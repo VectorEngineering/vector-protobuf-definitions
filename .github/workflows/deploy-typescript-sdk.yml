@@ -36,7 +36,7 @@ jobs:
           npm ci
 
       - name: Build and test
-        run: ./build.sh test
+        run: ./scripts/build.sh test
 
       - name: Publish client-typescript-sdk
         run: |

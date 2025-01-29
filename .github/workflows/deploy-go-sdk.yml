@@ -7,6 +7,7 @@ on:
       - 'sdk/client/go-client-sdk/**'
       - 'sdk/server/go/**'
       - 'version.yaml'
+  workflow_dispatch:
 
 jobs:
   deploy:

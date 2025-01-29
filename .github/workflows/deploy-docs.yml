@@ -6,6 +6,7 @@ on:
     paths:
       - 'documentation/**'
       - 'version.yaml'
+  workflow_dispatch:
 
 jobs:
   deploy:

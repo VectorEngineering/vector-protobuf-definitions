@@ -47,8 +47,15 @@ jobs:
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          packages-dir: |
-            sdk/client/python-client-sdk/dist/*
-            sdk/server/python/dist/*
+          packages-dir: sdk/client/python-client-sdk/dist/
+          verify-metadata: false
+        env:
+          PYPI_API_TOKEN: ${{ secrets.PYPI_TOKEN }}
+
+      - name: Publish Server SDK to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: sdk/server/python/dist/
+          verify-metadata: false
         env:
           PYPI_API_TOKEN: ${{ secrets.PYPI_TOKEN }} 

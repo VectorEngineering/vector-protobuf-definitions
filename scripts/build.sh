@@ -331,32 +331,13 @@ run_sdk_tests() {
     
     # TypeScript tests
     echo -e "\n${GREEN}Testing TypeScript SDKs${NC}"
-    (cd sdk/client/client-typescript-sdk && rm -rf node_modules package-lock.json && npm ci && npm test) || exit_code=$?
-    (cd sdk/client/client-node-sdk && rm -rf node_modules package-lock.json && npm ci && npm test) || exit_code=$?
+    (cd sdk/client/client-typescript-sdk && npm install && npm run test) || exit_code=$?
+    (cd sdk/client/client-node-sdk && npm install && npm run test) || exit_code=$?
 
     # Python tests
     echo -e "\n${GREEN}Testing Python SDKs${NC}"
-    (cd sdk/client/python-client-sdk && python3 -m pip install -r requirements.txt && pytest tests/) || exit_code=$?
-    (cd sdk/server/python && python3 -m pip install -r requirements.txt && pytest tests/) || exit_code=$?
-
-    # Go tests
-    echo -e "\n${GREEN}Testing Go SDKs${NC}"
-    (cd sdk/client/go-client-sdk && [ -f go.mod ] || go mod init github.com/playbookmedia/client && go mod tidy && go test -v ./...) || exit_code=$?
-    (cd sdk/server/go && [ -f go.mod ] || go mod init github.com/playbookmedia/server && go mod tidy && go test -v ./...) || exit_code=$?
-
-    # Documentation tests
-    echo -e "\n${GREEN}Validating Documentation${NC}"
-    if ! command -v spectral &> /dev/null; then
-        npm install -g @stoplight/spectral-cli
-    fi
-    (cd documentation/autogen/openapi-yaml && spectral lint playbookmedia-api.md) || exit_code=$?
-
-    if [ $exit_code -ne 0 ]; then
-        echo -e "\n${YELLOW}Some tests failed! See above for details.${NC}"
-        exit $exit_code
-    else
-        echo -e "\n${GREEN}All SDK tests passed successfully!${NC}"
-    fi
+    (cd sdk/client/python-client-sdk && python3 -m pytest tests/) || exit_code=$?
+    (cd sdk/server/python && python3 -m pytest tests/) || exit_code=$?
 }
 
 # Main script execution

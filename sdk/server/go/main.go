@@ -15,7 +15,7 @@ import (
 	"log"
 	"net/http"
 
-	backend_server "github.com/GIT_USER_ID/GIT_REPO_ID/go"
+	backend_server "github.com/Vector/vector-protobuf-definitions/sdk/server/go"
 )
 
 func main() {

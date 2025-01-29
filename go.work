@@ -1,6 +1,8 @@
-go 1.23.4
+go 1.23
 
 use (
 	./api-definitions
 	./openapi2krakend
+	./sdk/client/go-client-sdk
+	./sdk/server/go
 )

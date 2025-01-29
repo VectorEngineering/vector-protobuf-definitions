@@ -1,6 +1,6 @@
-module github.com/GIT_USER_ID/GIT_REPO_ID
+module github.com/Vector/vector-protobuf-definitions/sdk/client/go-client-sdk
 
-go 1.18
+go 1.23
 
 require github.com/stretchr/testify v1.10.0
 

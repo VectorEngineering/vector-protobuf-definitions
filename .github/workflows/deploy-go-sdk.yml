@@ -18,6 +18,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.VECTOR_BOT_PAT }}
 
       - name: Read versions
         run: |
@@ -30,9 +31,12 @@ jobs:
           go-version: '1.21'
 
       - name: Tag version
+        env:
+          GITHUB_TOKEN: ${{ secrets.VECTOR_BOT_PAT }}
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
           git tag -a "sdk/go/v${{ env.GO_VERSION }}" -m "Go SDK version ${{ env.GO_VERSION }}"
           git push origin "sdk/go/v${{ env.GO_VERSION }}"
 

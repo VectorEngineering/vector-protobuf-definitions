@@ -24,7 +24,10 @@ jobs:
         with:
           node-version: "lts/*"
 
+      - name: Install dependencies
+        run: npm install -g semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/github
+
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.VECTOR_BOT_PAT }}
-        uses: semantic-release/semantic-release@v22.0.12
+        run: npx semantic-release

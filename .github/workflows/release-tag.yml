@@ -1,4 +1,4 @@
-name: Deploy Go SDK
+name: Release Tag
 
 on:
   push:

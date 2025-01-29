@@ -590,86 +590,6 @@ pub enum GetScrapingJobResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
-pub enum ListAccountsResponse {
-    /// Accounts retrieved successfully
-    AccountsRetrievedSuccessfully
-    (models::ListAccountsResponse)
-    ,
-    /// Bad Request - Invalid input parameters
-    BadRequest
-    (models::ValidationErrorMessageResponse)
-    ,
-    /// Unauthorized - Authentication required
-    Unauthorized
-    (models::AuthenticationErrorMessageResponse)
-    ,
-    /// Payment Required - Payment is necessary to proceed
-    PaymentRequired
-    (models::PaymentRequiredErrorMessageResponse)
-    ,
-    /// Forbidden - Access denied
-    Forbidden
-    (models::ForbiddenErrorMessageResponse)
-    ,
-    /// Not Found - Resource not found
-    NotFound
-    (models::NotFoundErrorMessageResponse)
-    ,
-    /// Method Not Allowed - HTTP method not supported
-    MethodNotAllowed
-    (models::MethodNotAllowedErrorMessageResponse)
-    ,
-    /// Conflict - Resource already exists
-    Conflict
-    (models::ConflictErrorMessageResponse)
-    ,
-    /// Gone - Resource is no longer available
-    Gone
-    (models::GoneErrorMessageResponse)
-    ,
-    /// Precondition Failed - Preconditions in headers did not match
-    PreconditionFailed
-    (models::PreconditionFailedErrorMessageResponse)
-    ,
-    /// Unprocessable Entity - Semantic errors in the request
-    UnprocessableEntity
-    (models::UnprocessableEntityErrorMessageResponse)
-    ,
-    /// Too Early - Request is being replayed
-    TooEarly
-    (models::TooEarlyErrorMessageResponse)
-    ,
-    /// Too Many Requests - Rate limit exceeded
-    TooManyRequests
-    (models::RateLimitErrorMessageResponse)
-    ,
-    /// Internal Server Error
-    InternalServerError
-    (models::InternalErrorMessageResponse)
-    ,
-    /// Not Implemented - Functionality not supported
-    NotImplemented
-    (models::NotImplementedErrorMessageResponse)
-    ,
-    /// Bad Gateway - Invalid response from upstream server
-    BadGateway
-    (models::BadGatewayErrorMessageResponse)
-    ,
-    /// Service Unavailable - Try again later
-    ServiceUnavailable
-    (models::ServiceUnavailableErrorMessageResponse)
-    ,
-    /// Gateway Timeout - Upstream server timed out
-    GatewayTimeout
-    (models::GatewayTimeoutErrorMessageResponse)
-    ,
-    /// An unexpected error response.
-    AnUnexpectedErrorResponse
-    (models::Status)
-}
-
-#[derive(Debug, PartialEq, Serialize, Deserialize)]
-#[must_use]
 pub enum ListScrapingJobsResponse {
     /// Successful response
     SuccessfulResponse
@@ -851,9 +771,7 @@ pub trait Api<C: Send + Sync> {
     /// Delete account
     async fn delete_account(
         &self,
-        account_id: String,
-        org_id: String,
-        tenant_id: String,
+        id: String,
         context: &C) -> Result<DeleteAccountResponse, ApiError>;
 
     /// Delete a specific job
@@ -877,9 +795,7 @@ pub trait Api<C: Send + Sync> {
     /// Get account details
     async fn get_account(
         &self,
-        account_id: String,
-        org_id: String,
-        tenant_id: String,
+        id: String,
         context: &C) -> Result<GetAccountResponse, ApiError>;
 
     /// Get a specific job
@@ -890,15 +806,6 @@ pub trait Api<C: Send + Sync> {
         org_id: String,
         tenant_id: String,
         context: &C) -> Result<GetScrapingJobResponse, ApiError>;
-
-    /// List accounts
-    async fn list_accounts(
-        &self,
-        org_id: String,
-        tenant_id: String,
-        offset: Option<i32>,
-        limit: Option<i32>,
-        context: &C) -> Result<ListAccountsResponse, ApiError>;
 
     /// Get all jobs
     async fn list_scraping_jobs(
@@ -940,9 +847,7 @@ pub trait ApiNoContext<C: Send + Sync> {
     /// Delete account
     async fn delete_account(
         &self,
-        account_id: String,
-        org_id: String,
-        tenant_id: String,
+        id: String,
         ) -> Result<DeleteAccountResponse, ApiError>;
 
     /// Delete a specific job
@@ -966,9 +871,7 @@ pub trait ApiNoContext<C: Send + Sync> {
     /// Get account details
     async fn get_account(
         &self,
-        account_id: String,
-        org_id: String,
-        tenant_id: String,
+        id: String,
         ) -> Result<GetAccountResponse, ApiError>;
 
     /// Get a specific job
@@ -979,15 +882,6 @@ pub trait ApiNoContext<C: Send + Sync> {
         org_id: String,
         tenant_id: String,
         ) -> Result<GetScrapingJobResponse, ApiError>;
-
-    /// List accounts
-    async fn list_accounts(
-        &self,
-        org_id: String,
-        tenant_id: String,
-        offset: Option<i32>,
-        limit: Option<i32>,
-        ) -> Result<ListAccountsResponse, ApiError>;
 
     /// Get all jobs
     async fn list_scraping_jobs(
@@ -1051,13 +945,11 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     /// Delete account
     async fn delete_account(
         &self,
-        account_id: String,
-        org_id: String,
-        tenant_id: String,
+        id: String,
         ) -> Result<DeleteAccountResponse, ApiError>
     {
         let context = self.context().clone();
-        self.api().delete_account(account_id, org_id, tenant_id, &context).await
+        self.api().delete_account(id, &context).await
     }
 
     /// Delete a specific job
@@ -1089,13 +981,11 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     /// Get account details
     async fn get_account(
         &self,
-        account_id: String,
-        org_id: String,
-        tenant_id: String,
+        id: String,
         ) -> Result<GetAccountResponse, ApiError>
     {
         let context = self.context().clone();
-        self.api().get_account(account_id, org_id, tenant_id, &context).await
+        self.api().get_account(id, &context).await
     }
 
     /// Get a specific job
@@ -1109,19 +999,6 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().get_scraping_job(job_id, user_id, org_id, tenant_id, &context).await
-    }
-
-    /// List accounts
-    async fn list_accounts(
-        &self,
-        org_id: String,
-        tenant_id: String,
-        offset: Option<i32>,
-        limit: Option<i32>,
-        ) -> Result<ListAccountsResponse, ApiError>
-    {
-        let context = self.context().clone();
-        self.api().list_accounts(org_id, tenant_id, offset, limit, &context).await
     }
 
     /// Get all jobs

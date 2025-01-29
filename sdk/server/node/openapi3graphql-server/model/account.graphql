@@ -19,6 +19,17 @@ type Account {
   deletedAt: String!
   createdAt: String!
   scrapingJobs: [ScrapingJob!]
+  accountStatus: AccountStatus
+  roles: [String!!]
+  permissions: [String!!]
+  mfaEnabled: Boolean!
+  lastLoginAt: String!
+  timezone: String!
+  totalJobsRun: Int!
+  monthlyJobLimit: Int!
+  concurrentJobLimit: Int!
+  workspaces: [Workspace!]
+  settings: AccountSettings
 }
 
 input AccountInput {
@@ -31,5 +42,16 @@ input AccountInput {
     deletedAt: String!
     createdAt: String!
     scrapingJobs: [ScrapingJobInput]
+    accountStatus: AccountStatus
+    roles: [String!]
+    permissions: [String!]
+    mfaEnabled: Boolean!
+    lastLoginAt: String!
+    timezone: String!
+    totalJobsRun: Int!
+    monthlyJobLimit: Int!
+    concurrentJobLimit: Int!
+    workspaces: [WorkspaceInput]
+    settings: AccountSettingsInput
 }
 

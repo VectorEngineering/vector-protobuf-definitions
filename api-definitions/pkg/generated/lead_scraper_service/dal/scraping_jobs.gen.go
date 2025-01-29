@@ -36,7 +36,7 @@ func newScrapingJobORM(db *gorm.DB, opts ...gen.DOOption) scrapingJobORM {
 	_scrapingJobORM.Depth = field.NewInt32(tableName, "depth")
 	_scrapingJobORM.Email = field.NewBool(tableName, "email")
 	_scrapingJobORM.FastMode = field.NewBool(tableName, "fast_mode")
-	_scrapingJobORM.Id = field.NewString(tableName, "id")
+	_scrapingJobORM.Id = field.NewUint64(tableName, "id")
 	_scrapingJobORM.Keywords = field.NewField(tableName, "keywords")
 	_scrapingJobORM.Lang = field.NewString(tableName, "lang")
 	_scrapingJobORM.Lat = field.NewString(tableName, "lat")
@@ -48,9 +48,79 @@ func newScrapingJobORM(db *gorm.DB, opts ...gen.DOOption) scrapingJobORM {
 	_scrapingJobORM.Priority = field.NewInt32(tableName, "priority")
 	_scrapingJobORM.Proxies = field.NewField(tableName, "proxies")
 	_scrapingJobORM.Radius = field.NewInt32(tableName, "radius")
+	_scrapingJobORM.ScrapingWorkflowId = field.NewUint64(tableName, "scraping_workflow_id")
 	_scrapingJobORM.Status = field.NewString(tableName, "status")
 	_scrapingJobORM.UpdatedAt = field.NewTime(tableName, "updated_at")
+	_scrapingJobORM.WorkflowId = field.NewString(tableName, "workflow_id")
 	_scrapingJobORM.Zoom = field.NewInt32(tableName, "zoom")
+	_scrapingJobORM.Leads = scrapingJobORMHasManyLeads{
+		db: db.Session(&gorm.Session{}),
+
+		RelationField: field.NewRelation("Leads", "lead_scraper_servicev1.LeadORM"),
+		Job: struct {
+			field.RelationField
+			Leads struct {
+				field.RelationField
+			}
+		}{
+			RelationField: field.NewRelation("Leads.Job", "lead_scraper_servicev1.ScrapingJobORM"),
+			Leads: struct {
+				field.RelationField
+			}{
+				RelationField: field.NewRelation("Leads.Job.Leads", "lead_scraper_servicev1.LeadORM"),
+			},
+		},
+		Workspace: struct {
+			field.RelationField
+			Workflows struct {
+				field.RelationField
+				Workspace struct {
+					field.RelationField
+				}
+				Jobs struct {
+					field.RelationField
+				}
+			}
+		}{
+			RelationField: field.NewRelation("Leads.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
+			Workflows: struct {
+				field.RelationField
+				Workspace struct {
+					field.RelationField
+				}
+				Jobs struct {
+					field.RelationField
+				}
+			}{
+				RelationField: field.NewRelation("Leads.Workspace.Workflows", "lead_scraper_servicev1.ScrapingWorkflowORM"),
+				Workspace: struct {
+					field.RelationField
+				}{
+					RelationField: field.NewRelation("Leads.Workspace.Workflows.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
+				},
+				Jobs: struct {
+					field.RelationField
+				}{
+					RelationField: field.NewRelation("Leads.Workspace.Workflows.Jobs", "lead_scraper_servicev1.ScrapingJobORM"),
+				},
+			},
+		},
+		RegularHours: struct {
+			field.RelationField
+		}{
+			RelationField: field.NewRelation("Leads.RegularHours", "lead_scraper_servicev1.BusinessHoursORM"),
+		},
+		Reviews: struct {
+			field.RelationField
+		}{
+			RelationField: field.NewRelation("Leads.Reviews", "lead_scraper_servicev1.ReviewORM"),
+		},
+		SpecialHours: struct {
+			field.RelationField
+		}{
+			RelationField: field.NewRelation("Leads.SpecialHours", "lead_scraper_servicev1.BusinessHoursORM"),
+		},
+	}
 
 	_scrapingJobORM.fillFieldMap()
 
@@ -60,28 +130,31 @@ func newScrapingJobORM(db *gorm.DB, opts ...gen.DOOption) scrapingJobORM {
 type scrapingJobORM struct {
 	scrapingJobORMDo
 
-	ALL         field.Asterisk
-	AccountId   field.Uint64
-	CreatedAt   field.Time
-	DeletedAt   field.Time
-	Depth       field.Int32
-	Email       field.Bool
-	FastMode    field.Bool
-	Id          field.String
-	Keywords    field.Field
-	Lang        field.String
-	Lat         field.String
-	Lon         field.String
-	MaxTime     field.Int32
-	Name        field.String
-	Payload     field.Bytes
-	PayloadType field.String
-	Priority    field.Int32
-	Proxies     field.Field
-	Radius      field.Int32
-	Status      field.String
-	UpdatedAt   field.Time
-	Zoom        field.Int32
+	ALL                field.Asterisk
+	AccountId          field.Uint64
+	CreatedAt          field.Time
+	DeletedAt          field.Time
+	Depth              field.Int32
+	Email              field.Bool
+	FastMode           field.Bool
+	Id                 field.Uint64
+	Keywords           field.Field
+	Lang               field.String
+	Lat                field.String
+	Lon                field.String
+	MaxTime            field.Int32
+	Name               field.String
+	Payload            field.Bytes
+	PayloadType        field.String
+	Priority           field.Int32
+	Proxies            field.Field
+	Radius             field.Int32
+	ScrapingWorkflowId field.Uint64
+	Status             field.String
+	UpdatedAt          field.Time
+	WorkflowId         field.String
+	Zoom               field.Int32
+	Leads              scrapingJobORMHasManyLeads
 
 	fieldMap map[string]field.Expr
 }
@@ -104,7 +177,7 @@ func (s *scrapingJobORM) updateTableName(table string) *scrapingJobORM {
 	s.Depth = field.NewInt32(table, "depth")
 	s.Email = field.NewBool(table, "email")
 	s.FastMode = field.NewBool(table, "fast_mode")
-	s.Id = field.NewString(table, "id")
+	s.Id = field.NewUint64(table, "id")
 	s.Keywords = field.NewField(table, "keywords")
 	s.Lang = field.NewString(table, "lang")
 	s.Lat = field.NewString(table, "lat")
@@ -116,8 +189,10 @@ func (s *scrapingJobORM) updateTableName(table string) *scrapingJobORM {
 	s.Priority = field.NewInt32(table, "priority")
 	s.Proxies = field.NewField(table, "proxies")
 	s.Radius = field.NewInt32(table, "radius")
+	s.ScrapingWorkflowId = field.NewUint64(table, "scraping_workflow_id")
 	s.Status = field.NewString(table, "status")
 	s.UpdatedAt = field.NewTime(table, "updated_at")
+	s.WorkflowId = field.NewString(table, "workflow_id")
 	s.Zoom = field.NewInt32(table, "zoom")
 
 	s.fillFieldMap()
@@ -135,7 +210,7 @@ func (s *scrapingJobORM) GetFieldByName(fieldName string) (field.OrderExpr, bool
 }
 
 func (s *scrapingJobORM) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 21)
+	s.fieldMap = make(map[string]field.Expr, 24)
 	s.fieldMap["account_id"] = s.AccountId
 	s.fieldMap["created_at"] = s.CreatedAt
 	s.fieldMap["deleted_at"] = s.DeletedAt
@@ -154,9 +229,12 @@ func (s *scrapingJobORM) fillFieldMap() {
 	s.fieldMap["priority"] = s.Priority
 	s.fieldMap["proxies"] = s.Proxies
 	s.fieldMap["radius"] = s.Radius
+	s.fieldMap["scraping_workflow_id"] = s.ScrapingWorkflowId
 	s.fieldMap["status"] = s.Status
 	s.fieldMap["updated_at"] = s.UpdatedAt
+	s.fieldMap["workflow_id"] = s.WorkflowId
 	s.fieldMap["zoom"] = s.Zoom
+
 }
 
 func (s scrapingJobORM) clone(db *gorm.DB) scrapingJobORM {
@@ -167,6 +245,105 @@ func (s scrapingJobORM) clone(db *gorm.DB) scrapingJobORM {
 func (s scrapingJobORM) replaceDB(db *gorm.DB) scrapingJobORM {
 	s.scrapingJobORMDo.ReplaceDB(db)
 	return s
+}
+
+type scrapingJobORMHasManyLeads struct {
+	db *gorm.DB
+
+	field.RelationField
+
+	Job struct {
+		field.RelationField
+		Leads struct {
+			field.RelationField
+		}
+	}
+	Workspace struct {
+		field.RelationField
+		Workflows struct {
+			field.RelationField
+			Workspace struct {
+				field.RelationField
+			}
+			Jobs struct {
+				field.RelationField
+			}
+		}
+	}
+	RegularHours struct {
+		field.RelationField
+	}
+	Reviews struct {
+		field.RelationField
+	}
+	SpecialHours struct {
+		field.RelationField
+	}
+}
+
+func (a scrapingJobORMHasManyLeads) Where(conds ...field.Expr) *scrapingJobORMHasManyLeads {
+	if len(conds) == 0 {
+		return &a
+	}
+
+	exprs := make([]clause.Expression, 0, len(conds))
+	for _, cond := range conds {
+		exprs = append(exprs, cond.BeCond().(clause.Expression))
+	}
+	a.db = a.db.Clauses(clause.Where{Exprs: exprs})
+	return &a
+}
+
+func (a scrapingJobORMHasManyLeads) WithContext(ctx context.Context) *scrapingJobORMHasManyLeads {
+	a.db = a.db.WithContext(ctx)
+	return &a
+}
+
+func (a scrapingJobORMHasManyLeads) Session(session *gorm.Session) *scrapingJobORMHasManyLeads {
+	a.db = a.db.Session(session)
+	return &a
+}
+
+func (a scrapingJobORMHasManyLeads) Model(m *lead_scraper_servicev1.ScrapingJobORM) *scrapingJobORMHasManyLeadsTx {
+	return &scrapingJobORMHasManyLeadsTx{a.db.Model(m).Association(a.Name())}
+}
+
+type scrapingJobORMHasManyLeadsTx struct{ tx *gorm.Association }
+
+func (a scrapingJobORMHasManyLeadsTx) Find() (result []*lead_scraper_servicev1.LeadORM, err error) {
+	return result, a.tx.Find(&result)
+}
+
+func (a scrapingJobORMHasManyLeadsTx) Append(values ...*lead_scraper_servicev1.LeadORM) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Append(targetValues...)
+}
+
+func (a scrapingJobORMHasManyLeadsTx) Replace(values ...*lead_scraper_servicev1.LeadORM) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Replace(targetValues...)
+}
+
+func (a scrapingJobORMHasManyLeadsTx) Delete(values ...*lead_scraper_servicev1.LeadORM) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Delete(targetValues...)
+}
+
+func (a scrapingJobORMHasManyLeadsTx) Clear() error {
+	return a.tx.Clear()
+}
+
+func (a scrapingJobORMHasManyLeadsTx) Count() int64 {
+	return a.tx.Count()
 }
 
 type scrapingJobORMDo struct{ gen.DO }

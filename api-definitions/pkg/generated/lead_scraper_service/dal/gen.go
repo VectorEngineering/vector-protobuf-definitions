@@ -16,39 +16,69 @@ import (
 )
 
 var (
-	Q              = new(Query)
-	AccountORM     *accountORM
-	ScrapingJobORM *scrapingJobORM
+	Q                   = new(Query)
+	AccountORM          *accountORM
+	AccountSettingsORM  *accountSettingsORM
+	BusinessHoursORM    *businessHoursORM
+	LeadORM             *leadORM
+	ReviewORM           *reviewORM
+	ScrapingJobORM      *scrapingJobORM
+	ScrapingWorkflowORM *scrapingWorkflowORM
+	WorkspaceORM        *workspaceORM
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
 	AccountORM = &Q.AccountORM
+	AccountSettingsORM = &Q.AccountSettingsORM
+	BusinessHoursORM = &Q.BusinessHoursORM
+	LeadORM = &Q.LeadORM
+	ReviewORM = &Q.ReviewORM
 	ScrapingJobORM = &Q.ScrapingJobORM
+	ScrapingWorkflowORM = &Q.ScrapingWorkflowORM
+	WorkspaceORM = &Q.WorkspaceORM
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
-		db:             db,
-		AccountORM:     newAccountORM(db, opts...),
-		ScrapingJobORM: newScrapingJobORM(db, opts...),
+		db:                  db,
+		AccountORM:          newAccountORM(db, opts...),
+		AccountSettingsORM:  newAccountSettingsORM(db, opts...),
+		BusinessHoursORM:    newBusinessHoursORM(db, opts...),
+		LeadORM:             newLeadORM(db, opts...),
+		ReviewORM:           newReviewORM(db, opts...),
+		ScrapingJobORM:      newScrapingJobORM(db, opts...),
+		ScrapingWorkflowORM: newScrapingWorkflowORM(db, opts...),
+		WorkspaceORM:        newWorkspaceORM(db, opts...),
 	}
 }
 
 type Query struct {
 	db *gorm.DB
 
-	AccountORM     accountORM
-	ScrapingJobORM scrapingJobORM
+	AccountORM          accountORM
+	AccountSettingsORM  accountSettingsORM
+	BusinessHoursORM    businessHoursORM
+	LeadORM             leadORM
+	ReviewORM           reviewORM
+	ScrapingJobORM      scrapingJobORM
+	ScrapingWorkflowORM scrapingWorkflowORM
+	WorkspaceORM        workspaceORM
 }
 
 func (q *Query) Available() bool { return q.db != nil }
 
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
-		db:             db,
-		AccountORM:     q.AccountORM.clone(db),
-		ScrapingJobORM: q.ScrapingJobORM.clone(db),
+		db:                  db,
+		AccountORM:          q.AccountORM.clone(db),
+		AccountSettingsORM:  q.AccountSettingsORM.clone(db),
+		BusinessHoursORM:    q.BusinessHoursORM.clone(db),
+		LeadORM:             q.LeadORM.clone(db),
+		ReviewORM:           q.ReviewORM.clone(db),
+		ScrapingJobORM:      q.ScrapingJobORM.clone(db),
+		ScrapingWorkflowORM: q.ScrapingWorkflowORM.clone(db),
+		WorkspaceORM:        q.WorkspaceORM.clone(db),
 	}
 }
 
@@ -62,21 +92,39 @@ func (q *Query) WriteDB() *Query {
 
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
-		db:             db,
-		AccountORM:     q.AccountORM.replaceDB(db),
-		ScrapingJobORM: q.ScrapingJobORM.replaceDB(db),
+		db:                  db,
+		AccountORM:          q.AccountORM.replaceDB(db),
+		AccountSettingsORM:  q.AccountSettingsORM.replaceDB(db),
+		BusinessHoursORM:    q.BusinessHoursORM.replaceDB(db),
+		LeadORM:             q.LeadORM.replaceDB(db),
+		ReviewORM:           q.ReviewORM.replaceDB(db),
+		ScrapingJobORM:      q.ScrapingJobORM.replaceDB(db),
+		ScrapingWorkflowORM: q.ScrapingWorkflowORM.replaceDB(db),
+		WorkspaceORM:        q.WorkspaceORM.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
-	AccountORM     IAccountORMDo
-	ScrapingJobORM IScrapingJobORMDo
+	AccountORM          IAccountORMDo
+	AccountSettingsORM  IAccountSettingsORMDo
+	BusinessHoursORM    IBusinessHoursORMDo
+	LeadORM             ILeadORMDo
+	ReviewORM           IReviewORMDo
+	ScrapingJobORM      IScrapingJobORMDo
+	ScrapingWorkflowORM IScrapingWorkflowORMDo
+	WorkspaceORM        IWorkspaceORMDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		AccountORM:     q.AccountORM.WithContext(ctx),
-		ScrapingJobORM: q.ScrapingJobORM.WithContext(ctx),
+		AccountORM:          q.AccountORM.WithContext(ctx),
+		AccountSettingsORM:  q.AccountSettingsORM.WithContext(ctx),
+		BusinessHoursORM:    q.BusinessHoursORM.WithContext(ctx),
+		LeadORM:             q.LeadORM.WithContext(ctx),
+		ReviewORM:           q.ReviewORM.WithContext(ctx),
+		ScrapingJobORM:      q.ScrapingJobORM.WithContext(ctx),
+		ScrapingWorkflowORM: q.ScrapingWorkflowORM.WithContext(ctx),
+		WorkspaceORM:        q.WorkspaceORM.WithContext(ctx),
 	}
 }
 

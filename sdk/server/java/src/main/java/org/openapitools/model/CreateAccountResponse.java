@@ -19,10 +19,12 @@ import javax.annotation.Generated;
  * CreateAccountResponse
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T05:44:51.050519-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T11:21:34.061205-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class CreateAccountResponse {
 
   private Account account;
+
+  private String initialWorkspaceId;
 
   public CreateAccountResponse account(Account account) {
     this.account = account;
@@ -44,6 +46,26 @@ public class CreateAccountResponse {
     this.account = account;
   }
 
+  public CreateAccountResponse initialWorkspaceId(String initialWorkspaceId) {
+    this.initialWorkspaceId = initialWorkspaceId;
+    return this;
+  }
+
+  /**
+   * Get initialWorkspaceId
+   * @return initialWorkspaceId
+   */
+  
+  @Schema(name = "initialWorkspaceId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("initialWorkspaceId")
+  public String getInitialWorkspaceId() {
+    return initialWorkspaceId;
+  }
+
+  public void setInitialWorkspaceId(String initialWorkspaceId) {
+    this.initialWorkspaceId = initialWorkspaceId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -53,12 +75,13 @@ public class CreateAccountResponse {
       return false;
     }
     CreateAccountResponse createAccountResponse = (CreateAccountResponse) o;
-    return Objects.equals(this.account, createAccountResponse.account);
+    return Objects.equals(this.account, createAccountResponse.account) &&
+        Objects.equals(this.initialWorkspaceId, createAccountResponse.initialWorkspaceId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(account);
+    return Objects.hash(account, initialWorkspaceId);
   }
 
   @Override
@@ -66,6 +89,7 @@ public class CreateAccountResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateAccountResponse {\n");
     sb.append("    account: ").append(toIndentedString(account)).append("\n");
+    sb.append("    initialWorkspaceId: ").append(toIndentedString(initialWorkspaceId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

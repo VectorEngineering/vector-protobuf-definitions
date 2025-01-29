@@ -23,6 +23,8 @@ Name | Type | Description | Notes
 **payload_type** | **String** |  | [optional] [default to None]
 **priority** | **i32** |  | [optional] [default to None]
 **payload** | [***swagger::ByteArray**](ByteArray.md) |  | [optional] [default to None]
+**leads** | [**Vec<models::Lead>**](Lead.md) |  | [optional] [default to None]
+**workflow_id** | **String** |  | [optional] [default to None]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

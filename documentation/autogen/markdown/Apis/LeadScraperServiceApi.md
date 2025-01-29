@@ -6,14 +6,13 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 |------------- | ------------- | -------------|
 | [**createAccount**](LeadScraperServiceApi.md#createAccount) | **POST** /lead-scraper-microservice/api/v1/accounts | Create a new account |
 | [**createScrapingJob**](LeadScraperServiceApi.md#createScrapingJob) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task |
-| [**deleteAccount**](LeadScraperServiceApi.md#deleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{accountId} | Delete account |
+| [**deleteAccount**](LeadScraperServiceApi.md#deleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account |
 | [**deleteScrapingJob**](LeadScraperServiceApi.md#deleteScrapingJob) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job |
 | [**downloadScrapingResults**](LeadScraperServiceApi.md#downloadScrapingResults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV |
-| [**getAccount**](LeadScraperServiceApi.md#getAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{accountId} | Get account details |
+| [**getAccount**](LeadScraperServiceApi.md#getAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details |
 | [**getScrapingJob**](LeadScraperServiceApi.md#getScrapingJob) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job |
-| [**listAccounts**](LeadScraperServiceApi.md#listAccounts) | **GET** /lead-scraper-microservice/api/v1/accounts | List accounts |
 | [**listScrapingJobs**](LeadScraperServiceApi.md#listScrapingJobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs |
-| [**updateAccount**](LeadScraperServiceApi.md#updateAccount) | **PATCH** /lead-scraper-microservice/api/v1/accounts | Update account details |
+| [**updateAccount**](LeadScraperServiceApi.md#updateAccount) | **PUT** /lead-scraper-microservice/api/v1/accounts | Update account details |
 
 
 <a name="createAccount"></a>
@@ -72,7 +71,7 @@ No authorization required
 
 <a name="deleteAccount"></a>
 # **deleteAccount**
-> DeleteAccountResponse deleteAccount(accountId, orgId, tenantId)
+> DeleteAccountResponse deleteAccount(id)
 
 Delete account
 
@@ -82,9 +81,7 @@ Delete account
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **accountId** | **String**| Account identifier | [default to null] |
-| **orgId** | **String**| Organization context | [default to null] |
-| **tenantId** | **String**| Tenant context | [default to null] |
+| **id** | **String**|  | [default to null] |
 
 ### Return type
 
@@ -161,7 +158,7 @@ No authorization required
 
 <a name="getAccount"></a>
 # **getAccount**
-> GetAccountResponse getAccount(accountId, orgId, tenantId)
+> GetAccountResponse getAccount(id)
 
 Get account details
 
@@ -171,9 +168,7 @@ Get account details
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **accountId** | **String**| Account identifier | [default to null] |
-| **orgId** | **String**| Organization context | [default to null] |
-| **tenantId** | **String**| Tenant context | [default to null] |
+| **id** | **String**|  | [default to null] |
 
 ### Return type
 
@@ -208,36 +203,6 @@ Get a specific job
 ### Return type
 
 [**GetScrapingJobResponse**](../Models/GetScrapingJobResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json, 
-
-<a name="listAccounts"></a>
-# **listAccounts**
-> ListAccountsResponse listAccounts(orgId, tenantId, offset, limit)
-
-List accounts
-
-    Retrieves a list of accounts with optional filtering
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **orgId** | **String**| Organization context | [default to null] |
-| **tenantId** | **String**| Tenant context | [default to null] |
-| **offset** | **Integer**| Pagination offset | [optional] [default to null] |
-| **limit** | **Integer**| Maximum number of results | [optional] [default to null] |
-
-### Return type
-
-[**ListAccountsResponse**](../Models/ListAccountsResponse.md)
 
 ### Authorization
 

@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import org.openapitools.model.Account;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -18,109 +19,51 @@ import javax.annotation.Generated;
  * CreateAccountRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T05:44:51.050519-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T11:21:34.061205-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class CreateAccountRequest {
 
-  private String authPlatformUserId;
+  private Account account;
 
-  private String orgId;
+  private String initialWorkspaceName;
 
-  private String tenantId;
-
-  private String email;
-
-  public CreateAccountRequest() {
-    super();
-  }
-
-  /**
-   * Constructor with only required parameters
-   */
-  public CreateAccountRequest(String authPlatformUserId, String orgId, String tenantId, String email) {
-    this.authPlatformUserId = authPlatformUserId;
-    this.orgId = orgId;
-    this.tenantId = tenantId;
-    this.email = email;
-  }
-
-  public CreateAccountRequest authPlatformUserId(String authPlatformUserId) {
-    this.authPlatformUserId = authPlatformUserId;
+  public CreateAccountRequest account(Account account) {
+    this.account = account;
     return this;
   }
 
   /**
-   * Get authPlatformUserId
-   * @return authPlatformUserId
+   * Get account
+   * @return account
    */
-  @NotNull 
-  @Schema(name = "authPlatformUserId", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("authPlatformUserId")
-  public String getAuthPlatformUserId() {
-    return authPlatformUserId;
+  @Valid 
+  @Schema(name = "account", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("account")
+  public Account getAccount() {
+    return account;
   }
 
-  public void setAuthPlatformUserId(String authPlatformUserId) {
-    this.authPlatformUserId = authPlatformUserId;
+  public void setAccount(Account account) {
+    this.account = account;
   }
 
-  public CreateAccountRequest orgId(String orgId) {
-    this.orgId = orgId;
+  public CreateAccountRequest initialWorkspaceName(String initialWorkspaceName) {
+    this.initialWorkspaceName = initialWorkspaceName;
     return this;
   }
 
   /**
-   * Get orgId
-   * @return orgId
+   * Get initialWorkspaceName
+   * @return initialWorkspaceName
    */
-  @NotNull 
-  @Schema(name = "orgId", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("orgId")
-  public String getOrgId() {
-    return orgId;
+  
+  @Schema(name = "initialWorkspaceName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("initialWorkspaceName")
+  public String getInitialWorkspaceName() {
+    return initialWorkspaceName;
   }
 
-  public void setOrgId(String orgId) {
-    this.orgId = orgId;
-  }
-
-  public CreateAccountRequest tenantId(String tenantId) {
-    this.tenantId = tenantId;
-    return this;
-  }
-
-  /**
-   * Get tenantId
-   * @return tenantId
-   */
-  @NotNull 
-  @Schema(name = "tenantId", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("tenantId")
-  public String getTenantId() {
-    return tenantId;
-  }
-
-  public void setTenantId(String tenantId) {
-    this.tenantId = tenantId;
-  }
-
-  public CreateAccountRequest email(String email) {
-    this.email = email;
-    return this;
-  }
-
-  /**
-   * Get email
-   * @return email
-   */
-  @NotNull 
-  @Schema(name = "email", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("email")
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
+  public void setInitialWorkspaceName(String initialWorkspaceName) {
+    this.initialWorkspaceName = initialWorkspaceName;
   }
 
   @Override
@@ -132,25 +75,21 @@ public class CreateAccountRequest {
       return false;
     }
     CreateAccountRequest createAccountRequest = (CreateAccountRequest) o;
-    return Objects.equals(this.authPlatformUserId, createAccountRequest.authPlatformUserId) &&
-        Objects.equals(this.orgId, createAccountRequest.orgId) &&
-        Objects.equals(this.tenantId, createAccountRequest.tenantId) &&
-        Objects.equals(this.email, createAccountRequest.email);
+    return Objects.equals(this.account, createAccountRequest.account) &&
+        Objects.equals(this.initialWorkspaceName, createAccountRequest.initialWorkspaceName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(authPlatformUserId, orgId, tenantId, email);
+    return Objects.hash(account, initialWorkspaceName);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateAccountRequest {\n");
-    sb.append("    authPlatformUserId: ").append(toIndentedString(authPlatformUserId)).append("\n");
-    sb.append("    orgId: ").append(toIndentedString(orgId)).append("\n");
-    sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
-    sb.append("    email: ").append(toIndentedString(email)).append("\n");
+    sb.append("    account: ").append(toIndentedString(account)).append("\n");
+    sb.append("    initialWorkspaceName: ").append(toIndentedString(initialWorkspaceName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -111,7 +111,6 @@ use openapi_client::{
     DownloadScrapingResultsResponse,
     GetAccountResponse,
     GetScrapingJobResponse,
-    ListAccountsResponse,
     ListScrapingJobsResponse,
     UpdateAccountResponse,
 };
@@ -145,12 +144,10 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
     /// Delete account
     async fn delete_account(
         &self,
-        account_id: String,
-        org_id: String,
-        tenant_id: String,
+        id: String,
         context: &C) -> Result<DeleteAccountResponse, ApiError>
     {
-        info!("delete_account(\"{}\", \"{}\", \"{}\") - X-Span-ID: {:?}", account_id, org_id, tenant_id, context.get().0.clone());
+        info!("delete_account(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -183,12 +180,10 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
     /// Get account details
     async fn get_account(
         &self,
-        account_id: String,
-        org_id: String,
-        tenant_id: String,
+        id: String,
         context: &C) -> Result<GetAccountResponse, ApiError>
     {
-        info!("get_account(\"{}\", \"{}\", \"{}\") - X-Span-ID: {:?}", account_id, org_id, tenant_id, context.get().0.clone());
+        info!("get_account(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -202,19 +197,6 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<GetScrapingJobResponse, ApiError>
     {
         info!("get_scraping_job(\"{}\", \"{}\", \"{}\", \"{}\") - X-Span-ID: {:?}", job_id, user_id, org_id, tenant_id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// List accounts
-    async fn list_accounts(
-        &self,
-        org_id: String,
-        tenant_id: String,
-        offset: Option<i32>,
-        limit: Option<i32>,
-        context: &C) -> Result<ListAccountsResponse, ApiError>
-    {
-        info!("list_accounts(\"{}\", \"{}\", {:?}, {:?}) - X-Span-ID: {:?}", org_id, tenant_id, offset, limit, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

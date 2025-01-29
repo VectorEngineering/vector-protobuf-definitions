@@ -89,8 +89,8 @@ validate: ## Validate KrakenD configuration files
 	krakend check -tlc ./krakend-config/final-krakend.staging.json
 
 copy-configs-to-gateway: ## Copy final configurations to API gateway
-	cp ./krakend-config/final-krakend.prod.json ../services/backend-api-gateway/krakend.prod.json
-	cp ./krakend-config/final-krakend.staging.json ../services/backend-api-gateway/krakend.staging.json
+	cp ./krakend-config/final-krakend.prod.json ./services/backend-api-gateway/krakend.prod.json
+	cp ./krakend-config/final-krakend.staging.json ./services/backend-api-gateway/krakend.staging.json
 
 autogen: gen copy-swagger convert-swagger-to-openapiv3 update-typescript-client-sdk update-docs generate-krakend-config prettify-krakend merge-configs validate copy-configs-to-gateway ## Run all generation steps
 

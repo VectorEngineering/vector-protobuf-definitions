@@ -30,6 +30,8 @@ type ScrapingJob {
   payloadType: String!
   priority: Int!
   payload: String!
+  leads: [Lead!]
+  workflowId: String!
 }
 
 input ScrapingJobInput {
@@ -53,5 +55,7 @@ input ScrapingJobInput {
     payloadType: String!
     priority: Int!
     payload: String!
+    leads: [LeadInput]
+    workflowId: String!
 }
 

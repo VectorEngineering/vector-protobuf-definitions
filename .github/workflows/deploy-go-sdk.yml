@@ -38,7 +38,7 @@ jobs:
       - name: Update module versions
         run: |
           cd sdk/client/go-client-sdk
-          go mod edit -module github.com/playbookmedia/client/v${{ env.GO_VERSION }}
+          go mod edit -module github.com/VectorEngineering/vector-protobuf-definitions/client/v${{ env.GO_VERSION }}
           
           cd ../../server/go
-          go mod edit -module github.com/playbookmedia/server/v${{ env.GO_VERSION }} 
+          go mod edit -module github.com/VectorEngineering/vector-protobuf-definitions/server/v${{ env.GO_VERSION }} 

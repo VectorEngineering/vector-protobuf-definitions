@@ -6,14 +6,13 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 **CreateAccount**](lead_scraper_service_api.md#CreateAccount) | **POST** /lead-scraper-microservice/api/v1/accounts | Create a new account
 **CreateScrapingJob**](lead_scraper_service_api.md#CreateScrapingJob) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task
-**DeleteAccount**](lead_scraper_service_api.md#DeleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{accountId} | Delete account
+**DeleteAccount**](lead_scraper_service_api.md#DeleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 **DeleteScrapingJob**](lead_scraper_service_api.md#DeleteScrapingJob) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job
 **DownloadScrapingResults**](lead_scraper_service_api.md#DownloadScrapingResults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV
-**GetAccount**](lead_scraper_service_api.md#GetAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{accountId} | Get account details
+**GetAccount**](lead_scraper_service_api.md#GetAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details
 **GetScrapingJob**](lead_scraper_service_api.md#GetScrapingJob) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job
-**ListAccounts**](lead_scraper_service_api.md#ListAccounts) | **GET** /lead-scraper-microservice/api/v1/accounts | List accounts
 **ListScrapingJobs**](lead_scraper_service_api.md#ListScrapingJobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs
-**UpdateAccount**](lead_scraper_service_api.md#UpdateAccount) | **PATCH** /lead-scraper-microservice/api/v1/accounts | Update account details
+**UpdateAccount**](lead_scraper_service_api.md#UpdateAccount) | **PUT** /lead-scraper-microservice/api/v1/accounts | Update account details
 
 
 # **CreateAccount**
@@ -71,7 +70,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteAccount**
-> models::DeleteAccountResponse DeleteAccount(account_id, org_id, tenant_id)
+> models::DeleteAccountResponse DeleteAccount(id)
 Delete account
 
 Permanently deletes an account and associated resources
@@ -80,9 +79,7 @@ Permanently deletes an account and associated resources
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-  **account_id** | **String**| Account identifier | 
-  **org_id** | **String**| Organization context | 
-  **tenant_id** | **String**| Tenant context | 
+  **id** | **String**|  | 
 
 ### Return type
 
@@ -160,7 +157,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetAccount**
-> models::GetAccountResponse GetAccount(account_id, org_id, tenant_id)
+> models::GetAccountResponse GetAccount(id)
 Get account details
 
 Retrieves details of a specific account
@@ -169,9 +166,7 @@ Retrieves details of a specific account
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-  **account_id** | **String**| Account identifier | 
-  **org_id** | **String**| Organization context | 
-  **tenant_id** | **String**| Tenant context | 
+  **id** | **String**|  | 
 
 ### Return type
 
@@ -206,45 +201,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**models::GetScrapingJobResponse**](GetScrapingJobResponse.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: , application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **ListAccounts**
-> models::ListAccountsResponse ListAccounts(org_id, tenant_id, optional)
-List accounts
-
-Retrieves a list of accounts with optional filtering
-
-### Required Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-  **org_id** | **String**| Organization context | 
-  **tenant_id** | **String**| Tenant context | 
- **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
-
-### Optional Parameters
-Optional parameters are passed through a map[string]interface{}.
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **org_id** | **String**| Organization context | 
- **tenant_id** | **String**| Tenant context | 
- **offset** | **i32**| Pagination offset | 
- **limit** | **i32**| Maximum number of results | 
-
-### Return type
-
-[**models::ListAccountsResponse**](ListAccountsResponse.md)
 
 ### Authorization
 

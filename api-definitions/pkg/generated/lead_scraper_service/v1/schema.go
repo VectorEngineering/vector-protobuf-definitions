@@ -5,6 +5,13 @@ func GetDatabaseSchemas() []interface{} {
 	models := []interface{}{
 		ScrapingJobORM{},
 		AccountORM{},
+		WorkspaceORM{},
+		ScrapingJobORM{},
+		ScrapingWorkflowORM{},
+		LeadORM{},
+		ReviewORM{},
+		BusinessHoursORM{},
+		AccountSettingsORM{},
 	}
 
 	return models

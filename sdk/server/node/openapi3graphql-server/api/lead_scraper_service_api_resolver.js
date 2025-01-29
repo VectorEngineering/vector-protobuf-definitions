@@ -28,11 +28,9 @@ export default {
         },
 
         // @return GetAccountResponse
-        GetAccount: ($accountId, $orgId, $tenantId) => {
+        GetAccount: ($Id_) => {
             return {
-                "accountId": "accountId_example",
-                "orgId": "orgId_example",
-                "tenantId": "tenantId_example"
+                "Id_": "Id__example"
             };
         },
 
@@ -43,16 +41,6 @@ export default {
                 "userId": "userId_example",
                 "orgId": "orgId_example",
                 "tenantId": "tenantId_example"
-            };
-        },
-
-        // @return ListAccountsResponse
-        ListAccounts: ($orgId, $tenantId, $offset, $limit) => {
-            return {
-                "orgId": "orgId_example",
-                "tenantId": "tenantId_example",
-                "offset": "56",
-                "limit": "56"
             };
         },
 
@@ -84,11 +72,9 @@ export default {
         },
 
         // @return DeleteAccountResponse
-        DeleteAccount: ($accountId, $orgId, $tenantId) => {
+        DeleteAccount: ($Id_) => {
             return {
-                "accountId": "accountId_example",
-                "orgId": "orgId_example",
-                "tenantId": "tenantId_example"
+                "Id_": "Id__example"
             };
         },
 

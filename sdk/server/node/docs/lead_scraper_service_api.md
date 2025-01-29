@@ -6,14 +6,13 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateAccount**](lead_scraper_service_api.md#CreateAccount) | **POST** /lead-scraper-microservice/api/v1/accounts | Create a new account
 [**CreateScrapingJob**](lead_scraper_service_api.md#CreateScrapingJob) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task
-[**DeleteAccount**](lead_scraper_service_api.md#DeleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{accountId} | Delete account
+[**DeleteAccount**](lead_scraper_service_api.md#DeleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 [**DeleteScrapingJob**](lead_scraper_service_api.md#DeleteScrapingJob) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job
 [**DownloadScrapingResults**](lead_scraper_service_api.md#DownloadScrapingResults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV
-[**GetAccount**](lead_scraper_service_api.md#GetAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{accountId} | Get account details
+[**GetAccount**](lead_scraper_service_api.md#GetAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details
 [**GetScrapingJob**](lead_scraper_service_api.md#GetScrapingJob) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job
-[**ListAccounts**](lead_scraper_service_api.md#ListAccounts) | **GET** /lead-scraper-microservice/api/v1/accounts | List accounts
 [**ListScrapingJobs**](lead_scraper_service_api.md#ListScrapingJobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs
-[**UpdateAccount**](lead_scraper_service_api.md#UpdateAccount) | **PATCH** /lead-scraper-microservice/api/v1/accounts | Update account details
+[**UpdateAccount**](lead_scraper_service_api.md#UpdateAccount) | **PUT** /lead-scraper-microservice/api/v1/accounts | Update account details
 
 
 <a name="CreateAccount"></a>
@@ -32,7 +31,7 @@ Create a new job scraping task
 This endpoint creates a new Google Maps scraping job
 <a name="DeleteAccount"></a>
 # **DeleteAccount**
-> DeleteAccountResponse DeleteAccount(accountId, orgId, tenantId)
+> DeleteAccountResponse DeleteAccount(Id_)
 
 Delete account
 
@@ -53,7 +52,7 @@ Download job results as CSV
 This endpoint downloads the results of a Google Maps scraping job as CSV
 <a name="GetAccount"></a>
 # **GetAccount**
-> GetAccountResponse GetAccount(accountId, orgId, tenantId)
+> GetAccountResponse GetAccount(Id_)
 
 Get account details
 
@@ -65,13 +64,6 @@ Retrieves details of a specific account
 Get a specific job
 
 This endpoint retrieves a specific Google Maps scraping job
-<a name="ListAccounts"></a>
-# **ListAccounts**
-> ListAccountsResponse ListAccounts(orgId, tenantId, offset, limit)
-
-List accounts
-
-Retrieves a list of accounts with optional filtering
 <a name="ListScrapingJobs"></a>
 # **ListScrapingJobs**
 > ListScrapingJobsResponse ListScrapingJobs(userId, orgId, tenantId)

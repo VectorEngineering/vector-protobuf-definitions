@@ -21,249 +21,9 @@ tags:
     description: APIs for managing workspace sharing, permissions, and team collaboration
   - name: Workspace Analytics
     description: APIs for workspace usage analytics and reporting
-  - name: WorkspaceService
+  - name: LeadScraperService
 paths:
   /lead-scraper-microservice/api/v1/accounts:
-    get:
-      summary: List accounts
-      description: Retrieves a list of accounts with optional filtering
-      operationId: ListAccounts
-      responses:
-        "200":
-          description: Accounts retrieved successfully
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListAccountsResponse"
-        "400":
-          description: Bad Request - Invalid input parameters
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ValidationErrorMessageResponse"
-            "":
-              examples:
-                response:
-                  value: '{"status":{"code":400,"message":"Bad
-                    Request"},"error_code":2000,"message":"Invalid input
-                    parameters","field_violations":[{"field":"email","message":"Invalid
-                    email
-                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}'
-        "401":
-          description: Unauthorized - Authentication required
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AuthenticationErrorMessageResponse"
-            "":
-              examples:
-                response:
-                  value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
-                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}'
-        "402":
-          description: Payment Required - Payment is necessary to proceed
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PaymentRequiredErrorMessageResponse"
-            "":
-              examples:
-                response:
-                  value: '{"code":402,"message":"Payment
-                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}'
-        "403":
-          description: Forbidden - Access denied
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ForbiddenErrorMessageResponse"
-            "":
-              examples:
-                response:
-                  value: '{"code":403,"message":"Forbidden","reason":"Insufficient
-                    permissions","required_permissions":["admin"]}'
-        "404":
-          description: Not Found - Resource not found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotFoundErrorMessageResponse"
-            "":
-              examples:
-                response:
-                  value: '{"status":{"code":404,"message":"Not
-                    Found"},"error_code":5102,"message":"Resource not
-                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}'
-        "405":
-          description: Method Not Allowed - HTTP method not supported
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/MethodNotAllowedErrorMessageResponse"
-            "":
-              examples:
-                response:
-                  value: '{"code":405,"message":"Method Not
-                    Allowed","allowed_methods":["GET","POST"]}'
-        "409":
-          description: Conflict - Resource already exists
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ConflictErrorMessageResponse"
-            "":
-              examples:
-                response:
-                  value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
-                    already
-                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
-                    already registered"}}'
-        "410":
-          description: Gone - Resource is no longer available
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GoneErrorMessageResponse"
-            "":
-              examples:
-                response:
-                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
-        "412":
-          description: Precondition Failed - Preconditions in headers did not match
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PreconditionFailedErrorMessageResponse"
-            "":
-              examples:
-                response:
-                  value: '{"code":412,"message":"Precondition
-                    Failed","failed_conditions":["If-Match header does not
-                    match"]}'
-        "422":
-          description: Unprocessable Entity - Semantic errors in the request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UnprocessableEntityErrorMessageResponse"
-            "":
-              examples:
-                response:
-                  value: '{"code":422,"message":"Unprocessable
-                    Entity","errors":[{"field":"email","error":"Invalid
-                    format"}]}'
-        "425":
-          description: Too Early - Request is being replayed
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TooEarlyErrorMessageResponse"
-            "":
-              examples:
-                response:
-                  value: '{"code":425,"message":"Too Early"}'
-        "429":
-          description: Too Many Requests - Rate limit exceeded
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RateLimitErrorMessageResponse"
-            "":
-              examples:
-                response:
-                  value: '{"status":{"code":429,"message":"Too Many
-                    Requests"},"error_code":4102,"message":"Rate limit
-                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}'
-        "500":
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/InternalErrorMessageResponse"
-            "":
-              examples:
-                response:
-                  value: '{"status":{"code":500,"message":"Internal Server
-                    Error"},"error_code":4000,"message":"An unexpected error
-                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}'
-        "501":
-          description: Not Implemented - Functionality not supported
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/NotImplementedErrorMessageResponse"
-            "":
-              examples:
-                response:
-                  value: '{"code":501,"message":"Not Implemented","feature":"User Deletion"}'
-        "502":
-          description: Bad Gateway - Invalid response from upstream server
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/BadGatewayErrorMessageResponse"
-            "":
-              examples:
-                response:
-                  value: '{"code":502,"message":"Bad Gateway","upstream_service":"Auth Service"}'
-        "503":
-          description: Service Unavailable - Try again later
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ServiceUnavailableErrorMessageResponse"
-            "":
-              examples:
-                response:
-                  value: '{"status":{"code":503,"message":"Service
-                    Unavailable"},"error_code":4300,"message":"Service is
-                    temporarily
-                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}'
-        "504":
-          description: Gateway Timeout - Upstream server timed out
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GatewayTimeoutErrorMessageResponse"
-            "":
-              examples:
-                response:
-                  value: '{"code":504,"message":"Gateway Timeout","upstream_service":"Database"}'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Status"
-      parameters:
-        - name: orgId
-          description: Organization context
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: tenantId
-          description: Tenant context
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: offset
-          description: Pagination offset
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
-        - name: limit
-          description: Maximum number of results
-          in: query
-          required: false
-          schema:
-            type: integer
-            format: int32
-      tags:
-        - lead-scraper-service
     post:
       summary: Create a new account
       description: Creates a new user account in the workspace service
@@ -492,7 +252,7 @@ paths:
         required: true
       tags:
         - lead-scraper-service
-    patch:
+    put:
       summary: Update account details
       description: Updates specified fields of an existing account
       operationId: UpdateAccount
@@ -714,7 +474,7 @@ paths:
         required: true
       tags:
         - lead-scraper-service
-  "/lead-scraper-microservice/api/v1/accounts/{accountId}":
+  "/lead-scraper-microservice/api/v1/accounts/{id}":
     get:
       summary: Get account details
       description: Retrieves details of a specific account
@@ -927,22 +687,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Status"
       parameters:
-        - name: accountId
-          description: Account identifier
+        - name: id
           in: path
-          required: true
-          schema:
-            type: string
-            format: uint64
-        - name: orgId
-          description: Organization context
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: tenantId
-          description: Tenant context
-          in: query
           required: true
           schema:
             type: string
@@ -1160,22 +906,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Status"
       parameters:
-        - name: accountId
-          description: Account identifier
+        - name: id
           in: path
-          required: true
-          schema:
-            type: string
-            format: uint64
-        - name: orgId
-          description: Organization context
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: tenantId
-          description: Tenant context
-          in: query
           required: true
           schema:
             type: string
@@ -2343,6 +2075,3418 @@ paths:
             type: string
       tags:
         - lead-scraper-service
+  /v1/accounts:
+    get:
+      summary: List all accounts
+      description: Retrieves a list of accounts
+      operationId: ListAccounts
+      responses:
+        "200":
+          description: Accounts retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAccountsResponse"
+        "400":
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":400,"message":"Bad
+                    Request"},"error_code":2000,"message":"Invalid input
+                    parameters","field_violations":[{"field":"email","message":"Invalid
+                    email
+                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}'
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
+                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}'
+        "402":
+          description: Payment Required - Payment is necessary to proceed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRequiredErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":402,"message":"Payment
+                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}'
+        "403":
+          description: Forbidden - Access denied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":403,"message":"Forbidden","reason":"Insufficient
+                    permissions","required_permissions":["admin"]}'
+        "404":
+          description: Not Found - Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":404,"message":"Not
+                    Found"},"error_code":5102,"message":"Resource not
+                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}'
+        "405":
+          description: Method Not Allowed - HTTP method not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":405,"message":"Method Not
+                    Allowed","allowed_methods":["GET","POST"]}'
+        "409":
+          description: Conflict - Resource already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
+                    already
+                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
+                    already registered"}}'
+        "410":
+          description: Gone - Resource is no longer available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoneErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
+        "412":
+          description: Precondition Failed - Preconditions in headers did not match
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreconditionFailedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":412,"message":"Precondition
+                    Failed","failed_conditions":["If-Match header does not
+                    match"]}'
+        "422":
+          description: Unprocessable Entity - Semantic errors in the request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntityErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":422,"message":"Unprocessable
+                    Entity","errors":[{"field":"email","error":"Invalid
+                    format"}]}'
+        "425":
+          description: Too Early - Request is being replayed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooEarlyErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":425,"message":"Too Early"}'
+        "429":
+          description: Too Many Requests - Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateLimitErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":429,"message":"Too Many
+                    Requests"},"error_code":4102,"message":"Rate limit
+                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":500,"message":"Internal Server
+                    Error"},"error_code":4000,"message":"An unexpected error
+                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}'
+        "501":
+          description: Not Implemented - Functionality not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotImplementedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":501,"message":"Not Implemented","feature":"User Deletion"}'
+        "502":
+          description: Bad Gateway - Invalid response from upstream server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadGatewayErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":502,"message":"Bad Gateway","upstream_service":"Auth Service"}'
+        "503":
+          description: Service Unavailable - Try again later
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":503,"message":"Service
+                    Unavailable"},"error_code":4300,"message":"Service is
+                    temporarily
+                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}'
+        "504":
+          description: Gateway Timeout - Upstream server timed out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayTimeoutErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":504,"message":"Gateway Timeout","upstream_service":"Database"}'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+      parameters:
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: pageToken
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: filter
+          in: query
+          required: false
+          schema:
+            type: string
+      tags:
+        - Account Management
+  /v1/accounts/settings:
+    put:
+      summary: Update account settings
+      description: Updates the settings for a given account
+      operationId: UpdateAccountSettings
+      responses:
+        "200":
+          description: Settings updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateAccountSettingsResponse"
+        "400":
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":400,"message":"Bad
+                    Request"},"error_code":2000,"message":"Invalid input
+                    parameters","field_violations":[{"field":"email","message":"Invalid
+                    email
+                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}'
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
+                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}'
+        "402":
+          description: Payment Required - Payment is necessary to proceed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRequiredErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":402,"message":"Payment
+                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}'
+        "403":
+          description: Forbidden - Access denied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":403,"message":"Forbidden","reason":"Insufficient
+                    permissions","required_permissions":["admin"]}'
+        "404":
+          description: Not Found - Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":404,"message":"Not
+                    Found"},"error_code":5102,"message":"Resource not
+                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}'
+        "405":
+          description: Method Not Allowed - HTTP method not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":405,"message":"Method Not
+                    Allowed","allowed_methods":["GET","POST"]}'
+        "409":
+          description: Conflict - Resource already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
+                    already
+                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
+                    already registered"}}'
+        "410":
+          description: Gone - Resource is no longer available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoneErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
+        "412":
+          description: Precondition Failed - Preconditions in headers did not match
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreconditionFailedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":412,"message":"Precondition
+                    Failed","failed_conditions":["If-Match header does not
+                    match"]}'
+        "422":
+          description: Unprocessable Entity - Semantic errors in the request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntityErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":422,"message":"Unprocessable
+                    Entity","errors":[{"field":"email","error":"Invalid
+                    format"}]}'
+        "425":
+          description: Too Early - Request is being replayed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooEarlyErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":425,"message":"Too Early"}'
+        "429":
+          description: Too Many Requests - Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateLimitErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":429,"message":"Too Many
+                    Requests"},"error_code":4102,"message":"Rate limit
+                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":500,"message":"Internal Server
+                    Error"},"error_code":4000,"message":"An unexpected error
+                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}'
+        "501":
+          description: Not Implemented - Functionality not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotImplementedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":501,"message":"Not Implemented","feature":"User Deletion"}'
+        "502":
+          description: Bad Gateway - Invalid response from upstream server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadGatewayErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":502,"message":"Bad Gateway","upstream_service":"Auth Service"}'
+        "503":
+          description: Service Unavailable - Try again later
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":503,"message":"Service
+                    Unavailable"},"error_code":4300,"message":"Service is
+                    temporarily
+                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}'
+        "504":
+          description: Gateway Timeout - Upstream server timed out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayTimeoutErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":504,"message":"Gateway Timeout","upstream_service":"Database"}'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAccountSettingsRequest"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/UpdateAccountSettingsRequest"
+        required: true
+      tags:
+        - Account Management
+  "/v1/accounts/{id}/usage":
+    get:
+      summary: Get account usage
+      description: Retrieves usage details for a given account
+      operationId: GetAccountUsage
+      responses:
+        "200":
+          description: Usage details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetAccountUsageResponse"
+        "400":
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":400,"message":"Bad
+                    Request"},"error_code":2000,"message":"Invalid input
+                    parameters","field_violations":[{"field":"email","message":"Invalid
+                    email
+                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}'
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
+                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}'
+        "402":
+          description: Payment Required - Payment is necessary to proceed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRequiredErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":402,"message":"Payment
+                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}'
+        "403":
+          description: Forbidden - Access denied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":403,"message":"Forbidden","reason":"Insufficient
+                    permissions","required_permissions":["admin"]}'
+        "404":
+          description: Not Found - Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":404,"message":"Not
+                    Found"},"error_code":5102,"message":"Resource not
+                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}'
+        "405":
+          description: Method Not Allowed - HTTP method not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":405,"message":"Method Not
+                    Allowed","allowed_methods":["GET","POST"]}'
+        "409":
+          description: Conflict - Resource already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
+                    already
+                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
+                    already registered"}}'
+        "410":
+          description: Gone - Resource is no longer available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoneErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
+        "412":
+          description: Precondition Failed - Preconditions in headers did not match
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreconditionFailedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":412,"message":"Precondition
+                    Failed","failed_conditions":["If-Match header does not
+                    match"]}'
+        "422":
+          description: Unprocessable Entity - Semantic errors in the request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntityErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":422,"message":"Unprocessable
+                    Entity","errors":[{"field":"email","error":"Invalid
+                    format"}]}'
+        "425":
+          description: Too Early - Request is being replayed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooEarlyErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":425,"message":"Too Early"}'
+        "429":
+          description: Too Many Requests - Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateLimitErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":429,"message":"Too Many
+                    Requests"},"error_code":4102,"message":"Rate limit
+                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":500,"message":"Internal Server
+                    Error"},"error_code":4000,"message":"An unexpected error
+                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}'
+        "501":
+          description: Not Implemented - Functionality not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotImplementedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":501,"message":"Not Implemented","feature":"User Deletion"}'
+        "502":
+          description: Bad Gateway - Invalid response from upstream server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadGatewayErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":502,"message":"Bad Gateway","upstream_service":"Auth Service"}'
+        "503":
+          description: Service Unavailable - Try again later
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":503,"message":"Service
+                    Unavailable"},"error_code":4300,"message":"Service is
+                    temporarily
+                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}'
+        "504":
+          description: Gateway Timeout - Upstream server timed out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayTimeoutErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":504,"message":"Gateway Timeout","upstream_service":"Database"}'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - Account Management
+  /v1/workspace:
+    put:
+      summary: Update workspace details
+      description: Updates the details of a specific workspace
+      operationId: UpdateWorkspace
+      responses:
+        "200":
+          description: Workspace updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateWorkspaceResponse"
+        "400":
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":400,"message":"Bad
+                    Request"},"error_code":2000,"message":"Invalid input
+                    parameters","field_violations":[{"field":"email","message":"Invalid
+                    email
+                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}'
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
+                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}'
+        "402":
+          description: Payment Required - Payment is necessary to proceed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRequiredErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":402,"message":"Payment
+                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}'
+        "403":
+          description: Forbidden - Access denied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":403,"message":"Forbidden","reason":"Insufficient
+                    permissions","required_permissions":["admin"]}'
+        "404":
+          description: Not Found - Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":404,"message":"Not
+                    Found"},"error_code":5102,"message":"Resource not
+                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}'
+        "405":
+          description: Method Not Allowed - HTTP method not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":405,"message":"Method Not
+                    Allowed","allowed_methods":["GET","POST"]}'
+        "409":
+          description: Conflict - Resource already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
+                    already
+                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
+                    already registered"}}'
+        "410":
+          description: Gone - Resource is no longer available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoneErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
+        "412":
+          description: Precondition Failed - Preconditions in headers did not match
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreconditionFailedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":412,"message":"Precondition
+                    Failed","failed_conditions":["If-Match header does not
+                    match"]}'
+        "422":
+          description: Unprocessable Entity - Semantic errors in the request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntityErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":422,"message":"Unprocessable
+                    Entity","errors":[{"field":"email","error":"Invalid
+                    format"}]}'
+        "425":
+          description: Too Early - Request is being replayed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooEarlyErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":425,"message":"Too Early"}'
+        "429":
+          description: Too Many Requests - Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateLimitErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":429,"message":"Too Many
+                    Requests"},"error_code":4102,"message":"Rate limit
+                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":500,"message":"Internal Server
+                    Error"},"error_code":4000,"message":"An unexpected error
+                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}'
+        "501":
+          description: Not Implemented - Functionality not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotImplementedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":501,"message":"Not Implemented","feature":"User Deletion"}'
+        "502":
+          description: Bad Gateway - Invalid response from upstream server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadGatewayErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":502,"message":"Bad Gateway","upstream_service":"Auth Service"}'
+        "503":
+          description: Service Unavailable - Try again later
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":503,"message":"Service
+                    Unavailable"},"error_code":4300,"message":"Service is
+                    temporarily
+                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}'
+        "504":
+          description: Gateway Timeout - Upstream server timed out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayTimeoutErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":504,"message":"Gateway Timeout","upstream_service":"Database"}'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateWorkspaceRequest"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/UpdateWorkspaceRequest"
+        required: true
+      tags:
+        - Workspace Management
+  "/v1/workspace/{id}":
+    get:
+      summary: Get workspace details
+      description: Retrieves details of a specific workspace
+      operationId: GetWorkspace
+      responses:
+        "200":
+          description: Workspace retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workspace"
+        "400":
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":400,"message":"Bad
+                    Request"},"error_code":2000,"message":"Invalid input
+                    parameters","field_violations":[{"field":"email","message":"Invalid
+                    email
+                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}'
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
+                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}'
+        "402":
+          description: Payment Required - Payment is necessary to proceed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRequiredErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":402,"message":"Payment
+                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}'
+        "403":
+          description: Forbidden - Access denied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":403,"message":"Forbidden","reason":"Insufficient
+                    permissions","required_permissions":["admin"]}'
+        "404":
+          description: Not Found - Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":404,"message":"Not
+                    Found"},"error_code":5102,"message":"Resource not
+                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}'
+        "405":
+          description: Method Not Allowed - HTTP method not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":405,"message":"Method Not
+                    Allowed","allowed_methods":["GET","POST"]}'
+        "409":
+          description: Conflict - Resource already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
+                    already
+                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
+                    already registered"}}'
+        "410":
+          description: Gone - Resource is no longer available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoneErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
+        "412":
+          description: Precondition Failed - Preconditions in headers did not match
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreconditionFailedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":412,"message":"Precondition
+                    Failed","failed_conditions":["If-Match header does not
+                    match"]}'
+        "422":
+          description: Unprocessable Entity - Semantic errors in the request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntityErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":422,"message":"Unprocessable
+                    Entity","errors":[{"field":"email","error":"Invalid
+                    format"}]}'
+        "425":
+          description: Too Early - Request is being replayed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooEarlyErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":425,"message":"Too Early"}'
+        "429":
+          description: Too Many Requests - Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateLimitErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":429,"message":"Too Many
+                    Requests"},"error_code":4102,"message":"Rate limit
+                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":500,"message":"Internal Server
+                    Error"},"error_code":4000,"message":"An unexpected error
+                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}'
+        "501":
+          description: Not Implemented - Functionality not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotImplementedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":501,"message":"Not Implemented","feature":"User Deletion"}'
+        "502":
+          description: Bad Gateway - Invalid response from upstream server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadGatewayErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":502,"message":"Bad Gateway","upstream_service":"Auth Service"}'
+        "503":
+          description: Service Unavailable - Try again later
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":503,"message":"Service
+                    Unavailable"},"error_code":4300,"message":"Service is
+                    temporarily
+                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}'
+        "504":
+          description: Gateway Timeout - Upstream server timed out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayTimeoutErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":504,"message":"Gateway Timeout","upstream_service":"Database"}'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - Workspace Management
+    delete:
+      summary: Delete a workspace
+      description: Deletes a specific workspace
+      operationId: DeleteWorkspace
+      responses:
+        "200":
+          description: Workspace deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteWorkspaceResponse"
+        "400":
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":400,"message":"Bad
+                    Request"},"error_code":2000,"message":"Invalid input
+                    parameters","field_violations":[{"field":"email","message":"Invalid
+                    email
+                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}'
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
+                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}'
+        "402":
+          description: Payment Required - Payment is necessary to proceed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRequiredErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":402,"message":"Payment
+                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}'
+        "403":
+          description: Forbidden - Access denied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":403,"message":"Forbidden","reason":"Insufficient
+                    permissions","required_permissions":["admin"]}'
+        "404":
+          description: Not Found - Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":404,"message":"Not
+                    Found"},"error_code":5102,"message":"Resource not
+                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}'
+        "405":
+          description: Method Not Allowed - HTTP method not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":405,"message":"Method Not
+                    Allowed","allowed_methods":["GET","POST"]}'
+        "409":
+          description: Conflict - Resource already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
+                    already
+                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
+                    already registered"}}'
+        "410":
+          description: Gone - Resource is no longer available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoneErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
+        "412":
+          description: Precondition Failed - Preconditions in headers did not match
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreconditionFailedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":412,"message":"Precondition
+                    Failed","failed_conditions":["If-Match header does not
+                    match"]}'
+        "422":
+          description: Unprocessable Entity - Semantic errors in the request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntityErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":422,"message":"Unprocessable
+                    Entity","errors":[{"field":"email","error":"Invalid
+                    format"}]}'
+        "425":
+          description: Too Early - Request is being replayed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooEarlyErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":425,"message":"Too Early"}'
+        "429":
+          description: Too Many Requests - Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateLimitErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":429,"message":"Too Many
+                    Requests"},"error_code":4102,"message":"Rate limit
+                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":500,"message":"Internal Server
+                    Error"},"error_code":4000,"message":"An unexpected error
+                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}'
+        "501":
+          description: Not Implemented - Functionality not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotImplementedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":501,"message":"Not Implemented","feature":"User Deletion"}'
+        "502":
+          description: Bad Gateway - Invalid response from upstream server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadGatewayErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":502,"message":"Bad Gateway","upstream_service":"Auth Service"}'
+        "503":
+          description: Service Unavailable - Try again later
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":503,"message":"Service
+                    Unavailable"},"error_code":4300,"message":"Service is
+                    temporarily
+                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}'
+        "504":
+          description: Gateway Timeout - Upstream server timed out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayTimeoutErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":504,"message":"Gateway Timeout","upstream_service":"Database"}'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - Workspace Management
+  /v1/workspaces:
+    get:
+      summary: List workspaces
+      description: Retrieves a list of workspaces for a given account
+      operationId: ListWorkspaces
+      responses:
+        "200":
+          description: Workspaces retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListWorkspacesResponse"
+        "400":
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":400,"message":"Bad
+                    Request"},"error_code":2000,"message":"Invalid input
+                    parameters","field_violations":[{"field":"email","message":"Invalid
+                    email
+                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}'
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
+                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}'
+        "402":
+          description: Payment Required - Payment is necessary to proceed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRequiredErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":402,"message":"Payment
+                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}'
+        "403":
+          description: Forbidden - Access denied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":403,"message":"Forbidden","reason":"Insufficient
+                    permissions","required_permissions":["admin"]}'
+        "404":
+          description: Not Found - Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":404,"message":"Not
+                    Found"},"error_code":5102,"message":"Resource not
+                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}'
+        "405":
+          description: Method Not Allowed - HTTP method not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":405,"message":"Method Not
+                    Allowed","allowed_methods":["GET","POST"]}'
+        "409":
+          description: Conflict - Resource already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
+                    already
+                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
+                    already registered"}}'
+        "410":
+          description: Gone - Resource is no longer available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoneErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
+        "412":
+          description: Precondition Failed - Preconditions in headers did not match
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreconditionFailedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":412,"message":"Precondition
+                    Failed","failed_conditions":["If-Match header does not
+                    match"]}'
+        "422":
+          description: Unprocessable Entity - Semantic errors in the request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntityErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":422,"message":"Unprocessable
+                    Entity","errors":[{"field":"email","error":"Invalid
+                    format"}]}'
+        "425":
+          description: Too Early - Request is being replayed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooEarlyErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":425,"message":"Too Early"}'
+        "429":
+          description: Too Many Requests - Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateLimitErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":429,"message":"Too Many
+                    Requests"},"error_code":4102,"message":"Rate limit
+                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":500,"message":"Internal Server
+                    Error"},"error_code":4000,"message":"An unexpected error
+                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}'
+        "501":
+          description: Not Implemented - Functionality not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotImplementedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":501,"message":"Not Implemented","feature":"User Deletion"}'
+        "502":
+          description: Bad Gateway - Invalid response from upstream server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadGatewayErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":502,"message":"Bad Gateway","upstream_service":"Auth Service"}'
+        "503":
+          description: Service Unavailable - Try again later
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":503,"message":"Service
+                    Unavailable"},"error_code":4300,"message":"Service is
+                    temporarily
+                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}'
+        "504":
+          description: Gateway Timeout - Upstream server timed out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayTimeoutErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":504,"message":"Gateway Timeout","upstream_service":"Database"}'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+      parameters:
+        - name: accountId
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: pageToken
+          in: query
+          required: false
+          schema:
+            type: string
+      tags:
+        - Workspace Management
+    post:
+      summary: Create a new workspace
+      description: Creates a new workspace for a given account
+      operationId: CreateWorkspace
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateWorkspaceResponse"
+        "201":
+          description: Workspace created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateWorkspaceResponse"
+        "400":
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":400,"message":"Bad
+                    Request"},"error_code":2000,"message":"Invalid input
+                    parameters","field_violations":[{"field":"email","message":"Invalid
+                    email
+                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}'
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
+                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}'
+        "402":
+          description: Payment Required - Payment is necessary to proceed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRequiredErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":402,"message":"Payment
+                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}'
+        "403":
+          description: Forbidden - Access denied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":403,"message":"Forbidden","reason":"Insufficient
+                    permissions","required_permissions":["admin"]}'
+        "404":
+          description: Not Found - Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":404,"message":"Not
+                    Found"},"error_code":5102,"message":"Resource not
+                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}'
+        "405":
+          description: Method Not Allowed - HTTP method not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":405,"message":"Method Not
+                    Allowed","allowed_methods":["GET","POST"]}'
+        "409":
+          description: Conflict - Resource already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
+                    already
+                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
+                    already registered"}}'
+        "410":
+          description: Gone - Resource is no longer available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoneErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
+        "412":
+          description: Precondition Failed - Preconditions in headers did not match
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreconditionFailedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":412,"message":"Precondition
+                    Failed","failed_conditions":["If-Match header does not
+                    match"]}'
+        "422":
+          description: Unprocessable Entity - Semantic errors in the request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntityErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":422,"message":"Unprocessable
+                    Entity","errors":[{"field":"email","error":"Invalid
+                    format"}]}'
+        "425":
+          description: Too Early - Request is being replayed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooEarlyErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":425,"message":"Too Early"}'
+        "429":
+          description: Too Many Requests - Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateLimitErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":429,"message":"Too Many
+                    Requests"},"error_code":4102,"message":"Rate limit
+                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":500,"message":"Internal Server
+                    Error"},"error_code":4000,"message":"An unexpected error
+                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}'
+        "501":
+          description: Not Implemented - Functionality not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotImplementedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":501,"message":"Not Implemented","feature":"User Deletion"}'
+        "502":
+          description: Bad Gateway - Invalid response from upstream server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadGatewayErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":502,"message":"Bad Gateway","upstream_service":"Auth Service"}'
+        "503":
+          description: Service Unavailable - Try again later
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":503,"message":"Service
+                    Unavailable"},"error_code":4300,"message":"Service is
+                    temporarily
+                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}'
+        "504":
+          description: Gateway Timeout - Upstream server timed out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayTimeoutErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":504,"message":"Gateway Timeout","upstream_service":"Database"}'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateWorkspaceRequest"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/CreateWorkspaceRequest"
+        required: true
+      tags:
+        - Workspace Management
+  /v1/workspaces/workflow:
+    put:
+      summary: Update workflow details
+      description: Updates the details of a specific workflow
+      operationId: UpdateWorkflow
+      responses:
+        "200":
+          description: Workflow updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScrapingWorkflow"
+        "400":
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":400,"message":"Bad
+                    Request"},"error_code":2000,"message":"Invalid input
+                    parameters","field_violations":[{"field":"email","message":"Invalid
+                    email
+                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}'
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
+                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}'
+        "402":
+          description: Payment Required - Payment is necessary to proceed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRequiredErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":402,"message":"Payment
+                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}'
+        "403":
+          description: Forbidden - Access denied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":403,"message":"Forbidden","reason":"Insufficient
+                    permissions","required_permissions":["admin"]}'
+        "404":
+          description: Not Found - Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":404,"message":"Not
+                    Found"},"error_code":5102,"message":"Resource not
+                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}'
+        "405":
+          description: Method Not Allowed - HTTP method not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":405,"message":"Method Not
+                    Allowed","allowed_methods":["GET","POST"]}'
+        "409":
+          description: Conflict - Resource already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
+                    already
+                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
+                    already registered"}}'
+        "410":
+          description: Gone - Resource is no longer available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoneErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
+        "412":
+          description: Precondition Failed - Preconditions in headers did not match
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreconditionFailedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":412,"message":"Precondition
+                    Failed","failed_conditions":["If-Match header does not
+                    match"]}'
+        "422":
+          description: Unprocessable Entity - Semantic errors in the request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntityErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":422,"message":"Unprocessable
+                    Entity","errors":[{"field":"email","error":"Invalid
+                    format"}]}'
+        "425":
+          description: Too Early - Request is being replayed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooEarlyErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":425,"message":"Too Early"}'
+        "429":
+          description: Too Many Requests - Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateLimitErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":429,"message":"Too Many
+                    Requests"},"error_code":4102,"message":"Rate limit
+                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":500,"message":"Internal Server
+                    Error"},"error_code":4000,"message":"An unexpected error
+                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}'
+        "501":
+          description: Not Implemented - Functionality not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotImplementedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":501,"message":"Not Implemented","feature":"User Deletion"}'
+        "502":
+          description: Bad Gateway - Invalid response from upstream server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadGatewayErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":502,"message":"Bad Gateway","upstream_service":"Auth Service"}'
+        "503":
+          description: Service Unavailable - Try again later
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":503,"message":"Service
+                    Unavailable"},"error_code":4300,"message":"Service is
+                    temporarily
+                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}'
+        "504":
+          description: Gateway Timeout - Upstream server timed out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayTimeoutErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":504,"message":"Gateway Timeout","upstream_service":"Database"}'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateWorkflowRequest"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/UpdateWorkflowRequest"
+        required: true
+      tags:
+        - Workflow Management
+  "/v1/workspaces/{workspaceId}/analytics":
+    get:
+      summary: Get workspace analytics
+      description: Retrieves analytics data for a specific workspace
+      operationId: GetWorkspaceAnalytics
+      responses:
+        "200":
+          description: Analytics data retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetWorkspaceAnalyticsResponse"
+        "400":
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":400,"message":"Bad
+                    Request"},"error_code":2000,"message":"Invalid input
+                    parameters","field_violations":[{"field":"email","message":"Invalid
+                    email
+                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}'
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
+                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}'
+        "402":
+          description: Payment Required - Payment is necessary to proceed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRequiredErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":402,"message":"Payment
+                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}'
+        "403":
+          description: Forbidden - Access denied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":403,"message":"Forbidden","reason":"Insufficient
+                    permissions","required_permissions":["admin"]}'
+        "404":
+          description: Not Found - Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":404,"message":"Not
+                    Found"},"error_code":5102,"message":"Resource not
+                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}'
+        "405":
+          description: Method Not Allowed - HTTP method not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":405,"message":"Method Not
+                    Allowed","allowed_methods":["GET","POST"]}'
+        "409":
+          description: Conflict - Resource already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
+                    already
+                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
+                    already registered"}}'
+        "410":
+          description: Gone - Resource is no longer available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoneErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
+        "412":
+          description: Precondition Failed - Preconditions in headers did not match
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreconditionFailedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":412,"message":"Precondition
+                    Failed","failed_conditions":["If-Match header does not
+                    match"]}'
+        "422":
+          description: Unprocessable Entity - Semantic errors in the request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntityErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":422,"message":"Unprocessable
+                    Entity","errors":[{"field":"email","error":"Invalid
+                    format"}]}'
+        "425":
+          description: Too Early - Request is being replayed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooEarlyErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":425,"message":"Too Early"}'
+        "429":
+          description: Too Many Requests - Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateLimitErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":429,"message":"Too Many
+                    Requests"},"error_code":4102,"message":"Rate limit
+                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":500,"message":"Internal Server
+                    Error"},"error_code":4000,"message":"An unexpected error
+                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}'
+        "501":
+          description: Not Implemented - Functionality not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotImplementedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":501,"message":"Not Implemented","feature":"User Deletion"}'
+        "502":
+          description: Bad Gateway - Invalid response from upstream server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadGatewayErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":502,"message":"Bad Gateway","upstream_service":"Auth Service"}'
+        "503":
+          description: Service Unavailable - Try again later
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":503,"message":"Service
+                    Unavailable"},"error_code":4300,"message":"Service is
+                    temporarily
+                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}'
+        "504":
+          description: Gateway Timeout - Upstream server timed out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayTimeoutErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":504,"message":"Gateway Timeout","upstream_service":"Database"}'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: startTime
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: endTime
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+      tags:
+        - Analytics
+  "/v1/workspaces/{workspaceId}/workflows":
+    get:
+      summary: List workflows
+      description: Retrieves a list of workflows for a given workspace
+      operationId: ListWorkflows
+      responses:
+        "200":
+          description: Workflows retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListWorkflowsResponse"
+        "400":
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":400,"message":"Bad
+                    Request"},"error_code":2000,"message":"Invalid input
+                    parameters","field_violations":[{"field":"email","message":"Invalid
+                    email
+                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}'
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
+                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}'
+        "402":
+          description: Payment Required - Payment is necessary to proceed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRequiredErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":402,"message":"Payment
+                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}'
+        "403":
+          description: Forbidden - Access denied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":403,"message":"Forbidden","reason":"Insufficient
+                    permissions","required_permissions":["admin"]}'
+        "404":
+          description: Not Found - Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":404,"message":"Not
+                    Found"},"error_code":5102,"message":"Resource not
+                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}'
+        "405":
+          description: Method Not Allowed - HTTP method not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":405,"message":"Method Not
+                    Allowed","allowed_methods":["GET","POST"]}'
+        "409":
+          description: Conflict - Resource already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
+                    already
+                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
+                    already registered"}}'
+        "410":
+          description: Gone - Resource is no longer available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoneErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
+        "412":
+          description: Precondition Failed - Preconditions in headers did not match
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreconditionFailedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":412,"message":"Precondition
+                    Failed","failed_conditions":["If-Match header does not
+                    match"]}'
+        "422":
+          description: Unprocessable Entity - Semantic errors in the request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntityErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":422,"message":"Unprocessable
+                    Entity","errors":[{"field":"email","error":"Invalid
+                    format"}]}'
+        "425":
+          description: Too Early - Request is being replayed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooEarlyErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":425,"message":"Too Early"}'
+        "429":
+          description: Too Many Requests - Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateLimitErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":429,"message":"Too Many
+                    Requests"},"error_code":4102,"message":"Rate limit
+                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":500,"message":"Internal Server
+                    Error"},"error_code":4000,"message":"An unexpected error
+                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}'
+        "501":
+          description: Not Implemented - Functionality not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotImplementedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":501,"message":"Not Implemented","feature":"User Deletion"}'
+        "502":
+          description: Bad Gateway - Invalid response from upstream server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadGatewayErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":502,"message":"Bad Gateway","upstream_service":"Auth Service"}'
+        "503":
+          description: Service Unavailable - Try again later
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":503,"message":"Service
+                    Unavailable"},"error_code":4300,"message":"Service is
+                    temporarily
+                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}'
+        "504":
+          description: Gateway Timeout - Upstream server timed out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayTimeoutErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":504,"message":"Gateway Timeout","upstream_service":"Database"}'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: pageToken
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: filter
+          in: query
+          required: false
+          schema:
+            type: string
+      tags:
+        - Workflow Management
+    post:
+      summary: Create a new workflow
+      operationId: LeadScraperService_CreateWorkflow
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateWorkflowResponse"
+        "201":
+          description: Workflow created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateWorkflowResponse"
+        "400":
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":400,"message":"Bad
+                    Request"},"error_code":2000,"message":"Invalid input
+                    parameters","field_violations":[{"field":"email","message":"Invalid
+                    email
+                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}'
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
+                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}'
+        "402":
+          description: Payment Required - Payment is necessary to proceed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRequiredErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":402,"message":"Payment
+                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}'
+        "403":
+          description: Forbidden - Access denied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":403,"message":"Forbidden","reason":"Insufficient
+                    permissions","required_permissions":["admin"]}'
+        "404":
+          description: Not Found - Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":404,"message":"Not
+                    Found"},"error_code":5102,"message":"Resource not
+                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}'
+        "405":
+          description: Method Not Allowed - HTTP method not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":405,"message":"Method Not
+                    Allowed","allowed_methods":["GET","POST"]}'
+        "409":
+          description: Conflict - Resource already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
+                    already
+                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
+                    already registered"}}'
+        "410":
+          description: Gone - Resource is no longer available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoneErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
+        "412":
+          description: Precondition Failed - Preconditions in headers did not match
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreconditionFailedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":412,"message":"Precondition
+                    Failed","failed_conditions":["If-Match header does not
+                    match"]}'
+        "422":
+          description: Unprocessable Entity - Semantic errors in the request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntityErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":422,"message":"Unprocessable
+                    Entity","errors":[{"field":"email","error":"Invalid
+                    format"}]}'
+        "425":
+          description: Too Early - Request is being replayed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooEarlyErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":425,"message":"Too Early"}'
+        "429":
+          description: Too Many Requests - Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateLimitErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":429,"message":"Too Many
+                    Requests"},"error_code":4102,"message":"Rate limit
+                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":500,"message":"Internal Server
+                    Error"},"error_code":4000,"message":"An unexpected error
+                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}'
+        "501":
+          description: Not Implemented - Functionality not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotImplementedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":501,"message":"Not Implemented","feature":"User Deletion"}'
+        "502":
+          description: Bad Gateway - Invalid response from upstream server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadGatewayErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":502,"message":"Bad Gateway","upstream_service":"Auth Service"}'
+        "503":
+          description: Service Unavailable - Try again later
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":503,"message":"Service
+                    Unavailable"},"error_code":4300,"message":"Service is
+                    temporarily
+                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}'
+        "504":
+          description: Gateway Timeout - Upstream server timed out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayTimeoutErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":504,"message":"Gateway Timeout","upstream_service":"Database"}'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateWorkflowBody"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/CreateWorkflowBody"
+        required: true
+      tags:
+        - Workflow Management
+  "/v1/workspaces/{workspaceId}/workflows/{id}":
+    get:
+      summary: Get workflow details
+      description: Retrieves details of a specific workflow
+      operationId: GetWorkflow
+      responses:
+        "200":
+          description: Workflow retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScrapingWorkflow"
+        "400":
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":400,"message":"Bad
+                    Request"},"error_code":2000,"message":"Invalid input
+                    parameters","field_violations":[{"field":"email","message":"Invalid
+                    email
+                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}'
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
+                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}'
+        "402":
+          description: Payment Required - Payment is necessary to proceed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRequiredErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":402,"message":"Payment
+                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}'
+        "403":
+          description: Forbidden - Access denied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":403,"message":"Forbidden","reason":"Insufficient
+                    permissions","required_permissions":["admin"]}'
+        "404":
+          description: Not Found - Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":404,"message":"Not
+                    Found"},"error_code":5102,"message":"Resource not
+                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}'
+        "405":
+          description: Method Not Allowed - HTTP method not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":405,"message":"Method Not
+                    Allowed","allowed_methods":["GET","POST"]}'
+        "409":
+          description: Conflict - Resource already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
+                    already
+                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
+                    already registered"}}'
+        "410":
+          description: Gone - Resource is no longer available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoneErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
+        "412":
+          description: Precondition Failed - Preconditions in headers did not match
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreconditionFailedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":412,"message":"Precondition
+                    Failed","failed_conditions":["If-Match header does not
+                    match"]}'
+        "422":
+          description: Unprocessable Entity - Semantic errors in the request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntityErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":422,"message":"Unprocessable
+                    Entity","errors":[{"field":"email","error":"Invalid
+                    format"}]}'
+        "425":
+          description: Too Early - Request is being replayed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooEarlyErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":425,"message":"Too Early"}'
+        "429":
+          description: Too Many Requests - Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateLimitErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":429,"message":"Too Many
+                    Requests"},"error_code":4102,"message":"Rate limit
+                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":500,"message":"Internal Server
+                    Error"},"error_code":4000,"message":"An unexpected error
+                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}'
+        "501":
+          description: Not Implemented - Functionality not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotImplementedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":501,"message":"Not Implemented","feature":"User Deletion"}'
+        "502":
+          description: Bad Gateway - Invalid response from upstream server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadGatewayErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":502,"message":"Bad Gateway","upstream_service":"Auth Service"}'
+        "503":
+          description: Service Unavailable - Try again later
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":503,"message":"Service
+                    Unavailable"},"error_code":4300,"message":"Service is
+                    temporarily
+                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}'
+        "504":
+          description: Gateway Timeout - Upstream server timed out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayTimeoutErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":504,"message":"Gateway Timeout","upstream_service":"Database"}'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - Workflow Management
+  "/v1/workspaces/{workspaceId}/workflows/{id}/pause":
+    post:
+      summary: Pause workflow execution
+      description: Pauses the execution of a specific workflow
+      operationId: PauseWorkflow
+      responses:
+        "200":
+          description: Workflow paused successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PauseWorkflowResponse"
+        "400":
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":400,"message":"Bad
+                    Request"},"error_code":2000,"message":"Invalid input
+                    parameters","field_violations":[{"field":"email","message":"Invalid
+                    email
+                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}'
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
+                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}'
+        "402":
+          description: Payment Required - Payment is necessary to proceed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRequiredErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":402,"message":"Payment
+                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}'
+        "403":
+          description: Forbidden - Access denied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":403,"message":"Forbidden","reason":"Insufficient
+                    permissions","required_permissions":["admin"]}'
+        "404":
+          description: Not Found - Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":404,"message":"Not
+                    Found"},"error_code":5102,"message":"Resource not
+                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}'
+        "405":
+          description: Method Not Allowed - HTTP method not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":405,"message":"Method Not
+                    Allowed","allowed_methods":["GET","POST"]}'
+        "409":
+          description: Conflict - Resource already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
+                    already
+                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
+                    already registered"}}'
+        "410":
+          description: Gone - Resource is no longer available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoneErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
+        "412":
+          description: Precondition Failed - Preconditions in headers did not match
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreconditionFailedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":412,"message":"Precondition
+                    Failed","failed_conditions":["If-Match header does not
+                    match"]}'
+        "422":
+          description: Unprocessable Entity - Semantic errors in the request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntityErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":422,"message":"Unprocessable
+                    Entity","errors":[{"field":"email","error":"Invalid
+                    format"}]}'
+        "425":
+          description: Too Early - Request is being replayed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooEarlyErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":425,"message":"Too Early"}'
+        "429":
+          description: Too Many Requests - Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateLimitErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":429,"message":"Too Many
+                    Requests"},"error_code":4102,"message":"Rate limit
+                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":500,"message":"Internal Server
+                    Error"},"error_code":4000,"message":"An unexpected error
+                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}'
+        "501":
+          description: Not Implemented - Functionality not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotImplementedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":501,"message":"Not Implemented","feature":"User Deletion"}'
+        "502":
+          description: Bad Gateway - Invalid response from upstream server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadGatewayErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":502,"message":"Bad Gateway","upstream_service":"Auth Service"}'
+        "503":
+          description: Service Unavailable - Try again later
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":503,"message":"Service
+                    Unavailable"},"error_code":4300,"message":"Service is
+                    temporarily
+                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}'
+        "504":
+          description: Gateway Timeout - Upstream server timed out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayTimeoutErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":504,"message":"Gateway Timeout","upstream_service":"Database"}'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PauseWorkflowBody"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/PauseWorkflowBody"
+        required: true
+      tags:
+        - Execution Control
+  "/v1/workspaces/{workspaceId}/workflows/{id}/trigger":
+    post:
+      summary: Trigger workflow execution
+      description: Triggers the execution of a specific workflow
+      operationId: TriggerWorkflow
+      responses:
+        "200":
+          description: Workflow triggered successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TriggerWorkflowResponse"
+        "400":
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":400,"message":"Bad
+                    Request"},"error_code":2000,"message":"Invalid input
+                    parameters","field_violations":[{"field":"email","message":"Invalid
+                    email
+                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}'
+        "401":
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
+                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}'
+        "402":
+          description: Payment Required - Payment is necessary to proceed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentRequiredErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":402,"message":"Payment
+                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}'
+        "403":
+          description: Forbidden - Access denied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ForbiddenErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":403,"message":"Forbidden","reason":"Insufficient
+                    permissions","required_permissions":["admin"]}'
+        "404":
+          description: Not Found - Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotFoundErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":404,"message":"Not
+                    Found"},"error_code":5102,"message":"Resource not
+                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}'
+        "405":
+          description: Method Not Allowed - HTTP method not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MethodNotAllowedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":405,"message":"Method Not
+                    Allowed","allowed_methods":["GET","POST"]}'
+        "409":
+          description: Conflict - Resource already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
+                    already
+                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
+                    already registered"}}'
+        "410":
+          description: Gone - Resource is no longer available
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoneErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
+        "412":
+          description: Precondition Failed - Preconditions in headers did not match
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PreconditionFailedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":412,"message":"Precondition
+                    Failed","failed_conditions":["If-Match header does not
+                    match"]}'
+        "422":
+          description: Unprocessable Entity - Semantic errors in the request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnprocessableEntityErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":422,"message":"Unprocessable
+                    Entity","errors":[{"field":"email","error":"Invalid
+                    format"}]}'
+        "425":
+          description: Too Early - Request is being replayed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TooEarlyErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":425,"message":"Too Early"}'
+        "429":
+          description: Too Many Requests - Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RateLimitErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":429,"message":"Too Many
+                    Requests"},"error_code":4102,"message":"Rate limit
+                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InternalErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":500,"message":"Internal Server
+                    Error"},"error_code":4000,"message":"An unexpected error
+                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}'
+        "501":
+          description: Not Implemented - Functionality not supported
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NotImplementedErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":501,"message":"Not Implemented","feature":"User Deletion"}'
+        "502":
+          description: Bad Gateway - Invalid response from upstream server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadGatewayErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":502,"message":"Bad Gateway","upstream_service":"Auth Service"}'
+        "503":
+          description: Service Unavailable - Try again later
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServiceUnavailableErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"status":{"code":503,"message":"Service
+                    Unavailable"},"error_code":4300,"message":"Service is
+                    temporarily
+                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}'
+        "504":
+          description: Gateway Timeout - Upstream server timed out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GatewayTimeoutErrorMessageResponse"
+            "":
+              examples:
+                response:
+                  value: '{"code":504,"message":"Gateway Timeout","upstream_service":"Database"}'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Status"
+      parameters:
+        - name: workspaceId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TriggerWorkflowBody"
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/TriggerWorkflowBody"
+        required: true
+      tags:
+        - Execution Control
 externalDocs:
   description: Vector User Service Documentation
   url: https://internal-docs.solomon-ai.io/user-service
@@ -2415,6 +5559,42 @@ components:
           items:
             $ref: "#/components/schemas/ScrapingJob"
           title: Associated scraping jobs for this account
+        accountStatus:
+          $ref: "#/components/schemas/AccountStatus"
+        roles:
+          type: array
+          items:
+            type: string
+          title: Role-based access control
+        permissions:
+          type: array
+          items:
+            type: string
+        mfaEnabled:
+          type: boolean
+          title: Security settings
+        lastLoginAt:
+          type: string
+          format: date-time
+        timezone:
+          type: string
+        totalJobsRun:
+          type: integer
+          format: int32
+          title: Usage tracking
+        monthlyJobLimit:
+          type: integer
+          format: int32
+        concurrentJobLimit:
+          type: integer
+          format: int32
+        workspaces:
+          type: array
+          items:
+            $ref: "#/components/schemas/Workspace"
+          title: Relationships
+        settings:
+          $ref: "#/components/schemas/AccountSettings"
       description: >-
         Account represents a user account within the workspace service.
 
@@ -2452,6 +5632,37 @@ components:
         }
 
         ```
+    AccountSettings:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uint64
+        emailNotifications:
+          type: boolean
+          title: Notification preferences
+        slackNotifications:
+          type: boolean
+        defaultDataRetention:
+          type: string
+          title: Data retention
+        autoPurgeEnabled:
+          type: boolean
+        require2fa:
+          type: boolean
+          title: Security
+        sessionTimeout:
+          type: string
+      title: Account-wide settings
+    AccountStatus:
+      type: string
+      enum:
+        - ACCOUNT_STATUS_UNSPECIFIED
+        - ACCOUNT_STATUS_ACTIVE
+        - ACCOUNT_STATUS_SUSPENDED
+        - ACCOUNT_STATUS_PENDING_VERIFICATION
+      default: ACCOUNT_STATUS_UNSPECIFIED
+      title: Account status and permissions
     Any:
       type: object
       properties:
@@ -2778,6 +5989,23 @@ components:
       description: Represents errors when the server received an invalid response from
         an upstream server
       title: Bad Gateway Error Response
+    BusinessHours:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uint64
+        day:
+          $ref: "#/components/schemas/DayOfWeek"
+        openTime:
+          type: string
+        closeTime:
+          type: string
+        closed:
+          type: boolean
+        leadId:
+          type: string
+      title: Temporal data
     ConflictErrorMessageResponse:
       type: object
       example:
@@ -2815,30 +6043,18 @@ components:
     CreateAccountRequest:
       type: object
       properties:
-        authPlatformUserId:
+        account:
+          $ref: "#/components/schemas/Account"
+        initialWorkspaceName:
           type: string
-          title: Auth0 user identifier
-        orgId:
-          type: string
-          title: Organization identifier
-        tenantId:
-          type: string
-          title: Tenant identifier
-        email:
-          type: string
-          title: User's email address
-      title: CreateAccountRequest represents a request to create a new account
-      required:
-        - authPlatformUserId
-        - orgId
-        - tenantId
-        - email
+      title: Account Management Messages
     CreateAccountResponse:
       type: object
       properties:
         account:
           $ref: "#/components/schemas/Account"
-      title: CreateAccountResponse represents the response after creating an account
+        initialWorkspaceId:
+          type: string
     CreateScrapingJobRequest:
       type: object
       properties:
@@ -2898,12 +6114,47 @@ components:
           $ref: "#/components/schemas/BackgroundJobStatus"
       title: CreateScrapingJobResponse represents the response after creating a
         scraping job
+    CreateWorkflowBody:
+      type: object
+      properties:
+        workflow:
+          $ref: "#/components/schemas/ScrapingWorkflow"
+      title: Workflow Management Messages
+    CreateWorkflowResponse:
+      type: object
+      properties:
+        workflow:
+          $ref: "#/components/schemas/ScrapingWorkflow"
+    CreateWorkspaceRequest:
+      type: object
+      properties:
+        workspace:
+          $ref: "#/components/schemas/Workspace"
+        accountId:
+          type: string
+      title: Workspace Management Messages
+    CreateWorkspaceResponse:
+      type: object
+      properties:
+        workspace:
+          $ref: "#/components/schemas/Workspace"
+    DayOfWeek:
+      type: string
+      enum:
+        - DAY_OF_WEEK_UNSPECIFIED
+        - DAY_OF_WEEK_MONDAY
+        - DAY_OF_WEEK_TUESDAY
+        - DAY_OF_WEEK_WEDNESDAY
+        - DAY_OF_WEEK_THURSDAY
+        - DAY_OF_WEEK_FRIDAY
+        - DAY_OF_WEEK_SATURDAY
+        - DAY_OF_WEEK_SUNDAY
+      default: DAY_OF_WEEK_UNSPECIFIED
     DeleteAccountResponse:
       type: object
       properties:
         success:
           type: boolean
-      title: DeleteAccountResponse represents the response after deleting an account
     DeleteScrapingJobResponse:
       type: object
       properties:
@@ -2911,6 +6162,11 @@ components:
           type: boolean
       title: DeleteScrapingJobResponse represents the response after deleting a
         scraping job
+    DeleteWorkspaceResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
     Dependency:
       type: object
       properties:
@@ -2939,6 +6195,16 @@ components:
           type: string
       title: DownloadScrapingResultsResponse represents the response containing job
         results
+    EmployeeBenefit:
+      type: string
+      enum:
+        - EMPLOYEE_BENEFIT_UNSPECIFIED
+        - EMPLOYEE_BENEFIT_HEALTH_INSURANCE
+        - EMPLOYEE_BENEFIT_RETIREMENT_PLAN
+        - EMPLOYEE_BENEFIT_PAID_TIME_OFF
+        - EMPLOYEE_BENEFIT_REMOTE_WORK
+      default: EMPLOYEE_BENEFIT_UNSPECIFIED
+      title: Employee & HR Data
     ErrorResponse:
       type: object
       properties:
@@ -3028,7 +6294,22 @@ components:
       properties:
         account:
           $ref: "#/components/schemas/Account"
-      title: GetAccountResponse represents the response containing account details
+    GetAccountUsageResponse:
+      type: object
+      properties:
+        totalJobsRun:
+          type: integer
+          format: int32
+        monthlyJobLimit:
+          type: integer
+          format: int32
+        remainingJobs:
+          type: integer
+          format: int32
+        resetTime:
+          type: string
+          format: date-time
+      title: AccountUsage represents the usage details of an account
     GetScrapingJobResponse:
       type: object
       properties:
@@ -3036,6 +6317,32 @@ components:
           $ref: "#/components/schemas/ScrapingJob"
       title: GetScrapingJobResponse represents the response containing scraping job
         details
+    GetWorkflowResponse:
+      type: object
+      properties:
+        workflow:
+          $ref: "#/components/schemas/ScrapingWorkflow"
+    GetWorkspaceAnalyticsResponse:
+      type: object
+      properties:
+        totalLeads:
+          type: integer
+          format: int32
+        activeWorkflows:
+          type: integer
+          format: int32
+        jobsLast30Days:
+          type: integer
+          format: int32
+        successRates:
+          type: array
+          items:
+            $ref: "#/components/schemas/JobSuccessRate"
+    GetWorkspaceResponse:
+      type: object
+      properties:
+        workspace:
+          $ref: "#/components/schemas/Workspace"
     GoneErrorMessageResponse:
       type: object
       example:
@@ -3124,6 +6431,266 @@ components:
           $ref: "#/components/schemas/ErrorResponse"
       description: Represents internal server and system-level errors
       title: Internal Error Response
+    JobSuccessRate:
+      type: object
+      properties:
+        workflowId:
+          type: string
+        successRate:
+          type: number
+          format: float
+        totalRuns:
+          type: integer
+          format: int32
+    Lead:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uint64
+        name:
+          type: string
+          title: Business details
+        website:
+          type: string
+        phone:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        latitude:
+          type: number
+          format: double
+          title: Scraped data
+        longitude:
+          type: number
+          format: double
+        googleRating:
+          type: number
+          format: float
+        reviewCount:
+          type: integer
+          format: int32
+        industry:
+          type: string
+          title: Enrichment data
+        employeeCount:
+          type: integer
+          format: int32
+        estimatedRevenue:
+          type: string
+          format: int64
+        orgId:
+          type: string
+          title: Org context
+        tenantId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+          title: Audit fields
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+        job:
+          $ref: "#/components/schemas/ScrapingJob"
+        workspace:
+          $ref: "#/components/schemas/Workspace"
+        placeId:
+          type: string
+          description: Google Places ID
+          title: Detailed Google Maps metadata
+        googleMapsUrl:
+          type: string
+        businessStatus:
+          type: string
+          title: OPERATIONAL, CLOSED_TEMPORARILY, etc
+        regularHours:
+          type: array
+          items:
+            $ref: "#/components/schemas/BusinessHours"
+        specialHours:
+          type: array
+          items:
+            $ref: "#/components/schemas/BusinessHours"
+        photoReferences:
+          type: array
+          items:
+            type: string
+          description: Google Places photo IDs
+          title: Rich media
+        mainPhotoUrl:
+          type: string
+        reviews:
+          type: array
+          items:
+            $ref: "#/components/schemas/Review"
+        types:
+          type: array
+          items:
+            type: string
+          description: Google Places types
+          title: Categories and attributes
+        amenities:
+          type: array
+          items:
+            type: string
+          title: wheelchair_accessible, restroom, etc
+        servesVegetarianFood:
+          type: boolean
+        outdoorSeating:
+          type: boolean
+        paymentMethods:
+          type: array
+          items:
+            type: string
+          description: visa, amex, cash, etc
+          title: Payment and accessibility
+        wheelchairAccessible:
+          type: boolean
+        parkingAvailable:
+          type: boolean
+        socialMedia:
+          type: object
+          additionalProperties:
+            type: string
+          description: platform -> url
+          title: Social media links
+        ratingCategory:
+          type: string
+        rating:
+          type: number
+          format: float
+        count:
+          type: integer
+          format: int32
+        lastUpdated:
+          type: string
+          format: date-time
+          title: Metadata
+        dataSourceVersion:
+          type: string
+        scrapingSessionId:
+          type: string
+        alternatePhones:
+          type: array
+          items:
+            type: string
+          title: Contact Information
+        contactPersonName:
+          type: string
+        contactPersonTitle:
+          type: string
+        contactEmail:
+          type: string
+        foundedYear:
+          type: integer
+          format: int32
+          title: Business Operations
+        businessType:
+          type: string
+        certifications:
+          type: array
+          items:
+            type: string
+          title: ISO, LEED, etc
+        licenseNumber:
+          type: string
+        revenueRange:
+          $ref: "#/components/schemas/RevenueRange"
+        fundingStage:
+          type: string
+          title: Seed, Series A, etc
+        isPublicCompany:
+          type: boolean
+        websiteLoadSpeed:
+          type: number
+          format: float
+          description: In seconds
+          title: Online Presence Metrics
+        hasSslCertificate:
+          type: boolean
+        cmsUsed:
+          type: string
+          title: e.g., WordPress, Shopify
+        ecommercePlatforms:
+          type: array
+          items:
+            type: string
+        timezone:
+          type: string
+          title: Location Enhancements
+        neighborhood:
+          type: string
+        nearbyLandmarks:
+          type: array
+          items:
+            type: string
+        transportationAccess:
+          type: string
+          title: Near subway, parking, etc
+        employeeBenefits:
+          type: array
+          items:
+            $ref: "#/components/schemas/EmployeeBenefit"
+        parentCompany:
+          type: string
+          title: Partnerships & Affiliations
+        subsidiaries:
+          type: array
+          items:
+            type: string
+        isFranchise:
+          type: boolean
+        seoKeywords:
+          type: array
+          items:
+            type: string
+          title: Marketing & SEO
+        usesGoogleAds:
+          type: boolean
+        googleMyBusinessCategory:
+          type: string
+        naicsCode:
+          type: string
+          title: Industry Classification
+        sicCode:
+          type: string
+        unspscCode:
+          type: string
+        isGreenCertified:
+          type: boolean
+          title: Sustainability
+        energySources:
+          type: array
+          items:
+            type: string
+          title: Solar, Wind, etc
+        sustainabilityRating:
+          type: string
+        recentAnnouncements:
+          type: array
+          items:
+            type: string
+          title: Recent Activity
+        lastProductLaunch:
+          type: string
+          format: date-time
+        hasLitigationHistory:
+          type: boolean
+          title: Legal & Compliance
+        exportControlStatus:
+          type: string
+          title: EAR, ITAR, etc
+      title: Lead represents a scraped business entity
     LimitInfo:
       type: object
       properties:
@@ -3149,13 +6716,8 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Account"
-          title: List of accounts
-        total:
-          type: integer
-          format: int32
-          title: Total number of accounts matching the request
-      title: ListAccountsResponse represents the response containing a list of
-        accounts
+        nextPageToken:
+          type: string
     ListScrapingJobsResponse:
       type: object
       properties:
@@ -3165,6 +6727,24 @@ components:
             $ref: "#/components/schemas/ScrapingJob"
       title: ListScrapingJobsResponse represents the response containing a list of
         scraping jobs
+    ListWorkflowsResponse:
+      type: object
+      properties:
+        workflows:
+          type: array
+          items:
+            $ref: "#/components/schemas/ScrapingWorkflow"
+        nextPageToken:
+          type: string
+    ListWorkspacesResponse:
+      type: object
+      properties:
+        workspaces:
+          type: array
+          items:
+            $ref: "#/components/schemas/Workspace"
+        nextPageToken:
+          type: string
     MFAInfo:
       type: object
       properties:
@@ -3304,6 +6884,28 @@ components:
           additionalProperties:
             type: string
           title: Operation parameters
+    OutputFormat:
+      type: string
+      enum:
+        - OUTPUT_FORMAT_UNSPECIFIED
+        - OUTPUT_FORMAT_JSON
+        - OUTPUT_FORMAT_CSV
+        - OUTPUT_FORMAT_BIGQUERY
+        - OUTPUT_FORMAT_POSTGRES
+      default: OUTPUT_FORMAT_UNSPECIFIED
+      title: Result handling
+    PauseWorkflowBody:
+      type: object
+      properties:
+        pause:
+          type: boolean
+    PauseWorkflowResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        workflow:
+          $ref: "#/components/schemas/ScrapingWorkflow"
     PaymentInfo:
       type: object
       properties:
@@ -3499,6 +7101,41 @@ components:
           additionalProperties:
             type: string
           title: ID format violations
+    RevenueRange:
+      type: string
+      enum:
+        - REVENUE_RANGE_UNSPECIFIED
+        - REVENUE_RANGE_UNDER_100K
+        - REVENUE_RANGE_100K_TO_1M
+        - REVENUE_RANGE_1M_TO_10M
+        - REVENUE_RANGE_10M_TO_50M
+        - REVENUE_RANGE_OVER_50M
+      default: REVENUE_RANGE_UNSPECIFIED
+      title: Financial Metrics
+    Review:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uint64
+        author:
+          type: string
+        rating:
+          type: number
+          format: float
+        text:
+          type: string
+        time:
+          type: string
+          format: date-time
+        language:
+          type: string
+        profilePhotoUrl:
+          type: string
+        reviewCount:
+          type: integer
+          format: int32
+      title: Detailed reviews
     SchemaValidation:
       type: object
       properties:
@@ -3520,6 +7157,7 @@ components:
       properties:
         id:
           type: string
+          format: uint64
           title: Unique identifier for the job
         name:
           type: string
@@ -3590,6 +7228,14 @@ components:
           type: string
           format: byte
           title: Payload data
+        leads:
+          type: array
+          items:
+            $ref: "#/components/schemas/Lead"
+          title: Lead tracking
+        workflowId:
+          type: string
+          title: Workflow context
       description: >-
         ScrapingJob represents a Google Maps scraping task.
 
@@ -3637,6 +7283,136 @@ components:
         }
 
         ```
+    ScrapingWorkflow:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uint64
+        cronExpression:
+          type: string
+          title: Scheduling options
+        nextRunTime:
+          type: string
+          format: date-time
+          title: Execution settings
+        lastRunTime:
+          type: string
+          format: date-time
+        status:
+          $ref: "#/components/schemas/BackgroundJobStatus"
+        retryCount:
+          type: integer
+          format: int32
+          title: Failure handling
+        maxRetries:
+          type: integer
+          format: int32
+        alertEmails:
+          type: string
+        orgId:
+          type: string
+          title: Org context
+        tenantId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+          title: Audit fields
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+        jobs:
+          type: array
+          items:
+            $ref: "#/components/schemas/ScrapingJob"
+          title: Relationships
+        workspace:
+          $ref: "#/components/schemas/Workspace"
+        geoFencingRadius:
+          type: number
+          format: float
+          title: Advanced scraping configuration
+        geoFencingLat:
+          type: number
+          format: double
+        geoFencingLon:
+          type: number
+          format: double
+        geoFencingZoomMin:
+          type: integer
+          format: int32
+        geoFencingZoomMax:
+          type: integer
+          format: int32
+        includeReviews:
+          type: boolean
+          title: Data collection parameters
+        includePhotos:
+          type: boolean
+        includeBusinessHours:
+          type: boolean
+        maxReviewsPerBusiness:
+          type: integer
+          format: int32
+        outputFormat:
+          $ref: "#/components/schemas/OutputFormat"
+        outputDestination:
+          type: string
+          title: URI or dataset name
+        dataRetention:
+          type: string
+          title: Data retention
+        anonymizePii:
+          type: boolean
+        notificationWebhookUrl:
+          type: string
+        notificationSlackChannel:
+          type: string
+        notificationEmailGroup:
+          type: string
+        notificationNotifyOnStart:
+          type: boolean
+        notificationNotifyOnComplete:
+          type: boolean
+        notificationNotifyOnFailure:
+          type: boolean
+        contentFilterAllowedCountries:
+          type: array
+          items:
+            type: string
+        contentFilterExcludedTypes:
+          type: array
+          items:
+            type: string
+        contentFilterMinimumRating:
+          type: number
+          format: float
+        contentFilterMinimumReviews:
+          type: integer
+          format: int32
+        qosMaxConcurrentRequests:
+          type: integer
+          format: int32
+        qosMaxRetries:
+          type: integer
+          format: int32
+        qosRequestTimeout:
+          type: string
+        qosEnableJavascript:
+          type: boolean
+          title: For full page rendering
+        respectRobotsTxt:
+          type: boolean
+          title: Compliance
+        acceptTermsOfService:
+          type: boolean
+        userAgent:
+          type: string
+      title: ScrapingWorkflow defines recurring scraping configurations
     ServiceStatus:
       type: object
       properties:
@@ -3794,6 +7570,20 @@ components:
       description: Indicates that the server is unwilling to risk processing a request
         that might be replayed
       title: Too Early Error Response
+    TriggerWorkflowBody:
+      type: object
+      properties:
+        parameters:
+          type: object
+          additionalProperties:
+            type: string
+    TriggerWorkflowResponse:
+      type: object
+      properties:
+        jobId:
+          type: string
+        status:
+          $ref: "#/components/schemas/BackgroundJobStatus"
     UnprocessableEntityErrorMessageResponse:
       type: object
       example:
@@ -3825,13 +7615,43 @@ components:
       properties:
         account:
           $ref: "#/components/schemas/Account"
-      title: UpdateAccountRequest represents a request to update account details
     UpdateAccountResponse:
       type: object
       properties:
         account:
           $ref: "#/components/schemas/Account"
-      title: UpdateAccountResponse represents the response after updating an account
+    UpdateAccountSettingsRequest:
+      type: object
+      properties:
+        settings:
+          $ref: "#/components/schemas/AccountSettings"
+      title: UpdateAccountSettingsRequest represents a request to update account
+        settings
+    UpdateAccountSettingsResponse:
+      type: object
+      properties:
+        settings:
+          $ref: "#/components/schemas/AccountSettings"
+    UpdateWorkflowRequest:
+      type: object
+      properties:
+        workflow:
+          $ref: "#/components/schemas/ScrapingWorkflow"
+    UpdateWorkflowResponse:
+      type: object
+      properties:
+        workflow:
+          $ref: "#/components/schemas/ScrapingWorkflow"
+    UpdateWorkspaceRequest:
+      type: object
+      properties:
+        workspace:
+          $ref: "#/components/schemas/Workspace"
+    UpdateWorkspaceResponse:
+      type: object
+      properties:
+        workspace:
+          $ref: "#/components/schemas/Workspace"
     ValidationErrorCode:
       type: string
       enum:
@@ -3913,3 +7733,66 @@ components:
           $ref: "#/components/schemas/ErrorResponse"
       description: Represents data validation and business logic errors
       title: Validation Error Response
+    Workspace:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uint64
+        name:
+          type: string
+        industry:
+          type: string
+        domain:
+          type: string
+        gdprCompliant:
+          type: boolean
+          title: Compliance settings
+        hipaaCompliant:
+          type: boolean
+        soc2Compliant:
+          type: boolean
+        storageQuota:
+          type: string
+          format: int64
+          description: in bytes
+          title: Storage quotas
+        usedStorage:
+          type: string
+          format: int64
+        createdAt:
+          type: string
+          format: date-time
+          title: Audit fields
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+        workflows:
+          type: array
+          items:
+            $ref: "#/components/schemas/ScrapingWorkflow"
+          title: Relationships
+        jobsRunThisMonth:
+          type: integer
+          format: int32
+          title: Job tracking
+        workspaceJobLimit:
+          type: integer
+          format: int32
+        dailyJobQuota:
+          type: integer
+          format: int32
+        activeScrapers:
+          type: integer
+          format: int32
+          title: Usage metrics
+        totalLeadsCollected:
+          type: integer
+          format: int32
+        lastJobRun:
+          type: string
+          format: date-time
+      title: Workspace represents a business entity with multiple accounts

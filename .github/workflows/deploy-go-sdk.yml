@@ -7,10 +7,19 @@ on:
       - 'sdk/client/go-client-sdk/**'
       - 'sdk/server/go/**'
       - 'version.yaml'
+  pull_request:
+    types: [closed]
+    branches: [main]
+    paths:
+      - 'sdk/client/go-client-sdk/**'
+      - 'sdk/server/go/**'
+      - 'version.yaml'
   workflow_dispatch:
 
 jobs:
   deploy:
+    # Only run on main branch pushes or merged PRs
+    if: github.event.pull_request.merged == true || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     environment: go-publish
     steps:
@@ -20,15 +29,38 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.VECTOR_BOT_PAT }}
 
-      - name: Read versions
-        run: |
-          GO_VERSION=$(grep 'go:' version.yaml | awk '{print $2}')
-          echo "GO_VERSION=$GO_VERSION" >> $GITHUB_ENV
-
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
           go-version: '1.21'
+
+      - name: Get latest tag
+        id: get_latest_tag
+        run: |
+          # Get the latest version tag
+          LATEST_TAG=$(git tag -l "v*" | sort -V | tail -n 1)
+          if [ -z "$LATEST_TAG" ]; then
+            echo "No existing tag found, starting at v1.0.0"
+            echo "CURRENT_VERSION=1.0.0" >> $GITHUB_ENV
+          else
+            VERSION=$(echo $LATEST_TAG | sed 's/v//')
+            echo "CURRENT_VERSION=$VERSION" >> $GITHUB_ENV
+          fi
+          echo "Latest tag: $LATEST_TAG"
+
+      - name: Increment version
+        id: increment_version
+        run: |
+          # Split version into parts
+          IFS='.' read -r -a version_parts <<< "$CURRENT_VERSION"
+          
+          # Increment patch version
+          ((version_parts[2]++))
+          
+          # Construct new version
+          NEW_VERSION="${version_parts[0]}.${version_parts[1]}.${version_parts[2]}"
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+          echo "New version will be: $NEW_VERSION"
 
       - name: Tag version
         env:
@@ -37,13 +69,5 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
-          git tag -a "sdk/go/v${{ env.GO_VERSION }}" -m "Go SDK version ${{ env.GO_VERSION }}"
-          git push origin "sdk/go/v${{ env.GO_VERSION }}"
-
-      - name: Update module versions
-        run: |
-          cd sdk/client/go-client-sdk
-          go mod edit -module github.com/VectorEngineering/vector-protobuf-definitions/client/v${{ env.GO_VERSION }}
-          
-          cd ../../server/go
-          go mod edit -module github.com/VectorEngineering/vector-protobuf-definitions/server/v${{ env.GO_VERSION }} 
+          git tag -a "v${{ env.NEW_VERSION }}" -m "Version ${{ env.NEW_VERSION }}"
+          git push origin "v${{ env.NEW_VERSION }}"

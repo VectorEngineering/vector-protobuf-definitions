@@ -1,0 +1,378 @@
+syntax = "proto3";
+
+package lead_scraper_service.v1;
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "github.com/Vector/vector-lead-management/protobuf/api-definitions/pkg/generated/lead_scraper_service/v1";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "Lead Scraping Service API"
+    version: "1.0"
+    description: "Vector Lead Scraping Service API - Manages Lead Scraping Jobs"
+    contact: {
+      name: "Vector AI Engineering"
+      url: "https://vector.ai"
+      email: "yoanyomba@vector.ai"
+    }
+    license: {
+      name: "Apache 2.0 License"
+      url: "https://github.com/SolomonAIEngineering/backend-monorepo/blob/main/LICENSE"
+    }
+    extensions: {
+      key: "x-api-version"
+      value: {string_value: "v2"}
+    }
+  }
+
+  // Specify supported schemes
+  schemes: HTTP
+  schemes: HTTPS
+  schemes: WSS
+
+  // Specify supported content types
+  consumes: "application/json"
+  consumes: "application/x-www-form-urlencoded"
+  produces: "application/json"
+
+  host: "lead-scraping-microservice.vector.svc.cluster.local:9896"
+
+  // Security definitions
+  security_definitions: {
+    security: {
+      key: "ApiKeyAuth"
+      value: {
+        type: TYPE_API_KEY
+        in: IN_HEADER
+        name: "X-API-Key"
+        extensions: {
+          key: "x-amazon-apigateway-authtype"
+          value: {string_value: "oauth2"}
+        }
+        extensions: {
+          key: "x-amazon-apigateway-authorizer"
+          value: {
+            struct_value: {
+              fields: {
+                key: "type"
+                value: {string_value: "token"}
+              }
+              fields: {
+                key: "authorizerResultTtlInSeconds"
+                value: {number_value: 60}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Global response definitions
+ // Enhanced error responses
+  responses: {
+    key: "400"
+    value: {
+      description: "Bad Request - Invalid input parameters"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.ValidationErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: '{"status":{"code":400,"message":"Bad Request"},"error_code":2000,"message":"Invalid input parameters","field_violations":[{"field":"email","message":"Invalid email format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}'
+      }
+      headers: {
+        key: "X-Request-ID"
+        value: {
+          type: "string"
+          description: "Request identifier for tracking"
+        }
+      }
+    }
+  }
+  responses: {
+    key: "401"
+    value: {
+      description: "Unauthorized - Authentication required"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.AuthenticationErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}'
+      }
+      headers: {
+        key: "X-Authenticate"
+        value: {
+          type: "string"
+          description: "Authentication scheme required"
+        }
+      }
+    }
+  }
+  responses: {
+    key: "403"
+    value: {
+      description: "Forbidden - Insufficient permissions"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.AuthenticationErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: '{"status":{"code":403,"message":"Forbidden"},"error_code":1103,"message":"Insufficient permissions","auth_context":{"required_scopes":["write:user"],"provided_scopes":["read:user"],"missing_permissions":["write:user"]}}'
+      }
+    }
+  }
+  responses: {
+    key: "404"
+    value: {
+      description: "Not Found - Resource not found"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.NotFoundErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: '{"status":{"code":404,"message":"Not Found"},"error_code":5102,"message":"Resource not found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}'
+      }
+    }
+  }
+  responses: {
+    key: "409"
+    value: {
+      description: "Conflict - Resource already exists"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.ConflictErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource already exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email already registered"}}'
+      }
+    }
+  }
+  responses: {
+    key: "429"
+    value: {
+      description: "Too Many Requests - Rate limit exceeded"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.RateLimitErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: '{"status":{"code":429,"message":"Too Many Requests"},"error_code":4102,"message":"Rate limit exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}'
+      }
+      headers: {
+        key: "Retry-After"
+        value: {
+          type: "integer"
+          description: "Time in seconds to wait before retrying"
+        }
+      }
+    }
+  }
+  responses: {
+    key: "500"
+    value: {
+      description: "Internal Server Error"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.InternalErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: '{"status":{"code":500,"message":"Internal Server Error"},"error_code":4000,"message":"An unexpected error occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}'
+      }
+    }
+  }
+  responses: {
+    key: "503"
+    value: {
+      description: "Service Unavailable - Try again later"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.ServiceUnavailableErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: '{"status":{"code":503,"message":"Service Unavailable"},"error_code":4300,"message":"Service is temporarily unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}'
+      }
+      headers: {
+        key: "Retry-After"
+        value: {
+          type: "integer"
+          description: "Time in seconds to wait before retrying"
+        }
+      }
+    }
+  }
+  responses: {
+    key: "405"
+    value: {
+      description: "Method Not Allowed - HTTP method not supported"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.MethodNotAllowedErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: "{\"code\":405,\"message\":\"Method Not Allowed\",\"allowed_methods\":[\"GET\",\"POST\"]}"
+      }
+    }
+  }
+  responses: {
+    key: "412"
+    value: {
+      description: "Precondition Failed - Preconditions in headers did not match"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.PreconditionFailedErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: "{\"code\":412,\"message\":\"Precondition Failed\",\"failed_conditions\":[\"If-Match header does not match\"]}"
+      }
+    }
+  }
+  responses: {
+    key: "422"
+    value: {
+      description: "Unprocessable Entity - Semantic errors in the request"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.UnprocessableEntityErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: "{\"code\":422,\"message\":\"Unprocessable Entity\",\"errors\":[{\"field\":\"email\",\"error\":\"Invalid format\"}]}"
+      }
+    }
+  }
+  responses: {
+    key: "501"
+    value: {
+      description: "Not Implemented - Functionality not supported"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.NotImplementedErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: "{\"code\":501,\"message\":\"Not Implemented\",\"feature\":\"User Deletion\"}"
+      }
+    }
+  }
+  responses: {
+    key: "502"
+    value: {
+      description: "Bad Gateway - Invalid response from upstream server"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.BadGatewayErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: "{\"code\":502,\"message\":\"Bad Gateway\",\"upstream_service\":\"Auth Service\"}"
+      }
+    }
+  }
+  responses: {
+    key: "504"
+    value: {
+      description: "Gateway Timeout - Upstream server timed out"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.GatewayTimeoutErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: "{\"code\":504,\"message\":\"Gateway Timeout\",\"upstream_service\":\"Database\"}"
+      }
+    }
+  }
+  responses: {
+    key: "402"
+    value: {
+      description: "Payment Required - Payment is necessary to proceed"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.PaymentRequiredErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: "{\"code\":402,\"message\":\"Payment Required\",\"payment_info\":{\"amount_due\":29.99,\"currency\":\"USD\",\"due_date\":\"2024-01-01T00:00:00Z\"}}"
+      }
+    }
+  }
+  responses: {
+    key: "410"
+    value: {
+      description: "Gone - Resource is no longer available"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.GoneErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: "{\"code\":410,\"message\":\"Gone\",\"resource\":\"/api/v1/users\"}"
+      }
+    }
+  }
+  responses: {
+    key: "425"
+    value: {
+      description: "Too Early - Request is being replayed"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.TooEarlyErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: "{\"code\":425,\"message\":\"Too Early\"}"
+      }
+    }
+  }
+  responses: {
+    key: "403"
+    value: {
+      description: "Forbidden - Access denied"
+      schema: {
+        json_schema: {
+          ref: ".lead_scraper_service.v1.ForbiddenErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: "{\"code\":403,\"message\":\"Forbidden\",\"reason\":\"Insufficient permissions\",\"required_permissions\":[\"admin\"]}"
+      }
+    }
+  }
+
+  // External documentation
+  external_docs: {
+    description: "Vector User Service Documentation"
+    url: "https://internal-docs.solomon-ai.io/user-service"
+  }
+
+  // Tags for API organization
+  tags: {
+    name: "Workspace Management"
+    description: "APIs for managing workspaces, workspace settings, and configurations"
+    external_docs: {
+      description: "Learn more about workspace management"
+      url: "https://internal-docs.solomon-ai.io/workspace-service/management"
+    }
+  }
+  tags: {
+    name: "Workspace Collaboration"
+    description: "APIs for managing workspace sharing, permissions, and team collaboration"
+  }
+  tags: {
+    name: "Workspace Analytics"
+    description: "APIs for workspace usage analytics and reporting"
+  }
+};

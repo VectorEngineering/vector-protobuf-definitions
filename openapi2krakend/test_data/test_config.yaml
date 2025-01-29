@@ -1,0 +1,12 @@
+# test_data/test_config.yaml
+endpoints:
+  - name: "financial service plaid webhook"
+    krakendApiPath: "/v1/gateway/service/financials/plaid/webhook"
+    serviceApiPath: "/plaid/webhooks"
+    method: "post"
+    host: "http://financial-integration-service.platform.svc.cluster.local:9898"
+  - name: "financial service stripe webhook"
+    krakendApiPath: "/v1/gateway/service/financials/stripe/webhook"
+    serviceApiPath: "/stripe/webhooks"
+    method: "post"
+    host: "http://financial-integration-service.platform.svc.cluster.local:9898"

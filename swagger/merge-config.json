@@ -1,0 +1,11 @@
+{
+  "inputs": [
+    {
+      "inputFile": "./lead-scraper-service-backend-api.yaml",
+      "operationSelection": {
+        "includeTags": ["lead-scraper-service"]
+      }
+    }
+  ],
+  "output": "./backend-api.yaml"
+}

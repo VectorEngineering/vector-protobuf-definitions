@@ -1,0 +1,44 @@
+name: Deploy Go SDK
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'sdk/client/go-client-sdk/**'
+      - 'sdk/server/go/**'
+      - 'version.yaml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: go-publish
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Read versions
+        run: |
+          GO_VERSION=$(grep 'go:' version.yaml | awk '{print $2}')
+          echo "GO_VERSION=$GO_VERSION" >> $GITHUB_ENV
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+
+      - name: Tag version
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git tag -a "sdk/go/v${{ env.GO_VERSION }}" -m "Go SDK version ${{ env.GO_VERSION }}"
+          git push origin "sdk/go/v${{ env.GO_VERSION }}"
+
+      - name: Update module versions
+        run: |
+          cd sdk/client/go-client-sdk
+          go mod edit -module github.com/playbookmedia/client/v${{ env.GO_VERSION }}
+          
+          cd ../../server/go
+          go mod edit -module github.com/playbookmedia/server/v${{ env.GO_VERSION }} 

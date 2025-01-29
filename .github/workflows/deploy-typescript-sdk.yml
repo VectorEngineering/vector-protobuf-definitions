@@ -1,0 +1,53 @@
+name: Deploy TypeScript SDK
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'sdk/client/client-typescript-sdk/**'
+      - 'sdk/client/client-node-sdk/**'
+      - 'version.yaml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: npm-publish
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read versions
+        id: versions
+        run: |
+          TS_VERSION=$(grep 'typescript:' version.yaml | awk '{print $2}')
+          echo "TS_VERSION=$TS_VERSION" >> $GITHUB_ENV
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: |
+          cd sdk/client/client-typescript-sdk
+          npm ci
+          cd ../client-node-sdk
+          npm ci
+
+      - name: Build and test
+        run: ./build.sh test
+
+      - name: Publish client-typescript-sdk
+        run: |
+          cd sdk/client/client-typescript-sdk
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish client-node-sdk
+        run: |
+          cd sdk/client/client-node-sdk
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} 

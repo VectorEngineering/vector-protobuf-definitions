@@ -1,0 +1,12 @@
+# SDK version configuration
+sdk:
+  versions:
+    typescript: 1.0.0
+    python: 1.0.0
+    go: 1.0.0
+    docs: 1.0.0
+  metadata:
+    org: playbookmedia
+    repo: https://github.com/playbookmedia/sdks
+    license: MIT
+    support_email: yoanyomba@solomon-ai.co 

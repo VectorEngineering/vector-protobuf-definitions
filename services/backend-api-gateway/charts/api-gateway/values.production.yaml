@@ -1,0 +1,441 @@
+# Default values for api-gateway.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+fullnameOverride: "api-gateway"
+fullname: "api-gateway"
+
+replicaCount: 2
+
+environment: prod
+
+image:
+  repository: feelguuds/api-gateway
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: latest
+
+imagePullSecrets: []
+nameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# service.beta.kubernetes.io/do-loadbalancer-certificate-id: "ee5129f8-c4ff-495a-84c5-6dad4b6c05d4"
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "8081"
+  prometheus.io/path: "__stats"
+  # service.beta.kubernetes.io/do-loadbalancer-protocol: "https"
+  # service.beta.kubernetes.io/do-loadbalancer-healthcheck-port: "8080"
+  # service.beta.kubernetes.io/do-loadbalancer-healthcheck-protocol: "http"
+  # service.beta.kubernetes.io/do-loadbalancer-healthcheck-path: "/__health"
+  # service.beta.kubernetes.io/do-loadbalancer-healthcheck-check-interval-seconds: "3"
+  # service.beta.kubernetes.io/do-loadbalancer-healthcheck-response-timeout-seconds: "5"
+  # service.beta.kubernetes.io/do-loadbalancer-healthcheck-unhealthy-threshold: "3"
+  # service.beta.kubernetes.io/do-loadbalancer-healthcheck-healthy-threshold: "5"
+  # service.beta.kubernetes.io/do-loadbalancer-disable-lets-encrypt-dns-records: "false"
+  # service.beta.kubernetes.io/do-loadbalancer-certificate-id: "ee5129f8-c4ff-495a-84c5-6dad4b6c05d4"
+podSecurityContext: {}
+# fsGroup: 2000
+
+# securityContext:
+#   {}
+#   #capabilities:
+#   #   drop:
+#   #   - ALL
+#   #readOnlyRootFilesystem: true
+#   #runAsNonRoot: true
+#   #runAsUser: 1000
+
+service:
+  type: NodePort
+  port: 8080
+  nodeport: 32093
+  hostPort:
+  metrics:
+    port: 8081
+    nodeport: 32094
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  # kubernetes.io/ingress.class: nginx
+  # kubernetes.io/tls-acme: "true"
+  hosts:
+  - host: gateway.local
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+# ref: https://sdbrett.com/post/2019-11-25-kubernetes-resource-limits/
+# ref: https://www.krakend.io/docs/enterprise/deploying/server-dimensioning/
+resources:
+  limits:
+    cpu: "1000m"
+    memory: "1Gi"
+  requests:
+    cpu: "500m"
+    memory: "256Mi"
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+krakendJson: "krakend.json"
+addlVolumes: []
+addlVolumeMounts: []
+env: []
+
+sidecar:
+  enabled: false
+  name: kraken-designer
+  repository: devopsfaith/krakendesigner
+  tag: "latest"
+  port: 80
+
+linkerd:
+  profile:
+    enabled: true
+  annotations:
+    linkerd.io/inject: enabled # Controls whether or not a pod should be injected; accepted values are enabled, disabled and ingress
+    config.linkerd.io/access-log: json
+    config.linkerd.io/proxy-log-format: json
+    config.linkerd.io/proxy-log-level: warn
+
+tests:
+  enabled: false
+
+auth0:
+  domain: solomon-ai.us.auth0.com
+  audience: https://solomon-ai.us.auth0.com/api/v2/
+
+
+autoscaling:
+  enabled: true
+  # Annotation for custom metadata
+  annotations:
+    policy.scaling/owner: "platform-team"
+    policy.scaling/last-reviewed: "2024-03-19"
+
+  # Replica limits
+  minReplicas: 3
+  maxReplicas: 10
+
+  # Primary scaling metrics
+  cpu: 85 # Target CPU utilization percentage
+  memory: 512Mi # Target memory utilization
+  requests: 10000000 # Target requests per second
+
+  # Custom metrics for advanced scaling
+  customMetrics:
+  - name: queue_length
+    targetType: AverageValue
+    targetValue: 50
+  - name: error_rate
+    targetType: AverageValue
+    targetValue: 10
+
+  # Detailed scaling behavior
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 300 # 5 minutes
+      percent: 25 # 25% growth
+      periodSeconds: 300 # Every 5 minutes
+      podValue: 2 # Can add up to 2 pods
+      podPeriodSeconds: 60 # Every 1 minute
+      selectPolicy: Max # Use the more aggressive policy
+
+    scaleDown:
+      stabilizationWindowSeconds: 900 # 15 minutes
+      percent: 10 # 10% reduction
+      periodSeconds: 600 # Every 10 minutes
+      podValue: 1 # Remove only 1 pod
+      podPeriodSeconds: 300 # Every 5 minutes
+      selectPolicy: Min # Use the more conservative policy
+
+# A Pod Disruption Budget (PDB) is a Kubernetes resource that specifies the minimum availability level for a set of pods,
+# typically defined by labels. It provides a safety mechanism to maintain pod availability during voluntary disruptions,
+# such as planned maintenance, updates, and scaling operations. PDBs ensure that enough replicas of an application remain
+# available during these disruptions, preventing unintended downtime.
+podDisruptionBudget:
+  enabled: true # Enable or disable the Pod Disruption Budget (PDB). Ensures controlled disruption.
+
+  # Core configuration
+  safetyLevel: "high" # Defines the safety level: high, medium, or low. Affects the strictness of disruptions.
+  updatedBy: "platform-team" # Indicates the team responsible for configuration changes. Useful for auditing.
+
+  # Availability settings
+  minAvailable: "75%" # Minimum percentage of pods that must remain available. Accepts a percentage or an absolute number.
+  # maxUnavailable: 1  # Alternative to minAvailable, specifies the maximum number of pods that can be disrupted.
+  unhealthyPodEvictionPolicy: "IfHealthyBudget" # Policy for evicting unhealthy pods. "IfHealthyBudget" respects availability settings, "AlwaysAllow" disregards them.
+
+  # Maintenance windows
+  maintenanceWindow: "scheduled" # Determines when maintenance occurs. Options: "always," "scheduled," or "manual".
+  maintenanceDay: "Sunday" # Day designated for scheduled maintenance. Helps reduce unplanned disruptions.
+  requiresManualIntervention: true # Specifies if human intervention is required for certain operations.
+  requiresManualReview: true # Indicates if manual review is needed before executing disruptions.
+
+  # Protection settings
+  cascadeDelete: false # Controls if resources should be deleted when associated resources are removed. Prevents accidental data loss.
+  recoveryTime: "5m" # Time allotted for system recovery between disruptions.
+  criticalThreshold: 50 # Threshold for taking protective action if system health falls below this point.
+
+  # Health monitoring
+  health:
+    checkInterval: "30s" # Frequency of health checks to monitor the pods' status.
+    recoveryThreshold: 90 # Minimum percentage of healthy pods required for recovery operations.
+    minHealthyPeriod: "5m" # Minimum time period that pods must remain healthy to be considered stable.
+    metrics:
+    - name: "pod-ready" # Metric to measure pod readiness, crucial for evaluating pod health.
+      threshold: 95 # The percentage threshold for pod readiness, signaling acceptable health.
+      window: "5m" # Time window for the readiness check, allowing fluctuations to settle.
+    - name: "container-restarts" # Tracks container restart frequency to assess stability.
+      threshold: 2 # Maximum allowable restarts within the defined time window.
+      window: "15m" # Time window for monitoring restarts, used to detect persistent issues.
+
+  # Monitoring and alerting
+  enableAlerts: true # Enables alerting to notify on potential issues and ensure prompt response.
+  alertThreshold: 75 # Threshold at which alerts will be triggered to warn of potential problems.
+
+  # Recovery configuration
+  recovery:
+    enabled: true # Enables the recovery process to restore service if thresholds are breached.
+    strategy: "conservative" # Recovery approach: conservative, moderate, or aggressive. Dictates disruption tolerance.
+    maxAttempts: 3 # Maximum number of recovery attempts allowed before further action is taken.
+    backoffLimit: "10m" # Time delay between recovery attempts to avoid rapid cycling.
+    timeout: "15m" # Maximum time allowed for recovery before escalation.
+    requiresQuorum: true # Ensures a quorum is present before initiating recovery, indicating majority readiness.
+    actions:
+    - name: "pod-restart" # Action to restart pods, targeting minimal disruption.
+      threshold: 2 # Number of consecutive health check failures before initiating a restart.
+      cooldown: "5m" # Time delay between restart actions to prevent rapid cycling.
+    - name: "node-drain" # Action to drain a node, moving workloads to healthier nodes.
+      threshold: 3 # Number of health check failures before draining the node.
+      cooldown: "10m" # Delay between node-drain actions to allow system stabilization.
+
+  # Failsafe configuration
+  failsafe:
+    enabled: true # Enables failsafe to halt actions if disruptions reach critical levels.
+    recoveryDelay: "2m" # Delay before re-enabling disrupted services after a failsafe is activated.
+    minimumReplicas: 2 # Minimum replicas required for safe operations. Prevents single-point failures.
+    gracePeriod: "1m" # Grace period for pods to reach readiness before considering them unhealthy.
+    requireHealthCheck: true # Ensures health checks are active before any failsafe operations proceed.
+
+  # Circuit breaker
+  circuitBreaker:
+    enabled: true # Enables circuit breaker to prevent cascading failures.
+    timeout: "30m" # Time during which no further actions will occur if the circuit is broken.
+    errorThreshold: 3 # Number of consecutive failures before triggering the circuit breaker.
+    minRetryInterval: "1m" # Minimum time between retries after circuit breaker activation.
+    resetTimeout: "15m" # Time after which the circuit breaker resets, allowing recovery attempts.
+    gradualRecovery:
+      enabled: true # Allows for staged recovery, minimizing risks after a circuit break.
+      steps: 3 # Number of incremental steps to take for gradual recovery.
+      stepDelay: "2m" # Delay between each recovery step to observe stability.
+
+  # Incident management
+  incident:
+    autoRemediation: true # Enables automated remediation, expediting recovery without manual intervention.
+    escalationPolicy: "gradual" # Specifies escalation approach, balancing prompt response with stability.
+    requiresAcknowledgment: true # Requires acknowledgment before certain actions proceed.
+    notificationChannels:
+    - type: "slack" # Notification via Slack, ensuring real-time incident alerts.
+      channel: "platform-alerts" # Slack channel to receive alerts for efficient monitoring.
+    - type: "email" # Email notification option for additional alert coverage.
+      address: "platform-team@company.com" # Email address for alert notifications.
+    runbooks:
+      enabled: true # Enables access to runbooks for structured incident response.
+      baseURL: "https://runbooks.company.com/pdb/" # URL linking to incident response procedures.
+
+  # Advanced protection
+  advanced:
+    podAntiAffinity:
+      enabled: true # Enforces pod anti-affinity to prevent co-location, enhancing fault tolerance.
+      topologyKey: "kubernetes.io/hostname" # Specifies topology key for pod anti-affinity, often hostname.
+    nodeSelector:
+      enabled: true # Ensures pods are deployed on nodes meeting specific criteria.
+      key: "node-type" # Node label key for selection, aligning with desired node types.
+      value: "high-availability" # Node label value for selection, ensuring deployment on high-availability nodes.
+    tolerations:
+    - key: "node-role" # Key indicating node role toleration.
+      operator: "Equal" # Operator for toleration; Equal specifies exact match.
+      value: "critical" # Value for toleration, aligning pods with critical nodes.
+      effect: "NoSchedule" # Specifies scheduling effect, disallowing scheduling on non-critical nodes.
+
+  # Custom annotations
+  annotations:
+    team: "platform" # Indicates team responsible for this configuration.
+    tier: "production" # Defines the environment tier (e.g., production).
+    criticality: "high" # Criticality level, affecting priority and response.
+    review-period: "quarterly" # Frequency of configuration review.
+    compliance-required: "true" # Specifies if compliance adherence is mandatory.
+    backup-policy: "required" # Indicates that backups are required.
+    dr-tier: "tier-1" # Disaster recovery tier, establishing recovery priorities.
+
+# Deployment strategy
+strategy:
+  type: RollingUpdate # Strategy for deployment, allowing gradual replacement of pods.
+  rollingUpdate:
+    maxSurge: 1 # Maximum number of extra pods during updates.
+    maxUnavailable: 0 # Maximum number of pods unavailable during updates, ensuring stability.
+
+# set container security context
+securityContext:
+  runAsNonRoot: true # Enforces running containers as non-root for security.
+  runAsUser: 1000 # Defines user ID for container processes, enhancing isolation.
+  fsGroup: 2000 # Group ID for filesystem permissions within the container.
+  allowPrivilegeEscalation: false # Prevents privilege escalation, mitigating security risks.
+
+# Security Configuration
+security:
+  policyVersion: "v1"
+  complianceLevel: "high"
+  reviewer: "security-team"
+  reviewInterval: "90d"
+
+  # Security limits
+  minReplicas: 2
+  maxReplicas: 15
+  maxCPUUtilization: 90
+  maxRequestsPerPod: 1000000
+  maxScaleUpPercent: 50
+  maxScaleDownPercent: 20
+  maxPodsPerScaleUp: 3
+  maxPodsPerScaleDown: 2
+
+  # Pod Security Context
+  podSecurityContext:
+    fsGroup: 1000
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 3000
+    supplementalGroups: [1000]
+    seccompProfile:
+      type: RuntimeDefault
+    seLinuxOptions:
+      level: "s0:c123,c456"
+
+  # Container Security Context
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    privileged: false
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 1000
+    seccompProfile:
+      type: RuntimeDefault
+
+  # Security annotations
+  annotations:
+    security.policy.kubernetes.io/enforced: "true"
+    security.compliance/standard: "PCI-DSS"
+    security.compliance/level: "high"
+    security.review/last-audit: "2024-03-19"
+    security.review/next-audit: "2024-06-19"
+
+# ServiceMonitor configuration
+serviceMonitor:
+  enabled: true
+  # Required monitoring interval
+  interval: 15s
+  # Maximum time for scrape to complete
+  scrapeTimeout: 10s
+  # Priority for monitoring
+  priority: "critical"
+  # Alert configuration
+  alertTeam: "platform"
+  severity: "critical"
+
+  # Sample and target limits to prevent overload
+  sampleLimit: 5000000
+  targetLimit: 10
+
+  # Scrape behavior configuration
+  honorLabels: true
+  honorTimestamps: true
+  enableHttp2: false
+  followRedirects: true
+  scheme: "http"
+
+  # TLS configuration
+  tlsConfig:
+    insecureSkipVerify: false
+    # serverName: monitoring.example.com
+    # ca:
+    #   configMap:
+    #     name: prometheus-ca
+    #     key: ca.crt
+
+  # Basic auth configuration if needed
+  basicAuth: {}
+  # username:
+  #   name: monitoring-basic-auth
+  #   key: username
+  # password:
+  #   name: monitoring-basic-auth
+  #   key: password
+
+  # Additional labels for ServiceMonitor
+  additionalLabels:
+    prometheus: default
+    release: prometheus-operator
+    environment: production
+
+  # Production annotations
+  annotations: {}
+
+  # RelabelConfigs for production monitoring
+  relabelings:
+  - sourceLabels: [__meta_kubernetes_pod_node_name]
+    separator: ;
+    regex: ^(.*)$
+    targetLabel: node
+    replacement: $1
+    action: replace
+  - sourceLabels: [__meta_kubernetes_pod_container_port_number]
+    targetLabel: port
+    replacement: $1
+    action: replace
+
+  # MetricRelabelConfigs for production monitoring
+  metricRelabelings:
+  - sourceLabels: [__name__]
+    regex: 'go_.*'
+    action: keep
+  - sourceLabels: [__name__]
+    regex: 'process_.*'
+    action: keep
+  - sourceLabels: [container]
+    regex: '(.+)'
+    targetLabel: container_name
+    replacement: '$1'
+    action: replace
+
+tls:
+  enabled: false
+  # the name of the secret used to mount the certificate key pair
+  secretName:
+  # the path where the certificate key pair will be mounted
+  certPath: /data/cert
+  # the port used to host the tls endpoint on the service
+  port: 9899
+  # the port used to bind the tls port to the host
+  # NOTE: requires privileged container with NET_BIND_SERVICE capability -- this is useful for testing
+  # in local clusters such as kind without port forwarding
+  hostPort:

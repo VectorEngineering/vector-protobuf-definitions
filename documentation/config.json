@@ -1,0 +1,14 @@
+{
+  "themeOptions": {
+    "navbar": {
+      "title": "Playbook Media API",
+      "logo": {
+        "alt": "Playbook Media Logo",
+        "src": "assets/logo.png"
+      }
+    },
+    "footer": {
+      "copyright": "© 2024 Playbook Media. All rights reserved."
+    }
+  }
+} 

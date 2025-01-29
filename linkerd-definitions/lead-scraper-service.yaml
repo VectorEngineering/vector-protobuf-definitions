@@ -1,0 +1,48 @@
+apiVersion: linkerd.io/v1alpha2
+kind: ServiceProfile
+metadata:
+  creationTimestamp: null
+  name: backend-lead-scraper-service.lead-scraper-service.svc.cluster.local
+  namespace: lead-scraper-service
+spec:
+  routes:
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/CreateScrapingJob
+    name: CreateScrapingJob
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/ListScrapingJobs
+    name: ListScrapingJobs
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/GetScrapingJob
+    name: GetScrapingJob
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/DeleteScrapingJob
+    name: DeleteScrapingJob
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/DownloadScrapingResults
+    name: DownloadScrapingResults
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/CreateAccount
+    name: CreateAccount
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/GetAccount
+    name: GetAccount
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/UpdateAccount
+    name: UpdateAccount
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/DeleteAccount
+    name: DeleteAccount
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/ListAccounts
+    name: ListAccounts

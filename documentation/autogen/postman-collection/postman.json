@@ -1,0 +1,675 @@
+{
+	"info": {
+		"name": "Lead Scraping Service API",
+		"description": {
+		    "content": "Vector Lead Scraping Service API - Manages Lead Scraping Jobs",
+		    "type": "text/markdown"
+		},
+		"version": "1.0",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+	        {
+	            "name": "lead-scraper-service",
+	            "item": [
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/accounts",
+                "description": "Creates a new user account in the workspace service",
+                 "item": [
+                            {
+                                "name": "Create a new account",
+                                "request": {
+                                    "method": "POST",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"authPlatformUserId\": \"<string>\",\n \"orgId\": \"<string>\",\n \"tenantId\": \"<string>\",\n \"email\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "accounts"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Creates a new user account in the workspace service"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/accounts",
+                "description": "Retrieves a list of accounts with optional filtering",
+                 "item": [
+                            {
+                                "name": "List accounts",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "accounts"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                            {
+                                                "key": "orgId",
+                                                "value": "orgId_example",
+                                                "description": "Organization context",
+                                                "disabled": false
+                                            },
+                                            {
+                                                "key": "tenantId",
+                                                "value": "tenantId_example",
+                                                "description": "Tenant context",
+                                                "disabled": false
+                                            },
+                                            {
+                                                "key": "offset",
+                                                "value": "56",
+                                                "description": "Pagination offset",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "limit",
+                                                "value": "56",
+                                                "description": "Maximum number of results",
+                                                "disabled": true
+                                            }
+                                        ]
+                                    },
+                                    "description": "Retrieves a list of accounts with optional filtering"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/accounts",
+                "description": "Updates specified fields of an existing account",
+                 "item": [
+                            {
+                                "name": "Update account details",
+                                "request": {
+                                    "method": "PATCH",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"account\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "accounts"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Updates specified fields of an existing account"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/accounts/:accountId",
+                "description": "Permanently deletes an account and associated resources",
+                 "item": [
+                            {
+                                "name": "Delete account",
+                                "request": {
+                                    "method": "DELETE",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts/:accountId",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "accounts",
+                                            ":accountId"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "accountId",
+                                                "value": "",
+                                                "description": "Account identifier"
+                                            }
+                                        ],
+                                        "query": [
+                                            {
+                                                "key": "orgId",
+                                                "value": "orgId_example",
+                                                "description": "Organization context",
+                                                "disabled": false
+                                            },
+                                            {
+                                                "key": "tenantId",
+                                                "value": "tenantId_example",
+                                                "description": "Tenant context",
+                                                "disabled": false
+                                            }
+                                        ]
+                                    },
+                                    "description": "Permanently deletes an account and associated resources"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/accounts/:accountId",
+                "description": "Retrieves details of a specific account",
+                 "item": [
+                            {
+                                "name": "Get account details",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts/:accountId",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "accounts",
+                                            ":accountId"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "accountId",
+                                                "value": "",
+                                                "description": "Account identifier"
+                                            }
+                                        ],
+                                        "query": [
+                                            {
+                                                "key": "orgId",
+                                                "value": "orgId_example",
+                                                "description": "Organization context",
+                                                "disabled": false
+                                            },
+                                            {
+                                                "key": "tenantId",
+                                                "value": "tenantId_example",
+                                                "description": "Tenant context",
+                                                "disabled": false
+                                            }
+                                        ]
+                                    },
+                                    "description": "Retrieves details of a specific account"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/jobs",
+                "description": "This endpoint creates a new Google Maps scraping job",
+                 "item": [
+                            {
+                                "name": "Create a new job scraping task",
+                                "request": {
+                                    "method": "POST",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"userId\": \"<string>\",\n \"orgId\": \"<string>\",\n \"tenantId\": \"<string>\",\n \"name\": \"<string>\",\n \"keywords\": \"<string>\",\n \"lang\": \"<string>\",\n \"zoom\": \"<number>\",\n \"lat\": \"<string>\",\n \"lon\": \"<string>\",\n \"fastMode\": \"<string>\",\n \"radius\": \"<number>\",\n \"depth\": \"<number>\",\n \"email\": \"<string>\",\n \"maxTime\": \"<number>\",\n \"proxies\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/jobs",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "jobs"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "This endpoint creates a new Google Maps scraping job"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/jobs",
+                "description": "This endpoint retrieves all Google Maps scraping jobs",
+                 "item": [
+                            {
+                                "name": "Get all jobs",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/jobs",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "jobs"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                            {
+                                                "key": "userId",
+                                                "value": "userId_example",
+                                                "description": "",
+                                                "disabled": false
+                                            },
+                                            {
+                                                "key": "orgId",
+                                                "value": "orgId_example",
+                                                "description": "",
+                                                "disabled": false
+                                            },
+                                            {
+                                                "key": "tenantId",
+                                                "value": "tenantId_example",
+                                                "description": "",
+                                                "disabled": false
+                                            }
+                                        ]
+                                    },
+                                    "description": "This endpoint retrieves all Google Maps scraping jobs"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/jobs/:jobId",
+                "description": "This endpoint deletes a specific Google Maps scraping job",
+                 "item": [
+                            {
+                                "name": "Delete a specific job",
+                                "request": {
+                                    "method": "DELETE",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/jobs/:jobId",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "jobs",
+                                            ":jobId"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "jobId",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                            {
+                                                "key": "userId",
+                                                "value": "userId_example",
+                                                "description": "",
+                                                "disabled": false
+                                            },
+                                            {
+                                                "key": "orgId",
+                                                "value": "orgId_example",
+                                                "description": "",
+                                                "disabled": false
+                                            },
+                                            {
+                                                "key": "tenantId",
+                                                "value": "tenantId_example",
+                                                "description": "",
+                                                "disabled": false
+                                            }
+                                        ]
+                                    },
+                                    "description": "This endpoint deletes a specific Google Maps scraping job"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/jobs/:jobId",
+                "description": "This endpoint retrieves a specific Google Maps scraping job",
+                 "item": [
+                            {
+                                "name": "Get a specific job",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/jobs/:jobId",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "jobs",
+                                            ":jobId"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "jobId",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                            {
+                                                "key": "userId",
+                                                "value": "userId_example",
+                                                "description": "",
+                                                "disabled": false
+                                            },
+                                            {
+                                                "key": "orgId",
+                                                "value": "orgId_example",
+                                                "description": "",
+                                                "disabled": false
+                                            },
+                                            {
+                                                "key": "tenantId",
+                                                "value": "tenantId_example",
+                                                "description": "",
+                                                "disabled": false
+                                            }
+                                        ]
+                                    },
+                                    "description": "This endpoint retrieves a specific Google Maps scraping job"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/jobs/:jobId/download",
+                "description": "This endpoint downloads the results of a Google Maps scraping job as CSV",
+                 "item": [
+                            {
+                                "name": "Download job results as CSV",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/jobs/:jobId/download",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "jobs",
+                                            ":jobId",
+                                            "download"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "jobId",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                            {
+                                                "key": "userId",
+                                                "value": "userId_example",
+                                                "description": "",
+                                                "disabled": false
+                                            },
+                                            {
+                                                "key": "orgId",
+                                                "value": "orgId_example",
+                                                "description": "",
+                                                "disabled": false
+                                            },
+                                            {
+                                                "key": "tenantId",
+                                                "value": "tenantId_example",
+                                                "description": "",
+                                                "disabled": false
+                                            }
+                                        ]
+                                    },
+                                    "description": "This endpoint downloads the results of a Google Maps scraping job as CSV"
+                                }
+                            }
+                            ]
+                        }
+	                    ]
+	        }
+    ],
+    "auth": {
+    		"type": "apikey",
+    		"apikey": [
+    			{
+    				"key": "value",
+    				"value": "{{X-API-Key}}",
+    				"type": "string"
+    			},
+    			{
+    				"key": "key",
+    				"value": "X-API-Key",
+    				"type": "string"
+    			}
+    		]
+    	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://lead-scraping-microservice.vector.svc.cluster.local:9896",
+			"type": "string"
+        },
+        {
+            "key": "X-API-Key",
+            "value": "",
+            "type": "string"
+        }
+	]
+}
+

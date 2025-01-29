@@ -1,0 +1,327 @@
+syntax = "proto3";
+
+package lead_scraper_service.v1;
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "lead_scraper_service/v1/request_response.proto";
+
+option go_package = "github.com/Vector/vector-lead-management/protobuf/api-definitions/pkg/generated/lead_scraper_service/v1";
+
+/**
+ * WorkspaceService provides functionality for managing Google Maps scraping jobs.
+ * This service allows users to create, monitor, and retrieve results from scraping tasks
+ * that extract data from Google Maps based on specified search criteria.
+ *
+ * Key features:
+ * - Create and manage scraping jobs
+ * - Monitor job status and progress
+ * - Download scraped results
+ * - Multi-tenant support with organization and user context
+ *
+ * Usage example:
+ * ```go
+ * client := workspace_service.NewWorkspaceServiceClient(conn)
+ * resp, err := client.CreateScrapingJob(ctx, &CreateScrapingJobRequest{
+ *     Name: "Coffee shops in Athens",
+ *     Keywords: []string{"coffee", "café"},
+ *     Lang: "el",
+ * })
+ * ```
+ */
+service WorkspaceService {
+    // Create a new Google Maps scraping job
+    //
+    // This endpoint initiates a new scraping task with the specified parameters.
+    // The job will be queued and processed asynchronously. The response includes
+    // a job ID that can be used to track the job's progress.
+    //
+    // Common use cases:
+    // - Scrape business listings for market research
+    // - Collect location data for geographic analysis
+    // - Extract contact information for lead generation
+    rpc CreateScrapingJob(CreateScrapingJobRequest) returns (CreateScrapingJobResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/jobs"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a new job scraping task"
+            tags: ["lead-scraper-service"]
+            operation_id: "CreateScrapingJob"
+            description: "This endpoint creates a new Google Maps scraping job"
+            responses: {
+                key: "201"
+                value: {
+                    description: "Job created successfully"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.CreateScrapingJobResponse" }
+                    }
+                }
+            }
+        };
+    }
+
+    // Get all scraping jobs
+    //
+    // Retrieves a list of all scraping jobs for the authenticated user within their
+    // organization context. The results can be filtered by status and other criteria.
+    //
+    // The response includes basic job information and status. For detailed job data,
+    // use GetScrapingJob with a specific job ID.
+    rpc ListScrapingJobs(ListScrapingJobsRequest) returns (ListScrapingJobsResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/jobs"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get all jobs"
+            tags: ["lead-scraper-service"]
+            operation_id: "ListScrapingJobs"
+            description: "This endpoint retrieves all Google Maps scraping jobs"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Successful response"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.ListScrapingJobsResponse" }
+                    }
+                }
+            }
+        };
+    }
+
+    // Get a specific scraping job
+    //
+    // Retrieves detailed information about a specific scraping job, including its
+    // current status, configuration, and progress metrics.
+    //
+    // This endpoint is useful for:
+    // - Monitoring job progress
+    // - Debugging failed jobs
+    // - Retrieving job configuration details
+    rpc GetScrapingJob(GetScrapingJobRequest) returns (GetScrapingJobResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/jobs/{job_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get a specific job"
+            tags: ["lead-scraper-service"]
+            operation_id: "GetScrapingJob"
+            description: "This endpoint retrieves a specific Google Maps scraping job"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Successful response"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.GetScrapingJobResponse" }
+                    }
+                }
+            }
+        };
+    }
+
+    // Delete a specific scraping job
+    //
+    // Permanently removes a scraping job and its associated data. This action cannot
+    // be undone. If the job is currently running, it will be stopped.
+    //
+    // Security note:
+    // - Requires authentication
+    // - User must have appropriate permissions
+    // - Job must belong to user's organization
+    rpc DeleteScrapingJob(DeleteScrapingJobRequest) returns (DeleteScrapingJobResponse) {
+        option (google.api.http) = {
+            delete: "/lead-scraper-microservice/api/v1/jobs/{job_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete a specific job"
+            tags: ["lead-scraper-service"]
+            operation_id: "DeleteScrapingJob"
+            description: "This endpoint deletes a specific Google Maps scraping job"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Job deleted successfully"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.DeleteScrapingJobResponse" }
+                    }
+                }
+            }
+        };
+    }
+
+    // Download job results
+    //
+    // Downloads the results of a completed scraping job in CSV format. The response
+    // includes the file content and appropriate headers for browser download.
+    //
+    // The CSV file includes:
+    // - Business names and addresses
+    // - Contact information
+    // - Rating and review counts
+    // - Operating hours
+    // - Additional metadata based on job configuration
+    rpc DownloadScrapingResults(DownloadScrapingResultsRequest) returns (DownloadScrapingResultsResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/jobs/{job_id}/download"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Download job results as CSV"
+            tags: ["lead-scraper-service"]
+            operation_id: "DownloadScrapingResults"
+            description: "This endpoint downloads the results of a Google Maps scraping job as CSV"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Successful response"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.DownloadScrapingResultsResponse" }
+                    }
+                }
+            }
+        };
+    }
+
+    // Create a new account
+    //
+    // This endpoint creates a new user account in the workspace service.
+    // It sets up the necessary infrastructure for the user to start managing
+    // scraping jobs and other workspace resources.
+    //
+    // Required permissions:
+    // - create:account
+    rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/accounts"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a new account"
+            tags: ["lead-scraper-service"]
+            operation_id: "CreateAccount"
+            description: "Creates a new user account in the workspace service"
+            responses: {
+                key: "201"
+                value: {
+                    description: "Account created successfully"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.CreateAccountResponse" }
+                    }
+                }
+            }
+        };
+    }
+
+    // Get account details
+    //
+    // Retrieves detailed information about a specific account, including
+    // associated scraping jobs and account settings.
+    //
+    // Required permissions:
+    // - read:account
+    rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/accounts/{account_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get account details"
+            tags: ["lead-scraper-service"]
+            operation_id: "GetAccount"
+            description: "Retrieves details of a specific account"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Account details retrieved successfully"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.GetAccountResponse" }
+                    }
+                }
+            }
+        };
+    }
+
+    // Update account
+    //
+    // Updates the specified fields of an existing account. Only provided
+    // fields will be modified.
+    //
+    // Required permissions:
+    // - update:account
+    rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse) {
+        option (google.api.http) = {
+            patch: "/lead-scraper-microservice/api/v1/accounts"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Update account details"
+            tags: ["lead-scraper-service"]
+            operation_id: "UpdateAccount"
+            description: "Updates specified fields of an existing account"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Account updated successfully"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.UpdateAccountResponse" }
+                    }
+                }
+            }
+        };
+    }
+
+    // Delete account
+    //
+    // Permanently deletes an account and all associated resources.
+    // This action cannot be undone.
+    //
+    // Required permissions:
+    // - delete:account
+    rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse) {
+        option (google.api.http) = {
+            delete: "/lead-scraper-microservice/api/v1/accounts/{account_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete account"
+            tags: ["lead-scraper-service"]
+            operation_id: "DeleteAccount"
+            description: "Permanently deletes an account and associated resources"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Account deleted successfully"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.DeleteAccountResponse" }
+                    }
+                }
+            }
+        };
+    }
+
+    // List accounts
+    //
+    // Retrieves a list of accounts based on the provided filters.
+    // Results are paginated and can be filtered by organization and other criteria.
+    //
+    // Required permissions:
+    // - list:accounts
+    rpc ListAccounts(ListAccountsRequest) returns (ListAccountsResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/accounts"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "List accounts"
+            tags: ["lead-scraper-service"]
+            operation_id: "ListAccounts"
+            description: "Retrieves a list of accounts with optional filtering"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Accounts retrieved successfully"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.ListAccountsResponse" }
+                    }
+                }
+            }
+        };
+    }
+} 

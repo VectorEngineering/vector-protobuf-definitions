@@ -1,0 +1,202 @@
+syntax = "proto3";
+
+package lead_scraper_service.v1;
+
+import "protoc-gen-gorm/options/gorm.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/Vector/vector-lead-management/protobuf/api-definitions/pkg/generated/lead_scraper_service/v1";
+
+/**
+ * BackgroundJobStatus represents the possible states of a background job.
+ * This enum is used to track the lifecycle of asynchronous tasks like scraping jobs.
+ *
+ * State transitions:
+ * 1. QUEUED -> IN_PROGRESS
+ * 2. IN_PROGRESS -> COMPLETED/FAILED/CANCELLED/TIMED_OUT
+ *
+ * Usage example:
+ * ```go
+ * job := &ScrapingJob{
+ *     Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_IN_PROGRESS,
+ * }
+ * ```
+ */
+enum BackgroundJobStatus {
+    // Default state, should not be used explicitly
+    BACKGROUND_JOB_STATUS_UNSPECIFIED = 0;
+    // Job is queued and waiting to be processed
+    BACKGROUND_JOB_STATUS_QUEUED = 1;
+    // Job is currently being processed
+    BACKGROUND_JOB_STATUS_IN_PROGRESS = 2;
+    // Job has completed successfully
+    BACKGROUND_JOB_STATUS_COMPLETED = 3;
+    // Job encountered an error and failed
+    BACKGROUND_JOB_STATUS_FAILED = 4;
+    // Job was manually cancelled by user
+    BACKGROUND_JOB_STATUS_CANCELLED = 5;
+    // Job exceeded its maximum execution time
+    BACKGROUND_JOB_STATUS_TIMED_OUT = 6;
+}
+
+/**
+ * Account represents a user account within the workspace service.
+ * It serves as the top-level container for all user-specific workspaces and settings.
+ *
+ * Key features:
+ * - Unique identification via Auth0
+ * - Organization and tenant context
+ * - Audit timestamps
+ * - Associated scraping jobs
+ *
+ * Database considerations:
+ * - Uses GORM for ORM mapping
+ * - Includes indexes for efficient querying
+ * - Supports soft deletes via deleted_at
+ *
+ * Usage example:
+ * ```go
+ * account := &Account{
+ *     AuthPlatformUserId: "auth0|123",
+ *     OrgId: "org_123",
+ *     TenantId: "tenant_456",
+ * }
+ * ```
+ */
+message Account {
+    option (gorm.opts) = {
+        ormable: true
+        table: "accounts"
+    };
+
+    // Unique identifier for the account
+    uint64 id = 1 [(gorm.field).tag = {unique_index: "idx_user_id"}];
+
+    // Auth0 user identifier for authentication
+    string auth_platform_user_id = 2 [
+        (gorm.field).tag = {index: "idx_user_auth_platform_user_id"}
+    ];
+
+    // Organization identifier for multi-org support
+    string org_id = 3;
+
+    // Tenant identifier for multi-tenant support
+    string tenant_id = 4;
+
+    // User's email address
+    string email = 5;
+
+    // Timestamp of last modification
+    google.protobuf.Timestamp last_modified_at = 6;
+
+    // Soft delete timestamp
+    google.protobuf.Timestamp deleted_at = 7;
+
+    // Account creation timestamp
+    google.protobuf.Timestamp created_at = 8;
+
+    // Associated scraping jobs for this account
+    repeated ScrapingJob scraping_jobs = 9 [(gorm.field).has_many = {
+        disable_association_autocreate: false
+        disable_association_autoupdate: false
+        preload: true
+    }];
+}
+
+/**
+ * ScrapingJob represents a Google Maps scraping task.
+ * This message defines both the configuration and current state of a scraping operation.
+ *
+ * Key components:
+ * - Basic metadata (id, name, timestamps)
+ * - Job status tracking
+ * - Search configuration parameters
+ * - Geographic settings
+ * - Performance options
+ * - Multi-tenant context
+ *
+ * Database considerations:
+ * - Stored in "scraping_jobs" table
+ * - Uses GORM for ORM mapping
+ * - Includes foreign key to Account
+ * - Supports soft deletes
+ *
+ * Usage example:
+ * ```go
+ * job := &ScrapingJob{
+ *     Name: "Athens Cafes",
+ *     Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,
+ *     Keywords: []string{"cafe", "coffee"},
+ *     Lang: "el",
+ *     Zoom: 15,
+ *     FastMode: true,
+ *     MaxTime: 3600,
+ * }
+ * ```
+ */
+message ScrapingJob {
+    option (gorm.opts) = {
+        ormable: true
+        table: "scraping_jobs"
+    };
+
+    // Unique identifier for the job
+    string id = 1;
+
+    // Human-readable name for the job
+    string name = 2;
+
+    // Job creation timestamp
+    google.protobuf.Timestamp created_at = 3;
+
+    // Current status of the job
+    BackgroundJobStatus status = 4;
+
+    // Search terms for Google Maps
+    repeated string keywords = 5;
+
+    // ISO 639-1 language code (e.g., "en", "el")
+    string lang = 6;
+
+    // Map zoom level (1-20)
+    int32 zoom = 7;
+
+    // Latitude coordinate
+    string lat = 8;
+
+    // Longitude coordinate
+    string lon = 9;
+
+    // Enable faster but potentially less thorough scraping
+    bool fast_mode = 10;
+
+    // Search radius in meters
+    int32 radius = 11;
+
+    // Depth of recursive search (1-10)
+    int32 depth = 12;
+
+    // Whether to extract email addresses
+    bool email = 13;
+
+    // Maximum execution time in seconds
+    int32 max_time = 14;
+
+    // List of proxy servers to use
+    repeated string proxies = 15;
+
+    // Last update timestamp
+    google.protobuf.Timestamp updated_at = 19;
+
+    // Soft delete timestamp
+    google.protobuf.Timestamp deleted_at = 20;
+
+    // Account that created the jobs
+    string payload_type = 21;
+
+    // Priority level of the job
+    int32 priority = 22;
+
+    // Payload data
+    bytes payload = 23;
+}

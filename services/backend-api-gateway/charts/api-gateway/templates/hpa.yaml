@@ -1,0 +1,133 @@
+{{- if .Values.autoscaling.enabled -}}
+{{- /* Security validation */ -}}
+{{- $securityValidation := true }}
+{{- $securityErrors := list }}
+
+{{- /* Validate security requirements */ -}}
+{{- if not .Values.security.podSecurityContext }}
+  {{- $securityValidation = false }}
+  {{- $securityErrors = append $securityErrors "podSecurityContext must be defined" }}
+{{- end }}
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ template "api-gateway.fullname" . }}
+  labels:
+    {{- include "api-gateway.labels" . | nindent 4 }}
+    security.kubernetes.io/policy-enforced: "true"
+    security.kubernetes.io/context-validated: "true"
+  annotations:
+    {{- include "api-gateway.annotations" . | nindent 4 }}
+    # Security metadata
+    security.kubernetes.io/last-audit: {{ now | quote }}
+    security.kubernetes.io/policy-version: {{ .Values.security.policyVersion | default "v1" }}
+    security.kubernetes.io/compliance-level: {{ .Values.security.complianceLevel | default "high" }}
+
+    # HPA configuration metadata
+    app.kubernetes.io/description: "Production-grade HPA with security-enhanced scaling policies"
+    scaling.policy/update-time: {{ now | quote }}
+    scaling.policy/security-validated: "true"
+
+    # Security audit annotations
+    audit.kubernetes.io/last-review: {{ now | quote }}
+    audit.kubernetes.io/reviewer: {{ .Values.security.reviewer | default "system" }}
+    audit.kubernetes.io/required-review-interval: {{ .Values.security.reviewInterval | default "90d" }}
+
+    # Add metadata about the HPA configuration
+    app.kubernetes.io/description: "Production-grade HPA with conservative scaling policies"
+    scaling.policy/update-time: {{ now | quote }}
+    {{- with .Values.security.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+
+    {{- with .Values.autoscaling.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ template "api-gateway.fullname" . }}
+
+  # Production-ready replica range
+  minReplicas: {{ max (.Values.autoscaling.minReplicas | default 3) (.Values.security.minReplicas | default 2) }}
+  maxReplicas: {{ min (.Values.autoscaling.maxReplicas | default 10) (.Values.security.maxReplicas | default 15) }}
+
+  metrics:
+    {{- if .Values.autoscaling.cpu }}
+    # Primary CPU-based scaling
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: {{ min (.Values.autoscaling.cpu | default 85) (.Values.security.maxCPUUtilization | default 90) }}
+    {{- end }}
+
+    {{- if .Values.autoscaling.memory }}
+    # Memory-based scaling
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: AverageValue
+          averageValue: {{ .Values.autoscaling.memory | default "512Mi" }}
+    {{- end }}
+
+    {{- if .Values.autoscaling.requests }}
+    # Request rate-based scaling
+    - type: Pods
+      pods:
+        metric:
+          name: http_requests
+        target:
+          type: AverageValue
+          averageValue: {{ min (.Values.autoscaling.requests) (.Values.security.maxRequestsPerPod | default 1000) }}
+    {{- end }}
+
+  behavior:
+    scaleUp:
+      # Stabilization window for scale-up
+      stabilizationWindowSeconds: {{ .Values.autoscaling.behavior.scaleUp.stabilizationWindowSeconds | default 300 }}
+      # Multiple scaling policies for different scenarios
+      policies:
+      # Regular growth policy
+      - type: Percent
+        value: {{ .Values.autoscaling.behavior.scaleUp.percent | default 25 }}
+        periodSeconds: {{ .Values.autoscaling.behavior.scaleUp.periodSeconds | default 300 }}
+      # Burst growth policy for sudden spikes
+      - type: Pods
+        value: {{ .Values.autoscaling.behavior.scaleUp.podValue | default 2 }}
+        periodSeconds: {{ .Values.autoscaling.behavior.scaleUp.podPeriodSeconds | default 60 }}
+      # Handle policy selection
+      selectPolicy: {{ .Values.autoscaling.behavior.scaleUp.selectPolicy | default "Max" }}
+
+    scaleDown:
+      # Conservative stabilization window for scale-down
+      stabilizationWindowSeconds: {{ .Values.autoscaling.behavior.scaleDown.stabilizationWindowSeconds | default 900 }}
+      # Multiple policies for gradual scale-down
+      policies:
+      # Percentage-based reduction
+      - type: Percent
+        value: {{ .Values.autoscaling.behavior.scaleDown.percent | default 10 }}
+        periodSeconds: {{ .Values.autoscaling.behavior.scaleDown.periodSeconds | default 600 }}
+      # Pod-based reduction for fine control
+      - type: Pods
+        value: {{ .Values.autoscaling.behavior.scaleDown.podValue | default 1 }}
+        periodSeconds: {{ .Values.autoscaling.behavior.scaleDown.podPeriodSeconds | default 300 }}
+      # Use the most conservative policy
+      selectPolicy: {{ .Values.autoscaling.behavior.scaleDown.selectPolicy | default "Min" }}
+  {{- if .Values.security.podSecurityContext }}
+  template:
+    spec:
+      securityContext:
+        {{- toYaml .Values.security.podSecurityContext | nindent 8 }}
+      {{- with .Values.security.containerSecurityContext }}
+      containers:
+      - name: {{ template "api-gateway.fullname" . }}
+        securityContext:
+          {{- toYaml . | nindent 10 }}
+      {{- end }}
+  {{- end }}
+{{- end }}

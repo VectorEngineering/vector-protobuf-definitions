@@ -1,0 +1,3 @@
+endpoints:
+  - name: "invalid YAML example
+    krakendApiPath "/v1/missing-quote

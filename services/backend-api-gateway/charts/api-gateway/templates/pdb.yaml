@@ -1,0 +1,114 @@
+{{- /* Comprehensive validation block */ -}}
+{{- if .Values.podDisruptionBudget.enabled }}
+{{- /* Validate minimum requirements */ -}}
+{{- $validSetup := true }}
+{{- $errorMessages := list }}
+
+{{- /* Replica validation */ -}}
+{{- $minReplicas := 0 }}
+{{- if .Values.autoscaling.enabled }}
+  {{- if .Values.autoscaling.minReplicas }}
+    {{- $minReplicas = int .Values.autoscaling.minReplicas }}
+    {{- if le $minReplicas 0 }}
+      {{- $validSetup = false }}
+      {{- $errorMessages = append $errorMessages "autoscaling.minReplicas must be > 0" }}
+    {{- end }}
+  {{- else }}
+    {{- $validSetup = false }}
+    {{- $errorMessages = append $errorMessages "autoscaling.minReplicas must be specified when autoscaling is enabled" }}
+  {{- end }}
+{{- else if .Values.replicaCount }}
+  {{- $minReplicas = int .Values.replicaCount }}
+{{- else }}
+  {{- $validSetup = false }}
+  {{- $errorMessages = append $errorMessages "either replicaCount or autoscaling must be configured" }}
+{{- end }}
+
+{{- /* Validate PDB configuration */ -}}
+{{- if and .Values.podDisruptionBudget.minAvailable .Values.podDisruptionBudget.maxUnavailable }}
+  {{- $validSetup = false }}
+  {{- $errorMessages = append $errorMessages "cannot set both minAvailable and maxUnavailable" }}
+{{- end }}
+
+{{- /* Proceed only if validation passes */ -}}
+{{- if $validSetup }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "api-gateway.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "api-gateway.labels" . | nindent 4 }}
+    pdb.kubernetes.io/safety-level: {{ .Values.podDisruptionBudget.safetyLevel | default "high" }}
+    pdb.kubernetes.io/recovery-enabled: {{ .Values.podDisruptionBudget.recovery.enabled | default "true" | quote }}
+    pdb.kubernetes.io/version: "v2"
+    pdb.kubernetes.io/highly-available: "true"
+  annotations:
+    {{- include "api-gateway.annotations" . | nindent 4 }}
+    kubernetes.io/last-validated: {{ now | quote }}
+    kubernetes.io/description: "Workspace service pod disruption budget"
+    pdb.kubernetes.io/last-updated: {{ now | quote }}
+    pdb.kubernetes.io/update-by: {{ .Values.podDisruptionBudget.updatedBy | default "system" }}
+    pdb.kubernetes.io/config-version: {{ .Chart.Version | quote }}
+    pdb.kubernetes.io/min-replicas: {{ $minReplicas | quote }}
+    pdb.kubernetes.io/safety-checks-passed: "true"
+    pdb.kubernetes.io/validation-timestamp: {{ now | quote }}
+    pdb.kubernetes.io/maintenance-window: {{ .Values.podDisruptionBudget.maintenanceWindow | default "always" }}
+    pdb.kubernetes.io/maintenance-day: {{ .Values.podDisruptionBudget.maintenanceDay | default "any" }}
+    protection.kubernetes.io/cascade-delete: {{ .Values.podDisruptionBudget.cascadeDelete | default "false" | quote }}
+    protection.kubernetes.io/recovery-time: {{ .Values.podDisruptionBudget.recoveryTime | default "5m" }}
+    protection.kubernetes.io/force-delete-disabled: "true"
+    protection.kubernetes.io/requires-manual-intervention: {{ .Values.podDisruptionBudget.requiresManualIntervention | default "true" | quote }}
+    monitoring.kubernetes.io/alert-threshold: {{ .Values.podDisruptionBudget.alertThreshold | default "75" | quote }}
+    monitoring.kubernetes.io/should-alert: {{ .Values.podDisruptionBudget.enableAlerts | default "true" | quote }}
+    monitoring.kubernetes.io/critical-threshold: {{ .Values.podDisruptionBudget.criticalThreshold | default "50" | quote }}
+    monitoring.kubernetes.io/requires-manual-review: {{ .Values.podDisruptionBudget.requiresManualReview | default "true" | quote }}
+    recovery.kubernetes.io/strategy: {{ .Values.podDisruptionBudget.recovery.strategy | default "conservative" }}
+    recovery.kubernetes.io/max-attempts: {{ .Values.podDisruptionBudget.recovery.maxAttempts | default "3" | quote }}
+    recovery.kubernetes.io/backoff-limit: {{ .Values.podDisruptionBudget.recovery.backoffLimit | default "10m" }}
+    recovery.kubernetes.io/timeout: {{ .Values.podDisruptionBudget.recovery.timeout | default "15m" }}
+    recovery.kubernetes.io/requires-quorum: "true"
+    health.kubernetes.io/check-interval: {{ .Values.podDisruptionBudget.health.checkInterval | default "30s" }}
+    health.kubernetes.io/recovery-threshold: {{ .Values.podDisruptionBudget.health.recoveryThreshold | default "90" | quote }}
+    health.kubernetes.io/minimum-healthy-period: {{ .Values.podDisruptionBudget.health.minHealthyPeriod | default "5m" }}
+    failsafe.kubernetes.io/enabled: {{ .Values.podDisruptionBudget.failsafe.enabled | default "true" | quote }}
+    failsafe.kubernetes.io/min-healthy-replicas: {{ max 2 (div $minReplicas 2) | quote }}
+    failsafe.kubernetes.io/recovery-delay: {{ .Values.podDisruptionBudget.failsafe.recoveryDelay | default "2m" }}
+    circuitbreaker.kubernetes.io/enabled: {{ .Values.podDisruptionBudget.circuitBreaker.enabled | default "true" | quote }}
+    circuitbreaker.kubernetes.io/timeout: {{ .Values.podDisruptionBudget.circuitBreaker.timeout | default "30m" }}
+    circuitbreaker.kubernetes.io/error-threshold: {{ .Values.podDisruptionBudget.circuitBreaker.errorThreshold | default "3" | quote }}
+    circuitbreaker.kubernetes.io/min-retry-interval: "1m"
+    incident.kubernetes.io/auto-remediation: {{ .Values.podDisruptionBudget.incident.autoRemediation | default "true" | quote }}
+    incident.kubernetes.io/escalation-policy: {{ .Values.podDisruptionBudget.incident.escalationPolicy | default "gradual" }}
+    incident.kubernetes.io/requires-acknowledgment: "true"
+    {{- with .Values.podDisruptionBudget.annotations }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "api-gateway.selectorLabels" . | nindent 6 }}
+
+  {{- if .Values.podDisruptionBudget.minAvailable }}
+  minAvailable: {{ .Values.podDisruptionBudget.minAvailable }}
+  {{- else if .Values.podDisruptionBudget.maxUnavailable }}
+  maxUnavailable: {{ .Values.podDisruptionBudget.maxUnavailable }}
+  {{- else }}
+  {{- $percentage := 75 }}
+  {{- if gt $minReplicas 5 }}
+    {{- $percentage = 66 }}
+  {{- end }}
+  {{- if gt $minReplicas 10 }}
+    {{- $percentage = 60 }}
+  {{- end }}
+  minAvailable: {{ printf "%d%%" $percentage }}
+  {{- end }}
+
+  {{- if semverCompare ">=1.26.0" .Capabilities.KubeVersion.Version }}
+  unhealthyPodEvictionPolicy: {{ .Values.podDisruptionBudget.unhealthyPodEvictionPolicy | default "IfHealthyBudget" }}
+  {{- end }}
+
+{{- else }}
+{{- printf "\nPDB Configuration Errors:\n%s" (join "\n" $errorMessages) | fail }}
+{{- end }}
+{{- end }}

@@ -1,0 +1,9 @@
+./component-library/coverage/clover.xml
+./component-library/coverage/lcov-report/index.html
+./component-library/coverage/*
+node_modules
+node_modules/*
+dist
+dist/*
+.vscode/*
+./.vscode

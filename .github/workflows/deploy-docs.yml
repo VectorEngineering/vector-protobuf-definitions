@@ -1,0 +1,26 @@
+name: Deploy Documentation
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'documentation/**'
+      - 'version.yaml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: docs
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate docs
+        run: ./build.sh update-docs
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./documentation/autogen/html
+          keep_files: true 

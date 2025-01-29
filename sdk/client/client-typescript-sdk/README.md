@@ -1,117 +1,167 @@
-# typescript-npm-package-template
-
-> Template to kickstart creating a Node.js module using TypeScript and VSCode
-
-Inspired by [node-module-boilerplate](https://github.com/sindresorhus/node-module-boilerplate)
-
-## Features
-
-- [Semantic Release](https://github.com/semantic-release/semantic-release)
-- [Issue Templates](https://github.com/ryansonshine/typescript-npm-package-template/tree/main/.github/ISSUE_TEMPLATE)
-- [GitHub Actions](https://github.com/ryansonshine/typescript-npm-package-template/tree/main/.github/workflows)
-- [Codecov](https://about.codecov.io/)
-- [VSCode Launch Configurations](https://github.com/ryansonshine/typescript-npm-package-template/blob/main/.vscode/launch.json)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Husky](https://github.com/typicode/husky)
-- [Lint Staged](https://github.com/okonet/lint-staged)
-- [Commitizen](https://github.com/search?q=commitizen)
-- [Jest](https://jestjs.io/)
-- [ESLint](https://eslint.org/)
-- [Prettier](https://prettier.io/)
-
-## Getting started
-
-### Set up your repository
-
-**Click the "Use this template" button.**
-
-Alternatively, create a new directory and then run:
-
-```bash
-curl -fsSL https://github.com/ryansonshine/typescript-npm-package-template/archive/main.tar.gz | tar -xz --strip-components=1
-```
-
-Replace `FULL_NAME`, `GITHUB_USER`, and `REPO_NAME` in the script below with your own details to personalize your new package:
-
-```bash
-FULL_NAME="John Smith"
-GITHUB_USER="johnsmith"
-REPO_NAME="my-cool-package"
-sed -i.mybak "s/\([\/\"]\)(ryansonshine)/$GITHUB_USER/g; s/typescript-npm-package-template\|my-package-name/$REPO_NAME/g; s/Ryan Sonshine/$FULL_NAME/g" package.json package-lock.json README.md
-rm *.mybak
-```
-
-### Add NPM Token
-
-Add your npm token to your GitHub repository secrets as `NPM_TOKEN`.
-
-### Add Codecov integration
-
-Enable the Codecov GitHub App [here](https://github.com/apps/codecov).
-
-**Remove everything from here and above**
-
----
-
-# my-package-name
+# Vector TypeScript Client SDK
 
 [![npm package][npm-img]][npm-url]
 [![Build Status][build-img]][build-url]
 [![Downloads][downloads-img]][downloads-url]
 [![Issues][issues-img]][issues-url]
 [![Code Coverage][codecov-img]][codecov-url]
-[![Commitizen Friendly][commitizen-img]][commitizen-url]
 [![Semantic Release][semantic-release-img]][semantic-release-url]
 
-> My awesome module
+> Official TypeScript SDK for Vector's Backend Services
 
-## Install
+## Overview
+
+This package provides a modern, type-safe TypeScript client for interacting with Vector's backend services. Built with TypeScript and following best practices, it offers a seamless integration experience with comprehensive type definitions and Promise-based APIs.
+
+## Features
+
+- 🔒 **Type Safety**: Full TypeScript support with comprehensive type definitions
+- 🚀 **Modern Architecture**: Promise-based API with async/await support
+- 🛡️ **Error Handling**: Built-in error handling and retry mechanisms
+- 📦 **Zero Dependencies**: Minimal production dependencies
+- 🔄 **Automatic Retries**: Smart retry logic for failed requests
+- 📚 **Rich Documentation**: Extensive documentation and examples
+- ✨ **IDE Support**: Great IDE integration with TypeScript
+
+## Installation
 
 ```bash
-npm install my-package-name
+# Using npm
+npm install @playbookmedia/backend-typescript-sdk
+
+# Using yarn
+yarn add @playbookmedia/backend-typescript-sdk
+
+# Using pnpm
+pnpm add @playbookmedia/backend-typescript-sdk
 ```
 
-## Usage
+## Quick Start
 
-```ts
-import { myPackage } from 'my-package-name';
+```typescript
+import { VectorClient } from '@playbookmedia/backend-typescript-sdk';
 
-myPackage('hello');
-//=> 'hello from my package'
+// Initialize the client
+const client = new VectorClient({
+  apiKey: 'your-api-key',
+  environment: 'production' // or 'staging'
+});
+
+// Example: Using the client
+async function example() {
+  try {
+    // Make API calls
+    const response = await client.someEndpoint({
+      // request parameters
+    });
+    
+    console.log('Response:', response);
+  } catch (error) {
+    if (error instanceof VectorAPIError) {
+      console.error('API Error:', error.message);
+      console.error('Status:', error.status);
+      console.error('Code:', error.code);
+    } else {
+      console.error('Unexpected error:', error);
+    }
+  }
+}
 ```
 
-## API
+## API Reference
 
-### myPackage(input, options?)
+### Client Configuration
 
-#### input
+```typescript
+interface VectorClientConfig {
+  apiKey: string;
+  environment?: 'production' | 'staging';
+  timeout?: number;
+  retryConfig?: {
+    maxRetries: number;
+    initialDelayMs: number;
+  };
+}
+```
 
-Type: `string`
+### Available Methods
 
-Lorem ipsum.
+- `client.method1()`: Description of method 1
+- `client.method2()`: Description of method 2
+- More methods documented in our [API Reference](https://docs.vector.engineering/typescript)
 
-#### options
+## Development
 
-Type: `object`
+### Prerequisites
 
-##### postfix
+- Node.js >= 12.0
+- npm or yarn
 
-Type: `string`
-Default: `rainbows`
+### Setup
 
-Lorem ipsum.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/VectorEngineering/vector-protobuf-definitions.git
+   cd vector-protobuf-definitions/sdk/client/client-typescript-sdk
+   ```
 
-[build-img]: https://github.com/ryansonshine/typescript-npm-package-template/actions/workflows/release.yml/badge.svg
-[build-url]: https://github.com/ryansonshine/typescript-npm-package-template/actions/workflows/release.yml
-[downloads-img]: https://img.shields.io/npm/dt/typescript-npm-package-template
-[downloads-url]: https://www.npmtrends.com/typescript-npm-package-template
-[npm-img]: https://img.shields.io/npm/v/typescript-npm-package-template
-[npm-url]: https://www.npmjs.com/package/typescript-npm-package-template
-[issues-img]: https://img.shields.io/github/issues/ryansonshine/typescript-npm-package-template
-[issues-url]: https://github.com/ryansonshine/typescript-npm-package-template/issues
-[codecov-img]: https://codecov.io/gh/ryansonshine/typescript-npm-package-template/branch/main/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/ryansonshine/typescript-npm-package-template
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Available Scripts
+
+- `npm run build` - Builds the package using TypeScript
+- `npm run clean` - Removes build artifacts
+- `npm run test` - Runs tests with Jest
+- `npm run lint` - Lints code using ESLint
+- `npm run format` - Formats code using Prettier
+- `npm run typecheck` - Runs TypeScript type checking
+- `npm run semantic-release` - Handles semantic versioning and releases
+
+### Testing
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Generate coverage report
+npm run test:coverage
+```
+
+## Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. Fork the repository
+2. Create your feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `npm run cm` (uses Commitizen)
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+## Support
+
+- 📧 Email: yoanyomba@solomon-ai.co
+- 📚 Documentation: [docs.vector.engineering](https://docs.vector.engineering)
+- 🐛 Issue Tracker: [GitHub Issues](https://github.com/VectorEngineering/vector-protobuf-definitions/issues)
+
+## License
+
+MIT © [Vector Engineering]
+
+[npm-img]: https://img.shields.io/npm/v/@playbookmedia/backend-typescript-sdk
+[npm-url]: https://www.npmjs.com/package/@playbookmedia/backend-typescript-sdk
+[build-img]: https://github.com/VectorEngineering/vector-protobuf-definitions/actions/workflows/typescript-sdk.yml/badge.svg
+[build-url]: https://github.com/VectorEngineering/vector-protobuf-definitions/actions/workflows/typescript-sdk.yml
+[downloads-img]: https://img.shields.io/npm/dt/@playbookmedia/backend-typescript-sdk
+[downloads-url]: https://www.npmtrends.com/@playbookmedia/backend-typescript-sdk
+[issues-img]: https://img.shields.io/github/issues/VectorEngineering/vector-protobuf-definitions
+[issues-url]: https://github.com/VectorEngineering/vector-protobuf-definitions/issues
+[codecov-img]: https://codecov.io/gh/VectorEngineering/vector-protobuf-definitions/branch/main/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/VectorEngineering/vector-protobuf-definitions
 [semantic-release-img]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-release-url]: https://github.com/semantic-release/semantic-release
-[commitizen-img]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
-[commitizen-url]: http://commitizen.github.io/cz-cli/

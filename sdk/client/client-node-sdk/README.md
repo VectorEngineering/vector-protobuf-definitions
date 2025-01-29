@@ -1,117 +1,120 @@
-# typescript-npm-package-template
-
-> Template to kickstart creating a Node.js module using TypeScript and VSCode
-
-Inspired by [node-module-boilerplate](https://github.com/sindresorhus/node-module-boilerplate)
-
-## Features
-
-- [Semantic Release](https://github.com/semantic-release/semantic-release)
-- [Issue Templates](https://github.com/ryansonshine/typescript-npm-package-template/tree/main/.github/ISSUE_TEMPLATE)
-- [GitHub Actions](https://github.com/ryansonshine/typescript-npm-package-template/tree/main/.github/workflows)
-- [Codecov](https://about.codecov.io/)
-- [VSCode Launch Configurations](https://github.com/ryansonshine/typescript-npm-package-template/blob/main/.vscode/launch.json)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Husky](https://github.com/typicode/husky)
-- [Lint Staged](https://github.com/okonet/lint-staged)
-- [Commitizen](https://github.com/search?q=commitizen)
-- [Jest](https://jestjs.io/)
-- [ESLint](https://eslint.org/)
-- [Prettier](https://prettier.io/)
-
-## Getting started
-
-### Set up your repository
-
-**Click the "Use this template" button.**
-
-Alternatively, create a new directory and then run:
-
-```bash
-curl -fsSL https://github.com/ryansonshine/typescript-npm-package-template/archive/main.tar.gz | tar -xz --strip-components=1
-```
-
-Replace `FULL_NAME`, `GITHUB_USER`, and `REPO_NAME` in the script below with your own details to personalize your new package:
-
-```bash
-FULL_NAME="John Smith"
-GITHUB_USER="johnsmith"
-REPO_NAME="my-cool-package"
-sed -i.mybak "s/\([\/\"]\)(ryansonshine)/$GITHUB_USER/g; s/typescript-npm-package-template\|my-package-name/$REPO_NAME/g; s/Ryan Sonshine/$FULL_NAME/g" package.json package-lock.json README.md
-rm *.mybak
-```
-
-### Add NPM Token
-
-Add your npm token to your GitHub repository secrets as `NPM_TOKEN`.
-
-### Add Codecov integration
-
-Enable the Codecov GitHub App [here](https://github.com/apps/codecov).
-
-**Remove everything from here and above**
-
----
-
-# my-package-name
+# Vector Backend Node SDK
 
 [![npm package][npm-img]][npm-url]
 [![Build Status][build-img]][build-url]
 [![Downloads][downloads-img]][downloads-url]
 [![Issues][issues-img]][issues-url]
 [![Code Coverage][codecov-img]][codecov-url]
-[![Commitizen Friendly][commitizen-img]][commitizen-url]
 [![Semantic Release][semantic-release-img]][semantic-release-url]
 
-> My awesome module
+> Official Node.js SDK for interacting with the Vector API
 
-## Install
+## Overview
+
+This package provides a TypeScript/JavaScript client SDK for interacting with Vector's backend services. It's part of the Vector protobuf definitions repository which contains API definitions, SDKs, and related tooling for Vector's microservices architecture.
+
+## Features
+
+- Full TypeScript support with comprehensive type definitions
+- Promise-based API
+- Automatic request/response handling
+- Built-in error handling and retry logic
+- Semantic versioning and releases
+- Comprehensive test coverage
+- Modern ES6+ codebase
+
+## Installation
 
 ```bash
-npm install my-package-name
+npm install @playbookmedia/backend-node-sdk
 ```
 
-## Usage
+Or with yarn:
 
-```ts
-import { myPackage } from 'my-package-name';
-
-myPackage('hello');
-//=> 'hello from my package'
+```bash
+yarn add @playbookmedia/backend-node-sdk
 ```
 
-## API
+## Requirements
 
-### myPackage(input, options?)
+- Node.js >= 12.0
+- npm or yarn package manager
 
-#### input
+## Quick Start
 
-Type: `string`
+```typescript
+import { VectorClient } from '@playbookmedia/backend-node-sdk';
 
-Lorem ipsum.
+// Initialize the client
+const client = new VectorClient({
+  // Add your configuration options here
+});
 
-#### options
+// Example usage
+async function example() {
+  try {
+    const response = await client.someEndpoint();
+    console.log(response);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+```
 
-Type: `object`
+## Development
 
-##### postfix
+### Setup
 
-Type: `string`
-Default: `rainbows`
+1. Clone the repository
+2. Install dependencies:
+```bash
+npm install
+```
 
-Lorem ipsum.
+### Available Scripts
 
-[build-img]: https://github.com/ryansonshine/typescript-npm-package-template/actions/workflows/release.yml/badge.svg
-[build-url]: https://github.com/ryansonshine/typescript-npm-package-template/actions/workflows/release.yml
-[downloads-img]: https://img.shields.io/npm/dt/typescript-npm-package-template
-[downloads-url]: https://www.npmtrends.com/typescript-npm-package-template
-[npm-img]: https://img.shields.io/npm/v/typescript-npm-package-template
-[npm-url]: https://www.npmjs.com/package/typescript-npm-package-template
-[issues-img]: https://img.shields.io/github/issues/ryansonshine/typescript-npm-package-template
-[issues-url]: https://github.com/ryansonshine/typescript-npm-package-template/issues
-[codecov-img]: https://codecov.io/gh/ryansonshine/typescript-npm-package-template/branch/main/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/ryansonshine/typescript-npm-package-template
+- `npm run build` - Builds the package using TypeScript
+- `npm run clean` - Removes build artifacts
+- `npm run test` - Runs tests with Jest
+- `npm run lint` - Lints code using ESLint
+- `npm run format` - Formats code using Prettier
+- `npm run typecheck` - Runs TypeScript type checking
+- `npm run semantic-release` - Handles semantic versioning and releases
+
+### Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes using conventional commits (`npm run cm`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## Project Structure
+
+```
+├── src/           # Source code
+├── lib/           # Compiled JavaScript
+├── tests/         # Test files
+└── types/         # TypeScript type definitions
+```
+
+## Documentation
+
+For detailed API documentation and examples, please visit our [documentation site](https://docs.vector.engineering).
+
+## License
+
+MIT © [Vector Engineering]
+
+[build-img]: https://github.com/VectorEngineering/Vector-Lead-Management/actions/workflows/release.yml/badge.svg
+[build-url]: https://github.com/VectorEngineering/Vector-Lead-Management/actions/workflows/release.yml
+[downloads-img]: https://img.shields.io/npm/dt/@playbookmedia/backend-node-sdk
+[downloads-url]: https://www.npmtrends.com/@playbookmedia/backend-node-sdk
+[npm-img]: https://img.shields.io/npm/v/@playbookmedia/backend-node-sdk
+[npm-url]: https://www.npmjs.com/package/@playbookmedia/backend-node-sdk
+[issues-img]: https://img.shields.io/github/issues/VectorEngineering/Vector-Lead-Management
+[issues-url]: https://github.com/VectorEngineering/Vector-Lead-Management/issues
+[codecov-img]: https://codecov.io/gh/VectorEngineering/Vector-Lead-Management/branch/main/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/VectorEngineering/Vector-Lead-Management
 [semantic-release-img]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-release-url]: https://github.com/semantic-release/semantic-release
-[commitizen-img]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
-[commitizen-url]: http://commitizen.github.io/cz-cli/

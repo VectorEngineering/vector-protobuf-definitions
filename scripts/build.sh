@@ -127,8 +127,8 @@ update_typescript_client() {
         -i ./swagger/backend-api.yaml \
         -g python -o ./sdk/client/python-client-sdk \
         --additional-properties= \
-            projectName=playbookmedia-client, \
-            packageName=playbookmedia_client, \
+            projectName=${ORG_NAME}-client, \
+            packageName=${ORG_NAME}_client, \
             packageVersion=${PYTHON_VERSION}, \
             packageUrl=${REPO}/sdk-python-client, \
             licenseName=MIT, \
@@ -173,7 +173,7 @@ update_typescript_server() {
         -i ./swagger/backend-api.yaml \
         -g python-flask -o ./sdk/server/python \
         --additional-properties= \
-            packageName=playbookmedia_server, \
+            packageName=${ORG_NAME}_server_sdk, \
             packageVersion=${PYTHON_VERSION}, \
             controllerPackage=controllers, \
             defaultController=default_controller, \

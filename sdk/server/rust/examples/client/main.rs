@@ -12,7 +12,6 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       DownloadScrapingResultsResponse,
                       GetAccountResponse,
                       GetScrapingJobResponse,
-                      ListAccountsResponse,
                       ListScrapingJobsResponse,
                       UpdateAccountResponse,
                      };
@@ -48,7 +47,6 @@ fn main() {
                 "DownloadScrapingResults", 
                 "GetAccount", 
                 "GetScrapingJob", 
-                "ListAccounts", 
                 "ListScrapingJobs", 
             ])
             .required(true)
@@ -137,9 +135,7 @@ fn main() {
         */
         Some("DeleteAccount") => {
             let result = rt.block_on(client.delete_account(
-                  "account_id_example".to_string(),
-                  "org_id_example".to_string(),
-                  "tenant_id_example".to_string()
+                  "id_example".to_string()
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
@@ -163,9 +159,7 @@ fn main() {
         },
         Some("GetAccount") => {
             let result = rt.block_on(client.get_account(
-                  "account_id_example".to_string(),
-                  "org_id_example".to_string(),
-                  "tenant_id_example".to_string()
+                  "id_example".to_string()
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
@@ -175,15 +169,6 @@ fn main() {
                   "user_id_example".to_string(),
                   "org_id_example".to_string(),
                   "tenant_id_example".to_string()
-            ));
-            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
-        },
-        Some("ListAccounts") => {
-            let result = rt.block_on(client.list_accounts(
-                  "org_id_example".to_string(),
-                  "tenant_id_example".to_string(),
-                  Some(56),
-                  Some(56)
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },

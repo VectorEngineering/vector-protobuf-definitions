@@ -10,11 +10,11 @@
 
 type ListAccountsResponse {
   accounts: [Account!]
-  total: Int!
+  nextPageToken: String!
 }
 
 input ListAccountsResponseInput {
     accounts: [AccountInput]
-    total: Int!
+    nextPageToken: String!
 }
 

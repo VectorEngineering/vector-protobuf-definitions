@@ -36,7 +36,7 @@
                                     ],
                                     "body": {
                                         "mode": "raw",
-                                        "raw": "{\n \"authPlatformUserId\": \"<string>\",\n \"orgId\": \"<string>\",\n \"tenantId\": \"<string>\",\n \"email\": \"<string>\"\n}",
+                                        "raw": "{\n \"account\": \"<string>\",\n \"initialWorkspaceName\": \"<string>\"\n}",
                                         "options": {
                                             "raw": {
                                                 "language": "json"
@@ -66,82 +66,12 @@
                         },
 	                        {
     "name": "/lead-scraper-microservice/api/v1/accounts",
-                "description": "Retrieves a list of accounts with optional filtering",
-                 "item": [
-                            {
-                                "name": "List accounts",
-                                "request": {
-                                    "method": "GET",
-                                    "header": [
-                                        {
-                                            "key": "Accept",
-                                            "value": "application/json",
-                                            "description": "",
-                                            "disabled": false
-                                        }
-                                    ],
-                                    "body": {
-                                        "mode": "raw",
-                                        "raw": "",
-                                        "options": {
-                                            "raw": {
-                                                "language": "json"
-                                            }
-                                        }
-                                    },
-                                    "url": {
-                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts",
-                                        "host": [
-                                            "{{baseUrl}}"
-                                        ],
-                                        "path": [
-                                            "lead-scraper-microservice",
-                                            "api",
-                                            "v1",
-                                            "accounts"
-                                        ],
-                                        "variable": [
-                                        ],
-                                        "query": [
-                                            {
-                                                "key": "orgId",
-                                                "value": "orgId_example",
-                                                "description": "Organization context",
-                                                "disabled": false
-                                            },
-                                            {
-                                                "key": "tenantId",
-                                                "value": "tenantId_example",
-                                                "description": "Tenant context",
-                                                "disabled": false
-                                            },
-                                            {
-                                                "key": "offset",
-                                                "value": "56",
-                                                "description": "Pagination offset",
-                                                "disabled": true
-                                            },
-                                            {
-                                                "key": "limit",
-                                                "value": "56",
-                                                "description": "Maximum number of results",
-                                                "disabled": true
-                                            }
-                                        ]
-                                    },
-                                    "description": "Retrieves a list of accounts with optional filtering"
-                                }
-                            }
-                            ]
-                        },
-	                        {
-    "name": "/lead-scraper-microservice/api/v1/accounts",
                 "description": "Updates specified fields of an existing account",
                  "item": [
                             {
                                 "name": "Update account details",
                                 "request": {
-                                    "method": "PATCH",
+                                    "method": "PUT",
                                     "header": [
                                         {
                                             "key": "Content-Type",
@@ -187,7 +117,7 @@
                             ]
                         },
 	                        {
-    "name": "/lead-scraper-microservice/api/v1/accounts/:accountId",
+    "name": "/lead-scraper-microservice/api/v1/accounts/:id",
                 "description": "Permanently deletes an account and associated resources",
                  "item": [
                             {
@@ -212,7 +142,7 @@
                                         }
                                     },
                                     "url": {
-                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts/:accountId",
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts/:id",
                                         "host": [
                                             "{{baseUrl}}"
                                         ],
@@ -221,28 +151,16 @@
                                             "api",
                                             "v1",
                                             "accounts",
-                                            ":accountId"
+                                            ":id"
                                         ],
                                         "variable": [
                                             {
-                                                "key": "accountId",
+                                                "key": "id",
                                                 "value": "",
-                                                "description": "Account identifier"
+                                                "description": ""
                                             }
                                         ],
                                         "query": [
-                                            {
-                                                "key": "orgId",
-                                                "value": "orgId_example",
-                                                "description": "Organization context",
-                                                "disabled": false
-                                            },
-                                            {
-                                                "key": "tenantId",
-                                                "value": "tenantId_example",
-                                                "description": "Tenant context",
-                                                "disabled": false
-                                            }
                                         ]
                                     },
                                     "description": "Permanently deletes an account and associated resources"
@@ -251,7 +169,7 @@
                             ]
                         },
 	                        {
-    "name": "/lead-scraper-microservice/api/v1/accounts/:accountId",
+    "name": "/lead-scraper-microservice/api/v1/accounts/:id",
                 "description": "Retrieves details of a specific account",
                  "item": [
                             {
@@ -276,7 +194,7 @@
                                         }
                                     },
                                     "url": {
-                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts/:accountId",
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts/:id",
                                         "host": [
                                             "{{baseUrl}}"
                                         ],
@@ -285,28 +203,16 @@
                                             "api",
                                             "v1",
                                             "accounts",
-                                            ":accountId"
+                                            ":id"
                                         ],
                                         "variable": [
                                             {
-                                                "key": "accountId",
+                                                "key": "id",
                                                 "value": "",
-                                                "description": "Account identifier"
+                                                "description": ""
                                             }
                                         ],
                                         "query": [
-                                            {
-                                                "key": "orgId",
-                                                "value": "orgId_example",
-                                                "description": "Organization context",
-                                                "disabled": false
-                                            },
-                                            {
-                                                "key": "tenantId",
-                                                "value": "tenantId_example",
-                                                "description": "Tenant context",
-                                                "disabled": false
-                                            }
                                         ]
                                     },
                                     "description": "Retrieves details of a specific account"

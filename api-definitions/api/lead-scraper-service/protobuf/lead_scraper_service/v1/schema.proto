@@ -4,6 +4,8 @@ package lead_scraper_service.v1;
 
 import "protoc-gen-gorm/options/gorm.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+import "validate/validate.proto";
 
 option go_package = "github.com/Vector/vector-lead-management/protobuf/api-definitions/pkg/generated/lead_scraper_service/v1";
 
@@ -70,11 +72,12 @@ message Account {
     };
 
     // Unique identifier for the account
-    uint64 id = 1 [(gorm.field).tag = {unique_index: "idx_user_id"}];
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
 
     // Auth0 user identifier for authentication
     string auth_platform_user_id = 2 [
-        (gorm.field).tag = {index: "idx_user_auth_platform_user_id"}
+        (gorm.field).tag = {index: "idx_user_auth_platform_user_id"},
+        (validate.rules).string = {pattern: "^auth0\\|.*$", max_len: 128}
     ];
 
     // Organization identifier for multi-org support
@@ -101,6 +104,92 @@ message Account {
         disable_association_autoupdate: false
         preload: true
     }];
+
+    // Account status and permissions
+    enum AccountStatus {
+        ACCOUNT_STATUS_UNSPECIFIED = 0;
+        ACCOUNT_STATUS_ACTIVE = 1;
+        ACCOUNT_STATUS_SUSPENDED = 2;
+        ACCOUNT_STATUS_PENDING_VERIFICATION = 3;
+    }
+    AccountStatus account_status = 10;
+
+    // Role-based access control
+    repeated string roles = 11 [(gorm.field).tag = {type: "text[]"}];
+    repeated string permissions = 12 [(gorm.field).tag = {type: "text[]"}];
+
+    // Security settings
+    bool mfa_enabled = 13;
+    google.protobuf.Timestamp last_login_at = 14;
+    string timezone = 15;
+
+    // Usage tracking
+    int32 total_jobs_run = 17;
+    int32 monthly_job_limit = 18 [(validate.rules).int32 = {gt: 0}];
+    int32 concurrent_job_limit = 19 [(validate.rules).int32 = {gt: 0}];
+
+    // Relationships
+    repeated Workspace workspaces = 20 [
+        (gorm.field).has_many = {
+            disable_association_autocreate: false
+            disable_association_autoupdate: false
+            preload: true
+        }
+    ];
+    AccountSettings settings = 21 [
+        (gorm.field).has_one = {
+            disable_association_autocreate: false
+            disable_association_autoupdate: false
+            preload: true
+        }
+    ];
+}
+
+/**
+ * Workspace represents a business entity with multiple accounts
+ */
+message Workspace {
+    option (gorm.opts) = {
+        ormable: true,
+        table: "workspaces"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string name = 2 [(validate.rules).string.min_len = 1];
+    string industry = 3;
+    string domain = 4 [
+        (validate.rules).string = {
+            email: true,
+            max_len: 253  // Max DNS label length
+        }
+    ];
+    
+    // Compliance settings
+    bool gdpr_compliant = 5;
+    bool hipaa_compliant = 6;
+    bool soc2_compliant = 7;
+    
+    // Storage quotas
+    int64 storage_quota = 8;  // in bytes
+    int64 used_storage = 9;
+    
+    // Audit fields
+    google.protobuf.Timestamp created_at = 10;
+    google.protobuf.Timestamp updated_at = 11;
+    google.protobuf.Timestamp deleted_at = 12;
+
+    // Relationships
+    repeated ScrapingWorkflow workflows = 14 [(gorm.field).has_many = {}];
+
+    // Job tracking
+    int32 jobs_run_this_month = 15;
+    int32 workspace_job_limit = 16 [(validate.rules).int32 = {gt: 0}];
+    int32 daily_job_quota = 17;
+    
+    // Usage metrics
+    int32 active_scrapers = 18;
+    int32 total_leads_collected = 19;
+    google.protobuf.Timestamp last_job_run = 20;
 }
 
 /**
@@ -141,7 +230,7 @@ message ScrapingJob {
     };
 
     // Unique identifier for the job
-    string id = 1;
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
 
     // Human-readable name for the job
     string name = 2;
@@ -159,10 +248,14 @@ message ScrapingJob {
     string lang = 6;
 
     // Map zoom level (1-20)
-    int32 zoom = 7;
+    int32 zoom = 7 [
+        (validate.rules).int32 = {gte: 1, lte: 20}
+    ];
 
     // Latitude coordinate
-    string lat = 8;
+    string lat = 8 [
+        (validate.rules).string = {pattern: "^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?)$"}
+    ];
 
     // Longitude coordinate
     string lon = 9;
@@ -199,4 +292,337 @@ message ScrapingJob {
 
     // Payload data
     bytes payload = 23;
+
+    // Lead tracking
+    repeated Lead leads = 24 [(gorm.field).has_many = {}];
+    
+    // Workflow context
+    string workflow_id = 25 [(gorm.field).tag = {index: "idx_workflow_id"}];
+}
+
+/**
+ * ScrapingWorkflow defines recurring scraping configurations
+ */
+message ScrapingWorkflow {
+    option (gorm.opts) = {
+        ormable: true,
+        table: "scraping_workflows"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    
+    // Scheduling options
+   string cron_expression = 2;
+    // Execution settings
+    google.protobuf.Timestamp next_run_time = 4;
+    google.protobuf.Timestamp last_run_time = 5;
+    BackgroundJobStatus status = 6;
+    
+    // Failure handling
+    int32 retry_count = 7;
+    int32 max_retries = 8 [(validate.rules).int32 = {gt: 0}];
+    string alert_emails = 9;
+    
+    // Org context
+    string org_id = 10 [(validate.rules).string.min_len = 1];
+    string tenant_id = 11 [(validate.rules).string.min_len = 1];
+    
+    // Audit fields
+    google.protobuf.Timestamp created_at = 12;
+    google.protobuf.Timestamp updated_at = 13;
+    google.protobuf.Timestamp deleted_at = 14;
+
+    // Relationships
+    repeated ScrapingJob jobs = 15 [(gorm.field).has_many = {}];
+    Workspace workspace = 16 [(gorm.field).belongs_to = {}];
+
+    // Advanced scraping configuration
+    float geo_fencing_radius = 18;
+    double geo_fencing_lat = 19;
+    double geo_fencing_lon = 20;
+    int32 geo_fencing_zoom_min = 21;
+    int32 geo_fencing_zoom_max = 22;
+
+    // Data collection parameters
+    bool include_reviews = 23;
+    bool include_photos = 24;
+    bool include_business_hours = 25;
+    int32 max_reviews_per_business = 26 [(validate.rules).int32 = {lte: 500}];
+    
+    // Result handling
+    enum OutputFormat {
+        OUTPUT_FORMAT_UNSPECIFIED = 0;
+        OUTPUT_FORMAT_JSON = 1;
+        OUTPUT_FORMAT_CSV = 2;
+        OUTPUT_FORMAT_BIGQUERY = 3;
+        OUTPUT_FORMAT_POSTGRES = 4;
+    }
+    OutputFormat output_format = 27;
+    string output_destination = 28; // URI or dataset name
+    
+    // Data retention
+    google.protobuf.Duration data_retention = 29;
+    bool anonymize_pii = 30;
+
+    string notification_webhook_url = 31;
+    string notification_slack_channel = 32;
+    string notification_email_group = 33;
+    bool notification_notify_on_start = 34;
+    bool notification_notify_on_complete = 35;
+    bool notification_notify_on_failure = 36;
+
+    repeated string content_filter_allowed_countries = 37;
+    repeated string content_filter_excluded_types = 38;
+    float content_filter_minimum_rating = 39;
+    int32 content_filter_minimum_reviews = 40;
+
+    int32 qos_max_concurrent_requests = 41 [(validate.rules).int32 = {lte: 100}];
+    int32 qos_max_retries = 42;
+    google.protobuf.Duration qos_request_timeout = 43;
+    bool qos_enable_javascript = 44; // For full page rendering
+
+    // Compliance
+    bool respect_robots_txt = 45;
+    bool accept_terms_of_service = 46;
+    string user_agent = 47;
+}
+
+/**
+ * Lead represents a scraped business entity
+ */
+message Lead {
+    option (gorm.opts) = {
+        ormable: true,
+        table: "leads"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    
+    // Business details
+    string name = 2 [(validate.rules).string.min_len = 1];
+    string website = 3 [(validate.rules).string.uri = true];
+    string phone = 4;
+    string address = 5;
+    string city = 6;
+    string state = 7;
+    string country = 8;
+    
+    // Scraped data
+    double latitude = 9;
+    double longitude = 10;
+    float google_rating = 11;
+    int32 review_count = 12;
+    
+    // Enrichment data
+    string industry = 13;
+    int32 employee_count = 14;
+    int64 estimated_revenue = 15;
+    
+    // Org context
+    string org_id = 16 [(validate.rules).string.min_len = 1];
+    string tenant_id = 17 [(validate.rules).string.min_len = 1];
+    
+    // Audit fields
+    google.protobuf.Timestamp created_at = 18;
+    google.protobuf.Timestamp updated_at = 19;
+    google.protobuf.Timestamp deleted_at = 20;
+    
+    // Relationships
+    ScrapingJob job = 21 [(gorm.field).belongs_to = {}];
+    Workspace workspace = 22 [(gorm.field).belongs_to = {}];
+
+    // Detailed Google Maps metadata
+    string place_id = 23 [(validate.rules).string.min_len = 1]; // Google Places ID
+    string google_maps_url = 24 [(validate.rules).string.uri = true];
+    string business_status = 25; // OPERATIONAL, CLOSED_TEMPORARILY, etc
+    
+    repeated BusinessHours regular_hours = 26 [(gorm.field).has_many = {}];
+    repeated BusinessHours special_hours = 27 [(gorm.field).has_many = {}];
+
+    // Rich media
+    repeated string photo_references = 28; // Google Places photo IDs
+    string main_photo_url = 29;
+
+    repeated Review reviews = 30 [(gorm.field).has_many = {}];
+
+    // Categories and attributes
+    repeated string types = 31; // Google Places types
+    repeated string amenities = 32; // wheelchair_accessible, restroom, etc
+    bool serves_vegetarian_food = 33;
+    bool outdoor_seating = 34;
+
+    // Payment and accessibility
+    repeated string payment_methods = 36; // visa, amex, cash, etc
+    bool wheelchair_accessible = 37;
+    bool parking_available = 38;
+    
+    // Social media links
+    map<string, string> social_media = 39; // platform -> url
+    
+    string rating_category = 40;
+    float rating = 41;  
+    int32 count = 42;
+
+    // Metadata
+    google.protobuf.Timestamp last_updated = 43;
+    string data_source_version = 44;
+    string scraping_session_id = 45;
+
+    // =============================================
+    // Enhanced Business Metadata
+    // =============================================
+    
+    // Contact Information
+    repeated string alternate_phones = 46 [(gorm.field).tag = {type: "text[]"}];
+    string contact_person_name = 47;
+    string contact_person_title = 48;
+    string contact_email = 49 [
+        (validate.rules).string.email = true
+    ];
+    
+    // Business Operations
+    int32 founded_year = 50 [
+        (validate.rules).int32 = {
+            gte: 1600,
+            lte: 2025  // Update annually
+        }
+    ];
+    string business_type = 51 [  // Could also be enum
+        (gorm.field).tag = {type: "text"}
+    ];
+    repeated string certifications = 52 [(gorm.field).tag = {type: "text[]"}];  // ISO, LEED, etc
+    string license_number = 53;
+    
+    // Financial Metrics
+    enum RevenueRange {
+        REVENUE_RANGE_UNSPECIFIED = 0;
+        REVENUE_RANGE_UNDER_100K = 1;
+        REVENUE_RANGE_100K_TO_1M = 2;
+        REVENUE_RANGE_1M_TO_10M = 3;
+        REVENUE_RANGE_10M_TO_50M = 4;
+        REVENUE_RANGE_OVER_50M = 5;
+    }
+    RevenueRange revenue_range = 54;
+    string funding_stage = 55;  // Seed, Series A, etc
+    bool is_public_company = 56;
+    
+    // Online Presence Metrics
+    float website_load_speed = 57;  // In seconds
+    bool has_ssl_certificate = 58;
+    string cms_used = 59;  // e.g., WordPress, Shopify
+    repeated string ecommerce_platforms = 60 [(gorm.field).tag = {type: "text[]"}];
+    
+    // Location Enhancements
+    string timezone = 61;
+    string neighborhood = 62;
+    repeated string nearby_landmarks = 63 [(gorm.field).tag = {type: "text[]"}];
+    string transportation_access = 64;  // Near subway, parking, etc
+    
+    // Employee & HR Data
+    enum EmployeeBenefit {
+        EMPLOYEE_BENEFIT_UNSPECIFIED = 0;
+        EMPLOYEE_BENEFIT_HEALTH_INSURANCE = 1;
+        EMPLOYEE_BENEFIT_RETIREMENT_PLAN = 2;
+        EMPLOYEE_BENEFIT_PAID_TIME_OFF = 3;
+        EMPLOYEE_BENEFIT_REMOTE_WORK = 4;
+    }
+
+    repeated EmployeeBenefit employee_benefits = 66 [(gorm.field).tag = {type: "text[]"}];
+    
+    // Partnerships & Affiliations
+    string parent_company = 67;
+    repeated string subsidiaries = 68 [(gorm.field).tag = {type: "text[]"}];
+    bool is_franchise = 69;
+    
+    // Marketing & SEO
+    repeated string seo_keywords = 70 [(gorm.field).tag = {type: "text[]"}];
+    bool uses_google_ads = 71;
+    string google_my_business_category = 72;
+    
+    // Industry Classification
+    string naics_code = 73 [(validate.rules).string.pattern = "^[0-9]{6}$"];
+    string sic_code = 74 [(validate.rules).string.pattern = "^[0-9]{4}$"];
+    string unspsc_code = 75 [(validate.rules).string.pattern = "^[0-9]{8}$"];
+    
+    // Sustainability
+    bool is_green_certified = 76;
+    repeated string energy_sources = 77 [(gorm.field).tag = {type: "text[]"}];  // Solar, Wind, etc
+    string sustainability_rating = 78;
+    
+    // Recent Activity
+    repeated string recent_announcements = 79 [(gorm.field).tag = {type: "text[]"}];
+    google.protobuf.Timestamp last_product_launch = 80;
+    
+    // Legal & Compliance
+    bool has_litigation_history = 81;
+    string export_control_status = 82;  // EAR, ITAR, etc
+}
+
+// Detailed reviews
+message Review {
+    option (gorm.opts) = {
+        ormable: true,
+        table: "reviews"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string author = 2;
+    float rating = 3;
+    string text = 4;
+    google.protobuf.Timestamp time = 5;
+    string language = 6;
+    string profile_photo_url = 7;
+    int32 review_count = 8;
+}
+
+// Temporal data
+message BusinessHours {
+    option (gorm.opts) = {
+        ormable: true,
+        table: "business_hours"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    enum DayOfWeek {
+        DAY_OF_WEEK_UNSPECIFIED = 0;
+        DAY_OF_WEEK_MONDAY = 1;
+        DAY_OF_WEEK_TUESDAY = 2;
+        DAY_OF_WEEK_WEDNESDAY = 3;
+        DAY_OF_WEEK_THURSDAY = 4;
+        DAY_OF_WEEK_FRIDAY = 5;
+        DAY_OF_WEEK_SATURDAY = 6;
+        DAY_OF_WEEK_SUNDAY = 7;
+    }
+    DayOfWeek day = 2;
+    string open_time = 3 [
+        (validate.rules).string = {
+            pattern: "^([01]\\d|2[0-3]):[0-5]\\d$",  // HH:MM 24h format
+            max_len: 5
+        }
+    ];
+    string close_time = 4;
+    bool closed = 5;
+    string lead_id = 6 [(gorm.field).belongs_to = {}];
+}
+
+// Account-wide settings
+message AccountSettings {
+    option (gorm.opts) = {
+        ormable: true,
+        table: "account_settings"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    
+    // Notification preferences
+    bool email_notifications = 3;
+    bool slack_notifications = 4;
+    
+    // Data retention
+    google.protobuf.Duration default_data_retention = 5;
+    bool auto_purge_enabled = 6;
+    
+    // Security
+    bool require_2fa = 7;
+    google.protobuf.Duration session_timeout = 8;
 }

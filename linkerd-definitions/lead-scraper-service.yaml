@@ -8,41 +8,97 @@ spec:
   routes:
   - condition:
       method: POST
-      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/CreateScrapingJob
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/CreateScrapingJob
     name: CreateScrapingJob
   - condition:
       method: POST
-      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/ListScrapingJobs
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/ListScrapingJobs
     name: ListScrapingJobs
   - condition:
       method: POST
-      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/GetScrapingJob
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetScrapingJob
     name: GetScrapingJob
   - condition:
       method: POST
-      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/DeleteScrapingJob
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/DeleteScrapingJob
     name: DeleteScrapingJob
   - condition:
       method: POST
-      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/DownloadScrapingResults
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/DownloadScrapingResults
     name: DownloadScrapingResults
   - condition:
       method: POST
-      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/CreateAccount
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/CreateAccount
     name: CreateAccount
   - condition:
       method: POST
-      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/GetAccount
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetAccount
     name: GetAccount
   - condition:
       method: POST
-      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/UpdateAccount
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/UpdateAccount
     name: UpdateAccount
   - condition:
       method: POST
-      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/DeleteAccount
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/DeleteAccount
     name: DeleteAccount
   - condition:
       method: POST
-      pathRegex: /lead_scraper_service\.v1\.WorkspaceService/ListAccounts
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/CreateWorkspace
+    name: CreateWorkspace
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/ListWorkspaces
+    name: ListWorkspaces
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetAccountUsage
+    name: GetAccountUsage
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/UpdateAccountSettings
+    name: UpdateAccountSettings
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/ListAccounts
     name: ListAccounts
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/CreateWorkflow
+    name: CreateWorkflow
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetWorkflow
+    name: GetWorkflow
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/UpdateWorkflow
+    name: UpdateWorkflow
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/ListWorkflows
+    name: ListWorkflows
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/TriggerWorkflow
+    name: TriggerWorkflow
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/PauseWorkflow
+    name: PauseWorkflow
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetWorkspaceAnalytics
+    name: GetWorkspaceAnalytics
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetWorkspace
+    name: GetWorkspace
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/UpdateWorkspace
+    name: UpdateWorkspace
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/DeleteWorkspace
+    name: DeleteWorkspace

@@ -31,18 +31,123 @@ func newAccountORM(db *gorm.DB, opts ...gen.DOOption) accountORM {
 
 	tableName := _accountORM.accountORMDo.TableName()
 	_accountORM.ALL = field.NewAsterisk(tableName)
+	_accountORM.AccountStatus = field.NewString(tableName, "account_status")
 	_accountORM.AuthPlatformUserId = field.NewString(tableName, "auth_platform_user_id")
+	_accountORM.ConcurrentJobLimit = field.NewInt32(tableName, "concurrent_job_limit")
 	_accountORM.CreatedAt = field.NewTime(tableName, "created_at")
 	_accountORM.DeletedAt = field.NewTime(tableName, "deleted_at")
 	_accountORM.Email = field.NewString(tableName, "email")
 	_accountORM.Id = field.NewUint64(tableName, "id")
+	_accountORM.LastLoginAt = field.NewTime(tableName, "last_login_at")
 	_accountORM.LastModifiedAt = field.NewTime(tableName, "last_modified_at")
+	_accountORM.MfaEnabled = field.NewBool(tableName, "mfa_enabled")
+	_accountORM.MonthlyJobLimit = field.NewInt32(tableName, "monthly_job_limit")
 	_accountORM.OrgId = field.NewString(tableName, "org_id")
+	_accountORM.Permissions = field.NewField(tableName, "permissions")
+	_accountORM.Roles = field.NewField(tableName, "roles")
 	_accountORM.TenantId = field.NewString(tableName, "tenant_id")
+	_accountORM.Timezone = field.NewString(tableName, "timezone")
+	_accountORM.TotalJobsRun = field.NewInt32(tableName, "total_jobs_run")
+	_accountORM.Settings = accountORMHasOneSettings{
+		db: db.Session(&gorm.Session{}),
+
+		RelationField: field.NewRelation("Settings", "lead_scraper_servicev1.AccountSettingsORM"),
+	}
+
 	_accountORM.ScrapingJobs = accountORMHasManyScrapingJobs{
 		db: db.Session(&gorm.Session{}),
 
 		RelationField: field.NewRelation("ScrapingJobs", "lead_scraper_servicev1.ScrapingJobORM"),
+		Leads: struct {
+			field.RelationField
+			Job struct {
+				field.RelationField
+			}
+			Workspace struct {
+				field.RelationField
+				Workflows struct {
+					field.RelationField
+					Workspace struct {
+						field.RelationField
+					}
+					Jobs struct {
+						field.RelationField
+					}
+				}
+			}
+			RegularHours struct {
+				field.RelationField
+			}
+			Reviews struct {
+				field.RelationField
+			}
+			SpecialHours struct {
+				field.RelationField
+			}
+		}{
+			RelationField: field.NewRelation("ScrapingJobs.Leads", "lead_scraper_servicev1.LeadORM"),
+			Job: struct {
+				field.RelationField
+			}{
+				RelationField: field.NewRelation("ScrapingJobs.Leads.Job", "lead_scraper_servicev1.ScrapingJobORM"),
+			},
+			Workspace: struct {
+				field.RelationField
+				Workflows struct {
+					field.RelationField
+					Workspace struct {
+						field.RelationField
+					}
+					Jobs struct {
+						field.RelationField
+					}
+				}
+			}{
+				RelationField: field.NewRelation("ScrapingJobs.Leads.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
+				Workflows: struct {
+					field.RelationField
+					Workspace struct {
+						field.RelationField
+					}
+					Jobs struct {
+						field.RelationField
+					}
+				}{
+					RelationField: field.NewRelation("ScrapingJobs.Leads.Workspace.Workflows", "lead_scraper_servicev1.ScrapingWorkflowORM"),
+					Workspace: struct {
+						field.RelationField
+					}{
+						RelationField: field.NewRelation("ScrapingJobs.Leads.Workspace.Workflows.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
+					},
+					Jobs: struct {
+						field.RelationField
+					}{
+						RelationField: field.NewRelation("ScrapingJobs.Leads.Workspace.Workflows.Jobs", "lead_scraper_servicev1.ScrapingJobORM"),
+					},
+				},
+			},
+			RegularHours: struct {
+				field.RelationField
+			}{
+				RelationField: field.NewRelation("ScrapingJobs.Leads.RegularHours", "lead_scraper_servicev1.BusinessHoursORM"),
+			},
+			Reviews: struct {
+				field.RelationField
+			}{
+				RelationField: field.NewRelation("ScrapingJobs.Leads.Reviews", "lead_scraper_servicev1.ReviewORM"),
+			},
+			SpecialHours: struct {
+				field.RelationField
+			}{
+				RelationField: field.NewRelation("ScrapingJobs.Leads.SpecialHours", "lead_scraper_servicev1.BusinessHoursORM"),
+			},
+		},
+	}
+
+	_accountORM.Workspaces = accountORMHasManyWorkspaces{
+		db: db.Session(&gorm.Session{}),
+
+		RelationField: field.NewRelation("Workspaces", "lead_scraper_servicev1.WorkspaceORM"),
 	}
 
 	_accountORM.fillFieldMap()
@@ -54,15 +159,28 @@ type accountORM struct {
 	accountORMDo
 
 	ALL                field.Asterisk
+	AccountStatus      field.String
 	AuthPlatformUserId field.String
+	ConcurrentJobLimit field.Int32
 	CreatedAt          field.Time
 	DeletedAt          field.Time
 	Email              field.String
 	Id                 field.Uint64
+	LastLoginAt        field.Time
 	LastModifiedAt     field.Time
+	MfaEnabled         field.Bool
+	MonthlyJobLimit    field.Int32
 	OrgId              field.String
+	Permissions        field.Field
+	Roles              field.Field
 	TenantId           field.String
-	ScrapingJobs       accountORMHasManyScrapingJobs
+	Timezone           field.String
+	TotalJobsRun       field.Int32
+	Settings           accountORMHasOneSettings
+
+	ScrapingJobs accountORMHasManyScrapingJobs
+
+	Workspaces accountORMHasManyWorkspaces
 
 	fieldMap map[string]field.Expr
 }
@@ -79,14 +197,23 @@ func (a accountORM) As(alias string) *accountORM {
 
 func (a *accountORM) updateTableName(table string) *accountORM {
 	a.ALL = field.NewAsterisk(table)
+	a.AccountStatus = field.NewString(table, "account_status")
 	a.AuthPlatformUserId = field.NewString(table, "auth_platform_user_id")
+	a.ConcurrentJobLimit = field.NewInt32(table, "concurrent_job_limit")
 	a.CreatedAt = field.NewTime(table, "created_at")
 	a.DeletedAt = field.NewTime(table, "deleted_at")
 	a.Email = field.NewString(table, "email")
 	a.Id = field.NewUint64(table, "id")
+	a.LastLoginAt = field.NewTime(table, "last_login_at")
 	a.LastModifiedAt = field.NewTime(table, "last_modified_at")
+	a.MfaEnabled = field.NewBool(table, "mfa_enabled")
+	a.MonthlyJobLimit = field.NewInt32(table, "monthly_job_limit")
 	a.OrgId = field.NewString(table, "org_id")
+	a.Permissions = field.NewField(table, "permissions")
+	a.Roles = field.NewField(table, "roles")
 	a.TenantId = field.NewString(table, "tenant_id")
+	a.Timezone = field.NewString(table, "timezone")
+	a.TotalJobsRun = field.NewInt32(table, "total_jobs_run")
 
 	a.fillFieldMap()
 
@@ -103,15 +230,24 @@ func (a *accountORM) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (a *accountORM) fillFieldMap() {
-	a.fieldMap = make(map[string]field.Expr, 9)
+	a.fieldMap = make(map[string]field.Expr, 20)
+	a.fieldMap["account_status"] = a.AccountStatus
 	a.fieldMap["auth_platform_user_id"] = a.AuthPlatformUserId
+	a.fieldMap["concurrent_job_limit"] = a.ConcurrentJobLimit
 	a.fieldMap["created_at"] = a.CreatedAt
 	a.fieldMap["deleted_at"] = a.DeletedAt
 	a.fieldMap["email"] = a.Email
 	a.fieldMap["id"] = a.Id
+	a.fieldMap["last_login_at"] = a.LastLoginAt
 	a.fieldMap["last_modified_at"] = a.LastModifiedAt
+	a.fieldMap["mfa_enabled"] = a.MfaEnabled
+	a.fieldMap["monthly_job_limit"] = a.MonthlyJobLimit
 	a.fieldMap["org_id"] = a.OrgId
+	a.fieldMap["permissions"] = a.Permissions
+	a.fieldMap["roles"] = a.Roles
 	a.fieldMap["tenant_id"] = a.TenantId
+	a.fieldMap["timezone"] = a.Timezone
+	a.fieldMap["total_jobs_run"] = a.TotalJobsRun
 
 }
 
@@ -125,10 +261,109 @@ func (a accountORM) replaceDB(db *gorm.DB) accountORM {
 	return a
 }
 
+type accountORMHasOneSettings struct {
+	db *gorm.DB
+
+	field.RelationField
+}
+
+func (a accountORMHasOneSettings) Where(conds ...field.Expr) *accountORMHasOneSettings {
+	if len(conds) == 0 {
+		return &a
+	}
+
+	exprs := make([]clause.Expression, 0, len(conds))
+	for _, cond := range conds {
+		exprs = append(exprs, cond.BeCond().(clause.Expression))
+	}
+	a.db = a.db.Clauses(clause.Where{Exprs: exprs})
+	return &a
+}
+
+func (a accountORMHasOneSettings) WithContext(ctx context.Context) *accountORMHasOneSettings {
+	a.db = a.db.WithContext(ctx)
+	return &a
+}
+
+func (a accountORMHasOneSettings) Session(session *gorm.Session) *accountORMHasOneSettings {
+	a.db = a.db.Session(session)
+	return &a
+}
+
+func (a accountORMHasOneSettings) Model(m *lead_scraper_servicev1.AccountORM) *accountORMHasOneSettingsTx {
+	return &accountORMHasOneSettingsTx{a.db.Model(m).Association(a.Name())}
+}
+
+type accountORMHasOneSettingsTx struct{ tx *gorm.Association }
+
+func (a accountORMHasOneSettingsTx) Find() (result *lead_scraper_servicev1.AccountSettingsORM, err error) {
+	return result, a.tx.Find(&result)
+}
+
+func (a accountORMHasOneSettingsTx) Append(values ...*lead_scraper_servicev1.AccountSettingsORM) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Append(targetValues...)
+}
+
+func (a accountORMHasOneSettingsTx) Replace(values ...*lead_scraper_servicev1.AccountSettingsORM) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Replace(targetValues...)
+}
+
+func (a accountORMHasOneSettingsTx) Delete(values ...*lead_scraper_servicev1.AccountSettingsORM) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Delete(targetValues...)
+}
+
+func (a accountORMHasOneSettingsTx) Clear() error {
+	return a.tx.Clear()
+}
+
+func (a accountORMHasOneSettingsTx) Count() int64 {
+	return a.tx.Count()
+}
+
 type accountORMHasManyScrapingJobs struct {
 	db *gorm.DB
 
 	field.RelationField
+
+	Leads struct {
+		field.RelationField
+		Job struct {
+			field.RelationField
+		}
+		Workspace struct {
+			field.RelationField
+			Workflows struct {
+				field.RelationField
+				Workspace struct {
+					field.RelationField
+				}
+				Jobs struct {
+					field.RelationField
+				}
+			}
+		}
+		RegularHours struct {
+			field.RelationField
+		}
+		Reviews struct {
+			field.RelationField
+		}
+		SpecialHours struct {
+			field.RelationField
+		}
+	}
 }
 
 func (a accountORMHasManyScrapingJobs) Where(conds ...field.Expr) *accountORMHasManyScrapingJobs {
@@ -193,6 +428,77 @@ func (a accountORMHasManyScrapingJobsTx) Clear() error {
 }
 
 func (a accountORMHasManyScrapingJobsTx) Count() int64 {
+	return a.tx.Count()
+}
+
+type accountORMHasManyWorkspaces struct {
+	db *gorm.DB
+
+	field.RelationField
+}
+
+func (a accountORMHasManyWorkspaces) Where(conds ...field.Expr) *accountORMHasManyWorkspaces {
+	if len(conds) == 0 {
+		return &a
+	}
+
+	exprs := make([]clause.Expression, 0, len(conds))
+	for _, cond := range conds {
+		exprs = append(exprs, cond.BeCond().(clause.Expression))
+	}
+	a.db = a.db.Clauses(clause.Where{Exprs: exprs})
+	return &a
+}
+
+func (a accountORMHasManyWorkspaces) WithContext(ctx context.Context) *accountORMHasManyWorkspaces {
+	a.db = a.db.WithContext(ctx)
+	return &a
+}
+
+func (a accountORMHasManyWorkspaces) Session(session *gorm.Session) *accountORMHasManyWorkspaces {
+	a.db = a.db.Session(session)
+	return &a
+}
+
+func (a accountORMHasManyWorkspaces) Model(m *lead_scraper_servicev1.AccountORM) *accountORMHasManyWorkspacesTx {
+	return &accountORMHasManyWorkspacesTx{a.db.Model(m).Association(a.Name())}
+}
+
+type accountORMHasManyWorkspacesTx struct{ tx *gorm.Association }
+
+func (a accountORMHasManyWorkspacesTx) Find() (result []*lead_scraper_servicev1.WorkspaceORM, err error) {
+	return result, a.tx.Find(&result)
+}
+
+func (a accountORMHasManyWorkspacesTx) Append(values ...*lead_scraper_servicev1.WorkspaceORM) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Append(targetValues...)
+}
+
+func (a accountORMHasManyWorkspacesTx) Replace(values ...*lead_scraper_servicev1.WorkspaceORM) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Replace(targetValues...)
+}
+
+func (a accountORMHasManyWorkspacesTx) Delete(values ...*lead_scraper_servicev1.WorkspaceORM) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Delete(targetValues...)
+}
+
+func (a accountORMHasManyWorkspacesTx) Clear() error {
+	return a.tx.Clear()
+}
+
+func (a accountORMHasManyWorkspacesTx) Count() int64 {
 	return a.tx.Count()
 }
 

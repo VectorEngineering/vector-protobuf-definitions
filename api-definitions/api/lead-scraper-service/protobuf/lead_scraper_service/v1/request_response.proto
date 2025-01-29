@@ -6,6 +6,7 @@ import "lead_scraper_service/v1/schema.proto";
 
 import "validate/validate.proto";
 import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/Vector/vector-lead-management/protobuf/api-definitions/pkg/generated/lead_scraper_service/v1";
 
@@ -28,7 +29,13 @@ message CreateScrapingJobRequest {
 
     // Job configuration
     string name = 4 [(validate.rules).string.min_len = 1];
-    repeated string keywords = 5 [(validate.rules).repeated.min_items = 1];
+    repeated string keywords = 5 [
+        (validate.rules).repeated = {
+            min_items: 1,
+            max_items: 20,
+            items: {string: {max_len: 50}}
+        }
+    ];
     string lang = 6 [(validate.rules).string.len = 2];  // ISO 639-1 language code
     int32 zoom = 7 [(validate.rules).int32 = {gte: 1, lte: 20}];
     string lat = 8;
@@ -44,7 +51,9 @@ message CreateScrapingJobRequest {
 // CreateScrapingJobResponse represents the response after creating a scraping job
 message CreateScrapingJobResponse {
     string job_id = 1;
-    BackgroundJobStatus status = 2;
+    BackgroundJobStatus status = 2 [
+        (validate.rules).enum = {defined_only: true}
+    ];
 }
 
 // GetScrapingJobRequest represents a request to get details of a specific scraping job
@@ -90,7 +99,9 @@ message ListScrapingJobsRequest {
 
 // ListScrapingJobsResponse represents the response containing a list of scraping jobs
 message ListScrapingJobsResponse {
-    repeated ScrapingJob jobs = 1;
+    repeated ScrapingJob jobs = 1 [
+        (validate.rules).repeated.max_items = 100
+    ];
 }
 
 // DeleteScrapingJobRequest represents a request to delete a specific scraping job
@@ -145,129 +156,207 @@ message DownloadScrapingResultsResponse {
     string content_type = 3;
 }
 
-// CreateAccountRequest represents a request to create a new account
+// Account Management Messages
 message CreateAccountRequest {
-    // Auth0 user identifier
-    string auth_platform_user_id = 1 [
-        (validate.rules).string.min_len = 1,
-        (google.api.field_behavior) = REQUIRED
+    Account account = 1 [
+        (validate.rules).message.required = true
     ];
-    
-    // Organization identifier
-    string org_id = 2 [
-        (validate.rules).string.min_len = 1,
-        (google.api.field_behavior) = REQUIRED
-    ];
-    
-    // Tenant identifier
-    string tenant_id = 3 [
-        (validate.rules).string.min_len = 1,
-        (google.api.field_behavior) = REQUIRED
-    ];
-    
-    // User's email address
-    string email = 4 [
-        (validate.rules).string.email = true,
-        (google.api.field_behavior) = REQUIRED
+    string initial_workspace_name = 2 [
+        (validate.rules).string.min_len = 1
     ];
 }
 
-// CreateAccountResponse represents the response after creating an account
-message CreateAccountResponse {
-    // The created account
-    Account account = 1;
-}
-
-// GetAccountRequest represents a request to get account details
 message GetAccountRequest {
-    // Account identifier
-    uint64 account_id = 1 [
-        (validate.rules).uint64.gt = 0,
-        (google.api.field_behavior) = REQUIRED
-    ];
-    
-    // Organization context
-    string org_id = 2 [
-        (validate.rules).string.min_len = 1,
-        (google.api.field_behavior) = REQUIRED
-    ];
-    
-    // Tenant context
-    string tenant_id = 3 [
-        (validate.rules).string.min_len = 1,
-        (google.api.field_behavior) = REQUIRED
-    ];
+    string id = 1 [(validate.rules).string.min_len = 1];
 }
 
-// GetAccountResponse represents the response containing account details
-message GetAccountResponse {
-    // The requested account
-    Account account = 1;
-}
-
-// UpdateAccountRequest represents a request to update account details
 message UpdateAccountRequest {
     Account account = 1 [(validate.rules).message.required = true];
 }
 
-// UpdateAccountResponse represents the response after updating an account
-message UpdateAccountResponse {
-    // The updated account
+message DeleteAccountRequest {
+    string id = 1 [(validate.rules).string.min_len = 1];
+}
+
+message ListAccountsRequest {
+    int32 page_size = 1 [(validate.rules).int32 = {gte: 1, lte: 100}];
+    string page_token = 2;
+    string filter = 3;
+}
+
+message ListAccountsResponse {
+    repeated Account accounts = 1;
+    string next_page_token = 2;
+}
+
+// Workspace Management Messages
+message CreateWorkspaceRequest {
+    Workspace workspace = 1 [(validate.rules).message.required = true];
+    string account_id = 2 [(validate.rules).string.min_len = 1];
+}
+
+message CreateWorkspaceResponse {
+    Workspace workspace = 1;
+}
+
+message GetWorkspaceRequest {
+    string id = 1 [(validate.rules).string.min_len = 1];
+}
+
+message UpdateWorkspaceRequest {
+    Workspace workspace = 1 [(validate.rules).message.required = true];
+}
+
+message DeleteWorkspaceRequest {
+    string id = 1 [(validate.rules).string.min_len = 1];
+}
+
+message ListWorkspacesRequest {
+    string account_id = 1 [(validate.rules).string.min_len = 1];
+    int32 page_size = 2 [(validate.rules).int32 = {gte: 1, lte: 100}];
+    string page_token = 3;
+}
+
+message ListWorkspacesResponse {
+    repeated Workspace workspaces = 1;
+    string next_page_token = 2;
+}
+
+// GetAccountUsageRequest represents a request to get account usage details
+message GetAccountUsageRequest {
+    string id = 1 [(validate.rules).string.min_len = 1];
+}
+
+// AccountUsage represents the usage details of an account
+message GetAccountUsageResponse {
+    int32 total_jobs_run = 1;
+    int32 monthly_job_limit = 2;
+    int32 remaining_jobs = 3;
+    google.protobuf.Timestamp reset_time = 4;
+}
+
+// UpdateAccountSettingsRequest represents a request to update account settings
+message UpdateAccountSettingsRequest {
+    AccountSettings settings = 1 [
+        (validate.rules).message.required = true
+    ];
+}
+
+message UpdateAccountSettingsResponse {
+    AccountSettings settings = 1;
+}
+
+// Workflow Management Messages
+message CreateWorkflowRequest {
+    string workspace_id = 1 [(validate.rules).string.min_len = 1];
+    ScrapingWorkflow workflow = 2 [(validate.rules).message.required = true];
+}
+
+message GetWorkflowRequest {
+    string workspace_id = 1 [(validate.rules).string.min_len = 1];
+    string id = 2 [(validate.rules).string.min_len = 1];
+}
+
+message UpdateWorkflowRequest {
+    ScrapingWorkflow workflow = 1 [(validate.rules).message.required = true];
+}
+
+message ListWorkflowsRequest {
+    string workspace_id = 1 [(validate.rules).string.min_len = 1];
+    int32 page_size = 2 [(validate.rules).int32 = {gte: 1, lte: 100}];
+    string page_token = 3;
+    string filter = 4;
+}
+
+message ListWorkflowsResponse {
+    repeated ScrapingWorkflow workflows = 1;
+    string next_page_token = 2;
+}
+
+message TriggerWorkflowRequest {
+    string workspace_id = 1 [(validate.rules).string.min_len = 1];
+    string id = 2 [(validate.rules).string.min_len = 1];
+    map<string, string> parameters = 3 [
+        (validate.rules).map = {
+            max_pairs: 20,
+            keys: {string: {max_len: 50}},
+            values: {string: {max_len: 200}}
+        }
+    ];
+}
+
+message TriggerWorkflowResponse {
+    string job_id = 1;
+    BackgroundJobStatus status = 2;
+}
+
+message PauseWorkflowRequest {
+    string workspace_id = 1 [(validate.rules).string.min_len = 1];
+    string id = 2 [(validate.rules).string.min_len = 1];
+    bool pause = 3;
+}
+
+message PauseWorkflowResponse {
+    bool success = 1;
+    ScrapingWorkflow workflow = 2;
+}
+
+message GetWorkspaceAnalyticsRequest {
+    string workspace_id = 1 [(validate.rules).string.min_len = 1];
+    google.protobuf.Timestamp start_time = 2;
+    google.protobuf.Timestamp end_time = 3;
+}
+
+message GetWorkspaceAnalyticsResponse {
+    int32 total_leads = 1;
+    int32 active_workflows = 2;
+    int32 jobs_last_30_days = 3;
+    repeated JobSuccessRate success_rates = 4;
+
+    message JobSuccessRate {
+        string workflow_id = 1;
+        float success_rate = 2;
+        int32 total_runs = 3;
+    }
+}
+
+message GetWorkspaceResponse {
+    Workspace workspace = 1;
+}
+
+message UpdateWorkspaceResponse {
+    Workspace workspace = 1;
+}
+
+message DeleteWorkspaceResponse {
+    bool success = 1;
+}
+
+message GetAccountResponse {
     Account account = 1;
 }
 
-// DeleteAccountRequest represents a request to delete an account
-message DeleteAccountRequest {
-    // Account identifier
-    uint64 account_id = 1 [
-        (validate.rules).uint64.gt = 0,
-        (google.api.field_behavior) = REQUIRED
-    ];
-    
-    // Organization context
-    string org_id = 2 [
-        (validate.rules).string.min_len = 1,
-        (google.api.field_behavior) = REQUIRED
-    ];
-    
-    // Tenant context
-    string tenant_id = 3 [
-        (validate.rules).string.min_len = 1,
-        (google.api.field_behavior) = REQUIRED
-    ];
+message UpdateAccountResponse {
+    Account account = 1;
 }
 
-// DeleteAccountResponse represents the response after deleting an account
 message DeleteAccountResponse {
     bool success = 1;
 }
 
-// ListAccountsRequest represents a request to list accounts
-message ListAccountsRequest {
-    // Organization context
-    string org_id = 1 [
-        (validate.rules).string.min_len = 1,
-        (google.api.field_behavior) = REQUIRED
-    ];
-    
-    // Tenant context
-    string tenant_id = 2 [
-        (validate.rules).string.min_len = 1,
-        (google.api.field_behavior) = REQUIRED
-    ];
-    
-    // Pagination offset
-    int32 offset = 3;
-    
-    // Maximum number of results
-    int32 limit = 4 [(validate.rules).int32 = {gt: 0, lte: 100}];
+message CreateAccountResponse {
+    Account account = 1;
+    string initial_workspace_id = 2;
 }
 
-// ListAccountsResponse represents the response containing a list of accounts
-message ListAccountsResponse {
-    // List of accounts
-    repeated Account accounts = 1;
-    
-    // Total number of accounts matching the request
-    int32 total = 2;
-} 
+message GetWorkflowResponse {
+    ScrapingWorkflow workflow = 1;
+}
+
+message UpdateWorkflowResponse {
+    ScrapingWorkflow workflow = 1;
+}
+
+message CreateWorkflowResponse {
+    ScrapingWorkflow workflow = 1;
+}

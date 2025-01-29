@@ -25,12 +25,8 @@ input CreateScrapingJobInput {
 }
 
 input DeleteAccountInput {
-    # Account identifier
-    accountId: String!, 
-    # Organization context
-    orgId: String!, 
-    # Tenant context
-    tenantId: String!
+    
+    Id_: String!
 }
 
 input DeleteScrapingJobInput {
@@ -62,9 +58,7 @@ type Mutation {
   CreateScrapingJob(input: CreateScrapingJobInput!): CreateScrapingJobResponse
   # Delete account
   # Permanently deletes an account and associated resources
-  # @param String! accountId Account identifier
-  # @param String! orgId Organization context
-  # @param String! tenantId Tenant context
+  # @param String! Id_ 
   # @return [DeleteAccountResponse]
   DeleteAccount(input: DeleteAccountInput!): DeleteAccountResponse
   # Delete a specific job
@@ -93,11 +87,9 @@ type Query {
   DownloadScrapingResults(jobId: String!, userId: String!, orgId: String!, tenantId: String!): DownloadScrapingResultsResponse
   # Get account details
   # Retrieves details of a specific account
-  # @param String! accountId Account identifier
-  # @param String! orgId Organization context
-  # @param String! tenantId Tenant context
+  # @param String! Id_ 
   # @return [GetAccountResponse]
-  GetAccount(accountId: String!, orgId: String!, tenantId: String!): GetAccountResponse
+  GetAccount(Id_: String!): GetAccountResponse
   # Get a specific job
   # This endpoint retrieves a specific Google Maps scraping job
   # @param String! jobId 
@@ -106,14 +98,6 @@ type Query {
   # @param String! tenantId 
   # @return [GetScrapingJobResponse]
   GetScrapingJob(jobId: String!, userId: String!, orgId: String!, tenantId: String!): GetScrapingJobResponse
-  # List accounts
-  # Retrieves a list of accounts with optional filtering
-  # @param String! orgId Organization context
-  # @param String! tenantId Tenant context
-  # @param Int! offset Pagination offset
-  # @param Int! limit Maximum number of results
-  # @return [ListAccountsResponse]
-  ListAccounts(orgId: String!, tenantId: String!, offset: Int!, limit: Int!): ListAccountsResponse
   # Get all jobs
   # This endpoint retrieves all Google Maps scraping jobs
   # @param String! userId 

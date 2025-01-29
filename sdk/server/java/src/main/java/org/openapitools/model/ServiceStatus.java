@@ -24,7 +24,7 @@ import javax.annotation.Generated;
  * ServiceStatus
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T05:44:51.050519-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T11:21:34.061205-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ServiceStatus {
 
   private String name;

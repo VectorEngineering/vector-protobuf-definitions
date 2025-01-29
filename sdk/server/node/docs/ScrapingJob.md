@@ -23,6 +23,8 @@ Name | Type | Description | Notes
 **payloadType** | **String!** |  | [optional] [default to null]
 **priority** | **Int!** |  | [optional] [default to null]
 **payload** | **String!** |  | [optional] [default to null]
+**leads** | [**Lead**](Lead.md) |  | [optional] [default to null]
+**workflowId** | **String!** |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

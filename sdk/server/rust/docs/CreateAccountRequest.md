@@ -3,10 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**auth_platform_user_id** | **String** |  | 
-**org_id** | **String** |  | 
-**tenant_id** | **String** |  | 
-**email** | **String** |  | 
+**account** | [***models::Account**](Account.md) |  | [optional] [default to None]
+**initial_workspace_name** | **String** |  | [optional] [default to None]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

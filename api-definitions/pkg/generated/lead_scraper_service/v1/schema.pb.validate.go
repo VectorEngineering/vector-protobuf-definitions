@@ -58,7 +58,27 @@ func (m *Account) validate(all bool) error {
 
 	// no validation rules for Id
 
-	// no validation rules for AuthPlatformUserId
+	if utf8.RuneCountInString(m.GetAuthPlatformUserId()) > 128 {
+		err := AccountValidationError{
+			field:  "AuthPlatformUserId",
+			reason: "value length must be at most 128 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if !_Account_AuthPlatformUserId_Pattern.MatchString(m.GetAuthPlatformUserId()) {
+		err := AccountValidationError{
+			field:  "AuthPlatformUserId",
+			reason: "value does not match regex pattern \"^auth0\\\\|.*$\"",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	// no validation rules for OrgId
 
@@ -187,6 +207,128 @@ func (m *Account) validate(all bool) error {
 
 	}
 
+	// no validation rules for AccountStatus
+
+	// no validation rules for MfaEnabled
+
+	if all {
+		switch v := interface{}(m.GetLastLoginAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AccountValidationError{
+					field:  "LastLoginAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AccountValidationError{
+					field:  "LastLoginAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetLastLoginAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AccountValidationError{
+				field:  "LastLoginAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Timezone
+
+	// no validation rules for TotalJobsRun
+
+	if m.GetMonthlyJobLimit() <= 0 {
+		err := AccountValidationError{
+			field:  "MonthlyJobLimit",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetConcurrentJobLimit() <= 0 {
+		err := AccountValidationError{
+			field:  "ConcurrentJobLimit",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	for idx, item := range m.GetWorkspaces() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, AccountValidationError{
+						field:  fmt.Sprintf("Workspaces[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, AccountValidationError{
+						field:  fmt.Sprintf("Workspaces[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return AccountValidationError{
+					field:  fmt.Sprintf("Workspaces[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if all {
+		switch v := interface{}(m.GetSettings()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AccountValidationError{
+					field:  "Settings",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AccountValidationError{
+					field:  "Settings",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSettings()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AccountValidationError{
+				field:  "Settings",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	if len(errors) > 0 {
 		return AccountMultiError(errors)
 	}
@@ -264,6 +406,374 @@ var _ interface {
 	ErrorName() string
 } = AccountValidationError{}
 
+var _Account_AuthPlatformUserId_Pattern = regexp.MustCompile("^auth0\\|.*$")
+
+// Validate checks the field values on Workspace with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *Workspace) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Workspace with the rules defined in
+// the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in WorkspaceMultiError, or nil
+// if none found.
+func (m *Workspace) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Workspace) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if utf8.RuneCountInString(m.GetName()) < 1 {
+		err := WorkspaceValidationError{
+			field:  "Name",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for Industry
+
+	if utf8.RuneCountInString(m.GetDomain()) > 253 {
+		err := WorkspaceValidationError{
+			field:  "Domain",
+			reason: "value length must be at most 253 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if err := m._validateEmail(m.GetDomain()); err != nil {
+		err = WorkspaceValidationError{
+			field:  "Domain",
+			reason: "value must be a valid email address",
+			cause:  err,
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for GdprCompliant
+
+	// no validation rules for HipaaCompliant
+
+	// no validation rules for Soc2Compliant
+
+	// no validation rules for StorageQuota
+
+	// no validation rules for UsedStorage
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, WorkspaceValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, WorkspaceValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WorkspaceValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetUpdatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, WorkspaceValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, WorkspaceValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUpdatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WorkspaceValidationError{
+				field:  "UpdatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetDeletedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, WorkspaceValidationError{
+					field:  "DeletedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, WorkspaceValidationError{
+					field:  "DeletedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetDeletedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WorkspaceValidationError{
+				field:  "DeletedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	for idx, item := range m.GetWorkflows() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, WorkspaceValidationError{
+						field:  fmt.Sprintf("Workflows[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, WorkspaceValidationError{
+						field:  fmt.Sprintf("Workflows[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return WorkspaceValidationError{
+					field:  fmt.Sprintf("Workflows[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for JobsRunThisMonth
+
+	if m.GetWorkspaceJobLimit() <= 0 {
+		err := WorkspaceValidationError{
+			field:  "WorkspaceJobLimit",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for DailyJobQuota
+
+	// no validation rules for ActiveScrapers
+
+	// no validation rules for TotalLeadsCollected
+
+	if all {
+		switch v := interface{}(m.GetLastJobRun()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, WorkspaceValidationError{
+					field:  "LastJobRun",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, WorkspaceValidationError{
+					field:  "LastJobRun",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetLastJobRun()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WorkspaceValidationError{
+				field:  "LastJobRun",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return WorkspaceMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *Workspace) _validateHostname(host string) error {
+	s := strings.ToLower(strings.TrimSuffix(host, "."))
+
+	if len(host) > 253 {
+		return errors.New("hostname cannot exceed 253 characters")
+	}
+
+	for _, part := range strings.Split(s, ".") {
+		if l := len(part); l == 0 || l > 63 {
+			return errors.New("hostname part must be non-empty and cannot exceed 63 characters")
+		}
+
+		if part[0] == '-' {
+			return errors.New("hostname parts cannot begin with hyphens")
+		}
+
+		if part[len(part)-1] == '-' {
+			return errors.New("hostname parts cannot end with hyphens")
+		}
+
+		for _, r := range part {
+			if (r < 'a' || r > 'z') && (r < '0' || r > '9') && r != '-' {
+				return fmt.Errorf("hostname parts can only contain alphanumeric characters or hyphens, got %q", string(r))
+			}
+		}
+	}
+
+	return nil
+}
+
+func (m *Workspace) _validateEmail(addr string) error {
+	a, err := mail.ParseAddress(addr)
+	if err != nil {
+		return err
+	}
+	addr = a.Address
+
+	if len(addr) > 254 {
+		return errors.New("email addresses cannot exceed 254 characters")
+	}
+
+	parts := strings.SplitN(addr, "@", 2)
+
+	if len(parts[0]) > 64 {
+		return errors.New("email address local phrase cannot exceed 64 characters")
+	}
+
+	return m._validateHostname(parts[1])
+}
+
+// WorkspaceMultiError is an error wrapping multiple validation errors returned
+// by Workspace.ValidateAll() if the designated constraints aren't met.
+type WorkspaceMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m WorkspaceMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m WorkspaceMultiError) AllErrors() []error { return m }
+
+// WorkspaceValidationError is the validation error returned by
+// Workspace.Validate if the designated constraints aren't met.
+type WorkspaceValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e WorkspaceValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e WorkspaceValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e WorkspaceValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e WorkspaceValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e WorkspaceValidationError) ErrorName() string { return "WorkspaceValidationError" }
+
+// Error satisfies the builtin error interface
+func (e WorkspaceValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sWorkspace.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = WorkspaceValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = WorkspaceValidationError{}
+
 // Validate checks the field values on ScrapingJob with the rules defined in
 // the proto definition for this message. If any rules are violated, the first
 // error encountered is returned, or nil if there are no violations.
@@ -323,9 +833,27 @@ func (m *ScrapingJob) validate(all bool) error {
 
 	// no validation rules for Lang
 
-	// no validation rules for Zoom
+	if val := m.GetZoom(); val < 1 || val > 20 {
+		err := ScrapingJobValidationError{
+			field:  "Zoom",
+			reason: "value must be inside range [1, 20]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
-	// no validation rules for Lat
+	if !_ScrapingJob_Lat_Pattern.MatchString(m.GetLat()) {
+		err := ScrapingJobValidationError{
+			field:  "Lat",
+			reason: "value does not match regex pattern \"^[-+]?([1-8]?\\\\d(\\\\.\\\\d+)?|90(\\\\.0+)?)$\"",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	// no validation rules for Lon
 
@@ -403,6 +931,42 @@ func (m *ScrapingJob) validate(all bool) error {
 
 	// no validation rules for Payload
 
+	for idx, item := range m.GetLeads() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ScrapingJobValidationError{
+						field:  fmt.Sprintf("Leads[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ScrapingJobValidationError{
+						field:  fmt.Sprintf("Leads[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ScrapingJobValidationError{
+					field:  fmt.Sprintf("Leads[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for WorkflowId
+
 	if len(errors) > 0 {
 		return ScrapingJobMultiError(errors)
 	}
@@ -479,3 +1043,1620 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ScrapingJobValidationError{}
+
+var _ScrapingJob_Lat_Pattern = regexp.MustCompile("^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?)$")
+
+// Validate checks the field values on ScrapingWorkflow with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ScrapingWorkflow) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ScrapingWorkflow with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ScrapingWorkflowMultiError, or nil if none found.
+func (m *ScrapingWorkflow) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ScrapingWorkflow) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for CronExpression
+
+	if all {
+		switch v := interface{}(m.GetNextRunTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ScrapingWorkflowValidationError{
+					field:  "NextRunTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ScrapingWorkflowValidationError{
+					field:  "NextRunTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetNextRunTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ScrapingWorkflowValidationError{
+				field:  "NextRunTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetLastRunTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ScrapingWorkflowValidationError{
+					field:  "LastRunTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ScrapingWorkflowValidationError{
+					field:  "LastRunTime",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetLastRunTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ScrapingWorkflowValidationError{
+				field:  "LastRunTime",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Status
+
+	// no validation rules for RetryCount
+
+	if m.GetMaxRetries() <= 0 {
+		err := ScrapingWorkflowValidationError{
+			field:  "MaxRetries",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for AlertEmails
+
+	if utf8.RuneCountInString(m.GetOrgId()) < 1 {
+		err := ScrapingWorkflowValidationError{
+			field:  "OrgId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetTenantId()) < 1 {
+		err := ScrapingWorkflowValidationError{
+			field:  "TenantId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ScrapingWorkflowValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ScrapingWorkflowValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ScrapingWorkflowValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetUpdatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ScrapingWorkflowValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ScrapingWorkflowValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUpdatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ScrapingWorkflowValidationError{
+				field:  "UpdatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetDeletedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ScrapingWorkflowValidationError{
+					field:  "DeletedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ScrapingWorkflowValidationError{
+					field:  "DeletedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetDeletedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ScrapingWorkflowValidationError{
+				field:  "DeletedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	for idx, item := range m.GetJobs() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ScrapingWorkflowValidationError{
+						field:  fmt.Sprintf("Jobs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ScrapingWorkflowValidationError{
+						field:  fmt.Sprintf("Jobs[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ScrapingWorkflowValidationError{
+					field:  fmt.Sprintf("Jobs[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	if all {
+		switch v := interface{}(m.GetWorkspace()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ScrapingWorkflowValidationError{
+					field:  "Workspace",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ScrapingWorkflowValidationError{
+					field:  "Workspace",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetWorkspace()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ScrapingWorkflowValidationError{
+				field:  "Workspace",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for GeoFencingRadius
+
+	// no validation rules for GeoFencingLat
+
+	// no validation rules for GeoFencingLon
+
+	// no validation rules for GeoFencingZoomMin
+
+	// no validation rules for GeoFencingZoomMax
+
+	// no validation rules for IncludeReviews
+
+	// no validation rules for IncludePhotos
+
+	// no validation rules for IncludeBusinessHours
+
+	if m.GetMaxReviewsPerBusiness() > 500 {
+		err := ScrapingWorkflowValidationError{
+			field:  "MaxReviewsPerBusiness",
+			reason: "value must be less than or equal to 500",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for OutputFormat
+
+	// no validation rules for OutputDestination
+
+	if all {
+		switch v := interface{}(m.GetDataRetention()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ScrapingWorkflowValidationError{
+					field:  "DataRetention",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ScrapingWorkflowValidationError{
+					field:  "DataRetention",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetDataRetention()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ScrapingWorkflowValidationError{
+				field:  "DataRetention",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for AnonymizePii
+
+	// no validation rules for NotificationWebhookUrl
+
+	// no validation rules for NotificationSlackChannel
+
+	// no validation rules for NotificationEmailGroup
+
+	// no validation rules for NotificationNotifyOnStart
+
+	// no validation rules for NotificationNotifyOnComplete
+
+	// no validation rules for NotificationNotifyOnFailure
+
+	// no validation rules for ContentFilterMinimumRating
+
+	// no validation rules for ContentFilterMinimumReviews
+
+	if m.GetQosMaxConcurrentRequests() > 100 {
+		err := ScrapingWorkflowValidationError{
+			field:  "QosMaxConcurrentRequests",
+			reason: "value must be less than or equal to 100",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for QosMaxRetries
+
+	if all {
+		switch v := interface{}(m.GetQosRequestTimeout()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ScrapingWorkflowValidationError{
+					field:  "QosRequestTimeout",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ScrapingWorkflowValidationError{
+					field:  "QosRequestTimeout",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetQosRequestTimeout()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ScrapingWorkflowValidationError{
+				field:  "QosRequestTimeout",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for QosEnableJavascript
+
+	// no validation rules for RespectRobotsTxt
+
+	// no validation rules for AcceptTermsOfService
+
+	// no validation rules for UserAgent
+
+	if len(errors) > 0 {
+		return ScrapingWorkflowMultiError(errors)
+	}
+
+	return nil
+}
+
+// ScrapingWorkflowMultiError is an error wrapping multiple validation errors
+// returned by ScrapingWorkflow.ValidateAll() if the designated constraints
+// aren't met.
+type ScrapingWorkflowMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ScrapingWorkflowMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ScrapingWorkflowMultiError) AllErrors() []error { return m }
+
+// ScrapingWorkflowValidationError is the validation error returned by
+// ScrapingWorkflow.Validate if the designated constraints aren't met.
+type ScrapingWorkflowValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ScrapingWorkflowValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ScrapingWorkflowValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ScrapingWorkflowValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ScrapingWorkflowValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ScrapingWorkflowValidationError) ErrorName() string { return "ScrapingWorkflowValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ScrapingWorkflowValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sScrapingWorkflow.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ScrapingWorkflowValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ScrapingWorkflowValidationError{}
+
+// Validate checks the field values on Lead with the rules defined in the proto
+// definition for this message. If any rules are violated, the first error
+// encountered is returned, or nil if there are no violations.
+func (m *Lead) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Lead with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in LeadMultiError, or nil if none found.
+func (m *Lead) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Lead) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if utf8.RuneCountInString(m.GetName()) < 1 {
+		err := LeadValidationError{
+			field:  "Name",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if uri, err := url.Parse(m.GetWebsite()); err != nil {
+		err = LeadValidationError{
+			field:  "Website",
+			reason: "value must be a valid URI",
+			cause:  err,
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	} else if !uri.IsAbs() {
+		err := LeadValidationError{
+			field:  "Website",
+			reason: "value must be absolute",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for Phone
+
+	// no validation rules for Address
+
+	// no validation rules for City
+
+	// no validation rules for State
+
+	// no validation rules for Country
+
+	// no validation rules for Latitude
+
+	// no validation rules for Longitude
+
+	// no validation rules for GoogleRating
+
+	// no validation rules for ReviewCount
+
+	// no validation rules for Industry
+
+	// no validation rules for EmployeeCount
+
+	// no validation rules for EstimatedRevenue
+
+	if utf8.RuneCountInString(m.GetOrgId()) < 1 {
+		err := LeadValidationError{
+			field:  "OrgId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetTenantId()) < 1 {
+		err := LeadValidationError{
+			field:  "TenantId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LeadValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LeadValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LeadValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetUpdatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LeadValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LeadValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUpdatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LeadValidationError{
+				field:  "UpdatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetDeletedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LeadValidationError{
+					field:  "DeletedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LeadValidationError{
+					field:  "DeletedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetDeletedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LeadValidationError{
+				field:  "DeletedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetJob()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LeadValidationError{
+					field:  "Job",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LeadValidationError{
+					field:  "Job",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetJob()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LeadValidationError{
+				field:  "Job",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetWorkspace()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LeadValidationError{
+					field:  "Workspace",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LeadValidationError{
+					field:  "Workspace",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetWorkspace()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LeadValidationError{
+				field:  "Workspace",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if utf8.RuneCountInString(m.GetPlaceId()) < 1 {
+		err := LeadValidationError{
+			field:  "PlaceId",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if uri, err := url.Parse(m.GetGoogleMapsUrl()); err != nil {
+		err = LeadValidationError{
+			field:  "GoogleMapsUrl",
+			reason: "value must be a valid URI",
+			cause:  err,
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	} else if !uri.IsAbs() {
+		err := LeadValidationError{
+			field:  "GoogleMapsUrl",
+			reason: "value must be absolute",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for BusinessStatus
+
+	for idx, item := range m.GetRegularHours() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, LeadValidationError{
+						field:  fmt.Sprintf("RegularHours[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, LeadValidationError{
+						field:  fmt.Sprintf("RegularHours[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return LeadValidationError{
+					field:  fmt.Sprintf("RegularHours[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	for idx, item := range m.GetSpecialHours() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, LeadValidationError{
+						field:  fmt.Sprintf("SpecialHours[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, LeadValidationError{
+						field:  fmt.Sprintf("SpecialHours[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return LeadValidationError{
+					field:  fmt.Sprintf("SpecialHours[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for MainPhotoUrl
+
+	for idx, item := range m.GetReviews() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, LeadValidationError{
+						field:  fmt.Sprintf("Reviews[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, LeadValidationError{
+						field:  fmt.Sprintf("Reviews[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return LeadValidationError{
+					field:  fmt.Sprintf("Reviews[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for ServesVegetarianFood
+
+	// no validation rules for OutdoorSeating
+
+	// no validation rules for WheelchairAccessible
+
+	// no validation rules for ParkingAvailable
+
+	// no validation rules for SocialMedia
+
+	// no validation rules for RatingCategory
+
+	// no validation rules for Rating
+
+	// no validation rules for Count
+
+	if all {
+		switch v := interface{}(m.GetLastUpdated()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LeadValidationError{
+					field:  "LastUpdated",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LeadValidationError{
+					field:  "LastUpdated",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetLastUpdated()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LeadValidationError{
+				field:  "LastUpdated",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for DataSourceVersion
+
+	// no validation rules for ScrapingSessionId
+
+	// no validation rules for ContactPersonName
+
+	// no validation rules for ContactPersonTitle
+
+	if err := m._validateEmail(m.GetContactEmail()); err != nil {
+		err = LeadValidationError{
+			field:  "ContactEmail",
+			reason: "value must be a valid email address",
+			cause:  err,
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if val := m.GetFoundedYear(); val < 1600 || val > 2025 {
+		err := LeadValidationError{
+			field:  "FoundedYear",
+			reason: "value must be inside range [1600, 2025]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for BusinessType
+
+	// no validation rules for LicenseNumber
+
+	// no validation rules for RevenueRange
+
+	// no validation rules for FundingStage
+
+	// no validation rules for IsPublicCompany
+
+	// no validation rules for WebsiteLoadSpeed
+
+	// no validation rules for HasSslCertificate
+
+	// no validation rules for CmsUsed
+
+	// no validation rules for Timezone
+
+	// no validation rules for Neighborhood
+
+	// no validation rules for TransportationAccess
+
+	// no validation rules for ParentCompany
+
+	// no validation rules for IsFranchise
+
+	// no validation rules for UsesGoogleAds
+
+	// no validation rules for GoogleMyBusinessCategory
+
+	if !_Lead_NaicsCode_Pattern.MatchString(m.GetNaicsCode()) {
+		err := LeadValidationError{
+			field:  "NaicsCode",
+			reason: "value does not match regex pattern \"^[0-9]{6}$\"",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if !_Lead_SicCode_Pattern.MatchString(m.GetSicCode()) {
+		err := LeadValidationError{
+			field:  "SicCode",
+			reason: "value does not match regex pattern \"^[0-9]{4}$\"",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if !_Lead_UnspscCode_Pattern.MatchString(m.GetUnspscCode()) {
+		err := LeadValidationError{
+			field:  "UnspscCode",
+			reason: "value does not match regex pattern \"^[0-9]{8}$\"",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for IsGreenCertified
+
+	// no validation rules for SustainabilityRating
+
+	if all {
+		switch v := interface{}(m.GetLastProductLaunch()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, LeadValidationError{
+					field:  "LastProductLaunch",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, LeadValidationError{
+					field:  "LastProductLaunch",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetLastProductLaunch()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return LeadValidationError{
+				field:  "LastProductLaunch",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for HasLitigationHistory
+
+	// no validation rules for ExportControlStatus
+
+	if len(errors) > 0 {
+		return LeadMultiError(errors)
+	}
+
+	return nil
+}
+
+func (m *Lead) _validateHostname(host string) error {
+	s := strings.ToLower(strings.TrimSuffix(host, "."))
+
+	if len(host) > 253 {
+		return errors.New("hostname cannot exceed 253 characters")
+	}
+
+	for _, part := range strings.Split(s, ".") {
+		if l := len(part); l == 0 || l > 63 {
+			return errors.New("hostname part must be non-empty and cannot exceed 63 characters")
+		}
+
+		if part[0] == '-' {
+			return errors.New("hostname parts cannot begin with hyphens")
+		}
+
+		if part[len(part)-1] == '-' {
+			return errors.New("hostname parts cannot end with hyphens")
+		}
+
+		for _, r := range part {
+			if (r < 'a' || r > 'z') && (r < '0' || r > '9') && r != '-' {
+				return fmt.Errorf("hostname parts can only contain alphanumeric characters or hyphens, got %q", string(r))
+			}
+		}
+	}
+
+	return nil
+}
+
+func (m *Lead) _validateEmail(addr string) error {
+	a, err := mail.ParseAddress(addr)
+	if err != nil {
+		return err
+	}
+	addr = a.Address
+
+	if len(addr) > 254 {
+		return errors.New("email addresses cannot exceed 254 characters")
+	}
+
+	parts := strings.SplitN(addr, "@", 2)
+
+	if len(parts[0]) > 64 {
+		return errors.New("email address local phrase cannot exceed 64 characters")
+	}
+
+	return m._validateHostname(parts[1])
+}
+
+// LeadMultiError is an error wrapping multiple validation errors returned by
+// Lead.ValidateAll() if the designated constraints aren't met.
+type LeadMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m LeadMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m LeadMultiError) AllErrors() []error { return m }
+
+// LeadValidationError is the validation error returned by Lead.Validate if the
+// designated constraints aren't met.
+type LeadValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e LeadValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e LeadValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e LeadValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e LeadValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e LeadValidationError) ErrorName() string { return "LeadValidationError" }
+
+// Error satisfies the builtin error interface
+func (e LeadValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sLead.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = LeadValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = LeadValidationError{}
+
+var _Lead_NaicsCode_Pattern = regexp.MustCompile("^[0-9]{6}$")
+
+var _Lead_SicCode_Pattern = regexp.MustCompile("^[0-9]{4}$")
+
+var _Lead_UnspscCode_Pattern = regexp.MustCompile("^[0-9]{8}$")
+
+// Validate checks the field values on Review with the rules defined in the
+// proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *Review) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on Review with the rules defined in the
+// proto definition for this message. If any rules are violated, the result is
+// a list of violation errors wrapped in ReviewMultiError, or nil if none found.
+func (m *Review) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *Review) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Author
+
+	// no validation rules for Rating
+
+	// no validation rules for Text
+
+	if all {
+		switch v := interface{}(m.GetTime()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, ReviewValidationError{
+					field:  "Time",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, ReviewValidationError{
+					field:  "Time",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetTime()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return ReviewValidationError{
+				field:  "Time",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for Language
+
+	// no validation rules for ProfilePhotoUrl
+
+	// no validation rules for ReviewCount
+
+	if len(errors) > 0 {
+		return ReviewMultiError(errors)
+	}
+
+	return nil
+}
+
+// ReviewMultiError is an error wrapping multiple validation errors returned by
+// Review.ValidateAll() if the designated constraints aren't met.
+type ReviewMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ReviewMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ReviewMultiError) AllErrors() []error { return m }
+
+// ReviewValidationError is the validation error returned by Review.Validate if
+// the designated constraints aren't met.
+type ReviewValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ReviewValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ReviewValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ReviewValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ReviewValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ReviewValidationError) ErrorName() string { return "ReviewValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ReviewValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sReview.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ReviewValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ReviewValidationError{}
+
+// Validate checks the field values on BusinessHours with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *BusinessHours) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on BusinessHours with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in BusinessHoursMultiError, or
+// nil if none found.
+func (m *BusinessHours) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *BusinessHours) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for Day
+
+	if utf8.RuneCountInString(m.GetOpenTime()) > 5 {
+		err := BusinessHoursValidationError{
+			field:  "OpenTime",
+			reason: "value length must be at most 5 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if !_BusinessHours_OpenTime_Pattern.MatchString(m.GetOpenTime()) {
+		err := BusinessHoursValidationError{
+			field:  "OpenTime",
+			reason: "value does not match regex pattern \"^([01]\\\\d|2[0-3]):[0-5]\\\\d$\"",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for CloseTime
+
+	// no validation rules for Closed
+
+	// no validation rules for LeadId
+
+	if len(errors) > 0 {
+		return BusinessHoursMultiError(errors)
+	}
+
+	return nil
+}
+
+// BusinessHoursMultiError is an error wrapping multiple validation errors
+// returned by BusinessHours.ValidateAll() if the designated constraints
+// aren't met.
+type BusinessHoursMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m BusinessHoursMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m BusinessHoursMultiError) AllErrors() []error { return m }
+
+// BusinessHoursValidationError is the validation error returned by
+// BusinessHours.Validate if the designated constraints aren't met.
+type BusinessHoursValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e BusinessHoursValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e BusinessHoursValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e BusinessHoursValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e BusinessHoursValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e BusinessHoursValidationError) ErrorName() string { return "BusinessHoursValidationError" }
+
+// Error satisfies the builtin error interface
+func (e BusinessHoursValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sBusinessHours.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = BusinessHoursValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = BusinessHoursValidationError{}
+
+var _BusinessHours_OpenTime_Pattern = regexp.MustCompile("^([01]\\d|2[0-3]):[0-5]\\d$")
+
+// Validate checks the field values on AccountSettings with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *AccountSettings) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on AccountSettings with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// AccountSettingsMultiError, or nil if none found.
+func (m *AccountSettings) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *AccountSettings) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	// no validation rules for EmailNotifications
+
+	// no validation rules for SlackNotifications
+
+	if all {
+		switch v := interface{}(m.GetDefaultDataRetention()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AccountSettingsValidationError{
+					field:  "DefaultDataRetention",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AccountSettingsValidationError{
+					field:  "DefaultDataRetention",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetDefaultDataRetention()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AccountSettingsValidationError{
+				field:  "DefaultDataRetention",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for AutoPurgeEnabled
+
+	// no validation rules for Require_2Fa
+
+	if all {
+		switch v := interface{}(m.GetSessionTimeout()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, AccountSettingsValidationError{
+					field:  "SessionTimeout",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, AccountSettingsValidationError{
+					field:  "SessionTimeout",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetSessionTimeout()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return AccountSettingsValidationError{
+				field:  "SessionTimeout",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return AccountSettingsMultiError(errors)
+	}
+
+	return nil
+}
+
+// AccountSettingsMultiError is an error wrapping multiple validation errors
+// returned by AccountSettings.ValidateAll() if the designated constraints
+// aren't met.
+type AccountSettingsMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m AccountSettingsMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m AccountSettingsMultiError) AllErrors() []error { return m }
+
+// AccountSettingsValidationError is the validation error returned by
+// AccountSettings.Validate if the designated constraints aren't met.
+type AccountSettingsValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e AccountSettingsValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e AccountSettingsValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e AccountSettingsValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e AccountSettingsValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e AccountSettingsValidationError) ErrorName() string { return "AccountSettingsValidationError" }
+
+// Error satisfies the builtin error interface
+func (e AccountSettingsValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sAccountSettings.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = AccountSettingsValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = AccountSettingsValidationError{}

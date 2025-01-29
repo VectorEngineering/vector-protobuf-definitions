@@ -28,7 +28,6 @@ use crate::{Api,
      DownloadScrapingResultsResponse,
      GetAccountResponse,
      GetScrapingJobResponse,
-     ListAccountsResponse,
      ListScrapingJobsResponse,
      UpdateAccountResponse
 };
@@ -41,7 +40,7 @@ mod paths {
     lazy_static! {
         pub static ref GLOBAL_REGEX_SET: regex::RegexSet = regex::RegexSet::new(vec![
             r"^/lead-scraper-microservice/api/v1/accounts$",
-            r"^/lead-scraper-microservice/api/v1/accounts/(?P<accountId>[^/?#]*)$",
+            r"^/lead-scraper-microservice/api/v1/accounts/(?P<id>[^/?#]*)$",
             r"^/lead-scraper-microservice/api/v1/jobs$",
             r"^/lead-scraper-microservice/api/v1/jobs/(?P<jobId>[^/?#]*)$",
             r"^/lead-scraper-microservice/api/v1/jobs/(?P<jobId>[^/?#]*)/download$"
@@ -49,12 +48,12 @@ mod paths {
         .expect("Unable to create global regex set");
     }
     pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS: usize = 0;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ACCOUNTID: usize = 1;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID: usize = 1;
     lazy_static! {
-        pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ACCOUNTID: regex::Regex =
+        pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID: regex::Regex =
             #[allow(clippy::invalid_regex)]
-            regex::Regex::new(r"^/lead-scraper-microservice/api/v1/accounts/(?P<accountId>[^/?#]*)$")
-                .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ACCOUNTID");
+            regex::Regex::new(r"^/lead-scraper-microservice/api/v1/accounts/(?P<id>[^/?#]*)$")
+                .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID");
     }
     pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS: usize = 2;
     pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID: usize = 3;
@@ -755,86 +754,33 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                         }
             },
 
-            // DeleteAccount - DELETE /lead-scraper-microservice/api/v1/accounts/{accountId}
-            hyper::Method::DELETE if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ACCOUNTID) => {
+            // DeleteAccount - DELETE /lead-scraper-microservice/api/v1/accounts/{id}
+            hyper::Method::DELETE if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID) => {
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
-                    paths::REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ACCOUNTID
+                    paths::REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID
                     .captures(path)
                     .unwrap_or_else(||
-                        panic!("Path {} matched RE LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ACCOUNTID in set but failed match against \"{}\"", path, paths::REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ACCOUNTID.as_str())
+                        panic!("Path {} matched RE LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID in set but failed match against \"{}\"", path, paths::REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID.as_str())
                     );
 
-                let param_account_id = match percent_encoding::percent_decode(path_params["accountId"].as_bytes()).decode_utf8() {
-                    Ok(param_account_id) => match param_account_id.parse::<String>() {
-                        Ok(param_account_id) => param_account_id,
+                let param_id = match percent_encoding::percent_decode(path_params["id"].as_bytes()).decode_utf8() {
+                    Ok(param_id) => match param_id.parse::<String>() {
+                        Ok(param_id) => param_id,
                         Err(e) => return Ok(Response::builder()
                                         .status(StatusCode::BAD_REQUEST)
-                                        .body(Body::from(format!("Couldn't parse path parameter accountId: {}", e)))
+                                        .body(Body::from(format!("Couldn't parse path parameter id: {}", e)))
                                         .expect("Unable to create Bad Request response for invalid path parameter")),
                     },
                     Err(_) => return Ok(Response::builder()
                                         .status(StatusCode::BAD_REQUEST)
-                                        .body(Body::from(format!("Couldn't percent-decode path parameter as UTF-8: {}", &path_params["accountId"])))
+                                        .body(Body::from(format!("Couldn't percent-decode path parameter as UTF-8: {}", &path_params["id"])))
                                         .expect("Unable to create Bad Request response for invalid percent decode"))
                 };
 
-                // Query parameters (note that non-required or collection query parameters will ignore garbage values, rather than causing a 400 response)
-                let query_params = form_urlencoded::parse(uri.query().unwrap_or_default().as_bytes()).collect::<Vec<_>>();
-                let param_org_id = query_params.iter().filter(|e| e.0 == "orgId").map(|e| e.1.clone())
-                    .next();
-                let param_org_id = match param_org_id {
-                    Some(param_org_id) => {
-                        let param_org_id =
-                            <String as std::str::FromStr>::from_str
-                                (&param_org_id);
-                        match param_org_id {
-                            Ok(param_org_id) => Some(param_org_id),
-                            Err(e) => return Ok(Response::builder()
-                                .status(StatusCode::BAD_REQUEST)
-                                .body(Body::from(format!("Couldn't parse query parameter orgId - doesn't match schema: {}", e)))
-                                .expect("Unable to create Bad Request response for invalid query parameter orgId")),
-                        }
-                    },
-                    None => None,
-                };
-                let param_org_id = match param_org_id {
-                    Some(param_org_id) => param_org_id,
-                    None => return Ok(Response::builder()
-                        .status(StatusCode::BAD_REQUEST)
-                        .body(Body::from("Missing required query parameter orgId"))
-                        .expect("Unable to create Bad Request response for missing query parameter orgId")),
-                };
-                let param_tenant_id = query_params.iter().filter(|e| e.0 == "tenantId").map(|e| e.1.clone())
-                    .next();
-                let param_tenant_id = match param_tenant_id {
-                    Some(param_tenant_id) => {
-                        let param_tenant_id =
-                            <String as std::str::FromStr>::from_str
-                                (&param_tenant_id);
-                        match param_tenant_id {
-                            Ok(param_tenant_id) => Some(param_tenant_id),
-                            Err(e) => return Ok(Response::builder()
-                                .status(StatusCode::BAD_REQUEST)
-                                .body(Body::from(format!("Couldn't parse query parameter tenantId - doesn't match schema: {}", e)))
-                                .expect("Unable to create Bad Request response for invalid query parameter tenantId")),
-                        }
-                    },
-                    None => None,
-                };
-                let param_tenant_id = match param_tenant_id {
-                    Some(param_tenant_id) => param_tenant_id,
-                    None => return Ok(Response::builder()
-                        .status(StatusCode::BAD_REQUEST)
-                        .body(Body::from("Missing required query parameter tenantId"))
-                        .expect("Unable to create Bad Request response for missing query parameter tenantId")),
-                };
-
                                 let result = api_impl.delete_account(
-                                            param_account_id,
-                                            param_org_id,
-                                            param_tenant_id,
+                                            param_id,
                                         &context
                                     ).await;
                                 let mut response = Response::new(Body::empty());
@@ -1738,86 +1684,33 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                                         Ok(response)
             },
 
-            // GetAccount - GET /lead-scraper-microservice/api/v1/accounts/{accountId}
-            hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ACCOUNTID) => {
+            // GetAccount - GET /lead-scraper-microservice/api/v1/accounts/{id}
+            hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID) => {
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
-                    paths::REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ACCOUNTID
+                    paths::REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID
                     .captures(path)
                     .unwrap_or_else(||
-                        panic!("Path {} matched RE LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ACCOUNTID in set but failed match against \"{}\"", path, paths::REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ACCOUNTID.as_str())
+                        panic!("Path {} matched RE LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID in set but failed match against \"{}\"", path, paths::REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID.as_str())
                     );
 
-                let param_account_id = match percent_encoding::percent_decode(path_params["accountId"].as_bytes()).decode_utf8() {
-                    Ok(param_account_id) => match param_account_id.parse::<String>() {
-                        Ok(param_account_id) => param_account_id,
+                let param_id = match percent_encoding::percent_decode(path_params["id"].as_bytes()).decode_utf8() {
+                    Ok(param_id) => match param_id.parse::<String>() {
+                        Ok(param_id) => param_id,
                         Err(e) => return Ok(Response::builder()
                                         .status(StatusCode::BAD_REQUEST)
-                                        .body(Body::from(format!("Couldn't parse path parameter accountId: {}", e)))
+                                        .body(Body::from(format!("Couldn't parse path parameter id: {}", e)))
                                         .expect("Unable to create Bad Request response for invalid path parameter")),
                     },
                     Err(_) => return Ok(Response::builder()
                                         .status(StatusCode::BAD_REQUEST)
-                                        .body(Body::from(format!("Couldn't percent-decode path parameter as UTF-8: {}", &path_params["accountId"])))
+                                        .body(Body::from(format!("Couldn't percent-decode path parameter as UTF-8: {}", &path_params["id"])))
                                         .expect("Unable to create Bad Request response for invalid percent decode"))
                 };
 
-                // Query parameters (note that non-required or collection query parameters will ignore garbage values, rather than causing a 400 response)
-                let query_params = form_urlencoded::parse(uri.query().unwrap_or_default().as_bytes()).collect::<Vec<_>>();
-                let param_org_id = query_params.iter().filter(|e| e.0 == "orgId").map(|e| e.1.clone())
-                    .next();
-                let param_org_id = match param_org_id {
-                    Some(param_org_id) => {
-                        let param_org_id =
-                            <String as std::str::FromStr>::from_str
-                                (&param_org_id);
-                        match param_org_id {
-                            Ok(param_org_id) => Some(param_org_id),
-                            Err(e) => return Ok(Response::builder()
-                                .status(StatusCode::BAD_REQUEST)
-                                .body(Body::from(format!("Couldn't parse query parameter orgId - doesn't match schema: {}", e)))
-                                .expect("Unable to create Bad Request response for invalid query parameter orgId")),
-                        }
-                    },
-                    None => None,
-                };
-                let param_org_id = match param_org_id {
-                    Some(param_org_id) => param_org_id,
-                    None => return Ok(Response::builder()
-                        .status(StatusCode::BAD_REQUEST)
-                        .body(Body::from("Missing required query parameter orgId"))
-                        .expect("Unable to create Bad Request response for missing query parameter orgId")),
-                };
-                let param_tenant_id = query_params.iter().filter(|e| e.0 == "tenantId").map(|e| e.1.clone())
-                    .next();
-                let param_tenant_id = match param_tenant_id {
-                    Some(param_tenant_id) => {
-                        let param_tenant_id =
-                            <String as std::str::FromStr>::from_str
-                                (&param_tenant_id);
-                        match param_tenant_id {
-                            Ok(param_tenant_id) => Some(param_tenant_id),
-                            Err(e) => return Ok(Response::builder()
-                                .status(StatusCode::BAD_REQUEST)
-                                .body(Body::from(format!("Couldn't parse query parameter tenantId - doesn't match schema: {}", e)))
-                                .expect("Unable to create Bad Request response for invalid query parameter tenantId")),
-                        }
-                    },
-                    None => None,
-                };
-                let param_tenant_id = match param_tenant_id {
-                    Some(param_tenant_id) => param_tenant_id,
-                    None => return Ok(Response::builder()
-                        .status(StatusCode::BAD_REQUEST)
-                        .body(Body::from("Missing required query parameter tenantId"))
-                        .expect("Unable to create Bad Request response for missing query parameter tenantId")),
-                };
-
                                 let result = api_impl.get_account(
-                                            param_account_id,
-                                            param_org_id,
-                                            param_tenant_id,
+                                            param_id,
                                         &context
                                     ).await;
                                 let mut response = Response::new(Body::empty());
@@ -2385,329 +2278,6 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                                         Ok(response)
             },
 
-            // ListAccounts - GET /lead-scraper-microservice/api/v1/accounts
-            hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => {
-                // Query parameters (note that non-required or collection query parameters will ignore garbage values, rather than causing a 400 response)
-                let query_params = form_urlencoded::parse(uri.query().unwrap_or_default().as_bytes()).collect::<Vec<_>>();
-                let param_org_id = query_params.iter().filter(|e| e.0 == "orgId").map(|e| e.1.clone())
-                    .next();
-                let param_org_id = match param_org_id {
-                    Some(param_org_id) => {
-                        let param_org_id =
-                            <String as std::str::FromStr>::from_str
-                                (&param_org_id);
-                        match param_org_id {
-                            Ok(param_org_id) => Some(param_org_id),
-                            Err(e) => return Ok(Response::builder()
-                                .status(StatusCode::BAD_REQUEST)
-                                .body(Body::from(format!("Couldn't parse query parameter orgId - doesn't match schema: {}", e)))
-                                .expect("Unable to create Bad Request response for invalid query parameter orgId")),
-                        }
-                    },
-                    None => None,
-                };
-                let param_org_id = match param_org_id {
-                    Some(param_org_id) => param_org_id,
-                    None => return Ok(Response::builder()
-                        .status(StatusCode::BAD_REQUEST)
-                        .body(Body::from("Missing required query parameter orgId"))
-                        .expect("Unable to create Bad Request response for missing query parameter orgId")),
-                };
-                let param_tenant_id = query_params.iter().filter(|e| e.0 == "tenantId").map(|e| e.1.clone())
-                    .next();
-                let param_tenant_id = match param_tenant_id {
-                    Some(param_tenant_id) => {
-                        let param_tenant_id =
-                            <String as std::str::FromStr>::from_str
-                                (&param_tenant_id);
-                        match param_tenant_id {
-                            Ok(param_tenant_id) => Some(param_tenant_id),
-                            Err(e) => return Ok(Response::builder()
-                                .status(StatusCode::BAD_REQUEST)
-                                .body(Body::from(format!("Couldn't parse query parameter tenantId - doesn't match schema: {}", e)))
-                                .expect("Unable to create Bad Request response for invalid query parameter tenantId")),
-                        }
-                    },
-                    None => None,
-                };
-                let param_tenant_id = match param_tenant_id {
-                    Some(param_tenant_id) => param_tenant_id,
-                    None => return Ok(Response::builder()
-                        .status(StatusCode::BAD_REQUEST)
-                        .body(Body::from("Missing required query parameter tenantId"))
-                        .expect("Unable to create Bad Request response for missing query parameter tenantId")),
-                };
-                let param_offset = query_params.iter().filter(|e| e.0 == "offset").map(|e| e.1.clone())
-                    .next();
-                let param_offset = match param_offset {
-                    Some(param_offset) => {
-                        let param_offset =
-                            <i32 as std::str::FromStr>::from_str
-                                (&param_offset);
-                        match param_offset {
-                            Ok(param_offset) => Some(param_offset),
-                            Err(e) => return Ok(Response::builder()
-                                .status(StatusCode::BAD_REQUEST)
-                                .body(Body::from(format!("Couldn't parse query parameter offset - doesn't match schema: {}", e)))
-                                .expect("Unable to create Bad Request response for invalid query parameter offset")),
-                        }
-                    },
-                    None => None,
-                };
-                let param_limit = query_params.iter().filter(|e| e.0 == "limit").map(|e| e.1.clone())
-                    .next();
-                let param_limit = match param_limit {
-                    Some(param_limit) => {
-                        let param_limit =
-                            <i32 as std::str::FromStr>::from_str
-                                (&param_limit);
-                        match param_limit {
-                            Ok(param_limit) => Some(param_limit),
-                            Err(e) => return Ok(Response::builder()
-                                .status(StatusCode::BAD_REQUEST)
-                                .body(Body::from(format!("Couldn't parse query parameter limit - doesn't match schema: {}", e)))
-                                .expect("Unable to create Bad Request response for invalid query parameter limit")),
-                        }
-                    },
-                    None => None,
-                };
-
-                                let result = api_impl.list_accounts(
-                                            param_org_id,
-                                            param_tenant_id,
-                                            param_offset,
-                                            param_limit,
-                                        &context
-                                    ).await;
-                                let mut response = Response::new(Body::empty());
-                                response.headers_mut().insert(
-                                            HeaderName::from_static("x-span-id"),
-                                            HeaderValue::from_str((&context as &dyn Has<XSpanIdString>).get().0.clone().as_str())
-                                                .expect("Unable to create X-Span-ID header value"));
-
-                                        match result {
-                                            Ok(rsp) => match rsp {
-                                                ListAccountsResponse::AccountsRetrievedSuccessfully
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(200).expect("Unable to turn 200 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_ACCOUNTS_RETRIEVED_SUCCESSFULLY"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::BadRequest
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(400).expect("Unable to turn 400 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_BAD_REQUEST"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::Unauthorized
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(401).expect("Unable to turn 401 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_UNAUTHORIZED"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::PaymentRequired
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(402).expect("Unable to turn 402 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_PAYMENT_REQUIRED"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::Forbidden
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(403).expect("Unable to turn 403 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_FORBIDDEN"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::NotFound
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(404).expect("Unable to turn 404 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_NOT_FOUND"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::MethodNotAllowed
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(405).expect("Unable to turn 405 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_METHOD_NOT_ALLOWED"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::Conflict
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(409).expect("Unable to turn 409 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_CONFLICT"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::Gone
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(410).expect("Unable to turn 410 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_GONE"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::PreconditionFailed
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(412).expect("Unable to turn 412 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_PRECONDITION_FAILED"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::UnprocessableEntity
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(422).expect("Unable to turn 422 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_UNPROCESSABLE_ENTITY"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::TooEarly
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(425).expect("Unable to turn 425 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_TOO_EARLY"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::TooManyRequests
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(429).expect("Unable to turn 429 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_TOO_MANY_REQUESTS"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::InternalServerError
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(500).expect("Unable to turn 500 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_INTERNAL_SERVER_ERROR"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::NotImplemented
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(501).expect("Unable to turn 501 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_NOT_IMPLEMENTED"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::BadGateway
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(502).expect("Unable to turn 502 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_BAD_GATEWAY"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::ServiceUnavailable
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(503).expect("Unable to turn 503 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_SERVICE_UNAVAILABLE"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::GatewayTimeout
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(504).expect("Unable to turn 504 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_GATEWAY_TIMEOUT"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                                ListAccountsResponse::AnUnexpectedErrorResponse
-                                                    (body)
-                                                => {
-                                                    *response.status_mut() = StatusCode::from_u16(0).expect("Unable to turn 0 into a StatusCode");
-                                                    response.headers_mut().insert(
-                                                        CONTENT_TYPE,
-                                                        HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for LIST_ACCOUNTS_AN_UNEXPECTED_ERROR_RESPONSE"));
-                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
-                                                    *response.body_mut() = Body::from(body_content);
-                                                },
-                                            },
-                                            Err(_) => {
-                                                // Application code returned an error. This should not happen, as the implementation should
-                                                // return a valid response.
-                                                *response.status_mut() = StatusCode::INTERNAL_SERVER_ERROR;
-                                                *response.body_mut() = Body::from("An internal error occurred");
-                                            },
-                                        }
-
-                                        Ok(response)
-            },
-
             // ListScrapingJobs - GET /lead-scraper-microservice/api/v1/jobs
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS) => {
                 // Query parameters (note that non-required or collection query parameters will ignore garbage values, rather than causing a 400 response)
@@ -3020,8 +2590,8 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                                         Ok(response)
             },
 
-            // UpdateAccount - PATCH /lead-scraper-microservice/api/v1/accounts
-            hyper::Method::PATCH if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => {
+            // UpdateAccount - PUT /lead-scraper-microservice/api/v1/accounts
+            hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => {
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -3299,7 +2869,7 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
             },
 
             _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => method_not_allowed(),
-            _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ACCOUNTID) => method_not_allowed(),
+            _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID) => method_not_allowed(),
             _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS) => method_not_allowed(),
             _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID) => method_not_allowed(),
             _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID_DOWNLOAD) => method_not_allowed(),
@@ -3320,22 +2890,20 @@ impl<T> RequestParser<T> for ApiRequestParser {
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => Some("CreateAccount"),
             // CreateScrapingJob - POST /lead-scraper-microservice/api/v1/jobs
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS) => Some("CreateScrapingJob"),
-            // DeleteAccount - DELETE /lead-scraper-microservice/api/v1/accounts/{accountId}
-            hyper::Method::DELETE if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ACCOUNTID) => Some("DeleteAccount"),
+            // DeleteAccount - DELETE /lead-scraper-microservice/api/v1/accounts/{id}
+            hyper::Method::DELETE if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID) => Some("DeleteAccount"),
             // DeleteScrapingJob - DELETE /lead-scraper-microservice/api/v1/jobs/{jobId}
             hyper::Method::DELETE if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID) => Some("DeleteScrapingJob"),
             // DownloadScrapingResults - GET /lead-scraper-microservice/api/v1/jobs/{jobId}/download
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID_DOWNLOAD) => Some("DownloadScrapingResults"),
-            // GetAccount - GET /lead-scraper-microservice/api/v1/accounts/{accountId}
-            hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ACCOUNTID) => Some("GetAccount"),
+            // GetAccount - GET /lead-scraper-microservice/api/v1/accounts/{id}
+            hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID) => Some("GetAccount"),
             // GetScrapingJob - GET /lead-scraper-microservice/api/v1/jobs/{jobId}
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID) => Some("GetScrapingJob"),
-            // ListAccounts - GET /lead-scraper-microservice/api/v1/accounts
-            hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => Some("ListAccounts"),
             // ListScrapingJobs - GET /lead-scraper-microservice/api/v1/jobs
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS) => Some("ListScrapingJobs"),
-            // UpdateAccount - PATCH /lead-scraper-microservice/api/v1/accounts
-            hyper::Method::PATCH if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => Some("UpdateAccount"),
+            // UpdateAccount - PUT /lead-scraper-microservice/api/v1/accounts
+            hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => Some("UpdateAccount"),
             _ => None,
         }
     }

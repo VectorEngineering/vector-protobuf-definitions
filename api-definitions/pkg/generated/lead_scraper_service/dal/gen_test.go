@@ -78,7 +78,13 @@ func Test_WithContext(t *testing.T) {
 
 	for _, ctx := range []context.Context{
 		qCtx.AccountORM.UnderlyingDB().Statement.Context,
+		qCtx.AccountSettingsORM.UnderlyingDB().Statement.Context,
+		qCtx.BusinessHoursORM.UnderlyingDB().Statement.Context,
+		qCtx.LeadORM.UnderlyingDB().Statement.Context,
+		qCtx.ReviewORM.UnderlyingDB().Statement.Context,
 		qCtx.ScrapingJobORM.UnderlyingDB().Statement.Context,
+		qCtx.ScrapingWorkflowORM.UnderlyingDB().Statement.Context,
+		qCtx.WorkspaceORM.UnderlyingDB().Statement.Context,
 	} {
 		if v := ctx.Value(key); v != value {
 			t.Errorf("get value from context fail, expect %q, got %q", value, v)

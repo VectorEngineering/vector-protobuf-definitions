@@ -19,19 +19,33 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	WorkspaceService_CreateScrapingJob_FullMethodName       = "/lead_scraper_service.v1.WorkspaceService/CreateScrapingJob"
-	WorkspaceService_ListScrapingJobs_FullMethodName        = "/lead_scraper_service.v1.WorkspaceService/ListScrapingJobs"
-	WorkspaceService_GetScrapingJob_FullMethodName          = "/lead_scraper_service.v1.WorkspaceService/GetScrapingJob"
-	WorkspaceService_DeleteScrapingJob_FullMethodName       = "/lead_scraper_service.v1.WorkspaceService/DeleteScrapingJob"
-	WorkspaceService_DownloadScrapingResults_FullMethodName = "/lead_scraper_service.v1.WorkspaceService/DownloadScrapingResults"
-	WorkspaceService_CreateAccount_FullMethodName           = "/lead_scraper_service.v1.WorkspaceService/CreateAccount"
-	WorkspaceService_GetAccount_FullMethodName              = "/lead_scraper_service.v1.WorkspaceService/GetAccount"
-	WorkspaceService_UpdateAccount_FullMethodName           = "/lead_scraper_service.v1.WorkspaceService/UpdateAccount"
-	WorkspaceService_DeleteAccount_FullMethodName           = "/lead_scraper_service.v1.WorkspaceService/DeleteAccount"
-	WorkspaceService_ListAccounts_FullMethodName            = "/lead_scraper_service.v1.WorkspaceService/ListAccounts"
+	LeadScraperService_CreateScrapingJob_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/CreateScrapingJob"
+	LeadScraperService_ListScrapingJobs_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/ListScrapingJobs"
+	LeadScraperService_GetScrapingJob_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/GetScrapingJob"
+	LeadScraperService_DeleteScrapingJob_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/DeleteScrapingJob"
+	LeadScraperService_DownloadScrapingResults_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/DownloadScrapingResults"
+	LeadScraperService_CreateAccount_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/CreateAccount"
+	LeadScraperService_GetAccount_FullMethodName              = "/lead_scraper_service.v1.LeadScraperService/GetAccount"
+	LeadScraperService_UpdateAccount_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/UpdateAccount"
+	LeadScraperService_DeleteAccount_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/DeleteAccount"
+	LeadScraperService_CreateWorkspace_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/CreateWorkspace"
+	LeadScraperService_ListWorkspaces_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/ListWorkspaces"
+	LeadScraperService_GetAccountUsage_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/GetAccountUsage"
+	LeadScraperService_UpdateAccountSettings_FullMethodName   = "/lead_scraper_service.v1.LeadScraperService/UpdateAccountSettings"
+	LeadScraperService_ListAccounts_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/ListAccounts"
+	LeadScraperService_CreateWorkflow_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/CreateWorkflow"
+	LeadScraperService_GetWorkflow_FullMethodName             = "/lead_scraper_service.v1.LeadScraperService/GetWorkflow"
+	LeadScraperService_UpdateWorkflow_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/UpdateWorkflow"
+	LeadScraperService_ListWorkflows_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/ListWorkflows"
+	LeadScraperService_TriggerWorkflow_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/TriggerWorkflow"
+	LeadScraperService_PauseWorkflow_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/PauseWorkflow"
+	LeadScraperService_GetWorkspaceAnalytics_FullMethodName   = "/lead_scraper_service.v1.LeadScraperService/GetWorkspaceAnalytics"
+	LeadScraperService_GetWorkspace_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/GetWorkspace"
+	LeadScraperService_UpdateWorkspace_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/UpdateWorkspace"
+	LeadScraperService_DeleteWorkspace_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/DeleteWorkspace"
 )
 
-// WorkspaceServiceClient is the client API for WorkspaceService service.
+// LeadScraperServiceClient is the client API for LeadScraperService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
@@ -56,7 +70,7 @@ const (
 //	})
 //
 // ```
-type WorkspaceServiceClient interface {
+type LeadScraperServiceClient interface {
 	// Create a new Google Maps scraping job
 	//
 	// This endpoint initiates a new scraping task with the specified parameters.
@@ -141,6 +155,13 @@ type WorkspaceServiceClient interface {
 	// Required permissions:
 	// - delete:account
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error)
+	// Workspace Management
+	CreateWorkspace(ctx context.Context, in *CreateWorkspaceRequest, opts ...grpc.CallOption) (*CreateWorkspaceResponse, error)
+	ListWorkspaces(ctx context.Context, in *ListWorkspacesRequest, opts ...grpc.CallOption) (*ListWorkspacesResponse, error)
+	// Usage Tracking
+	GetAccountUsage(ctx context.Context, in *GetAccountUsageRequest, opts ...grpc.CallOption) (*GetAccountUsageResponse, error)
+	// Settings Management
+	UpdateAccountSettings(ctx context.Context, in *UpdateAccountSettingsRequest, opts ...grpc.CallOption) (*UpdateAccountSettingsResponse, error)
 	// List accounts
 	//
 	// Retrieves a list of accounts based on the provided filters.
@@ -149,118 +170,271 @@ type WorkspaceServiceClient interface {
 	// Required permissions:
 	// - list:accounts
 	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (*ListAccountsResponse, error)
+	// Workflow Management
+	CreateWorkflow(ctx context.Context, in *CreateWorkflowRequest, opts ...grpc.CallOption) (*CreateWorkflowResponse, error)
+	GetWorkflow(ctx context.Context, in *GetWorkflowRequest, opts ...grpc.CallOption) (*GetWorkflowResponse, error)
+	UpdateWorkflow(ctx context.Context, in *UpdateWorkflowRequest, opts ...grpc.CallOption) (*UpdateWorkflowResponse, error)
+	ListWorkflows(ctx context.Context, in *ListWorkflowsRequest, opts ...grpc.CallOption) (*ListWorkflowsResponse, error)
+	// Execution Control
+	TriggerWorkflow(ctx context.Context, in *TriggerWorkflowRequest, opts ...grpc.CallOption) (*TriggerWorkflowResponse, error)
+	PauseWorkflow(ctx context.Context, in *PauseWorkflowRequest, opts ...grpc.CallOption) (*PauseWorkflowResponse, error)
+	// Analytics
+	GetWorkspaceAnalytics(ctx context.Context, in *GetWorkspaceAnalyticsRequest, opts ...grpc.CallOption) (*GetWorkspaceAnalyticsResponse, error)
+	GetWorkspace(ctx context.Context, in *GetWorkspaceRequest, opts ...grpc.CallOption) (*GetWorkspaceResponse, error)
+	UpdateWorkspace(ctx context.Context, in *UpdateWorkspaceRequest, opts ...grpc.CallOption) (*UpdateWorkspaceResponse, error)
+	DeleteWorkspace(ctx context.Context, in *DeleteWorkspaceRequest, opts ...grpc.CallOption) (*DeleteWorkspaceResponse, error)
 }
 
-type workspaceServiceClient struct {
+type leadScraperServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewWorkspaceServiceClient(cc grpc.ClientConnInterface) WorkspaceServiceClient {
-	return &workspaceServiceClient{cc}
+func NewLeadScraperServiceClient(cc grpc.ClientConnInterface) LeadScraperServiceClient {
+	return &leadScraperServiceClient{cc}
 }
 
-func (c *workspaceServiceClient) CreateScrapingJob(ctx context.Context, in *CreateScrapingJobRequest, opts ...grpc.CallOption) (*CreateScrapingJobResponse, error) {
+func (c *leadScraperServiceClient) CreateScrapingJob(ctx context.Context, in *CreateScrapingJobRequest, opts ...grpc.CallOption) (*CreateScrapingJobResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateScrapingJobResponse)
-	err := c.cc.Invoke(ctx, WorkspaceService_CreateScrapingJob_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, LeadScraperService_CreateScrapingJob_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *workspaceServiceClient) ListScrapingJobs(ctx context.Context, in *ListScrapingJobsRequest, opts ...grpc.CallOption) (*ListScrapingJobsResponse, error) {
+func (c *leadScraperServiceClient) ListScrapingJobs(ctx context.Context, in *ListScrapingJobsRequest, opts ...grpc.CallOption) (*ListScrapingJobsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListScrapingJobsResponse)
-	err := c.cc.Invoke(ctx, WorkspaceService_ListScrapingJobs_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, LeadScraperService_ListScrapingJobs_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *workspaceServiceClient) GetScrapingJob(ctx context.Context, in *GetScrapingJobRequest, opts ...grpc.CallOption) (*GetScrapingJobResponse, error) {
+func (c *leadScraperServiceClient) GetScrapingJob(ctx context.Context, in *GetScrapingJobRequest, opts ...grpc.CallOption) (*GetScrapingJobResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetScrapingJobResponse)
-	err := c.cc.Invoke(ctx, WorkspaceService_GetScrapingJob_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetScrapingJob_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *workspaceServiceClient) DeleteScrapingJob(ctx context.Context, in *DeleteScrapingJobRequest, opts ...grpc.CallOption) (*DeleteScrapingJobResponse, error) {
+func (c *leadScraperServiceClient) DeleteScrapingJob(ctx context.Context, in *DeleteScrapingJobRequest, opts ...grpc.CallOption) (*DeleteScrapingJobResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteScrapingJobResponse)
-	err := c.cc.Invoke(ctx, WorkspaceService_DeleteScrapingJob_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, LeadScraperService_DeleteScrapingJob_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *workspaceServiceClient) DownloadScrapingResults(ctx context.Context, in *DownloadScrapingResultsRequest, opts ...grpc.CallOption) (*DownloadScrapingResultsResponse, error) {
+func (c *leadScraperServiceClient) DownloadScrapingResults(ctx context.Context, in *DownloadScrapingResultsRequest, opts ...grpc.CallOption) (*DownloadScrapingResultsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DownloadScrapingResultsResponse)
-	err := c.cc.Invoke(ctx, WorkspaceService_DownloadScrapingResults_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, LeadScraperService_DownloadScrapingResults_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *workspaceServiceClient) CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error) {
+func (c *leadScraperServiceClient) CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateAccountResponse)
-	err := c.cc.Invoke(ctx, WorkspaceService_CreateAccount_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, LeadScraperService_CreateAccount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *workspaceServiceClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error) {
+func (c *leadScraperServiceClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetAccountResponse)
-	err := c.cc.Invoke(ctx, WorkspaceService_GetAccount_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetAccount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *workspaceServiceClient) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*UpdateAccountResponse, error) {
+func (c *leadScraperServiceClient) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*UpdateAccountResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateAccountResponse)
-	err := c.cc.Invoke(ctx, WorkspaceService_UpdateAccount_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, LeadScraperService_UpdateAccount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *workspaceServiceClient) DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error) {
+func (c *leadScraperServiceClient) DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteAccountResponse)
-	err := c.cc.Invoke(ctx, WorkspaceService_DeleteAccount_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, LeadScraperService_DeleteAccount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *workspaceServiceClient) ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (*ListAccountsResponse, error) {
+func (c *leadScraperServiceClient) CreateWorkspace(ctx context.Context, in *CreateWorkspaceRequest, opts ...grpc.CallOption) (*CreateWorkspaceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateWorkspaceResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_CreateWorkspace_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) ListWorkspaces(ctx context.Context, in *ListWorkspacesRequest, opts ...grpc.CallOption) (*ListWorkspacesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListWorkspacesResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_ListWorkspaces_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) GetAccountUsage(ctx context.Context, in *GetAccountUsageRequest, opts ...grpc.CallOption) (*GetAccountUsageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAccountUsageResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetAccountUsage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) UpdateAccountSettings(ctx context.Context, in *UpdateAccountSettingsRequest, opts ...grpc.CallOption) (*UpdateAccountSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAccountSettingsResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_UpdateAccountSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (*ListAccountsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListAccountsResponse)
-	err := c.cc.Invoke(ctx, WorkspaceService_ListAccounts_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, LeadScraperService_ListAccounts_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// WorkspaceServiceServer is the server API for WorkspaceService service.
-// All implementations must embed UnimplementedWorkspaceServiceServer
+func (c *leadScraperServiceClient) CreateWorkflow(ctx context.Context, in *CreateWorkflowRequest, opts ...grpc.CallOption) (*CreateWorkflowResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateWorkflowResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_CreateWorkflow_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) GetWorkflow(ctx context.Context, in *GetWorkflowRequest, opts ...grpc.CallOption) (*GetWorkflowResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWorkflowResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetWorkflow_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) UpdateWorkflow(ctx context.Context, in *UpdateWorkflowRequest, opts ...grpc.CallOption) (*UpdateWorkflowResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateWorkflowResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_UpdateWorkflow_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) ListWorkflows(ctx context.Context, in *ListWorkflowsRequest, opts ...grpc.CallOption) (*ListWorkflowsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListWorkflowsResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_ListWorkflows_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) TriggerWorkflow(ctx context.Context, in *TriggerWorkflowRequest, opts ...grpc.CallOption) (*TriggerWorkflowResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TriggerWorkflowResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_TriggerWorkflow_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) PauseWorkflow(ctx context.Context, in *PauseWorkflowRequest, opts ...grpc.CallOption) (*PauseWorkflowResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PauseWorkflowResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_PauseWorkflow_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) GetWorkspaceAnalytics(ctx context.Context, in *GetWorkspaceAnalyticsRequest, opts ...grpc.CallOption) (*GetWorkspaceAnalyticsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWorkspaceAnalyticsResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetWorkspaceAnalytics_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) GetWorkspace(ctx context.Context, in *GetWorkspaceRequest, opts ...grpc.CallOption) (*GetWorkspaceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWorkspaceResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetWorkspace_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) UpdateWorkspace(ctx context.Context, in *UpdateWorkspaceRequest, opts ...grpc.CallOption) (*UpdateWorkspaceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateWorkspaceResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_UpdateWorkspace_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) DeleteWorkspace(ctx context.Context, in *DeleteWorkspaceRequest, opts ...grpc.CallOption) (*DeleteWorkspaceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteWorkspaceResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_DeleteWorkspace_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// LeadScraperServiceServer is the server API for LeadScraperService service.
+// All implementations must embed UnimplementedLeadScraperServiceServer
 // for forward compatibility.
 //
 // WorkspaceService provides functionality for managing Google Maps scraping jobs.
@@ -284,7 +458,7 @@ func (c *workspaceServiceClient) ListAccounts(ctx context.Context, in *ListAccou
 //	})
 //
 // ```
-type WorkspaceServiceServer interface {
+type LeadScraperServiceServer interface {
 	// Create a new Google Maps scraping job
 	//
 	// This endpoint initiates a new scraping task with the specified parameters.
@@ -369,6 +543,13 @@ type WorkspaceServiceServer interface {
 	// Required permissions:
 	// - delete:account
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error)
+	// Workspace Management
+	CreateWorkspace(context.Context, *CreateWorkspaceRequest) (*CreateWorkspaceResponse, error)
+	ListWorkspaces(context.Context, *ListWorkspacesRequest) (*ListWorkspacesResponse, error)
+	// Usage Tracking
+	GetAccountUsage(context.Context, *GetAccountUsageRequest) (*GetAccountUsageResponse, error)
+	// Settings Management
+	UpdateAccountSettings(context.Context, *UpdateAccountSettingsRequest) (*UpdateAccountSettingsResponse, error)
 	// List accounts
 	//
 	// Retrieves a list of accounts based on the provided filters.
@@ -377,293 +558,656 @@ type WorkspaceServiceServer interface {
 	// Required permissions:
 	// - list:accounts
 	ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error)
-	mustEmbedUnimplementedWorkspaceServiceServer()
+	// Workflow Management
+	CreateWorkflow(context.Context, *CreateWorkflowRequest) (*CreateWorkflowResponse, error)
+	GetWorkflow(context.Context, *GetWorkflowRequest) (*GetWorkflowResponse, error)
+	UpdateWorkflow(context.Context, *UpdateWorkflowRequest) (*UpdateWorkflowResponse, error)
+	ListWorkflows(context.Context, *ListWorkflowsRequest) (*ListWorkflowsResponse, error)
+	// Execution Control
+	TriggerWorkflow(context.Context, *TriggerWorkflowRequest) (*TriggerWorkflowResponse, error)
+	PauseWorkflow(context.Context, *PauseWorkflowRequest) (*PauseWorkflowResponse, error)
+	// Analytics
+	GetWorkspaceAnalytics(context.Context, *GetWorkspaceAnalyticsRequest) (*GetWorkspaceAnalyticsResponse, error)
+	GetWorkspace(context.Context, *GetWorkspaceRequest) (*GetWorkspaceResponse, error)
+	UpdateWorkspace(context.Context, *UpdateWorkspaceRequest) (*UpdateWorkspaceResponse, error)
+	DeleteWorkspace(context.Context, *DeleteWorkspaceRequest) (*DeleteWorkspaceResponse, error)
+	mustEmbedUnimplementedLeadScraperServiceServer()
 }
 
-// UnimplementedWorkspaceServiceServer must be embedded to have
+// UnimplementedLeadScraperServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedWorkspaceServiceServer struct{}
+type UnimplementedLeadScraperServiceServer struct{}
 
-func (UnimplementedWorkspaceServiceServer) CreateScrapingJob(context.Context, *CreateScrapingJobRequest) (*CreateScrapingJobResponse, error) {
+func (UnimplementedLeadScraperServiceServer) CreateScrapingJob(context.Context, *CreateScrapingJobRequest) (*CreateScrapingJobResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateScrapingJob not implemented")
 }
-func (UnimplementedWorkspaceServiceServer) ListScrapingJobs(context.Context, *ListScrapingJobsRequest) (*ListScrapingJobsResponse, error) {
+func (UnimplementedLeadScraperServiceServer) ListScrapingJobs(context.Context, *ListScrapingJobsRequest) (*ListScrapingJobsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListScrapingJobs not implemented")
 }
-func (UnimplementedWorkspaceServiceServer) GetScrapingJob(context.Context, *GetScrapingJobRequest) (*GetScrapingJobResponse, error) {
+func (UnimplementedLeadScraperServiceServer) GetScrapingJob(context.Context, *GetScrapingJobRequest) (*GetScrapingJobResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetScrapingJob not implemented")
 }
-func (UnimplementedWorkspaceServiceServer) DeleteScrapingJob(context.Context, *DeleteScrapingJobRequest) (*DeleteScrapingJobResponse, error) {
+func (UnimplementedLeadScraperServiceServer) DeleteScrapingJob(context.Context, *DeleteScrapingJobRequest) (*DeleteScrapingJobResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteScrapingJob not implemented")
 }
-func (UnimplementedWorkspaceServiceServer) DownloadScrapingResults(context.Context, *DownloadScrapingResultsRequest) (*DownloadScrapingResultsResponse, error) {
+func (UnimplementedLeadScraperServiceServer) DownloadScrapingResults(context.Context, *DownloadScrapingResultsRequest) (*DownloadScrapingResultsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DownloadScrapingResults not implemented")
 }
-func (UnimplementedWorkspaceServiceServer) CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error) {
+func (UnimplementedLeadScraperServiceServer) CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccount not implemented")
 }
-func (UnimplementedWorkspaceServiceServer) GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error) {
+func (UnimplementedLeadScraperServiceServer) GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccount not implemented")
 }
-func (UnimplementedWorkspaceServiceServer) UpdateAccount(context.Context, *UpdateAccountRequest) (*UpdateAccountResponse, error) {
+func (UnimplementedLeadScraperServiceServer) UpdateAccount(context.Context, *UpdateAccountRequest) (*UpdateAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccount not implemented")
 }
-func (UnimplementedWorkspaceServiceServer) DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error) {
+func (UnimplementedLeadScraperServiceServer) DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccount not implemented")
 }
-func (UnimplementedWorkspaceServiceServer) ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error) {
+func (UnimplementedLeadScraperServiceServer) CreateWorkspace(context.Context, *CreateWorkspaceRequest) (*CreateWorkspaceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateWorkspace not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) ListWorkspaces(context.Context, *ListWorkspacesRequest) (*ListWorkspacesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListWorkspaces not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) GetAccountUsage(context.Context, *GetAccountUsageRequest) (*GetAccountUsageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountUsage not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) UpdateAccountSettings(context.Context, *UpdateAccountSettingsRequest) (*UpdateAccountSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccountSettings not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAccounts not implemented")
 }
-func (UnimplementedWorkspaceServiceServer) mustEmbedUnimplementedWorkspaceServiceServer() {}
-func (UnimplementedWorkspaceServiceServer) testEmbeddedByValue()                          {}
+func (UnimplementedLeadScraperServiceServer) CreateWorkflow(context.Context, *CreateWorkflowRequest) (*CreateWorkflowResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateWorkflow not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) GetWorkflow(context.Context, *GetWorkflowRequest) (*GetWorkflowResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetWorkflow not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) UpdateWorkflow(context.Context, *UpdateWorkflowRequest) (*UpdateWorkflowResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWorkflow not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) ListWorkflows(context.Context, *ListWorkflowsRequest) (*ListWorkflowsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListWorkflows not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) TriggerWorkflow(context.Context, *TriggerWorkflowRequest) (*TriggerWorkflowResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TriggerWorkflow not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) PauseWorkflow(context.Context, *PauseWorkflowRequest) (*PauseWorkflowResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PauseWorkflow not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) GetWorkspaceAnalytics(context.Context, *GetWorkspaceAnalyticsRequest) (*GetWorkspaceAnalyticsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetWorkspaceAnalytics not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) GetWorkspace(context.Context, *GetWorkspaceRequest) (*GetWorkspaceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetWorkspace not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) UpdateWorkspace(context.Context, *UpdateWorkspaceRequest) (*UpdateWorkspaceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWorkspace not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) DeleteWorkspace(context.Context, *DeleteWorkspaceRequest) (*DeleteWorkspaceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteWorkspace not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) mustEmbedUnimplementedLeadScraperServiceServer() {}
+func (UnimplementedLeadScraperServiceServer) testEmbeddedByValue()                            {}
 
-// UnsafeWorkspaceServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to WorkspaceServiceServer will
+// UnsafeLeadScraperServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to LeadScraperServiceServer will
 // result in compilation errors.
-type UnsafeWorkspaceServiceServer interface {
-	mustEmbedUnimplementedWorkspaceServiceServer()
+type UnsafeLeadScraperServiceServer interface {
+	mustEmbedUnimplementedLeadScraperServiceServer()
 }
 
-func RegisterWorkspaceServiceServer(s grpc.ServiceRegistrar, srv WorkspaceServiceServer) {
-	// If the following call pancis, it indicates UnimplementedWorkspaceServiceServer was
+func RegisterLeadScraperServiceServer(s grpc.ServiceRegistrar, srv LeadScraperServiceServer) {
+	// If the following call pancis, it indicates UnimplementedLeadScraperServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&WorkspaceService_ServiceDesc, srv)
+	s.RegisterService(&LeadScraperService_ServiceDesc, srv)
 }
 
-func _WorkspaceService_CreateScrapingJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _LeadScraperService_CreateScrapingJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateScrapingJobRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WorkspaceServiceServer).CreateScrapingJob(ctx, in)
+		return srv.(LeadScraperServiceServer).CreateScrapingJob(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: WorkspaceService_CreateScrapingJob_FullMethodName,
+		FullMethod: LeadScraperService_CreateScrapingJob_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkspaceServiceServer).CreateScrapingJob(ctx, req.(*CreateScrapingJobRequest))
+		return srv.(LeadScraperServiceServer).CreateScrapingJob(ctx, req.(*CreateScrapingJobRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _WorkspaceService_ListScrapingJobs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _LeadScraperService_ListScrapingJobs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListScrapingJobsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WorkspaceServiceServer).ListScrapingJobs(ctx, in)
+		return srv.(LeadScraperServiceServer).ListScrapingJobs(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: WorkspaceService_ListScrapingJobs_FullMethodName,
+		FullMethod: LeadScraperService_ListScrapingJobs_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkspaceServiceServer).ListScrapingJobs(ctx, req.(*ListScrapingJobsRequest))
+		return srv.(LeadScraperServiceServer).ListScrapingJobs(ctx, req.(*ListScrapingJobsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _WorkspaceService_GetScrapingJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _LeadScraperService_GetScrapingJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetScrapingJobRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WorkspaceServiceServer).GetScrapingJob(ctx, in)
+		return srv.(LeadScraperServiceServer).GetScrapingJob(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: WorkspaceService_GetScrapingJob_FullMethodName,
+		FullMethod: LeadScraperService_GetScrapingJob_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkspaceServiceServer).GetScrapingJob(ctx, req.(*GetScrapingJobRequest))
+		return srv.(LeadScraperServiceServer).GetScrapingJob(ctx, req.(*GetScrapingJobRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _WorkspaceService_DeleteScrapingJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _LeadScraperService_DeleteScrapingJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteScrapingJobRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WorkspaceServiceServer).DeleteScrapingJob(ctx, in)
+		return srv.(LeadScraperServiceServer).DeleteScrapingJob(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: WorkspaceService_DeleteScrapingJob_FullMethodName,
+		FullMethod: LeadScraperService_DeleteScrapingJob_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkspaceServiceServer).DeleteScrapingJob(ctx, req.(*DeleteScrapingJobRequest))
+		return srv.(LeadScraperServiceServer).DeleteScrapingJob(ctx, req.(*DeleteScrapingJobRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _WorkspaceService_DownloadScrapingResults_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _LeadScraperService_DownloadScrapingResults_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DownloadScrapingResultsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WorkspaceServiceServer).DownloadScrapingResults(ctx, in)
+		return srv.(LeadScraperServiceServer).DownloadScrapingResults(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: WorkspaceService_DownloadScrapingResults_FullMethodName,
+		FullMethod: LeadScraperService_DownloadScrapingResults_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkspaceServiceServer).DownloadScrapingResults(ctx, req.(*DownloadScrapingResultsRequest))
+		return srv.(LeadScraperServiceServer).DownloadScrapingResults(ctx, req.(*DownloadScrapingResultsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _WorkspaceService_CreateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _LeadScraperService_CreateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WorkspaceServiceServer).CreateAccount(ctx, in)
+		return srv.(LeadScraperServiceServer).CreateAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: WorkspaceService_CreateAccount_FullMethodName,
+		FullMethod: LeadScraperService_CreateAccount_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkspaceServiceServer).CreateAccount(ctx, req.(*CreateAccountRequest))
+		return srv.(LeadScraperServiceServer).CreateAccount(ctx, req.(*CreateAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _WorkspaceService_GetAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _LeadScraperService_GetAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WorkspaceServiceServer).GetAccount(ctx, in)
+		return srv.(LeadScraperServiceServer).GetAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: WorkspaceService_GetAccount_FullMethodName,
+		FullMethod: LeadScraperService_GetAccount_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkspaceServiceServer).GetAccount(ctx, req.(*GetAccountRequest))
+		return srv.(LeadScraperServiceServer).GetAccount(ctx, req.(*GetAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _WorkspaceService_UpdateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _LeadScraperService_UpdateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WorkspaceServiceServer).UpdateAccount(ctx, in)
+		return srv.(LeadScraperServiceServer).UpdateAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: WorkspaceService_UpdateAccount_FullMethodName,
+		FullMethod: LeadScraperService_UpdateAccount_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkspaceServiceServer).UpdateAccount(ctx, req.(*UpdateAccountRequest))
+		return srv.(LeadScraperServiceServer).UpdateAccount(ctx, req.(*UpdateAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _WorkspaceService_DeleteAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _LeadScraperService_DeleteAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WorkspaceServiceServer).DeleteAccount(ctx, in)
+		return srv.(LeadScraperServiceServer).DeleteAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: WorkspaceService_DeleteAccount_FullMethodName,
+		FullMethod: LeadScraperService_DeleteAccount_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkspaceServiceServer).DeleteAccount(ctx, req.(*DeleteAccountRequest))
+		return srv.(LeadScraperServiceServer).DeleteAccount(ctx, req.(*DeleteAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _WorkspaceService_ListAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _LeadScraperService_CreateWorkspace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateWorkspaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).CreateWorkspace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_CreateWorkspace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).CreateWorkspace(ctx, req.(*CreateWorkspaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_ListWorkspaces_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListWorkspacesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).ListWorkspaces(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_ListWorkspaces_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).ListWorkspaces(ctx, req.(*ListWorkspacesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_GetAccountUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountUsageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).GetAccountUsage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_GetAccountUsage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).GetAccountUsage(ctx, req.(*GetAccountUsageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_UpdateAccountSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAccountSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).UpdateAccountSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_UpdateAccountSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).UpdateAccountSettings(ctx, req.(*UpdateAccountSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_ListAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListAccountsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(WorkspaceServiceServer).ListAccounts(ctx, in)
+		return srv.(LeadScraperServiceServer).ListAccounts(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: WorkspaceService_ListAccounts_FullMethodName,
+		FullMethod: LeadScraperService_ListAccounts_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(WorkspaceServiceServer).ListAccounts(ctx, req.(*ListAccountsRequest))
+		return srv.(LeadScraperServiceServer).ListAccounts(ctx, req.(*ListAccountsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// WorkspaceService_ServiceDesc is the grpc.ServiceDesc for WorkspaceService service.
+func _LeadScraperService_CreateWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateWorkflowRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).CreateWorkflow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_CreateWorkflow_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).CreateWorkflow(ctx, req.(*CreateWorkflowRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_GetWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWorkflowRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).GetWorkflow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_GetWorkflow_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).GetWorkflow(ctx, req.(*GetWorkflowRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_UpdateWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWorkflowRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).UpdateWorkflow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_UpdateWorkflow_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).UpdateWorkflow(ctx, req.(*UpdateWorkflowRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_ListWorkflows_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListWorkflowsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).ListWorkflows(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_ListWorkflows_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).ListWorkflows(ctx, req.(*ListWorkflowsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_TriggerWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TriggerWorkflowRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).TriggerWorkflow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_TriggerWorkflow_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).TriggerWorkflow(ctx, req.(*TriggerWorkflowRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_PauseWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PauseWorkflowRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).PauseWorkflow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_PauseWorkflow_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).PauseWorkflow(ctx, req.(*PauseWorkflowRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_GetWorkspaceAnalytics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWorkspaceAnalyticsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).GetWorkspaceAnalytics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_GetWorkspaceAnalytics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).GetWorkspaceAnalytics(ctx, req.(*GetWorkspaceAnalyticsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_GetWorkspace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWorkspaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).GetWorkspace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_GetWorkspace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).GetWorkspace(ctx, req.(*GetWorkspaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_UpdateWorkspace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWorkspaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).UpdateWorkspace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_UpdateWorkspace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).UpdateWorkspace(ctx, req.(*UpdateWorkspaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_DeleteWorkspace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteWorkspaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).DeleteWorkspace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_DeleteWorkspace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).DeleteWorkspace(ctx, req.(*DeleteWorkspaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// LeadScraperService_ServiceDesc is the grpc.ServiceDesc for LeadScraperService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var WorkspaceService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "lead_scraper_service.v1.WorkspaceService",
-	HandlerType: (*WorkspaceServiceServer)(nil),
+var LeadScraperService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "lead_scraper_service.v1.LeadScraperService",
+	HandlerType: (*LeadScraperServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "CreateScrapingJob",
-			Handler:    _WorkspaceService_CreateScrapingJob_Handler,
+			Handler:    _LeadScraperService_CreateScrapingJob_Handler,
 		},
 		{
 			MethodName: "ListScrapingJobs",
-			Handler:    _WorkspaceService_ListScrapingJobs_Handler,
+			Handler:    _LeadScraperService_ListScrapingJobs_Handler,
 		},
 		{
 			MethodName: "GetScrapingJob",
-			Handler:    _WorkspaceService_GetScrapingJob_Handler,
+			Handler:    _LeadScraperService_GetScrapingJob_Handler,
 		},
 		{
 			MethodName: "DeleteScrapingJob",
-			Handler:    _WorkspaceService_DeleteScrapingJob_Handler,
+			Handler:    _LeadScraperService_DeleteScrapingJob_Handler,
 		},
 		{
 			MethodName: "DownloadScrapingResults",
-			Handler:    _WorkspaceService_DownloadScrapingResults_Handler,
+			Handler:    _LeadScraperService_DownloadScrapingResults_Handler,
 		},
 		{
 			MethodName: "CreateAccount",
-			Handler:    _WorkspaceService_CreateAccount_Handler,
+			Handler:    _LeadScraperService_CreateAccount_Handler,
 		},
 		{
 			MethodName: "GetAccount",
-			Handler:    _WorkspaceService_GetAccount_Handler,
+			Handler:    _LeadScraperService_GetAccount_Handler,
 		},
 		{
 			MethodName: "UpdateAccount",
-			Handler:    _WorkspaceService_UpdateAccount_Handler,
+			Handler:    _LeadScraperService_UpdateAccount_Handler,
 		},
 		{
 			MethodName: "DeleteAccount",
-			Handler:    _WorkspaceService_DeleteAccount_Handler,
+			Handler:    _LeadScraperService_DeleteAccount_Handler,
+		},
+		{
+			MethodName: "CreateWorkspace",
+			Handler:    _LeadScraperService_CreateWorkspace_Handler,
+		},
+		{
+			MethodName: "ListWorkspaces",
+			Handler:    _LeadScraperService_ListWorkspaces_Handler,
+		},
+		{
+			MethodName: "GetAccountUsage",
+			Handler:    _LeadScraperService_GetAccountUsage_Handler,
+		},
+		{
+			MethodName: "UpdateAccountSettings",
+			Handler:    _LeadScraperService_UpdateAccountSettings_Handler,
 		},
 		{
 			MethodName: "ListAccounts",
-			Handler:    _WorkspaceService_ListAccounts_Handler,
+			Handler:    _LeadScraperService_ListAccounts_Handler,
+		},
+		{
+			MethodName: "CreateWorkflow",
+			Handler:    _LeadScraperService_CreateWorkflow_Handler,
+		},
+		{
+			MethodName: "GetWorkflow",
+			Handler:    _LeadScraperService_GetWorkflow_Handler,
+		},
+		{
+			MethodName: "UpdateWorkflow",
+			Handler:    _LeadScraperService_UpdateWorkflow_Handler,
+		},
+		{
+			MethodName: "ListWorkflows",
+			Handler:    _LeadScraperService_ListWorkflows_Handler,
+		},
+		{
+			MethodName: "TriggerWorkflow",
+			Handler:    _LeadScraperService_TriggerWorkflow_Handler,
+		},
+		{
+			MethodName: "PauseWorkflow",
+			Handler:    _LeadScraperService_PauseWorkflow_Handler,
+		},
+		{
+			MethodName: "GetWorkspaceAnalytics",
+			Handler:    _LeadScraperService_GetWorkspaceAnalytics_Handler,
+		},
+		{
+			MethodName: "GetWorkspace",
+			Handler:    _LeadScraperService_GetWorkspace_Handler,
+		},
+		{
+			MethodName: "UpdateWorkspace",
+			Handler:    _LeadScraperService_UpdateWorkspace_Handler,
+		},
+		{
+			MethodName: "DeleteWorkspace",
+			Handler:    _LeadScraperService_DeleteWorkspace_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

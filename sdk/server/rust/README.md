@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-01-29T05:44:52.470167-05:00[America/New_York]
+- Build date: 2025-01-29T11:21:35.696233-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -67,7 +67,6 @@ cargo run --example client DeleteScrapingJob
 cargo run --example client DownloadScrapingResults
 cargo run --example client GetAccount
 cargo run --example client GetScrapingJob
-cargo run --example client ListAccounts
 cargo run --example client ListScrapingJobs
 ```
 
@@ -104,19 +103,20 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateAccount**](docs/lead_scraper_service_api.md#CreateAccount) | **POST** /lead-scraper-microservice/api/v1/accounts | Create a new account
 [**CreateScrapingJob**](docs/lead_scraper_service_api.md#CreateScrapingJob) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task
-[**DeleteAccount**](docs/lead_scraper_service_api.md#DeleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{accountId} | Delete account
+[**DeleteAccount**](docs/lead_scraper_service_api.md#DeleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 [**DeleteScrapingJob**](docs/lead_scraper_service_api.md#DeleteScrapingJob) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job
 [**DownloadScrapingResults**](docs/lead_scraper_service_api.md#DownloadScrapingResults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV
-[**GetAccount**](docs/lead_scraper_service_api.md#GetAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{accountId} | Get account details
+[**GetAccount**](docs/lead_scraper_service_api.md#GetAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details
 [**GetScrapingJob**](docs/lead_scraper_service_api.md#GetScrapingJob) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job
-[**ListAccounts**](docs/lead_scraper_service_api.md#ListAccounts) | **GET** /lead-scraper-microservice/api/v1/accounts | List accounts
 [**ListScrapingJobs**](docs/lead_scraper_service_api.md#ListScrapingJobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs
-[**UpdateAccount**](docs/lead_scraper_service_api.md#UpdateAccount) | **PATCH** /lead-scraper-microservice/api/v1/accounts | Update account details
+[**UpdateAccount**](docs/lead_scraper_service_api.md#UpdateAccount) | **PUT** /lead-scraper-microservice/api/v1/accounts | Update account details
 
 
 ## Documentation For Models
 
  - [Account](docs/Account.md)
+ - [AccountSettings](docs/AccountSettings.md)
+ - [AccountStatus](docs/AccountStatus.md)
  - [Any](docs/Any.md)
  - [ApiInfo](docs/ApiInfo.md)
  - [AuthContext](docs/AuthContext.md)
@@ -125,35 +125,54 @@ Method | HTTP request | Description
  - [AvailabilityInfo](docs/AvailabilityInfo.md)
  - [BackgroundJobStatus](docs/BackgroundJobStatus.md)
  - [BadGatewayErrorMessageResponse](docs/BadGatewayErrorMessageResponse.md)
+ - [BusinessHours](docs/BusinessHours.md)
  - [ConflictErrorMessageResponse](docs/ConflictErrorMessageResponse.md)
  - [ConflictInfo](docs/ConflictInfo.md)
  - [CreateAccountRequest](docs/CreateAccountRequest.md)
  - [CreateAccountResponse](docs/CreateAccountResponse.md)
  - [CreateScrapingJobRequest](docs/CreateScrapingJobRequest.md)
  - [CreateScrapingJobResponse](docs/CreateScrapingJobResponse.md)
+ - [CreateWorkflowBody](docs/CreateWorkflowBody.md)
+ - [CreateWorkflowResponse](docs/CreateWorkflowResponse.md)
+ - [CreateWorkspaceRequest](docs/CreateWorkspaceRequest.md)
+ - [CreateWorkspaceResponse](docs/CreateWorkspaceResponse.md)
+ - [DayOfWeek](docs/DayOfWeek.md)
  - [DeleteAccountResponse](docs/DeleteAccountResponse.md)
  - [DeleteScrapingJobResponse](docs/DeleteScrapingJobResponse.md)
+ - [DeleteWorkspaceResponse](docs/DeleteWorkspaceResponse.md)
  - [Dependency](docs/Dependency.md)
  - [DownloadScrapingResultsResponse](docs/DownloadScrapingResultsResponse.md)
+ - [EmployeeBenefit](docs/EmployeeBenefit.md)
  - [ErrorResponse](docs/ErrorResponse.md)
  - [FieldError](docs/FieldError.md)
  - [FieldViolation](docs/FieldViolation.md)
  - [ForbiddenErrorMessageResponse](docs/ForbiddenErrorMessageResponse.md)
  - [GatewayTimeoutErrorMessageResponse](docs/GatewayTimeoutErrorMessageResponse.md)
  - [GetAccountResponse](docs/GetAccountResponse.md)
+ - [GetAccountUsageResponse](docs/GetAccountUsageResponse.md)
  - [GetScrapingJobResponse](docs/GetScrapingJobResponse.md)
+ - [GetWorkflowResponse](docs/GetWorkflowResponse.md)
+ - [GetWorkspaceAnalyticsResponse](docs/GetWorkspaceAnalyticsResponse.md)
+ - [GetWorkspaceResponse](docs/GetWorkspaceResponse.md)
  - [GoneErrorMessageResponse](docs/GoneErrorMessageResponse.md)
  - [InternalErrorCode](docs/InternalErrorCode.md)
  - [InternalErrorMessageResponse](docs/InternalErrorMessageResponse.md)
+ - [JobSuccessRate](docs/JobSuccessRate.md)
+ - [Lead](docs/Lead.md)
  - [LimitInfo](docs/LimitInfo.md)
  - [ListAccountsResponse](docs/ListAccountsResponse.md)
  - [ListScrapingJobsResponse](docs/ListScrapingJobsResponse.md)
+ - [ListWorkflowsResponse](docs/ListWorkflowsResponse.md)
+ - [ListWorkspacesResponse](docs/ListWorkspacesResponse.md)
  - [MethodNotAllowedErrorMessageResponse](docs/MethodNotAllowedErrorMessageResponse.md)
  - [MfaInfo](docs/MfaInfo.md)
  - [NotFoundErrorCode](docs/NotFoundErrorCode.md)
  - [NotFoundErrorMessageResponse](docs/NotFoundErrorMessageResponse.md)
  - [NotImplementedErrorMessageResponse](docs/NotImplementedErrorMessageResponse.md)
  - [OperationDetails](docs/OperationDetails.md)
+ - [OutputFormat](docs/OutputFormat.md)
+ - [PauseWorkflowBody](docs/PauseWorkflowBody.md)
+ - [PauseWorkflowResponse](docs/PauseWorkflowResponse.md)
  - [PaymentInfo](docs/PaymentInfo.md)
  - [PaymentRequiredErrorMessageResponse](docs/PaymentRequiredErrorMessageResponse.md)
  - [PreconditionFailedErrorMessageResponse](docs/PreconditionFailedErrorMessageResponse.md)
@@ -163,8 +182,11 @@ Method | HTTP request | Description
  - [ResourceInfo](docs/ResourceInfo.md)
  - [ResourceUtilization](docs/ResourceUtilization.md)
  - [ResourceValidation](docs/ResourceValidation.md)
+ - [RevenueRange](docs/RevenueRange.md)
+ - [Review](docs/Review.md)
  - [SchemaValidation](docs/SchemaValidation.md)
  - [ScrapingJob](docs/ScrapingJob.md)
+ - [ScrapingWorkflow](docs/ScrapingWorkflow.md)
  - [ServiceStatus](docs/ServiceStatus.md)
  - [ServiceUnavailableErrorMessageResponse](docs/ServiceUnavailableErrorMessageResponse.md)
  - [SessionInfo](docs/SessionInfo.md)
@@ -172,11 +194,20 @@ Method | HTTP request | Description
  - [Suggestions](docs/Suggestions.md)
  - [TokenInfo](docs/TokenInfo.md)
  - [TooEarlyErrorMessageResponse](docs/TooEarlyErrorMessageResponse.md)
+ - [TriggerWorkflowBody](docs/TriggerWorkflowBody.md)
+ - [TriggerWorkflowResponse](docs/TriggerWorkflowResponse.md)
  - [UnprocessableEntityErrorMessageResponse](docs/UnprocessableEntityErrorMessageResponse.md)
  - [UpdateAccountRequest](docs/UpdateAccountRequest.md)
  - [UpdateAccountResponse](docs/UpdateAccountResponse.md)
+ - [UpdateAccountSettingsRequest](docs/UpdateAccountSettingsRequest.md)
+ - [UpdateAccountSettingsResponse](docs/UpdateAccountSettingsResponse.md)
+ - [UpdateWorkflowRequest](docs/UpdateWorkflowRequest.md)
+ - [UpdateWorkflowResponse](docs/UpdateWorkflowResponse.md)
+ - [UpdateWorkspaceRequest](docs/UpdateWorkspaceRequest.md)
+ - [UpdateWorkspaceResponse](docs/UpdateWorkspaceResponse.md)
  - [ValidationErrorCode](docs/ValidationErrorCode.md)
  - [ValidationErrorMessageResponse](docs/ValidationErrorMessageResponse.md)
+ - [Workspace](docs/Workspace.md)
 
 
 ## Documentation For Authorization

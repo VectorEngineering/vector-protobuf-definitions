@@ -15,53 +15,59 @@
 import { mapValues } from '../runtime';
 import type { ScrapingJob } from './ScrapingJob';
 import {
-    ScrapingJobFromJSON,
-    ScrapingJobFromJSONTyped,
-    ScrapingJobToJSON,
+  ScrapingJobFromJSON,
+  ScrapingJobFromJSONTyped,
+  ScrapingJobToJSON,
 } from './ScrapingJob';
 
 /**
- * 
+ *
  * @export
  * @interface GetScrapingJobResponse
  */
 export interface GetScrapingJobResponse {
-    /**
-     * 
-     * @type {ScrapingJob}
-     * @memberof GetScrapingJobResponse
-     */
-    job?: ScrapingJob;
+  /**
+   *
+   * @type {ScrapingJob}
+   * @memberof GetScrapingJobResponse
+   */
+  job?: ScrapingJob;
 }
 
 /**
  * Check if a given object implements the GetScrapingJobResponse interface.
  */
-export function instanceOfGetScrapingJobResponse(value: object): value is GetScrapingJobResponse {
-    return true;
+export function instanceOfGetScrapingJobResponse(
+  value: object
+): value is GetScrapingJobResponse {
+  return true;
 }
 
-export function GetScrapingJobResponseFromJSON(json: any): GetScrapingJobResponse {
-    return GetScrapingJobResponseFromJSONTyped(json, false);
+export function GetScrapingJobResponseFromJSON(
+  json: any
+): GetScrapingJobResponse {
+  return GetScrapingJobResponseFromJSONTyped(json, false);
 }
 
-export function GetScrapingJobResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): GetScrapingJobResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'job': json['job'] == null ? undefined : ScrapingJobFromJSON(json['job']),
-    };
+export function GetScrapingJobResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): GetScrapingJobResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    job: json['job'] == null ? undefined : ScrapingJobFromJSON(json['job']),
+  };
 }
 
-export function GetScrapingJobResponseToJSON(value?: GetScrapingJobResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'job': ScrapingJobToJSON(value['job']),
-    };
+export function GetScrapingJobResponseToJSON(
+  value?: GetScrapingJobResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    job: ScrapingJobToJSON(value['job']),
+  };
 }
-

@@ -15,9 +15,9 @@
 import { mapValues } from '../runtime';
 import type { ErrorResponse } from './ErrorResponse';
 import {
-    ErrorResponseFromJSON,
-    ErrorResponseFromJSONTyped,
-    ErrorResponseToJSON,
+  ErrorResponseFromJSON,
+  ErrorResponseFromJSONTyped,
+  ErrorResponseToJSON,
 } from './ErrorResponse';
 
 /**
@@ -26,66 +26,76 @@ import {
  * @interface BadGatewayErrorMessageResponse
  */
 export interface BadGatewayErrorMessageResponse {
-    /**
-     * 
-     * @type {number}
-     * @memberof BadGatewayErrorMessageResponse
-     */
-    code?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof BadGatewayErrorMessageResponse
-     */
-    message?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof BadGatewayErrorMessageResponse
-     */
-    upstreamService?: string;
-    /**
-     * 
-     * @type {ErrorResponse}
-     * @memberof BadGatewayErrorMessageResponse
-     */
-    errorResponse?: ErrorResponse;
+  /**
+   *
+   * @type {number}
+   * @memberof BadGatewayErrorMessageResponse
+   */
+  code?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof BadGatewayErrorMessageResponse
+   */
+  message?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof BadGatewayErrorMessageResponse
+   */
+  upstreamService?: string;
+  /**
+   *
+   * @type {ErrorResponse}
+   * @memberof BadGatewayErrorMessageResponse
+   */
+  errorResponse?: ErrorResponse;
 }
 
 /**
  * Check if a given object implements the BadGatewayErrorMessageResponse interface.
  */
-export function instanceOfBadGatewayErrorMessageResponse(value: object): value is BadGatewayErrorMessageResponse {
-    return true;
+export function instanceOfBadGatewayErrorMessageResponse(
+  value: object
+): value is BadGatewayErrorMessageResponse {
+  return true;
 }
 
-export function BadGatewayErrorMessageResponseFromJSON(json: any): BadGatewayErrorMessageResponse {
-    return BadGatewayErrorMessageResponseFromJSONTyped(json, false);
+export function BadGatewayErrorMessageResponseFromJSON(
+  json: any
+): BadGatewayErrorMessageResponse {
+  return BadGatewayErrorMessageResponseFromJSONTyped(json, false);
 }
 
-export function BadGatewayErrorMessageResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): BadGatewayErrorMessageResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'code': json['code'] == null ? undefined : json['code'],
-        'message': json['message'] == null ? undefined : json['message'],
-        'upstreamService': json['upstreamService'] == null ? undefined : json['upstreamService'],
-        'errorResponse': json['errorResponse'] == null ? undefined : ErrorResponseFromJSON(json['errorResponse']),
-    };
+export function BadGatewayErrorMessageResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): BadGatewayErrorMessageResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    code: json['code'] == null ? undefined : json['code'],
+    message: json['message'] == null ? undefined : json['message'],
+    upstreamService:
+      json['upstreamService'] == null ? undefined : json['upstreamService'],
+    errorResponse:
+      json['errorResponse'] == null
+        ? undefined
+        : ErrorResponseFromJSON(json['errorResponse']),
+  };
 }
 
-export function BadGatewayErrorMessageResponseToJSON(value?: BadGatewayErrorMessageResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'code': value['code'],
-        'message': value['message'],
-        'upstreamService': value['upstreamService'],
-        'errorResponse': ErrorResponseToJSON(value['errorResponse']),
-    };
+export function BadGatewayErrorMessageResponseToJSON(
+  value?: BadGatewayErrorMessageResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    code: value['code'],
+    message: value['message'],
+    upstreamService: value['upstreamService'],
+    errorResponse: ErrorResponseToJSON(value['errorResponse']),
+  };
 }
-

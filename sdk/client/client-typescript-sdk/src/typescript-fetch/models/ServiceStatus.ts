@@ -15,77 +15,83 @@
 import { mapValues } from '../runtime';
 import type { Dependency } from './Dependency';
 import {
-    DependencyFromJSON,
-    DependencyFromJSONTyped,
-    DependencyToJSON,
+  DependencyFromJSON,
+  DependencyFromJSONTyped,
+  DependencyToJSON,
 } from './Dependency';
 
 /**
- * 
+ *
  * @export
  * @interface ServiceStatus
  */
 export interface ServiceStatus {
-    /**
-     * 
-     * @type {string}
-     * @memberof ServiceStatus
-     */
-    name?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ServiceStatus
-     */
-    status?: string;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof ServiceStatus
-     */
-    metrics?: { [key: string]: string; };
-    /**
-     * 
-     * @type {Array<Dependency>}
-     * @memberof ServiceStatus
-     */
-    dependencies?: Array<Dependency>;
+  /**
+   *
+   * @type {string}
+   * @memberof ServiceStatus
+   */
+  name?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof ServiceStatus
+   */
+  status?: string;
+  /**
+   *
+   * @type {{ [key: string]: string; }}
+   * @memberof ServiceStatus
+   */
+  metrics?: { [key: string]: string };
+  /**
+   *
+   * @type {Array<Dependency>}
+   * @memberof ServiceStatus
+   */
+  dependencies?: Array<Dependency>;
 }
 
 /**
  * Check if a given object implements the ServiceStatus interface.
  */
 export function instanceOfServiceStatus(value: object): value is ServiceStatus {
-    return true;
+  return true;
 }
 
 export function ServiceStatusFromJSON(json: any): ServiceStatus {
-    return ServiceStatusFromJSONTyped(json, false);
+  return ServiceStatusFromJSONTyped(json, false);
 }
 
-export function ServiceStatusFromJSONTyped(json: any, ignoreDiscriminator: boolean): ServiceStatus {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'name': json['name'] == null ? undefined : json['name'],
-        'status': json['status'] == null ? undefined : json['status'],
-        'metrics': json['metrics'] == null ? undefined : json['metrics'],
-        'dependencies': json['dependencies'] == null ? undefined : ((json['dependencies'] as Array<any>).map(DependencyFromJSON)),
-    };
+export function ServiceStatusFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): ServiceStatus {
+  if (json == null) {
+    return json;
+  }
+  return {
+    name: json['name'] == null ? undefined : json['name'],
+    status: json['status'] == null ? undefined : json['status'],
+    metrics: json['metrics'] == null ? undefined : json['metrics'],
+    dependencies:
+      json['dependencies'] == null
+        ? undefined
+        : (json['dependencies'] as Array<any>).map(DependencyFromJSON),
+  };
 }
 
 export function ServiceStatusToJSON(value?: ServiceStatus | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'name': value['name'],
-        'status': value['status'],
-        'metrics': value['metrics'],
-        'dependencies': value['dependencies'] == null ? undefined : ((value['dependencies'] as Array<any>).map(DependencyToJSON)),
-    };
+  if (value == null) {
+    return value;
+  }
+  return {
+    name: value['name'],
+    status: value['status'],
+    metrics: value['metrics'],
+    dependencies:
+      value['dependencies'] == null
+        ? undefined
+        : (value['dependencies'] as Array<any>).map(DependencyToJSON),
+  };
 }
-

@@ -15,15 +15,15 @@
 import { mapValues } from '../runtime';
 import type { PaymentInfo } from './PaymentInfo';
 import {
-    PaymentInfoFromJSON,
-    PaymentInfoFromJSONTyped,
-    PaymentInfoToJSON,
+  PaymentInfoFromJSON,
+  PaymentInfoFromJSONTyped,
+  PaymentInfoToJSON,
 } from './PaymentInfo';
 import type { ErrorResponse } from './ErrorResponse';
 import {
-    ErrorResponseFromJSON,
-    ErrorResponseFromJSONTyped,
-    ErrorResponseToJSON,
+  ErrorResponseFromJSON,
+  ErrorResponseFromJSONTyped,
+  ErrorResponseToJSON,
 } from './ErrorResponse';
 
 /**
@@ -32,66 +32,78 @@ import {
  * @interface PaymentRequiredErrorMessageResponse
  */
 export interface PaymentRequiredErrorMessageResponse {
-    /**
-     * 
-     * @type {number}
-     * @memberof PaymentRequiredErrorMessageResponse
-     */
-    code?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PaymentRequiredErrorMessageResponse
-     */
-    message?: string;
-    /**
-     * 
-     * @type {PaymentInfo}
-     * @memberof PaymentRequiredErrorMessageResponse
-     */
-    paymentInfo?: PaymentInfo;
-    /**
-     * 
-     * @type {ErrorResponse}
-     * @memberof PaymentRequiredErrorMessageResponse
-     */
-    errorResponse?: ErrorResponse;
+  /**
+   *
+   * @type {number}
+   * @memberof PaymentRequiredErrorMessageResponse
+   */
+  code?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof PaymentRequiredErrorMessageResponse
+   */
+  message?: string;
+  /**
+   *
+   * @type {PaymentInfo}
+   * @memberof PaymentRequiredErrorMessageResponse
+   */
+  paymentInfo?: PaymentInfo;
+  /**
+   *
+   * @type {ErrorResponse}
+   * @memberof PaymentRequiredErrorMessageResponse
+   */
+  errorResponse?: ErrorResponse;
 }
 
 /**
  * Check if a given object implements the PaymentRequiredErrorMessageResponse interface.
  */
-export function instanceOfPaymentRequiredErrorMessageResponse(value: object): value is PaymentRequiredErrorMessageResponse {
-    return true;
+export function instanceOfPaymentRequiredErrorMessageResponse(
+  value: object
+): value is PaymentRequiredErrorMessageResponse {
+  return true;
 }
 
-export function PaymentRequiredErrorMessageResponseFromJSON(json: any): PaymentRequiredErrorMessageResponse {
-    return PaymentRequiredErrorMessageResponseFromJSONTyped(json, false);
+export function PaymentRequiredErrorMessageResponseFromJSON(
+  json: any
+): PaymentRequiredErrorMessageResponse {
+  return PaymentRequiredErrorMessageResponseFromJSONTyped(json, false);
 }
 
-export function PaymentRequiredErrorMessageResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): PaymentRequiredErrorMessageResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'code': json['code'] == null ? undefined : json['code'],
-        'message': json['message'] == null ? undefined : json['message'],
-        'paymentInfo': json['paymentInfo'] == null ? undefined : PaymentInfoFromJSON(json['paymentInfo']),
-        'errorResponse': json['errorResponse'] == null ? undefined : ErrorResponseFromJSON(json['errorResponse']),
-    };
+export function PaymentRequiredErrorMessageResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): PaymentRequiredErrorMessageResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    code: json['code'] == null ? undefined : json['code'],
+    message: json['message'] == null ? undefined : json['message'],
+    paymentInfo:
+      json['paymentInfo'] == null
+        ? undefined
+        : PaymentInfoFromJSON(json['paymentInfo']),
+    errorResponse:
+      json['errorResponse'] == null
+        ? undefined
+        : ErrorResponseFromJSON(json['errorResponse']),
+  };
 }
 
-export function PaymentRequiredErrorMessageResponseToJSON(value?: PaymentRequiredErrorMessageResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'code': value['code'],
-        'message': value['message'],
-        'paymentInfo': PaymentInfoToJSON(value['paymentInfo']),
-        'errorResponse': ErrorResponseToJSON(value['errorResponse']),
-    };
+export function PaymentRequiredErrorMessageResponseToJSON(
+  value?: PaymentRequiredErrorMessageResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    code: value['code'],
+    message: value['message'],
+    paymentInfo: PaymentInfoToJSON(value['paymentInfo']),
+    errorResponse: ErrorResponseToJSON(value['errorResponse']),
+  };
 }
-

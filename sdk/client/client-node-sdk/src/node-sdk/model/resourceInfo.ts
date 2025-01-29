@@ -13,43 +13,47 @@
 import { RequestFile } from './models';
 
 export class ResourceInfo {
-    'type'?: string;
-    'id'?: string;
-    'path'?: string;
-    'tenantId'?: string;
-    'scopes'?: Array<string>;
+  'type'?: string;
+  'id'?: string;
+  'path'?: string;
+  'tenantId'?: string;
+  'scopes'?: Array<string>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "type",
-            "baseName": "type",
-            "type": "string"
-        },
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "path",
-            "baseName": "path",
-            "type": "string"
-        },
-        {
-            "name": "tenantId",
-            "baseName": "tenantId",
-            "type": "string"
-        },
-        {
-            "name": "scopes",
-            "baseName": "scopes",
-            "type": "Array<string>"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'string',
+    },
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+    },
+    {
+      name: 'path',
+      baseName: 'path',
+      type: 'string',
+    },
+    {
+      name: 'tenantId',
+      baseName: 'tenantId',
+      type: 'string',
+    },
+    {
+      name: 'scopes',
+      baseName: 'scopes',
+      type: 'Array<string>',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ResourceInfo.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ResourceInfo.attributeTypeMap;
+  }
 }
-

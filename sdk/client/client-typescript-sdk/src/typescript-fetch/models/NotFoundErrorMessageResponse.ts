@@ -15,33 +15,33 @@
 import { mapValues } from '../runtime';
 import type { NotFoundErrorCode } from './NotFoundErrorCode';
 import {
-    NotFoundErrorCodeFromJSON,
-    NotFoundErrorCodeFromJSONTyped,
-    NotFoundErrorCodeToJSON,
+  NotFoundErrorCodeFromJSON,
+  NotFoundErrorCodeFromJSONTyped,
+  NotFoundErrorCodeToJSON,
 } from './NotFoundErrorCode';
 import type { Suggestions } from './Suggestions';
 import {
-    SuggestionsFromJSON,
-    SuggestionsFromJSONTyped,
-    SuggestionsToJSON,
+  SuggestionsFromJSON,
+  SuggestionsFromJSONTyped,
+  SuggestionsToJSON,
 } from './Suggestions';
 import type { ResourceInfo } from './ResourceInfo';
 import {
-    ResourceInfoFromJSON,
-    ResourceInfoFromJSONTyped,
-    ResourceInfoToJSON,
+  ResourceInfoFromJSON,
+  ResourceInfoFromJSONTyped,
+  ResourceInfoToJSON,
 } from './ResourceInfo';
 import type { APIInfo } from './APIInfo';
 import {
-    APIInfoFromJSON,
-    APIInfoFromJSONTyped,
-    APIInfoToJSON,
+  APIInfoFromJSON,
+  APIInfoFromJSONTyped,
+  APIInfoToJSON,
 } from './APIInfo';
 import type { ErrorResponse } from './ErrorResponse';
 import {
-    ErrorResponseFromJSON,
-    ErrorResponseFromJSONTyped,
-    ErrorResponseToJSON,
+  ErrorResponseFromJSON,
+  ErrorResponseFromJSONTyped,
+  ErrorResponseToJSON,
 } from './ErrorResponse';
 
 /**
@@ -50,82 +50,101 @@ import {
  * @interface NotFoundErrorMessageResponse
  */
 export interface NotFoundErrorMessageResponse {
-    /**
-     * 
-     * @type {NotFoundErrorCode}
-     * @memberof NotFoundErrorMessageResponse
-     */
-    code?: NotFoundErrorCode;
-    /**
-     * 
-     * @type {string}
-     * @memberof NotFoundErrorMessageResponse
-     */
-    message?: string;
-    /**
-     * 
-     * @type {ResourceInfo}
-     * @memberof NotFoundErrorMessageResponse
-     */
-    resourceInfo?: ResourceInfo;
-    /**
-     * 
-     * @type {Suggestions}
-     * @memberof NotFoundErrorMessageResponse
-     */
-    suggestions?: Suggestions;
-    /**
-     * 
-     * @type {APIInfo}
-     * @memberof NotFoundErrorMessageResponse
-     */
-    apiInfo?: APIInfo;
-    /**
-     * 
-     * @type {ErrorResponse}
-     * @memberof NotFoundErrorMessageResponse
-     */
-    errorResponse?: ErrorResponse;
+  /**
+   *
+   * @type {NotFoundErrorCode}
+   * @memberof NotFoundErrorMessageResponse
+   */
+  code?: NotFoundErrorCode;
+  /**
+   *
+   * @type {string}
+   * @memberof NotFoundErrorMessageResponse
+   */
+  message?: string;
+  /**
+   *
+   * @type {ResourceInfo}
+   * @memberof NotFoundErrorMessageResponse
+   */
+  resourceInfo?: ResourceInfo;
+  /**
+   *
+   * @type {Suggestions}
+   * @memberof NotFoundErrorMessageResponse
+   */
+  suggestions?: Suggestions;
+  /**
+   *
+   * @type {APIInfo}
+   * @memberof NotFoundErrorMessageResponse
+   */
+  apiInfo?: APIInfo;
+  /**
+   *
+   * @type {ErrorResponse}
+   * @memberof NotFoundErrorMessageResponse
+   */
+  errorResponse?: ErrorResponse;
 }
 
 /**
  * Check if a given object implements the NotFoundErrorMessageResponse interface.
  */
-export function instanceOfNotFoundErrorMessageResponse(value: object): value is NotFoundErrorMessageResponse {
-    return true;
+export function instanceOfNotFoundErrorMessageResponse(
+  value: object
+): value is NotFoundErrorMessageResponse {
+  return true;
 }
 
-export function NotFoundErrorMessageResponseFromJSON(json: any): NotFoundErrorMessageResponse {
-    return NotFoundErrorMessageResponseFromJSONTyped(json, false);
+export function NotFoundErrorMessageResponseFromJSON(
+  json: any
+): NotFoundErrorMessageResponse {
+  return NotFoundErrorMessageResponseFromJSONTyped(json, false);
 }
 
-export function NotFoundErrorMessageResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): NotFoundErrorMessageResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'code': json['code'] == null ? undefined : NotFoundErrorCodeFromJSON(json['code']),
-        'message': json['message'] == null ? undefined : json['message'],
-        'resourceInfo': json['resourceInfo'] == null ? undefined : ResourceInfoFromJSON(json['resourceInfo']),
-        'suggestions': json['suggestions'] == null ? undefined : SuggestionsFromJSON(json['suggestions']),
-        'apiInfo': json['apiInfo'] == null ? undefined : APIInfoFromJSON(json['apiInfo']),
-        'errorResponse': json['errorResponse'] == null ? undefined : ErrorResponseFromJSON(json['errorResponse']),
-    };
+export function NotFoundErrorMessageResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): NotFoundErrorMessageResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    code:
+      json['code'] == null
+        ? undefined
+        : NotFoundErrorCodeFromJSON(json['code']),
+    message: json['message'] == null ? undefined : json['message'],
+    resourceInfo:
+      json['resourceInfo'] == null
+        ? undefined
+        : ResourceInfoFromJSON(json['resourceInfo']),
+    suggestions:
+      json['suggestions'] == null
+        ? undefined
+        : SuggestionsFromJSON(json['suggestions']),
+    apiInfo:
+      json['apiInfo'] == null ? undefined : APIInfoFromJSON(json['apiInfo']),
+    errorResponse:
+      json['errorResponse'] == null
+        ? undefined
+        : ErrorResponseFromJSON(json['errorResponse']),
+  };
 }
 
-export function NotFoundErrorMessageResponseToJSON(value?: NotFoundErrorMessageResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'code': NotFoundErrorCodeToJSON(value['code']),
-        'message': value['message'],
-        'resourceInfo': ResourceInfoToJSON(value['resourceInfo']),
-        'suggestions': SuggestionsToJSON(value['suggestions']),
-        'apiInfo': APIInfoToJSON(value['apiInfo']),
-        'errorResponse': ErrorResponseToJSON(value['errorResponse']),
-    };
+export function NotFoundErrorMessageResponseToJSON(
+  value?: NotFoundErrorMessageResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    code: NotFoundErrorCodeToJSON(value['code']),
+    message: value['message'],
+    resourceInfo: ResourceInfoToJSON(value['resourceInfo']),
+    suggestions: SuggestionsToJSON(value['suggestions']),
+    apiInfo: APIInfoToJSON(value['apiInfo']),
+    errorResponse: ErrorResponseToJSON(value['errorResponse']),
+  };
 }
-

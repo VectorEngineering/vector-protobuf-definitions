@@ -18,54 +18,58 @@ import { QuotaInfo } from './quotaInfo';
 import { RateLimitContext } from './rateLimitContext';
 
 /**
-* Represents rate limiting and quota exceeded errors
-*/
+ * Represents rate limiting and quota exceeded errors
+ */
 export class RateLimitErrorMessageResponse {
-    'code'?: InternalErrorCode;
-    'message'?: string;
-    'limitInfo'?: LimitInfo;
-    'quotaInfo'?: QuotaInfo;
-    'context'?: RateLimitContext;
-    'errorResponse'?: ErrorResponse;
+  'code'?: InternalErrorCode;
+  'message'?: string;
+  'limitInfo'?: LimitInfo;
+  'quotaInfo'?: QuotaInfo;
+  'context'?: RateLimitContext;
+  'errorResponse'?: ErrorResponse;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "code",
-            "baseName": "code",
-            "type": "InternalErrorCode"
-        },
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
-        },
-        {
-            "name": "limitInfo",
-            "baseName": "limitInfo",
-            "type": "LimitInfo"
-        },
-        {
-            "name": "quotaInfo",
-            "baseName": "quotaInfo",
-            "type": "QuotaInfo"
-        },
-        {
-            "name": "context",
-            "baseName": "context",
-            "type": "RateLimitContext"
-        },
-        {
-            "name": "errorResponse",
-            "baseName": "errorResponse",
-            "type": "ErrorResponse"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'code',
+      baseName: 'code',
+      type: 'InternalErrorCode',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'limitInfo',
+      baseName: 'limitInfo',
+      type: 'LimitInfo',
+    },
+    {
+      name: 'quotaInfo',
+      baseName: 'quotaInfo',
+      type: 'QuotaInfo',
+    },
+    {
+      name: 'context',
+      baseName: 'context',
+      type: 'RateLimitContext',
+    },
+    {
+      name: 'errorResponse',
+      baseName: 'errorResponse',
+      type: 'ErrorResponse',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return RateLimitErrorMessageResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return RateLimitErrorMessageResponse.attributeTypeMap;
+  }
 }
 
-export namespace RateLimitErrorMessageResponse {
-}
+export namespace RateLimitErrorMessageResponse {}

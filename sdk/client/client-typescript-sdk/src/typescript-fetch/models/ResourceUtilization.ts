@@ -14,71 +14,76 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface ResourceUtilization
  */
 export interface ResourceUtilization {
-    /**
-     * 
-     * @type {number}
-     * @memberof ResourceUtilization
-     */
-    cpuUsage?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ResourceUtilization
-     */
-    memoryUsage?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ResourceUtilization
-     */
-    activeConnections?: number;
-    /**
-     * 
-     * @type {{ [key: string]: number; }}
-     * @memberof ResourceUtilization
-     */
-    quotas?: { [key: string]: number; };
+  /**
+   *
+   * @type {number}
+   * @memberof ResourceUtilization
+   */
+  cpuUsage?: number;
+  /**
+   *
+   * @type {number}
+   * @memberof ResourceUtilization
+   */
+  memoryUsage?: number;
+  /**
+   *
+   * @type {number}
+   * @memberof ResourceUtilization
+   */
+  activeConnections?: number;
+  /**
+   *
+   * @type {{ [key: string]: number; }}
+   * @memberof ResourceUtilization
+   */
+  quotas?: { [key: string]: number };
 }
 
 /**
  * Check if a given object implements the ResourceUtilization interface.
  */
-export function instanceOfResourceUtilization(value: object): value is ResourceUtilization {
-    return true;
+export function instanceOfResourceUtilization(
+  value: object
+): value is ResourceUtilization {
+  return true;
 }
 
 export function ResourceUtilizationFromJSON(json: any): ResourceUtilization {
-    return ResourceUtilizationFromJSONTyped(json, false);
+  return ResourceUtilizationFromJSONTyped(json, false);
 }
 
-export function ResourceUtilizationFromJSONTyped(json: any, ignoreDiscriminator: boolean): ResourceUtilization {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'cpuUsage': json['cpuUsage'] == null ? undefined : json['cpuUsage'],
-        'memoryUsage': json['memoryUsage'] == null ? undefined : json['memoryUsage'],
-        'activeConnections': json['activeConnections'] == null ? undefined : json['activeConnections'],
-        'quotas': json['quotas'] == null ? undefined : json['quotas'],
-    };
+export function ResourceUtilizationFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): ResourceUtilization {
+  if (json == null) {
+    return json;
+  }
+  return {
+    cpuUsage: json['cpuUsage'] == null ? undefined : json['cpuUsage'],
+    memoryUsage: json['memoryUsage'] == null ? undefined : json['memoryUsage'],
+    activeConnections:
+      json['activeConnections'] == null ? undefined : json['activeConnections'],
+    quotas: json['quotas'] == null ? undefined : json['quotas'],
+  };
 }
 
-export function ResourceUtilizationToJSON(value?: ResourceUtilization | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'cpuUsage': value['cpuUsage'],
-        'memoryUsage': value['memoryUsage'],
-        'activeConnections': value['activeConnections'],
-        'quotas': value['quotas'],
-    };
+export function ResourceUtilizationToJSON(
+  value?: ResourceUtilization | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    cpuUsage: value['cpuUsage'],
+    memoryUsage: value['memoryUsage'],
+    activeConnections: value['activeConnections'],
+    quotas: value['quotas'],
+  };
 }
-

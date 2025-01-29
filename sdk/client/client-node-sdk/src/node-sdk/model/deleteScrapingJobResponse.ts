@@ -13,19 +13,23 @@
 import { RequestFile } from './models';
 
 export class DeleteScrapingJobResponse {
-    'success'?: boolean;
+  'success'?: boolean;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "success",
-            "baseName": "success",
-            "type": "boolean"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'success',
+      baseName: 'success',
+      type: 'boolean',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return DeleteScrapingJobResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return DeleteScrapingJobResponse.attributeTypeMap;
+  }
 }
-

@@ -14,40 +14,44 @@ import { RequestFile } from './models';
 import { ErrorResponse } from './errorResponse';
 
 /**
-* Represents errors when the requested functionality is not implemented
-*/
+ * Represents errors when the requested functionality is not implemented
+ */
 export class NotImplementedErrorMessageResponse {
-    'code'?: number;
-    'message'?: string;
-    'feature'?: string;
-    'errorResponse'?: ErrorResponse;
+  'code'?: number;
+  'message'?: string;
+  'feature'?: string;
+  'errorResponse'?: ErrorResponse;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "code",
-            "baseName": "code",
-            "type": "number"
-        },
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
-        },
-        {
-            "name": "feature",
-            "baseName": "feature",
-            "type": "string"
-        },
-        {
-            "name": "errorResponse",
-            "baseName": "errorResponse",
-            "type": "ErrorResponse"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'code',
+      baseName: 'code',
+      type: 'number',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'feature',
+      baseName: 'feature',
+      type: 'string',
+    },
+    {
+      name: 'errorResponse',
+      baseName: 'errorResponse',
+      type: 'ErrorResponse',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return NotImplementedErrorMessageResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return NotImplementedErrorMessageResponse.attributeTypeMap;
+  }
 }
-

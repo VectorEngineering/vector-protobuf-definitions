@@ -15,9 +15,9 @@
 import { mapValues } from '../runtime';
 import type { ErrorResponse } from './ErrorResponse';
 import {
-    ErrorResponseFromJSON,
-    ErrorResponseFromJSONTyped,
-    ErrorResponseToJSON,
+  ErrorResponseFromJSON,
+  ErrorResponseFromJSONTyped,
+  ErrorResponseToJSON,
 } from './ErrorResponse';
 
 /**
@@ -26,66 +26,76 @@ import {
  * @interface GatewayTimeoutErrorMessageResponse
  */
 export interface GatewayTimeoutErrorMessageResponse {
-    /**
-     * 
-     * @type {number}
-     * @memberof GatewayTimeoutErrorMessageResponse
-     */
-    code?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof GatewayTimeoutErrorMessageResponse
-     */
-    message?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GatewayTimeoutErrorMessageResponse
-     */
-    upstreamService?: string;
-    /**
-     * 
-     * @type {ErrorResponse}
-     * @memberof GatewayTimeoutErrorMessageResponse
-     */
-    errorResponse?: ErrorResponse;
+  /**
+   *
+   * @type {number}
+   * @memberof GatewayTimeoutErrorMessageResponse
+   */
+  code?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof GatewayTimeoutErrorMessageResponse
+   */
+  message?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof GatewayTimeoutErrorMessageResponse
+   */
+  upstreamService?: string;
+  /**
+   *
+   * @type {ErrorResponse}
+   * @memberof GatewayTimeoutErrorMessageResponse
+   */
+  errorResponse?: ErrorResponse;
 }
 
 /**
  * Check if a given object implements the GatewayTimeoutErrorMessageResponse interface.
  */
-export function instanceOfGatewayTimeoutErrorMessageResponse(value: object): value is GatewayTimeoutErrorMessageResponse {
-    return true;
+export function instanceOfGatewayTimeoutErrorMessageResponse(
+  value: object
+): value is GatewayTimeoutErrorMessageResponse {
+  return true;
 }
 
-export function GatewayTimeoutErrorMessageResponseFromJSON(json: any): GatewayTimeoutErrorMessageResponse {
-    return GatewayTimeoutErrorMessageResponseFromJSONTyped(json, false);
+export function GatewayTimeoutErrorMessageResponseFromJSON(
+  json: any
+): GatewayTimeoutErrorMessageResponse {
+  return GatewayTimeoutErrorMessageResponseFromJSONTyped(json, false);
 }
 
-export function GatewayTimeoutErrorMessageResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): GatewayTimeoutErrorMessageResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'code': json['code'] == null ? undefined : json['code'],
-        'message': json['message'] == null ? undefined : json['message'],
-        'upstreamService': json['upstreamService'] == null ? undefined : json['upstreamService'],
-        'errorResponse': json['errorResponse'] == null ? undefined : ErrorResponseFromJSON(json['errorResponse']),
-    };
+export function GatewayTimeoutErrorMessageResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): GatewayTimeoutErrorMessageResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    code: json['code'] == null ? undefined : json['code'],
+    message: json['message'] == null ? undefined : json['message'],
+    upstreamService:
+      json['upstreamService'] == null ? undefined : json['upstreamService'],
+    errorResponse:
+      json['errorResponse'] == null
+        ? undefined
+        : ErrorResponseFromJSON(json['errorResponse']),
+  };
 }
 
-export function GatewayTimeoutErrorMessageResponseToJSON(value?: GatewayTimeoutErrorMessageResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'code': value['code'],
-        'message': value['message'],
-        'upstreamService': value['upstreamService'],
-        'errorResponse': ErrorResponseToJSON(value['errorResponse']),
-    };
+export function GatewayTimeoutErrorMessageResponseToJSON(
+  value?: GatewayTimeoutErrorMessageResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    code: value['code'],
+    message: value['message'],
+    upstreamService: value['upstreamService'],
+    errorResponse: ErrorResponseToJSON(value['errorResponse']),
+  };
 }
-

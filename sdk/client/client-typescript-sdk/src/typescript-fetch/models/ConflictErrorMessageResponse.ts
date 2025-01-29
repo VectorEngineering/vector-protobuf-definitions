@@ -15,21 +15,21 @@
 import { mapValues } from '../runtime';
 import type { ConflictInfo } from './ConflictInfo';
 import {
-    ConflictInfoFromJSON,
-    ConflictInfoFromJSONTyped,
-    ConflictInfoToJSON,
+  ConflictInfoFromJSON,
+  ConflictInfoFromJSONTyped,
+  ConflictInfoToJSON,
 } from './ConflictInfo';
 import type { ValidationErrorCode } from './ValidationErrorCode';
 import {
-    ValidationErrorCodeFromJSON,
-    ValidationErrorCodeFromJSONTyped,
-    ValidationErrorCodeToJSON,
+  ValidationErrorCodeFromJSON,
+  ValidationErrorCodeFromJSONTyped,
+  ValidationErrorCodeToJSON,
 } from './ValidationErrorCode';
 import type { ErrorResponse } from './ErrorResponse';
 import {
-    ErrorResponseFromJSON,
-    ErrorResponseFromJSONTyped,
-    ErrorResponseToJSON,
+  ErrorResponseFromJSON,
+  ErrorResponseFromJSONTyped,
+  ErrorResponseToJSON,
 } from './ErrorResponse';
 
 /**
@@ -38,66 +38,81 @@ import {
  * @interface ConflictErrorMessageResponse
  */
 export interface ConflictErrorMessageResponse {
-    /**
-     * 
-     * @type {ValidationErrorCode}
-     * @memberof ConflictErrorMessageResponse
-     */
-    code?: ValidationErrorCode;
-    /**
-     * 
-     * @type {string}
-     * @memberof ConflictErrorMessageResponse
-     */
-    message?: string;
-    /**
-     * 
-     * @type {ConflictInfo}
-     * @memberof ConflictErrorMessageResponse
-     */
-    conflictInfo?: ConflictInfo;
-    /**
-     * 
-     * @type {ErrorResponse}
-     * @memberof ConflictErrorMessageResponse
-     */
-    errorResponse?: ErrorResponse;
+  /**
+   *
+   * @type {ValidationErrorCode}
+   * @memberof ConflictErrorMessageResponse
+   */
+  code?: ValidationErrorCode;
+  /**
+   *
+   * @type {string}
+   * @memberof ConflictErrorMessageResponse
+   */
+  message?: string;
+  /**
+   *
+   * @type {ConflictInfo}
+   * @memberof ConflictErrorMessageResponse
+   */
+  conflictInfo?: ConflictInfo;
+  /**
+   *
+   * @type {ErrorResponse}
+   * @memberof ConflictErrorMessageResponse
+   */
+  errorResponse?: ErrorResponse;
 }
 
 /**
  * Check if a given object implements the ConflictErrorMessageResponse interface.
  */
-export function instanceOfConflictErrorMessageResponse(value: object): value is ConflictErrorMessageResponse {
-    return true;
+export function instanceOfConflictErrorMessageResponse(
+  value: object
+): value is ConflictErrorMessageResponse {
+  return true;
 }
 
-export function ConflictErrorMessageResponseFromJSON(json: any): ConflictErrorMessageResponse {
-    return ConflictErrorMessageResponseFromJSONTyped(json, false);
+export function ConflictErrorMessageResponseFromJSON(
+  json: any
+): ConflictErrorMessageResponse {
+  return ConflictErrorMessageResponseFromJSONTyped(json, false);
 }
 
-export function ConflictErrorMessageResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): ConflictErrorMessageResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'code': json['code'] == null ? undefined : ValidationErrorCodeFromJSON(json['code']),
-        'message': json['message'] == null ? undefined : json['message'],
-        'conflictInfo': json['conflictInfo'] == null ? undefined : ConflictInfoFromJSON(json['conflictInfo']),
-        'errorResponse': json['errorResponse'] == null ? undefined : ErrorResponseFromJSON(json['errorResponse']),
-    };
+export function ConflictErrorMessageResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): ConflictErrorMessageResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    code:
+      json['code'] == null
+        ? undefined
+        : ValidationErrorCodeFromJSON(json['code']),
+    message: json['message'] == null ? undefined : json['message'],
+    conflictInfo:
+      json['conflictInfo'] == null
+        ? undefined
+        : ConflictInfoFromJSON(json['conflictInfo']),
+    errorResponse:
+      json['errorResponse'] == null
+        ? undefined
+        : ErrorResponseFromJSON(json['errorResponse']),
+  };
 }
 
-export function ConflictErrorMessageResponseToJSON(value?: ConflictErrorMessageResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'code': ValidationErrorCodeToJSON(value['code']),
-        'message': value['message'],
-        'conflictInfo': ConflictInfoToJSON(value['conflictInfo']),
-        'errorResponse': ErrorResponseToJSON(value['errorResponse']),
-    };
+export function ConflictErrorMessageResponseToJSON(
+  value?: ConflictErrorMessageResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    code: ValidationErrorCodeToJSON(value['code']),
+    message: value['message'],
+    conflictInfo: ConflictInfoToJSON(value['conflictInfo']),
+    errorResponse: ErrorResponseToJSON(value['errorResponse']),
+  };
 }
-

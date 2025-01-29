@@ -15,33 +15,33 @@
 import { mapValues } from '../runtime';
 import type { FieldViolation } from './FieldViolation';
 import {
-    FieldViolationFromJSON,
-    FieldViolationFromJSONTyped,
-    FieldViolationToJSON,
+  FieldViolationFromJSON,
+  FieldViolationFromJSONTyped,
+  FieldViolationToJSON,
 } from './FieldViolation';
 import type { ResourceValidation } from './ResourceValidation';
 import {
-    ResourceValidationFromJSON,
-    ResourceValidationFromJSONTyped,
-    ResourceValidationToJSON,
+  ResourceValidationFromJSON,
+  ResourceValidationFromJSONTyped,
+  ResourceValidationToJSON,
 } from './ResourceValidation';
 import type { SchemaValidation } from './SchemaValidation';
 import {
-    SchemaValidationFromJSON,
-    SchemaValidationFromJSONTyped,
-    SchemaValidationToJSON,
+  SchemaValidationFromJSON,
+  SchemaValidationFromJSONTyped,
+  SchemaValidationToJSON,
 } from './SchemaValidation';
 import type { ValidationErrorCode } from './ValidationErrorCode';
 import {
-    ValidationErrorCodeFromJSON,
-    ValidationErrorCodeFromJSONTyped,
-    ValidationErrorCodeToJSON,
+  ValidationErrorCodeFromJSON,
+  ValidationErrorCodeFromJSONTyped,
+  ValidationErrorCodeToJSON,
 } from './ValidationErrorCode';
 import type { ErrorResponse } from './ErrorResponse';
 import {
-    ErrorResponseFromJSON,
-    ErrorResponseFromJSONTyped,
-    ErrorResponseToJSON,
+  ErrorResponseFromJSON,
+  ErrorResponseFromJSONTyped,
+  ErrorResponseToJSON,
 } from './ErrorResponse';
 
 /**
@@ -50,82 +50,106 @@ import {
  * @interface ValidationErrorMessageResponse
  */
 export interface ValidationErrorMessageResponse {
-    /**
-     * 
-     * @type {ValidationErrorCode}
-     * @memberof ValidationErrorMessageResponse
-     */
-    code?: ValidationErrorCode;
-    /**
-     * 
-     * @type {string}
-     * @memberof ValidationErrorMessageResponse
-     */
-    message?: string;
-    /**
-     * 
-     * @type {Array<FieldViolation>}
-     * @memberof ValidationErrorMessageResponse
-     */
-    fieldViolations?: Array<FieldViolation>;
-    /**
-     * 
-     * @type {SchemaValidation}
-     * @memberof ValidationErrorMessageResponse
-     */
-    schemaValidation?: SchemaValidation;
-    /**
-     * 
-     * @type {ResourceValidation}
-     * @memberof ValidationErrorMessageResponse
-     */
-    resourceValidation?: ResourceValidation;
-    /**
-     * 
-     * @type {ErrorResponse}
-     * @memberof ValidationErrorMessageResponse
-     */
-    errorResponse?: ErrorResponse;
+  /**
+   *
+   * @type {ValidationErrorCode}
+   * @memberof ValidationErrorMessageResponse
+   */
+  code?: ValidationErrorCode;
+  /**
+   *
+   * @type {string}
+   * @memberof ValidationErrorMessageResponse
+   */
+  message?: string;
+  /**
+   *
+   * @type {Array<FieldViolation>}
+   * @memberof ValidationErrorMessageResponse
+   */
+  fieldViolations?: Array<FieldViolation>;
+  /**
+   *
+   * @type {SchemaValidation}
+   * @memberof ValidationErrorMessageResponse
+   */
+  schemaValidation?: SchemaValidation;
+  /**
+   *
+   * @type {ResourceValidation}
+   * @memberof ValidationErrorMessageResponse
+   */
+  resourceValidation?: ResourceValidation;
+  /**
+   *
+   * @type {ErrorResponse}
+   * @memberof ValidationErrorMessageResponse
+   */
+  errorResponse?: ErrorResponse;
 }
 
 /**
  * Check if a given object implements the ValidationErrorMessageResponse interface.
  */
-export function instanceOfValidationErrorMessageResponse(value: object): value is ValidationErrorMessageResponse {
-    return true;
+export function instanceOfValidationErrorMessageResponse(
+  value: object
+): value is ValidationErrorMessageResponse {
+  return true;
 }
 
-export function ValidationErrorMessageResponseFromJSON(json: any): ValidationErrorMessageResponse {
-    return ValidationErrorMessageResponseFromJSONTyped(json, false);
+export function ValidationErrorMessageResponseFromJSON(
+  json: any
+): ValidationErrorMessageResponse {
+  return ValidationErrorMessageResponseFromJSONTyped(json, false);
 }
 
-export function ValidationErrorMessageResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): ValidationErrorMessageResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'code': json['code'] == null ? undefined : ValidationErrorCodeFromJSON(json['code']),
-        'message': json['message'] == null ? undefined : json['message'],
-        'fieldViolations': json['fieldViolations'] == null ? undefined : ((json['fieldViolations'] as Array<any>).map(FieldViolationFromJSON)),
-        'schemaValidation': json['schemaValidation'] == null ? undefined : SchemaValidationFromJSON(json['schemaValidation']),
-        'resourceValidation': json['resourceValidation'] == null ? undefined : ResourceValidationFromJSON(json['resourceValidation']),
-        'errorResponse': json['errorResponse'] == null ? undefined : ErrorResponseFromJSON(json['errorResponse']),
-    };
+export function ValidationErrorMessageResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): ValidationErrorMessageResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    code:
+      json['code'] == null
+        ? undefined
+        : ValidationErrorCodeFromJSON(json['code']),
+    message: json['message'] == null ? undefined : json['message'],
+    fieldViolations:
+      json['fieldViolations'] == null
+        ? undefined
+        : (json['fieldViolations'] as Array<any>).map(FieldViolationFromJSON),
+    schemaValidation:
+      json['schemaValidation'] == null
+        ? undefined
+        : SchemaValidationFromJSON(json['schemaValidation']),
+    resourceValidation:
+      json['resourceValidation'] == null
+        ? undefined
+        : ResourceValidationFromJSON(json['resourceValidation']),
+    errorResponse:
+      json['errorResponse'] == null
+        ? undefined
+        : ErrorResponseFromJSON(json['errorResponse']),
+  };
 }
 
-export function ValidationErrorMessageResponseToJSON(value?: ValidationErrorMessageResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'code': ValidationErrorCodeToJSON(value['code']),
-        'message': value['message'],
-        'fieldViolations': value['fieldViolations'] == null ? undefined : ((value['fieldViolations'] as Array<any>).map(FieldViolationToJSON)),
-        'schemaValidation': SchemaValidationToJSON(value['schemaValidation']),
-        'resourceValidation': ResourceValidationToJSON(value['resourceValidation']),
-        'errorResponse': ErrorResponseToJSON(value['errorResponse']),
-    };
+export function ValidationErrorMessageResponseToJSON(
+  value?: ValidationErrorMessageResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    code: ValidationErrorCodeToJSON(value['code']),
+    message: value['message'],
+    fieldViolations:
+      value['fieldViolations'] == null
+        ? undefined
+        : (value['fieldViolations'] as Array<any>).map(FieldViolationToJSON),
+    schemaValidation: SchemaValidationToJSON(value['schemaValidation']),
+    resourceValidation: ResourceValidationToJSON(value['resourceValidation']),
+    errorResponse: ErrorResponseToJSON(value['errorResponse']),
+  };
 }
-

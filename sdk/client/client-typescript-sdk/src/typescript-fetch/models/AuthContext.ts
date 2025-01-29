@@ -14,71 +14,76 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface AuthContext
  */
 export interface AuthContext {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof AuthContext
-     */
-    requiredScopes?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof AuthContext
-     */
-    providedScopes?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof AuthContext
-     */
-    missingPermissions?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof AuthContext
-     */
-    tenantId?: string;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof AuthContext
+   */
+  requiredScopes?: Array<string>;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof AuthContext
+   */
+  providedScopes?: Array<string>;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof AuthContext
+   */
+  missingPermissions?: Array<string>;
+  /**
+   *
+   * @type {string}
+   * @memberof AuthContext
+   */
+  tenantId?: string;
 }
 
 /**
  * Check if a given object implements the AuthContext interface.
  */
 export function instanceOfAuthContext(value: object): value is AuthContext {
-    return true;
+  return true;
 }
 
 export function AuthContextFromJSON(json: any): AuthContext {
-    return AuthContextFromJSONTyped(json, false);
+  return AuthContextFromJSONTyped(json, false);
 }
 
-export function AuthContextFromJSONTyped(json: any, ignoreDiscriminator: boolean): AuthContext {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'requiredScopes': json['requiredScopes'] == null ? undefined : json['requiredScopes'],
-        'providedScopes': json['providedScopes'] == null ? undefined : json['providedScopes'],
-        'missingPermissions': json['missingPermissions'] == null ? undefined : json['missingPermissions'],
-        'tenantId': json['tenantId'] == null ? undefined : json['tenantId'],
-    };
+export function AuthContextFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): AuthContext {
+  if (json == null) {
+    return json;
+  }
+  return {
+    requiredScopes:
+      json['requiredScopes'] == null ? undefined : json['requiredScopes'],
+    providedScopes:
+      json['providedScopes'] == null ? undefined : json['providedScopes'],
+    missingPermissions:
+      json['missingPermissions'] == null
+        ? undefined
+        : json['missingPermissions'],
+    tenantId: json['tenantId'] == null ? undefined : json['tenantId'],
+  };
 }
 
 export function AuthContextToJSON(value?: AuthContext | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'requiredScopes': value['requiredScopes'],
-        'providedScopes': value['providedScopes'],
-        'missingPermissions': value['missingPermissions'],
-        'tenantId': value['tenantId'],
-    };
+  if (value == null) {
+    return value;
+  }
+  return {
+    requiredScopes: value['requiredScopes'],
+    providedScopes: value['providedScopes'],
+    missingPermissions: value['missingPermissions'],
+    tenantId: value['tenantId'],
+  };
 }
-

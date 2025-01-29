@@ -14,138 +14,142 @@ import { RequestFile } from './models';
 import { BackgroundJobStatus } from './backgroundJobStatus';
 
 /**
-* ScrapingJob represents a Google Maps scraping task. This message defines both the configuration and current state of a scraping operation.  Key components: - Basic metadata (id, name, timestamps) - Job status tracking - Search configuration parameters - Geographic settings - Performance options - Multi-tenant context  Database considerations: - Stored in \"scraping_jobs\" table - Uses GORM for ORM mapping - Includes foreign key to Account - Supports soft deletes  Usage example: ```go job := &ScrapingJob{     Name: \"Athens Cafes\",     Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,     Keywords: []string{\"cafe\", \"coffee\"},     Lang: \"el\",     Zoom: 15,     FastMode: true,     MaxTime: 3600, } ```
-*/
+ * ScrapingJob represents a Google Maps scraping task. This message defines both the configuration and current state of a scraping operation.  Key components: - Basic metadata (id, name, timestamps) - Job status tracking - Search configuration parameters - Geographic settings - Performance options - Multi-tenant context  Database considerations: - Stored in \"scraping_jobs\" table - Uses GORM for ORM mapping - Includes foreign key to Account - Supports soft deletes  Usage example: ```go job := &ScrapingJob{     Name: \"Athens Cafes\",     Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,     Keywords: []string{\"cafe\", \"coffee\"},     Lang: \"el\",     Zoom: 15,     FastMode: true,     MaxTime: 3600, } ```
+ */
 export class ScrapingJob {
-    'id'?: string;
-    'name'?: string;
-    'createdAt'?: Date;
-    'status'?: BackgroundJobStatus;
-    'keywords'?: Array<string>;
-    'lang'?: string;
-    'zoom'?: number;
-    'lat'?: string;
-    'lon'?: string;
-    'fastMode'?: boolean;
-    'radius'?: number;
-    'depth'?: number;
-    'email'?: boolean;
-    'maxTime'?: number;
-    'proxies'?: Array<string>;
-    'updatedAt'?: Date;
-    'deletedAt'?: Date;
-    'payloadType'?: string;
-    'priority'?: number;
-    'payload'?: string;
+  'id'?: string;
+  'name'?: string;
+  'createdAt'?: Date;
+  'status'?: BackgroundJobStatus;
+  'keywords'?: Array<string>;
+  'lang'?: string;
+  'zoom'?: number;
+  'lat'?: string;
+  'lon'?: string;
+  'fastMode'?: boolean;
+  'radius'?: number;
+  'depth'?: number;
+  'email'?: boolean;
+  'maxTime'?: number;
+  'proxies'?: Array<string>;
+  'updatedAt'?: Date;
+  'deletedAt'?: Date;
+  'payloadType'?: string;
+  'priority'?: number;
+  'payload'?: string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date"
-        },
-        {
-            "name": "status",
-            "baseName": "status",
-            "type": "BackgroundJobStatus"
-        },
-        {
-            "name": "keywords",
-            "baseName": "keywords",
-            "type": "Array<string>"
-        },
-        {
-            "name": "lang",
-            "baseName": "lang",
-            "type": "string"
-        },
-        {
-            "name": "zoom",
-            "baseName": "zoom",
-            "type": "number"
-        },
-        {
-            "name": "lat",
-            "baseName": "lat",
-            "type": "string"
-        },
-        {
-            "name": "lon",
-            "baseName": "lon",
-            "type": "string"
-        },
-        {
-            "name": "fastMode",
-            "baseName": "fastMode",
-            "type": "boolean"
-        },
-        {
-            "name": "radius",
-            "baseName": "radius",
-            "type": "number"
-        },
-        {
-            "name": "depth",
-            "baseName": "depth",
-            "type": "number"
-        },
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "boolean"
-        },
-        {
-            "name": "maxTime",
-            "baseName": "maxTime",
-            "type": "number"
-        },
-        {
-            "name": "proxies",
-            "baseName": "proxies",
-            "type": "Array<string>"
-        },
-        {
-            "name": "updatedAt",
-            "baseName": "updatedAt",
-            "type": "Date"
-        },
-        {
-            "name": "deletedAt",
-            "baseName": "deletedAt",
-            "type": "Date"
-        },
-        {
-            "name": "payloadType",
-            "baseName": "payloadType",
-            "type": "string"
-        },
-        {
-            "name": "priority",
-            "baseName": "priority",
-            "type": "number"
-        },
-        {
-            "name": "payload",
-            "baseName": "payload",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+    },
+    {
+      name: 'name',
+      baseName: 'name',
+      type: 'string',
+    },
+    {
+      name: 'createdAt',
+      baseName: 'createdAt',
+      type: 'Date',
+    },
+    {
+      name: 'status',
+      baseName: 'status',
+      type: 'BackgroundJobStatus',
+    },
+    {
+      name: 'keywords',
+      baseName: 'keywords',
+      type: 'Array<string>',
+    },
+    {
+      name: 'lang',
+      baseName: 'lang',
+      type: 'string',
+    },
+    {
+      name: 'zoom',
+      baseName: 'zoom',
+      type: 'number',
+    },
+    {
+      name: 'lat',
+      baseName: 'lat',
+      type: 'string',
+    },
+    {
+      name: 'lon',
+      baseName: 'lon',
+      type: 'string',
+    },
+    {
+      name: 'fastMode',
+      baseName: 'fastMode',
+      type: 'boolean',
+    },
+    {
+      name: 'radius',
+      baseName: 'radius',
+      type: 'number',
+    },
+    {
+      name: 'depth',
+      baseName: 'depth',
+      type: 'number',
+    },
+    {
+      name: 'email',
+      baseName: 'email',
+      type: 'boolean',
+    },
+    {
+      name: 'maxTime',
+      baseName: 'maxTime',
+      type: 'number',
+    },
+    {
+      name: 'proxies',
+      baseName: 'proxies',
+      type: 'Array<string>',
+    },
+    {
+      name: 'updatedAt',
+      baseName: 'updatedAt',
+      type: 'Date',
+    },
+    {
+      name: 'deletedAt',
+      baseName: 'deletedAt',
+      type: 'Date',
+    },
+    {
+      name: 'payloadType',
+      baseName: 'payloadType',
+      type: 'string',
+    },
+    {
+      name: 'priority',
+      baseName: 'priority',
+      type: 'number',
+    },
+    {
+      name: 'payload',
+      baseName: 'payload',
+      type: 'string',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ScrapingJob.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ScrapingJob.attributeTypeMap;
+  }
 }
 
-export namespace ScrapingJob {
-}
+export namespace ScrapingJob {}

@@ -15,39 +15,39 @@
 import { mapValues } from '../runtime';
 import type { AuthErrorCode } from './AuthErrorCode';
 import {
-    AuthErrorCodeFromJSON,
-    AuthErrorCodeFromJSONTyped,
-    AuthErrorCodeToJSON,
+  AuthErrorCodeFromJSON,
+  AuthErrorCodeFromJSONTyped,
+  AuthErrorCodeToJSON,
 } from './AuthErrorCode';
 import type { AuthContext } from './AuthContext';
 import {
-    AuthContextFromJSON,
-    AuthContextFromJSONTyped,
-    AuthContextToJSON,
+  AuthContextFromJSON,
+  AuthContextFromJSONTyped,
+  AuthContextToJSON,
 } from './AuthContext';
 import type { SessionInfo } from './SessionInfo';
 import {
-    SessionInfoFromJSON,
-    SessionInfoFromJSONTyped,
-    SessionInfoToJSON,
+  SessionInfoFromJSON,
+  SessionInfoFromJSONTyped,
+  SessionInfoToJSON,
 } from './SessionInfo';
 import type { TokenInfo } from './TokenInfo';
 import {
-    TokenInfoFromJSON,
-    TokenInfoFromJSONTyped,
-    TokenInfoToJSON,
+  TokenInfoFromJSON,
+  TokenInfoFromJSONTyped,
+  TokenInfoToJSON,
 } from './TokenInfo';
 import type { ErrorResponse } from './ErrorResponse';
 import {
-    ErrorResponseFromJSON,
-    ErrorResponseFromJSONTyped,
-    ErrorResponseToJSON,
+  ErrorResponseFromJSON,
+  ErrorResponseFromJSONTyped,
+  ErrorResponseToJSON,
 } from './ErrorResponse';
 import type { MFAInfo } from './MFAInfo';
 import {
-    MFAInfoFromJSON,
-    MFAInfoFromJSONTyped,
-    MFAInfoToJSON,
+  MFAInfoFromJSON,
+  MFAInfoFromJSONTyped,
+  MFAInfoToJSON,
 } from './MFAInfo';
 
 /**
@@ -56,90 +56,110 @@ import {
  * @interface AuthenticationErrorMessageResponse
  */
 export interface AuthenticationErrorMessageResponse {
-    /**
-     * 
-     * @type {AuthErrorCode}
-     * @memberof AuthenticationErrorMessageResponse
-     */
-    code?: AuthErrorCode;
-    /**
-     * 
-     * @type {string}
-     * @memberof AuthenticationErrorMessageResponse
-     */
-    message?: string;
-    /**
-     * 
-     * @type {TokenInfo}
-     * @memberof AuthenticationErrorMessageResponse
-     */
-    tokenInfo?: TokenInfo;
-    /**
-     * 
-     * @type {AuthContext}
-     * @memberof AuthenticationErrorMessageResponse
-     */
-    authContext?: AuthContext;
-    /**
-     * 
-     * @type {SessionInfo}
-     * @memberof AuthenticationErrorMessageResponse
-     */
-    sessionInfo?: SessionInfo;
-    /**
-     * 
-     * @type {MFAInfo}
-     * @memberof AuthenticationErrorMessageResponse
-     */
-    mfaInfo?: MFAInfo;
-    /**
-     * 
-     * @type {ErrorResponse}
-     * @memberof AuthenticationErrorMessageResponse
-     */
-    errorResponse?: ErrorResponse;
+  /**
+   *
+   * @type {AuthErrorCode}
+   * @memberof AuthenticationErrorMessageResponse
+   */
+  code?: AuthErrorCode;
+  /**
+   *
+   * @type {string}
+   * @memberof AuthenticationErrorMessageResponse
+   */
+  message?: string;
+  /**
+   *
+   * @type {TokenInfo}
+   * @memberof AuthenticationErrorMessageResponse
+   */
+  tokenInfo?: TokenInfo;
+  /**
+   *
+   * @type {AuthContext}
+   * @memberof AuthenticationErrorMessageResponse
+   */
+  authContext?: AuthContext;
+  /**
+   *
+   * @type {SessionInfo}
+   * @memberof AuthenticationErrorMessageResponse
+   */
+  sessionInfo?: SessionInfo;
+  /**
+   *
+   * @type {MFAInfo}
+   * @memberof AuthenticationErrorMessageResponse
+   */
+  mfaInfo?: MFAInfo;
+  /**
+   *
+   * @type {ErrorResponse}
+   * @memberof AuthenticationErrorMessageResponse
+   */
+  errorResponse?: ErrorResponse;
 }
 
 /**
  * Check if a given object implements the AuthenticationErrorMessageResponse interface.
  */
-export function instanceOfAuthenticationErrorMessageResponse(value: object): value is AuthenticationErrorMessageResponse {
-    return true;
+export function instanceOfAuthenticationErrorMessageResponse(
+  value: object
+): value is AuthenticationErrorMessageResponse {
+  return true;
 }
 
-export function AuthenticationErrorMessageResponseFromJSON(json: any): AuthenticationErrorMessageResponse {
-    return AuthenticationErrorMessageResponseFromJSONTyped(json, false);
+export function AuthenticationErrorMessageResponseFromJSON(
+  json: any
+): AuthenticationErrorMessageResponse {
+  return AuthenticationErrorMessageResponseFromJSONTyped(json, false);
 }
 
-export function AuthenticationErrorMessageResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): AuthenticationErrorMessageResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'code': json['code'] == null ? undefined : AuthErrorCodeFromJSON(json['code']),
-        'message': json['message'] == null ? undefined : json['message'],
-        'tokenInfo': json['tokenInfo'] == null ? undefined : TokenInfoFromJSON(json['tokenInfo']),
-        'authContext': json['authContext'] == null ? undefined : AuthContextFromJSON(json['authContext']),
-        'sessionInfo': json['sessionInfo'] == null ? undefined : SessionInfoFromJSON(json['sessionInfo']),
-        'mfaInfo': json['mfaInfo'] == null ? undefined : MFAInfoFromJSON(json['mfaInfo']),
-        'errorResponse': json['errorResponse'] == null ? undefined : ErrorResponseFromJSON(json['errorResponse']),
-    };
+export function AuthenticationErrorMessageResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): AuthenticationErrorMessageResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    code:
+      json['code'] == null ? undefined : AuthErrorCodeFromJSON(json['code']),
+    message: json['message'] == null ? undefined : json['message'],
+    tokenInfo:
+      json['tokenInfo'] == null
+        ? undefined
+        : TokenInfoFromJSON(json['tokenInfo']),
+    authContext:
+      json['authContext'] == null
+        ? undefined
+        : AuthContextFromJSON(json['authContext']),
+    sessionInfo:
+      json['sessionInfo'] == null
+        ? undefined
+        : SessionInfoFromJSON(json['sessionInfo']),
+    mfaInfo:
+      json['mfaInfo'] == null ? undefined : MFAInfoFromJSON(json['mfaInfo']),
+    errorResponse:
+      json['errorResponse'] == null
+        ? undefined
+        : ErrorResponseFromJSON(json['errorResponse']),
+  };
 }
 
-export function AuthenticationErrorMessageResponseToJSON(value?: AuthenticationErrorMessageResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'code': AuthErrorCodeToJSON(value['code']),
-        'message': value['message'],
-        'tokenInfo': TokenInfoToJSON(value['tokenInfo']),
-        'authContext': AuthContextToJSON(value['authContext']),
-        'sessionInfo': SessionInfoToJSON(value['sessionInfo']),
-        'mfaInfo': MFAInfoToJSON(value['mfaInfo']),
-        'errorResponse': ErrorResponseToJSON(value['errorResponse']),
-    };
+export function AuthenticationErrorMessageResponseToJSON(
+  value?: AuthenticationErrorMessageResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    code: AuthErrorCodeToJSON(value['code']),
+    message: value['message'],
+    tokenInfo: TokenInfoToJSON(value['tokenInfo']),
+    authContext: AuthContextToJSON(value['authContext']),
+    sessionInfo: SessionInfoToJSON(value['sessionInfo']),
+    mfaInfo: MFAInfoToJSON(value['mfaInfo']),
+    errorResponse: ErrorResponseToJSON(value['errorResponse']),
+  };
 }
-

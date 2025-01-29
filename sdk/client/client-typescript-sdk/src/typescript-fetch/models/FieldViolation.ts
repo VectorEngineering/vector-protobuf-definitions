@@ -14,79 +14,81 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface FieldViolation
  */
 export interface FieldViolation {
-    /**
-     * 
-     * @type {string}
-     * @memberof FieldViolation
-     */
-    field?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FieldViolation
-     */
-    validation?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FieldViolation
-     */
-    message?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FieldViolation
-     */
-    expected?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FieldViolation
-     */
-    actual?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof FieldViolation
+   */
+  field?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof FieldViolation
+   */
+  validation?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof FieldViolation
+   */
+  message?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof FieldViolation
+   */
+  expected?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof FieldViolation
+   */
+  actual?: string;
 }
 
 /**
  * Check if a given object implements the FieldViolation interface.
  */
-export function instanceOfFieldViolation(value: object): value is FieldViolation {
-    return true;
+export function instanceOfFieldViolation(
+  value: object
+): value is FieldViolation {
+  return true;
 }
 
 export function FieldViolationFromJSON(json: any): FieldViolation {
-    return FieldViolationFromJSONTyped(json, false);
+  return FieldViolationFromJSONTyped(json, false);
 }
 
-export function FieldViolationFromJSONTyped(json: any, ignoreDiscriminator: boolean): FieldViolation {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'field': json['field'] == null ? undefined : json['field'],
-        'validation': json['validation'] == null ? undefined : json['validation'],
-        'message': json['message'] == null ? undefined : json['message'],
-        'expected': json['expected'] == null ? undefined : json['expected'],
-        'actual': json['actual'] == null ? undefined : json['actual'],
-    };
+export function FieldViolationFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): FieldViolation {
+  if (json == null) {
+    return json;
+  }
+  return {
+    field: json['field'] == null ? undefined : json['field'],
+    validation: json['validation'] == null ? undefined : json['validation'],
+    message: json['message'] == null ? undefined : json['message'],
+    expected: json['expected'] == null ? undefined : json['expected'],
+    actual: json['actual'] == null ? undefined : json['actual'],
+  };
 }
 
 export function FieldViolationToJSON(value?: FieldViolation | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'field': value['field'],
-        'validation': value['validation'],
-        'message': value['message'],
-        'expected': value['expected'],
-        'actual': value['actual'],
-    };
+  if (value == null) {
+    return value;
+  }
+  return {
+    field: value['field'],
+    validation: value['validation'],
+    message: value['message'],
+    expected: value['expected'],
+    actual: value['actual'],
+  };
 }
-

@@ -13,37 +13,41 @@
 import { RequestFile } from './models';
 
 export class CreateAccountRequest {
-    'authPlatformUserId': string;
-    'orgId': string;
-    'tenantId': string;
-    'email': string;
+  'authPlatformUserId': string;
+  'orgId': string;
+  'tenantId': string;
+  'email': string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "authPlatformUserId",
-            "baseName": "authPlatformUserId",
-            "type": "string"
-        },
-        {
-            "name": "orgId",
-            "baseName": "orgId",
-            "type": "string"
-        },
-        {
-            "name": "tenantId",
-            "baseName": "tenantId",
-            "type": "string"
-        },
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'authPlatformUserId',
+      baseName: 'authPlatformUserId',
+      type: 'string',
+    },
+    {
+      name: 'orgId',
+      baseName: 'orgId',
+      type: 'string',
+    },
+    {
+      name: 'tenantId',
+      baseName: 'tenantId',
+      type: 'string',
+    },
+    {
+      name: 'email',
+      baseName: 'email',
+      type: 'string',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return CreateAccountRequest.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return CreateAccountRequest.attributeTypeMap;
+  }
 }
-

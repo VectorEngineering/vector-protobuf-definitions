@@ -14,63 +14,70 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface ResourceValidation
  */
 export interface ResourceValidation {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof ResourceValidation
-     */
-    missingResources?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof ResourceValidation
-     */
-    invalidReferences?: Array<string>;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof ResourceValidation
-     */
-    idViolations?: { [key: string]: string; };
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof ResourceValidation
+   */
+  missingResources?: Array<string>;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof ResourceValidation
+   */
+  invalidReferences?: Array<string>;
+  /**
+   *
+   * @type {{ [key: string]: string; }}
+   * @memberof ResourceValidation
+   */
+  idViolations?: { [key: string]: string };
 }
 
 /**
  * Check if a given object implements the ResourceValidation interface.
  */
-export function instanceOfResourceValidation(value: object): value is ResourceValidation {
-    return true;
+export function instanceOfResourceValidation(
+  value: object
+): value is ResourceValidation {
+  return true;
 }
 
 export function ResourceValidationFromJSON(json: any): ResourceValidation {
-    return ResourceValidationFromJSONTyped(json, false);
+  return ResourceValidationFromJSONTyped(json, false);
 }
 
-export function ResourceValidationFromJSONTyped(json: any, ignoreDiscriminator: boolean): ResourceValidation {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'missingResources': json['missingResources'] == null ? undefined : json['missingResources'],
-        'invalidReferences': json['invalidReferences'] == null ? undefined : json['invalidReferences'],
-        'idViolations': json['idViolations'] == null ? undefined : json['idViolations'],
-    };
+export function ResourceValidationFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): ResourceValidation {
+  if (json == null) {
+    return json;
+  }
+  return {
+    missingResources:
+      json['missingResources'] == null ? undefined : json['missingResources'],
+    invalidReferences:
+      json['invalidReferences'] == null ? undefined : json['invalidReferences'],
+    idViolations:
+      json['idViolations'] == null ? undefined : json['idViolations'],
+  };
 }
 
-export function ResourceValidationToJSON(value?: ResourceValidation | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'missingResources': value['missingResources'],
-        'invalidReferences': value['invalidReferences'],
-        'idViolations': value['idViolations'],
-    };
+export function ResourceValidationToJSON(
+  value?: ResourceValidation | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    missingResources: value['missingResources'],
+    invalidReferences: value['invalidReferences'],
+    idViolations: value['idViolations'],
+  };
 }
-

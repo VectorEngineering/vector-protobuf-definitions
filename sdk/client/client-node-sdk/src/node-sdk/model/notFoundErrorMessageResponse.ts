@@ -18,54 +18,58 @@ import { ResourceInfo } from './resourceInfo';
 import { Suggestions } from './suggestions';
 
 /**
-* Represents resource not found errors
-*/
+ * Represents resource not found errors
+ */
 export class NotFoundErrorMessageResponse {
-    'code'?: NotFoundErrorCode;
-    'message'?: string;
-    'resourceInfo'?: ResourceInfo;
-    'suggestions'?: Suggestions;
-    'apiInfo'?: APIInfo;
-    'errorResponse'?: ErrorResponse;
+  'code'?: NotFoundErrorCode;
+  'message'?: string;
+  'resourceInfo'?: ResourceInfo;
+  'suggestions'?: Suggestions;
+  'apiInfo'?: APIInfo;
+  'errorResponse'?: ErrorResponse;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "code",
-            "baseName": "code",
-            "type": "NotFoundErrorCode"
-        },
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
-        },
-        {
-            "name": "resourceInfo",
-            "baseName": "resourceInfo",
-            "type": "ResourceInfo"
-        },
-        {
-            "name": "suggestions",
-            "baseName": "suggestions",
-            "type": "Suggestions"
-        },
-        {
-            "name": "apiInfo",
-            "baseName": "apiInfo",
-            "type": "APIInfo"
-        },
-        {
-            "name": "errorResponse",
-            "baseName": "errorResponse",
-            "type": "ErrorResponse"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'code',
+      baseName: 'code',
+      type: 'NotFoundErrorCode',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'resourceInfo',
+      baseName: 'resourceInfo',
+      type: 'ResourceInfo',
+    },
+    {
+      name: 'suggestions',
+      baseName: 'suggestions',
+      type: 'Suggestions',
+    },
+    {
+      name: 'apiInfo',
+      baseName: 'apiInfo',
+      type: 'APIInfo',
+    },
+    {
+      name: 'errorResponse',
+      baseName: 'errorResponse',
+      type: 'ErrorResponse',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return NotFoundErrorMessageResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return NotFoundErrorMessageResponse.attributeTypeMap;
+  }
 }
 
-export namespace NotFoundErrorMessageResponse {
-}
+export namespace NotFoundErrorMessageResponse {}

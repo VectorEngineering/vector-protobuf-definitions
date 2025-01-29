@@ -14,19 +14,23 @@ import { RequestFile } from './models';
 import { Account } from './account';
 
 export class CreateAccountResponse {
-    'account'?: Account;
+  'account'?: Account;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "account",
-            "baseName": "account",
-            "type": "Account"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'account',
+      baseName: 'account',
+      type: 'Account',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return CreateAccountResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return CreateAccountResponse.attributeTypeMap;
+  }
 }
-

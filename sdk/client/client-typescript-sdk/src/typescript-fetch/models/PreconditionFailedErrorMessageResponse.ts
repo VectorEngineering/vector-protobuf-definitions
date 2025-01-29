@@ -15,9 +15,9 @@
 import { mapValues } from '../runtime';
 import type { ErrorResponse } from './ErrorResponse';
 import {
-    ErrorResponseFromJSON,
-    ErrorResponseFromJSONTyped,
-    ErrorResponseToJSON,
+  ErrorResponseFromJSON,
+  ErrorResponseFromJSONTyped,
+  ErrorResponseToJSON,
 } from './ErrorResponse';
 
 /**
@@ -26,66 +26,76 @@ import {
  * @interface PreconditionFailedErrorMessageResponse
  */
 export interface PreconditionFailedErrorMessageResponse {
-    /**
-     * 
-     * @type {number}
-     * @memberof PreconditionFailedErrorMessageResponse
-     */
-    code?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof PreconditionFailedErrorMessageResponse
-     */
-    message?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof PreconditionFailedErrorMessageResponse
-     */
-    failedConditions?: Array<string>;
-    /**
-     * 
-     * @type {ErrorResponse}
-     * @memberof PreconditionFailedErrorMessageResponse
-     */
-    errorResponse?: ErrorResponse;
+  /**
+   *
+   * @type {number}
+   * @memberof PreconditionFailedErrorMessageResponse
+   */
+  code?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof PreconditionFailedErrorMessageResponse
+   */
+  message?: string;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof PreconditionFailedErrorMessageResponse
+   */
+  failedConditions?: Array<string>;
+  /**
+   *
+   * @type {ErrorResponse}
+   * @memberof PreconditionFailedErrorMessageResponse
+   */
+  errorResponse?: ErrorResponse;
 }
 
 /**
  * Check if a given object implements the PreconditionFailedErrorMessageResponse interface.
  */
-export function instanceOfPreconditionFailedErrorMessageResponse(value: object): value is PreconditionFailedErrorMessageResponse {
-    return true;
+export function instanceOfPreconditionFailedErrorMessageResponse(
+  value: object
+): value is PreconditionFailedErrorMessageResponse {
+  return true;
 }
 
-export function PreconditionFailedErrorMessageResponseFromJSON(json: any): PreconditionFailedErrorMessageResponse {
-    return PreconditionFailedErrorMessageResponseFromJSONTyped(json, false);
+export function PreconditionFailedErrorMessageResponseFromJSON(
+  json: any
+): PreconditionFailedErrorMessageResponse {
+  return PreconditionFailedErrorMessageResponseFromJSONTyped(json, false);
 }
 
-export function PreconditionFailedErrorMessageResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): PreconditionFailedErrorMessageResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'code': json['code'] == null ? undefined : json['code'],
-        'message': json['message'] == null ? undefined : json['message'],
-        'failedConditions': json['failedConditions'] == null ? undefined : json['failedConditions'],
-        'errorResponse': json['errorResponse'] == null ? undefined : ErrorResponseFromJSON(json['errorResponse']),
-    };
+export function PreconditionFailedErrorMessageResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): PreconditionFailedErrorMessageResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    code: json['code'] == null ? undefined : json['code'],
+    message: json['message'] == null ? undefined : json['message'],
+    failedConditions:
+      json['failedConditions'] == null ? undefined : json['failedConditions'],
+    errorResponse:
+      json['errorResponse'] == null
+        ? undefined
+        : ErrorResponseFromJSON(json['errorResponse']),
+  };
 }
 
-export function PreconditionFailedErrorMessageResponseToJSON(value?: PreconditionFailedErrorMessageResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'code': value['code'],
-        'message': value['message'],
-        'failedConditions': value['failedConditions'],
-        'errorResponse': ErrorResponseToJSON(value['errorResponse']),
-    };
+export function PreconditionFailedErrorMessageResponseToJSON(
+  value?: PreconditionFailedErrorMessageResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    code: value['code'],
+    message: value['message'],
+    failedConditions: value['failedConditions'],
+    errorResponse: ErrorResponseToJSON(value['errorResponse']),
+  };
 }
-

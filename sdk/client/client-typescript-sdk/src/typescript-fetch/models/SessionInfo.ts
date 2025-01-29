@@ -14,71 +14,75 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface SessionInfo
  */
 export interface SessionInfo {
-    /**
-     * 
-     * @type {string}
-     * @memberof SessionInfo
-     */
-    sessionId?: string;
-    /**
-     * 
-     * @type {Date}
-     * @memberof SessionInfo
-     */
-    lastActive?: Date;
-    /**
-     * 
-     * @type {string}
-     * @memberof SessionInfo
-     */
-    deviceId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof SessionInfo
-     */
-    ipAddress?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof SessionInfo
+   */
+  sessionId?: string;
+  /**
+   *
+   * @type {Date}
+   * @memberof SessionInfo
+   */
+  lastActive?: Date;
+  /**
+   *
+   * @type {string}
+   * @memberof SessionInfo
+   */
+  deviceId?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof SessionInfo
+   */
+  ipAddress?: string;
 }
 
 /**
  * Check if a given object implements the SessionInfo interface.
  */
 export function instanceOfSessionInfo(value: object): value is SessionInfo {
-    return true;
+  return true;
 }
 
 export function SessionInfoFromJSON(json: any): SessionInfo {
-    return SessionInfoFromJSONTyped(json, false);
+  return SessionInfoFromJSONTyped(json, false);
 }
 
-export function SessionInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): SessionInfo {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'sessionId': json['sessionId'] == null ? undefined : json['sessionId'],
-        'lastActive': json['lastActive'] == null ? undefined : (new Date(json['lastActive'])),
-        'deviceId': json['deviceId'] == null ? undefined : json['deviceId'],
-        'ipAddress': json['ipAddress'] == null ? undefined : json['ipAddress'],
-    };
+export function SessionInfoFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): SessionInfo {
+  if (json == null) {
+    return json;
+  }
+  return {
+    sessionId: json['sessionId'] == null ? undefined : json['sessionId'],
+    lastActive:
+      json['lastActive'] == null ? undefined : new Date(json['lastActive']),
+    deviceId: json['deviceId'] == null ? undefined : json['deviceId'],
+    ipAddress: json['ipAddress'] == null ? undefined : json['ipAddress'],
+  };
 }
 
 export function SessionInfoToJSON(value?: SessionInfo | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'sessionId': value['sessionId'],
-        'lastActive': value['lastActive'] == null ? undefined : ((value['lastActive']).toISOString()),
-        'deviceId': value['deviceId'],
-        'ipAddress': value['ipAddress'],
-    };
+  if (value == null) {
+    return value;
+  }
+  return {
+    sessionId: value['sessionId'],
+    lastActive:
+      value['lastActive'] == null
+        ? undefined
+        : value['lastActive'].toISOString(),
+    deviceId: value['deviceId'],
+    ipAddress: value['ipAddress'],
+  };
 }
-

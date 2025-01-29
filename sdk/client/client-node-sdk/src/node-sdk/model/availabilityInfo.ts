@@ -13,37 +13,41 @@
 import { RequestFile } from './models';
 
 export class AvailabilityInfo {
-    'retryAfter'?: number;
-    'maintenanceWindow'?: string;
-    'affectedServices'?: Array<string>;
-    'statusPageUrl'?: string;
+  'retryAfter'?: number;
+  'maintenanceWindow'?: string;
+  'affectedServices'?: Array<string>;
+  'statusPageUrl'?: string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "retryAfter",
-            "baseName": "retryAfter",
-            "type": "number"
-        },
-        {
-            "name": "maintenanceWindow",
-            "baseName": "maintenanceWindow",
-            "type": "string"
-        },
-        {
-            "name": "affectedServices",
-            "baseName": "affectedServices",
-            "type": "Array<string>"
-        },
-        {
-            "name": "statusPageUrl",
-            "baseName": "statusPageUrl",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'retryAfter',
+      baseName: 'retryAfter',
+      type: 'number',
+    },
+    {
+      name: 'maintenanceWindow',
+      baseName: 'maintenanceWindow',
+      type: 'string',
+    },
+    {
+      name: 'affectedServices',
+      baseName: 'affectedServices',
+      type: 'Array<string>',
+    },
+    {
+      name: 'statusPageUrl',
+      baseName: 'statusPageUrl',
+      type: 'string',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return AvailabilityInfo.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return AvailabilityInfo.attributeTypeMap;
+  }
 }
-

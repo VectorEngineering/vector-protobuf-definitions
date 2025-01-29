@@ -15,15 +15,15 @@
 import { mapValues } from '../runtime';
 import type { BackgroundJobStatus } from './BackgroundJobStatus';
 import {
-    BackgroundJobStatusFromJSON,
-    BackgroundJobStatusFromJSONTyped,
-    BackgroundJobStatusToJSON,
+  BackgroundJobStatusFromJSON,
+  BackgroundJobStatusFromJSONTyped,
+  BackgroundJobStatusToJSON,
 } from './BackgroundJobStatus';
 
 /**
  * ScrapingJob represents a Google Maps scraping task.
  * This message defines both the configuration and current state of a scraping operation.
- * 
+ *
  * Key components:
  * - Basic metadata (id, name, timestamps)
  * - Job status tracking
@@ -31,13 +31,13 @@ import {
  * - Geographic settings
  * - Performance options
  * - Multi-tenant context
- * 
+ *
  * Database considerations:
  * - Stored in "scraping_jobs" table
  * - Uses GORM for ORM mapping
  * - Includes foreign key to Account
  * - Supports soft deletes
- * 
+ *
  * Usage example:
  * ```go
  * job := &ScrapingJob{
@@ -54,194 +54,203 @@ import {
  * @interface ScrapingJob
  */
 export interface ScrapingJob {
-    /**
-     * 
-     * @type {string}
-     * @memberof ScrapingJob
-     */
-    id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ScrapingJob
-     */
-    name?: string;
-    /**
-     * 
-     * @type {Date}
-     * @memberof ScrapingJob
-     */
-    createdAt?: Date;
-    /**
-     * 
-     * @type {BackgroundJobStatus}
-     * @memberof ScrapingJob
-     */
-    status?: BackgroundJobStatus;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof ScrapingJob
-     */
-    keywords?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof ScrapingJob
-     */
-    lang?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof ScrapingJob
-     */
-    zoom?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ScrapingJob
-     */
-    lat?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ScrapingJob
-     */
-    lon?: string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ScrapingJob
-     */
-    fastMode?: boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof ScrapingJob
-     */
-    radius?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof ScrapingJob
-     */
-    depth?: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof ScrapingJob
-     */
-    email?: boolean;
-    /**
-     * 
-     * @type {number}
-     * @memberof ScrapingJob
-     */
-    maxTime?: number;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof ScrapingJob
-     */
-    proxies?: Array<string>;
-    /**
-     * 
-     * @type {Date}
-     * @memberof ScrapingJob
-     */
-    updatedAt?: Date;
-    /**
-     * 
-     * @type {Date}
-     * @memberof ScrapingJob
-     */
-    deletedAt?: Date;
-    /**
-     * 
-     * @type {string}
-     * @memberof ScrapingJob
-     */
-    payloadType?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof ScrapingJob
-     */
-    priority?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ScrapingJob
-     */
-    payload?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof ScrapingJob
+   */
+  id?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof ScrapingJob
+   */
+  name?: string;
+  /**
+   *
+   * @type {Date}
+   * @memberof ScrapingJob
+   */
+  createdAt?: Date;
+  /**
+   *
+   * @type {BackgroundJobStatus}
+   * @memberof ScrapingJob
+   */
+  status?: BackgroundJobStatus;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof ScrapingJob
+   */
+  keywords?: Array<string>;
+  /**
+   *
+   * @type {string}
+   * @memberof ScrapingJob
+   */
+  lang?: string;
+  /**
+   *
+   * @type {number}
+   * @memberof ScrapingJob
+   */
+  zoom?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof ScrapingJob
+   */
+  lat?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof ScrapingJob
+   */
+  lon?: string;
+  /**
+   *
+   * @type {boolean}
+   * @memberof ScrapingJob
+   */
+  fastMode?: boolean;
+  /**
+   *
+   * @type {number}
+   * @memberof ScrapingJob
+   */
+  radius?: number;
+  /**
+   *
+   * @type {number}
+   * @memberof ScrapingJob
+   */
+  depth?: number;
+  /**
+   *
+   * @type {boolean}
+   * @memberof ScrapingJob
+   */
+  email?: boolean;
+  /**
+   *
+   * @type {number}
+   * @memberof ScrapingJob
+   */
+  maxTime?: number;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof ScrapingJob
+   */
+  proxies?: Array<string>;
+  /**
+   *
+   * @type {Date}
+   * @memberof ScrapingJob
+   */
+  updatedAt?: Date;
+  /**
+   *
+   * @type {Date}
+   * @memberof ScrapingJob
+   */
+  deletedAt?: Date;
+  /**
+   *
+   * @type {string}
+   * @memberof ScrapingJob
+   */
+  payloadType?: string;
+  /**
+   *
+   * @type {number}
+   * @memberof ScrapingJob
+   */
+  priority?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof ScrapingJob
+   */
+  payload?: string;
 }
 
 /**
  * Check if a given object implements the ScrapingJob interface.
  */
 export function instanceOfScrapingJob(value: object): value is ScrapingJob {
-    return true;
+  return true;
 }
 
 export function ScrapingJobFromJSON(json: any): ScrapingJob {
-    return ScrapingJobFromJSONTyped(json, false);
+  return ScrapingJobFromJSONTyped(json, false);
 }
 
-export function ScrapingJobFromJSONTyped(json: any, ignoreDiscriminator: boolean): ScrapingJob {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'id': json['id'] == null ? undefined : json['id'],
-        'name': json['name'] == null ? undefined : json['name'],
-        'createdAt': json['createdAt'] == null ? undefined : (new Date(json['createdAt'])),
-        'status': json['status'] == null ? undefined : BackgroundJobStatusFromJSON(json['status']),
-        'keywords': json['keywords'] == null ? undefined : json['keywords'],
-        'lang': json['lang'] == null ? undefined : json['lang'],
-        'zoom': json['zoom'] == null ? undefined : json['zoom'],
-        'lat': json['lat'] == null ? undefined : json['lat'],
-        'lon': json['lon'] == null ? undefined : json['lon'],
-        'fastMode': json['fastMode'] == null ? undefined : json['fastMode'],
-        'radius': json['radius'] == null ? undefined : json['radius'],
-        'depth': json['depth'] == null ? undefined : json['depth'],
-        'email': json['email'] == null ? undefined : json['email'],
-        'maxTime': json['maxTime'] == null ? undefined : json['maxTime'],
-        'proxies': json['proxies'] == null ? undefined : json['proxies'],
-        'updatedAt': json['updatedAt'] == null ? undefined : (new Date(json['updatedAt'])),
-        'deletedAt': json['deletedAt'] == null ? undefined : (new Date(json['deletedAt'])),
-        'payloadType': json['payloadType'] == null ? undefined : json['payloadType'],
-        'priority': json['priority'] == null ? undefined : json['priority'],
-        'payload': json['payload'] == null ? undefined : json['payload'],
-    };
+export function ScrapingJobFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): ScrapingJob {
+  if (json == null) {
+    return json;
+  }
+  return {
+    id: json['id'] == null ? undefined : json['id'],
+    name: json['name'] == null ? undefined : json['name'],
+    createdAt:
+      json['createdAt'] == null ? undefined : new Date(json['createdAt']),
+    status:
+      json['status'] == null
+        ? undefined
+        : BackgroundJobStatusFromJSON(json['status']),
+    keywords: json['keywords'] == null ? undefined : json['keywords'],
+    lang: json['lang'] == null ? undefined : json['lang'],
+    zoom: json['zoom'] == null ? undefined : json['zoom'],
+    lat: json['lat'] == null ? undefined : json['lat'],
+    lon: json['lon'] == null ? undefined : json['lon'],
+    fastMode: json['fastMode'] == null ? undefined : json['fastMode'],
+    radius: json['radius'] == null ? undefined : json['radius'],
+    depth: json['depth'] == null ? undefined : json['depth'],
+    email: json['email'] == null ? undefined : json['email'],
+    maxTime: json['maxTime'] == null ? undefined : json['maxTime'],
+    proxies: json['proxies'] == null ? undefined : json['proxies'],
+    updatedAt:
+      json['updatedAt'] == null ? undefined : new Date(json['updatedAt']),
+    deletedAt:
+      json['deletedAt'] == null ? undefined : new Date(json['deletedAt']),
+    payloadType: json['payloadType'] == null ? undefined : json['payloadType'],
+    priority: json['priority'] == null ? undefined : json['priority'],
+    payload: json['payload'] == null ? undefined : json['payload'],
+  };
 }
 
 export function ScrapingJobToJSON(value?: ScrapingJob | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'id': value['id'],
-        'name': value['name'],
-        'createdAt': value['createdAt'] == null ? undefined : ((value['createdAt']).toISOString()),
-        'status': BackgroundJobStatusToJSON(value['status']),
-        'keywords': value['keywords'],
-        'lang': value['lang'],
-        'zoom': value['zoom'],
-        'lat': value['lat'],
-        'lon': value['lon'],
-        'fastMode': value['fastMode'],
-        'radius': value['radius'],
-        'depth': value['depth'],
-        'email': value['email'],
-        'maxTime': value['maxTime'],
-        'proxies': value['proxies'],
-        'updatedAt': value['updatedAt'] == null ? undefined : ((value['updatedAt']).toISOString()),
-        'deletedAt': value['deletedAt'] == null ? undefined : ((value['deletedAt']).toISOString()),
-        'payloadType': value['payloadType'],
-        'priority': value['priority'],
-        'payload': value['payload'],
-    };
+  if (value == null) {
+    return value;
+  }
+  return {
+    id: value['id'],
+    name: value['name'],
+    createdAt:
+      value['createdAt'] == null ? undefined : value['createdAt'].toISOString(),
+    status: BackgroundJobStatusToJSON(value['status']),
+    keywords: value['keywords'],
+    lang: value['lang'],
+    zoom: value['zoom'],
+    lat: value['lat'],
+    lon: value['lon'],
+    fastMode: value['fastMode'],
+    radius: value['radius'],
+    depth: value['depth'],
+    email: value['email'],
+    maxTime: value['maxTime'],
+    proxies: value['proxies'],
+    updatedAt:
+      value['updatedAt'] == null ? undefined : value['updatedAt'].toISOString(),
+    deletedAt:
+      value['deletedAt'] == null ? undefined : value['deletedAt'].toISOString(),
+    payloadType: value['payloadType'],
+    priority: value['priority'],
+    payload: value['payload'],
+  };
 }
-

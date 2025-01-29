@@ -15,33 +15,33 @@
 import { mapValues } from '../runtime';
 import type { InternalErrorCode } from './InternalErrorCode';
 import {
-    InternalErrorCodeFromJSON,
-    InternalErrorCodeFromJSONTyped,
-    InternalErrorCodeToJSON,
+  InternalErrorCodeFromJSON,
+  InternalErrorCodeFromJSONTyped,
+  InternalErrorCodeToJSON,
 } from './InternalErrorCode';
 import type { RateLimitContext } from './RateLimitContext';
 import {
-    RateLimitContextFromJSON,
-    RateLimitContextFromJSONTyped,
-    RateLimitContextToJSON,
+  RateLimitContextFromJSON,
+  RateLimitContextFromJSONTyped,
+  RateLimitContextToJSON,
 } from './RateLimitContext';
 import type { QuotaInfo } from './QuotaInfo';
 import {
-    QuotaInfoFromJSON,
-    QuotaInfoFromJSONTyped,
-    QuotaInfoToJSON,
+  QuotaInfoFromJSON,
+  QuotaInfoFromJSONTyped,
+  QuotaInfoToJSON,
 } from './QuotaInfo';
 import type { LimitInfo } from './LimitInfo';
 import {
-    LimitInfoFromJSON,
-    LimitInfoFromJSONTyped,
-    LimitInfoToJSON,
+  LimitInfoFromJSON,
+  LimitInfoFromJSONTyped,
+  LimitInfoToJSON,
 } from './LimitInfo';
 import type { ErrorResponse } from './ErrorResponse';
 import {
-    ErrorResponseFromJSON,
-    ErrorResponseFromJSONTyped,
-    ErrorResponseToJSON,
+  ErrorResponseFromJSON,
+  ErrorResponseFromJSONTyped,
+  ErrorResponseToJSON,
 } from './ErrorResponse';
 
 /**
@@ -50,82 +50,103 @@ import {
  * @interface RateLimitErrorMessageResponse
  */
 export interface RateLimitErrorMessageResponse {
-    /**
-     * 
-     * @type {InternalErrorCode}
-     * @memberof RateLimitErrorMessageResponse
-     */
-    code?: InternalErrorCode;
-    /**
-     * 
-     * @type {string}
-     * @memberof RateLimitErrorMessageResponse
-     */
-    message?: string;
-    /**
-     * 
-     * @type {LimitInfo}
-     * @memberof RateLimitErrorMessageResponse
-     */
-    limitInfo?: LimitInfo;
-    /**
-     * 
-     * @type {QuotaInfo}
-     * @memberof RateLimitErrorMessageResponse
-     */
-    quotaInfo?: QuotaInfo;
-    /**
-     * 
-     * @type {RateLimitContext}
-     * @memberof RateLimitErrorMessageResponse
-     */
-    context?: RateLimitContext;
-    /**
-     * 
-     * @type {ErrorResponse}
-     * @memberof RateLimitErrorMessageResponse
-     */
-    errorResponse?: ErrorResponse;
+  /**
+   *
+   * @type {InternalErrorCode}
+   * @memberof RateLimitErrorMessageResponse
+   */
+  code?: InternalErrorCode;
+  /**
+   *
+   * @type {string}
+   * @memberof RateLimitErrorMessageResponse
+   */
+  message?: string;
+  /**
+   *
+   * @type {LimitInfo}
+   * @memberof RateLimitErrorMessageResponse
+   */
+  limitInfo?: LimitInfo;
+  /**
+   *
+   * @type {QuotaInfo}
+   * @memberof RateLimitErrorMessageResponse
+   */
+  quotaInfo?: QuotaInfo;
+  /**
+   *
+   * @type {RateLimitContext}
+   * @memberof RateLimitErrorMessageResponse
+   */
+  context?: RateLimitContext;
+  /**
+   *
+   * @type {ErrorResponse}
+   * @memberof RateLimitErrorMessageResponse
+   */
+  errorResponse?: ErrorResponse;
 }
 
 /**
  * Check if a given object implements the RateLimitErrorMessageResponse interface.
  */
-export function instanceOfRateLimitErrorMessageResponse(value: object): value is RateLimitErrorMessageResponse {
-    return true;
+export function instanceOfRateLimitErrorMessageResponse(
+  value: object
+): value is RateLimitErrorMessageResponse {
+  return true;
 }
 
-export function RateLimitErrorMessageResponseFromJSON(json: any): RateLimitErrorMessageResponse {
-    return RateLimitErrorMessageResponseFromJSONTyped(json, false);
+export function RateLimitErrorMessageResponseFromJSON(
+  json: any
+): RateLimitErrorMessageResponse {
+  return RateLimitErrorMessageResponseFromJSONTyped(json, false);
 }
 
-export function RateLimitErrorMessageResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): RateLimitErrorMessageResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'code': json['code'] == null ? undefined : InternalErrorCodeFromJSON(json['code']),
-        'message': json['message'] == null ? undefined : json['message'],
-        'limitInfo': json['limitInfo'] == null ? undefined : LimitInfoFromJSON(json['limitInfo']),
-        'quotaInfo': json['quotaInfo'] == null ? undefined : QuotaInfoFromJSON(json['quotaInfo']),
-        'context': json['context'] == null ? undefined : RateLimitContextFromJSON(json['context']),
-        'errorResponse': json['errorResponse'] == null ? undefined : ErrorResponseFromJSON(json['errorResponse']),
-    };
+export function RateLimitErrorMessageResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): RateLimitErrorMessageResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    code:
+      json['code'] == null
+        ? undefined
+        : InternalErrorCodeFromJSON(json['code']),
+    message: json['message'] == null ? undefined : json['message'],
+    limitInfo:
+      json['limitInfo'] == null
+        ? undefined
+        : LimitInfoFromJSON(json['limitInfo']),
+    quotaInfo:
+      json['quotaInfo'] == null
+        ? undefined
+        : QuotaInfoFromJSON(json['quotaInfo']),
+    context:
+      json['context'] == null
+        ? undefined
+        : RateLimitContextFromJSON(json['context']),
+    errorResponse:
+      json['errorResponse'] == null
+        ? undefined
+        : ErrorResponseFromJSON(json['errorResponse']),
+  };
 }
 
-export function RateLimitErrorMessageResponseToJSON(value?: RateLimitErrorMessageResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'code': InternalErrorCodeToJSON(value['code']),
-        'message': value['message'],
-        'limitInfo': LimitInfoToJSON(value['limitInfo']),
-        'quotaInfo': QuotaInfoToJSON(value['quotaInfo']),
-        'context': RateLimitContextToJSON(value['context']),
-        'errorResponse': ErrorResponseToJSON(value['errorResponse']),
-    };
+export function RateLimitErrorMessageResponseToJSON(
+  value?: RateLimitErrorMessageResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    code: InternalErrorCodeToJSON(value['code']),
+    message: value['message'],
+    limitInfo: LimitInfoToJSON(value['limitInfo']),
+    quotaInfo: QuotaInfoToJSON(value['quotaInfo']),
+    context: RateLimitContextToJSON(value['context']),
+    errorResponse: ErrorResponseToJSON(value['errorResponse']),
+  };
 }
-

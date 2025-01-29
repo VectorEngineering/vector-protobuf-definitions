@@ -15,53 +15,65 @@
 import { mapValues } from '../runtime';
 import type { ScrapingJob } from './ScrapingJob';
 import {
-    ScrapingJobFromJSON,
-    ScrapingJobFromJSONTyped,
-    ScrapingJobToJSON,
+  ScrapingJobFromJSON,
+  ScrapingJobFromJSONTyped,
+  ScrapingJobToJSON,
 } from './ScrapingJob';
 
 /**
- * 
+ *
  * @export
  * @interface ListScrapingJobsResponse
  */
 export interface ListScrapingJobsResponse {
-    /**
-     * 
-     * @type {Array<ScrapingJob>}
-     * @memberof ListScrapingJobsResponse
-     */
-    jobs?: Array<ScrapingJob>;
+  /**
+   *
+   * @type {Array<ScrapingJob>}
+   * @memberof ListScrapingJobsResponse
+   */
+  jobs?: Array<ScrapingJob>;
 }
 
 /**
  * Check if a given object implements the ListScrapingJobsResponse interface.
  */
-export function instanceOfListScrapingJobsResponse(value: object): value is ListScrapingJobsResponse {
-    return true;
+export function instanceOfListScrapingJobsResponse(
+  value: object
+): value is ListScrapingJobsResponse {
+  return true;
 }
 
-export function ListScrapingJobsResponseFromJSON(json: any): ListScrapingJobsResponse {
-    return ListScrapingJobsResponseFromJSONTyped(json, false);
+export function ListScrapingJobsResponseFromJSON(
+  json: any
+): ListScrapingJobsResponse {
+  return ListScrapingJobsResponseFromJSONTyped(json, false);
 }
 
-export function ListScrapingJobsResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): ListScrapingJobsResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'jobs': json['jobs'] == null ? undefined : ((json['jobs'] as Array<any>).map(ScrapingJobFromJSON)),
-    };
+export function ListScrapingJobsResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): ListScrapingJobsResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    jobs:
+      json['jobs'] == null
+        ? undefined
+        : (json['jobs'] as Array<any>).map(ScrapingJobFromJSON),
+  };
 }
 
-export function ListScrapingJobsResponseToJSON(value?: ListScrapingJobsResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'jobs': value['jobs'] == null ? undefined : ((value['jobs'] as Array<any>).map(ScrapingJobToJSON)),
-    };
+export function ListScrapingJobsResponseToJSON(
+  value?: ListScrapingJobsResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    jobs:
+      value['jobs'] == null
+        ? undefined
+        : (value['jobs'] as Array<any>).map(ScrapingJobToJSON),
+  };
 }
-

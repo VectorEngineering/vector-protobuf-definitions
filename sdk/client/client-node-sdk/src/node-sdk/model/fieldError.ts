@@ -13,25 +13,29 @@
 import { RequestFile } from './models';
 
 export class FieldError {
-    'field'?: string;
-    'error'?: string;
+  'field'?: string;
+  'error'?: string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "field",
-            "baseName": "field",
-            "type": "string"
-        },
-        {
-            "name": "error",
-            "baseName": "error",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'field',
+      baseName: 'field',
+      type: 'string',
+    },
+    {
+      name: 'error',
+      baseName: 'error',
+      type: 'string',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return FieldError.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return FieldError.attributeTypeMap;
+  }
 }
-

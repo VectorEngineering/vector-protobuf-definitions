@@ -15,9 +15,9 @@
 import { mapValues } from '../runtime';
 import type { ErrorResponse } from './ErrorResponse';
 import {
-    ErrorResponseFromJSON,
-    ErrorResponseFromJSONTyped,
-    ErrorResponseToJSON,
+  ErrorResponseFromJSON,
+  ErrorResponseFromJSONTyped,
+  ErrorResponseToJSON,
 } from './ErrorResponse';
 
 /**
@@ -26,66 +26,76 @@ import {
  * @interface MethodNotAllowedErrorMessageResponse
  */
 export interface MethodNotAllowedErrorMessageResponse {
-    /**
-     * 
-     * @type {number}
-     * @memberof MethodNotAllowedErrorMessageResponse
-     */
-    code?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof MethodNotAllowedErrorMessageResponse
-     */
-    message?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof MethodNotAllowedErrorMessageResponse
-     */
-    allowedMethods?: Array<string>;
-    /**
-     * 
-     * @type {ErrorResponse}
-     * @memberof MethodNotAllowedErrorMessageResponse
-     */
-    errorResponse?: ErrorResponse;
+  /**
+   *
+   * @type {number}
+   * @memberof MethodNotAllowedErrorMessageResponse
+   */
+  code?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof MethodNotAllowedErrorMessageResponse
+   */
+  message?: string;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof MethodNotAllowedErrorMessageResponse
+   */
+  allowedMethods?: Array<string>;
+  /**
+   *
+   * @type {ErrorResponse}
+   * @memberof MethodNotAllowedErrorMessageResponse
+   */
+  errorResponse?: ErrorResponse;
 }
 
 /**
  * Check if a given object implements the MethodNotAllowedErrorMessageResponse interface.
  */
-export function instanceOfMethodNotAllowedErrorMessageResponse(value: object): value is MethodNotAllowedErrorMessageResponse {
-    return true;
+export function instanceOfMethodNotAllowedErrorMessageResponse(
+  value: object
+): value is MethodNotAllowedErrorMessageResponse {
+  return true;
 }
 
-export function MethodNotAllowedErrorMessageResponseFromJSON(json: any): MethodNotAllowedErrorMessageResponse {
-    return MethodNotAllowedErrorMessageResponseFromJSONTyped(json, false);
+export function MethodNotAllowedErrorMessageResponseFromJSON(
+  json: any
+): MethodNotAllowedErrorMessageResponse {
+  return MethodNotAllowedErrorMessageResponseFromJSONTyped(json, false);
 }
 
-export function MethodNotAllowedErrorMessageResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): MethodNotAllowedErrorMessageResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'code': json['code'] == null ? undefined : json['code'],
-        'message': json['message'] == null ? undefined : json['message'],
-        'allowedMethods': json['allowedMethods'] == null ? undefined : json['allowedMethods'],
-        'errorResponse': json['errorResponse'] == null ? undefined : ErrorResponseFromJSON(json['errorResponse']),
-    };
+export function MethodNotAllowedErrorMessageResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): MethodNotAllowedErrorMessageResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    code: json['code'] == null ? undefined : json['code'],
+    message: json['message'] == null ? undefined : json['message'],
+    allowedMethods:
+      json['allowedMethods'] == null ? undefined : json['allowedMethods'],
+    errorResponse:
+      json['errorResponse'] == null
+        ? undefined
+        : ErrorResponseFromJSON(json['errorResponse']),
+  };
 }
 
-export function MethodNotAllowedErrorMessageResponseToJSON(value?: MethodNotAllowedErrorMessageResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'code': value['code'],
-        'message': value['message'],
-        'allowedMethods': value['allowedMethods'],
-        'errorResponse': ErrorResponseToJSON(value['errorResponse']),
-    };
+export function MethodNotAllowedErrorMessageResponseToJSON(
+  value?: MethodNotAllowedErrorMessageResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    code: value['code'],
+    message: value['message'],
+    allowedMethods: value['allowedMethods'],
+    errorResponse: ErrorResponseToJSON(value['errorResponse']),
+  };
 }
-

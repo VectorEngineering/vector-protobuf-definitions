@@ -15,53 +15,60 @@
 import { mapValues } from '../runtime';
 import type { Account } from './Account';
 import {
-    AccountFromJSON,
-    AccountFromJSONTyped,
-    AccountToJSON,
+  AccountFromJSON,
+  AccountFromJSONTyped,
+  AccountToJSON,
 } from './Account';
 
 /**
- * 
+ *
  * @export
  * @interface CreateAccountResponse
  */
 export interface CreateAccountResponse {
-    /**
-     * 
-     * @type {Account}
-     * @memberof CreateAccountResponse
-     */
-    account?: Account;
+  /**
+   *
+   * @type {Account}
+   * @memberof CreateAccountResponse
+   */
+  account?: Account;
 }
 
 /**
  * Check if a given object implements the CreateAccountResponse interface.
  */
-export function instanceOfCreateAccountResponse(value: object): value is CreateAccountResponse {
-    return true;
+export function instanceOfCreateAccountResponse(
+  value: object
+): value is CreateAccountResponse {
+  return true;
 }
 
-export function CreateAccountResponseFromJSON(json: any): CreateAccountResponse {
-    return CreateAccountResponseFromJSONTyped(json, false);
+export function CreateAccountResponseFromJSON(
+  json: any
+): CreateAccountResponse {
+  return CreateAccountResponseFromJSONTyped(json, false);
 }
 
-export function CreateAccountResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateAccountResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'account': json['account'] == null ? undefined : AccountFromJSON(json['account']),
-    };
+export function CreateAccountResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): CreateAccountResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    account:
+      json['account'] == null ? undefined : AccountFromJSON(json['account']),
+  };
 }
 
-export function CreateAccountResponseToJSON(value?: CreateAccountResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'account': AccountToJSON(value['account']),
-    };
+export function CreateAccountResponseToJSON(
+  value?: CreateAccountResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    account: AccountToJSON(value['account']),
+  };
 }
-

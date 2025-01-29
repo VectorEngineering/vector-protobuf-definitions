@@ -13,31 +13,35 @@
 import { RequestFile } from './models';
 
 export class SchemaValidation {
-    'schemaVersion'?: string;
-    'invalidPatterns'?: Array<string>;
-    'typeMismatches'?: Array<string>;
+  'schemaVersion'?: string;
+  'invalidPatterns'?: Array<string>;
+  'typeMismatches'?: Array<string>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "schemaVersion",
-            "baseName": "schemaVersion",
-            "type": "string"
-        },
-        {
-            "name": "invalidPatterns",
-            "baseName": "invalidPatterns",
-            "type": "Array<string>"
-        },
-        {
-            "name": "typeMismatches",
-            "baseName": "typeMismatches",
-            "type": "Array<string>"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'schemaVersion',
+      baseName: 'schemaVersion',
+      type: 'string',
+    },
+    {
+      name: 'invalidPatterns',
+      baseName: 'invalidPatterns',
+      type: 'Array<string>',
+    },
+    {
+      name: 'typeMismatches',
+      baseName: 'typeMismatches',
+      type: 'Array<string>',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return SchemaValidation.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return SchemaValidation.attributeTypeMap;
+  }
 }
-

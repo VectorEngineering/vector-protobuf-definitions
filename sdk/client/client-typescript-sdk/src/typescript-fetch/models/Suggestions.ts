@@ -14,71 +14,74 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface Suggestions
  */
 export interface Suggestions {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof Suggestions
-     */
-    similarResources?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof Suggestions
-     */
-    alternativePaths?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof Suggestions
-     */
-    documentationUrl?: string;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof Suggestions
-     */
-    hints?: { [key: string]: string; };
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof Suggestions
+   */
+  similarResources?: Array<string>;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof Suggestions
+   */
+  alternativePaths?: Array<string>;
+  /**
+   *
+   * @type {string}
+   * @memberof Suggestions
+   */
+  documentationUrl?: string;
+  /**
+   *
+   * @type {{ [key: string]: string; }}
+   * @memberof Suggestions
+   */
+  hints?: { [key: string]: string };
 }
 
 /**
  * Check if a given object implements the Suggestions interface.
  */
 export function instanceOfSuggestions(value: object): value is Suggestions {
-    return true;
+  return true;
 }
 
 export function SuggestionsFromJSON(json: any): Suggestions {
-    return SuggestionsFromJSONTyped(json, false);
+  return SuggestionsFromJSONTyped(json, false);
 }
 
-export function SuggestionsFromJSONTyped(json: any, ignoreDiscriminator: boolean): Suggestions {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'similarResources': json['similarResources'] == null ? undefined : json['similarResources'],
-        'alternativePaths': json['alternativePaths'] == null ? undefined : json['alternativePaths'],
-        'documentationUrl': json['documentationUrl'] == null ? undefined : json['documentationUrl'],
-        'hints': json['hints'] == null ? undefined : json['hints'],
-    };
+export function SuggestionsFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): Suggestions {
+  if (json == null) {
+    return json;
+  }
+  return {
+    similarResources:
+      json['similarResources'] == null ? undefined : json['similarResources'],
+    alternativePaths:
+      json['alternativePaths'] == null ? undefined : json['alternativePaths'],
+    documentationUrl:
+      json['documentationUrl'] == null ? undefined : json['documentationUrl'],
+    hints: json['hints'] == null ? undefined : json['hints'],
+  };
 }
 
 export function SuggestionsToJSON(value?: Suggestions | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'similarResources': value['similarResources'],
-        'alternativePaths': value['alternativePaths'],
-        'documentationUrl': value['documentationUrl'],
-        'hints': value['hints'],
-    };
+  if (value == null) {
+    return value;
+  }
+  return {
+    similarResources: value['similarResources'],
+    alternativePaths: value['alternativePaths'],
+    documentationUrl: value['documentationUrl'],
+    hints: value['hints'],
+  };
 }
-

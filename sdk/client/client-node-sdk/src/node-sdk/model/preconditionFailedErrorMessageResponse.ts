@@ -14,40 +14,44 @@ import { RequestFile } from './models';
 import { ErrorResponse } from './errorResponse';
 
 /**
-* Represents errors when a precondition provided in the request fails
-*/
+ * Represents errors when a precondition provided in the request fails
+ */
 export class PreconditionFailedErrorMessageResponse {
-    'code'?: number;
-    'message'?: string;
-    'failedConditions'?: Array<string>;
-    'errorResponse'?: ErrorResponse;
+  'code'?: number;
+  'message'?: string;
+  'failedConditions'?: Array<string>;
+  'errorResponse'?: ErrorResponse;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "code",
-            "baseName": "code",
-            "type": "number"
-        },
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
-        },
-        {
-            "name": "failedConditions",
-            "baseName": "failedConditions",
-            "type": "Array<string>"
-        },
-        {
-            "name": "errorResponse",
-            "baseName": "errorResponse",
-            "type": "ErrorResponse"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'code',
+      baseName: 'code',
+      type: 'number',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'failedConditions',
+      baseName: 'failedConditions',
+      type: 'Array<string>',
+    },
+    {
+      name: 'errorResponse',
+      baseName: 'errorResponse',
+      type: 'ErrorResponse',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return PreconditionFailedErrorMessageResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return PreconditionFailedErrorMessageResponse.attributeTypeMap;
+  }
 }
-

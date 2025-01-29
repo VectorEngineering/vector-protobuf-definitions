@@ -15,40 +15,44 @@ import { ErrorResponse } from './errorResponse';
 import { PaymentInfo } from './paymentInfo';
 
 /**
-* Indicates that payment is required to proceed
-*/
+ * Indicates that payment is required to proceed
+ */
 export class PaymentRequiredErrorMessageResponse {
-    'code'?: number;
-    'message'?: string;
-    'paymentInfo'?: PaymentInfo;
-    'errorResponse'?: ErrorResponse;
+  'code'?: number;
+  'message'?: string;
+  'paymentInfo'?: PaymentInfo;
+  'errorResponse'?: ErrorResponse;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "code",
-            "baseName": "code",
-            "type": "number"
-        },
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
-        },
-        {
-            "name": "paymentInfo",
-            "baseName": "paymentInfo",
-            "type": "PaymentInfo"
-        },
-        {
-            "name": "errorResponse",
-            "baseName": "errorResponse",
-            "type": "ErrorResponse"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'code',
+      baseName: 'code',
+      type: 'number',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'paymentInfo',
+      baseName: 'paymentInfo',
+      type: 'PaymentInfo',
+    },
+    {
+      name: 'errorResponse',
+      baseName: 'errorResponse',
+      type: 'ErrorResponse',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return PaymentRequiredErrorMessageResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return PaymentRequiredErrorMessageResponse.attributeTypeMap;
+  }
 }
-

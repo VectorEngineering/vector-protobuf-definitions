@@ -13,37 +13,41 @@
 import { RequestFile } from './models';
 
 export class Suggestions {
-    'similarResources'?: Array<string>;
-    'alternativePaths'?: Array<string>;
-    'documentationUrl'?: string;
-    'hints'?: { [key: string]: string | undefined; };
+  'similarResources'?: Array<string>;
+  'alternativePaths'?: Array<string>;
+  'documentationUrl'?: string;
+  'hints'?: { [key: string]: string | undefined };
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "similarResources",
-            "baseName": "similarResources",
-            "type": "Array<string>"
-        },
-        {
-            "name": "alternativePaths",
-            "baseName": "alternativePaths",
-            "type": "Array<string>"
-        },
-        {
-            "name": "documentationUrl",
-            "baseName": "documentationUrl",
-            "type": "string"
-        },
-        {
-            "name": "hints",
-            "baseName": "hints",
-            "type": "{ [key: string]: string | undefined; }"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'similarResources',
+      baseName: 'similarResources',
+      type: 'Array<string>',
+    },
+    {
+      name: 'alternativePaths',
+      baseName: 'alternativePaths',
+      type: 'Array<string>',
+    },
+    {
+      name: 'documentationUrl',
+      baseName: 'documentationUrl',
+      type: 'string',
+    },
+    {
+      name: 'hints',
+      baseName: 'hints',
+      type: '{ [key: string]: string | undefined; }',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return Suggestions.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return Suggestions.attributeTypeMap;
+  }
 }
-

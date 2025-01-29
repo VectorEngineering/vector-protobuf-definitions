@@ -14,79 +14,79 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface ResourceInfo
  */
 export interface ResourceInfo {
-    /**
-     * 
-     * @type {string}
-     * @memberof ResourceInfo
-     */
-    type?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ResourceInfo
-     */
-    id?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ResourceInfo
-     */
-    path?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ResourceInfo
-     */
-    tenantId?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof ResourceInfo
-     */
-    scopes?: Array<string>;
+  /**
+   *
+   * @type {string}
+   * @memberof ResourceInfo
+   */
+  type?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof ResourceInfo
+   */
+  id?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof ResourceInfo
+   */
+  path?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof ResourceInfo
+   */
+  tenantId?: string;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof ResourceInfo
+   */
+  scopes?: Array<string>;
 }
 
 /**
  * Check if a given object implements the ResourceInfo interface.
  */
 export function instanceOfResourceInfo(value: object): value is ResourceInfo {
-    return true;
+  return true;
 }
 
 export function ResourceInfoFromJSON(json: any): ResourceInfo {
-    return ResourceInfoFromJSONTyped(json, false);
+  return ResourceInfoFromJSONTyped(json, false);
 }
 
-export function ResourceInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): ResourceInfo {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'type': json['type'] == null ? undefined : json['type'],
-        'id': json['id'] == null ? undefined : json['id'],
-        'path': json['path'] == null ? undefined : json['path'],
-        'tenantId': json['tenantId'] == null ? undefined : json['tenantId'],
-        'scopes': json['scopes'] == null ? undefined : json['scopes'],
-    };
+export function ResourceInfoFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): ResourceInfo {
+  if (json == null) {
+    return json;
+  }
+  return {
+    type: json['type'] == null ? undefined : json['type'],
+    id: json['id'] == null ? undefined : json['id'],
+    path: json['path'] == null ? undefined : json['path'],
+    tenantId: json['tenantId'] == null ? undefined : json['tenantId'],
+    scopes: json['scopes'] == null ? undefined : json['scopes'],
+  };
 }
 
 export function ResourceInfoToJSON(value?: ResourceInfo | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'type': value['type'],
-        'id': value['id'],
-        'path': value['path'],
-        'tenantId': value['tenantId'],
-        'scopes': value['scopes'],
-    };
+  if (value == null) {
+    return value;
+  }
+  return {
+    type: value['type'],
+    id: value['id'],
+    path: value['path'],
+    tenantId: value['tenantId'],
+    scopes: value['scopes'],
+  };
 }
-

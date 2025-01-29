@@ -15,53 +15,60 @@
 import { mapValues } from '../runtime';
 import type { Account } from './Account';
 import {
-    AccountFromJSON,
-    AccountFromJSONTyped,
-    AccountToJSON,
+  AccountFromJSON,
+  AccountFromJSONTyped,
+  AccountToJSON,
 } from './Account';
 
 /**
- * 
+ *
  * @export
  * @interface UpdateAccountResponse
  */
 export interface UpdateAccountResponse {
-    /**
-     * 
-     * @type {Account}
-     * @memberof UpdateAccountResponse
-     */
-    account?: Account;
+  /**
+   *
+   * @type {Account}
+   * @memberof UpdateAccountResponse
+   */
+  account?: Account;
 }
 
 /**
  * Check if a given object implements the UpdateAccountResponse interface.
  */
-export function instanceOfUpdateAccountResponse(value: object): value is UpdateAccountResponse {
-    return true;
+export function instanceOfUpdateAccountResponse(
+  value: object
+): value is UpdateAccountResponse {
+  return true;
 }
 
-export function UpdateAccountResponseFromJSON(json: any): UpdateAccountResponse {
-    return UpdateAccountResponseFromJSONTyped(json, false);
+export function UpdateAccountResponseFromJSON(
+  json: any
+): UpdateAccountResponse {
+  return UpdateAccountResponseFromJSONTyped(json, false);
 }
 
-export function UpdateAccountResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): UpdateAccountResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'account': json['account'] == null ? undefined : AccountFromJSON(json['account']),
-    };
+export function UpdateAccountResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): UpdateAccountResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    account:
+      json['account'] == null ? undefined : AccountFromJSON(json['account']),
+  };
 }
 
-export function UpdateAccountResponseToJSON(value?: UpdateAccountResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'account': AccountToJSON(value['account']),
-    };
+export function UpdateAccountResponseToJSON(
+  value?: UpdateAccountResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    account: AccountToJSON(value['account']),
+  };
 }
-

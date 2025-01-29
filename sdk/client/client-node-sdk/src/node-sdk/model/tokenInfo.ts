@@ -13,43 +13,47 @@
 import { RequestFile } from './models';
 
 export class TokenInfo {
-    'tokenId'?: string;
-    'tokenType'?: string;
-    'expiry'?: Date;
-    'issuer'?: string;
-    'audiences'?: Array<string>;
+  'tokenId'?: string;
+  'tokenType'?: string;
+  'expiry'?: Date;
+  'issuer'?: string;
+  'audiences'?: Array<string>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "tokenId",
-            "baseName": "tokenId",
-            "type": "string"
-        },
-        {
-            "name": "tokenType",
-            "baseName": "tokenType",
-            "type": "string"
-        },
-        {
-            "name": "expiry",
-            "baseName": "expiry",
-            "type": "Date"
-        },
-        {
-            "name": "issuer",
-            "baseName": "issuer",
-            "type": "string"
-        },
-        {
-            "name": "audiences",
-            "baseName": "audiences",
-            "type": "Array<string>"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'tokenId',
+      baseName: 'tokenId',
+      type: 'string',
+    },
+    {
+      name: 'tokenType',
+      baseName: 'tokenType',
+      type: 'string',
+    },
+    {
+      name: 'expiry',
+      baseName: 'expiry',
+      type: 'Date',
+    },
+    {
+      name: 'issuer',
+      baseName: 'issuer',
+      type: 'string',
+    },
+    {
+      name: 'audiences',
+      baseName: 'audiences',
+      type: 'Array<string>',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return TokenInfo.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return TokenInfo.attributeTypeMap;
+  }
 }
-

@@ -14,54 +14,50 @@
 
 import { mapValues } from '../runtime';
 import type { Status } from './Status';
-import {
-    StatusFromJSON,
-    StatusFromJSONTyped,
-    StatusToJSON,
-} from './Status';
+import { StatusFromJSON, StatusFromJSONTyped, StatusToJSON } from './Status';
 
 /**
- * 
+ *
  * @export
  * @interface ErrorResponse
  */
 export interface ErrorResponse {
-    /**
-     * 
-     * @type {Status}
-     * @memberof ErrorResponse
-     */
-    status?: Status;
+  /**
+   *
+   * @type {Status}
+   * @memberof ErrorResponse
+   */
+  status?: Status;
 }
 
 /**
  * Check if a given object implements the ErrorResponse interface.
  */
 export function instanceOfErrorResponse(value: object): value is ErrorResponse {
-    return true;
+  return true;
 }
 
 export function ErrorResponseFromJSON(json: any): ErrorResponse {
-    return ErrorResponseFromJSONTyped(json, false);
+  return ErrorResponseFromJSONTyped(json, false);
 }
 
-export function ErrorResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): ErrorResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'status': json['status'] == null ? undefined : StatusFromJSON(json['status']),
-    };
+export function ErrorResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): ErrorResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    status: json['status'] == null ? undefined : StatusFromJSON(json['status']),
+  };
 }
 
 export function ErrorResponseToJSON(value?: ErrorResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'status': StatusToJSON(value['status']),
-    };
+  if (value == null) {
+    return value;
+  }
+  return {
+    status: StatusToJSON(value['status']),
+  };
 }
-

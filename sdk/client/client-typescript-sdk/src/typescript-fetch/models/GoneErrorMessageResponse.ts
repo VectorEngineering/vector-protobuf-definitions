@@ -15,9 +15,9 @@
 import { mapValues } from '../runtime';
 import type { ErrorResponse } from './ErrorResponse';
 import {
-    ErrorResponseFromJSON,
-    ErrorResponseFromJSONTyped,
-    ErrorResponseToJSON,
+  ErrorResponseFromJSON,
+  ErrorResponseFromJSONTyped,
+  ErrorResponseToJSON,
 } from './ErrorResponse';
 
 /**
@@ -26,66 +26,75 @@ import {
  * @interface GoneErrorMessageResponse
  */
 export interface GoneErrorMessageResponse {
-    /**
-     * 
-     * @type {number}
-     * @memberof GoneErrorMessageResponse
-     */
-    code?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof GoneErrorMessageResponse
-     */
-    message?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GoneErrorMessageResponse
-     */
-    resource?: string;
-    /**
-     * 
-     * @type {ErrorResponse}
-     * @memberof GoneErrorMessageResponse
-     */
-    errorResponse?: ErrorResponse;
+  /**
+   *
+   * @type {number}
+   * @memberof GoneErrorMessageResponse
+   */
+  code?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof GoneErrorMessageResponse
+   */
+  message?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof GoneErrorMessageResponse
+   */
+  resource?: string;
+  /**
+   *
+   * @type {ErrorResponse}
+   * @memberof GoneErrorMessageResponse
+   */
+  errorResponse?: ErrorResponse;
 }
 
 /**
  * Check if a given object implements the GoneErrorMessageResponse interface.
  */
-export function instanceOfGoneErrorMessageResponse(value: object): value is GoneErrorMessageResponse {
-    return true;
+export function instanceOfGoneErrorMessageResponse(
+  value: object
+): value is GoneErrorMessageResponse {
+  return true;
 }
 
-export function GoneErrorMessageResponseFromJSON(json: any): GoneErrorMessageResponse {
-    return GoneErrorMessageResponseFromJSONTyped(json, false);
+export function GoneErrorMessageResponseFromJSON(
+  json: any
+): GoneErrorMessageResponse {
+  return GoneErrorMessageResponseFromJSONTyped(json, false);
 }
 
-export function GoneErrorMessageResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): GoneErrorMessageResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'code': json['code'] == null ? undefined : json['code'],
-        'message': json['message'] == null ? undefined : json['message'],
-        'resource': json['resource'] == null ? undefined : json['resource'],
-        'errorResponse': json['errorResponse'] == null ? undefined : ErrorResponseFromJSON(json['errorResponse']),
-    };
+export function GoneErrorMessageResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): GoneErrorMessageResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    code: json['code'] == null ? undefined : json['code'],
+    message: json['message'] == null ? undefined : json['message'],
+    resource: json['resource'] == null ? undefined : json['resource'],
+    errorResponse:
+      json['errorResponse'] == null
+        ? undefined
+        : ErrorResponseFromJSON(json['errorResponse']),
+  };
 }
 
-export function GoneErrorMessageResponseToJSON(value?: GoneErrorMessageResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'code': value['code'],
-        'message': value['message'],
-        'resource': value['resource'],
-        'errorResponse': ErrorResponseToJSON(value['errorResponse']),
-    };
+export function GoneErrorMessageResponseToJSON(
+  value?: GoneErrorMessageResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    code: value['code'],
+    message: value['message'],
+    resource: value['resource'],
+    errorResponse: ErrorResponseToJSON(value['errorResponse']),
+  };
 }
-

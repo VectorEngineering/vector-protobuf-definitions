@@ -13,37 +13,41 @@
 import { RequestFile } from './models';
 
 export class LimitInfo {
-    'current'?: number;
-    'limit'?: number;
-    'resetTime'?: Date;
-    'windowSize'?: string;
+  'current'?: number;
+  'limit'?: number;
+  'resetTime'?: Date;
+  'windowSize'?: string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "current",
-            "baseName": "current",
-            "type": "number"
-        },
-        {
-            "name": "limit",
-            "baseName": "limit",
-            "type": "number"
-        },
-        {
-            "name": "resetTime",
-            "baseName": "resetTime",
-            "type": "Date"
-        },
-        {
-            "name": "windowSize",
-            "baseName": "windowSize",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'current',
+      baseName: 'current',
+      type: 'number',
+    },
+    {
+      name: 'limit',
+      baseName: 'limit',
+      type: 'number',
+    },
+    {
+      name: 'resetTime',
+      baseName: 'resetTime',
+      type: 'Date',
+    },
+    {
+      name: 'windowSize',
+      baseName: 'windowSize',
+      type: 'string',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return LimitInfo.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return LimitInfo.attributeTypeMap;
+  }
 }
-

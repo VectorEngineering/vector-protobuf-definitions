@@ -13,31 +13,35 @@
 import { RequestFile } from './models';
 
 export class MFAInfo {
-    'mfaRequired'?: boolean;
-    'allowedMethods'?: Array<string>;
-    'failedReason'?: string;
+  'mfaRequired'?: boolean;
+  'allowedMethods'?: Array<string>;
+  'failedReason'?: string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "mfaRequired",
-            "baseName": "mfaRequired",
-            "type": "boolean"
-        },
-        {
-            "name": "allowedMethods",
-            "baseName": "allowedMethods",
-            "type": "Array<string>"
-        },
-        {
-            "name": "failedReason",
-            "baseName": "failedReason",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'mfaRequired',
+      baseName: 'mfaRequired',
+      type: 'boolean',
+    },
+    {
+      name: 'allowedMethods',
+      baseName: 'allowedMethods',
+      type: 'Array<string>',
+    },
+    {
+      name: 'failedReason',
+      baseName: 'failedReason',
+      type: 'string',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return MFAInfo.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return MFAInfo.attributeTypeMap;
+  }
 }
-

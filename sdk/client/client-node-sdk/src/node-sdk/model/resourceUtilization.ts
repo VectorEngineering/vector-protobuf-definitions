@@ -13,37 +13,41 @@
 import { RequestFile } from './models';
 
 export class ResourceUtilization {
-    'cpuUsage'?: number;
-    'memoryUsage'?: number;
-    'activeConnections'?: number;
-    'quotas'?: { [key: string]: number | undefined; };
+  'cpuUsage'?: number;
+  'memoryUsage'?: number;
+  'activeConnections'?: number;
+  'quotas'?: { [key: string]: number | undefined };
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "cpuUsage",
-            "baseName": "cpuUsage",
-            "type": "number"
-        },
-        {
-            "name": "memoryUsage",
-            "baseName": "memoryUsage",
-            "type": "number"
-        },
-        {
-            "name": "activeConnections",
-            "baseName": "activeConnections",
-            "type": "number"
-        },
-        {
-            "name": "quotas",
-            "baseName": "quotas",
-            "type": "{ [key: string]: number | undefined; }"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'cpuUsage',
+      baseName: 'cpuUsage',
+      type: 'number',
+    },
+    {
+      name: 'memoryUsage',
+      baseName: 'memoryUsage',
+      type: 'number',
+    },
+    {
+      name: 'activeConnections',
+      baseName: 'activeConnections',
+      type: 'number',
+    },
+    {
+      name: 'quotas',
+      baseName: 'quotas',
+      type: '{ [key: string]: number | undefined; }',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ResourceUtilization.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ResourceUtilization.attributeTypeMap;
+  }
 }
-

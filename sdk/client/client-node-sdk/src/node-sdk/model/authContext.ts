@@ -13,37 +13,41 @@
 import { RequestFile } from './models';
 
 export class AuthContext {
-    'requiredScopes'?: Array<string>;
-    'providedScopes'?: Array<string>;
-    'missingPermissions'?: Array<string>;
-    'tenantId'?: string;
+  'requiredScopes'?: Array<string>;
+  'providedScopes'?: Array<string>;
+  'missingPermissions'?: Array<string>;
+  'tenantId'?: string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "requiredScopes",
-            "baseName": "requiredScopes",
-            "type": "Array<string>"
-        },
-        {
-            "name": "providedScopes",
-            "baseName": "providedScopes",
-            "type": "Array<string>"
-        },
-        {
-            "name": "missingPermissions",
-            "baseName": "missingPermissions",
-            "type": "Array<string>"
-        },
-        {
-            "name": "tenantId",
-            "baseName": "tenantId",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'requiredScopes',
+      baseName: 'requiredScopes',
+      type: 'Array<string>',
+    },
+    {
+      name: 'providedScopes',
+      baseName: 'providedScopes',
+      type: 'Array<string>',
+    },
+    {
+      name: 'missingPermissions',
+      baseName: 'missingPermissions',
+      type: 'Array<string>',
+    },
+    {
+      name: 'tenantId',
+      baseName: 'tenantId',
+      type: 'string',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return AuthContext.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return AuthContext.attributeTypeMap;
+  }
 }
-

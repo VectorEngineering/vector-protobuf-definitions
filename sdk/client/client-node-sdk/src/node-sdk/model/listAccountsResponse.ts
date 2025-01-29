@@ -14,25 +14,29 @@ import { RequestFile } from './models';
 import { Account } from './account';
 
 export class ListAccountsResponse {
-    'accounts'?: Array<Account>;
-    'total'?: number;
+  'accounts'?: Array<Account>;
+  'total'?: number;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "accounts",
-            "baseName": "accounts",
-            "type": "Array<Account>"
-        },
-        {
-            "name": "total",
-            "baseName": "total",
-            "type": "number"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'accounts',
+      baseName: 'accounts',
+      type: 'Array<Account>',
+    },
+    {
+      name: 'total',
+      baseName: 'total',
+      type: 'number',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ListAccountsResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ListAccountsResponse.attributeTypeMap;
+  }
 }
-

@@ -19,60 +19,64 @@ import { SessionInfo } from './sessionInfo';
 import { TokenInfo } from './tokenInfo';
 
 /**
-* Represents authentication and authorization failures
-*/
+ * Represents authentication and authorization failures
+ */
 export class AuthenticationErrorMessageResponse {
-    'code'?: AuthErrorCode;
-    'message'?: string;
-    'tokenInfo'?: TokenInfo;
-    'authContext'?: AuthContext;
-    'sessionInfo'?: SessionInfo;
-    'mfaInfo'?: MFAInfo;
-    'errorResponse'?: ErrorResponse;
+  'code'?: AuthErrorCode;
+  'message'?: string;
+  'tokenInfo'?: TokenInfo;
+  'authContext'?: AuthContext;
+  'sessionInfo'?: SessionInfo;
+  'mfaInfo'?: MFAInfo;
+  'errorResponse'?: ErrorResponse;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "code",
-            "baseName": "code",
-            "type": "AuthErrorCode"
-        },
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
-        },
-        {
-            "name": "tokenInfo",
-            "baseName": "tokenInfo",
-            "type": "TokenInfo"
-        },
-        {
-            "name": "authContext",
-            "baseName": "authContext",
-            "type": "AuthContext"
-        },
-        {
-            "name": "sessionInfo",
-            "baseName": "sessionInfo",
-            "type": "SessionInfo"
-        },
-        {
-            "name": "mfaInfo",
-            "baseName": "mfaInfo",
-            "type": "MFAInfo"
-        },
-        {
-            "name": "errorResponse",
-            "baseName": "errorResponse",
-            "type": "ErrorResponse"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'code',
+      baseName: 'code',
+      type: 'AuthErrorCode',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'tokenInfo',
+      baseName: 'tokenInfo',
+      type: 'TokenInfo',
+    },
+    {
+      name: 'authContext',
+      baseName: 'authContext',
+      type: 'AuthContext',
+    },
+    {
+      name: 'sessionInfo',
+      baseName: 'sessionInfo',
+      type: 'SessionInfo',
+    },
+    {
+      name: 'mfaInfo',
+      baseName: 'mfaInfo',
+      type: 'MFAInfo',
+    },
+    {
+      name: 'errorResponse',
+      baseName: 'errorResponse',
+      type: 'ErrorResponse',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return AuthenticationErrorMessageResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return AuthenticationErrorMessageResponse.attributeTypeMap;
+  }
 }
 
-export namespace AuthenticationErrorMessageResponse {
-}
+export namespace AuthenticationErrorMessageResponse {}

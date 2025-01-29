@@ -14,71 +14,76 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface AvailabilityInfo
  */
 export interface AvailabilityInfo {
-    /**
-     * 
-     * @type {number}
-     * @memberof AvailabilityInfo
-     */
-    retryAfter?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof AvailabilityInfo
-     */
-    maintenanceWindow?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof AvailabilityInfo
-     */
-    affectedServices?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof AvailabilityInfo
-     */
-    statusPageUrl?: string;
+  /**
+   *
+   * @type {number}
+   * @memberof AvailabilityInfo
+   */
+  retryAfter?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof AvailabilityInfo
+   */
+  maintenanceWindow?: string;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof AvailabilityInfo
+   */
+  affectedServices?: Array<string>;
+  /**
+   *
+   * @type {string}
+   * @memberof AvailabilityInfo
+   */
+  statusPageUrl?: string;
 }
 
 /**
  * Check if a given object implements the AvailabilityInfo interface.
  */
-export function instanceOfAvailabilityInfo(value: object): value is AvailabilityInfo {
-    return true;
+export function instanceOfAvailabilityInfo(
+  value: object
+): value is AvailabilityInfo {
+  return true;
 }
 
 export function AvailabilityInfoFromJSON(json: any): AvailabilityInfo {
-    return AvailabilityInfoFromJSONTyped(json, false);
+  return AvailabilityInfoFromJSONTyped(json, false);
 }
 
-export function AvailabilityInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): AvailabilityInfo {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'retryAfter': json['retryAfter'] == null ? undefined : json['retryAfter'],
-        'maintenanceWindow': json['maintenanceWindow'] == null ? undefined : json['maintenanceWindow'],
-        'affectedServices': json['affectedServices'] == null ? undefined : json['affectedServices'],
-        'statusPageUrl': json['statusPageUrl'] == null ? undefined : json['statusPageUrl'],
-    };
+export function AvailabilityInfoFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): AvailabilityInfo {
+  if (json == null) {
+    return json;
+  }
+  return {
+    retryAfter: json['retryAfter'] == null ? undefined : json['retryAfter'],
+    maintenanceWindow:
+      json['maintenanceWindow'] == null ? undefined : json['maintenanceWindow'],
+    affectedServices:
+      json['affectedServices'] == null ? undefined : json['affectedServices'],
+    statusPageUrl:
+      json['statusPageUrl'] == null ? undefined : json['statusPageUrl'],
+  };
 }
 
 export function AvailabilityInfoToJSON(value?: AvailabilityInfo | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'retryAfter': value['retryAfter'],
-        'maintenanceWindow': value['maintenanceWindow'],
-        'affectedServices': value['affectedServices'],
-        'statusPageUrl': value['statusPageUrl'],
-    };
+  if (value == null) {
+    return value;
+  }
+  return {
+    retryAfter: value['retryAfter'],
+    maintenanceWindow: value['maintenanceWindow'],
+    affectedServices: value['affectedServices'],
+    statusPageUrl: value['statusPageUrl'],
+  };
 }
-

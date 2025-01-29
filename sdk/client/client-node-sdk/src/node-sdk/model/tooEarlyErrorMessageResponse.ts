@@ -14,34 +14,38 @@ import { RequestFile } from './models';
 import { ErrorResponse } from './errorResponse';
 
 /**
-* Indicates that the server is unwilling to risk processing a request that might be replayed
-*/
+ * Indicates that the server is unwilling to risk processing a request that might be replayed
+ */
 export class TooEarlyErrorMessageResponse {
-    'code'?: number;
-    'message'?: string;
-    'errorResponse'?: ErrorResponse;
+  'code'?: number;
+  'message'?: string;
+  'errorResponse'?: ErrorResponse;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "code",
-            "baseName": "code",
-            "type": "number"
-        },
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
-        },
-        {
-            "name": "errorResponse",
-            "baseName": "errorResponse",
-            "type": "ErrorResponse"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'code',
+      baseName: 'code',
+      type: 'number',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'errorResponse',
+      baseName: 'errorResponse',
+      type: 'ErrorResponse',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return TooEarlyErrorMessageResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return TooEarlyErrorMessageResponse.attributeTypeMap;
+  }
 }
-

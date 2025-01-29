@@ -14,47 +14,53 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface DeleteScrapingJobResponse
  */
 export interface DeleteScrapingJobResponse {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof DeleteScrapingJobResponse
-     */
-    success?: boolean;
+  /**
+   *
+   * @type {boolean}
+   * @memberof DeleteScrapingJobResponse
+   */
+  success?: boolean;
 }
 
 /**
  * Check if a given object implements the DeleteScrapingJobResponse interface.
  */
-export function instanceOfDeleteScrapingJobResponse(value: object): value is DeleteScrapingJobResponse {
-    return true;
+export function instanceOfDeleteScrapingJobResponse(
+  value: object
+): value is DeleteScrapingJobResponse {
+  return true;
 }
 
-export function DeleteScrapingJobResponseFromJSON(json: any): DeleteScrapingJobResponse {
-    return DeleteScrapingJobResponseFromJSONTyped(json, false);
+export function DeleteScrapingJobResponseFromJSON(
+  json: any
+): DeleteScrapingJobResponse {
+  return DeleteScrapingJobResponseFromJSONTyped(json, false);
 }
 
-export function DeleteScrapingJobResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): DeleteScrapingJobResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'success': json['success'] == null ? undefined : json['success'],
-    };
+export function DeleteScrapingJobResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): DeleteScrapingJobResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    success: json['success'] == null ? undefined : json['success'],
+  };
 }
 
-export function DeleteScrapingJobResponseToJSON(value?: DeleteScrapingJobResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'success': value['success'],
-    };
+export function DeleteScrapingJobResponseToJSON(
+  value?: DeleteScrapingJobResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    success: value['success'],
+  };
 }
-

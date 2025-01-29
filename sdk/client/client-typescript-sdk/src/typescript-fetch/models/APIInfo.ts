@@ -14,71 +14,77 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface APIInfo
  */
 export interface APIInfo {
-    /**
-     * 
-     * @type {string}
-     * @memberof APIInfo
-     */
-    version?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof APIInfo
-     */
-    supportedVersions?: Array<string>;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof APIInfo
-     */
-    isDeprecated?: boolean;
-    /**
-     * 
-     * @type {Date}
-     * @memberof APIInfo
-     */
-    sunsetDate?: Date;
+  /**
+   *
+   * @type {string}
+   * @memberof APIInfo
+   */
+  version?: string;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof APIInfo
+   */
+  supportedVersions?: Array<string>;
+  /**
+   *
+   * @type {boolean}
+   * @memberof APIInfo
+   */
+  isDeprecated?: boolean;
+  /**
+   *
+   * @type {Date}
+   * @memberof APIInfo
+   */
+  sunsetDate?: Date;
 }
 
 /**
  * Check if a given object implements the APIInfo interface.
  */
 export function instanceOfAPIInfo(value: object): value is APIInfo {
-    return true;
+  return true;
 }
 
 export function APIInfoFromJSON(json: any): APIInfo {
-    return APIInfoFromJSONTyped(json, false);
+  return APIInfoFromJSONTyped(json, false);
 }
 
-export function APIInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): APIInfo {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'version': json['version'] == null ? undefined : json['version'],
-        'supportedVersions': json['supportedVersions'] == null ? undefined : json['supportedVersions'],
-        'isDeprecated': json['isDeprecated'] == null ? undefined : json['isDeprecated'],
-        'sunsetDate': json['sunsetDate'] == null ? undefined : (new Date(json['sunsetDate'])),
-    };
+export function APIInfoFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): APIInfo {
+  if (json == null) {
+    return json;
+  }
+  return {
+    version: json['version'] == null ? undefined : json['version'],
+    supportedVersions:
+      json['supportedVersions'] == null ? undefined : json['supportedVersions'],
+    isDeprecated:
+      json['isDeprecated'] == null ? undefined : json['isDeprecated'],
+    sunsetDate:
+      json['sunsetDate'] == null ? undefined : new Date(json['sunsetDate']),
+  };
 }
 
 export function APIInfoToJSON(value?: APIInfo | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'version': value['version'],
-        'supportedVersions': value['supportedVersions'],
-        'isDeprecated': value['isDeprecated'],
-        'sunsetDate': value['sunsetDate'] == null ? undefined : ((value['sunsetDate']).toISOString()),
-    };
+  if (value == null) {
+    return value;
+  }
+  return {
+    version: value['version'],
+    supportedVersions: value['supportedVersions'],
+    isDeprecated: value['isDeprecated'],
+    sunsetDate:
+      value['sunsetDate'] == null
+        ? undefined
+        : value['sunsetDate'].toISOString(),
+  };
 }
-

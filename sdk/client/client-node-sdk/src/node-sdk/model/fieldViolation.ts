@@ -13,43 +13,47 @@
 import { RequestFile } from './models';
 
 export class FieldViolation {
-    'field'?: string;
-    'validation'?: string;
-    'message'?: string;
-    'expected'?: string;
-    'actual'?: string;
+  'field'?: string;
+  'validation'?: string;
+  'message'?: string;
+  'expected'?: string;
+  'actual'?: string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "field",
-            "baseName": "field",
-            "type": "string"
-        },
-        {
-            "name": "validation",
-            "baseName": "validation",
-            "type": "string"
-        },
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
-        },
-        {
-            "name": "expected",
-            "baseName": "expected",
-            "type": "string"
-        },
-        {
-            "name": "actual",
-            "baseName": "actual",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'field',
+      baseName: 'field',
+      type: 'string',
+    },
+    {
+      name: 'validation',
+      baseName: 'validation',
+      type: 'string',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'expected',
+      baseName: 'expected',
+      type: 'string',
+    },
+    {
+      name: 'actual',
+      baseName: 'actual',
+      type: 'string',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return FieldViolation.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return FieldViolation.attributeTypeMap;
+  }
 }
-

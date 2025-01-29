@@ -13,14 +13,14 @@
 import { RequestFile } from './models';
 
 /**
-* - NO_NOT_FOUND_ERROR: Default value as per proto3 convention  - UNDEFINED_ENDPOINT: Endpoint errors  Requested endpoint doesn\'t exist  - UNIMPLEMENTED: Endpoint not implemented  - STORE_ID_NOT_FOUND: Resource errors  Requested store ID doesn\'t exist  - USER_NOT_FOUND: Requested user doesn\'t exist  - RESOURCE_NOT_FOUND: Generic resource not found  - TENANT_NOT_FOUND: Requested tenant doesn\'t exist
-*/
+ * - NO_NOT_FOUND_ERROR: Default value as per proto3 convention  - UNDEFINED_ENDPOINT: Endpoint errors  Requested endpoint doesn\'t exist  - UNIMPLEMENTED: Endpoint not implemented  - STORE_ID_NOT_FOUND: Resource errors  Requested store ID doesn\'t exist  - USER_NOT_FOUND: Requested user doesn\'t exist  - RESOURCE_NOT_FOUND: Generic resource not found  - TENANT_NOT_FOUND: Requested tenant doesn\'t exist
+ */
 export enum NotFoundErrorCode {
-    NoNotFoundError = <any> 'NO_NOT_FOUND_ERROR',
-    UndefinedEndpoint = <any> 'UNDEFINED_ENDPOINT',
-    Unimplemented = <any> 'UNIMPLEMENTED',
-    StoreIdNotFound = <any> 'STORE_ID_NOT_FOUND',
-    UserNotFound = <any> 'USER_NOT_FOUND',
-    ResourceNotFound = <any> 'RESOURCE_NOT_FOUND',
-    TenantNotFound = <any> 'TENANT_NOT_FOUND'
+  NoNotFoundError = <any>'NO_NOT_FOUND_ERROR',
+  UndefinedEndpoint = <any>'UNDEFINED_ENDPOINT',
+  Unimplemented = <any>'UNIMPLEMENTED',
+  StoreIdNotFound = <any>'STORE_ID_NOT_FOUND',
+  UserNotFound = <any>'USER_NOT_FOUND',
+  ResourceNotFound = <any>'RESOURCE_NOT_FOUND',
+  TenantNotFound = <any>'TENANT_NOT_FOUND',
 }

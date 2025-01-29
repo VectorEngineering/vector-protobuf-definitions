@@ -18,54 +18,58 @@ import { SchemaValidation } from './schemaValidation';
 import { ValidationErrorCode } from './validationErrorCode';
 
 /**
-* Represents data validation and business logic errors
-*/
+ * Represents data validation and business logic errors
+ */
 export class ValidationErrorMessageResponse {
-    'code'?: ValidationErrorCode;
-    'message'?: string;
-    'fieldViolations'?: Array<FieldViolation>;
-    'schemaValidation'?: SchemaValidation;
-    'resourceValidation'?: ResourceValidation;
-    'errorResponse'?: ErrorResponse;
+  'code'?: ValidationErrorCode;
+  'message'?: string;
+  'fieldViolations'?: Array<FieldViolation>;
+  'schemaValidation'?: SchemaValidation;
+  'resourceValidation'?: ResourceValidation;
+  'errorResponse'?: ErrorResponse;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "code",
-            "baseName": "code",
-            "type": "ValidationErrorCode"
-        },
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
-        },
-        {
-            "name": "fieldViolations",
-            "baseName": "fieldViolations",
-            "type": "Array<FieldViolation>"
-        },
-        {
-            "name": "schemaValidation",
-            "baseName": "schemaValidation",
-            "type": "SchemaValidation"
-        },
-        {
-            "name": "resourceValidation",
-            "baseName": "resourceValidation",
-            "type": "ResourceValidation"
-        },
-        {
-            "name": "errorResponse",
-            "baseName": "errorResponse",
-            "type": "ErrorResponse"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'code',
+      baseName: 'code',
+      type: 'ValidationErrorCode',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'fieldViolations',
+      baseName: 'fieldViolations',
+      type: 'Array<FieldViolation>',
+    },
+    {
+      name: 'schemaValidation',
+      baseName: 'schemaValidation',
+      type: 'SchemaValidation',
+    },
+    {
+      name: 'resourceValidation',
+      baseName: 'resourceValidation',
+      type: 'ResourceValidation',
+    },
+    {
+      name: 'errorResponse',
+      baseName: 'errorResponse',
+      type: 'ErrorResponse',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ValidationErrorMessageResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ValidationErrorMessageResponse.attributeTypeMap;
+  }
 }
 
-export namespace ValidationErrorMessageResponse {
-}
+export namespace ValidationErrorMessageResponse {}

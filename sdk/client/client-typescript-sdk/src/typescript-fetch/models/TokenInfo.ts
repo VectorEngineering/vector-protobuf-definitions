@@ -14,79 +14,79 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface TokenInfo
  */
 export interface TokenInfo {
-    /**
-     * 
-     * @type {string}
-     * @memberof TokenInfo
-     */
-    tokenId?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof TokenInfo
-     */
-    tokenType?: string;
-    /**
-     * 
-     * @type {Date}
-     * @memberof TokenInfo
-     */
-    expiry?: Date;
-    /**
-     * 
-     * @type {string}
-     * @memberof TokenInfo
-     */
-    issuer?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof TokenInfo
-     */
-    audiences?: Array<string>;
+  /**
+   *
+   * @type {string}
+   * @memberof TokenInfo
+   */
+  tokenId?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof TokenInfo
+   */
+  tokenType?: string;
+  /**
+   *
+   * @type {Date}
+   * @memberof TokenInfo
+   */
+  expiry?: Date;
+  /**
+   *
+   * @type {string}
+   * @memberof TokenInfo
+   */
+  issuer?: string;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof TokenInfo
+   */
+  audiences?: Array<string>;
 }
 
 /**
  * Check if a given object implements the TokenInfo interface.
  */
 export function instanceOfTokenInfo(value: object): value is TokenInfo {
-    return true;
+  return true;
 }
 
 export function TokenInfoFromJSON(json: any): TokenInfo {
-    return TokenInfoFromJSONTyped(json, false);
+  return TokenInfoFromJSONTyped(json, false);
 }
 
-export function TokenInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): TokenInfo {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'tokenId': json['tokenId'] == null ? undefined : json['tokenId'],
-        'tokenType': json['tokenType'] == null ? undefined : json['tokenType'],
-        'expiry': json['expiry'] == null ? undefined : (new Date(json['expiry'])),
-        'issuer': json['issuer'] == null ? undefined : json['issuer'],
-        'audiences': json['audiences'] == null ? undefined : json['audiences'],
-    };
+export function TokenInfoFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): TokenInfo {
+  if (json == null) {
+    return json;
+  }
+  return {
+    tokenId: json['tokenId'] == null ? undefined : json['tokenId'],
+    tokenType: json['tokenType'] == null ? undefined : json['tokenType'],
+    expiry: json['expiry'] == null ? undefined : new Date(json['expiry']),
+    issuer: json['issuer'] == null ? undefined : json['issuer'],
+    audiences: json['audiences'] == null ? undefined : json['audiences'],
+  };
 }
 
 export function TokenInfoToJSON(value?: TokenInfo | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'tokenId': value['tokenId'],
-        'tokenType': value['tokenType'],
-        'expiry': value['expiry'] == null ? undefined : ((value['expiry']).toISOString()),
-        'issuer': value['issuer'],
-        'audiences': value['audiences'],
-    };
+  if (value == null) {
+    return value;
+  }
+  return {
+    tokenId: value['tokenId'],
+    tokenType: value['tokenType'],
+    expiry: value['expiry'] == null ? undefined : value['expiry'].toISOString(),
+    issuer: value['issuer'],
+    audiences: value['audiences'],
+  };
 }
-

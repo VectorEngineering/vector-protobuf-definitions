@@ -14,40 +14,44 @@ import { RequestFile } from './models';
 import { ErrorResponse } from './errorResponse';
 
 /**
-* Represents errors when HTTP method is not allowed on the endpoint
-*/
+ * Represents errors when HTTP method is not allowed on the endpoint
+ */
 export class MethodNotAllowedErrorMessageResponse {
-    'code'?: number;
-    'message'?: string;
-    'allowedMethods'?: Array<string>;
-    'errorResponse'?: ErrorResponse;
+  'code'?: number;
+  'message'?: string;
+  'allowedMethods'?: Array<string>;
+  'errorResponse'?: ErrorResponse;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "code",
-            "baseName": "code",
-            "type": "number"
-        },
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
-        },
-        {
-            "name": "allowedMethods",
-            "baseName": "allowedMethods",
-            "type": "Array<string>"
-        },
-        {
-            "name": "errorResponse",
-            "baseName": "errorResponse",
-            "type": "ErrorResponse"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'code',
+      baseName: 'code',
+      type: 'number',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'allowedMethods',
+      baseName: 'allowedMethods',
+      type: 'Array<string>',
+    },
+    {
+      name: 'errorResponse',
+      baseName: 'errorResponse',
+      type: 'ErrorResponse',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return MethodNotAllowedErrorMessageResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return MethodNotAllowedErrorMessageResponse.attributeTypeMap;
+  }
 }
-

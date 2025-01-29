@@ -13,43 +13,47 @@
 import { RequestFile } from './models';
 
 export class QuotaInfo {
-    'resource'?: string;
-    'used'?: string;
-    'limit'?: string;
-    'resetTime'?: Date;
-    'resourceUsage'?: { [key: string]: string | undefined; };
+  'resource'?: string;
+  'used'?: string;
+  'limit'?: string;
+  'resetTime'?: Date;
+  'resourceUsage'?: { [key: string]: string | undefined };
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "resource",
-            "baseName": "resource",
-            "type": "string"
-        },
-        {
-            "name": "used",
-            "baseName": "used",
-            "type": "string"
-        },
-        {
-            "name": "limit",
-            "baseName": "limit",
-            "type": "string"
-        },
-        {
-            "name": "resetTime",
-            "baseName": "resetTime",
-            "type": "Date"
-        },
-        {
-            "name": "resourceUsage",
-            "baseName": "resourceUsage",
-            "type": "{ [key: string]: string | undefined; }"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'resource',
+      baseName: 'resource',
+      type: 'string',
+    },
+    {
+      name: 'used',
+      baseName: 'used',
+      type: 'string',
+    },
+    {
+      name: 'limit',
+      baseName: 'limit',
+      type: 'string',
+    },
+    {
+      name: 'resetTime',
+      baseName: 'resetTime',
+      type: 'Date',
+    },
+    {
+      name: 'resourceUsage',
+      baseName: 'resourceUsage',
+      type: '{ [key: string]: string | undefined; }',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return QuotaInfo.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return QuotaInfo.attributeTypeMap;
+  }
 }
-

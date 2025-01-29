@@ -13,37 +13,41 @@
 import { RequestFile } from './models';
 
 export class APIInfo {
-    'version'?: string;
-    'supportedVersions'?: Array<string>;
-    'isDeprecated'?: boolean;
-    'sunsetDate'?: Date;
+  'version'?: string;
+  'supportedVersions'?: Array<string>;
+  'isDeprecated'?: boolean;
+  'sunsetDate'?: Date;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "version",
-            "baseName": "version",
-            "type": "string"
-        },
-        {
-            "name": "supportedVersions",
-            "baseName": "supportedVersions",
-            "type": "Array<string>"
-        },
-        {
-            "name": "isDeprecated",
-            "baseName": "isDeprecated",
-            "type": "boolean"
-        },
-        {
-            "name": "sunsetDate",
-            "baseName": "sunsetDate",
-            "type": "Date"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'version',
+      baseName: 'version',
+      type: 'string',
+    },
+    {
+      name: 'supportedVersions',
+      baseName: 'supportedVersions',
+      type: 'Array<string>',
+    },
+    {
+      name: 'isDeprecated',
+      baseName: 'isDeprecated',
+      type: 'boolean',
+    },
+    {
+      name: 'sunsetDate',
+      baseName: 'sunsetDate',
+      type: 'Date',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return APIInfo.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return APIInfo.attributeTypeMap;
+  }
 }
-

@@ -12,7 +12,6 @@
  * Do not edit the class manually.
  */
 
-
 /**
  * - VALIDATION_ERROR: General validation errors
  *  - AUTHORIZATION_MODEL_NOT_FOUND: Resource not found errors
@@ -20,7 +19,7 @@
  *  - DUPLICATE_ENTRY: Conflict errors
  *  - INVALID_SCHEMA_VERSION: Schema errors
  *  - INVALID_FORMAT: New validation error codes
- * 
+ *
  * General invalid format
  *  - INVALID_EMAIL_FORMAT: Email format is invalid
  *  - INVALID_PASSWORD_STRENGTH: Password does not meet strength requirements
@@ -30,60 +29,67 @@
  * @export
  */
 export const ValidationErrorCode = {
-    NoError: 'NO_ERROR',
-    ValidationError: 'VALIDATION_ERROR',
-    InvalidWriteInput: 'INVALID_WRITE_INPUT',
-    InvalidCheckInput: 'INVALID_CHECK_INPUT',
-    InvalidExpandInput: 'INVALID_EXPAND_INPUT',
-    InvalidObjectFormat: 'INVALID_OBJECT_FORMAT',
-    InvalidUser: 'INVALID_USER',
-    InvalidTuple: 'INVALID_TUPLE',
-    AuthorizationModelNotFound: 'AUTHORIZATION_MODEL_NOT_FOUND',
-    TypeNotFound: 'TYPE_NOT_FOUND',
-    RelationNotFound: 'RELATION_NOT_FOUND',
-    StoreIdInvalidLength: 'STORE_ID_INVALID_LENGTH',
-    IdTooLong: 'ID_TOO_LONG',
-    InvalidContinuationToken: 'INVALID_CONTINUATION_TOKEN',
-    PageSizeInvalid: 'PAGE_SIZE_INVALID',
-    ParamMissingValue: 'PARAM_MISSING_VALUE',
-    ExceededEntityLimit: 'EXCEEDED_ENTITY_LIMIT',
-    DuplicateEntry: 'DUPLICATE_ENTRY',
-    CannotAllowDuplicateTuples: 'CANNOT_ALLOW_DUPLICATE_TUPLES',
-    CannotAllowDuplicateTypes: 'CANNOT_ALLOW_DUPLICATE_TYPES',
-    InvalidSchemaVersion: 'INVALID_SCHEMA_VERSION',
-    InvalidTypePattern: 'INVALID_TYPE_PATTERN',
-    InvalidRelationPattern: 'INVALID_RELATION_PATTERN',
-    InvalidObjectPattern: 'INVALID_OBJECT_PATTERN',
-    InvalidFormat: 'INVALID_FORMAT',
-    InvalidEmailFormat: 'INVALID_EMAIL_FORMAT',
-    InvalidPasswordStrength: 'INVALID_PASSWORD_STRENGTH',
-    FieldTooShort: 'FIELD_TOO_SHORT',
-    FieldTooLong: 'FIELD_TOO_LONG',
-    UnsupportedMediaType: 'UNSUPPORTED_MEDIA_TYPE'
+  NoError: 'NO_ERROR',
+  ValidationError: 'VALIDATION_ERROR',
+  InvalidWriteInput: 'INVALID_WRITE_INPUT',
+  InvalidCheckInput: 'INVALID_CHECK_INPUT',
+  InvalidExpandInput: 'INVALID_EXPAND_INPUT',
+  InvalidObjectFormat: 'INVALID_OBJECT_FORMAT',
+  InvalidUser: 'INVALID_USER',
+  InvalidTuple: 'INVALID_TUPLE',
+  AuthorizationModelNotFound: 'AUTHORIZATION_MODEL_NOT_FOUND',
+  TypeNotFound: 'TYPE_NOT_FOUND',
+  RelationNotFound: 'RELATION_NOT_FOUND',
+  StoreIdInvalidLength: 'STORE_ID_INVALID_LENGTH',
+  IdTooLong: 'ID_TOO_LONG',
+  InvalidContinuationToken: 'INVALID_CONTINUATION_TOKEN',
+  PageSizeInvalid: 'PAGE_SIZE_INVALID',
+  ParamMissingValue: 'PARAM_MISSING_VALUE',
+  ExceededEntityLimit: 'EXCEEDED_ENTITY_LIMIT',
+  DuplicateEntry: 'DUPLICATE_ENTRY',
+  CannotAllowDuplicateTuples: 'CANNOT_ALLOW_DUPLICATE_TUPLES',
+  CannotAllowDuplicateTypes: 'CANNOT_ALLOW_DUPLICATE_TYPES',
+  InvalidSchemaVersion: 'INVALID_SCHEMA_VERSION',
+  InvalidTypePattern: 'INVALID_TYPE_PATTERN',
+  InvalidRelationPattern: 'INVALID_RELATION_PATTERN',
+  InvalidObjectPattern: 'INVALID_OBJECT_PATTERN',
+  InvalidFormat: 'INVALID_FORMAT',
+  InvalidEmailFormat: 'INVALID_EMAIL_FORMAT',
+  InvalidPasswordStrength: 'INVALID_PASSWORD_STRENGTH',
+  FieldTooShort: 'FIELD_TOO_SHORT',
+  FieldTooLong: 'FIELD_TOO_LONG',
+  UnsupportedMediaType: 'UNSUPPORTED_MEDIA_TYPE',
 } as const;
-export type ValidationErrorCode = typeof ValidationErrorCode[keyof typeof ValidationErrorCode];
-
+export type ValidationErrorCode =
+  (typeof ValidationErrorCode)[keyof typeof ValidationErrorCode];
 
 export function instanceOfValidationErrorCode(value: any): boolean {
-    for (const key in ValidationErrorCode) {
-        if (Object.prototype.hasOwnProperty.call(ValidationErrorCode, key)) {
-            if ((ValidationErrorCode as Record<string, ValidationErrorCode>)[key] === value) {
-                return true;
-            }
-        }
+  for (const key in ValidationErrorCode) {
+    if (Object.prototype.hasOwnProperty.call(ValidationErrorCode, key)) {
+      if (
+        (ValidationErrorCode as Record<string, ValidationErrorCode>)[key] ===
+        value
+      ) {
+        return true;
+      }
     }
-    return false;
+  }
+  return false;
 }
 
 export function ValidationErrorCodeFromJSON(json: any): ValidationErrorCode {
-    return ValidationErrorCodeFromJSONTyped(json, false);
+  return ValidationErrorCodeFromJSONTyped(json, false);
 }
 
-export function ValidationErrorCodeFromJSONTyped(json: any, ignoreDiscriminator: boolean): ValidationErrorCode {
-    return json as ValidationErrorCode;
+export function ValidationErrorCodeFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): ValidationErrorCode {
+  return json as ValidationErrorCode;
 }
 
-export function ValidationErrorCodeToJSON(value?: ValidationErrorCode | null): any {
-    return value as any;
+export function ValidationErrorCodeToJSON(
+  value?: ValidationErrorCode | null
+): any {
+  return value as any;
 }
-

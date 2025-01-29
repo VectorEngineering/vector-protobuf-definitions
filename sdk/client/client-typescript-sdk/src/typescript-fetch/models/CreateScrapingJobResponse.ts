@@ -15,61 +15,70 @@
 import { mapValues } from '../runtime';
 import type { BackgroundJobStatus } from './BackgroundJobStatus';
 import {
-    BackgroundJobStatusFromJSON,
-    BackgroundJobStatusFromJSONTyped,
-    BackgroundJobStatusToJSON,
+  BackgroundJobStatusFromJSON,
+  BackgroundJobStatusFromJSONTyped,
+  BackgroundJobStatusToJSON,
 } from './BackgroundJobStatus';
 
 /**
- * 
+ *
  * @export
  * @interface CreateScrapingJobResponse
  */
 export interface CreateScrapingJobResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateScrapingJobResponse
-     */
-    jobId?: string;
-    /**
-     * 
-     * @type {BackgroundJobStatus}
-     * @memberof CreateScrapingJobResponse
-     */
-    status?: BackgroundJobStatus;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateScrapingJobResponse
+   */
+  jobId?: string;
+  /**
+   *
+   * @type {BackgroundJobStatus}
+   * @memberof CreateScrapingJobResponse
+   */
+  status?: BackgroundJobStatus;
 }
 
 /**
  * Check if a given object implements the CreateScrapingJobResponse interface.
  */
-export function instanceOfCreateScrapingJobResponse(value: object): value is CreateScrapingJobResponse {
-    return true;
+export function instanceOfCreateScrapingJobResponse(
+  value: object
+): value is CreateScrapingJobResponse {
+  return true;
 }
 
-export function CreateScrapingJobResponseFromJSON(json: any): CreateScrapingJobResponse {
-    return CreateScrapingJobResponseFromJSONTyped(json, false);
+export function CreateScrapingJobResponseFromJSON(
+  json: any
+): CreateScrapingJobResponse {
+  return CreateScrapingJobResponseFromJSONTyped(json, false);
 }
 
-export function CreateScrapingJobResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateScrapingJobResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'jobId': json['jobId'] == null ? undefined : json['jobId'],
-        'status': json['status'] == null ? undefined : BackgroundJobStatusFromJSON(json['status']),
-    };
+export function CreateScrapingJobResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): CreateScrapingJobResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    jobId: json['jobId'] == null ? undefined : json['jobId'],
+    status:
+      json['status'] == null
+        ? undefined
+        : BackgroundJobStatusFromJSON(json['status']),
+  };
 }
 
-export function CreateScrapingJobResponseToJSON(value?: CreateScrapingJobResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'jobId': value['jobId'],
-        'status': BackgroundJobStatusToJSON(value['status']),
-    };
+export function CreateScrapingJobResponseToJSON(
+  value?: CreateScrapingJobResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    jobId: value['jobId'],
+    status: BackgroundJobStatusToJSON(value['status']),
+  };
 }
-

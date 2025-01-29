@@ -14,79 +14,83 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface ConflictInfo
  */
 export interface ConflictInfo {
-    /**
-     * 
-     * @type {string}
-     * @memberof ConflictInfo
-     */
-    resourceType?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ConflictInfo
-     */
-    identifier?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ConflictInfo
-     */
-    conflictReason?: string;
-    /**
-     * 
-     * @type {Date}
-     * @memberof ConflictInfo
-     */
-    createdAt?: Date;
-    /**
-     * 
-     * @type {string}
-     * @memberof ConflictInfo
-     */
-    createdBy?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof ConflictInfo
+   */
+  resourceType?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof ConflictInfo
+   */
+  identifier?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof ConflictInfo
+   */
+  conflictReason?: string;
+  /**
+   *
+   * @type {Date}
+   * @memberof ConflictInfo
+   */
+  createdAt?: Date;
+  /**
+   *
+   * @type {string}
+   * @memberof ConflictInfo
+   */
+  createdBy?: string;
 }
 
 /**
  * Check if a given object implements the ConflictInfo interface.
  */
 export function instanceOfConflictInfo(value: object): value is ConflictInfo {
-    return true;
+  return true;
 }
 
 export function ConflictInfoFromJSON(json: any): ConflictInfo {
-    return ConflictInfoFromJSONTyped(json, false);
+  return ConflictInfoFromJSONTyped(json, false);
 }
 
-export function ConflictInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): ConflictInfo {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'resourceType': json['resourceType'] == null ? undefined : json['resourceType'],
-        'identifier': json['identifier'] == null ? undefined : json['identifier'],
-        'conflictReason': json['conflictReason'] == null ? undefined : json['conflictReason'],
-        'createdAt': json['createdAt'] == null ? undefined : (new Date(json['createdAt'])),
-        'createdBy': json['createdBy'] == null ? undefined : json['createdBy'],
-    };
+export function ConflictInfoFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): ConflictInfo {
+  if (json == null) {
+    return json;
+  }
+  return {
+    resourceType:
+      json['resourceType'] == null ? undefined : json['resourceType'],
+    identifier: json['identifier'] == null ? undefined : json['identifier'],
+    conflictReason:
+      json['conflictReason'] == null ? undefined : json['conflictReason'],
+    createdAt:
+      json['createdAt'] == null ? undefined : new Date(json['createdAt']),
+    createdBy: json['createdBy'] == null ? undefined : json['createdBy'],
+  };
 }
 
 export function ConflictInfoToJSON(value?: ConflictInfo | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'resourceType': value['resourceType'],
-        'identifier': value['identifier'],
-        'conflictReason': value['conflictReason'],
-        'createdAt': value['createdAt'] == null ? undefined : ((value['createdAt']).toISOString()),
-        'createdBy': value['createdBy'],
-    };
+  if (value == null) {
+    return value;
+  }
+  return {
+    resourceType: value['resourceType'],
+    identifier: value['identifier'],
+    conflictReason: value['conflictReason'],
+    createdAt:
+      value['createdAt'] == null ? undefined : value['createdAt'].toISOString(),
+    createdBy: value['createdBy'],
+  };
 }
-

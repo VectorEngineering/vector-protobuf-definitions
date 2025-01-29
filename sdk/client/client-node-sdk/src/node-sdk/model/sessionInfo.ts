@@ -13,37 +13,41 @@
 import { RequestFile } from './models';
 
 export class SessionInfo {
-    'sessionId'?: string;
-    'lastActive'?: Date;
-    'deviceId'?: string;
-    'ipAddress'?: string;
+  'sessionId'?: string;
+  'lastActive'?: Date;
+  'deviceId'?: string;
+  'ipAddress'?: string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "sessionId",
-            "baseName": "sessionId",
-            "type": "string"
-        },
-        {
-            "name": "lastActive",
-            "baseName": "lastActive",
-            "type": "Date"
-        },
-        {
-            "name": "deviceId",
-            "baseName": "deviceId",
-            "type": "string"
-        },
-        {
-            "name": "ipAddress",
-            "baseName": "ipAddress",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'sessionId',
+      baseName: 'sessionId',
+      type: 'string',
+    },
+    {
+      name: 'lastActive',
+      baseName: 'lastActive',
+      type: 'Date',
+    },
+    {
+      name: 'deviceId',
+      baseName: 'deviceId',
+      type: 'string',
+    },
+    {
+      name: 'ipAddress',
+      baseName: 'ipAddress',
+      type: 'string',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return SessionInfo.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return SessionInfo.attributeTypeMap;
+  }
 }
-

@@ -15,21 +15,21 @@
 import { mapValues } from '../runtime';
 import type { InternalErrorCode } from './InternalErrorCode';
 import {
-    InternalErrorCodeFromJSON,
-    InternalErrorCodeFromJSONTyped,
-    InternalErrorCodeToJSON,
+  InternalErrorCodeFromJSON,
+  InternalErrorCodeFromJSONTyped,
+  InternalErrorCodeToJSON,
 } from './InternalErrorCode';
 import type { AvailabilityInfo } from './AvailabilityInfo';
 import {
-    AvailabilityInfoFromJSON,
-    AvailabilityInfoFromJSONTyped,
-    AvailabilityInfoToJSON,
+  AvailabilityInfoFromJSON,
+  AvailabilityInfoFromJSONTyped,
+  AvailabilityInfoToJSON,
 } from './AvailabilityInfo';
 import type { ErrorResponse } from './ErrorResponse';
 import {
-    ErrorResponseFromJSON,
-    ErrorResponseFromJSONTyped,
-    ErrorResponseToJSON,
+  ErrorResponseFromJSON,
+  ErrorResponseFromJSONTyped,
+  ErrorResponseToJSON,
 } from './ErrorResponse';
 
 /**
@@ -38,66 +38,81 @@ import {
  * @interface ServiceUnavailableErrorMessageResponse
  */
 export interface ServiceUnavailableErrorMessageResponse {
-    /**
-     * 
-     * @type {InternalErrorCode}
-     * @memberof ServiceUnavailableErrorMessageResponse
-     */
-    code?: InternalErrorCode;
-    /**
-     * 
-     * @type {string}
-     * @memberof ServiceUnavailableErrorMessageResponse
-     */
-    message?: string;
-    /**
-     * 
-     * @type {AvailabilityInfo}
-     * @memberof ServiceUnavailableErrorMessageResponse
-     */
-    availabilityInfo?: AvailabilityInfo;
-    /**
-     * 
-     * @type {ErrorResponse}
-     * @memberof ServiceUnavailableErrorMessageResponse
-     */
-    errorResponse?: ErrorResponse;
+  /**
+   *
+   * @type {InternalErrorCode}
+   * @memberof ServiceUnavailableErrorMessageResponse
+   */
+  code?: InternalErrorCode;
+  /**
+   *
+   * @type {string}
+   * @memberof ServiceUnavailableErrorMessageResponse
+   */
+  message?: string;
+  /**
+   *
+   * @type {AvailabilityInfo}
+   * @memberof ServiceUnavailableErrorMessageResponse
+   */
+  availabilityInfo?: AvailabilityInfo;
+  /**
+   *
+   * @type {ErrorResponse}
+   * @memberof ServiceUnavailableErrorMessageResponse
+   */
+  errorResponse?: ErrorResponse;
 }
 
 /**
  * Check if a given object implements the ServiceUnavailableErrorMessageResponse interface.
  */
-export function instanceOfServiceUnavailableErrorMessageResponse(value: object): value is ServiceUnavailableErrorMessageResponse {
-    return true;
+export function instanceOfServiceUnavailableErrorMessageResponse(
+  value: object
+): value is ServiceUnavailableErrorMessageResponse {
+  return true;
 }
 
-export function ServiceUnavailableErrorMessageResponseFromJSON(json: any): ServiceUnavailableErrorMessageResponse {
-    return ServiceUnavailableErrorMessageResponseFromJSONTyped(json, false);
+export function ServiceUnavailableErrorMessageResponseFromJSON(
+  json: any
+): ServiceUnavailableErrorMessageResponse {
+  return ServiceUnavailableErrorMessageResponseFromJSONTyped(json, false);
 }
 
-export function ServiceUnavailableErrorMessageResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): ServiceUnavailableErrorMessageResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'code': json['code'] == null ? undefined : InternalErrorCodeFromJSON(json['code']),
-        'message': json['message'] == null ? undefined : json['message'],
-        'availabilityInfo': json['availabilityInfo'] == null ? undefined : AvailabilityInfoFromJSON(json['availabilityInfo']),
-        'errorResponse': json['errorResponse'] == null ? undefined : ErrorResponseFromJSON(json['errorResponse']),
-    };
+export function ServiceUnavailableErrorMessageResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): ServiceUnavailableErrorMessageResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    code:
+      json['code'] == null
+        ? undefined
+        : InternalErrorCodeFromJSON(json['code']),
+    message: json['message'] == null ? undefined : json['message'],
+    availabilityInfo:
+      json['availabilityInfo'] == null
+        ? undefined
+        : AvailabilityInfoFromJSON(json['availabilityInfo']),
+    errorResponse:
+      json['errorResponse'] == null
+        ? undefined
+        : ErrorResponseFromJSON(json['errorResponse']),
+  };
 }
 
-export function ServiceUnavailableErrorMessageResponseToJSON(value?: ServiceUnavailableErrorMessageResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'code': InternalErrorCodeToJSON(value['code']),
-        'message': value['message'],
-        'availabilityInfo': AvailabilityInfoToJSON(value['availabilityInfo']),
-        'errorResponse': ErrorResponseToJSON(value['errorResponse']),
-    };
+export function ServiceUnavailableErrorMessageResponseToJSON(
+  value?: ServiceUnavailableErrorMessageResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    code: InternalErrorCodeToJSON(value['code']),
+    message: value['message'],
+    availabilityInfo: AvailabilityInfoToJSON(value['availabilityInfo']),
+    errorResponse: ErrorResponseToJSON(value['errorResponse']),
+  };
 }
-

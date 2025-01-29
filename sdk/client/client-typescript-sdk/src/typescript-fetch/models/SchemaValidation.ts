@@ -14,63 +14,68 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface SchemaValidation
  */
 export interface SchemaValidation {
-    /**
-     * 
-     * @type {string}
-     * @memberof SchemaValidation
-     */
-    schemaVersion?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof SchemaValidation
-     */
-    invalidPatterns?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof SchemaValidation
-     */
-    typeMismatches?: Array<string>;
+  /**
+   *
+   * @type {string}
+   * @memberof SchemaValidation
+   */
+  schemaVersion?: string;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof SchemaValidation
+   */
+  invalidPatterns?: Array<string>;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof SchemaValidation
+   */
+  typeMismatches?: Array<string>;
 }
 
 /**
  * Check if a given object implements the SchemaValidation interface.
  */
-export function instanceOfSchemaValidation(value: object): value is SchemaValidation {
-    return true;
+export function instanceOfSchemaValidation(
+  value: object
+): value is SchemaValidation {
+  return true;
 }
 
 export function SchemaValidationFromJSON(json: any): SchemaValidation {
-    return SchemaValidationFromJSONTyped(json, false);
+  return SchemaValidationFromJSONTyped(json, false);
 }
 
-export function SchemaValidationFromJSONTyped(json: any, ignoreDiscriminator: boolean): SchemaValidation {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'schemaVersion': json['schemaVersion'] == null ? undefined : json['schemaVersion'],
-        'invalidPatterns': json['invalidPatterns'] == null ? undefined : json['invalidPatterns'],
-        'typeMismatches': json['typeMismatches'] == null ? undefined : json['typeMismatches'],
-    };
+export function SchemaValidationFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): SchemaValidation {
+  if (json == null) {
+    return json;
+  }
+  return {
+    schemaVersion:
+      json['schemaVersion'] == null ? undefined : json['schemaVersion'],
+    invalidPatterns:
+      json['invalidPatterns'] == null ? undefined : json['invalidPatterns'],
+    typeMismatches:
+      json['typeMismatches'] == null ? undefined : json['typeMismatches'],
+  };
 }
 
 export function SchemaValidationToJSON(value?: SchemaValidation | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'schemaVersion': value['schemaVersion'],
-        'invalidPatterns': value['invalidPatterns'],
-        'typeMismatches': value['typeMismatches'],
-    };
+  if (value == null) {
+    return value;
+  }
+  return {
+    schemaVersion: value['schemaVersion'],
+    invalidPatterns: value['invalidPatterns'],
+    typeMismatches: value['typeMismatches'],
+  };
 }
-

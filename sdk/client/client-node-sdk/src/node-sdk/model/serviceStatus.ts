@@ -14,37 +14,41 @@ import { RequestFile } from './models';
 import { Dependency } from './dependency';
 
 export class ServiceStatus {
-    'name'?: string;
-    'status'?: string;
-    'metrics'?: { [key: string]: string | undefined; };
-    'dependencies'?: Array<Dependency>;
+  'name'?: string;
+  'status'?: string;
+  'metrics'?: { [key: string]: string | undefined };
+  'dependencies'?: Array<Dependency>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        },
-        {
-            "name": "status",
-            "baseName": "status",
-            "type": "string"
-        },
-        {
-            "name": "metrics",
-            "baseName": "metrics",
-            "type": "{ [key: string]: string | undefined; }"
-        },
-        {
-            "name": "dependencies",
-            "baseName": "dependencies",
-            "type": "Array<Dependency>"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'name',
+      baseName: 'name',
+      type: 'string',
+    },
+    {
+      name: 'status',
+      baseName: 'status',
+      type: 'string',
+    },
+    {
+      name: 'metrics',
+      baseName: 'metrics',
+      type: '{ [key: string]: string | undefined; }',
+    },
+    {
+      name: 'dependencies',
+      baseName: 'dependencies',
+      type: 'Array<Dependency>',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ServiceStatus.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ServiceStatus.attributeTypeMap;
+  }
 }
-

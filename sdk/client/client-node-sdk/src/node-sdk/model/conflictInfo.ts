@@ -13,43 +13,47 @@
 import { RequestFile } from './models';
 
 export class ConflictInfo {
-    'resourceType'?: string;
-    'identifier'?: string;
-    'conflictReason'?: string;
-    'createdAt'?: Date;
-    'createdBy'?: string;
+  'resourceType'?: string;
+  'identifier'?: string;
+  'conflictReason'?: string;
+  'createdAt'?: Date;
+  'createdBy'?: string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "resourceType",
-            "baseName": "resourceType",
-            "type": "string"
-        },
-        {
-            "name": "identifier",
-            "baseName": "identifier",
-            "type": "string"
-        },
-        {
-            "name": "conflictReason",
-            "baseName": "conflictReason",
-            "type": "string"
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date"
-        },
-        {
-            "name": "createdBy",
-            "baseName": "createdBy",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'resourceType',
+      baseName: 'resourceType',
+      type: 'string',
+    },
+    {
+      name: 'identifier',
+      baseName: 'identifier',
+      type: 'string',
+    },
+    {
+      name: 'conflictReason',
+      baseName: 'conflictReason',
+      type: 'string',
+    },
+    {
+      name: 'createdAt',
+      baseName: 'createdAt',
+      type: 'Date',
+    },
+    {
+      name: 'createdBy',
+      baseName: 'createdBy',
+      type: 'string',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ConflictInfo.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ConflictInfo.attributeTypeMap;
+  }
 }
-

@@ -14,71 +14,73 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface LimitInfo
  */
 export interface LimitInfo {
-    /**
-     * 
-     * @type {number}
-     * @memberof LimitInfo
-     */
-    current?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof LimitInfo
-     */
-    limit?: number;
-    /**
-     * 
-     * @type {Date}
-     * @memberof LimitInfo
-     */
-    resetTime?: Date;
-    /**
-     * 
-     * @type {string}
-     * @memberof LimitInfo
-     */
-    windowSize?: string;
+  /**
+   *
+   * @type {number}
+   * @memberof LimitInfo
+   */
+  current?: number;
+  /**
+   *
+   * @type {number}
+   * @memberof LimitInfo
+   */
+  limit?: number;
+  /**
+   *
+   * @type {Date}
+   * @memberof LimitInfo
+   */
+  resetTime?: Date;
+  /**
+   *
+   * @type {string}
+   * @memberof LimitInfo
+   */
+  windowSize?: string;
 }
 
 /**
  * Check if a given object implements the LimitInfo interface.
  */
 export function instanceOfLimitInfo(value: object): value is LimitInfo {
-    return true;
+  return true;
 }
 
 export function LimitInfoFromJSON(json: any): LimitInfo {
-    return LimitInfoFromJSONTyped(json, false);
+  return LimitInfoFromJSONTyped(json, false);
 }
 
-export function LimitInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): LimitInfo {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'current': json['current'] == null ? undefined : json['current'],
-        'limit': json['limit'] == null ? undefined : json['limit'],
-        'resetTime': json['resetTime'] == null ? undefined : (new Date(json['resetTime'])),
-        'windowSize': json['windowSize'] == null ? undefined : json['windowSize'],
-    };
+export function LimitInfoFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): LimitInfo {
+  if (json == null) {
+    return json;
+  }
+  return {
+    current: json['current'] == null ? undefined : json['current'],
+    limit: json['limit'] == null ? undefined : json['limit'],
+    resetTime:
+      json['resetTime'] == null ? undefined : new Date(json['resetTime']),
+    windowSize: json['windowSize'] == null ? undefined : json['windowSize'],
+  };
 }
 
 export function LimitInfoToJSON(value?: LimitInfo | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'current': value['current'],
-        'limit': value['limit'],
-        'resetTime': value['resetTime'] == null ? undefined : ((value['resetTime']).toISOString()),
-        'windowSize': value['windowSize'],
-    };
+  if (value == null) {
+    return value;
+  }
+  return {
+    current: value['current'],
+    limit: value['limit'],
+    resetTime:
+      value['resetTime'] == null ? undefined : value['resetTime'].toISOString(),
+    windowSize: value['windowSize'],
+  };
 }
-

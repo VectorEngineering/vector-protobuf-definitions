@@ -14,40 +14,44 @@ import { RequestFile } from './models';
 import { ErrorResponse } from './errorResponse';
 
 /**
-* Indicates that the resource requested is no longer available and will not be available again
-*/
+ * Indicates that the resource requested is no longer available and will not be available again
+ */
 export class GoneErrorMessageResponse {
-    'code'?: number;
-    'message'?: string;
-    'resource'?: string;
-    'errorResponse'?: ErrorResponse;
+  'code'?: number;
+  'message'?: string;
+  'resource'?: string;
+  'errorResponse'?: ErrorResponse;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "code",
-            "baseName": "code",
-            "type": "number"
-        },
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
-        },
-        {
-            "name": "resource",
-            "baseName": "resource",
-            "type": "string"
-        },
-        {
-            "name": "errorResponse",
-            "baseName": "errorResponse",
-            "type": "ErrorResponse"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'code',
+      baseName: 'code',
+      type: 'number',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'resource',
+      baseName: 'resource',
+      type: 'string',
+    },
+    {
+      name: 'errorResponse',
+      baseName: 'errorResponse',
+      type: 'ErrorResponse',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return GoneErrorMessageResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return GoneErrorMessageResponse.attributeTypeMap;
+  }
 }
-

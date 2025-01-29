@@ -16,42 +16,46 @@ import { ErrorResponse } from './errorResponse';
 import { ValidationErrorCode } from './validationErrorCode';
 
 /**
-* Represents resource conflict errors
-*/
+ * Represents resource conflict errors
+ */
 export class ConflictErrorMessageResponse {
-    'code'?: ValidationErrorCode;
-    'message'?: string;
-    'conflictInfo'?: ConflictInfo;
-    'errorResponse'?: ErrorResponse;
+  'code'?: ValidationErrorCode;
+  'message'?: string;
+  'conflictInfo'?: ConflictInfo;
+  'errorResponse'?: ErrorResponse;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "code",
-            "baseName": "code",
-            "type": "ValidationErrorCode"
-        },
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
-        },
-        {
-            "name": "conflictInfo",
-            "baseName": "conflictInfo",
-            "type": "ConflictInfo"
-        },
-        {
-            "name": "errorResponse",
-            "baseName": "errorResponse",
-            "type": "ErrorResponse"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'code',
+      baseName: 'code',
+      type: 'ValidationErrorCode',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'conflictInfo',
+      baseName: 'conflictInfo',
+      type: 'ConflictInfo',
+    },
+    {
+      name: 'errorResponse',
+      baseName: 'errorResponse',
+      type: 'ErrorResponse',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ConflictErrorMessageResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ConflictErrorMessageResponse.attributeTypeMap;
+  }
 }
 
-export namespace ConflictErrorMessageResponse {
-}
+export namespace ConflictErrorMessageResponse {}

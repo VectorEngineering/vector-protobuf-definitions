@@ -14,70 +14,74 @@ import { RequestFile } from './models';
 import { ScrapingJob } from './scrapingJob';
 
 /**
-* Account represents a user account within the workspace service. It serves as the top-level container for all user-specific workspaces and settings.  Key features: - Unique identification via Auth0 - Organization and tenant context - Audit timestamps - Associated scraping jobs  Database considerations: - Uses GORM for ORM mapping - Includes indexes for efficient querying - Supports soft deletes via deleted_at  Usage example: ```go account := &Account{     AuthPlatformUserId: \"auth0|123\",     OrgId: \"org_123\",     TenantId: \"tenant_456\", } ```
-*/
+ * Account represents a user account within the workspace service. It serves as the top-level container for all user-specific workspaces and settings.  Key features: - Unique identification via Auth0 - Organization and tenant context - Audit timestamps - Associated scraping jobs  Database considerations: - Uses GORM for ORM mapping - Includes indexes for efficient querying - Supports soft deletes via deleted_at  Usage example: ```go account := &Account{     AuthPlatformUserId: \"auth0|123\",     OrgId: \"org_123\",     TenantId: \"tenant_456\", } ```
+ */
 export class Account {
-    'id'?: string;
-    'authPlatformUserId'?: string;
-    'orgId'?: string;
-    'tenantId'?: string;
-    'email'?: string;
-    'lastModifiedAt'?: Date;
-    'deletedAt'?: Date;
-    'createdAt'?: Date;
-    'scrapingJobs'?: Array<ScrapingJob>;
+  'id'?: string;
+  'authPlatformUserId'?: string;
+  'orgId'?: string;
+  'tenantId'?: string;
+  'email'?: string;
+  'lastModifiedAt'?: Date;
+  'deletedAt'?: Date;
+  'createdAt'?: Date;
+  'scrapingJobs'?: Array<ScrapingJob>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "id",
-            "baseName": "id",
-            "type": "string"
-        },
-        {
-            "name": "authPlatformUserId",
-            "baseName": "authPlatformUserId",
-            "type": "string"
-        },
-        {
-            "name": "orgId",
-            "baseName": "orgId",
-            "type": "string"
-        },
-        {
-            "name": "tenantId",
-            "baseName": "tenantId",
-            "type": "string"
-        },
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "string"
-        },
-        {
-            "name": "lastModifiedAt",
-            "baseName": "lastModifiedAt",
-            "type": "Date"
-        },
-        {
-            "name": "deletedAt",
-            "baseName": "deletedAt",
-            "type": "Date"
-        },
-        {
-            "name": "createdAt",
-            "baseName": "createdAt",
-            "type": "Date"
-        },
-        {
-            "name": "scrapingJobs",
-            "baseName": "scrapingJobs",
-            "type": "Array<ScrapingJob>"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+    },
+    {
+      name: 'authPlatformUserId',
+      baseName: 'authPlatformUserId',
+      type: 'string',
+    },
+    {
+      name: 'orgId',
+      baseName: 'orgId',
+      type: 'string',
+    },
+    {
+      name: 'tenantId',
+      baseName: 'tenantId',
+      type: 'string',
+    },
+    {
+      name: 'email',
+      baseName: 'email',
+      type: 'string',
+    },
+    {
+      name: 'lastModifiedAt',
+      baseName: 'lastModifiedAt',
+      type: 'Date',
+    },
+    {
+      name: 'deletedAt',
+      baseName: 'deletedAt',
+      type: 'Date',
+    },
+    {
+      name: 'createdAt',
+      baseName: 'createdAt',
+      type: 'Date',
+    },
+    {
+      name: 'scrapingJobs',
+      baseName: 'scrapingJobs',
+      type: 'Array<ScrapingJob>',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return Account.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return Account.attributeTypeMap;
+  }
 }
-

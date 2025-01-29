@@ -14,46 +14,50 @@ import { RequestFile } from './models';
 import { ErrorResponse } from './errorResponse';
 
 /**
-* Indicates that the server understood the request but refuses to authorize it
-*/
+ * Indicates that the server understood the request but refuses to authorize it
+ */
 export class ForbiddenErrorMessageResponse {
-    'code'?: number;
-    'message'?: string;
-    'reason'?: string;
-    'requiredPermissions'?: Array<string>;
-    'errorResponse'?: ErrorResponse;
+  'code'?: number;
+  'message'?: string;
+  'reason'?: string;
+  'requiredPermissions'?: Array<string>;
+  'errorResponse'?: ErrorResponse;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "code",
-            "baseName": "code",
-            "type": "number"
-        },
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
-        },
-        {
-            "name": "reason",
-            "baseName": "reason",
-            "type": "string"
-        },
-        {
-            "name": "requiredPermissions",
-            "baseName": "requiredPermissions",
-            "type": "Array<string>"
-        },
-        {
-            "name": "errorResponse",
-            "baseName": "errorResponse",
-            "type": "ErrorResponse"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'code',
+      baseName: 'code',
+      type: 'number',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'reason',
+      baseName: 'reason',
+      type: 'string',
+    },
+    {
+      name: 'requiredPermissions',
+      baseName: 'requiredPermissions',
+      type: 'Array<string>',
+    },
+    {
+      name: 'errorResponse',
+      baseName: 'errorResponse',
+      type: 'ErrorResponse',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ForbiddenErrorMessageResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ForbiddenErrorMessageResponse.attributeTypeMap;
+  }
 }
-

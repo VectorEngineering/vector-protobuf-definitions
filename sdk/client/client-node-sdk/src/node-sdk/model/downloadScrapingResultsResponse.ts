@@ -13,31 +13,35 @@
 import { RequestFile } from './models';
 
 export class DownloadScrapingResultsResponse {
-    'content'?: string;
-    'filename'?: string;
-    'contentType'?: string;
+  'content'?: string;
+  'filename'?: string;
+  'contentType'?: string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "content",
-            "baseName": "content",
-            "type": "string"
-        },
-        {
-            "name": "filename",
-            "baseName": "filename",
-            "type": "string"
-        },
-        {
-            "name": "contentType",
-            "baseName": "contentType",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'content',
+      baseName: 'content',
+      type: 'string',
+    },
+    {
+      name: 'filename',
+      baseName: 'filename',
+      type: 'string',
+    },
+    {
+      name: 'contentType',
+      baseName: 'contentType',
+      type: 'string',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return DownloadScrapingResultsResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return DownloadScrapingResultsResponse.attributeTypeMap;
+  }
 }
-

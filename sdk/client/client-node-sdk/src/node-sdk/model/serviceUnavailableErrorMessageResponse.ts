@@ -16,42 +16,46 @@ import { ErrorResponse } from './errorResponse';
 import { InternalErrorCode } from './internalErrorCode';
 
 /**
-* Represents service availability errors
-*/
+ * Represents service availability errors
+ */
 export class ServiceUnavailableErrorMessageResponse {
-    'code'?: InternalErrorCode;
-    'message'?: string;
-    'availabilityInfo'?: AvailabilityInfo;
-    'errorResponse'?: ErrorResponse;
+  'code'?: InternalErrorCode;
+  'message'?: string;
+  'availabilityInfo'?: AvailabilityInfo;
+  'errorResponse'?: ErrorResponse;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "code",
-            "baseName": "code",
-            "type": "InternalErrorCode"
-        },
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
-        },
-        {
-            "name": "availabilityInfo",
-            "baseName": "availabilityInfo",
-            "type": "AvailabilityInfo"
-        },
-        {
-            "name": "errorResponse",
-            "baseName": "errorResponse",
-            "type": "ErrorResponse"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'code',
+      baseName: 'code',
+      type: 'InternalErrorCode',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'availabilityInfo',
+      baseName: 'availabilityInfo',
+      type: 'AvailabilityInfo',
+    },
+    {
+      name: 'errorResponse',
+      baseName: 'errorResponse',
+      type: 'ErrorResponse',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ServiceUnavailableErrorMessageResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ServiceUnavailableErrorMessageResponse.attributeTypeMap;
+  }
 }
 
-export namespace ServiceUnavailableErrorMessageResponse {
-}
+export namespace ServiceUnavailableErrorMessageResponse {}

@@ -14,79 +14,82 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface QuotaInfo
  */
 export interface QuotaInfo {
-    /**
-     * 
-     * @type {string}
-     * @memberof QuotaInfo
-     */
-    resource?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof QuotaInfo
-     */
-    used?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof QuotaInfo
-     */
-    limit?: string;
-    /**
-     * 
-     * @type {Date}
-     * @memberof QuotaInfo
-     */
-    resetTime?: Date;
-    /**
-     * 
-     * @type {{ [key: string]: string; }}
-     * @memberof QuotaInfo
-     */
-    resourceUsage?: { [key: string]: string; };
+  /**
+   *
+   * @type {string}
+   * @memberof QuotaInfo
+   */
+  resource?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof QuotaInfo
+   */
+  used?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof QuotaInfo
+   */
+  limit?: string;
+  /**
+   *
+   * @type {Date}
+   * @memberof QuotaInfo
+   */
+  resetTime?: Date;
+  /**
+   *
+   * @type {{ [key: string]: string; }}
+   * @memberof QuotaInfo
+   */
+  resourceUsage?: { [key: string]: string };
 }
 
 /**
  * Check if a given object implements the QuotaInfo interface.
  */
 export function instanceOfQuotaInfo(value: object): value is QuotaInfo {
-    return true;
+  return true;
 }
 
 export function QuotaInfoFromJSON(json: any): QuotaInfo {
-    return QuotaInfoFromJSONTyped(json, false);
+  return QuotaInfoFromJSONTyped(json, false);
 }
 
-export function QuotaInfoFromJSONTyped(json: any, ignoreDiscriminator: boolean): QuotaInfo {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'resource': json['resource'] == null ? undefined : json['resource'],
-        'used': json['used'] == null ? undefined : json['used'],
-        'limit': json['limit'] == null ? undefined : json['limit'],
-        'resetTime': json['resetTime'] == null ? undefined : (new Date(json['resetTime'])),
-        'resourceUsage': json['resourceUsage'] == null ? undefined : json['resourceUsage'],
-    };
+export function QuotaInfoFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): QuotaInfo {
+  if (json == null) {
+    return json;
+  }
+  return {
+    resource: json['resource'] == null ? undefined : json['resource'],
+    used: json['used'] == null ? undefined : json['used'],
+    limit: json['limit'] == null ? undefined : json['limit'],
+    resetTime:
+      json['resetTime'] == null ? undefined : new Date(json['resetTime']),
+    resourceUsage:
+      json['resourceUsage'] == null ? undefined : json['resourceUsage'],
+  };
 }
 
 export function QuotaInfoToJSON(value?: QuotaInfo | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'resource': value['resource'],
-        'used': value['used'],
-        'limit': value['limit'],
-        'resetTime': value['resetTime'] == null ? undefined : ((value['resetTime']).toISOString()),
-        'resourceUsage': value['resourceUsage'],
-    };
+  if (value == null) {
+    return value;
+  }
+  return {
+    resource: value['resource'],
+    used: value['used'],
+    limit: value['limit'],
+    resetTime:
+      value['resetTime'] == null ? undefined : value['resetTime'].toISOString(),
+    resourceUsage: value['resourceUsage'],
+  };
 }
-

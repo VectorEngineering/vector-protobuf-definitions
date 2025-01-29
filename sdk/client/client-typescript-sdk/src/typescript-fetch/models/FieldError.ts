@@ -14,55 +14,55 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface FieldError
  */
 export interface FieldError {
-    /**
-     * 
-     * @type {string}
-     * @memberof FieldError
-     */
-    field?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof FieldError
-     */
-    error?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof FieldError
+   */
+  field?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof FieldError
+   */
+  error?: string;
 }
 
 /**
  * Check if a given object implements the FieldError interface.
  */
 export function instanceOfFieldError(value: object): value is FieldError {
-    return true;
+  return true;
 }
 
 export function FieldErrorFromJSON(json: any): FieldError {
-    return FieldErrorFromJSONTyped(json, false);
+  return FieldErrorFromJSONTyped(json, false);
 }
 
-export function FieldErrorFromJSONTyped(json: any, ignoreDiscriminator: boolean): FieldError {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'field': json['field'] == null ? undefined : json['field'],
-        'error': json['error'] == null ? undefined : json['error'],
-    };
+export function FieldErrorFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): FieldError {
+  if (json == null) {
+    return json;
+  }
+  return {
+    field: json['field'] == null ? undefined : json['field'],
+    error: json['error'] == null ? undefined : json['error'],
+  };
 }
 
 export function FieldErrorToJSON(value?: FieldError | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'field': value['field'],
-        'error': value['error'],
-    };
+  if (value == null) {
+    return value;
+  }
+  return {
+    field: value['field'],
+    error: value['error'],
+  };
 }
-

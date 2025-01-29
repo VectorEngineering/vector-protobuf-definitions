@@ -13,31 +13,31 @@
 import { RequestFile } from './models';
 
 /**
-* - AUTH_FAILED_INVALID_BEARER_TOKEN: Authentication errors  - SESSION_EXPIRED: Session errors  - UNAUTHENTICATED: Other authentication errors  - ACCOUNT_LOCKED: New authentication error codes  Account is locked due to too many failed login attempts  - ACCOUNT_DISABLED: Account has been disabled by admin  - PASSWORD_EXPIRED: Password has expired and must be changed  - PASSWORD_RESET_REQUIRED: Password reset is required  - UNRECOGNIZED_DEVICE: Login attempt from an unrecognized device
-*/
+ * - AUTH_FAILED_INVALID_BEARER_TOKEN: Authentication errors  - SESSION_EXPIRED: Session errors  - UNAUTHENTICATED: Other authentication errors  - ACCOUNT_LOCKED: New authentication error codes  Account is locked due to too many failed login attempts  - ACCOUNT_DISABLED: Account has been disabled by admin  - PASSWORD_EXPIRED: Password has expired and must be changed  - PASSWORD_RESET_REQUIRED: Password reset is required  - UNRECOGNIZED_DEVICE: Login attempt from an unrecognized device
+ */
 export enum AuthErrorCode {
-    NoAuthError = <any> 'NO_AUTH_ERROR',
-    AuthFailedInvalidBearerToken = <any> 'AUTH_FAILED_INVALID_BEARER_TOKEN',
-    AuthFailedInvalidSubject = <any> 'AUTH_FAILED_INVALID_SUBJECT',
-    AuthFailedInvalidAudience = <any> 'AUTH_FAILED_INVALID_AUDIENCE',
-    AuthFailedInvalidIssuer = <any> 'AUTH_FAILED_INVALID_ISSUER',
-    BearerTokenMissing = <any> 'BEARER_TOKEN_MISSING',
-    TokenExpired = <any> 'TOKEN_EXPIRED',
-    TokenNotActive = <any> 'TOKEN_NOT_ACTIVE',
-    TokenRevoked = <any> 'TOKEN_REVOKED',
-    InvalidClaims = <any> 'INVALID_CLAIMS',
-    MissingRequiredClaims = <any> 'MISSING_REQUIRED_CLAIMS',
-    InvalidScope = <any> 'INVALID_SCOPE',
-    InvalidPermissions = <any> 'INVALID_PERMISSIONS',
-    SessionExpired = <any> 'SESSION_EXPIRED',
-    SessionInvalid = <any> 'SESSION_INVALID',
-    SessionRevoked = <any> 'SESSION_REVOKED',
-    Unauthenticated = <any> 'UNAUTHENTICATED',
-    MultiFactorRequired = <any> 'MULTI_FACTOR_REQUIRED',
-    MultiFactorFailed = <any> 'MULTI_FACTOR_FAILED',
-    AccountLocked = <any> 'ACCOUNT_LOCKED',
-    AccountDisabled = <any> 'ACCOUNT_DISABLED',
-    PasswordExpired = <any> 'PASSWORD_EXPIRED',
-    PasswordResetRequired = <any> 'PASSWORD_RESET_REQUIRED',
-    UnrecognizedDevice = <any> 'UNRECOGNIZED_DEVICE'
+  NoAuthError = <any>'NO_AUTH_ERROR',
+  AuthFailedInvalidBearerToken = <any>'AUTH_FAILED_INVALID_BEARER_TOKEN',
+  AuthFailedInvalidSubject = <any>'AUTH_FAILED_INVALID_SUBJECT',
+  AuthFailedInvalidAudience = <any>'AUTH_FAILED_INVALID_AUDIENCE',
+  AuthFailedInvalidIssuer = <any>'AUTH_FAILED_INVALID_ISSUER',
+  BearerTokenMissing = <any>'BEARER_TOKEN_MISSING',
+  TokenExpired = <any>'TOKEN_EXPIRED',
+  TokenNotActive = <any>'TOKEN_NOT_ACTIVE',
+  TokenRevoked = <any>'TOKEN_REVOKED',
+  InvalidClaims = <any>'INVALID_CLAIMS',
+  MissingRequiredClaims = <any>'MISSING_REQUIRED_CLAIMS',
+  InvalidScope = <any>'INVALID_SCOPE',
+  InvalidPermissions = <any>'INVALID_PERMISSIONS',
+  SessionExpired = <any>'SESSION_EXPIRED',
+  SessionInvalid = <any>'SESSION_INVALID',
+  SessionRevoked = <any>'SESSION_REVOKED',
+  Unauthenticated = <any>'UNAUTHENTICATED',
+  MultiFactorRequired = <any>'MULTI_FACTOR_REQUIRED',
+  MultiFactorFailed = <any>'MULTI_FACTOR_FAILED',
+  AccountLocked = <any>'ACCOUNT_LOCKED',
+  AccountDisabled = <any>'ACCOUNT_DISABLED',
+  PasswordExpired = <any>'PASSWORD_EXPIRED',
+  PasswordResetRequired = <any>'PASSWORD_RESET_REQUIRED',
+  UnrecognizedDevice = <any>'UNRECOGNIZED_DEVICE',
 }

@@ -14,63 +14,69 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface DownloadScrapingResultsResponse
  */
 export interface DownloadScrapingResultsResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof DownloadScrapingResultsResponse
-     */
-    content?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof DownloadScrapingResultsResponse
-     */
-    filename?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof DownloadScrapingResultsResponse
-     */
-    contentType?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof DownloadScrapingResultsResponse
+   */
+  content?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof DownloadScrapingResultsResponse
+   */
+  filename?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof DownloadScrapingResultsResponse
+   */
+  contentType?: string;
 }
 
 /**
  * Check if a given object implements the DownloadScrapingResultsResponse interface.
  */
-export function instanceOfDownloadScrapingResultsResponse(value: object): value is DownloadScrapingResultsResponse {
-    return true;
+export function instanceOfDownloadScrapingResultsResponse(
+  value: object
+): value is DownloadScrapingResultsResponse {
+  return true;
 }
 
-export function DownloadScrapingResultsResponseFromJSON(json: any): DownloadScrapingResultsResponse {
-    return DownloadScrapingResultsResponseFromJSONTyped(json, false);
+export function DownloadScrapingResultsResponseFromJSON(
+  json: any
+): DownloadScrapingResultsResponse {
+  return DownloadScrapingResultsResponseFromJSONTyped(json, false);
 }
 
-export function DownloadScrapingResultsResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): DownloadScrapingResultsResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'content': json['content'] == null ? undefined : json['content'],
-        'filename': json['filename'] == null ? undefined : json['filename'],
-        'contentType': json['contentType'] == null ? undefined : json['contentType'],
-    };
+export function DownloadScrapingResultsResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): DownloadScrapingResultsResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    content: json['content'] == null ? undefined : json['content'],
+    filename: json['filename'] == null ? undefined : json['filename'],
+    contentType: json['contentType'] == null ? undefined : json['contentType'],
+  };
 }
 
-export function DownloadScrapingResultsResponseToJSON(value?: DownloadScrapingResultsResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'content': value['content'],
-        'filename': value['filename'],
-        'contentType': value['contentType'],
-    };
+export function DownloadScrapingResultsResponseToJSON(
+  value?: DownloadScrapingResultsResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    content: value['content'],
+    filename: value['filename'],
+    contentType: value['contentType'],
+  };
 }
-

@@ -14,47 +14,53 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface DeleteAccountResponse
  */
 export interface DeleteAccountResponse {
-    /**
-     * 
-     * @type {boolean}
-     * @memberof DeleteAccountResponse
-     */
-    success?: boolean;
+  /**
+   *
+   * @type {boolean}
+   * @memberof DeleteAccountResponse
+   */
+  success?: boolean;
 }
 
 /**
  * Check if a given object implements the DeleteAccountResponse interface.
  */
-export function instanceOfDeleteAccountResponse(value: object): value is DeleteAccountResponse {
-    return true;
+export function instanceOfDeleteAccountResponse(
+  value: object
+): value is DeleteAccountResponse {
+  return true;
 }
 
-export function DeleteAccountResponseFromJSON(json: any): DeleteAccountResponse {
-    return DeleteAccountResponseFromJSONTyped(json, false);
+export function DeleteAccountResponseFromJSON(
+  json: any
+): DeleteAccountResponse {
+  return DeleteAccountResponseFromJSONTyped(json, false);
 }
 
-export function DeleteAccountResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): DeleteAccountResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'success': json['success'] == null ? undefined : json['success'],
-    };
+export function DeleteAccountResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): DeleteAccountResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    success: json['success'] == null ? undefined : json['success'],
+  };
 }
 
-export function DeleteAccountResponseToJSON(value?: DeleteAccountResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'success': value['success'],
-    };
+export function DeleteAccountResponseToJSON(
+  value?: DeleteAccountResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    success: value['success'],
+  };
 }
-

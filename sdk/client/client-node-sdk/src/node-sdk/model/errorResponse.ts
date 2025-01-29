@@ -14,19 +14,23 @@ import { RequestFile } from './models';
 import { Status } from './status';
 
 export class ErrorResponse {
-    'status'?: Status;
+  'status'?: Status;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "status",
-            "baseName": "status",
-            "type": "Status"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'status',
+      baseName: 'status',
+      type: 'Status',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ErrorResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ErrorResponse.attributeTypeMap;
+  }
 }
-

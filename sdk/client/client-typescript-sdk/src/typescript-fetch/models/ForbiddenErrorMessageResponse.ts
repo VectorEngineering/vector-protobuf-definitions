@@ -15,9 +15,9 @@
 import { mapValues } from '../runtime';
 import type { ErrorResponse } from './ErrorResponse';
 import {
-    ErrorResponseFromJSON,
-    ErrorResponseFromJSONTyped,
-    ErrorResponseToJSON,
+  ErrorResponseFromJSON,
+  ErrorResponseFromJSONTyped,
+  ErrorResponseToJSON,
 } from './ErrorResponse';
 
 /**
@@ -26,74 +26,86 @@ import {
  * @interface ForbiddenErrorMessageResponse
  */
 export interface ForbiddenErrorMessageResponse {
-    /**
-     * 
-     * @type {number}
-     * @memberof ForbiddenErrorMessageResponse
-     */
-    code?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof ForbiddenErrorMessageResponse
-     */
-    message?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ForbiddenErrorMessageResponse
-     */
-    reason?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof ForbiddenErrorMessageResponse
-     */
-    requiredPermissions?: Array<string>;
-    /**
-     * 
-     * @type {ErrorResponse}
-     * @memberof ForbiddenErrorMessageResponse
-     */
-    errorResponse?: ErrorResponse;
+  /**
+   *
+   * @type {number}
+   * @memberof ForbiddenErrorMessageResponse
+   */
+  code?: number;
+  /**
+   *
+   * @type {string}
+   * @memberof ForbiddenErrorMessageResponse
+   */
+  message?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof ForbiddenErrorMessageResponse
+   */
+  reason?: string;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof ForbiddenErrorMessageResponse
+   */
+  requiredPermissions?: Array<string>;
+  /**
+   *
+   * @type {ErrorResponse}
+   * @memberof ForbiddenErrorMessageResponse
+   */
+  errorResponse?: ErrorResponse;
 }
 
 /**
  * Check if a given object implements the ForbiddenErrorMessageResponse interface.
  */
-export function instanceOfForbiddenErrorMessageResponse(value: object): value is ForbiddenErrorMessageResponse {
-    return true;
+export function instanceOfForbiddenErrorMessageResponse(
+  value: object
+): value is ForbiddenErrorMessageResponse {
+  return true;
 }
 
-export function ForbiddenErrorMessageResponseFromJSON(json: any): ForbiddenErrorMessageResponse {
-    return ForbiddenErrorMessageResponseFromJSONTyped(json, false);
+export function ForbiddenErrorMessageResponseFromJSON(
+  json: any
+): ForbiddenErrorMessageResponse {
+  return ForbiddenErrorMessageResponseFromJSONTyped(json, false);
 }
 
-export function ForbiddenErrorMessageResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): ForbiddenErrorMessageResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'code': json['code'] == null ? undefined : json['code'],
-        'message': json['message'] == null ? undefined : json['message'],
-        'reason': json['reason'] == null ? undefined : json['reason'],
-        'requiredPermissions': json['requiredPermissions'] == null ? undefined : json['requiredPermissions'],
-        'errorResponse': json['errorResponse'] == null ? undefined : ErrorResponseFromJSON(json['errorResponse']),
-    };
+export function ForbiddenErrorMessageResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): ForbiddenErrorMessageResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    code: json['code'] == null ? undefined : json['code'],
+    message: json['message'] == null ? undefined : json['message'],
+    reason: json['reason'] == null ? undefined : json['reason'],
+    requiredPermissions:
+      json['requiredPermissions'] == null
+        ? undefined
+        : json['requiredPermissions'],
+    errorResponse:
+      json['errorResponse'] == null
+        ? undefined
+        : ErrorResponseFromJSON(json['errorResponse']),
+  };
 }
 
-export function ForbiddenErrorMessageResponseToJSON(value?: ForbiddenErrorMessageResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'code': value['code'],
-        'message': value['message'],
-        'reason': value['reason'],
-        'requiredPermissions': value['requiredPermissions'],
-        'errorResponse': ErrorResponseToJSON(value['errorResponse']),
-    };
+export function ForbiddenErrorMessageResponseToJSON(
+  value?: ForbiddenErrorMessageResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    code: value['code'],
+    message: value['message'],
+    reason: value['reason'],
+    requiredPermissions: value['requiredPermissions'],
+    errorResponse: ErrorResponseToJSON(value['errorResponse']),
+  };
 }
-

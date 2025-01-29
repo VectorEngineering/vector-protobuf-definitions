@@ -13,103 +13,107 @@
 import { RequestFile } from './models';
 
 export class CreateScrapingJobRequest {
-    'userId': string;
-    'orgId': string;
-    'tenantId': string;
-    'name'?: string;
-    'keywords'?: Array<string>;
-    'lang'?: string;
-    'zoom'?: number;
-    'lat'?: string;
-    'lon'?: string;
-    'fastMode'?: boolean;
-    'radius'?: number;
-    'depth'?: number;
-    'email'?: boolean;
-    'maxTime'?: number;
-    'proxies'?: Array<string>;
+  'userId': string;
+  'orgId': string;
+  'tenantId': string;
+  'name'?: string;
+  'keywords'?: Array<string>;
+  'lang'?: string;
+  'zoom'?: number;
+  'lat'?: string;
+  'lon'?: string;
+  'fastMode'?: boolean;
+  'radius'?: number;
+  'depth'?: number;
+  'email'?: boolean;
+  'maxTime'?: number;
+  'proxies'?: Array<string>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "userId",
-            "baseName": "userId",
-            "type": "string"
-        },
-        {
-            "name": "orgId",
-            "baseName": "orgId",
-            "type": "string"
-        },
-        {
-            "name": "tenantId",
-            "baseName": "tenantId",
-            "type": "string"
-        },
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        },
-        {
-            "name": "keywords",
-            "baseName": "keywords",
-            "type": "Array<string>"
-        },
-        {
-            "name": "lang",
-            "baseName": "lang",
-            "type": "string"
-        },
-        {
-            "name": "zoom",
-            "baseName": "zoom",
-            "type": "number"
-        },
-        {
-            "name": "lat",
-            "baseName": "lat",
-            "type": "string"
-        },
-        {
-            "name": "lon",
-            "baseName": "lon",
-            "type": "string"
-        },
-        {
-            "name": "fastMode",
-            "baseName": "fastMode",
-            "type": "boolean"
-        },
-        {
-            "name": "radius",
-            "baseName": "radius",
-            "type": "number"
-        },
-        {
-            "name": "depth",
-            "baseName": "depth",
-            "type": "number"
-        },
-        {
-            "name": "email",
-            "baseName": "email",
-            "type": "boolean"
-        },
-        {
-            "name": "maxTime",
-            "baseName": "maxTime",
-            "type": "number"
-        },
-        {
-            "name": "proxies",
-            "baseName": "proxies",
-            "type": "Array<string>"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'userId',
+      baseName: 'userId',
+      type: 'string',
+    },
+    {
+      name: 'orgId',
+      baseName: 'orgId',
+      type: 'string',
+    },
+    {
+      name: 'tenantId',
+      baseName: 'tenantId',
+      type: 'string',
+    },
+    {
+      name: 'name',
+      baseName: 'name',
+      type: 'string',
+    },
+    {
+      name: 'keywords',
+      baseName: 'keywords',
+      type: 'Array<string>',
+    },
+    {
+      name: 'lang',
+      baseName: 'lang',
+      type: 'string',
+    },
+    {
+      name: 'zoom',
+      baseName: 'zoom',
+      type: 'number',
+    },
+    {
+      name: 'lat',
+      baseName: 'lat',
+      type: 'string',
+    },
+    {
+      name: 'lon',
+      baseName: 'lon',
+      type: 'string',
+    },
+    {
+      name: 'fastMode',
+      baseName: 'fastMode',
+      type: 'boolean',
+    },
+    {
+      name: 'radius',
+      baseName: 'radius',
+      type: 'number',
+    },
+    {
+      name: 'depth',
+      baseName: 'depth',
+      type: 'number',
+    },
+    {
+      name: 'email',
+      baseName: 'email',
+      type: 'boolean',
+    },
+    {
+      name: 'maxTime',
+      baseName: 'maxTime',
+      type: 'number',
+    },
+    {
+      name: 'proxies',
+      baseName: 'proxies',
+      type: 'Array<string>',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return CreateScrapingJobRequest.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return CreateScrapingJobRequest.attributeTypeMap;
+  }
 }
-

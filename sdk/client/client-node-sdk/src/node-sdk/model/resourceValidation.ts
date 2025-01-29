@@ -13,31 +13,35 @@
 import { RequestFile } from './models';
 
 export class ResourceValidation {
-    'missingResources'?: Array<string>;
-    'invalidReferences'?: Array<string>;
-    'idViolations'?: { [key: string]: string | undefined; };
+  'missingResources'?: Array<string>;
+  'invalidReferences'?: Array<string>;
+  'idViolations'?: { [key: string]: string | undefined };
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "missingResources",
-            "baseName": "missingResources",
-            "type": "Array<string>"
-        },
-        {
-            "name": "invalidReferences",
-            "baseName": "invalidReferences",
-            "type": "Array<string>"
-        },
-        {
-            "name": "idViolations",
-            "baseName": "idViolations",
-            "type": "{ [key: string]: string | undefined; }"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'missingResources',
+      baseName: 'missingResources',
+      type: 'Array<string>',
+    },
+    {
+      name: 'invalidReferences',
+      baseName: 'invalidReferences',
+      type: 'Array<string>',
+    },
+    {
+      name: 'idViolations',
+      baseName: 'idViolations',
+      type: '{ [key: string]: string | undefined; }',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ResourceValidation.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ResourceValidation.attributeTypeMap;
+  }
 }
-

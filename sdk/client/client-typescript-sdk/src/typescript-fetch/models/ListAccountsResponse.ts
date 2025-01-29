@@ -15,61 +15,71 @@
 import { mapValues } from '../runtime';
 import type { Account } from './Account';
 import {
-    AccountFromJSON,
-    AccountFromJSONTyped,
-    AccountToJSON,
+  AccountFromJSON,
+  AccountFromJSONTyped,
+  AccountToJSON,
 } from './Account';
 
 /**
- * 
+ *
  * @export
  * @interface ListAccountsResponse
  */
 export interface ListAccountsResponse {
-    /**
-     * 
-     * @type {Array<Account>}
-     * @memberof ListAccountsResponse
-     */
-    accounts?: Array<Account>;
-    /**
-     * 
-     * @type {number}
-     * @memberof ListAccountsResponse
-     */
-    total?: number;
+  /**
+   *
+   * @type {Array<Account>}
+   * @memberof ListAccountsResponse
+   */
+  accounts?: Array<Account>;
+  /**
+   *
+   * @type {number}
+   * @memberof ListAccountsResponse
+   */
+  total?: number;
 }
 
 /**
  * Check if a given object implements the ListAccountsResponse interface.
  */
-export function instanceOfListAccountsResponse(value: object): value is ListAccountsResponse {
-    return true;
+export function instanceOfListAccountsResponse(
+  value: object
+): value is ListAccountsResponse {
+  return true;
 }
 
 export function ListAccountsResponseFromJSON(json: any): ListAccountsResponse {
-    return ListAccountsResponseFromJSONTyped(json, false);
+  return ListAccountsResponseFromJSONTyped(json, false);
 }
 
-export function ListAccountsResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): ListAccountsResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'accounts': json['accounts'] == null ? undefined : ((json['accounts'] as Array<any>).map(AccountFromJSON)),
-        'total': json['total'] == null ? undefined : json['total'],
-    };
+export function ListAccountsResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): ListAccountsResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    accounts:
+      json['accounts'] == null
+        ? undefined
+        : (json['accounts'] as Array<any>).map(AccountFromJSON),
+    total: json['total'] == null ? undefined : json['total'],
+  };
 }
 
-export function ListAccountsResponseToJSON(value?: ListAccountsResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'accounts': value['accounts'] == null ? undefined : ((value['accounts'] as Array<any>).map(AccountToJSON)),
-        'total': value['total'],
-    };
+export function ListAccountsResponseToJSON(
+  value?: ListAccountsResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    accounts:
+      value['accounts'] == null
+        ? undefined
+        : (value['accounts'] as Array<any>).map(AccountToJSON),
+    total: value['total'],
+  };
 }
-

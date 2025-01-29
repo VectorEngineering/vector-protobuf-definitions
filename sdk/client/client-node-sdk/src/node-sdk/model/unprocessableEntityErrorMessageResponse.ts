@@ -15,40 +15,44 @@ import { ErrorResponse } from './errorResponse';
 import { FieldError } from './fieldError';
 
 /**
-* Represents errors when the server understands the content type but cannot process the instructions
-*/
+ * Represents errors when the server understands the content type but cannot process the instructions
+ */
 export class UnprocessableEntityErrorMessageResponse {
-    'code'?: number;
-    'message'?: string;
-    'errors'?: Array<FieldError>;
-    'errorResponse'?: ErrorResponse;
+  'code'?: number;
+  'message'?: string;
+  'errors'?: Array<FieldError>;
+  'errorResponse'?: ErrorResponse;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "code",
-            "baseName": "code",
-            "type": "number"
-        },
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
-        },
-        {
-            "name": "errors",
-            "baseName": "errors",
-            "type": "Array<FieldError>"
-        },
-        {
-            "name": "errorResponse",
-            "baseName": "errorResponse",
-            "type": "ErrorResponse"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'code',
+      baseName: 'code',
+      type: 'number',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'errors',
+      baseName: 'errors',
+      type: 'Array<FieldError>',
+    },
+    {
+      name: 'errorResponse',
+      baseName: 'errorResponse',
+      type: 'ErrorResponse',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return UnprocessableEntityErrorMessageResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return UnprocessableEntityErrorMessageResponse.attributeTypeMap;
+  }
 }
-

@@ -14,19 +14,23 @@ import { RequestFile } from './models';
 import { ScrapingJob } from './scrapingJob';
 
 export class ListScrapingJobsResponse {
-    'jobs'?: Array<ScrapingJob>;
+  'jobs'?: Array<ScrapingJob>;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "jobs",
-            "baseName": "jobs",
-            "type": "Array<ScrapingJob>"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'jobs',
+      baseName: 'jobs',
+      type: 'Array<ScrapingJob>',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return ListScrapingJobsResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return ListScrapingJobsResponse.attributeTypeMap;
+  }
 }
-

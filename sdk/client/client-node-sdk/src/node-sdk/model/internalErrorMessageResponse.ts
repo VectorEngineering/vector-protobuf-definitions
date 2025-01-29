@@ -18,60 +18,64 @@ import { ResourceUtilization } from './resourceUtilization';
 import { ServiceStatus } from './serviceStatus';
 
 /**
-* Represents internal server and system-level errors
-*/
+ * Represents internal server and system-level errors
+ */
 export class InternalErrorMessageResponse {
-    'code'?: InternalErrorCode;
-    'message'?: string;
-    'incidentId'?: string;
-    'serviceStatus'?: ServiceStatus;
-    'resourceUtilization'?: ResourceUtilization;
-    'operationDetails'?: OperationDetails;
-    'errorResponse'?: ErrorResponse;
+  'code'?: InternalErrorCode;
+  'message'?: string;
+  'incidentId'?: string;
+  'serviceStatus'?: ServiceStatus;
+  'resourceUtilization'?: ResourceUtilization;
+  'operationDetails'?: OperationDetails;
+  'errorResponse'?: ErrorResponse;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "code",
-            "baseName": "code",
-            "type": "InternalErrorCode"
-        },
-        {
-            "name": "message",
-            "baseName": "message",
-            "type": "string"
-        },
-        {
-            "name": "incidentId",
-            "baseName": "incidentId",
-            "type": "string"
-        },
-        {
-            "name": "serviceStatus",
-            "baseName": "serviceStatus",
-            "type": "ServiceStatus"
-        },
-        {
-            "name": "resourceUtilization",
-            "baseName": "resourceUtilization",
-            "type": "ResourceUtilization"
-        },
-        {
-            "name": "operationDetails",
-            "baseName": "operationDetails",
-            "type": "OperationDetails"
-        },
-        {
-            "name": "errorResponse",
-            "baseName": "errorResponse",
-            "type": "ErrorResponse"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'code',
+      baseName: 'code',
+      type: 'InternalErrorCode',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'incidentId',
+      baseName: 'incidentId',
+      type: 'string',
+    },
+    {
+      name: 'serviceStatus',
+      baseName: 'serviceStatus',
+      type: 'ServiceStatus',
+    },
+    {
+      name: 'resourceUtilization',
+      baseName: 'resourceUtilization',
+      type: 'ResourceUtilization',
+    },
+    {
+      name: 'operationDetails',
+      baseName: 'operationDetails',
+      type: 'OperationDetails',
+    },
+    {
+      name: 'errorResponse',
+      baseName: 'errorResponse',
+      type: 'ErrorResponse',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return InternalErrorMessageResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return InternalErrorMessageResponse.attributeTypeMap;
+  }
 }
 
-export namespace InternalErrorMessageResponse {
-}
+export namespace InternalErrorMessageResponse {}

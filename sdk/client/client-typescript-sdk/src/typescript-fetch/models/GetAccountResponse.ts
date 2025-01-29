@@ -15,53 +15,58 @@
 import { mapValues } from '../runtime';
 import type { Account } from './Account';
 import {
-    AccountFromJSON,
-    AccountFromJSONTyped,
-    AccountToJSON,
+  AccountFromJSON,
+  AccountFromJSONTyped,
+  AccountToJSON,
 } from './Account';
 
 /**
- * 
+ *
  * @export
  * @interface GetAccountResponse
  */
 export interface GetAccountResponse {
-    /**
-     * 
-     * @type {Account}
-     * @memberof GetAccountResponse
-     */
-    account?: Account;
+  /**
+   *
+   * @type {Account}
+   * @memberof GetAccountResponse
+   */
+  account?: Account;
 }
 
 /**
  * Check if a given object implements the GetAccountResponse interface.
  */
-export function instanceOfGetAccountResponse(value: object): value is GetAccountResponse {
-    return true;
+export function instanceOfGetAccountResponse(
+  value: object
+): value is GetAccountResponse {
+  return true;
 }
 
 export function GetAccountResponseFromJSON(json: any): GetAccountResponse {
-    return GetAccountResponseFromJSONTyped(json, false);
+  return GetAccountResponseFromJSONTyped(json, false);
 }
 
-export function GetAccountResponseFromJSONTyped(json: any, ignoreDiscriminator: boolean): GetAccountResponse {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'account': json['account'] == null ? undefined : AccountFromJSON(json['account']),
-    };
+export function GetAccountResponseFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): GetAccountResponse {
+  if (json == null) {
+    return json;
+  }
+  return {
+    account:
+      json['account'] == null ? undefined : AccountFromJSON(json['account']),
+  };
 }
 
-export function GetAccountResponseToJSON(value?: GetAccountResponse | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'account': AccountToJSON(value['account']),
-    };
+export function GetAccountResponseToJSON(
+  value?: GetAccountResponse | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    account: AccountToJSON(value['account']),
+  };
 }
-

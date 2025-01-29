@@ -14,27 +14,31 @@ import { RequestFile } from './models';
 import { BackgroundJobStatus } from './backgroundJobStatus';
 
 export class CreateScrapingJobResponse {
-    'jobId'?: string;
-    'status'?: BackgroundJobStatus;
+  'jobId'?: string;
+  'status'?: BackgroundJobStatus;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "jobId",
-            "baseName": "jobId",
-            "type": "string"
-        },
-        {
-            "name": "status",
-            "baseName": "status",
-            "type": "BackgroundJobStatus"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'jobId',
+      baseName: 'jobId',
+      type: 'string',
+    },
+    {
+      name: 'status',
+      baseName: 'status',
+      type: 'BackgroundJobStatus',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return CreateScrapingJobResponse.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return CreateScrapingJobResponse.attributeTypeMap;
+  }
 }
 
-export namespace CreateScrapingJobResponse {
-}
+export namespace CreateScrapingJobResponse {}

@@ -13,37 +13,41 @@
 import { RequestFile } from './models';
 
 export class PaymentInfo {
-    'amountDue'?: number;
-    'currency'?: string;
-    'dueDate'?: Date;
-    'paymentUrl'?: string;
+  'amountDue'?: number;
+  'currency'?: string;
+  'dueDate'?: Date;
+  'paymentUrl'?: string;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "amountDue",
-            "baseName": "amountDue",
-            "type": "number"
-        },
-        {
-            "name": "currency",
-            "baseName": "currency",
-            "type": "string"
-        },
-        {
-            "name": "dueDate",
-            "baseName": "dueDate",
-            "type": "Date"
-        },
-        {
-            "name": "paymentUrl",
-            "baseName": "paymentUrl",
-            "type": "string"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'amountDue',
+      baseName: 'amountDue',
+      type: 'number',
+    },
+    {
+      name: 'currency',
+      baseName: 'currency',
+      type: 'string',
+    },
+    {
+      name: 'dueDate',
+      baseName: 'dueDate',
+      type: 'Date',
+    },
+    {
+      name: 'paymentUrl',
+      baseName: 'paymentUrl',
+      type: 'string',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return PaymentInfo.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return PaymentInfo.attributeTypeMap;
+  }
 }
-

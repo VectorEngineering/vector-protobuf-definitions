@@ -14,75 +14,83 @@
 
 import { mapValues } from '../runtime';
 /**
- * 
+ *
  * @export
  * @interface CreateAccountRequest
  */
 export interface CreateAccountRequest {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateAccountRequest
-     */
-    authPlatformUserId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateAccountRequest
-     */
-    orgId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateAccountRequest
-     */
-    tenantId: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateAccountRequest
-     */
-    email: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateAccountRequest
+   */
+  authPlatformUserId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateAccountRequest
+   */
+  orgId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateAccountRequest
+   */
+  tenantId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateAccountRequest
+   */
+  email: string;
 }
 
 /**
  * Check if a given object implements the CreateAccountRequest interface.
  */
-export function instanceOfCreateAccountRequest(value: object): value is CreateAccountRequest {
-    if (!('authPlatformUserId' in value) || value['authPlatformUserId'] === undefined) return false;
-    if (!('orgId' in value) || value['orgId'] === undefined) return false;
-    if (!('tenantId' in value) || value['tenantId'] === undefined) return false;
-    if (!('email' in value) || value['email'] === undefined) return false;
-    return true;
+export function instanceOfCreateAccountRequest(
+  value: object
+): value is CreateAccountRequest {
+  if (
+    !('authPlatformUserId' in value) ||
+    value['authPlatformUserId'] === undefined
+  )
+    return false;
+  if (!('orgId' in value) || value['orgId'] === undefined) return false;
+  if (!('tenantId' in value) || value['tenantId'] === undefined) return false;
+  if (!('email' in value) || value['email'] === undefined) return false;
+  return true;
 }
 
 export function CreateAccountRequestFromJSON(json: any): CreateAccountRequest {
-    return CreateAccountRequestFromJSONTyped(json, false);
+  return CreateAccountRequestFromJSONTyped(json, false);
 }
 
-export function CreateAccountRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateAccountRequest {
-    if (json == null) {
-        return json;
-    }
-    return {
-        
-        'authPlatformUserId': json['authPlatformUserId'],
-        'orgId': json['orgId'],
-        'tenantId': json['tenantId'],
-        'email': json['email'],
-    };
+export function CreateAccountRequestFromJSONTyped(
+  json: any,
+  ignoreDiscriminator: boolean
+): CreateAccountRequest {
+  if (json == null) {
+    return json;
+  }
+  return {
+    authPlatformUserId: json['authPlatformUserId'],
+    orgId: json['orgId'],
+    tenantId: json['tenantId'],
+    email: json['email'],
+  };
 }
 
-export function CreateAccountRequestToJSON(value?: CreateAccountRequest | null): any {
-    if (value == null) {
-        return value;
-    }
-    return {
-        
-        'authPlatformUserId': value['authPlatformUserId'],
-        'orgId': value['orgId'],
-        'tenantId': value['tenantId'],
-        'email': value['email'],
-    };
+export function CreateAccountRequestToJSON(
+  value?: CreateAccountRequest | null
+): any {
+  if (value == null) {
+    return value;
+  }
+  return {
+    authPlatformUserId: value['authPlatformUserId'],
+    orgId: value['orgId'],
+    tenantId: value['tenantId'],
+    email: value['email'],
+  };
 }
-

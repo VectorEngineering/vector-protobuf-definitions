@@ -13,37 +13,41 @@
 import { RequestFile } from './models';
 
 export class RateLimitContext {
-    'userId'?: string;
-    'ipAddress'?: string;
-    'affectedEndpoints'?: Array<string>;
-    'headers'?: { [key: string]: string | undefined; };
+  'userId'?: string;
+  'ipAddress'?: string;
+  'affectedEndpoints'?: Array<string>;
+  'headers'?: { [key: string]: string | undefined };
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "userId",
-            "baseName": "userId",
-            "type": "string"
-        },
-        {
-            "name": "ipAddress",
-            "baseName": "ipAddress",
-            "type": "string"
-        },
-        {
-            "name": "affectedEndpoints",
-            "baseName": "affectedEndpoints",
-            "type": "Array<string>"
-        },
-        {
-            "name": "headers",
-            "baseName": "headers",
-            "type": "{ [key: string]: string | undefined; }"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'userId',
+      baseName: 'userId',
+      type: 'string',
+    },
+    {
+      name: 'ipAddress',
+      baseName: 'ipAddress',
+      type: 'string',
+    },
+    {
+      name: 'affectedEndpoints',
+      baseName: 'affectedEndpoints',
+      type: 'Array<string>',
+    },
+    {
+      name: 'headers',
+      baseName: 'headers',
+      type: '{ [key: string]: string | undefined; }',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return RateLimitContext.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return RateLimitContext.attributeTypeMap;
+  }
 }
-

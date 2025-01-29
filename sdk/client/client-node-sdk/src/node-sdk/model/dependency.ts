@@ -13,37 +13,41 @@
 import { RequestFile } from './models';
 
 export class Dependency {
-    'name'?: string;
-    'status'?: string;
-    'error'?: string;
-    'latency'?: number;
+  'name'?: string;
+  'status'?: string;
+  'error'?: string;
+  'latency'?: number;
 
-    static discriminator: string | undefined = undefined;
+  static discriminator: string | undefined = undefined;
 
-    static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
-        {
-            "name": "name",
-            "baseName": "name",
-            "type": "string"
-        },
-        {
-            "name": "status",
-            "baseName": "status",
-            "type": "string"
-        },
-        {
-            "name": "error",
-            "baseName": "error",
-            "type": "string"
-        },
-        {
-            "name": "latency",
-            "baseName": "latency",
-            "type": "number"
-        }    ];
+  static attributeTypeMap: Array<{
+    name: string;
+    baseName: string;
+    type: string;
+  }> = [
+    {
+      name: 'name',
+      baseName: 'name',
+      type: 'string',
+    },
+    {
+      name: 'status',
+      baseName: 'status',
+      type: 'string',
+    },
+    {
+      name: 'error',
+      baseName: 'error',
+      type: 'string',
+    },
+    {
+      name: 'latency',
+      baseName: 'latency',
+      type: 'number',
+    },
+  ];
 
-    static getAttributeTypeMap() {
-        return Dependency.attributeTypeMap;
-    }
+  static getAttributeTypeMap() {
+    return Dependency.attributeTypeMap;
+  }
 }
-

@@ -51,6 +51,7 @@ jobs:
           verify-metadata: false
         env:
           PYPI_API_TOKEN: ${{ secrets.PYPI_TOKEN }}
+        continue-on-error: true
 
       - name: Publish Server SDK to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
@@ -59,3 +60,4 @@ jobs:
           verify-metadata: false
         env:
           PYPI_API_TOKEN: ${{ secrets.PYPI_TOKEN }} 
+        continue-on-error: true

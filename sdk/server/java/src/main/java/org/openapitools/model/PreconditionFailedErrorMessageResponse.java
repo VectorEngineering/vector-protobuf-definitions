@@ -23,7 +23,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "PreconditionFailedErrorMessageResponse", description = "Represents errors when a precondition provided in the request fails")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T12:28:25.110741-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T12:50:06.029660-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class PreconditionFailedErrorMessageResponse {
 
   private Integer code;

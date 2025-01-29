@@ -23,7 +23,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "ForbiddenErrorMessageResponse", description = "Indicates that the server understood the request but refuses to authorize it")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T12:28:25.110741-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T12:50:06.029660-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ForbiddenErrorMessageResponse {
 
   private Integer code;

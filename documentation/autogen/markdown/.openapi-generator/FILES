@@ -91,6 +91,7 @@ Models/UpdateWorkspaceRequest.md
 Models/UpdateWorkspaceResponse.md
 Models/ValidationErrorCode.md
 Models/ValidationErrorMessageResponse.md
+Models/WorkflowStatus.md
 Models/Workspace.md
 Models/rpc.Status.md
 README.md

@@ -107,6 +107,11 @@ func newAPIKeyORM(db *gorm.DB, opts ...gen.DOOption) aPIKeyORM {
 		},
 		ScrapingJobs: struct {
 			field.RelationField
+		}{
+			RelationField: field.NewRelation("Account.ScrapingJobs", "lead_scraper_servicev1.ScrapingJobORM"),
+		},
+		Workspaces: struct {
+			field.RelationField
 			Leads struct {
 				field.RelationField
 				Job struct {
@@ -114,15 +119,6 @@ func newAPIKeyORM(db *gorm.DB, opts ...gen.DOOption) aPIKeyORM {
 				}
 				Workspace struct {
 					field.RelationField
-					Workflows struct {
-						field.RelationField
-						Workspace struct {
-							field.RelationField
-						}
-						Jobs struct {
-							field.RelationField
-						}
-					}
 				}
 				RegularHours struct {
 					field.RelationField
@@ -134,8 +130,17 @@ func newAPIKeyORM(db *gorm.DB, opts ...gen.DOOption) aPIKeyORM {
 					field.RelationField
 				}
 			}
+			Workflows struct {
+				field.RelationField
+				Workspace struct {
+					field.RelationField
+				}
+				Jobs struct {
+					field.RelationField
+				}
+			}
 		}{
-			RelationField: field.NewRelation("Account.ScrapingJobs", "lead_scraper_servicev1.ScrapingJobORM"),
+			RelationField: field.NewRelation("Account.Workspaces", "lead_scraper_servicev1.WorkspaceORM"),
 			Leads: struct {
 				field.RelationField
 				Job struct {
@@ -143,15 +148,6 @@ func newAPIKeyORM(db *gorm.DB, opts ...gen.DOOption) aPIKeyORM {
 				}
 				Workspace struct {
 					field.RelationField
-					Workflows struct {
-						field.RelationField
-						Workspace struct {
-							field.RelationField
-						}
-						Jobs struct {
-							field.RelationField
-						}
-					}
 				}
 				RegularHours struct {
 					field.RelationField
@@ -163,68 +159,54 @@ func newAPIKeyORM(db *gorm.DB, opts ...gen.DOOption) aPIKeyORM {
 					field.RelationField
 				}
 			}{
-				RelationField: field.NewRelation("Account.ScrapingJobs.Leads", "lead_scraper_servicev1.LeadORM"),
+				RelationField: field.NewRelation("Account.Workspaces.Leads", "lead_scraper_servicev1.LeadORM"),
 				Job: struct {
 					field.RelationField
 				}{
-					RelationField: field.NewRelation("Account.ScrapingJobs.Leads.Job", "lead_scraper_servicev1.ScrapingJobORM"),
+					RelationField: field.NewRelation("Account.Workspaces.Leads.Job", "lead_scraper_servicev1.ScrapingJobORM"),
 				},
 				Workspace: struct {
 					field.RelationField
-					Workflows struct {
-						field.RelationField
-						Workspace struct {
-							field.RelationField
-						}
-						Jobs struct {
-							field.RelationField
-						}
-					}
 				}{
-					RelationField: field.NewRelation("Account.ScrapingJobs.Leads.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-					Workflows: struct {
-						field.RelationField
-						Workspace struct {
-							field.RelationField
-						}
-						Jobs struct {
-							field.RelationField
-						}
-					}{
-						RelationField: field.NewRelation("Account.ScrapingJobs.Leads.Workspace.Workflows", "lead_scraper_servicev1.ScrapingWorkflowORM"),
-						Workspace: struct {
-							field.RelationField
-						}{
-							RelationField: field.NewRelation("Account.ScrapingJobs.Leads.Workspace.Workflows.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-						},
-						Jobs: struct {
-							field.RelationField
-						}{
-							RelationField: field.NewRelation("Account.ScrapingJobs.Leads.Workspace.Workflows.Jobs", "lead_scraper_servicev1.ScrapingJobORM"),
-						},
-					},
+					RelationField: field.NewRelation("Account.Workspaces.Leads.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
 				},
 				RegularHours: struct {
 					field.RelationField
 				}{
-					RelationField: field.NewRelation("Account.ScrapingJobs.Leads.RegularHours", "lead_scraper_servicev1.BusinessHoursORM"),
+					RelationField: field.NewRelation("Account.Workspaces.Leads.RegularHours", "lead_scraper_servicev1.BusinessHoursORM"),
 				},
 				Reviews: struct {
 					field.RelationField
 				}{
-					RelationField: field.NewRelation("Account.ScrapingJobs.Leads.Reviews", "lead_scraper_servicev1.ReviewORM"),
+					RelationField: field.NewRelation("Account.Workspaces.Leads.Reviews", "lead_scraper_servicev1.ReviewORM"),
 				},
 				SpecialHours: struct {
 					field.RelationField
 				}{
-					RelationField: field.NewRelation("Account.ScrapingJobs.Leads.SpecialHours", "lead_scraper_servicev1.BusinessHoursORM"),
+					RelationField: field.NewRelation("Account.Workspaces.Leads.SpecialHours", "lead_scraper_servicev1.BusinessHoursORM"),
 				},
 			},
-		},
-		Workspaces: struct {
-			field.RelationField
-		}{
-			RelationField: field.NewRelation("Account.Workspaces", "lead_scraper_servicev1.WorkspaceORM"),
+			Workflows: struct {
+				field.RelationField
+				Workspace struct {
+					field.RelationField
+				}
+				Jobs struct {
+					field.RelationField
+				}
+			}{
+				RelationField: field.NewRelation("Account.Workspaces.Workflows", "lead_scraper_servicev1.ScrapingWorkflowORM"),
+				Workspace: struct {
+					field.RelationField
+				}{
+					RelationField: field.NewRelation("Account.Workspaces.Workflows.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
+				},
+				Jobs: struct {
+					field.RelationField
+				}{
+					RelationField: field.NewRelation("Account.Workspaces.Workflows.Jobs", "lead_scraper_servicev1.ScrapingJobORM"),
+				},
+			},
 		},
 	}
 
@@ -497,6 +479,9 @@ type aPIKeyORMBelongsToAccount struct {
 	}
 	ScrapingJobs struct {
 		field.RelationField
+	}
+	Workspaces struct {
+		field.RelationField
 		Leads struct {
 			field.RelationField
 			Job struct {
@@ -504,15 +489,6 @@ type aPIKeyORMBelongsToAccount struct {
 			}
 			Workspace struct {
 				field.RelationField
-				Workflows struct {
-					field.RelationField
-					Workspace struct {
-						field.RelationField
-					}
-					Jobs struct {
-						field.RelationField
-					}
-				}
 			}
 			RegularHours struct {
 				field.RelationField
@@ -524,9 +500,15 @@ type aPIKeyORMBelongsToAccount struct {
 				field.RelationField
 			}
 		}
-	}
-	Workspaces struct {
-		field.RelationField
+		Workflows struct {
+			field.RelationField
+			Workspace struct {
+				field.RelationField
+			}
+			Jobs struct {
+				field.RelationField
+			}
+		}
 	}
 }
 

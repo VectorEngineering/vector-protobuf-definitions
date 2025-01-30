@@ -7195,7 +7195,7 @@ components:
           type: string
           format: date-time
         status:
-          type: string
+          $ref: "#/components/schemas/BackgroundJobStatus"
         name:
           type: string
           title: Human-readable name for the job
@@ -7248,14 +7248,10 @@ components:
           type: string
           format: date-time
           title: Soft delete timestamp
-        leads:
-          type: array
-          items:
-            $ref: "#/components/schemas/Lead"
-          title: Lead tracking
-        workflowId:
-          type: string
-          title: Workflow context
+        numLeadsCollected:
+          type: integer
+          format: int32
+          title: The number of leads collected
       description: >-
         ScrapingJob represents a Google Maps scraping task.
 
@@ -7320,7 +7316,7 @@ components:
           type: string
           format: date-time
         status:
-          $ref: "#/components/schemas/BackgroundJobStatus"
+          $ref: "#/components/schemas/WorkflowStatus"
         retryCount:
           type: integer
           format: int32
@@ -7712,6 +7708,17 @@ components:
           $ref: "#/components/schemas/ErrorResponse"
       description: Represents data validation and business logic errors
       title: Validation Error Response
+    WorkflowStatus:
+      type: string
+      enum:
+        - WORKFLOW_STATUS_UNSPECIFIED
+        - WORKFLOW_STATUS_ACTIVE
+        - WORKFLOW_STATUS_DEACTIVATED
+      default: WORKFLOW_STATUS_UNSPECIFIED
+      title: |-
+        - WORKFLOW_STATUS_UNSPECIFIED: workflow status (default)
+         - WORKFLOW_STATUS_ACTIVE: workflow status (active)
+         - WORKFLOW_STATUS_DEACTIVATED: workflow status (deactivated)
     Workspace:
       type: object
       properties:
@@ -7774,6 +7781,11 @@ components:
         lastJobRun:
           type: string
           format: date-time
+        leads:
+          type: array
+          items:
+            $ref: "#/components/schemas/Lead"
+          title: Lead tracking
       title: Workspace represents a business entity with multiple accounts
     rpc.Status:
       type: object

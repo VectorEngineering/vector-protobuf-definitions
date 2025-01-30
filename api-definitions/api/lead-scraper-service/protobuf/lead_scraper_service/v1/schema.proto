@@ -42,6 +42,52 @@ enum BackgroundJobStatus {
 }
 
 /**
+ * WorkflowStatus represents the current state of a scraping workflow.
+ * This enum tracks the lifecycle of automated, recurring scraping configurations.
+ *
+ * State transitions:
+ * 1. DRAFT -> ACTIVE/ARCHIVED
+ * 2. ACTIVE -> PAUSED/FAILED/COMPLETED/ARCHIVED
+ * 3. PAUSED -> ACTIVE/ARCHIVED
+ * 4. FAILED -> ACTIVE/ARCHIVED
+ */
+enum WorkflowStatus {
+    // Default state, should not be used explicitly
+    WORKFLOW_STATUS_UNSPECIFIED = 0;
+    
+    // Initial draft state before activation
+    WORKFLOW_STATUS_DRAFT = 1;
+    
+    // Workflow is actively running on schedule
+    WORKFLOW_STATUS_ACTIVE = 2;
+    
+    // Workflow is temporarily suspended
+    WORKFLOW_STATUS_PAUSED = 3;
+    
+    // Workflow encountered an error
+    WORKFLOW_STATUS_FAILED = 4;
+    
+    // Workflow completed all scheduled runs
+    WORKFLOW_STATUS_COMPLETED = 5;
+    
+    // Workflow is archived (soft-deleted)
+    WORKFLOW_STATUS_ARCHIVED = 6;
+    
+    // Workflow is pending approval
+    WORKFLOW_STATUS_PENDING_APPROVAL = 7;
+    
+    // Workflow is being validated
+    WORKFLOW_STATUS_VALIDATING = 8;
+    
+    // Workflow exceeded resource quotas
+    WORKFLOW_STATUS_QUOTA_EXCEEDED = 9;
+    
+    // Workflow is running but with warnings
+    WORKFLOW_STATUS_WARNING = 10;
+}
+
+
+/**
  * Account represents a user account within the workspace service.
  * It serves as the top-level container for all user-specific workspaces and settings.
  *
@@ -90,7 +136,7 @@ message Account {
     string email = 5 [(gorm.field).tag = {index: "idx_accounts_email"}];
 
     // Timestamp of last modification
-    google.protobuf.Timestamp last_modified_at = 6 [(gorm.field).tag = {index: "idx_accounts_last_modified"}];
+    google.protobuf.Timestamp last_modified_at = 6;
 
     // Soft delete timestamp
     google.protobuf.Timestamp deleted_at = 7;
@@ -194,6 +240,10 @@ message Workspace {
     int32 active_scrapers = 18;
     int32 total_leads_collected = 19;
     google.protobuf.Timestamp last_job_run = 20;
+
+
+    // Lead tracking
+    repeated Lead leads = 21 [(gorm.field).has_many = {}];
 }
 
 /**
@@ -241,7 +291,7 @@ message ScrapingJob {
     string payload_type = 3;
     bytes payload = 4;
     google.protobuf.Timestamp created_at = 5;
-    string status = 6;
+    BackgroundJobStatus status = 6;
 
     // Human-readable name for the job
     string name = 7 [(gorm.field).tag = {index: "idx_scraping_jobs_name"}];
@@ -258,9 +308,7 @@ message ScrapingJob {
     ];
 
     // Latitude coordinate
-    string lat = 11 [
-        (validate.rules).string = {pattern: "^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?)$"}
-    ];
+    string lat = 11;
 
     // Longitude coordinate
     string lon = 12;
@@ -289,11 +337,8 @@ message ScrapingJob {
     // Soft delete timestamp
     google.protobuf.Timestamp deleted_at = 20;
 
-    // Lead tracking
-    repeated Lead leads = 21 [(gorm.field).has_many = {}];
-    
-    // Workflow context
-    string workflow_id = 22 [(gorm.field).tag = {index: "idx_workflow_id"}];
+    // The number of leads collected
+    int32 num_leads_collected = 21;
 }
 
 /**
@@ -312,7 +357,7 @@ message ScrapingWorkflow {
     // Execution settings
     google.protobuf.Timestamp next_run_time = 4;
     google.protobuf.Timestamp last_run_time = 5;
-    BackgroundJobStatus status = 6;
+    WorkflowStatus status = 6;
     
     // Failure handling
     int32 retry_count = 7;

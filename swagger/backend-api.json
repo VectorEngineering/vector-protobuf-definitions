@@ -5142,7 +5142,7 @@
                         "format": "date-time"
                     },
                     "status": {
-                        "type": "string"
+                        "$ref": "#/components/schemas/BackgroundJobStatus"
                     },
                     "name": {
                         "type": "string",
@@ -5212,16 +5212,10 @@
                         "format": "date-time",
                         "title": "Soft delete timestamp"
                     },
-                    "leads": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Lead"
-                        },
-                        "title": "Lead tracking"
-                    },
-                    "workflowId": {
-                        "type": "string",
-                        "title": "Workflow context"
+                    "numLeadsCollected": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "The number of leads collected"
                     }
                 },
                 "description": "ScrapingJob represents a Google Maps scraping task.\nThis message defines both the configuration and current state of a scraping operation.\n\nKey components:\n- Basic metadata (id, name, timestamps)\n- Job status tracking\n- Search configuration parameters\n- Geographic settings\n- Performance options\n- Multi-tenant context\n\nDatabase considerations:\n- Stored in \"gmaps_jobs\" table\n- Uses GORM for ORM mapping\n- Includes foreign key to Account\n- Supports soft deletes\n\nUsage example:\n```go\njob := &ScrapingJob{\n    Name: \"Athens Cafes\",\n    Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,\n    Keywords: []string{\"cafe\", \"coffee\"},\n    Lang: \"el\",\n    Zoom: 15,\n    FastMode: true,\n    MaxTime: 3600,\n}\n```"
@@ -5247,7 +5241,7 @@
                         "format": "date-time"
                     },
                     "status": {
-                        "$ref": "#/components/schemas/BackgroundJobStatus"
+                        "$ref": "#/components/schemas/WorkflowStatus"
                     },
                     "retryCount": {
                         "type": "integer",
@@ -5774,6 +5768,16 @@
                 "description": "Represents data validation and business logic errors",
                 "title": "Validation Error Response"
             },
+            "WorkflowStatus": {
+                "type": "string",
+                "enum": [
+                    "WORKFLOW_STATUS_UNSPECIFIED",
+                    "WORKFLOW_STATUS_ACTIVE",
+                    "WORKFLOW_STATUS_DEACTIVATED"
+                ],
+                "default": "WORKFLOW_STATUS_UNSPECIFIED",
+                "title": "- WORKFLOW_STATUS_UNSPECIFIED: workflow status (default)\n - WORKFLOW_STATUS_ACTIVE: workflow status (active)\n - WORKFLOW_STATUS_DEACTIVATED: workflow status (deactivated)"
+            },
             "Workspace": {
                 "type": "object",
                 "properties": {
@@ -5855,6 +5859,13 @@
                     "lastJobRun": {
                         "type": "string",
                         "format": "date-time"
+                    },
+                    "leads": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Lead"
+                        },
+                        "title": "Lead tracking"
                     }
                 },
                 "title": "Workspace represents a business entity with multiple accounts"

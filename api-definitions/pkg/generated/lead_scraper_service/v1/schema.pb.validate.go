@@ -647,6 +647,40 @@ func (m *Workspace) validate(all bool) error {
 		}
 	}
 
+	for idx, item := range m.GetLeads() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, WorkspaceValidationError{
+						field:  fmt.Sprintf("Leads[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, WorkspaceValidationError{
+						field:  fmt.Sprintf("Leads[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return WorkspaceValidationError{
+					field:  fmt.Sprintf("Leads[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return WorkspaceMultiError(errors)
 	}
@@ -850,16 +884,7 @@ func (m *ScrapingJob) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if !_ScrapingJob_Lat_Pattern.MatchString(m.GetLat()) {
-		err := ScrapingJobValidationError{
-			field:  "Lat",
-			reason: "value does not match regex pattern \"^[-+]?([1-8]?\\\\d(\\\\.\\\\d+)?|90(\\\\.0+)?)$\"",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for Lat
 
 	// no validation rules for Lon
 
@@ -931,41 +956,7 @@ func (m *ScrapingJob) validate(all bool) error {
 		}
 	}
 
-	for idx, item := range m.GetLeads() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, ScrapingJobValidationError{
-						field:  fmt.Sprintf("Leads[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, ScrapingJobValidationError{
-						field:  fmt.Sprintf("Leads[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return ScrapingJobValidationError{
-					field:  fmt.Sprintf("Leads[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
-	// no validation rules for WorkflowId
+	// no validation rules for NumLeadsCollected
 
 	if len(errors) > 0 {
 		return ScrapingJobMultiError(errors)
@@ -1043,8 +1034,6 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ScrapingJobValidationError{}
-
-var _ScrapingJob_Lat_Pattern = regexp.MustCompile("^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?)$")
 
 // Validate checks the field values on ScrapingWorkflow with the rules defined
 // in the proto definition for this message. If any rules are violated, the

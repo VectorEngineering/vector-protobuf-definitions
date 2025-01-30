@@ -113,6 +113,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [UpdateWorkspaceResponse](./Models/UpdateWorkspaceResponse.md)
  - [ValidationErrorCode](./Models/ValidationErrorCode.md)
  - [ValidationErrorMessageResponse](./Models/ValidationErrorMessageResponse.md)
+ - [WorkflowStatus](./Models/WorkflowStatus.md)
  - [Workspace](./Models/Workspace.md)
  - [rpc.Status](./Models/rpc.Status.md)
 

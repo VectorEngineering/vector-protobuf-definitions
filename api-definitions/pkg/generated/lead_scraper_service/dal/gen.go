@@ -17,10 +17,12 @@ import (
 
 var (
 	Q                   = new(Query)
+	APIKeyORM           *aPIKeyORM
 	AccountORM          *accountORM
 	AccountSettingsORM  *accountSettingsORM
 	BusinessHoursORM    *businessHoursORM
 	LeadORM             *leadORM
+	ResultORM           *resultORM
 	ReviewORM           *reviewORM
 	ScrapingJobORM      *scrapingJobORM
 	ScrapingWorkflowORM *scrapingWorkflowORM
@@ -29,10 +31,12 @@ var (
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
+	APIKeyORM = &Q.APIKeyORM
 	AccountORM = &Q.AccountORM
 	AccountSettingsORM = &Q.AccountSettingsORM
 	BusinessHoursORM = &Q.BusinessHoursORM
 	LeadORM = &Q.LeadORM
+	ResultORM = &Q.ResultORM
 	ReviewORM = &Q.ReviewORM
 	ScrapingJobORM = &Q.ScrapingJobORM
 	ScrapingWorkflowORM = &Q.ScrapingWorkflowORM
@@ -42,10 +46,12 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
 		db:                  db,
+		APIKeyORM:           newAPIKeyORM(db, opts...),
 		AccountORM:          newAccountORM(db, opts...),
 		AccountSettingsORM:  newAccountSettingsORM(db, opts...),
 		BusinessHoursORM:    newBusinessHoursORM(db, opts...),
 		LeadORM:             newLeadORM(db, opts...),
+		ResultORM:           newResultORM(db, opts...),
 		ReviewORM:           newReviewORM(db, opts...),
 		ScrapingJobORM:      newScrapingJobORM(db, opts...),
 		ScrapingWorkflowORM: newScrapingWorkflowORM(db, opts...),
@@ -56,10 +62,12 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 type Query struct {
 	db *gorm.DB
 
+	APIKeyORM           aPIKeyORM
 	AccountORM          accountORM
 	AccountSettingsORM  accountSettingsORM
 	BusinessHoursORM    businessHoursORM
 	LeadORM             leadORM
+	ResultORM           resultORM
 	ReviewORM           reviewORM
 	ScrapingJobORM      scrapingJobORM
 	ScrapingWorkflowORM scrapingWorkflowORM
@@ -71,10 +79,12 @@ func (q *Query) Available() bool { return q.db != nil }
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
 		db:                  db,
+		APIKeyORM:           q.APIKeyORM.clone(db),
 		AccountORM:          q.AccountORM.clone(db),
 		AccountSettingsORM:  q.AccountSettingsORM.clone(db),
 		BusinessHoursORM:    q.BusinessHoursORM.clone(db),
 		LeadORM:             q.LeadORM.clone(db),
+		ResultORM:           q.ResultORM.clone(db),
 		ReviewORM:           q.ReviewORM.clone(db),
 		ScrapingJobORM:      q.ScrapingJobORM.clone(db),
 		ScrapingWorkflowORM: q.ScrapingWorkflowORM.clone(db),
@@ -93,10 +103,12 @@ func (q *Query) WriteDB() *Query {
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
 		db:                  db,
+		APIKeyORM:           q.APIKeyORM.replaceDB(db),
 		AccountORM:          q.AccountORM.replaceDB(db),
 		AccountSettingsORM:  q.AccountSettingsORM.replaceDB(db),
 		BusinessHoursORM:    q.BusinessHoursORM.replaceDB(db),
 		LeadORM:             q.LeadORM.replaceDB(db),
+		ResultORM:           q.ResultORM.replaceDB(db),
 		ReviewORM:           q.ReviewORM.replaceDB(db),
 		ScrapingJobORM:      q.ScrapingJobORM.replaceDB(db),
 		ScrapingWorkflowORM: q.ScrapingWorkflowORM.replaceDB(db),
@@ -105,10 +117,12 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 }
 
 type queryCtx struct {
+	APIKeyORM           IAPIKeyORMDo
 	AccountORM          IAccountORMDo
 	AccountSettingsORM  IAccountSettingsORMDo
 	BusinessHoursORM    IBusinessHoursORMDo
 	LeadORM             ILeadORMDo
+	ResultORM           IResultORMDo
 	ReviewORM           IReviewORMDo
 	ScrapingJobORM      IScrapingJobORMDo
 	ScrapingWorkflowORM IScrapingWorkflowORMDo
@@ -117,10 +131,12 @@ type queryCtx struct {
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
+		APIKeyORM:           q.APIKeyORM.WithContext(ctx),
 		AccountORM:          q.AccountORM.WithContext(ctx),
 		AccountSettingsORM:  q.AccountSettingsORM.WithContext(ctx),
 		BusinessHoursORM:    q.BusinessHoursORM.WithContext(ctx),
 		LeadORM:             q.LeadORM.WithContext(ctx),
+		ResultORM:           q.ResultORM.WithContext(ctx),
 		ReviewORM:           q.ReviewORM.WithContext(ctx),
 		ScrapingJobORM:      q.ScrapingJobORM.WithContext(ctx),
 		ScrapingWorkflowORM: q.ScrapingWorkflowORM.WithContext(ctx),

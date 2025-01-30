@@ -77,10 +77,12 @@ func Test_WithContext(t *testing.T) {
 	qCtx := query.WithContext(context.WithValue(context.Background(), key, value))
 
 	for _, ctx := range []context.Context{
+		qCtx.APIKeyORM.UnderlyingDB().Statement.Context,
 		qCtx.AccountORM.UnderlyingDB().Statement.Context,
 		qCtx.AccountSettingsORM.UnderlyingDB().Statement.Context,
 		qCtx.BusinessHoursORM.UnderlyingDB().Statement.Context,
 		qCtx.LeadORM.UnderlyingDB().Statement.Context,
+		qCtx.ResultORM.UnderlyingDB().Statement.Context,
 		qCtx.ReviewORM.UnderlyingDB().Statement.Context,
 		qCtx.ScrapingJobORM.UnderlyingDB().Statement.Context,
 		qCtx.ScrapingWorkflowORM.UnderlyingDB().Statement.Context,

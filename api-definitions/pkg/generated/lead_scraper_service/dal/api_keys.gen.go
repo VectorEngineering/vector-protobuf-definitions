@@ -32,35 +32,69 @@ func newAPIKeyORM(db *gorm.DB, opts ...gen.DOOption) aPIKeyORM {
 	tableName := _aPIKeyORM.aPIKeyORMDo.TableName()
 	_aPIKeyORM.ALL = field.NewAsterisk(tableName)
 	_aPIKeyORM.AccountId = field.NewUint64(tableName, "account_id")
+	_aPIKeyORM.AlertEmails = field.NewField(tableName, "alert_emails")
+	_aPIKeyORM.AlertOnErrorSpike = field.NewBool(tableName, "alert_on_error_spike")
+	_aPIKeyORM.AlertOnQuotaThreshold = field.NewBool(tableName, "alert_on_quota_threshold")
 	_aPIKeyORM.AllowedDomains = field.NewField(tableName, "allowed_domains")
+	_aPIKeyORM.AllowedEnvironments = field.NewField(tableName, "allowed_environments")
 	_aPIKeyORM.AllowedIps = field.NewField(tableName, "allowed_ips")
+	_aPIKeyORM.AllowedSignatureAlgorithms = field.NewField(tableName, "allowed_signature_algorithms")
+	_aPIKeyORM.ApiVersion = field.NewString(tableName, "api_version")
+	_aPIKeyORM.ApprovedIntegrations = field.NewField(tableName, "approved_integrations")
 	_aPIKeyORM.AverageResponseTime = field.NewFloat32(tableName, "average_response_time")
+	_aPIKeyORM.BillingTier = field.NewString(tableName, "billing_tier")
+	_aPIKeyORM.ClientCertificateHash = field.NewString(tableName, "client_certificate_hash")
 	_aPIKeyORM.ClientSecretHash = field.NewString(tableName, "client_secret_hash")
+	_aPIKeyORM.ComplianceStandards = field.NewField(tableName, "compliance_standards")
 	_aPIKeyORM.ConcurrentRequests = field.NewInt32(tableName, "concurrent_requests")
+	_aPIKeyORM.CostPerRequest = field.NewFloat32(tableName, "cost_per_request")
 	_aPIKeyORM.CreatedAt = field.NewTime(tableName, "created_at")
+	_aPIKeyORM.DataResidency = field.NewString(tableName, "data_residency")
 	_aPIKeyORM.DeletedAt = field.NewTime(tableName, "deleted_at")
+	_aPIKeyORM.Description = field.NewString(tableName, "description")
+	_aPIKeyORM.DocumentationUrl = field.NewString(tableName, "documentation_url")
+	_aPIKeyORM.EndpointUsageJson = field.NewBytes(tableName, "endpoint_usage_json")
 	_aPIKeyORM.EnforceHttps = field.NewBool(tableName, "enforce_https")
+	_aPIKeyORM.EnforceMutualTls = field.NewBool(tableName, "enforce_mutual_tls")
 	_aPIKeyORM.EnforceSigning = field.NewBool(tableName, "enforce_signing")
+	_aPIKeyORM.ErrorAlertThreshold = field.NewFloat32(tableName, "error_alert_threshold")
+	_aPIKeyORM.ErrorRatesJson = field.NewBytes(tableName, "error_rates_json")
 	_aPIKeyORM.ExpiresAt = field.NewTime(tableName, "expires_at")
 	_aPIKeyORM.Id = field.NewUint64(tableName, "id")
+	_aPIKeyORM.IsTestKey = field.NewBool(tableName, "is_test_key")
 	_aPIKeyORM.KeyHash = field.NewString(tableName, "key_hash")
 	_aPIKeyORM.KeyPrefix = field.NewString(tableName, "key_prefix")
+	_aPIKeyORM.LastRotatedAt = field.NewTime(tableName, "last_rotated_at")
 	_aPIKeyORM.LastRotationDate = field.NewTime(tableName, "last_rotation_date")
 	_aPIKeyORM.LastRotationReason = field.NewString(tableName, "last_rotation_reason")
+	_aPIKeyORM.LastSecurityReviewAt = field.NewTime(tableName, "last_security_review_at")
 	_aPIKeyORM.LastUsedAt = field.NewTime(tableName, "last_used_at")
 	_aPIKeyORM.LogAllRequests = field.NewBool(tableName, "log_all_requests")
+	_aPIKeyORM.MetadataJson = field.NewBytes(tableName, "metadata_json")
+	_aPIKeyORM.MonitoringIntegrations = field.NewField(tableName, "monitoring_integrations")
+	_aPIKeyORM.MonthlyRequestQuota = field.NewInt64(tableName, "monthly_request_quota")
 	_aPIKeyORM.Name = field.NewString(tableName, "name")
 	_aPIKeyORM.OrgId = field.NewString(tableName, "org_id")
+	_aPIKeyORM.QuotaAlertThreshold = field.NewFloat32(tableName, "quota_alert_threshold")
+	_aPIKeyORM.RecentErrors = field.NewBytes(tableName, "recent_errors")
 	_aPIKeyORM.RequestsPerDay = field.NewInt32(tableName, "requests_per_day")
 	_aPIKeyORM.RequestsPerSecond = field.NewInt32(tableName, "requests_per_second")
+	_aPIKeyORM.RequireRequestSigning = field.NewBool(tableName, "require_request_signing")
+	_aPIKeyORM.RequiresAuditLogging = field.NewBool(tableName, "requires_audit_logging")
 	_aPIKeyORM.RequiresClientSecret = field.NewBool(tableName, "requires_client_secret")
 	_aPIKeyORM.RotationFrequencyDays = field.NewInt32(tableName, "rotation_frequency_days")
 	_aPIKeyORM.Scopes_ = field.NewField(tableName, "scopes")
 	_aPIKeyORM.Status = field.NewString(tableName, "status")
+	_aPIKeyORM.SuccessRate = field.NewFloat32(tableName, "success_rate")
+	_aPIKeyORM.SuccessfulRequestsCount = field.NewInt32(tableName, "successful_requests_count")
+	_aPIKeyORM.SupportContact = field.NewString(tableName, "support_contact")
+	_aPIKeyORM.SupportedFeatures = field.NewField(tableName, "supported_features")
+	_aPIKeyORM.Tags = field.NewField(tableName, "tags")
 	_aPIKeyORM.TenantId = field.NewString(tableName, "tenant_id")
 	_aPIKeyORM.TotalErrors = field.NewInt64(tableName, "total_errors")
 	_aPIKeyORM.TotalRequests = field.NewInt64(tableName, "total_requests")
 	_aPIKeyORM.UpdatedAt = field.NewTime(tableName, "updated_at")
+	_aPIKeyORM.WebhookUrl = field.NewString(tableName, "webhook_url")
 	_aPIKeyORM.WorkspaceId = field.NewUint64(tableName, "workspace_id")
 	_aPIKeyORM.Account = aPIKeyORMBelongsToAccount{
 		db: db.Session(&gorm.Session{}),
@@ -208,39 +242,73 @@ func newAPIKeyORM(db *gorm.DB, opts ...gen.DOOption) aPIKeyORM {
 type aPIKeyORM struct {
 	aPIKeyORMDo
 
-	ALL                   field.Asterisk
-	AccountId             field.Uint64
-	AllowedDomains        field.Field
-	AllowedIps            field.Field
-	AverageResponseTime   field.Float32
-	ClientSecretHash      field.String
-	ConcurrentRequests    field.Int32
-	CreatedAt             field.Time
-	DeletedAt             field.Time
-	EnforceHttps          field.Bool
-	EnforceSigning        field.Bool
-	ExpiresAt             field.Time
-	Id                    field.Uint64
-	KeyHash               field.String
-	KeyPrefix             field.String
-	LastRotationDate      field.Time
-	LastRotationReason    field.String
-	LastUsedAt            field.Time
-	LogAllRequests        field.Bool
-	Name                  field.String
-	OrgId                 field.String
-	RequestsPerDay        field.Int32
-	RequestsPerSecond     field.Int32
-	RequiresClientSecret  field.Bool
-	RotationFrequencyDays field.Int32
-	Scopes_               field.Field
-	Status                field.String
-	TenantId              field.String
-	TotalErrors           field.Int64
-	TotalRequests         field.Int64
-	UpdatedAt             field.Time
-	WorkspaceId           field.Uint64
-	Account               aPIKeyORMBelongsToAccount
+	ALL                        field.Asterisk
+	AccountId                  field.Uint64
+	AlertEmails                field.Field
+	AlertOnErrorSpike          field.Bool
+	AlertOnQuotaThreshold      field.Bool
+	AllowedDomains             field.Field
+	AllowedEnvironments        field.Field
+	AllowedIps                 field.Field
+	AllowedSignatureAlgorithms field.Field
+	ApiVersion                 field.String
+	ApprovedIntegrations       field.Field
+	AverageResponseTime        field.Float32
+	BillingTier                field.String
+	ClientCertificateHash      field.String
+	ClientSecretHash           field.String
+	ComplianceStandards        field.Field
+	ConcurrentRequests         field.Int32
+	CostPerRequest             field.Float32
+	CreatedAt                  field.Time
+	DataResidency              field.String
+	DeletedAt                  field.Time
+	Description                field.String
+	DocumentationUrl           field.String
+	EndpointUsageJson          field.Bytes
+	EnforceHttps               field.Bool
+	EnforceMutualTls           field.Bool
+	EnforceSigning             field.Bool
+	ErrorAlertThreshold        field.Float32
+	ErrorRatesJson             field.Bytes
+	ExpiresAt                  field.Time
+	Id                         field.Uint64
+	IsTestKey                  field.Bool
+	KeyHash                    field.String
+	KeyPrefix                  field.String
+	LastRotatedAt              field.Time
+	LastRotationDate           field.Time
+	LastRotationReason         field.String
+	LastSecurityReviewAt       field.Time
+	LastUsedAt                 field.Time
+	LogAllRequests             field.Bool
+	MetadataJson               field.Bytes
+	MonitoringIntegrations     field.Field
+	MonthlyRequestQuota        field.Int64
+	Name                       field.String
+	OrgId                      field.String
+	QuotaAlertThreshold        field.Float32
+	RecentErrors               field.Bytes
+	RequestsPerDay             field.Int32
+	RequestsPerSecond          field.Int32
+	RequireRequestSigning      field.Bool
+	RequiresAuditLogging       field.Bool
+	RequiresClientSecret       field.Bool
+	RotationFrequencyDays      field.Int32
+	Scopes_                    field.Field
+	Status                     field.String
+	SuccessRate                field.Float32
+	SuccessfulRequestsCount    field.Int32
+	SupportContact             field.String
+	SupportedFeatures          field.Field
+	Tags                       field.Field
+	TenantId                   field.String
+	TotalErrors                field.Int64
+	TotalRequests              field.Int64
+	UpdatedAt                  field.Time
+	WebhookUrl                 field.String
+	WorkspaceId                field.Uint64
+	Account                    aPIKeyORMBelongsToAccount
 
 	Workspace aPIKeyORMBelongsToWorkspace
 
@@ -260,35 +328,69 @@ func (a aPIKeyORM) As(alias string) *aPIKeyORM {
 func (a *aPIKeyORM) updateTableName(table string) *aPIKeyORM {
 	a.ALL = field.NewAsterisk(table)
 	a.AccountId = field.NewUint64(table, "account_id")
+	a.AlertEmails = field.NewField(table, "alert_emails")
+	a.AlertOnErrorSpike = field.NewBool(table, "alert_on_error_spike")
+	a.AlertOnQuotaThreshold = field.NewBool(table, "alert_on_quota_threshold")
 	a.AllowedDomains = field.NewField(table, "allowed_domains")
+	a.AllowedEnvironments = field.NewField(table, "allowed_environments")
 	a.AllowedIps = field.NewField(table, "allowed_ips")
+	a.AllowedSignatureAlgorithms = field.NewField(table, "allowed_signature_algorithms")
+	a.ApiVersion = field.NewString(table, "api_version")
+	a.ApprovedIntegrations = field.NewField(table, "approved_integrations")
 	a.AverageResponseTime = field.NewFloat32(table, "average_response_time")
+	a.BillingTier = field.NewString(table, "billing_tier")
+	a.ClientCertificateHash = field.NewString(table, "client_certificate_hash")
 	a.ClientSecretHash = field.NewString(table, "client_secret_hash")
+	a.ComplianceStandards = field.NewField(table, "compliance_standards")
 	a.ConcurrentRequests = field.NewInt32(table, "concurrent_requests")
+	a.CostPerRequest = field.NewFloat32(table, "cost_per_request")
 	a.CreatedAt = field.NewTime(table, "created_at")
+	a.DataResidency = field.NewString(table, "data_residency")
 	a.DeletedAt = field.NewTime(table, "deleted_at")
+	a.Description = field.NewString(table, "description")
+	a.DocumentationUrl = field.NewString(table, "documentation_url")
+	a.EndpointUsageJson = field.NewBytes(table, "endpoint_usage_json")
 	a.EnforceHttps = field.NewBool(table, "enforce_https")
+	a.EnforceMutualTls = field.NewBool(table, "enforce_mutual_tls")
 	a.EnforceSigning = field.NewBool(table, "enforce_signing")
+	a.ErrorAlertThreshold = field.NewFloat32(table, "error_alert_threshold")
+	a.ErrorRatesJson = field.NewBytes(table, "error_rates_json")
 	a.ExpiresAt = field.NewTime(table, "expires_at")
 	a.Id = field.NewUint64(table, "id")
+	a.IsTestKey = field.NewBool(table, "is_test_key")
 	a.KeyHash = field.NewString(table, "key_hash")
 	a.KeyPrefix = field.NewString(table, "key_prefix")
+	a.LastRotatedAt = field.NewTime(table, "last_rotated_at")
 	a.LastRotationDate = field.NewTime(table, "last_rotation_date")
 	a.LastRotationReason = field.NewString(table, "last_rotation_reason")
+	a.LastSecurityReviewAt = field.NewTime(table, "last_security_review_at")
 	a.LastUsedAt = field.NewTime(table, "last_used_at")
 	a.LogAllRequests = field.NewBool(table, "log_all_requests")
+	a.MetadataJson = field.NewBytes(table, "metadata_json")
+	a.MonitoringIntegrations = field.NewField(table, "monitoring_integrations")
+	a.MonthlyRequestQuota = field.NewInt64(table, "monthly_request_quota")
 	a.Name = field.NewString(table, "name")
 	a.OrgId = field.NewString(table, "org_id")
+	a.QuotaAlertThreshold = field.NewFloat32(table, "quota_alert_threshold")
+	a.RecentErrors = field.NewBytes(table, "recent_errors")
 	a.RequestsPerDay = field.NewInt32(table, "requests_per_day")
 	a.RequestsPerSecond = field.NewInt32(table, "requests_per_second")
+	a.RequireRequestSigning = field.NewBool(table, "require_request_signing")
+	a.RequiresAuditLogging = field.NewBool(table, "requires_audit_logging")
 	a.RequiresClientSecret = field.NewBool(table, "requires_client_secret")
 	a.RotationFrequencyDays = field.NewInt32(table, "rotation_frequency_days")
 	a.Scopes_ = field.NewField(table, "scopes")
 	a.Status = field.NewString(table, "status")
+	a.SuccessRate = field.NewFloat32(table, "success_rate")
+	a.SuccessfulRequestsCount = field.NewInt32(table, "successful_requests_count")
+	a.SupportContact = field.NewString(table, "support_contact")
+	a.SupportedFeatures = field.NewField(table, "supported_features")
+	a.Tags = field.NewField(table, "tags")
 	a.TenantId = field.NewString(table, "tenant_id")
 	a.TotalErrors = field.NewInt64(table, "total_errors")
 	a.TotalRequests = field.NewInt64(table, "total_requests")
 	a.UpdatedAt = field.NewTime(table, "updated_at")
+	a.WebhookUrl = field.NewString(table, "webhook_url")
 	a.WorkspaceId = field.NewUint64(table, "workspace_id")
 
 	a.fillFieldMap()
@@ -306,37 +408,71 @@ func (a *aPIKeyORM) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (a *aPIKeyORM) fillFieldMap() {
-	a.fieldMap = make(map[string]field.Expr, 33)
+	a.fieldMap = make(map[string]field.Expr, 67)
 	a.fieldMap["account_id"] = a.AccountId
+	a.fieldMap["alert_emails"] = a.AlertEmails
+	a.fieldMap["alert_on_error_spike"] = a.AlertOnErrorSpike
+	a.fieldMap["alert_on_quota_threshold"] = a.AlertOnQuotaThreshold
 	a.fieldMap["allowed_domains"] = a.AllowedDomains
+	a.fieldMap["allowed_environments"] = a.AllowedEnvironments
 	a.fieldMap["allowed_ips"] = a.AllowedIps
+	a.fieldMap["allowed_signature_algorithms"] = a.AllowedSignatureAlgorithms
+	a.fieldMap["api_version"] = a.ApiVersion
+	a.fieldMap["approved_integrations"] = a.ApprovedIntegrations
 	a.fieldMap["average_response_time"] = a.AverageResponseTime
+	a.fieldMap["billing_tier"] = a.BillingTier
+	a.fieldMap["client_certificate_hash"] = a.ClientCertificateHash
 	a.fieldMap["client_secret_hash"] = a.ClientSecretHash
+	a.fieldMap["compliance_standards"] = a.ComplianceStandards
 	a.fieldMap["concurrent_requests"] = a.ConcurrentRequests
+	a.fieldMap["cost_per_request"] = a.CostPerRequest
 	a.fieldMap["created_at"] = a.CreatedAt
+	a.fieldMap["data_residency"] = a.DataResidency
 	a.fieldMap["deleted_at"] = a.DeletedAt
+	a.fieldMap["description"] = a.Description
+	a.fieldMap["documentation_url"] = a.DocumentationUrl
+	a.fieldMap["endpoint_usage_json"] = a.EndpointUsageJson
 	a.fieldMap["enforce_https"] = a.EnforceHttps
+	a.fieldMap["enforce_mutual_tls"] = a.EnforceMutualTls
 	a.fieldMap["enforce_signing"] = a.EnforceSigning
+	a.fieldMap["error_alert_threshold"] = a.ErrorAlertThreshold
+	a.fieldMap["error_rates_json"] = a.ErrorRatesJson
 	a.fieldMap["expires_at"] = a.ExpiresAt
 	a.fieldMap["id"] = a.Id
+	a.fieldMap["is_test_key"] = a.IsTestKey
 	a.fieldMap["key_hash"] = a.KeyHash
 	a.fieldMap["key_prefix"] = a.KeyPrefix
+	a.fieldMap["last_rotated_at"] = a.LastRotatedAt
 	a.fieldMap["last_rotation_date"] = a.LastRotationDate
 	a.fieldMap["last_rotation_reason"] = a.LastRotationReason
+	a.fieldMap["last_security_review_at"] = a.LastSecurityReviewAt
 	a.fieldMap["last_used_at"] = a.LastUsedAt
 	a.fieldMap["log_all_requests"] = a.LogAllRequests
+	a.fieldMap["metadata_json"] = a.MetadataJson
+	a.fieldMap["monitoring_integrations"] = a.MonitoringIntegrations
+	a.fieldMap["monthly_request_quota"] = a.MonthlyRequestQuota
 	a.fieldMap["name"] = a.Name
 	a.fieldMap["org_id"] = a.OrgId
+	a.fieldMap["quota_alert_threshold"] = a.QuotaAlertThreshold
+	a.fieldMap["recent_errors"] = a.RecentErrors
 	a.fieldMap["requests_per_day"] = a.RequestsPerDay
 	a.fieldMap["requests_per_second"] = a.RequestsPerSecond
+	a.fieldMap["require_request_signing"] = a.RequireRequestSigning
+	a.fieldMap["requires_audit_logging"] = a.RequiresAuditLogging
 	a.fieldMap["requires_client_secret"] = a.RequiresClientSecret
 	a.fieldMap["rotation_frequency_days"] = a.RotationFrequencyDays
 	a.fieldMap["scopes"] = a.Scopes_
 	a.fieldMap["status"] = a.Status
+	a.fieldMap["success_rate"] = a.SuccessRate
+	a.fieldMap["successful_requests_count"] = a.SuccessfulRequestsCount
+	a.fieldMap["support_contact"] = a.SupportContact
+	a.fieldMap["supported_features"] = a.SupportedFeatures
+	a.fieldMap["tags"] = a.Tags
 	a.fieldMap["tenant_id"] = a.TenantId
 	a.fieldMap["total_errors"] = a.TotalErrors
 	a.fieldMap["total_requests"] = a.TotalRequests
 	a.fieldMap["updated_at"] = a.UpdatedAt
+	a.fieldMap["webhook_url"] = a.WebhookUrl
 	a.fieldMap["workspace_id"] = a.WorkspaceId
 
 }

@@ -703,53 +703,96 @@ message APIKey {
         (gorm.field).tag = {index: "idx_api_keys_tenant_id"}
     ];
 
-    // Access control
+    // Access control and permissions
     repeated string scopes = 9 [(gorm.field).tag = {type: "text[]"}];
-    repeated string allowed_ips = 10 [(gorm.field).tag = {type: "text[]"}];  // IP whitelist
-    repeated string allowed_domains = 11 [(gorm.field).tag = {type: "text[]"}];  // Domain whitelist
+    repeated string allowed_ips = 10 [(gorm.field).tag = {type: "text[]"}];
+    repeated string allowed_domains = 11 [(gorm.field).tag = {type: "text[]"}];
+    repeated string allowed_environments = 12 [(gorm.field).tag = {type: "text[]"}]; // e.g., dev, staging, prod
+    bool is_test_key = 13; // Indicates if this is a test API key
 
-    // Rate limiting
-    int32 requests_per_second = 12 [(validate.rules).int32.gt = 0];
-    int32 requests_per_day = 13 [(validate.rules).int32.gt = 0];
-    int32 concurrent_requests = 14 [(validate.rules).int32.gt = 0];
+    // Rate limiting and quotas
+    int32 requests_per_second = 14 [(validate.rules).int32.gt = 0];
+    int32 requests_per_day = 15 [(validate.rules).int32.gt = 0];
+    int32 concurrent_requests = 16 [(validate.rules).int32.gt = 0];
+    int64 monthly_request_quota = 17;
+    float cost_per_request = 18; // For usage-based billing
+    string billing_tier = 19; // e.g., free, basic, premium
 
-    // Usage tracking
-    int64 total_requests = 15;
-    int64 total_errors = 16;
-    google.protobuf.Timestamp last_used_at = 17 [(gorm.field).tag = {index: "idx_api_keys_last_used"}];
-    float average_response_time = 18;  // in milliseconds
+    // Usage tracking and analytics
+    int64 total_requests = 20;
+    int64 total_errors = 21;
+    google.protobuf.Timestamp last_used_at = 22 [(gorm.field).tag = {index: "idx_api_keys_last_used"}];
+    float average_response_time = 23;
+    
+    // Store maps as JSONB in PostgreSQL
+    bytes endpoint_usage_json = 24 [(gorm.field).tag = {type: "jsonb"}]; // Tracks usage per endpoint
+    bytes error_rates_json = 25 [(gorm.field).tag = {type: "jsonb"}]; // Error rates by error type
+    bytes recent_errors = 26 [(gorm.field).tag = {type: "jsonb"}]; // Recent error details with timestamps
+    int32 successful_requests_count = 27;
+    float success_rate = 28;
 
-    // Key status
+    // Key status and lifecycle
     enum Status {
         STATUS_UNSPECIFIED = 0;
         STATUS_ACTIVE = 1;
         STATUS_REVOKED = 2;
         STATUS_EXPIRED = 3;
         STATUS_RATE_LIMITED = 4;
+        STATUS_SUSPENDED = 5;
+        STATUS_PENDING_REVIEW = 6;
+        STATUS_DEPRECATED = 7;
     }
-    Status status = 19 [(gorm.field).tag = {index: "idx_api_keys_status"}];
+    Status status = 29 [(gorm.field).tag = {index: "idx_api_keys_status"}];
 
     // Timestamps
-    google.protobuf.Timestamp created_at = 20;
-    google.protobuf.Timestamp updated_at = 21;
-    google.protobuf.Timestamp expires_at = 22 [(gorm.field).tag = {index: "idx_api_keys_expires"}];
-    google.protobuf.Timestamp deleted_at = 23;
+    google.protobuf.Timestamp created_at = 30;
+    google.protobuf.Timestamp updated_at = 31;
+    google.protobuf.Timestamp expires_at = 32 [(gorm.field).tag = {index: "idx_api_keys_expires"}];
+    google.protobuf.Timestamp deleted_at = 33;
+    google.protobuf.Timestamp last_rotated_at = 34;
+    google.protobuf.Timestamp last_security_review_at = 35;
 
     // Security features
-    bool requires_client_secret = 24;
-    string client_secret_hash = 25;
-    bool enforce_https = 26 [(validate.rules).bool.const = true];
-    bool enforce_signing = 27;
+    bool requires_client_secret = 36;
+    string client_secret_hash = 37;
+    bool enforce_https = 38 [(validate.rules).bool.const = true];
+    bool enforce_signing = 39;
+    repeated string allowed_signature_algorithms = 40 [(gorm.field).tag = {type: "text[]"}];
+    bool enforce_mutual_tls = 41;
+    string client_certificate_hash = 42;
+    bool require_request_signing = 43;
+
+    // Developer experience
+    string description = 44; // Detailed description of key usage
+    bytes metadata_json = 45 [(gorm.field).tag = {type: "jsonb"}]; // Custom metadata stored as JSONB
+    repeated string tags = 46 [(gorm.field).tag = {type: "text[]"}];
+    string api_version = 47; // API version this key is valid for
+    repeated string supported_features = 48 [(gorm.field).tag = {type: "text[]"}];
+    string documentation_url = 49;
+    string support_contact = 50;
 
     // Relationships
-    Account account = 28 [(gorm.field).belongs_to = {}];
-    Workspace workspace = 29 [(gorm.field).belongs_to = {}];
+    Account account = 51 [(gorm.field).belongs_to = {}];
+    Workspace workspace = 52 [(gorm.field).belongs_to = {}];
 
     // Compliance and auditing
-    bool log_all_requests = 31;
-    string last_rotation_reason = 32;
-    google.protobuf.Timestamp last_rotation_date = 33;
-    int32 rotation_frequency_days = 34 [(validate.rules).int32.gt = 0];
+    bool log_all_requests = 53;
+    string last_rotation_reason = 54;
+    google.protobuf.Timestamp last_rotation_date = 55;
+    int32 rotation_frequency_days = 56 [(validate.rules).int32.gt = 0];
+    repeated string compliance_standards = 57 [(gorm.field).tag = {type: "text[]"}]; // e.g., SOC2, GDPR
+    bool requires_audit_logging = 58;
+    string data_residency = 59; // Geographic location of data storage
+    repeated string approved_integrations = 60 [(gorm.field).tag = {type: "text[]"}];
+
+    // Monitoring and alerts
+    repeated string alert_emails = 61 [(gorm.field).tag = {type: "text[]"}];
+    string webhook_url = 62;
+    bool alert_on_quota_threshold = 63;
+    float quota_alert_threshold = 64;
+    bool alert_on_error_spike = 65;
+    float error_alert_threshold = 66;
+    repeated string monitoring_integrations = 67 [(gorm.field).tag = {type: "text[]"}];
 }
 
 /**

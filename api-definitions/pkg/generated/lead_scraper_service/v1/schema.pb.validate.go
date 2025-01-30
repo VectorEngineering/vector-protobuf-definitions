@@ -2980,6 +2980,8 @@ func (m *APIKey) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	// no validation rules for IsTestKey
+
 	if m.GetRequestsPerSecond() <= 0 {
 		err := APIKeyValidationError{
 			field:  "RequestsPerSecond",
@@ -3012,6 +3014,12 @@ func (m *APIKey) validate(all bool) error {
 		}
 		errors = append(errors, err)
 	}
+
+	// no validation rules for MonthlyRequestQuota
+
+	// no validation rules for CostPerRequest
+
+	// no validation rules for BillingTier
 
 	// no validation rules for TotalRequests
 
@@ -3047,6 +3055,16 @@ func (m *APIKey) validate(all bool) error {
 	}
 
 	// no validation rules for AverageResponseTime
+
+	// no validation rules for EndpointUsageJson
+
+	// no validation rules for ErrorRatesJson
+
+	// no validation rules for RecentErrors
+
+	// no validation rules for SuccessfulRequestsCount
+
+	// no validation rules for SuccessRate
 
 	// no validation rules for Status
 
@@ -3166,6 +3184,64 @@ func (m *APIKey) validate(all bool) error {
 		}
 	}
 
+	if all {
+		switch v := interface{}(m.GetLastRotatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, APIKeyValidationError{
+					field:  "LastRotatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, APIKeyValidationError{
+					field:  "LastRotatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetLastRotatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return APIKeyValidationError{
+				field:  "LastRotatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetLastSecurityReviewAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, APIKeyValidationError{
+					field:  "LastSecurityReviewAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, APIKeyValidationError{
+					field:  "LastSecurityReviewAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetLastSecurityReviewAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return APIKeyValidationError{
+				field:  "LastSecurityReviewAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
 	// no validation rules for RequiresClientSecret
 
 	// no validation rules for ClientSecretHash
@@ -3182,6 +3258,22 @@ func (m *APIKey) validate(all bool) error {
 	}
 
 	// no validation rules for EnforceSigning
+
+	// no validation rules for EnforceMutualTls
+
+	// no validation rules for ClientCertificateHash
+
+	// no validation rules for RequireRequestSigning
+
+	// no validation rules for Description
+
+	// no validation rules for MetadataJson
+
+	// no validation rules for ApiVersion
+
+	// no validation rules for DocumentationUrl
+
+	// no validation rules for SupportContact
 
 	if all {
 		switch v := interface{}(m.GetAccount()).(type) {
@@ -3284,6 +3376,20 @@ func (m *APIKey) validate(all bool) error {
 		}
 		errors = append(errors, err)
 	}
+
+	// no validation rules for RequiresAuditLogging
+
+	// no validation rules for DataResidency
+
+	// no validation rules for WebhookUrl
+
+	// no validation rules for AlertOnQuotaThreshold
+
+	// no validation rules for QuotaAlertThreshold
+
+	// no validation rules for AlertOnErrorSpike
+
+	// no validation rules for ErrorAlertThreshold
 
 	if len(errors) > 0 {
 		return APIKeyMultiError(errors)

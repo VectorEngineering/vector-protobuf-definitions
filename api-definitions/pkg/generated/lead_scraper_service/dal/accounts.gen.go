@@ -8,6 +8,7 @@ import (
 	"context"
 	"strings"
 
+	lead_scraper_servicev1 "github.com/Vector/vector-lead-management/protobuf/api-definitions/pkg/generated/lead_scraper_service/v1"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 	"gorm.io/gorm/schema"
@@ -17,8 +18,6 @@ import (
 	"gorm.io/gen/helper"
 
 	"gorm.io/plugin/dbresolver"
-
-	lead_scraper_servicev1 "github.com/Vector/vector-lead-management/protobuf/api-definitions/pkg/generated/lead_scraper_service/v1"
 
 	"time"
 )

@@ -18,7 +18,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	lead_scraper_servicev1 "github.com/Vector/vector-protobuf-definitions/api-definitions/pkg/generated/lead_scraper_service/v1"
+	lead_scraper_servicev1 "github.com/VectorEngineering/vector-protobuf-definitions/api-definitions/pkg/generated/lead_scraper_service/v1"
 
 	"time"
 )

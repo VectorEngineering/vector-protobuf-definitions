@@ -4,7 +4,7 @@ package lead_scraper_service.v1;
 
 import "protoc-gen-openapiv2/options/annotations.proto";
 
-option go_package = "github.com/Vector/vector-protobuf-definitions/api-definitions/pkg/generated/lead_scraper_service/v1";
+option go_package = "github.com/VectorEngineering/vector-protobuf-definitions/api-definitions/pkg/generated/lead_scraper_service/v1";
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
   info: {

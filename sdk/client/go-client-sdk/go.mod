@@ -1,4 +1,4 @@
-module github.com/Vector/vector-protobuf-definitions/sdk/client/go-client-sdk
+module github.com/VectorEngineering/vector-protobuf-definitions/sdk/client/go-client-sdk
 
 go 1.23
 

@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 import "validate/validate.proto";
 
-option go_package = "github.com/Vector/vector-protobuf-definitions/api-definitions/pkg/generated/lead_scraper_service/v1";
+option go_package = "github.com/VectorEngineering/vector-protobuf-definitions/api-definitions/pkg/generated/lead_scraper_service/v1";
 
 /**
  * BackgroundJobStatus represents the possible states of a background job.

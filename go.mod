@@ -1,3 +1,3 @@
-module github.com/Vector/vector-protobuf-definitions
+module github.com/VectorEngineering/vector-protobuf-definitions
 
 go 1.23.4

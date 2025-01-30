@@ -1,4 +1,4 @@
-module github.com/Vector/vector-protobuf-definitions/api-definitions
+module github.com/VectorEngineering/vector-protobuf-definitions/api-definitions
 
 go 1.23
 

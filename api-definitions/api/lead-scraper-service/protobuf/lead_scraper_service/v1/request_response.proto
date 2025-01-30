@@ -8,7 +8,7 @@ import "validate/validate.proto";
 import "google/api/field_behavior.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "github.com/Vector/vector-protobuf-definitions/api-definitions/pkg/generated/lead_scraper_service/v1";
+option go_package = "github.com/VectorEngineering/vector-protobuf-definitions/api-definitions/pkg/generated/lead_scraper_service/v1";
 
 
 // CreateScrapingJobRequest represents a request to create a new Google Maps scraping job

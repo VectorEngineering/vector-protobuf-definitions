@@ -13,7 +13,7 @@ import (
 	"context"
 	"testing"
 
-	openapiclient "github.com/Vector/vector-protobuf-definitions/sdk/client/go-client-sdk"
+	openapiclient "github.com/VectorEngineering/vector-protobuf-definitions/sdk/client/go-client-sdk"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

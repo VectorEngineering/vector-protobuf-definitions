@@ -209,7 +209,7 @@ message Workspace {
  * - Multi-tenant context
  *
  * Database considerations:
- * - Stored in "scraping_jobs" table
+ * - Stored in "gmaps_jobs" table
  * - Uses GORM for ORM mapping
  * - Includes foreign key to Account
  * - Supports soft deletes
@@ -230,57 +230,58 @@ message Workspace {
 message ScrapingJob {
     option (gorm.opts) = {
         ormable: true
-        table: "scraping_jobs"
+        table: "gmaps_jobs"
     };
 
-    // Unique identifier for the job
-    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    // Changed from uint64 to string to support UUID
+    string id = 1 [(gorm.field).tag = {primary_key: true}];
+    
+    // Core fields matching DB schema
+    int32 priority = 2;
+    string payload_type = 3;
+    bytes payload = 4;
+    google.protobuf.Timestamp created_at = 5;
+    string status = 6;
 
     // Human-readable name for the job
-    string name = 2 [(gorm.field).tag = {index: "idx_scraping_jobs_name"}];
-
-    // Job creation timestamp
-    google.protobuf.Timestamp created_at = 3 [(gorm.field).tag = {index: "idx_scraping_jobs_created_at"}];
-
-    // Current status of the job
-    BackgroundJobStatus status = 4 [(gorm.field).tag = {index: "idx_scraping_jobs_status"}];
+    string name = 7 [(gorm.field).tag = {index: "idx_scraping_jobs_name"}];
 
     // Search terms for Google Maps
-    repeated string keywords = 5;
+    repeated string keywords = 8;
 
     // ISO 639-1 language code (e.g., "en", "el")
-    string lang = 6;
+    string lang = 9;
 
     // Map zoom level (1-20)
-    int32 zoom = 7 [
+    int32 zoom = 10 [
         (validate.rules).int32 = {gte: 1, lte: 20}
     ];
 
     // Latitude coordinate
-    string lat = 8 [
+    string lat = 11 [
         (validate.rules).string = {pattern: "^[-+]?([1-8]?\\d(\\.\\d+)?|90(\\.0+)?)$"}
     ];
 
     // Longitude coordinate
-    string lon = 9;
+    string lon = 12;
 
     // Enable faster but potentially less thorough scraping
-    bool fast_mode = 10;
+    bool fast_mode = 13;
 
     // Search radius in meters
-    int32 radius = 11;
+    int32 radius = 14;
 
     // Depth of recursive search (1-10)
-    int32 depth = 12;
+    int32 depth = 15;
 
     // Whether to extract email addresses
-    bool email = 13;
+    bool email = 16;
 
     // Maximum execution time in seconds
-    int32 max_time = 14;
+    int32 max_time = 17;
 
     // List of proxy servers to use
-    repeated string proxies = 15;
+    repeated string proxies = 18;
 
     // Last update timestamp
     google.protobuf.Timestamp updated_at = 19;
@@ -288,20 +289,11 @@ message ScrapingJob {
     // Soft delete timestamp
     google.protobuf.Timestamp deleted_at = 20;
 
-    // Account that created the jobs
-    string payload_type = 21;
-
-    // Priority level of the job
-    int32 priority = 22;
-
-    // Payload data
-    bytes payload = 23;
-
     // Lead tracking
-    repeated Lead leads = 24 [(gorm.field).has_many = {}];
+    repeated Lead leads = 21 [(gorm.field).has_many = {}];
     
     // Workflow context
-    string workflow_id = 25 [(gorm.field).tag = {index: "idx_workflow_id"}];
+    string workflow_id = 22 [(gorm.field).tag = {index: "idx_workflow_id"}];
 }
 
 /**
@@ -758,4 +750,20 @@ message APIKey {
     string last_rotation_reason = 32;
     google.protobuf.Timestamp last_rotation_date = 33;
     int32 rotation_frequency_days = 34 [(validate.rules).int32.gt = 0];
+}
+
+/**
+ * Result represents a scraped business result stored in JSONB format
+ * This aligns with the results table in the database
+ */
+message Result {
+    option (gorm.opts) = {
+        ormable: true
+        table: "results"
+    };
+
+    int32 id = 1 [(gorm.field).tag = {primary_key: true}];
+    
+    // JSONB data field containing all business details
+    bytes data = 2;
 }

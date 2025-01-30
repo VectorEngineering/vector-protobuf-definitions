@@ -12,6 +12,8 @@ func GetDatabaseSchemas() []interface{} {
 		ReviewORM{},
 		BusinessHoursORM{},
 		AccountSettingsORM{},
+		APIKeyORM{},
+		ResultORM{},
 	}
 
 	return models

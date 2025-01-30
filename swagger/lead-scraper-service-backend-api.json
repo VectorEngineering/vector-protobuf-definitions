@@ -10279,20 +10279,30 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "format": "uint64",
-                        "title": "Unique identifier for the job"
+                        "title": "Changed from uint64 to string to support UUID"
+                    },
+                    "priority": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "Core fields matching DB schema"
+                    },
+                    "payloadType": {
+                        "type": "string"
+                    },
+                    "payload": {
+                        "type": "string",
+                        "format": "byte"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "status": {
+                        "type": "string"
                     },
                     "name": {
                         "type": "string",
                         "title": "Human-readable name for the job"
-                    },
-                    "createdAt": {
-                        "type": "string",
-                        "format": "date-time",
-                        "title": "Job creation timestamp"
-                    },
-                    "status": {
-                        "$ref": "#/components/schemas/BackgroundJobStatus"
                     },
                     "keywords": {
                         "type": "array",
@@ -10358,20 +10368,6 @@
                         "format": "date-time",
                         "title": "Soft delete timestamp"
                     },
-                    "payloadType": {
-                        "type": "string",
-                        "title": "Account that created the jobs"
-                    },
-                    "priority": {
-                        "type": "integer",
-                        "format": "int32",
-                        "title": "Priority level of the job"
-                    },
-                    "payload": {
-                        "type": "string",
-                        "format": "byte",
-                        "title": "Payload data"
-                    },
                     "leads": {
                         "type": "array",
                         "items": {
@@ -10384,7 +10380,7 @@
                         "title": "Workflow context"
                     }
                 },
-                "description": "ScrapingJob represents a Google Maps scraping task.\nThis message defines both the configuration and current state of a scraping operation.\n\nKey components:\n- Basic metadata (id, name, timestamps)\n- Job status tracking\n- Search configuration parameters\n- Geographic settings\n- Performance options\n- Multi-tenant context\n\nDatabase considerations:\n- Stored in \"scraping_jobs\" table\n- Uses GORM for ORM mapping\n- Includes foreign key to Account\n- Supports soft deletes\n\nUsage example:\n```go\njob := &ScrapingJob{\n    Name: \"Athens Cafes\",\n    Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,\n    Keywords: []string{\"cafe\", \"coffee\"},\n    Lang: \"el\",\n    Zoom: 15,\n    FastMode: true,\n    MaxTime: 3600,\n}\n```"
+                "description": "ScrapingJob represents a Google Maps scraping task.\nThis message defines both the configuration and current state of a scraping operation.\n\nKey components:\n- Basic metadata (id, name, timestamps)\n- Job status tracking\n- Search configuration parameters\n- Geographic settings\n- Performance options\n- Multi-tenant context\n\nDatabase considerations:\n- Stored in \"gmaps_jobs\" table\n- Uses GORM for ORM mapping\n- Includes foreign key to Account\n- Supports soft deletes\n\nUsage example:\n```go\njob := &ScrapingJob{\n    Name: \"Athens Cafes\",\n    Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,\n    Keywords: []string{\"cafe\", \"coffee\"},\n    Lang: \"el\",\n    Zoom: 15,\n    FastMode: true,\n    MaxTime: 3600,\n}\n```"
             },
             "ScrapingWorkflow": {
                 "type": "object",

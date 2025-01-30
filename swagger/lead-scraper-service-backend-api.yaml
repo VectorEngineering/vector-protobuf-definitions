@@ -7181,17 +7181,24 @@ components:
       properties:
         id:
           type: string
-          format: uint64
-          title: Unique identifier for the job
-        name:
+          title: Changed from uint64 to string to support UUID
+        priority:
+          type: integer
+          format: int32
+          title: Core fields matching DB schema
+        payloadType:
           type: string
-          title: Human-readable name for the job
+        payload:
+          type: string
+          format: byte
         createdAt:
           type: string
           format: date-time
-          title: Job creation timestamp
         status:
-          $ref: "#/components/schemas/BackgroundJobStatus"
+          type: string
+        name:
+          type: string
+          title: Human-readable name for the job
         keywords:
           type: array
           items:
@@ -7241,17 +7248,6 @@ components:
           type: string
           format: date-time
           title: Soft delete timestamp
-        payloadType:
-          type: string
-          title: Account that created the jobs
-        priority:
-          type: integer
-          format: int32
-          title: Priority level of the job
-        payload:
-          type: string
-          format: byte
-          title: Payload data
         leads:
           type: array
           items:
@@ -7283,7 +7279,7 @@ components:
 
         Database considerations:
 
-        - Stored in "scraping_jobs" table
+        - Stored in "gmaps_jobs" table
 
         - Uses GORM for ORM mapping
 

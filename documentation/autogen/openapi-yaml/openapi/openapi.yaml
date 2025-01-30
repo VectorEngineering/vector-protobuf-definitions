@@ -2279,12 +2279,12 @@ components:
           - keywords
           - keywords
           fastMode: true
-          zoom: 0
+          zoom: 6
           lon: lon
-          priority: 5
+          priority: 0
           createdAt: 2000-01-23T04:56:07.000+00:00
           deletedAt: 2000-01-23T04:56:07.000+00:00
-          depth: 1
+          depth: 5
           payloadType: payloadType
           payload: payload
           leads:
@@ -2345,7 +2345,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               - workspace: null
                 notificationNotifyOnFailure: true
                 geoFencingLat: 1.0246457001441578
@@ -2396,7 +2396,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               hipaaCompliant: true
               gdprCompliant: true
               soc2Compliant: true
@@ -2627,7 +2627,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               - workspace: null
                 notificationNotifyOnFailure: true
                 geoFencingLat: 1.0246457001441578
@@ -2678,7 +2678,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               hipaaCompliant: true
               gdprCompliant: true
               soc2Compliant: true
@@ -2858,23 +2858,23 @@ components:
           - proxies
           id: id
           lang: lang
-          radius: 6
+          radius: 1
           lat: lat
           email: true
           workflowId: workflowId
-          status: BACKGROUND_JOB_STATUS_UNSPECIFIED
+          status: status
           updatedAt: 2000-01-23T04:56:07.000+00:00
         - maxTime: 5
           keywords:
           - keywords
           - keywords
           fastMode: true
-          zoom: 0
+          zoom: 6
           lon: lon
-          priority: 5
+          priority: 0
           createdAt: 2000-01-23T04:56:07.000+00:00
           deletedAt: 2000-01-23T04:56:07.000+00:00
-          depth: 1
+          depth: 5
           payloadType: payloadType
           payload: payload
           leads:
@@ -2935,7 +2935,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               - workspace: null
                 notificationNotifyOnFailure: true
                 geoFencingLat: 1.0246457001441578
@@ -2986,7 +2986,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               hipaaCompliant: true
               gdprCompliant: true
               soc2Compliant: true
@@ -3217,7 +3217,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               - workspace: null
                 notificationNotifyOnFailure: true
                 geoFencingLat: 1.0246457001441578
@@ -3268,7 +3268,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               hipaaCompliant: true
               gdprCompliant: true
               soc2Compliant: true
@@ -3448,11 +3448,11 @@ components:
           - proxies
           id: id
           lang: lang
-          radius: 6
+          radius: 1
           lat: lat
           email: true
           workflowId: workflowId
-          status: BACKGROUND_JOB_STATUS_UNSPECIFIED
+          status: status
           updatedAt: 2000-01-23T04:56:07.000+00:00
         deletedAt: 2000-01-23T04:56:07.000+00:00
         lastLoginAt: 2000-01-23T04:56:07.000+00:00
@@ -3519,7 +3519,7 @@ components:
             - contentFilterExcludedTypes
             respectRobotsTxt: true
             alertEmails: alertEmails
-            status: null
+            status: BACKGROUND_JOB_STATUS_UNSPECIFIED
           - workspace: null
             notificationNotifyOnFailure: true
             geoFencingLat: 1.0246457001441578
@@ -3570,7 +3570,7 @@ components:
             - contentFilterExcludedTypes
             respectRobotsTxt: true
             alertEmails: alertEmails
-            status: null
+            status: BACKGROUND_JOB_STATUS_UNSPECIFIED
           hipaaCompliant: true
           gdprCompliant: true
           soc2Compliant: true
@@ -3640,7 +3640,7 @@ components:
             - contentFilterExcludedTypes
             respectRobotsTxt: true
             alertEmails: alertEmails
-            status: null
+            status: BACKGROUND_JOB_STATUS_UNSPECIFIED
           - workspace: null
             notificationNotifyOnFailure: true
             geoFencingLat: 1.0246457001441578
@@ -3691,7 +3691,7 @@ components:
             - contentFilterExcludedTypes
             respectRobotsTxt: true
             alertEmails: alertEmails
-            status: null
+            status: BACKGROUND_JOB_STATUS_UNSPECIFIED
           hipaaCompliant: true
           gdprCompliant: true
           soc2Compliant: true
@@ -4216,12 +4216,12 @@ components:
             - keywords
             - keywords
             fastMode: true
-            zoom: 0
+            zoom: 6
             lon: lon
-            priority: 5
+            priority: 0
             createdAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            depth: 1
+            depth: 5
             payloadType: payloadType
             payload: payload
             leads:
@@ -4282,7 +4282,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -4333,7 +4333,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -4564,7 +4564,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -4615,7 +4615,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -4795,23 +4795,23 @@ components:
             - proxies
             id: id
             lang: lang
-            radius: 6
+            radius: 1
             lat: lat
             email: true
             workflowId: workflowId
-            status: BACKGROUND_JOB_STATUS_UNSPECIFIED
+            status: status
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - maxTime: 5
             keywords:
             - keywords
             - keywords
             fastMode: true
-            zoom: 0
+            zoom: 6
             lon: lon
-            priority: 5
+            priority: 0
             createdAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            depth: 1
+            depth: 5
             payloadType: payloadType
             payload: payload
             leads:
@@ -4872,7 +4872,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -4923,7 +4923,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -5154,7 +5154,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -5205,7 +5205,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -5385,11 +5385,11 @@ components:
             - proxies
             id: id
             lang: lang
-            radius: 6
+            radius: 1
             lat: lat
             email: true
             workflowId: workflowId
-            status: BACKGROUND_JOB_STATUS_UNSPECIFIED
+            status: status
             updatedAt: 2000-01-23T04:56:07.000+00:00
           deletedAt: 2000-01-23T04:56:07.000+00:00
           lastLoginAt: 2000-01-23T04:56:07.000+00:00
@@ -5456,7 +5456,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 1.0246457001441578
@@ -5507,7 +5507,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
@@ -5577,7 +5577,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 1.0246457001441578
@@ -5628,7 +5628,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
@@ -5683,12 +5683,12 @@ components:
             - keywords
             - keywords
             fastMode: true
-            zoom: 0
+            zoom: 6
             lon: lon
-            priority: 5
+            priority: 0
             createdAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            depth: 1
+            depth: 5
             payloadType: payloadType
             payload: payload
             leads:
@@ -5749,7 +5749,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -5800,7 +5800,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -6031,7 +6031,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -6082,7 +6082,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -6262,23 +6262,23 @@ components:
             - proxies
             id: id
             lang: lang
-            radius: 6
+            radius: 1
             lat: lat
             email: true
             workflowId: workflowId
-            status: BACKGROUND_JOB_STATUS_UNSPECIFIED
+            status: status
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - maxTime: 5
             keywords:
             - keywords
             - keywords
             fastMode: true
-            zoom: 0
+            zoom: 6
             lon: lon
-            priority: 5
+            priority: 0
             createdAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            depth: 1
+            depth: 5
             payloadType: payloadType
             payload: payload
             leads:
@@ -6339,7 +6339,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -6390,7 +6390,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -6621,7 +6621,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -6672,7 +6672,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -6852,11 +6852,11 @@ components:
             - proxies
             id: id
             lang: lang
-            radius: 6
+            radius: 1
             lat: lat
             email: true
             workflowId: workflowId
-            status: BACKGROUND_JOB_STATUS_UNSPECIFIED
+            status: status
             updatedAt: 2000-01-23T04:56:07.000+00:00
           deletedAt: 2000-01-23T04:56:07.000+00:00
           lastLoginAt: 2000-01-23T04:56:07.000+00:00
@@ -6923,7 +6923,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 1.0246457001441578
@@ -6974,7 +6974,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
@@ -7044,7 +7044,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 1.0246457001441578
@@ -7095,7 +7095,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
@@ -7413,12 +7413,12 @@ components:
             - keywords
             - keywords
             fastMode: true
-            zoom: 0
+            zoom: 6
             lon: lon
-            priority: 5
+            priority: 0
             createdAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            depth: 1
+            depth: 5
             payloadType: payloadType
             payload: payload
             leads:
@@ -7479,7 +7479,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -7530,7 +7530,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -7761,7 +7761,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -7812,7 +7812,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -7992,23 +7992,23 @@ components:
             - proxies
             id: id
             lang: lang
-            radius: 6
+            radius: 1
             lat: lat
             email: true
             workflowId: workflowId
-            status: BACKGROUND_JOB_STATUS_UNSPECIFIED
+            status: status
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - maxTime: 5
             keywords:
             - keywords
             - keywords
             fastMode: true
-            zoom: 0
+            zoom: 6
             lon: lon
-            priority: 5
+            priority: 0
             createdAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            depth: 1
+            depth: 5
             payloadType: payloadType
             payload: payload
             leads:
@@ -8069,7 +8069,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -8120,7 +8120,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -8351,7 +8351,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -8402,7 +8402,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -8582,11 +8582,11 @@ components:
             - proxies
             id: id
             lang: lang
-            radius: 6
+            radius: 1
             lat: lat
             email: true
             workflowId: workflowId
-            status: BACKGROUND_JOB_STATUS_UNSPECIFIED
+            status: status
             updatedAt: 2000-01-23T04:56:07.000+00:00
           deletedAt: 2000-01-23T04:56:07.000+00:00
           lastLoginAt: 2000-01-23T04:56:07.000+00:00
@@ -8653,7 +8653,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 1.0246457001441578
@@ -8704,7 +8704,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
@@ -8774,7 +8774,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 1.0246457001441578
@@ -8825,7 +8825,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
@@ -8870,12 +8870,12 @@ components:
           - keywords
           - keywords
           fastMode: true
-          zoom: 0
+          zoom: 6
           lon: lon
-          priority: 5
+          priority: 0
           createdAt: 2000-01-23T04:56:07.000+00:00
           deletedAt: 2000-01-23T04:56:07.000+00:00
-          depth: 1
+          depth: 5
           payloadType: payloadType
           payload: payload
           leads:
@@ -8936,7 +8936,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               - workspace: null
                 notificationNotifyOnFailure: true
                 geoFencingLat: 1.0246457001441578
@@ -8987,7 +8987,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               hipaaCompliant: true
               gdprCompliant: true
               soc2Compliant: true
@@ -9218,7 +9218,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               - workspace: null
                 notificationNotifyOnFailure: true
                 geoFencingLat: 1.0246457001441578
@@ -9269,7 +9269,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               hipaaCompliant: true
               gdprCompliant: true
               soc2Compliant: true
@@ -9449,11 +9449,11 @@ components:
           - proxies
           id: id
           lang: lang
-          radius: 6
+          radius: 1
           lat: lat
           email: true
           workflowId: workflowId
-          status: BACKGROUND_JOB_STATUS_UNSPECIFIED
+          status: status
           updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         job:
@@ -9645,7 +9645,7 @@ components:
             - contentFilterExcludedTypes
             respectRobotsTxt: true
             alertEmails: alertEmails
-            status: null
+            status: BACKGROUND_JOB_STATUS_UNSPECIFIED
           - workspace: null
             notificationNotifyOnFailure: true
             geoFencingLat: 1.0246457001441578
@@ -9696,7 +9696,7 @@ components:
             - contentFilterExcludedTypes
             respectRobotsTxt: true
             alertEmails: alertEmails
-            status: null
+            status: BACKGROUND_JOB_STATUS_UNSPECIFIED
           hipaaCompliant: true
           gdprCompliant: true
           soc2Compliant: true
@@ -10152,12 +10152,12 @@ components:
           - keywords
           - keywords
           fastMode: true
-          zoom: 0
+          zoom: 6
           lon: lon
-          priority: 5
+          priority: 0
           createdAt: 2000-01-23T04:56:07.000+00:00
           deletedAt: 2000-01-23T04:56:07.000+00:00
-          depth: 1
+          depth: 5
           payloadType: payloadType
           payload: payload
           leads:
@@ -10218,7 +10218,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               - workspace: null
                 notificationNotifyOnFailure: true
                 geoFencingLat: 1.0246457001441578
@@ -10269,7 +10269,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               hipaaCompliant: true
               gdprCompliant: true
               soc2Compliant: true
@@ -10500,7 +10500,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               - workspace: null
                 notificationNotifyOnFailure: true
                 geoFencingLat: 1.0246457001441578
@@ -10551,7 +10551,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               hipaaCompliant: true
               gdprCompliant: true
               soc2Compliant: true
@@ -10731,23 +10731,23 @@ components:
           - proxies
           id: id
           lang: lang
-          radius: 6
+          radius: 1
           lat: lat
           email: true
           workflowId: workflowId
-          status: BACKGROUND_JOB_STATUS_UNSPECIFIED
+          status: status
           updatedAt: 2000-01-23T04:56:07.000+00:00
         - maxTime: 5
           keywords:
           - keywords
           - keywords
           fastMode: true
-          zoom: 0
+          zoom: 6
           lon: lon
-          priority: 5
+          priority: 0
           createdAt: 2000-01-23T04:56:07.000+00:00
           deletedAt: 2000-01-23T04:56:07.000+00:00
-          depth: 1
+          depth: 5
           payloadType: payloadType
           payload: payload
           leads:
@@ -10808,7 +10808,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               - workspace: null
                 notificationNotifyOnFailure: true
                 geoFencingLat: 1.0246457001441578
@@ -10859,7 +10859,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               hipaaCompliant: true
               gdprCompliant: true
               soc2Compliant: true
@@ -11090,7 +11090,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               - workspace: null
                 notificationNotifyOnFailure: true
                 geoFencingLat: 1.0246457001441578
@@ -11141,7 +11141,7 @@ components:
                 - contentFilterExcludedTypes
                 respectRobotsTxt: true
                 alertEmails: alertEmails
-                status: null
+                status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               hipaaCompliant: true
               gdprCompliant: true
               soc2Compliant: true
@@ -11321,11 +11321,11 @@ components:
           - proxies
           id: id
           lang: lang
-          radius: 6
+          radius: 1
           lat: lat
           email: true
           workflowId: workflowId
-          status: BACKGROUND_JOB_STATUS_UNSPECIFIED
+          status: status
           updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         jobs:
@@ -11795,7 +11795,7 @@ components:
         - Multi-tenant context
 
         Database considerations:
-        - Stored in "scraping_jobs" table
+        - Stored in "gmaps_jobs" table
         - Uses GORM for ORM mapping
         - Includes foreign key to Account
         - Supports soft deletes
@@ -11818,12 +11818,12 @@ components:
         - keywords
         - keywords
         fastMode: true
-        zoom: 0
+        zoom: 6
         lon: lon
-        priority: 5
+        priority: 0
         createdAt: 2000-01-23T04:56:07.000+00:00
         deletedAt: 2000-01-23T04:56:07.000+00:00
-        depth: 1
+        depth: 5
         payloadType: payloadType
         payload: payload
         leads:
@@ -11884,7 +11884,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 1.0246457001441578
@@ -11935,7 +11935,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
@@ -12166,7 +12166,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 1.0246457001441578
@@ -12217,7 +12217,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
@@ -12397,26 +12397,33 @@ components:
         - proxies
         id: id
         lang: lang
-        radius: 6
+        radius: 1
         lat: lat
         email: true
         workflowId: workflowId
-        status: BACKGROUND_JOB_STATUS_UNSPECIFIED
+        status: status
         updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
-          format: uint64
-          title: Unique identifier for the job
+          title: Changed from uint64 to string to support UUID
+          type: string
+        priority:
+          format: int32
+          title: Core fields matching DB schema
+          type: integer
+        payloadType:
+          type: string
+        payload:
+          format: byte
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        status:
           type: string
         name:
           title: Human-readable name for the job
           type: string
-        createdAt:
-          format: date-time
-          title: Job creation timestamp
-          type: string
-        status:
-          $ref: '#/components/schemas/BackgroundJobStatus'
         keywords:
           items:
             type: string
@@ -12465,17 +12472,6 @@ components:
         deletedAt:
           format: date-time
           title: Soft delete timestamp
-          type: string
-        payloadType:
-          title: Account that created the jobs
-          type: string
-        priority:
-          format: int32
-          title: Priority level of the job
-          type: integer
-        payload:
-          format: byte
-          title: Payload data
           type: string
         leads:
           items:
@@ -12538,7 +12534,7 @@ components:
         - contentFilterExcludedTypes
         respectRobotsTxt: true
         alertEmails: alertEmails
-        status: null
+        status: BACKGROUND_JOB_STATUS_UNSPECIFIED
       properties:
         id:
           format: uint64
@@ -12854,12 +12850,12 @@ components:
             - keywords
             - keywords
             fastMode: true
-            zoom: 0
+            zoom: 6
             lon: lon
-            priority: 5
+            priority: 0
             createdAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            depth: 1
+            depth: 5
             payloadType: payloadType
             payload: payload
             leads:
@@ -12920,7 +12916,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -12971,7 +12967,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -13202,7 +13198,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -13253,7 +13249,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -13433,23 +13429,23 @@ components:
             - proxies
             id: id
             lang: lang
-            radius: 6
+            radius: 1
             lat: lat
             email: true
             workflowId: workflowId
-            status: BACKGROUND_JOB_STATUS_UNSPECIFIED
+            status: status
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - maxTime: 5
             keywords:
             - keywords
             - keywords
             fastMode: true
-            zoom: 0
+            zoom: 6
             lon: lon
-            priority: 5
+            priority: 0
             createdAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            depth: 1
+            depth: 5
             payloadType: payloadType
             payload: payload
             leads:
@@ -13510,7 +13506,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -13561,7 +13557,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -13792,7 +13788,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -13843,7 +13839,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -14023,11 +14019,11 @@ components:
             - proxies
             id: id
             lang: lang
-            radius: 6
+            radius: 1
             lat: lat
             email: true
             workflowId: workflowId
-            status: BACKGROUND_JOB_STATUS_UNSPECIFIED
+            status: status
             updatedAt: 2000-01-23T04:56:07.000+00:00
           deletedAt: 2000-01-23T04:56:07.000+00:00
           lastLoginAt: 2000-01-23T04:56:07.000+00:00
@@ -14094,7 +14090,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 1.0246457001441578
@@ -14145,7 +14141,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
@@ -14215,7 +14211,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 1.0246457001441578
@@ -14266,7 +14262,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
@@ -14317,12 +14313,12 @@ components:
             - keywords
             - keywords
             fastMode: true
-            zoom: 0
+            zoom: 6
             lon: lon
-            priority: 5
+            priority: 0
             createdAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            depth: 1
+            depth: 5
             payloadType: payloadType
             payload: payload
             leads:
@@ -14383,7 +14379,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -14434,7 +14430,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -14665,7 +14661,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -14716,7 +14712,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -14896,23 +14892,23 @@ components:
             - proxies
             id: id
             lang: lang
-            radius: 6
+            radius: 1
             lat: lat
             email: true
             workflowId: workflowId
-            status: BACKGROUND_JOB_STATUS_UNSPECIFIED
+            status: status
             updatedAt: 2000-01-23T04:56:07.000+00:00
           - maxTime: 5
             keywords:
             - keywords
             - keywords
             fastMode: true
-            zoom: 0
+            zoom: 6
             lon: lon
-            priority: 5
+            priority: 0
             createdAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            depth: 1
+            depth: 5
             payloadType: payloadType
             payload: payload
             leads:
@@ -14973,7 +14969,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -15024,7 +15020,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -15255,7 +15251,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 - workspace: null
                   notificationNotifyOnFailure: true
                   geoFencingLat: 1.0246457001441578
@@ -15306,7 +15302,7 @@ components:
                   - contentFilterExcludedTypes
                   respectRobotsTxt: true
                   alertEmails: alertEmails
-                  status: null
+                  status: BACKGROUND_JOB_STATUS_UNSPECIFIED
                 hipaaCompliant: true
                 gdprCompliant: true
                 soc2Compliant: true
@@ -15486,11 +15482,11 @@ components:
             - proxies
             id: id
             lang: lang
-            radius: 6
+            radius: 1
             lat: lat
             email: true
             workflowId: workflowId
-            status: BACKGROUND_JOB_STATUS_UNSPECIFIED
+            status: status
             updatedAt: 2000-01-23T04:56:07.000+00:00
           deletedAt: 2000-01-23T04:56:07.000+00:00
           lastLoginAt: 2000-01-23T04:56:07.000+00:00
@@ -15557,7 +15553,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 1.0246457001441578
@@ -15608,7 +15604,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
@@ -15678,7 +15674,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 1.0246457001441578
@@ -15729,7 +15725,7 @@ components:
               - contentFilterExcludedTypes
               respectRobotsTxt: true
               alertEmails: alertEmails
-              status: null
+              status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
@@ -15919,7 +15915,7 @@ components:
           - contentFilterExcludedTypes
           respectRobotsTxt: true
           alertEmails: alertEmails
-          status: null
+          status: BACKGROUND_JOB_STATUS_UNSPECIFIED
         - workspace: null
           notificationNotifyOnFailure: true
           geoFencingLat: 1.0246457001441578
@@ -15970,7 +15966,7 @@ components:
           - contentFilterExcludedTypes
           respectRobotsTxt: true
           alertEmails: alertEmails
-          status: null
+          status: BACKGROUND_JOB_STATUS_UNSPECIFIED
         hipaaCompliant: true
         gdprCompliant: true
         soc2Compliant: true

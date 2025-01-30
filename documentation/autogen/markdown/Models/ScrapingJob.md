@@ -4,9 +4,12 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **String** |  | [optional] [default to null] |
-| **name** | **String** |  | [optional] [default to null] |
+| **priority** | **Integer** |  | [optional] [default to null] |
+| **payloadType** | **String** |  | [optional] [default to null] |
+| **payload** | **byte[]** |  | [optional] [default to null] |
 | **createdAt** | **Date** |  | [optional] [default to null] |
-| **status** | [**BackgroundJobStatus**](BackgroundJobStatus.md) |  | [optional] [default to null] |
+| **status** | **String** |  | [optional] [default to null] |
+| **name** | **String** |  | [optional] [default to null] |
 | **keywords** | **List** |  | [optional] [default to null] |
 | **lang** | **String** |  | [optional] [default to null] |
 | **zoom** | **Integer** |  | [optional] [default to null] |
@@ -20,9 +23,6 @@
 | **proxies** | **List** |  | [optional] [default to null] |
 | **updatedAt** | **Date** |  | [optional] [default to null] |
 | **deletedAt** | **Date** |  | [optional] [default to null] |
-| **payloadType** | **String** |  | [optional] [default to null] |
-| **priority** | **Integer** |  | [optional] [default to null] |
-| **payload** | **byte[]** |  | [optional] [default to null] |
 | **leads** | [**List**](Lead.md) |  | [optional] [default to null] |
 | **workflowId** | **String** |  | [optional] [default to null] |
 

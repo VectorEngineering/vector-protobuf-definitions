@@ -32,12 +32,14 @@ func newBusinessHoursORM(db *gorm.DB, opts ...gen.DOOption) businessHoursORM {
 	_businessHoursORM.ALL = field.NewAsterisk(tableName)
 	_businessHoursORM.CloseTime = field.NewString(tableName, "close_time")
 	_businessHoursORM.Closed = field.NewBool(tableName, "closed")
+	_businessHoursORM.CreatedAt = field.NewTime(tableName, "created_at")
 	_businessHoursORM.Day = field.NewString(tableName, "day")
+	_businessHoursORM.DeletedAt = field.NewTime(tableName, "deleted_at")
 	_businessHoursORM.Id = field.NewUint64(tableName, "id")
-	_businessHoursORM.LeadId = field.NewString(tableName, "lead_id")
 	_businessHoursORM.OpenTime = field.NewString(tableName, "open_time")
 	_businessHoursORM.RegularHoursLeadId = field.NewUint64(tableName, "regular_hours_lead_id")
 	_businessHoursORM.SpecialHoursLeadId = field.NewUint64(tableName, "special_hours_lead_id")
+	_businessHoursORM.UpdatedAt = field.NewTime(tableName, "updated_at")
 
 	_businessHoursORM.fillFieldMap()
 
@@ -50,12 +52,14 @@ type businessHoursORM struct {
 	ALL                field.Asterisk
 	CloseTime          field.String
 	Closed             field.Bool
+	CreatedAt          field.Time
 	Day                field.String
+	DeletedAt          field.Time
 	Id                 field.Uint64
-	LeadId             field.String
 	OpenTime           field.String
 	RegularHoursLeadId field.Uint64
 	SpecialHoursLeadId field.Uint64
+	UpdatedAt          field.Time
 
 	fieldMap map[string]field.Expr
 }
@@ -74,12 +78,14 @@ func (b *businessHoursORM) updateTableName(table string) *businessHoursORM {
 	b.ALL = field.NewAsterisk(table)
 	b.CloseTime = field.NewString(table, "close_time")
 	b.Closed = field.NewBool(table, "closed")
+	b.CreatedAt = field.NewTime(table, "created_at")
 	b.Day = field.NewString(table, "day")
+	b.DeletedAt = field.NewTime(table, "deleted_at")
 	b.Id = field.NewUint64(table, "id")
-	b.LeadId = field.NewString(table, "lead_id")
 	b.OpenTime = field.NewString(table, "open_time")
 	b.RegularHoursLeadId = field.NewUint64(table, "regular_hours_lead_id")
 	b.SpecialHoursLeadId = field.NewUint64(table, "special_hours_lead_id")
+	b.UpdatedAt = field.NewTime(table, "updated_at")
 
 	b.fillFieldMap()
 
@@ -96,15 +102,17 @@ func (b *businessHoursORM) GetFieldByName(fieldName string) (field.OrderExpr, bo
 }
 
 func (b *businessHoursORM) fillFieldMap() {
-	b.fieldMap = make(map[string]field.Expr, 8)
+	b.fieldMap = make(map[string]field.Expr, 10)
 	b.fieldMap["close_time"] = b.CloseTime
 	b.fieldMap["closed"] = b.Closed
+	b.fieldMap["created_at"] = b.CreatedAt
 	b.fieldMap["day"] = b.Day
+	b.fieldMap["deleted_at"] = b.DeletedAt
 	b.fieldMap["id"] = b.Id
-	b.fieldMap["lead_id"] = b.LeadId
 	b.fieldMap["open_time"] = b.OpenTime
 	b.fieldMap["regular_hours_lead_id"] = b.RegularHoursLeadId
 	b.fieldMap["special_hours_lead_id"] = b.SpecialHoursLeadId
+	b.fieldMap["updated_at"] = b.UpdatedAt
 }
 
 func (b businessHoursORM) clone(db *gorm.DB) businessHoursORM {

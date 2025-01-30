@@ -8456,6 +8456,18 @@
                     },
                     "sessionTimeout": {
                         "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "deletedAt": {
+                        "type": "string",
+                        "format": "date-time"
                     }
                 },
                 "title": "Account-wide settings"
@@ -8680,8 +8692,17 @@
                     "closed": {
                         "type": "boolean"
                     },
-                    "leadId": {
-                        "type": "string"
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "deletedAt": {
+                        "type": "string",
+                        "format": "date-time"
                     }
                 },
                 "title": "Temporal data"
@@ -10214,6 +10235,18 @@
                     "reviewCount": {
                         "type": "integer",
                         "format": "int32"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "deletedAt": {
+                        "type": "string",
+                        "format": "date-time"
                     }
                 },
                 "title": "Detailed reviews"

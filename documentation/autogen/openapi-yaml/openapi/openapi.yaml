@@ -2254,12 +2254,15 @@ components:
       example:
         settings:
           emailNotifications: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
           slackNotifications: true
+          deletedAt: 2000-01-23T04:56:07.000+00:00
           autoPurgeEnabled: true
           sessionTimeout: sessionTimeout
           id: id
           require2fa: true
           defaultDataRetention: defaultDataRetention
+          updatedAt: 2000-01-23T04:56:07.000+00:00
         lastModifiedAt: 2000-01-23T04:56:07.000+00:00
         timezone: timezone
         roles:
@@ -2413,18 +2416,22 @@ components:
             rating: 2.8841622
             contactPersonTitle: contactPersonTitle
             specialHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             employeeCount: 2
             foundedYear: 6
             mainPhotoUrl: mainPhotoUrl
@@ -2437,7 +2444,9 @@ components:
             - alternatePhones
             - alternatePhones
             reviews:
-            - reviewCount: 1
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -2445,7 +2454,10 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
-            - reviewCount: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -2453,6 +2465,7 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             reviewCount: 3
             outdoorSeating: true
             isPublicCompany: true
@@ -2497,18 +2510,22 @@ components:
             latitude: 2.3021358869347655
             industry: industry
             regularHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             seoKeywords:
             - seoKeywords
             - seoKeywords
@@ -2681,18 +2698,22 @@ components:
             rating: 2.8841622
             contactPersonTitle: contactPersonTitle
             specialHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             employeeCount: 2
             foundedYear: 6
             mainPhotoUrl: mainPhotoUrl
@@ -2705,7 +2726,9 @@ components:
             - alternatePhones
             - alternatePhones
             reviews:
-            - reviewCount: 1
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -2713,7 +2736,10 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
-            - reviewCount: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -2721,6 +2747,7 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             reviewCount: 3
             outdoorSeating: true
             isPublicCompany: true
@@ -2765,18 +2792,22 @@ components:
             latitude: 2.3021358869347655
             industry: industry
             regularHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             seoKeywords:
             - seoKeywords
             - seoKeywords
@@ -2975,18 +3006,22 @@ components:
             rating: 2.8841622
             contactPersonTitle: contactPersonTitle
             specialHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             employeeCount: 2
             foundedYear: 6
             mainPhotoUrl: mainPhotoUrl
@@ -2999,7 +3034,9 @@ components:
             - alternatePhones
             - alternatePhones
             reviews:
-            - reviewCount: 1
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -3007,7 +3044,10 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
-            - reviewCount: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -3015,6 +3055,7 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             reviewCount: 3
             outdoorSeating: true
             isPublicCompany: true
@@ -3059,18 +3100,22 @@ components:
             latitude: 2.3021358869347655
             industry: industry
             regularHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             seoKeywords:
             - seoKeywords
             - seoKeywords
@@ -3243,18 +3288,22 @@ components:
             rating: 2.8841622
             contactPersonTitle: contactPersonTitle
             specialHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             employeeCount: 2
             foundedYear: 6
             mainPhotoUrl: mainPhotoUrl
@@ -3267,7 +3316,9 @@ components:
             - alternatePhones
             - alternatePhones
             reviews:
-            - reviewCount: 1
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -3275,7 +3326,10 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
-            - reviewCount: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -3283,6 +3337,7 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             reviewCount: 3
             outdoorSeating: true
             isPublicCompany: true
@@ -3327,18 +3382,22 @@ components:
             latitude: 2.3021358869347655
             industry: industry
             regularHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             seoKeywords:
             - seoKeywords
             - seoKeywords
@@ -3723,12 +3782,15 @@ components:
     AccountSettings:
       example:
         emailNotifications: true
+        createdAt: 2000-01-23T04:56:07.000+00:00
         slackNotifications: true
+        deletedAt: 2000-01-23T04:56:07.000+00:00
         autoPurgeEnabled: true
         sessionTimeout: sessionTimeout
         id: id
         require2fa: true
         defaultDataRetention: defaultDataRetention
+        updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
           format: uint64
@@ -3747,6 +3809,15 @@ components:
           title: Security
           type: boolean
         sessionTimeout:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
           type: string
       title: Account-wide settings
       type: object
@@ -4049,12 +4120,14 @@ components:
       type: object
     BusinessHours:
       example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        deletedAt: 2000-01-23T04:56:07.000+00:00
         closeTime: closeTime
         closed: true
         id: id
         openTime: openTime
         day: DAY_OF_WEEK_UNSPECIFIED
-        leadId: leadId
+        updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
           format: uint64
@@ -4067,7 +4140,14 @@ components:
           type: string
         closed:
           type: boolean
-        leadId:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
           type: string
       title: Temporal data
       type: object
@@ -4111,12 +4191,15 @@ components:
         account:
           settings:
             emailNotifications: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
             slackNotifications: true
+            deletedAt: 2000-01-23T04:56:07.000+00:00
             autoPurgeEnabled: true
             sessionTimeout: sessionTimeout
             id: id
             require2fa: true
             defaultDataRetention: defaultDataRetention
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           lastModifiedAt: 2000-01-23T04:56:07.000+00:00
           timezone: timezone
           roles:
@@ -4270,18 +4353,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -4294,7 +4381,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -4302,7 +4391,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -4310,6 +4402,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -4354,18 +4447,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -4538,18 +4635,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -4562,7 +4663,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -4570,7 +4673,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -4578,6 +4684,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -4622,18 +4729,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -4832,18 +4943,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -4856,7 +4971,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -4864,7 +4981,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -4872,6 +4992,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -4916,18 +5037,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -5100,18 +5225,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -5124,7 +5253,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -5132,7 +5263,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -5140,6 +5274,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -5184,18 +5319,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -5519,12 +5658,15 @@ components:
         account:
           settings:
             emailNotifications: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
             slackNotifications: true
+            deletedAt: 2000-01-23T04:56:07.000+00:00
             autoPurgeEnabled: true
             sessionTimeout: sessionTimeout
             id: id
             require2fa: true
             defaultDataRetention: defaultDataRetention
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           lastModifiedAt: 2000-01-23T04:56:07.000+00:00
           timezone: timezone
           roles:
@@ -5678,18 +5820,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -5702,7 +5848,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -5710,7 +5858,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -5718,6 +5869,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -5762,18 +5914,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -5946,18 +6102,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -5970,7 +6130,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -5978,7 +6140,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -5986,6 +6151,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -6030,18 +6196,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -6240,18 +6410,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -6264,7 +6438,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -6272,7 +6448,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -6280,6 +6459,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -6324,18 +6504,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -6508,18 +6692,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -6532,7 +6720,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -6540,7 +6730,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -6548,6 +6741,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -6592,18 +6786,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -7190,12 +7388,15 @@ components:
         account:
           settings:
             emailNotifications: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
             slackNotifications: true
+            deletedAt: 2000-01-23T04:56:07.000+00:00
             autoPurgeEnabled: true
             sessionTimeout: sessionTimeout
             id: id
             require2fa: true
             defaultDataRetention: defaultDataRetention
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           lastModifiedAt: 2000-01-23T04:56:07.000+00:00
           timezone: timezone
           roles:
@@ -7349,18 +7550,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -7373,7 +7578,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -7381,7 +7588,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -7389,6 +7599,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -7433,18 +7644,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -7617,18 +7832,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -7641,7 +7860,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -7649,7 +7870,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -7657,6 +7881,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -7701,18 +7926,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -7911,18 +8140,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -7935,7 +8168,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -7943,7 +8178,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -7951,6 +8189,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -7995,18 +8234,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -8179,18 +8422,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -8203,7 +8450,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -8211,7 +8460,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -8219,6 +8471,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -8263,18 +8516,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -8750,18 +9007,22 @@ components:
             rating: 2.8841622
             contactPersonTitle: contactPersonTitle
             specialHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             employeeCount: 2
             foundedYear: 6
             mainPhotoUrl: mainPhotoUrl
@@ -8774,7 +9035,9 @@ components:
             - alternatePhones
             - alternatePhones
             reviews:
-            - reviewCount: 1
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -8782,7 +9045,10 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
-            - reviewCount: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -8790,6 +9056,7 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             reviewCount: 3
             outdoorSeating: true
             isPublicCompany: true
@@ -8834,18 +9101,22 @@ components:
             latitude: 2.3021358869347655
             industry: industry
             regularHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             seoKeywords:
             - seoKeywords
             - seoKeywords
@@ -9018,18 +9289,22 @@ components:
             rating: 2.8841622
             contactPersonTitle: contactPersonTitle
             specialHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             employeeCount: 2
             foundedYear: 6
             mainPhotoUrl: mainPhotoUrl
@@ -9042,7 +9317,9 @@ components:
             - alternatePhones
             - alternatePhones
             reviews:
-            - reviewCount: 1
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -9050,7 +9327,10 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
-            - reviewCount: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -9058,6 +9338,7 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             reviewCount: 3
             outdoorSeating: true
             isPublicCompany: true
@@ -9102,18 +9383,22 @@ components:
             latitude: 2.3021358869347655
             industry: industry
             regularHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             seoKeywords:
             - seoKeywords
             - seoKeywords
@@ -9431,18 +9716,22 @@ components:
         rating: 2.8841622
         contactPersonTitle: contactPersonTitle
         specialHours:
-        - closeTime: closeTime
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          deletedAt: 2000-01-23T04:56:07.000+00:00
+          closeTime: closeTime
           closed: true
           id: id
           openTime: openTime
           day: DAY_OF_WEEK_UNSPECIFIED
-          leadId: leadId
-        - closeTime: closeTime
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          deletedAt: 2000-01-23T04:56:07.000+00:00
+          closeTime: closeTime
           closed: true
           id: id
           openTime: openTime
           day: DAY_OF_WEEK_UNSPECIFIED
-          leadId: leadId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
         employeeCount: 2
         foundedYear: 6
         mainPhotoUrl: mainPhotoUrl
@@ -9455,7 +9744,9 @@ components:
         - alternatePhones
         - alternatePhones
         reviews:
-        - reviewCount: 1
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          deletedAt: 2000-01-23T04:56:07.000+00:00
+          reviewCount: 1
           author: author
           rating: 6.965118
           language: language
@@ -9463,7 +9754,10 @@ components:
           text: text
           time: 2000-01-23T04:56:07.000+00:00
           profilePhotoUrl: profilePhotoUrl
-        - reviewCount: 1
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          deletedAt: 2000-01-23T04:56:07.000+00:00
+          reviewCount: 1
           author: author
           rating: 6.965118
           language: language
@@ -9471,6 +9765,7 @@ components:
           text: text
           time: 2000-01-23T04:56:07.000+00:00
           profilePhotoUrl: profilePhotoUrl
+          updatedAt: 2000-01-23T04:56:07.000+00:00
         reviewCount: 3
         outdoorSeating: true
         isPublicCompany: true
@@ -9515,18 +9810,22 @@ components:
         latitude: 2.3021358869347655
         industry: industry
         regularHours:
-        - closeTime: closeTime
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          deletedAt: 2000-01-23T04:56:07.000+00:00
+          closeTime: closeTime
           closed: true
           id: id
           openTime: openTime
           day: DAY_OF_WEEK_UNSPECIFIED
-          leadId: leadId
-        - closeTime: closeTime
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          deletedAt: 2000-01-23T04:56:07.000+00:00
+          closeTime: closeTime
           closed: true
           id: id
           openTime: openTime
           day: DAY_OF_WEEK_UNSPECIFIED
-          leadId: leadId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
         seoKeywords:
         - seoKeywords
         - seoKeywords
@@ -9990,18 +10289,22 @@ components:
             rating: 2.8841622
             contactPersonTitle: contactPersonTitle
             specialHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             employeeCount: 2
             foundedYear: 6
             mainPhotoUrl: mainPhotoUrl
@@ -10014,7 +10317,9 @@ components:
             - alternatePhones
             - alternatePhones
             reviews:
-            - reviewCount: 1
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -10022,7 +10327,10 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
-            - reviewCount: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -10030,6 +10338,7 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             reviewCount: 3
             outdoorSeating: true
             isPublicCompany: true
@@ -10074,18 +10383,22 @@ components:
             latitude: 2.3021358869347655
             industry: industry
             regularHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             seoKeywords:
             - seoKeywords
             - seoKeywords
@@ -10258,18 +10571,22 @@ components:
             rating: 2.8841622
             contactPersonTitle: contactPersonTitle
             specialHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             employeeCount: 2
             foundedYear: 6
             mainPhotoUrl: mainPhotoUrl
@@ -10282,7 +10599,9 @@ components:
             - alternatePhones
             - alternatePhones
             reviews:
-            - reviewCount: 1
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -10290,7 +10609,10 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
-            - reviewCount: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -10298,6 +10620,7 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             reviewCount: 3
             outdoorSeating: true
             isPublicCompany: true
@@ -10342,18 +10665,22 @@ components:
             latitude: 2.3021358869347655
             industry: industry
             regularHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             seoKeywords:
             - seoKeywords
             - seoKeywords
@@ -10552,18 +10879,22 @@ components:
             rating: 2.8841622
             contactPersonTitle: contactPersonTitle
             specialHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             employeeCount: 2
             foundedYear: 6
             mainPhotoUrl: mainPhotoUrl
@@ -10576,7 +10907,9 @@ components:
             - alternatePhones
             - alternatePhones
             reviews:
-            - reviewCount: 1
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -10584,7 +10917,10 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
-            - reviewCount: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -10592,6 +10928,7 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             reviewCount: 3
             outdoorSeating: true
             isPublicCompany: true
@@ -10636,18 +10973,22 @@ components:
             latitude: 2.3021358869347655
             industry: industry
             regularHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             seoKeywords:
             - seoKeywords
             - seoKeywords
@@ -10820,18 +11161,22 @@ components:
             rating: 2.8841622
             contactPersonTitle: contactPersonTitle
             specialHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             employeeCount: 2
             foundedYear: 6
             mainPhotoUrl: mainPhotoUrl
@@ -10844,7 +11189,9 @@ components:
             - alternatePhones
             - alternatePhones
             reviews:
-            - reviewCount: 1
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -10852,7 +11199,10 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
-            - reviewCount: 1
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              reviewCount: 1
               author: author
               rating: 6.965118
               language: language
@@ -10860,6 +11210,7 @@ components:
               text: text
               time: 2000-01-23T04:56:07.000+00:00
               profilePhotoUrl: profilePhotoUrl
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             reviewCount: 3
             outdoorSeating: true
             isPublicCompany: true
@@ -10904,18 +11255,22 @@ components:
             latitude: 2.3021358869347655
             industry: industry
             regularHours:
-            - closeTime: closeTime
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
-            - closeTime: closeTime
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - createdAt: 2000-01-23T04:56:07.000+00:00
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              closeTime: closeTime
               closed: true
               id: id
               openTime: openTime
               day: DAY_OF_WEEK_UNSPECIFIED
-              leadId: leadId
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             seoKeywords:
             - seoKeywords
             - seoKeywords
@@ -11367,6 +11722,8 @@ components:
       type: string
     Review:
       example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        deletedAt: 2000-01-23T04:56:07.000+00:00
         reviewCount: 1
         author: author
         rating: 6.965118
@@ -11375,6 +11732,7 @@ components:
         text: text
         time: 2000-01-23T04:56:07.000+00:00
         profilePhotoUrl: profilePhotoUrl
+        updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
           format: uint64
@@ -11396,6 +11754,15 @@ components:
         reviewCount:
           format: int32
           type: integer
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
       title: Detailed reviews
       type: object
     SchemaValidation:
@@ -11588,18 +11955,22 @@ components:
           rating: 2.8841622
           contactPersonTitle: contactPersonTitle
           specialHours:
-          - closeTime: closeTime
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            closeTime: closeTime
             closed: true
             id: id
             openTime: openTime
             day: DAY_OF_WEEK_UNSPECIFIED
-            leadId: leadId
-          - closeTime: closeTime
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            closeTime: closeTime
             closed: true
             id: id
             openTime: openTime
             day: DAY_OF_WEEK_UNSPECIFIED
-            leadId: leadId
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           employeeCount: 2
           foundedYear: 6
           mainPhotoUrl: mainPhotoUrl
@@ -11612,7 +11983,9 @@ components:
           - alternatePhones
           - alternatePhones
           reviews:
-          - reviewCount: 1
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            reviewCount: 1
             author: author
             rating: 6.965118
             language: language
@@ -11620,7 +11993,10 @@ components:
             text: text
             time: 2000-01-23T04:56:07.000+00:00
             profilePhotoUrl: profilePhotoUrl
-          - reviewCount: 1
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            reviewCount: 1
             author: author
             rating: 6.965118
             language: language
@@ -11628,6 +12004,7 @@ components:
             text: text
             time: 2000-01-23T04:56:07.000+00:00
             profilePhotoUrl: profilePhotoUrl
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           reviewCount: 3
           outdoorSeating: true
           isPublicCompany: true
@@ -11672,18 +12049,22 @@ components:
           latitude: 2.3021358869347655
           industry: industry
           regularHours:
-          - closeTime: closeTime
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            closeTime: closeTime
             closed: true
             id: id
             openTime: openTime
             day: DAY_OF_WEEK_UNSPECIFIED
-            leadId: leadId
-          - closeTime: closeTime
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            closeTime: closeTime
             closed: true
             id: id
             openTime: openTime
             day: DAY_OF_WEEK_UNSPECIFIED
-            leadId: leadId
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           seoKeywords:
           - seoKeywords
           - seoKeywords
@@ -11856,18 +12237,22 @@ components:
           rating: 2.8841622
           contactPersonTitle: contactPersonTitle
           specialHours:
-          - closeTime: closeTime
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            closeTime: closeTime
             closed: true
             id: id
             openTime: openTime
             day: DAY_OF_WEEK_UNSPECIFIED
-            leadId: leadId
-          - closeTime: closeTime
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            closeTime: closeTime
             closed: true
             id: id
             openTime: openTime
             day: DAY_OF_WEEK_UNSPECIFIED
-            leadId: leadId
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           employeeCount: 2
           foundedYear: 6
           mainPhotoUrl: mainPhotoUrl
@@ -11880,7 +12265,9 @@ components:
           - alternatePhones
           - alternatePhones
           reviews:
-          - reviewCount: 1
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            reviewCount: 1
             author: author
             rating: 6.965118
             language: language
@@ -11888,7 +12275,10 @@ components:
             text: text
             time: 2000-01-23T04:56:07.000+00:00
             profilePhotoUrl: profilePhotoUrl
-          - reviewCount: 1
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            reviewCount: 1
             author: author
             rating: 6.965118
             language: language
@@ -11896,6 +12286,7 @@ components:
             text: text
             time: 2000-01-23T04:56:07.000+00:00
             profilePhotoUrl: profilePhotoUrl
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           reviewCount: 3
           outdoorSeating: true
           isPublicCompany: true
@@ -11940,18 +12331,22 @@ components:
           latitude: 2.3021358869347655
           industry: industry
           regularHours:
-          - closeTime: closeTime
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            closeTime: closeTime
             closed: true
             id: id
             openTime: openTime
             day: DAY_OF_WEEK_UNSPECIFIED
-            leadId: leadId
-          - closeTime: closeTime
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            closeTime: closeTime
             closed: true
             id: id
             openTime: openTime
             day: DAY_OF_WEEK_UNSPECIFIED
-            leadId: leadId
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           seoKeywords:
           - seoKeywords
           - seoKeywords
@@ -12434,12 +12829,15 @@ components:
         account:
           settings:
             emailNotifications: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
             slackNotifications: true
+            deletedAt: 2000-01-23T04:56:07.000+00:00
             autoPurgeEnabled: true
             sessionTimeout: sessionTimeout
             id: id
             require2fa: true
             defaultDataRetention: defaultDataRetention
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           lastModifiedAt: 2000-01-23T04:56:07.000+00:00
           timezone: timezone
           roles:
@@ -12593,18 +12991,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -12617,7 +13019,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -12625,7 +13029,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -12633,6 +13040,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -12677,18 +13085,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -12861,18 +13273,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -12885,7 +13301,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -12893,7 +13311,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -12901,6 +13322,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -12945,18 +13367,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -13155,18 +13581,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -13179,7 +13609,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -13187,7 +13619,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -13195,6 +13630,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -13239,18 +13675,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -13423,18 +13863,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -13447,7 +13891,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -13455,7 +13901,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -13463,6 +13912,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -13507,18 +13957,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -13838,12 +14292,15 @@ components:
         account:
           settings:
             emailNotifications: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
             slackNotifications: true
+            deletedAt: 2000-01-23T04:56:07.000+00:00
             autoPurgeEnabled: true
             sessionTimeout: sessionTimeout
             id: id
             require2fa: true
             defaultDataRetention: defaultDataRetention
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           lastModifiedAt: 2000-01-23T04:56:07.000+00:00
           timezone: timezone
           roles:
@@ -13997,18 +14454,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -14021,7 +14482,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -14029,7 +14492,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -14037,6 +14503,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -14081,18 +14548,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -14265,18 +14736,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -14289,7 +14764,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -14297,7 +14774,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -14305,6 +14785,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -14349,18 +14830,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -14559,18 +15044,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -14583,7 +15072,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -14591,7 +15082,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -14599,6 +15093,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -14643,18 +15138,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords
@@ -14827,18 +15326,22 @@ components:
               rating: 2.8841622
               contactPersonTitle: contactPersonTitle
               specialHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               employeeCount: 2
               foundedYear: 6
               mainPhotoUrl: mainPhotoUrl
@@ -14851,7 +15354,9 @@ components:
               - alternatePhones
               - alternatePhones
               reviews:
-              - reviewCount: 1
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -14859,7 +15364,10 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
-              - reviewCount: 1
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                reviewCount: 1
                 author: author
                 rating: 6.965118
                 language: language
@@ -14867,6 +15375,7 @@ components:
                 text: text
                 time: 2000-01-23T04:56:07.000+00:00
                 profilePhotoUrl: profilePhotoUrl
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               reviewCount: 3
               outdoorSeating: true
               isPublicCompany: true
@@ -14911,18 +15420,22 @@ components:
               latitude: 2.3021358869347655
               industry: industry
               regularHours:
-              - closeTime: closeTime
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
-              - closeTime: closeTime
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - createdAt: 2000-01-23T04:56:07.000+00:00
+                deletedAt: 2000-01-23T04:56:07.000+00:00
+                closeTime: closeTime
                 closed: true
                 id: id
                 openTime: openTime
                 day: DAY_OF_WEEK_UNSPECIFIED
-                leadId: leadId
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               seoKeywords:
               - seoKeywords
               - seoKeywords

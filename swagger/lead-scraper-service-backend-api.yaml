@@ -5653,6 +5653,15 @@ components:
           title: Security
         sessionTimeout:
           type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
       title: Account-wide settings
     AccountStatus:
       type: string
@@ -6003,8 +6012,15 @@ components:
           type: string
         closed:
           type: boolean
-        leadId:
+        createdAt:
           type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
       title: Temporal data
     ConflictErrorMessageResponse:
       type: object
@@ -7134,6 +7150,15 @@ components:
         reviewCount:
           type: integer
           format: int32
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
       title: Detailed reviews
     SchemaValidation:
       type: object

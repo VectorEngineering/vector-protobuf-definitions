@@ -31,6 +31,8 @@ func newReviewORM(db *gorm.DB, opts ...gen.DOOption) reviewORM {
 	tableName := _reviewORM.reviewORMDo.TableName()
 	_reviewORM.ALL = field.NewAsterisk(tableName)
 	_reviewORM.Author = field.NewString(tableName, "author")
+	_reviewORM.CreatedAt = field.NewTime(tableName, "created_at")
+	_reviewORM.DeletedAt = field.NewTime(tableName, "deleted_at")
 	_reviewORM.Id = field.NewUint64(tableName, "id")
 	_reviewORM.Language = field.NewString(tableName, "language")
 	_reviewORM.LeadId = field.NewUint64(tableName, "lead_id")
@@ -39,6 +41,7 @@ func newReviewORM(db *gorm.DB, opts ...gen.DOOption) reviewORM {
 	_reviewORM.ReviewCount = field.NewInt32(tableName, "review_count")
 	_reviewORM.Text = field.NewString(tableName, "text")
 	_reviewORM.Time = field.NewTime(tableName, "time")
+	_reviewORM.UpdatedAt = field.NewTime(tableName, "updated_at")
 
 	_reviewORM.fillFieldMap()
 
@@ -50,6 +53,8 @@ type reviewORM struct {
 
 	ALL             field.Asterisk
 	Author          field.String
+	CreatedAt       field.Time
+	DeletedAt       field.Time
 	Id              field.Uint64
 	Language        field.String
 	LeadId          field.Uint64
@@ -58,6 +63,7 @@ type reviewORM struct {
 	ReviewCount     field.Int32
 	Text            field.String
 	Time            field.Time
+	UpdatedAt       field.Time
 
 	fieldMap map[string]field.Expr
 }
@@ -75,6 +81,8 @@ func (r reviewORM) As(alias string) *reviewORM {
 func (r *reviewORM) updateTableName(table string) *reviewORM {
 	r.ALL = field.NewAsterisk(table)
 	r.Author = field.NewString(table, "author")
+	r.CreatedAt = field.NewTime(table, "created_at")
+	r.DeletedAt = field.NewTime(table, "deleted_at")
 	r.Id = field.NewUint64(table, "id")
 	r.Language = field.NewString(table, "language")
 	r.LeadId = field.NewUint64(table, "lead_id")
@@ -83,6 +91,7 @@ func (r *reviewORM) updateTableName(table string) *reviewORM {
 	r.ReviewCount = field.NewInt32(table, "review_count")
 	r.Text = field.NewString(table, "text")
 	r.Time = field.NewTime(table, "time")
+	r.UpdatedAt = field.NewTime(table, "updated_at")
 
 	r.fillFieldMap()
 
@@ -99,8 +108,10 @@ func (r *reviewORM) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (r *reviewORM) fillFieldMap() {
-	r.fieldMap = make(map[string]field.Expr, 9)
+	r.fieldMap = make(map[string]field.Expr, 12)
 	r.fieldMap["author"] = r.Author
+	r.fieldMap["created_at"] = r.CreatedAt
+	r.fieldMap["deleted_at"] = r.DeletedAt
 	r.fieldMap["id"] = r.Id
 	r.fieldMap["language"] = r.Language
 	r.fieldMap["lead_id"] = r.LeadId
@@ -109,6 +120,7 @@ func (r *reviewORM) fillFieldMap() {
 	r.fieldMap["review_count"] = r.ReviewCount
 	r.fieldMap["text"] = r.Text
 	r.fieldMap["time"] = r.Time
+	r.fieldMap["updated_at"] = r.UpdatedAt
 }
 
 func (r reviewORM) clone(db *gorm.DB) reviewORM {

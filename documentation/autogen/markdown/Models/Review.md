@@ -11,6 +11,9 @@
 | **language** | **String** |  | [optional] [default to null] |
 | **profilePhotoUrl** | **String** |  | [optional] [default to null] |
 | **reviewCount** | **Integer** |  | [optional] [default to null] |
+| **createdAt** | **Date** |  | [optional] [default to null] |
+| **updatedAt** | **Date** |  | [optional] [default to null] |
+| **deletedAt** | **Date** |  | [optional] [default to null] |
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

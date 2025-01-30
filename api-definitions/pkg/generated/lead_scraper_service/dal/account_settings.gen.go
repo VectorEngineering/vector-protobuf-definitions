@@ -32,12 +32,15 @@ func newAccountSettingsORM(db *gorm.DB, opts ...gen.DOOption) accountSettingsORM
 	_accountSettingsORM.ALL = field.NewAsterisk(tableName)
 	_accountSettingsORM.AccountId = field.NewUint64(tableName, "account_id")
 	_accountSettingsORM.AutoPurgeEnabled = field.NewBool(tableName, "auto_purge_enabled")
+	_accountSettingsORM.CreatedAt = field.NewTime(tableName, "created_at")
 	_accountSettingsORM.DefaultDataRetention = field.NewInt64(tableName, "default_data_retention")
+	_accountSettingsORM.DeletedAt = field.NewTime(tableName, "deleted_at")
 	_accountSettingsORM.EmailNotifications = field.NewBool(tableName, "email_notifications")
 	_accountSettingsORM.Id = field.NewUint64(tableName, "id")
 	_accountSettingsORM.Require_2Fa = field.NewBool(tableName, "require_2_fa")
 	_accountSettingsORM.SessionTimeout = field.NewInt64(tableName, "session_timeout")
 	_accountSettingsORM.SlackNotifications = field.NewBool(tableName, "slack_notifications")
+	_accountSettingsORM.UpdatedAt = field.NewTime(tableName, "updated_at")
 
 	_accountSettingsORM.fillFieldMap()
 
@@ -50,12 +53,15 @@ type accountSettingsORM struct {
 	ALL                  field.Asterisk
 	AccountId            field.Uint64
 	AutoPurgeEnabled     field.Bool
+	CreatedAt            field.Time
 	DefaultDataRetention field.Int64
+	DeletedAt            field.Time
 	EmailNotifications   field.Bool
 	Id                   field.Uint64
 	Require_2Fa          field.Bool
 	SessionTimeout       field.Int64
 	SlackNotifications   field.Bool
+	UpdatedAt            field.Time
 
 	fieldMap map[string]field.Expr
 }
@@ -74,12 +80,15 @@ func (a *accountSettingsORM) updateTableName(table string) *accountSettingsORM {
 	a.ALL = field.NewAsterisk(table)
 	a.AccountId = field.NewUint64(table, "account_id")
 	a.AutoPurgeEnabled = field.NewBool(table, "auto_purge_enabled")
+	a.CreatedAt = field.NewTime(table, "created_at")
 	a.DefaultDataRetention = field.NewInt64(table, "default_data_retention")
+	a.DeletedAt = field.NewTime(table, "deleted_at")
 	a.EmailNotifications = field.NewBool(table, "email_notifications")
 	a.Id = field.NewUint64(table, "id")
 	a.Require_2Fa = field.NewBool(table, "require_2_fa")
 	a.SessionTimeout = field.NewInt64(table, "session_timeout")
 	a.SlackNotifications = field.NewBool(table, "slack_notifications")
+	a.UpdatedAt = field.NewTime(table, "updated_at")
 
 	a.fillFieldMap()
 
@@ -96,15 +105,18 @@ func (a *accountSettingsORM) GetFieldByName(fieldName string) (field.OrderExpr, 
 }
 
 func (a *accountSettingsORM) fillFieldMap() {
-	a.fieldMap = make(map[string]field.Expr, 8)
+	a.fieldMap = make(map[string]field.Expr, 11)
 	a.fieldMap["account_id"] = a.AccountId
 	a.fieldMap["auto_purge_enabled"] = a.AutoPurgeEnabled
+	a.fieldMap["created_at"] = a.CreatedAt
 	a.fieldMap["default_data_retention"] = a.DefaultDataRetention
+	a.fieldMap["deleted_at"] = a.DeletedAt
 	a.fieldMap["email_notifications"] = a.EmailNotifications
 	a.fieldMap["id"] = a.Id
 	a.fieldMap["require_2_fa"] = a.Require_2Fa
 	a.fieldMap["session_timeout"] = a.SessionTimeout
 	a.fieldMap["slack_notifications"] = a.SlackNotifications
+	a.fieldMap["updated_at"] = a.UpdatedAt
 }
 
 func (a accountSettingsORM) clone(db *gorm.DB) accountSettingsORM {

@@ -589,6 +589,10 @@ message Review {
     string language = 6;
     string profile_photo_url = 7;
     int32 review_count = 8;
+
+    google.protobuf.Timestamp created_at = 9;
+    google.protobuf.Timestamp updated_at = 10;
+    google.protobuf.Timestamp deleted_at = 11;
 }
 
 // Temporal data
@@ -618,7 +622,10 @@ message BusinessHours {
     ];
     string close_time = 4;
     bool closed = 5;
-    string lead_id = 6 [(gorm.field).belongs_to = {}];
+
+     google.protobuf.Timestamp created_at = 9;
+    google.protobuf.Timestamp updated_at = 10;
+    google.protobuf.Timestamp deleted_at = 11;
 }
 
 // Account-wide settings
@@ -641,6 +648,10 @@ message AccountSettings {
     // Security
     bool require_2fa = 7;
     google.protobuf.Duration session_timeout = 8;
+
+    google.protobuf.Timestamp created_at = 9;
+    google.protobuf.Timestamp updated_at = 10;
+    google.protobuf.Timestamp deleted_at = 11;
 }
 
 /**

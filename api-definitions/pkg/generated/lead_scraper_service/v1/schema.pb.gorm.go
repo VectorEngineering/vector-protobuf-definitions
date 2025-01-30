@@ -6473,7 +6473,7 @@ func DefaultCreateAPIKey(ctx context.Context, in *APIKey, db *gorm.DB) (*APIKey,
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(APIKeyORMWithAfterCreate_); ok {

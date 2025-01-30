@@ -97,7 +97,6 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [ServiceStatus](./Models/ServiceStatus.md)
  - [ServiceUnavailableErrorMessageResponse](./Models/ServiceUnavailableErrorMessageResponse.md)
  - [SessionInfo](./Models/SessionInfo.md)
- - [Status](./Models/Status.md)
  - [Suggestions](./Models/Suggestions.md)
  - [TokenInfo](./Models/TokenInfo.md)
  - [TooEarlyErrorMessageResponse](./Models/TooEarlyErrorMessageResponse.md)
@@ -115,6 +114,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [ValidationErrorCode](./Models/ValidationErrorCode.md)
  - [ValidationErrorMessageResponse](./Models/ValidationErrorMessageResponse.md)
  - [Workspace](./Models/Workspace.md)
+ - [rpc.Status](./Models/rpc.Status.md)
 
 
 <a name="documentation-for-authorization"></a>

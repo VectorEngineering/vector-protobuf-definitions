@@ -81,16 +81,16 @@ message Account {
     ];
 
     // Organization identifier for multi-org support
-    string org_id = 3;
+    string org_id = 3 [(gorm.field).tag = {index: "idx_accounts_org_id"}];
 
     // Tenant identifier for multi-tenant support
-    string tenant_id = 4;
+    string tenant_id = 4 [(gorm.field).tag = {index: "idx_accounts_tenant_id"}];
 
     // User's email address
-    string email = 5;
+    string email = 5 [(gorm.field).tag = {index: "idx_accounts_email"}];
 
     // Timestamp of last modification
-    google.protobuf.Timestamp last_modified_at = 6;
+    google.protobuf.Timestamp last_modified_at = 6 [(gorm.field).tag = {index: "idx_accounts_last_modified"}];
 
     // Soft delete timestamp
     google.protobuf.Timestamp deleted_at = 7;
@@ -155,13 +155,17 @@ message Workspace {
     };
 
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
-    string name = 2 [(validate.rules).string.min_len = 1];
+    string name = 2 [
+        (validate.rules).string.min_len = 1,
+        (gorm.field).tag = {index: "idx_workspaces_name"}
+    ];
     string industry = 3;
     string domain = 4 [
         (validate.rules).string = {
             email: true,
             max_len: 253  // Max DNS label length
-        }
+        },
+        (gorm.field).tag = {index: "idx_workspaces_domain"}
     ];
     
     // Compliance settings
@@ -233,13 +237,13 @@ message ScrapingJob {
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
 
     // Human-readable name for the job
-    string name = 2;
+    string name = 2 [(gorm.field).tag = {index: "idx_scraping_jobs_name"}];
 
     // Job creation timestamp
-    google.protobuf.Timestamp created_at = 3;
+    google.protobuf.Timestamp created_at = 3 [(gorm.field).tag = {index: "idx_scraping_jobs_created_at"}];
 
     // Current status of the job
-    BackgroundJobStatus status = 4;
+    BackgroundJobStatus status = 4 [(gorm.field).tag = {index: "idx_scraping_jobs_status"}];
 
     // Search terms for Google Maps
     repeated string keywords = 5;
@@ -399,13 +403,16 @@ message Lead {
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
     
     // Business details
-    string name = 2 [(validate.rules).string.min_len = 1];
+    string name = 2 [
+        (validate.rules).string.min_len = 1,
+        (gorm.field).tag = {index: "idx_leads_name"}
+    ];
     string website = 3 [(validate.rules).string.uri = true];
-    string phone = 4;
+    string phone = 4 [(gorm.field).tag = {index: "idx_leads_phone"}];
     string address = 5;
-    string city = 6;
-    string state = 7;
-    string country = 8;
+    string city = 6 [(gorm.field).tag = {index: "idx_leads_city"}];
+    string state = 7 [(gorm.field).tag = {index: "idx_leads_state"}];
+    string country = 8 [(gorm.field).tag = {index: "idx_leads_country"}];
     
     // Scraped data
     double latitude = 9;
@@ -419,11 +426,17 @@ message Lead {
     int64 estimated_revenue = 15;
     
     // Org context
-    string org_id = 16 [(validate.rules).string.min_len = 1];
-    string tenant_id = 17 [(validate.rules).string.min_len = 1];
+    string org_id = 16 [
+        (validate.rules).string.min_len = 1,
+        (gorm.field).tag = {index: "idx_leads_org_id"}
+    ];
+    string tenant_id = 17 [
+        (validate.rules).string.min_len = 1,
+        (gorm.field).tag = {index: "idx_leads_tenant_id"}
+    ];
     
     // Audit fields
-    google.protobuf.Timestamp created_at = 18;
+    google.protobuf.Timestamp created_at = 18 [(gorm.field).tag = {index: "idx_leads_created_at"}];
     google.protobuf.Timestamp updated_at = 19;
     google.protobuf.Timestamp deleted_at = 20;
     
@@ -432,7 +445,10 @@ message Lead {
     Workspace workspace = 22 [(gorm.field).belongs_to = {}];
 
     // Detailed Google Maps metadata
-    string place_id = 23 [(validate.rules).string.min_len = 1]; // Google Places ID
+    string place_id = 23 [
+        (validate.rules).string.min_len = 1,
+        (gorm.field).tag = {index: "idx_leads_place_id", unique: true}
+    ];
     string google_maps_url = 24 [(validate.rules).string.uri = true];
     string business_status = 25; // OPERATIONAL, CLOSED_TEMPORARILY, etc
     
@@ -566,10 +582,10 @@ message Review {
     };
 
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
-    string author = 2;
+    string author = 2 [(gorm.field).tag = {index: "idx_reviews_author"}];
     float rating = 3;
     string text = 4;
-    google.protobuf.Timestamp time = 5;
+    google.protobuf.Timestamp time = 5 [(gorm.field).tag = {index: "idx_reviews_time"}];
     string language = 6;
     string profile_photo_url = 7;
     int32 review_count = 8;
@@ -625,4 +641,110 @@ message AccountSettings {
     // Security
     bool require_2fa = 7;
     google.protobuf.Duration session_timeout = 8;
+}
+
+/**
+ * APIKey represents an authentication token for accessing the API.
+ * It includes features for rate limiting, permissions, and usage tracking.
+ *
+ * Key features:
+ * - Unique key identification
+ * - Scope-based access control
+ * - Rate limiting
+ * - Usage tracking
+ * - Expiration management
+ * - Multi-tenant support
+ *
+ * Database considerations:
+ * - Uses GORM for ORM mapping
+ * - Includes indexes for efficient querying
+ * - Supports soft deletes
+ *
+ * Usage example:
+ * ```go
+ * apiKey := &APIKey{
+ *     Name: "Production API Key",
+ *     Scopes: []string{"leads:read", "leads:write"},
+ *     ExpiresAt: timestamppb.New(time.Now().AddDate(1, 0, 0)),
+ * }
+ * ```
+ */
+message APIKey {
+    option (gorm.opts) = {
+        ormable: true
+        table: "api_keys"
+    };
+
+    // Unique identifier
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+
+    // Human-readable name for the key
+    string name = 2 [
+        (validate.rules).string.min_len = 1,
+        (gorm.field).tag = {index: "idx_api_keys_name"}
+    ];
+
+    // The actual API key value (hashed in storage)
+    string key_hash = 3 [(gorm.field).tag = {unique: true}];
+
+    // Key prefix for display/reference (first 8 chars)
+    string key_prefix = 4 [(gorm.field).tag = {index: "idx_api_keys_prefix"}];
+
+    // Multi-tenant context
+    string org_id = 5 [
+        (validate.rules).string.min_len = 1,
+        (gorm.field).tag = {index: "idx_api_keys_org_id"}
+    ];
+    string tenant_id = 6 [
+        (validate.rules).string.min_len = 1,
+        (gorm.field).tag = {index: "idx_api_keys_tenant_id"}
+    ];
+
+    // Access control
+    repeated string scopes = 9 [(gorm.field).tag = {type: "text[]"}];
+    repeated string allowed_ips = 10 [(gorm.field).tag = {type: "text[]"}];  // IP whitelist
+    repeated string allowed_domains = 11 [(gorm.field).tag = {type: "text[]"}];  // Domain whitelist
+
+    // Rate limiting
+    int32 requests_per_second = 12 [(validate.rules).int32.gt = 0];
+    int32 requests_per_day = 13 [(validate.rules).int32.gt = 0];
+    int32 concurrent_requests = 14 [(validate.rules).int32.gt = 0];
+
+    // Usage tracking
+    int64 total_requests = 15;
+    int64 total_errors = 16;
+    google.protobuf.Timestamp last_used_at = 17 [(gorm.field).tag = {index: "idx_api_keys_last_used"}];
+    float average_response_time = 18;  // in milliseconds
+
+    // Key status
+    enum Status {
+        STATUS_UNSPECIFIED = 0;
+        STATUS_ACTIVE = 1;
+        STATUS_REVOKED = 2;
+        STATUS_EXPIRED = 3;
+        STATUS_RATE_LIMITED = 4;
+    }
+    Status status = 19 [(gorm.field).tag = {index: "idx_api_keys_status"}];
+
+    // Timestamps
+    google.protobuf.Timestamp created_at = 20;
+    google.protobuf.Timestamp updated_at = 21;
+    google.protobuf.Timestamp expires_at = 22 [(gorm.field).tag = {index: "idx_api_keys_expires"}];
+    google.protobuf.Timestamp deleted_at = 23;
+
+    // Security features
+    bool requires_client_secret = 24;
+    string client_secret_hash = 25;
+    bool enforce_https = 26 [(validate.rules).bool.const = true];
+    bool enforce_signing = 27;
+
+    // Relationships
+    Account account = 28 [(gorm.field).belongs_to = {}];
+    Workspace workspace = 29 [(gorm.field).belongs_to = {}];
+
+    // Compliance and auditing
+    bool log_all_requests = 31;
+    string last_rotation_reason = 32;
+    google.protobuf.Timestamp last_rotation_date = 33;
+    int32 rotation_frequency_days = 34 [(validate.rules).int32.gt = 0];
 }

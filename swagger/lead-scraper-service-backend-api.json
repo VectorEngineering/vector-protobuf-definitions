@@ -357,7 +357,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -691,7 +691,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -1027,7 +1027,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -1356,7 +1356,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -1687,7 +1687,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -2042,7 +2042,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -2378,7 +2378,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -2731,7 +2731,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -3086,7 +3086,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -3441,7 +3441,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -3789,7 +3789,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -4125,7 +4125,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -4456,7 +4456,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -4792,7 +4792,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -5121,7 +5121,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -5452,7 +5452,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -5808,7 +5808,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -6144,7 +6144,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -6480,7 +6480,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -6829,7 +6829,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -7192,7 +7192,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -7538,7 +7538,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -7877,7 +7877,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -8231,7 +8231,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Status"
+                                    "$ref": "#/components/schemas/rpc.Status"
                                 }
                             }
                         }
@@ -8969,7 +8969,7 @@
                 "type": "object",
                 "properties": {
                     "status": {
-                        "$ref": "#/components/schemas/Status"
+                        "$ref": "#/components/schemas/rpc.Status"
                     }
                 },
                 "title": "Base error message response, extending google.rpc.Status"
@@ -9359,7 +9359,6 @@
                     },
                     "placeId": {
                         "type": "string",
-                        "description": "Google Places ID",
                         "title": "Detailed Google Maps metadata"
                     },
                     "googleMapsUrl": {
@@ -10613,28 +10612,6 @@
                     }
                 }
             },
-            "Status": {
-                "type": "object",
-                "properties": {
-                    "code": {
-                        "type": "integer",
-                        "format": "int32",
-                        "description": "The status code, which should be an enum value of\n[google.rpc.Code][google.rpc.Code]."
-                    },
-                    "message": {
-                        "type": "string",
-                        "description": "A developer-facing error message, which should be in English. Any\nuser-facing error message should be localized and sent in the\n[google.rpc.Status.details][google.rpc.Status.details] field, or localized\nby the client."
-                    },
-                    "details": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/Any"
-                        },
-                        "description": "A list of messages that carry the error details.  There is a common set of\nmessage types for APIs to use."
-                    }
-                },
-                "description": "The `Status` type defines a logical error model that is suitable for\ndifferent programming environments, including REST APIs and RPC APIs. It is\nused by [gRPC](https://github.com/grpc). Each `Status` message contains\nthree pieces of data: error code, error message, and error details.\n\nYou can find out more about this error model and how to work with it in the\n[API Design Guide](https://cloud.google.com/apis/design/errors)."
-            },
             "Suggestions": {
                 "type": "object",
                 "properties": {
@@ -11008,6 +10985,28 @@
                     }
                 },
                 "title": "Workspace represents a business entity with multiple accounts"
+            },
+            "rpc.Status": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "The status code, which should be an enum value of\n[google.rpc.Code][google.rpc.Code]."
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "A developer-facing error message, which should be in English. Any\nuser-facing error message should be localized and sent in the\n[google.rpc.Status.details][google.rpc.Status.details] field, or localized\nby the client."
+                    },
+                    "details": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Any"
+                        },
+                        "description": "A list of messages that carry the error details.  There is a common set of\nmessage types for APIs to use."
+                    }
+                },
+                "description": "The `Status` type defines a logical error model that is suitable for\ndifferent programming environments, including REST APIs and RPC APIs. It is\nused by [gRPC](https://github.com/grpc). Each `Status` message contains\nthree pieces of data: error code, error message, and error details.\n\nYou can find out more about this error model and how to work with it in the\n[API Design Guide](https://cloud.google.com/apis/design/errors)."
             }
         }
     }

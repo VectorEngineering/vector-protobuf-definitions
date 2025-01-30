@@ -75,7 +75,6 @@ Models/ScrapingWorkflow.md
 Models/ServiceStatus.md
 Models/ServiceUnavailableErrorMessageResponse.md
 Models/SessionInfo.md
-Models/Status.md
 Models/Suggestions.md
 Models/TokenInfo.md
 Models/TooEarlyErrorMessageResponse.md
@@ -93,4 +92,5 @@ Models/UpdateWorkspaceResponse.md
 Models/ValidationErrorCode.md
 Models/ValidationErrorMessageResponse.md
 Models/Workspace.md
+Models/rpc.Status.md
 README.md

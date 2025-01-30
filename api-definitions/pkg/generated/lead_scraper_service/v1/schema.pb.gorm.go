@@ -20,18 +20,18 @@ type AccountORM struct {
 	ConcurrentJobLimit int32
 	CreatedAt          *time.Time
 	DeletedAt          *time.Time
-	Email              string
+	Email              string `gorm:"index:idx_accounts_email"`
 	Id                 uint64 `gorm:"primaryKey"`
 	LastLoginAt        *time.Time
-	LastModifiedAt     *time.Time
+	LastModifiedAt     *time.Time `gorm:"index:idx_accounts_last_modified"`
 	MfaEnabled         bool
 	MonthlyJobLimit    int32
-	OrgId              string
+	OrgId              string              `gorm:"index:idx_accounts_org_id"`
 	Permissions        pq.StringArray      `gorm:"type:text[]"`
 	Roles              pq.StringArray      `gorm:"type:text[]"`
 	ScrapingJobs       []*ScrapingJobORM   `gorm:"foreignKey:AccountId;references:Id"`
 	Settings           *AccountSettingsORM `gorm:"foreignKey:AccountId;references:Id"`
-	TenantId           string
+	TenantId           string              `gorm:"index:idx_accounts_tenant_id"`
 	Timezone           string
 	TotalJobsRun       int32
 	Workspaces         []*WorkspaceORM `gorm:"foreignKey:AccountId;references:Id"`
@@ -227,14 +227,14 @@ type WorkspaceORM struct {
 	CreatedAt           *time.Time
 	DailyJobQuota       int32
 	DeletedAt           *time.Time
-	Domain              string
+	Domain              string `gorm:"index:idx_workspaces_domain"`
 	GdprCompliant       bool
 	HipaaCompliant      bool
 	Id                  uint64 `gorm:"primaryKey"`
 	Industry            string
 	JobsRunThisMonth    int32
 	LastJobRun          *time.Time
-	Name                string
+	Name                string `gorm:"index:idx_workspaces_name"`
 	Soc2Compliant       bool
 	StorageQuota        int64
 	TotalLeadsCollected int32
@@ -384,7 +384,7 @@ type WorkspaceWithAfterToPB interface {
 
 type ScrapingJobORM struct {
 	AccountId          *uint64
-	CreatedAt          *time.Time
+	CreatedAt          *time.Time `gorm:"index:idx_scraping_jobs_created_at"`
 	DeletedAt          *time.Time
 	Depth              int32
 	Email              bool
@@ -396,14 +396,14 @@ type ScrapingJobORM struct {
 	Leads              []*LeadORM `gorm:"foreignKey:ScrapingJobId;references:Id"`
 	Lon                string
 	MaxTime            int32
-	Name               string
+	Name               string `gorm:"index:idx_scraping_jobs_name"`
 	Payload            []byte `gorm:"type:bytea"`
 	PayloadType        string
 	Priority           int32
 	Proxies            pq.StringArray `gorm:"type:text[]"`
 	Radius             int32
 	ScrapingWorkflowId *uint64
-	Status             string
+	Status             string `gorm:"index:idx_scraping_jobs_status"`
 	UpdatedAt          *time.Time
 	WorkflowId         string `gorm:"index:idx_workflow_id"`
 	Zoom               int32
@@ -845,14 +845,14 @@ type LeadORM struct {
 	BusinessStatus           string
 	BusinessType             string         `gorm:"type:text"`
 	Certifications           pq.StringArray `gorm:"type:text[]"`
-	City                     string
+	City                     string         `gorm:"index:idx_leads_city"`
 	CmsUsed                  string
 	ContactEmail             string
 	ContactPersonName        string
 	ContactPersonTitle       string
 	Count                    int32
-	Country                  string
-	CreatedAt                *time.Time
+	Country                  string     `gorm:"index:idx_leads_country"`
+	CreatedAt                *time.Time `gorm:"index:idx_leads_created_at"`
 	DataSourceVersion        string
 	DeletedAt                *time.Time
 	EcommercePlatforms       pq.StringArray `gorm:"type:text[]"`
@@ -880,17 +880,17 @@ type LeadORM struct {
 	Longitude                float64
 	MainPhotoUrl             string
 	NaicsCode                string
-	Name                     string
+	Name                     string         `gorm:"index:idx_leads_name"`
 	NearbyLandmarks          pq.StringArray `gorm:"type:text[]"`
 	Neighborhood             string
-	OrgId                    string
+	OrgId                    string `gorm:"index:idx_leads_org_id"`
 	OutdoorSeating           bool
 	ParentCompany            string
 	ParkingAvailable         bool
 	PaymentMethods           pq.StringArray `gorm:"type:text[]"`
-	Phone                    string
+	Phone                    string         `gorm:"index:idx_leads_phone"`
 	PhotoReferences          pq.StringArray `gorm:"type:text[]"`
-	PlaceId                  string
+	PlaceId                  string         `gorm:"unique;index:idx_leads_place_id"`
 	Rating                   float32
 	RatingCategory           string
 	RecentAnnouncements      pq.StringArray      `gorm:"type:text[]"`
@@ -904,10 +904,10 @@ type LeadORM struct {
 	ServesVegetarianFood     bool
 	SicCode                  string
 	SpecialHours             []*BusinessHoursORM `gorm:"foreignKey:SpecialHoursLeadId;references:Id"`
-	State                    string
-	Subsidiaries             pq.StringArray `gorm:"type:text[]"`
+	State                    string              `gorm:"index:idx_leads_state"`
+	Subsidiaries             pq.StringArray      `gorm:"type:text[]"`
 	SustainabilityRating     string
-	TenantId                 string
+	TenantId                 string `gorm:"index:idx_leads_tenant_id"`
 	Timezone                 string
 	TransportationAccess     string
 	Types                    pq.StringArray `gorm:"type:text[]"`
@@ -1323,7 +1323,7 @@ type LeadWithAfterToPB interface {
 }
 
 type ReviewORM struct {
-	Author          string
+	Author          string `gorm:"index:idx_reviews_author"`
 	Id              uint64 `gorm:"primaryKey"`
 	Language        string
 	LeadId          *uint64
@@ -1331,7 +1331,7 @@ type ReviewORM struct {
 	Rating          float32
 	ReviewCount     int32
 	Text            string
-	Time            *time.Time
+	Time            *time.Time `gorm:"index:idx_reviews_time"`
 }
 
 // TableName overrides the default tablename generated by GORM
@@ -1593,6 +1593,236 @@ type AccountSettingsWithAfterToPB interface {
 	AfterToPB(context.Context, *AccountSettings) error
 }
 
+type APIKeyORM struct {
+	Account               *AccountORM `gorm:"foreignKey:AccountId;references:Id"`
+	AccountId             *uint64
+	AllowedDomains        pq.StringArray `gorm:"type:text[]"`
+	AllowedIps            pq.StringArray `gorm:"type:text[]"`
+	AverageResponseTime   float32
+	ClientSecretHash      string
+	ConcurrentRequests    int32
+	CreatedAt             *time.Time
+	DeletedAt             *time.Time
+	EnforceHttps          bool
+	EnforceSigning        bool
+	ExpiresAt             *time.Time `gorm:"index:idx_api_keys_expires"`
+	Id                    uint64     `gorm:"primaryKey"`
+	KeyHash               string     `gorm:"unique"`
+	KeyPrefix             string     `gorm:"index:idx_api_keys_prefix"`
+	LastRotationDate      *time.Time
+	LastRotationReason    string
+	LastUsedAt            *time.Time `gorm:"index:idx_api_keys_last_used"`
+	LogAllRequests        bool
+	Name                  string `gorm:"index:idx_api_keys_name"`
+	OrgId                 string `gorm:"index:idx_api_keys_org_id"`
+	RequestsPerDay        int32
+	RequestsPerSecond     int32
+	RequiresClientSecret  bool
+	RotationFrequencyDays int32
+	Scopes                pq.StringArray `gorm:"type:text[]"`
+	Status                string         `gorm:"index:idx_api_keys_status"`
+	TenantId              string         `gorm:"index:idx_api_keys_tenant_id"`
+	TotalErrors           int64
+	TotalRequests         int64
+	UpdatedAt             *time.Time
+	Workspace             *WorkspaceORM `gorm:"foreignKey:WorkspaceId;references:Id"`
+	WorkspaceId           *uint64
+}
+
+// TableName overrides the default tablename generated by GORM
+func (APIKeyORM) TableName() string {
+	return "api_keys"
+}
+
+// ToORM runs the BeforeToORM hook if present, converts the fields of this
+// object to ORM format, runs the AfterToORM hook, then returns the ORM object
+func (m *APIKey) ToORM(ctx context.Context) (APIKeyORM, error) {
+	to := APIKeyORM{}
+	var err error
+	if prehook, ok := interface{}(m).(APIKeyWithBeforeToORM); ok {
+		if err = prehook.BeforeToORM(ctx, &to); err != nil {
+			return to, err
+		}
+	}
+	to.Id = m.Id
+	to.Name = m.Name
+	to.KeyHash = m.KeyHash
+	to.KeyPrefix = m.KeyPrefix
+	to.OrgId = m.OrgId
+	to.TenantId = m.TenantId
+	if m.Scopes != nil {
+		to.Scopes = make(pq.StringArray, len(m.Scopes))
+		copy(to.Scopes, m.Scopes)
+	}
+	if m.AllowedIps != nil {
+		to.AllowedIps = make(pq.StringArray, len(m.AllowedIps))
+		copy(to.AllowedIps, m.AllowedIps)
+	}
+	if m.AllowedDomains != nil {
+		to.AllowedDomains = make(pq.StringArray, len(m.AllowedDomains))
+		copy(to.AllowedDomains, m.AllowedDomains)
+	}
+	to.RequestsPerSecond = m.RequestsPerSecond
+	to.RequestsPerDay = m.RequestsPerDay
+	to.ConcurrentRequests = m.ConcurrentRequests
+	to.TotalRequests = m.TotalRequests
+	to.TotalErrors = m.TotalErrors
+	if m.LastUsedAt != nil {
+		t := m.LastUsedAt.AsTime()
+		to.LastUsedAt = &t
+	}
+	to.AverageResponseTime = m.AverageResponseTime
+	to.Status = APIKey_Status_name[int32(m.Status)]
+	if m.CreatedAt != nil {
+		t := m.CreatedAt.AsTime()
+		to.CreatedAt = &t
+	}
+	if m.UpdatedAt != nil {
+		t := m.UpdatedAt.AsTime()
+		to.UpdatedAt = &t
+	}
+	if m.ExpiresAt != nil {
+		t := m.ExpiresAt.AsTime()
+		to.ExpiresAt = &t
+	}
+	if m.DeletedAt != nil {
+		t := m.DeletedAt.AsTime()
+		to.DeletedAt = &t
+	}
+	to.RequiresClientSecret = m.RequiresClientSecret
+	to.ClientSecretHash = m.ClientSecretHash
+	to.EnforceHttps = m.EnforceHttps
+	to.EnforceSigning = m.EnforceSigning
+	if m.Account != nil {
+		tempAccount, err := m.Account.ToORM(ctx)
+		if err != nil {
+			return to, err
+		}
+		to.Account = &tempAccount
+	}
+	if m.Workspace != nil {
+		tempWorkspace, err := m.Workspace.ToORM(ctx)
+		if err != nil {
+			return to, err
+		}
+		to.Workspace = &tempWorkspace
+	}
+	to.LogAllRequests = m.LogAllRequests
+	to.LastRotationReason = m.LastRotationReason
+	if m.LastRotationDate != nil {
+		t := m.LastRotationDate.AsTime()
+		to.LastRotationDate = &t
+	}
+	to.RotationFrequencyDays = m.RotationFrequencyDays
+	if posthook, ok := interface{}(m).(APIKeyWithAfterToORM); ok {
+		err = posthook.AfterToORM(ctx, &to)
+	}
+	return to, err
+}
+
+// ToPB runs the BeforeToPB hook if present, converts the fields of this
+// object to PB format, runs the AfterToPB hook, then returns the PB object
+func (m *APIKeyORM) ToPB(ctx context.Context) (APIKey, error) {
+	to := APIKey{}
+	var err error
+	if prehook, ok := interface{}(m).(APIKeyWithBeforeToPB); ok {
+		if err = prehook.BeforeToPB(ctx, &to); err != nil {
+			return to, err
+		}
+	}
+	to.Id = m.Id
+	to.Name = m.Name
+	to.KeyHash = m.KeyHash
+	to.KeyPrefix = m.KeyPrefix
+	to.OrgId = m.OrgId
+	to.TenantId = m.TenantId
+	if m.Scopes != nil {
+		to.Scopes = make(pq.StringArray, len(m.Scopes))
+		copy(to.Scopes, m.Scopes)
+	}
+	if m.AllowedIps != nil {
+		to.AllowedIps = make(pq.StringArray, len(m.AllowedIps))
+		copy(to.AllowedIps, m.AllowedIps)
+	}
+	if m.AllowedDomains != nil {
+		to.AllowedDomains = make(pq.StringArray, len(m.AllowedDomains))
+		copy(to.AllowedDomains, m.AllowedDomains)
+	}
+	to.RequestsPerSecond = m.RequestsPerSecond
+	to.RequestsPerDay = m.RequestsPerDay
+	to.ConcurrentRequests = m.ConcurrentRequests
+	to.TotalRequests = m.TotalRequests
+	to.TotalErrors = m.TotalErrors
+	if m.LastUsedAt != nil {
+		to.LastUsedAt = timestamppb.New(*m.LastUsedAt)
+	}
+	to.AverageResponseTime = m.AverageResponseTime
+	to.Status = APIKey_Status(APIKey_Status_value[m.Status])
+	if m.CreatedAt != nil {
+		to.CreatedAt = timestamppb.New(*m.CreatedAt)
+	}
+	if m.UpdatedAt != nil {
+		to.UpdatedAt = timestamppb.New(*m.UpdatedAt)
+	}
+	if m.ExpiresAt != nil {
+		to.ExpiresAt = timestamppb.New(*m.ExpiresAt)
+	}
+	if m.DeletedAt != nil {
+		to.DeletedAt = timestamppb.New(*m.DeletedAt)
+	}
+	to.RequiresClientSecret = m.RequiresClientSecret
+	to.ClientSecretHash = m.ClientSecretHash
+	to.EnforceHttps = m.EnforceHttps
+	to.EnforceSigning = m.EnforceSigning
+	if m.Account != nil {
+		tempAccount, err := m.Account.ToPB(ctx)
+		if err != nil {
+			return to, err
+		}
+		to.Account = &tempAccount
+	}
+	if m.Workspace != nil {
+		tempWorkspace, err := m.Workspace.ToPB(ctx)
+		if err != nil {
+			return to, err
+		}
+		to.Workspace = &tempWorkspace
+	}
+	to.LogAllRequests = m.LogAllRequests
+	to.LastRotationReason = m.LastRotationReason
+	if m.LastRotationDate != nil {
+		to.LastRotationDate = timestamppb.New(*m.LastRotationDate)
+	}
+	to.RotationFrequencyDays = m.RotationFrequencyDays
+	if posthook, ok := interface{}(m).(APIKeyWithAfterToPB); ok {
+		err = posthook.AfterToPB(ctx, &to)
+	}
+	return to, err
+}
+
+// The following are interfaces you can implement for special behavior during ORM/PB conversions
+// of type APIKey the arg will be the target, the caller the one being converted from
+
+// APIKeyBeforeToORM called before default ToORM code
+type APIKeyWithBeforeToORM interface {
+	BeforeToORM(context.Context, *APIKeyORM) error
+}
+
+// APIKeyAfterToORM called after default ToORM code
+type APIKeyWithAfterToORM interface {
+	AfterToORM(context.Context, *APIKeyORM) error
+}
+
+// APIKeyBeforeToPB called before default ToPB code
+type APIKeyWithBeforeToPB interface {
+	BeforeToPB(context.Context, *APIKey) error
+}
+
+// APIKeyAfterToPB called after default ToPB code
+type APIKeyWithAfterToPB interface {
+	AfterToPB(context.Context, *APIKey) error
+}
+
 // DefaultCreateAccount executes a basic gorm create call
 func DefaultCreateAccount(ctx context.Context, in *Account, db *gorm.DB) (*Account, error) {
 	if in == nil {
@@ -1607,7 +1837,7 @@ func DefaultCreateAccount(ctx context.Context, in *Account, db *gorm.DB) (*Accou
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Settings").Preload("Workspaces").Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(AccountORMWithAfterCreate_); ok {
@@ -1789,7 +2019,7 @@ func DefaultStrictUpdateAccount(ctx context.Context, in *Account, db *gorm.DB) (
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Workspaces").Preload("Settings").Preload("ScrapingJobs").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(AccountORMWithAfterStrictUpdateSave); ok {
@@ -5756,4 +5986,617 @@ type AccountSettingsORMWithBeforeListFind interface {
 }
 type AccountSettingsORMWithAfterListFind interface {
 	AfterListFind(context.Context, *gorm.DB, *[]AccountSettingsORM) error
+}
+
+// DefaultCreateAPIKey executes a basic gorm create call
+func DefaultCreateAPIKey(ctx context.Context, in *APIKey, db *gorm.DB) (*APIKey, error) {
+	if in == nil {
+		return nil, errors.NilArgumentError
+	}
+	ormObj, err := in.ToORM(ctx)
+	if err != nil {
+		return nil, err
+	}
+	if hook, ok := interface{}(&ormObj).(APIKeyORMWithBeforeCreate_); ok {
+		if db, err = hook.BeforeCreate_(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	if err = db.Omit().Preload("Workspaces").Preload("ScrapingJobs").Preload("Settings").Create(&ormObj).Error; err != nil {
+		return nil, err
+	}
+	if hook, ok := interface{}(&ormObj).(APIKeyORMWithAfterCreate_); ok {
+		if err = hook.AfterCreate_(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	pbResponse, err := ormObj.ToPB(ctx)
+	return &pbResponse, err
+}
+
+type APIKeyORMWithBeforeCreate_ interface {
+	BeforeCreate_(context.Context, *gorm.DB) (*gorm.DB, error)
+}
+type APIKeyORMWithAfterCreate_ interface {
+	AfterCreate_(context.Context, *gorm.DB) error
+}
+
+func DefaultReadAPIKey(ctx context.Context, in *APIKey, db *gorm.DB) (*APIKey, error) {
+	if in == nil {
+		return nil, errors.NilArgumentError
+	}
+	ormObj, err := in.ToORM(ctx)
+	if err != nil {
+		return nil, err
+	}
+	if ormObj.Id == 0 {
+		return nil, errors.EmptyIdError
+	}
+	if hook, ok := interface{}(&ormObj).(APIKeyORMWithBeforeReadApplyQuery); ok {
+		if db, err = hook.BeforeReadApplyQuery(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	if hook, ok := interface{}(&ormObj).(APIKeyORMWithBeforeReadFind); ok {
+		if db, err = hook.BeforeReadFind(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	ormResponse := APIKeyORM{}
+	if err = db.Where(&ormObj).First(&ormResponse).Error; err != nil {
+		return nil, err
+	}
+	if hook, ok := interface{}(&ormResponse).(APIKeyORMWithAfterReadFind); ok {
+		if err = hook.AfterReadFind(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	pbResponse, err := ormResponse.ToPB(ctx)
+	return &pbResponse, err
+}
+
+type APIKeyORMWithBeforeReadApplyQuery interface {
+	BeforeReadApplyQuery(context.Context, *gorm.DB) (*gorm.DB, error)
+}
+type APIKeyORMWithBeforeReadFind interface {
+	BeforeReadFind(context.Context, *gorm.DB) (*gorm.DB, error)
+}
+type APIKeyORMWithAfterReadFind interface {
+	AfterReadFind(context.Context, *gorm.DB) error
+}
+
+func DefaultDeleteAPIKey(ctx context.Context, in *APIKey, db *gorm.DB) error {
+	if in == nil {
+		return errors.NilArgumentError
+	}
+	ormObj, err := in.ToORM(ctx)
+	if err != nil {
+		return err
+	}
+	if ormObj.Id == 0 {
+		return errors.EmptyIdError
+	}
+	if hook, ok := interface{}(&ormObj).(APIKeyORMWithBeforeDelete_); ok {
+		if db, err = hook.BeforeDelete_(ctx, db); err != nil {
+			return err
+		}
+	}
+	err = db.Where(&ormObj).Delete(&APIKeyORM{}).Error
+	if err != nil {
+		return err
+	}
+	if hook, ok := interface{}(&ormObj).(APIKeyORMWithAfterDelete_); ok {
+		err = hook.AfterDelete_(ctx, db)
+	}
+	return err
+}
+
+type APIKeyORMWithBeforeDelete_ interface {
+	BeforeDelete_(context.Context, *gorm.DB) (*gorm.DB, error)
+}
+type APIKeyORMWithAfterDelete_ interface {
+	AfterDelete_(context.Context, *gorm.DB) error
+}
+
+func DefaultDeleteAPIKeySet(ctx context.Context, in []*APIKey, db *gorm.DB) error {
+	if in == nil {
+		return errors.NilArgumentError
+	}
+	var err error
+	keys := []uint64{}
+	for _, obj := range in {
+		ormObj, err := obj.ToORM(ctx)
+		if err != nil {
+			return err
+		}
+		if ormObj.Id == 0 {
+			return errors.EmptyIdError
+		}
+		keys = append(keys, ormObj.Id)
+	}
+	if hook, ok := (interface{}(&APIKeyORM{})).(APIKeyORMWithBeforeDeleteSet); ok {
+		if db, err = hook.BeforeDeleteSet(ctx, in, db); err != nil {
+			return err
+		}
+	}
+	err = db.Where("id in (?)", keys).Delete(&APIKeyORM{}).Error
+	if err != nil {
+		return err
+	}
+	if hook, ok := (interface{}(&APIKeyORM{})).(APIKeyORMWithAfterDeleteSet); ok {
+		err = hook.AfterDeleteSet(ctx, in, db)
+	}
+	return err
+}
+
+type APIKeyORMWithBeforeDeleteSet interface {
+	BeforeDeleteSet(context.Context, []*APIKey, *gorm.DB) (*gorm.DB, error)
+}
+type APIKeyORMWithAfterDeleteSet interface {
+	AfterDeleteSet(context.Context, []*APIKey, *gorm.DB) error
+}
+
+// DefaultStrictUpdateAPIKey clears / replaces / appends first level 1:many children and then executes a gorm update call
+func DefaultStrictUpdateAPIKey(ctx context.Context, in *APIKey, db *gorm.DB) (*APIKey, error) {
+	if in == nil {
+		return nil, fmt.Errorf("Nil argument to DefaultStrictUpdateAPIKey")
+	}
+	ormObj, err := in.ToORM(ctx)
+	if err != nil {
+		return nil, err
+	}
+	lockedRow := &APIKeyORM{}
+	db.Model(&ormObj).Set("gorm:query_option", "FOR UPDATE").Where("id=?", ormObj.Id).First(lockedRow)
+	if hook, ok := interface{}(&ormObj).(APIKeyORMWithBeforeStrictUpdateCleanup); ok {
+		if db, err = hook.BeforeStrictUpdateCleanup(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	if hook, ok := interface{}(&ormObj).(APIKeyORMWithBeforeStrictUpdateSave); ok {
+		if db, err = hook.BeforeStrictUpdateSave(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	if err = db.Omit().Preload("ScrapingJobs").Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
+		return nil, err
+	}
+	if hook, ok := interface{}(&ormObj).(APIKeyORMWithAfterStrictUpdateSave); ok {
+		if err = hook.AfterStrictUpdateSave(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	pbResponse, err := ormObj.ToPB(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return &pbResponse, err
+}
+
+type APIKeyORMWithBeforeStrictUpdateCleanup interface {
+	BeforeStrictUpdateCleanup(context.Context, *gorm.DB) (*gorm.DB, error)
+}
+type APIKeyORMWithBeforeStrictUpdateSave interface {
+	BeforeStrictUpdateSave(context.Context, *gorm.DB) (*gorm.DB, error)
+}
+type APIKeyORMWithAfterStrictUpdateSave interface {
+	AfterStrictUpdateSave(context.Context, *gorm.DB) error
+}
+
+// DefaultPatchAPIKey executes a basic gorm update call with patch behavior
+func DefaultPatchAPIKey(ctx context.Context, in *APIKey, updateMask *field_mask.FieldMask, db *gorm.DB) (*APIKey, error) {
+	if in == nil {
+		return nil, errors.NilArgumentError
+	}
+	var pbObj APIKey
+	var err error
+	if hook, ok := interface{}(&pbObj).(APIKeyWithBeforePatchRead); ok {
+		if db, err = hook.BeforePatchRead(ctx, in, updateMask, db); err != nil {
+			return nil, err
+		}
+	}
+	pbReadRes, err := DefaultReadAPIKey(ctx, &APIKey{Id: in.GetId()}, db)
+	if err != nil {
+		return nil, err
+	}
+	pbObj = *pbReadRes
+	if hook, ok := interface{}(&pbObj).(APIKeyWithBeforePatchApplyFieldMask); ok {
+		if db, err = hook.BeforePatchApplyFieldMask(ctx, in, updateMask, db); err != nil {
+			return nil, err
+		}
+	}
+	if _, err := DefaultApplyFieldMaskAPIKey(ctx, &pbObj, in, updateMask, "", db); err != nil {
+		return nil, err
+	}
+	if hook, ok := interface{}(&pbObj).(APIKeyWithBeforePatchSave); ok {
+		if db, err = hook.BeforePatchSave(ctx, in, updateMask, db); err != nil {
+			return nil, err
+		}
+	}
+	pbResponse, err := DefaultStrictUpdateAPIKey(ctx, &pbObj, db)
+	if err != nil {
+		return nil, err
+	}
+	if hook, ok := interface{}(pbResponse).(APIKeyWithAfterPatchSave); ok {
+		if err = hook.AfterPatchSave(ctx, in, updateMask, db); err != nil {
+			return nil, err
+		}
+	}
+	return pbResponse, nil
+}
+
+type APIKeyWithBeforePatchRead interface {
+	BeforePatchRead(context.Context, *APIKey, *field_mask.FieldMask, *gorm.DB) (*gorm.DB, error)
+}
+type APIKeyWithBeforePatchApplyFieldMask interface {
+	BeforePatchApplyFieldMask(context.Context, *APIKey, *field_mask.FieldMask, *gorm.DB) (*gorm.DB, error)
+}
+type APIKeyWithBeforePatchSave interface {
+	BeforePatchSave(context.Context, *APIKey, *field_mask.FieldMask, *gorm.DB) (*gorm.DB, error)
+}
+type APIKeyWithAfterPatchSave interface {
+	AfterPatchSave(context.Context, *APIKey, *field_mask.FieldMask, *gorm.DB) error
+}
+
+// DefaultPatchSetAPIKey executes a bulk gorm update call with patch behavior
+func DefaultPatchSetAPIKey(ctx context.Context, objects []*APIKey, updateMasks []*field_mask.FieldMask, db *gorm.DB) ([]*APIKey, error) {
+	if len(objects) != len(updateMasks) {
+		return nil, fmt.Errorf(errors.BadRepeatedFieldMaskTpl, len(updateMasks), len(objects))
+	}
+
+	results := make([]*APIKey, 0, len(objects))
+	for i, patcher := range objects {
+		pbResponse, err := DefaultPatchAPIKey(ctx, patcher, updateMasks[i], db)
+		if err != nil {
+			return nil, err
+		}
+
+		results = append(results, pbResponse)
+	}
+
+	return results, nil
+}
+
+// DefaultApplyFieldMaskAPIKey patches an pbObject with patcher according to a field mask.
+func DefaultApplyFieldMaskAPIKey(ctx context.Context, patchee *APIKey, patcher *APIKey, updateMask *field_mask.FieldMask, prefix string, db *gorm.DB) (*APIKey, error) {
+	if patcher == nil {
+		return nil, nil
+	} else if patchee == nil {
+		return nil, errors.NilArgumentError
+	}
+	var err error
+	var updatedLastUsedAt bool
+	var updatedCreatedAt bool
+	var updatedUpdatedAt bool
+	var updatedExpiresAt bool
+	var updatedDeletedAt bool
+	var updatedAccount bool
+	var updatedWorkspace bool
+	var updatedLastRotationDate bool
+	for i, f := range updateMask.Paths {
+		if f == prefix+"Id" {
+			patchee.Id = patcher.Id
+			continue
+		}
+		if f == prefix+"Name" {
+			patchee.Name = patcher.Name
+			continue
+		}
+		if f == prefix+"KeyHash" {
+			patchee.KeyHash = patcher.KeyHash
+			continue
+		}
+		if f == prefix+"KeyPrefix" {
+			patchee.KeyPrefix = patcher.KeyPrefix
+			continue
+		}
+		if f == prefix+"OrgId" {
+			patchee.OrgId = patcher.OrgId
+			continue
+		}
+		if f == prefix+"TenantId" {
+			patchee.TenantId = patcher.TenantId
+			continue
+		}
+		if f == prefix+"Scopes" {
+			patchee.Scopes = patcher.Scopes
+			continue
+		}
+		if f == prefix+"AllowedIps" {
+			patchee.AllowedIps = patcher.AllowedIps
+			continue
+		}
+		if f == prefix+"AllowedDomains" {
+			patchee.AllowedDomains = patcher.AllowedDomains
+			continue
+		}
+		if f == prefix+"RequestsPerSecond" {
+			patchee.RequestsPerSecond = patcher.RequestsPerSecond
+			continue
+		}
+		if f == prefix+"RequestsPerDay" {
+			patchee.RequestsPerDay = patcher.RequestsPerDay
+			continue
+		}
+		if f == prefix+"ConcurrentRequests" {
+			patchee.ConcurrentRequests = patcher.ConcurrentRequests
+			continue
+		}
+		if f == prefix+"TotalRequests" {
+			patchee.TotalRequests = patcher.TotalRequests
+			continue
+		}
+		if f == prefix+"TotalErrors" {
+			patchee.TotalErrors = patcher.TotalErrors
+			continue
+		}
+		if !updatedLastUsedAt && strings.HasPrefix(f, prefix+"LastUsedAt.") {
+			if patcher.LastUsedAt == nil {
+				patchee.LastUsedAt = nil
+				continue
+			}
+			if patchee.LastUsedAt == nil {
+				patchee.LastUsedAt = &timestamppb.Timestamp{}
+			}
+			childMask := &field_mask.FieldMask{}
+			for j := i; j < len(updateMask.Paths); j++ {
+				if trimPath := strings.TrimPrefix(updateMask.Paths[j], prefix+"LastUsedAt."); trimPath != updateMask.Paths[j] {
+					childMask.Paths = append(childMask.Paths, trimPath)
+				}
+			}
+			if err := gorm1.MergeWithMask(patcher.LastUsedAt, patchee.LastUsedAt, childMask); err != nil {
+				return nil, nil
+			}
+		}
+		if f == prefix+"LastUsedAt" {
+			updatedLastUsedAt = true
+			patchee.LastUsedAt = patcher.LastUsedAt
+			continue
+		}
+		if f == prefix+"AverageResponseTime" {
+			patchee.AverageResponseTime = patcher.AverageResponseTime
+			continue
+		}
+		if f == prefix+"Status" {
+			patchee.Status = patcher.Status
+			continue
+		}
+		if !updatedCreatedAt && strings.HasPrefix(f, prefix+"CreatedAt.") {
+			if patcher.CreatedAt == nil {
+				patchee.CreatedAt = nil
+				continue
+			}
+			if patchee.CreatedAt == nil {
+				patchee.CreatedAt = &timestamppb.Timestamp{}
+			}
+			childMask := &field_mask.FieldMask{}
+			for j := i; j < len(updateMask.Paths); j++ {
+				if trimPath := strings.TrimPrefix(updateMask.Paths[j], prefix+"CreatedAt."); trimPath != updateMask.Paths[j] {
+					childMask.Paths = append(childMask.Paths, trimPath)
+				}
+			}
+			if err := gorm1.MergeWithMask(patcher.CreatedAt, patchee.CreatedAt, childMask); err != nil {
+				return nil, nil
+			}
+		}
+		if f == prefix+"CreatedAt" {
+			updatedCreatedAt = true
+			patchee.CreatedAt = patcher.CreatedAt
+			continue
+		}
+		if !updatedUpdatedAt && strings.HasPrefix(f, prefix+"UpdatedAt.") {
+			if patcher.UpdatedAt == nil {
+				patchee.UpdatedAt = nil
+				continue
+			}
+			if patchee.UpdatedAt == nil {
+				patchee.UpdatedAt = &timestamppb.Timestamp{}
+			}
+			childMask := &field_mask.FieldMask{}
+			for j := i; j < len(updateMask.Paths); j++ {
+				if trimPath := strings.TrimPrefix(updateMask.Paths[j], prefix+"UpdatedAt."); trimPath != updateMask.Paths[j] {
+					childMask.Paths = append(childMask.Paths, trimPath)
+				}
+			}
+			if err := gorm1.MergeWithMask(patcher.UpdatedAt, patchee.UpdatedAt, childMask); err != nil {
+				return nil, nil
+			}
+		}
+		if f == prefix+"UpdatedAt" {
+			updatedUpdatedAt = true
+			patchee.UpdatedAt = patcher.UpdatedAt
+			continue
+		}
+		if !updatedExpiresAt && strings.HasPrefix(f, prefix+"ExpiresAt.") {
+			if patcher.ExpiresAt == nil {
+				patchee.ExpiresAt = nil
+				continue
+			}
+			if patchee.ExpiresAt == nil {
+				patchee.ExpiresAt = &timestamppb.Timestamp{}
+			}
+			childMask := &field_mask.FieldMask{}
+			for j := i; j < len(updateMask.Paths); j++ {
+				if trimPath := strings.TrimPrefix(updateMask.Paths[j], prefix+"ExpiresAt."); trimPath != updateMask.Paths[j] {
+					childMask.Paths = append(childMask.Paths, trimPath)
+				}
+			}
+			if err := gorm1.MergeWithMask(patcher.ExpiresAt, patchee.ExpiresAt, childMask); err != nil {
+				return nil, nil
+			}
+		}
+		if f == prefix+"ExpiresAt" {
+			updatedExpiresAt = true
+			patchee.ExpiresAt = patcher.ExpiresAt
+			continue
+		}
+		if !updatedDeletedAt && strings.HasPrefix(f, prefix+"DeletedAt.") {
+			if patcher.DeletedAt == nil {
+				patchee.DeletedAt = nil
+				continue
+			}
+			if patchee.DeletedAt == nil {
+				patchee.DeletedAt = &timestamppb.Timestamp{}
+			}
+			childMask := &field_mask.FieldMask{}
+			for j := i; j < len(updateMask.Paths); j++ {
+				if trimPath := strings.TrimPrefix(updateMask.Paths[j], prefix+"DeletedAt."); trimPath != updateMask.Paths[j] {
+					childMask.Paths = append(childMask.Paths, trimPath)
+				}
+			}
+			if err := gorm1.MergeWithMask(patcher.DeletedAt, patchee.DeletedAt, childMask); err != nil {
+				return nil, nil
+			}
+		}
+		if f == prefix+"DeletedAt" {
+			updatedDeletedAt = true
+			patchee.DeletedAt = patcher.DeletedAt
+			continue
+		}
+		if f == prefix+"RequiresClientSecret" {
+			patchee.RequiresClientSecret = patcher.RequiresClientSecret
+			continue
+		}
+		if f == prefix+"ClientSecretHash" {
+			patchee.ClientSecretHash = patcher.ClientSecretHash
+			continue
+		}
+		if f == prefix+"EnforceHttps" {
+			patchee.EnforceHttps = patcher.EnforceHttps
+			continue
+		}
+		if f == prefix+"EnforceSigning" {
+			patchee.EnforceSigning = patcher.EnforceSigning
+			continue
+		}
+		if !updatedAccount && strings.HasPrefix(f, prefix+"Account.") {
+			updatedAccount = true
+			if patcher.Account == nil {
+				patchee.Account = nil
+				continue
+			}
+			if patchee.Account == nil {
+				patchee.Account = &Account{}
+			}
+			if o, err := DefaultApplyFieldMaskAccount(ctx, patchee.Account, patcher.Account, &field_mask.FieldMask{Paths: updateMask.Paths[i:]}, prefix+"Account.", db); err != nil {
+				return nil, err
+			} else {
+				patchee.Account = o
+			}
+			continue
+		}
+		if f == prefix+"Account" {
+			updatedAccount = true
+			patchee.Account = patcher.Account
+			continue
+		}
+		if !updatedWorkspace && strings.HasPrefix(f, prefix+"Workspace.") {
+			updatedWorkspace = true
+			if patcher.Workspace == nil {
+				patchee.Workspace = nil
+				continue
+			}
+			if patchee.Workspace == nil {
+				patchee.Workspace = &Workspace{}
+			}
+			if o, err := DefaultApplyFieldMaskWorkspace(ctx, patchee.Workspace, patcher.Workspace, &field_mask.FieldMask{Paths: updateMask.Paths[i:]}, prefix+"Workspace.", db); err != nil {
+				return nil, err
+			} else {
+				patchee.Workspace = o
+			}
+			continue
+		}
+		if f == prefix+"Workspace" {
+			updatedWorkspace = true
+			patchee.Workspace = patcher.Workspace
+			continue
+		}
+		if f == prefix+"LogAllRequests" {
+			patchee.LogAllRequests = patcher.LogAllRequests
+			continue
+		}
+		if f == prefix+"LastRotationReason" {
+			patchee.LastRotationReason = patcher.LastRotationReason
+			continue
+		}
+		if !updatedLastRotationDate && strings.HasPrefix(f, prefix+"LastRotationDate.") {
+			if patcher.LastRotationDate == nil {
+				patchee.LastRotationDate = nil
+				continue
+			}
+			if patchee.LastRotationDate == nil {
+				patchee.LastRotationDate = &timestamppb.Timestamp{}
+			}
+			childMask := &field_mask.FieldMask{}
+			for j := i; j < len(updateMask.Paths); j++ {
+				if trimPath := strings.TrimPrefix(updateMask.Paths[j], prefix+"LastRotationDate."); trimPath != updateMask.Paths[j] {
+					childMask.Paths = append(childMask.Paths, trimPath)
+				}
+			}
+			if err := gorm1.MergeWithMask(patcher.LastRotationDate, patchee.LastRotationDate, childMask); err != nil {
+				return nil, nil
+			}
+		}
+		if f == prefix+"LastRotationDate" {
+			updatedLastRotationDate = true
+			patchee.LastRotationDate = patcher.LastRotationDate
+			continue
+		}
+		if f == prefix+"RotationFrequencyDays" {
+			patchee.RotationFrequencyDays = patcher.RotationFrequencyDays
+			continue
+		}
+	}
+	if err != nil {
+		return nil, err
+	}
+	return patchee, nil
+}
+
+// DefaultListAPIKey executes a gorm list call
+func DefaultListAPIKey(ctx context.Context, db *gorm.DB) ([]*APIKey, error) {
+	in := APIKey{}
+	ormObj, err := in.ToORM(ctx)
+	if err != nil {
+		return nil, err
+	}
+	if hook, ok := interface{}(&ormObj).(APIKeyORMWithBeforeListApplyQuery); ok {
+		if db, err = hook.BeforeListApplyQuery(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	if hook, ok := interface{}(&ormObj).(APIKeyORMWithBeforeListFind); ok {
+		if db, err = hook.BeforeListFind(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	db = db.Where(&ormObj)
+	db = db.Order("id")
+	ormResponse := []APIKeyORM{}
+	if err := db.Find(&ormResponse).Error; err != nil {
+		return nil, err
+	}
+	if hook, ok := interface{}(&ormObj).(APIKeyORMWithAfterListFind); ok {
+		if err = hook.AfterListFind(ctx, db, &ormResponse); err != nil {
+			return nil, err
+		}
+	}
+	pbResponse := []*APIKey{}
+	for _, responseEntry := range ormResponse {
+		temp, err := responseEntry.ToPB(ctx)
+		if err != nil {
+			return nil, err
+		}
+		pbResponse = append(pbResponse, &temp)
+	}
+	return pbResponse, nil
+}
+
+type APIKeyORMWithBeforeListApplyQuery interface {
+	BeforeListApplyQuery(context.Context, *gorm.DB) (*gorm.DB, error)
+}
+type APIKeyORMWithBeforeListFind interface {
+	BeforeListFind(context.Context, *gorm.DB) (*gorm.DB, error)
+}
+type APIKeyORMWithAfterListFind interface {
+	AfterListFind(context.Context, *gorm.DB, *[]APIKeyORM) error
 }

@@ -264,7 +264,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Status'
+                $ref: '#/components/schemas/rpc.Status'
           description: An unexpected error response.
       summary: Create a new account
       tags:
@@ -496,7 +496,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Status'
+                $ref: '#/components/schemas/rpc.Status'
           description: An unexpected error response.
       summary: Update account details
       tags:
@@ -728,7 +728,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Status'
+                $ref: '#/components/schemas/rpc.Status'
           description: An unexpected error response.
       summary: Delete account
       tags:
@@ -959,7 +959,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Status'
+                $ref: '#/components/schemas/rpc.Status'
           description: An unexpected error response.
       summary: Get account details
       tags:
@@ -1205,7 +1205,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Status'
+                $ref: '#/components/schemas/rpc.Status'
           description: An unexpected error response.
       summary: Get all jobs
       tags:
@@ -1443,7 +1443,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Status'
+                $ref: '#/components/schemas/rpc.Status'
           description: An unexpected error response.
       summary: Create a new job scraping task
       tags:
@@ -1696,7 +1696,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Status'
+                $ref: '#/components/schemas/rpc.Status'
           description: An unexpected error response.
       summary: Delete a specific job
       tags:
@@ -1948,7 +1948,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Status'
+                $ref: '#/components/schemas/rpc.Status'
           description: An unexpected error response.
       summary: Get a specific job
       tags:
@@ -2202,7 +2202,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Status'
+                $ref: '#/components/schemas/rpc.Status'
           description: An unexpected error response.
       summary: Download job results as CSV
       tags:
@@ -7104,7 +7104,7 @@ components:
     ErrorResponse:
       properties:
         status:
-          $ref: '#/components/schemas/Status'
+          $ref: '#/components/schemas/rpc.Status'
       title: "Base error message response, extending google.rpc.Status"
       type: object
     FieldError:
@@ -9632,7 +9632,6 @@ components:
         workspace:
           $ref: '#/components/schemas/Workspace'
         placeId:
-          description: Google Places ID
           title: Detailed Google Maps metadata
           type: string
         googleMapsUrl:
@@ -12329,43 +12328,6 @@ components:
         ipAddress:
           title: IP address of the request
           type: string
-      type: object
-    Status:
-      description: |-
-        The `Status` type defines a logical error model that is suitable for
-        different programming environments, including REST APIs and RPC APIs. It is
-        used by [gRPC](https://github.com/grpc). Each `Status` message contains
-        three pieces of data: error code, error message, and error details.
-
-        You can find out more about this error model and how to work with it in the
-        [API Design Guide](https://cloud.google.com/apis/design/errors).
-      example:
-        code: 7
-        details:
-        - '@type': '@type'
-        - '@type': '@type'
-        message: message
-      properties:
-        code:
-          description: |-
-            The status code, which should be an enum value of
-            [google.rpc.Code][google.rpc.Code].
-          format: int32
-          type: integer
-        message:
-          description: |-
-            A developer-facing error message, which should be in English. Any
-            user-facing error message should be localized and sent in the
-            [google.rpc.Status.details][google.rpc.Status.details] field, or localized
-            by the client.
-          type: string
-        details:
-          description: |-
-            A list of messages that carry the error details.  There is a common set of
-            message types for APIs to use.
-          items:
-            $ref: '#/components/schemas/Any'
-          type: array
       type: object
     Suggestions:
       properties:
@@ -15571,6 +15533,43 @@ components:
           format: date-time
           type: string
       title: Workspace represents a business entity with multiple accounts
+      type: object
+    rpc.Status:
+      description: |-
+        The `Status` type defines a logical error model that is suitable for
+        different programming environments, including REST APIs and RPC APIs. It is
+        used by [gRPC](https://github.com/grpc). Each `Status` message contains
+        three pieces of data: error code, error message, and error details.
+
+        You can find out more about this error model and how to work with it in the
+        [API Design Guide](https://cloud.google.com/apis/design/errors).
+      example:
+        code: 7
+        details:
+        - '@type': '@type'
+        - '@type': '@type'
+        message: message
+      properties:
+        code:
+          description: |-
+            The status code, which should be an enum value of
+            [google.rpc.Code][google.rpc.Code].
+          format: int32
+          type: integer
+        message:
+          description: |-
+            A developer-facing error message, which should be in English. Any
+            user-facing error message should be localized and sent in the
+            [google.rpc.Status.details][google.rpc.Status.details] field, or localized
+            by the client.
+          type: string
+        details:
+          description: |-
+            A list of messages that carry the error details.  There is a common set of
+            message types for APIs to use.
+          items:
+            $ref: '#/components/schemas/Any'
+          type: array
       type: object
   securitySchemes:
     ApiKeyAuth:

@@ -5,7 +5,7 @@ managed:
   java_package_prefix: com
   java_string_check_utf8: false
   go_package_prefix:
-    default: github.com/Vector/vector-lead-management/protobuf/api-definitions/pkg/generated/lead-scraper-service/v1
+    default: github.com/Vector/vector-protobuf-definitions/api-definitions/pkg/generated/lead-scraper-service/v1
     except:
       - buf.build/types/dependencies
       - buf.build/googleapis/googleapis

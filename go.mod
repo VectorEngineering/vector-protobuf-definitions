@@ -1,3 +1,3 @@
-module github.com/Vector/vector-lead-management/protobuf
+module github.com/Vector/vector-protobuf-definitions
 
-go 1.23
+go 1.23.4

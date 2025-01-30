@@ -3,7 +3,7 @@ package main
 import (
 	"time"
 
-	leadScraperServiceProto "github.com/Vector/vector-lead-management/protobuf/api-definitions/pkg/generated/lead_scraper_service/v1"
+	leadScraperServiceProto "github.com/Vector/vector-protobuf-definitions/api-definitions/pkg/generated/lead_scraper_service/v1"
 	"gorm.io/gen"
 )
 

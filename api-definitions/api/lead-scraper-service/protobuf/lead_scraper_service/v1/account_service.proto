@@ -6,7 +6,7 @@ import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 import "lead_scraper_service/v1/request_response.proto";
 
-option go_package = "github.com/Vector/vector-lead-management/protobuf/api-definitions/pkg/generated/lead_scraper_service/v1";
+option go_package = "github.com/Vector/vector-protobuf-definitions/api-definitions/pkg/generated/lead_scraper_service/v1";
 
 /**
  * WorkspaceService provides functionality for managing Google Maps scraping jobs.

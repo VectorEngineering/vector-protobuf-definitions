@@ -8369,13 +8369,6 @@
                         "format": "date-time",
                         "title": "Account creation timestamp"
                     },
-                    "scrapingJobs": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/ScrapingJob"
-                        },
-                        "title": "Associated scraping jobs for this account"
-                    },
                     "accountStatus": {
                         "$ref": "#/components/schemas/AccountStatus"
                     },
@@ -10368,10 +10361,12 @@
                         "format": "date-time",
                         "title": "Soft delete timestamp"
                     },
-                    "numLeadsCollected": {
-                        "type": "integer",
-                        "format": "int32",
-                        "title": "The number of leads collected"
+                    "leads": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Lead"
+                        },
+                        "title": "Lead tracking"
                     }
                 },
                 "description": "ScrapingJob represents a Google Maps scraping task.\nThis message defines both the configuration and current state of a scraping operation.\n\nKey components:\n- Basic metadata (id, name, timestamps)\n- Job status tracking\n- Search configuration parameters\n- Geographic settings\n- Performance options\n- Multi-tenant context\n\nDatabase considerations:\n- Stored in \"gmaps_jobs\" table\n- Uses GORM for ORM mapping\n- Includes foreign key to Account\n- Supports soft deletes\n\nUsage example:\n```go\njob := &ScrapingJob{\n    Name: \"Athens Cafes\",\n    Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,\n    Keywords: []string{\"cafe\", \"coffee\"},\n    Lang: \"el\",\n    Zoom: 15,\n    FastMode: true,\n    MaxTime: 3600,\n}\n```"
@@ -11024,12 +11019,12 @@
                         "type": "string",
                         "format": "date-time"
                     },
-                    "leads": {
+                    "scrapingJobs": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Lead"
+                            "$ref": "#/components/schemas/ScrapingJob"
                         },
-                        "title": "Lead tracking"
+                        "title": "Associated scraping jobs for this workspace"
                     }
                 },
                 "title": "Workspace represents a business entity with multiple accounts"

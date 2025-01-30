@@ -144,13 +144,6 @@ message Account {
     // Account creation timestamp
     google.protobuf.Timestamp created_at = 8;
 
-    // Associated scraping jobs for this account
-    repeated ScrapingJob scraping_jobs = 9 [(gorm.field).has_many = {
-        disable_association_autocreate: false
-        disable_association_autoupdate: false
-        preload: true
-    }];
-
     // Account status and permissions
     enum AccountStatus {
         ACCOUNT_STATUS_UNSPECIFIED = 0;
@@ -242,8 +235,13 @@ message Workspace {
     google.protobuf.Timestamp last_job_run = 20;
 
 
-    // Lead tracking
-    repeated Lead leads = 21 [(gorm.field).has_many = {}];
+    // Associated scraping jobs for this workspace
+    repeated ScrapingJob scraping_jobs = 22 [(gorm.field).has_many = {
+        disable_association_autocreate: false
+        disable_association_autoupdate: false
+        preload: true
+    }];
+
 }
 
 /**
@@ -337,8 +335,8 @@ message ScrapingJob {
     // Soft delete timestamp
     google.protobuf.Timestamp deleted_at = 20;
 
-    // The number of leads collected
-    int32 num_leads_collected = 21;
+    // Lead tracking
+    repeated Lead leads = 21 [(gorm.field).has_many = {}];
 }
 
 /**

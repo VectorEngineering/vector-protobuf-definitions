@@ -49,72 +49,104 @@ func newWorkspaceORM(db *gorm.DB, opts ...gen.DOOption) workspaceORM {
 	_workspaceORM.UpdatedAt = field.NewTime(tableName, "updated_at")
 	_workspaceORM.UsedStorage = field.NewInt64(tableName, "used_storage")
 	_workspaceORM.WorkspaceJobLimit = field.NewInt32(tableName, "workspace_job_limit")
-	_workspaceORM.Leads = workspaceORMHasManyLeads{
+	_workspaceORM.ScrapingJobs = workspaceORMHasManyScrapingJobs{
 		db: db.Session(&gorm.Session{}),
 
-		RelationField: field.NewRelation("Leads", "lead_scraper_servicev1.LeadORM"),
-		Job: struct {
+		RelationField: field.NewRelation("ScrapingJobs", "lead_scraper_servicev1.ScrapingJobORM"),
+		Leads: struct {
 			field.RelationField
-		}{
-			RelationField: field.NewRelation("Leads.Job", "lead_scraper_servicev1.ScrapingJobORM"),
-		},
-		Workspace: struct {
-			field.RelationField
-			Leads struct {
+			Job struct {
 				field.RelationField
 			}
-			Workflows struct {
+			Workspace struct {
 				field.RelationField
-				Workspace struct {
+				ScrapingJobs struct {
 					field.RelationField
 				}
-				Jobs struct {
+				Workflows struct {
 					field.RelationField
+					Workspace struct {
+						field.RelationField
+					}
+					Jobs struct {
+						field.RelationField
+					}
 				}
 			}
+			RegularHours struct {
+				field.RelationField
+			}
+			Reviews struct {
+				field.RelationField
+			}
+			SpecialHours struct {
+				field.RelationField
+			}
 		}{
-			RelationField: field.NewRelation("Leads.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-			Leads: struct {
+			RelationField: field.NewRelation("ScrapingJobs.Leads", "lead_scraper_servicev1.LeadORM"),
+			Job: struct {
 				field.RelationField
 			}{
-				RelationField: field.NewRelation("Leads.Workspace.Leads", "lead_scraper_servicev1.LeadORM"),
+				RelationField: field.NewRelation("ScrapingJobs.Leads.Job", "lead_scraper_servicev1.ScrapingJobORM"),
 			},
-			Workflows: struct {
+			Workspace: struct {
 				field.RelationField
-				Workspace struct {
+				ScrapingJobs struct {
 					field.RelationField
 				}
-				Jobs struct {
+				Workflows struct {
 					field.RelationField
+					Workspace struct {
+						field.RelationField
+					}
+					Jobs struct {
+						field.RelationField
+					}
 				}
 			}{
-				RelationField: field.NewRelation("Leads.Workspace.Workflows", "lead_scraper_servicev1.ScrapingWorkflowORM"),
-				Workspace: struct {
+				RelationField: field.NewRelation("ScrapingJobs.Leads.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
+				ScrapingJobs: struct {
 					field.RelationField
 				}{
-					RelationField: field.NewRelation("Leads.Workspace.Workflows.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
+					RelationField: field.NewRelation("ScrapingJobs.Leads.Workspace.ScrapingJobs", "lead_scraper_servicev1.ScrapingJobORM"),
 				},
-				Jobs: struct {
+				Workflows: struct {
 					field.RelationField
+					Workspace struct {
+						field.RelationField
+					}
+					Jobs struct {
+						field.RelationField
+					}
 				}{
-					RelationField: field.NewRelation("Leads.Workspace.Workflows.Jobs", "lead_scraper_servicev1.ScrapingJobORM"),
+					RelationField: field.NewRelation("ScrapingJobs.Leads.Workspace.Workflows", "lead_scraper_servicev1.ScrapingWorkflowORM"),
+					Workspace: struct {
+						field.RelationField
+					}{
+						RelationField: field.NewRelation("ScrapingJobs.Leads.Workspace.Workflows.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
+					},
+					Jobs: struct {
+						field.RelationField
+					}{
+						RelationField: field.NewRelation("ScrapingJobs.Leads.Workspace.Workflows.Jobs", "lead_scraper_servicev1.ScrapingJobORM"),
+					},
 				},
 			},
-		},
-		RegularHours: struct {
-			field.RelationField
-		}{
-			RelationField: field.NewRelation("Leads.RegularHours", "lead_scraper_servicev1.BusinessHoursORM"),
-		},
-		Reviews: struct {
-			field.RelationField
-		}{
-			RelationField: field.NewRelation("Leads.Reviews", "lead_scraper_servicev1.ReviewORM"),
-		},
-		SpecialHours: struct {
-			field.RelationField
-		}{
-			RelationField: field.NewRelation("Leads.SpecialHours", "lead_scraper_servicev1.BusinessHoursORM"),
+			RegularHours: struct {
+				field.RelationField
+			}{
+				RelationField: field.NewRelation("ScrapingJobs.Leads.RegularHours", "lead_scraper_servicev1.BusinessHoursORM"),
+			},
+			Reviews: struct {
+				field.RelationField
+			}{
+				RelationField: field.NewRelation("ScrapingJobs.Leads.Reviews", "lead_scraper_servicev1.ReviewORM"),
+			},
+			SpecialHours: struct {
+				field.RelationField
+			}{
+				RelationField: field.NewRelation("ScrapingJobs.Leads.SpecialHours", "lead_scraper_servicev1.BusinessHoursORM"),
+			},
 		},
 	}
 
@@ -152,7 +184,7 @@ type workspaceORM struct {
 	UpdatedAt           field.Time
 	UsedStorage         field.Int64
 	WorkspaceJobLimit   field.Int32
-	Leads               workspaceORMHasManyLeads
+	ScrapingJobs        workspaceORMHasManyScrapingJobs
 
 	Workflows workspaceORMHasManyWorkflows
 
@@ -239,41 +271,44 @@ func (w workspaceORM) replaceDB(db *gorm.DB) workspaceORM {
 	return w
 }
 
-type workspaceORMHasManyLeads struct {
+type workspaceORMHasManyScrapingJobs struct {
 	db *gorm.DB
 
 	field.RelationField
 
-	Job struct {
+	Leads struct {
 		field.RelationField
-	}
-	Workspace struct {
-		field.RelationField
-		Leads struct {
+		Job struct {
 			field.RelationField
 		}
-		Workflows struct {
+		Workspace struct {
 			field.RelationField
-			Workspace struct {
+			ScrapingJobs struct {
 				field.RelationField
 			}
-			Jobs struct {
+			Workflows struct {
 				field.RelationField
+				Workspace struct {
+					field.RelationField
+				}
+				Jobs struct {
+					field.RelationField
+				}
 			}
 		}
-	}
-	RegularHours struct {
-		field.RelationField
-	}
-	Reviews struct {
-		field.RelationField
-	}
-	SpecialHours struct {
-		field.RelationField
+		RegularHours struct {
+			field.RelationField
+		}
+		Reviews struct {
+			field.RelationField
+		}
+		SpecialHours struct {
+			field.RelationField
+		}
 	}
 }
 
-func (a workspaceORMHasManyLeads) Where(conds ...field.Expr) *workspaceORMHasManyLeads {
+func (a workspaceORMHasManyScrapingJobs) Where(conds ...field.Expr) *workspaceORMHasManyScrapingJobs {
 	if len(conds) == 0 {
 		return &a
 	}
@@ -286,27 +321,27 @@ func (a workspaceORMHasManyLeads) Where(conds ...field.Expr) *workspaceORMHasMan
 	return &a
 }
 
-func (a workspaceORMHasManyLeads) WithContext(ctx context.Context) *workspaceORMHasManyLeads {
+func (a workspaceORMHasManyScrapingJobs) WithContext(ctx context.Context) *workspaceORMHasManyScrapingJobs {
 	a.db = a.db.WithContext(ctx)
 	return &a
 }
 
-func (a workspaceORMHasManyLeads) Session(session *gorm.Session) *workspaceORMHasManyLeads {
+func (a workspaceORMHasManyScrapingJobs) Session(session *gorm.Session) *workspaceORMHasManyScrapingJobs {
 	a.db = a.db.Session(session)
 	return &a
 }
 
-func (a workspaceORMHasManyLeads) Model(m *lead_scraper_servicev1.WorkspaceORM) *workspaceORMHasManyLeadsTx {
-	return &workspaceORMHasManyLeadsTx{a.db.Model(m).Association(a.Name())}
+func (a workspaceORMHasManyScrapingJobs) Model(m *lead_scraper_servicev1.WorkspaceORM) *workspaceORMHasManyScrapingJobsTx {
+	return &workspaceORMHasManyScrapingJobsTx{a.db.Model(m).Association(a.Name())}
 }
 
-type workspaceORMHasManyLeadsTx struct{ tx *gorm.Association }
+type workspaceORMHasManyScrapingJobsTx struct{ tx *gorm.Association }
 
-func (a workspaceORMHasManyLeadsTx) Find() (result []*lead_scraper_servicev1.LeadORM, err error) {
+func (a workspaceORMHasManyScrapingJobsTx) Find() (result []*lead_scraper_servicev1.ScrapingJobORM, err error) {
 	return result, a.tx.Find(&result)
 }
 
-func (a workspaceORMHasManyLeadsTx) Append(values ...*lead_scraper_servicev1.LeadORM) (err error) {
+func (a workspaceORMHasManyScrapingJobsTx) Append(values ...*lead_scraper_servicev1.ScrapingJobORM) (err error) {
 	targetValues := make([]interface{}, len(values))
 	for i, v := range values {
 		targetValues[i] = v
@@ -314,7 +349,7 @@ func (a workspaceORMHasManyLeadsTx) Append(values ...*lead_scraper_servicev1.Lea
 	return a.tx.Append(targetValues...)
 }
 
-func (a workspaceORMHasManyLeadsTx) Replace(values ...*lead_scraper_servicev1.LeadORM) (err error) {
+func (a workspaceORMHasManyScrapingJobsTx) Replace(values ...*lead_scraper_servicev1.ScrapingJobORM) (err error) {
 	targetValues := make([]interface{}, len(values))
 	for i, v := range values {
 		targetValues[i] = v
@@ -322,7 +357,7 @@ func (a workspaceORMHasManyLeadsTx) Replace(values ...*lead_scraper_servicev1.Le
 	return a.tx.Replace(targetValues...)
 }
 
-func (a workspaceORMHasManyLeadsTx) Delete(values ...*lead_scraper_servicev1.LeadORM) (err error) {
+func (a workspaceORMHasManyScrapingJobsTx) Delete(values ...*lead_scraper_servicev1.ScrapingJobORM) (err error) {
 	targetValues := make([]interface{}, len(values))
 	for i, v := range values {
 		targetValues[i] = v
@@ -330,11 +365,11 @@ func (a workspaceORMHasManyLeadsTx) Delete(values ...*lead_scraper_servicev1.Lea
 	return a.tx.Delete(targetValues...)
 }
 
-func (a workspaceORMHasManyLeadsTx) Clear() error {
+func (a workspaceORMHasManyScrapingJobsTx) Clear() error {
 	return a.tx.Clear()
 }
 
-func (a workspaceORMHasManyLeadsTx) Count() int64 {
+func (a workspaceORMHasManyScrapingJobsTx) Count() int64 {
 	return a.tx.Count()
 }
 

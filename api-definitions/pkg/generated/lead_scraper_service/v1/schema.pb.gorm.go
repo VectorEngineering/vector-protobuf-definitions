@@ -29,7 +29,6 @@ type AccountORM struct {
 	OrgId              string              `gorm:"index:idx_accounts_org_id"`
 	Permissions        pq.StringArray      `gorm:"type:text[]"`
 	Roles              pq.StringArray      `gorm:"type:text[]"`
-	ScrapingJobs       []*ScrapingJobORM   `gorm:"foreignKey:AccountId;references:Id"`
 	Settings           *AccountSettingsORM `gorm:"foreignKey:AccountId;references:Id"`
 	TenantId           string              `gorm:"index:idx_accounts_tenant_id"`
 	Timezone           string
@@ -68,17 +67,6 @@ func (m *Account) ToORM(ctx context.Context) (AccountORM, error) {
 	if m.CreatedAt != nil {
 		t := m.CreatedAt.AsTime()
 		to.CreatedAt = &t
-	}
-	for _, v := range m.ScrapingJobs {
-		if v != nil {
-			if tempScrapingJobs, cErr := v.ToORM(ctx); cErr == nil {
-				to.ScrapingJobs = append(to.ScrapingJobs, &tempScrapingJobs)
-			} else {
-				return to, cErr
-			}
-		} else {
-			to.ScrapingJobs = append(to.ScrapingJobs, nil)
-		}
 	}
 	to.AccountStatus = Account_AccountStatus_name[int32(m.AccountStatus)]
 	if m.Roles != nil {
@@ -145,17 +133,6 @@ func (m *AccountORM) ToPB(ctx context.Context) (Account, error) {
 	}
 	if m.CreatedAt != nil {
 		to.CreatedAt = timestamppb.New(*m.CreatedAt)
-	}
-	for _, v := range m.ScrapingJobs {
-		if v != nil {
-			if tempScrapingJobs, cErr := v.ToPB(ctx); cErr == nil {
-				to.ScrapingJobs = append(to.ScrapingJobs, &tempScrapingJobs)
-			} else {
-				return to, cErr
-			}
-		} else {
-			to.ScrapingJobs = append(to.ScrapingJobs, nil)
-		}
 	}
 	to.AccountStatus = Account_AccountStatus(Account_AccountStatus_value[m.AccountStatus])
 	if m.Roles != nil {
@@ -234,8 +211,8 @@ type WorkspaceORM struct {
 	Industry            string
 	JobsRunThisMonth    int32
 	LastJobRun          *time.Time
-	Leads               []*LeadORM `gorm:"foreignKey:WorkspaceId;references:Id"`
-	Name                string     `gorm:"index:idx_workspaces_name"`
+	Name                string            `gorm:"index:idx_workspaces_name"`
+	ScrapingJobs        []*ScrapingJobORM `gorm:"foreignKey:WorkspaceId;references:Id"`
 	Soc2Compliant       bool
 	StorageQuota        int64
 	TotalLeadsCollected int32
@@ -301,15 +278,15 @@ func (m *Workspace) ToORM(ctx context.Context) (WorkspaceORM, error) {
 		t := m.LastJobRun.AsTime()
 		to.LastJobRun = &t
 	}
-	for _, v := range m.Leads {
+	for _, v := range m.ScrapingJobs {
 		if v != nil {
-			if tempLeads, cErr := v.ToORM(ctx); cErr == nil {
-				to.Leads = append(to.Leads, &tempLeads)
+			if tempScrapingJobs, cErr := v.ToORM(ctx); cErr == nil {
+				to.ScrapingJobs = append(to.ScrapingJobs, &tempScrapingJobs)
 			} else {
 				return to, cErr
 			}
 		} else {
-			to.Leads = append(to.Leads, nil)
+			to.ScrapingJobs = append(to.ScrapingJobs, nil)
 		}
 	}
 	if posthook, ok := interface{}(m).(WorkspaceWithAfterToORM); ok {
@@ -365,15 +342,15 @@ func (m *WorkspaceORM) ToPB(ctx context.Context) (Workspace, error) {
 	if m.LastJobRun != nil {
 		to.LastJobRun = timestamppb.New(*m.LastJobRun)
 	}
-	for _, v := range m.Leads {
+	for _, v := range m.ScrapingJobs {
 		if v != nil {
-			if tempLeads, cErr := v.ToPB(ctx); cErr == nil {
-				to.Leads = append(to.Leads, &tempLeads)
+			if tempScrapingJobs, cErr := v.ToPB(ctx); cErr == nil {
+				to.ScrapingJobs = append(to.ScrapingJobs, &tempScrapingJobs)
 			} else {
 				return to, cErr
 			}
 		} else {
-			to.Leads = append(to.Leads, nil)
+			to.ScrapingJobs = append(to.ScrapingJobs, nil)
 		}
 	}
 	if posthook, ok := interface{}(m).(WorkspaceWithAfterToPB); ok {
@@ -406,7 +383,6 @@ type WorkspaceWithAfterToPB interface {
 }
 
 type ScrapingJobORM struct {
-	AccountId          *uint64
 	CreatedAt          *time.Time
 	DeletedAt          *time.Time
 	Depth              int32
@@ -416,10 +392,10 @@ type ScrapingJobORM struct {
 	Keywords           pq.StringArray `gorm:"type:text[]"`
 	Lang               string
 	Lat                string
+	Leads              []*LeadORM `gorm:"foreignKey:ScrapingJobId;references:Id"`
 	Lon                string
 	MaxTime            int32
 	Name               string `gorm:"index:idx_scraping_jobs_name"`
-	NumLeadsCollected  int32
 	Payload            []byte `gorm:"type:bytea"`
 	PayloadType        string
 	Priority           int32
@@ -428,6 +404,7 @@ type ScrapingJobORM struct {
 	ScrapingWorkflowId *uint64
 	Status             string
 	UpdatedAt          *time.Time
+	WorkspaceId        *uint64
 	Zoom               int32
 }
 
@@ -481,7 +458,17 @@ func (m *ScrapingJob) ToORM(ctx context.Context) (ScrapingJobORM, error) {
 		t := m.DeletedAt.AsTime()
 		to.DeletedAt = &t
 	}
-	to.NumLeadsCollected = m.NumLeadsCollected
+	for _, v := range m.Leads {
+		if v != nil {
+			if tempLeads, cErr := v.ToORM(ctx); cErr == nil {
+				to.Leads = append(to.Leads, &tempLeads)
+			} else {
+				return to, cErr
+			}
+		} else {
+			to.Leads = append(to.Leads, nil)
+		}
+	}
 	if posthook, ok := interface{}(m).(ScrapingJobWithAfterToORM); ok {
 		err = posthook.AfterToORM(ctx, &to)
 	}
@@ -530,7 +517,17 @@ func (m *ScrapingJobORM) ToPB(ctx context.Context) (ScrapingJob, error) {
 	if m.DeletedAt != nil {
 		to.DeletedAt = timestamppb.New(*m.DeletedAt)
 	}
-	to.NumLeadsCollected = m.NumLeadsCollected
+	for _, v := range m.Leads {
+		if v != nil {
+			if tempLeads, cErr := v.ToPB(ctx); cErr == nil {
+				to.Leads = append(to.Leads, &tempLeads)
+			} else {
+				return to, cErr
+			}
+		} else {
+			to.Leads = append(to.Leads, nil)
+		}
+	}
 	if posthook, ok := interface{}(m).(ScrapingJobWithAfterToPB); ok {
 		err = posthook.AfterToPB(ctx, &to)
 	}
@@ -2135,7 +2132,7 @@ func DefaultCreateAccount(ctx context.Context, in *Account, db *gorm.DB) (*Accou
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(AccountORMWithAfterCreate_); ok {
@@ -2285,15 +2282,6 @@ func DefaultStrictUpdateAccount(ctx context.Context, in *Account, db *gorm.DB) (
 			return nil, err
 		}
 	}
-	filterScrapingJobs := ScrapingJobORM{}
-	if ormObj.Id == 0 {
-		return nil, errors.EmptyIdError
-	}
-	filterScrapingJobs.AccountId = new(uint64)
-	*filterScrapingJobs.AccountId = ormObj.Id
-	if err = db.Where(filterScrapingJobs).Delete(ScrapingJobORM{}).Error; err != nil {
-		return nil, err
-	}
 	filterSettings := AccountSettingsORM{}
 	if ormObj.Id == 0 {
 		return nil, errors.EmptyIdError
@@ -2317,7 +2305,7 @@ func DefaultStrictUpdateAccount(ctx context.Context, in *Account, db *gorm.DB) (
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("ScrapingJobs").Preload("Workspaces").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(AccountORMWithAfterStrictUpdateSave); ok {
@@ -2519,10 +2507,6 @@ func DefaultApplyFieldMaskAccount(ctx context.Context, patchee *Account, patcher
 			patchee.CreatedAt = patcher.CreatedAt
 			continue
 		}
-		if f == prefix+"ScrapingJobs" {
-			patchee.ScrapingJobs = patcher.ScrapingJobs
-			continue
-		}
 		if f == prefix+"AccountStatus" {
 			patchee.AccountStatus = patcher.AccountStatus
 			continue
@@ -2673,7 +2657,7 @@ func DefaultCreateWorkspace(ctx context.Context, in *Workspace, db *gorm.DB) (*W
 			return nil, err
 		}
 	}
-	if err = db.Omit().Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(WorkspaceORMWithAfterCreate_); ok {
@@ -2823,13 +2807,13 @@ func DefaultStrictUpdateWorkspace(ctx context.Context, in *Workspace, db *gorm.D
 			return nil, err
 		}
 	}
-	filterLeads := LeadORM{}
+	filterScrapingJobs := ScrapingJobORM{}
 	if ormObj.Id == 0 {
 		return nil, errors.EmptyIdError
 	}
-	filterLeads.WorkspaceId = new(uint64)
-	*filterLeads.WorkspaceId = ormObj.Id
-	if err = db.Where(filterLeads).Delete(LeadORM{}).Error; err != nil {
+	filterScrapingJobs.WorkspaceId = new(uint64)
+	*filterScrapingJobs.WorkspaceId = ormObj.Id
+	if err = db.Where(filterScrapingJobs).Delete(ScrapingJobORM{}).Error; err != nil {
 		return nil, err
 	}
 	filterWorkflows := ScrapingWorkflowORM{}
@@ -2846,7 +2830,7 @@ func DefaultStrictUpdateWorkspace(ctx context.Context, in *Workspace, db *gorm.D
 			return nil, err
 		}
 	}
-	if err = db.Omit().Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(WorkspaceORMWithAfterStrictUpdateSave); ok {
@@ -3110,8 +3094,8 @@ func DefaultApplyFieldMaskWorkspace(ctx context.Context, patchee *Workspace, pat
 			patchee.LastJobRun = patcher.LastJobRun
 			continue
 		}
-		if f == prefix+"Leads" {
-			patchee.Leads = patcher.Leads
+		if f == prefix+"ScrapingJobs" {
+			patchee.ScrapingJobs = patcher.ScrapingJobs
 			continue
 		}
 	}
@@ -3184,7 +3168,7 @@ func DefaultCreateScrapingJob(ctx context.Context, in *ScrapingJob, db *gorm.DB)
 			return nil, err
 		}
 	}
-	if err = db.Omit().Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingJobORMWithAfterCreate_); ok {
@@ -3334,12 +3318,21 @@ func DefaultStrictUpdateScrapingJob(ctx context.Context, in *ScrapingJob, db *go
 			return nil, err
 		}
 	}
+	filterLeads := LeadORM{}
+	if ormObj.Id == "" {
+		return nil, errors.EmptyIdError
+	}
+	filterLeads.ScrapingJobId = new(string)
+	*filterLeads.ScrapingJobId = ormObj.Id
+	if err = db.Where(filterLeads).Delete(LeadORM{}).Error; err != nil {
+		return nil, err
+	}
 	if hook, ok := interface{}(&ormObj).(ScrapingJobORMWithBeforeStrictUpdateSave); ok {
 		if db, err = hook.BeforeStrictUpdateSave(ctx, db); err != nil {
 			return nil, err
 		}
 	}
-	if err = db.Omit().Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingJobORMWithAfterStrictUpdateSave); ok {
@@ -3587,8 +3580,8 @@ func DefaultApplyFieldMaskScrapingJob(ctx context.Context, patchee *ScrapingJob,
 			patchee.DeletedAt = patcher.DeletedAt
 			continue
 		}
-		if f == prefix+"NumLeadsCollected" {
-			patchee.NumLeadsCollected = patcher.NumLeadsCollected
+		if f == prefix+"Leads" {
+			patchee.Leads = patcher.Leads
 			continue
 		}
 	}
@@ -3661,7 +3654,7 @@ func DefaultCreateScrapingWorkflow(ctx context.Context, in *ScrapingWorkflow, db
 			return nil, err
 		}
 	}
-	if err = db.Omit().Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingWorkflowORMWithAfterCreate_); ok {
@@ -3825,7 +3818,7 @@ func DefaultStrictUpdateScrapingWorkflow(ctx context.Context, in *ScrapingWorkfl
 			return nil, err
 		}
 	}
-	if err = db.Omit().Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingWorkflowORMWithAfterStrictUpdateSave); ok {
@@ -4341,7 +4334,7 @@ func DefaultCreateLead(ctx context.Context, in *Lead, db *gorm.DB) (*Lead, error
 			return nil, err
 		}
 	}
-	if err = db.Omit().Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(LeadORMWithAfterCreate_); ok {
@@ -4523,7 +4516,7 @@ func DefaultStrictUpdateLead(ctx context.Context, in *Lead, db *gorm.DB) (*Lead,
 			return nil, err
 		}
 	}
-	if err = db.Omit().Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(LeadORMWithAfterStrictUpdateSave); ok {
@@ -6512,7 +6505,7 @@ func DefaultCreateAPIKey(ctx context.Context, in *APIKey, db *gorm.DB) (*APIKey,
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("ScrapingJobs").Preload("Workspaces").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("Settings").Preload("Workspaces").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(APIKeyORMWithAfterCreate_); ok {
@@ -6667,7 +6660,7 @@ func DefaultStrictUpdateAPIKey(ctx context.Context, in *APIKey, db *gorm.DB) (*A
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Workspaces").Preload("ScrapingJobs").Preload("Settings").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(APIKeyORMWithAfterStrictUpdateSave); ok {

@@ -173,40 +173,6 @@ func (m *Account) validate(all bool) error {
 		}
 	}
 
-	for idx, item := range m.GetScrapingJobs() {
-		_, _ = idx, item
-
-		if all {
-			switch v := interface{}(item).(type) {
-			case interface{ ValidateAll() error }:
-				if err := v.ValidateAll(); err != nil {
-					errors = append(errors, AccountValidationError{
-						field:  fmt.Sprintf("ScrapingJobs[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			case interface{ Validate() error }:
-				if err := v.Validate(); err != nil {
-					errors = append(errors, AccountValidationError{
-						field:  fmt.Sprintf("ScrapingJobs[%v]", idx),
-						reason: "embedded message failed validation",
-						cause:  err,
-					})
-				}
-			}
-		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
-			if err := v.Validate(); err != nil {
-				return AccountValidationError{
-					field:  fmt.Sprintf("ScrapingJobs[%v]", idx),
-					reason: "embedded message failed validation",
-					cause:  err,
-				}
-			}
-		}
-
-	}
-
 	// no validation rules for AccountStatus
 
 	// no validation rules for MfaEnabled
@@ -647,7 +613,7 @@ func (m *Workspace) validate(all bool) error {
 		}
 	}
 
-	for idx, item := range m.GetLeads() {
+	for idx, item := range m.GetScrapingJobs() {
 		_, _ = idx, item
 
 		if all {
@@ -655,7 +621,7 @@ func (m *Workspace) validate(all bool) error {
 			case interface{ ValidateAll() error }:
 				if err := v.ValidateAll(); err != nil {
 					errors = append(errors, WorkspaceValidationError{
-						field:  fmt.Sprintf("Leads[%v]", idx),
+						field:  fmt.Sprintf("ScrapingJobs[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -663,7 +629,7 @@ func (m *Workspace) validate(all bool) error {
 			case interface{ Validate() error }:
 				if err := v.Validate(); err != nil {
 					errors = append(errors, WorkspaceValidationError{
-						field:  fmt.Sprintf("Leads[%v]", idx),
+						field:  fmt.Sprintf("ScrapingJobs[%v]", idx),
 						reason: "embedded message failed validation",
 						cause:  err,
 					})
@@ -672,7 +638,7 @@ func (m *Workspace) validate(all bool) error {
 		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
 			if err := v.Validate(); err != nil {
 				return WorkspaceValidationError{
-					field:  fmt.Sprintf("Leads[%v]", idx),
+					field:  fmt.Sprintf("ScrapingJobs[%v]", idx),
 					reason: "embedded message failed validation",
 					cause:  err,
 				}
@@ -956,7 +922,39 @@ func (m *ScrapingJob) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for NumLeadsCollected
+	for idx, item := range m.GetLeads() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ScrapingJobValidationError{
+						field:  fmt.Sprintf("Leads[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ScrapingJobValidationError{
+						field:  fmt.Sprintf("Leads[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ScrapingJobValidationError{
+					field:  fmt.Sprintf("Leads[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
 
 	if len(errors) > 0 {
 		return ScrapingJobMultiError(errors)

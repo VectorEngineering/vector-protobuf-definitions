@@ -2295,11 +2295,6 @@ components:
           type: string
           format: date-time
           title: Account creation timestamp
-        scrapingJobs:
-          type: array
-          items:
-            $ref: '#/components/schemas/ScrapingJob'
-          title: Associated scraping jobs for this account
         accountStatus:
           $ref: '#/components/schemas/AccountStatus'
         roles:
@@ -4005,10 +4000,11 @@ components:
           type: string
           format: date-time
           title: Soft delete timestamp
-        numLeadsCollected:
-          type: integer
-          format: int32
-          title: The number of leads collected
+        leads:
+          type: array
+          items:
+            $ref: '#/components/schemas/Lead'
+          title: Lead tracking
       description: >-
         ScrapingJob represents a Google Maps scraping task.
 
@@ -4575,11 +4571,11 @@ components:
         lastJobRun:
           type: string
           format: date-time
-        leads:
+        scrapingJobs:
           type: array
           items:
-            $ref: '#/components/schemas/Lead'
-          title: Lead tracking
+            $ref: '#/components/schemas/ScrapingJob'
+          title: Associated scraping jobs for this workspace
       title: Workspace represents a business entity with multiple accounts
     rpc.Status:
       type: object

@@ -11,7 +11,6 @@
 | **lastModifiedAt** | **Date** |  | [optional] [default to null] |
 | **deletedAt** | **Date** |  | [optional] [default to null] |
 | **createdAt** | **Date** |  | [optional] [default to null] |
-| **scrapingJobs** | [**List**](ScrapingJob.md) |  | [optional] [default to null] |
 | **accountStatus** | [**AccountStatus**](AccountStatus.md) |  | [optional] [default to null] |
 | **roles** | **List** |  | [optional] [default to null] |
 | **permissions** | **List** |  | [optional] [default to null] |

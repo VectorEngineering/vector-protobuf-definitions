@@ -23,7 +23,6 @@ type AccountORM struct {
 	Email              string `gorm:"index:idx_accounts_email"`
 	Id                 uint64 `gorm:"primaryKey"`
 	LastLoginAt        *time.Time
-	LastModifiedAt     *time.Time
 	MfaEnabled         bool
 	MonthlyJobLimit    int32
 	OrgId              string              `gorm:"index:idx_accounts_org_id"`
@@ -56,10 +55,6 @@ func (m *Account) ToORM(ctx context.Context) (AccountORM, error) {
 	to.OrgId = m.OrgId
 	to.TenantId = m.TenantId
 	to.Email = m.Email
-	if m.LastModifiedAt != nil {
-		t := m.LastModifiedAt.AsTime()
-		to.LastModifiedAt = &t
-	}
 	if m.DeletedAt != nil {
 		t := m.DeletedAt.AsTime()
 		to.DeletedAt = &t
@@ -125,9 +120,6 @@ func (m *AccountORM) ToPB(ctx context.Context) (Account, error) {
 	to.OrgId = m.OrgId
 	to.TenantId = m.TenantId
 	to.Email = m.Email
-	if m.LastModifiedAt != nil {
-		to.LastModifiedAt = timestamppb.New(*m.LastModifiedAt)
-	}
 	if m.DeletedAt != nil {
 		to.DeletedAt = timestamppb.New(*m.DeletedAt)
 	}
@@ -2412,7 +2404,6 @@ func DefaultApplyFieldMaskAccount(ctx context.Context, patchee *Account, patcher
 		return nil, errors.NilArgumentError
 	}
 	var err error
-	var updatedLastModifiedAt bool
 	var updatedDeletedAt bool
 	var updatedCreatedAt bool
 	var updatedLastLoginAt bool
@@ -2436,29 +2427,6 @@ func DefaultApplyFieldMaskAccount(ctx context.Context, patchee *Account, patcher
 		}
 		if f == prefix+"Email" {
 			patchee.Email = patcher.Email
-			continue
-		}
-		if !updatedLastModifiedAt && strings.HasPrefix(f, prefix+"LastModifiedAt.") {
-			if patcher.LastModifiedAt == nil {
-				patchee.LastModifiedAt = nil
-				continue
-			}
-			if patchee.LastModifiedAt == nil {
-				patchee.LastModifiedAt = &timestamppb.Timestamp{}
-			}
-			childMask := &field_mask.FieldMask{}
-			for j := i; j < len(updateMask.Paths); j++ {
-				if trimPath := strings.TrimPrefix(updateMask.Paths[j], prefix+"LastModifiedAt."); trimPath != updateMask.Paths[j] {
-					childMask.Paths = append(childMask.Paths, trimPath)
-				}
-			}
-			if err := gorm1.MergeWithMask(patcher.LastModifiedAt, patchee.LastModifiedAt, childMask); err != nil {
-				return nil, nil
-			}
-		}
-		if f == prefix+"LastModifiedAt" {
-			updatedLastModifiedAt = true
-			patchee.LastModifiedAt = patcher.LastModifiedAt
 			continue
 		}
 		if !updatedDeletedAt && strings.HasPrefix(f, prefix+"DeletedAt.") {
@@ -6505,7 +6473,7 @@ func DefaultCreateAPIKey(ctx context.Context, in *APIKey, db *gorm.DB) (*APIKey,
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("Settings").Preload("Workspaces").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(APIKeyORMWithAfterCreate_); ok {
@@ -6660,7 +6628,7 @@ func DefaultStrictUpdateAPIKey(ctx context.Context, in *APIKey, db *gorm.DB) (*A
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Preload("ScrapingJobs").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(APIKeyORMWithAfterStrictUpdateSave); ok {

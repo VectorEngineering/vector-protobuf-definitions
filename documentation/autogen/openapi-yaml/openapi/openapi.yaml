@@ -2263,7 +2263,6 @@ components:
           require2fa: true
           defaultDataRetention: defaultDataRetention
           updatedAt: 2000-01-23T04:56:07.000+00:00
-        lastModifiedAt: 2000-01-23T04:56:07.000+00:00
         timezone: timezone
         roles:
         - roles
@@ -6702,10 +6701,6 @@ components:
         email:
           title: User's email address
           type: string
-        lastModifiedAt:
-          format: date-time
-          title: Timestamp of last modification
-          type: string
         deletedAt:
           format: date-time
           title: Soft delete timestamp
@@ -7172,7 +7167,6 @@ components:
             require2fa: true
             defaultDataRetention: defaultDataRetention
             updatedAt: 2000-01-23T04:56:07.000+00:00
-          lastModifiedAt: 2000-01-23T04:56:07.000+00:00
           timezone: timezone
           roles:
           - roles
@@ -11616,7 +11610,6 @@ components:
             require2fa: true
             defaultDataRetention: defaultDataRetention
             updatedAt: 2000-01-23T04:56:07.000+00:00
-          lastModifiedAt: 2000-01-23T04:56:07.000+00:00
           timezone: timezone
           roles:
           - roles
@@ -16323,7 +16316,6 @@ components:
             require2fa: true
             defaultDataRetention: defaultDataRetention
             updatedAt: 2000-01-23T04:56:07.000+00:00
-          lastModifiedAt: 2000-01-23T04:56:07.000+00:00
           timezone: timezone
           roles:
           - roles
@@ -24333,7 +24325,6 @@ components:
             require2fa: true
             defaultDataRetention: defaultDataRetention
             updatedAt: 2000-01-23T04:56:07.000+00:00
-          lastModifiedAt: 2000-01-23T04:56:07.000+00:00
           timezone: timezone
           roles:
           - roles
@@ -28773,7 +28764,6 @@ components:
             require2fa: true
             defaultDataRetention: defaultDataRetention
             updatedAt: 2000-01-23T04:56:07.000+00:00
-          lastModifiedAt: 2000-01-23T04:56:07.000+00:00
           timezone: timezone
           roles:
           - roles

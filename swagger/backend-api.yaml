@@ -2283,10 +2283,6 @@ components:
         email:
           type: string
           title: User's email address
-        lastModifiedAt:
-          type: string
-          format: date-time
-          title: Timestamp of last modification
         deletedAt:
           type: string
           format: date-time

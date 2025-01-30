@@ -8,7 +8,6 @@
 | **orgId** | **String** |  | [optional] [default to null] |
 | **tenantId** | **String** |  | [optional] [default to null] |
 | **email** | **String** |  | [optional] [default to null] |
-| **lastModifiedAt** | **Date** |  | [optional] [default to null] |
 | **deletedAt** | **Date** |  | [optional] [default to null] |
 | **createdAt** | **Date** |  | [optional] [default to null] |
 | **accountStatus** | [**AccountStatus**](AccountStatus.md) |  | [optional] [default to null] |

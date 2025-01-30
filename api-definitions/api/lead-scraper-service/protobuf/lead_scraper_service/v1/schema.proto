@@ -135,9 +135,6 @@ message Account {
     // User's email address
     string email = 5 [(gorm.field).tag = {index: "idx_accounts_email"}];
 
-    // Timestamp of last modification
-    google.protobuf.Timestamp last_modified_at = 6;
-
     // Soft delete timestamp
     google.protobuf.Timestamp deleted_at = 7;
 

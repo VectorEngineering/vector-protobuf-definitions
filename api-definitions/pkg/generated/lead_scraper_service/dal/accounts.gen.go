@@ -38,7 +38,6 @@ func newAccountORM(db *gorm.DB, opts ...gen.DOOption) accountORM {
 	_accountORM.Email = field.NewString(tableName, "email")
 	_accountORM.Id = field.NewUint64(tableName, "id")
 	_accountORM.LastLoginAt = field.NewTime(tableName, "last_login_at")
-	_accountORM.LastModifiedAt = field.NewTime(tableName, "last_modified_at")
 	_accountORM.MfaEnabled = field.NewBool(tableName, "mfa_enabled")
 	_accountORM.MonthlyJobLimit = field.NewInt32(tableName, "monthly_job_limit")
 	_accountORM.OrgId = field.NewString(tableName, "org_id")
@@ -165,7 +164,6 @@ type accountORM struct {
 	Email              field.String
 	Id                 field.Uint64
 	LastLoginAt        field.Time
-	LastModifiedAt     field.Time
 	MfaEnabled         field.Bool
 	MonthlyJobLimit    field.Int32
 	OrgId              field.String
@@ -201,7 +199,6 @@ func (a *accountORM) updateTableName(table string) *accountORM {
 	a.Email = field.NewString(table, "email")
 	a.Id = field.NewUint64(table, "id")
 	a.LastLoginAt = field.NewTime(table, "last_login_at")
-	a.LastModifiedAt = field.NewTime(table, "last_modified_at")
 	a.MfaEnabled = field.NewBool(table, "mfa_enabled")
 	a.MonthlyJobLimit = field.NewInt32(table, "monthly_job_limit")
 	a.OrgId = field.NewString(table, "org_id")
@@ -226,7 +223,7 @@ func (a *accountORM) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (a *accountORM) fillFieldMap() {
-	a.fieldMap = make(map[string]field.Expr, 19)
+	a.fieldMap = make(map[string]field.Expr, 18)
 	a.fieldMap["account_status"] = a.AccountStatus
 	a.fieldMap["auth_platform_user_id"] = a.AuthPlatformUserId
 	a.fieldMap["concurrent_job_limit"] = a.ConcurrentJobLimit
@@ -235,7 +232,6 @@ func (a *accountORM) fillFieldMap() {
 	a.fieldMap["email"] = a.Email
 	a.fieldMap["id"] = a.Id
 	a.fieldMap["last_login_at"] = a.LastLoginAt
-	a.fieldMap["last_modified_at"] = a.LastModifiedAt
 	a.fieldMap["mfa_enabled"] = a.MfaEnabled
 	a.fieldMap["monthly_job_limit"] = a.MonthlyJobLimit
 	a.fieldMap["org_id"] = a.OrgId

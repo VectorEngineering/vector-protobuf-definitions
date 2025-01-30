@@ -7,563 +7,6 @@
  "name": "Vector Backend API",
  "endpoints": [
   {
-   "endpoint": "/v1/accounts/settings",
-   "method": "PUT",
-   "output_encoding": "json",
-   "timeout": "15s",
-   "input_query_strings": [],
-   "backend": [
-    {
-     "url_pattern": "/v1/accounts/settings",
-     "encoding": "json",
-     "method": "PUT",
-     "host": [
-      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
-     ],
-     "disable_host_sanitize": false,
-     "extra_config": {
-      "backend/http": {
-       "return_error_details": "message"
-      },
-      "modifier/martian": {
-       "fifo.Group": {
-        "aggregateErrors": true,
-        "modifiers": [
-         {
-          "header.Append": {
-           "name": "X-PLATFORM",
-           "scope": [
-            "request",
-            "response"
-           ],
-           "value": "solomon-ai"
-          }
-         }
-        ],
-        "scope": [
-         "request",
-         "response"
-        ]
-       }
-      },
-      "qos/circuit-breaker": {
-       "interval": 30,
-       "log_status_change": true,
-       "max_errors": 5,
-       "name": "solomon-circuit-breaker",
-       "timeout": 10
-      }
-     }
-    }
-   ],
-   "input_headers": [
-    "Content-Type"
-   ],
-   "extra_config": {
-    "qos/ratelimit/router": {
-     "@comment": "six thousand requests every second",
-     "every": "1m",
-     "max_rate": 60000
-    }
-   }
-  },
-  {
-   "endpoint": "/v1/workspaces/workflow",
-   "method": "PUT",
-   "output_encoding": "json",
-   "timeout": "15s",
-   "input_query_strings": [],
-   "backend": [
-    {
-     "url_pattern": "/v1/workspaces/workflow",
-     "encoding": "json",
-     "method": "PUT",
-     "host": [
-      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
-     ],
-     "disable_host_sanitize": false,
-     "extra_config": {
-      "backend/http": {
-       "return_error_details": "message"
-      },
-      "modifier/martian": {
-       "fifo.Group": {
-        "aggregateErrors": true,
-        "modifiers": [
-         {
-          "header.Append": {
-           "name": "X-PLATFORM",
-           "scope": [
-            "request",
-            "response"
-           ],
-           "value": "solomon-ai"
-          }
-         }
-        ],
-        "scope": [
-         "request",
-         "response"
-        ]
-       }
-      },
-      "qos/circuit-breaker": {
-       "interval": 30,
-       "log_status_change": true,
-       "max_errors": 5,
-       "name": "solomon-circuit-breaker",
-       "timeout": 10
-      }
-     }
-    }
-   ],
-   "input_headers": [
-    "Content-Type"
-   ],
-   "extra_config": {
-    "qos/ratelimit/router": {
-     "@comment": "six thousand requests every second",
-     "every": "1m",
-     "max_rate": 60000
-    }
-   }
-  },
-  {
-   "endpoint": "/v1/workspaces/{workspaceId}/workflows",
-   "method": "GET",
-   "output_encoding": "json",
-   "timeout": "15s",
-   "input_query_strings": [
-    "pageSize",
-    "pageToken",
-    "filter"
-   ],
-   "backend": [
-    {
-     "url_pattern": "/v1/workspaces/{workspaceId}/workflows",
-     "encoding": "json",
-     "method": "GET",
-     "host": [
-      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
-     ],
-     "disable_host_sanitize": false,
-     "extra_config": {
-      "backend/http": {
-       "return_error_details": "message"
-      },
-      "modifier/martian": {
-       "fifo.Group": {
-        "aggregateErrors": true,
-        "modifiers": [
-         {
-          "header.Append": {
-           "name": "X-PLATFORM",
-           "scope": [
-            "request",
-            "response"
-           ],
-           "value": "solomon-ai"
-          }
-         }
-        ],
-        "scope": [
-         "request",
-         "response"
-        ]
-       }
-      },
-      "qos/circuit-breaker": {
-       "interval": 30,
-       "log_status_change": true,
-       "max_errors": 5,
-       "name": "solomon-circuit-breaker",
-       "timeout": 10
-      }
-     }
-    }
-   ],
-   "input_headers": [
-    "Content-Type"
-   ],
-   "extra_config": {
-    "qos/ratelimit/router": {
-     "@comment": "six thousand requests every second",
-     "every": "1m",
-     "max_rate": 60000
-    }
-   }
-  },
-  {
-   "endpoint": "/v1/workspaces/{workspaceId}/workflows",
-   "method": "POST",
-   "output_encoding": "json",
-   "timeout": "15s",
-   "input_query_strings": [],
-   "backend": [
-    {
-     "url_pattern": "/v1/workspaces/{workspaceId}/workflows",
-     "encoding": "json",
-     "method": "POST",
-     "host": [
-      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
-     ],
-     "disable_host_sanitize": false,
-     "extra_config": {
-      "backend/http": {
-       "return_error_details": "message"
-      },
-      "modifier/martian": {
-       "fifo.Group": {
-        "aggregateErrors": true,
-        "modifiers": [
-         {
-          "header.Append": {
-           "name": "X-PLATFORM",
-           "scope": [
-            "request",
-            "response"
-           ],
-           "value": "solomon-ai"
-          }
-         }
-        ],
-        "scope": [
-         "request",
-         "response"
-        ]
-       }
-      },
-      "qos/circuit-breaker": {
-       "interval": 30,
-       "log_status_change": true,
-       "max_errors": 5,
-       "name": "solomon-circuit-breaker",
-       "timeout": 10
-      }
-     }
-    }
-   ],
-   "input_headers": [
-    "Content-Type"
-   ],
-   "extra_config": {
-    "qos/ratelimit/router": {
-     "@comment": "six thousand requests every second",
-     "every": "1m",
-     "max_rate": 60000
-    }
-   }
-  },
-  {
-   "endpoint": "/v1/workspaces/{workspaceId}/workflows/{id}/trigger",
-   "method": "POST",
-   "output_encoding": "json",
-   "timeout": "15s",
-   "input_query_strings": [],
-   "backend": [
-    {
-     "url_pattern": "/v1/workspaces/{workspaceId}/workflows/{id}/trigger",
-     "encoding": "json",
-     "method": "POST",
-     "host": [
-      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
-     ],
-     "disable_host_sanitize": false,
-     "extra_config": {
-      "backend/http": {
-       "return_error_details": "message"
-      },
-      "modifier/martian": {
-       "fifo.Group": {
-        "aggregateErrors": true,
-        "modifiers": [
-         {
-          "header.Append": {
-           "name": "X-PLATFORM",
-           "scope": [
-            "request",
-            "response"
-           ],
-           "value": "solomon-ai"
-          }
-         }
-        ],
-        "scope": [
-         "request",
-         "response"
-        ]
-       }
-      },
-      "qos/circuit-breaker": {
-       "interval": 30,
-       "log_status_change": true,
-       "max_errors": 5,
-       "name": "solomon-circuit-breaker",
-       "timeout": 10
-      }
-     }
-    }
-   ],
-   "input_headers": [
-    "Content-Type"
-   ],
-   "extra_config": {
-    "qos/ratelimit/router": {
-     "@comment": "six thousand requests every second",
-     "every": "1m",
-     "max_rate": 60000
-    }
-   }
-  },
-  {
-   "endpoint": "/lead-scraper-microservice/api/v1/accounts",
-   "method": "POST",
-   "output_encoding": "json",
-   "timeout": "15s",
-   "input_query_strings": [],
-   "backend": [
-    {
-     "url_pattern": "/lead-scraper-microservice/api/v1/accounts",
-     "encoding": "json",
-     "method": "POST",
-     "host": [
-      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
-     ],
-     "disable_host_sanitize": false,
-     "extra_config": {
-      "backend/http": {
-       "return_error_details": "message"
-      },
-      "modifier/martian": {
-       "fifo.Group": {
-        "aggregateErrors": true,
-        "modifiers": [
-         {
-          "header.Append": {
-           "name": "X-PLATFORM",
-           "scope": [
-            "request",
-            "response"
-           ],
-           "value": "solomon-ai"
-          }
-         }
-        ],
-        "scope": [
-         "request",
-         "response"
-        ]
-       }
-      },
-      "qos/circuit-breaker": {
-       "interval": 30,
-       "log_status_change": true,
-       "max_errors": 5,
-       "name": "solomon-circuit-breaker",
-       "timeout": 10
-      }
-     }
-    }
-   ],
-   "input_headers": [
-    "Content-Type"
-   ],
-   "extra_config": {
-    "qos/ratelimit/router": {
-     "@comment": "six thousand requests every second",
-     "every": "1m",
-     "max_rate": 60000
-    }
-   }
-  },
-  {
-   "endpoint": "/lead-scraper-microservice/api/v1/accounts",
-   "method": "PUT",
-   "output_encoding": "json",
-   "timeout": "15s",
-   "input_query_strings": [],
-   "backend": [
-    {
-     "url_pattern": "/lead-scraper-microservice/api/v1/accounts",
-     "encoding": "json",
-     "method": "PUT",
-     "host": [
-      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
-     ],
-     "disable_host_sanitize": false,
-     "extra_config": {
-      "backend/http": {
-       "return_error_details": "message"
-      },
-      "modifier/martian": {
-       "fifo.Group": {
-        "aggregateErrors": true,
-        "modifiers": [
-         {
-          "header.Append": {
-           "name": "X-PLATFORM",
-           "scope": [
-            "request",
-            "response"
-           ],
-           "value": "solomon-ai"
-          }
-         }
-        ],
-        "scope": [
-         "request",
-         "response"
-        ]
-       }
-      },
-      "qos/circuit-breaker": {
-       "interval": 30,
-       "log_status_change": true,
-       "max_errors": 5,
-       "name": "solomon-circuit-breaker",
-       "timeout": 10
-      }
-     }
-    }
-   ],
-   "input_headers": [
-    "Content-Type"
-   ],
-   "extra_config": {
-    "qos/ratelimit/router": {
-     "@comment": "six thousand requests every second",
-     "every": "1m",
-     "max_rate": 60000
-    }
-   }
-  },
-  {
-   "endpoint": "/lead-scraper-microservice/api/v1/jobs",
-   "method": "GET",
-   "output_encoding": "json",
-   "timeout": "15s",
-   "input_query_strings": [
-    "userId",
-    "orgId",
-    "tenantId"
-   ],
-   "backend": [
-    {
-     "url_pattern": "/lead-scraper-microservice/api/v1/jobs",
-     "encoding": "json",
-     "method": "GET",
-     "host": [
-      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
-     ],
-     "disable_host_sanitize": false,
-     "extra_config": {
-      "backend/http": {
-       "return_error_details": "message"
-      },
-      "modifier/martian": {
-       "fifo.Group": {
-        "aggregateErrors": true,
-        "modifiers": [
-         {
-          "header.Append": {
-           "name": "X-PLATFORM",
-           "scope": [
-            "request",
-            "response"
-           ],
-           "value": "solomon-ai"
-          }
-         }
-        ],
-        "scope": [
-         "request",
-         "response"
-        ]
-       }
-      },
-      "qos/circuit-breaker": {
-       "interval": 30,
-       "log_status_change": true,
-       "max_errors": 5,
-       "name": "solomon-circuit-breaker",
-       "timeout": 10
-      }
-     }
-    }
-   ],
-   "input_headers": [
-    "Content-Type"
-   ],
-   "extra_config": {
-    "qos/ratelimit/router": {
-     "@comment": "six thousand requests every second",
-     "every": "1m",
-     "max_rate": 60000
-    }
-   }
-  },
-  {
-   "endpoint": "/lead-scraper-microservice/api/v1/jobs",
-   "method": "POST",
-   "output_encoding": "json",
-   "timeout": "15s",
-   "input_query_strings": [],
-   "backend": [
-    {
-     "url_pattern": "/lead-scraper-microservice/api/v1/jobs",
-     "encoding": "json",
-     "method": "POST",
-     "host": [
-      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
-     ],
-     "disable_host_sanitize": false,
-     "extra_config": {
-      "backend/http": {
-       "return_error_details": "message"
-      },
-      "modifier/martian": {
-       "fifo.Group": {
-        "aggregateErrors": true,
-        "modifiers": [
-         {
-          "header.Append": {
-           "name": "X-PLATFORM",
-           "scope": [
-            "request",
-            "response"
-           ],
-           "value": "solomon-ai"
-          }
-         }
-        ],
-        "scope": [
-         "request",
-         "response"
-        ]
-       }
-      },
-      "qos/circuit-breaker": {
-       "interval": 30,
-       "log_status_change": true,
-       "max_errors": 5,
-       "name": "solomon-circuit-breaker",
-       "timeout": 10
-      }
-     }
-    }
-   ],
-   "input_headers": [
-    "Content-Type"
-   ],
-   "extra_config": {
-    "qos/ratelimit/router": {
-     "@comment": "six thousand requests every second",
-     "every": "1m",
-     "max_rate": 60000
-    }
-   }
-  },
-  {
    "endpoint": "/v1/workspace",
    "method": "PUT",
    "output_encoding": "json",
@@ -747,79 +190,14 @@
    }
   },
   {
-   "endpoint": "/v1/workspaces",
-   "method": "GET",
-   "output_encoding": "json",
-   "timeout": "15s",
-   "input_query_strings": [
-    "accountId",
-    "pageSize",
-    "pageToken"
-   ],
-   "backend": [
-    {
-     "url_pattern": "/v1/workspaces",
-     "encoding": "json",
-     "method": "GET",
-     "host": [
-      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
-     ],
-     "disable_host_sanitize": false,
-     "extra_config": {
-      "backend/http": {
-       "return_error_details": "message"
-      },
-      "modifier/martian": {
-       "fifo.Group": {
-        "aggregateErrors": true,
-        "modifiers": [
-         {
-          "header.Append": {
-           "name": "X-PLATFORM",
-           "scope": [
-            "request",
-            "response"
-           ],
-           "value": "solomon-ai"
-          }
-         }
-        ],
-        "scope": [
-         "request",
-         "response"
-        ]
-       }
-      },
-      "qos/circuit-breaker": {
-       "interval": 30,
-       "log_status_change": true,
-       "max_errors": 5,
-       "name": "solomon-circuit-breaker",
-       "timeout": 10
-      }
-     }
-    }
-   ],
-   "input_headers": [
-    "Content-Type"
-   ],
-   "extra_config": {
-    "qos/ratelimit/router": {
-     "@comment": "six thousand requests every second",
-     "every": "1m",
-     "max_rate": 60000
-    }
-   }
-  },
-  {
-   "endpoint": "/v1/workspaces",
+   "endpoint": "/lead-scraper-microservice/api/v1/accounts",
    "method": "POST",
    "output_encoding": "json",
    "timeout": "15s",
    "input_query_strings": [],
    "backend": [
     {
-     "url_pattern": "/v1/workspaces",
+     "url_pattern": "/lead-scraper-microservice/api/v1/accounts",
      "encoding": "json",
      "method": "POST",
      "host": [
@@ -873,454 +251,16 @@
    }
   },
   {
-   "endpoint": "/v1/workspaces/{workspaceId}/workflows/{id}",
-   "method": "GET",
+   "endpoint": "/lead-scraper-microservice/api/v1/accounts",
+   "method": "PUT",
    "output_encoding": "json",
    "timeout": "15s",
    "input_query_strings": [],
    "backend": [
     {
-     "url_pattern": "/v1/workspaces/{workspaceId}/workflows/{id}",
+     "url_pattern": "/lead-scraper-microservice/api/v1/accounts",
      "encoding": "json",
-     "method": "GET",
-     "host": [
-      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
-     ],
-     "disable_host_sanitize": false,
-     "extra_config": {
-      "backend/http": {
-       "return_error_details": "message"
-      },
-      "modifier/martian": {
-       "fifo.Group": {
-        "aggregateErrors": true,
-        "modifiers": [
-         {
-          "header.Append": {
-           "name": "X-PLATFORM",
-           "scope": [
-            "request",
-            "response"
-           ],
-           "value": "solomon-ai"
-          }
-         }
-        ],
-        "scope": [
-         "request",
-         "response"
-        ]
-       }
-      },
-      "qos/circuit-breaker": {
-       "interval": 30,
-       "log_status_change": true,
-       "max_errors": 5,
-       "name": "solomon-circuit-breaker",
-       "timeout": 10
-      }
-     }
-    }
-   ],
-   "input_headers": [
-    "Content-Type"
-   ],
-   "extra_config": {
-    "qos/ratelimit/router": {
-     "@comment": "six thousand requests every second",
-     "every": "1m",
-     "max_rate": 60000
-    }
-   }
-  },
-  {
-   "endpoint": "/v1/workspaces/{workspaceId}/workflows/{id}/pause",
-   "method": "POST",
-   "output_encoding": "json",
-   "timeout": "15s",
-   "input_query_strings": [],
-   "backend": [
-    {
-     "url_pattern": "/v1/workspaces/{workspaceId}/workflows/{id}/pause",
-     "encoding": "json",
-     "method": "POST",
-     "host": [
-      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
-     ],
-     "disable_host_sanitize": false,
-     "extra_config": {
-      "backend/http": {
-       "return_error_details": "message"
-      },
-      "modifier/martian": {
-       "fifo.Group": {
-        "aggregateErrors": true,
-        "modifiers": [
-         {
-          "header.Append": {
-           "name": "X-PLATFORM",
-           "scope": [
-            "request",
-            "response"
-           ],
-           "value": "solomon-ai"
-          }
-         }
-        ],
-        "scope": [
-         "request",
-         "response"
-        ]
-       }
-      },
-      "qos/circuit-breaker": {
-       "interval": 30,
-       "log_status_change": true,
-       "max_errors": 5,
-       "name": "solomon-circuit-breaker",
-       "timeout": 10
-      }
-     }
-    }
-   ],
-   "input_headers": [
-    "Content-Type"
-   ],
-   "extra_config": {
-    "qos/ratelimit/router": {
-     "@comment": "six thousand requests every second",
-     "every": "1m",
-     "max_rate": 60000
-    }
-   }
-  },
-  {
-   "endpoint": "/v1/accounts/{id}/usage",
-   "method": "GET",
-   "output_encoding": "json",
-   "timeout": "15s",
-   "input_query_strings": [],
-   "backend": [
-    {
-     "url_pattern": "/v1/accounts/{id}/usage",
-     "encoding": "json",
-     "method": "GET",
-     "host": [
-      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
-     ],
-     "disable_host_sanitize": false,
-     "extra_config": {
-      "backend/http": {
-       "return_error_details": "message"
-      },
-      "modifier/martian": {
-       "fifo.Group": {
-        "aggregateErrors": true,
-        "modifiers": [
-         {
-          "header.Append": {
-           "name": "X-PLATFORM",
-           "scope": [
-            "request",
-            "response"
-           ],
-           "value": "solomon-ai"
-          }
-         }
-        ],
-        "scope": [
-         "request",
-         "response"
-        ]
-       }
-      },
-      "qos/circuit-breaker": {
-       "interval": 30,
-       "log_status_change": true,
-       "max_errors": 5,
-       "name": "solomon-circuit-breaker",
-       "timeout": 10
-      }
-     }
-    }
-   ],
-   "input_headers": [
-    "Content-Type"
-   ],
-   "extra_config": {
-    "qos/ratelimit/router": {
-     "@comment": "six thousand requests every second",
-     "every": "1m",
-     "max_rate": 60000
-    }
-   }
-  },
-  {
-   "endpoint": "/v1/workspaces/{workspaceId}/analytics",
-   "method": "GET",
-   "output_encoding": "json",
-   "timeout": "15s",
-   "input_query_strings": [
-    "startTime",
-    "endTime"
-   ],
-   "backend": [
-    {
-     "url_pattern": "/v1/workspaces/{workspaceId}/analytics",
-     "encoding": "json",
-     "method": "GET",
-     "host": [
-      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
-     ],
-     "disable_host_sanitize": false,
-     "extra_config": {
-      "backend/http": {
-       "return_error_details": "message"
-      },
-      "modifier/martian": {
-       "fifo.Group": {
-        "aggregateErrors": true,
-        "modifiers": [
-         {
-          "header.Append": {
-           "name": "X-PLATFORM",
-           "scope": [
-            "request",
-            "response"
-           ],
-           "value": "solomon-ai"
-          }
-         }
-        ],
-        "scope": [
-         "request",
-         "response"
-        ]
-       }
-      },
-      "qos/circuit-breaker": {
-       "interval": 30,
-       "log_status_change": true,
-       "max_errors": 5,
-       "name": "solomon-circuit-breaker",
-       "timeout": 10
-      }
-     }
-    }
-   ],
-   "input_headers": [
-    "Content-Type"
-   ],
-   "extra_config": {
-    "qos/ratelimit/router": {
-     "@comment": "six thousand requests every second",
-     "every": "1m",
-     "max_rate": 60000
-    }
-   }
-  },
-  {
-   "endpoint": "/lead-scraper-microservice/api/v1/accounts/{id}",
-   "method": "DELETE",
-   "output_encoding": "json",
-   "timeout": "15s",
-   "input_query_strings": [],
-   "backend": [
-    {
-     "url_pattern": "/lead-scraper-microservice/api/v1/accounts/{id}",
-     "encoding": "json",
-     "method": "DELETE",
-     "host": [
-      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
-     ],
-     "disable_host_sanitize": false,
-     "extra_config": {
-      "backend/http": {
-       "return_error_details": "message"
-      },
-      "modifier/martian": {
-       "fifo.Group": {
-        "aggregateErrors": true,
-        "modifiers": [
-         {
-          "header.Append": {
-           "name": "X-PLATFORM",
-           "scope": [
-            "request",
-            "response"
-           ],
-           "value": "solomon-ai"
-          }
-         }
-        ],
-        "scope": [
-         "request",
-         "response"
-        ]
-       }
-      },
-      "qos/circuit-breaker": {
-       "interval": 30,
-       "log_status_change": true,
-       "max_errors": 5,
-       "name": "solomon-circuit-breaker",
-       "timeout": 10
-      }
-     }
-    }
-   ],
-   "input_headers": [
-    "Content-Type"
-   ],
-   "extra_config": {
-    "qos/ratelimit/router": {
-     "@comment": "six thousand requests every second",
-     "every": "1m",
-     "max_rate": 60000
-    }
-   }
-  },
-  {
-   "endpoint": "/lead-scraper-microservice/api/v1/accounts/{id}",
-   "method": "GET",
-   "output_encoding": "json",
-   "timeout": "15s",
-   "input_query_strings": [],
-   "backend": [
-    {
-     "url_pattern": "/lead-scraper-microservice/api/v1/accounts/{id}",
-     "encoding": "json",
-     "method": "GET",
-     "host": [
-      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
-     ],
-     "disable_host_sanitize": false,
-     "extra_config": {
-      "backend/http": {
-       "return_error_details": "message"
-      },
-      "modifier/martian": {
-       "fifo.Group": {
-        "aggregateErrors": true,
-        "modifiers": [
-         {
-          "header.Append": {
-           "name": "X-PLATFORM",
-           "scope": [
-            "request",
-            "response"
-           ],
-           "value": "solomon-ai"
-          }
-         }
-        ],
-        "scope": [
-         "request",
-         "response"
-        ]
-       }
-      },
-      "qos/circuit-breaker": {
-       "interval": 30,
-       "log_status_change": true,
-       "max_errors": 5,
-       "name": "solomon-circuit-breaker",
-       "timeout": 10
-      }
-     }
-    }
-   ],
-   "input_headers": [
-    "Content-Type"
-   ],
-   "extra_config": {
-    "qos/ratelimit/router": {
-     "@comment": "six thousand requests every second",
-     "every": "1m",
-     "max_rate": 60000
-    }
-   }
-  },
-  {
-   "endpoint": "/lead-scraper-microservice/api/v1/jobs/{jobId}",
-   "method": "DELETE",
-   "output_encoding": "json",
-   "timeout": "15s",
-   "input_query_strings": [
-    "userId",
-    "orgId",
-    "tenantId"
-   ],
-   "backend": [
-    {
-     "url_pattern": "/lead-scraper-microservice/api/v1/jobs/{jobId}",
-     "encoding": "json",
-     "method": "DELETE",
-     "host": [
-      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
-     ],
-     "disable_host_sanitize": false,
-     "extra_config": {
-      "backend/http": {
-       "return_error_details": "message"
-      },
-      "modifier/martian": {
-       "fifo.Group": {
-        "aggregateErrors": true,
-        "modifiers": [
-         {
-          "header.Append": {
-           "name": "X-PLATFORM",
-           "scope": [
-            "request",
-            "response"
-           ],
-           "value": "solomon-ai"
-          }
-         }
-        ],
-        "scope": [
-         "request",
-         "response"
-        ]
-       }
-      },
-      "qos/circuit-breaker": {
-       "interval": 30,
-       "log_status_change": true,
-       "max_errors": 5,
-       "name": "solomon-circuit-breaker",
-       "timeout": 10
-      }
-     }
-    }
-   ],
-   "input_headers": [
-    "Content-Type"
-   ],
-   "extra_config": {
-    "qos/ratelimit/router": {
-     "@comment": "six thousand requests every second",
-     "every": "1m",
-     "max_rate": 60000
-    }
-   }
-  },
-  {
-   "endpoint": "/lead-scraper-microservice/api/v1/jobs/{jobId}",
-   "method": "GET",
-   "output_encoding": "json",
-   "timeout": "15s",
-   "input_query_strings": [
-    "userId",
-    "orgId",
-    "tenantId"
-   ],
-   "backend": [
-    {
-     "url_pattern": "/lead-scraper-microservice/api/v1/jobs/{jobId}",
-     "encoding": "json",
-     "method": "GET",
+     "method": "PUT",
      "host": [
       "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
      ],
@@ -1449,6 +389,1066 @@
    "backend": [
     {
      "url_pattern": "/v1/accounts",
+     "encoding": "json",
+     "method": "GET",
+     "host": [
+      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+     ],
+     "disable_host_sanitize": false,
+     "extra_config": {
+      "backend/http": {
+       "return_error_details": "message"
+      },
+      "modifier/martian": {
+       "fifo.Group": {
+        "aggregateErrors": true,
+        "modifiers": [
+         {
+          "header.Append": {
+           "name": "X-PLATFORM",
+           "scope": [
+            "request",
+            "response"
+           ],
+           "value": "solomon-ai"
+          }
+         }
+        ],
+        "scope": [
+         "request",
+         "response"
+        ]
+       }
+      },
+      "qos/circuit-breaker": {
+       "interval": 30,
+       "log_status_change": true,
+       "max_errors": 5,
+       "name": "solomon-circuit-breaker",
+       "timeout": 10
+      }
+     }
+    }
+   ],
+   "input_headers": [
+    "Content-Type"
+   ],
+   "extra_config": {
+    "qos/ratelimit/router": {
+     "@comment": "six thousand requests every second",
+     "every": "1m",
+     "max_rate": 60000
+    }
+   }
+  },
+  {
+   "endpoint": "/v1/accounts/{id}/usage",
+   "method": "GET",
+   "output_encoding": "json",
+   "timeout": "15s",
+   "input_query_strings": [],
+   "backend": [
+    {
+     "url_pattern": "/v1/accounts/{id}/usage",
+     "encoding": "json",
+     "method": "GET",
+     "host": [
+      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+     ],
+     "disable_host_sanitize": false,
+     "extra_config": {
+      "backend/http": {
+       "return_error_details": "message"
+      },
+      "modifier/martian": {
+       "fifo.Group": {
+        "aggregateErrors": true,
+        "modifiers": [
+         {
+          "header.Append": {
+           "name": "X-PLATFORM",
+           "scope": [
+            "request",
+            "response"
+           ],
+           "value": "solomon-ai"
+          }
+         }
+        ],
+        "scope": [
+         "request",
+         "response"
+        ]
+       }
+      },
+      "qos/circuit-breaker": {
+       "interval": 30,
+       "log_status_change": true,
+       "max_errors": 5,
+       "name": "solomon-circuit-breaker",
+       "timeout": 10
+      }
+     }
+    }
+   ],
+   "input_headers": [
+    "Content-Type"
+   ],
+   "extra_config": {
+    "qos/ratelimit/router": {
+     "@comment": "six thousand requests every second",
+     "every": "1m",
+     "max_rate": 60000
+    }
+   }
+  },
+  {
+   "endpoint": "/lead-scraper-microservice/api/v1/jobs",
+   "method": "POST",
+   "output_encoding": "json",
+   "timeout": "15s",
+   "input_query_strings": [],
+   "backend": [
+    {
+     "url_pattern": "/lead-scraper-microservice/api/v1/jobs",
+     "encoding": "json",
+     "method": "POST",
+     "host": [
+      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+     ],
+     "disable_host_sanitize": false,
+     "extra_config": {
+      "backend/http": {
+       "return_error_details": "message"
+      },
+      "modifier/martian": {
+       "fifo.Group": {
+        "aggregateErrors": true,
+        "modifiers": [
+         {
+          "header.Append": {
+           "name": "X-PLATFORM",
+           "scope": [
+            "request",
+            "response"
+           ],
+           "value": "solomon-ai"
+          }
+         }
+        ],
+        "scope": [
+         "request",
+         "response"
+        ]
+       }
+      },
+      "qos/circuit-breaker": {
+       "interval": 30,
+       "log_status_change": true,
+       "max_errors": 5,
+       "name": "solomon-circuit-breaker",
+       "timeout": 10
+      }
+     }
+    }
+   ],
+   "input_headers": [
+    "Content-Type"
+   ],
+   "extra_config": {
+    "qos/ratelimit/router": {
+     "@comment": "six thousand requests every second",
+     "every": "1m",
+     "max_rate": 60000
+    }
+   }
+  },
+  {
+   "endpoint": "/lead-scraper-microservice/api/v1/jobs",
+   "method": "GET",
+   "output_encoding": "json",
+   "timeout": "15s",
+   "input_query_strings": [
+    "userId",
+    "orgId",
+    "tenantId"
+   ],
+   "backend": [
+    {
+     "url_pattern": "/lead-scraper-microservice/api/v1/jobs",
+     "encoding": "json",
+     "method": "GET",
+     "host": [
+      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+     ],
+     "disable_host_sanitize": false,
+     "extra_config": {
+      "backend/http": {
+       "return_error_details": "message"
+      },
+      "modifier/martian": {
+       "fifo.Group": {
+        "aggregateErrors": true,
+        "modifiers": [
+         {
+          "header.Append": {
+           "name": "X-PLATFORM",
+           "scope": [
+            "request",
+            "response"
+           ],
+           "value": "solomon-ai"
+          }
+         }
+        ],
+        "scope": [
+         "request",
+         "response"
+        ]
+       }
+      },
+      "qos/circuit-breaker": {
+       "interval": 30,
+       "log_status_change": true,
+       "max_errors": 5,
+       "name": "solomon-circuit-breaker",
+       "timeout": 10
+      }
+     }
+    }
+   ],
+   "input_headers": [
+    "Content-Type"
+   ],
+   "extra_config": {
+    "qos/ratelimit/router": {
+     "@comment": "six thousand requests every second",
+     "every": "1m",
+     "max_rate": 60000
+    }
+   }
+  },
+  {
+   "endpoint": "/lead-scraper-microservice/api/v1/jobs/{jobId}",
+   "method": "DELETE",
+   "output_encoding": "json",
+   "timeout": "15s",
+   "input_query_strings": [
+    "userId",
+    "orgId",
+    "tenantId"
+   ],
+   "backend": [
+    {
+     "url_pattern": "/lead-scraper-microservice/api/v1/jobs/{jobId}",
+     "encoding": "json",
+     "method": "DELETE",
+     "host": [
+      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+     ],
+     "disable_host_sanitize": false,
+     "extra_config": {
+      "backend/http": {
+       "return_error_details": "message"
+      },
+      "modifier/martian": {
+       "fifo.Group": {
+        "aggregateErrors": true,
+        "modifiers": [
+         {
+          "header.Append": {
+           "name": "X-PLATFORM",
+           "scope": [
+            "request",
+            "response"
+           ],
+           "value": "solomon-ai"
+          }
+         }
+        ],
+        "scope": [
+         "request",
+         "response"
+        ]
+       }
+      },
+      "qos/circuit-breaker": {
+       "interval": 30,
+       "log_status_change": true,
+       "max_errors": 5,
+       "name": "solomon-circuit-breaker",
+       "timeout": 10
+      }
+     }
+    }
+   ],
+   "input_headers": [
+    "Content-Type"
+   ],
+   "extra_config": {
+    "qos/ratelimit/router": {
+     "@comment": "six thousand requests every second",
+     "every": "1m",
+     "max_rate": 60000
+    }
+   }
+  },
+  {
+   "endpoint": "/lead-scraper-microservice/api/v1/jobs/{jobId}",
+   "method": "GET",
+   "output_encoding": "json",
+   "timeout": "15s",
+   "input_query_strings": [
+    "userId",
+    "orgId",
+    "tenantId"
+   ],
+   "backend": [
+    {
+     "url_pattern": "/lead-scraper-microservice/api/v1/jobs/{jobId}",
+     "encoding": "json",
+     "method": "GET",
+     "host": [
+      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+     ],
+     "disable_host_sanitize": false,
+     "extra_config": {
+      "backend/http": {
+       "return_error_details": "message"
+      },
+      "modifier/martian": {
+       "fifo.Group": {
+        "aggregateErrors": true,
+        "modifiers": [
+         {
+          "header.Append": {
+           "name": "X-PLATFORM",
+           "scope": [
+            "request",
+            "response"
+           ],
+           "value": "solomon-ai"
+          }
+         }
+        ],
+        "scope": [
+         "request",
+         "response"
+        ]
+       }
+      },
+      "qos/circuit-breaker": {
+       "interval": 30,
+       "log_status_change": true,
+       "max_errors": 5,
+       "name": "solomon-circuit-breaker",
+       "timeout": 10
+      }
+     }
+    }
+   ],
+   "input_headers": [
+    "Content-Type"
+   ],
+   "extra_config": {
+    "qos/ratelimit/router": {
+     "@comment": "six thousand requests every second",
+     "every": "1m",
+     "max_rate": 60000
+    }
+   }
+  },
+  {
+   "endpoint": "/v1/workspaces",
+   "method": "GET",
+   "output_encoding": "json",
+   "timeout": "15s",
+   "input_query_strings": [
+    "accountId",
+    "pageSize",
+    "pageToken"
+   ],
+   "backend": [
+    {
+     "url_pattern": "/v1/workspaces",
+     "encoding": "json",
+     "method": "GET",
+     "host": [
+      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+     ],
+     "disable_host_sanitize": false,
+     "extra_config": {
+      "backend/http": {
+       "return_error_details": "message"
+      },
+      "modifier/martian": {
+       "fifo.Group": {
+        "aggregateErrors": true,
+        "modifiers": [
+         {
+          "header.Append": {
+           "name": "X-PLATFORM",
+           "scope": [
+            "request",
+            "response"
+           ],
+           "value": "solomon-ai"
+          }
+         }
+        ],
+        "scope": [
+         "request",
+         "response"
+        ]
+       }
+      },
+      "qos/circuit-breaker": {
+       "interval": 30,
+       "log_status_change": true,
+       "max_errors": 5,
+       "name": "solomon-circuit-breaker",
+       "timeout": 10
+      }
+     }
+    }
+   ],
+   "input_headers": [
+    "Content-Type"
+   ],
+   "extra_config": {
+    "qos/ratelimit/router": {
+     "@comment": "six thousand requests every second",
+     "every": "1m",
+     "max_rate": 60000
+    }
+   }
+  },
+  {
+   "endpoint": "/v1/workspaces",
+   "method": "POST",
+   "output_encoding": "json",
+   "timeout": "15s",
+   "input_query_strings": [],
+   "backend": [
+    {
+     "url_pattern": "/v1/workspaces",
+     "encoding": "json",
+     "method": "POST",
+     "host": [
+      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+     ],
+     "disable_host_sanitize": false,
+     "extra_config": {
+      "backend/http": {
+       "return_error_details": "message"
+      },
+      "modifier/martian": {
+       "fifo.Group": {
+        "aggregateErrors": true,
+        "modifiers": [
+         {
+          "header.Append": {
+           "name": "X-PLATFORM",
+           "scope": [
+            "request",
+            "response"
+           ],
+           "value": "solomon-ai"
+          }
+         }
+        ],
+        "scope": [
+         "request",
+         "response"
+        ]
+       }
+      },
+      "qos/circuit-breaker": {
+       "interval": 30,
+       "log_status_change": true,
+       "max_errors": 5,
+       "name": "solomon-circuit-breaker",
+       "timeout": 10
+      }
+     }
+    }
+   ],
+   "input_headers": [
+    "Content-Type"
+   ],
+   "extra_config": {
+    "qos/ratelimit/router": {
+     "@comment": "six thousand requests every second",
+     "every": "1m",
+     "max_rate": 60000
+    }
+   }
+  },
+  {
+   "endpoint": "/v1/workspaces/workflow",
+   "method": "PUT",
+   "output_encoding": "json",
+   "timeout": "15s",
+   "input_query_strings": [],
+   "backend": [
+    {
+     "url_pattern": "/v1/workspaces/workflow",
+     "encoding": "json",
+     "method": "PUT",
+     "host": [
+      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+     ],
+     "disable_host_sanitize": false,
+     "extra_config": {
+      "backend/http": {
+       "return_error_details": "message"
+      },
+      "modifier/martian": {
+       "fifo.Group": {
+        "aggregateErrors": true,
+        "modifiers": [
+         {
+          "header.Append": {
+           "name": "X-PLATFORM",
+           "scope": [
+            "request",
+            "response"
+           ],
+           "value": "solomon-ai"
+          }
+         }
+        ],
+        "scope": [
+         "request",
+         "response"
+        ]
+       }
+      },
+      "qos/circuit-breaker": {
+       "interval": 30,
+       "log_status_change": true,
+       "max_errors": 5,
+       "name": "solomon-circuit-breaker",
+       "timeout": 10
+      }
+     }
+    }
+   ],
+   "input_headers": [
+    "Content-Type"
+   ],
+   "extra_config": {
+    "qos/ratelimit/router": {
+     "@comment": "six thousand requests every second",
+     "every": "1m",
+     "max_rate": 60000
+    }
+   }
+  },
+  {
+   "endpoint": "/v1/workspaces/{workspaceId}/analytics",
+   "method": "GET",
+   "output_encoding": "json",
+   "timeout": "15s",
+   "input_query_strings": [
+    "startTime",
+    "endTime"
+   ],
+   "backend": [
+    {
+     "url_pattern": "/v1/workspaces/{workspaceId}/analytics",
+     "encoding": "json",
+     "method": "GET",
+     "host": [
+      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+     ],
+     "disable_host_sanitize": false,
+     "extra_config": {
+      "backend/http": {
+       "return_error_details": "message"
+      },
+      "modifier/martian": {
+       "fifo.Group": {
+        "aggregateErrors": true,
+        "modifiers": [
+         {
+          "header.Append": {
+           "name": "X-PLATFORM",
+           "scope": [
+            "request",
+            "response"
+           ],
+           "value": "solomon-ai"
+          }
+         }
+        ],
+        "scope": [
+         "request",
+         "response"
+        ]
+       }
+      },
+      "qos/circuit-breaker": {
+       "interval": 30,
+       "log_status_change": true,
+       "max_errors": 5,
+       "name": "solomon-circuit-breaker",
+       "timeout": 10
+      }
+     }
+    }
+   ],
+   "input_headers": [
+    "Content-Type"
+   ],
+   "extra_config": {
+    "qos/ratelimit/router": {
+     "@comment": "six thousand requests every second",
+     "every": "1m",
+     "max_rate": 60000
+    }
+   }
+  },
+  {
+   "endpoint": "/v1/workspaces/{workspaceId}/workflows/{id}/trigger",
+   "method": "POST",
+   "output_encoding": "json",
+   "timeout": "15s",
+   "input_query_strings": [],
+   "backend": [
+    {
+     "url_pattern": "/v1/workspaces/{workspaceId}/workflows/{id}/trigger",
+     "encoding": "json",
+     "method": "POST",
+     "host": [
+      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+     ],
+     "disable_host_sanitize": false,
+     "extra_config": {
+      "backend/http": {
+       "return_error_details": "message"
+      },
+      "modifier/martian": {
+       "fifo.Group": {
+        "aggregateErrors": true,
+        "modifiers": [
+         {
+          "header.Append": {
+           "name": "X-PLATFORM",
+           "scope": [
+            "request",
+            "response"
+           ],
+           "value": "solomon-ai"
+          }
+         }
+        ],
+        "scope": [
+         "request",
+         "response"
+        ]
+       }
+      },
+      "qos/circuit-breaker": {
+       "interval": 30,
+       "log_status_change": true,
+       "max_errors": 5,
+       "name": "solomon-circuit-breaker",
+       "timeout": 10
+      }
+     }
+    }
+   ],
+   "input_headers": [
+    "Content-Type"
+   ],
+   "extra_config": {
+    "qos/ratelimit/router": {
+     "@comment": "six thousand requests every second",
+     "every": "1m",
+     "max_rate": 60000
+    }
+   }
+  },
+  {
+   "endpoint": "/v1/workspaces/{workspaceId}/workflows/{id}/pause",
+   "method": "POST",
+   "output_encoding": "json",
+   "timeout": "15s",
+   "input_query_strings": [],
+   "backend": [
+    {
+     "url_pattern": "/v1/workspaces/{workspaceId}/workflows/{id}/pause",
+     "encoding": "json",
+     "method": "POST",
+     "host": [
+      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+     ],
+     "disable_host_sanitize": false,
+     "extra_config": {
+      "backend/http": {
+       "return_error_details": "message"
+      },
+      "modifier/martian": {
+       "fifo.Group": {
+        "aggregateErrors": true,
+        "modifiers": [
+         {
+          "header.Append": {
+           "name": "X-PLATFORM",
+           "scope": [
+            "request",
+            "response"
+           ],
+           "value": "solomon-ai"
+          }
+         }
+        ],
+        "scope": [
+         "request",
+         "response"
+        ]
+       }
+      },
+      "qos/circuit-breaker": {
+       "interval": 30,
+       "log_status_change": true,
+       "max_errors": 5,
+       "name": "solomon-circuit-breaker",
+       "timeout": 10
+      }
+     }
+    }
+   ],
+   "input_headers": [
+    "Content-Type"
+   ],
+   "extra_config": {
+    "qos/ratelimit/router": {
+     "@comment": "six thousand requests every second",
+     "every": "1m",
+     "max_rate": 60000
+    }
+   }
+  },
+  {
+   "endpoint": "/lead-scraper-microservice/api/v1/accounts/{id}",
+   "method": "DELETE",
+   "output_encoding": "json",
+   "timeout": "15s",
+   "input_query_strings": [],
+   "backend": [
+    {
+     "url_pattern": "/lead-scraper-microservice/api/v1/accounts/{id}",
+     "encoding": "json",
+     "method": "DELETE",
+     "host": [
+      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+     ],
+     "disable_host_sanitize": false,
+     "extra_config": {
+      "backend/http": {
+       "return_error_details": "message"
+      },
+      "modifier/martian": {
+       "fifo.Group": {
+        "aggregateErrors": true,
+        "modifiers": [
+         {
+          "header.Append": {
+           "name": "X-PLATFORM",
+           "scope": [
+            "request",
+            "response"
+           ],
+           "value": "solomon-ai"
+          }
+         }
+        ],
+        "scope": [
+         "request",
+         "response"
+        ]
+       }
+      },
+      "qos/circuit-breaker": {
+       "interval": 30,
+       "log_status_change": true,
+       "max_errors": 5,
+       "name": "solomon-circuit-breaker",
+       "timeout": 10
+      }
+     }
+    }
+   ],
+   "input_headers": [
+    "Content-Type"
+   ],
+   "extra_config": {
+    "qos/ratelimit/router": {
+     "@comment": "six thousand requests every second",
+     "every": "1m",
+     "max_rate": 60000
+    }
+   }
+  },
+  {
+   "endpoint": "/lead-scraper-microservice/api/v1/accounts/{id}",
+   "method": "GET",
+   "output_encoding": "json",
+   "timeout": "15s",
+   "input_query_strings": [],
+   "backend": [
+    {
+     "url_pattern": "/lead-scraper-microservice/api/v1/accounts/{id}",
+     "encoding": "json",
+     "method": "GET",
+     "host": [
+      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+     ],
+     "disable_host_sanitize": false,
+     "extra_config": {
+      "backend/http": {
+       "return_error_details": "message"
+      },
+      "modifier/martian": {
+       "fifo.Group": {
+        "aggregateErrors": true,
+        "modifiers": [
+         {
+          "header.Append": {
+           "name": "X-PLATFORM",
+           "scope": [
+            "request",
+            "response"
+           ],
+           "value": "solomon-ai"
+          }
+         }
+        ],
+        "scope": [
+         "request",
+         "response"
+        ]
+       }
+      },
+      "qos/circuit-breaker": {
+       "interval": 30,
+       "log_status_change": true,
+       "max_errors": 5,
+       "name": "solomon-circuit-breaker",
+       "timeout": 10
+      }
+     }
+    }
+   ],
+   "input_headers": [
+    "Content-Type"
+   ],
+   "extra_config": {
+    "qos/ratelimit/router": {
+     "@comment": "six thousand requests every second",
+     "every": "1m",
+     "max_rate": 60000
+    }
+   }
+  },
+  {
+   "endpoint": "/v1/accounts/settings",
+   "method": "PUT",
+   "output_encoding": "json",
+   "timeout": "15s",
+   "input_query_strings": [],
+   "backend": [
+    {
+     "url_pattern": "/v1/accounts/settings",
+     "encoding": "json",
+     "method": "PUT",
+     "host": [
+      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+     ],
+     "disable_host_sanitize": false,
+     "extra_config": {
+      "backend/http": {
+       "return_error_details": "message"
+      },
+      "modifier/martian": {
+       "fifo.Group": {
+        "aggregateErrors": true,
+        "modifiers": [
+         {
+          "header.Append": {
+           "name": "X-PLATFORM",
+           "scope": [
+            "request",
+            "response"
+           ],
+           "value": "solomon-ai"
+          }
+         }
+        ],
+        "scope": [
+         "request",
+         "response"
+        ]
+       }
+      },
+      "qos/circuit-breaker": {
+       "interval": 30,
+       "log_status_change": true,
+       "max_errors": 5,
+       "name": "solomon-circuit-breaker",
+       "timeout": 10
+      }
+     }
+    }
+   ],
+   "input_headers": [
+    "Content-Type"
+   ],
+   "extra_config": {
+    "qos/ratelimit/router": {
+     "@comment": "six thousand requests every second",
+     "every": "1m",
+     "max_rate": 60000
+    }
+   }
+  },
+  {
+   "endpoint": "/v1/workspaces/{workspaceId}/workflows",
+   "method": "GET",
+   "output_encoding": "json",
+   "timeout": "15s",
+   "input_query_strings": [
+    "pageSize",
+    "pageToken",
+    "filter"
+   ],
+   "backend": [
+    {
+     "url_pattern": "/v1/workspaces/{workspaceId}/workflows",
+     "encoding": "json",
+     "method": "GET",
+     "host": [
+      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+     ],
+     "disable_host_sanitize": false,
+     "extra_config": {
+      "backend/http": {
+       "return_error_details": "message"
+      },
+      "modifier/martian": {
+       "fifo.Group": {
+        "aggregateErrors": true,
+        "modifiers": [
+         {
+          "header.Append": {
+           "name": "X-PLATFORM",
+           "scope": [
+            "request",
+            "response"
+           ],
+           "value": "solomon-ai"
+          }
+         }
+        ],
+        "scope": [
+         "request",
+         "response"
+        ]
+       }
+      },
+      "qos/circuit-breaker": {
+       "interval": 30,
+       "log_status_change": true,
+       "max_errors": 5,
+       "name": "solomon-circuit-breaker",
+       "timeout": 10
+      }
+     }
+    }
+   ],
+   "input_headers": [
+    "Content-Type"
+   ],
+   "extra_config": {
+    "qos/ratelimit/router": {
+     "@comment": "six thousand requests every second",
+     "every": "1m",
+     "max_rate": 60000
+    }
+   }
+  },
+  {
+   "endpoint": "/v1/workspaces/{workspaceId}/workflows",
+   "method": "POST",
+   "output_encoding": "json",
+   "timeout": "15s",
+   "input_query_strings": [],
+   "backend": [
+    {
+     "url_pattern": "/v1/workspaces/{workspaceId}/workflows",
+     "encoding": "json",
+     "method": "POST",
+     "host": [
+      "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+     ],
+     "disable_host_sanitize": false,
+     "extra_config": {
+      "backend/http": {
+       "return_error_details": "message"
+      },
+      "modifier/martian": {
+       "fifo.Group": {
+        "aggregateErrors": true,
+        "modifiers": [
+         {
+          "header.Append": {
+           "name": "X-PLATFORM",
+           "scope": [
+            "request",
+            "response"
+           ],
+           "value": "solomon-ai"
+          }
+         }
+        ],
+        "scope": [
+         "request",
+         "response"
+        ]
+       }
+      },
+      "qos/circuit-breaker": {
+       "interval": 30,
+       "log_status_change": true,
+       "max_errors": 5,
+       "name": "solomon-circuit-breaker",
+       "timeout": 10
+      }
+     }
+    }
+   ],
+   "input_headers": [
+    "Content-Type"
+   ],
+   "extra_config": {
+    "qos/ratelimit/router": {
+     "@comment": "six thousand requests every second",
+     "every": "1m",
+     "max_rate": 60000
+    }
+   }
+  },
+  {
+   "endpoint": "/v1/workspaces/{workspaceId}/workflows/{id}",
+   "method": "GET",
+   "output_encoding": "json",
+   "timeout": "15s",
+   "input_query_strings": [],
+   "backend": [
+    {
+     "url_pattern": "/v1/workspaces/{workspaceId}/workflows/{id}",
      "encoding": "json",
      "method": "GET",
      "host": [

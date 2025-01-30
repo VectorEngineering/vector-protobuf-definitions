@@ -1,7 +1,7 @@
 import sys
 from setuptools import setup, find_packages
 
-NAME = "backend_server"
+NAME = "playbookmedia_backend_server_sdk"
 VERSION = "1.0.0"
 
 # To install the library, run the following
@@ -29,7 +29,7 @@ setup(
     package_data={'': ['openapi/openapi.yaml']},
     include_package_data=True,
     entry_points={
-        'console_scripts': ['backend_server=backend_server.__main__:main']},
+        'console_scripts': ['playbookmedia_backend_server_sdk=playbookmedia_backend_server_sdk.__main__:main']},
     long_description="""\
     Vector Lead Scraping Service API - Manages Lead Scraping Jobs
     """

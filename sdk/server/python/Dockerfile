@@ -13,4 +13,4 @@ EXPOSE 8080
 
 ENTRYPOINT ["python3"]
 
-CMD ["-m", "backend_server"]
+CMD ["-m", "playbookmedia_backend_server_sdk"]

@@ -1,0 +1,18 @@
+# EmployeeBenefit
+
+
+## Enum
+
+* `EMPLOYEE_BENEFIT_UNSPECIFIED` (value: `'EMPLOYEE_BENEFIT_UNSPECIFIED'`)
+
+* `EMPLOYEE_BENEFIT_HEALTH_INSURANCE` (value: `'EMPLOYEE_BENEFIT_HEALTH_INSURANCE'`)
+
+* `EMPLOYEE_BENEFIT_RETIREMENT_PLAN` (value: `'EMPLOYEE_BENEFIT_RETIREMENT_PLAN'`)
+
+* `EMPLOYEE_BENEFIT_PAID_TIME_OFF` (value: `'EMPLOYEE_BENEFIT_PAID_TIME_OFF'`)
+
+* `EMPLOYEE_BENEFIT_REMOTE_WORK` (value: `'EMPLOYEE_BENEFIT_REMOTE_WORK'`)
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

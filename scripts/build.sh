@@ -126,17 +126,7 @@ update_typescript_client() {
     openapi-generator-cli generate \
         -i ./swagger/backend-api.yaml \
         -g python -o ./sdk/client/python-client-sdk \
-        --additional-properties= \
-            projectName=${ORG_NAME}-client, \
-            packageName=${ORG_NAME}_client, \
-            packageVersion=${PYTHON_VERSION}, \
-            packageUrl=${REPO}/sdk-python-client, \
-            licenseName=MIT, \
-            library=asyncio, \
-            generateSourceCodeOnly=true, \
-            hideGenerationTimestamp=true, \
-            strictSpecBehavior=true, \
-            validateSpec=true
+        --additional-properties=projectName=playbookmedia-backend-client-sdk,packageName=playbookmedia_backend_client_sdk,packageVersion=${PYTHON_VERSION},packageUrl=${REPO}/sdk-python-client,licenseName=MIT,library=asyncio,generateSourceCodeOnly=true,hideGenerationTimestamp=true,strictSpecBehavior=true,validateSpec=true
 
     echo "Generating Go client SDK..."
     openapi-generator-cli generate \
@@ -172,17 +162,7 @@ update_typescript_server() {
     openapi-generator-cli generate \
         -i ./swagger/backend-api.yaml \
         -g python-flask -o ./sdk/server/python \
-        --additional-properties= \
-            packageName=${ORG_NAME}_server_sdk, \
-            packageVersion=${PYTHON_VERSION}, \
-            controllerPackage=controllers, \
-            defaultController=default_controller, \
-            supportPython2=false, \
-            hideGenerationTimestamp=true, \
-            validateSpec=true, \
-            strictSpecValidation=true, \
-            generateSourceCodeOnly=true, \
-            serverPort=8080
+        --additional-properties=packageName=playbookmedia_backend_server_sdk,packageVersion=${PYTHON_VERSION},controllerPackage=controllers,defaultController=default_controller,supportPython2=false,hideGenerationTimestamp=true,validateSpec=true,strictSpecValidation=true,generateSourceCodeOnly=true,serverPort=8080
 
     echo "Generating Go server SDK..."
     openapi-generator-cli generate \

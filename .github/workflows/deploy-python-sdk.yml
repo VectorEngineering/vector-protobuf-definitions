@@ -11,11 +11,6 @@ permissions:
   contents: write
   packages: write
 
-permissions:
-  id-token: write
-  contents: write
-  packages: write
-
 jobs:
   deploy:
     runs-on: ubuntu-latest

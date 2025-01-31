@@ -47,12 +47,25 @@ jobs:
           
           # Update client SDK version
           cd sdk/client/python-client-sdk
-          sed -i "s/version=\".*\"/version=\"$VERSION\"/" setup.py
+          sed -i 's/VERSION = "[^"]*"/VERSION = "'$VERSION'"/' setup.py
+          if ! git diff --quiet setup.py; then
+            echo "Updated client SDK version"
+          fi
           cd ../..
+          
           # Update server SDK version
           cd server/python
-          sed -i "s/version=\".*\"/version=\"$VERSION\"/" setup.py
+          sed -i 's/VERSION = "[^"]*"/VERSION = "'$VERSION'"/' setup.py
+          if ! git diff --quiet setup.py; then
+            echo "Updated server SDK version"
+          fi
           cd ../../..
+          
+          # Check if there are changes to commit
+          if git diff --quiet; then
+            echo "No version changes to commit"
+            exit 0
+          fi
           
           # Commit and push changes
           git add sdk/client/python-client-sdk/setup.py sdk/server/python/setup.py

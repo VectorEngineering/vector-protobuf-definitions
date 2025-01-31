@@ -2,11 +2,8 @@ name: Deploy Python SDK
 
 on:
   push:
-    branches: [ main ]
-    paths:
-      - 'sdk/client/python-client-sdk/**'
-      - 'sdk/server/python/**'
-      - 'version.yaml'
+    tags:
+      - 'v*'  # This will match any tag that starts with 'v'
   workflow_dispatch:
 
 permissions:
@@ -21,16 +18,40 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Read versions
+      - name: Configure Git
         run: |
-          PY_VERSION=$(grep 'python:' version.yaml | awk '{print $2}')
-          echo "PY_VERSION=$PY_VERSION" >> $GITHUB_ENV
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Get version from tag
+        id: get_version
+        run: |
+          # Strip the 'v' prefix from the tag name
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
+
+      - name: Update package versions
+        run: |
+          # Update client SDK version
+          cd sdk/client/python-client-sdk
+          sed -i "s/version=\".*\"/version=\"$VERSION\"/" setup.py
+          cd ../..
+          # Update server SDK version
+          cd server/python
+          sed -i "s/version=\".*\"/version=\"$VERSION\"/" setup.py
+          cd ../../..
+          # Commit changes
+          git add sdk/client/python-client-sdk/setup.py sdk/server/python/setup.py
+          git commit -m "chore: update Python SDK versions to $VERSION [skip ci]"
+          git push origin HEAD:main
 
       - name: Build client SDK
         run: |

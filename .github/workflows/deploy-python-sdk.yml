@@ -11,6 +11,11 @@ permissions:
   contents: write
   packages: write
 
+permissions:
+  id-token: write
+  contents: write
+  packages: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -20,10 +25,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configure Git
         run: |
-          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
       - name: Get version from tag
@@ -40,6 +46,10 @@ jobs:
 
       - name: Update package versions
         run: |
+          # First checkout main branch
+          git fetch origin main
+          git checkout main
+          
           # Update client SDK version
           cd sdk/client/python-client-sdk
           sed -i "s/version=\".*\"/version=\"$VERSION\"/" setup.py
@@ -48,10 +58,12 @@ jobs:
           cd server/python
           sed -i "s/version=\".*\"/version=\"$VERSION\"/" setup.py
           cd ../../..
-          # Commit changes
+          
+          # Commit and push changes
           git add sdk/client/python-client-sdk/setup.py sdk/server/python/setup.py
           git commit -m "chore: update Python SDK versions to $VERSION [skip ci]"
-          git push origin HEAD:main
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git push origin main
 
       - name: Build client SDK
         run: |

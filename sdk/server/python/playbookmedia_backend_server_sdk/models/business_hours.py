@@ -14,7 +14,7 @@ class BusinessHours(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, day=DayOfWeek.UNSPECIFIED, open_time=None, close_time=None, closed=None, lead_id=None):  # noqa: E501
+    def __init__(self, id=None, day=DayOfWeek.UNSPECIFIED, open_time=None, close_time=None, closed=None, created_at=None, updated_at=None, deleted_at=None):  # noqa: E501
         """BusinessHours - a model defined in OpenAPI
 
         :param id: The id of this BusinessHours.  # noqa: E501
@@ -27,8 +27,12 @@ class BusinessHours(Model):
         :type close_time: str
         :param closed: The closed of this BusinessHours.  # noqa: E501
         :type closed: bool
-        :param lead_id: The lead_id of this BusinessHours.  # noqa: E501
-        :type lead_id: str
+        :param created_at: The created_at of this BusinessHours.  # noqa: E501
+        :type created_at: datetime
+        :param updated_at: The updated_at of this BusinessHours.  # noqa: E501
+        :type updated_at: datetime
+        :param deleted_at: The deleted_at of this BusinessHours.  # noqa: E501
+        :type deleted_at: datetime
         """
         self.openapi_types = {
             'id': str,
@@ -36,7 +40,9 @@ class BusinessHours(Model):
             'open_time': str,
             'close_time': str,
             'closed': bool,
-            'lead_id': str
+            'created_at': datetime,
+            'updated_at': datetime,
+            'deleted_at': datetime
         }
 
         self.attribute_map = {
@@ -45,7 +51,9 @@ class BusinessHours(Model):
             'open_time': 'openTime',
             'close_time': 'closeTime',
             'closed': 'closed',
-            'lead_id': 'leadId'
+            'created_at': 'createdAt',
+            'updated_at': 'updatedAt',
+            'deleted_at': 'deletedAt'
         }
 
         self._id = id
@@ -53,7 +61,9 @@ class BusinessHours(Model):
         self._open_time = open_time
         self._close_time = close_time
         self._closed = closed
-        self._lead_id = lead_id
+        self._created_at = created_at
+        self._updated_at = updated_at
+        self._deleted_at = deleted_at
 
     @classmethod
     def from_dict(cls, dikt) -> 'BusinessHours':
@@ -172,22 +182,64 @@ class BusinessHours(Model):
         self._closed = closed
 
     @property
-    def lead_id(self) -> str:
-        """Gets the lead_id of this BusinessHours.
+    def created_at(self) -> datetime:
+        """Gets the created_at of this BusinessHours.
 
 
-        :return: The lead_id of this BusinessHours.
-        :rtype: str
+        :return: The created_at of this BusinessHours.
+        :rtype: datetime
         """
-        return self._lead_id
+        return self._created_at
 
-    @lead_id.setter
-    def lead_id(self, lead_id: str):
-        """Sets the lead_id of this BusinessHours.
+    @created_at.setter
+    def created_at(self, created_at: datetime):
+        """Sets the created_at of this BusinessHours.
 
 
-        :param lead_id: The lead_id of this BusinessHours.
-        :type lead_id: str
+        :param created_at: The created_at of this BusinessHours.
+        :type created_at: datetime
         """
 
-        self._lead_id = lead_id
+        self._created_at = created_at
+
+    @property
+    def updated_at(self) -> datetime:
+        """Gets the updated_at of this BusinessHours.
+
+
+        :return: The updated_at of this BusinessHours.
+        :rtype: datetime
+        """
+        return self._updated_at
+
+    @updated_at.setter
+    def updated_at(self, updated_at: datetime):
+        """Sets the updated_at of this BusinessHours.
+
+
+        :param updated_at: The updated_at of this BusinessHours.
+        :type updated_at: datetime
+        """
+
+        self._updated_at = updated_at
+
+    @property
+    def deleted_at(self) -> datetime:
+        """Gets the deleted_at of this BusinessHours.
+
+
+        :return: The deleted_at of this BusinessHours.
+        :rtype: datetime
+        """
+        return self._deleted_at
+
+    @deleted_at.setter
+    def deleted_at(self, deleted_at: datetime):
+        """Sets the deleted_at of this BusinessHours.
+
+
+        :param deleted_at: The deleted_at of this BusinessHours.
+        :type deleted_at: datetime
+        """
+
+        self._deleted_at = deleted_at

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **cron_expression** | **String** |  | [optional] [default to None]
 **next_run_time** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]
 **last_run_time** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]
-**status** | [***models::BackgroundJobStatus**](BackgroundJobStatus.md) |  | [optional] [default to None]
+**status** | [***models::WorkflowStatus**](WorkflowStatus.md) |  | [optional] [default to None]
 **retry_count** | **i32** |  | [optional] [default to None]
 **max_retries** | **i32** |  | [optional] [default to None]
 **alert_emails** | **String** |  | [optional] [default to None]

@@ -23,7 +23,6 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from playbookmedia_backend_client_sdk.models.account_settings import AccountSettings
 from playbookmedia_backend_client_sdk.models.account_status import AccountStatus
-from playbookmedia_backend_client_sdk.models.scraping_job import ScrapingJob
 from playbookmedia_backend_client_sdk.models.workspace import Workspace
 from typing import Optional, Set
 from typing_extensions import Self
@@ -37,10 +36,8 @@ class Account(BaseModel):
     org_id: Optional[StrictStr] = Field(default=None, alias="orgId")
     tenant_id: Optional[StrictStr] = Field(default=None, alias="tenantId")
     email: Optional[StrictStr] = None
-    last_modified_at: Optional[datetime] = Field(default=None, alias="lastModifiedAt")
     deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
-    scraping_jobs: Optional[List[ScrapingJob]] = Field(default=None, alias="scrapingJobs")
     account_status: Optional[AccountStatus] = Field(default=AccountStatus.UNSPECIFIED, alias="accountStatus")
     roles: Optional[List[StrictStr]] = None
     permissions: Optional[List[StrictStr]] = None
@@ -52,7 +49,7 @@ class Account(BaseModel):
     concurrent_job_limit: Optional[StrictInt] = Field(default=None, alias="concurrentJobLimit")
     workspaces: Optional[List[Workspace]] = None
     settings: Optional[AccountSettings] = None
-    __properties: ClassVar[List[str]] = ["id", "authPlatformUserId", "orgId", "tenantId", "email", "lastModifiedAt", "deletedAt", "createdAt", "scrapingJobs", "accountStatus", "roles", "permissions", "mfaEnabled", "lastLoginAt", "timezone", "totalJobsRun", "monthlyJobLimit", "concurrentJobLimit", "workspaces", "settings"]
+    __properties: ClassVar[List[str]] = ["id", "authPlatformUserId", "orgId", "tenantId", "email", "deletedAt", "createdAt", "accountStatus", "roles", "permissions", "mfaEnabled", "lastLoginAt", "timezone", "totalJobsRun", "monthlyJobLimit", "concurrentJobLimit", "workspaces", "settings"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,13 +90,6 @@ class Account(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in scraping_jobs (list)
-        _items = []
-        if self.scraping_jobs:
-            for _item in self.scraping_jobs:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['scrapingJobs'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in workspaces (list)
         _items = []
         if self.workspaces:
@@ -127,10 +117,8 @@ class Account(BaseModel):
             "orgId": obj.get("orgId"),
             "tenantId": obj.get("tenantId"),
             "email": obj.get("email"),
-            "lastModifiedAt": obj.get("lastModifiedAt"),
             "deletedAt": obj.get("deletedAt"),
             "createdAt": obj.get("createdAt"),
-            "scrapingJobs": [ScrapingJob.from_dict(_item) for _item in obj["scrapingJobs"]] if obj.get("scrapingJobs") is not None else None,
             "accountStatus": obj.get("accountStatus") if obj.get("accountStatus") is not None else AccountStatus.UNSPECIFIED,
             "roles": obj.get("roles"),
             "permissions": obj.get("permissions"),

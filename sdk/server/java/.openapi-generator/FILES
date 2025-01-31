@@ -77,13 +77,13 @@ src/main/java/org/openapitools/model/ResourceUtilization.java
 src/main/java/org/openapitools/model/ResourceValidation.java
 src/main/java/org/openapitools/model/RevenueRange.java
 src/main/java/org/openapitools/model/Review.java
+src/main/java/org/openapitools/model/RpcStatus.java
 src/main/java/org/openapitools/model/SchemaValidation.java
 src/main/java/org/openapitools/model/ScrapingJob.java
 src/main/java/org/openapitools/model/ScrapingWorkflow.java
 src/main/java/org/openapitools/model/ServiceStatus.java
 src/main/java/org/openapitools/model/ServiceUnavailableErrorMessageResponse.java
 src/main/java/org/openapitools/model/SessionInfo.java
-src/main/java/org/openapitools/model/Status.java
 src/main/java/org/openapitools/model/Suggestions.java
 src/main/java/org/openapitools/model/TokenInfo.java
 src/main/java/org/openapitools/model/TooEarlyErrorMessageResponse.java
@@ -100,6 +100,7 @@ src/main/java/org/openapitools/model/UpdateWorkspaceRequest.java
 src/main/java/org/openapitools/model/UpdateWorkspaceResponse.java
 src/main/java/org/openapitools/model/ValidationErrorCode.java
 src/main/java/org/openapitools/model/ValidationErrorMessageResponse.java
+src/main/java/org/openapitools/model/WorkflowStatus.java
 src/main/java/org/openapitools/model/Workspace.java
 src/main/resources/application.properties
 src/main/resources/openapi.yaml

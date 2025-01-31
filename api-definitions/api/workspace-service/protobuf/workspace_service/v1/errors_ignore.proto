@@ -1,0 +1,588 @@
+syntax = "proto3";
+
+package workspace_service.v1;
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/rpc/status.proto";
+
+option go_package = "github.com/VectorEngineering/vector-protobuf-definitions/api-definitions/pkg/generated/workspace_service/v1";
+
+// Enhanced AuthErrorCode represents authentication-related error codes
+enum AuthErrorCode {
+  NO_AUTH_ERROR = 0;
+
+  // Authentication errors
+  AUTH_FAILED_INVALID_BEARER_TOKEN = 1001;
+  AUTH_FAILED_INVALID_SUBJECT = 1002;
+  AUTH_FAILED_INVALID_AUDIENCE = 1003;
+  AUTH_FAILED_INVALID_ISSUER = 1004;
+  BEARER_TOKEN_MISSING = 1005;
+  TOKEN_EXPIRED = 1006;
+  TOKEN_NOT_ACTIVE = 1007;
+  TOKEN_REVOKED = 1008;
+  INVALID_CLAIMS = 1100;
+  MISSING_REQUIRED_CLAIMS = 1101;
+  INVALID_SCOPE = 1102;
+  INVALID_PERMISSIONS = 1103;
+
+  // Session errors
+  SESSION_EXPIRED = 1200;
+  SESSION_INVALID = 1201;
+  SESSION_REVOKED = 1202;
+
+  // Other authentication errors
+  UNAUTHENTICATED = 1500;
+  MULTI_FACTOR_REQUIRED = 1501;
+  MULTI_FACTOR_FAILED = 1502;
+
+  // New authentication error codes
+  ACCOUNT_LOCKED = 1600;                // Account is locked due to too many failed login attempts
+  ACCOUNT_DISABLED = 1601;              // Account has been disabled by admin
+  PASSWORD_EXPIRED = 1602;              // Password has expired and must be changed
+  PASSWORD_RESET_REQUIRED = 1603;       // Password reset is required
+  UNRECOGNIZED_DEVICE = 1604;           // Login attempt from an unrecognized device
+}
+
+// Enhanced ValidationErrorCode represents validation and business logic error codes
+enum ValidationErrorCode {
+  NO_ERROR = 0;
+
+  // General validation errors
+  VALIDATION_ERROR = 2000;
+  INVALID_WRITE_INPUT = 2001;
+  INVALID_CHECK_INPUT = 2002;
+  INVALID_EXPAND_INPUT = 2003;
+  INVALID_OBJECT_FORMAT = 2004;
+  INVALID_USER = 2005;
+  INVALID_TUPLE = 2006;
+
+  // Resource not found errors
+  AUTHORIZATION_MODEL_NOT_FOUND = 2100;
+  TYPE_NOT_FOUND = 2101;
+  RELATION_NOT_FOUND = 2102;
+  STORE_ID_INVALID_LENGTH = 2103;
+  ID_TOO_LONG = 2104;
+
+  // Input errors
+  INVALID_CONTINUATION_TOKEN = 2200;
+  PAGE_SIZE_INVALID = 2201;
+  PARAM_MISSING_VALUE = 2202;
+  EXCEEDED_ENTITY_LIMIT = 2203;
+
+  // Conflict errors
+  DUPLICATE_ENTRY = 2300;
+  CANNOT_ALLOW_DUPLICATE_TUPLES = 2301;
+  CANNOT_ALLOW_DUPLICATE_TYPES = 2302;
+
+  // Schema errors
+  INVALID_SCHEMA_VERSION = 2400;
+  INVALID_TYPE_PATTERN = 2401;
+  INVALID_RELATION_PATTERN = 2402;
+  INVALID_OBJECT_PATTERN = 2403;
+
+  // New validation error codes
+  INVALID_FORMAT = 2500;                // General invalid format
+  INVALID_EMAIL_FORMAT = 2501;          // Email format is invalid
+  INVALID_PASSWORD_STRENGTH = 2502;     // Password does not meet strength requirements
+  FIELD_TOO_SHORT = 2503;               // Field value is too short
+  FIELD_TOO_LONG = 2504;                // Field value is too long
+  UNSUPPORTED_MEDIA_TYPE = 2505;        // Media type is not supported
+}
+
+// Enhanced InternalErrorCode represents server-side error codes
+enum InternalErrorCode {
+  NO_INTERNAL_ERROR = 0;
+
+  // General internal errors
+  INTERNAL_ERROR = 4000;
+  DATA_CORRUPTION = 4001;
+  DATABASE_ERROR = 4002;
+  CACHE_ERROR = 4003;
+
+  // Resource exhaustion errors
+  RESOURCE_EXHAUSTED = 4100;
+  QUOTA_EXCEEDED = 4101;
+  RATE_LIMIT_EXCEEDED = 4102;
+
+  // Operation errors
+  CANCELLED = 4200;
+  DEADLINE_EXCEEDED = 4201;
+  ALREADY_EXISTS = 4202;
+  FAILED_PRECONDITION = 4203;
+  ABORTED = 4204;
+  OUT_OF_RANGE = 4205;
+
+  // Availability errors
+  UNAVAILABLE = 4300;
+  DATA_LOSS = 4301;
+  SERVICE_DEGRADED = 4302;
+
+  // New internal error codes
+  DEPENDENCY_FAILURE = 4400;            // Failure in external dependency
+  CONFIGURATION_ERROR = 4401;           // Service configuration error
+  SECURITY_BREACH_DETECTED = 4402;      // Potential security breach detected
+}
+
+
+// Enhanced NotFoundErrorCode represents resource not found error codes
+enum NotFoundErrorCode {
+  NO_NOT_FOUND_ERROR = 0;   // Default value as per proto3 convention
+
+  // Endpoint errors
+  UNDEFINED_ENDPOINT = 5000;              // Requested endpoint doesn't exist
+  UNIMPLEMENTED = 5001;                   // Endpoint not implemented
+
+  // Resource errors
+  STORE_ID_NOT_FOUND = 5100;              // Requested store ID doesn't exist
+  USER_NOT_FOUND = 5101;                  // Requested user doesn't exist
+  RESOURCE_NOT_FOUND = 5102;              // Generic resource not found
+  TENANT_NOT_FOUND = 5103;                // Requested tenant doesn't exist
+}
+
+// Base error message response, extending google.rpc.Status
+message ErrorResponse {
+  google.rpc.Status status = 1;
+}
+
+// AuthenticationErrorMessageResponse
+message AuthenticationErrorMessageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Authentication Error Response"
+      description: "Represents authentication and authorization failures"
+    }
+    example: "{\"code\":1001,\"message\":\"Authentication failed\",\"token_info\":{\"token_id\":\"t-123\",\"expiry\":\"2024-01-01T00:00:00Z\"},\"auth_context\":{\"required_scopes\":[\"read\",\"write\"],\"provided_scopes\":[\"read\"]},\"session_info\":{\"session_id\":\"s-456\",\"last_active\":\"2024-01-01T00:00:00Z\"}}"
+  };
+
+  AuthErrorCode code = 1;                // Error code indicating type of auth error
+  string message = 2;                    // Human-readable error message
+
+  message TokenInfo {
+    string token_id = 1;                 // Identifier of the invalid token
+    string token_type = 2;               // Type of token (Bearer, JWT, etc)
+    google.protobuf.Timestamp expiry = 3; // Token expiration time
+    string issuer = 4;                   // Token issuer
+    repeated string audiences = 5;        // Token audiences
+  }
+  TokenInfo token_info = 3;
+
+  message AuthContext {
+    repeated string required_scopes = 1;  // Scopes required for the operation
+    repeated string provided_scopes = 2;  // Scopes present in the token
+    repeated string missing_permissions = 3; // Permissions that were missing
+    string tenant_id = 4;                // Tenant context if applicable
+  }
+  AuthContext auth_context = 4;
+
+  message SessionInfo {
+    string session_id = 1;               // ID of the invalid session
+    google.protobuf.Timestamp last_active = 2; // Last activity timestamp
+    string device_id = 3;                // Device associated with session
+    string ip_address = 4;               // IP address of the request
+  }
+  SessionInfo session_info = 5;
+
+  message MFAInfo {
+    bool mfa_required = 1;               // Whether MFA was required
+    repeated string allowed_methods = 2;  // Allowed MFA methods
+    string failed_reason = 3;            // Why MFA failed if applicable
+  }
+  MFAInfo mfa_info = 6;
+
+  ErrorResponse error_response = 7;      // Standard error response
+}
+
+// ValidationErrorMessageResponse
+message ValidationErrorMessageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Validation Error Response"
+      description: "Represents data validation and business logic errors"
+    }
+    example: "{\"code\":2000,\"message\":\"Validation failed\",\"field_violations\":[{\"field\":\"email\",\"validation\":\"format\",\"message\":\"Invalid email format\"}],\"entity_violations\":{\"user\":[\"duplicate_email\",\"invalid_age\"]}}"
+  };
+
+  ValidationErrorCode code = 1;          // Error code indicating validation error type
+  string message = 2;                    // Human-readable error message
+
+  message FieldViolation {
+    string field = 1;                    // Field that failed validation
+    string validation = 2;               // Type of validation that failed
+    string message = 3;                  // Specific error message
+    string expected = 4;                 // Expected value or format
+    string actual = 5;                   // Actual value provided
+  }
+  repeated FieldViolation field_violations = 3;
+
+  message SchemaValidation {
+    string schema_version = 1;           // Version of schema used
+    repeated string invalid_patterns = 2; // Patterns that were invalid
+    repeated string type_mismatches = 3;  // Type mismatches found
+  }
+  SchemaValidation schema_validation = 5;
+
+  message ResourceValidation {
+    repeated string missing_resources = 1; // Resources that weren't found
+    repeated string invalid_references = 2; // Invalid resource references
+    map<string, string> id_violations = 3; // ID format violations
+  }
+  ResourceValidation resource_validation = 6;
+
+  ErrorResponse error_response = 7;      // Standard error response
+}
+
+// InternalErrorMessageResponse
+message InternalErrorMessageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Internal Error Response"
+      description: "Represents internal server and system-level errors"
+    }
+    example: "{\"code\":4000,\"message\":\"Internal server error\",\"incident_id\":\"inc-789\",\"service_status\":{\"name\":\"user-service\",\"status\":\"degraded\",\"dependencies\":[{\"name\":\"db\",\"status\":\"down\"}]}}"
+  };
+
+  InternalErrorCode code = 1;            // Error code indicating internal error type
+  string message = 2;                    // Human-readable error message
+  string incident_id = 3;                // Unique error tracking ID
+
+  message ServiceStatus {
+    string name = 1;                     // Name of the service
+    string status = 2;                   // Current service status
+    map<string, string> metrics = 3;     // Service metrics
+
+    message Dependency {
+      string name = 1;                   // Dependency name
+      string status = 2;                 // Dependency status
+      string error = 3;                  // Error if any
+      int32 latency = 4;                 // Current latency in ms
+    }
+    repeated Dependency dependencies = 4;  // Status of dependencies
+  }
+  ServiceStatus service_status = 4;
+
+  message ResourceUtilization {
+    double cpu_usage = 1;                // CPU usage percentage
+    double memory_usage = 2;             // Memory usage percentage
+    int32 active_connections = 3;        // Number of active connections
+    map<string, double> quotas = 4;      // Current quota utilization
+  }
+  ResourceUtilization resource_utilization = 5;
+
+  message OperationDetails {
+    string operation_id = 1;             // ID of failed operation
+    google.protobuf.Timestamp start_time = 2; // When operation started
+    google.protobuf.Timestamp end_time = 3;   // When operation failed
+    repeated string stack_trace = 4;     // Stack trace if available
+    map<string, string> parameters = 5;  // Operation parameters
+  }
+  OperationDetails operation_details = 6;
+
+  ErrorResponse error_response = 7;      // Standard error response
+}
+
+// NotFoundErrorMessageResponse
+message NotFoundErrorMessageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Not Found Error Response"
+      description: "Represents resource not found errors"
+    }
+    example: "{\"code\":5000,\"message\":\"Resource not found\",\"resource_info\":{\"type\":\"user\",\"id\":\"123\",\"path\":\"/api/users/123\"},\"suggestions\":{\"similar_resources\":[\"124\",\"125\"],\"alternative_paths\":[\"/api/v2/users/123\"]}}"
+  };
+
+  NotFoundErrorCode code = 1;            // Error code indicating not found error type
+  string message = 2;                    // Human-readable error message
+
+  message ResourceInfo {
+    string type = 1;                     // Type of resource not found
+    string id = 2;                       // ID of resource not found
+    string path = 3;                     // Path that was accessed
+    string tenant_id = 4;                // Tenant context if applicable
+    repeated string scopes = 5;          // Required scopes for access
+  }
+  ResourceInfo resource_info = 3;
+
+  message Suggestions {
+    repeated string similar_resources = 1; // Similar resource IDs
+    repeated string alternative_paths = 2; // Alternative API paths
+    string documentation_url = 3;         // Relevant documentation
+    map<string, string> hints = 4;        // Additional hints
+  }
+  Suggestions suggestions = 4;
+
+  message APIInfo {
+    string version = 1;                  // API version used
+    repeated string supported_versions = 2; // Supported API versions
+    bool is_deprecated = 3;              // Whether endpoint is deprecated
+    google.protobuf.Timestamp sunset_date = 4; // When endpoint will be removed
+  }
+  APIInfo api_info = 5;
+
+  ErrorResponse error_response = 6;      // Standard error response
+}
+
+// RateLimitErrorMessageResponse
+message RateLimitErrorMessageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Rate Limit Error Response"
+      description: "Represents rate limiting and quota exceeded errors"
+    }
+    example: "{\"code\":4102,\"message\":\"Rate limit exceeded\",\"limit_info\":{\"current\":150,\"limit\":100,\"reset_time\":\"2024-01-01T00:00:00Z\"},\"quota_info\":{\"resource\":\"api_calls\",\"used\":1500,\"limit\":1000}}"
+  };
+
+  InternalErrorCode code = 1;            // Error code (typically RATE_LIMIT_EXCEEDED)
+  string message = 2;                    // Human-readable error message
+
+  message LimitInfo {
+    int32 current = 1;                   // Current request count
+    int32 limit = 2;                     // Rate limit threshold
+    google.protobuf.Timestamp reset_time = 3; // When the limit resets
+    string window_size = 4;              // Time window for the limit
+  }
+  LimitInfo limit_info = 3;
+
+  message QuotaInfo {
+    string resource = 1;                 // Resource being limited
+    int64 used = 2;                      // Amount used
+    int64 limit = 3;                     // Quota limit
+    google.protobuf.Timestamp reset_time = 4; // When quota resets
+    map<string, int64> resource_usage = 5; // Usage by resource type
+  }
+  QuotaInfo quota_info = 4;
+
+  message RateLimitContext {
+    string user_id = 1;                  // Affected user
+    string ip_address = 2;               // IP address
+    repeated string affected_endpoints = 3; // Endpoints being rate limited
+    map<string, string> headers = 4;     // Relevant headers
+  }
+  RateLimitContext context = 5;
+
+  ErrorResponse error_response = 6;      // Standard error response
+}
+
+// ConflictErrorMessageResponse
+message ConflictErrorMessageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Conflict Error Response"
+      description: "Represents resource conflict errors"
+    }
+    example: "{\"code\":2300,\"message\":\"Resource already exists\",\"conflict_info\":{\"resource_type\":\"user\",\"identifier\":\"email@example.com\"}}"
+  };
+
+  ValidationErrorCode code = 1;          // Error code indicating conflict error
+  string message = 2;                    // Human-readable error message
+
+  message ConflictInfo {
+    string resource_type = 1;
+    string identifier = 2;
+    string conflict_reason = 3;
+    google.protobuf.Timestamp created_at = 4;
+    string created_by = 5;
+  }
+  ConflictInfo conflict_info = 3;
+
+  ErrorResponse error_response = 4;      // Standard error response
+}
+
+// ServiceUnavailableErrorMessageResponse
+message ServiceUnavailableErrorMessageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Service Unavailable Error Response"
+      description: "Represents service availability errors"
+    }
+    example: "{\"code\":4300,\"message\":\"Service is temporarily unavailable\",\"availability_info\":{\"retry_after\":60,\"affected_services\":[\"user-service\"]}}"
+  };
+
+  InternalErrorCode code = 1;            // Error code indicating service unavailability
+  string message = 2;                    // Human-readable error message
+
+  message AvailabilityInfo {
+    int32 retry_after = 1;               // Seconds to wait before retrying
+    string maintenance_window = 2;       // Scheduled maintenance information
+    repeated string affected_services = 3; // List of affected services
+    string status_page_url = 4;          // URL to service status page
+  }
+  AvailabilityInfo availability_info = 3;
+
+  ErrorResponse error_response = 4;      // Standard error response
+}
+
+// Empty request message for error endpoints
+message ErrorMessageRequest {}
+
+// MethodNotAllowedErrorMessageResponse for 405 Method Not Allowed
+message MethodNotAllowedErrorMessageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Method Not Allowed Error Response"
+      description: "Represents errors when HTTP method is not allowed on the endpoint"
+    }
+    example: "{\"code\":405,\"message\":\"Method Not Allowed\",\"allowed_methods\":[\"GET\",\"POST\"]}"
+  };
+
+  int32 code = 1;                      // HTTP status code (405)
+  string message = 2;                  // Human-readable error message
+  repeated string allowed_methods = 3; // List of allowed HTTP methods
+  ErrorResponse error_response = 4;    // Standard error response
+}
+
+// UnprocessableEntityErrorMessageResponse for 422 Unprocessable Entity
+message UnprocessableEntityErrorMessageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Unprocessable Entity Error Response"
+      description: "Represents errors when the server understands the content type but cannot process the instructions"
+    }
+    example: "{\"code\":422,\"message\":\"Unprocessable Entity\",\"errors\":[{\"field\":\"email\",\"error\":\"Invalid format\"}]}"
+  };
+
+  int32 code = 1;                      // HTTP status code (422)
+  string message = 2;                  // Human-readable error message
+
+  message FieldError {
+    string field = 1;                  // Field with error
+    string error = 2;                  // Error description
+  }
+  repeated FieldError errors = 3;      // List of field-specific errors
+  ErrorResponse error_response = 4;    // Standard error response
+}
+
+// NotImplementedErrorMessageResponse for 501 Not Implemented
+message NotImplementedErrorMessageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Not Implemented Error Response"
+      description: "Represents errors when the requested functionality is not implemented"
+    }
+    example: "{\"code\":501,\"message\":\"Not Implemented\",\"feature\":\"User Deletion\"}"
+  };
+
+  int32 code = 1;                      // HTTP status code (501)
+  string message = 2;                  // Human-readable error message
+  string feature = 3;                  // Feature or functionality not implemented
+  ErrorResponse error_response = 4;    // Standard error response
+}
+
+// BadGatewayErrorMessageResponse for 502 Bad Gateway
+message BadGatewayErrorMessageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Bad Gateway Error Response"
+      description: "Represents errors when the server received an invalid response from an upstream server"
+    }
+    example: "{\"code\":502,\"message\":\"Bad Gateway\",\"upstream_service\":\"Auth Service\"}"
+  };
+
+  int32 code = 1;                      // HTTP status code (502)
+  string message = 2;                  // Human-readable error message
+  string upstream_service = 3;         // Name of the upstream service
+  ErrorResponse error_response = 4;    // Standard error response
+}
+
+// GatewayTimeoutErrorMessageResponse for 504 Gateway Timeout
+message GatewayTimeoutErrorMessageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Gateway Timeout Error Response"
+      description: "Represents errors when the server did not receive a timely response from an upstream server"
+    }
+    example: "{\"code\":504,\"message\":\"Gateway Timeout\",\"upstream_service\":\"Database\"}"
+  };
+
+  int32 code = 1;                      // HTTP status code (504)
+  string message = 2;                  // Human-readable error message
+  string upstream_service = 3;         // Name of the upstream service
+  ErrorResponse error_response = 4;    // Standard error response
+}
+
+// PreconditionFailedErrorMessageResponse for 412 Precondition Failed
+message PreconditionFailedErrorMessageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Precondition Failed Error Response"
+      description: "Represents errors when a precondition provided in the request fails"
+    }
+    example: "{\"code\":412,\"message\":\"Precondition Failed\",\"failed_conditions\":[\"If-Match header does not match\"]}"
+  };
+
+  int32 code = 1;                      // HTTP status code (412)
+  string message = 2;                  // Human-readable error message
+  repeated string failed_conditions = 3; // List of failed preconditions
+  ErrorResponse error_response = 4;    // Standard error response
+}
+
+// TooEarlyErrorMessageResponse for 425 Too Early
+message TooEarlyErrorMessageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Too Early Error Response"
+      description: "Indicates that the server is unwilling to risk processing a request that might be replayed"
+    }
+    example: "{\"code\":425,\"message\":\"Too Early\"}"
+  };
+
+  int32 code = 1;                      // HTTP status code (425)
+  string message = 2;                  // Human-readable error message
+  ErrorResponse error_response = 3;    // Standard error response
+}
+
+// PaymentRequiredErrorMessageResponse for 402 Payment Required
+message PaymentRequiredErrorMessageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Payment Required Error Response"
+      description: "Indicates that payment is required to proceed"
+    }
+    example: "{\"code\":402,\"message\":\"Payment Required\",\"payment_info\":{\"amount_due\":29.99,\"currency\":\"USD\",\"due_date\":\"2024-01-01T00:00:00Z\"}}"
+  };
+
+  int32 code = 1;                      // HTTP status code (402)
+  string message = 2;                  // Human-readable error message
+
+  message PaymentInfo {
+    double amount_due = 1;             // Amount that needs to be paid
+    string currency = 2;               // Currency code
+    google.protobuf.Timestamp due_date = 3; // Payment due date
+    string payment_url = 4;            // URL to make the payment
+  }
+  PaymentInfo payment_info = 3;
+  ErrorResponse error_response = 4;    // Standard error response
+}
+
+// ForbiddenErrorMessageResponse for 403 Forbidden
+message ForbiddenErrorMessageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Forbidden Error Response"
+      description: "Indicates that the server understood the request but refuses to authorize it"
+    }
+    example: "{\"code\":403,\"message\":\"Forbidden\",\"reason\":\"Insufficient permissions\",\"required_permissions\":[\"admin\"]}"
+  };
+
+  int32 code = 1;                      // HTTP status code (403)
+  string message = 2;                  // Human-readable error message
+  string reason = 3;                   // Reason for the forbidden access
+  repeated string required_permissions = 4; // Permissions required to access the resource
+  ErrorResponse error_response = 5;    // Standard error response
+}
+
+// GoneErrorMessageResponse for 410 Gone
+message GoneErrorMessageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Gone Error Response"
+      description: "Indicates that the resource requested is no longer available and will not be available again"
+    }
+    example: "{\"code\":410,\"message\":\"Gone\",\"resource\":\"/api/v1/users\"}"
+  };
+
+  int32 code = 1;                      // HTTP status code (410)
+  string message = 2;                  // Human-readable error message
+  string resource = 3;                 // Resource that is gone
+  ErrorResponse error_response = 4;    // Standard error response
+}

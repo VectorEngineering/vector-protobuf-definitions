@@ -9,9 +9,9 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.openapitools.model.BackgroundJobStatus;
 import org.openapitools.model.OutputFormat;
 import org.openapitools.model.ScrapingJob;
+import org.openapitools.model.WorkflowStatus;
 import org.openapitools.model.Workspace;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -28,7 +28,7 @@ import javax.annotation.Generated;
  * ScrapingWorkflow
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T23:23:25.497382-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-31T03:28:40.740898-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ScrapingWorkflow {
 
   private String id;
@@ -41,7 +41,7 @@ public class ScrapingWorkflow {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime lastRunTime;
 
-  private BackgroundJobStatus status = BackgroundJobStatus.UNSPECIFIED;
+  private WorkflowStatus status = WorkflowStatus.UNSPECIFIED;
 
   private Integer retryCount;
 
@@ -209,7 +209,7 @@ public class ScrapingWorkflow {
     this.lastRunTime = lastRunTime;
   }
 
-  public ScrapingWorkflow status(BackgroundJobStatus status) {
+  public ScrapingWorkflow status(WorkflowStatus status) {
     this.status = status;
     return this;
   }
@@ -221,11 +221,11 @@ public class ScrapingWorkflow {
   @Valid 
   @Schema(name = "status", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("status")
-  public BackgroundJobStatus getStatus() {
+  public WorkflowStatus getStatus() {
     return status;
   }
 
-  public void setStatus(BackgroundJobStatus status) {
+  public void setStatus(WorkflowStatus status) {
     this.status = status;
   }
 

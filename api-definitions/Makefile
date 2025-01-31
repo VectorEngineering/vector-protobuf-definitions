@@ -26,7 +26,7 @@ test:
 # New gen target to incorporate the build process of different services
 gen:
 	@echo "Generating code for all services..."
-	for service in lead-scraper-service; do \
+	for service in lead-scraper-service workspace-service; do \
 		(cd api/$$service && make) || exit 1; \
 	done
 	@echo "Running additional generate script..."
@@ -39,14 +39,14 @@ precommit: gen fmt lint test
 # Additional custom targets if needed
 clean:
 	@echo "Cleaning up generated files..."
-	for service in lead-scraper-service; do \
+	for service in lead-scraper-service workspace-service; do \
 		(cd api/$$service && make clean) || exit 1; \
 	done
 	@echo "Clean completed."
 
 build:
 	@echo "Building all services..."
-	for service in lead-scraper-service; do \
+	for service in lead-scraper-service workspace-service; do \
 		(cd api/$$service && make build) || exit 1; \
 	done
 	@echo "Build completed."

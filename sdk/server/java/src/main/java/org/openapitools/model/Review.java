@@ -20,7 +20,7 @@ import javax.annotation.Generated;
  * Review
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T23:23:25.497382-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-31T03:28:40.740898-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class Review {
 
   private String id;
@@ -39,6 +39,15 @@ public class Review {
   private String profilePhotoUrl;
 
   private Integer reviewCount;
+
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private OffsetDateTime createdAt;
+
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private OffsetDateTime updatedAt;
+
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private OffsetDateTime deletedAt;
 
   public Review id(String id) {
     this.id = id;
@@ -200,6 +209,66 @@ public class Review {
     this.reviewCount = reviewCount;
   }
 
+  public Review createdAt(OffsetDateTime createdAt) {
+    this.createdAt = createdAt;
+    return this;
+  }
+
+  /**
+   * Get createdAt
+   * @return createdAt
+   */
+  @Valid 
+  @Schema(name = "createdAt", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("createdAt")
+  public OffsetDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(OffsetDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public Review updatedAt(OffsetDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+    return this;
+  }
+
+  /**
+   * Get updatedAt
+   * @return updatedAt
+   */
+  @Valid 
+  @Schema(name = "updatedAt", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("updatedAt")
+  public OffsetDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(OffsetDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
+
+  public Review deletedAt(OffsetDateTime deletedAt) {
+    this.deletedAt = deletedAt;
+    return this;
+  }
+
+  /**
+   * Get deletedAt
+   * @return deletedAt
+   */
+  @Valid 
+  @Schema(name = "deletedAt", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("deletedAt")
+  public OffsetDateTime getDeletedAt() {
+    return deletedAt;
+  }
+
+  public void setDeletedAt(OffsetDateTime deletedAt) {
+    this.deletedAt = deletedAt;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -216,12 +285,15 @@ public class Review {
         Objects.equals(this.time, review.time) &&
         Objects.equals(this.language, review.language) &&
         Objects.equals(this.profilePhotoUrl, review.profilePhotoUrl) &&
-        Objects.equals(this.reviewCount, review.reviewCount);
+        Objects.equals(this.reviewCount, review.reviewCount) &&
+        Objects.equals(this.createdAt, review.createdAt) &&
+        Objects.equals(this.updatedAt, review.updatedAt) &&
+        Objects.equals(this.deletedAt, review.deletedAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, author, rating, text, time, language, profilePhotoUrl, reviewCount);
+    return Objects.hash(id, author, rating, text, time, language, profilePhotoUrl, reviewCount, createdAt, updatedAt, deletedAt);
   }
 
   @Override
@@ -236,6 +308,9 @@ public class Review {
     sb.append("    language: ").append(toIndentedString(language)).append("\n");
     sb.append("    profilePhotoUrl: ").append(toIndentedString(profilePhotoUrl)).append("\n");
     sb.append("    reviewCount: ").append(toIndentedString(reviewCount)).append("\n");
+    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
+    sb.append("    deletedAt: ").append(toIndentedString(deletedAt)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -12,7 +12,7 @@ class AccountSettings(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, email_notifications=None, slack_notifications=None, default_data_retention=None, auto_purge_enabled=None, require2fa=None, session_timeout=None):  # noqa: E501
+    def __init__(self, id=None, email_notifications=None, slack_notifications=None, default_data_retention=None, auto_purge_enabled=None, require2fa=None, session_timeout=None, created_at=None, updated_at=None, deleted_at=None):  # noqa: E501
         """AccountSettings - a model defined in OpenAPI
 
         :param id: The id of this AccountSettings.  # noqa: E501
@@ -29,6 +29,12 @@ class AccountSettings(Model):
         :type require2fa: bool
         :param session_timeout: The session_timeout of this AccountSettings.  # noqa: E501
         :type session_timeout: str
+        :param created_at: The created_at of this AccountSettings.  # noqa: E501
+        :type created_at: datetime
+        :param updated_at: The updated_at of this AccountSettings.  # noqa: E501
+        :type updated_at: datetime
+        :param deleted_at: The deleted_at of this AccountSettings.  # noqa: E501
+        :type deleted_at: datetime
         """
         self.openapi_types = {
             'id': str,
@@ -37,7 +43,10 @@ class AccountSettings(Model):
             'default_data_retention': str,
             'auto_purge_enabled': bool,
             'require2fa': bool,
-            'session_timeout': str
+            'session_timeout': str,
+            'created_at': datetime,
+            'updated_at': datetime,
+            'deleted_at': datetime
         }
 
         self.attribute_map = {
@@ -47,7 +56,10 @@ class AccountSettings(Model):
             'default_data_retention': 'defaultDataRetention',
             'auto_purge_enabled': 'autoPurgeEnabled',
             'require2fa': 'require2fa',
-            'session_timeout': 'sessionTimeout'
+            'session_timeout': 'sessionTimeout',
+            'created_at': 'createdAt',
+            'updated_at': 'updatedAt',
+            'deleted_at': 'deletedAt'
         }
 
         self._id = id
@@ -57,6 +69,9 @@ class AccountSettings(Model):
         self._auto_purge_enabled = auto_purge_enabled
         self._require2fa = require2fa
         self._session_timeout = session_timeout
+        self._created_at = created_at
+        self._updated_at = updated_at
+        self._deleted_at = deleted_at
 
     @classmethod
     def from_dict(cls, dikt) -> 'AccountSettings':
@@ -215,3 +230,66 @@ class AccountSettings(Model):
         """
 
         self._session_timeout = session_timeout
+
+    @property
+    def created_at(self) -> datetime:
+        """Gets the created_at of this AccountSettings.
+
+
+        :return: The created_at of this AccountSettings.
+        :rtype: datetime
+        """
+        return self._created_at
+
+    @created_at.setter
+    def created_at(self, created_at: datetime):
+        """Sets the created_at of this AccountSettings.
+
+
+        :param created_at: The created_at of this AccountSettings.
+        :type created_at: datetime
+        """
+
+        self._created_at = created_at
+
+    @property
+    def updated_at(self) -> datetime:
+        """Gets the updated_at of this AccountSettings.
+
+
+        :return: The updated_at of this AccountSettings.
+        :rtype: datetime
+        """
+        return self._updated_at
+
+    @updated_at.setter
+    def updated_at(self, updated_at: datetime):
+        """Sets the updated_at of this AccountSettings.
+
+
+        :param updated_at: The updated_at of this AccountSettings.
+        :type updated_at: datetime
+        """
+
+        self._updated_at = updated_at
+
+    @property
+    def deleted_at(self) -> datetime:
+        """Gets the deleted_at of this AccountSettings.
+
+
+        :return: The deleted_at of this AccountSettings.
+        :rtype: datetime
+        """
+        return self._deleted_at
+
+    @deleted_at.setter
+    def deleted_at(self, deleted_at: datetime):
+        """Sets the deleted_at of this AccountSettings.
+
+
+        :param deleted_at: The deleted_at of this AccountSettings.
+        :type deleted_at: datetime
+        """
+
+        self._deleted_at = deleted_at

@@ -30,10 +30,6 @@ pub struct Account {
     #[serde(skip_serializing_if="Option::is_none")]
     pub email: Option<String>,
 
-    #[serde(rename = "lastModifiedAt")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub last_modified_at: Option<chrono::DateTime::<chrono::Utc>>,
-
     #[serde(rename = "deletedAt")]
     #[serde(skip_serializing_if="Option::is_none")]
     pub deleted_at: Option<chrono::DateTime::<chrono::Utc>>,
@@ -41,10 +37,6 @@ pub struct Account {
     #[serde(rename = "createdAt")]
     #[serde(skip_serializing_if="Option::is_none")]
     pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
-
-    #[serde(rename = "scrapingJobs")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub scraping_jobs: Option<Vec<models::ScrapingJob>>,
 
     #[serde(rename = "accountStatus")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -102,10 +94,8 @@ impl Account {
             org_id: None,
             tenant_id: None,
             email: None,
-            last_modified_at: None,
             deleted_at: None,
             created_at: None,
-            scraping_jobs: None,
             account_status: None,
             roles: None,
             permissions: None,
@@ -167,13 +157,9 @@ impl std::string::ToString for Account {
                 ].join(",")
             }),
 
-            // Skipping lastModifiedAt in query parameter serialization
-
             // Skipping deletedAt in query parameter serialization
 
             // Skipping createdAt in query parameter serialization
-
-            // Skipping scrapingJobs in query parameter serialization
 
             // Skipping accountStatus in query parameter serialization
 
@@ -261,10 +247,8 @@ impl std::str::FromStr for Account {
             pub org_id: Vec<String>,
             pub tenant_id: Vec<String>,
             pub email: Vec<String>,
-            pub last_modified_at: Vec<chrono::DateTime::<chrono::Utc>>,
             pub deleted_at: Vec<chrono::DateTime::<chrono::Utc>>,
             pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
-            pub scraping_jobs: Vec<Vec<models::ScrapingJob>>,
             pub account_status: Vec<models::AccountStatus>,
             pub roles: Vec<Vec<String>>,
             pub permissions: Vec<Vec<String>>,
@@ -304,12 +288,9 @@ impl std::str::FromStr for Account {
                     #[allow(clippy::redundant_clone)]
                     "email" => intermediate_rep.email.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
-                    "lastModifiedAt" => intermediate_rep.last_modified_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
                     "deletedAt" => intermediate_rep.deleted_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    "scrapingJobs" => return std::result::Result::Err("Parsing a container in this style is not supported in Account".to_string()),
                     #[allow(clippy::redundant_clone)]
                     "accountStatus" => intermediate_rep.account_status.push(<models::AccountStatus as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     "roles" => return std::result::Result::Err("Parsing a container in this style is not supported in Account".to_string()),
@@ -344,10 +325,8 @@ impl std::str::FromStr for Account {
             org_id: intermediate_rep.org_id.into_iter().next(),
             tenant_id: intermediate_rep.tenant_id.into_iter().next(),
             email: intermediate_rep.email.into_iter().next(),
-            last_modified_at: intermediate_rep.last_modified_at.into_iter().next(),
             deleted_at: intermediate_rep.deleted_at.into_iter().next(),
             created_at: intermediate_rep.created_at.into_iter().next(),
-            scraping_jobs: intermediate_rep.scraping_jobs.into_iter().next(),
             account_status: intermediate_rep.account_status.into_iter().next(),
             roles: intermediate_rep.roles.into_iter().next(),
             permissions: intermediate_rep.permissions.into_iter().next(),
@@ -433,6 +412,18 @@ pub struct AccountSettings {
     #[serde(skip_serializing_if="Option::is_none")]
     pub session_timeout: Option<String>,
 
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "deletedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub deleted_at: Option<chrono::DateTime::<chrono::Utc>>,
+
 }
 
 
@@ -447,6 +438,9 @@ impl AccountSettings {
             auto_purge_enabled: None,
             require2fa: None,
             session_timeout: None,
+            created_at: None,
+            updated_at: None,
+            deleted_at: None,
         }
     }
 }
@@ -513,6 +507,12 @@ impl std::string::ToString for AccountSettings {
                 ].join(",")
             }),
 
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+            // Skipping deletedAt in query parameter serialization
+
         ];
 
         params.into_iter().flatten().collect::<Vec<_>>().join(",")
@@ -537,6 +537,9 @@ impl std::str::FromStr for AccountSettings {
             pub auto_purge_enabled: Vec<bool>,
             pub require2fa: Vec<bool>,
             pub session_timeout: Vec<String>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub deleted_at: Vec<chrono::DateTime::<chrono::Utc>>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -568,6 +571,12 @@ impl std::str::FromStr for AccountSettings {
                     "require2fa" => intermediate_rep.require2fa.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "sessionTimeout" => intermediate_rep.session_timeout.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "deletedAt" => intermediate_rep.deleted_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing AccountSettings".to_string())
                 }
             }
@@ -585,6 +594,9 @@ impl std::str::FromStr for AccountSettings {
             auto_purge_enabled: intermediate_rep.auto_purge_enabled.into_iter().next(),
             require2fa: intermediate_rep.require2fa.into_iter().next(),
             session_timeout: intermediate_rep.session_timeout.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+            deleted_at: intermediate_rep.deleted_at.into_iter().next(),
         })
     }
 }
@@ -1875,9 +1887,17 @@ pub struct BusinessHours {
     #[serde(skip_serializing_if="Option::is_none")]
     pub closed: Option<bool>,
 
-    #[serde(rename = "leadId")]
+    #[serde(rename = "createdAt")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub lead_id: Option<String>,
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "deletedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub deleted_at: Option<chrono::DateTime::<chrono::Utc>>,
 
 }
 
@@ -1891,7 +1911,9 @@ impl BusinessHours {
             open_time: None,
             close_time: None,
             closed: None,
-            lead_id: None,
+            created_at: None,
+            updated_at: None,
+            deleted_at: None,
         }
     }
 }
@@ -1936,13 +1958,11 @@ impl std::string::ToString for BusinessHours {
                 ].join(",")
             }),
 
+            // Skipping createdAt in query parameter serialization
 
-            self.lead_id.as_ref().map(|lead_id| {
-                [
-                    "leadId".to_string(),
-                    lead_id.to_string(),
-                ].join(",")
-            }),
+            // Skipping updatedAt in query parameter serialization
+
+            // Skipping deletedAt in query parameter serialization
 
         ];
 
@@ -1966,7 +1986,9 @@ impl std::str::FromStr for BusinessHours {
             pub open_time: Vec<String>,
             pub close_time: Vec<String>,
             pub closed: Vec<bool>,
-            pub lead_id: Vec<String>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub deleted_at: Vec<chrono::DateTime::<chrono::Utc>>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -1995,7 +2017,11 @@ impl std::str::FromStr for BusinessHours {
                     #[allow(clippy::redundant_clone)]
                     "closed" => intermediate_rep.closed.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
-                    "leadId" => intermediate_rep.lead_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "deletedAt" => intermediate_rep.deleted_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing BusinessHours".to_string())
                 }
             }
@@ -2011,7 +2037,9 @@ impl std::str::FromStr for BusinessHours {
             open_time: intermediate_rep.open_time.into_iter().next(),
             close_time: intermediate_rep.close_time.into_iter().next(),
             closed: intermediate_rep.closed.into_iter().next(),
-            lead_id: intermediate_rep.lead_id.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+            deleted_at: intermediate_rep.deleted_at.into_iter().next(),
         })
     }
 }
@@ -4448,7 +4476,7 @@ impl std::str::FromStr for EmployeeBenefit {
 pub struct ErrorResponse {
     #[serde(rename = "status")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub status: Option<models::Status>,
+    pub status: Option<models::RpcPeriodStatus>,
 
 }
 
@@ -4487,7 +4515,7 @@ impl std::str::FromStr for ErrorResponse {
         #[derive(Default)]
         #[allow(dead_code)]
         struct IntermediateRep {
-            pub status: Vec<models::Status>,
+            pub status: Vec<models::RpcPeriodStatus>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -4506,7 +4534,7 @@ impl std::str::FromStr for ErrorResponse {
                 #[allow(clippy::match_single_binding)]
                 match key {
                     #[allow(clippy::redundant_clone)]
-                    "status" => intermediate_rep.status.push(<models::Status as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "status" => intermediate_rep.status.push(<models::RpcPeriodStatus as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing ErrorResponse".to_string())
                 }
             }
@@ -6783,7 +6811,6 @@ pub struct Lead {
     #[serde(skip_serializing_if="Option::is_none")]
     pub workspace: Option<models::Workspace>,
 
-    /// Google Places ID
     #[serde(rename = "placeId")]
     #[serde(skip_serializing_if="Option::is_none")]
     pub place_id: Option<String>,
@@ -11590,6 +11617,18 @@ pub struct Review {
     #[serde(skip_serializing_if="Option::is_none")]
     pub review_count: Option<i32>,
 
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "deletedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub deleted_at: Option<chrono::DateTime::<chrono::Utc>>,
+
 }
 
 
@@ -11605,6 +11644,9 @@ impl Review {
             language: None,
             profile_photo_url: None,
             review_count: None,
+            created_at: None,
+            updated_at: None,
+            deleted_at: None,
         }
     }
 }
@@ -11673,6 +11715,12 @@ impl std::string::ToString for Review {
                 ].join(",")
             }),
 
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+            // Skipping deletedAt in query parameter serialization
+
         ];
 
         params.into_iter().flatten().collect::<Vec<_>>().join(",")
@@ -11698,6 +11746,9 @@ impl std::str::FromStr for Review {
             pub language: Vec<String>,
             pub profile_photo_url: Vec<String>,
             pub review_count: Vec<i32>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub deleted_at: Vec<chrono::DateTime::<chrono::Utc>>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -11731,6 +11782,12 @@ impl std::str::FromStr for Review {
                     "profilePhotoUrl" => intermediate_rep.profile_photo_url.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "reviewCount" => intermediate_rep.review_count.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "deletedAt" => intermediate_rep.deleted_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing Review".to_string())
                 }
             }
@@ -11749,6 +11806,9 @@ impl std::str::FromStr for Review {
             language: intermediate_rep.language.into_iter().next(),
             profile_photo_url: intermediate_rep.profile_photo_url.into_iter().next(),
             review_count: intermediate_rep.review_count.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+            deleted_at: intermediate_rep.deleted_at.into_iter().next(),
         })
     }
 }
@@ -11781,6 +11841,161 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into Review - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+/// The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct RpcPeriodStatus {
+    /// The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+    #[serde(rename = "code")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub code: Option<i32>,
+
+    /// A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+    #[serde(rename = "message")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub message: Option<String>,
+
+    /// A list of messages that carry the error details.  There is a common set of message types for APIs to use.
+    #[serde(rename = "details")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub details: Option<Vec<models::Any>>,
+
+}
+
+
+impl RpcPeriodStatus {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> RpcPeriodStatus {
+        RpcPeriodStatus {
+            code: None,
+            message: None,
+            details: None,
+        }
+    }
+}
+
+/// Converts the RpcPeriodStatus value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for RpcPeriodStatus {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.code.as_ref().map(|code| {
+                [
+                    "code".to_string(),
+                    code.to_string(),
+                ].join(",")
+            }),
+
+
+            self.message.as_ref().map(|message| {
+                [
+                    "message".to_string(),
+                    message.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping details in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a RpcPeriodStatus value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for RpcPeriodStatus {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub code: Vec<i32>,
+            pub message: Vec<String>,
+            pub details: Vec<Vec<models::Any>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing RpcPeriodStatus".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "code" => intermediate_rep.code.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "message" => intermediate_rep.message.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "details" => return std::result::Result::Err("Parsing a container in this style is not supported in RpcPeriodStatus".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing RpcPeriodStatus".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(RpcPeriodStatus {
+            code: intermediate_rep.code.into_iter().next(),
+            message: intermediate_rep.message.into_iter().next(),
+            details: intermediate_rep.details.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<RpcPeriodStatus> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<RpcPeriodStatus>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<RpcPeriodStatus>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for RpcPeriodStatus - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<RpcPeriodStatus> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <RpcPeriodStatus as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into RpcPeriodStatus - {}",
                                 value, err))
                     }
              },
@@ -11948,7 +12163,7 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 }
 
 
-/// ScrapingJob represents a Google Maps scraping task. This message defines both the configuration and current state of a scraping operation.  Key components: - Basic metadata (id, name, timestamps) - Job status tracking - Search configuration parameters - Geographic settings - Performance options - Multi-tenant context  Database considerations: - Stored in \"scraping_jobs\" table - Uses GORM for ORM mapping - Includes foreign key to Account - Supports soft deletes  Usage example: ```go job := &ScrapingJob{     Name: \"Athens Cafes\",     Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,     Keywords: []string{\"cafe\", \"coffee\"},     Lang: \"el\",     Zoom: 15,     FastMode: true,     MaxTime: 3600, } ```
+/// ScrapingJob represents a Google Maps scraping task. This message defines both the configuration and current state of a scraping operation.  Key components: - Basic metadata (id, name, timestamps) - Job status tracking - Search configuration parameters - Geographic settings - Performance options - Multi-tenant context  Database considerations: - Stored in \"gmaps_jobs\" table - Uses GORM for ORM mapping - Includes foreign key to Account - Supports soft deletes  Usage example: ```go job := &ScrapingJob{     Name: \"Athens Cafes\",     Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,     Keywords: []string{\"cafe\", \"coffee\"},     Lang: \"el\",     Zoom: 15,     FastMode: true,     MaxTime: 3600, } ```
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct ScrapingJob {
@@ -11956,9 +12171,17 @@ pub struct ScrapingJob {
     #[serde(skip_serializing_if="Option::is_none")]
     pub id: Option<String>,
 
-    #[serde(rename = "name")]
+    #[serde(rename = "priority")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub name: Option<String>,
+    pub priority: Option<i32>,
+
+    #[serde(rename = "payloadType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub payload_type: Option<String>,
+
+    #[serde(rename = "payload")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub payload: Option<swagger::ByteArray>,
 
     #[serde(rename = "createdAt")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -11967,6 +12190,10 @@ pub struct ScrapingJob {
     #[serde(rename = "status")]
     #[serde(skip_serializing_if="Option::is_none")]
     pub status: Option<models::BackgroundJobStatus>,
+
+    #[serde(rename = "name")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub name: Option<String>,
 
     #[serde(rename = "keywords")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -12020,25 +12247,9 @@ pub struct ScrapingJob {
     #[serde(skip_serializing_if="Option::is_none")]
     pub deleted_at: Option<chrono::DateTime::<chrono::Utc>>,
 
-    #[serde(rename = "payloadType")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub payload_type: Option<String>,
-
-    #[serde(rename = "priority")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub priority: Option<i32>,
-
-    #[serde(rename = "payload")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub payload: Option<swagger::ByteArray>,
-
     #[serde(rename = "leads")]
     #[serde(skip_serializing_if="Option::is_none")]
     pub leads: Option<Vec<models::Lead>>,
-
-    #[serde(rename = "workflowId")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub workflow_id: Option<String>,
 
 }
 
@@ -12048,9 +12259,12 @@ impl ScrapingJob {
     pub fn new() -> ScrapingJob {
         ScrapingJob {
             id: None,
-            name: None,
+            priority: None,
+            payload_type: None,
+            payload: None,
             created_at: None,
             status: None,
+            name: None,
             keywords: None,
             lang: None,
             zoom: None,
@@ -12064,11 +12278,7 @@ impl ScrapingJob {
             proxies: None,
             updated_at: None,
             deleted_at: None,
-            payload_type: None,
-            priority: None,
-            payload: None,
             leads: None,
-            workflow_id: None,
         }
     }
 }
@@ -12088,16 +12298,35 @@ impl std::string::ToString for ScrapingJob {
             }),
 
 
+            self.priority.as_ref().map(|priority| {
+                [
+                    "priority".to_string(),
+                    priority.to_string(),
+                ].join(",")
+            }),
+
+
+            self.payload_type.as_ref().map(|payload_type| {
+                [
+                    "payloadType".to_string(),
+                    payload_type.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping payload in query parameter serialization
+            // Skipping payload in query parameter serialization
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping status in query parameter serialization
+
+
             self.name.as_ref().map(|name| {
                 [
                     "name".to_string(),
                     name.to_string(),
                 ].join(",")
             }),
-
-            // Skipping createdAt in query parameter serialization
-
-            // Skipping status in query parameter serialization
 
 
             self.keywords.as_ref().map(|keywords| {
@@ -12191,34 +12420,7 @@ impl std::string::ToString for ScrapingJob {
 
             // Skipping deletedAt in query parameter serialization
 
-
-            self.payload_type.as_ref().map(|payload_type| {
-                [
-                    "payloadType".to_string(),
-                    payload_type.to_string(),
-                ].join(",")
-            }),
-
-
-            self.priority.as_ref().map(|priority| {
-                [
-                    "priority".to_string(),
-                    priority.to_string(),
-                ].join(",")
-            }),
-
-            // Skipping payload in query parameter serialization
-            // Skipping payload in query parameter serialization
-
             // Skipping leads in query parameter serialization
-
-
-            self.workflow_id.as_ref().map(|workflow_id| {
-                [
-                    "workflowId".to_string(),
-                    workflow_id.to_string(),
-                ].join(",")
-            }),
 
         ];
 
@@ -12238,9 +12440,12 @@ impl std::str::FromStr for ScrapingJob {
         #[allow(dead_code)]
         struct IntermediateRep {
             pub id: Vec<String>,
-            pub name: Vec<String>,
+            pub priority: Vec<i32>,
+            pub payload_type: Vec<String>,
+            pub payload: Vec<swagger::ByteArray>,
             pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
             pub status: Vec<models::BackgroundJobStatus>,
+            pub name: Vec<String>,
             pub keywords: Vec<Vec<String>>,
             pub lang: Vec<String>,
             pub zoom: Vec<i32>,
@@ -12254,11 +12459,7 @@ impl std::str::FromStr for ScrapingJob {
             pub proxies: Vec<Vec<String>>,
             pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
             pub deleted_at: Vec<chrono::DateTime::<chrono::Utc>>,
-            pub payload_type: Vec<String>,
-            pub priority: Vec<i32>,
-            pub payload: Vec<swagger::ByteArray>,
             pub leads: Vec<Vec<models::Lead>>,
-            pub workflow_id: Vec<String>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -12279,11 +12480,16 @@ impl std::str::FromStr for ScrapingJob {
                     #[allow(clippy::redundant_clone)]
                     "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
-                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "priority" => intermediate_rep.priority.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "payloadType" => intermediate_rep.payload_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "payload" => return std::result::Result::Err("Parsing binary data in this style is not supported in ScrapingJob".to_string()),
                     #[allow(clippy::redundant_clone)]
                     "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "status" => intermediate_rep.status.push(<models::BackgroundJobStatus as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     "keywords" => return std::result::Result::Err("Parsing a container in this style is not supported in ScrapingJob".to_string()),
                     #[allow(clippy::redundant_clone)]
                     "lang" => intermediate_rep.lang.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
@@ -12308,14 +12514,7 @@ impl std::str::FromStr for ScrapingJob {
                     "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "deletedAt" => intermediate_rep.deleted_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "payloadType" => intermediate_rep.payload_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "priority" => intermediate_rep.priority.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    "payload" => return std::result::Result::Err("Parsing binary data in this style is not supported in ScrapingJob".to_string()),
                     "leads" => return std::result::Result::Err("Parsing a container in this style is not supported in ScrapingJob".to_string()),
-                    #[allow(clippy::redundant_clone)]
-                    "workflowId" => intermediate_rep.workflow_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing ScrapingJob".to_string())
                 }
             }
@@ -12327,9 +12526,12 @@ impl std::str::FromStr for ScrapingJob {
         // Use the intermediate representation to return the struct
         std::result::Result::Ok(ScrapingJob {
             id: intermediate_rep.id.into_iter().next(),
-            name: intermediate_rep.name.into_iter().next(),
+            priority: intermediate_rep.priority.into_iter().next(),
+            payload_type: intermediate_rep.payload_type.into_iter().next(),
+            payload: intermediate_rep.payload.into_iter().next(),
             created_at: intermediate_rep.created_at.into_iter().next(),
             status: intermediate_rep.status.into_iter().next(),
+            name: intermediate_rep.name.into_iter().next(),
             keywords: intermediate_rep.keywords.into_iter().next(),
             lang: intermediate_rep.lang.into_iter().next(),
             zoom: intermediate_rep.zoom.into_iter().next(),
@@ -12343,11 +12545,7 @@ impl std::str::FromStr for ScrapingJob {
             proxies: intermediate_rep.proxies.into_iter().next(),
             updated_at: intermediate_rep.updated_at.into_iter().next(),
             deleted_at: intermediate_rep.deleted_at.into_iter().next(),
-            payload_type: intermediate_rep.payload_type.into_iter().next(),
-            priority: intermediate_rep.priority.into_iter().next(),
-            payload: intermediate_rep.payload.into_iter().next(),
             leads: intermediate_rep.leads.into_iter().next(),
-            workflow_id: intermediate_rep.workflow_id.into_iter().next(),
         })
     }
 }
@@ -12412,7 +12610,7 @@ pub struct ScrapingWorkflow {
 
     #[serde(rename = "status")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub status: Option<models::BackgroundJobStatus>,
+    pub status: Option<models::WorkflowStatus>,
 
     #[serde(rename = "retryCount")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -12963,7 +13161,7 @@ impl std::str::FromStr for ScrapingWorkflow {
             pub cron_expression: Vec<String>,
             pub next_run_time: Vec<chrono::DateTime::<chrono::Utc>>,
             pub last_run_time: Vec<chrono::DateTime::<chrono::Utc>>,
-            pub status: Vec<models::BackgroundJobStatus>,
+            pub status: Vec<models::WorkflowStatus>,
             pub retry_count: Vec<i32>,
             pub max_retries: Vec<i32>,
             pub alert_emails: Vec<String>,
@@ -13030,7 +13228,7 @@ impl std::str::FromStr for ScrapingWorkflow {
                     #[allow(clippy::redundant_clone)]
                     "lastRunTime" => intermediate_rep.last_run_time.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
-                    "status" => intermediate_rep.status.push(<models::BackgroundJobStatus as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "status" => intermediate_rep.status.push(<models::WorkflowStatus as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "retryCount" => intermediate_rep.retry_count.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
@@ -13683,161 +13881,6 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into SessionInfo - {}",
-                                value, err))
-                    }
-             },
-             std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
-        }
-    }
-}
-
-
-/// The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
-#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
-pub struct Status {
-    /// The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
-    #[serde(rename = "code")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub code: Option<i32>,
-
-    /// A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
-    #[serde(rename = "message")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub message: Option<String>,
-
-    /// A list of messages that carry the error details.  There is a common set of message types for APIs to use.
-    #[serde(rename = "details")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub details: Option<Vec<models::Any>>,
-
-}
-
-
-impl Status {
-    #[allow(clippy::new_without_default)]
-    pub fn new() -> Status {
-        Status {
-            code: None,
-            message: None,
-            details: None,
-        }
-    }
-}
-
-/// Converts the Status value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
-/// Should be implemented in a serde serializer
-impl std::string::ToString for Status {
-    fn to_string(&self) -> String {
-        let params: Vec<Option<String>> = vec![
-
-            self.code.as_ref().map(|code| {
-                [
-                    "code".to_string(),
-                    code.to_string(),
-                ].join(",")
-            }),
-
-
-            self.message.as_ref().map(|message| {
-                [
-                    "message".to_string(),
-                    message.to_string(),
-                ].join(",")
-            }),
-
-            // Skipping details in query parameter serialization
-
-        ];
-
-        params.into_iter().flatten().collect::<Vec<_>>().join(",")
-    }
-}
-
-/// Converts Query Parameters representation (style=form, explode=false) to a Status value
-/// as specified in https://swagger.io/docs/specification/serialization/
-/// Should be implemented in a serde deserializer
-impl std::str::FromStr for Status {
-    type Err = String;
-
-    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
-        /// An intermediate representation of the struct to use for parsing.
-        #[derive(Default)]
-        #[allow(dead_code)]
-        struct IntermediateRep {
-            pub code: Vec<i32>,
-            pub message: Vec<String>,
-            pub details: Vec<Vec<models::Any>>,
-        }
-
-        let mut intermediate_rep = IntermediateRep::default();
-
-        // Parse into intermediate representation
-        let mut string_iter = s.split(',');
-        let mut key_result = string_iter.next();
-
-        while key_result.is_some() {
-            let val = match string_iter.next() {
-                Some(x) => x,
-                None => return std::result::Result::Err("Missing value while parsing Status".to_string())
-            };
-
-            if let Some(key) = key_result {
-                #[allow(clippy::match_single_binding)]
-                match key {
-                    #[allow(clippy::redundant_clone)]
-                    "code" => intermediate_rep.code.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "message" => intermediate_rep.message.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    "details" => return std::result::Result::Err("Parsing a container in this style is not supported in Status".to_string()),
-                    _ => return std::result::Result::Err("Unexpected key while parsing Status".to_string())
-                }
-            }
-
-            // Get the next key
-            key_result = string_iter.next();
-        }
-
-        // Use the intermediate representation to return the struct
-        std::result::Result::Ok(Status {
-            code: intermediate_rep.code.into_iter().next(),
-            message: intermediate_rep.message.into_iter().next(),
-            details: intermediate_rep.details.into_iter().next(),
-        })
-    }
-}
-
-// Methods for converting between header::IntoHeaderValue<Status> and hyper::header::HeaderValue
-
-#[cfg(any(feature = "client", feature = "server"))]
-impl std::convert::TryFrom<header::IntoHeaderValue<Status>> for hyper::header::HeaderValue {
-    type Error = String;
-
-    fn try_from(hdr_value: header::IntoHeaderValue<Status>) -> std::result::Result<Self, Self::Error> {
-        let hdr_value = hdr_value.to_string();
-        match hyper::header::HeaderValue::from_str(&hdr_value) {
-             std::result::Result::Ok(value) => std::result::Result::Ok(value),
-             std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for Status - value: {} is invalid {}",
-                     hdr_value, e))
-        }
-    }
-}
-
-#[cfg(any(feature = "client", feature = "server"))]
-impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Status> {
-    type Error = String;
-
-    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
-        match hdr_value.to_str() {
-             std::result::Result::Ok(value) => {
-                    match <Status as std::str::FromStr>::from_str(value) {
-                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
-                        std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into Status - {}",
                                 value, err))
                     }
              },
@@ -16039,6 +16082,78 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 }
 
 
+/// WorkflowStatus represents the current state of a scraping workflow. This enum tracks the lifecycle of automated, recurring scraping configurations.  State transitions: 1. DRAFT -> ACTIVE/ARCHIVED 2. ACTIVE -> PAUSED/FAILED/COMPLETED/ARCHIVED 3. PAUSED -> ACTIVE/ARCHIVED 4. FAILED -> ACTIVE/ARCHIVED   - WORKFLOW_STATUS_UNSPECIFIED: Default state, should not be used explicitly  - WORKFLOW_STATUS_DRAFT: Initial draft state before activation  - WORKFLOW_STATUS_ACTIVE: Workflow is actively running on schedule  - WORKFLOW_STATUS_PAUSED: Workflow is temporarily suspended  - WORKFLOW_STATUS_FAILED: Workflow encountered an error  - WORKFLOW_STATUS_COMPLETED: Workflow completed all scheduled runs  - WORKFLOW_STATUS_ARCHIVED: Workflow is archived (soft-deleted)  - WORKFLOW_STATUS_PENDING_APPROVAL: Workflow is pending approval  - WORKFLOW_STATUS_VALIDATING: Workflow is being validated  - WORKFLOW_STATUS_QUOTA_EXCEEDED: Workflow exceeded resource quotas  - WORKFLOW_STATUS_WARNING: Workflow is running but with warnings
+/// Enumeration of values.
+/// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
+/// which helps with FFI.
+#[allow(non_camel_case_types)]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "conversion", derive(frunk_enum_derive::LabelledGenericEnum))]
+pub enum WorkflowStatus {
+    #[serde(rename = "WORKFLOW_STATUS_UNSPECIFIED")]
+    Unspecified,
+    #[serde(rename = "WORKFLOW_STATUS_DRAFT")]
+    Draft,
+    #[serde(rename = "WORKFLOW_STATUS_ACTIVE")]
+    Active,
+    #[serde(rename = "WORKFLOW_STATUS_PAUSED")]
+    Paused,
+    #[serde(rename = "WORKFLOW_STATUS_FAILED")]
+    Failed,
+    #[serde(rename = "WORKFLOW_STATUS_COMPLETED")]
+    Completed,
+    #[serde(rename = "WORKFLOW_STATUS_ARCHIVED")]
+    Archived,
+    #[serde(rename = "WORKFLOW_STATUS_PENDING_APPROVAL")]
+    PendingApproval,
+    #[serde(rename = "WORKFLOW_STATUS_VALIDATING")]
+    Validating,
+    #[serde(rename = "WORKFLOW_STATUS_QUOTA_EXCEEDED")]
+    QuotaExceeded,
+    #[serde(rename = "WORKFLOW_STATUS_WARNING")]
+    Warning,
+}
+
+impl std::fmt::Display for WorkflowStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            WorkflowStatus::Unspecified => write!(f, "WORKFLOW_STATUS_UNSPECIFIED"),
+            WorkflowStatus::Draft => write!(f, "WORKFLOW_STATUS_DRAFT"),
+            WorkflowStatus::Active => write!(f, "WORKFLOW_STATUS_ACTIVE"),
+            WorkflowStatus::Paused => write!(f, "WORKFLOW_STATUS_PAUSED"),
+            WorkflowStatus::Failed => write!(f, "WORKFLOW_STATUS_FAILED"),
+            WorkflowStatus::Completed => write!(f, "WORKFLOW_STATUS_COMPLETED"),
+            WorkflowStatus::Archived => write!(f, "WORKFLOW_STATUS_ARCHIVED"),
+            WorkflowStatus::PendingApproval => write!(f, "WORKFLOW_STATUS_PENDING_APPROVAL"),
+            WorkflowStatus::Validating => write!(f, "WORKFLOW_STATUS_VALIDATING"),
+            WorkflowStatus::QuotaExceeded => write!(f, "WORKFLOW_STATUS_QUOTA_EXCEEDED"),
+            WorkflowStatus::Warning => write!(f, "WORKFLOW_STATUS_WARNING"),
+        }
+    }
+}
+
+impl std::str::FromStr for WorkflowStatus {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s {
+            "WORKFLOW_STATUS_UNSPECIFIED" => std::result::Result::Ok(WorkflowStatus::Unspecified),
+            "WORKFLOW_STATUS_DRAFT" => std::result::Result::Ok(WorkflowStatus::Draft),
+            "WORKFLOW_STATUS_ACTIVE" => std::result::Result::Ok(WorkflowStatus::Active),
+            "WORKFLOW_STATUS_PAUSED" => std::result::Result::Ok(WorkflowStatus::Paused),
+            "WORKFLOW_STATUS_FAILED" => std::result::Result::Ok(WorkflowStatus::Failed),
+            "WORKFLOW_STATUS_COMPLETED" => std::result::Result::Ok(WorkflowStatus::Completed),
+            "WORKFLOW_STATUS_ARCHIVED" => std::result::Result::Ok(WorkflowStatus::Archived),
+            "WORKFLOW_STATUS_PENDING_APPROVAL" => std::result::Result::Ok(WorkflowStatus::PendingApproval),
+            "WORKFLOW_STATUS_VALIDATING" => std::result::Result::Ok(WorkflowStatus::Validating),
+            "WORKFLOW_STATUS_QUOTA_EXCEEDED" => std::result::Result::Ok(WorkflowStatus::QuotaExceeded),
+            "WORKFLOW_STATUS_WARNING" => std::result::Result::Ok(WorkflowStatus::Warning),
+            _ => std::result::Result::Err(format!("Value not valid: {}", s)),
+        }
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct Workspace {
@@ -16119,6 +16234,10 @@ pub struct Workspace {
     #[serde(skip_serializing_if="Option::is_none")]
     pub last_job_run: Option<chrono::DateTime::<chrono::Utc>>,
 
+    #[serde(rename = "scrapingJobs")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub scraping_jobs: Option<Vec<models::ScrapingJob>>,
+
 }
 
 
@@ -16145,6 +16264,7 @@ impl Workspace {
             active_scrapers: None,
             total_leads_collected: None,
             last_job_run: None,
+            scraping_jobs: None,
         }
     }
 }
@@ -16277,6 +16397,8 @@ impl std::string::ToString for Workspace {
 
             // Skipping lastJobRun in query parameter serialization
 
+            // Skipping scrapingJobs in query parameter serialization
+
         ];
 
         params.into_iter().flatten().collect::<Vec<_>>().join(",")
@@ -16313,6 +16435,7 @@ impl std::str::FromStr for Workspace {
             pub active_scrapers: Vec<i32>,
             pub total_leads_collected: Vec<i32>,
             pub last_job_run: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub scraping_jobs: Vec<Vec<models::ScrapingJob>>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -16367,6 +16490,7 @@ impl std::str::FromStr for Workspace {
                     "totalLeadsCollected" => intermediate_rep.total_leads_collected.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "lastJobRun" => intermediate_rep.last_job_run.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "scrapingJobs" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
                     _ => return std::result::Result::Err("Unexpected key while parsing Workspace".to_string())
                 }
             }
@@ -16396,6 +16520,7 @@ impl std::str::FromStr for Workspace {
             active_scrapers: intermediate_rep.active_scrapers.into_iter().next(),
             total_leads_collected: intermediate_rep.total_leads_collected.into_iter().next(),
             last_job_run: intermediate_rep.last_job_run.into_iter().next(),
+            scraping_jobs: intermediate_rep.scraping_jobs.into_iter().next(),
         })
     }
 }

@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **active_scrapers** | **int** |  | [optional] 
 **total_leads_collected** | **int** |  | [optional] 
 **last_job_run** | **datetime** |  | [optional] 
+**scraping_jobs** | [**List[ScrapingJob]**](ScrapingJob.md) |  | [optional] 
 
 ## Example
 

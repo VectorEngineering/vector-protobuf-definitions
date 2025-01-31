@@ -16,6 +16,9 @@ type AccountSettings {
   autoPurgeEnabled: Boolean!
   require2fa: Boolean!
   sessionTimeout: String!
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String!
 }
 
 input AccountSettingsInput {
@@ -26,5 +29,8 @@ input AccountSettingsInput {
     autoPurgeEnabled: Boolean!
     require2fa: Boolean!
     sessionTimeout: String!
+    createdAt: String!
+    updatedAt: String!
+    deletedAt: String!
 }
 

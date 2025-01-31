@@ -148,13 +148,13 @@ Class | Method | HTTP request | Description
  - [ResourceValidation](playbookmedia_backend_client_sdk/docs/ResourceValidation.md)
  - [RevenueRange](playbookmedia_backend_client_sdk/docs/RevenueRange.md)
  - [Review](playbookmedia_backend_client_sdk/docs/Review.md)
+ - [RpcStatus](playbookmedia_backend_client_sdk/docs/RpcStatus.md)
  - [SchemaValidation](playbookmedia_backend_client_sdk/docs/SchemaValidation.md)
  - [ScrapingJob](playbookmedia_backend_client_sdk/docs/ScrapingJob.md)
  - [ScrapingWorkflow](playbookmedia_backend_client_sdk/docs/ScrapingWorkflow.md)
  - [ServiceStatus](playbookmedia_backend_client_sdk/docs/ServiceStatus.md)
  - [ServiceUnavailableErrorMessageResponse](playbookmedia_backend_client_sdk/docs/ServiceUnavailableErrorMessageResponse.md)
  - [SessionInfo](playbookmedia_backend_client_sdk/docs/SessionInfo.md)
- - [Status](playbookmedia_backend_client_sdk/docs/Status.md)
  - [Suggestions](playbookmedia_backend_client_sdk/docs/Suggestions.md)
  - [TokenInfo](playbookmedia_backend_client_sdk/docs/TokenInfo.md)
  - [TooEarlyErrorMessageResponse](playbookmedia_backend_client_sdk/docs/TooEarlyErrorMessageResponse.md)
@@ -171,6 +171,7 @@ Class | Method | HTTP request | Description
  - [UpdateWorkspaceResponse](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceResponse.md)
  - [ValidationErrorCode](playbookmedia_backend_client_sdk/docs/ValidationErrorCode.md)
  - [ValidationErrorMessageResponse](playbookmedia_backend_client_sdk/docs/ValidationErrorMessageResponse.md)
+ - [WorkflowStatus](playbookmedia_backend_client_sdk/docs/WorkflowStatus.md)
  - [Workspace](playbookmedia_backend_client_sdk/docs/Workspace.md)
 
 

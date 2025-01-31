@@ -13,6 +13,9 @@ Name | Type | Description | Notes
 **language** | **str** |  | [optional] 
 **profile_photo_url** | **str** |  | [optional] 
 **review_count** | **int** |  | [optional] 
+**created_at** | **datetime** |  | [optional] 
+**updated_at** | **datetime** |  | [optional] 
+**deleted_at** | **datetime** |  | [optional] 
 
 ## Example
 

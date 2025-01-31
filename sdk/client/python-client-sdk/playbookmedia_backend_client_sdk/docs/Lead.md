@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 **deleted_at** | **datetime** |  | [optional] 
 **job** | [**ScrapingJob**](ScrapingJob.md) |  | [optional] 
 **workspace** | [**Workspace**](Workspace.md) |  | [optional] 
-**place_id** | **str** | Google Places ID | [optional] 
+**place_id** | **str** |  | [optional] 
 **google_maps_url** | **str** |  | [optional] 
 **business_status** | **str** |  | [optional] 
 **regular_hours** | [**List[BusinessHours]**](BusinessHours.md) |  | [optional] 

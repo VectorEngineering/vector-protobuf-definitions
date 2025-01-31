@@ -14,7 +14,9 @@ type BusinessHours {
   openTime: String!
   closeTime: String!
   closed: Boolean!
-  leadId: String!
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String!
 }
 
 input BusinessHoursInput {
@@ -23,6 +25,8 @@ input BusinessHoursInput {
     openTime: String!
     closeTime: String!
     closed: Boolean!
-    leadId: String!
+    createdAt: String!
+    updatedAt: String!
+    deletedAt: String!
 }
 

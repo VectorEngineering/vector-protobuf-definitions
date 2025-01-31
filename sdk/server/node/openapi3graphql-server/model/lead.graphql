@@ -31,7 +31,6 @@ type Lead {
   deletedAt: String!
   job: ScrapingJob
   workspace: Workspace
-  # Google Places ID
   placeId: String!
   googleMapsUrl: String!
   businessStatus: String!
@@ -120,7 +119,6 @@ input LeadInput {
     deletedAt: String!
     job: ScrapingJobInput
     workspace: WorkspaceInput
-    # Google Places ID
     placeId: String!
     googleMapsUrl: String!
     businessStatus: String!

@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 **deleted_at** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]
 **job** | [***models::ScrapingJob**](ScrapingJob.md) |  | [optional] [default to None]
 **workspace** | [***models::Workspace**](Workspace.md) |  | [optional] [default to None]
-**place_id** | **String** | Google Places ID | [optional] [default to None]
+**place_id** | **String** |  | [optional] [default to None]
 **google_maps_url** | **String** |  | [optional] [default to None]
 **business_status** | **String** |  | [optional] [default to None]
 **regular_hours** | [**Vec<models::BusinessHours>**](BusinessHours.md) |  | [optional] [default to None]

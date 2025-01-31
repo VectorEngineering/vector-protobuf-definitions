@@ -23,21 +23,27 @@ import java.util.*;
 import javax.annotation.Generated;
 
 /**
- * ScrapingJob represents a Google Maps scraping task. This message defines both the configuration and current state of a scraping operation.  Key components: - Basic metadata (id, name, timestamps) - Job status tracking - Search configuration parameters - Geographic settings - Performance options - Multi-tenant context  Database considerations: - Stored in \&quot;scraping_jobs\&quot; table - Uses GORM for ORM mapping - Includes foreign key to Account - Supports soft deletes  Usage example: &#x60;&#x60;&#x60;go job :&#x3D; &amp;ScrapingJob{     Name: \&quot;Athens Cafes\&quot;,     Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,     Keywords: []string{\&quot;cafe\&quot;, \&quot;coffee\&quot;},     Lang: \&quot;el\&quot;,     Zoom: 15,     FastMode: true,     MaxTime: 3600, } &#x60;&#x60;&#x60;
+ * ScrapingJob represents a Google Maps scraping task. This message defines both the configuration and current state of a scraping operation.  Key components: - Basic metadata (id, name, timestamps) - Job status tracking - Search configuration parameters - Geographic settings - Performance options - Multi-tenant context  Database considerations: - Stored in \&quot;gmaps_jobs\&quot; table - Uses GORM for ORM mapping - Includes foreign key to Account - Supports soft deletes  Usage example: &#x60;&#x60;&#x60;go job :&#x3D; &amp;ScrapingJob{     Name: \&quot;Athens Cafes\&quot;,     Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,     Keywords: []string{\&quot;cafe\&quot;, \&quot;coffee\&quot;},     Lang: \&quot;el\&quot;,     Zoom: 15,     FastMode: true,     MaxTime: 3600, } &#x60;&#x60;&#x60;
  */
 
-@Schema(name = "ScrapingJob", description = "ScrapingJob represents a Google Maps scraping task. This message defines both the configuration and current state of a scraping operation.  Key components: - Basic metadata (id, name, timestamps) - Job status tracking - Search configuration parameters - Geographic settings - Performance options - Multi-tenant context  Database considerations: - Stored in \"scraping_jobs\" table - Uses GORM for ORM mapping - Includes foreign key to Account - Supports soft deletes  Usage example: ```go job := &ScrapingJob{     Name: \"Athens Cafes\",     Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,     Keywords: []string{\"cafe\", \"coffee\"},     Lang: \"el\",     Zoom: 15,     FastMode: true,     MaxTime: 3600, } ```")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T23:23:25.497382-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Schema(name = "ScrapingJob", description = "ScrapingJob represents a Google Maps scraping task. This message defines both the configuration and current state of a scraping operation.  Key components: - Basic metadata (id, name, timestamps) - Job status tracking - Search configuration parameters - Geographic settings - Performance options - Multi-tenant context  Database considerations: - Stored in \"gmaps_jobs\" table - Uses GORM for ORM mapping - Includes foreign key to Account - Supports soft deletes  Usage example: ```go job := &ScrapingJob{     Name: \"Athens Cafes\",     Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,     Keywords: []string{\"cafe\", \"coffee\"},     Lang: \"el\",     Zoom: 15,     FastMode: true,     MaxTime: 3600, } ```")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-31T03:28:40.740898-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ScrapingJob {
 
   private String id;
 
-  private String name;
+  private Integer priority;
+
+  private String payloadType;
+
+  private byte[] payload;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime createdAt;
 
   private BackgroundJobStatus status = BackgroundJobStatus.UNSPECIFIED;
+
+  private String name;
 
   @Valid
   private List<String> keywords = new ArrayList<>();
@@ -69,16 +75,8 @@ public class ScrapingJob {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime deletedAt;
 
-  private String payloadType;
-
-  private Integer priority;
-
-  private byte[] payload;
-
   @Valid
   private List<@Valid Lead> leads = new ArrayList<>();
-
-  private String workflowId;
 
   public ScrapingJob id(String id) {
     this.id = id;
@@ -100,24 +98,64 @@ public class ScrapingJob {
     this.id = id;
   }
 
-  public ScrapingJob name(String name) {
-    this.name = name;
+  public ScrapingJob priority(Integer priority) {
+    this.priority = priority;
     return this;
   }
 
   /**
-   * Get name
-   * @return name
+   * Get priority
+   * @return priority
    */
   
-  @Schema(name = "name", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("name")
-  public String getName() {
-    return name;
+  @Schema(name = "priority", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("priority")
+  public Integer getPriority() {
+    return priority;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setPriority(Integer priority) {
+    this.priority = priority;
+  }
+
+  public ScrapingJob payloadType(String payloadType) {
+    this.payloadType = payloadType;
+    return this;
+  }
+
+  /**
+   * Get payloadType
+   * @return payloadType
+   */
+  
+  @Schema(name = "payloadType", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("payloadType")
+  public String getPayloadType() {
+    return payloadType;
+  }
+
+  public void setPayloadType(String payloadType) {
+    this.payloadType = payloadType;
+  }
+
+  public ScrapingJob payload(byte[] payload) {
+    this.payload = payload;
+    return this;
+  }
+
+  /**
+   * Get payload
+   * @return payload
+   */
+  
+  @Schema(name = "payload", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("payload")
+  public byte[] getPayload() {
+    return payload;
+  }
+
+  public void setPayload(byte[] payload) {
+    this.payload = payload;
   }
 
   public ScrapingJob createdAt(OffsetDateTime createdAt) {
@@ -158,6 +196,26 @@ public class ScrapingJob {
 
   public void setStatus(BackgroundJobStatus status) {
     this.status = status;
+  }
+
+  public ScrapingJob name(String name) {
+    this.name = name;
+    return this;
+  }
+
+  /**
+   * Get name
+   * @return name
+   */
+  
+  @Schema(name = "name", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("name")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   public ScrapingJob keywords(List<String> keywords) {
@@ -436,66 +494,6 @@ public class ScrapingJob {
     this.deletedAt = deletedAt;
   }
 
-  public ScrapingJob payloadType(String payloadType) {
-    this.payloadType = payloadType;
-    return this;
-  }
-
-  /**
-   * Get payloadType
-   * @return payloadType
-   */
-  
-  @Schema(name = "payloadType", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("payloadType")
-  public String getPayloadType() {
-    return payloadType;
-  }
-
-  public void setPayloadType(String payloadType) {
-    this.payloadType = payloadType;
-  }
-
-  public ScrapingJob priority(Integer priority) {
-    this.priority = priority;
-    return this;
-  }
-
-  /**
-   * Get priority
-   * @return priority
-   */
-  
-  @Schema(name = "priority", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("priority")
-  public Integer getPriority() {
-    return priority;
-  }
-
-  public void setPriority(Integer priority) {
-    this.priority = priority;
-  }
-
-  public ScrapingJob payload(byte[] payload) {
-    this.payload = payload;
-    return this;
-  }
-
-  /**
-   * Get payload
-   * @return payload
-   */
-  
-  @Schema(name = "payload", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("payload")
-  public byte[] getPayload() {
-    return payload;
-  }
-
-  public void setPayload(byte[] payload) {
-    this.payload = payload;
-  }
-
   public ScrapingJob leads(List<@Valid Lead> leads) {
     this.leads = leads;
     return this;
@@ -524,26 +522,6 @@ public class ScrapingJob {
     this.leads = leads;
   }
 
-  public ScrapingJob workflowId(String workflowId) {
-    this.workflowId = workflowId;
-    return this;
-  }
-
-  /**
-   * Get workflowId
-   * @return workflowId
-   */
-  
-  @Schema(name = "workflowId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("workflowId")
-  public String getWorkflowId() {
-    return workflowId;
-  }
-
-  public void setWorkflowId(String workflowId) {
-    this.workflowId = workflowId;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -554,9 +532,12 @@ public class ScrapingJob {
     }
     ScrapingJob scrapingJob = (ScrapingJob) o;
     return Objects.equals(this.id, scrapingJob.id) &&
-        Objects.equals(this.name, scrapingJob.name) &&
+        Objects.equals(this.priority, scrapingJob.priority) &&
+        Objects.equals(this.payloadType, scrapingJob.payloadType) &&
+        Arrays.equals(this.payload, scrapingJob.payload) &&
         Objects.equals(this.createdAt, scrapingJob.createdAt) &&
         Objects.equals(this.status, scrapingJob.status) &&
+        Objects.equals(this.name, scrapingJob.name) &&
         Objects.equals(this.keywords, scrapingJob.keywords) &&
         Objects.equals(this.lang, scrapingJob.lang) &&
         Objects.equals(this.zoom, scrapingJob.zoom) &&
@@ -570,16 +551,12 @@ public class ScrapingJob {
         Objects.equals(this.proxies, scrapingJob.proxies) &&
         Objects.equals(this.updatedAt, scrapingJob.updatedAt) &&
         Objects.equals(this.deletedAt, scrapingJob.deletedAt) &&
-        Objects.equals(this.payloadType, scrapingJob.payloadType) &&
-        Objects.equals(this.priority, scrapingJob.priority) &&
-        Arrays.equals(this.payload, scrapingJob.payload) &&
-        Objects.equals(this.leads, scrapingJob.leads) &&
-        Objects.equals(this.workflowId, scrapingJob.workflowId);
+        Objects.equals(this.leads, scrapingJob.leads);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, createdAt, status, keywords, lang, zoom, lat, lon, fastMode, radius, depth, email, maxTime, proxies, updatedAt, deletedAt, payloadType, priority, Arrays.hashCode(payload), leads, workflowId);
+    return Objects.hash(id, priority, payloadType, Arrays.hashCode(payload), createdAt, status, name, keywords, lang, zoom, lat, lon, fastMode, radius, depth, email, maxTime, proxies, updatedAt, deletedAt, leads);
   }
 
   @Override
@@ -587,9 +564,12 @@ public class ScrapingJob {
     StringBuilder sb = new StringBuilder();
     sb.append("class ScrapingJob {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
+    sb.append("    priority: ").append(toIndentedString(priority)).append("\n");
+    sb.append("    payloadType: ").append(toIndentedString(payloadType)).append("\n");
+    sb.append("    payload: ").append(toIndentedString(payload)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    keywords: ").append(toIndentedString(keywords)).append("\n");
     sb.append("    lang: ").append(toIndentedString(lang)).append("\n");
     sb.append("    zoom: ").append(toIndentedString(zoom)).append("\n");
@@ -603,11 +583,7 @@ public class ScrapingJob {
     sb.append("    proxies: ").append(toIndentedString(proxies)).append("\n");
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
     sb.append("    deletedAt: ").append(toIndentedString(deletedAt)).append("\n");
-    sb.append("    payloadType: ").append(toIndentedString(payloadType)).append("\n");
-    sb.append("    priority: ").append(toIndentedString(priority)).append("\n");
-    sb.append("    payload: ").append(toIndentedString(payload)).append("\n");
     sb.append("    leads: ").append(toIndentedString(leads)).append("\n");
-    sb.append("    workflowId: ").append(toIndentedString(workflowId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

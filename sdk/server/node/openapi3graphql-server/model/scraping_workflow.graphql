@@ -13,7 +13,7 @@ type ScrapingWorkflow {
   cronExpression: String!
   nextRunTime: String!
   lastRunTime: String!
-  status: BackgroundJobStatus
+  status: WorkflowStatus
   retryCount: Int!
   maxRetries: Int!
   alertEmails: String!
@@ -61,7 +61,7 @@ input ScrapingWorkflowInput {
     cronExpression: String!
     nextRunTime: String!
     lastRunTime: String!
-    status: BackgroundJobStatus
+    status: WorkflowStatus
     retryCount: Int!
     maxRetries: Int!
     alertEmails: String!

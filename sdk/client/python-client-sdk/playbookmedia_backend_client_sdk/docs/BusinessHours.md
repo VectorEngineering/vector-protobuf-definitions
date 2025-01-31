@@ -10,7 +10,9 @@ Name | Type | Description | Notes
 **open_time** | **str** |  | [optional] 
 **close_time** | **str** |  | [optional] 
 **closed** | **bool** |  | [optional] 
-**lead_id** | **str** |  | [optional] 
+**created_at** | **datetime** |  | [optional] 
+**updated_at** | **datetime** |  | [optional] 
+**deleted_at** | **datetime** |  | [optional] 
 
 ## Example
 

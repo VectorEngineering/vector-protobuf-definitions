@@ -8,7 +8,9 @@ Name | Type | Description | Notes
 **openTime** | **String!** |  | [optional] [default to null]
 **closeTime** | **String!** |  | [optional] [default to null]
 **closed** | **Boolean!** |  | [optional] [default to null]
-**leadId** | **String!** |  | [optional] [default to null]
+**createdAt** | **String!** |  | [optional] [default to null]
+**updatedAt** | **String!** |  | [optional] [default to null]
+**deletedAt** | **String!** |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

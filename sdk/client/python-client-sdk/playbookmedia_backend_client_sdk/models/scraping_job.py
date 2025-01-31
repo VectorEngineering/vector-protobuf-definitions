@@ -27,12 +27,15 @@ from typing_extensions import Self
 
 class ScrapingJob(BaseModel):
     """
-    ScrapingJob represents a Google Maps scraping task. This message defines both the configuration and current state of a scraping operation.  Key components: - Basic metadata (id, name, timestamps) - Job status tracking - Search configuration parameters - Geographic settings - Performance options - Multi-tenant context  Database considerations: - Stored in \"scraping_jobs\" table - Uses GORM for ORM mapping - Includes foreign key to Account - Supports soft deletes  Usage example: ```go job := &ScrapingJob{     Name: \"Athens Cafes\",     Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,     Keywords: []string{\"cafe\", \"coffee\"},     Lang: \"el\",     Zoom: 15,     FastMode: true,     MaxTime: 3600, } ```
+    ScrapingJob represents a Google Maps scraping task. This message defines both the configuration and current state of a scraping operation.  Key components: - Basic metadata (id, name, timestamps) - Job status tracking - Search configuration parameters - Geographic settings - Performance options - Multi-tenant context  Database considerations: - Stored in \"gmaps_jobs\" table - Uses GORM for ORM mapping - Includes foreign key to Account - Supports soft deletes  Usage example: ```go job := &ScrapingJob{     Name: \"Athens Cafes\",     Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,     Keywords: []string{\"cafe\", \"coffee\"},     Lang: \"el\",     Zoom: 15,     FastMode: true,     MaxTime: 3600, } ```
     """ # noqa: E501
     id: Optional[StrictStr] = None
-    name: Optional[StrictStr] = None
+    priority: Optional[StrictInt] = None
+    payload_type: Optional[StrictStr] = Field(default=None, alias="payloadType")
+    payload: Optional[Union[StrictBytes, StrictStr]] = None
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     status: Optional[BackgroundJobStatus] = BackgroundJobStatus.UNSPECIFIED
+    name: Optional[StrictStr] = None
     keywords: Optional[List[StrictStr]] = None
     lang: Optional[StrictStr] = None
     zoom: Optional[StrictInt] = None
@@ -46,12 +49,8 @@ class ScrapingJob(BaseModel):
     proxies: Optional[List[StrictStr]] = None
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
     deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
-    payload_type: Optional[StrictStr] = Field(default=None, alias="payloadType")
-    priority: Optional[StrictInt] = None
-    payload: Optional[Union[StrictBytes, StrictStr]] = None
     leads: Optional[List[Lead]] = None
-    workflow_id: Optional[StrictStr] = Field(default=None, alias="workflowId")
-    __properties: ClassVar[List[str]] = ["id", "name", "createdAt", "status", "keywords", "lang", "zoom", "lat", "lon", "fastMode", "radius", "depth", "email", "maxTime", "proxies", "updatedAt", "deletedAt", "payloadType", "priority", "payload", "leads", "workflowId"]
+    __properties: ClassVar[List[str]] = ["id", "priority", "payloadType", "payload", "createdAt", "status", "name", "keywords", "lang", "zoom", "lat", "lon", "fastMode", "radius", "depth", "email", "maxTime", "proxies", "updatedAt", "deletedAt", "leads"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -112,9 +111,12 @@ class ScrapingJob(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "name": obj.get("name"),
+            "priority": obj.get("priority"),
+            "payloadType": obj.get("payloadType"),
+            "payload": obj.get("payload"),
             "createdAt": obj.get("createdAt"),
             "status": obj.get("status") if obj.get("status") is not None else BackgroundJobStatus.UNSPECIFIED,
+            "name": obj.get("name"),
             "keywords": obj.get("keywords"),
             "lang": obj.get("lang"),
             "zoom": obj.get("zoom"),
@@ -128,11 +130,7 @@ class ScrapingJob(BaseModel):
             "proxies": obj.get("proxies"),
             "updatedAt": obj.get("updatedAt"),
             "deletedAt": obj.get("deletedAt"),
-            "payloadType": obj.get("payloadType"),
-            "priority": obj.get("priority"),
-            "payload": obj.get("payload"),
-            "leads": [Lead.from_dict(_item) for _item in obj["leads"]] if obj.get("leads") is not None else None,
-            "workflowId": obj.get("workflowId")
+            "leads": [Lead.from_dict(_item) for _item in obj["leads"]] if obj.get("leads") is not None else None
         })
         return _obj
 

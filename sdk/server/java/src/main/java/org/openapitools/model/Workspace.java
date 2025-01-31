@@ -8,6 +8,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.openapitools.model.ScrapingJob;
 import org.openapitools.model.ScrapingWorkflow;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -24,7 +25,7 @@ import javax.annotation.Generated;
  * Workspace
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T23:23:25.497382-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-31T03:28:40.740898-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class Workspace {
 
   private String id;
@@ -69,6 +70,9 @@ public class Workspace {
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime lastJobRun;
+
+  @Valid
+  private List<@Valid ScrapingJob> scrapingJobs = new ArrayList<>();
 
   public Workspace id(String id) {
     this.id = id;
@@ -458,6 +462,34 @@ public class Workspace {
     this.lastJobRun = lastJobRun;
   }
 
+  public Workspace scrapingJobs(List<@Valid ScrapingJob> scrapingJobs) {
+    this.scrapingJobs = scrapingJobs;
+    return this;
+  }
+
+  public Workspace addScrapingJobsItem(ScrapingJob scrapingJobsItem) {
+    if (this.scrapingJobs == null) {
+      this.scrapingJobs = new ArrayList<>();
+    }
+    this.scrapingJobs.add(scrapingJobsItem);
+    return this;
+  }
+
+  /**
+   * Get scrapingJobs
+   * @return scrapingJobs
+   */
+  @Valid 
+  @Schema(name = "scrapingJobs", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("scrapingJobs")
+  public List<@Valid ScrapingJob> getScrapingJobs() {
+    return scrapingJobs;
+  }
+
+  public void setScrapingJobs(List<@Valid ScrapingJob> scrapingJobs) {
+    this.scrapingJobs = scrapingJobs;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -485,12 +517,13 @@ public class Workspace {
         Objects.equals(this.dailyJobQuota, workspace.dailyJobQuota) &&
         Objects.equals(this.activeScrapers, workspace.activeScrapers) &&
         Objects.equals(this.totalLeadsCollected, workspace.totalLeadsCollected) &&
-        Objects.equals(this.lastJobRun, workspace.lastJobRun);
+        Objects.equals(this.lastJobRun, workspace.lastJobRun) &&
+        Objects.equals(this.scrapingJobs, workspace.scrapingJobs);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, industry, domain, gdprCompliant, hipaaCompliant, soc2Compliant, storageQuota, usedStorage, createdAt, updatedAt, deletedAt, workflows, jobsRunThisMonth, workspaceJobLimit, dailyJobQuota, activeScrapers, totalLeadsCollected, lastJobRun);
+    return Objects.hash(id, name, industry, domain, gdprCompliant, hipaaCompliant, soc2Compliant, storageQuota, usedStorage, createdAt, updatedAt, deletedAt, workflows, jobsRunThisMonth, workspaceJobLimit, dailyJobQuota, activeScrapers, totalLeadsCollected, lastJobRun, scrapingJobs);
   }
 
   @Override
@@ -516,6 +549,7 @@ public class Workspace {
     sb.append("    activeScrapers: ").append(toIndentedString(activeScrapers)).append("\n");
     sb.append("    totalLeadsCollected: ").append(toIndentedString(totalLeadsCollected)).append("\n");
     sb.append("    lastJobRun: ").append(toIndentedString(lastJobRun)).append("\n");
+    sb.append("    scrapingJobs: ").append(toIndentedString(scrapingJobs)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -5,7 +5,9 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.time.OffsetDateTime;
 import org.openapitools.model.DayOfWeek;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -20,7 +22,7 @@ import javax.annotation.Generated;
  * BusinessHours
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T23:23:25.497382-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-31T03:28:40.740898-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class BusinessHours {
 
   private String id;
@@ -33,7 +35,14 @@ public class BusinessHours {
 
   private Boolean closed;
 
-  private String leadId;
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private OffsetDateTime createdAt;
+
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private OffsetDateTime updatedAt;
+
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private OffsetDateTime deletedAt;
 
   public BusinessHours id(String id) {
     this.id = id;
@@ -135,24 +144,64 @@ public class BusinessHours {
     this.closed = closed;
   }
 
-  public BusinessHours leadId(String leadId) {
-    this.leadId = leadId;
+  public BusinessHours createdAt(OffsetDateTime createdAt) {
+    this.createdAt = createdAt;
     return this;
   }
 
   /**
-   * Get leadId
-   * @return leadId
+   * Get createdAt
+   * @return createdAt
    */
-  
-  @Schema(name = "leadId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("leadId")
-  public String getLeadId() {
-    return leadId;
+  @Valid 
+  @Schema(name = "createdAt", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("createdAt")
+  public OffsetDateTime getCreatedAt() {
+    return createdAt;
   }
 
-  public void setLeadId(String leadId) {
-    this.leadId = leadId;
+  public void setCreatedAt(OffsetDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public BusinessHours updatedAt(OffsetDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+    return this;
+  }
+
+  /**
+   * Get updatedAt
+   * @return updatedAt
+   */
+  @Valid 
+  @Schema(name = "updatedAt", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("updatedAt")
+  public OffsetDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(OffsetDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
+
+  public BusinessHours deletedAt(OffsetDateTime deletedAt) {
+    this.deletedAt = deletedAt;
+    return this;
+  }
+
+  /**
+   * Get deletedAt
+   * @return deletedAt
+   */
+  @Valid 
+  @Schema(name = "deletedAt", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("deletedAt")
+  public OffsetDateTime getDeletedAt() {
+    return deletedAt;
+  }
+
+  public void setDeletedAt(OffsetDateTime deletedAt) {
+    this.deletedAt = deletedAt;
   }
 
   @Override
@@ -169,12 +218,14 @@ public class BusinessHours {
         Objects.equals(this.openTime, businessHours.openTime) &&
         Objects.equals(this.closeTime, businessHours.closeTime) &&
         Objects.equals(this.closed, businessHours.closed) &&
-        Objects.equals(this.leadId, businessHours.leadId);
+        Objects.equals(this.createdAt, businessHours.createdAt) &&
+        Objects.equals(this.updatedAt, businessHours.updatedAt) &&
+        Objects.equals(this.deletedAt, businessHours.deletedAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, day, openTime, closeTime, closed, leadId);
+    return Objects.hash(id, day, openTime, closeTime, closed, createdAt, updatedAt, deletedAt);
   }
 
   @Override
@@ -186,7 +237,9 @@ public class BusinessHours {
     sb.append("    openTime: ").append(toIndentedString(openTime)).append("\n");
     sb.append("    closeTime: ").append(toIndentedString(closeTime)).append("\n");
     sb.append("    closed: ").append(toIndentedString(closed)).append("\n");
-    sb.append("    leadId: ").append(toIndentedString(leadId)).append("\n");
+    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
+    sb.append("    deletedAt: ").append(toIndentedString(deletedAt)).append("\n");
     sb.append("}");
     return sb.toString();
   }

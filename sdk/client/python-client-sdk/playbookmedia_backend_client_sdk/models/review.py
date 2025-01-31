@@ -36,7 +36,10 @@ class Review(BaseModel):
     language: Optional[StrictStr] = None
     profile_photo_url: Optional[StrictStr] = Field(default=None, alias="profilePhotoUrl")
     review_count: Optional[StrictInt] = Field(default=None, alias="reviewCount")
-    __properties: ClassVar[List[str]] = ["id", "author", "rating", "text", "time", "language", "profilePhotoUrl", "reviewCount"]
+    created_at: Optional[datetime] = Field(default=None, alias="createdAt")
+    updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
+    deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
+    __properties: ClassVar[List[str]] = ["id", "author", "rating", "text", "time", "language", "profilePhotoUrl", "reviewCount", "createdAt", "updatedAt", "deletedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -96,7 +99,10 @@ class Review(BaseModel):
             "time": obj.get("time"),
             "language": obj.get("language"),
             "profilePhotoUrl": obj.get("profilePhotoUrl"),
-            "reviewCount": obj.get("reviewCount")
+            "reviewCount": obj.get("reviewCount"),
+            "createdAt": obj.get("createdAt"),
+            "updatedAt": obj.get("updatedAt"),
+            "deletedAt": obj.get("deletedAt")
         })
         return _obj
 

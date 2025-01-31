@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import java.time.OffsetDateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -18,7 +20,7 @@ import javax.annotation.Generated;
  * AccountSettings
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T23:23:25.497382-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-31T03:28:40.740898-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class AccountSettings {
 
   private String id;
@@ -34,6 +36,15 @@ public class AccountSettings {
   private Boolean require2fa;
 
   private String sessionTimeout;
+
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private OffsetDateTime createdAt;
+
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private OffsetDateTime updatedAt;
+
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private OffsetDateTime deletedAt;
 
   public AccountSettings id(String id) {
     this.id = id;
@@ -175,6 +186,66 @@ public class AccountSettings {
     this.sessionTimeout = sessionTimeout;
   }
 
+  public AccountSettings createdAt(OffsetDateTime createdAt) {
+    this.createdAt = createdAt;
+    return this;
+  }
+
+  /**
+   * Get createdAt
+   * @return createdAt
+   */
+  @Valid 
+  @Schema(name = "createdAt", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("createdAt")
+  public OffsetDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(OffsetDateTime createdAt) {
+    this.createdAt = createdAt;
+  }
+
+  public AccountSettings updatedAt(OffsetDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+    return this;
+  }
+
+  /**
+   * Get updatedAt
+   * @return updatedAt
+   */
+  @Valid 
+  @Schema(name = "updatedAt", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("updatedAt")
+  public OffsetDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(OffsetDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
+
+  public AccountSettings deletedAt(OffsetDateTime deletedAt) {
+    this.deletedAt = deletedAt;
+    return this;
+  }
+
+  /**
+   * Get deletedAt
+   * @return deletedAt
+   */
+  @Valid 
+  @Schema(name = "deletedAt", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("deletedAt")
+  public OffsetDateTime getDeletedAt() {
+    return deletedAt;
+  }
+
+  public void setDeletedAt(OffsetDateTime deletedAt) {
+    this.deletedAt = deletedAt;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -190,12 +261,15 @@ public class AccountSettings {
         Objects.equals(this.defaultDataRetention, accountSettings.defaultDataRetention) &&
         Objects.equals(this.autoPurgeEnabled, accountSettings.autoPurgeEnabled) &&
         Objects.equals(this.require2fa, accountSettings.require2fa) &&
-        Objects.equals(this.sessionTimeout, accountSettings.sessionTimeout);
+        Objects.equals(this.sessionTimeout, accountSettings.sessionTimeout) &&
+        Objects.equals(this.createdAt, accountSettings.createdAt) &&
+        Objects.equals(this.updatedAt, accountSettings.updatedAt) &&
+        Objects.equals(this.deletedAt, accountSettings.deletedAt);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, emailNotifications, slackNotifications, defaultDataRetention, autoPurgeEnabled, require2fa, sessionTimeout);
+    return Objects.hash(id, emailNotifications, slackNotifications, defaultDataRetention, autoPurgeEnabled, require2fa, sessionTimeout, createdAt, updatedAt, deletedAt);
   }
 
   @Override
@@ -209,6 +283,9 @@ public class AccountSettings {
     sb.append("    autoPurgeEnabled: ").append(toIndentedString(autoPurgeEnabled)).append("\n");
     sb.append("    require2fa: ").append(toIndentedString(require2fa)).append("\n");
     sb.append("    sessionTimeout: ").append(toIndentedString(sessionTimeout)).append("\n");
+    sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
+    sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
+    sb.append("    deletedAt: ").append(toIndentedString(deletedAt)).append("\n");
     sb.append("}");
     return sb.toString();
   }

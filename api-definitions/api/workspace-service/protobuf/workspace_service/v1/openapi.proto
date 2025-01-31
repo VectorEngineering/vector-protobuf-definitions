@@ -1,0 +1,227 @@
+syntax = "proto3";
+
+package workspace_service.v1;
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "github.com/VectorEngineering/vector-protobuf-definitions/api-definitions/pkg/generated/workspace_service/v1";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "Workspace Service API"
+    version: "1.0"
+    description: "Vector Workspace Service API - Manages workspaces, accounts, and document collaboration"
+    contact: {
+      name: "Vector AI Engineering"
+      url: "https://vector.ai"
+      email: "yoanyomba@vector.ai"
+    }
+    license: {
+      name: "Apache 2.0 License"
+      url: "https://github.com/SolomonAIEngineering/backend-monorepo/blob/main/LICENSE"
+    }
+    extensions: {
+      key: "x-api-version"
+      value: {string_value: "v1"}
+    }
+  }
+
+  // Specify supported schemes
+  schemes: HTTP
+  schemes: HTTPS
+  schemes: WSS
+
+  // Specify supported content types
+  consumes: "application/json"
+  consumes: "application/x-www-form-urlencoded"
+  produces: "application/json"
+
+  host: "workspace-service.vector.svc.cluster.local:9896"
+
+  // Security definitions
+  security_definitions: {
+    security: {
+      key: "ApiKeyAuth"
+      value: {
+        type: TYPE_API_KEY
+        in: IN_HEADER
+        name: "X-API-Key"
+        extensions: {
+          key: "x-amazon-apigateway-authtype"
+          value: {string_value: "oauth2"}
+        }
+        extensions: {
+          key: "x-amazon-apigateway-authorizer"
+          value: {
+            struct_value: {
+              fields: {
+                key: "type"
+                value: {string_value: "token"}
+              }
+              fields: {
+                key: "authorizerResultTtlInSeconds"
+                value: {number_value: 60}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Global response definitions
+  responses: {
+    key: "400"
+    value: {
+      description: "Bad Request - Invalid input parameters"
+      schema: {
+        json_schema: {
+          ref: ".workspace_service.v1.ValidationErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: '{"status":{"code":400,"message":"Bad Request"},"error_code":2000,"message":"Invalid input parameters","field_violations":[{"field":"email","message":"Invalid email format"}]}'
+      }
+    }
+  }
+  responses: {
+    key: "401"
+    value: {
+      description: "Unauthorized - Authentication required"
+      schema: {
+        json_schema: {
+          ref: ".workspace_service.v1.AuthenticationErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: '{"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication failed"}'
+      }
+    }
+  }
+  responses: {
+    key: "403"
+    value: {
+      description: "Forbidden - Insufficient permissions"
+      schema: {
+        json_schema: {
+          ref: ".workspace_service.v1.ForbiddenErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: '{"status":{"code":403,"message":"Forbidden"},"error_code":1103,"message":"Insufficient permissions"}'
+      }
+    }
+  }
+  responses: {
+    key: "404"
+    value: {
+      description: "Not Found - Resource not found"
+      schema: {
+        json_schema: {
+          ref: ".workspace_service.v1.NotFoundErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: '{"status":{"code":404,"message":"Not Found"},"error_code":5102,"message":"Resource not found"}'
+      }
+    }
+  }
+  responses: {
+    key: "409"
+    value: {
+      description: "Conflict - Resource already exists"
+      schema: {
+        json_schema: {
+          ref: ".workspace_service.v1.ConflictErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: '{"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource already exists"}'
+      }
+    }
+  }
+  responses: {
+    key: "429"
+    value: {
+      description: "Too Many Requests - Rate limit exceeded"
+      schema: {
+        json_schema: {
+          ref: ".workspace_service.v1.RateLimitErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: '{"status":{"code":429,"message":"Too Many Requests"},"error_code":4102,"message":"Rate limit exceeded"}'
+      }
+    }
+  }
+  responses: {
+    key: "500"
+    value: {
+      description: "Internal Server Error"
+      schema: {
+        json_schema: {
+          ref: ".workspace_service.v1.InternalErrorMessageResponse"
+        }
+      }
+      examples: {
+        value: '{"status":{"code":500,"message":"Internal Server Error"},"error_code":4000,"message":"An unexpected error occurred"}'
+      }
+    }
+  }
+
+  // External documentation
+  external_docs: {
+    description: "Vector Workspace Service Documentation"
+    url: "https://internal-docs.solomon-ai.io/workspace-service"
+  }
+
+  // Tags for API organization
+  tags: {
+    name: "Account Management"
+    description: "APIs for managing user accounts and account settings"
+    external_docs: {
+      description: "Learn more about account management"
+      url: "https://internal-docs.solomon-ai.io/workspace-service/accounts"
+    }
+  }
+  tags: {
+    name: "Workspace Management"
+    description: "APIs for managing workspaces, workspace settings, and configurations"
+    external_docs: {
+      description: "Learn more about workspace management"
+      url: "https://internal-docs.solomon-ai.io/workspace-service/workspaces"
+    }
+  }
+  tags: {
+    name: "Workspace Sharing"
+    description: "APIs for managing workspace sharing, permissions, and team collaboration"
+    external_docs: {
+      description: "Learn more about workspace sharing"
+      url: "https://internal-docs.solomon-ai.io/workspace-service/sharing"
+    }
+  }
+  tags: {
+    name: "Analytics"
+    description: "APIs for workspace usage analytics and reporting"
+    external_docs: {
+      description: "Learn more about analytics"
+      url: "https://internal-docs.solomon-ai.io/workspace-service/analytics"
+    }
+  }
+  tags: {
+    name: "Compliance"
+    description: "APIs for compliance reporting and auditing"
+    external_docs: {
+      description: "Learn more about compliance"
+      url: "https://internal-docs.solomon-ai.io/workspace-service/compliance"
+    }
+  }
+  tags: {
+    name: "Storage"
+    description: "APIs for storage management and statistics"
+    external_docs: {
+      description: "Learn more about storage"
+      url: "https://internal-docs.solomon-ai.io/workspace-service/storage"
+    }
+  }
+};

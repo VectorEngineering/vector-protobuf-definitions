@@ -101,7 +101,7 @@ pub enum CreateAccountResponse {
     ,
     /// An unexpected error response.
     AnUnexpectedErrorResponse
-    (models::Status)
+    (models::RpcPeriodStatus)
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -185,7 +185,7 @@ pub enum CreateScrapingJobResponse {
     ,
     /// An unexpected error response.
     AnUnexpectedErrorResponse
-    (models::Status)
+    (models::RpcPeriodStatus)
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -265,7 +265,7 @@ pub enum DeleteAccountResponse {
     ,
     /// An unexpected error response.
     AnUnexpectedErrorResponse
-    (models::Status)
+    (models::RpcPeriodStatus)
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -345,7 +345,7 @@ pub enum DeleteScrapingJobResponse {
     ,
     /// An unexpected error response.
     AnUnexpectedErrorResponse
-    (models::Status)
+    (models::RpcPeriodStatus)
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -425,7 +425,7 @@ pub enum DownloadScrapingResultsResponse {
     ,
     /// An unexpected error response.
     AnUnexpectedErrorResponse
-    (models::Status)
+    (models::RpcPeriodStatus)
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -505,7 +505,7 @@ pub enum GetAccountResponse {
     ,
     /// An unexpected error response.
     AnUnexpectedErrorResponse
-    (models::Status)
+    (models::RpcPeriodStatus)
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -585,7 +585,7 @@ pub enum GetScrapingJobResponse {
     ,
     /// An unexpected error response.
     AnUnexpectedErrorResponse
-    (models::Status)
+    (models::RpcPeriodStatus)
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -665,7 +665,7 @@ pub enum ListScrapingJobsResponse {
     ,
     /// An unexpected error response.
     AnUnexpectedErrorResponse
-    (models::Status)
+    (models::RpcPeriodStatus)
 }
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
@@ -745,7 +745,7 @@ pub enum UpdateAccountResponse {
     ,
     /// An unexpected error response.
     AnUnexpectedErrorResponse
-    (models::Status)
+    (models::RpcPeriodStatus)
 }
 
 /// API

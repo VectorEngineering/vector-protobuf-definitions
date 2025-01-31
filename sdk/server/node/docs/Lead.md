@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 **deletedAt** | **String!** |  | [optional] [default to null]
 **job** | [***ScrapingJob**](ScrapingJob.md) |  | [optional] [default to null]
 **workspace** | [***Workspace**](Workspace.md) |  | [optional] [default to null]
-**placeId** | **String!** | Google Places ID | [optional] [default to null]
+**placeId** | **String!** |  | [optional] [default to null]
 **googleMapsUrl** | **String!** |  | [optional] [default to null]
 **businessStatus** | **String!** |  | [optional] [default to null]
 **regularHours** | [**BusinessHours**](BusinessHours.md) |  | [optional] [default to null]

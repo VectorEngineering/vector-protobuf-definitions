@@ -1,0 +1,269 @@
+syntax = "proto3";
+
+package workspace_service.v1;
+
+import "workspace_service/v1/schema.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+
+option go_package = "github.com/VectorEngineering/vector-protobuf-definitions/api-definitions/pkg/generated/workspace_service/v1";
+
+// Account Management Messages
+message CreateAccountRequest {
+    string auth0_user_id = 1 [
+        (validate.rules).string.min_len = 1,
+        (google.api.field_behavior) = REQUIRED
+    ];
+    string email = 2 [
+        (validate.rules).string.email = true,
+        (google.api.field_behavior) = REQUIRED
+    ];
+    string base_directory = 3;
+    string region = 4 [(validate.rules).string.min_len = 2];
+    uint64 org_id = 5 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 6 [(validate.rules).uint64.gt = 0];
+    repeated string roles = 7;
+    repeated string permissions = 8;
+    bool mfa_enabled = 9;
+    ComplianceLevel compliance_level = 10;
+    map<string, string> preferences = 11;
+}
+
+message CreateAccountResponse {
+    Account account = 1;
+    string initial_workspace_name = 2;
+}
+
+message GetAccountRequest {
+    uint64 id = 1 [(validate.rules).uint64.gt = 0];
+}
+
+message GetAccountResponse {
+    Account account = 1;
+}
+
+message UpdateAccountRequest {
+    Account account = 1;
+}
+
+message UpdateAccountResponse {
+    Account account = 1;
+}
+
+message DeleteAccountRequest {
+    uint64 id = 1 [(validate.rules).uint64.gt = 0];
+}
+
+message DeleteAccountResponse {
+    bool success = 1;
+}
+
+message ListAccountsRequest {
+    uint64 org_id = 1;
+    uint64 tenant_id = 2;
+    int32 page_size = 3 [(validate.rules).int32 = {gte: 1, lte: 100}];
+    string page_token = 4;
+    string filter = 5;
+}
+
+message ListAccountsResponse {
+    repeated Account accounts = 1;
+    string next_page_token = 2;
+    int32 total_size = 3;
+}
+
+// Workspace Management Messages
+message CreateWorkspaceRequest {
+    uint64 account_id = 1 [(validate.rules).uint64.gt = 0];
+    string name = 2 [
+        (validate.rules).string = {
+            min_len: 1,
+            max_len: 100,
+            pattern: "^[a-zA-Z0-9-_ ]+$"
+        },
+        (google.api.field_behavior) = REQUIRED
+    ];
+    int64 storage_quota = 3;
+    bool allow_public_sharing = 4;
+    bool require_approval = 5;
+    bool gdpr_compliant = 6;
+    bool hipaa_compliant = 7;
+}
+
+message CreateWorkspaceResponse {
+    Workspace workspace = 1;
+}
+
+message GetWorkspaceRequest {
+    uint64 id = 1 [(validate.rules).uint64.gt = 0];
+}
+
+message GetWorkspaceResponse {
+    Workspace workspace = 1;
+}
+
+message UpdateWorkspaceRequest {
+    Workspace workspace = 1;
+}
+
+message UpdateWorkspaceResponse {
+    Workspace workspace = 1;
+}
+
+message DeleteWorkspaceRequest {
+    uint64 id = 1 [(validate.rules).uint64.gt = 0];
+}
+
+message DeleteWorkspaceResponse {
+    bool success = 1;
+}
+
+message ListWorkspacesRequest {
+    uint64 account_id = 1 [(validate.rules).uint64.gt = 0];
+    int32 page_size = 2 [(validate.rules).int32 = {gte: 1, lte: 100}];
+    string page_token = 3;
+    string filter = 4;
+}
+
+message ListWorkspacesResponse {
+    repeated Workspace workspaces = 1;
+    string next_page_token = 2;
+    int32 total_size = 3;
+}
+
+// Workspace Sharing Messages
+message ShareWorkspaceRequest {
+    uint64 workspace_id = 1 [(validate.rules).uint64.gt = 0];
+    string shared_with_email = 2 [(validate.rules).string.email = true];
+    string permission_level = 3 [
+        (validate.rules).string = {
+            in: ["viewer", "editor", "admin"]
+        }
+    ];
+    google.protobuf.Timestamp expires_at = 4;
+}
+
+message ShareWorkspaceResponse {
+    WorkspaceSharing sharing = 1;
+}
+
+message UpdateWorkspaceSharingRequest {
+    WorkspaceSharing sharing = 1;
+}
+
+message UpdateWorkspaceSharingResponse {
+    WorkspaceSharing sharing = 1;
+}
+
+message RemoveWorkspaceSharingRequest {
+    uint64 sharing_id = 1 [(validate.rules).uint64.gt = 0];
+}
+
+message RemoveWorkspaceSharingResponse {
+    bool success = 1;
+}
+
+message ListWorkspaceSharingsRequest {
+    uint64 workspace_id = 1 [(validate.rules).uint64.gt = 0];
+    int32 page_size = 2 [(validate.rules).int32 = {gte: 1, lte: 100}];
+    string page_token = 3;
+}
+
+message ListWorkspaceSharingsResponse {
+    repeated WorkspaceSharing sharings = 1;
+    string next_page_token = 2;
+    int32 total_size = 3;
+}
+
+// Workspace Analytics Messages
+message GetWorkspaceAnalyticsRequest {
+    uint64 workspace_id = 1 [(validate.rules).uint64.gt = 0];
+    google.protobuf.Timestamp start_time = 2;
+    google.protobuf.Timestamp end_time = 3;
+}
+
+message GetWorkspaceAnalyticsResponse {
+    message ActivityMetrics {
+        int32 total_files = 1;
+        int32 total_folders = 2;
+        int32 active_users = 3;
+        int64 storage_used = 4;
+        float storage_usage_percentage = 5;
+    }
+
+    message UserActivity {
+        string user_id = 1;
+        string email = 2;
+        int32 file_operations = 3;
+        int32 comments_made = 4;
+        int32 documents_processed = 5;
+    }
+
+    message ComplianceMetrics {
+        float gdpr_compliance_score = 1;
+        float hipaa_compliance_score = 2;
+        int32 pending_approvals = 3;
+        int32 compliance_violations = 4;
+    }
+
+    ActivityMetrics activity = 1;
+    repeated UserActivity user_activities = 2;
+    ComplianceMetrics compliance = 3;
+    repeated WorkspaceActivity recent_activities = 4;
+}
+
+// Workspace Compliance Messages
+message GetWorkspaceComplianceReportRequest {
+    uint64 workspace_id = 1 [(validate.rules).uint64.gt = 0];
+    string compliance_type = 2 [
+        (validate.rules).string = {
+            in: ["gdpr", "hipaa", "sox", "pci"]
+        }
+    ];
+}
+
+message GetWorkspaceComplianceReportResponse {
+    message ComplianceViolation {
+        string rule_id = 1;
+        string severity = 2;
+        string description = 3;
+        repeated string affected_resources = 4;
+        string remediation_steps = 5;
+    }
+
+    message ComplianceScore {
+        string category = 1;
+        float score = 2;
+        string status = 3;
+        repeated string improvements = 4;
+    }
+
+    float overall_score = 1;
+    string compliance_status = 2;
+    repeated ComplianceViolation violations = 3;
+    repeated ComplianceScore category_scores = 4;
+    google.protobuf.Timestamp report_generated_at = 5;
+    string certification_id = 6;
+}
+
+// Workspace Storage Messages
+message GetWorkspaceStorageStatsRequest {
+    uint64 workspace_id = 1 [(validate.rules).uint64.gt = 0];
+}
+
+message GetWorkspaceStorageStatsResponse {
+    message StorageBreakdown {
+        string file_type = 1;
+        int64 size = 2;
+        int32 file_count = 3;
+    }
+
+    int64 total_storage_used = 1;
+    int64 storage_quota = 2;
+    float usage_percentage = 3;
+    repeated StorageBreakdown storage_by_type = 4;
+    int32 total_files = 5;
+    int32 total_folders = 6;
+    google.protobuf.Timestamp last_updated = 7;
+}

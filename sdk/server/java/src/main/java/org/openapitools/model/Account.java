@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.AccountSettings;
 import org.openapitools.model.AccountStatus;
-import org.openapitools.model.ScrapingJob;
 import org.openapitools.model.Workspace;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -29,7 +28,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "Account", description = "Account represents a user account within the workspace service. It serves as the top-level container for all user-specific workspaces and settings.  Key features: - Unique identification via Auth0 - Organization and tenant context - Audit timestamps - Associated scraping jobs  Database considerations: - Uses GORM for ORM mapping - Includes indexes for efficient querying - Supports soft deletes via deleted_at  Usage example: ```go account := &Account{     AuthPlatformUserId: \"auth0|123\",     OrgId: \"org_123\",     TenantId: \"tenant_456\", } ```")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-29T23:23:25.497382-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-31T03:28:40.740898-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class Account {
 
   private String id;
@@ -43,16 +42,10 @@ public class Account {
   private String email;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-  private OffsetDateTime lastModifiedAt;
-
-  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime deletedAt;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime createdAt;
-
-  @Valid
-  private List<@Valid ScrapingJob> scrapingJobs = new ArrayList<>();
 
   private AccountStatus accountStatus = AccountStatus.UNSPECIFIED;
 
@@ -180,26 +173,6 @@ public class Account {
     this.email = email;
   }
 
-  public Account lastModifiedAt(OffsetDateTime lastModifiedAt) {
-    this.lastModifiedAt = lastModifiedAt;
-    return this;
-  }
-
-  /**
-   * Get lastModifiedAt
-   * @return lastModifiedAt
-   */
-  @Valid 
-  @Schema(name = "lastModifiedAt", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("lastModifiedAt")
-  public OffsetDateTime getLastModifiedAt() {
-    return lastModifiedAt;
-  }
-
-  public void setLastModifiedAt(OffsetDateTime lastModifiedAt) {
-    this.lastModifiedAt = lastModifiedAt;
-  }
-
   public Account deletedAt(OffsetDateTime deletedAt) {
     this.deletedAt = deletedAt;
     return this;
@@ -238,34 +211,6 @@ public class Account {
 
   public void setCreatedAt(OffsetDateTime createdAt) {
     this.createdAt = createdAt;
-  }
-
-  public Account scrapingJobs(List<@Valid ScrapingJob> scrapingJobs) {
-    this.scrapingJobs = scrapingJobs;
-    return this;
-  }
-
-  public Account addScrapingJobsItem(ScrapingJob scrapingJobsItem) {
-    if (this.scrapingJobs == null) {
-      this.scrapingJobs = new ArrayList<>();
-    }
-    this.scrapingJobs.add(scrapingJobsItem);
-    return this;
-  }
-
-  /**
-   * Get scrapingJobs
-   * @return scrapingJobs
-   */
-  @Valid 
-  @Schema(name = "scrapingJobs", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("scrapingJobs")
-  public List<@Valid ScrapingJob> getScrapingJobs() {
-    return scrapingJobs;
-  }
-
-  public void setScrapingJobs(List<@Valid ScrapingJob> scrapingJobs) {
-    this.scrapingJobs = scrapingJobs;
   }
 
   public Account accountStatus(AccountStatus accountStatus) {
@@ -526,10 +471,8 @@ public class Account {
         Objects.equals(this.orgId, account.orgId) &&
         Objects.equals(this.tenantId, account.tenantId) &&
         Objects.equals(this.email, account.email) &&
-        Objects.equals(this.lastModifiedAt, account.lastModifiedAt) &&
         Objects.equals(this.deletedAt, account.deletedAt) &&
         Objects.equals(this.createdAt, account.createdAt) &&
-        Objects.equals(this.scrapingJobs, account.scrapingJobs) &&
         Objects.equals(this.accountStatus, account.accountStatus) &&
         Objects.equals(this.roles, account.roles) &&
         Objects.equals(this.permissions, account.permissions) &&
@@ -545,7 +488,7 @@ public class Account {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, authPlatformUserId, orgId, tenantId, email, lastModifiedAt, deletedAt, createdAt, scrapingJobs, accountStatus, roles, permissions, mfaEnabled, lastLoginAt, timezone, totalJobsRun, monthlyJobLimit, concurrentJobLimit, workspaces, settings);
+    return Objects.hash(id, authPlatformUserId, orgId, tenantId, email, deletedAt, createdAt, accountStatus, roles, permissions, mfaEnabled, lastLoginAt, timezone, totalJobsRun, monthlyJobLimit, concurrentJobLimit, workspaces, settings);
   }
 
   @Override
@@ -557,10 +500,8 @@ public class Account {
     sb.append("    orgId: ").append(toIndentedString(orgId)).append("\n");
     sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
-    sb.append("    lastModifiedAt: ").append(toIndentedString(lastModifiedAt)).append("\n");
     sb.append("    deletedAt: ").append(toIndentedString(deletedAt)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
-    sb.append("    scrapingJobs: ").append(toIndentedString(scrapingJobs)).append("\n");
     sb.append("    accountStatus: ").append(toIndentedString(accountStatus)).append("\n");
     sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
     sb.append("    permissions: ").append(toIndentedString(permissions)).append("\n");

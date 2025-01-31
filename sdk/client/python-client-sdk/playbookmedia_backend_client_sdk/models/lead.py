@@ -54,7 +54,7 @@ class Lead(BaseModel):
     deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
     job: Optional[ScrapingJob] = None
     workspace: Optional[Workspace] = None
-    place_id: Optional[StrictStr] = Field(default=None, description="Google Places ID", alias="placeId")
+    place_id: Optional[StrictStr] = Field(default=None, alias="placeId")
     google_maps_url: Optional[StrictStr] = Field(default=None, alias="googleMapsUrl")
     business_status: Optional[StrictStr] = Field(default=None, alias="businessStatus")
     regular_hours: Optional[List[BusinessHours]] = Field(default=None, alias="regularHours")

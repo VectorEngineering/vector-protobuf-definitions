@@ -12,7 +12,7 @@ class Review(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, author=None, rating=None, text=None, time=None, language=None, profile_photo_url=None, review_count=None):  # noqa: E501
+    def __init__(self, id=None, author=None, rating=None, text=None, time=None, language=None, profile_photo_url=None, review_count=None, created_at=None, updated_at=None, deleted_at=None):  # noqa: E501
         """Review - a model defined in OpenAPI
 
         :param id: The id of this Review.  # noqa: E501
@@ -31,6 +31,12 @@ class Review(Model):
         :type profile_photo_url: str
         :param review_count: The review_count of this Review.  # noqa: E501
         :type review_count: int
+        :param created_at: The created_at of this Review.  # noqa: E501
+        :type created_at: datetime
+        :param updated_at: The updated_at of this Review.  # noqa: E501
+        :type updated_at: datetime
+        :param deleted_at: The deleted_at of this Review.  # noqa: E501
+        :type deleted_at: datetime
         """
         self.openapi_types = {
             'id': str,
@@ -40,7 +46,10 @@ class Review(Model):
             'time': datetime,
             'language': str,
             'profile_photo_url': str,
-            'review_count': int
+            'review_count': int,
+            'created_at': datetime,
+            'updated_at': datetime,
+            'deleted_at': datetime
         }
 
         self.attribute_map = {
@@ -51,7 +60,10 @@ class Review(Model):
             'time': 'time',
             'language': 'language',
             'profile_photo_url': 'profilePhotoUrl',
-            'review_count': 'reviewCount'
+            'review_count': 'reviewCount',
+            'created_at': 'createdAt',
+            'updated_at': 'updatedAt',
+            'deleted_at': 'deletedAt'
         }
 
         self._id = id
@@ -62,6 +74,9 @@ class Review(Model):
         self._language = language
         self._profile_photo_url = profile_photo_url
         self._review_count = review_count
+        self._created_at = created_at
+        self._updated_at = updated_at
+        self._deleted_at = deleted_at
 
     @classmethod
     def from_dict(cls, dikt) -> 'Review':
@@ -241,3 +256,66 @@ class Review(Model):
         """
 
         self._review_count = review_count
+
+    @property
+    def created_at(self) -> datetime:
+        """Gets the created_at of this Review.
+
+
+        :return: The created_at of this Review.
+        :rtype: datetime
+        """
+        return self._created_at
+
+    @created_at.setter
+    def created_at(self, created_at: datetime):
+        """Sets the created_at of this Review.
+
+
+        :param created_at: The created_at of this Review.
+        :type created_at: datetime
+        """
+
+        self._created_at = created_at
+
+    @property
+    def updated_at(self) -> datetime:
+        """Gets the updated_at of this Review.
+
+
+        :return: The updated_at of this Review.
+        :rtype: datetime
+        """
+        return self._updated_at
+
+    @updated_at.setter
+    def updated_at(self, updated_at: datetime):
+        """Sets the updated_at of this Review.
+
+
+        :param updated_at: The updated_at of this Review.
+        :type updated_at: datetime
+        """
+
+        self._updated_at = updated_at
+
+    @property
+    def deleted_at(self) -> datetime:
+        """Gets the deleted_at of this Review.
+
+
+        :return: The deleted_at of this Review.
+        :rtype: datetime
+        """
+        return self._deleted_at
+
+    @deleted_at.setter
+    def deleted_at(self, deleted_at: datetime):
+        """Sets the deleted_at of this Review.
+
+
+        :param deleted_at: The deleted_at of this Review.
+        :type deleted_at: datetime
+        """
+
+        self._deleted_at = deleted_at

@@ -3,9 +3,11 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from playbookmedia_backend_server_sdk.models.base_model import Model
+from playbookmedia_backend_server_sdk.models.scraping_job import ScrapingJob
 from playbookmedia_backend_server_sdk.models.scraping_workflow import ScrapingWorkflow
 from playbookmedia_backend_server_sdk import util
 
+from playbookmedia_backend_server_sdk.models.scraping_job import ScrapingJob  # noqa: E501
 from playbookmedia_backend_server_sdk.models.scraping_workflow import ScrapingWorkflow  # noqa: E501
 
 class Workspace(Model):
@@ -14,7 +16,7 @@ class Workspace(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, name=None, industry=None, domain=None, gdpr_compliant=None, hipaa_compliant=None, soc2_compliant=None, storage_quota=None, used_storage=None, created_at=None, updated_at=None, deleted_at=None, workflows=None, jobs_run_this_month=None, workspace_job_limit=None, daily_job_quota=None, active_scrapers=None, total_leads_collected=None, last_job_run=None):  # noqa: E501
+    def __init__(self, id=None, name=None, industry=None, domain=None, gdpr_compliant=None, hipaa_compliant=None, soc2_compliant=None, storage_quota=None, used_storage=None, created_at=None, updated_at=None, deleted_at=None, workflows=None, jobs_run_this_month=None, workspace_job_limit=None, daily_job_quota=None, active_scrapers=None, total_leads_collected=None, last_job_run=None, scraping_jobs=None):  # noqa: E501
         """Workspace - a model defined in OpenAPI
 
         :param id: The id of this Workspace.  # noqa: E501
@@ -55,6 +57,8 @@ class Workspace(Model):
         :type total_leads_collected: int
         :param last_job_run: The last_job_run of this Workspace.  # noqa: E501
         :type last_job_run: datetime
+        :param scraping_jobs: The scraping_jobs of this Workspace.  # noqa: E501
+        :type scraping_jobs: List[ScrapingJob]
         """
         self.openapi_types = {
             'id': str,
@@ -75,7 +79,8 @@ class Workspace(Model):
             'daily_job_quota': int,
             'active_scrapers': int,
             'total_leads_collected': int,
-            'last_job_run': datetime
+            'last_job_run': datetime,
+            'scraping_jobs': List[ScrapingJob]
         }
 
         self.attribute_map = {
@@ -97,7 +102,8 @@ class Workspace(Model):
             'daily_job_quota': 'dailyJobQuota',
             'active_scrapers': 'activeScrapers',
             'total_leads_collected': 'totalLeadsCollected',
-            'last_job_run': 'lastJobRun'
+            'last_job_run': 'lastJobRun',
+            'scraping_jobs': 'scrapingJobs'
         }
 
         self._id = id
@@ -119,6 +125,7 @@ class Workspace(Model):
         self._active_scrapers = active_scrapers
         self._total_leads_collected = total_leads_collected
         self._last_job_run = last_job_run
+        self._scraping_jobs = scraping_jobs
 
     @classmethod
     def from_dict(cls, dikt) -> 'Workspace':
@@ -531,3 +538,24 @@ class Workspace(Model):
         """
 
         self._last_job_run = last_job_run
+
+    @property
+    def scraping_jobs(self) -> List[ScrapingJob]:
+        """Gets the scraping_jobs of this Workspace.
+
+
+        :return: The scraping_jobs of this Workspace.
+        :rtype: List[ScrapingJob]
+        """
+        return self._scraping_jobs
+
+    @scraping_jobs.setter
+    def scraping_jobs(self, scraping_jobs: List[ScrapingJob]):
+        """Sets the scraping_jobs of this Workspace.
+
+
+        :param scraping_jobs: The scraping_jobs of this Workspace.
+        :type scraping_jobs: List[ScrapingJob]
+        """
+
+        self._scraping_jobs = scraping_jobs

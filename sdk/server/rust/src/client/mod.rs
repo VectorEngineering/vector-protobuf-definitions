@@ -714,7 +714,7 @@ impl<S, C> Api<C> for Client<S, C> where
                         .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
                 let body = str::from_utf8(&body)
                     .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
-                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
                     ApiError(format!("Response body did not match the schema: {}", e))
                 })?;
                 Ok(CreateAccountResponse::AnUnexpectedErrorResponse
@@ -1066,7 +1066,7 @@ impl<S, C> Api<C> for Client<S, C> where
                         .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
                 let body = str::from_utf8(&body)
                     .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
-                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
                     ApiError(format!("Response body did not match the schema: {}", e))
                 })?;
                 Ok(CreateScrapingJobResponse::AnUnexpectedErrorResponse
@@ -1397,7 +1397,7 @@ impl<S, C> Api<C> for Client<S, C> where
                         .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
                 let body = str::from_utf8(&body)
                     .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
-                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
                     ApiError(format!("Response body did not match the schema: {}", e))
                 })?;
                 Ok(DeleteAccountResponse::AnUnexpectedErrorResponse
@@ -1737,7 +1737,7 @@ impl<S, C> Api<C> for Client<S, C> where
                         .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
                 let body = str::from_utf8(&body)
                     .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
-                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
                     ApiError(format!("Response body did not match the schema: {}", e))
                 })?;
                 Ok(DeleteScrapingJobResponse::AnUnexpectedErrorResponse
@@ -2077,7 +2077,7 @@ impl<S, C> Api<C> for Client<S, C> where
                         .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
                 let body = str::from_utf8(&body)
                     .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
-                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
                     ApiError(format!("Response body did not match the schema: {}", e))
                 })?;
                 Ok(DownloadScrapingResultsResponse::AnUnexpectedErrorResponse
@@ -2408,7 +2408,7 @@ impl<S, C> Api<C> for Client<S, C> where
                         .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
                 let body = str::from_utf8(&body)
                     .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
-                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
                     ApiError(format!("Response body did not match the schema: {}", e))
                 })?;
                 Ok(GetAccountResponse::AnUnexpectedErrorResponse
@@ -2748,7 +2748,7 @@ impl<S, C> Api<C> for Client<S, C> where
                         .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
                 let body = str::from_utf8(&body)
                     .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
-                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
                     ApiError(format!("Response body did not match the schema: {}", e))
                 })?;
                 Ok(GetScrapingJobResponse::AnUnexpectedErrorResponse
@@ -3086,7 +3086,7 @@ impl<S, C> Api<C> for Client<S, C> where
                         .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
                 let body = str::from_utf8(&body)
                     .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
-                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
                     ApiError(format!("Response body did not match the schema: {}", e))
                 })?;
                 Ok(ListScrapingJobsResponse::AnUnexpectedErrorResponse
@@ -3426,7 +3426,7 @@ impl<S, C> Api<C> for Client<S, C> where
                         .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
                 let body = str::from_utf8(&body)
                     .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
-                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
                     ApiError(format!("Response body did not match the schema: {}", e))
                 })?;
                 Ok(UpdateAccountResponse::AnUnexpectedErrorResponse

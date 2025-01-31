@@ -29,6 +29,7 @@ type Workspace {
   activeScrapers: Int!
   totalLeadsCollected: Int!
   lastJobRun: String!
+  scrapingJobs: [ScrapingJob!]
 }
 
 input WorkspaceInput {
@@ -52,5 +53,6 @@ input WorkspaceInput {
     activeScrapers: Int!
     totalLeadsCollected: Int!
     lastJobRun: String!
+    scrapingJobs: [ScrapingJobInput]
 }
 

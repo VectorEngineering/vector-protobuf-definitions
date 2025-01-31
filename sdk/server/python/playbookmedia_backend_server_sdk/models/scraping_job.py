@@ -16,17 +16,23 @@ class ScrapingJob(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, name=None, created_at=None, status=BackgroundJobStatus.UNSPECIFIED, keywords=None, lang=None, zoom=None, lat=None, lon=None, fast_mode=None, radius=None, depth=None, email=None, max_time=None, proxies=None, updated_at=None, deleted_at=None, payload_type=None, priority=None, payload=None, leads=None, workflow_id=None):  # noqa: E501
+    def __init__(self, id=None, priority=None, payload_type=None, payload=None, created_at=None, status=BackgroundJobStatus.UNSPECIFIED, name=None, keywords=None, lang=None, zoom=None, lat=None, lon=None, fast_mode=None, radius=None, depth=None, email=None, max_time=None, proxies=None, updated_at=None, deleted_at=None, leads=None):  # noqa: E501
         """ScrapingJob - a model defined in OpenAPI
 
         :param id: The id of this ScrapingJob.  # noqa: E501
         :type id: str
-        :param name: The name of this ScrapingJob.  # noqa: E501
-        :type name: str
+        :param priority: The priority of this ScrapingJob.  # noqa: E501
+        :type priority: int
+        :param payload_type: The payload_type of this ScrapingJob.  # noqa: E501
+        :type payload_type: str
+        :param payload: The payload of this ScrapingJob.  # noqa: E501
+        :type payload: str
         :param created_at: The created_at of this ScrapingJob.  # noqa: E501
         :type created_at: datetime
         :param status: The status of this ScrapingJob.  # noqa: E501
         :type status: BackgroundJobStatus
+        :param name: The name of this ScrapingJob.  # noqa: E501
+        :type name: str
         :param keywords: The keywords of this ScrapingJob.  # noqa: E501
         :type keywords: List[str]
         :param lang: The lang of this ScrapingJob.  # noqa: E501
@@ -53,22 +59,17 @@ class ScrapingJob(Model):
         :type updated_at: datetime
         :param deleted_at: The deleted_at of this ScrapingJob.  # noqa: E501
         :type deleted_at: datetime
-        :param payload_type: The payload_type of this ScrapingJob.  # noqa: E501
-        :type payload_type: str
-        :param priority: The priority of this ScrapingJob.  # noqa: E501
-        :type priority: int
-        :param payload: The payload of this ScrapingJob.  # noqa: E501
-        :type payload: str
         :param leads: The leads of this ScrapingJob.  # noqa: E501
         :type leads: List[Lead]
-        :param workflow_id: The workflow_id of this ScrapingJob.  # noqa: E501
-        :type workflow_id: str
         """
         self.openapi_types = {
             'id': str,
-            'name': str,
+            'priority': int,
+            'payload_type': str,
+            'payload': str,
             'created_at': datetime,
             'status': BackgroundJobStatus,
+            'name': str,
             'keywords': List[str],
             'lang': str,
             'zoom': int,
@@ -82,18 +83,17 @@ class ScrapingJob(Model):
             'proxies': List[str],
             'updated_at': datetime,
             'deleted_at': datetime,
-            'payload_type': str,
-            'priority': int,
-            'payload': str,
-            'leads': List[Lead],
-            'workflow_id': str
+            'leads': List[Lead]
         }
 
         self.attribute_map = {
             'id': 'id',
-            'name': 'name',
+            'priority': 'priority',
+            'payload_type': 'payloadType',
+            'payload': 'payload',
             'created_at': 'createdAt',
             'status': 'status',
+            'name': 'name',
             'keywords': 'keywords',
             'lang': 'lang',
             'zoom': 'zoom',
@@ -107,17 +107,16 @@ class ScrapingJob(Model):
             'proxies': 'proxies',
             'updated_at': 'updatedAt',
             'deleted_at': 'deletedAt',
-            'payload_type': 'payloadType',
-            'priority': 'priority',
-            'payload': 'payload',
-            'leads': 'leads',
-            'workflow_id': 'workflowId'
+            'leads': 'leads'
         }
 
         self._id = id
-        self._name = name
+        self._priority = priority
+        self._payload_type = payload_type
+        self._payload = payload
         self._created_at = created_at
         self._status = status
+        self._name = name
         self._keywords = keywords
         self._lang = lang
         self._zoom = zoom
@@ -131,11 +130,7 @@ class ScrapingJob(Model):
         self._proxies = proxies
         self._updated_at = updated_at
         self._deleted_at = deleted_at
-        self._payload_type = payload_type
-        self._priority = priority
-        self._payload = payload
         self._leads = leads
-        self._workflow_id = workflow_id
 
     @classmethod
     def from_dict(cls, dikt) -> 'ScrapingJob':
@@ -170,25 +165,67 @@ class ScrapingJob(Model):
         self._id = id
 
     @property
-    def name(self) -> str:
-        """Gets the name of this ScrapingJob.
+    def priority(self) -> int:
+        """Gets the priority of this ScrapingJob.
 
 
-        :return: The name of this ScrapingJob.
+        :return: The priority of this ScrapingJob.
+        :rtype: int
+        """
+        return self._priority
+
+    @priority.setter
+    def priority(self, priority: int):
+        """Sets the priority of this ScrapingJob.
+
+
+        :param priority: The priority of this ScrapingJob.
+        :type priority: int
+        """
+
+        self._priority = priority
+
+    @property
+    def payload_type(self) -> str:
+        """Gets the payload_type of this ScrapingJob.
+
+
+        :return: The payload_type of this ScrapingJob.
         :rtype: str
         """
-        return self._name
+        return self._payload_type
 
-    @name.setter
-    def name(self, name: str):
-        """Sets the name of this ScrapingJob.
+    @payload_type.setter
+    def payload_type(self, payload_type: str):
+        """Sets the payload_type of this ScrapingJob.
 
 
-        :param name: The name of this ScrapingJob.
-        :type name: str
+        :param payload_type: The payload_type of this ScrapingJob.
+        :type payload_type: str
         """
 
-        self._name = name
+        self._payload_type = payload_type
+
+    @property
+    def payload(self) -> str:
+        """Gets the payload of this ScrapingJob.
+
+
+        :return: The payload of this ScrapingJob.
+        :rtype: str
+        """
+        return self._payload
+
+    @payload.setter
+    def payload(self, payload: str):
+        """Sets the payload of this ScrapingJob.
+
+
+        :param payload: The payload of this ScrapingJob.
+        :type payload: str
+        """
+
+        self._payload = payload
 
     @property
     def created_at(self) -> datetime:
@@ -231,6 +268,27 @@ class ScrapingJob(Model):
         """
 
         self._status = status
+
+    @property
+    def name(self) -> str:
+        """Gets the name of this ScrapingJob.
+
+
+        :return: The name of this ScrapingJob.
+        :rtype: str
+        """
+        return self._name
+
+    @name.setter
+    def name(self, name: str):
+        """Sets the name of this ScrapingJob.
+
+
+        :param name: The name of this ScrapingJob.
+        :type name: str
+        """
+
+        self._name = name
 
     @property
     def keywords(self) -> List[str]:
@@ -506,69 +564,6 @@ class ScrapingJob(Model):
         self._deleted_at = deleted_at
 
     @property
-    def payload_type(self) -> str:
-        """Gets the payload_type of this ScrapingJob.
-
-
-        :return: The payload_type of this ScrapingJob.
-        :rtype: str
-        """
-        return self._payload_type
-
-    @payload_type.setter
-    def payload_type(self, payload_type: str):
-        """Sets the payload_type of this ScrapingJob.
-
-
-        :param payload_type: The payload_type of this ScrapingJob.
-        :type payload_type: str
-        """
-
-        self._payload_type = payload_type
-
-    @property
-    def priority(self) -> int:
-        """Gets the priority of this ScrapingJob.
-
-
-        :return: The priority of this ScrapingJob.
-        :rtype: int
-        """
-        return self._priority
-
-    @priority.setter
-    def priority(self, priority: int):
-        """Sets the priority of this ScrapingJob.
-
-
-        :param priority: The priority of this ScrapingJob.
-        :type priority: int
-        """
-
-        self._priority = priority
-
-    @property
-    def payload(self) -> str:
-        """Gets the payload of this ScrapingJob.
-
-
-        :return: The payload of this ScrapingJob.
-        :rtype: str
-        """
-        return self._payload
-
-    @payload.setter
-    def payload(self, payload: str):
-        """Sets the payload of this ScrapingJob.
-
-
-        :param payload: The payload of this ScrapingJob.
-        :type payload: str
-        """
-
-        self._payload = payload
-
-    @property
     def leads(self) -> List[Lead]:
         """Gets the leads of this ScrapingJob.
 
@@ -588,24 +583,3 @@ class ScrapingJob(Model):
         """
 
         self._leads = leads
-
-    @property
-    def workflow_id(self) -> str:
-        """Gets the workflow_id of this ScrapingJob.
-
-
-        :return: The workflow_id of this ScrapingJob.
-        :rtype: str
-        """
-        return self._workflow_id
-
-    @workflow_id.setter
-    def workflow_id(self, workflow_id: str):
-        """Sets the workflow_id of this ScrapingJob.
-
-
-        :param workflow_id: The workflow_id of this ScrapingJob.
-        :type workflow_id: str
-        """
-
-        self._workflow_id = workflow_id

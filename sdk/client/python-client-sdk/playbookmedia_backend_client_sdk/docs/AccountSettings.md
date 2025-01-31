@@ -12,6 +12,9 @@ Name | Type | Description | Notes
 **auto_purge_enabled** | **bool** |  | [optional] 
 **require2fa** | **bool** |  | [optional] 
 **session_timeout** | **str** |  | [optional] 
+**created_at** | **datetime** |  | [optional] 
+**updated_at** | **datetime** |  | [optional] 
+**deleted_at** | **datetime** |  | [optional] 
 
 ## Example
 

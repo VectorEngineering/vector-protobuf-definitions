@@ -21,8 +21,8 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
-from playbookmedia_backend_client_sdk.models.background_job_status import BackgroundJobStatus
 from playbookmedia_backend_client_sdk.models.output_format import OutputFormat
+from playbookmedia_backend_client_sdk.models.workflow_status import WorkflowStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,7 +34,7 @@ class ScrapingWorkflow(BaseModel):
     cron_expression: Optional[StrictStr] = Field(default=None, alias="cronExpression")
     next_run_time: Optional[datetime] = Field(default=None, alias="nextRunTime")
     last_run_time: Optional[datetime] = Field(default=None, alias="lastRunTime")
-    status: Optional[BackgroundJobStatus] = BackgroundJobStatus.UNSPECIFIED
+    status: Optional[WorkflowStatus] = WorkflowStatus.UNSPECIFIED
     retry_count: Optional[StrictInt] = Field(default=None, alias="retryCount")
     max_retries: Optional[StrictInt] = Field(default=None, alias="maxRetries")
     alert_emails: Optional[StrictStr] = Field(default=None, alias="alertEmails")
@@ -142,7 +142,7 @@ class ScrapingWorkflow(BaseModel):
             "cronExpression": obj.get("cronExpression"),
             "nextRunTime": obj.get("nextRunTime"),
             "lastRunTime": obj.get("lastRunTime"),
-            "status": obj.get("status") if obj.get("status") is not None else BackgroundJobStatus.UNSPECIFIED,
+            "status": obj.get("status") if obj.get("status") is not None else WorkflowStatus.UNSPECIFIED,
             "retryCount": obj.get("retryCount"),
             "maxRetries": obj.get("maxRetries"),
             "alertEmails": obj.get("alertEmails"),

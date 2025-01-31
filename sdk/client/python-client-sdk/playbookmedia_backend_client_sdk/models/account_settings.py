@@ -18,6 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
@@ -34,7 +35,10 @@ class AccountSettings(BaseModel):
     auto_purge_enabled: Optional[StrictBool] = Field(default=None, alias="autoPurgeEnabled")
     require2fa: Optional[StrictBool] = None
     session_timeout: Optional[StrictStr] = Field(default=None, alias="sessionTimeout")
-    __properties: ClassVar[List[str]] = ["id", "emailNotifications", "slackNotifications", "defaultDataRetention", "autoPurgeEnabled", "require2fa", "sessionTimeout"]
+    created_at: Optional[datetime] = Field(default=None, alias="createdAt")
+    updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
+    deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
+    __properties: ClassVar[List[str]] = ["id", "emailNotifications", "slackNotifications", "defaultDataRetention", "autoPurgeEnabled", "require2fa", "sessionTimeout", "createdAt", "updatedAt", "deletedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -93,7 +97,10 @@ class AccountSettings(BaseModel):
             "defaultDataRetention": obj.get("defaultDataRetention"),
             "autoPurgeEnabled": obj.get("autoPurgeEnabled"),
             "require2fa": obj.get("require2fa"),
-            "sessionTimeout": obj.get("sessionTimeout")
+            "sessionTimeout": obj.get("sessionTimeout"),
+            "createdAt": obj.get("createdAt"),
+            "updatedAt": obj.get("updatedAt"),
+            "deletedAt": obj.get("deletedAt")
         })
         return _obj
 

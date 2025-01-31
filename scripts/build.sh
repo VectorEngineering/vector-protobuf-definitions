@@ -49,6 +49,7 @@ show_help() {
 gen_linkerd() {
     echo "Generating Linkerd service profiles..."
     linkerd profile --namespace lead-scraper-service --proto ./api-definitions/api/lead-scraper-service/protobuf/lead_scraper_service/v1/account_service.proto backend-lead-scraper-service > linkerd-definitions/lead-scraper-service.yaml
+    linkerd profile --namespace workspace-service --proto ./api-definitions/api/workspace-service/protobuf/workspace_service/v1/account_service.proto backend-workspace-service > linkerd-definitions/workspace-service.yaml
 }
 
 gen() {
@@ -63,7 +64,7 @@ copy_swagger() {
 
 convert_swagger() {
     echo "Converting Swagger to OpenAPI v3..."
-    local services=("lead-scraper-service")
+    local services=("lead-scraper-service" "workspace-service")
     
     for service in "${services[@]}"; do
         swagger2openapi --yaml --outfile "./swagger/${service}-backend-api.yaml" "./swagger/${service}.json"

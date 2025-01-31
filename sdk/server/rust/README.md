@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-01-29T23:23:27.129039-05:00[America/New_York]
+- Build date: 2025-01-31T03:28:42.596923-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -184,13 +184,13 @@ Method | HTTP request | Description
  - [ResourceValidation](docs/ResourceValidation.md)
  - [RevenueRange](docs/RevenueRange.md)
  - [Review](docs/Review.md)
+ - [RpcPeriodStatus](docs/RpcPeriodStatus.md)
  - [SchemaValidation](docs/SchemaValidation.md)
  - [ScrapingJob](docs/ScrapingJob.md)
  - [ScrapingWorkflow](docs/ScrapingWorkflow.md)
  - [ServiceStatus](docs/ServiceStatus.md)
  - [ServiceUnavailableErrorMessageResponse](docs/ServiceUnavailableErrorMessageResponse.md)
  - [SessionInfo](docs/SessionInfo.md)
- - [Status](docs/Status.md)
  - [Suggestions](docs/Suggestions.md)
  - [TokenInfo](docs/TokenInfo.md)
  - [TooEarlyErrorMessageResponse](docs/TooEarlyErrorMessageResponse.md)
@@ -207,6 +207,7 @@ Method | HTTP request | Description
  - [UpdateWorkspaceResponse](docs/UpdateWorkspaceResponse.md)
  - [ValidationErrorCode](docs/ValidationErrorCode.md)
  - [ValidationErrorMessageResponse](docs/ValidationErrorMessageResponse.md)
+ - [WorkflowStatus](docs/WorkflowStatus.md)
  - [Workspace](docs/Workspace.md)
 
 

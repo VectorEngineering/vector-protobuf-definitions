@@ -1,0 +1,903 @@
+syntax = "proto3";
+
+package workspace_service.v1;
+
+import "protoc-gen-gorm/options/gorm.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/VectorEngineering/vector-protobuf-definitions/api-definitions/pkg/generated/workspace_service/v1";
+
+// Status enums
+enum DocumentStatus {
+    DOCUMENT_STATUS_UNSPECIFIED = 0;
+    DOCUMENT_STATUS_DRAFT = 1;
+    DOCUMENT_STATUS_IN_REVIEW = 2;
+    DOCUMENT_STATUS_APPROVED = 3;
+    DOCUMENT_STATUS_REJECTED = 4;
+    DOCUMENT_STATUS_EXPIRED = 5;
+    DOCUMENT_STATUS_ARCHIVED = 6;
+}
+
+enum SignatureStatus {
+    SIGNATURE_STATUS_UNSPECIFIED = 0;
+    SIGNATURE_STATUS_PENDING = 1;
+    SIGNATURE_STATUS_SIGNED = 2;
+    SIGNATURE_STATUS_REJECTED = 3;
+    SIGNATURE_STATUS_EXPIRED = 4;
+    SIGNATURE_STATUS_REVOKED = 5;
+}
+
+enum WorkflowStatus {
+    WORKFLOW_STATUS_UNSPECIFIED = 0;
+    WORKFLOW_STATUS_ACTIVE = 1;
+    WORKFLOW_STATUS_PAUSED = 2;
+    WORKFLOW_STATUS_COMPLETED = 3;
+    WORKFLOW_STATUS_FAILED = 4;
+    WORKFLOW_STATUS_CANCELLED = 5;
+}
+
+// Additional status enums
+enum ComplianceLevel {
+    COMPLIANCE_LEVEL_UNSPECIFIED = 0;
+    COMPLIANCE_LEVEL_NONE = 1;
+    COMPLIANCE_LEVEL_BASIC = 2;
+    COMPLIANCE_LEVEL_ADVANCED = 3;
+    COMPLIANCE_LEVEL_ENTERPRISE = 4;
+}
+
+enum TemplateType {
+    TEMPLATE_TYPE_UNSPECIFIED = 0;
+    TEMPLATE_TYPE_STANDARD = 1;
+    TEMPLATE_TYPE_SMART = 2;
+    TEMPLATE_TYPE_ADAPTIVE = 3;
+    TEMPLATE_TYPE_AI_GENERATED = 4;
+}
+
+enum ProcessingStatus {
+    PROCESSING_STATUS_UNSPECIFIED = 0;
+    PROCESSING_STATUS_PENDING = 1;
+    PROCESSING_STATUS_IN_PROGRESS = 2;
+    PROCESSING_STATUS_COMPLETED = 3;
+    PROCESSING_STATUS_FAILED = 4;
+}
+
+// Additional enums for marketplace and analytics
+enum AppCategory {
+    APP_CATEGORY_UNSPECIFIED = 0;
+    APP_CATEGORY_CONTRACT_AUTOMATION = 1;
+    APP_CATEGORY_CONTRACT_ANALYSIS = 2;
+    APP_CATEGORY_INTEGRATION = 3;
+    APP_CATEGORY_AI_POWERED = 4;
+    APP_CATEGORY_WORKFLOW = 5;
+    APP_CATEGORY_COMPLIANCE = 6;
+}
+
+enum PricingModel {
+    PRICING_MODEL_UNSPECIFIED = 0;
+    PRICING_MODEL_FREE = 1;
+    PRICING_MODEL_SUBSCRIPTION = 2;
+    PRICING_MODEL_USAGE_BASED = 3;
+    PRICING_MODEL_ENTERPRISE = 4;
+}
+
+// Additional enums for monitoring and health
+enum HealthStatus {
+    HEALTH_STATUS_UNSPECIFIED = 0;
+    HEALTH_STATUS_HEALTHY = 1;
+    HEALTH_STATUS_DEGRADED = 2;
+    HEALTH_STATUS_UNHEALTHY = 3;
+}
+
+enum LogLevel {
+    LOG_LEVEL_UNSPECIFIED = 0;
+    LOG_LEVEL_DEBUG = 1;
+    LOG_LEVEL_INFO = 2;
+    LOG_LEVEL_WARN = 3;
+    LOG_LEVEL_ERROR = 4;
+}
+
+// Core entities
+message Account {
+    option (gorm.opts) = {
+        ormable: true
+        table: "accounts"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string auth0_user_id = 2 [(gorm.field).tag = {unique: true}];
+    string email = 3;
+    string base_directory = 4;
+    string bucket_name = 5;
+    string region = 6;
+    uint64 org_id = 7;
+    uint64 tenant_id = 8;
+    repeated string roles = 9;
+    repeated string permissions = 10;
+    bool mfa_enabled = 11;
+    ComplianceLevel compliance_level = 12;
+    map<string, string> preferences = 13;
+    repeated string api_keys = 14;
+    google.protobuf.Timestamp created_at = 15;
+    google.protobuf.Timestamp updated_at = 16;
+    google.protobuf.Timestamp deleted_at = 17;
+
+    // Relationships
+    repeated Workspace workspaces = 18 [(gorm.field).has_many = {}];
+    repeated DataProfile data_profiles = 19 [(gorm.field).has_many = {}];
+}
+
+message DataProfile {
+    option (gorm.opts) = {
+        ormable: true
+        table: "data_profiles"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string name = 2;
+    string profile_type = 3;
+    map<string, string> data_fields = 4;
+    bool is_default = 5;
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+}
+
+message Workspace {
+    option (gorm.opts) = {
+        ormable: true
+        table: "workspaces"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string name = 2;
+    string unique_identifier = 3;
+    string s3_bucket_name = 4;
+    string s3_folder_path = 5;
+    int64 storage_quota = 6;
+    int64 used_storage = 7;
+    bool allow_public_sharing = 8;
+    bool require_approval = 9;
+    bool gdpr_compliant = 10;
+    bool hipaa_compliant = 11;
+    google.protobuf.Timestamp created_at = 12;
+    google.protobuf.Timestamp updated_at = 13;
+    google.protobuf.Timestamp deleted_at = 14;
+
+    // Relationships
+    repeated FolderMetadata folders = 15 [(gorm.field).has_many = {}];
+    repeated DocumentTemplate templates = 16 [(gorm.field).has_many = {}];
+    repeated WorkspaceSharing sharing = 17 [(gorm.field).has_many = {}];
+    repeated WorkspaceActivity activities = 18 [(gorm.field).has_many = {}];
+    repeated WorkspaceCompliance compliance = 19 [(gorm.field).has_many = {}];
+    repeated MarketplaceApp installed_apps = 20 [(gorm.field).has_many = {}];
+}
+
+message WorkspaceSharing {
+    option (gorm.opts) = {
+        ormable: true
+        table: "workspace_sharings"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string shared_with_email = 3;
+    string permission_level = 4;
+    google.protobuf.Timestamp expires_at = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+}
+
+message WorkspaceActivity {
+    option (gorm.opts) = {
+        ormable: true
+        table: "workspace_activities"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string activity_type = 3;
+    string user_id = 4;
+    string description = 5;
+    map<string, string> metadata = 6;
+    google.protobuf.Timestamp created_at = 7;
+}
+
+message WorkspaceCompliance {
+    option (gorm.opts) = {
+        ormable: true
+        table: "workspace_compliance"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string compliance_type = 3;
+    string status = 4;
+    string certification_id = 5;
+    google.protobuf.Timestamp valid_until = 6;
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+}
+
+// File system entities
+message FolderMetadata {
+    option (gorm.opts) = {
+        ormable: true
+        table: "folders"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string name = 2;
+    string s3_bucket_name = 3;
+    string s3_folder_path = 4;
+    bool is_deleted = 5;
+    uint64 parent_folder_id = 6;
+    google.protobuf.Timestamp created_at = 8;
+    google.protobuf.Timestamp updated_at = 9;
+    google.protobuf.Timestamp deleted_at = 10;
+
+    // Relationships
+    repeated FolderMetadata child_folders = 11 [(gorm.field).has_many = {}];
+    repeated FileMetadata files = 12 [(gorm.field).has_many = {}];
+}
+
+message FileMetadata {
+    uint64 id = 1;
+    string name = 2;
+    int64 size = 3;
+    string s3_key = 4;
+    string s3_bucket_name = 5;
+    bool is_deleted = 6;
+    int32 version = 7;
+    google.protobuf.Timestamp created_at = 9;
+    google.protobuf.Timestamp updated_at = 10;
+    google.protobuf.Timestamp deleted_at = 11;
+
+    // Relationships
+    FileEmbeddings embeddings = 12;
+    repeated FileVersion versions = 13;
+    repeated CommentThread comments = 14;
+    repeated FileSharing sharing = 15;
+    repeated DocumentSnapshot snapshots = 16;
+}
+
+message FileEmbeddings {
+    option (gorm.opts) = {
+        ormable: true
+        table: "file_embeddings"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    repeated float embeddings = 3;
+    string model_version = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+}
+
+message FileVersion {
+    option (gorm.opts) = {
+        ormable: true
+        table: "file_versions"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 file_id = 2;
+    int32 version_number = 3;
+    string s3_key = 4;
+    int64 size = 5;
+    string commit_message = 6;
+    string author_id = 7;
+    google.protobuf.Timestamp created_at = 8;
+}
+
+message CommentThread {
+    option (gorm.opts) = {
+        ormable: true
+        table: "comment_threads"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string author_id = 3;
+    string content = 4;
+    int32 start_position = 5;
+    int32 end_position = 6;
+    bool resolved = 7;
+    google.protobuf.Timestamp created_at = 8;
+    google.protobuf.Timestamp updated_at = 9;
+}
+
+message FileSharing {
+    option (gorm.opts) = {
+        ormable: true
+        table: "file_sharings"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string shared_with_email = 3;
+    string permission_level = 4;
+    google.protobuf.Timestamp expires_at = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+}
+
+// Document management entities
+message DocumentTemplate {
+    option (gorm.opts) = {
+        ormable: true
+        table: "document_templates"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string name = 2;
+    string description = 3;
+    string industry_type = 4;
+    string document_type = 5;
+    string base_content = 6;
+    bool is_adaptive = 7;
+    map<string, string> metadata = 8;
+    repeated string supported_languages = 9;
+    repeated string required_data_fields = 10;
+    string version = 11;
+    google.protobuf.Timestamp created_at = 13;
+    google.protobuf.Timestamp updated_at = 14;
+
+    TemplateType template_type = 15;
+    string content = 16;
+    repeated string detected_variables = 17;
+    map<string, string> variable_mappings = 18;
+    bool is_context_aware = 19;
+    repeated string supported_contexts = 20;
+    map<string, string> formatting_rules = 21;
+    repeated string conditional_sections = 22;
+
+    // Relationships
+    repeated TemplateVersion versions = 23 [(gorm.field).has_many = {}];
+    repeated TemplateVariable variables = 24 [(gorm.field).has_many = {}];
+    repeated DocumentInstance instances = 25 [(gorm.field).has_many = {}];
+    repeated ExplanationBlock explanations = 26 [(gorm.field).has_many = {}];
+    repeated ContractIntelligence intelligence = 27 [(gorm.field).has_many = {}];
+}
+
+message TemplateVariable {
+    option (gorm.opts) = {
+        ormable: true
+        table: "template_variables"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string name = 2;
+    string description = 3;
+    string variable_type = 4;
+    string default_value = 5;
+    bool is_required = 6;
+    string validation_rules = 7;
+    string data_source = 8;
+    string ai_extraction_rules = 9;
+    repeated string alternatives = 10;
+    uint64 template_id = 11;
+}
+
+message DocumentInstance {
+    option (gorm.opts) = {
+        ormable: true
+        table: "document_instances"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 template_id = 2;
+    DocumentStatus status = 3;
+    map<string, string> field_values = 4;
+    repeated string signers = 5;
+    string language = 6;
+    bool is_completed = 7;
+    google.protobuf.Timestamp due_date = 8;
+    string generated_content = 9;
+    repeated string attachments = 10;
+    google.protobuf.Timestamp created_at = 11;
+    google.protobuf.Timestamp updated_at = 12;
+
+    // Relationships
+    repeated SignatureRequest signature_requests = 13 [(gorm.field).has_many = {}];
+    repeated AIAssistanceLog ai_assistance = 14 [(gorm.field).has_many = {}];
+    NegotiationHistory negotiation = 15 [(gorm.field).has_one = {}];
+    repeated DocumentVersion versions = 16 [(gorm.field).has_many = {}];
+}
+
+// Version control entities
+message DocumentVersion {
+    option (gorm.opts) = {
+        ormable: true
+        table: "document_versions"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string version_hash = 2;
+    string parent_hash = 3;
+    string commit_message = 4;
+    string author_id = 5;
+    string branch_name = 6;
+    map<string, string> metadata = 7;
+    repeated string tags = 8;
+    bool is_approved = 9;
+    string approval_chain = 10;
+    google.protobuf.Timestamp created_at = 11;
+
+    // Relationships
+    repeated DocumentBranch branches = 12 [(gorm.field).has_many = {}];
+    repeated ChangeSet changes = 13 [(gorm.field).has_many = {}];
+    repeated ContextualSummary summaries = 14 [(gorm.field).has_many = {}];
+}
+
+message DocumentBranch {
+    option (gorm.opts) = {
+        ormable: true
+        table: "document_branches"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string name = 2;
+    string base_version_hash = 3;
+    string current_head_hash = 4;
+    string purpose = 5;
+    string status = 6;
+    repeated string reviewers = 7;
+    map<string, string> branch_metadata = 8;
+    bool is_locked = 9;
+    google.protobuf.Timestamp last_updated = 10;
+
+    // Relationships
+    repeated BranchMerge merges = 11 [(gorm.field).has_many = {}];
+    BranchPolicy policy = 12 [(gorm.field).has_one = {}];
+    repeated MergeRequest merge_requests = 13 [(gorm.field).has_many = {}];
+}
+
+// E-Signature entities
+message SignatureRequest {
+    option (gorm.opts) = {
+        ormable: true
+        table: "signature_requests"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    SignatureStatus status = 2;
+    string signer_email = 3;
+    string signer_name = 4;
+    string role = 5;
+    string authentication_method = 6;
+    google.protobuf.Timestamp expires_at = 7;
+    bool requires_mfa = 8;
+    string signature_type = 9;
+    repeated string reminder_schedule = 10;
+    uint64 document_id = 11;
+
+    // Relationships
+    repeated SignatureBlock signature_blocks = 12 [(gorm.field).has_many = {}];
+    SignatureWorkflow workflow = 13 [(gorm.field).has_one = {}];
+}
+
+// AI and Analytics entities
+message ContractIntelligence {
+    option (gorm.opts) = {
+        ormable: true
+        table: "contract_intelligence"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string contract_type = 2;
+    map<string, float> risk_scores = 3;
+    map<string, string> detected_clauses = 4;
+    repeated string key_obligations = 5;
+    map<string, float> compliance_scores = 6;
+    string jurisdiction = 7;
+    repeated string governing_laws = 8;
+    map<string, string> semantic_analysis = 9;
+    google.protobuf.Timestamp analysis_date = 10;
+
+    // Relationships
+    repeated RiskAssessment risk_assessments = 11 [(gorm.field).has_many = {}];
+    repeated ComplianceCheck compliance_checks = 12 [(gorm.field).has_many = {}];
+}
+
+// App Marketplace entities
+message MarketplaceApp {
+    option (gorm.opts) = {
+        ormable: true
+        table: "marketplace_apps"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string name = 2;
+    string description = 3;
+    string developer_id = 4;
+    AppCategory category = 5;
+    repeated string supported_contract_types = 6;
+    repeated string features = 7;
+    PricingModel pricing_model = 8;
+    map<string, float> pricing_tiers = 9;
+    repeated string supported_integrations = 10;
+    bool is_verified = 11;
+    float rating = 12;
+    int32 installation_count = 13;
+    repeated string required_permissions = 14;
+    map<string, string> metadata = 15;
+    string documentation_url = 16;
+    string support_email = 17;
+    repeated string screenshots = 18;
+    string privacy_policy_url = 19;
+    string terms_url = 20;
+    google.protobuf.Timestamp published_at = 21;
+    google.protobuf.Timestamp last_updated = 22;
+
+    // Relationships
+    repeated AppVersion versions = 23 [(gorm.field).has_many = {}];
+    repeated AppInstallation installations = 24 [(gorm.field).has_many = {}];
+    repeated AppAnalytics analytics = 25 [(gorm.field).has_many = {}];
+    repeated AppReview reviews = 26 [(gorm.field).has_many = {}];
+    AppDevelopmentInfo info = 27 [(gorm.field).has_one = {}];
+    repeated AppWebhook webhooks = 28 [(gorm.field).has_many = {}];
+    repeated AppPermission permissions = 29 [(gorm.field).has_many = {}];
+}
+
+message DocumentSnapshot {
+    option (gorm.opts) = {
+        ormable: true
+        table: "document_snapshots"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 file_id = 2;
+    string snapshot_hash = 3;
+    bytes content = 4;
+    string author_id = 5;
+    string reason = 6;
+    google.protobuf.Timestamp created_at = 7;
+}
+
+message TemplateVersion {
+    option (gorm.opts) = {
+        ormable: true
+        table: "template_versions"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 template_id = 2;
+    string version = 3;
+    string base_content = 4;
+    map<string, string> metadata = 5;
+    string author_id = 6;
+    string change_description = 7;
+    google.protobuf.Timestamp created_at = 8;
+}
+
+message ExplanationBlock {
+    option (gorm.opts) = {
+        ormable: true
+        table: "explanation_blocks"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 template_id = 2;
+    string section_identifier = 3;
+    string explanation_text = 4;
+    string complexity_level = 5;
+    repeated string related_terms = 6;
+    repeated string legal_references = 7;
+    google.protobuf.Timestamp created_at = 8;
+    google.protobuf.Timestamp updated_at = 9;
+}
+
+message AIAssistanceLog {
+    option (gorm.opts) = {
+        ormable: true
+        table: "ai_assistance_logs"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 document_id = 2;
+    string interaction_type = 3;
+    string user_query = 4;
+    string ai_response = 5;
+    map<string, string> context = 6;
+    google.protobuf.Timestamp created_at = 7;
+}
+
+message NegotiationHistory {
+    option (gorm.opts) = {
+        ormable: true
+        table: "negotiation_histories"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 document_id = 2;
+    repeated NegotiationRound rounds = 3 [(gorm.field).has_many = {}];
+    string current_status = 4;
+    google.protobuf.Timestamp started_at = 5;
+    google.protobuf.Timestamp last_updated = 6;
+}
+
+message NegotiationRound {
+    option (gorm.opts) = {
+        ormable: true
+        table: "negotiation_rounds"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 history_id = 2;
+    int32 round_number = 3;
+    string proposer_id = 4;
+    string proposal_content = 5;
+    string response_content = 6;
+    string status = 7;
+    google.protobuf.Timestamp created_at = 8;
+}
+
+message ChangeSet {
+    option (gorm.opts) = {
+        ormable: true
+        table: "change_sets"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 version_id = 2;
+    string change_type = 3;
+    string content_before = 4;
+    string content_after = 5;
+    map<string, string> metadata = 6;
+    google.protobuf.Timestamp created_at = 7;
+}
+
+message ContextualSummary {
+    option (gorm.opts) = {
+        ormable: true
+        table: "contextual_summaries"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 version_id = 2;
+    string summary_type = 3;
+    string content = 4;
+    string target_audience = 5;
+    repeated string key_points = 6;
+    map<string, string> metadata = 7;
+    google.protobuf.Timestamp created_at = 8;
+}
+
+message BranchMerge {
+    option (gorm.opts) = {
+        ormable: true
+        table: "branch_merges"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 branch_id = 2;
+    string source_branch = 3;
+    string target_branch = 4;
+    string merge_status = 5;
+    string merge_strategy = 6;
+    repeated string conflicts = 7;
+    string merger_id = 8;
+    google.protobuf.Timestamp created_at = 9;
+    google.protobuf.Timestamp completed_at = 10;
+}
+
+message SignatureBlock {
+    option (gorm.opts) = {
+        ormable: true
+        table: "signature_blocks"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 request_id = 2;
+    string block_type = 3;
+    int32 page_number = 4;
+    float x_position = 5;
+    float y_position = 6;
+    float width = 7;
+    float height = 8;
+    bool is_required = 9;
+    string signature_data = 10;
+    google.protobuf.Timestamp signed_at = 11;
+}
+
+message SignatureWorkflow {
+    option (gorm.opts) = {
+        ormable: true
+        table: "signature_workflows"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 request_id = 2;
+    repeated string signing_order = 3;
+    string current_signer = 4;
+    string workflow_status = 5;
+    bool parallel_signing = 6;
+    bool require_all_signatures = 7;
+    google.protobuf.Timestamp deadline = 8;
+    google.protobuf.Timestamp created_at = 9;
+    google.protobuf.Timestamp updated_at = 10;
+}
+
+message RiskAssessment {
+    option (gorm.opts) = {
+        ormable: true
+        table: "risk_assessments"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 intelligence_id = 2;
+    string risk_type = 3;
+    float risk_score = 4;
+    string assessment_details = 5;
+    repeated string mitigation_suggestions = 6;
+    string assessor_id = 7;
+    google.protobuf.Timestamp created_at = 8;
+}
+
+message ComplianceCheck {
+    option (gorm.opts) = {
+        ormable: true
+        table: "compliance_checks"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 intelligence_id = 2;
+    string compliance_standard = 3;
+    string check_result = 4;
+    repeated string violations = 5;
+    string remediation_steps = 6;
+    google.protobuf.Timestamp check_date = 7;
+}
+
+message AppVersion {
+    option (gorm.opts) = {
+        ormable: true
+        table: "app_versions"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 app_id = 2;
+    string version_number = 3;
+    string changelog = 4;
+    map<string, string> requirements = 5;
+    bool is_public = 6;
+    google.protobuf.Timestamp release_date = 7;
+}
+
+message AppInstallation {
+    option (gorm.opts) = {
+        ormable: true
+        table: "app_installations"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 app_id = 2;
+    uint64 workspace_id = 3;
+    string version_installed = 4;
+    map<string, string> configuration = 5;
+    string installation_status = 6;
+    google.protobuf.Timestamp installed_at = 7;
+    google.protobuf.Timestamp last_used = 8;
+}
+
+message AppAnalytics {
+    option (gorm.opts) = {
+        ormable: true
+        table: "app_analytics"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 app_id = 2;
+    string metric_name = 3;
+    float metric_value = 4;
+    map<string, string> dimensions = 5;
+    google.protobuf.Timestamp recorded_at = 6;
+}
+
+message AppReview {
+    option (gorm.opts) = {
+        ormable: true
+        table: "app_reviews"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 app_id = 2;
+    string reviewer_id = 3;
+    float rating = 4;
+    string review_text = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+}
+
+message AppDevelopmentInfo {
+    option (gorm.opts) = {
+        ormable: true
+        table: "app_development_info"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 app_id = 2;
+    repeated string supported_languages = 3;
+    repeated string sdk_features = 4;
+    map<string, float> test_coverage = 5;
+    repeated string security_scans = 6;
+    map<string, string> performance_metrics = 7;
+    string development_status = 8;
+    repeated string known_issues = 9;
+    string roadmap_url = 10;
+    google.protobuf.Timestamp last_security_audit = 11;
+    google.protobuf.Timestamp created_at = 12;
+    google.protobuf.Timestamp updated_at = 13;
+}
+
+message AppWebhook {
+    option (gorm.opts) = {
+        ormable: true
+        table: "app_webhooks"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 app_id = 2;
+    string url = 3;
+    repeated string subscribed_events = 4;
+    string secret_key = 5;
+    int32 retry_count = 6;
+    int32 timeout_seconds = 7;
+    bool is_active = 8;
+    map<string, string> headers = 9;
+    google.protobuf.Timestamp last_triggered = 10;
+    google.protobuf.Timestamp created_at = 11;
+}
+
+message AppPermission {
+    option (gorm.opts) = {
+        ormable: true
+        table: "app_permissions"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 app_id = 2;
+    string scope = 3;
+    string description = 4;
+    bool is_required = 5;
+    repeated string access_levels = 6;
+    map<string, string> constraints = 7;
+    bool requires_approval = 8;
+    google.protobuf.Timestamp created_at = 9;
+    google.protobuf.Timestamp updated_at = 10;
+}
+
+// Enhanced version control entities
+message BranchPolicy {
+    option (gorm.opts) = {
+        ormable: true
+        table: "branch_policies"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 branch_id = 2;
+    repeated string required_approvers = 3;
+    int32 minimum_approvals = 4;
+    bool enforce_linear_history = 5;
+    bool allow_force_push = 6;
+    repeated string protected_paths = 7;
+    map<string, string> merge_rules = 8;
+    repeated string automated_checks = 9;
+    google.protobuf.Timestamp created_at = 10;
+    google.protobuf.Timestamp updated_at = 11;
+}
+
+message MergeRequest {
+    option (gorm.opts) = {
+        ormable: true
+        table: "merge_requests"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 source_branch_id = 2;
+    uint64 target_branch_id = 3;
+    string title = 4;
+    string description = 5;
+    string author_id = 6;
+    repeated string reviewers = 7;
+    string status = 8;
+    repeated string labels = 9;
+    bool has_conflicts = 10;
+    repeated string automated_check_results = 11;
+    google.protobuf.Timestamp created_at = 12;
+    google.protobuf.Timestamp updated_at = 13;
+}

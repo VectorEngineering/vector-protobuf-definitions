@@ -15,10 +15,8 @@ type Account {
   orgId: String!
   tenantId: String!
   email: String!
-  lastModifiedAt: String!
   deletedAt: String!
   createdAt: String!
-  scrapingJobs: [ScrapingJob!]
   accountStatus: AccountStatus
   roles: [String!!]
   permissions: [String!!]
@@ -38,10 +36,8 @@ input AccountInput {
     orgId: String!
     tenantId: String!
     email: String!
-    lastModifiedAt: String!
     deletedAt: String!
     createdAt: String!
-    scrapingJobs: [ScrapingJobInput]
     accountStatus: AccountStatus
     roles: [String!]
     permissions: [String!]

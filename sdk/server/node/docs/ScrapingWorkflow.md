@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **cronExpression** | **String!** |  | [optional] [default to null]
 **nextRunTime** | **String!** |  | [optional] [default to null]
 **lastRunTime** | **String!** |  | [optional] [default to null]
-**status** | [***BackgroundJobStatus**](BackgroundJobStatus.md) |  | [optional] [default to null]
+**status** | [***WorkflowStatus**](WorkflowStatus.md) |  | [optional] [default to null]
 **retryCount** | **Int!** |  | [optional] [default to null]
 **maxRetries** | **Int!** |  | [optional] [default to null]
 **alertEmails** | **String!** |  | [optional] [default to null]

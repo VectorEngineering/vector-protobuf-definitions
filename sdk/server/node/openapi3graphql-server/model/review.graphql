@@ -17,6 +17,9 @@ type Review {
   language: String!
   profilePhotoUrl: String!
   reviewCount: Int!
+  createdAt: String!
+  updatedAt: String!
+  deletedAt: String!
 }
 
 input ReviewInput {
@@ -28,5 +31,8 @@ input ReviewInput {
     language: String!
     profilePhotoUrl: String!
     reviewCount: Int!
+    createdAt: String!
+    updatedAt: String!
+    deletedAt: String!
 }
 

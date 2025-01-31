@@ -10,6 +10,7 @@ import org.openapitools.model.NotFoundErrorCode;
 import org.openapitools.model.OutputFormat;
 import org.openapitools.model.RevenueRange;
 import org.openapitools.model.ValidationErrorCode;
+import org.openapitools.model.WorkflowStatus;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -105,6 +106,15 @@ public class EnumConverterConfiguration {
             @Override
             public ValidationErrorCode convert(String source) {
                 return ValidationErrorCode.fromValue(source);
+            }
+        };
+    }
+    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.workflowStatusConverter")
+    Converter<String, WorkflowStatus> workflowStatusConverter() {
+        return new Converter<String, WorkflowStatus>() {
+            @Override
+            public WorkflowStatus convert(String source) {
+                return WorkflowStatus.fromValue(source);
             }
         };
     }

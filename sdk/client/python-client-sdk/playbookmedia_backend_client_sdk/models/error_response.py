@@ -20,7 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
-from playbookmedia_backend_client_sdk.models.status import Status
+from playbookmedia_backend_client_sdk.models.rpc_status import RpcStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +28,7 @@ class ErrorResponse(BaseModel):
     """
     ErrorResponse
     """ # noqa: E501
-    status: Optional[Status] = None
+    status: Optional[RpcStatus] = None
     __properties: ClassVar[List[str]] = ["status"]
 
     model_config = ConfigDict(
@@ -85,7 +85,7 @@ class ErrorResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "status": Status.from_dict(obj["status"]) if obj.get("status") is not None else None
+            "status": RpcStatus.from_dict(obj["status"]) if obj.get("status") is not None else None
         })
         return _obj
 

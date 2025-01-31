@@ -1,15 +1,18 @@
 # ScrapingJob
 
-ScrapingJob represents a Google Maps scraping task. This message defines both the configuration and current state of a scraping operation.  Key components: - Basic metadata (id, name, timestamps) - Job status tracking - Search configuration parameters - Geographic settings - Performance options - Multi-tenant context  Database considerations: - Stored in \"scraping_jobs\" table - Uses GORM for ORM mapping - Includes foreign key to Account - Supports soft deletes  Usage example: ```go job := &ScrapingJob{     Name: \"Athens Cafes\",     Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,     Keywords: []string{\"cafe\", \"coffee\"},     Lang: \"el\",     Zoom: 15,     FastMode: true,     MaxTime: 3600, } ```
+ScrapingJob represents a Google Maps scraping task. This message defines both the configuration and current state of a scraping operation.  Key components: - Basic metadata (id, name, timestamps) - Job status tracking - Search configuration parameters - Geographic settings - Performance options - Multi-tenant context  Database considerations: - Stored in \"gmaps_jobs\" table - Uses GORM for ORM mapping - Includes foreign key to Account - Supports soft deletes  Usage example: ```go job := &ScrapingJob{     Name: \"Athens Cafes\",     Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,     Keywords: []string{\"cafe\", \"coffee\"},     Lang: \"el\",     Zoom: 15,     FastMode: true,     MaxTime: 3600, } ```
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** |  | [optional] 
-**name** | **str** |  | [optional] 
+**priority** | **int** |  | [optional] 
+**payload_type** | **str** |  | [optional] 
+**payload** | **bytearray** |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
 **status** | [**BackgroundJobStatus**](BackgroundJobStatus.md) |  | [optional] [default to BackgroundJobStatus.UNSPECIFIED]
+**name** | **str** |  | [optional] 
 **keywords** | **List[str]** |  | [optional] 
 **lang** | **str** |  | [optional] 
 **zoom** | **int** |  | [optional] 
@@ -23,11 +26,7 @@ Name | Type | Description | Notes
 **proxies** | **List[str]** |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 
 **deleted_at** | **datetime** |  | [optional] 
-**payload_type** | **str** |  | [optional] 
-**priority** | **int** |  | [optional] 
-**payload** | **bytearray** |  | [optional] 
 **leads** | [**List[Lead]**](Lead.md) |  | [optional] 
-**workflow_id** | **str** |  | [optional] 
 
 ## Example
 

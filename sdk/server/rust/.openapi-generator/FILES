@@ -73,13 +73,13 @@ docs/ResourceUtilization.md
 docs/ResourceValidation.md
 docs/RevenueRange.md
 docs/Review.md
+docs/RpcPeriodStatus.md
 docs/SchemaValidation.md
 docs/ScrapingJob.md
 docs/ScrapingWorkflow.md
 docs/ServiceStatus.md
 docs/ServiceUnavailableErrorMessageResponse.md
 docs/SessionInfo.md
-docs/Status.md
 docs/Suggestions.md
 docs/TokenInfo.md
 docs/TooEarlyErrorMessageResponse.md
@@ -96,6 +96,7 @@ docs/UpdateWorkspaceRequest.md
 docs/UpdateWorkspaceResponse.md
 docs/ValidationErrorCode.md
 docs/ValidationErrorMessageResponse.md
+docs/WorkflowStatus.md
 docs/Workspace.md
 docs/lead_scraper_service_api.md
 examples/ca.pem

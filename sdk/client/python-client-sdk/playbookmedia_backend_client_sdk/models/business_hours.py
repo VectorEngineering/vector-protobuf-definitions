@@ -18,6 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from playbookmedia_backend_client_sdk.models.day_of_week import DayOfWeek
@@ -33,8 +34,10 @@ class BusinessHours(BaseModel):
     open_time: Optional[StrictStr] = Field(default=None, alias="openTime")
     close_time: Optional[StrictStr] = Field(default=None, alias="closeTime")
     closed: Optional[StrictBool] = None
-    lead_id: Optional[StrictStr] = Field(default=None, alias="leadId")
-    __properties: ClassVar[List[str]] = ["id", "day", "openTime", "closeTime", "closed", "leadId"]
+    created_at: Optional[datetime] = Field(default=None, alias="createdAt")
+    updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
+    deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
+    __properties: ClassVar[List[str]] = ["id", "day", "openTime", "closeTime", "closed", "createdAt", "updatedAt", "deletedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -92,7 +95,9 @@ class BusinessHours(BaseModel):
             "openTime": obj.get("openTime"),
             "closeTime": obj.get("closeTime"),
             "closed": obj.get("closed"),
-            "leadId": obj.get("leadId")
+            "createdAt": obj.get("createdAt"),
+            "updatedAt": obj.get("updatedAt"),
+            "deletedAt": obj.get("deletedAt")
         })
         return _obj
 

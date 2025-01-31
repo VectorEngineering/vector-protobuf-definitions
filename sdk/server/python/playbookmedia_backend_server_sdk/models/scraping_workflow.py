@@ -3,15 +3,15 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from playbookmedia_backend_server_sdk.models.base_model import Model
-from playbookmedia_backend_server_sdk.models.background_job_status import BackgroundJobStatus
 from playbookmedia_backend_server_sdk.models.output_format import OutputFormat
 from playbookmedia_backend_server_sdk.models.scraping_job import ScrapingJob
+from playbookmedia_backend_server_sdk.models.workflow_status import WorkflowStatus
 from playbookmedia_backend_server_sdk.models.workspace import Workspace
 from playbookmedia_backend_server_sdk import util
 
-from playbookmedia_backend_server_sdk.models.background_job_status import BackgroundJobStatus  # noqa: E501
 from playbookmedia_backend_server_sdk.models.output_format import OutputFormat  # noqa: E501
 from playbookmedia_backend_server_sdk.models.scraping_job import ScrapingJob  # noqa: E501
+from playbookmedia_backend_server_sdk.models.workflow_status import WorkflowStatus  # noqa: E501
 from playbookmedia_backend_server_sdk.models.workspace import Workspace  # noqa: E501
 
 class ScrapingWorkflow(Model):
@@ -20,7 +20,7 @@ class ScrapingWorkflow(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, cron_expression=None, next_run_time=None, last_run_time=None, status=BackgroundJobStatus.UNSPECIFIED, retry_count=None, max_retries=None, alert_emails=None, org_id=None, tenant_id=None, created_at=None, updated_at=None, deleted_at=None, jobs=None, workspace=None, geo_fencing_radius=None, geo_fencing_lat=None, geo_fencing_lon=None, geo_fencing_zoom_min=None, geo_fencing_zoom_max=None, include_reviews=None, include_photos=None, include_business_hours=None, max_reviews_per_business=None, output_format=OutputFormat.UNSPECIFIED, output_destination=None, data_retention=None, anonymize_pii=None, notification_webhook_url=None, notification_slack_channel=None, notification_email_group=None, notification_notify_on_start=None, notification_notify_on_complete=None, notification_notify_on_failure=None, content_filter_allowed_countries=None, content_filter_excluded_types=None, content_filter_minimum_rating=None, content_filter_minimum_reviews=None, qos_max_concurrent_requests=None, qos_max_retries=None, qos_request_timeout=None, qos_enable_javascript=None, respect_robots_txt=None, accept_terms_of_service=None, user_agent=None):  # noqa: E501
+    def __init__(self, id=None, cron_expression=None, next_run_time=None, last_run_time=None, status=WorkflowStatus.UNSPECIFIED, retry_count=None, max_retries=None, alert_emails=None, org_id=None, tenant_id=None, created_at=None, updated_at=None, deleted_at=None, jobs=None, workspace=None, geo_fencing_radius=None, geo_fencing_lat=None, geo_fencing_lon=None, geo_fencing_zoom_min=None, geo_fencing_zoom_max=None, include_reviews=None, include_photos=None, include_business_hours=None, max_reviews_per_business=None, output_format=OutputFormat.UNSPECIFIED, output_destination=None, data_retention=None, anonymize_pii=None, notification_webhook_url=None, notification_slack_channel=None, notification_email_group=None, notification_notify_on_start=None, notification_notify_on_complete=None, notification_notify_on_failure=None, content_filter_allowed_countries=None, content_filter_excluded_types=None, content_filter_minimum_rating=None, content_filter_minimum_reviews=None, qos_max_concurrent_requests=None, qos_max_retries=None, qos_request_timeout=None, qos_enable_javascript=None, respect_robots_txt=None, accept_terms_of_service=None, user_agent=None):  # noqa: E501
         """ScrapingWorkflow - a model defined in OpenAPI
 
         :param id: The id of this ScrapingWorkflow.  # noqa: E501
@@ -32,7 +32,7 @@ class ScrapingWorkflow(Model):
         :param last_run_time: The last_run_time of this ScrapingWorkflow.  # noqa: E501
         :type last_run_time: datetime
         :param status: The status of this ScrapingWorkflow.  # noqa: E501
-        :type status: BackgroundJobStatus
+        :type status: WorkflowStatus
         :param retry_count: The retry_count of this ScrapingWorkflow.  # noqa: E501
         :type retry_count: int
         :param max_retries: The max_retries of this ScrapingWorkflow.  # noqa: E501
@@ -119,7 +119,7 @@ class ScrapingWorkflow(Model):
             'cron_expression': str,
             'next_run_time': datetime,
             'last_run_time': datetime,
-            'status': BackgroundJobStatus,
+            'status': WorkflowStatus,
             'retry_count': int,
             'max_retries': int,
             'alert_emails': str,
@@ -352,22 +352,22 @@ class ScrapingWorkflow(Model):
         self._last_run_time = last_run_time
 
     @property
-    def status(self) -> BackgroundJobStatus:
+    def status(self) -> WorkflowStatus:
         """Gets the status of this ScrapingWorkflow.
 
 
         :return: The status of this ScrapingWorkflow.
-        :rtype: BackgroundJobStatus
+        :rtype: WorkflowStatus
         """
         return self._status
 
     @status.setter
-    def status(self, status: BackgroundJobStatus):
+    def status(self, status: WorkflowStatus):
         """Sets the status of this ScrapingWorkflow.
 
 
         :param status: The status of this ScrapingWorkflow.
-        :type status: BackgroundJobStatus
+        :type status: WorkflowStatus
         """
 
         self._status = status

@@ -1,0 +1,426 @@
+syntax = "proto3";
+
+package workspace_service.v1;
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "workspace_service/v1/request_response.proto";
+
+option go_package = "github.com/VectorEngineering/vector-protobuf-definitions/api-definitions/pkg/generated/workspace_service/v1";
+
+/**
+ * WorkspaceService provides functionality for managing workspaces, accounts, and documents.
+ * This service enables organizations to manage their digital workspace environment with
+ * features like document management, collaboration, and compliance tracking.
+ *
+ * Key features:
+ * - Account and workspace management
+ * - Document handling and version control
+ * - Smart contract management
+ * - E-signature workflows
+ * - Compliance and analytics
+ * - Marketplace integration
+ */
+service WorkspaceService {
+    // Account Management
+    rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {
+        option (google.api.http) = {
+            post: "/v1/accounts"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a new account"
+            tags: ["Account Management"]
+            operation_id: "CreateAccount"
+            description: "Creates a new user account with initial workspace"
+            responses: {
+                key: "201"
+                value: {
+                    description: "Account created successfully"
+                    schema: {
+                        json_schema: { ref: ".workspace_service.v1.CreateAccountResponse" }
+                    }
+                    examples: {
+                        value: '{"account":{"id":"123","auth0_user_id":"auth0|123","email":"user@example.com","base_directory":"/users/123","region":"us-east-1","org_id":"456","tenant_id":"789","roles":["user"],"permissions":["read:workspace","write:workspace"],"mfa_enabled":true,"compliance_level":"COMPLIANCE_LEVEL_BASIC"},"initial_workspace_name":"My Workspace"}'
+                    }
+                }
+            }
+        };
+    }
+
+    rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {
+        option (google.api.http) = {
+            get: "/v1/accounts/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get account details"
+            tags: ["Account Management"]
+            operation_id: "GetAccount"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Account details retrieved successfully"
+                    schema: {
+                        json_schema: { ref: ".workspace_service.v1.GetAccountResponse" }
+                    }
+                    examples: {
+                        value: '{"account":{"id":"123","auth0_user_id":"auth0|123","email":"user@example.com","base_directory":"/users/123","region":"us-east-1","org_id":"456","tenant_id":"789","roles":["user"],"permissions":["read:workspace","write:workspace"],"mfa_enabled":true,"compliance_level":"COMPLIANCE_LEVEL_BASIC"}}'
+                    }
+                }
+            }
+        };
+    }
+
+    rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse) {
+        option (google.api.http) = {
+            put: "/v1/accounts"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Update account details"
+            tags: ["Account Management"]
+            operation_id: "UpdateAccount"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Account updated successfully"
+                    schema: {
+                        json_schema: { ref: ".workspace_service.v1.UpdateAccountResponse" }
+                    }
+                    examples: {
+                        value: '{"account":{"id":"123","auth0_user_id":"auth0|123","email":"updated@example.com","base_directory":"/users/123","region":"us-east-1","org_id":"456","tenant_id":"789","roles":["user","admin"],"permissions":["read:workspace","write:workspace","manage:workspace"],"mfa_enabled":true,"compliance_level":"COMPLIANCE_LEVEL_ADVANCED"}}'
+                    }
+                }
+            }
+        };
+    }
+
+    rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse) {
+        option (google.api.http) = {
+            delete: "/v1/accounts/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete account"
+            tags: ["Account Management"]
+            operation_id: "DeleteAccount"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Account deleted successfully"
+                    schema: {
+                        json_schema: { ref: ".workspace_service.v1.DeleteAccountResponse" }
+                    }
+                    examples: {
+                        value: '{"success":true}'
+                    }
+                }
+            }
+        };
+    }
+
+    rpc ListAccounts(ListAccountsRequest) returns (ListAccountsResponse) {
+        option (google.api.http) = {
+            get: "/v1/accounts"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "List accounts"
+            tags: ["Account Management"]
+            operation_id: "ListAccounts"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Accounts retrieved successfully"
+                    schema: {
+                        json_schema: { ref: ".workspace_service.v1.ListAccountsResponse" }
+                    }
+                    examples: {
+                        value: '{"accounts":[{"id":"123","email":"user1@example.com"},{"id":"124","email":"user2@example.com"}],"next_page_token":"token123","total_size":50}'
+                    }
+                }
+            }
+        };
+    }
+
+    // Workspace Management
+    rpc CreateWorkspace(CreateWorkspaceRequest) returns (CreateWorkspaceResponse) {
+        option (google.api.http) = {
+            post: "/v1/workspaces"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create workspace"
+            tags: ["Workspace Management"]
+            operation_id: "CreateWorkspace"
+            responses: {
+                key: "201"
+                value: {
+                    description: "Workspace created successfully"
+                    schema: {
+                        json_schema: { ref: ".workspace_service.v1.CreateWorkspaceResponse" }
+                    }
+                    examples: {
+                        value: '{"workspace":{"id":"789","name":"Project X","storage_quota":1073741824,"allow_public_sharing":false,"require_approval":true,"gdpr_compliant":true,"hipaa_compliant":false}}'
+                    }
+                }
+            }
+        };
+    }
+
+    rpc GetWorkspace(GetWorkspaceRequest) returns (GetWorkspaceResponse) {
+        option (google.api.http) = {
+            get: "/v1/workspaces/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get workspace details"
+            tags: ["Workspace Management"]
+            operation_id: "GetWorkspace"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workspace retrieved successfully"
+                    schema: {
+                        json_schema: { ref: ".workspace_service.v1.GetWorkspaceResponse" }
+                    }
+                    examples: {
+                        value: '{"workspace":{"id":"789","name":"Project X","storage_quota":1073741824,"used_storage":52428800,"allow_public_sharing":false,"require_approval":true,"gdpr_compliant":true,"hipaa_compliant":false}}'
+                    }
+                }
+            }
+        };
+    }
+
+    rpc UpdateWorkspace(UpdateWorkspaceRequest) returns (UpdateWorkspaceResponse) {
+        option (google.api.http) = {
+            put: "/v1/workspaces"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Update workspace"
+            tags: ["Workspace Management"]
+            operation_id: "UpdateWorkspace"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workspace updated successfully"
+                    schema: {
+                        json_schema: { ref: ".workspace_service.v1.UpdateWorkspaceResponse" }
+                    }
+                    examples: {
+                        value: '{"workspace":{"id":"789","name":"Project X - Updated","storage_quota":2147483648,"allow_public_sharing":true,"require_approval":true,"gdpr_compliant":true,"hipaa_compliant":true}}'
+                    }
+                }
+            }
+        };
+    }
+
+    rpc DeleteWorkspace(DeleteWorkspaceRequest) returns (DeleteWorkspaceResponse) {
+        option (google.api.http) = {
+            delete: "/v1/workspaces/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete workspace"
+            tags: ["Workspace Management"]
+            operation_id: "DeleteWorkspace"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workspace deleted successfully"
+                    schema: {
+                        json_schema: { ref: ".workspace_service.v1.DeleteWorkspaceResponse" }
+                    }
+                    examples: {
+                        value: '{"success":true}'
+                    }
+                }
+            }
+        };
+    }
+
+    rpc ListWorkspaces(ListWorkspacesRequest) returns (ListWorkspacesResponse) {
+        option (google.api.http) = {
+            get: "/v1/workspaces"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "List workspaces"
+            tags: ["Workspace Management"]
+            operation_id: "ListWorkspaces"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workspaces retrieved successfully"
+                    schema: {
+                        json_schema: { ref: ".workspace_service.v1.ListWorkspacesResponse" }
+                    }
+                    examples: {
+                        value: '{"workspaces":[{"id":"789","name":"Project X"},{"id":"790","name":"Project Y"}],"next_page_token":"token456","total_size":25}'
+                    }
+                }
+            }
+        };
+    }
+
+    // Workspace Sharing
+    rpc ShareWorkspace(ShareWorkspaceRequest) returns (ShareWorkspaceResponse) {
+        option (google.api.http) = {
+            post: "/v1/workspaces/{workspace_id}/share"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Share workspace"
+            tags: ["Workspace Sharing"]
+            operation_id: "ShareWorkspace"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workspace shared successfully"
+                    schema: {
+                        json_schema: { ref: ".workspace_service.v1.ShareWorkspaceResponse" }
+                    }
+                    examples: {
+                        value: '{"sharing":{"id":"456","shared_with_email":"collaborator@example.com","permission_level":"editor","expires_at":"2024-12-31T23:59:59Z"}}'
+                    }
+                }
+            }
+        };
+    }
+
+    rpc UpdateWorkspaceSharing(UpdateWorkspaceSharingRequest) returns (UpdateWorkspaceSharingResponse) {
+        option (google.api.http) = {
+            put: "/v1/workspace-sharings"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Update workspace sharing"
+            tags: ["Workspace Sharing"]
+            operation_id: "UpdateWorkspaceSharing"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workspace sharing updated successfully"
+                    schema: {
+                        json_schema: { ref: ".workspace_service.v1.UpdateWorkspaceSharingResponse" }
+                    }
+                    examples: {
+                        value: '{"sharing":{"id":"456","shared_with_email":"collaborator@example.com","permission_level":"admin","expires_at":"2025-12-31T23:59:59Z"}}'
+                    }
+                }
+            }
+        };
+    }
+
+    rpc RemoveWorkspaceSharing(RemoveWorkspaceSharingRequest) returns (RemoveWorkspaceSharingResponse) {
+        option (google.api.http) = {
+            delete: "/v1/workspace-sharings/{sharing_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Remove workspace sharing"
+            tags: ["Workspace Sharing"]
+            operation_id: "RemoveWorkspaceSharing"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workspace sharing removed successfully"
+                    schema: {
+                        json_schema: { ref: ".workspace_service.v1.RemoveWorkspaceSharingResponse" }
+                    }
+                    examples: {
+                        value: '{"success":true}'
+                    }
+                }
+            }
+        };
+    }
+
+    rpc ListWorkspaceSharings(ListWorkspaceSharingsRequest) returns (ListWorkspaceSharingsResponse) {
+        option (google.api.http) = {
+            get: "/v1/workspaces/{workspace_id}/sharings"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "List workspace sharings"
+            tags: ["Workspace Sharing"]
+            operation_id: "ListWorkspaceSharings"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workspace sharings retrieved successfully"
+                    schema: {
+                        json_schema: { ref: ".workspace_service.v1.ListWorkspaceSharingsResponse" }
+                    }
+                    examples: {
+                        value: '{"sharings":[{"id":"456","shared_with_email":"user1@example.com","permission_level":"editor"},{"id":"457","shared_with_email":"user2@example.com","permission_level":"viewer"}],"next_page_token":"token789","total_size":10}'
+                    }
+                }
+            }
+        };
+    }
+
+    // Analytics and Reporting
+    rpc GetWorkspaceAnalytics(GetWorkspaceAnalyticsRequest) returns (GetWorkspaceAnalyticsResponse) {
+        option (google.api.http) = {
+            get: "/v1/workspaces/{workspace_id}/analytics"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get workspace analytics"
+            tags: ["Analytics"]
+            operation_id: "GetWorkspaceAnalytics"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Analytics data retrieved successfully"
+                    schema: {
+                        json_schema: { ref: ".workspace_service.v1.GetWorkspaceAnalyticsResponse" }
+                    }
+                    examples: {
+                        value: '{"activity":{"total_files":150,"total_folders":25,"active_users":10,"storage_used":524288000,"storage_usage_percentage":48.8},"user_activities":[{"user_id":"123","email":"user@example.com","file_operations":45,"comments_made":12,"documents_processed":8}],"compliance":{"gdpr_compliance_score":0.95,"hipaa_compliance_score":0.88,"pending_approvals":3,"compliance_violations":1}}'
+                    }
+                }
+            }
+        };
+    }
+
+    rpc GetWorkspaceComplianceReport(GetWorkspaceComplianceReportRequest) returns (GetWorkspaceComplianceReportResponse) {
+        option (google.api.http) = {
+            get: "/v1/workspaces/{workspace_id}/compliance-report"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get compliance report"
+            tags: ["Compliance"]
+            operation_id: "GetWorkspaceComplianceReport"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Compliance report retrieved successfully"
+                    schema: {
+                        json_schema: { ref: ".workspace_service.v1.GetWorkspaceComplianceReportResponse" }
+                    }
+                    examples: {
+                        value: '{"overall_score":0.92,"compliance_status":"compliant","violations":[{"rule_id":"GDPR-001","severity":"medium","description":"Missing data retention policy","affected_resources":["doc-123","doc-456"],"remediation_steps":"Set up data retention policy"}],"category_scores":[{"category":"Data Protection","score":0.95,"status":"passed","improvements":["Enable encryption at rest"]}]}'
+                    }
+                }
+            }
+        };
+    }
+
+    rpc GetWorkspaceStorageStats(GetWorkspaceStorageStatsRequest) returns (GetWorkspaceStorageStatsResponse) {
+        option (google.api.http) = {
+            get: "/v1/workspaces/{workspace_id}/storage-stats"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get storage statistics"
+            tags: ["Storage"]
+            operation_id: "GetWorkspaceStorageStats"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Storage statistics retrieved successfully"
+                    schema: {
+                        json_schema: { ref: ".workspace_service.v1.GetWorkspaceStorageStatsResponse" }
+                    }
+                    examples: {
+                        value: '{"total_storage_used":524288000,"storage_quota":1073741824,"usage_percentage":48.8,"storage_by_type":[{"file_type":"pdf","size":262144000,"file_count":75},{"file_type":"docx","size":131072000,"file_count":45}],"total_files":150,"total_folders":25}'
+                    }
+                }
+            }
+        };
+    }
+}

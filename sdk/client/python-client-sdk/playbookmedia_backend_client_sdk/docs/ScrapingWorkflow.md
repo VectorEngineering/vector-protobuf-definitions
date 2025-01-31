@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **cron_expression** | **str** |  | [optional] 
 **next_run_time** | **datetime** |  | [optional] 
 **last_run_time** | **datetime** |  | [optional] 
-**status** | [**BackgroundJobStatus**](BackgroundJobStatus.md) |  | [optional] [default to BackgroundJobStatus.UNSPECIFIED]
+**status** | [**WorkflowStatus**](WorkflowStatus.md) |  | [optional] [default to WorkflowStatus.UNSPECIFIED]
 **retry_count** | **int** |  | [optional] 
 **max_retries** | **int** |  | [optional] 
 **alert_emails** | **str** |  | [optional] 

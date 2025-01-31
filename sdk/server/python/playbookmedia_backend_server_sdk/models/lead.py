@@ -912,7 +912,6 @@ class Lead(Model):
     def place_id(self) -> str:
         """Gets the place_id of this Lead.
 
-        Google Places ID  # noqa: E501
 
         :return: The place_id of this Lead.
         :rtype: str
@@ -923,7 +922,6 @@ class Lead(Model):
     def place_id(self, place_id: str):
         """Sets the place_id of this Lead.
 
-        Google Places ID  # noqa: E501
 
         :param place_id: The place_id of this Lead.
         :type place_id: str

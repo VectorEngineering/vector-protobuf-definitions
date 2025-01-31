@@ -5,13 +5,11 @@ from typing import List, Dict  # noqa: F401
 from playbookmedia_backend_server_sdk.models.base_model import Model
 from playbookmedia_backend_server_sdk.models.account_settings import AccountSettings
 from playbookmedia_backend_server_sdk.models.account_status import AccountStatus
-from playbookmedia_backend_server_sdk.models.scraping_job import ScrapingJob
 from playbookmedia_backend_server_sdk.models.workspace import Workspace
 from playbookmedia_backend_server_sdk import util
 
 from playbookmedia_backend_server_sdk.models.account_settings import AccountSettings  # noqa: E501
 from playbookmedia_backend_server_sdk.models.account_status import AccountStatus  # noqa: E501
-from playbookmedia_backend_server_sdk.models.scraping_job import ScrapingJob  # noqa: E501
 from playbookmedia_backend_server_sdk.models.workspace import Workspace  # noqa: E501
 
 class Account(Model):
@@ -20,7 +18,7 @@ class Account(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, auth_platform_user_id=None, org_id=None, tenant_id=None, email=None, last_modified_at=None, deleted_at=None, created_at=None, scraping_jobs=None, account_status=AccountStatus.UNSPECIFIED, roles=None, permissions=None, mfa_enabled=None, last_login_at=None, timezone=None, total_jobs_run=None, monthly_job_limit=None, concurrent_job_limit=None, workspaces=None, settings=None):  # noqa: E501
+    def __init__(self, id=None, auth_platform_user_id=None, org_id=None, tenant_id=None, email=None, deleted_at=None, created_at=None, account_status=AccountStatus.UNSPECIFIED, roles=None, permissions=None, mfa_enabled=None, last_login_at=None, timezone=None, total_jobs_run=None, monthly_job_limit=None, concurrent_job_limit=None, workspaces=None, settings=None):  # noqa: E501
         """Account - a model defined in OpenAPI
 
         :param id: The id of this Account.  # noqa: E501
@@ -33,14 +31,10 @@ class Account(Model):
         :type tenant_id: str
         :param email: The email of this Account.  # noqa: E501
         :type email: str
-        :param last_modified_at: The last_modified_at of this Account.  # noqa: E501
-        :type last_modified_at: datetime
         :param deleted_at: The deleted_at of this Account.  # noqa: E501
         :type deleted_at: datetime
         :param created_at: The created_at of this Account.  # noqa: E501
         :type created_at: datetime
-        :param scraping_jobs: The scraping_jobs of this Account.  # noqa: E501
-        :type scraping_jobs: List[ScrapingJob]
         :param account_status: The account_status of this Account.  # noqa: E501
         :type account_status: AccountStatus
         :param roles: The roles of this Account.  # noqa: E501
@@ -70,10 +64,8 @@ class Account(Model):
             'org_id': str,
             'tenant_id': str,
             'email': str,
-            'last_modified_at': datetime,
             'deleted_at': datetime,
             'created_at': datetime,
-            'scraping_jobs': List[ScrapingJob],
             'account_status': AccountStatus,
             'roles': List[str],
             'permissions': List[str],
@@ -93,10 +85,8 @@ class Account(Model):
             'org_id': 'orgId',
             'tenant_id': 'tenantId',
             'email': 'email',
-            'last_modified_at': 'lastModifiedAt',
             'deleted_at': 'deletedAt',
             'created_at': 'createdAt',
-            'scraping_jobs': 'scrapingJobs',
             'account_status': 'accountStatus',
             'roles': 'roles',
             'permissions': 'permissions',
@@ -115,10 +105,8 @@ class Account(Model):
         self._org_id = org_id
         self._tenant_id = tenant_id
         self._email = email
-        self._last_modified_at = last_modified_at
         self._deleted_at = deleted_at
         self._created_at = created_at
-        self._scraping_jobs = scraping_jobs
         self._account_status = account_status
         self._roles = roles
         self._permissions = permissions
@@ -248,27 +236,6 @@ class Account(Model):
         self._email = email
 
     @property
-    def last_modified_at(self) -> datetime:
-        """Gets the last_modified_at of this Account.
-
-
-        :return: The last_modified_at of this Account.
-        :rtype: datetime
-        """
-        return self._last_modified_at
-
-    @last_modified_at.setter
-    def last_modified_at(self, last_modified_at: datetime):
-        """Sets the last_modified_at of this Account.
-
-
-        :param last_modified_at: The last_modified_at of this Account.
-        :type last_modified_at: datetime
-        """
-
-        self._last_modified_at = last_modified_at
-
-    @property
     def deleted_at(self) -> datetime:
         """Gets the deleted_at of this Account.
 
@@ -309,27 +276,6 @@ class Account(Model):
         """
 
         self._created_at = created_at
-
-    @property
-    def scraping_jobs(self) -> List[ScrapingJob]:
-        """Gets the scraping_jobs of this Account.
-
-
-        :return: The scraping_jobs of this Account.
-        :rtype: List[ScrapingJob]
-        """
-        return self._scraping_jobs
-
-    @scraping_jobs.setter
-    def scraping_jobs(self, scraping_jobs: List[ScrapingJob]):
-        """Sets the scraping_jobs of this Account.
-
-
-        :param scraping_jobs: The scraping_jobs of this Account.
-        :type scraping_jobs: List[ScrapingJob]
-        """
-
-        self._scraping_jobs = scraping_jobs
 
     @property
     def account_status(self) -> AccountStatus:

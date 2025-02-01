@@ -1062,7 +1062,16 @@ func (m *ScrapingWorkflow) validate(all bool) error {
 
 	// no validation rules for Id
 
-	// no validation rules for CronExpression
+	if !_ScrapingWorkflow_CronExpression_Pattern.MatchString(m.GetCronExpression()) {
+		err := ScrapingWorkflowValidationError{
+			field:  "CronExpression",
+			reason: "value does not match regex pattern \"^(0\\\\d|1\\\\d|2\\\\d|3\\\\d|4\\\\d|5\\\\d)\\\\s(0\\\\d|1\\\\d|2\\\\d|3\\\\d|4\\\\d|5\\\\d)\\\\s\\\\*\\\\s\\\\*\\\\s\\\\*$\"",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if all {
 		switch v := interface{}(m.GetNextRunTime()).(type) {
@@ -1607,6 +1616,8 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = ScrapingWorkflowValidationError{}
+
+var _ScrapingWorkflow_CronExpression_Pattern = regexp.MustCompile("^(0\\d|1\\d|2\\d|3\\d|4\\d|5\\d)\\s(0\\d|1\\d|2\\d|3\\d|4\\d|5\\d)\\s\\*\\s\\*\\s\\*$")
 
 // Validate checks the field values on Lead with the rules defined in the proto
 // definition for this message. If any rules are violated, the first error

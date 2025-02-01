@@ -1311,15 +1311,60 @@ func (m *ScrapingWorkflow) validate(all bool) error {
 		}
 	}
 
-	// no validation rules for GeoFencingRadius
+	if val := m.GetGeoFencingRadius(); val < 0 || val > 100000 {
+		err := ScrapingWorkflowValidationError{
+			field:  "GeoFencingRadius",
+			reason: "value must be inside range [0, 100000]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
-	// no validation rules for GeoFencingLat
+	if val := m.GetGeoFencingLat(); val < -90 || val > 90 {
+		err := ScrapingWorkflowValidationError{
+			field:  "GeoFencingLat",
+			reason: "value must be inside range [-90, 90]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
-	// no validation rules for GeoFencingLon
+	if val := m.GetGeoFencingLon(); val < -180 || val > 180 {
+		err := ScrapingWorkflowValidationError{
+			field:  "GeoFencingLon",
+			reason: "value must be inside range [-180, 180]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
-	// no validation rules for GeoFencingZoomMin
+	if val := m.GetGeoFencingZoomMin(); val < 1 || val > 20 {
+		err := ScrapingWorkflowValidationError{
+			field:  "GeoFencingZoomMin",
+			reason: "value must be inside range [1, 20]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
-	// no validation rules for GeoFencingZoomMax
+	if val := m.GetGeoFencingZoomMax(); val < 1 || val > 20 {
+		err := ScrapingWorkflowValidationError{
+			field:  "GeoFencingZoomMax",
+			reason: "value must be inside range [1, 20]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	// no validation rules for IncludeReviews
 
@@ -1373,7 +1418,26 @@ func (m *ScrapingWorkflow) validate(all bool) error {
 
 	// no validation rules for AnonymizePii
 
-	// no validation rules for NotificationWebhookUrl
+	if uri, err := url.Parse(m.GetNotificationWebhookUrl()); err != nil {
+		err = ScrapingWorkflowValidationError{
+			field:  "NotificationWebhookUrl",
+			reason: "value must be a valid URI",
+			cause:  err,
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	} else if !uri.IsAbs() {
+		err := ScrapingWorkflowValidationError{
+			field:  "NotificationWebhookUrl",
+			reason: "value must be absolute",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	// no validation rules for NotificationSlackChannel
 
@@ -1385,9 +1449,27 @@ func (m *ScrapingWorkflow) validate(all bool) error {
 
 	// no validation rules for NotificationNotifyOnFailure
 
-	// no validation rules for ContentFilterMinimumRating
+	if m.GetContentFilterMinimumRating() < 0 {
+		err := ScrapingWorkflowValidationError{
+			field:  "ContentFilterMinimumRating",
+			reason: "value must be greater than or equal to 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
-	// no validation rules for ContentFilterMinimumReviews
+	if m.GetContentFilterMinimumReviews() < 0 {
+		err := ScrapingWorkflowValidationError{
+			field:  "ContentFilterMinimumReviews",
+			reason: "value must be greater than or equal to 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if m.GetQosMaxConcurrentRequests() > 100 {
 		err := ScrapingWorkflowValidationError{
@@ -1400,7 +1482,16 @@ func (m *ScrapingWorkflow) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	// no validation rules for QosMaxRetries
+	if m.GetQosMaxRetries() < 0 {
+		err := ScrapingWorkflowValidationError{
+			field:  "QosMaxRetries",
+			reason: "value must be greater than or equal to 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if all {
 		switch v := interface{}(m.GetQosRequestTimeout()).(type) {
@@ -1582,19 +1673,73 @@ func (m *Lead) validate(all bool) error {
 
 	// no validation rules for Country
 
-	// no validation rules for Latitude
+	if val := m.GetLatitude(); val < -90 || val > 90 {
+		err := LeadValidationError{
+			field:  "Latitude",
+			reason: "value must be inside range [-90, 90]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
-	// no validation rules for Longitude
+	if val := m.GetLongitude(); val < -180 || val > 180 {
+		err := LeadValidationError{
+			field:  "Longitude",
+			reason: "value must be inside range [-180, 180]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
-	// no validation rules for GoogleRating
+	if val := m.GetGoogleRating(); val < 0 || val > 5 {
+		err := LeadValidationError{
+			field:  "GoogleRating",
+			reason: "value must be inside range [0, 5]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
-	// no validation rules for ReviewCount
+	if m.GetReviewCount() < 0 {
+		err := LeadValidationError{
+			field:  "ReviewCount",
+			reason: "value must be greater than or equal to 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	// no validation rules for Industry
 
-	// no validation rules for EmployeeCount
+	if m.GetEmployeeCount() < 0 {
+		err := LeadValidationError{
+			field:  "EmployeeCount",
+			reason: "value must be greater than or equal to 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
-	// no validation rules for EstimatedRevenue
+	if m.GetEstimatedRevenue() < 0 {
+		err := LeadValidationError{
+			field:  "EstimatedRevenue",
+			reason: "value must be greater than or equal to 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if utf8.RuneCountInString(m.GetOrgId()) < 1 {
 		err := LeadValidationError{

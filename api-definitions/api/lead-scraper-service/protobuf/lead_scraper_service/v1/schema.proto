@@ -378,11 +378,11 @@ message ScrapingWorkflow {
     Workspace workspace = 16 [(gorm.field).belongs_to = {}];
 
     // Advanced scraping configuration
-    float geo_fencing_radius = 18;
-    double geo_fencing_lat = 19;
-    double geo_fencing_lon = 20;
-    int32 geo_fencing_zoom_min = 21;
-    int32 geo_fencing_zoom_max = 22;
+    float geo_fencing_radius = 18 [(validate.rules).float = {gte: 0, lte: 100000}];
+    double geo_fencing_lat = 19 [(validate.rules).double = {gte: -90, lte: 90}];
+    double geo_fencing_lon = 20 [(validate.rules).double = {gte: -180, lte: 180}];
+    int32 geo_fencing_zoom_min = 21 [(validate.rules).int32 = {gte: 1, lte: 20}];
+    int32 geo_fencing_zoom_max = 22 [(validate.rules).int32 = {gte: 1, lte: 20}];
 
     // Data collection parameters
     bool include_reviews = 23;
@@ -405,7 +405,7 @@ message ScrapingWorkflow {
     google.protobuf.Duration data_retention = 29;
     bool anonymize_pii = 30;
 
-    string notification_webhook_url = 31;
+    string notification_webhook_url = 31 [(validate.rules).string.uri = true];
     string notification_slack_channel = 32;
     string notification_email_group = 33;
     bool notification_notify_on_start = 34;
@@ -414,11 +414,11 @@ message ScrapingWorkflow {
 
     repeated string content_filter_allowed_countries = 37;
     repeated string content_filter_excluded_types = 38;
-    float content_filter_minimum_rating = 39;
-    int32 content_filter_minimum_reviews = 40;
+    float content_filter_minimum_rating = 39 [(validate.rules).float = {gte: 0}];
+    int32 content_filter_minimum_reviews = 40 [(validate.rules).int32 = {gte: 0}];
 
     int32 qos_max_concurrent_requests = 41 [(validate.rules).int32 = {lte: 100}];
-    int32 qos_max_retries = 42;
+    int32 qos_max_retries = 42 [(validate.rules).int32 = {gte: 0}];
     google.protobuf.Duration qos_request_timeout = 43;
     bool qos_enable_javascript = 44; // For full page rendering
 
@@ -452,15 +452,15 @@ message Lead {
     string country = 8 [(gorm.field).tag = {index: "idx_leads_country"}];
     
     // Scraped data
-    double latitude = 9;
-    double longitude = 10;
-    float google_rating = 11;
-    int32 review_count = 12;
+    double latitude = 9 [(validate.rules).double = {gte: -90, lte: 90}];
+    double longitude = 10 [(validate.rules).double = {gte: -180, lte: 180}];
+    float google_rating = 11 [(validate.rules).float = {gte: 0, lte: 5}];
+    int32 review_count = 12 [(validate.rules).int32 = {gte: 0}];
     
     // Enrichment data
     string industry = 13;
-    int32 employee_count = 14;
-    int64 estimated_revenue = 15;
+    int32 employee_count = 14 [(validate.rules).int32 = {gte: 0}];
+    int64 estimated_revenue = 15 [(validate.rules).int64 = {gte: 0}];
     
     // Org context
     string org_id = 16 [

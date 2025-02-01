@@ -1,5 +1,6 @@
 package org.openapitools.configuration;
 
+import org.openapitools.model.APIKeyStatus;
 import org.openapitools.model.AccountStatus;
 import org.openapitools.model.AuthErrorCode;
 import org.openapitools.model.BackgroundJobStatus;
@@ -19,6 +20,15 @@ import org.springframework.core.convert.converter.Converter;
 @Configuration
 public class EnumConverterConfiguration {
 
+    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.apIKeyStatusConverter")
+    Converter<String, APIKeyStatus> apIKeyStatusConverter() {
+        return new Converter<String, APIKeyStatus>() {
+            @Override
+            public APIKeyStatus convert(String source) {
+                return APIKeyStatus.fromValue(source);
+            }
+        };
+    }
     @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.accountStatusConverter")
     Converter<String, AccountStatus> accountStatusConverter() {
         return new Converter<String, AccountStatus>() {

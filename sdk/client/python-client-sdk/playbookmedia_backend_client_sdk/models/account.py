@@ -23,7 +23,6 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from playbookmedia_backend_client_sdk.models.account_settings import AccountSettings
 from playbookmedia_backend_client_sdk.models.account_status import AccountStatus
-from playbookmedia_backend_client_sdk.models.workspace import Workspace
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -133,4 +132,7 @@ class Account(BaseModel):
         })
         return _obj
 
+from playbookmedia_backend_client_sdk.models.workspace import Workspace
+# TODO: Rewrite to not use raise_errors
+Account.model_rebuild(raise_errors=False)
 

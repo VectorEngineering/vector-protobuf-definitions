@@ -85,6 +85,21 @@ func newScrapingWorkflowORM(db *gorm.DB, opts ...gen.DOOption) scrapingWorkflowO
 			}
 			Workspace struct {
 				field.RelationField
+				ApiKeys struct {
+					field.RelationField
+					Account struct {
+						field.RelationField
+						Settings struct {
+							field.RelationField
+						}
+						Workspaces struct {
+							field.RelationField
+						}
+					}
+					Workspace struct {
+						field.RelationField
+					}
+				}
 				ScrapingJobs struct {
 					field.RelationField
 				}
@@ -116,6 +131,21 @@ func newScrapingWorkflowORM(db *gorm.DB, opts ...gen.DOOption) scrapingWorkflowO
 			},
 			Workspace: struct {
 				field.RelationField
+				ApiKeys struct {
+					field.RelationField
+					Account struct {
+						field.RelationField
+						Settings struct {
+							field.RelationField
+						}
+						Workspaces struct {
+							field.RelationField
+						}
+					}
+					Workspace struct {
+						field.RelationField
+					}
+				}
 				ScrapingJobs struct {
 					field.RelationField
 				}
@@ -130,6 +160,49 @@ func newScrapingWorkflowORM(db *gorm.DB, opts ...gen.DOOption) scrapingWorkflowO
 				}
 			}{
 				RelationField: field.NewRelation("Jobs.Leads.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
+				ApiKeys: struct {
+					field.RelationField
+					Account struct {
+						field.RelationField
+						Settings struct {
+							field.RelationField
+						}
+						Workspaces struct {
+							field.RelationField
+						}
+					}
+					Workspace struct {
+						field.RelationField
+					}
+				}{
+					RelationField: field.NewRelation("Jobs.Leads.Workspace.ApiKeys", "lead_scraper_servicev1.APIKeyORM"),
+					Account: struct {
+						field.RelationField
+						Settings struct {
+							field.RelationField
+						}
+						Workspaces struct {
+							field.RelationField
+						}
+					}{
+						RelationField: field.NewRelation("Jobs.Leads.Workspace.ApiKeys.Account", "lead_scraper_servicev1.AccountORM"),
+						Settings: struct {
+							field.RelationField
+						}{
+							RelationField: field.NewRelation("Jobs.Leads.Workspace.ApiKeys.Account.Settings", "lead_scraper_servicev1.AccountSettingsORM"),
+						},
+						Workspaces: struct {
+							field.RelationField
+						}{
+							RelationField: field.NewRelation("Jobs.Leads.Workspace.ApiKeys.Account.Workspaces", "lead_scraper_servicev1.WorkspaceORM"),
+						},
+					},
+					Workspace: struct {
+						field.RelationField
+					}{
+						RelationField: field.NewRelation("Jobs.Leads.Workspace.ApiKeys.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
+					},
+				},
 				ScrapingJobs: struct {
 					field.RelationField
 				}{
@@ -383,6 +456,21 @@ type scrapingWorkflowORMHasManyJobs struct {
 		}
 		Workspace struct {
 			field.RelationField
+			ApiKeys struct {
+				field.RelationField
+				Account struct {
+					field.RelationField
+					Settings struct {
+						field.RelationField
+					}
+					Workspaces struct {
+						field.RelationField
+					}
+				}
+				Workspace struct {
+					field.RelationField
+				}
+			}
 			ScrapingJobs struct {
 				field.RelationField
 			}

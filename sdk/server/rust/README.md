@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-01-31T03:28:42.596923-05:00[America/New_York]
+- Build date: 2025-02-01T16:14:31.248998-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -119,6 +119,8 @@ Method | HTTP request | Description
  - [AccountStatus](docs/AccountStatus.md)
  - [Any](docs/Any.md)
  - [ApiInfo](docs/ApiInfo.md)
+ - [ApiKey](docs/ApiKey.md)
+ - [ApiKeyPeriodStatus](docs/ApiKeyPeriodStatus.md)
  - [AuthContext](docs/AuthContext.md)
  - [AuthErrorCode](docs/AuthErrorCode.md)
  - [AuthenticationErrorMessageResponse](docs/AuthenticationErrorMessageResponse.md)

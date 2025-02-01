@@ -8,6 +8,8 @@ docs/AccountSettings.md
 docs/AccountStatus.md
 docs/Any.md
 docs/ApiInfo.md
+docs/ApiKey.md
+docs/ApiKeyPeriodStatus.md
 docs/AuthContext.md
 docs/AuthErrorCode.md
 docs/AuthenticationErrorMessageResponse.md

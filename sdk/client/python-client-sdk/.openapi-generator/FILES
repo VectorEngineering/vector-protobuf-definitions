@@ -5,6 +5,8 @@ playbookmedia_backend_client_sdk/api_client.py
 playbookmedia_backend_client_sdk/api_response.py
 playbookmedia_backend_client_sdk/configuration.py
 playbookmedia_backend_client_sdk/docs/APIInfo.md
+playbookmedia_backend_client_sdk/docs/APIKey.md
+playbookmedia_backend_client_sdk/docs/APIKeyStatus.md
 playbookmedia_backend_client_sdk/docs/Account.md
 playbookmedia_backend_client_sdk/docs/AccountSettings.md
 playbookmedia_backend_client_sdk/docs/AccountStatus.md
@@ -107,6 +109,8 @@ playbookmedia_backend_client_sdk/models/account_settings.py
 playbookmedia_backend_client_sdk/models/account_status.py
 playbookmedia_backend_client_sdk/models/any.py
 playbookmedia_backend_client_sdk/models/api_info.py
+playbookmedia_backend_client_sdk/models/api_key.py
+playbookmedia_backend_client_sdk/models/api_key_status.py
 playbookmedia_backend_client_sdk/models/auth_context.py
 playbookmedia_backend_client_sdk/models/auth_error_code.py
 playbookmedia_backend_client_sdk/models/authentication_error_message_response.py
@@ -199,4 +203,6 @@ playbookmedia_backend_client_sdk/models/workflow_status.py
 playbookmedia_backend_client_sdk/models/workspace.py
 playbookmedia_backend_client_sdk/rest.py
 playbookmedia_backend_client_sdk/test/__init__.py
+playbookmedia_backend_client_sdk/test/test_api_key.py
+playbookmedia_backend_client_sdk/test/test_api_key_status.py
 playbookmedia_backend_client_sdk_README.md

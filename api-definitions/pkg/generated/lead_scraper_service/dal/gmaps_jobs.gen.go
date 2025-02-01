@@ -35,7 +35,7 @@ func newScrapingJobORM(db *gorm.DB, opts ...gen.DOOption) scrapingJobORM {
 	_scrapingJobORM.Depth = field.NewInt32(tableName, "depth")
 	_scrapingJobORM.Email = field.NewBool(tableName, "email")
 	_scrapingJobORM.FastMode = field.NewBool(tableName, "fast_mode")
-	_scrapingJobORM.Id = field.NewString(tableName, "id")
+	_scrapingJobORM.Id = field.NewUint64(tableName, "id")
 	_scrapingJobORM.Keywords = field.NewField(tableName, "keywords")
 	_scrapingJobORM.Lang = field.NewString(tableName, "lang")
 	_scrapingJobORM.Lat = field.NewString(tableName, "lat")
@@ -71,6 +71,21 @@ func newScrapingJobORM(db *gorm.DB, opts ...gen.DOOption) scrapingJobORM {
 		},
 		Workspace: struct {
 			field.RelationField
+			ApiKeys struct {
+				field.RelationField
+				Account struct {
+					field.RelationField
+					Settings struct {
+						field.RelationField
+					}
+					Workspaces struct {
+						field.RelationField
+					}
+				}
+				Workspace struct {
+					field.RelationField
+				}
+			}
 			ScrapingJobs struct {
 				field.RelationField
 			}
@@ -85,6 +100,49 @@ func newScrapingJobORM(db *gorm.DB, opts ...gen.DOOption) scrapingJobORM {
 			}
 		}{
 			RelationField: field.NewRelation("Leads.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
+			ApiKeys: struct {
+				field.RelationField
+				Account struct {
+					field.RelationField
+					Settings struct {
+						field.RelationField
+					}
+					Workspaces struct {
+						field.RelationField
+					}
+				}
+				Workspace struct {
+					field.RelationField
+				}
+			}{
+				RelationField: field.NewRelation("Leads.Workspace.ApiKeys", "lead_scraper_servicev1.APIKeyORM"),
+				Account: struct {
+					field.RelationField
+					Settings struct {
+						field.RelationField
+					}
+					Workspaces struct {
+						field.RelationField
+					}
+				}{
+					RelationField: field.NewRelation("Leads.Workspace.ApiKeys.Account", "lead_scraper_servicev1.AccountORM"),
+					Settings: struct {
+						field.RelationField
+					}{
+						RelationField: field.NewRelation("Leads.Workspace.ApiKeys.Account.Settings", "lead_scraper_servicev1.AccountSettingsORM"),
+					},
+					Workspaces: struct {
+						field.RelationField
+					}{
+						RelationField: field.NewRelation("Leads.Workspace.ApiKeys.Account.Workspaces", "lead_scraper_servicev1.WorkspaceORM"),
+					},
+				},
+				Workspace: struct {
+					field.RelationField
+				}{
+					RelationField: field.NewRelation("Leads.Workspace.ApiKeys.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
+				},
+			},
 			ScrapingJobs: struct {
 				field.RelationField
 			}{
@@ -143,7 +201,7 @@ type scrapingJobORM struct {
 	Depth              field.Int32
 	Email              field.Bool
 	FastMode           field.Bool
-	Id                 field.String
+	Id                 field.Uint64
 	Keywords           field.Field
 	Lang               field.String
 	Lat                field.String
@@ -182,7 +240,7 @@ func (s *scrapingJobORM) updateTableName(table string) *scrapingJobORM {
 	s.Depth = field.NewInt32(table, "depth")
 	s.Email = field.NewBool(table, "email")
 	s.FastMode = field.NewBool(table, "fast_mode")
-	s.Id = field.NewString(table, "id")
+	s.Id = field.NewUint64(table, "id")
 	s.Keywords = field.NewField(table, "keywords")
 	s.Lang = field.NewString(table, "lang")
 	s.Lat = field.NewString(table, "lat")
@@ -264,6 +322,21 @@ type scrapingJobORMHasManyLeads struct {
 	}
 	Workspace struct {
 		field.RelationField
+		ApiKeys struct {
+			field.RelationField
+			Account struct {
+				field.RelationField
+				Settings struct {
+					field.RelationField
+				}
+				Workspaces struct {
+					field.RelationField
+				}
+			}
+			Workspace struct {
+				field.RelationField
+			}
+		}
 		ScrapingJobs struct {
 			field.RelationField
 		}

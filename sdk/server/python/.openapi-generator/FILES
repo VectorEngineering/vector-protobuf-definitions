@@ -16,6 +16,8 @@ playbookmedia_backend_server_sdk/models/account_settings.py
 playbookmedia_backend_server_sdk/models/account_status.py
 playbookmedia_backend_server_sdk/models/any.py
 playbookmedia_backend_server_sdk/models/api_info.py
+playbookmedia_backend_server_sdk/models/api_key.py
+playbookmedia_backend_server_sdk/models/api_key_status.py
 playbookmedia_backend_server_sdk/models/auth_context.py
 playbookmedia_backend_server_sdk/models/auth_error_code.py
 playbookmedia_backend_server_sdk/models/authentication_error_message_response.py

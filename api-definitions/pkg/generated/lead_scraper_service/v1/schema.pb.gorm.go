@@ -193,6 +193,7 @@ type AccountWithAfterToPB interface {
 type WorkspaceORM struct {
 	AccountId           *uint64
 	ActiveScrapers      int32
+	ApiKeys             []*APIKeyORM `gorm:"foreignKey:WorkspaceId;references:Id"`
 	CreatedAt           *time.Time
 	DailyJobQuota       int32
 	DeletedAt           *time.Time
@@ -281,6 +282,17 @@ func (m *Workspace) ToORM(ctx context.Context) (WorkspaceORM, error) {
 			to.ScrapingJobs = append(to.ScrapingJobs, nil)
 		}
 	}
+	for _, v := range m.ApiKeys {
+		if v != nil {
+			if tempApiKeys, cErr := v.ToORM(ctx); cErr == nil {
+				to.ApiKeys = append(to.ApiKeys, &tempApiKeys)
+			} else {
+				return to, cErr
+			}
+		} else {
+			to.ApiKeys = append(to.ApiKeys, nil)
+		}
+	}
 	if posthook, ok := interface{}(m).(WorkspaceWithAfterToORM); ok {
 		err = posthook.AfterToORM(ctx, &to)
 	}
@@ -345,6 +357,17 @@ func (m *WorkspaceORM) ToPB(ctx context.Context) (Workspace, error) {
 			to.ScrapingJobs = append(to.ScrapingJobs, nil)
 		}
 	}
+	for _, v := range m.ApiKeys {
+		if v != nil {
+			if tempApiKeys, cErr := v.ToPB(ctx); cErr == nil {
+				to.ApiKeys = append(to.ApiKeys, &tempApiKeys)
+			} else {
+				return to, cErr
+			}
+		} else {
+			to.ApiKeys = append(to.ApiKeys, nil)
+		}
+	}
 	if posthook, ok := interface{}(m).(WorkspaceWithAfterToPB); ok {
 		err = posthook.AfterToPB(ctx, &to)
 	}
@@ -380,7 +403,7 @@ type ScrapingJobORM struct {
 	Depth              int32
 	Email              bool
 	FastMode           bool
-	Id                 string         `gorm:"primaryKey"`
+	Id                 uint64         `gorm:"primaryKey"`
 	Keywords           pq.StringArray `gorm:"type:text[]"`
 	Lang               string
 	Lat                string
@@ -887,7 +910,7 @@ type LeadORM struct {
 	RevenueRange             string
 	ReviewCount              int32
 	Reviews                  []*ReviewORM `gorm:"foreignKey:LeadId;references:Id"`
-	ScrapingJobId            *string
+	ScrapingJobId            *uint64
 	ScrapingSessionId        string
 	SeoKeywords              pq.StringArray `gorm:"type:text[]"`
 	ServesVegetarianFood     bool
@@ -1671,10 +1694,12 @@ type APIKeyORM struct {
 	ConcurrentRequests         int32
 	CostPerRequest             float32
 	CreatedAt                  *time.Time
+	DataClassification         string
 	DataResidency              string
 	DeletedAt                  *time.Time
 	Description                string
 	DocumentationUrl           string
+	Encrypted                  bool
 	EndpointUsageJson          []byte `gorm:"type:bytea"`
 	EnforceHttps               bool
 	EnforceMutualTls           bool
@@ -1870,6 +1895,8 @@ func (m *APIKey) ToORM(ctx context.Context) (APIKeyORM, error) {
 		to.MonitoringIntegrations = make(pq.StringArray, len(m.MonitoringIntegrations))
 		copy(to.MonitoringIntegrations, m.MonitoringIntegrations)
 	}
+	to.Encrypted = m.Encrypted
+	to.DataClassification = m.DataClassification
 	if posthook, ok := interface{}(m).(APIKeyWithAfterToORM); ok {
 		err = posthook.AfterToORM(ctx, &to)
 	}
@@ -2012,6 +2039,8 @@ func (m *APIKeyORM) ToPB(ctx context.Context) (APIKey, error) {
 		to.MonitoringIntegrations = make(pq.StringArray, len(m.MonitoringIntegrations))
 		copy(to.MonitoringIntegrations, m.MonitoringIntegrations)
 	}
+	to.Encrypted = m.Encrypted
+	to.DataClassification = m.DataClassification
 	if posthook, ok := interface{}(m).(APIKeyWithAfterToPB); ok {
 		err = posthook.AfterToPB(ctx, &to)
 	}
@@ -2124,7 +2153,7 @@ func DefaultCreateAccount(ctx context.Context, in *Account, db *gorm.DB) (*Accou
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Settings").Preload("Workspaces").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(AccountORMWithAfterCreate_); ok {
@@ -2625,7 +2654,7 @@ func DefaultCreateWorkspace(ctx context.Context, in *Workspace, db *gorm.DB) (*W
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(WorkspaceORMWithAfterCreate_); ok {
@@ -2775,6 +2804,15 @@ func DefaultStrictUpdateWorkspace(ctx context.Context, in *Workspace, db *gorm.D
 			return nil, err
 		}
 	}
+	filterApiKeys := APIKeyORM{}
+	if ormObj.Id == 0 {
+		return nil, errors.EmptyIdError
+	}
+	filterApiKeys.WorkspaceId = new(uint64)
+	*filterApiKeys.WorkspaceId = ormObj.Id
+	if err = db.Where(filterApiKeys).Delete(APIKeyORM{}).Error; err != nil {
+		return nil, err
+	}
 	filterScrapingJobs := ScrapingJobORM{}
 	if ormObj.Id == 0 {
 		return nil, errors.EmptyIdError
@@ -2798,7 +2836,7 @@ func DefaultStrictUpdateWorkspace(ctx context.Context, in *Workspace, db *gorm.D
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ApiKeys").Preload("ScrapingJobs").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(WorkspaceORMWithAfterStrictUpdateSave); ok {
@@ -3066,6 +3104,10 @@ func DefaultApplyFieldMaskWorkspace(ctx context.Context, patchee *Workspace, pat
 			patchee.ScrapingJobs = patcher.ScrapingJobs
 			continue
 		}
+		if f == prefix+"ApiKeys" {
+			patchee.ApiKeys = patcher.ApiKeys
+			continue
+		}
 	}
 	if err != nil {
 		return nil, err
@@ -3136,7 +3178,7 @@ func DefaultCreateScrapingJob(ctx context.Context, in *ScrapingJob, db *gorm.DB)
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingJobORMWithAfterCreate_); ok {
@@ -3163,7 +3205,7 @@ func DefaultReadScrapingJob(ctx context.Context, in *ScrapingJob, db *gorm.DB) (
 	if err != nil {
 		return nil, err
 	}
-	if ormObj.Id == "" {
+	if ormObj.Id == 0 {
 		return nil, errors.EmptyIdError
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingJobORMWithBeforeReadApplyQuery); ok {
@@ -3207,7 +3249,7 @@ func DefaultDeleteScrapingJob(ctx context.Context, in *ScrapingJob, db *gorm.DB)
 	if err != nil {
 		return err
 	}
-	if ormObj.Id == "" {
+	if ormObj.Id == 0 {
 		return errors.EmptyIdError
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingJobORMWithBeforeDelete_); ok {
@@ -3237,13 +3279,13 @@ func DefaultDeleteScrapingJobSet(ctx context.Context, in []*ScrapingJob, db *gor
 		return errors.NilArgumentError
 	}
 	var err error
-	keys := []string{}
+	keys := []uint64{}
 	for _, obj := range in {
 		ormObj, err := obj.ToORM(ctx)
 		if err != nil {
 			return err
 		}
-		if ormObj.Id == "" {
+		if ormObj.Id == 0 {
 			return errors.EmptyIdError
 		}
 		keys = append(keys, ormObj.Id)
@@ -3287,10 +3329,10 @@ func DefaultStrictUpdateScrapingJob(ctx context.Context, in *ScrapingJob, db *go
 		}
 	}
 	filterLeads := LeadORM{}
-	if ormObj.Id == "" {
+	if ormObj.Id == 0 {
 		return nil, errors.EmptyIdError
 	}
-	filterLeads.ScrapingJobId = new(string)
+	filterLeads.ScrapingJobId = new(uint64)
 	*filterLeads.ScrapingJobId = ormObj.Id
 	if err = db.Where(filterLeads).Delete(LeadORM{}).Error; err != nil {
 		return nil, err
@@ -3300,7 +3342,7 @@ func DefaultStrictUpdateScrapingJob(ctx context.Context, in *ScrapingJob, db *go
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingJobORMWithAfterStrictUpdateSave); ok {
@@ -3622,7 +3664,7 @@ func DefaultCreateScrapingWorkflow(ctx context.Context, in *ScrapingWorkflow, db
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ApiKeys").Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingWorkflowORMWithAfterCreate_); ok {
@@ -3786,7 +3828,7 @@ func DefaultStrictUpdateScrapingWorkflow(ctx context.Context, in *ScrapingWorkfl
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingWorkflowORMWithAfterStrictUpdateSave); ok {
@@ -4302,7 +4344,7 @@ func DefaultCreateLead(ctx context.Context, in *Lead, db *gorm.DB) (*Lead, error
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ApiKeys").Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(LeadORMWithAfterCreate_); ok {
@@ -4484,7 +4526,7 @@ func DefaultStrictUpdateLead(ctx context.Context, in *Lead, db *gorm.DB) (*Lead,
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ApiKeys").Preload("ScrapingJobs").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(LeadORMWithAfterStrictUpdateSave); ok {
@@ -6473,7 +6515,7 @@ func DefaultCreateAPIKey(ctx context.Context, in *APIKey, db *gorm.DB) (*APIKey,
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Settings").Preload("Workspaces").Preload("ApiKeys").Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(APIKeyORMWithAfterCreate_); ok {
@@ -6628,7 +6670,7 @@ func DefaultStrictUpdateAPIKey(ctx context.Context, in *APIKey, db *gorm.DB) (*A
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(APIKeyORMWithAfterStrictUpdateSave); ok {
@@ -7190,6 +7232,14 @@ func DefaultApplyFieldMaskAPIKey(ctx context.Context, patchee *APIKey, patcher *
 		}
 		if f == prefix+"MonitoringIntegrations" {
 			patchee.MonitoringIntegrations = patcher.MonitoringIntegrations
+			continue
+		}
+		if f == prefix+"Encrypted" {
+			patchee.Encrypted = patcher.Encrypted
+			continue
+		}
+		if f == prefix+"DataClassification" {
+			patchee.DataClassification = patcher.DataClassification
 			continue
 		}
 	}

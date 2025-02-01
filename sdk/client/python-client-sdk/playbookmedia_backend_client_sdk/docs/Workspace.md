@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **total_leads_collected** | **int** |  | [optional] 
 **last_job_run** | **datetime** |  | [optional] 
 **scraping_jobs** | [**List[ScrapingJob]**](ScrapingJob.md) |  | [optional] 
+**api_keys** | [**List[APIKey]**](APIKey.md) |  | [optional] 
 
 ## Example
 

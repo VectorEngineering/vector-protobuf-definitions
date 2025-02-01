@@ -30,6 +30,7 @@ type Workspace {
   totalLeadsCollected: Int!
   lastJobRun: String!
   scrapingJobs: [ScrapingJob!]
+  apiKeys: [ApiKey!]
 }
 
 input WorkspaceInput {
@@ -54,5 +55,6 @@ input WorkspaceInput {
     totalLeadsCollected: Int!
     lastJobRun: String!
     scrapingJobs: [ScrapingJobInput]
+    apiKeys: [ApiKeyInput]
 }
 

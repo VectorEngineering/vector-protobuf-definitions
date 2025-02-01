@@ -48,7 +48,8 @@ class Workspace(BaseModel):
     total_leads_collected: Optional[StrictInt] = Field(default=None, alias="totalLeadsCollected")
     last_job_run: Optional[datetime] = Field(default=None, alias="lastJobRun")
     scraping_jobs: Optional[List[ScrapingJob]] = Field(default=None, alias="scrapingJobs")
-    __properties: ClassVar[List[str]] = ["id", "name", "industry", "domain", "gdprCompliant", "hipaaCompliant", "soc2Compliant", "storageQuota", "usedStorage", "createdAt", "updatedAt", "deletedAt", "workflows", "jobsRunThisMonth", "workspaceJobLimit", "dailyJobQuota", "activeScrapers", "totalLeadsCollected", "lastJobRun", "scrapingJobs"]
+    api_keys: Optional[List[APIKey]] = Field(default=None, alias="apiKeys")
+    __properties: ClassVar[List[str]] = ["id", "name", "industry", "domain", "gdprCompliant", "hipaaCompliant", "soc2Compliant", "storageQuota", "usedStorage", "createdAt", "updatedAt", "deletedAt", "workflows", "jobsRunThisMonth", "workspaceJobLimit", "dailyJobQuota", "activeScrapers", "totalLeadsCollected", "lastJobRun", "scrapingJobs", "apiKeys"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -103,6 +104,13 @@ class Workspace(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['scrapingJobs'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in api_keys (list)
+        _items = []
+        if self.api_keys:
+            for _item in self.api_keys:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['apiKeys'] = _items
         return _dict
 
     @classmethod
@@ -134,10 +142,12 @@ class Workspace(BaseModel):
             "activeScrapers": obj.get("activeScrapers"),
             "totalLeadsCollected": obj.get("totalLeadsCollected"),
             "lastJobRun": obj.get("lastJobRun"),
-            "scrapingJobs": [ScrapingJob.from_dict(_item) for _item in obj["scrapingJobs"]] if obj.get("scrapingJobs") is not None else None
+            "scrapingJobs": [ScrapingJob.from_dict(_item) for _item in obj["scrapingJobs"]] if obj.get("scrapingJobs") is not None else None,
+            "apiKeys": [APIKey.from_dict(_item) for _item in obj["apiKeys"]] if obj.get("apiKeys") is not None else None
         })
         return _obj
 
+from playbookmedia_backend_client_sdk.models.api_key import APIKey
 from playbookmedia_backend_client_sdk.models.scraping_job import ScrapingJob
 from playbookmedia_backend_client_sdk.models.scraping_workflow import ScrapingWorkflow
 # TODO: Rewrite to not use raise_errors

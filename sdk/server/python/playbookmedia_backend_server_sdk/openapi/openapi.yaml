@@ -2237,6 +2237,386 @@ components:
           type: string
       title: APIInfo
       type: object
+    APIKey:
+      description: |-
+        APIKey represents an authentication token for accessing the API.
+        It includes features for rate limiting, permissions, and usage tracking.
+
+        Key features:
+        - Unique key identification
+        - Scope-based access control
+        - Rate limiting
+        - Usage tracking
+        - Expiration management
+        - Multi-tenant support
+
+        Database considerations:
+        - Uses GORM for ORM mapping
+        - Includes indexes for efficient querying
+        - Supports soft deletes
+
+        Usage example:
+        ```go
+        apiKey := &APIKey{
+            Name: "Production API Key",
+            Scopes: []string{"leads:read", "leads:write"},
+            ExpiresAt: timestamppb.New(time.Now().AddDate(1, 0, 0)),
+        }
+        ```
+      example:
+        averageResponseTime: 0.10263654
+        lastRotationDate: 2000-01-23T04:56:07.000+00:00
+        documentationUrl: documentationUrl
+        workspace: null
+        alertOnQuotaThreshold: true
+        metadataJson: metadataJson
+        totalRequests: totalRequests
+        enforceMutualTls: true
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        logAllRequests: true
+        apiVersion: apiVersion
+        requiresAuditLogging: true
+        lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+        dataClassification: dataClassification
+        id: id
+        costPerRequest: 6.519181
+        requireRequestSigning: true
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+        allowedDomains:
+        - allowedDomains
+        - allowedDomains
+        approvedIntegrations:
+        - approvedIntegrations
+        - approvedIntegrations
+        requestsPerSecond: 7
+        rotationFrequencyDays: 7
+        recentErrors: recentErrors
+        endpointUsageJson: endpointUsageJson
+        tags:
+        - tags
+        - tags
+        deletedAt: 2000-01-23T04:56:07.000+00:00
+        enforceSigning: true
+        clientCertificateHash: clientCertificateHash
+        enforceHttps: true
+        allowedIps:
+        - allowedIps
+        - allowedIps
+        name: name
+        concurrentRequests: 7
+        status: STATUS_UNSPECIFIED
+        supportContact: supportContact
+        supportedFeatures:
+        - supportedFeatures
+        - supportedFeatures
+        errorRatesJson: errorRatesJson
+        alertOnErrorSpike: true
+        allowedEnvironments:
+        - allowedEnvironments
+        - allowedEnvironments
+        description: description
+        isTestKey: true
+        orgId: orgId
+        monitoringIntegrations:
+        - monitoringIntegrations
+        - monitoringIntegrations
+        keyHash: keyHash
+        quotaAlertThreshold: 3.0205798
+        successRate: 8.969579
+        successfulRequestsCount: 4
+        totalErrors: totalErrors
+        clientSecretHash: clientSecretHash
+        lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+        complianceStandards:
+        - complianceStandards
+        - complianceStandards
+        keyPrefix: keyPrefix
+        requiresClientSecret: true
+        expiresAt: 2000-01-23T04:56:07.000+00:00
+        webhookUrl: webhookUrl
+        monthlyRequestQuota: monthlyRequestQuota
+        dataResidency: dataResidency
+        encrypted: true
+        lastUsedAt: 2000-01-23T04:56:07.000+00:00
+        lastRotationReason: lastRotationReason
+        tenantId: tenantId
+        requestsPerDay: 0
+        scopes:
+        - scopes
+        - scopes
+        alertEmails:
+        - alertEmails
+        - alertEmails
+        allowedSignatureAlgorithms:
+        - allowedSignatureAlgorithms
+        - allowedSignatureAlgorithms
+        billingTier: billingTier
+        account: null
+        errorAlertThreshold: 3.05761
+      properties:
+        id:
+          format: uint64
+          title: Unique identifier
+          type: string
+        name:
+          title: Human-readable name for the key
+          type: string
+        keyHash:
+          title: The actual API key value (hashed in storage)
+          type: string
+        keyPrefix:
+          title: Key prefix for display/reference (first 8 chars)
+          type: string
+        orgId:
+          title: Multi-tenant context
+          type: string
+        tenantId:
+          title: tenantId
+          type: string
+        scopes:
+          items:
+            type: string
+          title: Access control and permissions
+          type: array
+        allowedIps:
+          items:
+            type: string
+          title: allowedIps
+          type: array
+        allowedDomains:
+          items:
+            type: string
+          title: allowedDomains
+          type: array
+        allowedEnvironments:
+          items:
+            type: string
+          title: "e.g., dev, staging, prod"
+          type: array
+        isTestKey:
+          title: Indicates if this is a test API key
+          type: boolean
+        requestsPerSecond:
+          format: int32
+          title: Rate limiting and quotas
+          type: integer
+        requestsPerDay:
+          format: int32
+          title: requestsPerDay
+          type: integer
+        concurrentRequests:
+          format: int32
+          title: concurrentRequests
+          type: integer
+        monthlyRequestQuota:
+          format: int64
+          title: monthlyRequestQuota
+          type: string
+        costPerRequest:
+          format: float
+          title: For usage-based billing
+          type: number
+        billingTier:
+          title: "e.g., free, basic, premium"
+          type: string
+        totalRequests:
+          format: int64
+          title: Usage tracking and analytics
+          type: string
+        totalErrors:
+          format: int64
+          title: totalErrors
+          type: string
+        lastUsedAt:
+          format: date-time
+          title: lastUsedAt
+          type: string
+        averageResponseTime:
+          format: float
+          title: averageResponseTime
+          type: number
+        endpointUsageJson:
+          description: Tracks usage per endpoint
+          format: byte
+          title: Store maps as JSONB in PostgreSQL
+          type: string
+        errorRatesJson:
+          format: byte
+          title: Error rates by error type
+          type: string
+        recentErrors:
+          format: byte
+          title: Recent error details with timestamps
+          type: string
+        successfulRequestsCount:
+          format: int32
+          title: successfulRequestsCount
+          type: integer
+        successRate:
+          format: float
+          title: successRate
+          type: number
+        status:
+          $ref: '#/components/schemas/APIKey.Status'
+        createdAt:
+          format: date-time
+          title: Timestamps
+          type: string
+        updatedAt:
+          format: date-time
+          title: updatedAt
+          type: string
+        expiresAt:
+          format: date-time
+          title: expiresAt
+          type: string
+        deletedAt:
+          format: date-time
+          title: deletedAt
+          type: string
+        lastRotatedAt:
+          format: date-time
+          title: lastRotatedAt
+          type: string
+        lastSecurityReviewAt:
+          format: date-time
+          title: lastSecurityReviewAt
+          type: string
+        requiresClientSecret:
+          title: Security features
+          type: boolean
+        clientSecretHash:
+          title: clientSecretHash
+          type: string
+        enforceHttps:
+          title: enforceHttps
+          type: boolean
+        enforceSigning:
+          title: enforceSigning
+          type: boolean
+        allowedSignatureAlgorithms:
+          items:
+            type: string
+          title: allowedSignatureAlgorithms
+          type: array
+        enforceMutualTls:
+          title: enforceMutualTls
+          type: boolean
+        clientCertificateHash:
+          title: clientCertificateHash
+          type: string
+        requireRequestSigning:
+          title: requireRequestSigning
+          type: boolean
+        description:
+          description: Detailed description of key usage
+          title: Developer experience
+          type: string
+        metadataJson:
+          format: byte
+          title: Custom metadata stored as JSONB
+          type: string
+        tags:
+          items:
+            type: string
+          title: tags
+          type: array
+        apiVersion:
+          title: API version this key is valid for
+          type: string
+        supportedFeatures:
+          items:
+            type: string
+          title: supportedFeatures
+          type: array
+        documentationUrl:
+          title: documentationUrl
+          type: string
+        supportContact:
+          title: supportContact
+          type: string
+        account:
+          $ref: '#/components/schemas/Account'
+        workspace:
+          $ref: '#/components/schemas/Workspace'
+        logAllRequests:
+          title: Compliance and auditing
+          type: boolean
+        lastRotationReason:
+          title: lastRotationReason
+          type: string
+        lastRotationDate:
+          format: date-time
+          title: lastRotationDate
+          type: string
+        rotationFrequencyDays:
+          format: int32
+          title: rotationFrequencyDays
+          type: integer
+        complianceStandards:
+          items:
+            type: string
+          title: "e.g., SOC2, GDPR"
+          type: array
+        requiresAuditLogging:
+          title: requiresAuditLogging
+          type: boolean
+        dataResidency:
+          title: Geographic location of data storage
+          type: string
+        approvedIntegrations:
+          items:
+            type: string
+          title: approvedIntegrations
+          type: array
+        alertEmails:
+          items:
+            type: string
+          title: Monitoring and alerts
+          type: array
+        webhookUrl:
+          title: webhookUrl
+          type: string
+        alertOnQuotaThreshold:
+          title: alertOnQuotaThreshold
+          type: boolean
+        quotaAlertThreshold:
+          format: float
+          title: quotaAlertThreshold
+          type: number
+        alertOnErrorSpike:
+          title: alertOnErrorSpike
+          type: boolean
+        errorAlertThreshold:
+          format: float
+          title: errorAlertThreshold
+          type: number
+        monitoringIntegrations:
+          items:
+            type: string
+          title: monitoringIntegrations
+          type: array
+        encrypted:
+          title: encrypted
+          type: boolean
+        dataClassification:
+          title: dataClassification
+          type: string
+      title: APIKey
+      type: object
+    APIKey.Status:
+      default: STATUS_UNSPECIFIED
+      enum:
+      - STATUS_UNSPECIFIED
+      - STATUS_ACTIVE
+      - STATUS_REVOKED
+      - STATUS_EXPIRED
+      - STATUS_RATE_LIMITED
+      - STATUS_SUSPENDED
+      - STATUS_PENDING_REVIEW
+      - STATUS_DEPRECATED
+      title: Key status and lifecycle
+      type: string
     Account:
       description: |-
         Account represents a user account within the workspace service.
@@ -2295,6 +2675,185 @@ components:
         - activeScrapers: 3
           storageQuota: storageQuota
           dailyJobQuota: 6
+          apiKeys:
+          - averageResponseTime: 0.10263654
+            lastRotationDate: 2000-01-23T04:56:07.000+00:00
+            documentationUrl: documentationUrl
+            workspace: null
+            alertOnQuotaThreshold: true
+            metadataJson: metadataJson
+            totalRequests: totalRequests
+            enforceMutualTls: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            logAllRequests: true
+            apiVersion: apiVersion
+            requiresAuditLogging: true
+            lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+            dataClassification: dataClassification
+            id: id
+            costPerRequest: 6.519181
+            requireRequestSigning: true
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+            allowedDomains:
+            - allowedDomains
+            - allowedDomains
+            approvedIntegrations:
+            - approvedIntegrations
+            - approvedIntegrations
+            requestsPerSecond: 7
+            rotationFrequencyDays: 7
+            recentErrors: recentErrors
+            endpointUsageJson: endpointUsageJson
+            tags:
+            - tags
+            - tags
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            enforceSigning: true
+            clientCertificateHash: clientCertificateHash
+            enforceHttps: true
+            allowedIps:
+            - allowedIps
+            - allowedIps
+            name: name
+            concurrentRequests: 7
+            status: STATUS_UNSPECIFIED
+            supportContact: supportContact
+            supportedFeatures:
+            - supportedFeatures
+            - supportedFeatures
+            errorRatesJson: errorRatesJson
+            alertOnErrorSpike: true
+            allowedEnvironments:
+            - allowedEnvironments
+            - allowedEnvironments
+            description: description
+            isTestKey: true
+            orgId: orgId
+            monitoringIntegrations:
+            - monitoringIntegrations
+            - monitoringIntegrations
+            keyHash: keyHash
+            quotaAlertThreshold: 3.0205798
+            successRate: 8.969579
+            successfulRequestsCount: 4
+            totalErrors: totalErrors
+            clientSecretHash: clientSecretHash
+            lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+            complianceStandards:
+            - complianceStandards
+            - complianceStandards
+            keyPrefix: keyPrefix
+            requiresClientSecret: true
+            expiresAt: 2000-01-23T04:56:07.000+00:00
+            webhookUrl: webhookUrl
+            monthlyRequestQuota: monthlyRequestQuota
+            dataResidency: dataResidency
+            encrypted: true
+            lastUsedAt: 2000-01-23T04:56:07.000+00:00
+            lastRotationReason: lastRotationReason
+            tenantId: tenantId
+            requestsPerDay: 0
+            scopes:
+            - scopes
+            - scopes
+            alertEmails:
+            - alertEmails
+            - alertEmails
+            allowedSignatureAlgorithms:
+            - allowedSignatureAlgorithms
+            - allowedSignatureAlgorithms
+            billingTier: billingTier
+            account: null
+            errorAlertThreshold: 3.05761
+          - averageResponseTime: 0.10263654
+            lastRotationDate: 2000-01-23T04:56:07.000+00:00
+            documentationUrl: documentationUrl
+            workspace: null
+            alertOnQuotaThreshold: true
+            metadataJson: metadataJson
+            totalRequests: totalRequests
+            enforceMutualTls: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            logAllRequests: true
+            apiVersion: apiVersion
+            requiresAuditLogging: true
+            lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+            dataClassification: dataClassification
+            id: id
+            costPerRequest: 6.519181
+            requireRequestSigning: true
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+            allowedDomains:
+            - allowedDomains
+            - allowedDomains
+            approvedIntegrations:
+            - approvedIntegrations
+            - approvedIntegrations
+            requestsPerSecond: 7
+            rotationFrequencyDays: 7
+            recentErrors: recentErrors
+            endpointUsageJson: endpointUsageJson
+            tags:
+            - tags
+            - tags
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            enforceSigning: true
+            clientCertificateHash: clientCertificateHash
+            enforceHttps: true
+            allowedIps:
+            - allowedIps
+            - allowedIps
+            name: name
+            concurrentRequests: 7
+            status: STATUS_UNSPECIFIED
+            supportContact: supportContact
+            supportedFeatures:
+            - supportedFeatures
+            - supportedFeatures
+            errorRatesJson: errorRatesJson
+            alertOnErrorSpike: true
+            allowedEnvironments:
+            - allowedEnvironments
+            - allowedEnvironments
+            description: description
+            isTestKey: true
+            orgId: orgId
+            monitoringIntegrations:
+            - monitoringIntegrations
+            - monitoringIntegrations
+            keyHash: keyHash
+            quotaAlertThreshold: 3.0205798
+            successRate: 8.969579
+            successfulRequestsCount: 4
+            totalErrors: totalErrors
+            clientSecretHash: clientSecretHash
+            lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+            complianceStandards:
+            - complianceStandards
+            - complianceStandards
+            keyPrefix: keyPrefix
+            requiresClientSecret: true
+            expiresAt: 2000-01-23T04:56:07.000+00:00
+            webhookUrl: webhookUrl
+            monthlyRequestQuota: monthlyRequestQuota
+            dataResidency: dataResidency
+            encrypted: true
+            lastUsedAt: 2000-01-23T04:56:07.000+00:00
+            lastRotationReason: lastRotationReason
+            tenantId: tenantId
+            requestsPerDay: 0
+            scopes:
+            - scopes
+            - scopes
+            alertEmails:
+            - alertEmails
+            - alertEmails
+            allowedSignatureAlgorithms:
+            - allowedSignatureAlgorithms
+            - allowedSignatureAlgorithms
+            billingTier: billingTier
+            account: null
+            errorAlertThreshold: 3.05761
           industry: industry
           workflows:
           - workspace: null
@@ -4495,6 +5054,185 @@ components:
         - activeScrapers: 3
           storageQuota: storageQuota
           dailyJobQuota: 6
+          apiKeys:
+          - averageResponseTime: 0.10263654
+            lastRotationDate: 2000-01-23T04:56:07.000+00:00
+            documentationUrl: documentationUrl
+            workspace: null
+            alertOnQuotaThreshold: true
+            metadataJson: metadataJson
+            totalRequests: totalRequests
+            enforceMutualTls: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            logAllRequests: true
+            apiVersion: apiVersion
+            requiresAuditLogging: true
+            lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+            dataClassification: dataClassification
+            id: id
+            costPerRequest: 6.519181
+            requireRequestSigning: true
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+            allowedDomains:
+            - allowedDomains
+            - allowedDomains
+            approvedIntegrations:
+            - approvedIntegrations
+            - approvedIntegrations
+            requestsPerSecond: 7
+            rotationFrequencyDays: 7
+            recentErrors: recentErrors
+            endpointUsageJson: endpointUsageJson
+            tags:
+            - tags
+            - tags
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            enforceSigning: true
+            clientCertificateHash: clientCertificateHash
+            enforceHttps: true
+            allowedIps:
+            - allowedIps
+            - allowedIps
+            name: name
+            concurrentRequests: 7
+            status: STATUS_UNSPECIFIED
+            supportContact: supportContact
+            supportedFeatures:
+            - supportedFeatures
+            - supportedFeatures
+            errorRatesJson: errorRatesJson
+            alertOnErrorSpike: true
+            allowedEnvironments:
+            - allowedEnvironments
+            - allowedEnvironments
+            description: description
+            isTestKey: true
+            orgId: orgId
+            monitoringIntegrations:
+            - monitoringIntegrations
+            - monitoringIntegrations
+            keyHash: keyHash
+            quotaAlertThreshold: 3.0205798
+            successRate: 8.969579
+            successfulRequestsCount: 4
+            totalErrors: totalErrors
+            clientSecretHash: clientSecretHash
+            lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+            complianceStandards:
+            - complianceStandards
+            - complianceStandards
+            keyPrefix: keyPrefix
+            requiresClientSecret: true
+            expiresAt: 2000-01-23T04:56:07.000+00:00
+            webhookUrl: webhookUrl
+            monthlyRequestQuota: monthlyRequestQuota
+            dataResidency: dataResidency
+            encrypted: true
+            lastUsedAt: 2000-01-23T04:56:07.000+00:00
+            lastRotationReason: lastRotationReason
+            tenantId: tenantId
+            requestsPerDay: 0
+            scopes:
+            - scopes
+            - scopes
+            alertEmails:
+            - alertEmails
+            - alertEmails
+            allowedSignatureAlgorithms:
+            - allowedSignatureAlgorithms
+            - allowedSignatureAlgorithms
+            billingTier: billingTier
+            account: null
+            errorAlertThreshold: 3.05761
+          - averageResponseTime: 0.10263654
+            lastRotationDate: 2000-01-23T04:56:07.000+00:00
+            documentationUrl: documentationUrl
+            workspace: null
+            alertOnQuotaThreshold: true
+            metadataJson: metadataJson
+            totalRequests: totalRequests
+            enforceMutualTls: true
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            logAllRequests: true
+            apiVersion: apiVersion
+            requiresAuditLogging: true
+            lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+            dataClassification: dataClassification
+            id: id
+            costPerRequest: 6.519181
+            requireRequestSigning: true
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+            allowedDomains:
+            - allowedDomains
+            - allowedDomains
+            approvedIntegrations:
+            - approvedIntegrations
+            - approvedIntegrations
+            requestsPerSecond: 7
+            rotationFrequencyDays: 7
+            recentErrors: recentErrors
+            endpointUsageJson: endpointUsageJson
+            tags:
+            - tags
+            - tags
+            deletedAt: 2000-01-23T04:56:07.000+00:00
+            enforceSigning: true
+            clientCertificateHash: clientCertificateHash
+            enforceHttps: true
+            allowedIps:
+            - allowedIps
+            - allowedIps
+            name: name
+            concurrentRequests: 7
+            status: STATUS_UNSPECIFIED
+            supportContact: supportContact
+            supportedFeatures:
+            - supportedFeatures
+            - supportedFeatures
+            errorRatesJson: errorRatesJson
+            alertOnErrorSpike: true
+            allowedEnvironments:
+            - allowedEnvironments
+            - allowedEnvironments
+            description: description
+            isTestKey: true
+            orgId: orgId
+            monitoringIntegrations:
+            - monitoringIntegrations
+            - monitoringIntegrations
+            keyHash: keyHash
+            quotaAlertThreshold: 3.0205798
+            successRate: 8.969579
+            successfulRequestsCount: 4
+            totalErrors: totalErrors
+            clientSecretHash: clientSecretHash
+            lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+            complianceStandards:
+            - complianceStandards
+            - complianceStandards
+            keyPrefix: keyPrefix
+            requiresClientSecret: true
+            expiresAt: 2000-01-23T04:56:07.000+00:00
+            webhookUrl: webhookUrl
+            monthlyRequestQuota: monthlyRequestQuota
+            dataResidency: dataResidency
+            encrypted: true
+            lastUsedAt: 2000-01-23T04:56:07.000+00:00
+            lastRotationReason: lastRotationReason
+            tenantId: tenantId
+            requestsPerDay: 0
+            scopes:
+            - scopes
+            - scopes
+            alertEmails:
+            - alertEmails
+            - alertEmails
+            allowedSignatureAlgorithms:
+            - allowedSignatureAlgorithms
+            - allowedSignatureAlgorithms
+            billingTier: billingTier
+            account: null
+            errorAlertThreshold: 3.05761
           industry: industry
           workflows:
           - workspace: null
@@ -7229,6 +7967,185 @@ components:
           - activeScrapers: 3
             storageQuota: storageQuota
             dailyJobQuota: 6
+            apiKeys:
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
             industry: industry
             workflows:
             - workspace: null
@@ -9429,6 +10346,185 @@ components:
           - activeScrapers: 3
             storageQuota: storageQuota
             dailyJobQuota: 6
+            apiKeys:
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
             industry: industry
             workflows:
             - workspace: null
@@ -11673,6 +12769,185 @@ components:
           - activeScrapers: 3
             storageQuota: storageQuota
             dailyJobQuota: 6
+            apiKeys:
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
             industry: industry
             workflows:
             - workspace: null
@@ -13873,6 +15148,185 @@ components:
           - activeScrapers: 3
             storageQuota: storageQuota
             dailyJobQuota: 6
+            apiKeys:
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
             industry: industry
             workflows:
             - workspace: null
@@ -16404,6 +17858,185 @@ components:
           - activeScrapers: 3
             storageQuota: storageQuota
             dailyJobQuota: 6
+            apiKeys:
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
             industry: industry
             workflows:
             - workspace: null
@@ -18604,6 +20237,185 @@ components:
           - activeScrapers: 3
             storageQuota: storageQuota
             dailyJobQuota: 6
+            apiKeys:
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
             industry: industry
             workflows:
             - workspace: null
@@ -23348,6 +25160,7 @@ components:
         updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
+          format: uint64
           title: Changed from uint64 to string to support UUID
           type: string
         priority:
@@ -24526,6 +26339,185 @@ components:
           - activeScrapers: 3
             storageQuota: storageQuota
             dailyJobQuota: 6
+            apiKeys:
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
             industry: industry
             workflows:
             - workspace: null
@@ -26726,6 +28718,185 @@ components:
           - activeScrapers: 3
             storageQuota: storageQuota
             dailyJobQuota: 6
+            apiKeys:
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
             industry: industry
             workflows:
             - workspace: null
@@ -28966,6 +31137,185 @@ components:
           - activeScrapers: 3
             storageQuota: storageQuota
             dailyJobQuota: 6
+            apiKeys:
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
             industry: industry
             workflows:
             - workspace: null
@@ -31166,6 +33516,185 @@ components:
           - activeScrapers: 3
             storageQuota: storageQuota
             dailyJobQuota: 6
+            apiKeys:
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
+            - averageResponseTime: 0.10263654
+              lastRotationDate: 2000-01-23T04:56:07.000+00:00
+              documentationUrl: documentationUrl
+              workspace: null
+              alertOnQuotaThreshold: true
+              metadataJson: metadataJson
+              totalRequests: totalRequests
+              enforceMutualTls: true
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              logAllRequests: true
+              apiVersion: apiVersion
+              requiresAuditLogging: true
+              lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+              dataClassification: dataClassification
+              id: id
+              costPerRequest: 6.519181
+              requireRequestSigning: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+              allowedDomains:
+              - allowedDomains
+              - allowedDomains
+              approvedIntegrations:
+              - approvedIntegrations
+              - approvedIntegrations
+              requestsPerSecond: 7
+              rotationFrequencyDays: 7
+              recentErrors: recentErrors
+              endpointUsageJson: endpointUsageJson
+              tags:
+              - tags
+              - tags
+              deletedAt: 2000-01-23T04:56:07.000+00:00
+              enforceSigning: true
+              clientCertificateHash: clientCertificateHash
+              enforceHttps: true
+              allowedIps:
+              - allowedIps
+              - allowedIps
+              name: name
+              concurrentRequests: 7
+              status: STATUS_UNSPECIFIED
+              supportContact: supportContact
+              supportedFeatures:
+              - supportedFeatures
+              - supportedFeatures
+              errorRatesJson: errorRatesJson
+              alertOnErrorSpike: true
+              allowedEnvironments:
+              - allowedEnvironments
+              - allowedEnvironments
+              description: description
+              isTestKey: true
+              orgId: orgId
+              monitoringIntegrations:
+              - monitoringIntegrations
+              - monitoringIntegrations
+              keyHash: keyHash
+              quotaAlertThreshold: 3.0205798
+              successRate: 8.969579
+              successfulRequestsCount: 4
+              totalErrors: totalErrors
+              clientSecretHash: clientSecretHash
+              lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+              complianceStandards:
+              - complianceStandards
+              - complianceStandards
+              keyPrefix: keyPrefix
+              requiresClientSecret: true
+              expiresAt: 2000-01-23T04:56:07.000+00:00
+              webhookUrl: webhookUrl
+              monthlyRequestQuota: monthlyRequestQuota
+              dataResidency: dataResidency
+              encrypted: true
+              lastUsedAt: 2000-01-23T04:56:07.000+00:00
+              lastRotationReason: lastRotationReason
+              tenantId: tenantId
+              requestsPerDay: 0
+              scopes:
+              - scopes
+              - scopes
+              alertEmails:
+              - alertEmails
+              - alertEmails
+              allowedSignatureAlgorithms:
+              - allowedSignatureAlgorithms
+              - allowedSignatureAlgorithms
+              billingTier: billingTier
+              account: null
+              errorAlertThreshold: 3.05761
             industry: industry
             workflows:
             - workspace: null
@@ -33524,6 +36053,185 @@ components:
         activeScrapers: 3
         storageQuota: storageQuota
         dailyJobQuota: 6
+        apiKeys:
+        - averageResponseTime: 0.10263654
+          lastRotationDate: 2000-01-23T04:56:07.000+00:00
+          documentationUrl: documentationUrl
+          workspace: null
+          alertOnQuotaThreshold: true
+          metadataJson: metadataJson
+          totalRequests: totalRequests
+          enforceMutualTls: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          logAllRequests: true
+          apiVersion: apiVersion
+          requiresAuditLogging: true
+          lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+          dataClassification: dataClassification
+          id: id
+          costPerRequest: 6.519181
+          requireRequestSigning: true
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          allowedDomains:
+          - allowedDomains
+          - allowedDomains
+          approvedIntegrations:
+          - approvedIntegrations
+          - approvedIntegrations
+          requestsPerSecond: 7
+          rotationFrequencyDays: 7
+          recentErrors: recentErrors
+          endpointUsageJson: endpointUsageJson
+          tags:
+          - tags
+          - tags
+          deletedAt: 2000-01-23T04:56:07.000+00:00
+          enforceSigning: true
+          clientCertificateHash: clientCertificateHash
+          enforceHttps: true
+          allowedIps:
+          - allowedIps
+          - allowedIps
+          name: name
+          concurrentRequests: 7
+          status: STATUS_UNSPECIFIED
+          supportContact: supportContact
+          supportedFeatures:
+          - supportedFeatures
+          - supportedFeatures
+          errorRatesJson: errorRatesJson
+          alertOnErrorSpike: true
+          allowedEnvironments:
+          - allowedEnvironments
+          - allowedEnvironments
+          description: description
+          isTestKey: true
+          orgId: orgId
+          monitoringIntegrations:
+          - monitoringIntegrations
+          - monitoringIntegrations
+          keyHash: keyHash
+          quotaAlertThreshold: 3.0205798
+          successRate: 8.969579
+          successfulRequestsCount: 4
+          totalErrors: totalErrors
+          clientSecretHash: clientSecretHash
+          lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+          complianceStandards:
+          - complianceStandards
+          - complianceStandards
+          keyPrefix: keyPrefix
+          requiresClientSecret: true
+          expiresAt: 2000-01-23T04:56:07.000+00:00
+          webhookUrl: webhookUrl
+          monthlyRequestQuota: monthlyRequestQuota
+          dataResidency: dataResidency
+          encrypted: true
+          lastUsedAt: 2000-01-23T04:56:07.000+00:00
+          lastRotationReason: lastRotationReason
+          tenantId: tenantId
+          requestsPerDay: 0
+          scopes:
+          - scopes
+          - scopes
+          alertEmails:
+          - alertEmails
+          - alertEmails
+          allowedSignatureAlgorithms:
+          - allowedSignatureAlgorithms
+          - allowedSignatureAlgorithms
+          billingTier: billingTier
+          account: null
+          errorAlertThreshold: 3.05761
+        - averageResponseTime: 0.10263654
+          lastRotationDate: 2000-01-23T04:56:07.000+00:00
+          documentationUrl: documentationUrl
+          workspace: null
+          alertOnQuotaThreshold: true
+          metadataJson: metadataJson
+          totalRequests: totalRequests
+          enforceMutualTls: true
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          logAllRequests: true
+          apiVersion: apiVersion
+          requiresAuditLogging: true
+          lastRotatedAt: 2000-01-23T04:56:07.000+00:00
+          dataClassification: dataClassification
+          id: id
+          costPerRequest: 6.519181
+          requireRequestSigning: true
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          allowedDomains:
+          - allowedDomains
+          - allowedDomains
+          approvedIntegrations:
+          - approvedIntegrations
+          - approvedIntegrations
+          requestsPerSecond: 7
+          rotationFrequencyDays: 7
+          recentErrors: recentErrors
+          endpointUsageJson: endpointUsageJson
+          tags:
+          - tags
+          - tags
+          deletedAt: 2000-01-23T04:56:07.000+00:00
+          enforceSigning: true
+          clientCertificateHash: clientCertificateHash
+          enforceHttps: true
+          allowedIps:
+          - allowedIps
+          - allowedIps
+          name: name
+          concurrentRequests: 7
+          status: STATUS_UNSPECIFIED
+          supportContact: supportContact
+          supportedFeatures:
+          - supportedFeatures
+          - supportedFeatures
+          errorRatesJson: errorRatesJson
+          alertOnErrorSpike: true
+          allowedEnvironments:
+          - allowedEnvironments
+          - allowedEnvironments
+          description: description
+          isTestKey: true
+          orgId: orgId
+          monitoringIntegrations:
+          - monitoringIntegrations
+          - monitoringIntegrations
+          keyHash: keyHash
+          quotaAlertThreshold: 3.0205798
+          successRate: 8.969579
+          successfulRequestsCount: 4
+          totalErrors: totalErrors
+          clientSecretHash: clientSecretHash
+          lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
+          complianceStandards:
+          - complianceStandards
+          - complianceStandards
+          keyPrefix: keyPrefix
+          requiresClientSecret: true
+          expiresAt: 2000-01-23T04:56:07.000+00:00
+          webhookUrl: webhookUrl
+          monthlyRequestQuota: monthlyRequestQuota
+          dataResidency: dataResidency
+          encrypted: true
+          lastUsedAt: 2000-01-23T04:56:07.000+00:00
+          lastRotationReason: lastRotationReason
+          tenantId: tenantId
+          requestsPerDay: 0
+          scopes:
+          - scopes
+          - scopes
+          alertEmails:
+          - alertEmails
+          - alertEmails
+          allowedSignatureAlgorithms:
+          - allowedSignatureAlgorithms
+          - allowedSignatureAlgorithms
+          billingTier: billingTier
+          account: null
+          errorAlertThreshold: 3.05761
         industry: industry
         workflows:
         - workspace: null
@@ -35798,6 +38506,11 @@ components:
           items:
             $ref: '#/components/schemas/ScrapingJob'
           title: Associated scraping jobs for this workspace
+          type: array
+        apiKeys:
+          items:
+            $ref: '#/components/schemas/APIKey'
+          title: apiKeys
           type: array
       title: Workspace represents a business entity with multiple accounts
       type: object

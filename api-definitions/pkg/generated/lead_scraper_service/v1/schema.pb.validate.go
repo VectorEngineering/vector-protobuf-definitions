@@ -618,6 +618,40 @@ func (m *Workspace) validate(all bool) error {
 
 	}
 
+	for idx, item := range m.GetApiKeys() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, WorkspaceValidationError{
+						field:  fmt.Sprintf("ApiKeys[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, WorkspaceValidationError{
+						field:  fmt.Sprintf("ApiKeys[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return WorkspaceValidationError{
+					field:  fmt.Sprintf("ApiKeys[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return WorkspaceMultiError(errors)
 	}
@@ -3349,6 +3383,19 @@ func (m *APIKey) validate(all bool) error {
 
 	// no validation rules for ErrorAlertThreshold
 
+	// no validation rules for Encrypted
+
+	if _, ok := _APIKey_DataClassification_InLookup[m.GetDataClassification()]; !ok {
+		err := APIKeyValidationError{
+			field:  "DataClassification",
+			reason: "value must be in list [public confidential restricted]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return APIKeyMultiError(errors)
 	}
@@ -3425,6 +3472,12 @@ var _ interface {
 	Cause() error
 	ErrorName() string
 } = APIKeyValidationError{}
+
+var _APIKey_DataClassification_InLookup = map[string]struct{}{
+	"public":       {},
+	"confidential": {},
+	"restricted":   {},
+}
 
 // Validate checks the field values on Result with the rules defined in the
 // proto definition for this message. If any rules are violated, the first

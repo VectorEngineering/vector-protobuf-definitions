@@ -3,10 +3,12 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from playbookmedia_backend_server_sdk.models.base_model import Model
+from playbookmedia_backend_server_sdk.models.api_key import APIKey
 from playbookmedia_backend_server_sdk.models.scraping_job import ScrapingJob
 from playbookmedia_backend_server_sdk.models.scraping_workflow import ScrapingWorkflow
 from playbookmedia_backend_server_sdk import util
 
+from playbookmedia_backend_server_sdk.models.api_key import APIKey  # noqa: E501
 from playbookmedia_backend_server_sdk.models.scraping_job import ScrapingJob  # noqa: E501
 from playbookmedia_backend_server_sdk.models.scraping_workflow import ScrapingWorkflow  # noqa: E501
 
@@ -16,7 +18,7 @@ class Workspace(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, name=None, industry=None, domain=None, gdpr_compliant=None, hipaa_compliant=None, soc2_compliant=None, storage_quota=None, used_storage=None, created_at=None, updated_at=None, deleted_at=None, workflows=None, jobs_run_this_month=None, workspace_job_limit=None, daily_job_quota=None, active_scrapers=None, total_leads_collected=None, last_job_run=None, scraping_jobs=None):  # noqa: E501
+    def __init__(self, id=None, name=None, industry=None, domain=None, gdpr_compliant=None, hipaa_compliant=None, soc2_compliant=None, storage_quota=None, used_storage=None, created_at=None, updated_at=None, deleted_at=None, workflows=None, jobs_run_this_month=None, workspace_job_limit=None, daily_job_quota=None, active_scrapers=None, total_leads_collected=None, last_job_run=None, scraping_jobs=None, api_keys=None):  # noqa: E501
         """Workspace - a model defined in OpenAPI
 
         :param id: The id of this Workspace.  # noqa: E501
@@ -59,6 +61,8 @@ class Workspace(Model):
         :type last_job_run: datetime
         :param scraping_jobs: The scraping_jobs of this Workspace.  # noqa: E501
         :type scraping_jobs: List[ScrapingJob]
+        :param api_keys: The api_keys of this Workspace.  # noqa: E501
+        :type api_keys: List[APIKey]
         """
         self.openapi_types = {
             'id': str,
@@ -80,7 +84,8 @@ class Workspace(Model):
             'active_scrapers': int,
             'total_leads_collected': int,
             'last_job_run': datetime,
-            'scraping_jobs': List[ScrapingJob]
+            'scraping_jobs': List[ScrapingJob],
+            'api_keys': List[APIKey]
         }
 
         self.attribute_map = {
@@ -103,7 +108,8 @@ class Workspace(Model):
             'active_scrapers': 'activeScrapers',
             'total_leads_collected': 'totalLeadsCollected',
             'last_job_run': 'lastJobRun',
-            'scraping_jobs': 'scrapingJobs'
+            'scraping_jobs': 'scrapingJobs',
+            'api_keys': 'apiKeys'
         }
 
         self._id = id
@@ -126,6 +132,7 @@ class Workspace(Model):
         self._total_leads_collected = total_leads_collected
         self._last_job_run = last_job_run
         self._scraping_jobs = scraping_jobs
+        self._api_keys = api_keys
 
     @classmethod
     def from_dict(cls, dikt) -> 'Workspace':
@@ -559,3 +566,24 @@ class Workspace(Model):
         """
 
         self._scraping_jobs = scraping_jobs
+
+    @property
+    def api_keys(self) -> List[APIKey]:
+        """Gets the api_keys of this Workspace.
+
+
+        :return: The api_keys of this Workspace.
+        :rtype: List[APIKey]
+        """
+        return self._api_keys
+
+    @api_keys.setter
+    def api_keys(self, api_keys: List[APIKey]):
+        """Sets the api_keys of this Workspace.
+
+
+        :param api_keys: The api_keys of this Workspace.
+        :type api_keys: List[APIKey]
+        """
+
+        self._api_keys = api_keys

@@ -79,6 +79,8 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [APIInfo](playbookmedia_backend_client_sdk/docs/APIInfo.md)
+ - [APIKey](playbookmedia_backend_client_sdk/docs/APIKey.md)
+ - [APIKeyStatus](playbookmedia_backend_client_sdk/docs/APIKeyStatus.md)
  - [Account](playbookmedia_backend_client_sdk/docs/Account.md)
  - [AccountSettings](playbookmedia_backend_client_sdk/docs/AccountSettings.md)
  - [AccountStatus](playbookmedia_backend_client_sdk/docs/AccountStatus.md)

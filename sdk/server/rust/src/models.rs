@@ -977,6 +977,1213 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 }
 
 
+/// APIKey represents an authentication token for accessing the API. It includes features for rate limiting, permissions, and usage tracking.  Key features: - Unique key identification - Scope-based access control - Rate limiting - Usage tracking - Expiration management - Multi-tenant support  Database considerations: - Uses GORM for ORM mapping - Includes indexes for efficient querying - Supports soft deletes  Usage example: ```go apiKey := &APIKey{     Name: \"Production API Key\",     Scopes: []string{\"leads:read\", \"leads:write\"},     ExpiresAt: timestamppb.New(time.Now().AddDate(1, 0, 0)), } ```
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ApiKey {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "name")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub name: Option<String>,
+
+    #[serde(rename = "keyHash")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub key_hash: Option<String>,
+
+    #[serde(rename = "keyPrefix")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub key_prefix: Option<String>,
+
+    #[serde(rename = "orgId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub org_id: Option<String>,
+
+    #[serde(rename = "tenantId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub tenant_id: Option<String>,
+
+    #[serde(rename = "scopes")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub scopes: Option<Vec<String>>,
+
+    #[serde(rename = "allowedIps")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub allowed_ips: Option<Vec<String>>,
+
+    #[serde(rename = "allowedDomains")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub allowed_domains: Option<Vec<String>>,
+
+    #[serde(rename = "allowedEnvironments")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub allowed_environments: Option<Vec<String>>,
+
+    #[serde(rename = "isTestKey")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub is_test_key: Option<bool>,
+
+    #[serde(rename = "requestsPerSecond")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub requests_per_second: Option<i32>,
+
+    #[serde(rename = "requestsPerDay")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub requests_per_day: Option<i32>,
+
+    #[serde(rename = "concurrentRequests")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub concurrent_requests: Option<i32>,
+
+    #[serde(rename = "monthlyRequestQuota")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub monthly_request_quota: Option<String>,
+
+    #[serde(rename = "costPerRequest")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub cost_per_request: Option<f32>,
+
+    #[serde(rename = "billingTier")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub billing_tier: Option<String>,
+
+    #[serde(rename = "totalRequests")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_requests: Option<String>,
+
+    #[serde(rename = "totalErrors")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_errors: Option<String>,
+
+    #[serde(rename = "lastUsedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub last_used_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "averageResponseTime")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub average_response_time: Option<f32>,
+
+    /// Tracks usage per endpoint
+    #[serde(rename = "endpointUsageJson")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub endpoint_usage_json: Option<swagger::ByteArray>,
+
+    #[serde(rename = "errorRatesJson")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub error_rates_json: Option<swagger::ByteArray>,
+
+    #[serde(rename = "recentErrors")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub recent_errors: Option<swagger::ByteArray>,
+
+    #[serde(rename = "successfulRequestsCount")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub successful_requests_count: Option<i32>,
+
+    #[serde(rename = "successRate")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub success_rate: Option<f32>,
+
+    #[serde(rename = "status")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub status: Option<models::ApiKeyPeriodStatus>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "expiresAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub expires_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "deletedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub deleted_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "lastRotatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub last_rotated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "lastSecurityReviewAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub last_security_review_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "requiresClientSecret")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub requires_client_secret: Option<bool>,
+
+    #[serde(rename = "clientSecretHash")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub client_secret_hash: Option<String>,
+
+    #[serde(rename = "enforceHttps")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub enforce_https: Option<bool>,
+
+    #[serde(rename = "enforceSigning")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub enforce_signing: Option<bool>,
+
+    #[serde(rename = "allowedSignatureAlgorithms")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub allowed_signature_algorithms: Option<Vec<String>>,
+
+    #[serde(rename = "enforceMutualTls")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub enforce_mutual_tls: Option<bool>,
+
+    #[serde(rename = "clientCertificateHash")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub client_certificate_hash: Option<String>,
+
+    #[serde(rename = "requireRequestSigning")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub require_request_signing: Option<bool>,
+
+    /// Detailed description of key usage
+    #[serde(rename = "description")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub description: Option<String>,
+
+    #[serde(rename = "metadataJson")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub metadata_json: Option<swagger::ByteArray>,
+
+    #[serde(rename = "tags")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub tags: Option<Vec<String>>,
+
+    #[serde(rename = "apiVersion")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub api_version: Option<String>,
+
+    #[serde(rename = "supportedFeatures")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub supported_features: Option<Vec<String>>,
+
+    #[serde(rename = "documentationUrl")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub documentation_url: Option<String>,
+
+    #[serde(rename = "supportContact")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub support_contact: Option<String>,
+
+    #[serde(rename = "account")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub account: Option<models::Account>,
+
+    #[serde(rename = "workspace")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub workspace: Option<models::Workspace>,
+
+    #[serde(rename = "logAllRequests")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub log_all_requests: Option<bool>,
+
+    #[serde(rename = "lastRotationReason")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub last_rotation_reason: Option<String>,
+
+    #[serde(rename = "lastRotationDate")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub last_rotation_date: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "rotationFrequencyDays")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub rotation_frequency_days: Option<i32>,
+
+    #[serde(rename = "complianceStandards")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub compliance_standards: Option<Vec<String>>,
+
+    #[serde(rename = "requiresAuditLogging")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub requires_audit_logging: Option<bool>,
+
+    #[serde(rename = "dataResidency")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub data_residency: Option<String>,
+
+    #[serde(rename = "approvedIntegrations")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub approved_integrations: Option<Vec<String>>,
+
+    #[serde(rename = "alertEmails")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub alert_emails: Option<Vec<String>>,
+
+    #[serde(rename = "webhookUrl")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub webhook_url: Option<String>,
+
+    #[serde(rename = "alertOnQuotaThreshold")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub alert_on_quota_threshold: Option<bool>,
+
+    #[serde(rename = "quotaAlertThreshold")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub quota_alert_threshold: Option<f32>,
+
+    #[serde(rename = "alertOnErrorSpike")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub alert_on_error_spike: Option<bool>,
+
+    #[serde(rename = "errorAlertThreshold")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub error_alert_threshold: Option<f32>,
+
+    #[serde(rename = "monitoringIntegrations")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub monitoring_integrations: Option<Vec<String>>,
+
+    #[serde(rename = "encrypted")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub encrypted: Option<bool>,
+
+    #[serde(rename = "dataClassification")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub data_classification: Option<String>,
+
+}
+
+
+impl ApiKey {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ApiKey {
+        ApiKey {
+            id: None,
+            name: None,
+            key_hash: None,
+            key_prefix: None,
+            org_id: None,
+            tenant_id: None,
+            scopes: None,
+            allowed_ips: None,
+            allowed_domains: None,
+            allowed_environments: None,
+            is_test_key: None,
+            requests_per_second: None,
+            requests_per_day: None,
+            concurrent_requests: None,
+            monthly_request_quota: None,
+            cost_per_request: None,
+            billing_tier: None,
+            total_requests: None,
+            total_errors: None,
+            last_used_at: None,
+            average_response_time: None,
+            endpoint_usage_json: None,
+            error_rates_json: None,
+            recent_errors: None,
+            successful_requests_count: None,
+            success_rate: None,
+            status: None,
+            created_at: None,
+            updated_at: None,
+            expires_at: None,
+            deleted_at: None,
+            last_rotated_at: None,
+            last_security_review_at: None,
+            requires_client_secret: None,
+            client_secret_hash: None,
+            enforce_https: None,
+            enforce_signing: None,
+            allowed_signature_algorithms: None,
+            enforce_mutual_tls: None,
+            client_certificate_hash: None,
+            require_request_signing: None,
+            description: None,
+            metadata_json: None,
+            tags: None,
+            api_version: None,
+            supported_features: None,
+            documentation_url: None,
+            support_contact: None,
+            account: None,
+            workspace: None,
+            log_all_requests: None,
+            last_rotation_reason: None,
+            last_rotation_date: None,
+            rotation_frequency_days: None,
+            compliance_standards: None,
+            requires_audit_logging: None,
+            data_residency: None,
+            approved_integrations: None,
+            alert_emails: None,
+            webhook_url: None,
+            alert_on_quota_threshold: None,
+            quota_alert_threshold: None,
+            alert_on_error_spike: None,
+            error_alert_threshold: None,
+            monitoring_integrations: None,
+            encrypted: None,
+            data_classification: None,
+        }
+    }
+}
+
+/// Converts the ApiKey value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ApiKey {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.name.as_ref().map(|name| {
+                [
+                    "name".to_string(),
+                    name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.key_hash.as_ref().map(|key_hash| {
+                [
+                    "keyHash".to_string(),
+                    key_hash.to_string(),
+                ].join(",")
+            }),
+
+
+            self.key_prefix.as_ref().map(|key_prefix| {
+                [
+                    "keyPrefix".to_string(),
+                    key_prefix.to_string(),
+                ].join(",")
+            }),
+
+
+            self.org_id.as_ref().map(|org_id| {
+                [
+                    "orgId".to_string(),
+                    org_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.tenant_id.as_ref().map(|tenant_id| {
+                [
+                    "tenantId".to_string(),
+                    tenant_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.scopes.as_ref().map(|scopes| {
+                [
+                    "scopes".to_string(),
+                    scopes.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.allowed_ips.as_ref().map(|allowed_ips| {
+                [
+                    "allowedIps".to_string(),
+                    allowed_ips.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.allowed_domains.as_ref().map(|allowed_domains| {
+                [
+                    "allowedDomains".to_string(),
+                    allowed_domains.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.allowed_environments.as_ref().map(|allowed_environments| {
+                [
+                    "allowedEnvironments".to_string(),
+                    allowed_environments.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.is_test_key.as_ref().map(|is_test_key| {
+                [
+                    "isTestKey".to_string(),
+                    is_test_key.to_string(),
+                ].join(",")
+            }),
+
+
+            self.requests_per_second.as_ref().map(|requests_per_second| {
+                [
+                    "requestsPerSecond".to_string(),
+                    requests_per_second.to_string(),
+                ].join(",")
+            }),
+
+
+            self.requests_per_day.as_ref().map(|requests_per_day| {
+                [
+                    "requestsPerDay".to_string(),
+                    requests_per_day.to_string(),
+                ].join(",")
+            }),
+
+
+            self.concurrent_requests.as_ref().map(|concurrent_requests| {
+                [
+                    "concurrentRequests".to_string(),
+                    concurrent_requests.to_string(),
+                ].join(",")
+            }),
+
+
+            self.monthly_request_quota.as_ref().map(|monthly_request_quota| {
+                [
+                    "monthlyRequestQuota".to_string(),
+                    monthly_request_quota.to_string(),
+                ].join(",")
+            }),
+
+
+            self.cost_per_request.as_ref().map(|cost_per_request| {
+                [
+                    "costPerRequest".to_string(),
+                    cost_per_request.to_string(),
+                ].join(",")
+            }),
+
+
+            self.billing_tier.as_ref().map(|billing_tier| {
+                [
+                    "billingTier".to_string(),
+                    billing_tier.to_string(),
+                ].join(",")
+            }),
+
+
+            self.total_requests.as_ref().map(|total_requests| {
+                [
+                    "totalRequests".to_string(),
+                    total_requests.to_string(),
+                ].join(",")
+            }),
+
+
+            self.total_errors.as_ref().map(|total_errors| {
+                [
+                    "totalErrors".to_string(),
+                    total_errors.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping lastUsedAt in query parameter serialization
+
+
+            self.average_response_time.as_ref().map(|average_response_time| {
+                [
+                    "averageResponseTime".to_string(),
+                    average_response_time.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping endpointUsageJson in query parameter serialization
+            // Skipping endpointUsageJson in query parameter serialization
+
+            // Skipping errorRatesJson in query parameter serialization
+            // Skipping errorRatesJson in query parameter serialization
+
+            // Skipping recentErrors in query parameter serialization
+            // Skipping recentErrors in query parameter serialization
+
+
+            self.successful_requests_count.as_ref().map(|successful_requests_count| {
+                [
+                    "successfulRequestsCount".to_string(),
+                    successful_requests_count.to_string(),
+                ].join(",")
+            }),
+
+
+            self.success_rate.as_ref().map(|success_rate| {
+                [
+                    "successRate".to_string(),
+                    success_rate.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping status in query parameter serialization
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+            // Skipping expiresAt in query parameter serialization
+
+            // Skipping deletedAt in query parameter serialization
+
+            // Skipping lastRotatedAt in query parameter serialization
+
+            // Skipping lastSecurityReviewAt in query parameter serialization
+
+
+            self.requires_client_secret.as_ref().map(|requires_client_secret| {
+                [
+                    "requiresClientSecret".to_string(),
+                    requires_client_secret.to_string(),
+                ].join(",")
+            }),
+
+
+            self.client_secret_hash.as_ref().map(|client_secret_hash| {
+                [
+                    "clientSecretHash".to_string(),
+                    client_secret_hash.to_string(),
+                ].join(",")
+            }),
+
+
+            self.enforce_https.as_ref().map(|enforce_https| {
+                [
+                    "enforceHttps".to_string(),
+                    enforce_https.to_string(),
+                ].join(",")
+            }),
+
+
+            self.enforce_signing.as_ref().map(|enforce_signing| {
+                [
+                    "enforceSigning".to_string(),
+                    enforce_signing.to_string(),
+                ].join(",")
+            }),
+
+
+            self.allowed_signature_algorithms.as_ref().map(|allowed_signature_algorithms| {
+                [
+                    "allowedSignatureAlgorithms".to_string(),
+                    allowed_signature_algorithms.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.enforce_mutual_tls.as_ref().map(|enforce_mutual_tls| {
+                [
+                    "enforceMutualTls".to_string(),
+                    enforce_mutual_tls.to_string(),
+                ].join(",")
+            }),
+
+
+            self.client_certificate_hash.as_ref().map(|client_certificate_hash| {
+                [
+                    "clientCertificateHash".to_string(),
+                    client_certificate_hash.to_string(),
+                ].join(",")
+            }),
+
+
+            self.require_request_signing.as_ref().map(|require_request_signing| {
+                [
+                    "requireRequestSigning".to_string(),
+                    require_request_signing.to_string(),
+                ].join(",")
+            }),
+
+
+            self.description.as_ref().map(|description| {
+                [
+                    "description".to_string(),
+                    description.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping metadataJson in query parameter serialization
+            // Skipping metadataJson in query parameter serialization
+
+
+            self.tags.as_ref().map(|tags| {
+                [
+                    "tags".to_string(),
+                    tags.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.api_version.as_ref().map(|api_version| {
+                [
+                    "apiVersion".to_string(),
+                    api_version.to_string(),
+                ].join(",")
+            }),
+
+
+            self.supported_features.as_ref().map(|supported_features| {
+                [
+                    "supportedFeatures".to_string(),
+                    supported_features.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.documentation_url.as_ref().map(|documentation_url| {
+                [
+                    "documentationUrl".to_string(),
+                    documentation_url.to_string(),
+                ].join(",")
+            }),
+
+
+            self.support_contact.as_ref().map(|support_contact| {
+                [
+                    "supportContact".to_string(),
+                    support_contact.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping account in query parameter serialization
+
+            // Skipping workspace in query parameter serialization
+
+
+            self.log_all_requests.as_ref().map(|log_all_requests| {
+                [
+                    "logAllRequests".to_string(),
+                    log_all_requests.to_string(),
+                ].join(",")
+            }),
+
+
+            self.last_rotation_reason.as_ref().map(|last_rotation_reason| {
+                [
+                    "lastRotationReason".to_string(),
+                    last_rotation_reason.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping lastRotationDate in query parameter serialization
+
+
+            self.rotation_frequency_days.as_ref().map(|rotation_frequency_days| {
+                [
+                    "rotationFrequencyDays".to_string(),
+                    rotation_frequency_days.to_string(),
+                ].join(",")
+            }),
+
+
+            self.compliance_standards.as_ref().map(|compliance_standards| {
+                [
+                    "complianceStandards".to_string(),
+                    compliance_standards.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.requires_audit_logging.as_ref().map(|requires_audit_logging| {
+                [
+                    "requiresAuditLogging".to_string(),
+                    requires_audit_logging.to_string(),
+                ].join(",")
+            }),
+
+
+            self.data_residency.as_ref().map(|data_residency| {
+                [
+                    "dataResidency".to_string(),
+                    data_residency.to_string(),
+                ].join(",")
+            }),
+
+
+            self.approved_integrations.as_ref().map(|approved_integrations| {
+                [
+                    "approvedIntegrations".to_string(),
+                    approved_integrations.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.alert_emails.as_ref().map(|alert_emails| {
+                [
+                    "alertEmails".to_string(),
+                    alert_emails.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.webhook_url.as_ref().map(|webhook_url| {
+                [
+                    "webhookUrl".to_string(),
+                    webhook_url.to_string(),
+                ].join(",")
+            }),
+
+
+            self.alert_on_quota_threshold.as_ref().map(|alert_on_quota_threshold| {
+                [
+                    "alertOnQuotaThreshold".to_string(),
+                    alert_on_quota_threshold.to_string(),
+                ].join(",")
+            }),
+
+
+            self.quota_alert_threshold.as_ref().map(|quota_alert_threshold| {
+                [
+                    "quotaAlertThreshold".to_string(),
+                    quota_alert_threshold.to_string(),
+                ].join(",")
+            }),
+
+
+            self.alert_on_error_spike.as_ref().map(|alert_on_error_spike| {
+                [
+                    "alertOnErrorSpike".to_string(),
+                    alert_on_error_spike.to_string(),
+                ].join(",")
+            }),
+
+
+            self.error_alert_threshold.as_ref().map(|error_alert_threshold| {
+                [
+                    "errorAlertThreshold".to_string(),
+                    error_alert_threshold.to_string(),
+                ].join(",")
+            }),
+
+
+            self.monitoring_integrations.as_ref().map(|monitoring_integrations| {
+                [
+                    "monitoringIntegrations".to_string(),
+                    monitoring_integrations.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.encrypted.as_ref().map(|encrypted| {
+                [
+                    "encrypted".to_string(),
+                    encrypted.to_string(),
+                ].join(",")
+            }),
+
+
+            self.data_classification.as_ref().map(|data_classification| {
+                [
+                    "dataClassification".to_string(),
+                    data_classification.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ApiKey value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ApiKey {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub name: Vec<String>,
+            pub key_hash: Vec<String>,
+            pub key_prefix: Vec<String>,
+            pub org_id: Vec<String>,
+            pub tenant_id: Vec<String>,
+            pub scopes: Vec<Vec<String>>,
+            pub allowed_ips: Vec<Vec<String>>,
+            pub allowed_domains: Vec<Vec<String>>,
+            pub allowed_environments: Vec<Vec<String>>,
+            pub is_test_key: Vec<bool>,
+            pub requests_per_second: Vec<i32>,
+            pub requests_per_day: Vec<i32>,
+            pub concurrent_requests: Vec<i32>,
+            pub monthly_request_quota: Vec<String>,
+            pub cost_per_request: Vec<f32>,
+            pub billing_tier: Vec<String>,
+            pub total_requests: Vec<String>,
+            pub total_errors: Vec<String>,
+            pub last_used_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub average_response_time: Vec<f32>,
+            pub endpoint_usage_json: Vec<swagger::ByteArray>,
+            pub error_rates_json: Vec<swagger::ByteArray>,
+            pub recent_errors: Vec<swagger::ByteArray>,
+            pub successful_requests_count: Vec<i32>,
+            pub success_rate: Vec<f32>,
+            pub status: Vec<models::ApiKeyPeriodStatus>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub expires_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub deleted_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub last_rotated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub last_security_review_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub requires_client_secret: Vec<bool>,
+            pub client_secret_hash: Vec<String>,
+            pub enforce_https: Vec<bool>,
+            pub enforce_signing: Vec<bool>,
+            pub allowed_signature_algorithms: Vec<Vec<String>>,
+            pub enforce_mutual_tls: Vec<bool>,
+            pub client_certificate_hash: Vec<String>,
+            pub require_request_signing: Vec<bool>,
+            pub description: Vec<String>,
+            pub metadata_json: Vec<swagger::ByteArray>,
+            pub tags: Vec<Vec<String>>,
+            pub api_version: Vec<String>,
+            pub supported_features: Vec<Vec<String>>,
+            pub documentation_url: Vec<String>,
+            pub support_contact: Vec<String>,
+            pub account: Vec<models::Account>,
+            pub workspace: Vec<models::Workspace>,
+            pub log_all_requests: Vec<bool>,
+            pub last_rotation_reason: Vec<String>,
+            pub last_rotation_date: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub rotation_frequency_days: Vec<i32>,
+            pub compliance_standards: Vec<Vec<String>>,
+            pub requires_audit_logging: Vec<bool>,
+            pub data_residency: Vec<String>,
+            pub approved_integrations: Vec<Vec<String>>,
+            pub alert_emails: Vec<Vec<String>>,
+            pub webhook_url: Vec<String>,
+            pub alert_on_quota_threshold: Vec<bool>,
+            pub quota_alert_threshold: Vec<f32>,
+            pub alert_on_error_spike: Vec<bool>,
+            pub error_alert_threshold: Vec<f32>,
+            pub monitoring_integrations: Vec<Vec<String>>,
+            pub encrypted: Vec<bool>,
+            pub data_classification: Vec<String>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ApiKey".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "keyHash" => intermediate_rep.key_hash.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "keyPrefix" => intermediate_rep.key_prefix.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "orgId" => intermediate_rep.org_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "scopes" => return std::result::Result::Err("Parsing a container in this style is not supported in ApiKey".to_string()),
+                    "allowedIps" => return std::result::Result::Err("Parsing a container in this style is not supported in ApiKey".to_string()),
+                    "allowedDomains" => return std::result::Result::Err("Parsing a container in this style is not supported in ApiKey".to_string()),
+                    "allowedEnvironments" => return std::result::Result::Err("Parsing a container in this style is not supported in ApiKey".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "isTestKey" => intermediate_rep.is_test_key.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "requestsPerSecond" => intermediate_rep.requests_per_second.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "requestsPerDay" => intermediate_rep.requests_per_day.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "concurrentRequests" => intermediate_rep.concurrent_requests.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "monthlyRequestQuota" => intermediate_rep.monthly_request_quota.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "costPerRequest" => intermediate_rep.cost_per_request.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "billingTier" => intermediate_rep.billing_tier.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "totalRequests" => intermediate_rep.total_requests.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "totalErrors" => intermediate_rep.total_errors.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "lastUsedAt" => intermediate_rep.last_used_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "averageResponseTime" => intermediate_rep.average_response_time.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "endpointUsageJson" => return std::result::Result::Err("Parsing binary data in this style is not supported in ApiKey".to_string()),
+                    "errorRatesJson" => return std::result::Result::Err("Parsing binary data in this style is not supported in ApiKey".to_string()),
+                    "recentErrors" => return std::result::Result::Err("Parsing binary data in this style is not supported in ApiKey".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "successfulRequestsCount" => intermediate_rep.successful_requests_count.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "successRate" => intermediate_rep.success_rate.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "status" => intermediate_rep.status.push(<models::ApiKeyPeriodStatus as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "expiresAt" => intermediate_rep.expires_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "deletedAt" => intermediate_rep.deleted_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "lastRotatedAt" => intermediate_rep.last_rotated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "lastSecurityReviewAt" => intermediate_rep.last_security_review_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "requiresClientSecret" => intermediate_rep.requires_client_secret.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "clientSecretHash" => intermediate_rep.client_secret_hash.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "enforceHttps" => intermediate_rep.enforce_https.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "enforceSigning" => intermediate_rep.enforce_signing.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "allowedSignatureAlgorithms" => return std::result::Result::Err("Parsing a container in this style is not supported in ApiKey".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "enforceMutualTls" => intermediate_rep.enforce_mutual_tls.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "clientCertificateHash" => intermediate_rep.client_certificate_hash.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "requireRequestSigning" => intermediate_rep.require_request_signing.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "metadataJson" => return std::result::Result::Err("Parsing binary data in this style is not supported in ApiKey".to_string()),
+                    "tags" => return std::result::Result::Err("Parsing a container in this style is not supported in ApiKey".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "apiVersion" => intermediate_rep.api_version.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "supportedFeatures" => return std::result::Result::Err("Parsing a container in this style is not supported in ApiKey".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "documentationUrl" => intermediate_rep.documentation_url.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "supportContact" => intermediate_rep.support_contact.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "account" => intermediate_rep.account.push(<models::Account as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "workspace" => intermediate_rep.workspace.push(<models::Workspace as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "logAllRequests" => intermediate_rep.log_all_requests.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "lastRotationReason" => intermediate_rep.last_rotation_reason.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "lastRotationDate" => intermediate_rep.last_rotation_date.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "rotationFrequencyDays" => intermediate_rep.rotation_frequency_days.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "complianceStandards" => return std::result::Result::Err("Parsing a container in this style is not supported in ApiKey".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "requiresAuditLogging" => intermediate_rep.requires_audit_logging.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "dataResidency" => intermediate_rep.data_residency.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "approvedIntegrations" => return std::result::Result::Err("Parsing a container in this style is not supported in ApiKey".to_string()),
+                    "alertEmails" => return std::result::Result::Err("Parsing a container in this style is not supported in ApiKey".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "webhookUrl" => intermediate_rep.webhook_url.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "alertOnQuotaThreshold" => intermediate_rep.alert_on_quota_threshold.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "quotaAlertThreshold" => intermediate_rep.quota_alert_threshold.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "alertOnErrorSpike" => intermediate_rep.alert_on_error_spike.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "errorAlertThreshold" => intermediate_rep.error_alert_threshold.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "monitoringIntegrations" => return std::result::Result::Err("Parsing a container in this style is not supported in ApiKey".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "encrypted" => intermediate_rep.encrypted.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "dataClassification" => intermediate_rep.data_classification.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ApiKey".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ApiKey {
+            id: intermediate_rep.id.into_iter().next(),
+            name: intermediate_rep.name.into_iter().next(),
+            key_hash: intermediate_rep.key_hash.into_iter().next(),
+            key_prefix: intermediate_rep.key_prefix.into_iter().next(),
+            org_id: intermediate_rep.org_id.into_iter().next(),
+            tenant_id: intermediate_rep.tenant_id.into_iter().next(),
+            scopes: intermediate_rep.scopes.into_iter().next(),
+            allowed_ips: intermediate_rep.allowed_ips.into_iter().next(),
+            allowed_domains: intermediate_rep.allowed_domains.into_iter().next(),
+            allowed_environments: intermediate_rep.allowed_environments.into_iter().next(),
+            is_test_key: intermediate_rep.is_test_key.into_iter().next(),
+            requests_per_second: intermediate_rep.requests_per_second.into_iter().next(),
+            requests_per_day: intermediate_rep.requests_per_day.into_iter().next(),
+            concurrent_requests: intermediate_rep.concurrent_requests.into_iter().next(),
+            monthly_request_quota: intermediate_rep.monthly_request_quota.into_iter().next(),
+            cost_per_request: intermediate_rep.cost_per_request.into_iter().next(),
+            billing_tier: intermediate_rep.billing_tier.into_iter().next(),
+            total_requests: intermediate_rep.total_requests.into_iter().next(),
+            total_errors: intermediate_rep.total_errors.into_iter().next(),
+            last_used_at: intermediate_rep.last_used_at.into_iter().next(),
+            average_response_time: intermediate_rep.average_response_time.into_iter().next(),
+            endpoint_usage_json: intermediate_rep.endpoint_usage_json.into_iter().next(),
+            error_rates_json: intermediate_rep.error_rates_json.into_iter().next(),
+            recent_errors: intermediate_rep.recent_errors.into_iter().next(),
+            successful_requests_count: intermediate_rep.successful_requests_count.into_iter().next(),
+            success_rate: intermediate_rep.success_rate.into_iter().next(),
+            status: intermediate_rep.status.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+            expires_at: intermediate_rep.expires_at.into_iter().next(),
+            deleted_at: intermediate_rep.deleted_at.into_iter().next(),
+            last_rotated_at: intermediate_rep.last_rotated_at.into_iter().next(),
+            last_security_review_at: intermediate_rep.last_security_review_at.into_iter().next(),
+            requires_client_secret: intermediate_rep.requires_client_secret.into_iter().next(),
+            client_secret_hash: intermediate_rep.client_secret_hash.into_iter().next(),
+            enforce_https: intermediate_rep.enforce_https.into_iter().next(),
+            enforce_signing: intermediate_rep.enforce_signing.into_iter().next(),
+            allowed_signature_algorithms: intermediate_rep.allowed_signature_algorithms.into_iter().next(),
+            enforce_mutual_tls: intermediate_rep.enforce_mutual_tls.into_iter().next(),
+            client_certificate_hash: intermediate_rep.client_certificate_hash.into_iter().next(),
+            require_request_signing: intermediate_rep.require_request_signing.into_iter().next(),
+            description: intermediate_rep.description.into_iter().next(),
+            metadata_json: intermediate_rep.metadata_json.into_iter().next(),
+            tags: intermediate_rep.tags.into_iter().next(),
+            api_version: intermediate_rep.api_version.into_iter().next(),
+            supported_features: intermediate_rep.supported_features.into_iter().next(),
+            documentation_url: intermediate_rep.documentation_url.into_iter().next(),
+            support_contact: intermediate_rep.support_contact.into_iter().next(),
+            account: intermediate_rep.account.into_iter().next(),
+            workspace: intermediate_rep.workspace.into_iter().next(),
+            log_all_requests: intermediate_rep.log_all_requests.into_iter().next(),
+            last_rotation_reason: intermediate_rep.last_rotation_reason.into_iter().next(),
+            last_rotation_date: intermediate_rep.last_rotation_date.into_iter().next(),
+            rotation_frequency_days: intermediate_rep.rotation_frequency_days.into_iter().next(),
+            compliance_standards: intermediate_rep.compliance_standards.into_iter().next(),
+            requires_audit_logging: intermediate_rep.requires_audit_logging.into_iter().next(),
+            data_residency: intermediate_rep.data_residency.into_iter().next(),
+            approved_integrations: intermediate_rep.approved_integrations.into_iter().next(),
+            alert_emails: intermediate_rep.alert_emails.into_iter().next(),
+            webhook_url: intermediate_rep.webhook_url.into_iter().next(),
+            alert_on_quota_threshold: intermediate_rep.alert_on_quota_threshold.into_iter().next(),
+            quota_alert_threshold: intermediate_rep.quota_alert_threshold.into_iter().next(),
+            alert_on_error_spike: intermediate_rep.alert_on_error_spike.into_iter().next(),
+            error_alert_threshold: intermediate_rep.error_alert_threshold.into_iter().next(),
+            monitoring_integrations: intermediate_rep.monitoring_integrations.into_iter().next(),
+            encrypted: intermediate_rep.encrypted.into_iter().next(),
+            data_classification: intermediate_rep.data_classification.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ApiKey> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ApiKey>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ApiKey>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ApiKey - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ApiKey> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ApiKey as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ApiKey - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+/// Enumeration of values.
+/// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
+/// which helps with FFI.
+#[allow(non_camel_case_types)]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "conversion", derive(frunk_enum_derive::LabelledGenericEnum))]
+pub enum ApiKeyPeriodStatus {
+    #[serde(rename = "STATUS_UNSPECIFIED")]
+    Unspecified,
+    #[serde(rename = "STATUS_ACTIVE")]
+    Active,
+    #[serde(rename = "STATUS_REVOKED")]
+    Revoked,
+    #[serde(rename = "STATUS_EXPIRED")]
+    Expired,
+    #[serde(rename = "STATUS_RATE_LIMITED")]
+    RateLimited,
+    #[serde(rename = "STATUS_SUSPENDED")]
+    Suspended,
+    #[serde(rename = "STATUS_PENDING_REVIEW")]
+    PendingReview,
+    #[serde(rename = "STATUS_DEPRECATED")]
+    Deprecated,
+}
+
+impl std::fmt::Display for ApiKeyPeriodStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            ApiKeyPeriodStatus::Unspecified => write!(f, "STATUS_UNSPECIFIED"),
+            ApiKeyPeriodStatus::Active => write!(f, "STATUS_ACTIVE"),
+            ApiKeyPeriodStatus::Revoked => write!(f, "STATUS_REVOKED"),
+            ApiKeyPeriodStatus::Expired => write!(f, "STATUS_EXPIRED"),
+            ApiKeyPeriodStatus::RateLimited => write!(f, "STATUS_RATE_LIMITED"),
+            ApiKeyPeriodStatus::Suspended => write!(f, "STATUS_SUSPENDED"),
+            ApiKeyPeriodStatus::PendingReview => write!(f, "STATUS_PENDING_REVIEW"),
+            ApiKeyPeriodStatus::Deprecated => write!(f, "STATUS_DEPRECATED"),
+        }
+    }
+}
+
+impl std::str::FromStr for ApiKeyPeriodStatus {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s {
+            "STATUS_UNSPECIFIED" => std::result::Result::Ok(ApiKeyPeriodStatus::Unspecified),
+            "STATUS_ACTIVE" => std::result::Result::Ok(ApiKeyPeriodStatus::Active),
+            "STATUS_REVOKED" => std::result::Result::Ok(ApiKeyPeriodStatus::Revoked),
+            "STATUS_EXPIRED" => std::result::Result::Ok(ApiKeyPeriodStatus::Expired),
+            "STATUS_RATE_LIMITED" => std::result::Result::Ok(ApiKeyPeriodStatus::RateLimited),
+            "STATUS_SUSPENDED" => std::result::Result::Ok(ApiKeyPeriodStatus::Suspended),
+            "STATUS_PENDING_REVIEW" => std::result::Result::Ok(ApiKeyPeriodStatus::PendingReview),
+            "STATUS_DEPRECATED" => std::result::Result::Ok(ApiKeyPeriodStatus::Deprecated),
+            _ => std::result::Result::Err(format!("Value not valid: {}", s)),
+        }
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct AuthContext {
@@ -16238,6 +17445,10 @@ pub struct Workspace {
     #[serde(skip_serializing_if="Option::is_none")]
     pub scraping_jobs: Option<Vec<models::ScrapingJob>>,
 
+    #[serde(rename = "apiKeys")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub api_keys: Option<Vec<models::ApiKey>>,
+
 }
 
 
@@ -16265,6 +17476,7 @@ impl Workspace {
             total_leads_collected: None,
             last_job_run: None,
             scraping_jobs: None,
+            api_keys: None,
         }
     }
 }
@@ -16399,6 +17611,8 @@ impl std::string::ToString for Workspace {
 
             // Skipping scrapingJobs in query parameter serialization
 
+            // Skipping apiKeys in query parameter serialization
+
         ];
 
         params.into_iter().flatten().collect::<Vec<_>>().join(",")
@@ -16436,6 +17650,7 @@ impl std::str::FromStr for Workspace {
             pub total_leads_collected: Vec<i32>,
             pub last_job_run: Vec<chrono::DateTime::<chrono::Utc>>,
             pub scraping_jobs: Vec<Vec<models::ScrapingJob>>,
+            pub api_keys: Vec<Vec<models::ApiKey>>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -16491,6 +17706,7 @@ impl std::str::FromStr for Workspace {
                     #[allow(clippy::redundant_clone)]
                     "lastJobRun" => intermediate_rep.last_job_run.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     "scrapingJobs" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
+                    "apiKeys" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
                     _ => return std::result::Result::Err("Unexpected key while parsing Workspace".to_string())
                 }
             }
@@ -16521,6 +17737,7 @@ impl std::str::FromStr for Workspace {
             total_leads_collected: intermediate_rep.total_leads_collected.into_iter().next(),
             last_job_run: intermediate_rep.last_job_run.into_iter().next(),
             scraping_jobs: intermediate_rep.scraping_jobs.into_iter().next(),
+            api_keys: intermediate_rep.api_keys.into_iter().next(),
         })
     }
 }

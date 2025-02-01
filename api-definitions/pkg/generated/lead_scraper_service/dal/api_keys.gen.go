@@ -8,6 +8,7 @@ import (
 	"context"
 	"strings"
 
+	lead_scraper_servicev1 "github.com/VectorEngineering/vector-protobuf-definitions/api-definitions/pkg/generated/lead_scraper_service/v1"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 	"gorm.io/gorm/schema"
@@ -17,8 +18,6 @@ import (
 	"gorm.io/gen/helper"
 
 	"gorm.io/plugin/dbresolver"
-
-	lead_scraper_servicev1 "github.com/VectorEngineering/vector-protobuf-definitions/api-definitions/pkg/generated/lead_scraper_service/v1"
 
 	"time"
 )
@@ -49,10 +48,12 @@ func newAPIKeyORM(db *gorm.DB, opts ...gen.DOOption) aPIKeyORM {
 	_aPIKeyORM.ConcurrentRequests = field.NewInt32(tableName, "concurrent_requests")
 	_aPIKeyORM.CostPerRequest = field.NewFloat32(tableName, "cost_per_request")
 	_aPIKeyORM.CreatedAt = field.NewTime(tableName, "created_at")
+	_aPIKeyORM.DataClassification = field.NewString(tableName, "data_classification")
 	_aPIKeyORM.DataResidency = field.NewString(tableName, "data_residency")
 	_aPIKeyORM.DeletedAt = field.NewTime(tableName, "deleted_at")
 	_aPIKeyORM.Description = field.NewString(tableName, "description")
 	_aPIKeyORM.DocumentationUrl = field.NewString(tableName, "documentation_url")
+	_aPIKeyORM.Encrypted = field.NewBool(tableName, "encrypted")
 	_aPIKeyORM.EndpointUsageJson = field.NewBytes(tableName, "endpoint_usage_json")
 	_aPIKeyORM.EnforceHttps = field.NewBool(tableName, "enforce_https")
 	_aPIKeyORM.EnforceMutualTls = field.NewBool(tableName, "enforce_mutual_tls")
@@ -107,6 +108,15 @@ func newAPIKeyORM(db *gorm.DB, opts ...gen.DOOption) aPIKeyORM {
 		},
 		Workspaces: struct {
 			field.RelationField
+			ApiKeys struct {
+				field.RelationField
+				Account struct {
+					field.RelationField
+				}
+				Workspace struct {
+					field.RelationField
+				}
+			}
 			ScrapingJobs struct {
 				field.RelationField
 				Leads struct {
@@ -139,6 +149,27 @@ func newAPIKeyORM(db *gorm.DB, opts ...gen.DOOption) aPIKeyORM {
 			}
 		}{
 			RelationField: field.NewRelation("Account.Workspaces", "lead_scraper_servicev1.WorkspaceORM"),
+			ApiKeys: struct {
+				field.RelationField
+				Account struct {
+					field.RelationField
+				}
+				Workspace struct {
+					field.RelationField
+				}
+			}{
+				RelationField: field.NewRelation("Account.Workspaces.ApiKeys", "lead_scraper_servicev1.APIKeyORM"),
+				Account: struct {
+					field.RelationField
+				}{
+					RelationField: field.NewRelation("Account.Workspaces.ApiKeys.Account", "lead_scraper_servicev1.AccountORM"),
+				},
+				Workspace: struct {
+					field.RelationField
+				}{
+					RelationField: field.NewRelation("Account.Workspaces.ApiKeys.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
+				},
+			},
 			ScrapingJobs: struct {
 				field.RelationField
 				Leads struct {
@@ -264,10 +295,12 @@ type aPIKeyORM struct {
 	ConcurrentRequests         field.Int32
 	CostPerRequest             field.Float32
 	CreatedAt                  field.Time
+	DataClassification         field.String
 	DataResidency              field.String
 	DeletedAt                  field.Time
 	Description                field.String
 	DocumentationUrl           field.String
+	Encrypted                  field.Bool
 	EndpointUsageJson          field.Bytes
 	EnforceHttps               field.Bool
 	EnforceMutualTls           field.Bool
@@ -348,10 +381,12 @@ func (a *aPIKeyORM) updateTableName(table string) *aPIKeyORM {
 	a.ConcurrentRequests = field.NewInt32(table, "concurrent_requests")
 	a.CostPerRequest = field.NewFloat32(table, "cost_per_request")
 	a.CreatedAt = field.NewTime(table, "created_at")
+	a.DataClassification = field.NewString(table, "data_classification")
 	a.DataResidency = field.NewString(table, "data_residency")
 	a.DeletedAt = field.NewTime(table, "deleted_at")
 	a.Description = field.NewString(table, "description")
 	a.DocumentationUrl = field.NewString(table, "documentation_url")
+	a.Encrypted = field.NewBool(table, "encrypted")
 	a.EndpointUsageJson = field.NewBytes(table, "endpoint_usage_json")
 	a.EnforceHttps = field.NewBool(table, "enforce_https")
 	a.EnforceMutualTls = field.NewBool(table, "enforce_mutual_tls")
@@ -411,7 +446,7 @@ func (a *aPIKeyORM) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (a *aPIKeyORM) fillFieldMap() {
-	a.fieldMap = make(map[string]field.Expr, 67)
+	a.fieldMap = make(map[string]field.Expr, 69)
 	a.fieldMap["account_id"] = a.AccountId
 	a.fieldMap["alert_emails"] = a.AlertEmails
 	a.fieldMap["alert_on_error_spike"] = a.AlertOnErrorSpike
@@ -430,10 +465,12 @@ func (a *aPIKeyORM) fillFieldMap() {
 	a.fieldMap["concurrent_requests"] = a.ConcurrentRequests
 	a.fieldMap["cost_per_request"] = a.CostPerRequest
 	a.fieldMap["created_at"] = a.CreatedAt
+	a.fieldMap["data_classification"] = a.DataClassification
 	a.fieldMap["data_residency"] = a.DataResidency
 	a.fieldMap["deleted_at"] = a.DeletedAt
 	a.fieldMap["description"] = a.Description
 	a.fieldMap["documentation_url"] = a.DocumentationUrl
+	a.fieldMap["encrypted"] = a.Encrypted
 	a.fieldMap["endpoint_usage_json"] = a.EndpointUsageJson
 	a.fieldMap["enforce_https"] = a.EnforceHttps
 	a.fieldMap["enforce_mutual_tls"] = a.EnforceMutualTls
@@ -500,6 +537,15 @@ type aPIKeyORMBelongsToAccount struct {
 	}
 	Workspaces struct {
 		field.RelationField
+		ApiKeys struct {
+			field.RelationField
+			Account struct {
+				field.RelationField
+			}
+			Workspace struct {
+				field.RelationField
+			}
+		}
 		ScrapingJobs struct {
 			field.RelationField
 			Leads struct {

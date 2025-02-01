@@ -16,6 +16,8 @@
 
 # import models into model package
 from playbookmedia_backend_client_sdk.models.api_info import APIInfo
+from playbookmedia_backend_client_sdk.models.api_key import APIKey
+from playbookmedia_backend_client_sdk.models.api_key_status import APIKeyStatus
 from playbookmedia_backend_client_sdk.models.account import Account
 from playbookmedia_backend_client_sdk.models.account_settings import AccountSettings
 from playbookmedia_backend_client_sdk.models.account_status import AccountStatus

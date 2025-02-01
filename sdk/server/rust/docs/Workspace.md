@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **total_leads_collected** | **i32** |  | [optional] [default to None]
 **last_job_run** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]
 **scraping_jobs** | [**Vec<models::ScrapingJob>**](ScrapingJob.md) |  | [optional] [default to None]
+**api_keys** | [**Vec<models::ApiKey>**](APIKey.md) |  | [optional] [default to None]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

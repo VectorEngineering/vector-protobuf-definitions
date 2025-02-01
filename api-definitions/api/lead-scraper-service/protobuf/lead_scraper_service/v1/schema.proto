@@ -239,6 +239,11 @@ message Workspace {
         preload: true
     }];
 
+    repeated APIKey api_keys = 23 [(gorm.field).has_many = {
+        disable_association_autocreate: false
+        disable_association_autoupdate: false
+        preload: true
+    }];
 }
 
 /**
@@ -279,7 +284,7 @@ message ScrapingJob {
     };
 
     // Changed from uint64 to string to support UUID
-    string id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
     
     // Core fields matching DB schema
     int32 priority = 2;
@@ -833,6 +838,10 @@ message APIKey {
     bool alert_on_error_spike = 65;
     float error_alert_threshold = 66;
     repeated string monitoring_integrations = 67 [(gorm.field).tag = {type: "text[]"}];
+    bool encrypted = 68;
+    string data_classification = 69 [
+        (validate.rules).string = {in: ["public", "confidential", "restricted"]}
+    ];
 }
 
 /**

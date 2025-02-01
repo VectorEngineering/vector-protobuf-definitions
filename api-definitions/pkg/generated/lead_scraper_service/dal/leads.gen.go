@@ -86,7 +86,7 @@ func newLeadORM(db *gorm.DB, opts ...gen.DOOption) leadORM {
 	_leadORM.RecentAnnouncements = field.NewField(tableName, "recent_announcements")
 	_leadORM.RevenueRange = field.NewString(tableName, "revenue_range")
 	_leadORM.ReviewCount = field.NewInt32(tableName, "review_count")
-	_leadORM.ScrapingJobId = field.NewString(tableName, "scraping_job_id")
+	_leadORM.ScrapingJobId = field.NewUint64(tableName, "scraping_job_id")
 	_leadORM.ScrapingSessionId = field.NewString(tableName, "scraping_session_id")
 	_leadORM.SeoKeywords = field.NewField(tableName, "seo_keywords")
 	_leadORM.ServesVegetarianFood = field.NewBool(tableName, "serves_vegetarian_food")
@@ -134,6 +134,21 @@ func newLeadORM(db *gorm.DB, opts ...gen.DOOption) leadORM {
 			}
 			Workspace struct {
 				field.RelationField
+				ApiKeys struct {
+					field.RelationField
+					Account struct {
+						field.RelationField
+						Settings struct {
+							field.RelationField
+						}
+						Workspaces struct {
+							field.RelationField
+						}
+					}
+					Workspace struct {
+						field.RelationField
+					}
+				}
 				ScrapingJobs struct {
 					field.RelationField
 				}
@@ -165,6 +180,21 @@ func newLeadORM(db *gorm.DB, opts ...gen.DOOption) leadORM {
 			},
 			Workspace: struct {
 				field.RelationField
+				ApiKeys struct {
+					field.RelationField
+					Account struct {
+						field.RelationField
+						Settings struct {
+							field.RelationField
+						}
+						Workspaces struct {
+							field.RelationField
+						}
+					}
+					Workspace struct {
+						field.RelationField
+					}
+				}
 				ScrapingJobs struct {
 					field.RelationField
 				}
@@ -179,6 +209,49 @@ func newLeadORM(db *gorm.DB, opts ...gen.DOOption) leadORM {
 				}
 			}{
 				RelationField: field.NewRelation("Job.Leads.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
+				ApiKeys: struct {
+					field.RelationField
+					Account struct {
+						field.RelationField
+						Settings struct {
+							field.RelationField
+						}
+						Workspaces struct {
+							field.RelationField
+						}
+					}
+					Workspace struct {
+						field.RelationField
+					}
+				}{
+					RelationField: field.NewRelation("Job.Leads.Workspace.ApiKeys", "lead_scraper_servicev1.APIKeyORM"),
+					Account: struct {
+						field.RelationField
+						Settings struct {
+							field.RelationField
+						}
+						Workspaces struct {
+							field.RelationField
+						}
+					}{
+						RelationField: field.NewRelation("Job.Leads.Workspace.ApiKeys.Account", "lead_scraper_servicev1.AccountORM"),
+						Settings: struct {
+							field.RelationField
+						}{
+							RelationField: field.NewRelation("Job.Leads.Workspace.ApiKeys.Account.Settings", "lead_scraper_servicev1.AccountSettingsORM"),
+						},
+						Workspaces: struct {
+							field.RelationField
+						}{
+							RelationField: field.NewRelation("Job.Leads.Workspace.ApiKeys.Account.Workspaces", "lead_scraper_servicev1.WorkspaceORM"),
+						},
+					},
+					Workspace: struct {
+						field.RelationField
+					}{
+						RelationField: field.NewRelation("Job.Leads.Workspace.ApiKeys.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
+					},
+				},
 				ScrapingJobs: struct {
 					field.RelationField
 				}{
@@ -295,7 +368,7 @@ type leadORM struct {
 	RecentAnnouncements      field.Field
 	RevenueRange             field.String
 	ReviewCount              field.Int32
-	ScrapingJobId            field.String
+	ScrapingJobId            field.Uint64
 	ScrapingSessionId        field.String
 	SeoKeywords              field.Field
 	ServesVegetarianFood     field.Bool
@@ -395,7 +468,7 @@ func (l *leadORM) updateTableName(table string) *leadORM {
 	l.RecentAnnouncements = field.NewField(table, "recent_announcements")
 	l.RevenueRange = field.NewString(table, "revenue_range")
 	l.ReviewCount = field.NewInt32(table, "review_count")
-	l.ScrapingJobId = field.NewString(table, "scraping_job_id")
+	l.ScrapingJobId = field.NewUint64(table, "scraping_job_id")
 	l.ScrapingSessionId = field.NewString(table, "scraping_session_id")
 	l.SeoKeywords = field.NewField(table, "seo_keywords")
 	l.ServesVegetarianFood = field.NewBool(table, "serves_vegetarian_food")
@@ -744,6 +817,21 @@ type leadORMBelongsToJob struct {
 		}
 		Workspace struct {
 			field.RelationField
+			ApiKeys struct {
+				field.RelationField
+				Account struct {
+					field.RelationField
+					Settings struct {
+						field.RelationField
+					}
+					Workspaces struct {
+						field.RelationField
+					}
+				}
+				Workspace struct {
+					field.RelationField
+				}
+			}
 			ScrapingJobs struct {
 				field.RelationField
 			}

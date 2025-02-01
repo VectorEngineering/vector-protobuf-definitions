@@ -22,6 +22,8 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 ## Documentation for Models
 
  - [APIInfo](./Models/APIInfo.md)
+ - [APIKey](./Models/APIKey.md)
+ - [APIKey.Status](./Models/APIKey.Status.md)
  - [Account](./Models/Account.md)
  - [AccountSettings](./Models/AccountSettings.md)
  - [AccountStatus](./Models/AccountStatus.md)

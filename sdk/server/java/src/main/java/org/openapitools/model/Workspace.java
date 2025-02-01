@@ -8,6 +8,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.openapitools.model.APIKey;
 import org.openapitools.model.ScrapingJob;
 import org.openapitools.model.ScrapingWorkflow;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,7 +26,7 @@ import javax.annotation.Generated;
  * Workspace
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-01-31T03:28:40.740898-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-01T16:14:29.520396-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class Workspace {
 
   private String id;
@@ -73,6 +74,9 @@ public class Workspace {
 
   @Valid
   private List<@Valid ScrapingJob> scrapingJobs = new ArrayList<>();
+
+  @Valid
+  private List<@Valid APIKey> apiKeys = new ArrayList<>();
 
   public Workspace id(String id) {
     this.id = id;
@@ -490,6 +494,34 @@ public class Workspace {
     this.scrapingJobs = scrapingJobs;
   }
 
+  public Workspace apiKeys(List<@Valid APIKey> apiKeys) {
+    this.apiKeys = apiKeys;
+    return this;
+  }
+
+  public Workspace addApiKeysItem(APIKey apiKeysItem) {
+    if (this.apiKeys == null) {
+      this.apiKeys = new ArrayList<>();
+    }
+    this.apiKeys.add(apiKeysItem);
+    return this;
+  }
+
+  /**
+   * Get apiKeys
+   * @return apiKeys
+   */
+  @Valid 
+  @Schema(name = "apiKeys", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("apiKeys")
+  public List<@Valid APIKey> getApiKeys() {
+    return apiKeys;
+  }
+
+  public void setApiKeys(List<@Valid APIKey> apiKeys) {
+    this.apiKeys = apiKeys;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -518,12 +550,13 @@ public class Workspace {
         Objects.equals(this.activeScrapers, workspace.activeScrapers) &&
         Objects.equals(this.totalLeadsCollected, workspace.totalLeadsCollected) &&
         Objects.equals(this.lastJobRun, workspace.lastJobRun) &&
-        Objects.equals(this.scrapingJobs, workspace.scrapingJobs);
+        Objects.equals(this.scrapingJobs, workspace.scrapingJobs) &&
+        Objects.equals(this.apiKeys, workspace.apiKeys);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, industry, domain, gdprCompliant, hipaaCompliant, soc2Compliant, storageQuota, usedStorage, createdAt, updatedAt, deletedAt, workflows, jobsRunThisMonth, workspaceJobLimit, dailyJobQuota, activeScrapers, totalLeadsCollected, lastJobRun, scrapingJobs);
+    return Objects.hash(id, name, industry, domain, gdprCompliant, hipaaCompliant, soc2Compliant, storageQuota, usedStorage, createdAt, updatedAt, deletedAt, workflows, jobsRunThisMonth, workspaceJobLimit, dailyJobQuota, activeScrapers, totalLeadsCollected, lastJobRun, scrapingJobs, apiKeys);
   }
 
   @Override
@@ -550,6 +583,7 @@ public class Workspace {
     sb.append("    totalLeadsCollected: ").append(toIndentedString(totalLeadsCollected)).append("\n");
     sb.append("    lastJobRun: ").append(toIndentedString(lastJobRun)).append("\n");
     sb.append("    scrapingJobs: ").append(toIndentedString(scrapingJobs)).append("\n");
+    sb.append("    apiKeys: ").append(toIndentedString(apiKeys)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -3,6 +3,8 @@ docs/AccountSettings.md
 docs/AccountStatus.md
 docs/Any.md
 docs/ApiInfo.md
+docs/ApiKey.md
+docs/ApiKeyStatus.md
 docs/AuthContext.md
 docs/AuthErrorCode.md
 docs/AuthenticationErrorMessageResponse.md
@@ -103,6 +105,8 @@ openapi3graphql-server/model/account_settings.graphql
 openapi3graphql-server/model/account_status.graphql
 openapi3graphql-server/model/any.graphql
 openapi3graphql-server/model/api_info.graphql
+openapi3graphql-server/model/api_key.graphql
+openapi3graphql-server/model/api_key_status.graphql
 openapi3graphql-server/model/auth_context.graphql
 openapi3graphql-server/model/auth_error_code.graphql
 openapi3graphql-server/model/authentication_error_message_response.graphql

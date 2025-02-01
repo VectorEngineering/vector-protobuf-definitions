@@ -1,5 +1,7 @@
 Apis/LeadScraperServiceApi.md
 Models/APIInfo.md
+Models/APIKey.Status.md
+Models/APIKey.md
 Models/Account.md
 Models/AccountSettings.md
 Models/AccountStatus.md

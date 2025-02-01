@@ -8330,6 +8330,313 @@
                     }
                 }
             },
+            "APIKey": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uint64",
+                        "title": "Unique identifier"
+                    },
+                    "name": {
+                        "type": "string",
+                        "title": "Human-readable name for the key"
+                    },
+                    "keyHash": {
+                        "type": "string",
+                        "title": "The actual API key value (hashed in storage)"
+                    },
+                    "keyPrefix": {
+                        "type": "string",
+                        "title": "Key prefix for display/reference (first 8 chars)"
+                    },
+                    "orgId": {
+                        "type": "string",
+                        "title": "Multi-tenant context"
+                    },
+                    "tenantId": {
+                        "type": "string"
+                    },
+                    "scopes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "title": "Access control and permissions"
+                    },
+                    "allowedIps": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "allowedDomains": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "allowedEnvironments": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "title": "e.g., dev, staging, prod"
+                    },
+                    "isTestKey": {
+                        "type": "boolean",
+                        "title": "Indicates if this is a test API key"
+                    },
+                    "requestsPerSecond": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "Rate limiting and quotas"
+                    },
+                    "requestsPerDay": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "concurrentRequests": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "monthlyRequestQuota": {
+                        "type": "string",
+                        "format": "int64"
+                    },
+                    "costPerRequest": {
+                        "type": "number",
+                        "format": "float",
+                        "title": "For usage-based billing"
+                    },
+                    "billingTier": {
+                        "type": "string",
+                        "title": "e.g., free, basic, premium"
+                    },
+                    "totalRequests": {
+                        "type": "string",
+                        "format": "int64",
+                        "title": "Usage tracking and analytics"
+                    },
+                    "totalErrors": {
+                        "type": "string",
+                        "format": "int64"
+                    },
+                    "lastUsedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "averageResponseTime": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "endpointUsageJson": {
+                        "type": "string",
+                        "format": "byte",
+                        "description": "Tracks usage per endpoint",
+                        "title": "Store maps as JSONB in PostgreSQL"
+                    },
+                    "errorRatesJson": {
+                        "type": "string",
+                        "format": "byte",
+                        "title": "Error rates by error type"
+                    },
+                    "recentErrors": {
+                        "type": "string",
+                        "format": "byte",
+                        "title": "Recent error details with timestamps"
+                    },
+                    "successfulRequestsCount": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "successRate": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/APIKey.Status"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Timestamps"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "expiresAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "deletedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "lastRotatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "lastSecurityReviewAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "requiresClientSecret": {
+                        "type": "boolean",
+                        "title": "Security features"
+                    },
+                    "clientSecretHash": {
+                        "type": "string"
+                    },
+                    "enforceHttps": {
+                        "type": "boolean"
+                    },
+                    "enforceSigning": {
+                        "type": "boolean"
+                    },
+                    "allowedSignatureAlgorithms": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "enforceMutualTls": {
+                        "type": "boolean"
+                    },
+                    "clientCertificateHash": {
+                        "type": "string"
+                    },
+                    "requireRequestSigning": {
+                        "type": "boolean"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Detailed description of key usage",
+                        "title": "Developer experience"
+                    },
+                    "metadataJson": {
+                        "type": "string",
+                        "format": "byte",
+                        "title": "Custom metadata stored as JSONB"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "apiVersion": {
+                        "type": "string",
+                        "title": "API version this key is valid for"
+                    },
+                    "supportedFeatures": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "documentationUrl": {
+                        "type": "string"
+                    },
+                    "supportContact": {
+                        "type": "string"
+                    },
+                    "account": {
+                        "$ref": "#/components/schemas/Account"
+                    },
+                    "workspace": {
+                        "$ref": "#/components/schemas/Workspace"
+                    },
+                    "logAllRequests": {
+                        "type": "boolean",
+                        "title": "Compliance and auditing"
+                    },
+                    "lastRotationReason": {
+                        "type": "string"
+                    },
+                    "lastRotationDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "rotationFrequencyDays": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "complianceStandards": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "title": "e.g., SOC2, GDPR"
+                    },
+                    "requiresAuditLogging": {
+                        "type": "boolean"
+                    },
+                    "dataResidency": {
+                        "type": "string",
+                        "title": "Geographic location of data storage"
+                    },
+                    "approvedIntegrations": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "alertEmails": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "title": "Monitoring and alerts"
+                    },
+                    "webhookUrl": {
+                        "type": "string"
+                    },
+                    "alertOnQuotaThreshold": {
+                        "type": "boolean"
+                    },
+                    "quotaAlertThreshold": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "alertOnErrorSpike": {
+                        "type": "boolean"
+                    },
+                    "errorAlertThreshold": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "monitoringIntegrations": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "encrypted": {
+                        "type": "boolean"
+                    },
+                    "dataClassification": {
+                        "type": "string"
+                    }
+                },
+                "description": "APIKey represents an authentication token for accessing the API.\nIt includes features for rate limiting, permissions, and usage tracking.\n\nKey features:\n- Unique key identification\n- Scope-based access control\n- Rate limiting\n- Usage tracking\n- Expiration management\n- Multi-tenant support\n\nDatabase considerations:\n- Uses GORM for ORM mapping\n- Includes indexes for efficient querying\n- Supports soft deletes\n\nUsage example:\n```go\napiKey := &APIKey{\n    Name: \"Production API Key\",\n    Scopes: []string{\"leads:read\", \"leads:write\"},\n    ExpiresAt: timestamppb.New(time.Now().AddDate(1, 0, 0)),\n}\n```"
+            },
+            "APIKey.Status": {
+                "type": "string",
+                "enum": [
+                    "STATUS_UNSPECIFIED",
+                    "STATUS_ACTIVE",
+                    "STATUS_REVOKED",
+                    "STATUS_EXPIRED",
+                    "STATUS_RATE_LIMITED",
+                    "STATUS_SUSPENDED",
+                    "STATUS_PENDING_REVIEW",
+                    "STATUS_DEPRECATED"
+                ],
+                "default": "STATUS_UNSPECIFIED",
+                "title": "Key status and lifecycle"
+            },
             "Account": {
                 "type": "object",
                 "properties": {
@@ -10267,6 +10574,7 @@
                 "properties": {
                     "id": {
                         "type": "string",
+                        "format": "uint64",
                         "title": "Changed from uint64 to string to support UUID"
                     },
                     "priority": {
@@ -11020,6 +11328,12 @@
                             "$ref": "#/components/schemas/ScrapingJob"
                         },
                         "title": "Associated scraping jobs for this workspace"
+                    },
+                    "apiKeys": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/APIKey"
+                        }
                     }
                 },
                 "title": "Workspace represents a business entity with multiple accounts"

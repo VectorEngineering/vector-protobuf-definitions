@@ -8,6 +8,8 @@ src/main/java/org/openapitools/configuration/EnumConverterConfiguration.java
 src/main/java/org/openapitools/configuration/HomeController.java
 src/main/java/org/openapitools/configuration/SpringDocConfiguration.java
 src/main/java/org/openapitools/model/APIInfo.java
+src/main/java/org/openapitools/model/APIKey.java
+src/main/java/org/openapitools/model/APIKeyStatus.java
 src/main/java/org/openapitools/model/Account.java
 src/main/java/org/openapitools/model/AccountSettings.java
 src/main/java/org/openapitools/model/AccountStatus.java

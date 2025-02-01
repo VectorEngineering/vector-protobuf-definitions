@@ -23,7 +23,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "MethodNotAllowedErrorMessageResponse", description = "Represents errors when HTTP method is not allowed on the endpoint")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-01T16:14:29.520396-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-01T18:45:40.135269-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class MethodNotAllowedErrorMessageResponse {
 
   private Integer code;

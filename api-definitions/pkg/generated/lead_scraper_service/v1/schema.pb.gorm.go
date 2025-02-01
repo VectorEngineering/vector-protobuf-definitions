@@ -2326,7 +2326,7 @@ func DefaultStrictUpdateAccount(ctx context.Context, in *Account, db *gorm.DB) (
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(AccountORMWithAfterStrictUpdateSave); ok {
@@ -2654,7 +2654,7 @@ func DefaultCreateWorkspace(ctx context.Context, in *Workspace, db *gorm.DB) (*W
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ApiKeys").Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(WorkspaceORMWithAfterCreate_); ok {
@@ -2836,7 +2836,7 @@ func DefaultStrictUpdateWorkspace(ctx context.Context, in *Workspace, db *gorm.D
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ApiKeys").Preload("ScrapingJobs").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(WorkspaceORMWithAfterStrictUpdateSave); ok {
@@ -3178,7 +3178,7 @@ func DefaultCreateScrapingJob(ctx context.Context, in *ScrapingJob, db *gorm.DB)
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ApiKeys").Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingJobORMWithAfterCreate_); ok {
@@ -3342,7 +3342,7 @@ func DefaultStrictUpdateScrapingJob(ctx context.Context, in *ScrapingJob, db *go
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ApiKeys").Preload("ScrapingJobs").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingJobORMWithAfterStrictUpdateSave); ok {
@@ -3664,7 +3664,7 @@ func DefaultCreateScrapingWorkflow(ctx context.Context, in *ScrapingWorkflow, db
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ApiKeys").Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingWorkflowORMWithAfterCreate_); ok {
@@ -3828,7 +3828,7 @@ func DefaultStrictUpdateScrapingWorkflow(ctx context.Context, in *ScrapingWorkfl
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ApiKeys").Preload("ScrapingJobs").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingWorkflowORMWithAfterStrictUpdateSave); ok {
@@ -6515,7 +6515,7 @@ func DefaultCreateAPIKey(ctx context.Context, in *APIKey, db *gorm.DB) (*APIKey,
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Workspaces").Preload("Settings").Preload("ApiKeys").Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(APIKeyORMWithAfterCreate_); ok {
@@ -6670,7 +6670,7 @@ func DefaultStrictUpdateAPIKey(ctx context.Context, in *APIKey, db *gorm.DB) (*A
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Preload("ApiKeys").Preload("ScrapingJobs").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(APIKeyORMWithAfterStrictUpdateSave); ok {

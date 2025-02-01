@@ -27,7 +27,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "ScrapingJob", description = "ScrapingJob represents a Google Maps scraping task. This message defines both the configuration and current state of a scraping operation.  Key components: - Basic metadata (id, name, timestamps) - Job status tracking - Search configuration parameters - Geographic settings - Performance options - Multi-tenant context  Database considerations: - Stored in \"gmaps_jobs\" table - Uses GORM for ORM mapping - Includes foreign key to Account - Supports soft deletes  Usage example: ```go job := &ScrapingJob{     Name: \"Athens Cafes\",     Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,     Keywords: []string{\"cafe\", \"coffee\"},     Lang: \"el\",     Zoom: 15,     FastMode: true,     MaxTime: 3600, } ```")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-01T16:14:29.520396-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-01T18:45:40.135269-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ScrapingJob {
 
   private String id;

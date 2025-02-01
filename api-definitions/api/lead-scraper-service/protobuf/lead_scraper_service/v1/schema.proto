@@ -353,7 +353,7 @@ message ScrapingWorkflow {
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
     
     // Scheduling options
-    string cron_expression = 2 [(validate.rules).string.pattern = "^(0\\d|1\\d|2\\d|3\\d|4\\d|5\\d)\\s(0\\d|1\\d|2\\d|3\\d|4\\d|5\\d)\\s\\*\\s\\*\\s\\*$"];
+    string cron_expression = 2;
     // Execution settings
     google.protobuf.Timestamp next_run_time = 4;
     google.protobuf.Timestamp last_run_time = 5;

@@ -3896,6 +3896,7 @@
       },
       "post": {
         "summary": "Create a new workflow",
+        "description": "This endpoint creates a new workflow configuration for a specific workspace\n\nRequired parameters:\n- workspace_id: Parent workspace ID\n- name: Human-readable workflow name\n- description: Optional workflow description\n- parameters: Job parameters for the workflow\n\nExample:\n```json",
         "operationId": "LeadScraperService_CreateWorkflow",
         "responses": {
           "200": {

@@ -49,7 +49,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// WorkspaceService provides functionality for managing Google Maps scraping jobs.
+// LeadScraperService provides functionality for managing Google Maps scraping jobs.
 // This service allows users to create, monitor, and retrieve results from scraping tasks
 // that extract data from Google Maps based on specified search criteria.
 //
@@ -61,7 +61,7 @@ const (
 //
 // Usage example:
 // ```go
-// client := workspace_service.NewWorkspaceServiceClient(conn)
+// client := workspace_service.NewLeadScraperServiceClient(conn)
 //
 //	resp, err := client.CreateScrapingJob(ctx, &CreateScrapingJobRequest{
 //	    Name: "Coffee shops in Athens",
@@ -155,33 +155,181 @@ type LeadScraperServiceClient interface {
 	// Required permissions:
 	// - delete:account
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error)
-	// Workspace Management
+	// CreateWorkspace establishes a new organizational workspace for managing scraping jobs
+	//
+	// This endpoint creates a dedicated workspace with configurable:
+	// - Access controls and permissions
+	// - Resource quotas
+	// - Team member associations
+	// - Job execution environments
+	//
+	// Required parameters:
+	// - account_id: Parent account ID
+	// - name: Human-readable workspace name
+	// - region: Deployment region for workspace resources
+	//
+	// Example:
+	// ```curl
+	// POST /lead-scraper-microservice/api/v1/workspaces
+	//
+	//	{
+	//	  "name": "European Market Research",
+	//	  "region": "eu-west-1",
+	//	  "default_job_parameters": {
+	//	    "lang": "en",
+	//	    "country_code": "GR"
+	//	  }
+	//	}
+	//
+	// ```
 	CreateWorkspace(ctx context.Context, in *CreateWorkspaceRequest, opts ...grpc.CallOption) (*CreateWorkspaceResponse, error)
+	// ListWorkspaces retrieves all workspaces associated with an account
+	//
+	// Features:
+	// - Pagination support via limit/offset parameters
+	// - Filtering by creation date, region, and status
+	// - Summary statistics for quick overview
+	//
+	// Response includes:
+	// - Basic workspace metadata
+	// - Job execution statistics
+	// - Resource utilization metrics
 	ListWorkspaces(ctx context.Context, in *ListWorkspacesRequest, opts ...grpc.CallOption) (*ListWorkspacesResponse, error)
-	// Usage Tracking
+	// GetAccountUsage provides detailed usage metrics for an account
+	//
+	// Metrics include:
+	// - Active scraping jobs
+	// - API call statistics
+	// - Storage utilization
+	// - Data processing throughput
+	// - Historical usage trends
+	//
+	// Usage scenarios:
+	// - Billing and invoicing
+	// - Resource planning
+	// - Usage quota enforcement
 	GetAccountUsage(ctx context.Context, in *GetAccountUsageRequest, opts ...grpc.CallOption) (*GetAccountUsageResponse, error)
-	// Settings Management
+	// UpdateAccountSettings modifies configurable account parameters
+	//
+	// Configurable settings:
+	// - Notification preferences
+	// - API rate limits
+	// - Data retention policies
+	// - Security settings (2FA, IP whitelisting)
+	// - Default job parameters
+	//
+	// Example update:
+	// ```json
+	//
+	//	{
+	//	  "notification_settings": {
+	//	    "job_completion_webhook": "https://example.com/webhooks/jobs"
+	//	  },
+	//	  "data_retention_days": 30
+	//	}
+	//
+	// ```
 	UpdateAccountSettings(ctx context.Context, in *UpdateAccountSettingsRequest, opts ...grpc.CallOption) (*UpdateAccountSettingsResponse, error)
-	// List accounts
+	// ListAccounts retrieves paginated account information
 	//
-	// Retrieves a list of accounts based on the provided filters.
-	// Results are paginated and can be filtered by organization and other criteria.
+	// Features:
+	// - Server-side filtering by organization, status, and region
+	// - Sorting by creation date, last active, etc.
+	// - Partial response field masking
 	//
-	// Required permissions:
-	// - list:accounts
+	// Security:
+	// - Requires admin privileges
+	// - Results filtered by organization context
+	// - Sensitive fields omitted by default
 	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (*ListAccountsResponse, error)
-	// Workflow Management
+	// CreateWorkflow establishes a new workflow for a workspace
+	//
+	// # This endpoint creates a new workflow configuration for a specific workspace
+	//
+	// Required parameters:
+	// - workspace_id: Parent workspace ID
+	// - name: Human-readable workflow name
+	// - description: Optional workflow description
+	// - parameters: Job parameters for the workflow
+	//
+	// Example:
+	// ```json
 	CreateWorkflow(ctx context.Context, in *CreateWorkflowRequest, opts ...grpc.CallOption) (*CreateWorkflowResponse, error)
+	// GetWorkflow retrieves detailed information about a specific workflow
+	//
+	// This endpoint provides comprehensive details about a workflow, including:
+	// - Workflow configuration
+	// - Job execution history
+	// - Associated workspaces
 	GetWorkflow(ctx context.Context, in *GetWorkflowRequest, opts ...grpc.CallOption) (*GetWorkflowResponse, error)
+	// UpdateWorkflow modifies the configuration of a specific workflow
+	//
+	// This endpoint allows updating the details of a workflow, including:
+	// - Workflow name and description
+	// - Job parameters
+	//
+	// Example update:
+	// ```json
+	//
+	//	{
+	//	  "name": "Updated Workflow",
+	//	  "description": "Updated description"
+	//	}
+	//
+	// ```
 	UpdateWorkflow(ctx context.Context, in *UpdateWorkflowRequest, opts ...grpc.CallOption) (*UpdateWorkflowResponse, error)
 	ListWorkflows(ctx context.Context, in *ListWorkflowsRequest, opts ...grpc.CallOption) (*ListWorkflowsResponse, error)
-	// Execution Control
+	// TriggerWorkflow initiates the execution of a specific workflow
+	//
+	// This endpoint triggers the execution of a workflow, which will:
+	// - Fetch and process data based on the workflow configuration
+	// - Store results in the configured storage location
+	// - Update workflow status
+	// - Send notifications to the specified recipients
 	TriggerWorkflow(ctx context.Context, in *TriggerWorkflowRequest, opts ...grpc.CallOption) (*TriggerWorkflowResponse, error)
+	// PauseWorkflow pauses the execution of a specific workflow
+	//
+	// This endpoint allows temporarily stopping the execution of a workflow,
+	// which will:
+	// - Prevent new job instances from being created
+	// - Allow resuming from the last completed job
+	// - Maintain workflow state for future resumption
 	PauseWorkflow(ctx context.Context, in *PauseWorkflowRequest, opts ...grpc.CallOption) (*PauseWorkflowResponse, error)
-	// Analytics
+	// GetWorkspaceAnalytics retrieves analytics data for a specific workspace
+	//
+	// This endpoint provides comprehensive analytics about a workspace, including:
+	// - Job execution statistics
+	// - Resource utilization metrics
+	// - Performance metrics
+	// - Associated workflows
 	GetWorkspaceAnalytics(ctx context.Context, in *GetWorkspaceAnalyticsRequest, opts ...grpc.CallOption) (*GetWorkspaceAnalyticsResponse, error)
+	// GetWorkspace retrieves detailed configuration and status for a workspace
+	//
+	// Response includes:
+	// - Access control list
+	// - Active job count
+	// - Resource allocation
+	// - Performance metrics
+	// - Associated workflows
 	GetWorkspace(ctx context.Context, in *GetWorkspaceRequest, opts ...grpc.CallOption) (*GetWorkspaceResponse, error)
+	// UpdateWorkspace modifies workspace configuration
+	//
+	// Modifiable fields:
+	// - Name and description
+	// - Access controls
+	// - Resource quotas
+	// - Default job parameters
+	// - Retention policies
+	//
+	// Audit: Changes are logged with user ID and timestamp
 	UpdateWorkspace(ctx context.Context, in *UpdateWorkspaceRequest, opts ...grpc.CallOption) (*UpdateWorkspaceResponse, error)
+	// DeleteWorkspace permanently removes a workspace and its resources
+	//
+	// Safety measures:
+	// - Requires confirmation via separate endpoint
+	// - All child resources must be deleted first
+	// - 7-day soft delete window
+	// - Audit trail preserved
 	DeleteWorkspace(ctx context.Context, in *DeleteWorkspaceRequest, opts ...grpc.CallOption) (*DeleteWorkspaceResponse, error)
 }
 
@@ -437,7 +585,7 @@ func (c *leadScraperServiceClient) DeleteWorkspace(ctx context.Context, in *Dele
 // All implementations must embed UnimplementedLeadScraperServiceServer
 // for forward compatibility.
 //
-// WorkspaceService provides functionality for managing Google Maps scraping jobs.
+// LeadScraperService provides functionality for managing Google Maps scraping jobs.
 // This service allows users to create, monitor, and retrieve results from scraping tasks
 // that extract data from Google Maps based on specified search criteria.
 //
@@ -449,7 +597,7 @@ func (c *leadScraperServiceClient) DeleteWorkspace(ctx context.Context, in *Dele
 //
 // Usage example:
 // ```go
-// client := workspace_service.NewWorkspaceServiceClient(conn)
+// client := workspace_service.NewLeadScraperServiceClient(conn)
 //
 //	resp, err := client.CreateScrapingJob(ctx, &CreateScrapingJobRequest{
 //	    Name: "Coffee shops in Athens",
@@ -543,33 +691,181 @@ type LeadScraperServiceServer interface {
 	// Required permissions:
 	// - delete:account
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error)
-	// Workspace Management
+	// CreateWorkspace establishes a new organizational workspace for managing scraping jobs
+	//
+	// This endpoint creates a dedicated workspace with configurable:
+	// - Access controls and permissions
+	// - Resource quotas
+	// - Team member associations
+	// - Job execution environments
+	//
+	// Required parameters:
+	// - account_id: Parent account ID
+	// - name: Human-readable workspace name
+	// - region: Deployment region for workspace resources
+	//
+	// Example:
+	// ```curl
+	// POST /lead-scraper-microservice/api/v1/workspaces
+	//
+	//	{
+	//	  "name": "European Market Research",
+	//	  "region": "eu-west-1",
+	//	  "default_job_parameters": {
+	//	    "lang": "en",
+	//	    "country_code": "GR"
+	//	  }
+	//	}
+	//
+	// ```
 	CreateWorkspace(context.Context, *CreateWorkspaceRequest) (*CreateWorkspaceResponse, error)
+	// ListWorkspaces retrieves all workspaces associated with an account
+	//
+	// Features:
+	// - Pagination support via limit/offset parameters
+	// - Filtering by creation date, region, and status
+	// - Summary statistics for quick overview
+	//
+	// Response includes:
+	// - Basic workspace metadata
+	// - Job execution statistics
+	// - Resource utilization metrics
 	ListWorkspaces(context.Context, *ListWorkspacesRequest) (*ListWorkspacesResponse, error)
-	// Usage Tracking
+	// GetAccountUsage provides detailed usage metrics for an account
+	//
+	// Metrics include:
+	// - Active scraping jobs
+	// - API call statistics
+	// - Storage utilization
+	// - Data processing throughput
+	// - Historical usage trends
+	//
+	// Usage scenarios:
+	// - Billing and invoicing
+	// - Resource planning
+	// - Usage quota enforcement
 	GetAccountUsage(context.Context, *GetAccountUsageRequest) (*GetAccountUsageResponse, error)
-	// Settings Management
+	// UpdateAccountSettings modifies configurable account parameters
+	//
+	// Configurable settings:
+	// - Notification preferences
+	// - API rate limits
+	// - Data retention policies
+	// - Security settings (2FA, IP whitelisting)
+	// - Default job parameters
+	//
+	// Example update:
+	// ```json
+	//
+	//	{
+	//	  "notification_settings": {
+	//	    "job_completion_webhook": "https://example.com/webhooks/jobs"
+	//	  },
+	//	  "data_retention_days": 30
+	//	}
+	//
+	// ```
 	UpdateAccountSettings(context.Context, *UpdateAccountSettingsRequest) (*UpdateAccountSettingsResponse, error)
-	// List accounts
+	// ListAccounts retrieves paginated account information
 	//
-	// Retrieves a list of accounts based on the provided filters.
-	// Results are paginated and can be filtered by organization and other criteria.
+	// Features:
+	// - Server-side filtering by organization, status, and region
+	// - Sorting by creation date, last active, etc.
+	// - Partial response field masking
 	//
-	// Required permissions:
-	// - list:accounts
+	// Security:
+	// - Requires admin privileges
+	// - Results filtered by organization context
+	// - Sensitive fields omitted by default
 	ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error)
-	// Workflow Management
+	// CreateWorkflow establishes a new workflow for a workspace
+	//
+	// # This endpoint creates a new workflow configuration for a specific workspace
+	//
+	// Required parameters:
+	// - workspace_id: Parent workspace ID
+	// - name: Human-readable workflow name
+	// - description: Optional workflow description
+	// - parameters: Job parameters for the workflow
+	//
+	// Example:
+	// ```json
 	CreateWorkflow(context.Context, *CreateWorkflowRequest) (*CreateWorkflowResponse, error)
+	// GetWorkflow retrieves detailed information about a specific workflow
+	//
+	// This endpoint provides comprehensive details about a workflow, including:
+	// - Workflow configuration
+	// - Job execution history
+	// - Associated workspaces
 	GetWorkflow(context.Context, *GetWorkflowRequest) (*GetWorkflowResponse, error)
+	// UpdateWorkflow modifies the configuration of a specific workflow
+	//
+	// This endpoint allows updating the details of a workflow, including:
+	// - Workflow name and description
+	// - Job parameters
+	//
+	// Example update:
+	// ```json
+	//
+	//	{
+	//	  "name": "Updated Workflow",
+	//	  "description": "Updated description"
+	//	}
+	//
+	// ```
 	UpdateWorkflow(context.Context, *UpdateWorkflowRequest) (*UpdateWorkflowResponse, error)
 	ListWorkflows(context.Context, *ListWorkflowsRequest) (*ListWorkflowsResponse, error)
-	// Execution Control
+	// TriggerWorkflow initiates the execution of a specific workflow
+	//
+	// This endpoint triggers the execution of a workflow, which will:
+	// - Fetch and process data based on the workflow configuration
+	// - Store results in the configured storage location
+	// - Update workflow status
+	// - Send notifications to the specified recipients
 	TriggerWorkflow(context.Context, *TriggerWorkflowRequest) (*TriggerWorkflowResponse, error)
+	// PauseWorkflow pauses the execution of a specific workflow
+	//
+	// This endpoint allows temporarily stopping the execution of a workflow,
+	// which will:
+	// - Prevent new job instances from being created
+	// - Allow resuming from the last completed job
+	// - Maintain workflow state for future resumption
 	PauseWorkflow(context.Context, *PauseWorkflowRequest) (*PauseWorkflowResponse, error)
-	// Analytics
+	// GetWorkspaceAnalytics retrieves analytics data for a specific workspace
+	//
+	// This endpoint provides comprehensive analytics about a workspace, including:
+	// - Job execution statistics
+	// - Resource utilization metrics
+	// - Performance metrics
+	// - Associated workflows
 	GetWorkspaceAnalytics(context.Context, *GetWorkspaceAnalyticsRequest) (*GetWorkspaceAnalyticsResponse, error)
+	// GetWorkspace retrieves detailed configuration and status for a workspace
+	//
+	// Response includes:
+	// - Access control list
+	// - Active job count
+	// - Resource allocation
+	// - Performance metrics
+	// - Associated workflows
 	GetWorkspace(context.Context, *GetWorkspaceRequest) (*GetWorkspaceResponse, error)
+	// UpdateWorkspace modifies workspace configuration
+	//
+	// Modifiable fields:
+	// - Name and description
+	// - Access controls
+	// - Resource quotas
+	// - Default job parameters
+	// - Retention policies
+	//
+	// Audit: Changes are logged with user ID and timestamp
 	UpdateWorkspace(context.Context, *UpdateWorkspaceRequest) (*UpdateWorkspaceResponse, error)
+	// DeleteWorkspace permanently removes a workspace and its resources
+	//
+	// Safety measures:
+	// - Requires confirmation via separate endpoint
+	// - All child resources must be deleted first
+	// - 7-day soft delete window
+	// - Audit trail preserved
 	DeleteWorkspace(context.Context, *DeleteWorkspaceRequest) (*DeleteWorkspaceResponse, error)
 	mustEmbedUnimplementedLeadScraperServiceServer()
 }

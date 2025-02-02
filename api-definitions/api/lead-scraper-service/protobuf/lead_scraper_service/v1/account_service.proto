@@ -9,7 +9,7 @@ import "lead_scraper_service/v1/request_response.proto";
 option go_package = "github.com/VectorEngineering/vector-protobuf-definitions/api-definitions/pkg/generated/lead_scraper_service/v1";
 
 /**
- * WorkspaceService provides functionality for managing Google Maps scraping jobs.
+ * LeadScraperService provides functionality for managing Google Maps scraping jobs.
  * This service allows users to create, monitor, and retrieve results from scraping tasks
  * that extract data from Google Maps based on specified search criteria.
  *
@@ -21,7 +21,7 @@ option go_package = "github.com/VectorEngineering/vector-protobuf-definitions/ap
  *
  * Usage example:
  * ```go
- * client := workspace_service.NewWorkspaceServiceClient(conn)
+ * client := workspace_service.NewLeadScraperServiceClient(conn)
  * resp, err := client.CreateScrapingJob(ctx, &CreateScrapingJobRequest{
  *     Name: "Coffee shops in Athens",
  *     Keywords: []string{"coffee", "café"},
@@ -297,7 +297,33 @@ service LeadScraperService {
         };
     }
 
-    // Workspace Management
+    /**
+     * CreateWorkspace establishes a new organizational workspace for managing scraping jobs
+     * 
+     * This endpoint creates a dedicated workspace with configurable:
+     * - Access controls and permissions
+     * - Resource quotas
+     * - Team member associations
+     * - Job execution environments
+     * 
+     * Required parameters:
+     * - account_id: Parent account ID
+     * - name: Human-readable workspace name
+     * - region: Deployment region for workspace resources
+     * 
+     * Example:
+     * ```curl
+     * POST /lead-scraper-microservice/api/v1/workspaces
+     * {
+     *   "name": "European Market Research",
+     *   "region": "eu-west-1",
+     *   "default_job_parameters": {
+     *     "lang": "en",
+     *     "country_code": "GR"
+     *   }
+     * }
+     * ```
+     */
     rpc CreateWorkspace(CreateWorkspaceRequest) returns (CreateWorkspaceResponse) {
         option (google.api.http) = {
             post: "/v1/workspaces"
@@ -319,6 +345,19 @@ service LeadScraperService {
 
     }
 
+    /**
+     * ListWorkspaces retrieves all workspaces associated with an account
+     * 
+     * Features:
+     * - Pagination support via limit/offset parameters
+     * - Filtering by creation date, region, and status
+     * - Summary statistics for quick overview
+     * 
+     * Response includes:
+     * - Basic workspace metadata
+     * - Job execution statistics
+     * - Resource utilization metrics
+     */
     rpc ListWorkspaces(ListWorkspacesRequest) returns (ListWorkspacesResponse) {
         option (google.api.http) = {
             get: "/v1/workspaces"
@@ -338,7 +377,21 @@ service LeadScraperService {
         };
     }
 
-    // Usage Tracking
+    /**
+     * GetAccountUsage provides detailed usage metrics for an account
+     * 
+     * Metrics include:
+     * - Active scraping jobs
+     * - API call statistics
+     * - Storage utilization
+     * - Data processing throughput
+     * - Historical usage trends
+     * 
+     * Usage scenarios:
+     * - Billing and invoicing
+     * - Resource planning
+     * - Usage quota enforcement
+     */
     rpc GetAccountUsage(GetAccountUsageRequest) returns (GetAccountUsageResponse) {
         option (google.api.http) = {
             get: "/v1/accounts/{id}/usage"
@@ -358,7 +411,26 @@ service LeadScraperService {
         };
     }
 
-    // Settings Management
+    /**
+     * UpdateAccountSettings modifies configurable account parameters
+     * 
+     * Configurable settings:
+     * - Notification preferences
+     * - API rate limits
+     * - Data retention policies
+     * - Security settings (2FA, IP whitelisting)
+     * - Default job parameters
+     * 
+     * Example update:
+     * ```json
+     * {
+     *   "notification_settings": {
+     *     "job_completion_webhook": "https://example.com/webhooks/jobs"
+     *   },
+     *   "data_retention_days": 30
+     * }
+     * ```
+     */
     rpc UpdateAccountSettings(UpdateAccountSettingsRequest) returns (UpdateAccountSettingsResponse) {
         option (google.api.http) = {
             put: "/v1/accounts/settings"
@@ -379,13 +451,19 @@ service LeadScraperService {
         };
     }
 
-    // List accounts
-    //
-    // Retrieves a list of accounts based on the provided filters.
-    // Results are paginated and can be filtered by organization and other criteria.
-    //
-    // Required permissions:
-    // - list:accounts
+    /**
+     * ListAccounts retrieves paginated account information
+     * 
+     * Features:
+     * - Server-side filtering by organization, status, and region
+     * - Sorting by creation date, last active, etc.
+     * - Partial response field masking
+     * 
+     * Security:
+     * - Requires admin privileges
+     * - Results filtered by organization context
+     * - Sensitive fields omitted by default
+     */
     rpc ListAccounts(ListAccountsRequest) returns (ListAccountsResponse) {
         option (google.api.http) = {
             get: "/v1/accounts"
@@ -406,6 +484,20 @@ service LeadScraperService {
     }
 
      // Workflow Management
+     /**
+     * CreateWorkflow establishes a new workflow for a workspace
+     * 
+     * This endpoint creates a new workflow configuration for a specific workspace
+     * 
+     * Required parameters:
+     * - workspace_id: Parent workspace ID
+     * - name: Human-readable workflow name
+     * - description: Optional workflow description
+     * - parameters: Job parameters for the workflow
+     * 
+     * Example:
+     * ```json
+     */
     rpc CreateWorkflow(CreateWorkflowRequest) returns (CreateWorkflowResponse) {
         option (google.api.http) = {
             post: "/v1/workspaces/{workspace_id}/workflows"
@@ -424,6 +516,14 @@ service LeadScraperService {
         };
     }
 
+    /**
+     * GetWorkflow retrieves detailed information about a specific workflow
+     * 
+     * This endpoint provides comprehensive details about a workflow, including:
+     * - Workflow configuration
+     * - Job execution history
+     * - Associated workspaces
+     */
     rpc GetWorkflow(GetWorkflowRequest) returns (GetWorkflowResponse) {
         option (google.api.http) = {
             get: "/v1/workspaces/{workspace_id}/workflows/{id}"
@@ -443,6 +543,21 @@ service LeadScraperService {
         };
     }
 
+    /**
+     * UpdateWorkflow modifies the configuration of a specific workflow
+     * 
+     * This endpoint allows updating the details of a workflow, including:
+     * - Workflow name and description
+     * - Job parameters
+     * 
+     * Example update:
+     * ```json
+     * {
+     *   "name": "Updated Workflow",
+     *   "description": "Updated description"
+     * }
+     * ```
+     */
     rpc UpdateWorkflow(UpdateWorkflowRequest) returns (UpdateWorkflowResponse) {
         option (google.api.http) = {
             put: "/v1/workspaces/workflow"
@@ -483,6 +598,15 @@ service LeadScraperService {
     }
 
     // Execution Control
+    /**
+     * TriggerWorkflow initiates the execution of a specific workflow
+     * 
+     * This endpoint triggers the execution of a workflow, which will:
+     * - Fetch and process data based on the workflow configuration
+     * - Store results in the configured storage location
+     * - Update workflow status
+     * - Send notifications to the specified recipients
+     */
     rpc TriggerWorkflow(TriggerWorkflowRequest) returns (TriggerWorkflowResponse) {
         option (google.api.http) = {
             post: "/v1/workspaces/{workspace_id}/workflows/{id}/trigger"
@@ -503,6 +627,15 @@ service LeadScraperService {
         };
     }
 
+    /**
+     * PauseWorkflow pauses the execution of a specific workflow
+     * 
+     * This endpoint allows temporarily stopping the execution of a workflow,
+     * which will:
+     * - Prevent new job instances from being created
+     * - Allow resuming from the last completed job
+     * - Maintain workflow state for future resumption
+     */
     rpc PauseWorkflow(PauseWorkflowRequest) returns (PauseWorkflowResponse) {
         option (google.api.http) = {
             post: "/v1/workspaces/{workspace_id}/workflows/{id}/pause"
@@ -524,6 +657,15 @@ service LeadScraperService {
     }
 
     // Analytics
+    /**
+     * GetWorkspaceAnalytics retrieves analytics data for a specific workspace
+     * 
+     * This endpoint provides comprehensive analytics about a workspace, including:
+     * - Job execution statistics
+     * - Resource utilization metrics
+     * - Performance metrics
+     * - Associated workflows
+     */
     rpc GetWorkspaceAnalytics(GetWorkspaceAnalyticsRequest) returns (GetWorkspaceAnalyticsResponse) {
         option (google.api.http) = {
             get: "/v1/workspaces/{workspace_id}/analytics"
@@ -543,6 +685,16 @@ service LeadScraperService {
         };
     }
 
+    /**
+     * GetWorkspace retrieves detailed configuration and status for a workspace
+     * 
+     * Response includes:
+     * - Access control list
+     * - Active job count
+     * - Resource allocation
+     * - Performance metrics
+     * - Associated workflows
+     */
     rpc GetWorkspace(GetWorkspaceRequest) returns (GetWorkspaceResponse) {
         option (google.api.http) = {
             get: "/v1/workspace/{id}"
@@ -562,6 +714,18 @@ service LeadScraperService {
         };
     }
 
+    /**
+     * UpdateWorkspace modifies workspace configuration
+     * 
+     * Modifiable fields:
+     * - Name and description
+     * - Access controls
+     * - Resource quotas
+     * - Default job parameters
+     * - Retention policies
+     * 
+     * Audit: Changes are logged with user ID and timestamp
+     */
     rpc UpdateWorkspace(UpdateWorkspaceRequest) returns (UpdateWorkspaceResponse) {
         option (google.api.http) = {
             put: "/v1/workspace"
@@ -582,6 +746,15 @@ service LeadScraperService {
         };
     }
 
+    /**
+     * DeleteWorkspace permanently removes a workspace and its resources
+     * 
+     * Safety measures:
+     * - Requires confirmation via separate endpoint
+     * - All child resources must be deleted first
+     * - 7-day soft delete window
+     * - Audit trail preserved
+     */
     rpc DeleteWorkspace(DeleteWorkspaceRequest) returns (DeleteWorkspaceResponse) {
         option (google.api.http) = {
             delete: "/v1/workspace/{id}"

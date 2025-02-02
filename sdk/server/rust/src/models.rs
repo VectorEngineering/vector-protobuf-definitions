@@ -18,14 +18,6 @@ pub struct Account {
     #[serde(skip_serializing_if="Option::is_none")]
     pub auth_platform_user_id: Option<String>,
 
-    #[serde(rename = "orgId")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub org_id: Option<String>,
-
-    #[serde(rename = "tenantId")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub tenant_id: Option<String>,
-
     #[serde(rename = "email")]
     #[serde(skip_serializing_if="Option::is_none")]
     pub email: Option<String>,
@@ -91,8 +83,6 @@ impl Account {
         Account {
             id: None,
             auth_platform_user_id: None,
-            org_id: None,
-            tenant_id: None,
             email: None,
             deleted_at: None,
             created_at: None,
@@ -130,22 +120,6 @@ impl std::string::ToString for Account {
                 [
                     "authPlatformUserId".to_string(),
                     auth_platform_user_id.to_string(),
-                ].join(",")
-            }),
-
-
-            self.org_id.as_ref().map(|org_id| {
-                [
-                    "orgId".to_string(),
-                    org_id.to_string(),
-                ].join(",")
-            }),
-
-
-            self.tenant_id.as_ref().map(|tenant_id| {
-                [
-                    "tenantId".to_string(),
-                    tenant_id.to_string(),
                 ].join(",")
             }),
 
@@ -244,8 +218,6 @@ impl std::str::FromStr for Account {
         struct IntermediateRep {
             pub id: Vec<String>,
             pub auth_platform_user_id: Vec<String>,
-            pub org_id: Vec<String>,
-            pub tenant_id: Vec<String>,
             pub email: Vec<String>,
             pub deleted_at: Vec<chrono::DateTime::<chrono::Utc>>,
             pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
@@ -281,10 +253,6 @@ impl std::str::FromStr for Account {
                     "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "authPlatformUserId" => intermediate_rep.auth_platform_user_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "orgId" => intermediate_rep.org_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "email" => intermediate_rep.email.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
@@ -322,8 +290,6 @@ impl std::str::FromStr for Account {
         std::result::Result::Ok(Account {
             id: intermediate_rep.id.into_iter().next(),
             auth_platform_user_id: intermediate_rep.auth_platform_user_id.into_iter().next(),
-            org_id: intermediate_rep.org_id.into_iter().next(),
-            tenant_id: intermediate_rep.tenant_id.into_iter().next(),
             email: intermediate_rep.email.into_iter().next(),
             deleted_at: intermediate_rep.deleted_at.into_iter().next(),
             created_at: intermediate_rep.created_at.into_iter().next(),

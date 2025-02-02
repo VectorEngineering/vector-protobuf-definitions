@@ -5,8 +5,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id_** | **String!** |  | [optional] [default to null]
 **authPlatformUserId** | **String!** |  | [optional] [default to null]
-**orgId** | **String!** |  | [optional] [default to null]
-**tenantId** | **String!** |  | [optional] [default to null]
 **email** | **String!** |  | [optional] [default to null]
 **deletedAt** | **String!** |  | [optional] [default to null]
 **createdAt** | **String!** |  | [optional] [default to null]

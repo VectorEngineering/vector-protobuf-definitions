@@ -5,8 +5,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** |  | [optional] [default to None]
 **auth_platform_user_id** | **String** |  | [optional] [default to None]
-**org_id** | **String** |  | [optional] [default to None]
-**tenant_id** | **String** |  | [optional] [default to None]
 **email** | **String** |  | [optional] [default to None]
 **deleted_at** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]
 **created_at** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]

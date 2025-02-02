@@ -2655,7 +2655,6 @@ components:
         - roles
         - roles
         concurrentJobLimit: 1
-        orgId: orgId
         monthlyJobLimit: 6
         accountStatus: ACCOUNT_STATUS_UNSPECIFIED
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2665,7 +2664,6 @@ components:
         permissions:
         - permissions
         - permissions
-        tenantId: tenantId
         mfaEnabled: true
         id: id
         workspaces:
@@ -7437,12 +7435,6 @@ components:
         authPlatformUserId:
           title: Auth0 user identifier for authentication
           type: string
-        orgId:
-          title: Organization identifier for multi-org support
-          type: string
-        tenantId:
-          title: Tenant identifier for multi-tenant support
-          type: string
         email:
           title: User's email address
           type: string
@@ -7917,7 +7909,6 @@ components:
           - roles
           - roles
           concurrentJobLimit: 1
-          orgId: orgId
           monthlyJobLimit: 6
           accountStatus: ACCOUNT_STATUS_UNSPECIFIED
           createdAt: 2000-01-23T04:56:07.000+00:00
@@ -7927,7 +7918,6 @@ components:
           permissions:
           - permissions
           - permissions
-          tenantId: tenantId
           mfaEnabled: true
           id: id
           workspaces:
@@ -12718,7 +12708,6 @@ components:
           - roles
           - roles
           concurrentJobLimit: 1
-          orgId: orgId
           monthlyJobLimit: 6
           accountStatus: ACCOUNT_STATUS_UNSPECIFIED
           createdAt: 2000-01-23T04:56:07.000+00:00
@@ -12728,7 +12717,6 @@ components:
           permissions:
           - permissions
           - permissions
-          tenantId: tenantId
           mfaEnabled: true
           id: id
           workspaces:
@@ -17782,7 +17770,6 @@ components:
           - roles
           - roles
           concurrentJobLimit: 1
-          orgId: orgId
           monthlyJobLimit: 6
           accountStatus: ACCOUNT_STATUS_UNSPECIFIED
           createdAt: 2000-01-23T04:56:07.000+00:00
@@ -17792,7 +17779,6 @@ components:
           permissions:
           - permissions
           - permissions
-          tenantId: tenantId
           mfaEnabled: true
           id: id
           workspaces:
@@ -26150,7 +26136,6 @@ components:
           - roles
           - roles
           concurrentJobLimit: 1
-          orgId: orgId
           monthlyJobLimit: 6
           accountStatus: ACCOUNT_STATUS_UNSPECIFIED
           createdAt: 2000-01-23T04:56:07.000+00:00
@@ -26160,7 +26145,6 @@ components:
           permissions:
           - permissions
           - permissions
-          tenantId: tenantId
           mfaEnabled: true
           id: id
           workspaces:
@@ -30947,7 +30931,6 @@ components:
           - roles
           - roles
           concurrentJobLimit: 1
-          orgId: orgId
           monthlyJobLimit: 6
           accountStatus: ACCOUNT_STATUS_UNSPECIFIED
           createdAt: 2000-01-23T04:56:07.000+00:00
@@ -30957,7 +30940,6 @@ components:
           permissions:
           - permissions
           - permissions
-          tenantId: tenantId
           mfaEnabled: true
           id: id
           workspaces:

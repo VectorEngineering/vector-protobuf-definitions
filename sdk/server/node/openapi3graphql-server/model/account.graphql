@@ -12,8 +12,6 @@
 type Account {
   id: String!
   authPlatformUserId: String!
-  orgId: String!
-  tenantId: String!
   email: String!
   deletedAt: String!
   createdAt: String!
@@ -33,8 +31,6 @@ type Account {
 input AccountInput {
     id: String!
     authPlatformUserId: String!
-    orgId: String!
-    tenantId: String!
     email: String!
     deletedAt: String!
     createdAt: String!

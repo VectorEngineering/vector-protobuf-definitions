@@ -18,17 +18,13 @@ class Account(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, auth_platform_user_id=None, org_id=None, tenant_id=None, email=None, deleted_at=None, created_at=None, account_status=AccountStatus.UNSPECIFIED, roles=None, permissions=None, mfa_enabled=None, last_login_at=None, timezone=None, total_jobs_run=None, monthly_job_limit=None, concurrent_job_limit=None, workspaces=None, settings=None):  # noqa: E501
+    def __init__(self, id=None, auth_platform_user_id=None, email=None, deleted_at=None, created_at=None, account_status=AccountStatus.UNSPECIFIED, roles=None, permissions=None, mfa_enabled=None, last_login_at=None, timezone=None, total_jobs_run=None, monthly_job_limit=None, concurrent_job_limit=None, workspaces=None, settings=None):  # noqa: E501
         """Account - a model defined in OpenAPI
 
         :param id: The id of this Account.  # noqa: E501
         :type id: str
         :param auth_platform_user_id: The auth_platform_user_id of this Account.  # noqa: E501
         :type auth_platform_user_id: str
-        :param org_id: The org_id of this Account.  # noqa: E501
-        :type org_id: str
-        :param tenant_id: The tenant_id of this Account.  # noqa: E501
-        :type tenant_id: str
         :param email: The email of this Account.  # noqa: E501
         :type email: str
         :param deleted_at: The deleted_at of this Account.  # noqa: E501
@@ -61,8 +57,6 @@ class Account(Model):
         self.openapi_types = {
             'id': str,
             'auth_platform_user_id': str,
-            'org_id': str,
-            'tenant_id': str,
             'email': str,
             'deleted_at': datetime,
             'created_at': datetime,
@@ -82,8 +76,6 @@ class Account(Model):
         self.attribute_map = {
             'id': 'id',
             'auth_platform_user_id': 'authPlatformUserId',
-            'org_id': 'orgId',
-            'tenant_id': 'tenantId',
             'email': 'email',
             'deleted_at': 'deletedAt',
             'created_at': 'createdAt',
@@ -102,8 +94,6 @@ class Account(Model):
 
         self._id = id
         self._auth_platform_user_id = auth_platform_user_id
-        self._org_id = org_id
-        self._tenant_id = tenant_id
         self._email = email
         self._deleted_at = deleted_at
         self._created_at = created_at
@@ -171,48 +161,6 @@ class Account(Model):
         """
 
         self._auth_platform_user_id = auth_platform_user_id
-
-    @property
-    def org_id(self) -> str:
-        """Gets the org_id of this Account.
-
-
-        :return: The org_id of this Account.
-        :rtype: str
-        """
-        return self._org_id
-
-    @org_id.setter
-    def org_id(self, org_id: str):
-        """Sets the org_id of this Account.
-
-
-        :param org_id: The org_id of this Account.
-        :type org_id: str
-        """
-
-        self._org_id = org_id
-
-    @property
-    def tenant_id(self) -> str:
-        """Gets the tenant_id of this Account.
-
-
-        :return: The tenant_id of this Account.
-        :rtype: str
-        """
-        return self._tenant_id
-
-    @tenant_id.setter
-    def tenant_id(self, tenant_id: str):
-        """Sets the tenant_id of this Account.
-
-
-        :param tenant_id: The tenant_id of this Account.
-        :type tenant_id: str
-        """
-
-        self._tenant_id = tenant_id
 
     @property
     def email(self) -> str:

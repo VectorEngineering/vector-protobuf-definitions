@@ -28,16 +28,12 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "Account", description = "Account represents a user account within the workspace service. It serves as the top-level container for all user-specific workspaces and settings.  Key features: - Unique identification via Auth0 - Organization and tenant context - Audit timestamps - Associated scraping jobs  Database considerations: - Uses GORM for ORM mapping - Includes indexes for efficient querying - Supports soft deletes via deleted_at  Usage example: ```go account := &Account{     AuthPlatformUserId: \"auth0|123\",     OrgId: \"org_123\",     TenantId: \"tenant_456\", } ```")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-01T18:45:40.135269-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-02T05:34:49.009100-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class Account {
 
   private String id;
 
   private String authPlatformUserId;
-
-  private String orgId;
-
-  private String tenantId;
 
   private String email;
 
@@ -111,46 +107,6 @@ public class Account {
 
   public void setAuthPlatformUserId(String authPlatformUserId) {
     this.authPlatformUserId = authPlatformUserId;
-  }
-
-  public Account orgId(String orgId) {
-    this.orgId = orgId;
-    return this;
-  }
-
-  /**
-   * Get orgId
-   * @return orgId
-   */
-  
-  @Schema(name = "orgId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("orgId")
-  public String getOrgId() {
-    return orgId;
-  }
-
-  public void setOrgId(String orgId) {
-    this.orgId = orgId;
-  }
-
-  public Account tenantId(String tenantId) {
-    this.tenantId = tenantId;
-    return this;
-  }
-
-  /**
-   * Get tenantId
-   * @return tenantId
-   */
-  
-  @Schema(name = "tenantId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("tenantId")
-  public String getTenantId() {
-    return tenantId;
-  }
-
-  public void setTenantId(String tenantId) {
-    this.tenantId = tenantId;
   }
 
   public Account email(String email) {
@@ -468,8 +424,6 @@ public class Account {
     Account account = (Account) o;
     return Objects.equals(this.id, account.id) &&
         Objects.equals(this.authPlatformUserId, account.authPlatformUserId) &&
-        Objects.equals(this.orgId, account.orgId) &&
-        Objects.equals(this.tenantId, account.tenantId) &&
         Objects.equals(this.email, account.email) &&
         Objects.equals(this.deletedAt, account.deletedAt) &&
         Objects.equals(this.createdAt, account.createdAt) &&
@@ -488,7 +442,7 @@ public class Account {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, authPlatformUserId, orgId, tenantId, email, deletedAt, createdAt, accountStatus, roles, permissions, mfaEnabled, lastLoginAt, timezone, totalJobsRun, monthlyJobLimit, concurrentJobLimit, workspaces, settings);
+    return Objects.hash(id, authPlatformUserId, email, deletedAt, createdAt, accountStatus, roles, permissions, mfaEnabled, lastLoginAt, timezone, totalJobsRun, monthlyJobLimit, concurrentJobLimit, workspaces, settings);
   }
 
   @Override
@@ -497,8 +451,6 @@ public class Account {
     sb.append("class Account {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    authPlatformUserId: ").append(toIndentedString(authPlatformUserId)).append("\n");
-    sb.append("    orgId: ").append(toIndentedString(orgId)).append("\n");
-    sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    deletedAt: ").append(toIndentedString(deletedAt)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");

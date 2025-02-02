@@ -86,6 +86,256 @@ enum WorkflowStatus {
     WORKFLOW_STATUS_WARNING = 10;
 }
 
+/**
+ * Organization represents a company using the platform
+ * 
+ * Key features:
+ * - Multi-tenant support
+ * - Hierarchical structure
+ * - Enterprise features
+ * - Billing management
+ * 
+ * Use cases:
+ * - Company creates multiple apps/tenants
+ * - Enterprise manages business units
+ * - Usage tracking across tenants
+ */
+message Organization {
+    option (gorm.opts) = {
+        ormable: true
+        table: "organizations"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    
+    // Basic Information
+    string name = 2 [(validate.rules).string.min_len = 1];
+    string display_name = 3;
+    string website = 4 [(validate.rules).string.uri = true];
+    string description = 5;
+    
+    // Contact Information
+    string billing_email = 6 [(validate.rules).string.email = true];
+    string technical_email = 7 [(validate.rules).string.email = true];
+    string phone = 8;
+    string address = 9;
+    
+    // Enterprise Features
+    bool sso_enabled = 10;
+    string sso_provider = 11; // e.g., "okta", "azure_ad"
+    string sso_domain = 12;
+    repeated string allowed_domains = 13 [(gorm.field).tag = {type: "text[]"}];
+    bool enforce_2fa = 14;
+    
+    // Billing
+    enum BillingPlan {
+        BILLING_PLAN_UNSPECIFIED = 0;
+        BILLING_PLAN_STARTUP = 1;
+        BILLING_PLAN_BUSINESS = 2;
+        BILLING_PLAN_ENTERPRISE = 3;
+    }
+    BillingPlan billing_plan = 15;
+    string billing_currency = 16;
+    bool auto_billing = 17;
+    string tax_id = 18;
+    
+    // Compliance
+    repeated string compliance_frameworks = 19 [(gorm.field).tag = {type: "text[]"}]; // SOC2, GDPR, etc
+    bool data_processing_agreement = 20;
+    string data_region = 21; // Primary data storage region
+    
+    // Resource Limits
+    int32 max_tenants = 22;
+    int64 total_storage_limit = 23;
+    int32 max_api_keys = 24;
+    int32 max_users = 25;
+    
+    // Relationships
+    repeated Tenant tenants = 26 [(gorm.field).has_many = {}];
+    Subscription subscriptions = 27 [(gorm.field).has_one = {}];
+    
+    // Audit
+    google.protobuf.Timestamp created_at = 28;
+    google.protobuf.Timestamp updated_at = 29;
+    google.protobuf.Timestamp deleted_at = 30;
+    string created_by = 31;
+    
+    // Status
+    enum Status {
+        STATUS_UNSPECIFIED = 0;
+        STATUS_ACTIVE = 1;
+        STATUS_SUSPENDED = 2;
+        STATUS_PENDING_VERIFICATION = 3;
+    }
+    Status status = 32;
+}
+
+/**
+ * Tenant represents an application/project within an organization
+ * 
+ * Key features:
+ * - Resource isolation
+ * - Independent configuration
+ * - Usage tracking
+ * - Service subscriptions
+ */
+message Tenant {
+    option (gorm.opts) = {
+        ormable: true
+        table: "tenants"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    
+    // Basic Information
+    string name = 2 [(validate.rules).string.min_len = 1];
+    string display_name = 3;
+    string description = 4;
+    
+    // Organization Context
+    Organization organization = 6 [(gorm.field).belongs_to = {}];
+    
+    // Configuration
+    string api_base_url = 7;
+    map<string, string> environment_variables = 8;
+    repeated string allowed_origins = 9 [(gorm.field).tag = {type: "text[]"}];
+    
+    // Resource Management
+    int64 storage_quota = 10;
+    int64 monthly_request_limit = 11;
+    int32 max_concurrent_jobs = 12;
+    
+    // Feature Flags
+    bool enable_caching = 13;
+    bool enable_rate_limiting = 14;
+    bool enable_request_logging = 15;
+    
+    // Relationships
+    repeated Account accounts = 16 [(gorm.field).has_many = {}];
+    repeated TenantAPIKey api_keys = 17 [(gorm.field).has_many = {}];
+
+    // Usage Metrics
+    int64 total_requests = 19;
+    int64 total_storage_used = 20;
+    float average_response_time = 21;
+    
+    // Audit
+    google.protobuf.Timestamp created_at = 22;
+    google.protobuf.Timestamp updated_at = 23;
+    google.protobuf.Timestamp deleted_at = 24;
+    
+    // Status
+    enum Status {
+        STATUS_UNSPECIFIED = 0;
+        STATUS_ACTIVE = 1;
+        STATUS_SUSPENDED = 2;
+        STATUS_MAINTENANCE = 3;
+    }
+    Status status = 25;
+}
+
+/**
+ * Subscription represents a tenant's Stripe-based subscription
+ * 
+ * Key features:
+ * - Stripe integration
+ * - Usage-based billing
+ * - Metered pricing
+ * - Feature flags
+ * 
+ * Database considerations:
+ * - Syncs with Stripe webhooks
+ * - Tracks usage for metered billing
+ * - Maintains subscription lifecycle
+ */
+message Subscription {
+    option (gorm.opts) = {
+        ormable: true
+        table: "subscriptions"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    
+    // Stripe Integration
+    string stripe_customer_id = 4 [(gorm.field).tag = {index: "idx_subscriptions_stripe_customer"}];
+    string stripe_subscription_id = 5 [(gorm.field).tag = {index: "idx_subscriptions_stripe_subscription"}];
+    string stripe_price_id = 6;
+    string stripe_product_id = 7;
+    
+    // Plan Details
+    enum PlanTier {
+        PLAN_TIER_UNSPECIFIED = 0;
+        PLAN_TIER_FREE = 1;
+        PLAN_TIER_STARTER = 2;
+        PLAN_TIER_PROFESSIONAL = 3;
+        PLAN_TIER_ENTERPRISE = 4;
+    }
+    PlanTier plan_tier = 8;
+    
+    // Billing Mode
+    enum BillingMode {
+        BILLING_MODE_UNSPECIFIED = 0;
+        BILLING_MODE_LICENSED = 1;    // Fixed price per seat
+        BILLING_MODE_METERED = 2;     // Usage-based
+        BILLING_MODE_HYBRID = 3;      // Base price + usage
+    }
+    BillingMode billing_mode = 9;
+    
+    // Usage Limits
+    int32 included_jobs = 10;         // Jobs included in base price
+    float per_job_rate = 11;          // Cost per additional job
+    int32 max_concurrent_jobs = 12;
+    int64 included_storage = 13;      // Storage included in base price
+    float per_gb_rate = 14;           // Cost per additional GB
+    
+    // Feature Entitlements
+    bool advanced_filtering_enabled = 15;
+    bool priority_support_enabled = 16;
+    bool custom_exports_enabled = 17;
+    bool api_access_enabled = 18;
+    bool custom_proxies_enabled = 19;
+    bool advanced_analytics_enabled = 20;
+    int32 retention_days = 21;
+    int32 max_results_per_job = 22;
+    
+    // Current Period
+    google.protobuf.Timestamp current_period_start = 23;
+    google.protobuf.Timestamp current_period_end = 24;
+    float current_period_usage = 25;   // Usage amount for current period
+    
+    // Billing
+    string currency = 26;              // e.g., "usd"
+    float base_price = 27;             // Monthly/yearly base price
+    enum Interval {
+        INTERVAL_UNSPECIFIED = 0;
+        INTERVAL_MONTHLY = 1;
+        INTERVAL_YEARLY = 2;
+    }
+    Interval billing_interval = 28;
+    bool auto_renew = 29;
+    
+    // Payment Status
+    enum PaymentStatus {
+        PAYMENT_STATUS_UNSPECIFIED = 0;
+        PAYMENT_STATUS_PAID = 1;
+        PAYMENT_STATUS_PAST_DUE = 2;
+        PAYMENT_STATUS_FAILED = 3;
+        PAYMENT_STATUS_CANCELED = 4;
+    }
+    PaymentStatus payment_status = 30;
+
+    
+    // Trial
+    bool is_trial = 31;
+    google.protobuf.Timestamp trial_start = 32;
+    google.protobuf.Timestamp trial_end = 33;
+    
+    // Timestamps
+    google.protobuf.Timestamp created_at = 34;
+    google.protobuf.Timestamp updated_at = 35;
+    google.protobuf.Timestamp canceled_at = 36;
+    google.protobuf.Timestamp ended_at = 37;
+}
 
 /**
  * Account represents a user account within the workspace service.
@@ -125,12 +375,6 @@ message Account {
         (gorm.field).tag = {index: "idx_user_auth_platform_user_id"},
         (validate.rules).string = {pattern: "^auth0\\|.*$", max_len: 128}
     ];
-
-    // Organization identifier for multi-org support
-    string org_id = 3 [(gorm.field).tag = {index: "idx_accounts_org_id"}];
-
-    // Tenant identifier for multi-tenant support
-    string tenant_id = 4 [(gorm.field).tag = {index: "idx_accounts_tenant_id"}];
 
     // User's email address
     string email = 5 [(gorm.field).tag = {index: "idx_accounts_email"}];
@@ -842,6 +1086,24 @@ message APIKey {
     string data_classification = 69 [
         (validate.rules).string = {in: ["public", "confidential", "restricted"]}
     ];
+}
+
+message TenantAPIKey {
+    option (gorm.opts) = {
+        ormable: true
+        table: "tenant_api_keys"
+    };
+ 
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    string key_hash = 2 [(gorm.field).tag = {unique: true}];
+    string key_prefix = 3 [(gorm.field).tag = {index: "idx_tenant_api_keys_prefix"}];
+
+    string name = 4;
+    string description = 5;
+    string status = 6;
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+    google.protobuf.Timestamp deleted_at = 9;
 }
 
 /**

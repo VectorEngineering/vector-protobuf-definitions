@@ -278,58 +278,150 @@ type LeadScraperServiceClient interface {
 	//
 	// ```
 	UpdateWorkflow(ctx context.Context, in *UpdateWorkflowRequest, opts ...grpc.CallOption) (*UpdateWorkflowResponse, error)
-	ListWorkflows(ctx context.Context, in *ListWorkflowsRequest, opts ...grpc.CallOption) (*ListWorkflowsResponse, error)
-	// TriggerWorkflow initiates the execution of a specific workflow
+	// ListWorkflows retrieves all workflows in a workspace
 	//
-	// This endpoint triggers the execution of a workflow, which will:
-	// - Fetch and process data based on the workflow configuration
-	// - Store results in the configured storage location
-	// - Update workflow status
-	// - Send notifications to the specified recipients
-	TriggerWorkflow(ctx context.Context, in *TriggerWorkflowRequest, opts ...grpc.CallOption) (*TriggerWorkflowResponse, error)
-	// PauseWorkflow pauses the execution of a specific workflow
-	//
-	// This endpoint allows temporarily stopping the execution of a workflow,
-	// which will:
-	// - Prevent new job instances from being created
-	// - Allow resuming from the last completed job
-	// - Maintain workflow state for future resumption
-	PauseWorkflow(ctx context.Context, in *PauseWorkflowRequest, opts ...grpc.CallOption) (*PauseWorkflowResponse, error)
-	// GetWorkspaceAnalytics retrieves analytics data for a specific workspace
-	//
-	// This endpoint provides comprehensive analytics about a workspace, including:
-	// - Job execution statistics
-	// - Resource utilization metrics
-	// - Performance metrics
-	// - Associated workflows
-	GetWorkspaceAnalytics(ctx context.Context, in *GetWorkspaceAnalyticsRequest, opts ...grpc.CallOption) (*GetWorkspaceAnalyticsResponse, error)
-	// GetWorkspace retrieves detailed configuration and status for a workspace
+	// Features:
+	// - Pagination support with customizable page size
+	// - Filtering by status, creation date, and type
+	// - Sorting options for various workflow attributes
 	//
 	// Response includes:
-	// - Access control list
-	// - Active job count
-	// - Resource allocation
-	// - Performance metrics
-	// - Associated workflows
+	// - Workflow metadata and configuration
+	// - Execution statistics and status
+	// - Last run information
+	// - Associated resource usage
+	//
+	// Common use cases:
+	// - Monitoring workflow health
+	// - Auditing workflow configurations
+	// - Resource utilization analysis
+	ListWorkflows(ctx context.Context, in *ListWorkflowsRequest, opts ...grpc.CallOption) (*ListWorkflowsResponse, error)
+	// TriggerWorkflow initiates workflow execution with specified parameters
+	//
+	// Features:
+	// - Immediate or scheduled execution
+	// - Custom parameter overrides
+	// - Dependency chain validation
+	// - Resource availability check
+	//
+	// Execution process:
+	// 1. Validates workflow configuration
+	// 2. Checks resource availability
+	// 3. Initializes execution environment
+	// 4. Starts job processing
+	// 5. Monitors progress and updates status
+	//
+	// Error handling:
+	// - Automatic retry for transient failures
+	// - Configurable timeout settings
+	// - Detailed error reporting
+	TriggerWorkflow(ctx context.Context, in *TriggerWorkflowRequest, opts ...grpc.CallOption) (*TriggerWorkflowResponse, error)
+	// PauseWorkflow safely suspends workflow execution
+	//
+	// Behavior:
+	// - Gracefully stops job processing
+	// - Maintains workflow state
+	// - Preserves partial results
+	// - Allows resume from last checkpoint
+	//
+	// Safety measures:
+	// - Completes in-progress tasks
+	// - Saves checkpoint data
+	// - Updates workflow status
+	// - Notifies dependent systems
+	//
+	// Use cases:
+	// - System maintenance
+	// - Resource reallocation
+	// - Error investigation
+	// - Configuration updates
+	PauseWorkflow(ctx context.Context, in *PauseWorkflowRequest, opts ...grpc.CallOption) (*PauseWorkflowResponse, error)
+	// GetWorkspaceAnalytics provides comprehensive workspace metrics
+	//
+	// Metrics categories:
+	// - Resource utilization (CPU, memory, storage)
+	// - Job execution statistics
+	// - Error rates and types
+	// - Performance trends
+	// - Cost analysis
+	//
+	// Time ranges:
+	// - Real-time metrics
+	// - Historical data (configurable periods)
+	// - Trend analysis
+	//
+	// Aggregation options:
+	// - By workflow
+	// - By job type
+	// - By time period
+	// - By resource type
+	GetWorkspaceAnalytics(ctx context.Context, in *GetWorkspaceAnalyticsRequest, opts ...grpc.CallOption) (*GetWorkspaceAnalyticsResponse, error)
+	// GetWorkspace retrieves detailed workspace information
+	//
+	// Response includes:
+	// - Basic metadata (name, ID, creation date)
+	// - Access control configuration
+	// - Resource quotas and usage
+	// - Workflow inventory
+	// - Integration settings
+	//
+	// Security features:
+	// - Role-based access control
+	// - Audit log integration
+	// - Resource isolation validation
+	//
+	// Common use cases:
+	// - Workspace administration
+	// - Configuration management
+	// - Compliance auditing
+	// - Resource planning
 	GetWorkspace(ctx context.Context, in *GetWorkspaceRequest, opts ...grpc.CallOption) (*GetWorkspaceResponse, error)
 	// UpdateWorkspace modifies workspace configuration
 	//
-	// Modifiable fields:
-	// - Name and description
-	// - Access controls
+	// Modifiable settings:
+	// - Basic information (name, description)
+	// - Access control lists
 	// - Resource quotas
-	// - Default job parameters
-	// - Retention policies
+	// - Default parameters
+	// - Integration configurations
+	// - Notification preferences
 	//
-	// Audit: Changes are logged with user ID and timestamp
+	// Update process:
+	// 1. Validates new configuration
+	// 2. Checks resource implications
+	// 3. Applies changes atomically
+	// 4. Updates dependent systems
+	// 5. Logs modifications
+	//
+	// Safety features:
+	// - Configuration validation
+	// - Atomic updates
+	// - Rollback capability
+	// - Audit trail
 	UpdateWorkspace(ctx context.Context, in *UpdateWorkspaceRequest, opts ...grpc.CallOption) (*UpdateWorkspaceResponse, error)
-	// DeleteWorkspace permanently removes a workspace and its resources
+	// DeleteWorkspace removes a workspace and associated resources
+	//
+	// Deletion process:
+	// 1. Validation checks
+	//   - Resource dependencies
+	//   - Active workflows
+	//   - User permissions
+	//
+	// 2. Resource cleanup
+	//   - Workflow termination
+	//   - Data archival
+	//   - Resource deallocation
 	//
 	// Safety measures:
-	// - Requires confirmation via separate endpoint
-	// - All child resources must be deleted first
-	// - 7-day soft delete window
-	// - Audit trail preserved
+	// - Soft delete with recovery window
+	// - Dependency validation
+	// - Resource cleanup confirmation
+	// - Audit trail preservation
+	//
+	// Post-deletion:
+	// - Notification to stakeholders
+	// - Resource reclamation
+	// - Audit log finalization
 	DeleteWorkspace(ctx context.Context, in *DeleteWorkspaceRequest, opts ...grpc.CallOption) (*DeleteWorkspaceResponse, error)
 }
 
@@ -814,58 +906,150 @@ type LeadScraperServiceServer interface {
 	//
 	// ```
 	UpdateWorkflow(context.Context, *UpdateWorkflowRequest) (*UpdateWorkflowResponse, error)
-	ListWorkflows(context.Context, *ListWorkflowsRequest) (*ListWorkflowsResponse, error)
-	// TriggerWorkflow initiates the execution of a specific workflow
+	// ListWorkflows retrieves all workflows in a workspace
 	//
-	// This endpoint triggers the execution of a workflow, which will:
-	// - Fetch and process data based on the workflow configuration
-	// - Store results in the configured storage location
-	// - Update workflow status
-	// - Send notifications to the specified recipients
-	TriggerWorkflow(context.Context, *TriggerWorkflowRequest) (*TriggerWorkflowResponse, error)
-	// PauseWorkflow pauses the execution of a specific workflow
-	//
-	// This endpoint allows temporarily stopping the execution of a workflow,
-	// which will:
-	// - Prevent new job instances from being created
-	// - Allow resuming from the last completed job
-	// - Maintain workflow state for future resumption
-	PauseWorkflow(context.Context, *PauseWorkflowRequest) (*PauseWorkflowResponse, error)
-	// GetWorkspaceAnalytics retrieves analytics data for a specific workspace
-	//
-	// This endpoint provides comprehensive analytics about a workspace, including:
-	// - Job execution statistics
-	// - Resource utilization metrics
-	// - Performance metrics
-	// - Associated workflows
-	GetWorkspaceAnalytics(context.Context, *GetWorkspaceAnalyticsRequest) (*GetWorkspaceAnalyticsResponse, error)
-	// GetWorkspace retrieves detailed configuration and status for a workspace
+	// Features:
+	// - Pagination support with customizable page size
+	// - Filtering by status, creation date, and type
+	// - Sorting options for various workflow attributes
 	//
 	// Response includes:
-	// - Access control list
-	// - Active job count
-	// - Resource allocation
-	// - Performance metrics
-	// - Associated workflows
+	// - Workflow metadata and configuration
+	// - Execution statistics and status
+	// - Last run information
+	// - Associated resource usage
+	//
+	// Common use cases:
+	// - Monitoring workflow health
+	// - Auditing workflow configurations
+	// - Resource utilization analysis
+	ListWorkflows(context.Context, *ListWorkflowsRequest) (*ListWorkflowsResponse, error)
+	// TriggerWorkflow initiates workflow execution with specified parameters
+	//
+	// Features:
+	// - Immediate or scheduled execution
+	// - Custom parameter overrides
+	// - Dependency chain validation
+	// - Resource availability check
+	//
+	// Execution process:
+	// 1. Validates workflow configuration
+	// 2. Checks resource availability
+	// 3. Initializes execution environment
+	// 4. Starts job processing
+	// 5. Monitors progress and updates status
+	//
+	// Error handling:
+	// - Automatic retry for transient failures
+	// - Configurable timeout settings
+	// - Detailed error reporting
+	TriggerWorkflow(context.Context, *TriggerWorkflowRequest) (*TriggerWorkflowResponse, error)
+	// PauseWorkflow safely suspends workflow execution
+	//
+	// Behavior:
+	// - Gracefully stops job processing
+	// - Maintains workflow state
+	// - Preserves partial results
+	// - Allows resume from last checkpoint
+	//
+	// Safety measures:
+	// - Completes in-progress tasks
+	// - Saves checkpoint data
+	// - Updates workflow status
+	// - Notifies dependent systems
+	//
+	// Use cases:
+	// - System maintenance
+	// - Resource reallocation
+	// - Error investigation
+	// - Configuration updates
+	PauseWorkflow(context.Context, *PauseWorkflowRequest) (*PauseWorkflowResponse, error)
+	// GetWorkspaceAnalytics provides comprehensive workspace metrics
+	//
+	// Metrics categories:
+	// - Resource utilization (CPU, memory, storage)
+	// - Job execution statistics
+	// - Error rates and types
+	// - Performance trends
+	// - Cost analysis
+	//
+	// Time ranges:
+	// - Real-time metrics
+	// - Historical data (configurable periods)
+	// - Trend analysis
+	//
+	// Aggregation options:
+	// - By workflow
+	// - By job type
+	// - By time period
+	// - By resource type
+	GetWorkspaceAnalytics(context.Context, *GetWorkspaceAnalyticsRequest) (*GetWorkspaceAnalyticsResponse, error)
+	// GetWorkspace retrieves detailed workspace information
+	//
+	// Response includes:
+	// - Basic metadata (name, ID, creation date)
+	// - Access control configuration
+	// - Resource quotas and usage
+	// - Workflow inventory
+	// - Integration settings
+	//
+	// Security features:
+	// - Role-based access control
+	// - Audit log integration
+	// - Resource isolation validation
+	//
+	// Common use cases:
+	// - Workspace administration
+	// - Configuration management
+	// - Compliance auditing
+	// - Resource planning
 	GetWorkspace(context.Context, *GetWorkspaceRequest) (*GetWorkspaceResponse, error)
 	// UpdateWorkspace modifies workspace configuration
 	//
-	// Modifiable fields:
-	// - Name and description
-	// - Access controls
+	// Modifiable settings:
+	// - Basic information (name, description)
+	// - Access control lists
 	// - Resource quotas
-	// - Default job parameters
-	// - Retention policies
+	// - Default parameters
+	// - Integration configurations
+	// - Notification preferences
 	//
-	// Audit: Changes are logged with user ID and timestamp
+	// Update process:
+	// 1. Validates new configuration
+	// 2. Checks resource implications
+	// 3. Applies changes atomically
+	// 4. Updates dependent systems
+	// 5. Logs modifications
+	//
+	// Safety features:
+	// - Configuration validation
+	// - Atomic updates
+	// - Rollback capability
+	// - Audit trail
 	UpdateWorkspace(context.Context, *UpdateWorkspaceRequest) (*UpdateWorkspaceResponse, error)
-	// DeleteWorkspace permanently removes a workspace and its resources
+	// DeleteWorkspace removes a workspace and associated resources
+	//
+	// Deletion process:
+	// 1. Validation checks
+	//   - Resource dependencies
+	//   - Active workflows
+	//   - User permissions
+	//
+	// 2. Resource cleanup
+	//   - Workflow termination
+	//   - Data archival
+	//   - Resource deallocation
 	//
 	// Safety measures:
-	// - Requires confirmation via separate endpoint
-	// - All child resources must be deleted first
-	// - 7-day soft delete window
-	// - Audit trail preserved
+	// - Soft delete with recovery window
+	// - Dependency validation
+	// - Resource cleanup confirmation
+	// - Audit trail preservation
+	//
+	// Post-deletion:
+	// - Notification to stakeholders
+	// - Resource reclamation
+	// - Audit log finalization
 	DeleteWorkspace(context.Context, *DeleteWorkspaceRequest) (*DeleteWorkspaceResponse, error)
 	mustEmbedUnimplementedLeadScraperServiceServer()
 }

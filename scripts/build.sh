@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Environment variables
-SWAGGER_WORKSPACE_SERVICE_CODEGEN_PATH="./api-definitions/pkg/generated/lead_scraper_service/v1/apidocs.swagger.json"
+SWAGGER_LEAD_SCRAPER_SERVICE_CODEGEN_PATH="./api-definitions/pkg/generated/lead_scraper_service/v1/apidocs.swagger.json"
+SWAGGER_WORKSPACE_SERVICE_CODEGEN_PATH="./api-definitions/pkg/generated/workspace_service/v1/apidocs.swagger.json"
 
 VERSION=3
 FILE_PROD="./krakend-config/final-krakend.prod.json"
@@ -59,7 +60,8 @@ gen() {
 
 copy_swagger() {
     echo "Copying Swagger files..."
-    cp -rf "$SWAGGER_WORKSPACE_SERVICE_CODEGEN_PATH" ./swagger/lead-scraper-service.json
+    cp -rf "$SWAGGER_LEAD_SERVICE_CODEGEN_PATH" ./swagger/lead-scraper-service.json
+    cp -rf "$SWAGGER_WORKSPACE_SERVICE_CODEGEN_PATH" ./swagger/workspace-service.json
 }
 
 convert_swagger() {

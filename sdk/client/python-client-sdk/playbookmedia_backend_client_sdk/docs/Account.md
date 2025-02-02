@@ -8,8 +8,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** |  | [optional] 
 **auth_platform_user_id** | **str** |  | [optional] 
-**org_id** | **str** |  | [optional] 
-**tenant_id** | **str** |  | [optional] 
 **email** | **str** |  | [optional] 
 **deleted_at** | **datetime** |  | [optional] 
 **created_at** | **datetime** |  | [optional] 

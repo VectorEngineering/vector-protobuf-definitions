@@ -8650,14 +8650,6 @@
                         "type": "string",
                         "title": "Auth0 user identifier for authentication"
                     },
-                    "orgId": {
-                        "type": "string",
-                        "title": "Organization identifier for multi-org support"
-                    },
-                    "tenantId": {
-                        "type": "string",
-                        "title": "Tenant identifier for multi-tenant support"
-                    },
                     "email": {
                         "type": "string",
                         "title": "User's email address"

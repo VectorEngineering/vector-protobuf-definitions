@@ -32,8 +32,6 @@ class Account(BaseModel):
     """ # noqa: E501
     id: Optional[StrictStr] = None
     auth_platform_user_id: Optional[StrictStr] = Field(default=None, alias="authPlatformUserId")
-    org_id: Optional[StrictStr] = Field(default=None, alias="orgId")
-    tenant_id: Optional[StrictStr] = Field(default=None, alias="tenantId")
     email: Optional[StrictStr] = None
     deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
@@ -48,7 +46,7 @@ class Account(BaseModel):
     concurrent_job_limit: Optional[StrictInt] = Field(default=None, alias="concurrentJobLimit")
     workspaces: Optional[List[Workspace]] = None
     settings: Optional[AccountSettings] = None
-    __properties: ClassVar[List[str]] = ["id", "authPlatformUserId", "orgId", "tenantId", "email", "deletedAt", "createdAt", "accountStatus", "roles", "permissions", "mfaEnabled", "lastLoginAt", "timezone", "totalJobsRun", "monthlyJobLimit", "concurrentJobLimit", "workspaces", "settings"]
+    __properties: ClassVar[List[str]] = ["id", "authPlatformUserId", "email", "deletedAt", "createdAt", "accountStatus", "roles", "permissions", "mfaEnabled", "lastLoginAt", "timezone", "totalJobsRun", "monthlyJobLimit", "concurrentJobLimit", "workspaces", "settings"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -113,8 +111,6 @@ class Account(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id"),
             "authPlatformUserId": obj.get("authPlatformUserId"),
-            "orgId": obj.get("orgId"),
-            "tenantId": obj.get("tenantId"),
             "email": obj.get("email"),
             "deletedAt": obj.get("deletedAt"),
             "createdAt": obj.get("createdAt"),

@@ -14,6 +14,9 @@ func GetDatabaseSchemas() []interface{} {
 		AccountSettingsORM{},
 		APIKeyORM{},
 		ResultORM{},
+		TenantAPIKeyORM{},
+		TenantORM{},
+		OrganizationORM{},
 	}
 
 	return models

@@ -22,10 +22,13 @@ var (
 	AccountSettingsORM  *accountSettingsORM
 	BusinessHoursORM    *businessHoursORM
 	LeadORM             *leadORM
+	OrganizationORM     *organizationORM
 	ResultORM           *resultORM
 	ReviewORM           *reviewORM
 	ScrapingJobORM      *scrapingJobORM
 	ScrapingWorkflowORM *scrapingWorkflowORM
+	TenantAPIKeyORM     *tenantAPIKeyORM
+	TenantORM           *tenantORM
 	WorkspaceORM        *workspaceORM
 )
 
@@ -36,10 +39,13 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	AccountSettingsORM = &Q.AccountSettingsORM
 	BusinessHoursORM = &Q.BusinessHoursORM
 	LeadORM = &Q.LeadORM
+	OrganizationORM = &Q.OrganizationORM
 	ResultORM = &Q.ResultORM
 	ReviewORM = &Q.ReviewORM
 	ScrapingJobORM = &Q.ScrapingJobORM
 	ScrapingWorkflowORM = &Q.ScrapingWorkflowORM
+	TenantAPIKeyORM = &Q.TenantAPIKeyORM
+	TenantORM = &Q.TenantORM
 	WorkspaceORM = &Q.WorkspaceORM
 }
 
@@ -51,10 +57,13 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		AccountSettingsORM:  newAccountSettingsORM(db, opts...),
 		BusinessHoursORM:    newBusinessHoursORM(db, opts...),
 		LeadORM:             newLeadORM(db, opts...),
+		OrganizationORM:     newOrganizationORM(db, opts...),
 		ResultORM:           newResultORM(db, opts...),
 		ReviewORM:           newReviewORM(db, opts...),
 		ScrapingJobORM:      newScrapingJobORM(db, opts...),
 		ScrapingWorkflowORM: newScrapingWorkflowORM(db, opts...),
+		TenantAPIKeyORM:     newTenantAPIKeyORM(db, opts...),
+		TenantORM:           newTenantORM(db, opts...),
 		WorkspaceORM:        newWorkspaceORM(db, opts...),
 	}
 }
@@ -67,10 +76,13 @@ type Query struct {
 	AccountSettingsORM  accountSettingsORM
 	BusinessHoursORM    businessHoursORM
 	LeadORM             leadORM
+	OrganizationORM     organizationORM
 	ResultORM           resultORM
 	ReviewORM           reviewORM
 	ScrapingJobORM      scrapingJobORM
 	ScrapingWorkflowORM scrapingWorkflowORM
+	TenantAPIKeyORM     tenantAPIKeyORM
+	TenantORM           tenantORM
 	WorkspaceORM        workspaceORM
 }
 
@@ -84,10 +96,13 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		AccountSettingsORM:  q.AccountSettingsORM.clone(db),
 		BusinessHoursORM:    q.BusinessHoursORM.clone(db),
 		LeadORM:             q.LeadORM.clone(db),
+		OrganizationORM:     q.OrganizationORM.clone(db),
 		ResultORM:           q.ResultORM.clone(db),
 		ReviewORM:           q.ReviewORM.clone(db),
 		ScrapingJobORM:      q.ScrapingJobORM.clone(db),
 		ScrapingWorkflowORM: q.ScrapingWorkflowORM.clone(db),
+		TenantAPIKeyORM:     q.TenantAPIKeyORM.clone(db),
+		TenantORM:           q.TenantORM.clone(db),
 		WorkspaceORM:        q.WorkspaceORM.clone(db),
 	}
 }
@@ -108,10 +123,13 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		AccountSettingsORM:  q.AccountSettingsORM.replaceDB(db),
 		BusinessHoursORM:    q.BusinessHoursORM.replaceDB(db),
 		LeadORM:             q.LeadORM.replaceDB(db),
+		OrganizationORM:     q.OrganizationORM.replaceDB(db),
 		ResultORM:           q.ResultORM.replaceDB(db),
 		ReviewORM:           q.ReviewORM.replaceDB(db),
 		ScrapingJobORM:      q.ScrapingJobORM.replaceDB(db),
 		ScrapingWorkflowORM: q.ScrapingWorkflowORM.replaceDB(db),
+		TenantAPIKeyORM:     q.TenantAPIKeyORM.replaceDB(db),
+		TenantORM:           q.TenantORM.replaceDB(db),
 		WorkspaceORM:        q.WorkspaceORM.replaceDB(db),
 	}
 }
@@ -122,10 +140,13 @@ type queryCtx struct {
 	AccountSettingsORM  IAccountSettingsORMDo
 	BusinessHoursORM    IBusinessHoursORMDo
 	LeadORM             ILeadORMDo
+	OrganizationORM     IOrganizationORMDo
 	ResultORM           IResultORMDo
 	ReviewORM           IReviewORMDo
 	ScrapingJobORM      IScrapingJobORMDo
 	ScrapingWorkflowORM IScrapingWorkflowORMDo
+	TenantAPIKeyORM     ITenantAPIKeyORMDo
+	TenantORM           ITenantORMDo
 	WorkspaceORM        IWorkspaceORMDo
 }
 
@@ -136,10 +157,13 @@ func (q *Query) WithContext(ctx context.Context) *queryCtx {
 		AccountSettingsORM:  q.AccountSettingsORM.WithContext(ctx),
 		BusinessHoursORM:    q.BusinessHoursORM.WithContext(ctx),
 		LeadORM:             q.LeadORM.WithContext(ctx),
+		OrganizationORM:     q.OrganizationORM.WithContext(ctx),
 		ResultORM:           q.ResultORM.WithContext(ctx),
 		ReviewORM:           q.ReviewORM.WithContext(ctx),
 		ScrapingJobORM:      q.ScrapingJobORM.WithContext(ctx),
 		ScrapingWorkflowORM: q.ScrapingWorkflowORM.WithContext(ctx),
+		TenantAPIKeyORM:     q.TenantAPIKeyORM.WithContext(ctx),
+		TenantORM:           q.TenantORM.WithContext(ctx),
 		WorkspaceORM:        q.WorkspaceORM.WithContext(ctx),
 	}
 }

@@ -82,10 +82,13 @@ func Test_WithContext(t *testing.T) {
 		qCtx.AccountSettingsORM.UnderlyingDB().Statement.Context,
 		qCtx.BusinessHoursORM.UnderlyingDB().Statement.Context,
 		qCtx.LeadORM.UnderlyingDB().Statement.Context,
+		qCtx.OrganizationORM.UnderlyingDB().Statement.Context,
 		qCtx.ResultORM.UnderlyingDB().Statement.Context,
 		qCtx.ReviewORM.UnderlyingDB().Statement.Context,
 		qCtx.ScrapingJobORM.UnderlyingDB().Statement.Context,
 		qCtx.ScrapingWorkflowORM.UnderlyingDB().Statement.Context,
+		qCtx.TenantAPIKeyORM.UnderlyingDB().Statement.Context,
+		qCtx.TenantORM.UnderlyingDB().Statement.Context,
 		qCtx.WorkspaceORM.UnderlyingDB().Statement.Context,
 	} {
 		if v := ctx.Value(key); v != value {

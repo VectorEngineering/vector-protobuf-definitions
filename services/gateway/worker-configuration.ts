@@ -1,10 +1,4 @@
-import {
-  D1Database,
-  KVNamespace,
-  R2Bucket,
-  Fetcher,
-  Ai,
-} from "@cloudflare/workers-types";
+import { D1Database, KVNamespace, R2Bucket, Fetcher, Ai } from "@cloudflare/workers-types";
 import { TokenPrivilege } from "./middleware/auth";
 
 interface Env {
@@ -28,4 +22,4 @@ type Variables = {
   privilege?: TokenPrivilege;
 };
 
-type Bindings = Env;
+type Bindings = Env; 

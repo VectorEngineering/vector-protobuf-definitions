@@ -193,7 +193,6 @@ playbookmedia_backend_server_sdk/models/workspace_compliance.py
 playbookmedia_backend_server_sdk/models/workspace_sharing.py
 playbookmedia_backend_server_sdk/openapi/openapi.yaml
 playbookmedia_backend_server_sdk/test/__init__.py
-playbookmedia_backend_server_sdk/test/test_workspace_service_controller.py
 playbookmedia_backend_server_sdk/typing_utils.py
 playbookmedia_backend_server_sdk/util.py
 requirements.txt

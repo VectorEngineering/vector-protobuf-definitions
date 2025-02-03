@@ -9,10 +9,7 @@ import { secureHeaders } from "hono/secure-headers";
 
 const PUBLIC_PATHS = ["/", "/openapi", "/health"];
 
-const authMiddleware: MiddlewareHandler<Env> = async (
-  c: Context,
-  next: Next,
-) => {
+const authMiddleware: MiddlewareHandler<Env> = async (c: Context, next: Next) => {
   if (PUBLIC_PATHS.includes(c.req.path)) {
     return next();
   }
@@ -23,10 +20,7 @@ const authMiddleware: MiddlewareHandler<Env> = async (
   return bearer(c, next);
 };
 
-const cacheMiddleware: MiddlewareHandler<Env> = async (
-  c: Context,
-  next: Next,
-) => {
+const cacheMiddleware: MiddlewareHandler<Env> = async (c: Context, next: Next) => {
   if (process.env.NODE_ENV === "development") {
     return next();
   }
@@ -39,10 +33,7 @@ const cacheMiddleware: MiddlewareHandler<Env> = async (
 
 const securityMiddleware = secureHeaders();
 
-const loggingMiddleware: MiddlewareHandler<Env> = async (
-  c: Context,
-  next: Next,
-) => {
+const loggingMiddleware: MiddlewareHandler<Env> = async (c: Context, next: Next) => {
   c.set("logger", logger);
   return honoLogger((message, rest) => {
     logger.info(c, message, {}, rest);
@@ -54,4 +45,4 @@ export {
   cacheMiddleware,
   securityMiddleware,
   loggingMiddleware,
-};
+}; 

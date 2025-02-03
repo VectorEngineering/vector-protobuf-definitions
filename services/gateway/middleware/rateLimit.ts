@@ -6,16 +6,13 @@ import { HTTPException } from "hono/http-exception";
 const DEFAULT_LIMIT = 100;
 const WINDOW_SIZE = 60 * 60; // 1 hour in seconds
 
-export const rateLimit: MiddlewareHandler<Env> = async (
-  c: Context,
-  next: Next,
-) => {
+export const rateLimit: MiddlewareHandler<Env> = async (c: Context, next: Next) => {
   // Simple in-memory rate limiting
   // Replace with your storage solution (Redis, DB, etc.)
   const endpoint = new URL(c.req.url).pathname;
   const key = `rate_limit:${endpoint}`;
 
-  const currentCount = parseInt((await c.env.KV?.get(key)) || "0");
+  const currentCount = parseInt(await c.env.KV?.get(key) || "0");
 
   if (currentCount >= DEFAULT_LIMIT) {
     throw new HTTPException(429, { message: "Rate limit exceeded" });
@@ -26,10 +23,7 @@ export const rateLimit: MiddlewareHandler<Env> = async (
   });
 
   c.header("X-RateLimit-Limit", DEFAULT_LIMIT.toString());
-  c.header(
-    "X-RateLimit-Remaining",
-    (DEFAULT_LIMIT - currentCount - 1).toString(),
-  );
+  c.header("X-RateLimit-Remaining", (DEFAULT_LIMIT - currentCount - 1).toString());
 
   await next();
-};
+}; 

@@ -24,7 +24,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "UnprocessableEntityErrorMessageResponse", description = "Represents errors when the server understands the content type but cannot process the instructions")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T10:37:17.791439-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T14:01:35.727997-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class UnprocessableEntityErrorMessageResponse {
 
   private Integer code;

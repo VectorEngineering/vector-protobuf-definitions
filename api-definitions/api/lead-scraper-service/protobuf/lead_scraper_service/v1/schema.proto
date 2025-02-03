@@ -918,8 +918,7 @@ message Lead {
 
     // Detailed Google Maps metadata
     string place_id = 23 [
-        (validate.rules).string.min_len = 1,
-        (gorm.field).tag = {index: "idx_leads_place_id", unique: true}
+        (validate.rules).string.min_len = 1
     ];
     string google_maps_url = 24 [(validate.rules).string.uri = true];
     string business_status = 25; // OPERATIONAL, CLOSED_TEMPORARILY, etc
@@ -1168,7 +1167,7 @@ message APIKey {
     ];
 
     // The actual API key value (hashed in storage)
-    string key_hash = 3 [(gorm.field).tag = {unique: true}];
+    string key_hash = 3;
 
     // Key prefix for display/reference (first 8 chars)
     string key_prefix = 4 [(gorm.field).tag = {index: "idx_api_keys_prefix"}];
@@ -1286,7 +1285,7 @@ message TenantAPIKey {
     };
  
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
-    string key_hash = 2 [(gorm.field).tag = {unique: true}];
+    string key_hash = 2;
     string key_prefix = 3 [(gorm.field).tag = {index: "idx_tenant_api_keys_prefix"}];
 
     string name = 4;

@@ -772,7 +772,7 @@ const Lead: z.ZodType<Lead> = z.lazy(() =>
       exportControlStatus: z.string(),
     })
     .partial()
-    .passthrough(),
+    .passthrough()
 );
 const ScrapingJob: z.ZodType<ScrapingJob> = z.lazy(() =>
   z
@@ -800,7 +800,7 @@ const ScrapingJob: z.ZodType<ScrapingJob> = z.lazy(() =>
       leads: z.array(Lead),
     })
     .partial()
-    .passthrough(),
+    .passthrough()
 );
 const OutputFormat = z.enum([
   "OUTPUT_FORMAT_UNSPECIFIED",
@@ -857,7 +857,7 @@ const ScrapingWorkflow: z.ZodType<ScrapingWorkflow> = z.lazy(() =>
       userAgent: z.string(),
     })
     .partial()
-    .passthrough(),
+    .passthrough()
 );
 const APIKey_Status = z.enum([
   "STATUS_UNSPECIFIED",
@@ -941,7 +941,7 @@ const APIKey: z.ZodType<APIKey> = z.lazy(() =>
       dataClassification: z.string(),
     })
     .partial()
-    .passthrough(),
+    .passthrough()
 );
 const TriggerEvent = z.enum([
   "TRIGGER_EVENT_UNSPECIFIED",
@@ -1051,7 +1051,7 @@ const Workspace: z.ZodType<Workspace> = z.lazy(() =>
       webhooks: z.array(WebhookConfig),
     })
     .partial()
-    .passthrough(),
+    .passthrough()
 );
 const AccountSettings = z
   .object({
@@ -1089,7 +1089,7 @@ const Account: z.ZodType<Account> = z.lazy(() =>
       settings: AccountSettings,
     })
     .partial()
-    .passthrough(),
+    .passthrough()
 );
 const ListAccountsResponse = z
   .object({ accounts: z.array(Account), nextPageToken: z.string() })
@@ -1664,7 +1664,7 @@ const FolderMetadata: z.ZodType<FolderMetadata> = z.lazy(() =>
       files: z.array(FileMetadata),
     })
     .partial()
-    .passthrough(),
+    .passthrough()
 );
 const TemplateType = z.enum([
   "TEMPLATE_TYPE_UNSPECIFIED",
@@ -2432,7 +2432,7 @@ const CreateAccountRequest1 = z
     permissions: z.array(z.string()).optional(),
     mfaEnabled: z.boolean().optional(),
     complianceLevel: ComplianceLevel.optional().default(
-      "COMPLIANCE_LEVEL_UNSPECIFIED",
+      "COMPLIANCE_LEVEL_UNSPECIFIED"
     ),
     preferences: z.record(z.string()).optional(),
   })
@@ -6440,6 +6440,7 @@ export function createApiClient(baseUrl: string, options?: ZodiosOptions) {
   return new Zodios(baseUrl, endpoints, options);
 }
 
+
 export class ApiClient {
   private readonly client: ZodiosInstance<typeof endpoints>;
 
@@ -6447,446 +6448,300 @@ export class ApiClient {
     this.client = new Zodios(baseUrl, endpoints, options);
   }
 
-  async getLeadScraperMicroserviceApiV1Accounts(params: {
-    pageSize: string | undefined;
-    pageToken: string | undefined;
-    filter: string | undefined;
-  }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/accounts", {
-      queries: {
-        pageSize: params.pageSize,
-        pageToken: params.pageToken,
-        filter: params.filter,
-      },
-    });
-  }
+    async getLeadScraperMicroserviceApiV1Accounts(params: { pageSize: string | undefined; pageToken: string | undefined; filter: string | undefined;  }) {
+      return this.client.get("/lead-scraper-microservice/api/v1/accounts", { 
+        
+        queries: { pageSize: params.pageSize, pageToken: params.pageToken, filter: params.filter }
+      });
+    }
 
-  async createLeadScraperMicroserviceApiV1Accounts(
-    data: z.infer<typeof CreateAccountRequest>,
-  ) {
-    return this.client.post(
-      "/lead-scraper-microservice/api/v1/accounts",
-      data,
-      {},
-    );
-  }
+    async createLeadScraperMicroserviceApiV1Accounts(data: z.infer<typeof CreateAccountRequest>, ) {
+      return this.client.post("/lead-scraper-microservice/api/v1/accounts", data, { 
+        
+      });
+    }
 
-  async updateLeadScraperMicroserviceApiV1Accounts(
-    data: z.infer<typeof schemas.UpdateAccountRequest>,
-  ) {
-    return this.client.put(
-      "/lead-scraper-microservice/api/v1/accounts",
-      data,
-      {},
-    );
-  }
+    async updateLeadScraperMicroserviceApiV1Accounts(data: z.infer<typeof schemas.UpdateAccountRequest>, ) {
+      return this.client.put("/lead-scraper-microservice/api/v1/accounts", data, { 
+        
+      });
+    }
 
-  async updateLeadScraperMicroserviceApiV1AccountsSettings(
-    data: z.infer<typeof schemas.UpdateAccountSettingsRequest>,
-  ) {
-    return this.client.put(
-      "/lead-scraper-microservice/api/v1/accounts/settings",
-      data,
-      {},
-    );
-  }
 
-  async getLeadScraperMicroserviceApiV1AccountsId(params: { id: string }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/accounts/:id", {
-      params: { id: params.id },
-    });
-  }
 
-  async deleteLeadScraperMicroserviceApiV1AccountsId(params: { id: string }) {
-    return this.client.delete(
-      "/lead-scraper-microservice/api/v1/accounts/:id",
-      undefined,
-      {
-        params: { id: params.id },
-      },
-    );
-  }
-  async getLeadScraperMicroserviceApiV1AccountsIdUsage(params: { id: string }) {
-    return this.client.get(
-      "/lead-scraper-microservice/api/v1/accounts/:id/usage",
-      {
-        params: { id: params.id },
-      },
-    );
-  }
+    async updateLeadScraperMicroserviceApiV1AccountsSettings(data: z.infer<typeof schemas.UpdateAccountSettingsRequest>, ) {
+      return this.client.put("/lead-scraper-microservice/api/v1/accounts/settings", data, { 
+        
+      });
+    }
 
-  async getLeadScraperMicroserviceApiV1Jobs(params: {
-    userId: string;
-    orgId: string;
-    tenantId: string;
-  }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/jobs", {
-      queries: {
-        userId: params.userId,
-        orgId: params.orgId,
-        tenantId: params.tenantId,
-      },
-    });
-  }
+    async getLeadScraperMicroserviceApiV1AccountsId(params: { id: string;  }) {
+      return this.client.get("/lead-scraper-microservice/api/v1/accounts/:id", { 
+        params: { id: params.id, },
+      });
+    }
 
-  async createLeadScraperMicroserviceApiV1Jobs(
-    data: z.infer<typeof CreateScrapingJobRequest>,
-  ) {
-    return this.client.post("/lead-scraper-microservice/api/v1/jobs", data, {});
-  }
 
-  async getLeadScraperMicroserviceApiV1JobsJobId(params: {
-    jobId: string;
-    userId: string;
-    orgId: string;
-    tenantId: string;
-  }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/jobs/:jobId", {
-      params: { jobId: params.jobId },
-      queries: {
-        userId: params.userId,
-        orgId: params.orgId,
-        tenantId: params.tenantId,
-      },
-    });
-  }
 
-  async deleteLeadScraperMicroserviceApiV1JobsJobId(params: {
-    jobId: string;
-    userId: string;
-    orgId: string;
-    tenantId: string;
-  }) {
-    return this.client.delete(
-      "/lead-scraper-microservice/api/v1/jobs/:jobId",
-      undefined,
-      {
-        params: { jobId: params.jobId },
-        queries: {
-          userId: params.userId,
-          orgId: params.orgId,
-          tenantId: params.tenantId,
-        },
-      },
-    );
-  }
-  async getLeadScraperMicroserviceApiV1JobsJobIdDownload(params: {
-    jobId: string;
-    userId: string;
-    orgId: string;
-    tenantId: string;
-  }) {
-    return this.client.get(
-      "/lead-scraper-microservice/api/v1/jobs/:jobId/download",
-      {
-        params: { jobId: params.jobId },
-        queries: {
-          userId: params.userId,
-          orgId: params.orgId,
-          tenantId: params.tenantId,
-        },
-      },
-    );
-  }
+    async deleteLeadScraperMicroserviceApiV1AccountsId(params: { id: string;  }) {
+      return this.client.delete("/lead-scraper-microservice/api/v1/accounts/:id", undefined, { 
+        params: { id: params.id, },
+      });
+    }
+    async getLeadScraperMicroserviceApiV1AccountsIdUsage(params: { id: string;  }) {
+      return this.client.get("/lead-scraper-microservice/api/v1/accounts/:id/usage", { 
+        params: { id: params.id, },
+      });
+    }
 
-  async updateLeadScraperMicroserviceApiV1Workspace(
-    data: z.infer<typeof schemas.UpdateWorkspaceRequest>,
-  ) {
-    return this.client.put(
-      "/lead-scraper-microservice/api/v1/workspace",
-      data,
-      {},
-    );
-  }
 
-  async getLeadScraperMicroserviceApiV1WorkspaceId(params: { id: string }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/workspace/:id", {
-      params: { id: params.id },
-    });
-  }
 
-  async deleteLeadScraperMicroserviceApiV1WorkspaceId(params: { id: string }) {
-    return this.client.delete(
-      "/lead-scraper-microservice/api/v1/workspace/:id",
-      undefined,
-      {
-        params: { id: params.id },
-      },
-    );
-  }
-  async getLeadScraperMicroserviceApiV1Workspaces(params: {
-    accountId: string | undefined;
-    pageSize: string | undefined;
-    pageToken: string | undefined;
-  }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/workspaces", {
-      queries: {
-        accountId: params.accountId,
-        pageSize: params.pageSize,
-        pageToken: params.pageToken,
-      },
-    });
-  }
+    async getLeadScraperMicroserviceApiV1Jobs(params: { userId: string; orgId: string; tenantId: string;  }) {
+      return this.client.get("/lead-scraper-microservice/api/v1/jobs", { 
+        
+        queries: { userId: params.userId, orgId: params.orgId, tenantId: params.tenantId }
+      });
+    }
 
-  async createLeadScraperMicroserviceApiV1Workspaces(
-    data: z.infer<typeof CreateWorkspaceRequest>,
-  ) {
-    return this.client.post(
-      "/lead-scraper-microservice/api/v1/workspaces",
-      data,
-      {},
-    );
-  }
+    async createLeadScraperMicroserviceApiV1Jobs(data: z.infer<typeof CreateScrapingJobRequest>, ) {
+      return this.client.post("/lead-scraper-microservice/api/v1/jobs", data, { 
+        
+      });
+    }
 
-  async updateLeadScraperMicroserviceApiV1WorkspacesWorkflow(
-    data: z.infer<typeof schemas.UpdateWorkflowRequest>,
-  ) {
-    return this.client.put(
-      "/lead-scraper-microservice/api/v1/workspaces/workflow",
-      data,
-      {},
-    );
-  }
 
-  async getLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdAnalytics(params: {
-    workspaceId: string;
-    startTime: string | undefined;
-    endTime: string | undefined;
-  }) {
-    return this.client.get(
-      "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/analytics",
-      {
-        params: { workspaceId: params.workspaceId },
-        queries: { startTime: params.startTime, endTime: params.endTime },
-      },
-    );
-  }
+    async getLeadScraperMicroserviceApiV1JobsJobId(params: { jobId: string; userId: string; orgId: string; tenantId: string;  }) {
+      return this.client.get("/lead-scraper-microservice/api/v1/jobs/:jobId", { 
+        params: { jobId: params.jobId, },
+        queries: { userId: params.userId, orgId: params.orgId, tenantId: params.tenantId }
+      });
+    }
 
-  async getLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdWorkflows(params: {
-    workspaceId: string;
-    pageSize: string | undefined;
-    pageToken: string | undefined;
-    filter: string | undefined;
-  }) {
-    return this.client.get(
-      "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows",
-      {
-        params: { workspaceId: params.workspaceId },
-        queries: {
-          pageSize: params.pageSize,
-          pageToken: params.pageToken,
-          filter: params.filter,
-        },
-      },
-    );
-  }
 
-  async createLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdWorkflows(
-    data: z.infer<typeof CreateWorkflowBody>,
-    params: { workspaceId: string },
-  ) {
-    return this.client.post(
-      "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows",
-      data,
-      {
-        params: { workspaceId: params.workspaceId },
-      },
-    );
-  }
 
-  async getLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdWorkflowsId(params: {
-    workspaceId: string;
-    id: string;
-  }) {
-    return this.client.get(
-      "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id",
-      {
-        params: { workspaceId: params.workspaceId, id: params.id },
-        params: { workspaceId: params.workspaceId, id: params.id },
-      },
-    );
-  }
+    async deleteLeadScraperMicroserviceApiV1JobsJobId(params: { jobId: string; userId: string; orgId: string; tenantId: string;  }) {
+      return this.client.delete("/lead-scraper-microservice/api/v1/jobs/:jobId", undefined, { 
+        params: { jobId: params.jobId, },
+        queries: { userId: params.userId, orgId: params.orgId, tenantId: params.tenantId }
+      });
+    }
+    async getLeadScraperMicroserviceApiV1JobsJobIdDownload(params: { jobId: string; userId: string; orgId: string; tenantId: string;  }) {
+      return this.client.get("/lead-scraper-microservice/api/v1/jobs/:jobId/download", { 
+        params: { jobId: params.jobId, },
+        queries: { userId: params.userId, orgId: params.orgId, tenantId: params.tenantId }
+      });
+    }
 
-  async createLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdWorkflowsIdPause(
-    data: z.infer<typeof PauseWorkflowBody>,
-    params: { workspaceId: string; id: string },
-  ) {
-    return this.client.post(
-      "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id/pause",
-      data,
-      {
-        params: { workspaceId: params.workspaceId, id: params.id },
-        params: { workspaceId: params.workspaceId, id: params.id },
-      },
-    );
-  }
 
-  async createLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdWorkflowsIdTrigger(
-    data: z.infer<typeof TriggerWorkflowBody>,
-    params: { workspaceId: string; id: string },
-  ) {
-    return this.client.post(
-      "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id/trigger",
-      data,
-      {
-        params: { workspaceId: params.workspaceId, id: params.id },
-        params: { workspaceId: params.workspaceId, id: params.id },
-      },
-    );
-  }
 
-  async createWorkspaceServiceV1Accounts(
-    data: z.infer<typeof CreateAccountRequest1>,
-  ) {
-    return this.client.post("/workspace-service/v1/accounts", data, {});
-  }
 
-  async updateWorkspaceServiceV1Accounts(
-    data: z.infer<typeof schemas.UpdateAccountRequest>,
-  ) {
-    return this.client.put("/workspace-service/v1/accounts", data, {});
-  }
 
-  async getWorkspaceServiceV1AccountsId(params: { id: string }) {
-    return this.client.get("/workspace-service/v1/accounts/:id", {
-      params: { id: params.id },
-    });
-  }
+    async updateLeadScraperMicroserviceApiV1Workspace(data: z.infer<typeof schemas.UpdateWorkspaceRequest>, ) {
+      return this.client.put("/lead-scraper-microservice/api/v1/workspace", data, { 
+        
+      });
+    }
 
-  async deleteWorkspaceServiceV1AccountsId(params: { id: string }) {
-    return this.client.delete("/workspace-service/v1/accounts/:id", undefined, {
-      params: { id: params.id },
-    });
-  }
+    async getLeadScraperMicroserviceApiV1WorkspaceId(params: { id: string;  }) {
+      return this.client.get("/lead-scraper-microservice/api/v1/workspace/:id", { 
+        params: { id: params.id, },
+      });
+    }
 
-  async updateWorkspaceServiceV1WorkspaceSharings(
-    data: z.infer<typeof schemas.UpdateWorkspaceSharingRequest>,
-  ) {
-    return this.client.put(
-      "/workspace-service/v1/workspace-sharings",
-      data,
-      {},
-    );
-  }
 
-  async deleteWorkspaceServiceV1WorkspaceSharingsSharingId(params: {
-    sharingId: string;
-  }) {
-    return this.client.delete(
-      "/workspace-service/v1/workspace-sharings/:sharingId",
-      undefined,
-      {
-        params: { sharingId: params.sharingId },
-      },
-    );
-  }
 
-  async createWorkspaceServiceV1Workspaces(
-    data: z.infer<typeof CreateWorkspaceRequest1>,
-  ) {
-    return this.client.post("/workspace-service/v1/workspaces", data, {});
-  }
+    async deleteLeadScraperMicroserviceApiV1WorkspaceId(params: { id: string;  }) {
+      return this.client.delete("/lead-scraper-microservice/api/v1/workspace/:id", undefined, { 
+        params: { id: params.id, },
+      });
+    }
+    async getLeadScraperMicroserviceApiV1Workspaces(params: { accountId: string | undefined; pageSize: string | undefined; pageToken: string | undefined;  }) {
+      return this.client.get("/lead-scraper-microservice/api/v1/workspaces", { 
+        
+        queries: { accountId: params.accountId, pageSize: params.pageSize, pageToken: params.pageToken }
+      });
+    }
 
-  async updateWorkspaceServiceV1Workspaces(
-    data: z.infer<typeof schemas.UpdateWorkspaceRequest>,
-  ) {
-    return this.client.put("/workspace-service/v1/workspaces", data, {});
-  }
+    async createLeadScraperMicroserviceApiV1Workspaces(data: z.infer<typeof CreateWorkspaceRequest>, ) {
+      return this.client.post("/lead-scraper-microservice/api/v1/workspaces", data, { 
+        
+      });
+    }
 
-  async getWorkspaceServiceV1WorkspacesAnalyticsWorkspaceId(params: {
-    workspaceId: string;
-    startTime: string | undefined;
-    endTime: string | undefined;
-  }) {
-    return this.client.get(
-      "/workspace-service/v1/workspaces/analytics/:workspaceId",
-      {
-        params: { workspaceId: params.workspaceId },
-        queries: { startTime: params.startTime, endTime: params.endTime },
-      },
-    );
-  }
 
-  async getWorkspaceServiceV1WorkspacesComplianceReportWorkspaceId(params: {
-    workspaceId: string;
-    complianceType: string | undefined;
-  }) {
-    return this.client.get(
-      "/workspace-service/v1/workspaces/compliance-report/:workspaceId",
-      {
-        params: { workspaceId: params.workspaceId },
-        queries: { complianceType: params.complianceType },
-      },
-    );
-  }
 
-  async getWorkspaceServiceV1WorkspacesList(params: {
-    accountId: string | undefined;
-    pageSize: string | undefined;
-    pageToken: string | undefined;
-    filter: string | undefined;
-  }) {
-    return this.client.get("/workspace-service/v1/workspaces/list", {
-      queries: {
-        accountId: params.accountId,
-        pageSize: params.pageSize,
-        pageToken: params.pageToken,
-        filter: params.filter,
-      },
-    });
-  }
 
-  async getWorkspaceServiceV1WorkspacesSharingsWorkspaceId(params: {
-    workspaceId: string;
-    pageSize: string | undefined;
-    pageToken: string | undefined;
-  }) {
-    return this.client.get(
-      "/workspace-service/v1/workspaces/sharings/:workspaceId",
-      {
-        params: { workspaceId: params.workspaceId },
-        queries: { pageSize: params.pageSize, pageToken: params.pageToken },
-      },
-    );
-  }
+    async updateLeadScraperMicroserviceApiV1WorkspacesWorkflow(data: z.infer<typeof schemas.UpdateWorkflowRequest>, ) {
+      return this.client.put("/lead-scraper-microservice/api/v1/workspaces/workflow", data, { 
+        
+      });
+    }
 
-  async getWorkspaceServiceV1WorkspacesStorageStatsWorkspaceId(params: {
-    workspaceId: string;
-  }) {
-    return this.client.get(
-      "/workspace-service/v1/workspaces/storage-stats/:workspaceId",
-      {
-        params: { workspaceId: params.workspaceId },
-      },
-    );
-  }
+    async getLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdAnalytics(params: { workspaceId: string; startTime: string | undefined; endTime: string | undefined;  }) {
+      return this.client.get("/lead-scraper-microservice/api/v1/workspaces/:workspaceId/analytics", { 
+        params: { workspaceId: params.workspaceId, },
+        queries: { startTime: params.startTime, endTime: params.endTime }
+      });
+    }
 
-  async getWorkspaceServiceV1WorkspacesId(params: { id: string }) {
-    return this.client.get("/workspace-service/v1/workspaces/:id", {
-      params: { id: params.id },
-    });
-  }
 
-  async deleteWorkspaceServiceV1WorkspacesId(params: { id: string }) {
-    return this.client.delete(
-      "/workspace-service/v1/workspaces/:id",
-      undefined,
-      {
-        params: { id: params.id },
-      },
-    );
-  }
 
-  async createWorkspaceServiceV1WorkspacesWorkspaceIdShare(
-    data: z.infer<typeof ShareWorkspaceBody>,
-    params: { workspaceId: string },
-  ) {
-    return this.client.post(
-      "/workspace-service/v1/workspaces/:workspaceId/share",
-      data,
-      {
-        params: { workspaceId: params.workspaceId },
-      },
-    );
-  }
+    async getLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdWorkflows(params: { workspaceId: string; pageSize: string | undefined; pageToken: string | undefined; filter: string | undefined;  }) {
+      return this.client.get("/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows", { 
+        params: { workspaceId: params.workspaceId, },
+        queries: { pageSize: params.pageSize, pageToken: params.pageToken, filter: params.filter }
+      });
+    }
+
+    async createLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdWorkflows(data: z.infer<typeof CreateWorkflowBody>, params: { workspaceId: string;  }) {
+      return this.client.post("/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows", data, { 
+        params: { workspaceId: params.workspaceId, },
+      });
+    }
+
+
+    async getLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdWorkflowsId(params: { workspaceId: string; id: string;  }) {
+      return this.client.get("/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id", { 
+        params: { workspaceId: params.workspaceId,id: params.id, },params: { workspaceId: params.workspaceId,id: params.id, },
+      });
+    }
+
+
+
+
+    async createLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdWorkflowsIdPause(data: z.infer<typeof PauseWorkflowBody>, params: { workspaceId: string; id: string;  }) {
+      return this.client.post("/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id/pause", data, { 
+        params: { workspaceId: params.workspaceId,id: params.id, },params: { workspaceId: params.workspaceId,id: params.id, },
+      });
+    }
+
+
+
+    async createLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdWorkflowsIdTrigger(data: z.infer<typeof TriggerWorkflowBody>, params: { workspaceId: string; id: string;  }) {
+      return this.client.post("/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id/trigger", data, { 
+        params: { workspaceId: params.workspaceId,id: params.id, },params: { workspaceId: params.workspaceId,id: params.id, },
+      });
+    }
+
+
+
+    async createWorkspaceServiceV1Accounts(data: z.infer<typeof CreateAccountRequest1>, ) {
+      return this.client.post("/workspace-service/v1/accounts", data, { 
+        
+      });
+    }
+
+    async updateWorkspaceServiceV1Accounts(data: z.infer<typeof schemas.UpdateAccountRequest>, ) {
+      return this.client.put("/workspace-service/v1/accounts", data, { 
+        
+      });
+    }
+
+    async getWorkspaceServiceV1AccountsId(params: { id: string;  }) {
+      return this.client.get("/workspace-service/v1/accounts/:id", { 
+        params: { id: params.id, },
+      });
+    }
+
+
+
+    async deleteWorkspaceServiceV1AccountsId(params: { id: string;  }) {
+      return this.client.delete("/workspace-service/v1/accounts/:id", undefined, { 
+        params: { id: params.id, },
+      });
+    }
+
+
+    async updateWorkspaceServiceV1WorkspaceSharings(data: z.infer<typeof schemas.UpdateWorkspaceSharingRequest>, ) {
+      return this.client.put("/workspace-service/v1/workspace-sharings", data, { 
+        
+      });
+    }
+
+
+
+
+    async deleteWorkspaceServiceV1WorkspaceSharingsSharingId(params: { sharingId: string;  }) {
+      return this.client.delete("/workspace-service/v1/workspace-sharings/:sharingId", undefined, { 
+        params: { sharingId: params.sharingId, },
+      });
+    }
+
+    async createWorkspaceServiceV1Workspaces(data: z.infer<typeof CreateWorkspaceRequest1>, ) {
+      return this.client.post("/workspace-service/v1/workspaces", data, { 
+        
+      });
+    }
+
+    async updateWorkspaceServiceV1Workspaces(data: z.infer<typeof schemas.UpdateWorkspaceRequest>, ) {
+      return this.client.put("/workspace-service/v1/workspaces", data, { 
+        
+      });
+    }
+
+    async getWorkspaceServiceV1WorkspacesAnalyticsWorkspaceId(params: { workspaceId: string; startTime: string | undefined; endTime: string | undefined;  }) {
+      return this.client.get("/workspace-service/v1/workspaces/analytics/:workspaceId", { 
+        params: { workspaceId: params.workspaceId, },
+        queries: { startTime: params.startTime, endTime: params.endTime }
+      });
+    }
+
+
+
+    async getWorkspaceServiceV1WorkspacesComplianceReportWorkspaceId(params: { workspaceId: string; complianceType: string | undefined;  }) {
+      return this.client.get("/workspace-service/v1/workspaces/compliance-report/:workspaceId", { 
+        params: { workspaceId: params.workspaceId, },
+        queries: { complianceType: params.complianceType }
+      });
+    }
+
+
+
+    async getWorkspaceServiceV1WorkspacesList(params: { accountId: string | undefined; pageSize: string | undefined; pageToken: string | undefined; filter: string | undefined;  }) {
+      return this.client.get("/workspace-service/v1/workspaces/list", { 
+        
+        queries: { accountId: params.accountId, pageSize: params.pageSize, pageToken: params.pageToken, filter: params.filter }
+      });
+    }
+
+
+
+    async getWorkspaceServiceV1WorkspacesSharingsWorkspaceId(params: { workspaceId: string; pageSize: string | undefined; pageToken: string | undefined;  }) {
+      return this.client.get("/workspace-service/v1/workspaces/sharings/:workspaceId", { 
+        params: { workspaceId: params.workspaceId, },
+        queries: { pageSize: params.pageSize, pageToken: params.pageToken }
+      });
+    }
+
+
+
+    async getWorkspaceServiceV1WorkspacesStorageStatsWorkspaceId(params: { workspaceId: string;  }) {
+      return this.client.get("/workspace-service/v1/workspaces/storage-stats/:workspaceId", { 
+        params: { workspaceId: params.workspaceId, },
+      });
+    }
+
+
+
+    async getWorkspaceServiceV1WorkspacesId(params: { id: string;  }) {
+      return this.client.get("/workspace-service/v1/workspaces/:id", { 
+        params: { id: params.id, },
+      });
+    }
+
+
+
+    async deleteWorkspaceServiceV1WorkspacesId(params: { id: string;  }) {
+      return this.client.delete("/workspace-service/v1/workspaces/:id", undefined, { 
+        params: { id: params.id, },
+      });
+    }
+
+    async createWorkspaceServiceV1WorkspacesWorkspaceIdShare(data: z.infer<typeof ShareWorkspaceBody>, params: { workspaceId: string;  }) {
+      return this.client.post("/workspace-service/v1/workspaces/:workspaceId/share", data, { 
+        params: { workspaceId: params.workspaceId, },
+      });
+    }
+
+
 }

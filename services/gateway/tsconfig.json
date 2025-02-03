@@ -16,4 +16,4 @@
   },
   "include": ["./**/*", "worker-configuration.d.ts"],
   "exclude": ["node_modules"]
-}
+} 

@@ -1,6 +1,6 @@
-import { ApiClient } from "../client";
-import type { Env } from "../types";
-import { HTTPException } from "hono/http-exception";
+import { ApiClient } from '../client';
+import type { Env } from '../types';
+import { HTTPException } from 'hono/http-exception';
 import { Hono } from "hono";
 
 // Route handler for /workspace-service/v1/workspaces/list
@@ -18,4 +18,7 @@ router.get("/", async (c) => {
   return c.json(response);
 });
 
-export const workspaceServicev1workspaceslistRouter = router;
+
+
+
+export const workspaceServicev1workspaceslistRouter = router; 

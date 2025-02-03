@@ -21,6 +21,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from playbookmedia_backend_client_sdk.models.webhook_config import WebhookConfig
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -49,7 +50,8 @@ class Workspace(BaseModel):
     last_job_run: Optional[datetime] = Field(default=None, alias="lastJobRun")
     scraping_jobs: Optional[List[ScrapingJob]] = Field(default=None, alias="scrapingJobs")
     api_keys: Optional[List[APIKey]] = Field(default=None, alias="apiKeys")
-    __properties: ClassVar[List[str]] = ["id", "name", "industry", "domain", "gdprCompliant", "hipaaCompliant", "soc2Compliant", "storageQuota", "usedStorage", "createdAt", "updatedAt", "deletedAt", "workflows", "jobsRunThisMonth", "workspaceJobLimit", "dailyJobQuota", "activeScrapers", "totalLeadsCollected", "lastJobRun", "scrapingJobs", "apiKeys"]
+    webhooks: Optional[List[WebhookConfig]] = None
+    __properties: ClassVar[List[str]] = ["id", "name", "industry", "domain", "gdprCompliant", "hipaaCompliant", "soc2Compliant", "storageQuota", "usedStorage", "createdAt", "updatedAt", "deletedAt", "workflows", "jobsRunThisMonth", "workspaceJobLimit", "dailyJobQuota", "activeScrapers", "totalLeadsCollected", "lastJobRun", "scrapingJobs", "apiKeys", "webhooks"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,6 +113,13 @@ class Workspace(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['apiKeys'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in webhooks (list)
+        _items = []
+        if self.webhooks:
+            for _item in self.webhooks:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['webhooks'] = _items
         return _dict
 
     @classmethod
@@ -143,7 +152,8 @@ class Workspace(BaseModel):
             "totalLeadsCollected": obj.get("totalLeadsCollected"),
             "lastJobRun": obj.get("lastJobRun"),
             "scrapingJobs": [ScrapingJob.from_dict(_item) for _item in obj["scrapingJobs"]] if obj.get("scrapingJobs") is not None else None,
-            "apiKeys": [APIKey.from_dict(_item) for _item in obj["apiKeys"]] if obj.get("apiKeys") is not None else None
+            "apiKeys": [APIKey.from_dict(_item) for _item in obj["apiKeys"]] if obj.get("apiKeys") is not None else None,
+            "webhooks": [WebhookConfig.from_dict(_item) for _item in obj["webhooks"]] if obj.get("webhooks") is not None else None
         })
         return _obj
 

@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import org.openapitools.model.RpcStatus;
+import org.openapitools.model.Status;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -19,12 +19,12 @@ import javax.annotation.Generated;
  * ErrorResponse
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T06:30:06.935816-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T10:37:17.791439-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ErrorResponse {
 
-  private RpcStatus status;
+  private Status status;
 
-  public ErrorResponse status(RpcStatus status) {
+  public ErrorResponse status(Status status) {
     this.status = status;
     return this;
   }
@@ -36,11 +36,11 @@ public class ErrorResponse {
   @Valid 
   @Schema(name = "status", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("status")
-  public RpcStatus getStatus() {
+  public Status getStatus() {
     return status;
   }
 
-  public void setStatus(RpcStatus status) {
+  public void setStatus(Status status) {
     this.status = status;
   }
 

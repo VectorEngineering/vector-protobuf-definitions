@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **last_job_run** | **datetime** |  | [optional] 
 **scraping_jobs** | [**List[ScrapingJob]**](ScrapingJob.md) |  | [optional] 
 **api_keys** | [**List[APIKey]**](APIKey.md) |  | [optional] 
+**webhooks** | [**List[WebhookConfig]**](WebhookConfig.md) |  | [optional] 
 
 ## Example
 

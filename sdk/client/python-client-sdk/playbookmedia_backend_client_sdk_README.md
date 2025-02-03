@@ -67,72 +67,155 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *LeadScraperServiceApi* | [**create_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_account) | **POST** /lead-scraper-microservice/api/v1/accounts | Create a new account
 *LeadScraperServiceApi* | [**create_scraping_job**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_scraping_job) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task
+*LeadScraperServiceApi* | [**create_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_workspace) | **POST** /lead-scraper-microservice/api/v1/workspaces | Create a new workspace
 *LeadScraperServiceApi* | [**delete_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_account) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 *LeadScraperServiceApi* | [**delete_scraping_job**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_scraping_job) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job
+*LeadScraperServiceApi* | [**delete_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_workspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
 *LeadScraperServiceApi* | [**download_scraping_results**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#download_scraping_results) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV
 *LeadScraperServiceApi* | [**get_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_account) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details
+*LeadScraperServiceApi* | [**get_account_usage**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_account_usage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage
 *LeadScraperServiceApi* | [**get_scraping_job**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_scraping_job) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job
+*LeadScraperServiceApi* | [**get_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_workflow) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Get workflow details
+*LeadScraperServiceApi* | [**get_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_workspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details
+*LeadScraperServiceApi* | [**get_workspace_analytics**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_workspace_analytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics
+*LeadScraperServiceApi* | [**lead_scraper_service_create_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#lead_scraper_service_create_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow
+*LeadScraperServiceApi* | [**list_accounts**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_accounts) | **GET** /lead-scraper-microservice/api/v1/accounts | List all accounts
 *LeadScraperServiceApi* | [**list_scraping_jobs**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_scraping_jobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs
+*LeadScraperServiceApi* | [**list_workflows**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_workflows) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | List workflows
+*LeadScraperServiceApi* | [**list_workspaces**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_workspaces) | **GET** /lead-scraper-microservice/api/v1/workspaces | List workspaces
+*LeadScraperServiceApi* | [**pause_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#pause_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution
+*LeadScraperServiceApi* | [**trigger_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#trigger_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution
 *LeadScraperServiceApi* | [**update_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_account) | **PUT** /lead-scraper-microservice/api/v1/accounts | Update account details
+*LeadScraperServiceApi* | [**update_account_settings**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_account_settings) | **PUT** /lead-scraper-microservice/api/v1/accounts/settings | Update account settings
+*LeadScraperServiceApi* | [**update_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_workflow) | **PUT** /lead-scraper-microservice/api/v1/workspaces/workflow | Update workflow details
+*LeadScraperServiceApi* | [**update_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_workspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details
+*WorkspaceServiceApi* | [**create_account1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#create_account1) | **POST** /workspace-service/v1/accounts | Create a new account
+*WorkspaceServiceApi* | [**create_workspace1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#create_workspace1) | **POST** /workspace-service/v1/workspaces | Create workspace
+*WorkspaceServiceApi* | [**delete_account1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#delete_account1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
+*WorkspaceServiceApi* | [**delete_workspace1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#delete_workspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
+*WorkspaceServiceApi* | [**get_account1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_account1) | **GET** /workspace-service/v1/accounts/{id} | Get account details
+*WorkspaceServiceApi* | [**get_workspace1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
+*WorkspaceServiceApi* | [**get_workspace_analytics1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace_analytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
+*WorkspaceServiceApi* | [**get_workspace_compliance_report**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace_compliance_report) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report
+*WorkspaceServiceApi* | [**get_workspace_storage_stats**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace_storage_stats) | **GET** /workspace-service/v1/workspaces/storage-stats/{workspaceId} | Get storage statistics
+*WorkspaceServiceApi* | [**list_workspace_sharings**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#list_workspace_sharings) | **GET** /workspace-service/v1/workspaces/sharings/{workspaceId} | List workspace sharings
+*WorkspaceServiceApi* | [**list_workspaces1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#list_workspaces1) | **GET** /workspace-service/v1/workspaces/list | List workspaces
+*WorkspaceServiceApi* | [**remove_workspace_sharing**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#remove_workspace_sharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing
+*WorkspaceServiceApi* | [**share_workspace**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#share_workspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace
+*WorkspaceServiceApi* | [**update_account1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#update_account1) | **PUT** /workspace-service/v1/accounts | Update account details
+*WorkspaceServiceApi* | [**update_workspace1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#update_workspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace
+*WorkspaceServiceApi* | [**update_workspace_sharing**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#update_workspace_sharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing
 
 
 ## Documentation For Models
 
+ - [AIAssistanceLog](playbookmedia_backend_client_sdk/docs/AIAssistanceLog.md)
  - [APIInfo](playbookmedia_backend_client_sdk/docs/APIInfo.md)
  - [APIKey](playbookmedia_backend_client_sdk/docs/APIKey.md)
  - [APIKeyStatus](playbookmedia_backend_client_sdk/docs/APIKeyStatus.md)
  - [Account](playbookmedia_backend_client_sdk/docs/Account.md)
+ - [Account1](playbookmedia_backend_client_sdk/docs/Account1.md)
  - [AccountSettings](playbookmedia_backend_client_sdk/docs/AccountSettings.md)
  - [AccountStatus](playbookmedia_backend_client_sdk/docs/AccountStatus.md)
+ - [ActivityMetrics](playbookmedia_backend_client_sdk/docs/ActivityMetrics.md)
  - [Any](playbookmedia_backend_client_sdk/docs/Any.md)
+ - [AppAnalytics](playbookmedia_backend_client_sdk/docs/AppAnalytics.md)
+ - [AppCategory](playbookmedia_backend_client_sdk/docs/AppCategory.md)
+ - [AppDevelopmentInfo](playbookmedia_backend_client_sdk/docs/AppDevelopmentInfo.md)
+ - [AppInstallation](playbookmedia_backend_client_sdk/docs/AppInstallation.md)
+ - [AppPermission](playbookmedia_backend_client_sdk/docs/AppPermission.md)
+ - [AppReview](playbookmedia_backend_client_sdk/docs/AppReview.md)
+ - [AppVersion](playbookmedia_backend_client_sdk/docs/AppVersion.md)
+ - [AppWebhook](playbookmedia_backend_client_sdk/docs/AppWebhook.md)
  - [AuthContext](playbookmedia_backend_client_sdk/docs/AuthContext.md)
  - [AuthErrorCode](playbookmedia_backend_client_sdk/docs/AuthErrorCode.md)
  - [AuthenticationErrorMessageResponse](playbookmedia_backend_client_sdk/docs/AuthenticationErrorMessageResponse.md)
+ - [AuthenticationErrorMessageResponse1](playbookmedia_backend_client_sdk/docs/AuthenticationErrorMessageResponse1.md)
  - [AvailabilityInfo](playbookmedia_backend_client_sdk/docs/AvailabilityInfo.md)
  - [BackgroundJobStatus](playbookmedia_backend_client_sdk/docs/BackgroundJobStatus.md)
  - [BadGatewayErrorMessageResponse](playbookmedia_backend_client_sdk/docs/BadGatewayErrorMessageResponse.md)
+ - [BranchMerge](playbookmedia_backend_client_sdk/docs/BranchMerge.md)
+ - [BranchPolicy](playbookmedia_backend_client_sdk/docs/BranchPolicy.md)
  - [BusinessHours](playbookmedia_backend_client_sdk/docs/BusinessHours.md)
+ - [ChangeSet](playbookmedia_backend_client_sdk/docs/ChangeSet.md)
+ - [CommentThread](playbookmedia_backend_client_sdk/docs/CommentThread.md)
+ - [ComplianceCheck](playbookmedia_backend_client_sdk/docs/ComplianceCheck.md)
+ - [ComplianceLevel](playbookmedia_backend_client_sdk/docs/ComplianceLevel.md)
+ - [ComplianceMetrics](playbookmedia_backend_client_sdk/docs/ComplianceMetrics.md)
+ - [ComplianceScore](playbookmedia_backend_client_sdk/docs/ComplianceScore.md)
+ - [ComplianceViolation](playbookmedia_backend_client_sdk/docs/ComplianceViolation.md)
  - [ConflictErrorMessageResponse](playbookmedia_backend_client_sdk/docs/ConflictErrorMessageResponse.md)
  - [ConflictInfo](playbookmedia_backend_client_sdk/docs/ConflictInfo.md)
+ - [ContextualSummary](playbookmedia_backend_client_sdk/docs/ContextualSummary.md)
+ - [ContractIntelligence](playbookmedia_backend_client_sdk/docs/ContractIntelligence.md)
  - [CreateAccountRequest](playbookmedia_backend_client_sdk/docs/CreateAccountRequest.md)
+ - [CreateAccountRequest1](playbookmedia_backend_client_sdk/docs/CreateAccountRequest1.md)
  - [CreateAccountResponse](playbookmedia_backend_client_sdk/docs/CreateAccountResponse.md)
+ - [CreateAccountResponse1](playbookmedia_backend_client_sdk/docs/CreateAccountResponse1.md)
  - [CreateScrapingJobRequest](playbookmedia_backend_client_sdk/docs/CreateScrapingJobRequest.md)
  - [CreateScrapingJobResponse](playbookmedia_backend_client_sdk/docs/CreateScrapingJobResponse.md)
  - [CreateWorkflowBody](playbookmedia_backend_client_sdk/docs/CreateWorkflowBody.md)
  - [CreateWorkflowResponse](playbookmedia_backend_client_sdk/docs/CreateWorkflowResponse.md)
  - [CreateWorkspaceRequest](playbookmedia_backend_client_sdk/docs/CreateWorkspaceRequest.md)
+ - [CreateWorkspaceRequest1](playbookmedia_backend_client_sdk/docs/CreateWorkspaceRequest1.md)
  - [CreateWorkspaceResponse](playbookmedia_backend_client_sdk/docs/CreateWorkspaceResponse.md)
+ - [CreateWorkspaceResponse1](playbookmedia_backend_client_sdk/docs/CreateWorkspaceResponse1.md)
+ - [DataProfile](playbookmedia_backend_client_sdk/docs/DataProfile.md)
  - [DayOfWeek](playbookmedia_backend_client_sdk/docs/DayOfWeek.md)
  - [DeleteAccountResponse](playbookmedia_backend_client_sdk/docs/DeleteAccountResponse.md)
  - [DeleteScrapingJobResponse](playbookmedia_backend_client_sdk/docs/DeleteScrapingJobResponse.md)
  - [DeleteWorkspaceResponse](playbookmedia_backend_client_sdk/docs/DeleteWorkspaceResponse.md)
  - [Dependency](playbookmedia_backend_client_sdk/docs/Dependency.md)
+ - [DocumentBranch](playbookmedia_backend_client_sdk/docs/DocumentBranch.md)
+ - [DocumentInstance](playbookmedia_backend_client_sdk/docs/DocumentInstance.md)
+ - [DocumentSnapshot](playbookmedia_backend_client_sdk/docs/DocumentSnapshot.md)
+ - [DocumentStatus](playbookmedia_backend_client_sdk/docs/DocumentStatus.md)
+ - [DocumentTemplate](playbookmedia_backend_client_sdk/docs/DocumentTemplate.md)
+ - [DocumentVersion](playbookmedia_backend_client_sdk/docs/DocumentVersion.md)
  - [DownloadScrapingResultsResponse](playbookmedia_backend_client_sdk/docs/DownloadScrapingResultsResponse.md)
  - [EmployeeBenefit](playbookmedia_backend_client_sdk/docs/EmployeeBenefit.md)
  - [ErrorResponse](playbookmedia_backend_client_sdk/docs/ErrorResponse.md)
+ - [ExplanationBlock](playbookmedia_backend_client_sdk/docs/ExplanationBlock.md)
  - [FieldError](playbookmedia_backend_client_sdk/docs/FieldError.md)
  - [FieldViolation](playbookmedia_backend_client_sdk/docs/FieldViolation.md)
+ - [FileEmbeddings](playbookmedia_backend_client_sdk/docs/FileEmbeddings.md)
+ - [FileMetadata](playbookmedia_backend_client_sdk/docs/FileMetadata.md)
+ - [FileSharing](playbookmedia_backend_client_sdk/docs/FileSharing.md)
+ - [FileVersion](playbookmedia_backend_client_sdk/docs/FileVersion.md)
+ - [FolderMetadata](playbookmedia_backend_client_sdk/docs/FolderMetadata.md)
  - [ForbiddenErrorMessageResponse](playbookmedia_backend_client_sdk/docs/ForbiddenErrorMessageResponse.md)
  - [GatewayTimeoutErrorMessageResponse](playbookmedia_backend_client_sdk/docs/GatewayTimeoutErrorMessageResponse.md)
  - [GetAccountResponse](playbookmedia_backend_client_sdk/docs/GetAccountResponse.md)
+ - [GetAccountResponse1](playbookmedia_backend_client_sdk/docs/GetAccountResponse1.md)
  - [GetAccountUsageResponse](playbookmedia_backend_client_sdk/docs/GetAccountUsageResponse.md)
  - [GetScrapingJobResponse](playbookmedia_backend_client_sdk/docs/GetScrapingJobResponse.md)
  - [GetWorkflowResponse](playbookmedia_backend_client_sdk/docs/GetWorkflowResponse.md)
  - [GetWorkspaceAnalyticsResponse](playbookmedia_backend_client_sdk/docs/GetWorkspaceAnalyticsResponse.md)
+ - [GetWorkspaceAnalyticsResponse1](playbookmedia_backend_client_sdk/docs/GetWorkspaceAnalyticsResponse1.md)
+ - [GetWorkspaceComplianceReportResponse](playbookmedia_backend_client_sdk/docs/GetWorkspaceComplianceReportResponse.md)
  - [GetWorkspaceResponse](playbookmedia_backend_client_sdk/docs/GetWorkspaceResponse.md)
+ - [GetWorkspaceStorageStatsResponse](playbookmedia_backend_client_sdk/docs/GetWorkspaceStorageStatsResponse.md)
  - [GoneErrorMessageResponse](playbookmedia_backend_client_sdk/docs/GoneErrorMessageResponse.md)
  - [IncludedField](playbookmedia_backend_client_sdk/docs/IncludedField.md)
  - [InternalErrorCode](playbookmedia_backend_client_sdk/docs/InternalErrorCode.md)
  - [InternalErrorMessageResponse](playbookmedia_backend_client_sdk/docs/InternalErrorMessageResponse.md)
  - [JobSuccessRate](playbookmedia_backend_client_sdk/docs/JobSuccessRate.md)
+ - [Language](playbookmedia_backend_client_sdk/docs/Language.md)
  - [Lead](playbookmedia_backend_client_sdk/docs/Lead.md)
  - [LimitInfo](playbookmedia_backend_client_sdk/docs/LimitInfo.md)
  - [ListAccountsResponse](playbookmedia_backend_client_sdk/docs/ListAccountsResponse.md)
+ - [ListAccountsResponse1](playbookmedia_backend_client_sdk/docs/ListAccountsResponse1.md)
  - [ListScrapingJobsResponse](playbookmedia_backend_client_sdk/docs/ListScrapingJobsResponse.md)
  - [ListWorkflowsResponse](playbookmedia_backend_client_sdk/docs/ListWorkflowsResponse.md)
+ - [ListWorkspaceSharingsResponse](playbookmedia_backend_client_sdk/docs/ListWorkspaceSharingsResponse.md)
  - [ListWorkspacesResponse](playbookmedia_backend_client_sdk/docs/ListWorkspacesResponse.md)
+ - [ListWorkspacesResponse1](playbookmedia_backend_client_sdk/docs/ListWorkspacesResponse1.md)
  - [MFAInfo](playbookmedia_backend_client_sdk/docs/MFAInfo.md)
+ - [MarketplaceApp](playbookmedia_backend_client_sdk/docs/MarketplaceApp.md)
+ - [MergeRequest](playbookmedia_backend_client_sdk/docs/MergeRequest.md)
  - [MethodNotAllowedErrorMessageResponse](playbookmedia_backend_client_sdk/docs/MethodNotAllowedErrorMessageResponse.md)
+ - [NegotiationHistory](playbookmedia_backend_client_sdk/docs/NegotiationHistory.md)
+ - [NegotiationRound](playbookmedia_backend_client_sdk/docs/NegotiationRound.md)
  - [NotFoundErrorCode](playbookmedia_backend_client_sdk/docs/NotFoundErrorCode.md)
  - [NotFoundErrorMessageResponse](playbookmedia_backend_client_sdk/docs/NotFoundErrorMessageResponse.md)
  - [NotImplementedErrorMessageResponse](playbookmedia_backend_client_sdk/docs/NotImplementedErrorMessageResponse.md)
@@ -144,15 +227,20 @@ Class | Method | HTTP request | Description
  - [PayloadFormat](playbookmedia_backend_client_sdk/docs/PayloadFormat.md)
  - [PaymentInfo](playbookmedia_backend_client_sdk/docs/PaymentInfo.md)
  - [PaymentRequiredErrorMessageResponse](playbookmedia_backend_client_sdk/docs/PaymentRequiredErrorMessageResponse.md)
+ - [Permission](playbookmedia_backend_client_sdk/docs/Permission.md)
  - [PreconditionFailedErrorMessageResponse](playbookmedia_backend_client_sdk/docs/PreconditionFailedErrorMessageResponse.md)
+ - [PricingModel](playbookmedia_backend_client_sdk/docs/PricingModel.md)
  - [QuotaInfo](playbookmedia_backend_client_sdk/docs/QuotaInfo.md)
  - [RateLimitContext](playbookmedia_backend_client_sdk/docs/RateLimitContext.md)
  - [RateLimitErrorMessageResponse](playbookmedia_backend_client_sdk/docs/RateLimitErrorMessageResponse.md)
+ - [RemoveWorkspaceSharingResponse](playbookmedia_backend_client_sdk/docs/RemoveWorkspaceSharingResponse.md)
  - [ResourceInfo](playbookmedia_backend_client_sdk/docs/ResourceInfo.md)
  - [ResourceUtilization](playbookmedia_backend_client_sdk/docs/ResourceUtilization.md)
  - [ResourceValidation](playbookmedia_backend_client_sdk/docs/ResourceValidation.md)
  - [RevenueRange](playbookmedia_backend_client_sdk/docs/RevenueRange.md)
  - [Review](playbookmedia_backend_client_sdk/docs/Review.md)
+ - [RiskAssessment](playbookmedia_backend_client_sdk/docs/RiskAssessment.md)
+ - [Role](playbookmedia_backend_client_sdk/docs/Role.md)
  - [RpcStatus](playbookmedia_backend_client_sdk/docs/RpcStatus.md)
  - [SchemaValidation](playbookmedia_backend_client_sdk/docs/SchemaValidation.md)
  - [ScrapingJob](playbookmedia_backend_client_sdk/docs/ScrapingJob.md)
@@ -160,7 +248,19 @@ Class | Method | HTTP request | Description
  - [ServiceStatus](playbookmedia_backend_client_sdk/docs/ServiceStatus.md)
  - [ServiceUnavailableErrorMessageResponse](playbookmedia_backend_client_sdk/docs/ServiceUnavailableErrorMessageResponse.md)
  - [SessionInfo](playbookmedia_backend_client_sdk/docs/SessionInfo.md)
+ - [ShareWorkspaceBody](playbookmedia_backend_client_sdk/docs/ShareWorkspaceBody.md)
+ - [ShareWorkspaceResponse](playbookmedia_backend_client_sdk/docs/ShareWorkspaceResponse.md)
+ - [SignatureBlock](playbookmedia_backend_client_sdk/docs/SignatureBlock.md)
+ - [SignatureRequest](playbookmedia_backend_client_sdk/docs/SignatureRequest.md)
+ - [SignatureStatus](playbookmedia_backend_client_sdk/docs/SignatureStatus.md)
+ - [SignatureWorkflow](playbookmedia_backend_client_sdk/docs/SignatureWorkflow.md)
+ - [Status](playbookmedia_backend_client_sdk/docs/Status.md)
+ - [StorageBreakdown](playbookmedia_backend_client_sdk/docs/StorageBreakdown.md)
  - [Suggestions](playbookmedia_backend_client_sdk/docs/Suggestions.md)
+ - [TemplateType](playbookmedia_backend_client_sdk/docs/TemplateType.md)
+ - [TemplateVariable](playbookmedia_backend_client_sdk/docs/TemplateVariable.md)
+ - [TemplateVersion](playbookmedia_backend_client_sdk/docs/TemplateVersion.md)
+ - [Timezone](playbookmedia_backend_client_sdk/docs/Timezone.md)
  - [TokenInfo](playbookmedia_backend_client_sdk/docs/TokenInfo.md)
  - [TooEarlyErrorMessageResponse](playbookmedia_backend_client_sdk/docs/TooEarlyErrorMessageResponse.md)
  - [TriggerEvent](playbookmedia_backend_client_sdk/docs/TriggerEvent.md)
@@ -175,11 +275,18 @@ Class | Method | HTTP request | Description
  - [UpdateWorkflowResponse](playbookmedia_backend_client_sdk/docs/UpdateWorkflowResponse.md)
  - [UpdateWorkspaceRequest](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceRequest.md)
  - [UpdateWorkspaceResponse](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceResponse.md)
+ - [UpdateWorkspaceSharingRequest](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceSharingRequest.md)
+ - [UpdateWorkspaceSharingResponse](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceSharingResponse.md)
+ - [UserActivity](playbookmedia_backend_client_sdk/docs/UserActivity.md)
  - [ValidationErrorCode](playbookmedia_backend_client_sdk/docs/ValidationErrorCode.md)
  - [ValidationErrorMessageResponse](playbookmedia_backend_client_sdk/docs/ValidationErrorMessageResponse.md)
  - [WebhookConfig](playbookmedia_backend_client_sdk/docs/WebhookConfig.md)
  - [WorkflowStatus](playbookmedia_backend_client_sdk/docs/WorkflowStatus.md)
  - [Workspace](playbookmedia_backend_client_sdk/docs/Workspace.md)
+ - [Workspace1](playbookmedia_backend_client_sdk/docs/Workspace1.md)
+ - [WorkspaceActivity](playbookmedia_backend_client_sdk/docs/WorkspaceActivity.md)
+ - [WorkspaceCompliance](playbookmedia_backend_client_sdk/docs/WorkspaceCompliance.md)
+ - [WorkspaceSharing](playbookmedia_backend_client_sdk/docs/WorkspaceSharing.md)
 
 
 <a id="documentation-for-authorization"></a>

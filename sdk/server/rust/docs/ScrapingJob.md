@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **status** | [***models::BackgroundJobStatus**](BackgroundJobStatus.md) |  | [optional] [default to None]
 **name** | **String** |  | [optional] [default to None]
 **keywords** | **Vec<String>** |  | [optional] [default to None]
-**lang** | **String** |  | [optional] [default to None]
+**lang** | [***models::Language**](Language.md) |  | [optional] [default to None]
 **zoom** | **i32** |  | [optional] [default to None]
 **lat** | **String** |  | [optional] [default to None]
 **lon** | **String** |  | [optional] [default to None]

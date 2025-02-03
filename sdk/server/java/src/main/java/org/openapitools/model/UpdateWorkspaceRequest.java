@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import org.openapitools.model.Workspace;
+import org.openapitools.model.Workspace1;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -19,12 +19,12 @@ import javax.annotation.Generated;
  * UpdateWorkspaceRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T06:30:06.935816-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T10:37:17.791439-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class UpdateWorkspaceRequest {
 
-  private Workspace workspace;
+  private Workspace1 workspace;
 
-  public UpdateWorkspaceRequest workspace(Workspace workspace) {
+  public UpdateWorkspaceRequest workspace(Workspace1 workspace) {
     this.workspace = workspace;
     return this;
   }
@@ -36,11 +36,11 @@ public class UpdateWorkspaceRequest {
   @Valid 
   @Schema(name = "workspace", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("workspace")
-  public Workspace getWorkspace() {
+  public Workspace1 getWorkspace() {
     return workspace;
   }
 
-  public void setWorkspace(Workspace workspace) {
+  public void setWorkspace(Workspace1 workspace) {
     this.workspace = workspace;
   }
 

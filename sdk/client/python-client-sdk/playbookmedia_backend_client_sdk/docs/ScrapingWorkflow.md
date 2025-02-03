@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** |  | [optional] 
+**name** | **str** |  | [optional] 
 **cron_expression** | **str** |  | [optional] 
 **next_run_time** | **datetime** |  | [optional] 
 **last_run_time** | **datetime** |  | [optional] 
@@ -13,8 +14,6 @@ Name | Type | Description | Notes
 **retry_count** | **int** |  | [optional] 
 **max_retries** | **int** |  | [optional] 
 **alert_emails** | **str** |  | [optional] 
-**org_id** | **str** |  | [optional] 
-**tenant_id** | **str** |  | [optional] 
 **created_at** | **datetime** |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 
 **deleted_at** | **datetime** |  | [optional] 
@@ -33,7 +32,6 @@ Name | Type | Description | Notes
 **output_destination** | **str** |  | [optional] 
 **data_retention** | **str** |  | [optional] 
 **anonymize_pii** | **bool** |  | [optional] 
-**webhooks** | [**List[WebhookConfig]**](WebhookConfig.md) |  | [optional] 
 **notification_slack_channel** | **str** |  | [optional] 
 **notification_email_group** | **str** |  | [optional] 
 **notification_notify_on_start** | **bool** |  | [optional] 

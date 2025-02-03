@@ -1,0 +1,22 @@
+# AppCategory
+
+
+## Enum
+
+* `APP_CATEGORY_UNSPECIFIED` (value: `'APP_CATEGORY_UNSPECIFIED'`)
+
+* `APP_CATEGORY_CONTRACT_AUTOMATION` (value: `'APP_CATEGORY_CONTRACT_AUTOMATION'`)
+
+* `APP_CATEGORY_CONTRACT_ANALYSIS` (value: `'APP_CATEGORY_CONTRACT_ANALYSIS'`)
+
+* `APP_CATEGORY_INTEGRATION` (value: `'APP_CATEGORY_INTEGRATION'`)
+
+* `APP_CATEGORY_AI_POWERED` (value: `'APP_CATEGORY_AI_POWERED'`)
+
+* `APP_CATEGORY_WORKFLOW` (value: `'APP_CATEGORY_WORKFLOW'`)
+
+* `APP_CATEGORY_COMPLIANCE` (value: `'APP_CATEGORY_COMPLIANCE'`)
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

@@ -36,11 +36,11 @@ pub struct Account {
 
     #[serde(rename = "roles")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub roles: Option<Vec<String>>,
+    pub roles: Option<Vec<models::Role>>,
 
     #[serde(rename = "permissions")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub permissions: Option<Vec<String>>,
+    pub permissions: Option<Vec<models::Permission>>,
 
     #[serde(rename = "mfaEnabled")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -52,7 +52,7 @@ pub struct Account {
 
     #[serde(rename = "timezone")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub timezone: Option<String>,
+    pub timezone: Option<models::Timezone>,
 
     #[serde(rename = "totalJobsRun")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -137,21 +137,9 @@ impl std::string::ToString for Account {
 
             // Skipping accountStatus in query parameter serialization
 
+            // Skipping roles in query parameter serialization
 
-            self.roles.as_ref().map(|roles| {
-                [
-                    "roles".to_string(),
-                    roles.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
-                ].join(",")
-            }),
-
-
-            self.permissions.as_ref().map(|permissions| {
-                [
-                    "permissions".to_string(),
-                    permissions.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
-                ].join(",")
-            }),
+            // Skipping permissions in query parameter serialization
 
 
             self.mfa_enabled.as_ref().map(|mfa_enabled| {
@@ -163,13 +151,7 @@ impl std::string::ToString for Account {
 
             // Skipping lastLoginAt in query parameter serialization
 
-
-            self.timezone.as_ref().map(|timezone| {
-                [
-                    "timezone".to_string(),
-                    timezone.to_string(),
-                ].join(",")
-            }),
+            // Skipping timezone in query parameter serialization
 
 
             self.total_jobs_run.as_ref().map(|total_jobs_run| {
@@ -222,11 +204,11 @@ impl std::str::FromStr for Account {
             pub deleted_at: Vec<chrono::DateTime::<chrono::Utc>>,
             pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
             pub account_status: Vec<models::AccountStatus>,
-            pub roles: Vec<Vec<String>>,
-            pub permissions: Vec<Vec<String>>,
+            pub roles: Vec<Vec<models::Role>>,
+            pub permissions: Vec<Vec<models::Permission>>,
             pub mfa_enabled: Vec<bool>,
             pub last_login_at: Vec<chrono::DateTime::<chrono::Utc>>,
-            pub timezone: Vec<String>,
+            pub timezone: Vec<models::Timezone>,
             pub total_jobs_run: Vec<i32>,
             pub monthly_job_limit: Vec<i32>,
             pub concurrent_job_limit: Vec<i32>,
@@ -268,7 +250,7 @@ impl std::str::FromStr for Account {
                     #[allow(clippy::redundant_clone)]
                     "lastLoginAt" => intermediate_rep.last_login_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
-                    "timezone" => intermediate_rep.timezone.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "timezone" => intermediate_rep.timezone.push(<models::Timezone as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "totalJobsRun" => intermediate_rep.total_jobs_run.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
@@ -336,6 +318,388 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into Account - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct Account1 {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "auth0UserId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub auth0_user_id: Option<String>,
+
+    #[serde(rename = "email")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub email: Option<String>,
+
+    #[serde(rename = "baseDirectory")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub base_directory: Option<String>,
+
+    #[serde(rename = "bucketName")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub bucket_name: Option<String>,
+
+    #[serde(rename = "region")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub region: Option<String>,
+
+    #[serde(rename = "orgId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub org_id: Option<String>,
+
+    #[serde(rename = "tenantId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub tenant_id: Option<String>,
+
+    #[serde(rename = "roles")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub roles: Option<Vec<String>>,
+
+    #[serde(rename = "permissions")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub permissions: Option<Vec<String>>,
+
+    #[serde(rename = "mfaEnabled")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub mfa_enabled: Option<bool>,
+
+    #[serde(rename = "complianceLevel")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub compliance_level: Option<models::ComplianceLevel>,
+
+    #[serde(rename = "preferences")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub preferences: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "apiKeys")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub api_keys: Option<Vec<String>>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "deletedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub deleted_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "workspaces")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub workspaces: Option<Vec<models::Workspace1>>,
+
+    #[serde(rename = "dataProfiles")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub data_profiles: Option<Vec<models::DataProfile>>,
+
+}
+
+
+impl Account1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> Account1 {
+        Account1 {
+            id: None,
+            auth0_user_id: None,
+            email: None,
+            base_directory: None,
+            bucket_name: None,
+            region: None,
+            org_id: None,
+            tenant_id: None,
+            roles: None,
+            permissions: None,
+            mfa_enabled: None,
+            compliance_level: None,
+            preferences: None,
+            api_keys: None,
+            created_at: None,
+            updated_at: None,
+            deleted_at: None,
+            workspaces: None,
+            data_profiles: None,
+        }
+    }
+}
+
+/// Converts the Account1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for Account1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.auth0_user_id.as_ref().map(|auth0_user_id| {
+                [
+                    "auth0UserId".to_string(),
+                    auth0_user_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.email.as_ref().map(|email| {
+                [
+                    "email".to_string(),
+                    email.to_string(),
+                ].join(",")
+            }),
+
+
+            self.base_directory.as_ref().map(|base_directory| {
+                [
+                    "baseDirectory".to_string(),
+                    base_directory.to_string(),
+                ].join(",")
+            }),
+
+
+            self.bucket_name.as_ref().map(|bucket_name| {
+                [
+                    "bucketName".to_string(),
+                    bucket_name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.region.as_ref().map(|region| {
+                [
+                    "region".to_string(),
+                    region.to_string(),
+                ].join(",")
+            }),
+
+
+            self.org_id.as_ref().map(|org_id| {
+                [
+                    "orgId".to_string(),
+                    org_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.tenant_id.as_ref().map(|tenant_id| {
+                [
+                    "tenantId".to_string(),
+                    tenant_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.roles.as_ref().map(|roles| {
+                [
+                    "roles".to_string(),
+                    roles.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.permissions.as_ref().map(|permissions| {
+                [
+                    "permissions".to_string(),
+                    permissions.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.mfa_enabled.as_ref().map(|mfa_enabled| {
+                [
+                    "mfaEnabled".to_string(),
+                    mfa_enabled.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping complianceLevel in query parameter serialization
+
+            // Skipping preferences in query parameter serialization
+
+
+            self.api_keys.as_ref().map(|api_keys| {
+                [
+                    "apiKeys".to_string(),
+                    api_keys.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+            // Skipping deletedAt in query parameter serialization
+
+            // Skipping workspaces in query parameter serialization
+
+            // Skipping dataProfiles in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a Account1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for Account1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub auth0_user_id: Vec<String>,
+            pub email: Vec<String>,
+            pub base_directory: Vec<String>,
+            pub bucket_name: Vec<String>,
+            pub region: Vec<String>,
+            pub org_id: Vec<String>,
+            pub tenant_id: Vec<String>,
+            pub roles: Vec<Vec<String>>,
+            pub permissions: Vec<Vec<String>>,
+            pub mfa_enabled: Vec<bool>,
+            pub compliance_level: Vec<models::ComplianceLevel>,
+            pub preferences: Vec<std::collections::HashMap<String, String>>,
+            pub api_keys: Vec<Vec<String>>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub deleted_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub workspaces: Vec<Vec<models::Workspace1>>,
+            pub data_profiles: Vec<Vec<models::DataProfile>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing Account1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "auth0UserId" => intermediate_rep.auth0_user_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "email" => intermediate_rep.email.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "baseDirectory" => intermediate_rep.base_directory.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "bucketName" => intermediate_rep.bucket_name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "region" => intermediate_rep.region.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "orgId" => intermediate_rep.org_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "roles" => return std::result::Result::Err("Parsing a container in this style is not supported in Account1".to_string()),
+                    "permissions" => return std::result::Result::Err("Parsing a container in this style is not supported in Account1".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "mfaEnabled" => intermediate_rep.mfa_enabled.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "complianceLevel" => intermediate_rep.compliance_level.push(<models::ComplianceLevel as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "preferences" => return std::result::Result::Err("Parsing a container in this style is not supported in Account1".to_string()),
+                    "apiKeys" => return std::result::Result::Err("Parsing a container in this style is not supported in Account1".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "deletedAt" => intermediate_rep.deleted_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "workspaces" => return std::result::Result::Err("Parsing a container in this style is not supported in Account1".to_string()),
+                    "dataProfiles" => return std::result::Result::Err("Parsing a container in this style is not supported in Account1".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing Account1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(Account1 {
+            id: intermediate_rep.id.into_iter().next(),
+            auth0_user_id: intermediate_rep.auth0_user_id.into_iter().next(),
+            email: intermediate_rep.email.into_iter().next(),
+            base_directory: intermediate_rep.base_directory.into_iter().next(),
+            bucket_name: intermediate_rep.bucket_name.into_iter().next(),
+            region: intermediate_rep.region.into_iter().next(),
+            org_id: intermediate_rep.org_id.into_iter().next(),
+            tenant_id: intermediate_rep.tenant_id.into_iter().next(),
+            roles: intermediate_rep.roles.into_iter().next(),
+            permissions: intermediate_rep.permissions.into_iter().next(),
+            mfa_enabled: intermediate_rep.mfa_enabled.into_iter().next(),
+            compliance_level: intermediate_rep.compliance_level.into_iter().next(),
+            preferences: intermediate_rep.preferences.into_iter().next(),
+            api_keys: intermediate_rep.api_keys.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+            deleted_at: intermediate_rep.deleted_at.into_iter().next(),
+            workspaces: intermediate_rep.workspaces.into_iter().next(),
+            data_profiles: intermediate_rep.data_profiles.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<Account1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Account1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<Account1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for Account1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Account1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <Account1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into Account1 - {}",
                                 value, err))
                     }
              },
@@ -648,6 +1012,411 @@ impl std::str::FromStr for AccountStatus {
         }
     }
 }
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ActivityMetrics {
+    #[serde(rename = "totalFiles")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_files: Option<i32>,
+
+    #[serde(rename = "totalFolders")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_folders: Option<i32>,
+
+    #[serde(rename = "activeUsers")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub active_users: Option<i32>,
+
+    #[serde(rename = "storageUsed")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub storage_used: Option<String>,
+
+    #[serde(rename = "storageUsagePercentage")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub storage_usage_percentage: Option<f32>,
+
+}
+
+
+impl ActivityMetrics {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ActivityMetrics {
+        ActivityMetrics {
+            total_files: None,
+            total_folders: None,
+            active_users: None,
+            storage_used: None,
+            storage_usage_percentage: None,
+        }
+    }
+}
+
+/// Converts the ActivityMetrics value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ActivityMetrics {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.total_files.as_ref().map(|total_files| {
+                [
+                    "totalFiles".to_string(),
+                    total_files.to_string(),
+                ].join(",")
+            }),
+
+
+            self.total_folders.as_ref().map(|total_folders| {
+                [
+                    "totalFolders".to_string(),
+                    total_folders.to_string(),
+                ].join(",")
+            }),
+
+
+            self.active_users.as_ref().map(|active_users| {
+                [
+                    "activeUsers".to_string(),
+                    active_users.to_string(),
+                ].join(",")
+            }),
+
+
+            self.storage_used.as_ref().map(|storage_used| {
+                [
+                    "storageUsed".to_string(),
+                    storage_used.to_string(),
+                ].join(",")
+            }),
+
+
+            self.storage_usage_percentage.as_ref().map(|storage_usage_percentage| {
+                [
+                    "storageUsagePercentage".to_string(),
+                    storage_usage_percentage.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ActivityMetrics value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ActivityMetrics {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub total_files: Vec<i32>,
+            pub total_folders: Vec<i32>,
+            pub active_users: Vec<i32>,
+            pub storage_used: Vec<String>,
+            pub storage_usage_percentage: Vec<f32>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ActivityMetrics".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "totalFiles" => intermediate_rep.total_files.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "totalFolders" => intermediate_rep.total_folders.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "activeUsers" => intermediate_rep.active_users.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "storageUsed" => intermediate_rep.storage_used.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "storageUsagePercentage" => intermediate_rep.storage_usage_percentage.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ActivityMetrics".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ActivityMetrics {
+            total_files: intermediate_rep.total_files.into_iter().next(),
+            total_folders: intermediate_rep.total_folders.into_iter().next(),
+            active_users: intermediate_rep.active_users.into_iter().next(),
+            storage_used: intermediate_rep.storage_used.into_iter().next(),
+            storage_usage_percentage: intermediate_rep.storage_usage_percentage.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ActivityMetrics> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ActivityMetrics>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ActivityMetrics>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ActivityMetrics - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ActivityMetrics> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ActivityMetrics as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ActivityMetrics - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct AiAssistanceLog {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "documentId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub document_id: Option<String>,
+
+    #[serde(rename = "interactionType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub interaction_type: Option<String>,
+
+    #[serde(rename = "userQuery")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub user_query: Option<String>,
+
+    #[serde(rename = "aiResponse")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub ai_response: Option<String>,
+
+    #[serde(rename = "context")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub context: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl AiAssistanceLog {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> AiAssistanceLog {
+        AiAssistanceLog {
+            id: None,
+            document_id: None,
+            interaction_type: None,
+            user_query: None,
+            ai_response: None,
+            context: None,
+            created_at: None,
+        }
+    }
+}
+
+/// Converts the AiAssistanceLog value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for AiAssistanceLog {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.document_id.as_ref().map(|document_id| {
+                [
+                    "documentId".to_string(),
+                    document_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.interaction_type.as_ref().map(|interaction_type| {
+                [
+                    "interactionType".to_string(),
+                    interaction_type.to_string(),
+                ].join(",")
+            }),
+
+
+            self.user_query.as_ref().map(|user_query| {
+                [
+                    "userQuery".to_string(),
+                    user_query.to_string(),
+                ].join(",")
+            }),
+
+
+            self.ai_response.as_ref().map(|ai_response| {
+                [
+                    "aiResponse".to_string(),
+                    ai_response.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping context in query parameter serialization
+
+            // Skipping createdAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a AiAssistanceLog value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for AiAssistanceLog {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub document_id: Vec<String>,
+            pub interaction_type: Vec<String>,
+            pub user_query: Vec<String>,
+            pub ai_response: Vec<String>,
+            pub context: Vec<std::collections::HashMap<String, String>>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing AiAssistanceLog".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "documentId" => intermediate_rep.document_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "interactionType" => intermediate_rep.interaction_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "userQuery" => intermediate_rep.user_query.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "aiResponse" => intermediate_rep.ai_response.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "context" => return std::result::Result::Err("Parsing a container in this style is not supported in AiAssistanceLog".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing AiAssistanceLog".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(AiAssistanceLog {
+            id: intermediate_rep.id.into_iter().next(),
+            document_id: intermediate_rep.document_id.into_iter().next(),
+            interaction_type: intermediate_rep.interaction_type.into_iter().next(),
+            user_query: intermediate_rep.user_query.into_iter().next(),
+            ai_response: intermediate_rep.ai_response.into_iter().next(),
+            context: intermediate_rep.context.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<AiAssistanceLog> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<AiAssistanceLog>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<AiAssistanceLog>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for AiAssistanceLog - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<AiAssistanceLog> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <AiAssistanceLog as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into AiAssistanceLog - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
 
 /// `Any` contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.  Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type.  Example 1: Pack and unpack a message in C++.      Foo foo = ...;     Any any;     any.PackFrom(foo);     ...     if (any.UnpackTo(&foo)) {       ...     }  Example 2: Pack and unpack a message in Java.      Foo foo = ...;     Any any = Any.pack(foo);     ...     if (any.is(Foo.class)) {       foo = any.unpack(Foo.class);     }  Example 3: Pack and unpack a message in Python.      foo = Foo(...)     any = Any()     any.Pack(foo)     ...     if any.Is(Foo.DESCRIPTOR):       any.Unpack(foo)       ...  Example 4: Pack and unpack a message in Go       foo := &pb.Foo{...}      any, err := anypb.New(foo)      if err != nil {        ...      }      ...      foo := &pb.Foo{}      if err := any.UnmarshalTo(foo); err != nil {        ...      }  The pack methods provided by protobuf library will by default use 'type.googleapis.com/full.type.name' as the type URL and the unpack methods only use the fully qualified type name after the last '/' in the type URL, for example \"foo.bar.com/x/y.z\" will yield type name \"y.z\".   JSON  The JSON representation of an `Any` value uses the regular representation of the deserialized, embedded message, with an additional field `@type` which contains the type URL. Example:      package google.profile;     message Person {       string first_name = 1;       string last_name = 2;     }      {       \"@type\": \"type.googleapis.com/google.profile.Person\",       \"firstName\": <string>,       \"lastName\": <string>     }  If the embedded message type is well-known and has a custom JSON representation, that representation will be embedded adding a field `value` which holds the custom JSON in addition to the `@type` field. Example (for message [google.protobuf.Duration][]):      {       \"@type\": \"type.googleapis.com/google.protobuf.Duration\",       \"value\": \"1.212s\"     }
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
@@ -2152,6 +2921,1731 @@ impl std::str::FromStr for ApiKeyPeriodStatus {
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct AppAnalytics {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "appId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub app_id: Option<String>,
+
+    #[serde(rename = "metricName")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub metric_name: Option<String>,
+
+    #[serde(rename = "metricValue")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub metric_value: Option<f32>,
+
+    #[serde(rename = "dimensions")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub dimensions: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "recordedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub recorded_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl AppAnalytics {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> AppAnalytics {
+        AppAnalytics {
+            id: None,
+            app_id: None,
+            metric_name: None,
+            metric_value: None,
+            dimensions: None,
+            recorded_at: None,
+        }
+    }
+}
+
+/// Converts the AppAnalytics value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for AppAnalytics {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.app_id.as_ref().map(|app_id| {
+                [
+                    "appId".to_string(),
+                    app_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.metric_name.as_ref().map(|metric_name| {
+                [
+                    "metricName".to_string(),
+                    metric_name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.metric_value.as_ref().map(|metric_value| {
+                [
+                    "metricValue".to_string(),
+                    metric_value.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping dimensions in query parameter serialization
+
+            // Skipping recordedAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a AppAnalytics value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for AppAnalytics {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub app_id: Vec<String>,
+            pub metric_name: Vec<String>,
+            pub metric_value: Vec<f32>,
+            pub dimensions: Vec<std::collections::HashMap<String, String>>,
+            pub recorded_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing AppAnalytics".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "appId" => intermediate_rep.app_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "metricName" => intermediate_rep.metric_name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "metricValue" => intermediate_rep.metric_value.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "dimensions" => return std::result::Result::Err("Parsing a container in this style is not supported in AppAnalytics".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "recordedAt" => intermediate_rep.recorded_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing AppAnalytics".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(AppAnalytics {
+            id: intermediate_rep.id.into_iter().next(),
+            app_id: intermediate_rep.app_id.into_iter().next(),
+            metric_name: intermediate_rep.metric_name.into_iter().next(),
+            metric_value: intermediate_rep.metric_value.into_iter().next(),
+            dimensions: intermediate_rep.dimensions.into_iter().next(),
+            recorded_at: intermediate_rep.recorded_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<AppAnalytics> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<AppAnalytics>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<AppAnalytics>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for AppAnalytics - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<AppAnalytics> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <AppAnalytics as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into AppAnalytics - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+/// Enumeration of values.
+/// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
+/// which helps with FFI.
+#[allow(non_camel_case_types)]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "conversion", derive(frunk_enum_derive::LabelledGenericEnum))]
+pub enum AppCategory {
+    #[serde(rename = "APP_CATEGORY_UNSPECIFIED")]
+    Unspecified,
+    #[serde(rename = "APP_CATEGORY_CONTRACT_AUTOMATION")]
+    ContractAutomation,
+    #[serde(rename = "APP_CATEGORY_CONTRACT_ANALYSIS")]
+    ContractAnalysis,
+    #[serde(rename = "APP_CATEGORY_INTEGRATION")]
+    Integration,
+    #[serde(rename = "APP_CATEGORY_AI_POWERED")]
+    AiPowered,
+    #[serde(rename = "APP_CATEGORY_WORKFLOW")]
+    Workflow,
+    #[serde(rename = "APP_CATEGORY_COMPLIANCE")]
+    Compliance,
+}
+
+impl std::fmt::Display for AppCategory {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            AppCategory::Unspecified => write!(f, "APP_CATEGORY_UNSPECIFIED"),
+            AppCategory::ContractAutomation => write!(f, "APP_CATEGORY_CONTRACT_AUTOMATION"),
+            AppCategory::ContractAnalysis => write!(f, "APP_CATEGORY_CONTRACT_ANALYSIS"),
+            AppCategory::Integration => write!(f, "APP_CATEGORY_INTEGRATION"),
+            AppCategory::AiPowered => write!(f, "APP_CATEGORY_AI_POWERED"),
+            AppCategory::Workflow => write!(f, "APP_CATEGORY_WORKFLOW"),
+            AppCategory::Compliance => write!(f, "APP_CATEGORY_COMPLIANCE"),
+        }
+    }
+}
+
+impl std::str::FromStr for AppCategory {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s {
+            "APP_CATEGORY_UNSPECIFIED" => std::result::Result::Ok(AppCategory::Unspecified),
+            "APP_CATEGORY_CONTRACT_AUTOMATION" => std::result::Result::Ok(AppCategory::ContractAutomation),
+            "APP_CATEGORY_CONTRACT_ANALYSIS" => std::result::Result::Ok(AppCategory::ContractAnalysis),
+            "APP_CATEGORY_INTEGRATION" => std::result::Result::Ok(AppCategory::Integration),
+            "APP_CATEGORY_AI_POWERED" => std::result::Result::Ok(AppCategory::AiPowered),
+            "APP_CATEGORY_WORKFLOW" => std::result::Result::Ok(AppCategory::Workflow),
+            "APP_CATEGORY_COMPLIANCE" => std::result::Result::Ok(AppCategory::Compliance),
+            _ => std::result::Result::Err(format!("Value not valid: {}", s)),
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct AppDevelopmentInfo {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "appId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub app_id: Option<String>,
+
+    #[serde(rename = "supportedLanguages")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub supported_languages: Option<Vec<String>>,
+
+    #[serde(rename = "sdkFeatures")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub sdk_features: Option<Vec<String>>,
+
+    #[serde(rename = "testCoverage")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub test_coverage: Option<std::collections::HashMap<String, f32>>,
+
+    #[serde(rename = "securityScans")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub security_scans: Option<Vec<String>>,
+
+    #[serde(rename = "performanceMetrics")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub performance_metrics: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "developmentStatus")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub development_status: Option<String>,
+
+    #[serde(rename = "knownIssues")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub known_issues: Option<Vec<String>>,
+
+    #[serde(rename = "roadmapUrl")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub roadmap_url: Option<String>,
+
+    #[serde(rename = "lastSecurityAudit")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub last_security_audit: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl AppDevelopmentInfo {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> AppDevelopmentInfo {
+        AppDevelopmentInfo {
+            id: None,
+            app_id: None,
+            supported_languages: None,
+            sdk_features: None,
+            test_coverage: None,
+            security_scans: None,
+            performance_metrics: None,
+            development_status: None,
+            known_issues: None,
+            roadmap_url: None,
+            last_security_audit: None,
+            created_at: None,
+            updated_at: None,
+        }
+    }
+}
+
+/// Converts the AppDevelopmentInfo value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for AppDevelopmentInfo {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.app_id.as_ref().map(|app_id| {
+                [
+                    "appId".to_string(),
+                    app_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.supported_languages.as_ref().map(|supported_languages| {
+                [
+                    "supportedLanguages".to_string(),
+                    supported_languages.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.sdk_features.as_ref().map(|sdk_features| {
+                [
+                    "sdkFeatures".to_string(),
+                    sdk_features.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping testCoverage in query parameter serialization
+
+
+            self.security_scans.as_ref().map(|security_scans| {
+                [
+                    "securityScans".to_string(),
+                    security_scans.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping performanceMetrics in query parameter serialization
+
+
+            self.development_status.as_ref().map(|development_status| {
+                [
+                    "developmentStatus".to_string(),
+                    development_status.to_string(),
+                ].join(",")
+            }),
+
+
+            self.known_issues.as_ref().map(|known_issues| {
+                [
+                    "knownIssues".to_string(),
+                    known_issues.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.roadmap_url.as_ref().map(|roadmap_url| {
+                [
+                    "roadmapUrl".to_string(),
+                    roadmap_url.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping lastSecurityAudit in query parameter serialization
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a AppDevelopmentInfo value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for AppDevelopmentInfo {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub app_id: Vec<String>,
+            pub supported_languages: Vec<Vec<String>>,
+            pub sdk_features: Vec<Vec<String>>,
+            pub test_coverage: Vec<std::collections::HashMap<String, f32>>,
+            pub security_scans: Vec<Vec<String>>,
+            pub performance_metrics: Vec<std::collections::HashMap<String, String>>,
+            pub development_status: Vec<String>,
+            pub known_issues: Vec<Vec<String>>,
+            pub roadmap_url: Vec<String>,
+            pub last_security_audit: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing AppDevelopmentInfo".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "appId" => intermediate_rep.app_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "supportedLanguages" => return std::result::Result::Err("Parsing a container in this style is not supported in AppDevelopmentInfo".to_string()),
+                    "sdkFeatures" => return std::result::Result::Err("Parsing a container in this style is not supported in AppDevelopmentInfo".to_string()),
+                    "testCoverage" => return std::result::Result::Err("Parsing a container in this style is not supported in AppDevelopmentInfo".to_string()),
+                    "securityScans" => return std::result::Result::Err("Parsing a container in this style is not supported in AppDevelopmentInfo".to_string()),
+                    "performanceMetrics" => return std::result::Result::Err("Parsing a container in this style is not supported in AppDevelopmentInfo".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "developmentStatus" => intermediate_rep.development_status.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "knownIssues" => return std::result::Result::Err("Parsing a container in this style is not supported in AppDevelopmentInfo".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "roadmapUrl" => intermediate_rep.roadmap_url.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "lastSecurityAudit" => intermediate_rep.last_security_audit.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing AppDevelopmentInfo".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(AppDevelopmentInfo {
+            id: intermediate_rep.id.into_iter().next(),
+            app_id: intermediate_rep.app_id.into_iter().next(),
+            supported_languages: intermediate_rep.supported_languages.into_iter().next(),
+            sdk_features: intermediate_rep.sdk_features.into_iter().next(),
+            test_coverage: intermediate_rep.test_coverage.into_iter().next(),
+            security_scans: intermediate_rep.security_scans.into_iter().next(),
+            performance_metrics: intermediate_rep.performance_metrics.into_iter().next(),
+            development_status: intermediate_rep.development_status.into_iter().next(),
+            known_issues: intermediate_rep.known_issues.into_iter().next(),
+            roadmap_url: intermediate_rep.roadmap_url.into_iter().next(),
+            last_security_audit: intermediate_rep.last_security_audit.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<AppDevelopmentInfo> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<AppDevelopmentInfo>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<AppDevelopmentInfo>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for AppDevelopmentInfo - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<AppDevelopmentInfo> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <AppDevelopmentInfo as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into AppDevelopmentInfo - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct AppInstallation {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "appId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub app_id: Option<String>,
+
+    #[serde(rename = "workspaceId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub workspace_id: Option<String>,
+
+    #[serde(rename = "versionInstalled")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub version_installed: Option<String>,
+
+    #[serde(rename = "configuration")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub configuration: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "installationStatus")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub installation_status: Option<String>,
+
+    #[serde(rename = "installedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub installed_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "lastUsed")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub last_used: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl AppInstallation {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> AppInstallation {
+        AppInstallation {
+            id: None,
+            app_id: None,
+            workspace_id: None,
+            version_installed: None,
+            configuration: None,
+            installation_status: None,
+            installed_at: None,
+            last_used: None,
+        }
+    }
+}
+
+/// Converts the AppInstallation value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for AppInstallation {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.app_id.as_ref().map(|app_id| {
+                [
+                    "appId".to_string(),
+                    app_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.workspace_id.as_ref().map(|workspace_id| {
+                [
+                    "workspaceId".to_string(),
+                    workspace_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.version_installed.as_ref().map(|version_installed| {
+                [
+                    "versionInstalled".to_string(),
+                    version_installed.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping configuration in query parameter serialization
+
+
+            self.installation_status.as_ref().map(|installation_status| {
+                [
+                    "installationStatus".to_string(),
+                    installation_status.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping installedAt in query parameter serialization
+
+            // Skipping lastUsed in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a AppInstallation value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for AppInstallation {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub app_id: Vec<String>,
+            pub workspace_id: Vec<String>,
+            pub version_installed: Vec<String>,
+            pub configuration: Vec<std::collections::HashMap<String, String>>,
+            pub installation_status: Vec<String>,
+            pub installed_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub last_used: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing AppInstallation".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "appId" => intermediate_rep.app_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "workspaceId" => intermediate_rep.workspace_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "versionInstalled" => intermediate_rep.version_installed.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "configuration" => return std::result::Result::Err("Parsing a container in this style is not supported in AppInstallation".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "installationStatus" => intermediate_rep.installation_status.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "installedAt" => intermediate_rep.installed_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "lastUsed" => intermediate_rep.last_used.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing AppInstallation".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(AppInstallation {
+            id: intermediate_rep.id.into_iter().next(),
+            app_id: intermediate_rep.app_id.into_iter().next(),
+            workspace_id: intermediate_rep.workspace_id.into_iter().next(),
+            version_installed: intermediate_rep.version_installed.into_iter().next(),
+            configuration: intermediate_rep.configuration.into_iter().next(),
+            installation_status: intermediate_rep.installation_status.into_iter().next(),
+            installed_at: intermediate_rep.installed_at.into_iter().next(),
+            last_used: intermediate_rep.last_used.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<AppInstallation> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<AppInstallation>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<AppInstallation>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for AppInstallation - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<AppInstallation> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <AppInstallation as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into AppInstallation - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct AppPermission {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "appId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub app_id: Option<String>,
+
+    #[serde(rename = "scope")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub scope: Option<String>,
+
+    #[serde(rename = "description")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub description: Option<String>,
+
+    #[serde(rename = "isRequired")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub is_required: Option<bool>,
+
+    #[serde(rename = "accessLevels")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub access_levels: Option<Vec<String>>,
+
+    #[serde(rename = "constraints")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub constraints: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "requiresApproval")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub requires_approval: Option<bool>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl AppPermission {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> AppPermission {
+        AppPermission {
+            id: None,
+            app_id: None,
+            scope: None,
+            description: None,
+            is_required: None,
+            access_levels: None,
+            constraints: None,
+            requires_approval: None,
+            created_at: None,
+            updated_at: None,
+        }
+    }
+}
+
+/// Converts the AppPermission value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for AppPermission {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.app_id.as_ref().map(|app_id| {
+                [
+                    "appId".to_string(),
+                    app_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.scope.as_ref().map(|scope| {
+                [
+                    "scope".to_string(),
+                    scope.to_string(),
+                ].join(",")
+            }),
+
+
+            self.description.as_ref().map(|description| {
+                [
+                    "description".to_string(),
+                    description.to_string(),
+                ].join(",")
+            }),
+
+
+            self.is_required.as_ref().map(|is_required| {
+                [
+                    "isRequired".to_string(),
+                    is_required.to_string(),
+                ].join(",")
+            }),
+
+
+            self.access_levels.as_ref().map(|access_levels| {
+                [
+                    "accessLevels".to_string(),
+                    access_levels.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping constraints in query parameter serialization
+
+
+            self.requires_approval.as_ref().map(|requires_approval| {
+                [
+                    "requiresApproval".to_string(),
+                    requires_approval.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a AppPermission value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for AppPermission {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub app_id: Vec<String>,
+            pub scope: Vec<String>,
+            pub description: Vec<String>,
+            pub is_required: Vec<bool>,
+            pub access_levels: Vec<Vec<String>>,
+            pub constraints: Vec<std::collections::HashMap<String, String>>,
+            pub requires_approval: Vec<bool>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing AppPermission".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "appId" => intermediate_rep.app_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "scope" => intermediate_rep.scope.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "isRequired" => intermediate_rep.is_required.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "accessLevels" => return std::result::Result::Err("Parsing a container in this style is not supported in AppPermission".to_string()),
+                    "constraints" => return std::result::Result::Err("Parsing a container in this style is not supported in AppPermission".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "requiresApproval" => intermediate_rep.requires_approval.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing AppPermission".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(AppPermission {
+            id: intermediate_rep.id.into_iter().next(),
+            app_id: intermediate_rep.app_id.into_iter().next(),
+            scope: intermediate_rep.scope.into_iter().next(),
+            description: intermediate_rep.description.into_iter().next(),
+            is_required: intermediate_rep.is_required.into_iter().next(),
+            access_levels: intermediate_rep.access_levels.into_iter().next(),
+            constraints: intermediate_rep.constraints.into_iter().next(),
+            requires_approval: intermediate_rep.requires_approval.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<AppPermission> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<AppPermission>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<AppPermission>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for AppPermission - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<AppPermission> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <AppPermission as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into AppPermission - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct AppReview {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "appId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub app_id: Option<String>,
+
+    #[serde(rename = "reviewerId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub reviewer_id: Option<String>,
+
+    #[serde(rename = "rating")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub rating: Option<f32>,
+
+    #[serde(rename = "reviewText")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub review_text: Option<String>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl AppReview {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> AppReview {
+        AppReview {
+            id: None,
+            app_id: None,
+            reviewer_id: None,
+            rating: None,
+            review_text: None,
+            created_at: None,
+            updated_at: None,
+        }
+    }
+}
+
+/// Converts the AppReview value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for AppReview {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.app_id.as_ref().map(|app_id| {
+                [
+                    "appId".to_string(),
+                    app_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.reviewer_id.as_ref().map(|reviewer_id| {
+                [
+                    "reviewerId".to_string(),
+                    reviewer_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.rating.as_ref().map(|rating| {
+                [
+                    "rating".to_string(),
+                    rating.to_string(),
+                ].join(",")
+            }),
+
+
+            self.review_text.as_ref().map(|review_text| {
+                [
+                    "reviewText".to_string(),
+                    review_text.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a AppReview value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for AppReview {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub app_id: Vec<String>,
+            pub reviewer_id: Vec<String>,
+            pub rating: Vec<f32>,
+            pub review_text: Vec<String>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing AppReview".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "appId" => intermediate_rep.app_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "reviewerId" => intermediate_rep.reviewer_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "rating" => intermediate_rep.rating.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "reviewText" => intermediate_rep.review_text.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing AppReview".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(AppReview {
+            id: intermediate_rep.id.into_iter().next(),
+            app_id: intermediate_rep.app_id.into_iter().next(),
+            reviewer_id: intermediate_rep.reviewer_id.into_iter().next(),
+            rating: intermediate_rep.rating.into_iter().next(),
+            review_text: intermediate_rep.review_text.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<AppReview> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<AppReview>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<AppReview>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for AppReview - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<AppReview> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <AppReview as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into AppReview - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct AppVersion {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "appId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub app_id: Option<String>,
+
+    #[serde(rename = "versionNumber")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub version_number: Option<String>,
+
+    #[serde(rename = "changelog")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub changelog: Option<String>,
+
+    #[serde(rename = "requirements")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub requirements: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "isPublic")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub is_public: Option<bool>,
+
+    #[serde(rename = "releaseDate")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub release_date: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl AppVersion {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> AppVersion {
+        AppVersion {
+            id: None,
+            app_id: None,
+            version_number: None,
+            changelog: None,
+            requirements: None,
+            is_public: None,
+            release_date: None,
+        }
+    }
+}
+
+/// Converts the AppVersion value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for AppVersion {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.app_id.as_ref().map(|app_id| {
+                [
+                    "appId".to_string(),
+                    app_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.version_number.as_ref().map(|version_number| {
+                [
+                    "versionNumber".to_string(),
+                    version_number.to_string(),
+                ].join(",")
+            }),
+
+
+            self.changelog.as_ref().map(|changelog| {
+                [
+                    "changelog".to_string(),
+                    changelog.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping requirements in query parameter serialization
+
+
+            self.is_public.as_ref().map(|is_public| {
+                [
+                    "isPublic".to_string(),
+                    is_public.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping releaseDate in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a AppVersion value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for AppVersion {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub app_id: Vec<String>,
+            pub version_number: Vec<String>,
+            pub changelog: Vec<String>,
+            pub requirements: Vec<std::collections::HashMap<String, String>>,
+            pub is_public: Vec<bool>,
+            pub release_date: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing AppVersion".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "appId" => intermediate_rep.app_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "versionNumber" => intermediate_rep.version_number.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "changelog" => intermediate_rep.changelog.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "requirements" => return std::result::Result::Err("Parsing a container in this style is not supported in AppVersion".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "isPublic" => intermediate_rep.is_public.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "releaseDate" => intermediate_rep.release_date.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing AppVersion".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(AppVersion {
+            id: intermediate_rep.id.into_iter().next(),
+            app_id: intermediate_rep.app_id.into_iter().next(),
+            version_number: intermediate_rep.version_number.into_iter().next(),
+            changelog: intermediate_rep.changelog.into_iter().next(),
+            requirements: intermediate_rep.requirements.into_iter().next(),
+            is_public: intermediate_rep.is_public.into_iter().next(),
+            release_date: intermediate_rep.release_date.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<AppVersion> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<AppVersion>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<AppVersion>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for AppVersion - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<AppVersion> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <AppVersion as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into AppVersion - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct AppWebhook {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "appId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub app_id: Option<String>,
+
+    #[serde(rename = "url")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub url: Option<String>,
+
+    #[serde(rename = "subscribedEvents")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub subscribed_events: Option<Vec<String>>,
+
+    #[serde(rename = "secretKey")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub secret_key: Option<String>,
+
+    #[serde(rename = "retryCount")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub retry_count: Option<i32>,
+
+    #[serde(rename = "timeoutSeconds")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub timeout_seconds: Option<i32>,
+
+    #[serde(rename = "isActive")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub is_active: Option<bool>,
+
+    #[serde(rename = "headers")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub headers: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "lastTriggered")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub last_triggered: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl AppWebhook {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> AppWebhook {
+        AppWebhook {
+            id: None,
+            app_id: None,
+            url: None,
+            subscribed_events: None,
+            secret_key: None,
+            retry_count: None,
+            timeout_seconds: None,
+            is_active: None,
+            headers: None,
+            last_triggered: None,
+            created_at: None,
+        }
+    }
+}
+
+/// Converts the AppWebhook value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for AppWebhook {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.app_id.as_ref().map(|app_id| {
+                [
+                    "appId".to_string(),
+                    app_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.url.as_ref().map(|url| {
+                [
+                    "url".to_string(),
+                    url.to_string(),
+                ].join(",")
+            }),
+
+
+            self.subscribed_events.as_ref().map(|subscribed_events| {
+                [
+                    "subscribedEvents".to_string(),
+                    subscribed_events.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.secret_key.as_ref().map(|secret_key| {
+                [
+                    "secretKey".to_string(),
+                    secret_key.to_string(),
+                ].join(",")
+            }),
+
+
+            self.retry_count.as_ref().map(|retry_count| {
+                [
+                    "retryCount".to_string(),
+                    retry_count.to_string(),
+                ].join(",")
+            }),
+
+
+            self.timeout_seconds.as_ref().map(|timeout_seconds| {
+                [
+                    "timeoutSeconds".to_string(),
+                    timeout_seconds.to_string(),
+                ].join(",")
+            }),
+
+
+            self.is_active.as_ref().map(|is_active| {
+                [
+                    "isActive".to_string(),
+                    is_active.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping headers in query parameter serialization
+
+            // Skipping lastTriggered in query parameter serialization
+
+            // Skipping createdAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a AppWebhook value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for AppWebhook {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub app_id: Vec<String>,
+            pub url: Vec<String>,
+            pub subscribed_events: Vec<Vec<String>>,
+            pub secret_key: Vec<String>,
+            pub retry_count: Vec<i32>,
+            pub timeout_seconds: Vec<i32>,
+            pub is_active: Vec<bool>,
+            pub headers: Vec<std::collections::HashMap<String, String>>,
+            pub last_triggered: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing AppWebhook".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "appId" => intermediate_rep.app_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "url" => intermediate_rep.url.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "subscribedEvents" => return std::result::Result::Err("Parsing a container in this style is not supported in AppWebhook".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "secretKey" => intermediate_rep.secret_key.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "retryCount" => intermediate_rep.retry_count.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "timeoutSeconds" => intermediate_rep.timeout_seconds.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "isActive" => intermediate_rep.is_active.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "headers" => return std::result::Result::Err("Parsing a container in this style is not supported in AppWebhook".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "lastTriggered" => intermediate_rep.last_triggered.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing AppWebhook".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(AppWebhook {
+            id: intermediate_rep.id.into_iter().next(),
+            app_id: intermediate_rep.app_id.into_iter().next(),
+            url: intermediate_rep.url.into_iter().next(),
+            subscribed_events: intermediate_rep.subscribed_events.into_iter().next(),
+            secret_key: intermediate_rep.secret_key.into_iter().next(),
+            retry_count: intermediate_rep.retry_count.into_iter().next(),
+            timeout_seconds: intermediate_rep.timeout_seconds.into_iter().next(),
+            is_active: intermediate_rep.is_active.into_iter().next(),
+            headers: intermediate_rep.headers.into_iter().next(),
+            last_triggered: intermediate_rep.last_triggered.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<AppWebhook> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<AppWebhook>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<AppWebhook>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for AppWebhook - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<AppWebhook> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <AppWebhook as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into AppWebhook - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct AuthContext {
     #[serde(rename = "requiredScopes")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -2637,6 +5131,197 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 }
 
 
+/// Represents authentication and authorization failures
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct AuthenticationErrorMessageResponse1 {
+    #[serde(rename = "code")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub code: Option<models::AuthErrorCode>,
+
+    #[serde(rename = "message")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub message: Option<String>,
+
+    #[serde(rename = "tokenInfo")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub token_info: Option<models::TokenInfo>,
+
+    #[serde(rename = "authContext")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub auth_context: Option<models::AuthContext>,
+
+    #[serde(rename = "sessionInfo")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub session_info: Option<models::SessionInfo>,
+
+    #[serde(rename = "mfaInfo")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub mfa_info: Option<models::MfaInfo>,
+
+    #[serde(rename = "errorResponse")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub error_response: Option<models::ErrorResponse>,
+
+}
+
+
+impl AuthenticationErrorMessageResponse1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> AuthenticationErrorMessageResponse1 {
+        AuthenticationErrorMessageResponse1 {
+            code: None,
+            message: None,
+            token_info: None,
+            auth_context: None,
+            session_info: None,
+            mfa_info: None,
+            error_response: None,
+        }
+    }
+}
+
+/// Converts the AuthenticationErrorMessageResponse1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for AuthenticationErrorMessageResponse1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping code in query parameter serialization
+
+
+            self.message.as_ref().map(|message| {
+                [
+                    "message".to_string(),
+                    message.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping tokenInfo in query parameter serialization
+
+            // Skipping authContext in query parameter serialization
+
+            // Skipping sessionInfo in query parameter serialization
+
+            // Skipping mfaInfo in query parameter serialization
+
+            // Skipping errorResponse in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a AuthenticationErrorMessageResponse1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for AuthenticationErrorMessageResponse1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub code: Vec<models::AuthErrorCode>,
+            pub message: Vec<String>,
+            pub token_info: Vec<models::TokenInfo>,
+            pub auth_context: Vec<models::AuthContext>,
+            pub session_info: Vec<models::SessionInfo>,
+            pub mfa_info: Vec<models::MfaInfo>,
+            pub error_response: Vec<models::ErrorResponse>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing AuthenticationErrorMessageResponse1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "code" => intermediate_rep.code.push(<models::AuthErrorCode as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "message" => intermediate_rep.message.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "tokenInfo" => intermediate_rep.token_info.push(<models::TokenInfo as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "authContext" => intermediate_rep.auth_context.push(<models::AuthContext as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "sessionInfo" => intermediate_rep.session_info.push(<models::SessionInfo as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "mfaInfo" => intermediate_rep.mfa_info.push(<models::MfaInfo as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "errorResponse" => intermediate_rep.error_response.push(<models::ErrorResponse as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing AuthenticationErrorMessageResponse1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(AuthenticationErrorMessageResponse1 {
+            code: intermediate_rep.code.into_iter().next(),
+            message: intermediate_rep.message.into_iter().next(),
+            token_info: intermediate_rep.token_info.into_iter().next(),
+            auth_context: intermediate_rep.auth_context.into_iter().next(),
+            session_info: intermediate_rep.session_info.into_iter().next(),
+            mfa_info: intermediate_rep.mfa_info.into_iter().next(),
+            error_response: intermediate_rep.error_response.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<AuthenticationErrorMessageResponse1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<AuthenticationErrorMessageResponse1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<AuthenticationErrorMessageResponse1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for AuthenticationErrorMessageResponse1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<AuthenticationErrorMessageResponse1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <AuthenticationErrorMessageResponse1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into AuthenticationErrorMessageResponse1 - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct AvailabilityInfo {
@@ -3039,6 +5724,542 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct BranchMerge {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "branchId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub branch_id: Option<String>,
+
+    #[serde(rename = "sourceBranch")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub source_branch: Option<String>,
+
+    #[serde(rename = "targetBranch")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub target_branch: Option<String>,
+
+    #[serde(rename = "mergeStatus")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub merge_status: Option<String>,
+
+    #[serde(rename = "mergeStrategy")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub merge_strategy: Option<String>,
+
+    #[serde(rename = "conflicts")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub conflicts: Option<Vec<String>>,
+
+    #[serde(rename = "mergerId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub merger_id: Option<String>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "completedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub completed_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl BranchMerge {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> BranchMerge {
+        BranchMerge {
+            id: None,
+            branch_id: None,
+            source_branch: None,
+            target_branch: None,
+            merge_status: None,
+            merge_strategy: None,
+            conflicts: None,
+            merger_id: None,
+            created_at: None,
+            completed_at: None,
+        }
+    }
+}
+
+/// Converts the BranchMerge value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for BranchMerge {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.branch_id.as_ref().map(|branch_id| {
+                [
+                    "branchId".to_string(),
+                    branch_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.source_branch.as_ref().map(|source_branch| {
+                [
+                    "sourceBranch".to_string(),
+                    source_branch.to_string(),
+                ].join(",")
+            }),
+
+
+            self.target_branch.as_ref().map(|target_branch| {
+                [
+                    "targetBranch".to_string(),
+                    target_branch.to_string(),
+                ].join(",")
+            }),
+
+
+            self.merge_status.as_ref().map(|merge_status| {
+                [
+                    "mergeStatus".to_string(),
+                    merge_status.to_string(),
+                ].join(",")
+            }),
+
+
+            self.merge_strategy.as_ref().map(|merge_strategy| {
+                [
+                    "mergeStrategy".to_string(),
+                    merge_strategy.to_string(),
+                ].join(",")
+            }),
+
+
+            self.conflicts.as_ref().map(|conflicts| {
+                [
+                    "conflicts".to_string(),
+                    conflicts.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.merger_id.as_ref().map(|merger_id| {
+                [
+                    "mergerId".to_string(),
+                    merger_id.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping completedAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a BranchMerge value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for BranchMerge {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub branch_id: Vec<String>,
+            pub source_branch: Vec<String>,
+            pub target_branch: Vec<String>,
+            pub merge_status: Vec<String>,
+            pub merge_strategy: Vec<String>,
+            pub conflicts: Vec<Vec<String>>,
+            pub merger_id: Vec<String>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub completed_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing BranchMerge".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "branchId" => intermediate_rep.branch_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "sourceBranch" => intermediate_rep.source_branch.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "targetBranch" => intermediate_rep.target_branch.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "mergeStatus" => intermediate_rep.merge_status.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "mergeStrategy" => intermediate_rep.merge_strategy.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "conflicts" => return std::result::Result::Err("Parsing a container in this style is not supported in BranchMerge".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "mergerId" => intermediate_rep.merger_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "completedAt" => intermediate_rep.completed_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing BranchMerge".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(BranchMerge {
+            id: intermediate_rep.id.into_iter().next(),
+            branch_id: intermediate_rep.branch_id.into_iter().next(),
+            source_branch: intermediate_rep.source_branch.into_iter().next(),
+            target_branch: intermediate_rep.target_branch.into_iter().next(),
+            merge_status: intermediate_rep.merge_status.into_iter().next(),
+            merge_strategy: intermediate_rep.merge_strategy.into_iter().next(),
+            conflicts: intermediate_rep.conflicts.into_iter().next(),
+            merger_id: intermediate_rep.merger_id.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            completed_at: intermediate_rep.completed_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<BranchMerge> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<BranchMerge>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<BranchMerge>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for BranchMerge - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<BranchMerge> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <BranchMerge as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into BranchMerge - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct BranchPolicy {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "branchId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub branch_id: Option<String>,
+
+    #[serde(rename = "requiredApprovers")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub required_approvers: Option<Vec<String>>,
+
+    #[serde(rename = "minimumApprovals")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub minimum_approvals: Option<i32>,
+
+    #[serde(rename = "enforceLinearHistory")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub enforce_linear_history: Option<bool>,
+
+    #[serde(rename = "allowForcePush")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub allow_force_push: Option<bool>,
+
+    #[serde(rename = "protectedPaths")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub protected_paths: Option<Vec<String>>,
+
+    #[serde(rename = "mergeRules")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub merge_rules: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "automatedChecks")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub automated_checks: Option<Vec<String>>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl BranchPolicy {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> BranchPolicy {
+        BranchPolicy {
+            id: None,
+            branch_id: None,
+            required_approvers: None,
+            minimum_approvals: None,
+            enforce_linear_history: None,
+            allow_force_push: None,
+            protected_paths: None,
+            merge_rules: None,
+            automated_checks: None,
+            created_at: None,
+            updated_at: None,
+        }
+    }
+}
+
+/// Converts the BranchPolicy value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for BranchPolicy {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.branch_id.as_ref().map(|branch_id| {
+                [
+                    "branchId".to_string(),
+                    branch_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.required_approvers.as_ref().map(|required_approvers| {
+                [
+                    "requiredApprovers".to_string(),
+                    required_approvers.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.minimum_approvals.as_ref().map(|minimum_approvals| {
+                [
+                    "minimumApprovals".to_string(),
+                    minimum_approvals.to_string(),
+                ].join(",")
+            }),
+
+
+            self.enforce_linear_history.as_ref().map(|enforce_linear_history| {
+                [
+                    "enforceLinearHistory".to_string(),
+                    enforce_linear_history.to_string(),
+                ].join(",")
+            }),
+
+
+            self.allow_force_push.as_ref().map(|allow_force_push| {
+                [
+                    "allowForcePush".to_string(),
+                    allow_force_push.to_string(),
+                ].join(",")
+            }),
+
+
+            self.protected_paths.as_ref().map(|protected_paths| {
+                [
+                    "protectedPaths".to_string(),
+                    protected_paths.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping mergeRules in query parameter serialization
+
+
+            self.automated_checks.as_ref().map(|automated_checks| {
+                [
+                    "automatedChecks".to_string(),
+                    automated_checks.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a BranchPolicy value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for BranchPolicy {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub branch_id: Vec<String>,
+            pub required_approvers: Vec<Vec<String>>,
+            pub minimum_approvals: Vec<i32>,
+            pub enforce_linear_history: Vec<bool>,
+            pub allow_force_push: Vec<bool>,
+            pub protected_paths: Vec<Vec<String>>,
+            pub merge_rules: Vec<std::collections::HashMap<String, String>>,
+            pub automated_checks: Vec<Vec<String>>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing BranchPolicy".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "branchId" => intermediate_rep.branch_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "requiredApprovers" => return std::result::Result::Err("Parsing a container in this style is not supported in BranchPolicy".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "minimumApprovals" => intermediate_rep.minimum_approvals.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "enforceLinearHistory" => intermediate_rep.enforce_linear_history.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "allowForcePush" => intermediate_rep.allow_force_push.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "protectedPaths" => return std::result::Result::Err("Parsing a container in this style is not supported in BranchPolicy".to_string()),
+                    "mergeRules" => return std::result::Result::Err("Parsing a container in this style is not supported in BranchPolicy".to_string()),
+                    "automatedChecks" => return std::result::Result::Err("Parsing a container in this style is not supported in BranchPolicy".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing BranchPolicy".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(BranchPolicy {
+            id: intermediate_rep.id.into_iter().next(),
+            branch_id: intermediate_rep.branch_id.into_iter().next(),
+            required_approvers: intermediate_rep.required_approvers.into_iter().next(),
+            minimum_approvals: intermediate_rep.minimum_approvals.into_iter().next(),
+            enforce_linear_history: intermediate_rep.enforce_linear_history.into_iter().next(),
+            allow_force_push: intermediate_rep.allow_force_push.into_iter().next(),
+            protected_paths: intermediate_rep.protected_paths.into_iter().next(),
+            merge_rules: intermediate_rep.merge_rules.into_iter().next(),
+            automated_checks: intermediate_rep.automated_checks.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<BranchPolicy> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<BranchPolicy>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<BranchPolicy>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for BranchPolicy - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<BranchPolicy> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <BranchPolicy as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into BranchPolicy - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct BusinessHours {
     #[serde(rename = "id")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -3245,6 +6466,1256 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into BusinessHours - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ChangeSet {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "versionId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub version_id: Option<String>,
+
+    #[serde(rename = "changeType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub change_type: Option<String>,
+
+    #[serde(rename = "contentBefore")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub content_before: Option<String>,
+
+    #[serde(rename = "contentAfter")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub content_after: Option<String>,
+
+    #[serde(rename = "metadata")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub metadata: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl ChangeSet {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ChangeSet {
+        ChangeSet {
+            id: None,
+            version_id: None,
+            change_type: None,
+            content_before: None,
+            content_after: None,
+            metadata: None,
+            created_at: None,
+        }
+    }
+}
+
+/// Converts the ChangeSet value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ChangeSet {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.version_id.as_ref().map(|version_id| {
+                [
+                    "versionId".to_string(),
+                    version_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.change_type.as_ref().map(|change_type| {
+                [
+                    "changeType".to_string(),
+                    change_type.to_string(),
+                ].join(",")
+            }),
+
+
+            self.content_before.as_ref().map(|content_before| {
+                [
+                    "contentBefore".to_string(),
+                    content_before.to_string(),
+                ].join(",")
+            }),
+
+
+            self.content_after.as_ref().map(|content_after| {
+                [
+                    "contentAfter".to_string(),
+                    content_after.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping metadata in query parameter serialization
+
+            // Skipping createdAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ChangeSet value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ChangeSet {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub version_id: Vec<String>,
+            pub change_type: Vec<String>,
+            pub content_before: Vec<String>,
+            pub content_after: Vec<String>,
+            pub metadata: Vec<std::collections::HashMap<String, String>>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ChangeSet".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "versionId" => intermediate_rep.version_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "changeType" => intermediate_rep.change_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "contentBefore" => intermediate_rep.content_before.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "contentAfter" => intermediate_rep.content_after.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "metadata" => return std::result::Result::Err("Parsing a container in this style is not supported in ChangeSet".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ChangeSet".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ChangeSet {
+            id: intermediate_rep.id.into_iter().next(),
+            version_id: intermediate_rep.version_id.into_iter().next(),
+            change_type: intermediate_rep.change_type.into_iter().next(),
+            content_before: intermediate_rep.content_before.into_iter().next(),
+            content_after: intermediate_rep.content_after.into_iter().next(),
+            metadata: intermediate_rep.metadata.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ChangeSet> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ChangeSet>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ChangeSet>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ChangeSet - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ChangeSet> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ChangeSet as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ChangeSet - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct CommentThread {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "authorId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub author_id: Option<String>,
+
+    #[serde(rename = "content")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub content: Option<String>,
+
+    #[serde(rename = "startPosition")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub start_position: Option<i32>,
+
+    #[serde(rename = "endPosition")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub end_position: Option<i32>,
+
+    #[serde(rename = "resolved")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub resolved: Option<bool>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl CommentThread {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> CommentThread {
+        CommentThread {
+            id: None,
+            author_id: None,
+            content: None,
+            start_position: None,
+            end_position: None,
+            resolved: None,
+            created_at: None,
+            updated_at: None,
+        }
+    }
+}
+
+/// Converts the CommentThread value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for CommentThread {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.author_id.as_ref().map(|author_id| {
+                [
+                    "authorId".to_string(),
+                    author_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.content.as_ref().map(|content| {
+                [
+                    "content".to_string(),
+                    content.to_string(),
+                ].join(",")
+            }),
+
+
+            self.start_position.as_ref().map(|start_position| {
+                [
+                    "startPosition".to_string(),
+                    start_position.to_string(),
+                ].join(",")
+            }),
+
+
+            self.end_position.as_ref().map(|end_position| {
+                [
+                    "endPosition".to_string(),
+                    end_position.to_string(),
+                ].join(",")
+            }),
+
+
+            self.resolved.as_ref().map(|resolved| {
+                [
+                    "resolved".to_string(),
+                    resolved.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a CommentThread value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for CommentThread {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub author_id: Vec<String>,
+            pub content: Vec<String>,
+            pub start_position: Vec<i32>,
+            pub end_position: Vec<i32>,
+            pub resolved: Vec<bool>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing CommentThread".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "authorId" => intermediate_rep.author_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "content" => intermediate_rep.content.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "startPosition" => intermediate_rep.start_position.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "endPosition" => intermediate_rep.end_position.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "resolved" => intermediate_rep.resolved.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CommentThread".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(CommentThread {
+            id: intermediate_rep.id.into_iter().next(),
+            author_id: intermediate_rep.author_id.into_iter().next(),
+            content: intermediate_rep.content.into_iter().next(),
+            start_position: intermediate_rep.start_position.into_iter().next(),
+            end_position: intermediate_rep.end_position.into_iter().next(),
+            resolved: intermediate_rep.resolved.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<CommentThread> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<CommentThread>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<CommentThread>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for CommentThread - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CommentThread> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <CommentThread as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into CommentThread - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ComplianceCheck {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "intelligenceId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub intelligence_id: Option<String>,
+
+    #[serde(rename = "complianceStandard")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub compliance_standard: Option<String>,
+
+    #[serde(rename = "checkResult")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub check_result: Option<String>,
+
+    #[serde(rename = "violations")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub violations: Option<Vec<String>>,
+
+    #[serde(rename = "remediationSteps")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub remediation_steps: Option<String>,
+
+    #[serde(rename = "checkDate")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub check_date: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl ComplianceCheck {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ComplianceCheck {
+        ComplianceCheck {
+            id: None,
+            intelligence_id: None,
+            compliance_standard: None,
+            check_result: None,
+            violations: None,
+            remediation_steps: None,
+            check_date: None,
+        }
+    }
+}
+
+/// Converts the ComplianceCheck value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ComplianceCheck {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.intelligence_id.as_ref().map(|intelligence_id| {
+                [
+                    "intelligenceId".to_string(),
+                    intelligence_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.compliance_standard.as_ref().map(|compliance_standard| {
+                [
+                    "complianceStandard".to_string(),
+                    compliance_standard.to_string(),
+                ].join(",")
+            }),
+
+
+            self.check_result.as_ref().map(|check_result| {
+                [
+                    "checkResult".to_string(),
+                    check_result.to_string(),
+                ].join(",")
+            }),
+
+
+            self.violations.as_ref().map(|violations| {
+                [
+                    "violations".to_string(),
+                    violations.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.remediation_steps.as_ref().map(|remediation_steps| {
+                [
+                    "remediationSteps".to_string(),
+                    remediation_steps.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping checkDate in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ComplianceCheck value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ComplianceCheck {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub intelligence_id: Vec<String>,
+            pub compliance_standard: Vec<String>,
+            pub check_result: Vec<String>,
+            pub violations: Vec<Vec<String>>,
+            pub remediation_steps: Vec<String>,
+            pub check_date: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ComplianceCheck".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "intelligenceId" => intermediate_rep.intelligence_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "complianceStandard" => intermediate_rep.compliance_standard.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "checkResult" => intermediate_rep.check_result.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "violations" => return std::result::Result::Err("Parsing a container in this style is not supported in ComplianceCheck".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "remediationSteps" => intermediate_rep.remediation_steps.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "checkDate" => intermediate_rep.check_date.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ComplianceCheck".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ComplianceCheck {
+            id: intermediate_rep.id.into_iter().next(),
+            intelligence_id: intermediate_rep.intelligence_id.into_iter().next(),
+            compliance_standard: intermediate_rep.compliance_standard.into_iter().next(),
+            check_result: intermediate_rep.check_result.into_iter().next(),
+            violations: intermediate_rep.violations.into_iter().next(),
+            remediation_steps: intermediate_rep.remediation_steps.into_iter().next(),
+            check_date: intermediate_rep.check_date.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ComplianceCheck> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ComplianceCheck>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ComplianceCheck>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ComplianceCheck - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ComplianceCheck> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ComplianceCheck as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ComplianceCheck - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+/// Enumeration of values.
+/// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
+/// which helps with FFI.
+#[allow(non_camel_case_types)]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "conversion", derive(frunk_enum_derive::LabelledGenericEnum))]
+pub enum ComplianceLevel {
+    #[serde(rename = "COMPLIANCE_LEVEL_UNSPECIFIED")]
+    Unspecified,
+    #[serde(rename = "COMPLIANCE_LEVEL_NONE")]
+    None,
+    #[serde(rename = "COMPLIANCE_LEVEL_BASIC")]
+    Basic,
+    #[serde(rename = "COMPLIANCE_LEVEL_ADVANCED")]
+    Advanced,
+    #[serde(rename = "COMPLIANCE_LEVEL_ENTERPRISE")]
+    Enterprise,
+}
+
+impl std::fmt::Display for ComplianceLevel {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            ComplianceLevel::Unspecified => write!(f, "COMPLIANCE_LEVEL_UNSPECIFIED"),
+            ComplianceLevel::None => write!(f, "COMPLIANCE_LEVEL_NONE"),
+            ComplianceLevel::Basic => write!(f, "COMPLIANCE_LEVEL_BASIC"),
+            ComplianceLevel::Advanced => write!(f, "COMPLIANCE_LEVEL_ADVANCED"),
+            ComplianceLevel::Enterprise => write!(f, "COMPLIANCE_LEVEL_ENTERPRISE"),
+        }
+    }
+}
+
+impl std::str::FromStr for ComplianceLevel {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s {
+            "COMPLIANCE_LEVEL_UNSPECIFIED" => std::result::Result::Ok(ComplianceLevel::Unspecified),
+            "COMPLIANCE_LEVEL_NONE" => std::result::Result::Ok(ComplianceLevel::None),
+            "COMPLIANCE_LEVEL_BASIC" => std::result::Result::Ok(ComplianceLevel::Basic),
+            "COMPLIANCE_LEVEL_ADVANCED" => std::result::Result::Ok(ComplianceLevel::Advanced),
+            "COMPLIANCE_LEVEL_ENTERPRISE" => std::result::Result::Ok(ComplianceLevel::Enterprise),
+            _ => std::result::Result::Err(format!("Value not valid: {}", s)),
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ComplianceMetrics {
+    #[serde(rename = "gdprComplianceScore")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub gdpr_compliance_score: Option<f32>,
+
+    #[serde(rename = "hipaaComplianceScore")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub hipaa_compliance_score: Option<f32>,
+
+    #[serde(rename = "pendingApprovals")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub pending_approvals: Option<i32>,
+
+    #[serde(rename = "complianceViolations")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub compliance_violations: Option<i32>,
+
+}
+
+
+impl ComplianceMetrics {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ComplianceMetrics {
+        ComplianceMetrics {
+            gdpr_compliance_score: None,
+            hipaa_compliance_score: None,
+            pending_approvals: None,
+            compliance_violations: None,
+        }
+    }
+}
+
+/// Converts the ComplianceMetrics value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ComplianceMetrics {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.gdpr_compliance_score.as_ref().map(|gdpr_compliance_score| {
+                [
+                    "gdprComplianceScore".to_string(),
+                    gdpr_compliance_score.to_string(),
+                ].join(",")
+            }),
+
+
+            self.hipaa_compliance_score.as_ref().map(|hipaa_compliance_score| {
+                [
+                    "hipaaComplianceScore".to_string(),
+                    hipaa_compliance_score.to_string(),
+                ].join(",")
+            }),
+
+
+            self.pending_approvals.as_ref().map(|pending_approvals| {
+                [
+                    "pendingApprovals".to_string(),
+                    pending_approvals.to_string(),
+                ].join(",")
+            }),
+
+
+            self.compliance_violations.as_ref().map(|compliance_violations| {
+                [
+                    "complianceViolations".to_string(),
+                    compliance_violations.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ComplianceMetrics value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ComplianceMetrics {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub gdpr_compliance_score: Vec<f32>,
+            pub hipaa_compliance_score: Vec<f32>,
+            pub pending_approvals: Vec<i32>,
+            pub compliance_violations: Vec<i32>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ComplianceMetrics".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "gdprComplianceScore" => intermediate_rep.gdpr_compliance_score.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "hipaaComplianceScore" => intermediate_rep.hipaa_compliance_score.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "pendingApprovals" => intermediate_rep.pending_approvals.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "complianceViolations" => intermediate_rep.compliance_violations.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ComplianceMetrics".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ComplianceMetrics {
+            gdpr_compliance_score: intermediate_rep.gdpr_compliance_score.into_iter().next(),
+            hipaa_compliance_score: intermediate_rep.hipaa_compliance_score.into_iter().next(),
+            pending_approvals: intermediate_rep.pending_approvals.into_iter().next(),
+            compliance_violations: intermediate_rep.compliance_violations.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ComplianceMetrics> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ComplianceMetrics>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ComplianceMetrics>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ComplianceMetrics - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ComplianceMetrics> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ComplianceMetrics as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ComplianceMetrics - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ComplianceScore {
+    #[serde(rename = "category")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub category: Option<String>,
+
+    #[serde(rename = "score")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub score: Option<f32>,
+
+    #[serde(rename = "status")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub status: Option<String>,
+
+    #[serde(rename = "improvements")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub improvements: Option<Vec<String>>,
+
+}
+
+
+impl ComplianceScore {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ComplianceScore {
+        ComplianceScore {
+            category: None,
+            score: None,
+            status: None,
+            improvements: None,
+        }
+    }
+}
+
+/// Converts the ComplianceScore value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ComplianceScore {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.category.as_ref().map(|category| {
+                [
+                    "category".to_string(),
+                    category.to_string(),
+                ].join(",")
+            }),
+
+
+            self.score.as_ref().map(|score| {
+                [
+                    "score".to_string(),
+                    score.to_string(),
+                ].join(",")
+            }),
+
+
+            self.status.as_ref().map(|status| {
+                [
+                    "status".to_string(),
+                    status.to_string(),
+                ].join(",")
+            }),
+
+
+            self.improvements.as_ref().map(|improvements| {
+                [
+                    "improvements".to_string(),
+                    improvements.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ComplianceScore value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ComplianceScore {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub category: Vec<String>,
+            pub score: Vec<f32>,
+            pub status: Vec<String>,
+            pub improvements: Vec<Vec<String>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ComplianceScore".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "category" => intermediate_rep.category.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "score" => intermediate_rep.score.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "status" => intermediate_rep.status.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "improvements" => return std::result::Result::Err("Parsing a container in this style is not supported in ComplianceScore".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ComplianceScore".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ComplianceScore {
+            category: intermediate_rep.category.into_iter().next(),
+            score: intermediate_rep.score.into_iter().next(),
+            status: intermediate_rep.status.into_iter().next(),
+            improvements: intermediate_rep.improvements.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ComplianceScore> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ComplianceScore>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ComplianceScore>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ComplianceScore - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ComplianceScore> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ComplianceScore as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ComplianceScore - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ComplianceViolation {
+    #[serde(rename = "ruleId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub rule_id: Option<String>,
+
+    #[serde(rename = "severity")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub severity: Option<String>,
+
+    #[serde(rename = "description")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub description: Option<String>,
+
+    #[serde(rename = "affectedResources")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub affected_resources: Option<Vec<String>>,
+
+    #[serde(rename = "remediationSteps")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub remediation_steps: Option<String>,
+
+}
+
+
+impl ComplianceViolation {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ComplianceViolation {
+        ComplianceViolation {
+            rule_id: None,
+            severity: None,
+            description: None,
+            affected_resources: None,
+            remediation_steps: None,
+        }
+    }
+}
+
+/// Converts the ComplianceViolation value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ComplianceViolation {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.rule_id.as_ref().map(|rule_id| {
+                [
+                    "ruleId".to_string(),
+                    rule_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.severity.as_ref().map(|severity| {
+                [
+                    "severity".to_string(),
+                    severity.to_string(),
+                ].join(",")
+            }),
+
+
+            self.description.as_ref().map(|description| {
+                [
+                    "description".to_string(),
+                    description.to_string(),
+                ].join(",")
+            }),
+
+
+            self.affected_resources.as_ref().map(|affected_resources| {
+                [
+                    "affectedResources".to_string(),
+                    affected_resources.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.remediation_steps.as_ref().map(|remediation_steps| {
+                [
+                    "remediationSteps".to_string(),
+                    remediation_steps.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ComplianceViolation value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ComplianceViolation {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub rule_id: Vec<String>,
+            pub severity: Vec<String>,
+            pub description: Vec<String>,
+            pub affected_resources: Vec<Vec<String>>,
+            pub remediation_steps: Vec<String>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ComplianceViolation".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "ruleId" => intermediate_rep.rule_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "severity" => intermediate_rep.severity.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "affectedResources" => return std::result::Result::Err("Parsing a container in this style is not supported in ComplianceViolation".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "remediationSteps" => intermediate_rep.remediation_steps.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ComplianceViolation".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ComplianceViolation {
+            rule_id: intermediate_rep.rule_id.into_iter().next(),
+            severity: intermediate_rep.severity.into_iter().next(),
+            description: intermediate_rep.description.into_iter().next(),
+            affected_resources: intermediate_rep.affected_resources.into_iter().next(),
+            remediation_steps: intermediate_rep.remediation_steps.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ComplianceViolation> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ComplianceViolation>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ComplianceViolation>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ComplianceViolation - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ComplianceViolation> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ComplianceViolation as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ComplianceViolation - {}",
                                 value, err))
                     }
              },
@@ -3602,6 +8073,496 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ContextualSummary {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "versionId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub version_id: Option<String>,
+
+    #[serde(rename = "summaryType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub summary_type: Option<String>,
+
+    #[serde(rename = "content")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub content: Option<String>,
+
+    #[serde(rename = "targetAudience")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub target_audience: Option<String>,
+
+    #[serde(rename = "keyPoints")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub key_points: Option<Vec<String>>,
+
+    #[serde(rename = "metadata")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub metadata: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl ContextualSummary {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ContextualSummary {
+        ContextualSummary {
+            id: None,
+            version_id: None,
+            summary_type: None,
+            content: None,
+            target_audience: None,
+            key_points: None,
+            metadata: None,
+            created_at: None,
+        }
+    }
+}
+
+/// Converts the ContextualSummary value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ContextualSummary {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.version_id.as_ref().map(|version_id| {
+                [
+                    "versionId".to_string(),
+                    version_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.summary_type.as_ref().map(|summary_type| {
+                [
+                    "summaryType".to_string(),
+                    summary_type.to_string(),
+                ].join(",")
+            }),
+
+
+            self.content.as_ref().map(|content| {
+                [
+                    "content".to_string(),
+                    content.to_string(),
+                ].join(",")
+            }),
+
+
+            self.target_audience.as_ref().map(|target_audience| {
+                [
+                    "targetAudience".to_string(),
+                    target_audience.to_string(),
+                ].join(",")
+            }),
+
+
+            self.key_points.as_ref().map(|key_points| {
+                [
+                    "keyPoints".to_string(),
+                    key_points.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping metadata in query parameter serialization
+
+            // Skipping createdAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ContextualSummary value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ContextualSummary {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub version_id: Vec<String>,
+            pub summary_type: Vec<String>,
+            pub content: Vec<String>,
+            pub target_audience: Vec<String>,
+            pub key_points: Vec<Vec<String>>,
+            pub metadata: Vec<std::collections::HashMap<String, String>>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ContextualSummary".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "versionId" => intermediate_rep.version_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "summaryType" => intermediate_rep.summary_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "content" => intermediate_rep.content.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "targetAudience" => intermediate_rep.target_audience.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "keyPoints" => return std::result::Result::Err("Parsing a container in this style is not supported in ContextualSummary".to_string()),
+                    "metadata" => return std::result::Result::Err("Parsing a container in this style is not supported in ContextualSummary".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ContextualSummary".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ContextualSummary {
+            id: intermediate_rep.id.into_iter().next(),
+            version_id: intermediate_rep.version_id.into_iter().next(),
+            summary_type: intermediate_rep.summary_type.into_iter().next(),
+            content: intermediate_rep.content.into_iter().next(),
+            target_audience: intermediate_rep.target_audience.into_iter().next(),
+            key_points: intermediate_rep.key_points.into_iter().next(),
+            metadata: intermediate_rep.metadata.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ContextualSummary> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ContextualSummary>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ContextualSummary>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ContextualSummary - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ContextualSummary> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ContextualSummary as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ContextualSummary - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ContractIntelligence {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "contractType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub contract_type: Option<String>,
+
+    #[serde(rename = "riskScores")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub risk_scores: Option<std::collections::HashMap<String, f32>>,
+
+    #[serde(rename = "detectedClauses")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub detected_clauses: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "keyObligations")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub key_obligations: Option<Vec<String>>,
+
+    #[serde(rename = "complianceScores")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub compliance_scores: Option<std::collections::HashMap<String, f32>>,
+
+    #[serde(rename = "jurisdiction")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub jurisdiction: Option<String>,
+
+    #[serde(rename = "governingLaws")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub governing_laws: Option<Vec<String>>,
+
+    #[serde(rename = "semanticAnalysis")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub semantic_analysis: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "analysisDate")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub analysis_date: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "riskAssessments")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub risk_assessments: Option<Vec<models::RiskAssessment>>,
+
+    #[serde(rename = "complianceChecks")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub compliance_checks: Option<Vec<models::ComplianceCheck>>,
+
+}
+
+
+impl ContractIntelligence {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ContractIntelligence {
+        ContractIntelligence {
+            id: None,
+            contract_type: None,
+            risk_scores: None,
+            detected_clauses: None,
+            key_obligations: None,
+            compliance_scores: None,
+            jurisdiction: None,
+            governing_laws: None,
+            semantic_analysis: None,
+            analysis_date: None,
+            risk_assessments: None,
+            compliance_checks: None,
+        }
+    }
+}
+
+/// Converts the ContractIntelligence value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ContractIntelligence {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.contract_type.as_ref().map(|contract_type| {
+                [
+                    "contractType".to_string(),
+                    contract_type.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping riskScores in query parameter serialization
+
+            // Skipping detectedClauses in query parameter serialization
+
+
+            self.key_obligations.as_ref().map(|key_obligations| {
+                [
+                    "keyObligations".to_string(),
+                    key_obligations.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping complianceScores in query parameter serialization
+
+
+            self.jurisdiction.as_ref().map(|jurisdiction| {
+                [
+                    "jurisdiction".to_string(),
+                    jurisdiction.to_string(),
+                ].join(",")
+            }),
+
+
+            self.governing_laws.as_ref().map(|governing_laws| {
+                [
+                    "governingLaws".to_string(),
+                    governing_laws.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping semanticAnalysis in query parameter serialization
+
+            // Skipping analysisDate in query parameter serialization
+
+            // Skipping riskAssessments in query parameter serialization
+
+            // Skipping complianceChecks in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ContractIntelligence value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ContractIntelligence {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub contract_type: Vec<String>,
+            pub risk_scores: Vec<std::collections::HashMap<String, f32>>,
+            pub detected_clauses: Vec<std::collections::HashMap<String, String>>,
+            pub key_obligations: Vec<Vec<String>>,
+            pub compliance_scores: Vec<std::collections::HashMap<String, f32>>,
+            pub jurisdiction: Vec<String>,
+            pub governing_laws: Vec<Vec<String>>,
+            pub semantic_analysis: Vec<std::collections::HashMap<String, String>>,
+            pub analysis_date: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub risk_assessments: Vec<Vec<models::RiskAssessment>>,
+            pub compliance_checks: Vec<Vec<models::ComplianceCheck>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ContractIntelligence".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "contractType" => intermediate_rep.contract_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "riskScores" => return std::result::Result::Err("Parsing a container in this style is not supported in ContractIntelligence".to_string()),
+                    "detectedClauses" => return std::result::Result::Err("Parsing a container in this style is not supported in ContractIntelligence".to_string()),
+                    "keyObligations" => return std::result::Result::Err("Parsing a container in this style is not supported in ContractIntelligence".to_string()),
+                    "complianceScores" => return std::result::Result::Err("Parsing a container in this style is not supported in ContractIntelligence".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "jurisdiction" => intermediate_rep.jurisdiction.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "governingLaws" => return std::result::Result::Err("Parsing a container in this style is not supported in ContractIntelligence".to_string()),
+                    "semanticAnalysis" => return std::result::Result::Err("Parsing a container in this style is not supported in ContractIntelligence".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "analysisDate" => intermediate_rep.analysis_date.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "riskAssessments" => return std::result::Result::Err("Parsing a container in this style is not supported in ContractIntelligence".to_string()),
+                    "complianceChecks" => return std::result::Result::Err("Parsing a container in this style is not supported in ContractIntelligence".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ContractIntelligence".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ContractIntelligence {
+            id: intermediate_rep.id.into_iter().next(),
+            contract_type: intermediate_rep.contract_type.into_iter().next(),
+            risk_scores: intermediate_rep.risk_scores.into_iter().next(),
+            detected_clauses: intermediate_rep.detected_clauses.into_iter().next(),
+            key_obligations: intermediate_rep.key_obligations.into_iter().next(),
+            compliance_scores: intermediate_rep.compliance_scores.into_iter().next(),
+            jurisdiction: intermediate_rep.jurisdiction.into_iter().next(),
+            governing_laws: intermediate_rep.governing_laws.into_iter().next(),
+            semantic_analysis: intermediate_rep.semantic_analysis.into_iter().next(),
+            analysis_date: intermediate_rep.analysis_date.into_iter().next(),
+            risk_assessments: intermediate_rep.risk_assessments.into_iter().next(),
+            compliance_checks: intermediate_rep.compliance_checks.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ContractIntelligence> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ContractIntelligence>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ContractIntelligence>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ContractIntelligence - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ContractIntelligence> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ContractIntelligence as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ContractIntelligence - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct CreateAccountRequest {
     #[serde(rename = "account")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -3737,6 +8698,275 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct CreateAccountRequest1 {
+    #[serde(rename = "auth0UserId")]
+    pub auth0_user_id: String,
+
+    #[serde(rename = "email")]
+    pub email: String,
+
+    #[serde(rename = "baseDirectory")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub base_directory: Option<String>,
+
+    #[serde(rename = "region")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub region: Option<String>,
+
+    #[serde(rename = "orgId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub org_id: Option<String>,
+
+    #[serde(rename = "tenantId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub tenant_id: Option<String>,
+
+    #[serde(rename = "roles")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub roles: Option<Vec<String>>,
+
+    #[serde(rename = "permissions")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub permissions: Option<Vec<String>>,
+
+    #[serde(rename = "mfaEnabled")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub mfa_enabled: Option<bool>,
+
+    #[serde(rename = "complianceLevel")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub compliance_level: Option<models::ComplianceLevel>,
+
+    #[serde(rename = "preferences")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub preferences: Option<std::collections::HashMap<String, String>>,
+
+}
+
+
+impl CreateAccountRequest1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new(auth0_user_id: String, email: String, ) -> CreateAccountRequest1 {
+        CreateAccountRequest1 {
+            auth0_user_id,
+            email,
+            base_directory: None,
+            region: None,
+            org_id: None,
+            tenant_id: None,
+            roles: None,
+            permissions: None,
+            mfa_enabled: None,
+            compliance_level: None,
+            preferences: None,
+        }
+    }
+}
+
+/// Converts the CreateAccountRequest1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for CreateAccountRequest1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            Some("auth0UserId".to_string()),
+            Some(self.auth0_user_id.to_string()),
+
+
+            Some("email".to_string()),
+            Some(self.email.to_string()),
+
+
+            self.base_directory.as_ref().map(|base_directory| {
+                [
+                    "baseDirectory".to_string(),
+                    base_directory.to_string(),
+                ].join(",")
+            }),
+
+
+            self.region.as_ref().map(|region| {
+                [
+                    "region".to_string(),
+                    region.to_string(),
+                ].join(",")
+            }),
+
+
+            self.org_id.as_ref().map(|org_id| {
+                [
+                    "orgId".to_string(),
+                    org_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.tenant_id.as_ref().map(|tenant_id| {
+                [
+                    "tenantId".to_string(),
+                    tenant_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.roles.as_ref().map(|roles| {
+                [
+                    "roles".to_string(),
+                    roles.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.permissions.as_ref().map(|permissions| {
+                [
+                    "permissions".to_string(),
+                    permissions.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.mfa_enabled.as_ref().map(|mfa_enabled| {
+                [
+                    "mfaEnabled".to_string(),
+                    mfa_enabled.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping complianceLevel in query parameter serialization
+
+            // Skipping preferences in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateAccountRequest1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for CreateAccountRequest1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub auth0_user_id: Vec<String>,
+            pub email: Vec<String>,
+            pub base_directory: Vec<String>,
+            pub region: Vec<String>,
+            pub org_id: Vec<String>,
+            pub tenant_id: Vec<String>,
+            pub roles: Vec<Vec<String>>,
+            pub permissions: Vec<Vec<String>>,
+            pub mfa_enabled: Vec<bool>,
+            pub compliance_level: Vec<models::ComplianceLevel>,
+            pub preferences: Vec<std::collections::HashMap<String, String>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing CreateAccountRequest1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "auth0UserId" => intermediate_rep.auth0_user_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "email" => intermediate_rep.email.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "baseDirectory" => intermediate_rep.base_directory.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "region" => intermediate_rep.region.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "orgId" => intermediate_rep.org_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "roles" => return std::result::Result::Err("Parsing a container in this style is not supported in CreateAccountRequest1".to_string()),
+                    "permissions" => return std::result::Result::Err("Parsing a container in this style is not supported in CreateAccountRequest1".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "mfaEnabled" => intermediate_rep.mfa_enabled.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "complianceLevel" => intermediate_rep.compliance_level.push(<models::ComplianceLevel as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "preferences" => return std::result::Result::Err("Parsing a container in this style is not supported in CreateAccountRequest1".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateAccountRequest1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(CreateAccountRequest1 {
+            auth0_user_id: intermediate_rep.auth0_user_id.into_iter().next().ok_or_else(|| "auth0UserId missing in CreateAccountRequest1".to_string())?,
+            email: intermediate_rep.email.into_iter().next().ok_or_else(|| "email missing in CreateAccountRequest1".to_string())?,
+            base_directory: intermediate_rep.base_directory.into_iter().next(),
+            region: intermediate_rep.region.into_iter().next(),
+            org_id: intermediate_rep.org_id.into_iter().next(),
+            tenant_id: intermediate_rep.tenant_id.into_iter().next(),
+            roles: intermediate_rep.roles.into_iter().next(),
+            permissions: intermediate_rep.permissions.into_iter().next(),
+            mfa_enabled: intermediate_rep.mfa_enabled.into_iter().next(),
+            compliance_level: intermediate_rep.compliance_level.into_iter().next(),
+            preferences: intermediate_rep.preferences.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<CreateAccountRequest1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateAccountRequest1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateAccountRequest1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for CreateAccountRequest1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateAccountRequest1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <CreateAccountRequest1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into CreateAccountRequest1 - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct CreateAccountResponse {
     #[serde(rename = "account")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -3859,6 +9089,141 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into CreateAccountResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct CreateAccountResponse1 {
+    #[serde(rename = "account")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub account: Option<models::Account1>,
+
+    #[serde(rename = "initialWorkspaceName")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub initial_workspace_name: Option<String>,
+
+}
+
+
+impl CreateAccountResponse1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> CreateAccountResponse1 {
+        CreateAccountResponse1 {
+            account: None,
+            initial_workspace_name: None,
+        }
+    }
+}
+
+/// Converts the CreateAccountResponse1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for CreateAccountResponse1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping account in query parameter serialization
+
+
+            self.initial_workspace_name.as_ref().map(|initial_workspace_name| {
+                [
+                    "initialWorkspaceName".to_string(),
+                    initial_workspace_name.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateAccountResponse1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for CreateAccountResponse1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub account: Vec<models::Account1>,
+            pub initial_workspace_name: Vec<String>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing CreateAccountResponse1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "account" => intermediate_rep.account.push(<models::Account1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "initialWorkspaceName" => intermediate_rep.initial_workspace_name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateAccountResponse1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(CreateAccountResponse1 {
+            account: intermediate_rep.account.into_iter().next(),
+            initial_workspace_name: intermediate_rep.initial_workspace_name.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<CreateAccountResponse1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateAccountResponse1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateAccountResponse1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for CreateAccountResponse1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateAccountResponse1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <CreateAccountResponse1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into CreateAccountResponse1 - {}",
                                 value, err))
                     }
              },
@@ -4723,6 +10088,227 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct CreateWorkspaceRequest1 {
+    #[serde(rename = "accountId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub account_id: Option<String>,
+
+    #[serde(rename = "name")]
+    pub name: String,
+
+    #[serde(rename = "storageQuota")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub storage_quota: Option<String>,
+
+    #[serde(rename = "allowPublicSharing")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub allow_public_sharing: Option<bool>,
+
+    #[serde(rename = "requireApproval")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub require_approval: Option<bool>,
+
+    #[serde(rename = "gdprCompliant")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub gdpr_compliant: Option<bool>,
+
+    #[serde(rename = "hipaaCompliant")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub hipaa_compliant: Option<bool>,
+
+}
+
+
+impl CreateWorkspaceRequest1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new(name: String, ) -> CreateWorkspaceRequest1 {
+        CreateWorkspaceRequest1 {
+            account_id: None,
+            name,
+            storage_quota: None,
+            allow_public_sharing: None,
+            require_approval: None,
+            gdpr_compliant: None,
+            hipaa_compliant: None,
+        }
+    }
+}
+
+/// Converts the CreateWorkspaceRequest1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for CreateWorkspaceRequest1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.account_id.as_ref().map(|account_id| {
+                [
+                    "accountId".to_string(),
+                    account_id.to_string(),
+                ].join(",")
+            }),
+
+
+            Some("name".to_string()),
+            Some(self.name.to_string()),
+
+
+            self.storage_quota.as_ref().map(|storage_quota| {
+                [
+                    "storageQuota".to_string(),
+                    storage_quota.to_string(),
+                ].join(",")
+            }),
+
+
+            self.allow_public_sharing.as_ref().map(|allow_public_sharing| {
+                [
+                    "allowPublicSharing".to_string(),
+                    allow_public_sharing.to_string(),
+                ].join(",")
+            }),
+
+
+            self.require_approval.as_ref().map(|require_approval| {
+                [
+                    "requireApproval".to_string(),
+                    require_approval.to_string(),
+                ].join(",")
+            }),
+
+
+            self.gdpr_compliant.as_ref().map(|gdpr_compliant| {
+                [
+                    "gdprCompliant".to_string(),
+                    gdpr_compliant.to_string(),
+                ].join(",")
+            }),
+
+
+            self.hipaa_compliant.as_ref().map(|hipaa_compliant| {
+                [
+                    "hipaaCompliant".to_string(),
+                    hipaa_compliant.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateWorkspaceRequest1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for CreateWorkspaceRequest1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub account_id: Vec<String>,
+            pub name: Vec<String>,
+            pub storage_quota: Vec<String>,
+            pub allow_public_sharing: Vec<bool>,
+            pub require_approval: Vec<bool>,
+            pub gdpr_compliant: Vec<bool>,
+            pub hipaa_compliant: Vec<bool>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing CreateWorkspaceRequest1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "accountId" => intermediate_rep.account_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "storageQuota" => intermediate_rep.storage_quota.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "allowPublicSharing" => intermediate_rep.allow_public_sharing.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "requireApproval" => intermediate_rep.require_approval.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "gdprCompliant" => intermediate_rep.gdpr_compliant.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "hipaaCompliant" => intermediate_rep.hipaa_compliant.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateWorkspaceRequest1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(CreateWorkspaceRequest1 {
+            account_id: intermediate_rep.account_id.into_iter().next(),
+            name: intermediate_rep.name.into_iter().next().ok_or_else(|| "name missing in CreateWorkspaceRequest1".to_string())?,
+            storage_quota: intermediate_rep.storage_quota.into_iter().next(),
+            allow_public_sharing: intermediate_rep.allow_public_sharing.into_iter().next(),
+            require_approval: intermediate_rep.require_approval.into_iter().next(),
+            gdpr_compliant: intermediate_rep.gdpr_compliant.into_iter().next(),
+            hipaa_compliant: intermediate_rep.hipaa_compliant.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<CreateWorkspaceRequest1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateWorkspaceRequest1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateWorkspaceRequest1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for CreateWorkspaceRequest1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateWorkspaceRequest1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <CreateWorkspaceRequest1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into CreateWorkspaceRequest1 - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct CreateWorkspaceResponse {
     #[serde(rename = "workspace")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -4828,6 +10414,331 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into CreateWorkspaceResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct CreateWorkspaceResponse1 {
+    #[serde(rename = "workspace")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub workspace: Option<models::Workspace1>,
+
+}
+
+
+impl CreateWorkspaceResponse1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> CreateWorkspaceResponse1 {
+        CreateWorkspaceResponse1 {
+            workspace: None,
+        }
+    }
+}
+
+/// Converts the CreateWorkspaceResponse1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for CreateWorkspaceResponse1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping workspace in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateWorkspaceResponse1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for CreateWorkspaceResponse1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub workspace: Vec<models::Workspace1>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing CreateWorkspaceResponse1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "workspace" => intermediate_rep.workspace.push(<models::Workspace1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateWorkspaceResponse1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(CreateWorkspaceResponse1 {
+            workspace: intermediate_rep.workspace.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<CreateWorkspaceResponse1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateWorkspaceResponse1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateWorkspaceResponse1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for CreateWorkspaceResponse1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateWorkspaceResponse1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <CreateWorkspaceResponse1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into CreateWorkspaceResponse1 - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct DataProfile {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "name")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub name: Option<String>,
+
+    #[serde(rename = "profileType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub profile_type: Option<String>,
+
+    #[serde(rename = "dataFields")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub data_fields: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "isDefault")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub is_default: Option<bool>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl DataProfile {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> DataProfile {
+        DataProfile {
+            id: None,
+            name: None,
+            profile_type: None,
+            data_fields: None,
+            is_default: None,
+            created_at: None,
+            updated_at: None,
+        }
+    }
+}
+
+/// Converts the DataProfile value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for DataProfile {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.name.as_ref().map(|name| {
+                [
+                    "name".to_string(),
+                    name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.profile_type.as_ref().map(|profile_type| {
+                [
+                    "profileType".to_string(),
+                    profile_type.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping dataFields in query parameter serialization
+
+
+            self.is_default.as_ref().map(|is_default| {
+                [
+                    "isDefault".to_string(),
+                    is_default.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a DataProfile value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for DataProfile {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub name: Vec<String>,
+            pub profile_type: Vec<String>,
+            pub data_fields: Vec<std::collections::HashMap<String, String>>,
+            pub is_default: Vec<bool>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing DataProfile".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "profileType" => intermediate_rep.profile_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "dataFields" => return std::result::Result::Err("Parsing a container in this style is not supported in DataProfile".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "isDefault" => intermediate_rep.is_default.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing DataProfile".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(DataProfile {
+            id: intermediate_rep.id.into_iter().next(),
+            name: intermediate_rep.name.into_iter().next(),
+            profile_type: intermediate_rep.profile_type.into_iter().next(),
+            data_fields: intermediate_rep.data_fields.into_iter().next(),
+            is_default: intermediate_rep.is_default.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<DataProfile> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<DataProfile>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<DataProfile>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for DataProfile - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<DataProfile> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <DataProfile as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into DataProfile - {}",
                                 value, err))
                     }
              },
@@ -5447,6 +11358,1668 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct DocumentBranch {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "name")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub name: Option<String>,
+
+    #[serde(rename = "baseVersionHash")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub base_version_hash: Option<String>,
+
+    #[serde(rename = "currentHeadHash")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub current_head_hash: Option<String>,
+
+    #[serde(rename = "purpose")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub purpose: Option<String>,
+
+    #[serde(rename = "status")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub status: Option<String>,
+
+    #[serde(rename = "reviewers")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub reviewers: Option<Vec<String>>,
+
+    #[serde(rename = "branchMetadata")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub branch_metadata: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "isLocked")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub is_locked: Option<bool>,
+
+    #[serde(rename = "lastUpdated")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub last_updated: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "merges")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub merges: Option<Vec<models::BranchMerge>>,
+
+    #[serde(rename = "policy")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub policy: Option<models::BranchPolicy>,
+
+    #[serde(rename = "mergeRequests")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub merge_requests: Option<Vec<models::MergeRequest>>,
+
+}
+
+
+impl DocumentBranch {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> DocumentBranch {
+        DocumentBranch {
+            id: None,
+            name: None,
+            base_version_hash: None,
+            current_head_hash: None,
+            purpose: None,
+            status: None,
+            reviewers: None,
+            branch_metadata: None,
+            is_locked: None,
+            last_updated: None,
+            merges: None,
+            policy: None,
+            merge_requests: None,
+        }
+    }
+}
+
+/// Converts the DocumentBranch value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for DocumentBranch {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.name.as_ref().map(|name| {
+                [
+                    "name".to_string(),
+                    name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.base_version_hash.as_ref().map(|base_version_hash| {
+                [
+                    "baseVersionHash".to_string(),
+                    base_version_hash.to_string(),
+                ].join(",")
+            }),
+
+
+            self.current_head_hash.as_ref().map(|current_head_hash| {
+                [
+                    "currentHeadHash".to_string(),
+                    current_head_hash.to_string(),
+                ].join(",")
+            }),
+
+
+            self.purpose.as_ref().map(|purpose| {
+                [
+                    "purpose".to_string(),
+                    purpose.to_string(),
+                ].join(",")
+            }),
+
+
+            self.status.as_ref().map(|status| {
+                [
+                    "status".to_string(),
+                    status.to_string(),
+                ].join(",")
+            }),
+
+
+            self.reviewers.as_ref().map(|reviewers| {
+                [
+                    "reviewers".to_string(),
+                    reviewers.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping branchMetadata in query parameter serialization
+
+
+            self.is_locked.as_ref().map(|is_locked| {
+                [
+                    "isLocked".to_string(),
+                    is_locked.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping lastUpdated in query parameter serialization
+
+            // Skipping merges in query parameter serialization
+
+            // Skipping policy in query parameter serialization
+
+            // Skipping mergeRequests in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a DocumentBranch value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for DocumentBranch {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub name: Vec<String>,
+            pub base_version_hash: Vec<String>,
+            pub current_head_hash: Vec<String>,
+            pub purpose: Vec<String>,
+            pub status: Vec<String>,
+            pub reviewers: Vec<Vec<String>>,
+            pub branch_metadata: Vec<std::collections::HashMap<String, String>>,
+            pub is_locked: Vec<bool>,
+            pub last_updated: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub merges: Vec<Vec<models::BranchMerge>>,
+            pub policy: Vec<models::BranchPolicy>,
+            pub merge_requests: Vec<Vec<models::MergeRequest>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing DocumentBranch".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "baseVersionHash" => intermediate_rep.base_version_hash.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "currentHeadHash" => intermediate_rep.current_head_hash.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "purpose" => intermediate_rep.purpose.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "status" => intermediate_rep.status.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "reviewers" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentBranch".to_string()),
+                    "branchMetadata" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentBranch".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "isLocked" => intermediate_rep.is_locked.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "lastUpdated" => intermediate_rep.last_updated.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "merges" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentBranch".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "policy" => intermediate_rep.policy.push(<models::BranchPolicy as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "mergeRequests" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentBranch".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing DocumentBranch".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(DocumentBranch {
+            id: intermediate_rep.id.into_iter().next(),
+            name: intermediate_rep.name.into_iter().next(),
+            base_version_hash: intermediate_rep.base_version_hash.into_iter().next(),
+            current_head_hash: intermediate_rep.current_head_hash.into_iter().next(),
+            purpose: intermediate_rep.purpose.into_iter().next(),
+            status: intermediate_rep.status.into_iter().next(),
+            reviewers: intermediate_rep.reviewers.into_iter().next(),
+            branch_metadata: intermediate_rep.branch_metadata.into_iter().next(),
+            is_locked: intermediate_rep.is_locked.into_iter().next(),
+            last_updated: intermediate_rep.last_updated.into_iter().next(),
+            merges: intermediate_rep.merges.into_iter().next(),
+            policy: intermediate_rep.policy.into_iter().next(),
+            merge_requests: intermediate_rep.merge_requests.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<DocumentBranch> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<DocumentBranch>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<DocumentBranch>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for DocumentBranch - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<DocumentBranch> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <DocumentBranch as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into DocumentBranch - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct DocumentInstance {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "templateId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub template_id: Option<String>,
+
+    #[serde(rename = "status")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub status: Option<models::DocumentStatus>,
+
+    #[serde(rename = "fieldValues")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub field_values: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "signers")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub signers: Option<Vec<String>>,
+
+    #[serde(rename = "language")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub language: Option<String>,
+
+    #[serde(rename = "isCompleted")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub is_completed: Option<bool>,
+
+    #[serde(rename = "dueDate")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub due_date: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "generatedContent")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub generated_content: Option<String>,
+
+    #[serde(rename = "attachments")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub attachments: Option<Vec<String>>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "signatureRequests")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub signature_requests: Option<Vec<models::SignatureRequest>>,
+
+    #[serde(rename = "aiAssistance")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub ai_assistance: Option<Vec<models::AiAssistanceLog>>,
+
+    #[serde(rename = "negotiation")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub negotiation: Option<models::NegotiationHistory>,
+
+    #[serde(rename = "versions")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub versions: Option<Vec<models::DocumentVersion>>,
+
+}
+
+
+impl DocumentInstance {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> DocumentInstance {
+        DocumentInstance {
+            id: None,
+            template_id: None,
+            status: None,
+            field_values: None,
+            signers: None,
+            language: None,
+            is_completed: None,
+            due_date: None,
+            generated_content: None,
+            attachments: None,
+            created_at: None,
+            updated_at: None,
+            signature_requests: None,
+            ai_assistance: None,
+            negotiation: None,
+            versions: None,
+        }
+    }
+}
+
+/// Converts the DocumentInstance value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for DocumentInstance {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.template_id.as_ref().map(|template_id| {
+                [
+                    "templateId".to_string(),
+                    template_id.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping status in query parameter serialization
+
+            // Skipping fieldValues in query parameter serialization
+
+
+            self.signers.as_ref().map(|signers| {
+                [
+                    "signers".to_string(),
+                    signers.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.language.as_ref().map(|language| {
+                [
+                    "language".to_string(),
+                    language.to_string(),
+                ].join(",")
+            }),
+
+
+            self.is_completed.as_ref().map(|is_completed| {
+                [
+                    "isCompleted".to_string(),
+                    is_completed.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping dueDate in query parameter serialization
+
+
+            self.generated_content.as_ref().map(|generated_content| {
+                [
+                    "generatedContent".to_string(),
+                    generated_content.to_string(),
+                ].join(",")
+            }),
+
+
+            self.attachments.as_ref().map(|attachments| {
+                [
+                    "attachments".to_string(),
+                    attachments.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+            // Skipping signatureRequests in query parameter serialization
+
+            // Skipping aiAssistance in query parameter serialization
+
+            // Skipping negotiation in query parameter serialization
+
+            // Skipping versions in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a DocumentInstance value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for DocumentInstance {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub template_id: Vec<String>,
+            pub status: Vec<models::DocumentStatus>,
+            pub field_values: Vec<std::collections::HashMap<String, String>>,
+            pub signers: Vec<Vec<String>>,
+            pub language: Vec<String>,
+            pub is_completed: Vec<bool>,
+            pub due_date: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub generated_content: Vec<String>,
+            pub attachments: Vec<Vec<String>>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub signature_requests: Vec<Vec<models::SignatureRequest>>,
+            pub ai_assistance: Vec<Vec<models::AiAssistanceLog>>,
+            pub negotiation: Vec<models::NegotiationHistory>,
+            pub versions: Vec<Vec<models::DocumentVersion>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing DocumentInstance".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "templateId" => intermediate_rep.template_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "status" => intermediate_rep.status.push(<models::DocumentStatus as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "fieldValues" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentInstance".to_string()),
+                    "signers" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentInstance".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "language" => intermediate_rep.language.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "isCompleted" => intermediate_rep.is_completed.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "dueDate" => intermediate_rep.due_date.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "generatedContent" => intermediate_rep.generated_content.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "attachments" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentInstance".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "signatureRequests" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentInstance".to_string()),
+                    "aiAssistance" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentInstance".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "negotiation" => intermediate_rep.negotiation.push(<models::NegotiationHistory as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "versions" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentInstance".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing DocumentInstance".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(DocumentInstance {
+            id: intermediate_rep.id.into_iter().next(),
+            template_id: intermediate_rep.template_id.into_iter().next(),
+            status: intermediate_rep.status.into_iter().next(),
+            field_values: intermediate_rep.field_values.into_iter().next(),
+            signers: intermediate_rep.signers.into_iter().next(),
+            language: intermediate_rep.language.into_iter().next(),
+            is_completed: intermediate_rep.is_completed.into_iter().next(),
+            due_date: intermediate_rep.due_date.into_iter().next(),
+            generated_content: intermediate_rep.generated_content.into_iter().next(),
+            attachments: intermediate_rep.attachments.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+            signature_requests: intermediate_rep.signature_requests.into_iter().next(),
+            ai_assistance: intermediate_rep.ai_assistance.into_iter().next(),
+            negotiation: intermediate_rep.negotiation.into_iter().next(),
+            versions: intermediate_rep.versions.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<DocumentInstance> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<DocumentInstance>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<DocumentInstance>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for DocumentInstance - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<DocumentInstance> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <DocumentInstance as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into DocumentInstance - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct DocumentSnapshot {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "fileId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub file_id: Option<String>,
+
+    #[serde(rename = "snapshotHash")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub snapshot_hash: Option<String>,
+
+    #[serde(rename = "content")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub content: Option<swagger::ByteArray>,
+
+    #[serde(rename = "authorId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub author_id: Option<String>,
+
+    #[serde(rename = "reason")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub reason: Option<String>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl DocumentSnapshot {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> DocumentSnapshot {
+        DocumentSnapshot {
+            id: None,
+            file_id: None,
+            snapshot_hash: None,
+            content: None,
+            author_id: None,
+            reason: None,
+            created_at: None,
+        }
+    }
+}
+
+/// Converts the DocumentSnapshot value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for DocumentSnapshot {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.file_id.as_ref().map(|file_id| {
+                [
+                    "fileId".to_string(),
+                    file_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.snapshot_hash.as_ref().map(|snapshot_hash| {
+                [
+                    "snapshotHash".to_string(),
+                    snapshot_hash.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping content in query parameter serialization
+            // Skipping content in query parameter serialization
+
+
+            self.author_id.as_ref().map(|author_id| {
+                [
+                    "authorId".to_string(),
+                    author_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.reason.as_ref().map(|reason| {
+                [
+                    "reason".to_string(),
+                    reason.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a DocumentSnapshot value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for DocumentSnapshot {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub file_id: Vec<String>,
+            pub snapshot_hash: Vec<String>,
+            pub content: Vec<swagger::ByteArray>,
+            pub author_id: Vec<String>,
+            pub reason: Vec<String>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing DocumentSnapshot".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "fileId" => intermediate_rep.file_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "snapshotHash" => intermediate_rep.snapshot_hash.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "content" => return std::result::Result::Err("Parsing binary data in this style is not supported in DocumentSnapshot".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "authorId" => intermediate_rep.author_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "reason" => intermediate_rep.reason.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing DocumentSnapshot".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(DocumentSnapshot {
+            id: intermediate_rep.id.into_iter().next(),
+            file_id: intermediate_rep.file_id.into_iter().next(),
+            snapshot_hash: intermediate_rep.snapshot_hash.into_iter().next(),
+            content: intermediate_rep.content.into_iter().next(),
+            author_id: intermediate_rep.author_id.into_iter().next(),
+            reason: intermediate_rep.reason.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<DocumentSnapshot> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<DocumentSnapshot>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<DocumentSnapshot>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for DocumentSnapshot - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<DocumentSnapshot> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <DocumentSnapshot as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into DocumentSnapshot - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+/// Enumeration of values.
+/// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
+/// which helps with FFI.
+#[allow(non_camel_case_types)]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "conversion", derive(frunk_enum_derive::LabelledGenericEnum))]
+pub enum DocumentStatus {
+    #[serde(rename = "DOCUMENT_STATUS_UNSPECIFIED")]
+    Unspecified,
+    #[serde(rename = "DOCUMENT_STATUS_DRAFT")]
+    Draft,
+    #[serde(rename = "DOCUMENT_STATUS_IN_REVIEW")]
+    InReview,
+    #[serde(rename = "DOCUMENT_STATUS_APPROVED")]
+    Approved,
+    #[serde(rename = "DOCUMENT_STATUS_REJECTED")]
+    Rejected,
+    #[serde(rename = "DOCUMENT_STATUS_EXPIRED")]
+    Expired,
+    #[serde(rename = "DOCUMENT_STATUS_ARCHIVED")]
+    Archived,
+}
+
+impl std::fmt::Display for DocumentStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            DocumentStatus::Unspecified => write!(f, "DOCUMENT_STATUS_UNSPECIFIED"),
+            DocumentStatus::Draft => write!(f, "DOCUMENT_STATUS_DRAFT"),
+            DocumentStatus::InReview => write!(f, "DOCUMENT_STATUS_IN_REVIEW"),
+            DocumentStatus::Approved => write!(f, "DOCUMENT_STATUS_APPROVED"),
+            DocumentStatus::Rejected => write!(f, "DOCUMENT_STATUS_REJECTED"),
+            DocumentStatus::Expired => write!(f, "DOCUMENT_STATUS_EXPIRED"),
+            DocumentStatus::Archived => write!(f, "DOCUMENT_STATUS_ARCHIVED"),
+        }
+    }
+}
+
+impl std::str::FromStr for DocumentStatus {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s {
+            "DOCUMENT_STATUS_UNSPECIFIED" => std::result::Result::Ok(DocumentStatus::Unspecified),
+            "DOCUMENT_STATUS_DRAFT" => std::result::Result::Ok(DocumentStatus::Draft),
+            "DOCUMENT_STATUS_IN_REVIEW" => std::result::Result::Ok(DocumentStatus::InReview),
+            "DOCUMENT_STATUS_APPROVED" => std::result::Result::Ok(DocumentStatus::Approved),
+            "DOCUMENT_STATUS_REJECTED" => std::result::Result::Ok(DocumentStatus::Rejected),
+            "DOCUMENT_STATUS_EXPIRED" => std::result::Result::Ok(DocumentStatus::Expired),
+            "DOCUMENT_STATUS_ARCHIVED" => std::result::Result::Ok(DocumentStatus::Archived),
+            _ => std::result::Result::Err(format!("Value not valid: {}", s)),
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct DocumentTemplate {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "name")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub name: Option<String>,
+
+    #[serde(rename = "description")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub description: Option<String>,
+
+    #[serde(rename = "industryType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub industry_type: Option<String>,
+
+    #[serde(rename = "documentType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub document_type: Option<String>,
+
+    #[serde(rename = "baseContent")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub base_content: Option<String>,
+
+    #[serde(rename = "isAdaptive")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub is_adaptive: Option<bool>,
+
+    #[serde(rename = "metadata")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub metadata: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "supportedLanguages")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub supported_languages: Option<Vec<String>>,
+
+    #[serde(rename = "requiredDataFields")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub required_data_fields: Option<Vec<String>>,
+
+    #[serde(rename = "version")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub version: Option<String>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "templateType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub template_type: Option<models::TemplateType>,
+
+    #[serde(rename = "content")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub content: Option<String>,
+
+    #[serde(rename = "detectedVariables")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub detected_variables: Option<Vec<String>>,
+
+    #[serde(rename = "variableMappings")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub variable_mappings: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "isContextAware")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub is_context_aware: Option<bool>,
+
+    #[serde(rename = "supportedContexts")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub supported_contexts: Option<Vec<String>>,
+
+    #[serde(rename = "formattingRules")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub formatting_rules: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "conditionalSections")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub conditional_sections: Option<Vec<String>>,
+
+    #[serde(rename = "versions")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub versions: Option<Vec<models::TemplateVersion>>,
+
+    #[serde(rename = "variables")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub variables: Option<Vec<models::TemplateVariable>>,
+
+    #[serde(rename = "instances")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub instances: Option<Vec<models::DocumentInstance>>,
+
+    #[serde(rename = "explanations")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub explanations: Option<Vec<models::ExplanationBlock>>,
+
+    #[serde(rename = "intelligence")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub intelligence: Option<Vec<models::ContractIntelligence>>,
+
+}
+
+
+impl DocumentTemplate {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> DocumentTemplate {
+        DocumentTemplate {
+            id: None,
+            name: None,
+            description: None,
+            industry_type: None,
+            document_type: None,
+            base_content: None,
+            is_adaptive: None,
+            metadata: None,
+            supported_languages: None,
+            required_data_fields: None,
+            version: None,
+            created_at: None,
+            updated_at: None,
+            template_type: None,
+            content: None,
+            detected_variables: None,
+            variable_mappings: None,
+            is_context_aware: None,
+            supported_contexts: None,
+            formatting_rules: None,
+            conditional_sections: None,
+            versions: None,
+            variables: None,
+            instances: None,
+            explanations: None,
+            intelligence: None,
+        }
+    }
+}
+
+/// Converts the DocumentTemplate value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for DocumentTemplate {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.name.as_ref().map(|name| {
+                [
+                    "name".to_string(),
+                    name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.description.as_ref().map(|description| {
+                [
+                    "description".to_string(),
+                    description.to_string(),
+                ].join(",")
+            }),
+
+
+            self.industry_type.as_ref().map(|industry_type| {
+                [
+                    "industryType".to_string(),
+                    industry_type.to_string(),
+                ].join(",")
+            }),
+
+
+            self.document_type.as_ref().map(|document_type| {
+                [
+                    "documentType".to_string(),
+                    document_type.to_string(),
+                ].join(",")
+            }),
+
+
+            self.base_content.as_ref().map(|base_content| {
+                [
+                    "baseContent".to_string(),
+                    base_content.to_string(),
+                ].join(",")
+            }),
+
+
+            self.is_adaptive.as_ref().map(|is_adaptive| {
+                [
+                    "isAdaptive".to_string(),
+                    is_adaptive.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping metadata in query parameter serialization
+
+
+            self.supported_languages.as_ref().map(|supported_languages| {
+                [
+                    "supportedLanguages".to_string(),
+                    supported_languages.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.required_data_fields.as_ref().map(|required_data_fields| {
+                [
+                    "requiredDataFields".to_string(),
+                    required_data_fields.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.version.as_ref().map(|version| {
+                [
+                    "version".to_string(),
+                    version.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+            // Skipping templateType in query parameter serialization
+
+
+            self.content.as_ref().map(|content| {
+                [
+                    "content".to_string(),
+                    content.to_string(),
+                ].join(",")
+            }),
+
+
+            self.detected_variables.as_ref().map(|detected_variables| {
+                [
+                    "detectedVariables".to_string(),
+                    detected_variables.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping variableMappings in query parameter serialization
+
+
+            self.is_context_aware.as_ref().map(|is_context_aware| {
+                [
+                    "isContextAware".to_string(),
+                    is_context_aware.to_string(),
+                ].join(",")
+            }),
+
+
+            self.supported_contexts.as_ref().map(|supported_contexts| {
+                [
+                    "supportedContexts".to_string(),
+                    supported_contexts.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping formattingRules in query parameter serialization
+
+
+            self.conditional_sections.as_ref().map(|conditional_sections| {
+                [
+                    "conditionalSections".to_string(),
+                    conditional_sections.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping versions in query parameter serialization
+
+            // Skipping variables in query parameter serialization
+
+            // Skipping instances in query parameter serialization
+
+            // Skipping explanations in query parameter serialization
+
+            // Skipping intelligence in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a DocumentTemplate value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for DocumentTemplate {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub name: Vec<String>,
+            pub description: Vec<String>,
+            pub industry_type: Vec<String>,
+            pub document_type: Vec<String>,
+            pub base_content: Vec<String>,
+            pub is_adaptive: Vec<bool>,
+            pub metadata: Vec<std::collections::HashMap<String, String>>,
+            pub supported_languages: Vec<Vec<String>>,
+            pub required_data_fields: Vec<Vec<String>>,
+            pub version: Vec<String>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub template_type: Vec<models::TemplateType>,
+            pub content: Vec<String>,
+            pub detected_variables: Vec<Vec<String>>,
+            pub variable_mappings: Vec<std::collections::HashMap<String, String>>,
+            pub is_context_aware: Vec<bool>,
+            pub supported_contexts: Vec<Vec<String>>,
+            pub formatting_rules: Vec<std::collections::HashMap<String, String>>,
+            pub conditional_sections: Vec<Vec<String>>,
+            pub versions: Vec<Vec<models::TemplateVersion>>,
+            pub variables: Vec<Vec<models::TemplateVariable>>,
+            pub instances: Vec<Vec<models::DocumentInstance>>,
+            pub explanations: Vec<Vec<models::ExplanationBlock>>,
+            pub intelligence: Vec<Vec<models::ContractIntelligence>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing DocumentTemplate".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "industryType" => intermediate_rep.industry_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "documentType" => intermediate_rep.document_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "baseContent" => intermediate_rep.base_content.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "isAdaptive" => intermediate_rep.is_adaptive.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "metadata" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentTemplate".to_string()),
+                    "supportedLanguages" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentTemplate".to_string()),
+                    "requiredDataFields" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentTemplate".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "version" => intermediate_rep.version.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "templateType" => intermediate_rep.template_type.push(<models::TemplateType as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "content" => intermediate_rep.content.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "detectedVariables" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentTemplate".to_string()),
+                    "variableMappings" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentTemplate".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "isContextAware" => intermediate_rep.is_context_aware.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "supportedContexts" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentTemplate".to_string()),
+                    "formattingRules" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentTemplate".to_string()),
+                    "conditionalSections" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentTemplate".to_string()),
+                    "versions" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentTemplate".to_string()),
+                    "variables" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentTemplate".to_string()),
+                    "instances" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentTemplate".to_string()),
+                    "explanations" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentTemplate".to_string()),
+                    "intelligence" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentTemplate".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing DocumentTemplate".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(DocumentTemplate {
+            id: intermediate_rep.id.into_iter().next(),
+            name: intermediate_rep.name.into_iter().next(),
+            description: intermediate_rep.description.into_iter().next(),
+            industry_type: intermediate_rep.industry_type.into_iter().next(),
+            document_type: intermediate_rep.document_type.into_iter().next(),
+            base_content: intermediate_rep.base_content.into_iter().next(),
+            is_adaptive: intermediate_rep.is_adaptive.into_iter().next(),
+            metadata: intermediate_rep.metadata.into_iter().next(),
+            supported_languages: intermediate_rep.supported_languages.into_iter().next(),
+            required_data_fields: intermediate_rep.required_data_fields.into_iter().next(),
+            version: intermediate_rep.version.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+            template_type: intermediate_rep.template_type.into_iter().next(),
+            content: intermediate_rep.content.into_iter().next(),
+            detected_variables: intermediate_rep.detected_variables.into_iter().next(),
+            variable_mappings: intermediate_rep.variable_mappings.into_iter().next(),
+            is_context_aware: intermediate_rep.is_context_aware.into_iter().next(),
+            supported_contexts: intermediate_rep.supported_contexts.into_iter().next(),
+            formatting_rules: intermediate_rep.formatting_rules.into_iter().next(),
+            conditional_sections: intermediate_rep.conditional_sections.into_iter().next(),
+            versions: intermediate_rep.versions.into_iter().next(),
+            variables: intermediate_rep.variables.into_iter().next(),
+            instances: intermediate_rep.instances.into_iter().next(),
+            explanations: intermediate_rep.explanations.into_iter().next(),
+            intelligence: intermediate_rep.intelligence.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<DocumentTemplate> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<DocumentTemplate>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<DocumentTemplate>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for DocumentTemplate - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<DocumentTemplate> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <DocumentTemplate as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into DocumentTemplate - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct DocumentVersion {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "versionHash")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub version_hash: Option<String>,
+
+    #[serde(rename = "parentHash")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub parent_hash: Option<String>,
+
+    #[serde(rename = "commitMessage")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub commit_message: Option<String>,
+
+    #[serde(rename = "authorId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub author_id: Option<String>,
+
+    #[serde(rename = "branchName")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub branch_name: Option<String>,
+
+    #[serde(rename = "metadata")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub metadata: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "tags")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub tags: Option<Vec<String>>,
+
+    #[serde(rename = "isApproved")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub is_approved: Option<bool>,
+
+    #[serde(rename = "approvalChain")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub approval_chain: Option<String>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "branches")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub branches: Option<Vec<models::DocumentBranch>>,
+
+    #[serde(rename = "changes")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub changes: Option<Vec<models::ChangeSet>>,
+
+    #[serde(rename = "summaries")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub summaries: Option<Vec<models::ContextualSummary>>,
+
+}
+
+
+impl DocumentVersion {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> DocumentVersion {
+        DocumentVersion {
+            id: None,
+            version_hash: None,
+            parent_hash: None,
+            commit_message: None,
+            author_id: None,
+            branch_name: None,
+            metadata: None,
+            tags: None,
+            is_approved: None,
+            approval_chain: None,
+            created_at: None,
+            branches: None,
+            changes: None,
+            summaries: None,
+        }
+    }
+}
+
+/// Converts the DocumentVersion value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for DocumentVersion {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.version_hash.as_ref().map(|version_hash| {
+                [
+                    "versionHash".to_string(),
+                    version_hash.to_string(),
+                ].join(",")
+            }),
+
+
+            self.parent_hash.as_ref().map(|parent_hash| {
+                [
+                    "parentHash".to_string(),
+                    parent_hash.to_string(),
+                ].join(",")
+            }),
+
+
+            self.commit_message.as_ref().map(|commit_message| {
+                [
+                    "commitMessage".to_string(),
+                    commit_message.to_string(),
+                ].join(",")
+            }),
+
+
+            self.author_id.as_ref().map(|author_id| {
+                [
+                    "authorId".to_string(),
+                    author_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.branch_name.as_ref().map(|branch_name| {
+                [
+                    "branchName".to_string(),
+                    branch_name.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping metadata in query parameter serialization
+
+
+            self.tags.as_ref().map(|tags| {
+                [
+                    "tags".to_string(),
+                    tags.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.is_approved.as_ref().map(|is_approved| {
+                [
+                    "isApproved".to_string(),
+                    is_approved.to_string(),
+                ].join(",")
+            }),
+
+
+            self.approval_chain.as_ref().map(|approval_chain| {
+                [
+                    "approvalChain".to_string(),
+                    approval_chain.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping branches in query parameter serialization
+
+            // Skipping changes in query parameter serialization
+
+            // Skipping summaries in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a DocumentVersion value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for DocumentVersion {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub version_hash: Vec<String>,
+            pub parent_hash: Vec<String>,
+            pub commit_message: Vec<String>,
+            pub author_id: Vec<String>,
+            pub branch_name: Vec<String>,
+            pub metadata: Vec<std::collections::HashMap<String, String>>,
+            pub tags: Vec<Vec<String>>,
+            pub is_approved: Vec<bool>,
+            pub approval_chain: Vec<String>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub branches: Vec<Vec<models::DocumentBranch>>,
+            pub changes: Vec<Vec<models::ChangeSet>>,
+            pub summaries: Vec<Vec<models::ContextualSummary>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing DocumentVersion".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "versionHash" => intermediate_rep.version_hash.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "parentHash" => intermediate_rep.parent_hash.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "commitMessage" => intermediate_rep.commit_message.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "authorId" => intermediate_rep.author_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "branchName" => intermediate_rep.branch_name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "metadata" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentVersion".to_string()),
+                    "tags" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentVersion".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "isApproved" => intermediate_rep.is_approved.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "approvalChain" => intermediate_rep.approval_chain.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "branches" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentVersion".to_string()),
+                    "changes" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentVersion".to_string()),
+                    "summaries" => return std::result::Result::Err("Parsing a container in this style is not supported in DocumentVersion".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing DocumentVersion".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(DocumentVersion {
+            id: intermediate_rep.id.into_iter().next(),
+            version_hash: intermediate_rep.version_hash.into_iter().next(),
+            parent_hash: intermediate_rep.parent_hash.into_iter().next(),
+            commit_message: intermediate_rep.commit_message.into_iter().next(),
+            author_id: intermediate_rep.author_id.into_iter().next(),
+            branch_name: intermediate_rep.branch_name.into_iter().next(),
+            metadata: intermediate_rep.metadata.into_iter().next(),
+            tags: intermediate_rep.tags.into_iter().next(),
+            is_approved: intermediate_rep.is_approved.into_iter().next(),
+            approval_chain: intermediate_rep.approval_chain.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            branches: intermediate_rep.branches.into_iter().next(),
+            changes: intermediate_rep.changes.into_iter().next(),
+            summaries: intermediate_rep.summaries.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<DocumentVersion> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<DocumentVersion>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<DocumentVersion>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for DocumentVersion - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<DocumentVersion> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <DocumentVersion as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into DocumentVersion - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct DownloadScrapingResultsResponse {
     #[serde(rename = "content")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -5649,7 +13222,7 @@ impl std::str::FromStr for EmployeeBenefit {
 pub struct ErrorResponse {
     #[serde(rename = "status")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub status: Option<models::RpcPeriodStatus>,
+    pub status: Option<models::Status>,
 
 }
 
@@ -5688,7 +13261,7 @@ impl std::str::FromStr for ErrorResponse {
         #[derive(Default)]
         #[allow(dead_code)]
         struct IntermediateRep {
-            pub status: Vec<models::RpcPeriodStatus>,
+            pub status: Vec<models::Status>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -5707,7 +13280,7 @@ impl std::str::FromStr for ErrorResponse {
                 #[allow(clippy::match_single_binding)]
                 match key {
                     #[allow(clippy::redundant_clone)]
-                    "status" => intermediate_rep.status.push(<models::RpcPeriodStatus as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "status" => intermediate_rep.status.push(<models::Status as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing ErrorResponse".to_string())
                 }
             }
@@ -5751,6 +13324,252 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into ErrorResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ExplanationBlock {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "templateId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub template_id: Option<String>,
+
+    #[serde(rename = "sectionIdentifier")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub section_identifier: Option<String>,
+
+    #[serde(rename = "explanationText")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub explanation_text: Option<String>,
+
+    #[serde(rename = "complexityLevel")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub complexity_level: Option<String>,
+
+    #[serde(rename = "relatedTerms")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub related_terms: Option<Vec<String>>,
+
+    #[serde(rename = "legalReferences")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub legal_references: Option<Vec<String>>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl ExplanationBlock {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ExplanationBlock {
+        ExplanationBlock {
+            id: None,
+            template_id: None,
+            section_identifier: None,
+            explanation_text: None,
+            complexity_level: None,
+            related_terms: None,
+            legal_references: None,
+            created_at: None,
+            updated_at: None,
+        }
+    }
+}
+
+/// Converts the ExplanationBlock value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ExplanationBlock {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.template_id.as_ref().map(|template_id| {
+                [
+                    "templateId".to_string(),
+                    template_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.section_identifier.as_ref().map(|section_identifier| {
+                [
+                    "sectionIdentifier".to_string(),
+                    section_identifier.to_string(),
+                ].join(",")
+            }),
+
+
+            self.explanation_text.as_ref().map(|explanation_text| {
+                [
+                    "explanationText".to_string(),
+                    explanation_text.to_string(),
+                ].join(",")
+            }),
+
+
+            self.complexity_level.as_ref().map(|complexity_level| {
+                [
+                    "complexityLevel".to_string(),
+                    complexity_level.to_string(),
+                ].join(",")
+            }),
+
+
+            self.related_terms.as_ref().map(|related_terms| {
+                [
+                    "relatedTerms".to_string(),
+                    related_terms.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.legal_references.as_ref().map(|legal_references| {
+                [
+                    "legalReferences".to_string(),
+                    legal_references.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ExplanationBlock value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ExplanationBlock {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub template_id: Vec<String>,
+            pub section_identifier: Vec<String>,
+            pub explanation_text: Vec<String>,
+            pub complexity_level: Vec<String>,
+            pub related_terms: Vec<Vec<String>>,
+            pub legal_references: Vec<Vec<String>>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ExplanationBlock".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "templateId" => intermediate_rep.template_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "sectionIdentifier" => intermediate_rep.section_identifier.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "explanationText" => intermediate_rep.explanation_text.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "complexityLevel" => intermediate_rep.complexity_level.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "relatedTerms" => return std::result::Result::Err("Parsing a container in this style is not supported in ExplanationBlock".to_string()),
+                    "legalReferences" => return std::result::Result::Err("Parsing a container in this style is not supported in ExplanationBlock".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ExplanationBlock".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ExplanationBlock {
+            id: intermediate_rep.id.into_iter().next(),
+            template_id: intermediate_rep.template_id.into_iter().next(),
+            section_identifier: intermediate_rep.section_identifier.into_iter().next(),
+            explanation_text: intermediate_rep.explanation_text.into_iter().next(),
+            complexity_level: intermediate_rep.complexity_level.into_iter().next(),
+            related_terms: intermediate_rep.related_terms.into_iter().next(),
+            legal_references: intermediate_rep.legal_references.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ExplanationBlock> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ExplanationBlock>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ExplanationBlock>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ExplanationBlock - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ExplanationBlock> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ExplanationBlock as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ExplanationBlock - {}",
                                 value, err))
                     }
              },
@@ -6084,6 +13903,1185 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into FieldViolation - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct FileEmbeddings {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "embeddings")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub embeddings: Option<Vec<f32>>,
+
+    #[serde(rename = "modelVersion")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub model_version: Option<String>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl FileEmbeddings {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> FileEmbeddings {
+        FileEmbeddings {
+            id: None,
+            embeddings: None,
+            model_version: None,
+            created_at: None,
+            updated_at: None,
+        }
+    }
+}
+
+/// Converts the FileEmbeddings value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for FileEmbeddings {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.embeddings.as_ref().map(|embeddings| {
+                [
+                    "embeddings".to_string(),
+                    embeddings.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.model_version.as_ref().map(|model_version| {
+                [
+                    "modelVersion".to_string(),
+                    model_version.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a FileEmbeddings value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for FileEmbeddings {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub embeddings: Vec<Vec<f32>>,
+            pub model_version: Vec<String>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing FileEmbeddings".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "embeddings" => return std::result::Result::Err("Parsing a container in this style is not supported in FileEmbeddings".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "modelVersion" => intermediate_rep.model_version.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing FileEmbeddings".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(FileEmbeddings {
+            id: intermediate_rep.id.into_iter().next(),
+            embeddings: intermediate_rep.embeddings.into_iter().next(),
+            model_version: intermediate_rep.model_version.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<FileEmbeddings> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<FileEmbeddings>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<FileEmbeddings>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for FileEmbeddings - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<FileEmbeddings> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <FileEmbeddings as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into FileEmbeddings - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct FileMetadata {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "name")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub name: Option<String>,
+
+    #[serde(rename = "size")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub size: Option<String>,
+
+    #[serde(rename = "s3Key")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub s3_key: Option<String>,
+
+    #[serde(rename = "s3BucketName")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub s3_bucket_name: Option<String>,
+
+    #[serde(rename = "isDeleted")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub is_deleted: Option<bool>,
+
+    #[serde(rename = "version")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub version: Option<i32>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "deletedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub deleted_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "embeddings")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub embeddings: Option<models::FileEmbeddings>,
+
+    #[serde(rename = "versions")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub versions: Option<Vec<models::FileVersion>>,
+
+    #[serde(rename = "comments")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub comments: Option<Vec<models::CommentThread>>,
+
+    #[serde(rename = "sharing")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub sharing: Option<Vec<models::FileSharing>>,
+
+    #[serde(rename = "snapshots")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub snapshots: Option<Vec<models::DocumentSnapshot>>,
+
+}
+
+
+impl FileMetadata {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> FileMetadata {
+        FileMetadata {
+            id: None,
+            name: None,
+            size: None,
+            s3_key: None,
+            s3_bucket_name: None,
+            is_deleted: None,
+            version: None,
+            created_at: None,
+            updated_at: None,
+            deleted_at: None,
+            embeddings: None,
+            versions: None,
+            comments: None,
+            sharing: None,
+            snapshots: None,
+        }
+    }
+}
+
+/// Converts the FileMetadata value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for FileMetadata {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.name.as_ref().map(|name| {
+                [
+                    "name".to_string(),
+                    name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.size.as_ref().map(|size| {
+                [
+                    "size".to_string(),
+                    size.to_string(),
+                ].join(",")
+            }),
+
+
+            self.s3_key.as_ref().map(|s3_key| {
+                [
+                    "s3Key".to_string(),
+                    s3_key.to_string(),
+                ].join(",")
+            }),
+
+
+            self.s3_bucket_name.as_ref().map(|s3_bucket_name| {
+                [
+                    "s3BucketName".to_string(),
+                    s3_bucket_name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.is_deleted.as_ref().map(|is_deleted| {
+                [
+                    "isDeleted".to_string(),
+                    is_deleted.to_string(),
+                ].join(",")
+            }),
+
+
+            self.version.as_ref().map(|version| {
+                [
+                    "version".to_string(),
+                    version.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+            // Skipping deletedAt in query parameter serialization
+
+            // Skipping embeddings in query parameter serialization
+
+            // Skipping versions in query parameter serialization
+
+            // Skipping comments in query parameter serialization
+
+            // Skipping sharing in query parameter serialization
+
+            // Skipping snapshots in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a FileMetadata value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for FileMetadata {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub name: Vec<String>,
+            pub size: Vec<String>,
+            pub s3_key: Vec<String>,
+            pub s3_bucket_name: Vec<String>,
+            pub is_deleted: Vec<bool>,
+            pub version: Vec<i32>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub deleted_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub embeddings: Vec<models::FileEmbeddings>,
+            pub versions: Vec<Vec<models::FileVersion>>,
+            pub comments: Vec<Vec<models::CommentThread>>,
+            pub sharing: Vec<Vec<models::FileSharing>>,
+            pub snapshots: Vec<Vec<models::DocumentSnapshot>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing FileMetadata".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "size" => intermediate_rep.size.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "s3Key" => intermediate_rep.s3_key.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "s3BucketName" => intermediate_rep.s3_bucket_name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "isDeleted" => intermediate_rep.is_deleted.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "version" => intermediate_rep.version.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "deletedAt" => intermediate_rep.deleted_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "embeddings" => intermediate_rep.embeddings.push(<models::FileEmbeddings as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "versions" => return std::result::Result::Err("Parsing a container in this style is not supported in FileMetadata".to_string()),
+                    "comments" => return std::result::Result::Err("Parsing a container in this style is not supported in FileMetadata".to_string()),
+                    "sharing" => return std::result::Result::Err("Parsing a container in this style is not supported in FileMetadata".to_string()),
+                    "snapshots" => return std::result::Result::Err("Parsing a container in this style is not supported in FileMetadata".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing FileMetadata".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(FileMetadata {
+            id: intermediate_rep.id.into_iter().next(),
+            name: intermediate_rep.name.into_iter().next(),
+            size: intermediate_rep.size.into_iter().next(),
+            s3_key: intermediate_rep.s3_key.into_iter().next(),
+            s3_bucket_name: intermediate_rep.s3_bucket_name.into_iter().next(),
+            is_deleted: intermediate_rep.is_deleted.into_iter().next(),
+            version: intermediate_rep.version.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+            deleted_at: intermediate_rep.deleted_at.into_iter().next(),
+            embeddings: intermediate_rep.embeddings.into_iter().next(),
+            versions: intermediate_rep.versions.into_iter().next(),
+            comments: intermediate_rep.comments.into_iter().next(),
+            sharing: intermediate_rep.sharing.into_iter().next(),
+            snapshots: intermediate_rep.snapshots.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<FileMetadata> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<FileMetadata>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<FileMetadata>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for FileMetadata - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<FileMetadata> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <FileMetadata as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into FileMetadata - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct FileSharing {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "sharedWithEmail")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub shared_with_email: Option<String>,
+
+    #[serde(rename = "permissionLevel")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub permission_level: Option<String>,
+
+    #[serde(rename = "expiresAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub expires_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl FileSharing {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> FileSharing {
+        FileSharing {
+            id: None,
+            shared_with_email: None,
+            permission_level: None,
+            expires_at: None,
+            created_at: None,
+            updated_at: None,
+        }
+    }
+}
+
+/// Converts the FileSharing value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for FileSharing {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.shared_with_email.as_ref().map(|shared_with_email| {
+                [
+                    "sharedWithEmail".to_string(),
+                    shared_with_email.to_string(),
+                ].join(",")
+            }),
+
+
+            self.permission_level.as_ref().map(|permission_level| {
+                [
+                    "permissionLevel".to_string(),
+                    permission_level.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping expiresAt in query parameter serialization
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a FileSharing value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for FileSharing {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub shared_with_email: Vec<String>,
+            pub permission_level: Vec<String>,
+            pub expires_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing FileSharing".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "sharedWithEmail" => intermediate_rep.shared_with_email.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "permissionLevel" => intermediate_rep.permission_level.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "expiresAt" => intermediate_rep.expires_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing FileSharing".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(FileSharing {
+            id: intermediate_rep.id.into_iter().next(),
+            shared_with_email: intermediate_rep.shared_with_email.into_iter().next(),
+            permission_level: intermediate_rep.permission_level.into_iter().next(),
+            expires_at: intermediate_rep.expires_at.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<FileSharing> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<FileSharing>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<FileSharing>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for FileSharing - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<FileSharing> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <FileSharing as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into FileSharing - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct FileVersion {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "fileId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub file_id: Option<String>,
+
+    #[serde(rename = "versionNumber")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub version_number: Option<i32>,
+
+    #[serde(rename = "s3Key")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub s3_key: Option<String>,
+
+    #[serde(rename = "size")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub size: Option<String>,
+
+    #[serde(rename = "commitMessage")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub commit_message: Option<String>,
+
+    #[serde(rename = "authorId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub author_id: Option<String>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl FileVersion {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> FileVersion {
+        FileVersion {
+            id: None,
+            file_id: None,
+            version_number: None,
+            s3_key: None,
+            size: None,
+            commit_message: None,
+            author_id: None,
+            created_at: None,
+        }
+    }
+}
+
+/// Converts the FileVersion value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for FileVersion {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.file_id.as_ref().map(|file_id| {
+                [
+                    "fileId".to_string(),
+                    file_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.version_number.as_ref().map(|version_number| {
+                [
+                    "versionNumber".to_string(),
+                    version_number.to_string(),
+                ].join(",")
+            }),
+
+
+            self.s3_key.as_ref().map(|s3_key| {
+                [
+                    "s3Key".to_string(),
+                    s3_key.to_string(),
+                ].join(",")
+            }),
+
+
+            self.size.as_ref().map(|size| {
+                [
+                    "size".to_string(),
+                    size.to_string(),
+                ].join(",")
+            }),
+
+
+            self.commit_message.as_ref().map(|commit_message| {
+                [
+                    "commitMessage".to_string(),
+                    commit_message.to_string(),
+                ].join(",")
+            }),
+
+
+            self.author_id.as_ref().map(|author_id| {
+                [
+                    "authorId".to_string(),
+                    author_id.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a FileVersion value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for FileVersion {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub file_id: Vec<String>,
+            pub version_number: Vec<i32>,
+            pub s3_key: Vec<String>,
+            pub size: Vec<String>,
+            pub commit_message: Vec<String>,
+            pub author_id: Vec<String>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing FileVersion".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "fileId" => intermediate_rep.file_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "versionNumber" => intermediate_rep.version_number.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "s3Key" => intermediate_rep.s3_key.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "size" => intermediate_rep.size.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "commitMessage" => intermediate_rep.commit_message.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "authorId" => intermediate_rep.author_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing FileVersion".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(FileVersion {
+            id: intermediate_rep.id.into_iter().next(),
+            file_id: intermediate_rep.file_id.into_iter().next(),
+            version_number: intermediate_rep.version_number.into_iter().next(),
+            s3_key: intermediate_rep.s3_key.into_iter().next(),
+            size: intermediate_rep.size.into_iter().next(),
+            commit_message: intermediate_rep.commit_message.into_iter().next(),
+            author_id: intermediate_rep.author_id.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<FileVersion> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<FileVersion>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<FileVersion>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for FileVersion - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<FileVersion> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <FileVersion as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into FileVersion - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct FolderMetadata {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "name")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub name: Option<String>,
+
+    #[serde(rename = "s3BucketName")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub s3_bucket_name: Option<String>,
+
+    #[serde(rename = "s3FolderPath")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub s3_folder_path: Option<String>,
+
+    #[serde(rename = "isDeleted")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub is_deleted: Option<bool>,
+
+    #[serde(rename = "parentFolderId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub parent_folder_id: Option<String>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "deletedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub deleted_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "childFolders")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub child_folders: Option<Vec<models::FolderMetadata>>,
+
+    #[serde(rename = "files")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub files: Option<Vec<models::FileMetadata>>,
+
+}
+
+
+impl FolderMetadata {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> FolderMetadata {
+        FolderMetadata {
+            id: None,
+            name: None,
+            s3_bucket_name: None,
+            s3_folder_path: None,
+            is_deleted: None,
+            parent_folder_id: None,
+            created_at: None,
+            updated_at: None,
+            deleted_at: None,
+            child_folders: None,
+            files: None,
+        }
+    }
+}
+
+/// Converts the FolderMetadata value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for FolderMetadata {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.name.as_ref().map(|name| {
+                [
+                    "name".to_string(),
+                    name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.s3_bucket_name.as_ref().map(|s3_bucket_name| {
+                [
+                    "s3BucketName".to_string(),
+                    s3_bucket_name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.s3_folder_path.as_ref().map(|s3_folder_path| {
+                [
+                    "s3FolderPath".to_string(),
+                    s3_folder_path.to_string(),
+                ].join(",")
+            }),
+
+
+            self.is_deleted.as_ref().map(|is_deleted| {
+                [
+                    "isDeleted".to_string(),
+                    is_deleted.to_string(),
+                ].join(",")
+            }),
+
+
+            self.parent_folder_id.as_ref().map(|parent_folder_id| {
+                [
+                    "parentFolderId".to_string(),
+                    parent_folder_id.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+            // Skipping deletedAt in query parameter serialization
+
+            // Skipping childFolders in query parameter serialization
+
+            // Skipping files in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a FolderMetadata value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for FolderMetadata {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub name: Vec<String>,
+            pub s3_bucket_name: Vec<String>,
+            pub s3_folder_path: Vec<String>,
+            pub is_deleted: Vec<bool>,
+            pub parent_folder_id: Vec<String>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub deleted_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub child_folders: Vec<Vec<models::FolderMetadata>>,
+            pub files: Vec<Vec<models::FileMetadata>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing FolderMetadata".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "s3BucketName" => intermediate_rep.s3_bucket_name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "s3FolderPath" => intermediate_rep.s3_folder_path.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "isDeleted" => intermediate_rep.is_deleted.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "parentFolderId" => intermediate_rep.parent_folder_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "deletedAt" => intermediate_rep.deleted_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "childFolders" => return std::result::Result::Err("Parsing a container in this style is not supported in FolderMetadata".to_string()),
+                    "files" => return std::result::Result::Err("Parsing a container in this style is not supported in FolderMetadata".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing FolderMetadata".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(FolderMetadata {
+            id: intermediate_rep.id.into_iter().next(),
+            name: intermediate_rep.name.into_iter().next(),
+            s3_bucket_name: intermediate_rep.s3_bucket_name.into_iter().next(),
+            s3_folder_path: intermediate_rep.s3_folder_path.into_iter().next(),
+            is_deleted: intermediate_rep.is_deleted.into_iter().next(),
+            parent_folder_id: intermediate_rep.parent_folder_id.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+            deleted_at: intermediate_rep.deleted_at.into_iter().next(),
+            child_folders: intermediate_rep.child_folders.into_iter().next(),
+            files: intermediate_rep.files.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<FolderMetadata> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<FolderMetadata>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<FolderMetadata>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for FolderMetadata - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<FolderMetadata> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <FolderMetadata as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into FolderMetadata - {}",
                                 value, err))
                     }
              },
@@ -6558,6 +15556,124 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into GetAccountResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct GetAccountResponse1 {
+    #[serde(rename = "account")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub account: Option<models::Account1>,
+
+}
+
+
+impl GetAccountResponse1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> GetAccountResponse1 {
+        GetAccountResponse1 {
+            account: None,
+        }
+    }
+}
+
+/// Converts the GetAccountResponse1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for GetAccountResponse1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping account in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a GetAccountResponse1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for GetAccountResponse1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub account: Vec<models::Account1>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing GetAccountResponse1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "account" => intermediate_rep.account.push(<models::Account1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing GetAccountResponse1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(GetAccountResponse1 {
+            account: intermediate_rep.account.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<GetAccountResponse1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<GetAccountResponse1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<GetAccountResponse1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for GetAccountResponse1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<GetAccountResponse1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <GetAccountResponse1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into GetAccountResponse1 - {}",
                                 value, err))
                     }
              },
@@ -7144,10 +16260,348 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct GetWorkspaceAnalyticsResponse1 {
+    #[serde(rename = "activity")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub activity: Option<models::ActivityMetrics>,
+
+    #[serde(rename = "userActivities")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub user_activities: Option<Vec<models::UserActivity>>,
+
+    #[serde(rename = "compliance")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub compliance: Option<models::ComplianceMetrics>,
+
+    #[serde(rename = "recentActivities")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub recent_activities: Option<Vec<models::WorkspaceActivity>>,
+
+}
+
+
+impl GetWorkspaceAnalyticsResponse1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> GetWorkspaceAnalyticsResponse1 {
+        GetWorkspaceAnalyticsResponse1 {
+            activity: None,
+            user_activities: None,
+            compliance: None,
+            recent_activities: None,
+        }
+    }
+}
+
+/// Converts the GetWorkspaceAnalyticsResponse1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for GetWorkspaceAnalyticsResponse1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping activity in query parameter serialization
+
+            // Skipping userActivities in query parameter serialization
+
+            // Skipping compliance in query parameter serialization
+
+            // Skipping recentActivities in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a GetWorkspaceAnalyticsResponse1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for GetWorkspaceAnalyticsResponse1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub activity: Vec<models::ActivityMetrics>,
+            pub user_activities: Vec<Vec<models::UserActivity>>,
+            pub compliance: Vec<models::ComplianceMetrics>,
+            pub recent_activities: Vec<Vec<models::WorkspaceActivity>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing GetWorkspaceAnalyticsResponse1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "activity" => intermediate_rep.activity.push(<models::ActivityMetrics as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "userActivities" => return std::result::Result::Err("Parsing a container in this style is not supported in GetWorkspaceAnalyticsResponse1".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "compliance" => intermediate_rep.compliance.push(<models::ComplianceMetrics as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "recentActivities" => return std::result::Result::Err("Parsing a container in this style is not supported in GetWorkspaceAnalyticsResponse1".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing GetWorkspaceAnalyticsResponse1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(GetWorkspaceAnalyticsResponse1 {
+            activity: intermediate_rep.activity.into_iter().next(),
+            user_activities: intermediate_rep.user_activities.into_iter().next(),
+            compliance: intermediate_rep.compliance.into_iter().next(),
+            recent_activities: intermediate_rep.recent_activities.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<GetWorkspaceAnalyticsResponse1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<GetWorkspaceAnalyticsResponse1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<GetWorkspaceAnalyticsResponse1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for GetWorkspaceAnalyticsResponse1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<GetWorkspaceAnalyticsResponse1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <GetWorkspaceAnalyticsResponse1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into GetWorkspaceAnalyticsResponse1 - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct GetWorkspaceComplianceReportResponse {
+    #[serde(rename = "overallScore")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub overall_score: Option<f32>,
+
+    #[serde(rename = "complianceStatus")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub compliance_status: Option<String>,
+
+    #[serde(rename = "violations")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub violations: Option<Vec<models::ComplianceViolation>>,
+
+    #[serde(rename = "categoryScores")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub category_scores: Option<Vec<models::ComplianceScore>>,
+
+    #[serde(rename = "reportGeneratedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub report_generated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "certificationId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub certification_id: Option<String>,
+
+}
+
+
+impl GetWorkspaceComplianceReportResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> GetWorkspaceComplianceReportResponse {
+        GetWorkspaceComplianceReportResponse {
+            overall_score: None,
+            compliance_status: None,
+            violations: None,
+            category_scores: None,
+            report_generated_at: None,
+            certification_id: None,
+        }
+    }
+}
+
+/// Converts the GetWorkspaceComplianceReportResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for GetWorkspaceComplianceReportResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.overall_score.as_ref().map(|overall_score| {
+                [
+                    "overallScore".to_string(),
+                    overall_score.to_string(),
+                ].join(",")
+            }),
+
+
+            self.compliance_status.as_ref().map(|compliance_status| {
+                [
+                    "complianceStatus".to_string(),
+                    compliance_status.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping violations in query parameter serialization
+
+            // Skipping categoryScores in query parameter serialization
+
+            // Skipping reportGeneratedAt in query parameter serialization
+
+
+            self.certification_id.as_ref().map(|certification_id| {
+                [
+                    "certificationId".to_string(),
+                    certification_id.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a GetWorkspaceComplianceReportResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for GetWorkspaceComplianceReportResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub overall_score: Vec<f32>,
+            pub compliance_status: Vec<String>,
+            pub violations: Vec<Vec<models::ComplianceViolation>>,
+            pub category_scores: Vec<Vec<models::ComplianceScore>>,
+            pub report_generated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub certification_id: Vec<String>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing GetWorkspaceComplianceReportResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "overallScore" => intermediate_rep.overall_score.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "complianceStatus" => intermediate_rep.compliance_status.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "violations" => return std::result::Result::Err("Parsing a container in this style is not supported in GetWorkspaceComplianceReportResponse".to_string()),
+                    "categoryScores" => return std::result::Result::Err("Parsing a container in this style is not supported in GetWorkspaceComplianceReportResponse".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "reportGeneratedAt" => intermediate_rep.report_generated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "certificationId" => intermediate_rep.certification_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing GetWorkspaceComplianceReportResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(GetWorkspaceComplianceReportResponse {
+            overall_score: intermediate_rep.overall_score.into_iter().next(),
+            compliance_status: intermediate_rep.compliance_status.into_iter().next(),
+            violations: intermediate_rep.violations.into_iter().next(),
+            category_scores: intermediate_rep.category_scores.into_iter().next(),
+            report_generated_at: intermediate_rep.report_generated_at.into_iter().next(),
+            certification_id: intermediate_rep.certification_id.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<GetWorkspaceComplianceReportResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<GetWorkspaceComplianceReportResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<GetWorkspaceComplianceReportResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for GetWorkspaceComplianceReportResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<GetWorkspaceComplianceReportResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <GetWorkspaceComplianceReportResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into GetWorkspaceComplianceReportResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct GetWorkspaceResponse {
     #[serde(rename = "workspace")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub workspace: Option<models::Workspace>,
+    pub workspace: Option<models::Workspace1>,
 
 }
 
@@ -7186,7 +16640,7 @@ impl std::str::FromStr for GetWorkspaceResponse {
         #[derive(Default)]
         #[allow(dead_code)]
         struct IntermediateRep {
-            pub workspace: Vec<models::Workspace>,
+            pub workspace: Vec<models::Workspace1>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -7205,7 +16659,7 @@ impl std::str::FromStr for GetWorkspaceResponse {
                 #[allow(clippy::match_single_binding)]
                 match key {
                     #[allow(clippy::redundant_clone)]
-                    "workspace" => intermediate_rep.workspace.push(<models::Workspace as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "workspace" => intermediate_rep.workspace.push(<models::Workspace1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing GetWorkspaceResponse".to_string())
                 }
             }
@@ -7249,6 +16703,219 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into GetWorkspaceResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct GetWorkspaceStorageStatsResponse {
+    #[serde(rename = "totalStorageUsed")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_storage_used: Option<String>,
+
+    #[serde(rename = "storageQuota")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub storage_quota: Option<String>,
+
+    #[serde(rename = "usagePercentage")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub usage_percentage: Option<f32>,
+
+    #[serde(rename = "storageByType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub storage_by_type: Option<Vec<models::StorageBreakdown>>,
+
+    #[serde(rename = "totalFiles")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_files: Option<i32>,
+
+    #[serde(rename = "totalFolders")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_folders: Option<i32>,
+
+    #[serde(rename = "lastUpdated")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub last_updated: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl GetWorkspaceStorageStatsResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> GetWorkspaceStorageStatsResponse {
+        GetWorkspaceStorageStatsResponse {
+            total_storage_used: None,
+            storage_quota: None,
+            usage_percentage: None,
+            storage_by_type: None,
+            total_files: None,
+            total_folders: None,
+            last_updated: None,
+        }
+    }
+}
+
+/// Converts the GetWorkspaceStorageStatsResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for GetWorkspaceStorageStatsResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.total_storage_used.as_ref().map(|total_storage_used| {
+                [
+                    "totalStorageUsed".to_string(),
+                    total_storage_used.to_string(),
+                ].join(",")
+            }),
+
+
+            self.storage_quota.as_ref().map(|storage_quota| {
+                [
+                    "storageQuota".to_string(),
+                    storage_quota.to_string(),
+                ].join(",")
+            }),
+
+
+            self.usage_percentage.as_ref().map(|usage_percentage| {
+                [
+                    "usagePercentage".to_string(),
+                    usage_percentage.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping storageByType in query parameter serialization
+
+
+            self.total_files.as_ref().map(|total_files| {
+                [
+                    "totalFiles".to_string(),
+                    total_files.to_string(),
+                ].join(",")
+            }),
+
+
+            self.total_folders.as_ref().map(|total_folders| {
+                [
+                    "totalFolders".to_string(),
+                    total_folders.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping lastUpdated in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a GetWorkspaceStorageStatsResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for GetWorkspaceStorageStatsResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub total_storage_used: Vec<String>,
+            pub storage_quota: Vec<String>,
+            pub usage_percentage: Vec<f32>,
+            pub storage_by_type: Vec<Vec<models::StorageBreakdown>>,
+            pub total_files: Vec<i32>,
+            pub total_folders: Vec<i32>,
+            pub last_updated: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing GetWorkspaceStorageStatsResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "totalStorageUsed" => intermediate_rep.total_storage_used.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "storageQuota" => intermediate_rep.storage_quota.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "usagePercentage" => intermediate_rep.usage_percentage.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "storageByType" => return std::result::Result::Err("Parsing a container in this style is not supported in GetWorkspaceStorageStatsResponse".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "totalFiles" => intermediate_rep.total_files.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "totalFolders" => intermediate_rep.total_folders.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "lastUpdated" => intermediate_rep.last_updated.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing GetWorkspaceStorageStatsResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(GetWorkspaceStorageStatsResponse {
+            total_storage_used: intermediate_rep.total_storage_used.into_iter().next(),
+            storage_quota: intermediate_rep.storage_quota.into_iter().next(),
+            usage_percentage: intermediate_rep.usage_percentage.into_iter().next(),
+            storage_by_type: intermediate_rep.storage_by_type.into_iter().next(),
+            total_files: intermediate_rep.total_files.into_iter().next(),
+            total_folders: intermediate_rep.total_folders.into_iter().next(),
+            last_updated: intermediate_rep.last_updated.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<GetWorkspaceStorageStatsResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<GetWorkspaceStorageStatsResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<GetWorkspaceStorageStatsResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for GetWorkspaceStorageStatsResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<GetWorkspaceStorageStatsResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <GetWorkspaceStorageStatsResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into GetWorkspaceStorageStatsResponse - {}",
                                 value, err))
                     }
              },
@@ -8044,6 +17711,98 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
     }
 }
 
+
+/// - LANGUAGE_ENGLISH: en  - LANGUAGE_SPANISH: es  - LANGUAGE_FRENCH: fr  - LANGUAGE_GERMAN: de  - LANGUAGE_ITALIAN: it  - LANGUAGE_PORTUGUESE: pt  - LANGUAGE_DUTCH: nl  - LANGUAGE_RUSSIAN: ru  - LANGUAGE_CHINESE: zh  - LANGUAGE_JAPANESE: ja  - LANGUAGE_KOREAN: ko  - LANGUAGE_ARABIC: ar  - LANGUAGE_HINDI: hi  - LANGUAGE_GREEK: el  - LANGUAGE_TURKISH: tr
+/// Enumeration of values.
+/// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
+/// which helps with FFI.
+#[allow(non_camel_case_types)]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "conversion", derive(frunk_enum_derive::LabelledGenericEnum))]
+pub enum Language {
+    #[serde(rename = "LANGUAGE_UNSPECIFIED")]
+    Unspecified,
+    #[serde(rename = "LANGUAGE_ENGLISH")]
+    English,
+    #[serde(rename = "LANGUAGE_SPANISH")]
+    Spanish,
+    #[serde(rename = "LANGUAGE_FRENCH")]
+    French,
+    #[serde(rename = "LANGUAGE_GERMAN")]
+    German,
+    #[serde(rename = "LANGUAGE_ITALIAN")]
+    Italian,
+    #[serde(rename = "LANGUAGE_PORTUGUESE")]
+    Portuguese,
+    #[serde(rename = "LANGUAGE_DUTCH")]
+    Dutch,
+    #[serde(rename = "LANGUAGE_RUSSIAN")]
+    Russian,
+    #[serde(rename = "LANGUAGE_CHINESE")]
+    Chinese,
+    #[serde(rename = "LANGUAGE_JAPANESE")]
+    Japanese,
+    #[serde(rename = "LANGUAGE_KOREAN")]
+    Korean,
+    #[serde(rename = "LANGUAGE_ARABIC")]
+    Arabic,
+    #[serde(rename = "LANGUAGE_HINDI")]
+    Hindi,
+    #[serde(rename = "LANGUAGE_GREEK")]
+    Greek,
+    #[serde(rename = "LANGUAGE_TURKISH")]
+    Turkish,
+}
+
+impl std::fmt::Display for Language {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            Language::Unspecified => write!(f, "LANGUAGE_UNSPECIFIED"),
+            Language::English => write!(f, "LANGUAGE_ENGLISH"),
+            Language::Spanish => write!(f, "LANGUAGE_SPANISH"),
+            Language::French => write!(f, "LANGUAGE_FRENCH"),
+            Language::German => write!(f, "LANGUAGE_GERMAN"),
+            Language::Italian => write!(f, "LANGUAGE_ITALIAN"),
+            Language::Portuguese => write!(f, "LANGUAGE_PORTUGUESE"),
+            Language::Dutch => write!(f, "LANGUAGE_DUTCH"),
+            Language::Russian => write!(f, "LANGUAGE_RUSSIAN"),
+            Language::Chinese => write!(f, "LANGUAGE_CHINESE"),
+            Language::Japanese => write!(f, "LANGUAGE_JAPANESE"),
+            Language::Korean => write!(f, "LANGUAGE_KOREAN"),
+            Language::Arabic => write!(f, "LANGUAGE_ARABIC"),
+            Language::Hindi => write!(f, "LANGUAGE_HINDI"),
+            Language::Greek => write!(f, "LANGUAGE_GREEK"),
+            Language::Turkish => write!(f, "LANGUAGE_TURKISH"),
+        }
+    }
+}
+
+impl std::str::FromStr for Language {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s {
+            "LANGUAGE_UNSPECIFIED" => std::result::Result::Ok(Language::Unspecified),
+            "LANGUAGE_ENGLISH" => std::result::Result::Ok(Language::English),
+            "LANGUAGE_SPANISH" => std::result::Result::Ok(Language::Spanish),
+            "LANGUAGE_FRENCH" => std::result::Result::Ok(Language::French),
+            "LANGUAGE_GERMAN" => std::result::Result::Ok(Language::German),
+            "LANGUAGE_ITALIAN" => std::result::Result::Ok(Language::Italian),
+            "LANGUAGE_PORTUGUESE" => std::result::Result::Ok(Language::Portuguese),
+            "LANGUAGE_DUTCH" => std::result::Result::Ok(Language::Dutch),
+            "LANGUAGE_RUSSIAN" => std::result::Result::Ok(Language::Russian),
+            "LANGUAGE_CHINESE" => std::result::Result::Ok(Language::Chinese),
+            "LANGUAGE_JAPANESE" => std::result::Result::Ok(Language::Japanese),
+            "LANGUAGE_KOREAN" => std::result::Result::Ok(Language::Korean),
+            "LANGUAGE_ARABIC" => std::result::Result::Ok(Language::Arabic),
+            "LANGUAGE_HINDI" => std::result::Result::Ok(Language::Hindi),
+            "LANGUAGE_GREEK" => std::result::Result::Ok(Language::Greek),
+            "LANGUAGE_TURKISH" => std::result::Result::Ok(Language::Turkish),
+            _ => std::result::Result::Err(format!("Value not valid: {}", s)),
+        }
+    }
+}
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
@@ -9727,6 +19486,157 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ListAccountsResponse1 {
+    #[serde(rename = "accounts")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub accounts: Option<Vec<models::Account1>>,
+
+    #[serde(rename = "nextPageToken")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub next_page_token: Option<String>,
+
+    #[serde(rename = "totalSize")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_size: Option<i32>,
+
+}
+
+
+impl ListAccountsResponse1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ListAccountsResponse1 {
+        ListAccountsResponse1 {
+            accounts: None,
+            next_page_token: None,
+            total_size: None,
+        }
+    }
+}
+
+/// Converts the ListAccountsResponse1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ListAccountsResponse1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping accounts in query parameter serialization
+
+
+            self.next_page_token.as_ref().map(|next_page_token| {
+                [
+                    "nextPageToken".to_string(),
+                    next_page_token.to_string(),
+                ].join(",")
+            }),
+
+
+            self.total_size.as_ref().map(|total_size| {
+                [
+                    "totalSize".to_string(),
+                    total_size.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ListAccountsResponse1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ListAccountsResponse1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub accounts: Vec<Vec<models::Account1>>,
+            pub next_page_token: Vec<String>,
+            pub total_size: Vec<i32>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ListAccountsResponse1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    "accounts" => return std::result::Result::Err("Parsing a container in this style is not supported in ListAccountsResponse1".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "nextPageToken" => intermediate_rep.next_page_token.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "totalSize" => intermediate_rep.total_size.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ListAccountsResponse1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ListAccountsResponse1 {
+            accounts: intermediate_rep.accounts.into_iter().next(),
+            next_page_token: intermediate_rep.next_page_token.into_iter().next(),
+            total_size: intermediate_rep.total_size.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ListAccountsResponse1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ListAccountsResponse1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ListAccountsResponse1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ListAccountsResponse1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ListAccountsResponse1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ListAccountsResponse1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ListAccountsResponse1 - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct ListScrapingJobsResponse {
     #[serde(rename = "jobs")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -9978,6 +19888,157 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ListWorkspaceSharingsResponse {
+    #[serde(rename = "sharings")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub sharings: Option<Vec<models::WorkspaceSharing>>,
+
+    #[serde(rename = "nextPageToken")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub next_page_token: Option<String>,
+
+    #[serde(rename = "totalSize")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_size: Option<i32>,
+
+}
+
+
+impl ListWorkspaceSharingsResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ListWorkspaceSharingsResponse {
+        ListWorkspaceSharingsResponse {
+            sharings: None,
+            next_page_token: None,
+            total_size: None,
+        }
+    }
+}
+
+/// Converts the ListWorkspaceSharingsResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ListWorkspaceSharingsResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping sharings in query parameter serialization
+
+
+            self.next_page_token.as_ref().map(|next_page_token| {
+                [
+                    "nextPageToken".to_string(),
+                    next_page_token.to_string(),
+                ].join(",")
+            }),
+
+
+            self.total_size.as_ref().map(|total_size| {
+                [
+                    "totalSize".to_string(),
+                    total_size.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ListWorkspaceSharingsResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ListWorkspaceSharingsResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub sharings: Vec<Vec<models::WorkspaceSharing>>,
+            pub next_page_token: Vec<String>,
+            pub total_size: Vec<i32>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ListWorkspaceSharingsResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    "sharings" => return std::result::Result::Err("Parsing a container in this style is not supported in ListWorkspaceSharingsResponse".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "nextPageToken" => intermediate_rep.next_page_token.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "totalSize" => intermediate_rep.total_size.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ListWorkspaceSharingsResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ListWorkspaceSharingsResponse {
+            sharings: intermediate_rep.sharings.into_iter().next(),
+            next_page_token: intermediate_rep.next_page_token.into_iter().next(),
+            total_size: intermediate_rep.total_size.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ListWorkspaceSharingsResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ListWorkspaceSharingsResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ListWorkspaceSharingsResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ListWorkspaceSharingsResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ListWorkspaceSharingsResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ListWorkspaceSharingsResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ListWorkspaceSharingsResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct ListWorkspacesResponse {
     #[serde(rename = "workspaces")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -10099,6 +20160,979 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into ListWorkspacesResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ListWorkspacesResponse1 {
+    #[serde(rename = "workspaces")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub workspaces: Option<Vec<models::Workspace1>>,
+
+    #[serde(rename = "nextPageToken")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub next_page_token: Option<String>,
+
+    #[serde(rename = "totalSize")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_size: Option<i32>,
+
+}
+
+
+impl ListWorkspacesResponse1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ListWorkspacesResponse1 {
+        ListWorkspacesResponse1 {
+            workspaces: None,
+            next_page_token: None,
+            total_size: None,
+        }
+    }
+}
+
+/// Converts the ListWorkspacesResponse1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ListWorkspacesResponse1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping workspaces in query parameter serialization
+
+
+            self.next_page_token.as_ref().map(|next_page_token| {
+                [
+                    "nextPageToken".to_string(),
+                    next_page_token.to_string(),
+                ].join(",")
+            }),
+
+
+            self.total_size.as_ref().map(|total_size| {
+                [
+                    "totalSize".to_string(),
+                    total_size.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ListWorkspacesResponse1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ListWorkspacesResponse1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub workspaces: Vec<Vec<models::Workspace1>>,
+            pub next_page_token: Vec<String>,
+            pub total_size: Vec<i32>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ListWorkspacesResponse1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    "workspaces" => return std::result::Result::Err("Parsing a container in this style is not supported in ListWorkspacesResponse1".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "nextPageToken" => intermediate_rep.next_page_token.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "totalSize" => intermediate_rep.total_size.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ListWorkspacesResponse1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ListWorkspacesResponse1 {
+            workspaces: intermediate_rep.workspaces.into_iter().next(),
+            next_page_token: intermediate_rep.next_page_token.into_iter().next(),
+            total_size: intermediate_rep.total_size.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ListWorkspacesResponse1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ListWorkspacesResponse1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ListWorkspacesResponse1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ListWorkspacesResponse1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ListWorkspacesResponse1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ListWorkspacesResponse1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ListWorkspacesResponse1 - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct MarketplaceApp {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "name")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub name: Option<String>,
+
+    #[serde(rename = "description")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub description: Option<String>,
+
+    #[serde(rename = "developerId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub developer_id: Option<String>,
+
+    #[serde(rename = "category")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub category: Option<models::AppCategory>,
+
+    #[serde(rename = "supportedContractTypes")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub supported_contract_types: Option<Vec<String>>,
+
+    #[serde(rename = "features")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub features: Option<Vec<String>>,
+
+    #[serde(rename = "pricingModel")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub pricing_model: Option<models::PricingModel>,
+
+    #[serde(rename = "pricingTiers")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub pricing_tiers: Option<std::collections::HashMap<String, f32>>,
+
+    #[serde(rename = "supportedIntegrations")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub supported_integrations: Option<Vec<String>>,
+
+    #[serde(rename = "isVerified")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub is_verified: Option<bool>,
+
+    #[serde(rename = "rating")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub rating: Option<f32>,
+
+    #[serde(rename = "installationCount")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub installation_count: Option<i32>,
+
+    #[serde(rename = "requiredPermissions")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub required_permissions: Option<Vec<String>>,
+
+    #[serde(rename = "metadata")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub metadata: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "documentationUrl")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub documentation_url: Option<String>,
+
+    #[serde(rename = "supportEmail")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub support_email: Option<String>,
+
+    #[serde(rename = "screenshots")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub screenshots: Option<Vec<String>>,
+
+    #[serde(rename = "privacyPolicyUrl")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub privacy_policy_url: Option<String>,
+
+    #[serde(rename = "termsUrl")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub terms_url: Option<String>,
+
+    #[serde(rename = "publishedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub published_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "lastUpdated")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub last_updated: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "versions")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub versions: Option<Vec<models::AppVersion>>,
+
+    #[serde(rename = "installations")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub installations: Option<Vec<models::AppInstallation>>,
+
+    #[serde(rename = "analytics")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub analytics: Option<Vec<models::AppAnalytics>>,
+
+    #[serde(rename = "reviews")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub reviews: Option<Vec<models::AppReview>>,
+
+    #[serde(rename = "info")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub info: Option<models::AppDevelopmentInfo>,
+
+    #[serde(rename = "webhooks")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub webhooks: Option<Vec<models::AppWebhook>>,
+
+    #[serde(rename = "permissions")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub permissions: Option<Vec<models::AppPermission>>,
+
+}
+
+
+impl MarketplaceApp {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> MarketplaceApp {
+        MarketplaceApp {
+            id: None,
+            name: None,
+            description: None,
+            developer_id: None,
+            category: None,
+            supported_contract_types: None,
+            features: None,
+            pricing_model: None,
+            pricing_tiers: None,
+            supported_integrations: None,
+            is_verified: None,
+            rating: None,
+            installation_count: None,
+            required_permissions: None,
+            metadata: None,
+            documentation_url: None,
+            support_email: None,
+            screenshots: None,
+            privacy_policy_url: None,
+            terms_url: None,
+            published_at: None,
+            last_updated: None,
+            versions: None,
+            installations: None,
+            analytics: None,
+            reviews: None,
+            info: None,
+            webhooks: None,
+            permissions: None,
+        }
+    }
+}
+
+/// Converts the MarketplaceApp value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for MarketplaceApp {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.name.as_ref().map(|name| {
+                [
+                    "name".to_string(),
+                    name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.description.as_ref().map(|description| {
+                [
+                    "description".to_string(),
+                    description.to_string(),
+                ].join(",")
+            }),
+
+
+            self.developer_id.as_ref().map(|developer_id| {
+                [
+                    "developerId".to_string(),
+                    developer_id.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping category in query parameter serialization
+
+
+            self.supported_contract_types.as_ref().map(|supported_contract_types| {
+                [
+                    "supportedContractTypes".to_string(),
+                    supported_contract_types.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.features.as_ref().map(|features| {
+                [
+                    "features".to_string(),
+                    features.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping pricingModel in query parameter serialization
+
+            // Skipping pricingTiers in query parameter serialization
+
+
+            self.supported_integrations.as_ref().map(|supported_integrations| {
+                [
+                    "supportedIntegrations".to_string(),
+                    supported_integrations.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.is_verified.as_ref().map(|is_verified| {
+                [
+                    "isVerified".to_string(),
+                    is_verified.to_string(),
+                ].join(",")
+            }),
+
+
+            self.rating.as_ref().map(|rating| {
+                [
+                    "rating".to_string(),
+                    rating.to_string(),
+                ].join(",")
+            }),
+
+
+            self.installation_count.as_ref().map(|installation_count| {
+                [
+                    "installationCount".to_string(),
+                    installation_count.to_string(),
+                ].join(",")
+            }),
+
+
+            self.required_permissions.as_ref().map(|required_permissions| {
+                [
+                    "requiredPermissions".to_string(),
+                    required_permissions.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping metadata in query parameter serialization
+
+
+            self.documentation_url.as_ref().map(|documentation_url| {
+                [
+                    "documentationUrl".to_string(),
+                    documentation_url.to_string(),
+                ].join(",")
+            }),
+
+
+            self.support_email.as_ref().map(|support_email| {
+                [
+                    "supportEmail".to_string(),
+                    support_email.to_string(),
+                ].join(",")
+            }),
+
+
+            self.screenshots.as_ref().map(|screenshots| {
+                [
+                    "screenshots".to_string(),
+                    screenshots.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.privacy_policy_url.as_ref().map(|privacy_policy_url| {
+                [
+                    "privacyPolicyUrl".to_string(),
+                    privacy_policy_url.to_string(),
+                ].join(",")
+            }),
+
+
+            self.terms_url.as_ref().map(|terms_url| {
+                [
+                    "termsUrl".to_string(),
+                    terms_url.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping publishedAt in query parameter serialization
+
+            // Skipping lastUpdated in query parameter serialization
+
+            // Skipping versions in query parameter serialization
+
+            // Skipping installations in query parameter serialization
+
+            // Skipping analytics in query parameter serialization
+
+            // Skipping reviews in query parameter serialization
+
+            // Skipping info in query parameter serialization
+
+            // Skipping webhooks in query parameter serialization
+
+            // Skipping permissions in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a MarketplaceApp value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for MarketplaceApp {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub name: Vec<String>,
+            pub description: Vec<String>,
+            pub developer_id: Vec<String>,
+            pub category: Vec<models::AppCategory>,
+            pub supported_contract_types: Vec<Vec<String>>,
+            pub features: Vec<Vec<String>>,
+            pub pricing_model: Vec<models::PricingModel>,
+            pub pricing_tiers: Vec<std::collections::HashMap<String, f32>>,
+            pub supported_integrations: Vec<Vec<String>>,
+            pub is_verified: Vec<bool>,
+            pub rating: Vec<f32>,
+            pub installation_count: Vec<i32>,
+            pub required_permissions: Vec<Vec<String>>,
+            pub metadata: Vec<std::collections::HashMap<String, String>>,
+            pub documentation_url: Vec<String>,
+            pub support_email: Vec<String>,
+            pub screenshots: Vec<Vec<String>>,
+            pub privacy_policy_url: Vec<String>,
+            pub terms_url: Vec<String>,
+            pub published_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub last_updated: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub versions: Vec<Vec<models::AppVersion>>,
+            pub installations: Vec<Vec<models::AppInstallation>>,
+            pub analytics: Vec<Vec<models::AppAnalytics>>,
+            pub reviews: Vec<Vec<models::AppReview>>,
+            pub info: Vec<models::AppDevelopmentInfo>,
+            pub webhooks: Vec<Vec<models::AppWebhook>>,
+            pub permissions: Vec<Vec<models::AppPermission>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing MarketplaceApp".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "developerId" => intermediate_rep.developer_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "category" => intermediate_rep.category.push(<models::AppCategory as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "supportedContractTypes" => return std::result::Result::Err("Parsing a container in this style is not supported in MarketplaceApp".to_string()),
+                    "features" => return std::result::Result::Err("Parsing a container in this style is not supported in MarketplaceApp".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "pricingModel" => intermediate_rep.pricing_model.push(<models::PricingModel as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "pricingTiers" => return std::result::Result::Err("Parsing a container in this style is not supported in MarketplaceApp".to_string()),
+                    "supportedIntegrations" => return std::result::Result::Err("Parsing a container in this style is not supported in MarketplaceApp".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "isVerified" => intermediate_rep.is_verified.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "rating" => intermediate_rep.rating.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "installationCount" => intermediate_rep.installation_count.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "requiredPermissions" => return std::result::Result::Err("Parsing a container in this style is not supported in MarketplaceApp".to_string()),
+                    "metadata" => return std::result::Result::Err("Parsing a container in this style is not supported in MarketplaceApp".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "documentationUrl" => intermediate_rep.documentation_url.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "supportEmail" => intermediate_rep.support_email.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "screenshots" => return std::result::Result::Err("Parsing a container in this style is not supported in MarketplaceApp".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "privacyPolicyUrl" => intermediate_rep.privacy_policy_url.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "termsUrl" => intermediate_rep.terms_url.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "publishedAt" => intermediate_rep.published_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "lastUpdated" => intermediate_rep.last_updated.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "versions" => return std::result::Result::Err("Parsing a container in this style is not supported in MarketplaceApp".to_string()),
+                    "installations" => return std::result::Result::Err("Parsing a container in this style is not supported in MarketplaceApp".to_string()),
+                    "analytics" => return std::result::Result::Err("Parsing a container in this style is not supported in MarketplaceApp".to_string()),
+                    "reviews" => return std::result::Result::Err("Parsing a container in this style is not supported in MarketplaceApp".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "info" => intermediate_rep.info.push(<models::AppDevelopmentInfo as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "webhooks" => return std::result::Result::Err("Parsing a container in this style is not supported in MarketplaceApp".to_string()),
+                    "permissions" => return std::result::Result::Err("Parsing a container in this style is not supported in MarketplaceApp".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing MarketplaceApp".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(MarketplaceApp {
+            id: intermediate_rep.id.into_iter().next(),
+            name: intermediate_rep.name.into_iter().next(),
+            description: intermediate_rep.description.into_iter().next(),
+            developer_id: intermediate_rep.developer_id.into_iter().next(),
+            category: intermediate_rep.category.into_iter().next(),
+            supported_contract_types: intermediate_rep.supported_contract_types.into_iter().next(),
+            features: intermediate_rep.features.into_iter().next(),
+            pricing_model: intermediate_rep.pricing_model.into_iter().next(),
+            pricing_tiers: intermediate_rep.pricing_tiers.into_iter().next(),
+            supported_integrations: intermediate_rep.supported_integrations.into_iter().next(),
+            is_verified: intermediate_rep.is_verified.into_iter().next(),
+            rating: intermediate_rep.rating.into_iter().next(),
+            installation_count: intermediate_rep.installation_count.into_iter().next(),
+            required_permissions: intermediate_rep.required_permissions.into_iter().next(),
+            metadata: intermediate_rep.metadata.into_iter().next(),
+            documentation_url: intermediate_rep.documentation_url.into_iter().next(),
+            support_email: intermediate_rep.support_email.into_iter().next(),
+            screenshots: intermediate_rep.screenshots.into_iter().next(),
+            privacy_policy_url: intermediate_rep.privacy_policy_url.into_iter().next(),
+            terms_url: intermediate_rep.terms_url.into_iter().next(),
+            published_at: intermediate_rep.published_at.into_iter().next(),
+            last_updated: intermediate_rep.last_updated.into_iter().next(),
+            versions: intermediate_rep.versions.into_iter().next(),
+            installations: intermediate_rep.installations.into_iter().next(),
+            analytics: intermediate_rep.analytics.into_iter().next(),
+            reviews: intermediate_rep.reviews.into_iter().next(),
+            info: intermediate_rep.info.into_iter().next(),
+            webhooks: intermediate_rep.webhooks.into_iter().next(),
+            permissions: intermediate_rep.permissions.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<MarketplaceApp> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<MarketplaceApp>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<MarketplaceApp>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for MarketplaceApp - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<MarketplaceApp> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <MarketplaceApp as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into MarketplaceApp - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct MergeRequest {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "sourceBranchId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub source_branch_id: Option<String>,
+
+    #[serde(rename = "targetBranchId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub target_branch_id: Option<String>,
+
+    #[serde(rename = "title")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub title: Option<String>,
+
+    #[serde(rename = "description")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub description: Option<String>,
+
+    #[serde(rename = "authorId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub author_id: Option<String>,
+
+    #[serde(rename = "reviewers")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub reviewers: Option<Vec<String>>,
+
+    #[serde(rename = "status")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub status: Option<String>,
+
+    #[serde(rename = "labels")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub labels: Option<Vec<String>>,
+
+    #[serde(rename = "hasConflicts")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub has_conflicts: Option<bool>,
+
+    #[serde(rename = "automatedCheckResults")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub automated_check_results: Option<Vec<String>>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl MergeRequest {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> MergeRequest {
+        MergeRequest {
+            id: None,
+            source_branch_id: None,
+            target_branch_id: None,
+            title: None,
+            description: None,
+            author_id: None,
+            reviewers: None,
+            status: None,
+            labels: None,
+            has_conflicts: None,
+            automated_check_results: None,
+            created_at: None,
+            updated_at: None,
+        }
+    }
+}
+
+/// Converts the MergeRequest value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for MergeRequest {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.source_branch_id.as_ref().map(|source_branch_id| {
+                [
+                    "sourceBranchId".to_string(),
+                    source_branch_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.target_branch_id.as_ref().map(|target_branch_id| {
+                [
+                    "targetBranchId".to_string(),
+                    target_branch_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.title.as_ref().map(|title| {
+                [
+                    "title".to_string(),
+                    title.to_string(),
+                ].join(",")
+            }),
+
+
+            self.description.as_ref().map(|description| {
+                [
+                    "description".to_string(),
+                    description.to_string(),
+                ].join(",")
+            }),
+
+
+            self.author_id.as_ref().map(|author_id| {
+                [
+                    "authorId".to_string(),
+                    author_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.reviewers.as_ref().map(|reviewers| {
+                [
+                    "reviewers".to_string(),
+                    reviewers.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.status.as_ref().map(|status| {
+                [
+                    "status".to_string(),
+                    status.to_string(),
+                ].join(",")
+            }),
+
+
+            self.labels.as_ref().map(|labels| {
+                [
+                    "labels".to_string(),
+                    labels.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.has_conflicts.as_ref().map(|has_conflicts| {
+                [
+                    "hasConflicts".to_string(),
+                    has_conflicts.to_string(),
+                ].join(",")
+            }),
+
+
+            self.automated_check_results.as_ref().map(|automated_check_results| {
+                [
+                    "automatedCheckResults".to_string(),
+                    automated_check_results.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a MergeRequest value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for MergeRequest {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub source_branch_id: Vec<String>,
+            pub target_branch_id: Vec<String>,
+            pub title: Vec<String>,
+            pub description: Vec<String>,
+            pub author_id: Vec<String>,
+            pub reviewers: Vec<Vec<String>>,
+            pub status: Vec<String>,
+            pub labels: Vec<Vec<String>>,
+            pub has_conflicts: Vec<bool>,
+            pub automated_check_results: Vec<Vec<String>>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing MergeRequest".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "sourceBranchId" => intermediate_rep.source_branch_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "targetBranchId" => intermediate_rep.target_branch_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "title" => intermediate_rep.title.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "authorId" => intermediate_rep.author_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "reviewers" => return std::result::Result::Err("Parsing a container in this style is not supported in MergeRequest".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "status" => intermediate_rep.status.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "labels" => return std::result::Result::Err("Parsing a container in this style is not supported in MergeRequest".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "hasConflicts" => intermediate_rep.has_conflicts.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "automatedCheckResults" => return std::result::Result::Err("Parsing a container in this style is not supported in MergeRequest".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing MergeRequest".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(MergeRequest {
+            id: intermediate_rep.id.into_iter().next(),
+            source_branch_id: intermediate_rep.source_branch_id.into_iter().next(),
+            target_branch_id: intermediate_rep.target_branch_id.into_iter().next(),
+            title: intermediate_rep.title.into_iter().next(),
+            description: intermediate_rep.description.into_iter().next(),
+            author_id: intermediate_rep.author_id.into_iter().next(),
+            reviewers: intermediate_rep.reviewers.into_iter().next(),
+            status: intermediate_rep.status.into_iter().next(),
+            labels: intermediate_rep.labels.into_iter().next(),
+            has_conflicts: intermediate_rep.has_conflicts.into_iter().next(),
+            automated_check_results: intermediate_rep.automated_check_results.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<MergeRequest> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<MergeRequest>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<MergeRequest>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for MergeRequest - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<MergeRequest> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <MergeRequest as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into MergeRequest - {}",
                                 value, err))
                     }
              },
@@ -10425,6 +21459,433 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into MfaInfo - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct NegotiationHistory {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "documentId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub document_id: Option<String>,
+
+    #[serde(rename = "rounds")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub rounds: Option<Vec<models::NegotiationRound>>,
+
+    #[serde(rename = "currentStatus")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub current_status: Option<String>,
+
+    #[serde(rename = "startedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub started_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "lastUpdated")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub last_updated: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl NegotiationHistory {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> NegotiationHistory {
+        NegotiationHistory {
+            id: None,
+            document_id: None,
+            rounds: None,
+            current_status: None,
+            started_at: None,
+            last_updated: None,
+        }
+    }
+}
+
+/// Converts the NegotiationHistory value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for NegotiationHistory {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.document_id.as_ref().map(|document_id| {
+                [
+                    "documentId".to_string(),
+                    document_id.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping rounds in query parameter serialization
+
+
+            self.current_status.as_ref().map(|current_status| {
+                [
+                    "currentStatus".to_string(),
+                    current_status.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping startedAt in query parameter serialization
+
+            // Skipping lastUpdated in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a NegotiationHistory value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for NegotiationHistory {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub document_id: Vec<String>,
+            pub rounds: Vec<Vec<models::NegotiationRound>>,
+            pub current_status: Vec<String>,
+            pub started_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub last_updated: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing NegotiationHistory".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "documentId" => intermediate_rep.document_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "rounds" => return std::result::Result::Err("Parsing a container in this style is not supported in NegotiationHistory".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "currentStatus" => intermediate_rep.current_status.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "startedAt" => intermediate_rep.started_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "lastUpdated" => intermediate_rep.last_updated.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing NegotiationHistory".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(NegotiationHistory {
+            id: intermediate_rep.id.into_iter().next(),
+            document_id: intermediate_rep.document_id.into_iter().next(),
+            rounds: intermediate_rep.rounds.into_iter().next(),
+            current_status: intermediate_rep.current_status.into_iter().next(),
+            started_at: intermediate_rep.started_at.into_iter().next(),
+            last_updated: intermediate_rep.last_updated.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<NegotiationHistory> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<NegotiationHistory>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<NegotiationHistory>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for NegotiationHistory - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<NegotiationHistory> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <NegotiationHistory as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into NegotiationHistory - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct NegotiationRound {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "historyId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub history_id: Option<String>,
+
+    #[serde(rename = "roundNumber")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub round_number: Option<i32>,
+
+    #[serde(rename = "proposerId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub proposer_id: Option<String>,
+
+    #[serde(rename = "proposalContent")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub proposal_content: Option<String>,
+
+    #[serde(rename = "responseContent")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub response_content: Option<String>,
+
+    #[serde(rename = "status")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub status: Option<String>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl NegotiationRound {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> NegotiationRound {
+        NegotiationRound {
+            id: None,
+            history_id: None,
+            round_number: None,
+            proposer_id: None,
+            proposal_content: None,
+            response_content: None,
+            status: None,
+            created_at: None,
+        }
+    }
+}
+
+/// Converts the NegotiationRound value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for NegotiationRound {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.history_id.as_ref().map(|history_id| {
+                [
+                    "historyId".to_string(),
+                    history_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.round_number.as_ref().map(|round_number| {
+                [
+                    "roundNumber".to_string(),
+                    round_number.to_string(),
+                ].join(",")
+            }),
+
+
+            self.proposer_id.as_ref().map(|proposer_id| {
+                [
+                    "proposerId".to_string(),
+                    proposer_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.proposal_content.as_ref().map(|proposal_content| {
+                [
+                    "proposalContent".to_string(),
+                    proposal_content.to_string(),
+                ].join(",")
+            }),
+
+
+            self.response_content.as_ref().map(|response_content| {
+                [
+                    "responseContent".to_string(),
+                    response_content.to_string(),
+                ].join(",")
+            }),
+
+
+            self.status.as_ref().map(|status| {
+                [
+                    "status".to_string(),
+                    status.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a NegotiationRound value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for NegotiationRound {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub history_id: Vec<String>,
+            pub round_number: Vec<i32>,
+            pub proposer_id: Vec<String>,
+            pub proposal_content: Vec<String>,
+            pub response_content: Vec<String>,
+            pub status: Vec<String>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing NegotiationRound".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "historyId" => intermediate_rep.history_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "roundNumber" => intermediate_rep.round_number.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "proposerId" => intermediate_rep.proposer_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "proposalContent" => intermediate_rep.proposal_content.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "responseContent" => intermediate_rep.response_content.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "status" => intermediate_rep.status.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing NegotiationRound".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(NegotiationRound {
+            id: intermediate_rep.id.into_iter().next(),
+            history_id: intermediate_rep.history_id.into_iter().next(),
+            round_number: intermediate_rep.round_number.into_iter().next(),
+            proposer_id: intermediate_rep.proposer_id.into_iter().next(),
+            proposal_content: intermediate_rep.proposal_content.into_iter().next(),
+            response_content: intermediate_rep.response_content.into_iter().next(),
+            status: intermediate_rep.status.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<NegotiationRound> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<NegotiationRound>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<NegotiationRound>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for NegotiationRound - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<NegotiationRound> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <NegotiationRound as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into NegotiationRound - {}",
                                 value, err))
                     }
              },
@@ -11736,6 +23197,65 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 }
 
 
+/// Enumeration of values.
+/// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
+/// which helps with FFI.
+#[allow(non_camel_case_types)]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "conversion", derive(frunk_enum_derive::LabelledGenericEnum))]
+pub enum Permission {
+    #[serde(rename = "PERMISSION_UNSPECIFIED")]
+    Unspecified,
+    #[serde(rename = "PERMISSION_READ")]
+    Read,
+    #[serde(rename = "PERMISSION_WRITE")]
+    Write,
+    #[serde(rename = "PERMISSION_DELETE")]
+    Delete,
+    #[serde(rename = "PERMISSION_MANAGE_USERS")]
+    ManageUsers,
+    #[serde(rename = "PERMISSION_MANAGE_BILLING")]
+    ManageBilling,
+    #[serde(rename = "PERMISSION_VIEW_ANALYTICS")]
+    ViewAnalytics,
+    #[serde(rename = "PERMISSION_MANAGE_WORKFLOWS")]
+    ManageWorkflows,
+}
+
+impl std::fmt::Display for Permission {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            Permission::Unspecified => write!(f, "PERMISSION_UNSPECIFIED"),
+            Permission::Read => write!(f, "PERMISSION_READ"),
+            Permission::Write => write!(f, "PERMISSION_WRITE"),
+            Permission::Delete => write!(f, "PERMISSION_DELETE"),
+            Permission::ManageUsers => write!(f, "PERMISSION_MANAGE_USERS"),
+            Permission::ManageBilling => write!(f, "PERMISSION_MANAGE_BILLING"),
+            Permission::ViewAnalytics => write!(f, "PERMISSION_VIEW_ANALYTICS"),
+            Permission::ManageWorkflows => write!(f, "PERMISSION_MANAGE_WORKFLOWS"),
+        }
+    }
+}
+
+impl std::str::FromStr for Permission {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s {
+            "PERMISSION_UNSPECIFIED" => std::result::Result::Ok(Permission::Unspecified),
+            "PERMISSION_READ" => std::result::Result::Ok(Permission::Read),
+            "PERMISSION_WRITE" => std::result::Result::Ok(Permission::Write),
+            "PERMISSION_DELETE" => std::result::Result::Ok(Permission::Delete),
+            "PERMISSION_MANAGE_USERS" => std::result::Result::Ok(Permission::ManageUsers),
+            "PERMISSION_MANAGE_BILLING" => std::result::Result::Ok(Permission::ManageBilling),
+            "PERMISSION_VIEW_ANALYTICS" => std::result::Result::Ok(Permission::ViewAnalytics),
+            "PERMISSION_MANAGE_WORKFLOWS" => std::result::Result::Ok(Permission::ManageWorkflows),
+            _ => std::result::Result::Err(format!("Value not valid: {}", s)),
+        }
+    }
+}
+
 /// Represents errors when a precondition provided in the request fails
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
@@ -11904,6 +23424,53 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
     }
 }
 
+
+/// Enumeration of values.
+/// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
+/// which helps with FFI.
+#[allow(non_camel_case_types)]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "conversion", derive(frunk_enum_derive::LabelledGenericEnum))]
+pub enum PricingModel {
+    #[serde(rename = "PRICING_MODEL_UNSPECIFIED")]
+    Unspecified,
+    #[serde(rename = "PRICING_MODEL_FREE")]
+    Free,
+    #[serde(rename = "PRICING_MODEL_SUBSCRIPTION")]
+    Subscription,
+    #[serde(rename = "PRICING_MODEL_USAGE_BASED")]
+    UsageBased,
+    #[serde(rename = "PRICING_MODEL_ENTERPRISE")]
+    Enterprise,
+}
+
+impl std::fmt::Display for PricingModel {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            PricingModel::Unspecified => write!(f, "PRICING_MODEL_UNSPECIFIED"),
+            PricingModel::Free => write!(f, "PRICING_MODEL_FREE"),
+            PricingModel::Subscription => write!(f, "PRICING_MODEL_SUBSCRIPTION"),
+            PricingModel::UsageBased => write!(f, "PRICING_MODEL_USAGE_BASED"),
+            PricingModel::Enterprise => write!(f, "PRICING_MODEL_ENTERPRISE"),
+        }
+    }
+}
+
+impl std::str::FromStr for PricingModel {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s {
+            "PRICING_MODEL_UNSPECIFIED" => std::result::Result::Ok(PricingModel::Unspecified),
+            "PRICING_MODEL_FREE" => std::result::Result::Ok(PricingModel::Free),
+            "PRICING_MODEL_SUBSCRIPTION" => std::result::Result::Ok(PricingModel::Subscription),
+            "PRICING_MODEL_USAGE_BASED" => std::result::Result::Ok(PricingModel::UsageBased),
+            "PRICING_MODEL_ENTERPRISE" => std::result::Result::Ok(PricingModel::Enterprise),
+            _ => std::result::Result::Err(format!("Value not valid: {}", s)),
+        }
+    }
+}
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
@@ -12420,6 +23987,130 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into RateLimitErrorMessageResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct RemoveWorkspaceSharingResponse {
+    #[serde(rename = "success")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub success: Option<bool>,
+
+}
+
+
+impl RemoveWorkspaceSharingResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> RemoveWorkspaceSharingResponse {
+        RemoveWorkspaceSharingResponse {
+            success: None,
+        }
+    }
+}
+
+/// Converts the RemoveWorkspaceSharingResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for RemoveWorkspaceSharingResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.success.as_ref().map(|success| {
+                [
+                    "success".to_string(),
+                    success.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a RemoveWorkspaceSharingResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for RemoveWorkspaceSharingResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub success: Vec<bool>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing RemoveWorkspaceSharingResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "success" => intermediate_rep.success.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing RemoveWorkspaceSharingResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(RemoveWorkspaceSharingResponse {
+            success: intermediate_rep.success.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<RemoveWorkspaceSharingResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<RemoveWorkspaceSharingResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<RemoveWorkspaceSharingResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for RemoveWorkspaceSharingResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<RemoveWorkspaceSharingResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <RemoveWorkspaceSharingResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into RemoveWorkspaceSharingResponse - {}",
                                 value, err))
                     }
              },
@@ -13260,6 +24951,289 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 }
 
 
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct RiskAssessment {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "intelligenceId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub intelligence_id: Option<String>,
+
+    #[serde(rename = "riskType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub risk_type: Option<String>,
+
+    #[serde(rename = "riskScore")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub risk_score: Option<f32>,
+
+    #[serde(rename = "assessmentDetails")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub assessment_details: Option<String>,
+
+    #[serde(rename = "mitigationSuggestions")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub mitigation_suggestions: Option<Vec<String>>,
+
+    #[serde(rename = "assessorId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub assessor_id: Option<String>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl RiskAssessment {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> RiskAssessment {
+        RiskAssessment {
+            id: None,
+            intelligence_id: None,
+            risk_type: None,
+            risk_score: None,
+            assessment_details: None,
+            mitigation_suggestions: None,
+            assessor_id: None,
+            created_at: None,
+        }
+    }
+}
+
+/// Converts the RiskAssessment value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for RiskAssessment {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.intelligence_id.as_ref().map(|intelligence_id| {
+                [
+                    "intelligenceId".to_string(),
+                    intelligence_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.risk_type.as_ref().map(|risk_type| {
+                [
+                    "riskType".to_string(),
+                    risk_type.to_string(),
+                ].join(",")
+            }),
+
+
+            self.risk_score.as_ref().map(|risk_score| {
+                [
+                    "riskScore".to_string(),
+                    risk_score.to_string(),
+                ].join(",")
+            }),
+
+
+            self.assessment_details.as_ref().map(|assessment_details| {
+                [
+                    "assessmentDetails".to_string(),
+                    assessment_details.to_string(),
+                ].join(",")
+            }),
+
+
+            self.mitigation_suggestions.as_ref().map(|mitigation_suggestions| {
+                [
+                    "mitigationSuggestions".to_string(),
+                    mitigation_suggestions.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.assessor_id.as_ref().map(|assessor_id| {
+                [
+                    "assessorId".to_string(),
+                    assessor_id.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a RiskAssessment value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for RiskAssessment {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub intelligence_id: Vec<String>,
+            pub risk_type: Vec<String>,
+            pub risk_score: Vec<f32>,
+            pub assessment_details: Vec<String>,
+            pub mitigation_suggestions: Vec<Vec<String>>,
+            pub assessor_id: Vec<String>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing RiskAssessment".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "intelligenceId" => intermediate_rep.intelligence_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "riskType" => intermediate_rep.risk_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "riskScore" => intermediate_rep.risk_score.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "assessmentDetails" => intermediate_rep.assessment_details.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "mitigationSuggestions" => return std::result::Result::Err("Parsing a container in this style is not supported in RiskAssessment".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "assessorId" => intermediate_rep.assessor_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing RiskAssessment".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(RiskAssessment {
+            id: intermediate_rep.id.into_iter().next(),
+            intelligence_id: intermediate_rep.intelligence_id.into_iter().next(),
+            risk_type: intermediate_rep.risk_type.into_iter().next(),
+            risk_score: intermediate_rep.risk_score.into_iter().next(),
+            assessment_details: intermediate_rep.assessment_details.into_iter().next(),
+            mitigation_suggestions: intermediate_rep.mitigation_suggestions.into_iter().next(),
+            assessor_id: intermediate_rep.assessor_id.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<RiskAssessment> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<RiskAssessment>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<RiskAssessment>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for RiskAssessment - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<RiskAssessment> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <RiskAssessment as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into RiskAssessment - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+/// Enumeration of values.
+/// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
+/// which helps with FFI.
+#[allow(non_camel_case_types)]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "conversion", derive(frunk_enum_derive::LabelledGenericEnum))]
+pub enum Role {
+    #[serde(rename = "ROLE_UNSPECIFIED")]
+    Unspecified,
+    #[serde(rename = "ROLE_ADMIN")]
+    Admin,
+    #[serde(rename = "ROLE_USER")]
+    User,
+    #[serde(rename = "ROLE_VIEWER")]
+    Viewer,
+    #[serde(rename = "ROLE_MANAGER")]
+    Manager,
+}
+
+impl std::fmt::Display for Role {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            Role::Unspecified => write!(f, "ROLE_UNSPECIFIED"),
+            Role::Admin => write!(f, "ROLE_ADMIN"),
+            Role::User => write!(f, "ROLE_USER"),
+            Role::Viewer => write!(f, "ROLE_VIEWER"),
+            Role::Manager => write!(f, "ROLE_MANAGER"),
+        }
+    }
+}
+
+impl std::str::FromStr for Role {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s {
+            "ROLE_UNSPECIFIED" => std::result::Result::Ok(Role::Unspecified),
+            "ROLE_ADMIN" => std::result::Result::Ok(Role::Admin),
+            "ROLE_USER" => std::result::Result::Ok(Role::User),
+            "ROLE_VIEWER" => std::result::Result::Ok(Role::Viewer),
+            "ROLE_MANAGER" => std::result::Result::Ok(Role::Manager),
+            _ => std::result::Result::Err(format!("Value not valid: {}", s)),
+        }
+    }
+}
+
 /// The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
@@ -13609,7 +25583,7 @@ pub struct ScrapingJob {
 
     #[serde(rename = "lang")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub lang: Option<String>,
+    pub lang: Option<models::Language>,
 
     #[serde(rename = "zoom")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -13744,13 +25718,7 @@ impl std::string::ToString for ScrapingJob {
                 ].join(",")
             }),
 
-
-            self.lang.as_ref().map(|lang| {
-                [
-                    "lang".to_string(),
-                    lang.to_string(),
-                ].join(",")
-            }),
+            // Skipping lang in query parameter serialization
 
 
             self.zoom.as_ref().map(|zoom| {
@@ -13855,7 +25823,7 @@ impl std::str::FromStr for ScrapingJob {
             pub status: Vec<models::BackgroundJobStatus>,
             pub name: Vec<String>,
             pub keywords: Vec<Vec<String>>,
-            pub lang: Vec<String>,
+            pub lang: Vec<models::Language>,
             pub zoom: Vec<i32>,
             pub lat: Vec<String>,
             pub lon: Vec<String>,
@@ -13900,7 +25868,7 @@ impl std::str::FromStr for ScrapingJob {
                     "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     "keywords" => return std::result::Result::Err("Parsing a container in this style is not supported in ScrapingJob".to_string()),
                     #[allow(clippy::redundant_clone)]
-                    "lang" => intermediate_rep.lang.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "lang" => intermediate_rep.lang.push(<models::Language as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "zoom" => intermediate_rep.zoom.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
@@ -14004,6 +25972,10 @@ pub struct ScrapingWorkflow {
     #[serde(skip_serializing_if="Option::is_none")]
     pub id: Option<String>,
 
+    #[serde(rename = "name")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub name: Option<String>,
+
     #[serde(rename = "cronExpression")]
     #[serde(skip_serializing_if="Option::is_none")]
     pub cron_expression: Option<String>,
@@ -14031,14 +26003,6 @@ pub struct ScrapingWorkflow {
     #[serde(rename = "alertEmails")]
     #[serde(skip_serializing_if="Option::is_none")]
     pub alert_emails: Option<String>,
-
-    #[serde(rename = "orgId")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub org_id: Option<String>,
-
-    #[serde(rename = "tenantId")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub tenant_id: Option<String>,
 
     #[serde(rename = "createdAt")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -14112,10 +26076,6 @@ pub struct ScrapingWorkflow {
     #[serde(skip_serializing_if="Option::is_none")]
     pub anonymize_pii: Option<bool>,
 
-    #[serde(rename = "webhooks")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub webhooks: Option<Vec<models::WebhookConfig>>,
-
     #[serde(rename = "notificationSlackChannel")]
     #[serde(skip_serializing_if="Option::is_none")]
     pub notification_slack_channel: Option<String>,
@@ -14188,6 +26148,7 @@ impl ScrapingWorkflow {
     pub fn new() -> ScrapingWorkflow {
         ScrapingWorkflow {
             id: None,
+            name: None,
             cron_expression: None,
             next_run_time: None,
             last_run_time: None,
@@ -14195,8 +26156,6 @@ impl ScrapingWorkflow {
             retry_count: None,
             max_retries: None,
             alert_emails: None,
-            org_id: None,
-            tenant_id: None,
             created_at: None,
             updated_at: None,
             deleted_at: None,
@@ -14215,7 +26174,6 @@ impl ScrapingWorkflow {
             output_destination: None,
             data_retention: None,
             anonymize_pii: None,
-            webhooks: None,
             notification_slack_channel: None,
             notification_email_group: None,
             notification_notify_on_start: None,
@@ -14247,6 +26205,14 @@ impl std::string::ToString for ScrapingWorkflow {
                 [
                     "id".to_string(),
                     id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.name.as_ref().map(|name| {
+                [
+                    "name".to_string(),
+                    name.to_string(),
                 ].join(",")
             }),
 
@@ -14285,22 +26251,6 @@ impl std::string::ToString for ScrapingWorkflow {
                 [
                     "alertEmails".to_string(),
                     alert_emails.to_string(),
-                ].join(",")
-            }),
-
-
-            self.org_id.as_ref().map(|org_id| {
-                [
-                    "orgId".to_string(),
-                    org_id.to_string(),
-                ].join(",")
-            }),
-
-
-            self.tenant_id.as_ref().map(|tenant_id| {
-                [
-                    "tenantId".to_string(),
-                    tenant_id.to_string(),
                 ].join(",")
             }),
 
@@ -14411,8 +26361,6 @@ impl std::string::ToString for ScrapingWorkflow {
                     anonymize_pii.to_string(),
                 ].join(",")
             }),
-
-            // Skipping webhooks in query parameter serialization
 
 
             self.notification_slack_channel.as_ref().map(|notification_slack_channel| {
@@ -14560,6 +26508,7 @@ impl std::str::FromStr for ScrapingWorkflow {
         #[allow(dead_code)]
         struct IntermediateRep {
             pub id: Vec<String>,
+            pub name: Vec<String>,
             pub cron_expression: Vec<String>,
             pub next_run_time: Vec<chrono::DateTime::<chrono::Utc>>,
             pub last_run_time: Vec<chrono::DateTime::<chrono::Utc>>,
@@ -14567,8 +26516,6 @@ impl std::str::FromStr for ScrapingWorkflow {
             pub retry_count: Vec<i32>,
             pub max_retries: Vec<i32>,
             pub alert_emails: Vec<String>,
-            pub org_id: Vec<String>,
-            pub tenant_id: Vec<String>,
             pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
             pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
             pub deleted_at: Vec<chrono::DateTime::<chrono::Utc>>,
@@ -14587,7 +26534,6 @@ impl std::str::FromStr for ScrapingWorkflow {
             pub output_destination: Vec<String>,
             pub data_retention: Vec<String>,
             pub anonymize_pii: Vec<bool>,
-            pub webhooks: Vec<Vec<models::WebhookConfig>>,
             pub notification_slack_channel: Vec<String>,
             pub notification_email_group: Vec<String>,
             pub notification_notify_on_start: Vec<bool>,
@@ -14624,6 +26570,8 @@ impl std::str::FromStr for ScrapingWorkflow {
                     #[allow(clippy::redundant_clone)]
                     "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
                     "cronExpression" => intermediate_rep.cron_expression.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "nextRunTime" => intermediate_rep.next_run_time.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
@@ -14637,10 +26585,6 @@ impl std::str::FromStr for ScrapingWorkflow {
                     "maxRetries" => intermediate_rep.max_retries.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "alertEmails" => intermediate_rep.alert_emails.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "orgId" => intermediate_rep.org_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
@@ -14676,7 +26620,6 @@ impl std::str::FromStr for ScrapingWorkflow {
                     "dataRetention" => intermediate_rep.data_retention.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "anonymizePii" => intermediate_rep.anonymize_pii.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    "webhooks" => return std::result::Result::Err("Parsing a container in this style is not supported in ScrapingWorkflow".to_string()),
                     #[allow(clippy::redundant_clone)]
                     "notificationSlackChannel" => intermediate_rep.notification_slack_channel.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
@@ -14718,6 +26661,7 @@ impl std::str::FromStr for ScrapingWorkflow {
         // Use the intermediate representation to return the struct
         std::result::Result::Ok(ScrapingWorkflow {
             id: intermediate_rep.id.into_iter().next(),
+            name: intermediate_rep.name.into_iter().next(),
             cron_expression: intermediate_rep.cron_expression.into_iter().next(),
             next_run_time: intermediate_rep.next_run_time.into_iter().next(),
             last_run_time: intermediate_rep.last_run_time.into_iter().next(),
@@ -14725,8 +26669,6 @@ impl std::str::FromStr for ScrapingWorkflow {
             retry_count: intermediate_rep.retry_count.into_iter().next(),
             max_retries: intermediate_rep.max_retries.into_iter().next(),
             alert_emails: intermediate_rep.alert_emails.into_iter().next(),
-            org_id: intermediate_rep.org_id.into_iter().next(),
-            tenant_id: intermediate_rep.tenant_id.into_iter().next(),
             created_at: intermediate_rep.created_at.into_iter().next(),
             updated_at: intermediate_rep.updated_at.into_iter().next(),
             deleted_at: intermediate_rep.deleted_at.into_iter().next(),
@@ -14745,7 +26687,6 @@ impl std::str::FromStr for ScrapingWorkflow {
             output_destination: intermediate_rep.output_destination.into_iter().next(),
             data_retention: intermediate_rep.data_retention.into_iter().next(),
             anonymize_pii: intermediate_rep.anonymize_pii.into_iter().next(),
-            webhooks: intermediate_rep.webhooks.into_iter().next(),
             notification_slack_channel: intermediate_rep.notification_slack_channel.into_iter().next(),
             notification_email_group: intermediate_rep.notification_email_group.into_iter().next(),
             notification_notify_on_start: intermediate_rep.notification_notify_on_start.into_iter().next(),
@@ -15295,6 +27236,1488 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ShareWorkspaceBody {
+    #[serde(rename = "sharedWithEmail")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub shared_with_email: Option<String>,
+
+    #[serde(rename = "permissionLevel")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub permission_level: Option<String>,
+
+    #[serde(rename = "expiresAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub expires_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl ShareWorkspaceBody {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ShareWorkspaceBody {
+        ShareWorkspaceBody {
+            shared_with_email: None,
+            permission_level: None,
+            expires_at: None,
+        }
+    }
+}
+
+/// Converts the ShareWorkspaceBody value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ShareWorkspaceBody {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.shared_with_email.as_ref().map(|shared_with_email| {
+                [
+                    "sharedWithEmail".to_string(),
+                    shared_with_email.to_string(),
+                ].join(",")
+            }),
+
+
+            self.permission_level.as_ref().map(|permission_level| {
+                [
+                    "permissionLevel".to_string(),
+                    permission_level.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping expiresAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ShareWorkspaceBody value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ShareWorkspaceBody {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub shared_with_email: Vec<String>,
+            pub permission_level: Vec<String>,
+            pub expires_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ShareWorkspaceBody".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "sharedWithEmail" => intermediate_rep.shared_with_email.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "permissionLevel" => intermediate_rep.permission_level.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "expiresAt" => intermediate_rep.expires_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ShareWorkspaceBody".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ShareWorkspaceBody {
+            shared_with_email: intermediate_rep.shared_with_email.into_iter().next(),
+            permission_level: intermediate_rep.permission_level.into_iter().next(),
+            expires_at: intermediate_rep.expires_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ShareWorkspaceBody> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ShareWorkspaceBody>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ShareWorkspaceBody>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ShareWorkspaceBody - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ShareWorkspaceBody> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ShareWorkspaceBody as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ShareWorkspaceBody - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ShareWorkspaceResponse {
+    #[serde(rename = "sharing")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub sharing: Option<models::WorkspaceSharing>,
+
+}
+
+
+impl ShareWorkspaceResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ShareWorkspaceResponse {
+        ShareWorkspaceResponse {
+            sharing: None,
+        }
+    }
+}
+
+/// Converts the ShareWorkspaceResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ShareWorkspaceResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping sharing in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ShareWorkspaceResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ShareWorkspaceResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub sharing: Vec<models::WorkspaceSharing>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ShareWorkspaceResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "sharing" => intermediate_rep.sharing.push(<models::WorkspaceSharing as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ShareWorkspaceResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ShareWorkspaceResponse {
+            sharing: intermediate_rep.sharing.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ShareWorkspaceResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ShareWorkspaceResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ShareWorkspaceResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ShareWorkspaceResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ShareWorkspaceResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ShareWorkspaceResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ShareWorkspaceResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct SignatureBlock {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "requestId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub request_id: Option<String>,
+
+    #[serde(rename = "blockType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub block_type: Option<String>,
+
+    #[serde(rename = "pageNumber")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub page_number: Option<i32>,
+
+    #[serde(rename = "xPosition")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub x_position: Option<f32>,
+
+    #[serde(rename = "yPosition")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub y_position: Option<f32>,
+
+    #[serde(rename = "width")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub width: Option<f32>,
+
+    #[serde(rename = "height")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub height: Option<f32>,
+
+    #[serde(rename = "isRequired")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub is_required: Option<bool>,
+
+    #[serde(rename = "signatureData")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub signature_data: Option<String>,
+
+    #[serde(rename = "signedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub signed_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl SignatureBlock {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> SignatureBlock {
+        SignatureBlock {
+            id: None,
+            request_id: None,
+            block_type: None,
+            page_number: None,
+            x_position: None,
+            y_position: None,
+            width: None,
+            height: None,
+            is_required: None,
+            signature_data: None,
+            signed_at: None,
+        }
+    }
+}
+
+/// Converts the SignatureBlock value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for SignatureBlock {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.request_id.as_ref().map(|request_id| {
+                [
+                    "requestId".to_string(),
+                    request_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.block_type.as_ref().map(|block_type| {
+                [
+                    "blockType".to_string(),
+                    block_type.to_string(),
+                ].join(",")
+            }),
+
+
+            self.page_number.as_ref().map(|page_number| {
+                [
+                    "pageNumber".to_string(),
+                    page_number.to_string(),
+                ].join(",")
+            }),
+
+
+            self.x_position.as_ref().map(|x_position| {
+                [
+                    "xPosition".to_string(),
+                    x_position.to_string(),
+                ].join(",")
+            }),
+
+
+            self.y_position.as_ref().map(|y_position| {
+                [
+                    "yPosition".to_string(),
+                    y_position.to_string(),
+                ].join(",")
+            }),
+
+
+            self.width.as_ref().map(|width| {
+                [
+                    "width".to_string(),
+                    width.to_string(),
+                ].join(",")
+            }),
+
+
+            self.height.as_ref().map(|height| {
+                [
+                    "height".to_string(),
+                    height.to_string(),
+                ].join(",")
+            }),
+
+
+            self.is_required.as_ref().map(|is_required| {
+                [
+                    "isRequired".to_string(),
+                    is_required.to_string(),
+                ].join(",")
+            }),
+
+
+            self.signature_data.as_ref().map(|signature_data| {
+                [
+                    "signatureData".to_string(),
+                    signature_data.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping signedAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a SignatureBlock value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for SignatureBlock {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub request_id: Vec<String>,
+            pub block_type: Vec<String>,
+            pub page_number: Vec<i32>,
+            pub x_position: Vec<f32>,
+            pub y_position: Vec<f32>,
+            pub width: Vec<f32>,
+            pub height: Vec<f32>,
+            pub is_required: Vec<bool>,
+            pub signature_data: Vec<String>,
+            pub signed_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing SignatureBlock".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "requestId" => intermediate_rep.request_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "blockType" => intermediate_rep.block_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "pageNumber" => intermediate_rep.page_number.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "xPosition" => intermediate_rep.x_position.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "yPosition" => intermediate_rep.y_position.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "width" => intermediate_rep.width.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "height" => intermediate_rep.height.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "isRequired" => intermediate_rep.is_required.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "signatureData" => intermediate_rep.signature_data.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "signedAt" => intermediate_rep.signed_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing SignatureBlock".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(SignatureBlock {
+            id: intermediate_rep.id.into_iter().next(),
+            request_id: intermediate_rep.request_id.into_iter().next(),
+            block_type: intermediate_rep.block_type.into_iter().next(),
+            page_number: intermediate_rep.page_number.into_iter().next(),
+            x_position: intermediate_rep.x_position.into_iter().next(),
+            y_position: intermediate_rep.y_position.into_iter().next(),
+            width: intermediate_rep.width.into_iter().next(),
+            height: intermediate_rep.height.into_iter().next(),
+            is_required: intermediate_rep.is_required.into_iter().next(),
+            signature_data: intermediate_rep.signature_data.into_iter().next(),
+            signed_at: intermediate_rep.signed_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<SignatureBlock> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<SignatureBlock>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<SignatureBlock>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for SignatureBlock - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<SignatureBlock> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <SignatureBlock as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into SignatureBlock - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct SignatureRequest {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "status")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub status: Option<models::SignatureStatus>,
+
+    #[serde(rename = "signerEmail")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub signer_email: Option<String>,
+
+    #[serde(rename = "signerName")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub signer_name: Option<String>,
+
+    #[serde(rename = "role")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub role: Option<String>,
+
+    #[serde(rename = "authenticationMethod")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub authentication_method: Option<String>,
+
+    #[serde(rename = "expiresAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub expires_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "requiresMfa")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub requires_mfa: Option<bool>,
+
+    #[serde(rename = "signatureType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub signature_type: Option<String>,
+
+    #[serde(rename = "reminderSchedule")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub reminder_schedule: Option<Vec<String>>,
+
+    #[serde(rename = "documentId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub document_id: Option<String>,
+
+    #[serde(rename = "signatureBlocks")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub signature_blocks: Option<Vec<models::SignatureBlock>>,
+
+    #[serde(rename = "workflow")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub workflow: Option<models::SignatureWorkflow>,
+
+}
+
+
+impl SignatureRequest {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> SignatureRequest {
+        SignatureRequest {
+            id: None,
+            status: None,
+            signer_email: None,
+            signer_name: None,
+            role: None,
+            authentication_method: None,
+            expires_at: None,
+            requires_mfa: None,
+            signature_type: None,
+            reminder_schedule: None,
+            document_id: None,
+            signature_blocks: None,
+            workflow: None,
+        }
+    }
+}
+
+/// Converts the SignatureRequest value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for SignatureRequest {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping status in query parameter serialization
+
+
+            self.signer_email.as_ref().map(|signer_email| {
+                [
+                    "signerEmail".to_string(),
+                    signer_email.to_string(),
+                ].join(",")
+            }),
+
+
+            self.signer_name.as_ref().map(|signer_name| {
+                [
+                    "signerName".to_string(),
+                    signer_name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.role.as_ref().map(|role| {
+                [
+                    "role".to_string(),
+                    role.to_string(),
+                ].join(",")
+            }),
+
+
+            self.authentication_method.as_ref().map(|authentication_method| {
+                [
+                    "authenticationMethod".to_string(),
+                    authentication_method.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping expiresAt in query parameter serialization
+
+
+            self.requires_mfa.as_ref().map(|requires_mfa| {
+                [
+                    "requiresMfa".to_string(),
+                    requires_mfa.to_string(),
+                ].join(",")
+            }),
+
+
+            self.signature_type.as_ref().map(|signature_type| {
+                [
+                    "signatureType".to_string(),
+                    signature_type.to_string(),
+                ].join(",")
+            }),
+
+
+            self.reminder_schedule.as_ref().map(|reminder_schedule| {
+                [
+                    "reminderSchedule".to_string(),
+                    reminder_schedule.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.document_id.as_ref().map(|document_id| {
+                [
+                    "documentId".to_string(),
+                    document_id.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping signatureBlocks in query parameter serialization
+
+            // Skipping workflow in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a SignatureRequest value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for SignatureRequest {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub status: Vec<models::SignatureStatus>,
+            pub signer_email: Vec<String>,
+            pub signer_name: Vec<String>,
+            pub role: Vec<String>,
+            pub authentication_method: Vec<String>,
+            pub expires_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub requires_mfa: Vec<bool>,
+            pub signature_type: Vec<String>,
+            pub reminder_schedule: Vec<Vec<String>>,
+            pub document_id: Vec<String>,
+            pub signature_blocks: Vec<Vec<models::SignatureBlock>>,
+            pub workflow: Vec<models::SignatureWorkflow>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing SignatureRequest".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "status" => intermediate_rep.status.push(<models::SignatureStatus as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "signerEmail" => intermediate_rep.signer_email.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "signerName" => intermediate_rep.signer_name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "role" => intermediate_rep.role.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "authenticationMethod" => intermediate_rep.authentication_method.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "expiresAt" => intermediate_rep.expires_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "requiresMfa" => intermediate_rep.requires_mfa.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "signatureType" => intermediate_rep.signature_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "reminderSchedule" => return std::result::Result::Err("Parsing a container in this style is not supported in SignatureRequest".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "documentId" => intermediate_rep.document_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "signatureBlocks" => return std::result::Result::Err("Parsing a container in this style is not supported in SignatureRequest".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "workflow" => intermediate_rep.workflow.push(<models::SignatureWorkflow as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing SignatureRequest".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(SignatureRequest {
+            id: intermediate_rep.id.into_iter().next(),
+            status: intermediate_rep.status.into_iter().next(),
+            signer_email: intermediate_rep.signer_email.into_iter().next(),
+            signer_name: intermediate_rep.signer_name.into_iter().next(),
+            role: intermediate_rep.role.into_iter().next(),
+            authentication_method: intermediate_rep.authentication_method.into_iter().next(),
+            expires_at: intermediate_rep.expires_at.into_iter().next(),
+            requires_mfa: intermediate_rep.requires_mfa.into_iter().next(),
+            signature_type: intermediate_rep.signature_type.into_iter().next(),
+            reminder_schedule: intermediate_rep.reminder_schedule.into_iter().next(),
+            document_id: intermediate_rep.document_id.into_iter().next(),
+            signature_blocks: intermediate_rep.signature_blocks.into_iter().next(),
+            workflow: intermediate_rep.workflow.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<SignatureRequest> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<SignatureRequest>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<SignatureRequest>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for SignatureRequest - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<SignatureRequest> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <SignatureRequest as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into SignatureRequest - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+/// Enumeration of values.
+/// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
+/// which helps with FFI.
+#[allow(non_camel_case_types)]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "conversion", derive(frunk_enum_derive::LabelledGenericEnum))]
+pub enum SignatureStatus {
+    #[serde(rename = "SIGNATURE_STATUS_UNSPECIFIED")]
+    Unspecified,
+    #[serde(rename = "SIGNATURE_STATUS_PENDING")]
+    Pending,
+    #[serde(rename = "SIGNATURE_STATUS_SIGNED")]
+    Signed,
+    #[serde(rename = "SIGNATURE_STATUS_REJECTED")]
+    Rejected,
+    #[serde(rename = "SIGNATURE_STATUS_EXPIRED")]
+    Expired,
+    #[serde(rename = "SIGNATURE_STATUS_REVOKED")]
+    Revoked,
+}
+
+impl std::fmt::Display for SignatureStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            SignatureStatus::Unspecified => write!(f, "SIGNATURE_STATUS_UNSPECIFIED"),
+            SignatureStatus::Pending => write!(f, "SIGNATURE_STATUS_PENDING"),
+            SignatureStatus::Signed => write!(f, "SIGNATURE_STATUS_SIGNED"),
+            SignatureStatus::Rejected => write!(f, "SIGNATURE_STATUS_REJECTED"),
+            SignatureStatus::Expired => write!(f, "SIGNATURE_STATUS_EXPIRED"),
+            SignatureStatus::Revoked => write!(f, "SIGNATURE_STATUS_REVOKED"),
+        }
+    }
+}
+
+impl std::str::FromStr for SignatureStatus {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s {
+            "SIGNATURE_STATUS_UNSPECIFIED" => std::result::Result::Ok(SignatureStatus::Unspecified),
+            "SIGNATURE_STATUS_PENDING" => std::result::Result::Ok(SignatureStatus::Pending),
+            "SIGNATURE_STATUS_SIGNED" => std::result::Result::Ok(SignatureStatus::Signed),
+            "SIGNATURE_STATUS_REJECTED" => std::result::Result::Ok(SignatureStatus::Rejected),
+            "SIGNATURE_STATUS_EXPIRED" => std::result::Result::Ok(SignatureStatus::Expired),
+            "SIGNATURE_STATUS_REVOKED" => std::result::Result::Ok(SignatureStatus::Revoked),
+            _ => std::result::Result::Err(format!("Value not valid: {}", s)),
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct SignatureWorkflow {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "requestId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub request_id: Option<String>,
+
+    #[serde(rename = "signingOrder")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub signing_order: Option<Vec<String>>,
+
+    #[serde(rename = "currentSigner")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub current_signer: Option<String>,
+
+    #[serde(rename = "workflowStatus")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub workflow_status: Option<String>,
+
+    #[serde(rename = "parallelSigning")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub parallel_signing: Option<bool>,
+
+    #[serde(rename = "requireAllSignatures")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub require_all_signatures: Option<bool>,
+
+    #[serde(rename = "deadline")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub deadline: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl SignatureWorkflow {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> SignatureWorkflow {
+        SignatureWorkflow {
+            id: None,
+            request_id: None,
+            signing_order: None,
+            current_signer: None,
+            workflow_status: None,
+            parallel_signing: None,
+            require_all_signatures: None,
+            deadline: None,
+            created_at: None,
+            updated_at: None,
+        }
+    }
+}
+
+/// Converts the SignatureWorkflow value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for SignatureWorkflow {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.request_id.as_ref().map(|request_id| {
+                [
+                    "requestId".to_string(),
+                    request_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.signing_order.as_ref().map(|signing_order| {
+                [
+                    "signingOrder".to_string(),
+                    signing_order.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.current_signer.as_ref().map(|current_signer| {
+                [
+                    "currentSigner".to_string(),
+                    current_signer.to_string(),
+                ].join(",")
+            }),
+
+
+            self.workflow_status.as_ref().map(|workflow_status| {
+                [
+                    "workflowStatus".to_string(),
+                    workflow_status.to_string(),
+                ].join(",")
+            }),
+
+
+            self.parallel_signing.as_ref().map(|parallel_signing| {
+                [
+                    "parallelSigning".to_string(),
+                    parallel_signing.to_string(),
+                ].join(",")
+            }),
+
+
+            self.require_all_signatures.as_ref().map(|require_all_signatures| {
+                [
+                    "requireAllSignatures".to_string(),
+                    require_all_signatures.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping deadline in query parameter serialization
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a SignatureWorkflow value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for SignatureWorkflow {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub request_id: Vec<String>,
+            pub signing_order: Vec<Vec<String>>,
+            pub current_signer: Vec<String>,
+            pub workflow_status: Vec<String>,
+            pub parallel_signing: Vec<bool>,
+            pub require_all_signatures: Vec<bool>,
+            pub deadline: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing SignatureWorkflow".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "requestId" => intermediate_rep.request_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "signingOrder" => return std::result::Result::Err("Parsing a container in this style is not supported in SignatureWorkflow".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "currentSigner" => intermediate_rep.current_signer.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "workflowStatus" => intermediate_rep.workflow_status.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "parallelSigning" => intermediate_rep.parallel_signing.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "requireAllSignatures" => intermediate_rep.require_all_signatures.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "deadline" => intermediate_rep.deadline.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing SignatureWorkflow".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(SignatureWorkflow {
+            id: intermediate_rep.id.into_iter().next(),
+            request_id: intermediate_rep.request_id.into_iter().next(),
+            signing_order: intermediate_rep.signing_order.into_iter().next(),
+            current_signer: intermediate_rep.current_signer.into_iter().next(),
+            workflow_status: intermediate_rep.workflow_status.into_iter().next(),
+            parallel_signing: intermediate_rep.parallel_signing.into_iter().next(),
+            require_all_signatures: intermediate_rep.require_all_signatures.into_iter().next(),
+            deadline: intermediate_rep.deadline.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<SignatureWorkflow> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<SignatureWorkflow>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<SignatureWorkflow>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for SignatureWorkflow - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<SignatureWorkflow> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <SignatureWorkflow as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into SignatureWorkflow - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+/// The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct Status {
+    /// The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+    #[serde(rename = "code")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub code: Option<i32>,
+
+    /// A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+    #[serde(rename = "message")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub message: Option<String>,
+
+    /// A list of messages that carry the error details.  There is a common set of message types for APIs to use.
+    #[serde(rename = "details")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub details: Option<Vec<models::Any>>,
+
+}
+
+
+impl Status {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> Status {
+        Status {
+            code: None,
+            message: None,
+            details: None,
+        }
+    }
+}
+
+/// Converts the Status value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for Status {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.code.as_ref().map(|code| {
+                [
+                    "code".to_string(),
+                    code.to_string(),
+                ].join(",")
+            }),
+
+
+            self.message.as_ref().map(|message| {
+                [
+                    "message".to_string(),
+                    message.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping details in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a Status value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for Status {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub code: Vec<i32>,
+            pub message: Vec<String>,
+            pub details: Vec<Vec<models::Any>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing Status".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "code" => intermediate_rep.code.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "message" => intermediate_rep.message.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "details" => return std::result::Result::Err("Parsing a container in this style is not supported in Status".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing Status".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(Status {
+            code: intermediate_rep.code.into_iter().next(),
+            message: intermediate_rep.message.into_iter().next(),
+            details: intermediate_rep.details.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<Status> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Status>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<Status>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for Status - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Status> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <Status as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into Status - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct StorageBreakdown {
+    #[serde(rename = "fileType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub file_type: Option<String>,
+
+    #[serde(rename = "size")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub size: Option<String>,
+
+    #[serde(rename = "fileCount")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub file_count: Option<i32>,
+
+}
+
+
+impl StorageBreakdown {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> StorageBreakdown {
+        StorageBreakdown {
+            file_type: None,
+            size: None,
+            file_count: None,
+        }
+    }
+}
+
+/// Converts the StorageBreakdown value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for StorageBreakdown {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.file_type.as_ref().map(|file_type| {
+                [
+                    "fileType".to_string(),
+                    file_type.to_string(),
+                ].join(",")
+            }),
+
+
+            self.size.as_ref().map(|size| {
+                [
+                    "size".to_string(),
+                    size.to_string(),
+                ].join(",")
+            }),
+
+
+            self.file_count.as_ref().map(|file_count| {
+                [
+                    "fileCount".to_string(),
+                    file_count.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a StorageBreakdown value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for StorageBreakdown {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub file_type: Vec<String>,
+            pub size: Vec<String>,
+            pub file_count: Vec<i32>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing StorageBreakdown".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "fileType" => intermediate_rep.file_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "size" => intermediate_rep.size.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "fileCount" => intermediate_rep.file_count.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing StorageBreakdown".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(StorageBreakdown {
+            file_type: intermediate_rep.file_type.into_iter().next(),
+            size: intermediate_rep.size.into_iter().next(),
+            file_count: intermediate_rep.file_count.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<StorageBreakdown> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<StorageBreakdown>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<StorageBreakdown>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for StorageBreakdown - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<StorageBreakdown> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <StorageBreakdown as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into StorageBreakdown - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct Suggestions {
     #[serde(rename = "similarResources")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -15458,6 +28881,647 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
     }
 }
 
+
+/// Enumeration of values.
+/// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
+/// which helps with FFI.
+#[allow(non_camel_case_types)]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "conversion", derive(frunk_enum_derive::LabelledGenericEnum))]
+pub enum TemplateType {
+    #[serde(rename = "TEMPLATE_TYPE_UNSPECIFIED")]
+    Unspecified,
+    #[serde(rename = "TEMPLATE_TYPE_STANDARD")]
+    Standard,
+    #[serde(rename = "TEMPLATE_TYPE_SMART")]
+    Smart,
+    #[serde(rename = "TEMPLATE_TYPE_ADAPTIVE")]
+    Adaptive,
+    #[serde(rename = "TEMPLATE_TYPE_AI_GENERATED")]
+    AiGenerated,
+}
+
+impl std::fmt::Display for TemplateType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            TemplateType::Unspecified => write!(f, "TEMPLATE_TYPE_UNSPECIFIED"),
+            TemplateType::Standard => write!(f, "TEMPLATE_TYPE_STANDARD"),
+            TemplateType::Smart => write!(f, "TEMPLATE_TYPE_SMART"),
+            TemplateType::Adaptive => write!(f, "TEMPLATE_TYPE_ADAPTIVE"),
+            TemplateType::AiGenerated => write!(f, "TEMPLATE_TYPE_AI_GENERATED"),
+        }
+    }
+}
+
+impl std::str::FromStr for TemplateType {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s {
+            "TEMPLATE_TYPE_UNSPECIFIED" => std::result::Result::Ok(TemplateType::Unspecified),
+            "TEMPLATE_TYPE_STANDARD" => std::result::Result::Ok(TemplateType::Standard),
+            "TEMPLATE_TYPE_SMART" => std::result::Result::Ok(TemplateType::Smart),
+            "TEMPLATE_TYPE_ADAPTIVE" => std::result::Result::Ok(TemplateType::Adaptive),
+            "TEMPLATE_TYPE_AI_GENERATED" => std::result::Result::Ok(TemplateType::AiGenerated),
+            _ => std::result::Result::Err(format!("Value not valid: {}", s)),
+        }
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct TemplateVariable {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "name")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub name: Option<String>,
+
+    #[serde(rename = "description")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub description: Option<String>,
+
+    #[serde(rename = "variableType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub variable_type: Option<String>,
+
+    #[serde(rename = "defaultValue")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub default_value: Option<String>,
+
+    #[serde(rename = "isRequired")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub is_required: Option<bool>,
+
+    #[serde(rename = "validationRules")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub validation_rules: Option<String>,
+
+    #[serde(rename = "dataSource")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub data_source: Option<String>,
+
+    #[serde(rename = "aiExtractionRules")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub ai_extraction_rules: Option<String>,
+
+    #[serde(rename = "alternatives")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub alternatives: Option<Vec<String>>,
+
+    #[serde(rename = "templateId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub template_id: Option<String>,
+
+}
+
+
+impl TemplateVariable {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> TemplateVariable {
+        TemplateVariable {
+            id: None,
+            name: None,
+            description: None,
+            variable_type: None,
+            default_value: None,
+            is_required: None,
+            validation_rules: None,
+            data_source: None,
+            ai_extraction_rules: None,
+            alternatives: None,
+            template_id: None,
+        }
+    }
+}
+
+/// Converts the TemplateVariable value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for TemplateVariable {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.name.as_ref().map(|name| {
+                [
+                    "name".to_string(),
+                    name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.description.as_ref().map(|description| {
+                [
+                    "description".to_string(),
+                    description.to_string(),
+                ].join(",")
+            }),
+
+
+            self.variable_type.as_ref().map(|variable_type| {
+                [
+                    "variableType".to_string(),
+                    variable_type.to_string(),
+                ].join(",")
+            }),
+
+
+            self.default_value.as_ref().map(|default_value| {
+                [
+                    "defaultValue".to_string(),
+                    default_value.to_string(),
+                ].join(",")
+            }),
+
+
+            self.is_required.as_ref().map(|is_required| {
+                [
+                    "isRequired".to_string(),
+                    is_required.to_string(),
+                ].join(",")
+            }),
+
+
+            self.validation_rules.as_ref().map(|validation_rules| {
+                [
+                    "validationRules".to_string(),
+                    validation_rules.to_string(),
+                ].join(",")
+            }),
+
+
+            self.data_source.as_ref().map(|data_source| {
+                [
+                    "dataSource".to_string(),
+                    data_source.to_string(),
+                ].join(",")
+            }),
+
+
+            self.ai_extraction_rules.as_ref().map(|ai_extraction_rules| {
+                [
+                    "aiExtractionRules".to_string(),
+                    ai_extraction_rules.to_string(),
+                ].join(",")
+            }),
+
+
+            self.alternatives.as_ref().map(|alternatives| {
+                [
+                    "alternatives".to_string(),
+                    alternatives.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.template_id.as_ref().map(|template_id| {
+                [
+                    "templateId".to_string(),
+                    template_id.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a TemplateVariable value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for TemplateVariable {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub name: Vec<String>,
+            pub description: Vec<String>,
+            pub variable_type: Vec<String>,
+            pub default_value: Vec<String>,
+            pub is_required: Vec<bool>,
+            pub validation_rules: Vec<String>,
+            pub data_source: Vec<String>,
+            pub ai_extraction_rules: Vec<String>,
+            pub alternatives: Vec<Vec<String>>,
+            pub template_id: Vec<String>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing TemplateVariable".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "variableType" => intermediate_rep.variable_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "defaultValue" => intermediate_rep.default_value.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "isRequired" => intermediate_rep.is_required.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "validationRules" => intermediate_rep.validation_rules.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "dataSource" => intermediate_rep.data_source.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "aiExtractionRules" => intermediate_rep.ai_extraction_rules.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "alternatives" => return std::result::Result::Err("Parsing a container in this style is not supported in TemplateVariable".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "templateId" => intermediate_rep.template_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing TemplateVariable".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(TemplateVariable {
+            id: intermediate_rep.id.into_iter().next(),
+            name: intermediate_rep.name.into_iter().next(),
+            description: intermediate_rep.description.into_iter().next(),
+            variable_type: intermediate_rep.variable_type.into_iter().next(),
+            default_value: intermediate_rep.default_value.into_iter().next(),
+            is_required: intermediate_rep.is_required.into_iter().next(),
+            validation_rules: intermediate_rep.validation_rules.into_iter().next(),
+            data_source: intermediate_rep.data_source.into_iter().next(),
+            ai_extraction_rules: intermediate_rep.ai_extraction_rules.into_iter().next(),
+            alternatives: intermediate_rep.alternatives.into_iter().next(),
+            template_id: intermediate_rep.template_id.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<TemplateVariable> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<TemplateVariable>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<TemplateVariable>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for TemplateVariable - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<TemplateVariable> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <TemplateVariable as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into TemplateVariable - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct TemplateVersion {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "templateId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub template_id: Option<String>,
+
+    #[serde(rename = "version")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub version: Option<String>,
+
+    #[serde(rename = "baseContent")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub base_content: Option<String>,
+
+    #[serde(rename = "metadata")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub metadata: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "authorId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub author_id: Option<String>,
+
+    #[serde(rename = "changeDescription")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub change_description: Option<String>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl TemplateVersion {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> TemplateVersion {
+        TemplateVersion {
+            id: None,
+            template_id: None,
+            version: None,
+            base_content: None,
+            metadata: None,
+            author_id: None,
+            change_description: None,
+            created_at: None,
+        }
+    }
+}
+
+/// Converts the TemplateVersion value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for TemplateVersion {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.template_id.as_ref().map(|template_id| {
+                [
+                    "templateId".to_string(),
+                    template_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.version.as_ref().map(|version| {
+                [
+                    "version".to_string(),
+                    version.to_string(),
+                ].join(",")
+            }),
+
+
+            self.base_content.as_ref().map(|base_content| {
+                [
+                    "baseContent".to_string(),
+                    base_content.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping metadata in query parameter serialization
+
+
+            self.author_id.as_ref().map(|author_id| {
+                [
+                    "authorId".to_string(),
+                    author_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.change_description.as_ref().map(|change_description| {
+                [
+                    "changeDescription".to_string(),
+                    change_description.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a TemplateVersion value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for TemplateVersion {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub template_id: Vec<String>,
+            pub version: Vec<String>,
+            pub base_content: Vec<String>,
+            pub metadata: Vec<std::collections::HashMap<String, String>>,
+            pub author_id: Vec<String>,
+            pub change_description: Vec<String>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing TemplateVersion".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "templateId" => intermediate_rep.template_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "version" => intermediate_rep.version.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "baseContent" => intermediate_rep.base_content.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "metadata" => return std::result::Result::Err("Parsing a container in this style is not supported in TemplateVersion".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "authorId" => intermediate_rep.author_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "changeDescription" => intermediate_rep.change_description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing TemplateVersion".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(TemplateVersion {
+            id: intermediate_rep.id.into_iter().next(),
+            template_id: intermediate_rep.template_id.into_iter().next(),
+            version: intermediate_rep.version.into_iter().next(),
+            base_content: intermediate_rep.base_content.into_iter().next(),
+            metadata: intermediate_rep.metadata.into_iter().next(),
+            author_id: intermediate_rep.author_id.into_iter().next(),
+            change_description: intermediate_rep.change_description.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<TemplateVersion> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<TemplateVersion>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<TemplateVersion>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for TemplateVersion - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<TemplateVersion> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <TemplateVersion as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into TemplateVersion - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+/// Enumeration of values.
+/// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
+/// which helps with FFI.
+#[allow(non_camel_case_types)]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "conversion", derive(frunk_enum_derive::LabelledGenericEnum))]
+pub enum Timezone {
+    #[serde(rename = "TIMEZONE_UNSPECIFIED")]
+    Unspecified,
+    #[serde(rename = "TIMEZONE_UTC")]
+    Utc,
+    #[serde(rename = "TIMEZONE_EST")]
+    Est,
+    #[serde(rename = "TIMEZONE_CST")]
+    Cst,
+    #[serde(rename = "TIMEZONE_MST")]
+    Mst,
+    #[serde(rename = "TIMEZONE_PST")]
+    Pst,
+    #[serde(rename = "TIMEZONE_GMT")]
+    Gmt,
+    #[serde(rename = "TIMEZONE_CET")]
+    Cet,
+    #[serde(rename = "TIMEZONE_IST")]
+    Ist,
+    #[serde(rename = "TIMEZONE_JST")]
+    Jst,
+    #[serde(rename = "TIMEZONE_AEST")]
+    Aest,
+}
+
+impl std::fmt::Display for Timezone {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            Timezone::Unspecified => write!(f, "TIMEZONE_UNSPECIFIED"),
+            Timezone::Utc => write!(f, "TIMEZONE_UTC"),
+            Timezone::Est => write!(f, "TIMEZONE_EST"),
+            Timezone::Cst => write!(f, "TIMEZONE_CST"),
+            Timezone::Mst => write!(f, "TIMEZONE_MST"),
+            Timezone::Pst => write!(f, "TIMEZONE_PST"),
+            Timezone::Gmt => write!(f, "TIMEZONE_GMT"),
+            Timezone::Cet => write!(f, "TIMEZONE_CET"),
+            Timezone::Ist => write!(f, "TIMEZONE_IST"),
+            Timezone::Jst => write!(f, "TIMEZONE_JST"),
+            Timezone::Aest => write!(f, "TIMEZONE_AEST"),
+        }
+    }
+}
+
+impl std::str::FromStr for Timezone {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s {
+            "TIMEZONE_UNSPECIFIED" => std::result::Result::Ok(Timezone::Unspecified),
+            "TIMEZONE_UTC" => std::result::Result::Ok(Timezone::Utc),
+            "TIMEZONE_EST" => std::result::Result::Ok(Timezone::Est),
+            "TIMEZONE_CST" => std::result::Result::Ok(Timezone::Cst),
+            "TIMEZONE_MST" => std::result::Result::Ok(Timezone::Mst),
+            "TIMEZONE_PST" => std::result::Result::Ok(Timezone::Pst),
+            "TIMEZONE_GMT" => std::result::Result::Ok(Timezone::Gmt),
+            "TIMEZONE_CET" => std::result::Result::Ok(Timezone::Cet),
+            "TIMEZONE_IST" => std::result::Result::Ok(Timezone::Ist),
+            "TIMEZONE_JST" => std::result::Result::Ok(Timezone::Jst),
+            "TIMEZONE_AEST" => std::result::Result::Ok(Timezone::Aest),
+            _ => std::result::Result::Err(format!("Value not valid: {}", s)),
+        }
+    }
+}
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
@@ -16288,7 +30352,7 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 pub struct UpdateAccountRequest {
     #[serde(rename = "account")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub account: Option<models::Account>,
+    pub account: Option<models::Account1>,
 
 }
 
@@ -16327,7 +30391,7 @@ impl std::str::FromStr for UpdateAccountRequest {
         #[derive(Default)]
         #[allow(dead_code)]
         struct IntermediateRep {
-            pub account: Vec<models::Account>,
+            pub account: Vec<models::Account1>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -16346,7 +30410,7 @@ impl std::str::FromStr for UpdateAccountRequest {
                 #[allow(clippy::match_single_binding)]
                 match key {
                     #[allow(clippy::redundant_clone)]
-                    "account" => intermediate_rep.account.push(<models::Account as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "account" => intermediate_rep.account.push(<models::Account1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing UpdateAccountRequest".to_string())
                 }
             }
@@ -16406,7 +30470,7 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 pub struct UpdateAccountResponse {
     #[serde(rename = "account")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub account: Option<models::Account>,
+    pub account: Option<models::Account1>,
 
 }
 
@@ -16445,7 +30509,7 @@ impl std::str::FromStr for UpdateAccountResponse {
         #[derive(Default)]
         #[allow(dead_code)]
         struct IntermediateRep {
-            pub account: Vec<models::Account>,
+            pub account: Vec<models::Account1>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -16464,7 +30528,7 @@ impl std::str::FromStr for UpdateAccountResponse {
                 #[allow(clippy::match_single_binding)]
                 match key {
                     #[allow(clippy::redundant_clone)]
-                    "account" => intermediate_rep.account.push(<models::Account as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "account" => intermediate_rep.account.push(<models::Account1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing UpdateAccountResponse".to_string())
                 }
             }
@@ -16996,7 +31060,7 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 pub struct UpdateWorkspaceRequest {
     #[serde(rename = "workspace")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub workspace: Option<models::Workspace>,
+    pub workspace: Option<models::Workspace1>,
 
 }
 
@@ -17035,7 +31099,7 @@ impl std::str::FromStr for UpdateWorkspaceRequest {
         #[derive(Default)]
         #[allow(dead_code)]
         struct IntermediateRep {
-            pub workspace: Vec<models::Workspace>,
+            pub workspace: Vec<models::Workspace1>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -17054,7 +31118,7 @@ impl std::str::FromStr for UpdateWorkspaceRequest {
                 #[allow(clippy::match_single_binding)]
                 match key {
                     #[allow(clippy::redundant_clone)]
-                    "workspace" => intermediate_rep.workspace.push(<models::Workspace as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "workspace" => intermediate_rep.workspace.push(<models::Workspace1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing UpdateWorkspaceRequest".to_string())
                 }
             }
@@ -17114,7 +31178,7 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 pub struct UpdateWorkspaceResponse {
     #[serde(rename = "workspace")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub workspace: Option<models::Workspace>,
+    pub workspace: Option<models::Workspace1>,
 
 }
 
@@ -17153,7 +31217,7 @@ impl std::str::FromStr for UpdateWorkspaceResponse {
         #[derive(Default)]
         #[allow(dead_code)]
         struct IntermediateRep {
-            pub workspace: Vec<models::Workspace>,
+            pub workspace: Vec<models::Workspace1>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -17172,7 +31236,7 @@ impl std::str::FromStr for UpdateWorkspaceResponse {
                 #[allow(clippy::match_single_binding)]
                 match key {
                     #[allow(clippy::redundant_clone)]
-                    "workspace" => intermediate_rep.workspace.push(<models::Workspace as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "workspace" => intermediate_rep.workspace.push(<models::Workspace1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing UpdateWorkspaceResponse".to_string())
                 }
             }
@@ -17216,6 +31280,434 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into UpdateWorkspaceResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct UpdateWorkspaceSharingRequest {
+    #[serde(rename = "sharing")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub sharing: Option<models::WorkspaceSharing>,
+
+}
+
+
+impl UpdateWorkspaceSharingRequest {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> UpdateWorkspaceSharingRequest {
+        UpdateWorkspaceSharingRequest {
+            sharing: None,
+        }
+    }
+}
+
+/// Converts the UpdateWorkspaceSharingRequest value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for UpdateWorkspaceSharingRequest {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping sharing in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a UpdateWorkspaceSharingRequest value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for UpdateWorkspaceSharingRequest {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub sharing: Vec<models::WorkspaceSharing>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing UpdateWorkspaceSharingRequest".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "sharing" => intermediate_rep.sharing.push(<models::WorkspaceSharing as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing UpdateWorkspaceSharingRequest".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(UpdateWorkspaceSharingRequest {
+            sharing: intermediate_rep.sharing.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<UpdateWorkspaceSharingRequest> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<UpdateWorkspaceSharingRequest>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<UpdateWorkspaceSharingRequest>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for UpdateWorkspaceSharingRequest - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<UpdateWorkspaceSharingRequest> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <UpdateWorkspaceSharingRequest as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into UpdateWorkspaceSharingRequest - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct UpdateWorkspaceSharingResponse {
+    #[serde(rename = "sharing")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub sharing: Option<models::WorkspaceSharing>,
+
+}
+
+
+impl UpdateWorkspaceSharingResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> UpdateWorkspaceSharingResponse {
+        UpdateWorkspaceSharingResponse {
+            sharing: None,
+        }
+    }
+}
+
+/// Converts the UpdateWorkspaceSharingResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for UpdateWorkspaceSharingResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping sharing in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a UpdateWorkspaceSharingResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for UpdateWorkspaceSharingResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub sharing: Vec<models::WorkspaceSharing>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing UpdateWorkspaceSharingResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "sharing" => intermediate_rep.sharing.push(<models::WorkspaceSharing as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing UpdateWorkspaceSharingResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(UpdateWorkspaceSharingResponse {
+            sharing: intermediate_rep.sharing.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<UpdateWorkspaceSharingResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<UpdateWorkspaceSharingResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<UpdateWorkspaceSharingResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for UpdateWorkspaceSharingResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<UpdateWorkspaceSharingResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <UpdateWorkspaceSharingResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into UpdateWorkspaceSharingResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct UserActivity {
+    #[serde(rename = "userId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub user_id: Option<String>,
+
+    #[serde(rename = "email")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub email: Option<String>,
+
+    #[serde(rename = "fileOperations")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub file_operations: Option<i32>,
+
+    #[serde(rename = "commentsMade")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub comments_made: Option<i32>,
+
+    #[serde(rename = "documentsProcessed")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub documents_processed: Option<i32>,
+
+}
+
+
+impl UserActivity {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> UserActivity {
+        UserActivity {
+            user_id: None,
+            email: None,
+            file_operations: None,
+            comments_made: None,
+            documents_processed: None,
+        }
+    }
+}
+
+/// Converts the UserActivity value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for UserActivity {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.user_id.as_ref().map(|user_id| {
+                [
+                    "userId".to_string(),
+                    user_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.email.as_ref().map(|email| {
+                [
+                    "email".to_string(),
+                    email.to_string(),
+                ].join(",")
+            }),
+
+
+            self.file_operations.as_ref().map(|file_operations| {
+                [
+                    "fileOperations".to_string(),
+                    file_operations.to_string(),
+                ].join(",")
+            }),
+
+
+            self.comments_made.as_ref().map(|comments_made| {
+                [
+                    "commentsMade".to_string(),
+                    comments_made.to_string(),
+                ].join(",")
+            }),
+
+
+            self.documents_processed.as_ref().map(|documents_processed| {
+                [
+                    "documentsProcessed".to_string(),
+                    documents_processed.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a UserActivity value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for UserActivity {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub user_id: Vec<String>,
+            pub email: Vec<String>,
+            pub file_operations: Vec<i32>,
+            pub comments_made: Vec<i32>,
+            pub documents_processed: Vec<i32>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing UserActivity".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "userId" => intermediate_rep.user_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "email" => intermediate_rep.email.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "fileOperations" => intermediate_rep.file_operations.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "commentsMade" => intermediate_rep.comments_made.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "documentsProcessed" => intermediate_rep.documents_processed.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing UserActivity".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(UserActivity {
+            user_id: intermediate_rep.user_id.into_iter().next(),
+            email: intermediate_rep.email.into_iter().next(),
+            file_operations: intermediate_rep.file_operations.into_iter().next(),
+            comments_made: intermediate_rep.comments_made.into_iter().next(),
+            documents_processed: intermediate_rep.documents_processed.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<UserActivity> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<UserActivity>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<UserActivity>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for UserActivity - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<UserActivity> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <UserActivity as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into UserActivity - {}",
                                 value, err))
                     }
              },
@@ -17642,6 +32134,10 @@ pub struct WebhookConfig {
     #[serde(skip_serializing_if="Option::is_none")]
     pub metadata: Option<serde_json::Value>,
 
+    #[serde(rename = "webhookName")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub webhook_name: Option<String>,
+
 }
 
 
@@ -17670,6 +32166,7 @@ impl WebhookConfig {
             successful_calls: None,
             failed_calls: None,
             metadata: None,
+            webhook_name: None,
         }
     }
 }
@@ -17800,6 +32297,14 @@ impl std::string::ToString for WebhookConfig {
 
             // Skipping metadata in query parameter serialization
 
+
+            self.webhook_name.as_ref().map(|webhook_name| {
+                [
+                    "webhookName".to_string(),
+                    webhook_name.to_string(),
+                ].join(",")
+            }),
+
         ];
 
         params.into_iter().flatten().collect::<Vec<_>>().join(",")
@@ -17838,6 +32343,7 @@ impl std::str::FromStr for WebhookConfig {
             pub successful_calls: Vec<i32>,
             pub failed_calls: Vec<i32>,
             pub metadata: Vec<serde_json::Value>,
+            pub webhook_name: Vec<String>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -17894,6 +32400,8 @@ impl std::str::FromStr for WebhookConfig {
                     "failedCalls" => intermediate_rep.failed_calls.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "metadata" => intermediate_rep.metadata.push(<serde_json::Value as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "webhookName" => intermediate_rep.webhook_name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing WebhookConfig".to_string())
                 }
             }
@@ -17925,6 +32433,7 @@ impl std::str::FromStr for WebhookConfig {
             successful_calls: intermediate_rep.successful_calls.into_iter().next(),
             failed_calls: intermediate_rep.failed_calls.into_iter().next(),
             metadata: intermediate_rep.metadata.into_iter().next(),
+            webhook_name: intermediate_rep.webhook_name.into_iter().next(),
         })
     }
 }
@@ -18128,6 +32637,10 @@ pub struct Workspace {
     #[serde(skip_serializing_if="Option::is_none")]
     pub api_keys: Option<Vec<models::ApiKey>>,
 
+    #[serde(rename = "webhooks")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub webhooks: Option<Vec<models::WebhookConfig>>,
+
 }
 
 
@@ -18156,6 +32669,7 @@ impl Workspace {
             last_job_run: None,
             scraping_jobs: None,
             api_keys: None,
+            webhooks: None,
         }
     }
 }
@@ -18292,6 +32806,8 @@ impl std::string::ToString for Workspace {
 
             // Skipping apiKeys in query parameter serialization
 
+            // Skipping webhooks in query parameter serialization
+
         ];
 
         params.into_iter().flatten().collect::<Vec<_>>().join(",")
@@ -18330,6 +32846,7 @@ impl std::str::FromStr for Workspace {
             pub last_job_run: Vec<chrono::DateTime::<chrono::Utc>>,
             pub scraping_jobs: Vec<Vec<models::ScrapingJob>>,
             pub api_keys: Vec<Vec<models::ApiKey>>,
+            pub webhooks: Vec<Vec<models::WebhookConfig>>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -18386,6 +32903,7 @@ impl std::str::FromStr for Workspace {
                     "lastJobRun" => intermediate_rep.last_job_run.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     "scrapingJobs" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
                     "apiKeys" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
+                    "webhooks" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
                     _ => return std::result::Result::Err("Unexpected key while parsing Workspace".to_string())
                 }
             }
@@ -18417,6 +32935,7 @@ impl std::str::FromStr for Workspace {
             last_job_run: intermediate_rep.last_job_run.into_iter().next(),
             scraping_jobs: intermediate_rep.scraping_jobs.into_iter().next(),
             api_keys: intermediate_rep.api_keys.into_iter().next(),
+            webhooks: intermediate_rep.webhooks.into_iter().next(),
         })
     }
 }
@@ -18449,6 +32968,988 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into Workspace - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct Workspace1 {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "name")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub name: Option<String>,
+
+    #[serde(rename = "uniqueIdentifier")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub unique_identifier: Option<String>,
+
+    #[serde(rename = "s3BucketName")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub s3_bucket_name: Option<String>,
+
+    #[serde(rename = "s3FolderPath")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub s3_folder_path: Option<String>,
+
+    #[serde(rename = "storageQuota")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub storage_quota: Option<String>,
+
+    #[serde(rename = "usedStorage")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub used_storage: Option<String>,
+
+    #[serde(rename = "allowPublicSharing")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub allow_public_sharing: Option<bool>,
+
+    #[serde(rename = "requireApproval")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub require_approval: Option<bool>,
+
+    #[serde(rename = "gdprCompliant")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub gdpr_compliant: Option<bool>,
+
+    #[serde(rename = "hipaaCompliant")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub hipaa_compliant: Option<bool>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "deletedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub deleted_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "folders")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub folders: Option<Vec<models::FolderMetadata>>,
+
+    #[serde(rename = "templates")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub templates: Option<Vec<models::DocumentTemplate>>,
+
+    #[serde(rename = "sharing")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub sharing: Option<Vec<models::WorkspaceSharing>>,
+
+    #[serde(rename = "activities")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub activities: Option<Vec<models::WorkspaceActivity>>,
+
+    #[serde(rename = "compliance")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub compliance: Option<Vec<models::WorkspaceCompliance>>,
+
+    #[serde(rename = "installedApps")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub installed_apps: Option<Vec<models::MarketplaceApp>>,
+
+}
+
+
+impl Workspace1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> Workspace1 {
+        Workspace1 {
+            id: None,
+            name: None,
+            unique_identifier: None,
+            s3_bucket_name: None,
+            s3_folder_path: None,
+            storage_quota: None,
+            used_storage: None,
+            allow_public_sharing: None,
+            require_approval: None,
+            gdpr_compliant: None,
+            hipaa_compliant: None,
+            created_at: None,
+            updated_at: None,
+            deleted_at: None,
+            folders: None,
+            templates: None,
+            sharing: None,
+            activities: None,
+            compliance: None,
+            installed_apps: None,
+        }
+    }
+}
+
+/// Converts the Workspace1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for Workspace1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.name.as_ref().map(|name| {
+                [
+                    "name".to_string(),
+                    name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.unique_identifier.as_ref().map(|unique_identifier| {
+                [
+                    "uniqueIdentifier".to_string(),
+                    unique_identifier.to_string(),
+                ].join(",")
+            }),
+
+
+            self.s3_bucket_name.as_ref().map(|s3_bucket_name| {
+                [
+                    "s3BucketName".to_string(),
+                    s3_bucket_name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.s3_folder_path.as_ref().map(|s3_folder_path| {
+                [
+                    "s3FolderPath".to_string(),
+                    s3_folder_path.to_string(),
+                ].join(",")
+            }),
+
+
+            self.storage_quota.as_ref().map(|storage_quota| {
+                [
+                    "storageQuota".to_string(),
+                    storage_quota.to_string(),
+                ].join(",")
+            }),
+
+
+            self.used_storage.as_ref().map(|used_storage| {
+                [
+                    "usedStorage".to_string(),
+                    used_storage.to_string(),
+                ].join(",")
+            }),
+
+
+            self.allow_public_sharing.as_ref().map(|allow_public_sharing| {
+                [
+                    "allowPublicSharing".to_string(),
+                    allow_public_sharing.to_string(),
+                ].join(",")
+            }),
+
+
+            self.require_approval.as_ref().map(|require_approval| {
+                [
+                    "requireApproval".to_string(),
+                    require_approval.to_string(),
+                ].join(",")
+            }),
+
+
+            self.gdpr_compliant.as_ref().map(|gdpr_compliant| {
+                [
+                    "gdprCompliant".to_string(),
+                    gdpr_compliant.to_string(),
+                ].join(",")
+            }),
+
+
+            self.hipaa_compliant.as_ref().map(|hipaa_compliant| {
+                [
+                    "hipaaCompliant".to_string(),
+                    hipaa_compliant.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+            // Skipping deletedAt in query parameter serialization
+
+            // Skipping folders in query parameter serialization
+
+            // Skipping templates in query parameter serialization
+
+            // Skipping sharing in query parameter serialization
+
+            // Skipping activities in query parameter serialization
+
+            // Skipping compliance in query parameter serialization
+
+            // Skipping installedApps in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a Workspace1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for Workspace1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub name: Vec<String>,
+            pub unique_identifier: Vec<String>,
+            pub s3_bucket_name: Vec<String>,
+            pub s3_folder_path: Vec<String>,
+            pub storage_quota: Vec<String>,
+            pub used_storage: Vec<String>,
+            pub allow_public_sharing: Vec<bool>,
+            pub require_approval: Vec<bool>,
+            pub gdpr_compliant: Vec<bool>,
+            pub hipaa_compliant: Vec<bool>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub deleted_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub folders: Vec<Vec<models::FolderMetadata>>,
+            pub templates: Vec<Vec<models::DocumentTemplate>>,
+            pub sharing: Vec<Vec<models::WorkspaceSharing>>,
+            pub activities: Vec<Vec<models::WorkspaceActivity>>,
+            pub compliance: Vec<Vec<models::WorkspaceCompliance>>,
+            pub installed_apps: Vec<Vec<models::MarketplaceApp>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing Workspace1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "uniqueIdentifier" => intermediate_rep.unique_identifier.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "s3BucketName" => intermediate_rep.s3_bucket_name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "s3FolderPath" => intermediate_rep.s3_folder_path.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "storageQuota" => intermediate_rep.storage_quota.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "usedStorage" => intermediate_rep.used_storage.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "allowPublicSharing" => intermediate_rep.allow_public_sharing.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "requireApproval" => intermediate_rep.require_approval.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "gdprCompliant" => intermediate_rep.gdpr_compliant.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "hipaaCompliant" => intermediate_rep.hipaa_compliant.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "deletedAt" => intermediate_rep.deleted_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "folders" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace1".to_string()),
+                    "templates" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace1".to_string()),
+                    "sharing" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace1".to_string()),
+                    "activities" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace1".to_string()),
+                    "compliance" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace1".to_string()),
+                    "installedApps" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace1".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing Workspace1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(Workspace1 {
+            id: intermediate_rep.id.into_iter().next(),
+            name: intermediate_rep.name.into_iter().next(),
+            unique_identifier: intermediate_rep.unique_identifier.into_iter().next(),
+            s3_bucket_name: intermediate_rep.s3_bucket_name.into_iter().next(),
+            s3_folder_path: intermediate_rep.s3_folder_path.into_iter().next(),
+            storage_quota: intermediate_rep.storage_quota.into_iter().next(),
+            used_storage: intermediate_rep.used_storage.into_iter().next(),
+            allow_public_sharing: intermediate_rep.allow_public_sharing.into_iter().next(),
+            require_approval: intermediate_rep.require_approval.into_iter().next(),
+            gdpr_compliant: intermediate_rep.gdpr_compliant.into_iter().next(),
+            hipaa_compliant: intermediate_rep.hipaa_compliant.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+            deleted_at: intermediate_rep.deleted_at.into_iter().next(),
+            folders: intermediate_rep.folders.into_iter().next(),
+            templates: intermediate_rep.templates.into_iter().next(),
+            sharing: intermediate_rep.sharing.into_iter().next(),
+            activities: intermediate_rep.activities.into_iter().next(),
+            compliance: intermediate_rep.compliance.into_iter().next(),
+            installed_apps: intermediate_rep.installed_apps.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<Workspace1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<Workspace1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<Workspace1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for Workspace1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<Workspace1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <Workspace1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into Workspace1 - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct WorkspaceActivity {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "activityType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub activity_type: Option<String>,
+
+    #[serde(rename = "userId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub user_id: Option<String>,
+
+    #[serde(rename = "description")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub description: Option<String>,
+
+    #[serde(rename = "metadata")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub metadata: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl WorkspaceActivity {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> WorkspaceActivity {
+        WorkspaceActivity {
+            id: None,
+            activity_type: None,
+            user_id: None,
+            description: None,
+            metadata: None,
+            created_at: None,
+        }
+    }
+}
+
+/// Converts the WorkspaceActivity value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for WorkspaceActivity {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.activity_type.as_ref().map(|activity_type| {
+                [
+                    "activityType".to_string(),
+                    activity_type.to_string(),
+                ].join(",")
+            }),
+
+
+            self.user_id.as_ref().map(|user_id| {
+                [
+                    "userId".to_string(),
+                    user_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.description.as_ref().map(|description| {
+                [
+                    "description".to_string(),
+                    description.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping metadata in query parameter serialization
+
+            // Skipping createdAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a WorkspaceActivity value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for WorkspaceActivity {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub activity_type: Vec<String>,
+            pub user_id: Vec<String>,
+            pub description: Vec<String>,
+            pub metadata: Vec<std::collections::HashMap<String, String>>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing WorkspaceActivity".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "activityType" => intermediate_rep.activity_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "userId" => intermediate_rep.user_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "metadata" => return std::result::Result::Err("Parsing a container in this style is not supported in WorkspaceActivity".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing WorkspaceActivity".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(WorkspaceActivity {
+            id: intermediate_rep.id.into_iter().next(),
+            activity_type: intermediate_rep.activity_type.into_iter().next(),
+            user_id: intermediate_rep.user_id.into_iter().next(),
+            description: intermediate_rep.description.into_iter().next(),
+            metadata: intermediate_rep.metadata.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<WorkspaceActivity> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<WorkspaceActivity>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<WorkspaceActivity>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for WorkspaceActivity - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<WorkspaceActivity> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <WorkspaceActivity as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into WorkspaceActivity - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct WorkspaceCompliance {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "complianceType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub compliance_type: Option<String>,
+
+    #[serde(rename = "status")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub status: Option<String>,
+
+    #[serde(rename = "certificationId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub certification_id: Option<String>,
+
+    #[serde(rename = "validUntil")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub valid_until: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl WorkspaceCompliance {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> WorkspaceCompliance {
+        WorkspaceCompliance {
+            id: None,
+            compliance_type: None,
+            status: None,
+            certification_id: None,
+            valid_until: None,
+            created_at: None,
+            updated_at: None,
+        }
+    }
+}
+
+/// Converts the WorkspaceCompliance value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for WorkspaceCompliance {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.compliance_type.as_ref().map(|compliance_type| {
+                [
+                    "complianceType".to_string(),
+                    compliance_type.to_string(),
+                ].join(",")
+            }),
+
+
+            self.status.as_ref().map(|status| {
+                [
+                    "status".to_string(),
+                    status.to_string(),
+                ].join(",")
+            }),
+
+
+            self.certification_id.as_ref().map(|certification_id| {
+                [
+                    "certificationId".to_string(),
+                    certification_id.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping validUntil in query parameter serialization
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a WorkspaceCompliance value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for WorkspaceCompliance {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub compliance_type: Vec<String>,
+            pub status: Vec<String>,
+            pub certification_id: Vec<String>,
+            pub valid_until: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing WorkspaceCompliance".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "complianceType" => intermediate_rep.compliance_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "status" => intermediate_rep.status.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "certificationId" => intermediate_rep.certification_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "validUntil" => intermediate_rep.valid_until.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing WorkspaceCompliance".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(WorkspaceCompliance {
+            id: intermediate_rep.id.into_iter().next(),
+            compliance_type: intermediate_rep.compliance_type.into_iter().next(),
+            status: intermediate_rep.status.into_iter().next(),
+            certification_id: intermediate_rep.certification_id.into_iter().next(),
+            valid_until: intermediate_rep.valid_until.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<WorkspaceCompliance> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<WorkspaceCompliance>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<WorkspaceCompliance>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for WorkspaceCompliance - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<WorkspaceCompliance> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <WorkspaceCompliance as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into WorkspaceCompliance - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct WorkspaceSharing {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "sharedWithEmail")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub shared_with_email: Option<String>,
+
+    #[serde(rename = "permissionLevel")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub permission_level: Option<String>,
+
+    #[serde(rename = "expiresAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub expires_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl WorkspaceSharing {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> WorkspaceSharing {
+        WorkspaceSharing {
+            id: None,
+            shared_with_email: None,
+            permission_level: None,
+            expires_at: None,
+            created_at: None,
+            updated_at: None,
+        }
+    }
+}
+
+/// Converts the WorkspaceSharing value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for WorkspaceSharing {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.shared_with_email.as_ref().map(|shared_with_email| {
+                [
+                    "sharedWithEmail".to_string(),
+                    shared_with_email.to_string(),
+                ].join(",")
+            }),
+
+
+            self.permission_level.as_ref().map(|permission_level| {
+                [
+                    "permissionLevel".to_string(),
+                    permission_level.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping expiresAt in query parameter serialization
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a WorkspaceSharing value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for WorkspaceSharing {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub shared_with_email: Vec<String>,
+            pub permission_level: Vec<String>,
+            pub expires_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing WorkspaceSharing".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "sharedWithEmail" => intermediate_rep.shared_with_email.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "permissionLevel" => intermediate_rep.permission_level.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "expiresAt" => intermediate_rep.expires_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing WorkspaceSharing".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(WorkspaceSharing {
+            id: intermediate_rep.id.into_iter().next(),
+            shared_with_email: intermediate_rep.shared_with_email.into_iter().next(),
+            permission_level: intermediate_rep.permission_level.into_iter().next(),
+            expires_at: intermediate_rep.expires_at.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<WorkspaceSharing> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<WorkspaceSharing>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<WorkspaceSharing>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for WorkspaceSharing - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<WorkspaceSharing> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <WorkspaceSharing as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into WorkspaceSharing - {}",
                                 value, err))
                     }
              },

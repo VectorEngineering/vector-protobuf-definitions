@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.OutputFormat;
 import org.openapitools.model.ScrapingJob;
-import org.openapitools.model.WebhookConfig;
 import org.openapitools.model.WorkflowStatus;
 import org.openapitools.model.Workspace;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,10 +28,12 @@ import javax.annotation.Generated;
  * ScrapingWorkflow
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T06:30:06.935816-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T10:37:17.791439-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ScrapingWorkflow {
 
   private String id;
+
+  private String name;
 
   private String cronExpression;
 
@@ -49,10 +50,6 @@ public class ScrapingWorkflow {
   private Integer maxRetries;
 
   private String alertEmails;
-
-  private String orgId;
-
-  private String tenantId;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime createdAt;
@@ -93,9 +90,6 @@ public class ScrapingWorkflow {
   private String dataRetention;
 
   private Boolean anonymizePii;
-
-  @Valid
-  private List<@Valid WebhookConfig> webhooks = new ArrayList<>();
 
   private String notificationSlackChannel;
 
@@ -149,6 +143,26 @@ public class ScrapingWorkflow {
 
   public void setId(String id) {
     this.id = id;
+  }
+
+  public ScrapingWorkflow name(String name) {
+    this.name = name;
+    return this;
+  }
+
+  /**
+   * Get name
+   * @return name
+   */
+  
+  @Schema(name = "name", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("name")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 
   public ScrapingWorkflow cronExpression(String cronExpression) {
@@ -289,46 +303,6 @@ public class ScrapingWorkflow {
 
   public void setAlertEmails(String alertEmails) {
     this.alertEmails = alertEmails;
-  }
-
-  public ScrapingWorkflow orgId(String orgId) {
-    this.orgId = orgId;
-    return this;
-  }
-
-  /**
-   * Get orgId
-   * @return orgId
-   */
-  
-  @Schema(name = "orgId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("orgId")
-  public String getOrgId() {
-    return orgId;
-  }
-
-  public void setOrgId(String orgId) {
-    this.orgId = orgId;
-  }
-
-  public ScrapingWorkflow tenantId(String tenantId) {
-    this.tenantId = tenantId;
-    return this;
-  }
-
-  /**
-   * Get tenantId
-   * @return tenantId
-   */
-  
-  @Schema(name = "tenantId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("tenantId")
-  public String getTenantId() {
-    return tenantId;
-  }
-
-  public void setTenantId(String tenantId) {
-    this.tenantId = tenantId;
   }
 
   public ScrapingWorkflow createdAt(OffsetDateTime createdAt) {
@@ -699,34 +673,6 @@ public class ScrapingWorkflow {
     this.anonymizePii = anonymizePii;
   }
 
-  public ScrapingWorkflow webhooks(List<@Valid WebhookConfig> webhooks) {
-    this.webhooks = webhooks;
-    return this;
-  }
-
-  public ScrapingWorkflow addWebhooksItem(WebhookConfig webhooksItem) {
-    if (this.webhooks == null) {
-      this.webhooks = new ArrayList<>();
-    }
-    this.webhooks.add(webhooksItem);
-    return this;
-  }
-
-  /**
-   * Get webhooks
-   * @return webhooks
-   */
-  @Valid 
-  @Schema(name = "webhooks", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("webhooks")
-  public List<@Valid WebhookConfig> getWebhooks() {
-    return webhooks;
-  }
-
-  public void setWebhooks(List<@Valid WebhookConfig> webhooks) {
-    this.webhooks = webhooks;
-  }
-
   public ScrapingWorkflow notificationSlackChannel(String notificationSlackChannel) {
     this.notificationSlackChannel = notificationSlackChannel;
     return this;
@@ -1073,6 +1019,7 @@ public class ScrapingWorkflow {
     }
     ScrapingWorkflow scrapingWorkflow = (ScrapingWorkflow) o;
     return Objects.equals(this.id, scrapingWorkflow.id) &&
+        Objects.equals(this.name, scrapingWorkflow.name) &&
         Objects.equals(this.cronExpression, scrapingWorkflow.cronExpression) &&
         Objects.equals(this.nextRunTime, scrapingWorkflow.nextRunTime) &&
         Objects.equals(this.lastRunTime, scrapingWorkflow.lastRunTime) &&
@@ -1080,8 +1027,6 @@ public class ScrapingWorkflow {
         Objects.equals(this.retryCount, scrapingWorkflow.retryCount) &&
         Objects.equals(this.maxRetries, scrapingWorkflow.maxRetries) &&
         Objects.equals(this.alertEmails, scrapingWorkflow.alertEmails) &&
-        Objects.equals(this.orgId, scrapingWorkflow.orgId) &&
-        Objects.equals(this.tenantId, scrapingWorkflow.tenantId) &&
         Objects.equals(this.createdAt, scrapingWorkflow.createdAt) &&
         Objects.equals(this.updatedAt, scrapingWorkflow.updatedAt) &&
         Objects.equals(this.deletedAt, scrapingWorkflow.deletedAt) &&
@@ -1100,7 +1045,6 @@ public class ScrapingWorkflow {
         Objects.equals(this.outputDestination, scrapingWorkflow.outputDestination) &&
         Objects.equals(this.dataRetention, scrapingWorkflow.dataRetention) &&
         Objects.equals(this.anonymizePii, scrapingWorkflow.anonymizePii) &&
-        Objects.equals(this.webhooks, scrapingWorkflow.webhooks) &&
         Objects.equals(this.notificationSlackChannel, scrapingWorkflow.notificationSlackChannel) &&
         Objects.equals(this.notificationEmailGroup, scrapingWorkflow.notificationEmailGroup) &&
         Objects.equals(this.notificationNotifyOnStart, scrapingWorkflow.notificationNotifyOnStart) &&
@@ -1121,7 +1065,7 @@ public class ScrapingWorkflow {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, cronExpression, nextRunTime, lastRunTime, status, retryCount, maxRetries, alertEmails, orgId, tenantId, createdAt, updatedAt, deletedAt, jobs, workspace, geoFencingRadius, geoFencingLat, geoFencingLon, geoFencingZoomMin, geoFencingZoomMax, includeReviews, includePhotos, includeBusinessHours, maxReviewsPerBusiness, outputFormat, outputDestination, dataRetention, anonymizePii, webhooks, notificationSlackChannel, notificationEmailGroup, notificationNotifyOnStart, notificationNotifyOnComplete, notificationNotifyOnFailure, contentFilterAllowedCountries, contentFilterExcludedTypes, contentFilterMinimumRating, contentFilterMinimumReviews, qosMaxConcurrentRequests, qosMaxRetries, qosRequestTimeout, qosEnableJavascript, respectRobotsTxt, acceptTermsOfService, userAgent);
+    return Objects.hash(id, name, cronExpression, nextRunTime, lastRunTime, status, retryCount, maxRetries, alertEmails, createdAt, updatedAt, deletedAt, jobs, workspace, geoFencingRadius, geoFencingLat, geoFencingLon, geoFencingZoomMin, geoFencingZoomMax, includeReviews, includePhotos, includeBusinessHours, maxReviewsPerBusiness, outputFormat, outputDestination, dataRetention, anonymizePii, notificationSlackChannel, notificationEmailGroup, notificationNotifyOnStart, notificationNotifyOnComplete, notificationNotifyOnFailure, contentFilterAllowedCountries, contentFilterExcludedTypes, contentFilterMinimumRating, contentFilterMinimumReviews, qosMaxConcurrentRequests, qosMaxRetries, qosRequestTimeout, qosEnableJavascript, respectRobotsTxt, acceptTermsOfService, userAgent);
   }
 
   @Override
@@ -1129,6 +1073,7 @@ public class ScrapingWorkflow {
     StringBuilder sb = new StringBuilder();
     sb.append("class ScrapingWorkflow {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    cronExpression: ").append(toIndentedString(cronExpression)).append("\n");
     sb.append("    nextRunTime: ").append(toIndentedString(nextRunTime)).append("\n");
     sb.append("    lastRunTime: ").append(toIndentedString(lastRunTime)).append("\n");
@@ -1136,8 +1081,6 @@ public class ScrapingWorkflow {
     sb.append("    retryCount: ").append(toIndentedString(retryCount)).append("\n");
     sb.append("    maxRetries: ").append(toIndentedString(maxRetries)).append("\n");
     sb.append("    alertEmails: ").append(toIndentedString(alertEmails)).append("\n");
-    sb.append("    orgId: ").append(toIndentedString(orgId)).append("\n");
-    sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
     sb.append("    deletedAt: ").append(toIndentedString(deletedAt)).append("\n");
@@ -1156,7 +1099,6 @@ public class ScrapingWorkflow {
     sb.append("    outputDestination: ").append(toIndentedString(outputDestination)).append("\n");
     sb.append("    dataRetention: ").append(toIndentedString(dataRetention)).append("\n");
     sb.append("    anonymizePii: ").append(toIndentedString(anonymizePii)).append("\n");
-    sb.append("    webhooks: ").append(toIndentedString(webhooks)).append("\n");
     sb.append("    notificationSlackChannel: ").append(toIndentedString(notificationSlackChannel)).append("\n");
     sb.append("    notificationEmailGroup: ").append(toIndentedString(notificationEmailGroup)).append("\n");
     sb.append("    notificationNotifyOnStart: ").append(toIndentedString(notificationNotifyOnStart)).append("\n");

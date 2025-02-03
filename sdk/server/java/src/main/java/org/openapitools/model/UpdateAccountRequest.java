@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import org.openapitools.model.Account;
+import org.openapitools.model.Account1;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -19,12 +19,12 @@ import javax.annotation.Generated;
  * UpdateAccountRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T06:30:06.935816-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T10:37:17.791439-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class UpdateAccountRequest {
 
-  private Account account;
+  private Account1 account;
 
-  public UpdateAccountRequest account(Account account) {
+  public UpdateAccountRequest account(Account1 account) {
     this.account = account;
     return this;
   }
@@ -36,11 +36,11 @@ public class UpdateAccountRequest {
   @Valid 
   @Schema(name = "account", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("account")
-  public Account getAccount() {
+  public Account1 getAccount() {
     return account;
   }
 
-  public void setAccount(Account account) {
+  public void setAccount(Account1 account) {
     this.account = account;
   }
 

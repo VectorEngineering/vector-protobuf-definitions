@@ -18,7 +18,7 @@ type ScrapingJob {
   status: BackgroundJobStatus
   name: String!
   keywords: [String!!]
-  lang: String!
+  lang: Language
   zoom: Int!
   lat: String!
   lon: String!
@@ -42,7 +42,7 @@ input ScrapingJobInput {
     status: BackgroundJobStatus
     name: String!
     keywords: [String!]
-    lang: String!
+    lang: Language
     zoom: Int!
     lat: String!
     lon: String!

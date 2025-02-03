@@ -7,13 +7,44 @@ use futures::{future, Stream, stream};
 use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, models,
                       CreateAccountResponse,
                       CreateScrapingJobResponse,
+                      CreateWorkspaceResponse,
                       DeleteAccountResponse,
                       DeleteScrapingJobResponse,
+                      DeleteWorkspaceResponse,
                       DownloadScrapingResultsResponse,
                       GetAccountResponse,
+                      GetAccountUsageResponse,
                       GetScrapingJobResponse,
+                      GetWorkflowResponse,
+                      GetWorkspaceResponse,
+                      GetWorkspaceAnalyticsResponse,
+                      LeadScraperServiceCreateWorkflowResponse,
+                      ListAccountsResponse,
                       ListScrapingJobsResponse,
+                      ListWorkflowsResponse,
+                      ListWorkspacesResponse,
+                      PauseWorkflowResponse,
+                      TriggerWorkflowResponse,
                       UpdateAccountResponse,
+                      UpdateAccountSettingsResponse,
+                      UpdateWorkflowResponse,
+                      UpdateWorkspaceResponse,
+                      CreateAccount1Response,
+                      CreateWorkspace1Response,
+                      DeleteAccount1Response,
+                      DeleteWorkspace1Response,
+                      GetAccount1Response,
+                      GetWorkspace1Response,
+                      GetWorkspaceAnalytics1Response,
+                      GetWorkspaceComplianceReportResponse,
+                      GetWorkspaceStorageStatsResponse,
+                      ListWorkspaceSharingsResponse,
+                      ListWorkspaces1Response,
+                      RemoveWorkspaceSharingResponse,
+                      ShareWorkspaceResponse,
+                      UpdateAccount1Response,
+                      UpdateWorkspace1Response,
+                      UpdateWorkspaceSharingResponse,
                      };
 use clap::{App, Arg};
 
@@ -44,10 +75,28 @@ fn main() {
             .possible_values(&[
                 "DeleteAccount", 
                 "DeleteScrapingJob", 
+                "DeleteWorkspace", 
                 "DownloadScrapingResults", 
                 "GetAccount", 
+                "GetAccountUsage", 
                 "GetScrapingJob", 
+                "GetWorkflow", 
+                "GetWorkspace", 
+                "GetWorkspaceAnalytics", 
+                "ListAccounts", 
                 "ListScrapingJobs", 
+                "ListWorkflows", 
+                "ListWorkspaces", 
+                "DeleteAccount1", 
+                "DeleteWorkspace1", 
+                "GetAccount1", 
+                "GetWorkspace1", 
+                "GetWorkspaceAnalytics1", 
+                "GetWorkspaceComplianceReport", 
+                "GetWorkspaceStorageStats", 
+                "ListWorkspaceSharings", 
+                "ListWorkspaces1", 
+                "RemoveWorkspaceSharing", 
             ])
             .required(true)
             .index(1))
@@ -133,6 +182,14 @@ fn main() {
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
         */
+        /* Disabled because there's no example.
+        Some("CreateWorkspace") => {
+            let result = rt.block_on(client.create_workspace(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
         Some("DeleteAccount") => {
             let result = rt.block_on(client.delete_account(
                   "id_example".to_string()
@@ -145,6 +202,12 @@ fn main() {
                   "user_id_example".to_string(),
                   "org_id_example".to_string(),
                   "tenant_id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("DeleteWorkspace") => {
+            let result = rt.block_on(client.delete_workspace(
+                  "id_example".to_string()
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
@@ -163,12 +226,56 @@ fn main() {
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
+        Some("GetAccountUsage") => {
+            let result = rt.block_on(client.get_account_usage(
+                  "id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
         Some("GetScrapingJob") => {
             let result = rt.block_on(client.get_scraping_job(
                   "job_id_example".to_string(),
                   "user_id_example".to_string(),
                   "org_id_example".to_string(),
                   "tenant_id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("GetWorkflow") => {
+            let result = rt.block_on(client.get_workflow(
+                  "workspace_id_example".to_string(),
+                  "id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("GetWorkspace") => {
+            let result = rt.block_on(client.get_workspace(
+                  "id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("GetWorkspaceAnalytics") => {
+            let result = rt.block_on(client.get_workspace_analytics(
+                  "workspace_id_example".to_string(),
+                  None,
+                  None
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        /* Disabled because there's no example.
+        Some("LeadScraperServiceCreateWorkflow") => {
+            let result = rt.block_on(client.lead_scraper_service_create_workflow(
+                  "workspace_id_example".to_string(),
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        Some("ListAccounts") => {
+            let result = rt.block_on(client.list_accounts(
+                  Some(56),
+                  Some("page_token_example".to_string()),
+                  Some("filter_example".to_string())
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
@@ -180,9 +287,187 @@ fn main() {
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
+        Some("ListWorkflows") => {
+            let result = rt.block_on(client.list_workflows(
+                  "workspace_id_example".to_string(),
+                  Some(56),
+                  Some("page_token_example".to_string()),
+                  Some("filter_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("ListWorkspaces") => {
+            let result = rt.block_on(client.list_workspaces(
+                  Some("account_id_example".to_string()),
+                  Some(56),
+                  Some("page_token_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        /* Disabled because there's no example.
+        Some("PauseWorkflow") => {
+            let result = rt.block_on(client.pause_workflow(
+                  "workspace_id_example".to_string(),
+                  "id_example".to_string(),
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("TriggerWorkflow") => {
+            let result = rt.block_on(client.trigger_workflow(
+                  "workspace_id_example".to_string(),
+                  "id_example".to_string(),
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
         /* Disabled because there's no example.
         Some("UpdateAccount") => {
             let result = rt.block_on(client.update_account(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("UpdateAccountSettings") => {
+            let result = rt.block_on(client.update_account_settings(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("UpdateWorkflow") => {
+            let result = rt.block_on(client.update_workflow(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("UpdateWorkspace") => {
+            let result = rt.block_on(client.update_workspace(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("CreateAccount1") => {
+            let result = rt.block_on(client.create_account1(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("CreateWorkspace1") => {
+            let result = rt.block_on(client.create_workspace1(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        Some("DeleteAccount1") => {
+            let result = rt.block_on(client.delete_account1(
+                  "id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("DeleteWorkspace1") => {
+            let result = rt.block_on(client.delete_workspace1(
+                  "id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("GetAccount1") => {
+            let result = rt.block_on(client.get_account1(
+                  "id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("GetWorkspace1") => {
+            let result = rt.block_on(client.get_workspace1(
+                  "id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("GetWorkspaceAnalytics1") => {
+            let result = rt.block_on(client.get_workspace_analytics1(
+                  "workspace_id_example".to_string(),
+                  None,
+                  None
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("GetWorkspaceComplianceReport") => {
+            let result = rt.block_on(client.get_workspace_compliance_report(
+                  "workspace_id_example".to_string(),
+                  Some("compliance_type_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("GetWorkspaceStorageStats") => {
+            let result = rt.block_on(client.get_workspace_storage_stats(
+                  "workspace_id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("ListWorkspaceSharings") => {
+            let result = rt.block_on(client.list_workspace_sharings(
+                  "workspace_id_example".to_string(),
+                  Some(56),
+                  Some("page_token_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("ListWorkspaces1") => {
+            let result = rt.block_on(client.list_workspaces1(
+                  Some("account_id_example".to_string()),
+                  Some(56),
+                  Some("page_token_example".to_string()),
+                  Some("filter_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("RemoveWorkspaceSharing") => {
+            let result = rt.block_on(client.remove_workspace_sharing(
+                  "sharing_id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        /* Disabled because there's no example.
+        Some("ShareWorkspace") => {
+            let result = rt.block_on(client.share_workspace(
+                  "workspace_id_example".to_string(),
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("UpdateAccount1") => {
+            let result = rt.block_on(client.update_account1(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("UpdateWorkspace1") => {
+            let result = rt.block_on(client.update_workspace1(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("UpdateWorkspaceSharing") => {
+            let result = rt.block_on(client.update_workspace_sharing(
                   ???
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());

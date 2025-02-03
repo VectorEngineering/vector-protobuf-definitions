@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id_** | **String!** |  | [optional] [default to null]
+**name** | **String!** |  | [optional] [default to null]
 **cronExpression** | **String!** |  | [optional] [default to null]
 **nextRunTime** | **String!** |  | [optional] [default to null]
 **lastRunTime** | **String!** |  | [optional] [default to null]
@@ -11,8 +12,6 @@ Name | Type | Description | Notes
 **retryCount** | **Int!** |  | [optional] [default to null]
 **maxRetries** | **Int!** |  | [optional] [default to null]
 **alertEmails** | **String!** |  | [optional] [default to null]
-**orgId** | **String!** |  | [optional] [default to null]
-**tenantId** | **String!** |  | [optional] [default to null]
 **createdAt** | **String!** |  | [optional] [default to null]
 **updatedAt** | **String!** |  | [optional] [default to null]
 **deletedAt** | **String!** |  | [optional] [default to null]
@@ -31,7 +30,6 @@ Name | Type | Description | Notes
 **outputDestination** | **String!** |  | [optional] [default to null]
 **dataRetention** | **String!** |  | [optional] [default to null]
 **anonymizePii** | **Boolean!** |  | [optional] [default to null]
-**webhooks** | [**WebhookConfig**](WebhookConfig.md) |  | [optional] [default to null]
 **notificationSlackChannel** | **String!** |  | [optional] [default to null]
 **notificationEmailGroup** | **String!** |  | [optional] [default to null]
 **notificationNotifyOnStart** | **Boolean!** |  | [optional] [default to null]

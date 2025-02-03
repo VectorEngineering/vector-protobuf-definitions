@@ -5,11 +5,17 @@ from typing import List, Dict  # noqa: F401
 from playbookmedia_backend_server_sdk.models.base_model import Model
 from playbookmedia_backend_server_sdk.models.account_settings import AccountSettings
 from playbookmedia_backend_server_sdk.models.account_status import AccountStatus
+from playbookmedia_backend_server_sdk.models.permission import Permission
+from playbookmedia_backend_server_sdk.models.role import Role
+from playbookmedia_backend_server_sdk.models.timezone import Timezone
 from playbookmedia_backend_server_sdk.models.workspace import Workspace
 from playbookmedia_backend_server_sdk import util
 
 from playbookmedia_backend_server_sdk.models.account_settings import AccountSettings  # noqa: E501
 from playbookmedia_backend_server_sdk.models.account_status import AccountStatus  # noqa: E501
+from playbookmedia_backend_server_sdk.models.permission import Permission  # noqa: E501
+from playbookmedia_backend_server_sdk.models.role import Role  # noqa: E501
+from playbookmedia_backend_server_sdk.models.timezone import Timezone  # noqa: E501
 from playbookmedia_backend_server_sdk.models.workspace import Workspace  # noqa: E501
 
 class Account(Model):
@@ -18,7 +24,7 @@ class Account(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, auth_platform_user_id=None, email=None, deleted_at=None, created_at=None, account_status=AccountStatus.UNSPECIFIED, roles=None, permissions=None, mfa_enabled=None, last_login_at=None, timezone=None, total_jobs_run=None, monthly_job_limit=None, concurrent_job_limit=None, workspaces=None, settings=None):  # noqa: E501
+    def __init__(self, id=None, auth_platform_user_id=None, email=None, deleted_at=None, created_at=None, account_status=AccountStatus.UNSPECIFIED, roles=None, permissions=None, mfa_enabled=None, last_login_at=None, timezone=Timezone.UNSPECIFIED, total_jobs_run=None, monthly_job_limit=None, concurrent_job_limit=None, workspaces=None, settings=None):  # noqa: E501
         """Account - a model defined in OpenAPI
 
         :param id: The id of this Account.  # noqa: E501
@@ -34,15 +40,15 @@ class Account(Model):
         :param account_status: The account_status of this Account.  # noqa: E501
         :type account_status: AccountStatus
         :param roles: The roles of this Account.  # noqa: E501
-        :type roles: List[str]
+        :type roles: List[Role]
         :param permissions: The permissions of this Account.  # noqa: E501
-        :type permissions: List[str]
+        :type permissions: List[Permission]
         :param mfa_enabled: The mfa_enabled of this Account.  # noqa: E501
         :type mfa_enabled: bool
         :param last_login_at: The last_login_at of this Account.  # noqa: E501
         :type last_login_at: datetime
         :param timezone: The timezone of this Account.  # noqa: E501
-        :type timezone: str
+        :type timezone: Timezone
         :param total_jobs_run: The total_jobs_run of this Account.  # noqa: E501
         :type total_jobs_run: int
         :param monthly_job_limit: The monthly_job_limit of this Account.  # noqa: E501
@@ -61,11 +67,11 @@ class Account(Model):
             'deleted_at': datetime,
             'created_at': datetime,
             'account_status': AccountStatus,
-            'roles': List[str],
-            'permissions': List[str],
+            'roles': List[Role],
+            'permissions': List[Permission],
             'mfa_enabled': bool,
             'last_login_at': datetime,
-            'timezone': str,
+            'timezone': Timezone,
             'total_jobs_run': int,
             'monthly_job_limit': int,
             'concurrent_job_limit': int,
@@ -247,43 +253,43 @@ class Account(Model):
         self._account_status = account_status
 
     @property
-    def roles(self) -> List[str]:
+    def roles(self) -> List[Role]:
         """Gets the roles of this Account.
 
 
         :return: The roles of this Account.
-        :rtype: List[str]
+        :rtype: List[Role]
         """
         return self._roles
 
     @roles.setter
-    def roles(self, roles: List[str]):
+    def roles(self, roles: List[Role]):
         """Sets the roles of this Account.
 
 
         :param roles: The roles of this Account.
-        :type roles: List[str]
+        :type roles: List[Role]
         """
 
         self._roles = roles
 
     @property
-    def permissions(self) -> List[str]:
+    def permissions(self) -> List[Permission]:
         """Gets the permissions of this Account.
 
 
         :return: The permissions of this Account.
-        :rtype: List[str]
+        :rtype: List[Permission]
         """
         return self._permissions
 
     @permissions.setter
-    def permissions(self, permissions: List[str]):
+    def permissions(self, permissions: List[Permission]):
         """Sets the permissions of this Account.
 
 
         :param permissions: The permissions of this Account.
-        :type permissions: List[str]
+        :type permissions: List[Permission]
         """
 
         self._permissions = permissions
@@ -331,22 +337,22 @@ class Account(Model):
         self._last_login_at = last_login_at
 
     @property
-    def timezone(self) -> str:
+    def timezone(self) -> Timezone:
         """Gets the timezone of this Account.
 
 
         :return: The timezone of this Account.
-        :rtype: str
+        :rtype: Timezone
         """
         return self._timezone
 
     @timezone.setter
-    def timezone(self, timezone: str):
+    def timezone(self, timezone: Timezone):
         """Sets the timezone of this Account.
 
 
         :param timezone: The timezone of this Account.
-        :type timezone: str
+        :type timezone: Timezone
         """
 
         self._timezone = timezone

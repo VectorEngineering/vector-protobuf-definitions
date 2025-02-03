@@ -4,10 +4,12 @@ from typing import List, Dict  # noqa: F401
 
 from playbookmedia_backend_server_sdk.models.base_model import Model
 from playbookmedia_backend_server_sdk.models.background_job_status import BackgroundJobStatus
+from playbookmedia_backend_server_sdk.models.language import Language
 from playbookmedia_backend_server_sdk.models.lead import Lead
 from playbookmedia_backend_server_sdk import util
 
 from playbookmedia_backend_server_sdk.models.background_job_status import BackgroundJobStatus  # noqa: E501
+from playbookmedia_backend_server_sdk.models.language import Language  # noqa: E501
 from playbookmedia_backend_server_sdk.models.lead import Lead  # noqa: E501
 
 class ScrapingJob(Model):
@@ -16,7 +18,7 @@ class ScrapingJob(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, priority=None, payload_type=None, payload=None, created_at=None, status=BackgroundJobStatus.UNSPECIFIED, name=None, keywords=None, lang=None, zoom=None, lat=None, lon=None, fast_mode=None, radius=None, depth=None, email=None, max_time=None, proxies=None, updated_at=None, deleted_at=None, leads=None):  # noqa: E501
+    def __init__(self, id=None, priority=None, payload_type=None, payload=None, created_at=None, status=BackgroundJobStatus.UNSPECIFIED, name=None, keywords=None, lang=Language.UNSPECIFIED, zoom=None, lat=None, lon=None, fast_mode=None, radius=None, depth=None, email=None, max_time=None, proxies=None, updated_at=None, deleted_at=None, leads=None):  # noqa: E501
         """ScrapingJob - a model defined in OpenAPI
 
         :param id: The id of this ScrapingJob.  # noqa: E501
@@ -36,7 +38,7 @@ class ScrapingJob(Model):
         :param keywords: The keywords of this ScrapingJob.  # noqa: E501
         :type keywords: List[str]
         :param lang: The lang of this ScrapingJob.  # noqa: E501
-        :type lang: str
+        :type lang: Language
         :param zoom: The zoom of this ScrapingJob.  # noqa: E501
         :type zoom: int
         :param lat: The lat of this ScrapingJob.  # noqa: E501
@@ -71,7 +73,7 @@ class ScrapingJob(Model):
             'status': BackgroundJobStatus,
             'name': str,
             'keywords': List[str],
-            'lang': str,
+            'lang': Language,
             'zoom': int,
             'lat': str,
             'lon': str,
@@ -312,22 +314,22 @@ class ScrapingJob(Model):
         self._keywords = keywords
 
     @property
-    def lang(self) -> str:
+    def lang(self) -> Language:
         """Gets the lang of this ScrapingJob.
 
 
         :return: The lang of this ScrapingJob.
-        :rtype: str
+        :rtype: Language
         """
         return self._lang
 
     @lang.setter
-    def lang(self, lang: str):
+    def lang(self, lang: Language):
         """Sets the lang of this ScrapingJob.
 
 
         :param lang: The lang of this ScrapingJob.
-        :type lang: str
+        :type lang: Language
         """
 
         self._lang = lang

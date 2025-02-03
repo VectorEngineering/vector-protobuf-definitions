@@ -16,11 +16,11 @@ type Account {
   deletedAt: String!
   createdAt: String!
   accountStatus: AccountStatus
-  roles: [String!!]
-  permissions: [String!!]
+  roles: [Role!]
+  permissions: [Permission!]
   mfaEnabled: Boolean!
   lastLoginAt: String!
-  timezone: String!
+  timezone: Timezone
   totalJobsRun: Int!
   monthlyJobLimit: Int!
   concurrentJobLimit: Int!
@@ -35,11 +35,11 @@ input AccountInput {
     deletedAt: String!
     createdAt: String!
     accountStatus: AccountStatus
-    roles: [String!]
-    permissions: [String!]
+    roles: [RoleInput]
+    permissions: [PermissionInput]
     mfaEnabled: Boolean!
     lastLoginAt: String!
-    timezone: String!
+    timezone: Timezone
     totalJobsRun: Int!
     monthlyJobLimit: Int!
     concurrentJobLimit: Int!

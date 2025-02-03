@@ -30,7 +30,7 @@ service WorkspaceService {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Create a new account"
-            tags: ["Account Management"]
+            tags: ["workspace-service"]
             operation_id: "CreateAccount"
             description: "Creates a new user account with initial workspace"
             responses: {
@@ -54,7 +54,7 @@ service WorkspaceService {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get account details"
-            tags: ["Account Management"]
+            tags: ["workspace-service"]
             operation_id: "GetAccount"
             responses: {
                 key: "200"
@@ -78,7 +78,7 @@ service WorkspaceService {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Update account details"
-            tags: ["Account Management"]
+            tags: ["workspace-service"]
             operation_id: "UpdateAccount"
             responses: {
                 key: "200"
@@ -101,7 +101,7 @@ service WorkspaceService {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Delete account"
-            tags: ["Account Management"]
+            tags: ["workspace-service"]
             operation_id: "DeleteAccount"
             responses: {
                 key: "200"
@@ -149,7 +149,7 @@ service WorkspaceService {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Create workspace"
-            tags: ["Workspace Management"]
+            tags: ["workspace-service"]
             operation_id: "CreateWorkspace"
             responses: {
                 key: "201"
@@ -172,7 +172,7 @@ service WorkspaceService {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get workspace details"
-            tags: ["Workspace Management"]
+            tags: ["workspace-service"]
             operation_id: "GetWorkspace"
             responses: {
                 key: "200"
@@ -196,7 +196,7 @@ service WorkspaceService {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Update workspace"
-            tags: ["Workspace Management"]
+            tags: ["workspace-service"]
             operation_id: "UpdateWorkspace"
             responses: {
                 key: "200"
@@ -219,7 +219,7 @@ service WorkspaceService {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Delete workspace"
-            tags: ["Workspace Management"]
+            tags: ["workspace-service"]
             operation_id: "DeleteWorkspace"
             responses: {
                 key: "200"
@@ -242,7 +242,7 @@ service WorkspaceService {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "List workspaces"
-            tags: ["Workspace Management"]
+            tags: ["workspace-service"]
             operation_id: "ListWorkspaces"
             responses: {
                 key: "200"
@@ -267,7 +267,7 @@ service WorkspaceService {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Share workspace"
-            tags: ["Workspace Sharing"]
+            tags: ["workspace-service"]
             operation_id: "ShareWorkspace"
             responses: {
                 key: "200"
@@ -291,7 +291,7 @@ service WorkspaceService {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Update workspace sharing"
-            tags: ["Workspace Sharing"]
+            tags: ["workspace-service"]
             operation_id: "UpdateWorkspaceSharing"
             responses: {
                 key: "200"
@@ -314,7 +314,7 @@ service WorkspaceService {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Remove workspace sharing"
-            tags: ["Workspace Sharing"]
+            tags: ["workspace-service"]
             operation_id: "RemoveWorkspaceSharing"
             responses: {
                 key: "200"
@@ -337,7 +337,7 @@ service WorkspaceService {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "List workspace sharings"
-            tags: ["Workspace Sharing"]
+            tags: ["workspace-service"]
             operation_id: "ListWorkspaceSharings"
             responses: {
                 key: "200"
@@ -361,7 +361,7 @@ service WorkspaceService {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get workspace analytics"
-            tags: ["Analytics"]
+            tags: ["workspace-service"]
             operation_id: "GetWorkspaceAnalytics"
             responses: {
                 key: "200"
@@ -384,7 +384,7 @@ service WorkspaceService {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get compliance report"
-            tags: ["Compliance"]
+            tags: ["workspace-service"]
             operation_id: "GetWorkspaceComplianceReport"
             responses: {
                 key: "200"
@@ -407,7 +407,7 @@ service WorkspaceService {
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "Get storage statistics"
-            tags: ["Storage"]
+            tags: ["workspace-service"]
             operation_id: "GetWorkspaceStorageStats"
             responses: {
                 key: "200"

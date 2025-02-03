@@ -1,0 +1,22 @@
+# DocumentStatus
+
+
+## Enum
+
+* `DOCUMENT_STATUS_UNSPECIFIED` (value: `'DOCUMENT_STATUS_UNSPECIFIED'`)
+
+* `DOCUMENT_STATUS_DRAFT` (value: `'DOCUMENT_STATUS_DRAFT'`)
+
+* `DOCUMENT_STATUS_IN_REVIEW` (value: `'DOCUMENT_STATUS_IN_REVIEW'`)
+
+* `DOCUMENT_STATUS_APPROVED` (value: `'DOCUMENT_STATUS_APPROVED'`)
+
+* `DOCUMENT_STATUS_REJECTED` (value: `'DOCUMENT_STATUS_REJECTED'`)
+
+* `DOCUMENT_STATUS_EXPIRED` (value: `'DOCUMENT_STATUS_EXPIRED'`)
+
+* `DOCUMENT_STATUS_ARCHIVED` (value: `'DOCUMENT_STATUS_ARCHIVED'`)
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

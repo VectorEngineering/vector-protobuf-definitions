@@ -22,6 +22,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictBytes, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from playbookmedia_backend_client_sdk.models.background_job_status import BackgroundJobStatus
+from playbookmedia_backend_client_sdk.models.language import Language
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -37,7 +38,7 @@ class ScrapingJob(BaseModel):
     status: Optional[BackgroundJobStatus] = BackgroundJobStatus.UNSPECIFIED
     name: Optional[StrictStr] = None
     keywords: Optional[List[StrictStr]] = None
-    lang: Optional[StrictStr] = None
+    lang: Optional[Language] = Language.UNSPECIFIED
     zoom: Optional[StrictInt] = None
     lat: Optional[StrictStr] = None
     lon: Optional[StrictStr] = None
@@ -118,7 +119,7 @@ class ScrapingJob(BaseModel):
             "status": obj.get("status") if obj.get("status") is not None else BackgroundJobStatus.UNSPECIFIED,
             "name": obj.get("name"),
             "keywords": obj.get("keywords"),
-            "lang": obj.get("lang"),
+            "lang": obj.get("lang") if obj.get("lang") is not None else Language.UNSPECIFIED,
             "zoom": obj.get("zoom"),
             "lat": obj.get("lat"),
             "lon": obj.get("lon"),

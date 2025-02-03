@@ -1,4 +1,4 @@
-import type { Context, Next } from "hono";
+import type { Context, Env, MiddlewareHandler, Next } from "hono";
 
 import { bearerAuth } from "hono/bearer-auth";
 import { cache } from "hono/cache";
@@ -9,7 +9,7 @@ import { secureHeaders } from "hono/secure-headers";
 
 const PUBLIC_PATHS = ["/", "/openapi", "/health"];
 
-const authMiddleware = (c: Context, next: Next) => {
+const authMiddleware: MiddlewareHandler<Env> = async (c: Context, next: Next) => {
   if (PUBLIC_PATHS.includes(c.req.path)) {
     return next();
   }
@@ -20,7 +20,7 @@ const authMiddleware = (c: Context, next: Next) => {
   return bearer(c, next);
 };
 
-const cacheMiddleware = (c: Context, next: Next) => {
+const cacheMiddleware: MiddlewareHandler<Env> = async (c: Context, next: Next) => {
   if (process.env.NODE_ENV === "development") {
     return next();
   }
@@ -33,7 +33,7 @@ const cacheMiddleware = (c: Context, next: Next) => {
 
 const securityMiddleware = secureHeaders();
 
-const loggingMiddleware = (c: Context, next: Next) => {
+const loggingMiddleware: MiddlewareHandler<Env> = async (c: Context, next: Next) => {
   c.set("logger", logger);
   return honoLogger((message, rest) => {
     logger.info(c, message, {}, rest);

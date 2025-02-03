@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** |  | [optional] [default to None]
+**name** | **String** |  | [optional] [default to None]
 **cron_expression** | **String** |  | [optional] [default to None]
 **next_run_time** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]
 **last_run_time** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]
@@ -11,8 +12,6 @@ Name | Type | Description | Notes
 **retry_count** | **i32** |  | [optional] [default to None]
 **max_retries** | **i32** |  | [optional] [default to None]
 **alert_emails** | **String** |  | [optional] [default to None]
-**org_id** | **String** |  | [optional] [default to None]
-**tenant_id** | **String** |  | [optional] [default to None]
 **created_at** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]
 **updated_at** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]
 **deleted_at** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]
@@ -31,7 +30,6 @@ Name | Type | Description | Notes
 **output_destination** | **String** |  | [optional] [default to None]
 **data_retention** | **String** |  | [optional] [default to None]
 **anonymize_pii** | **bool** |  | [optional] [default to None]
-**webhooks** | [**Vec<models::WebhookConfig>**](WebhookConfig.md) |  | [optional] [default to None]
 **notification_slack_channel** | **String** |  | [optional] [default to None]
 **notification_email_group** | **String** |  | [optional] [default to None]
 **notification_notify_on_start** | **bool** |  | [optional] [default to None]

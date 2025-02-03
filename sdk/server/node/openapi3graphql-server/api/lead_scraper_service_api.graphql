@@ -24,6 +24,11 @@ input CreateScrapingJobInput {
     createScrapingJobRequest: CreateScrapingJobRequestInput
 }
 
+input CreateWorkspaceInput {
+    
+    createWorkspaceRequest: CreateWorkspaceRequestInput
+}
+
 input DeleteAccountInput {
     
     Id_: String!
@@ -40,9 +45,54 @@ input DeleteScrapingJobInput {
     tenantId: String!
 }
 
+input DeleteWorkspaceInput {
+    
+    Id_: String!
+}
+
+input LeadScraperServiceCreateWorkflowInput {
+    
+    workspaceId: String!, 
+    
+    createWorkflowBody: CreateWorkflowBodyInput
+}
+
+input PauseWorkflowInput {
+    
+    workspaceId: String!, 
+    
+    Id_: String!, 
+    
+    pauseWorkflowBody: PauseWorkflowBodyInput
+}
+
+input TriggerWorkflowInput {
+    
+    workspaceId: String!, 
+    
+    Id_: String!, 
+    
+    triggerWorkflowBody: TriggerWorkflowBodyInput
+}
+
 input UpdateAccountInput {
     
     updateAccountRequest: UpdateAccountRequestInput
+}
+
+input UpdateAccountSettingsInput {
+    
+    updateAccountSettingsRequest: UpdateAccountSettingsRequestInput
+}
+
+input UpdateWorkflowInput {
+    
+    updateWorkflowRequest: UpdateWorkflowRequestInput
+}
+
+input UpdateWorkspaceInput {
+    
+    updateWorkspaceRequest: UpdateWorkspaceRequestInput
 }
 
 type Mutation {
@@ -56,6 +106,11 @@ type Mutation {
   # @param CreateScrapingJobRequest createScrapingJobRequest 
   # @return [CreateScrapingJobResponse]
   CreateScrapingJob(input: CreateScrapingJobInput!): CreateScrapingJobResponse
+  # Create a new workspace
+  # Creates a new workspace for a given account
+  # @param CreateWorkspaceRequest createWorkspaceRequest 
+  # @return [CreateWorkspaceResponse]
+  CreateWorkspace(input: CreateWorkspaceInput!): CreateWorkspaceResponse
   # Delete account
   # Permanently deletes an account and associated resources
   # @param String! Id_ 
@@ -69,11 +124,51 @@ type Mutation {
   # @param String! tenantId 
   # @return [DeleteScrapingJobResponse]
   DeleteScrapingJob(input: DeleteScrapingJobInput!): DeleteScrapingJobResponse
+  # Delete a workspace
+  # Deletes a specific workspace
+  # @param String! Id_ 
+  # @return [DeleteWorkspaceResponse]
+  DeleteWorkspace(input: DeleteWorkspaceInput!): DeleteWorkspaceResponse
+  # Create a new workflow
+  # This endpoint creates a new workflow configuration for a specific workspace  Required parameters: - workspace_id: Parent workspace ID - name: Human-readable workflow name - description: Optional workflow description - parameters: Job parameters for the workflow  Example: &#x60;&#x60;&#x60;json
+  # @param String! workspaceId 
+  # @param CreateWorkflowBody createWorkflowBody 
+  # @return [CreateWorkflowResponse]
+  LeadScraperServiceCreateWorkflow(input: LeadScraperServiceCreateWorkflowInput!): CreateWorkflowResponse
+  # Pause workflow execution
+  # Pauses the execution of a specific workflow
+  # @param String! workspaceId 
+  # @param String! Id_ 
+  # @param PauseWorkflowBody pauseWorkflowBody 
+  # @return [PauseWorkflowResponse]
+  PauseWorkflow(input: PauseWorkflowInput!): PauseWorkflowResponse
+  # Trigger workflow execution
+  # Triggers the execution of a specific workflow
+  # @param String! workspaceId 
+  # @param String! Id_ 
+  # @param TriggerWorkflowBody triggerWorkflowBody 
+  # @return [TriggerWorkflowResponse]
+  TriggerWorkflow(input: TriggerWorkflowInput!): TriggerWorkflowResponse
   # Update account details
   # Updates specified fields of an existing account
   # @param UpdateAccountRequest updateAccountRequest 
   # @return [UpdateAccountResponse]
   UpdateAccount(input: UpdateAccountInput!): UpdateAccountResponse
+  # Update account settings
+  # Updates the settings for a given account
+  # @param UpdateAccountSettingsRequest updateAccountSettingsRequest 
+  # @return [UpdateAccountSettingsResponse]
+  UpdateAccountSettings(input: UpdateAccountSettingsInput!): UpdateAccountSettingsResponse
+  # Update workflow details
+  # Updates the details of a specific workflow
+  # @param UpdateWorkflowRequest updateWorkflowRequest 
+  # @return [ScrapingWorkflow]
+  UpdateWorkflow(input: UpdateWorkflowInput!): ScrapingWorkflow
+  # Update workspace details
+  # Updates the details of a specific workspace
+  # @param UpdateWorkspaceRequest updateWorkspaceRequest 
+  # @return [UpdateWorkspaceResponse]
+  UpdateWorkspace(input: UpdateWorkspaceInput!): UpdateWorkspaceResponse
 }
 
 type Query {
@@ -90,6 +185,11 @@ type Query {
   # @param String! Id_ 
   # @return [GetAccountResponse]
   GetAccount(Id_: String!): GetAccountResponse
+  # Get account usage
+  # Retrieves usage details for a given account
+  # @param String! Id_ 
+  # @return [GetAccountUsageResponse]
+  GetAccountUsage(Id_: String!): GetAccountUsageResponse
   # Get a specific job
   # This endpoint retrieves a specific Google Maps scraping job
   # @param String! jobId 
@@ -98,6 +198,31 @@ type Query {
   # @param String! tenantId 
   # @return [GetScrapingJobResponse]
   GetScrapingJob(jobId: String!, userId: String!, orgId: String!, tenantId: String!): GetScrapingJobResponse
+  # Get workflow details
+  # Retrieves details of a specific workflow
+  # @param String! workspaceId 
+  # @param String! Id_ 
+  # @return [ScrapingWorkflow]
+  GetWorkflow(workspaceId: String!, Id_: String!): ScrapingWorkflow
+  # Get workspace details
+  # Retrieves details of a specific workspace
+  # @param String! Id_ 
+  # @return [Workspace]
+  GetWorkspace(Id_: String!): Workspace
+  # Get workspace analytics
+  # Retrieves analytics data for a specific workspace
+  # @param String! workspaceId 
+  # @param String! startTime 
+  # @param String! endTime 
+  # @return [GetWorkspaceAnalyticsResponse]
+  GetWorkspaceAnalytics(workspaceId: String!, startTime: String!, endTime: String!): GetWorkspaceAnalyticsResponse
+  # List all accounts
+  # Retrieves a list of accounts
+  # @param Int! pageSize 
+  # @param String! pageToken 
+  # @param String! filter 
+  # @return [ListAccountsResponse]
+  ListAccounts(pageSize: Int!, pageToken: String!, filter: String!): ListAccountsResponse
   # Get all jobs
   # This endpoint retrieves all Google Maps scraping jobs
   # @param String! userId 
@@ -105,5 +230,20 @@ type Query {
   # @param String! tenantId 
   # @return [ListScrapingJobsResponse]
   ListScrapingJobs(userId: String!, orgId: String!, tenantId: String!): ListScrapingJobsResponse
+  # List workflows
+  # Retrieves a list of workflows for a given workspace
+  # @param String! workspaceId 
+  # @param Int! pageSize 
+  # @param String! pageToken 
+  # @param String! filter 
+  # @return [ListWorkflowsResponse]
+  ListWorkflows(workspaceId: String!, pageSize: Int!, pageToken: String!, filter: String!): ListWorkflowsResponse
+  # List workspaces
+  # Retrieves a list of workspaces for a given account
+  # @param String! accountId 
+  # @param Int! pageSize 
+  # @param String! pageToken 
+  # @return [ListWorkspacesResponse]
+  ListWorkspaces(accountId: String!, pageSize: Int!, pageToken: String!): ListWorkspacesResponse
 }
 

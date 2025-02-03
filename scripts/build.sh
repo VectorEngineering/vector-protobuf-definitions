@@ -44,6 +44,7 @@ show_help() {
     echo -e "  ${GREEN}validate${NC}                      Validate KrakenD config"
     echo -e "  ${GREEN}copy-configs${NC}                  Copy configs to gateway"
     echo -e "  ${GREEN}gen-workspace-api${NC}            Generate Workspace Service API"
+    echo -e "  ${GREEN}gen-cloudflare-worker${NC}        Generate Cloudflare Worker Gateway"
     echo -e "  ${GREEN}autogen${NC}                      Run all generation steps"
 }
 
@@ -60,7 +61,7 @@ gen() {
 
 copy_swagger() {
     echo "Copying Swagger files..."
-    cp -rf "$SWAGGER_LEAD_SERVICE_CODEGEN_PATH" ./swagger/lead-scraper-service.json
+    cp -rf "$SWAGGER_LEAD_SCRAPER_SERVICE_CODEGEN_PATH" ./swagger/lead-scraper-service.json
     cp -rf "$SWAGGER_WORKSPACE_SERVICE_CODEGEN_PATH" ./swagger/workspace-service.json
 }
 
@@ -293,6 +294,27 @@ copy_configs() {
     cp "$FILE_STAGING" ./services/backend-api-gateway/krakend.staging.json
 }
 
+gen_workspace_api() {
+    echo "Generating Workspace Service API..."
+    # Implementation of gen_workspace_api function
+}
+
+gen_cloudflare_worker() {
+    echo -e "${CYAN}Generating Cloudflare Worker Gateway...${NC}"
+    
+    # Ensure the CLI is built
+    (cd cli && pnpm install && pnpm run build)
+    
+    # Generate the worker code
+    (cd cli && pnpm run cli generate \
+        -i ../swagger/backend-api.yaml \
+        -o ../services/gateway \
+        -t ./templates)
+    
+    echo -e "${GREEN}✓ Generated Cloudflare Worker Gateway${NC}"
+    echo -e "  Location: services/gateway"
+}
+
 autogen() {
     gen
     copy_swagger
@@ -305,6 +327,7 @@ autogen() {
     validate
     copy_configs
     gen_linkerd
+    gen_cloudflare_worker
 }
 
 # Test all SDKs
@@ -363,6 +386,9 @@ case "$1" in
         ;;
     "gen-workspace-api")
         gen_workspace_api
+        ;;
+    "gen-cloudflare-worker")
+        gen_cloudflare_worker
         ;;
     "autogen")
         autogen

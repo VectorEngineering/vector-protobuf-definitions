@@ -1,0 +1,24 @@
+# Permission
+
+
+## Enum
+
+* `PERMISSION_UNSPECIFIED` (value: `'PERMISSION_UNSPECIFIED'`)
+
+* `PERMISSION_READ` (value: `'PERMISSION_READ'`)
+
+* `PERMISSION_WRITE` (value: `'PERMISSION_WRITE'`)
+
+* `PERMISSION_DELETE` (value: `'PERMISSION_DELETE'`)
+
+* `PERMISSION_MANAGE_USERS` (value: `'PERMISSION_MANAGE_USERS'`)
+
+* `PERMISSION_MANAGE_BILLING` (value: `'PERMISSION_MANAGE_BILLING'`)
+
+* `PERMISSION_VIEW_ANALYTICS` (value: `'PERMISSION_VIEW_ANALYTICS'`)
+
+* `PERMISSION_MANAGE_WORKFLOWS` (value: `'PERMISSION_MANAGE_WORKFLOWS'`)
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

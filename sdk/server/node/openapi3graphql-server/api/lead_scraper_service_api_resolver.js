@@ -34,6 +34,13 @@ export default {
             };
         },
 
+        // @return GetAccountUsageResponse
+        GetAccountUsage: ($Id_) => {
+            return {
+                "Id_": "Id__example"
+            };
+        },
+
         // @return GetScrapingJobResponse
         GetScrapingJob: ($jobId, $userId, $orgId, $tenantId) => {
             return {
@@ -44,12 +51,64 @@ export default {
             };
         },
 
+        // @return ScrapingWorkflow
+        GetWorkflow: ($workspaceId, $Id_) => {
+            return {
+                "workspaceId": "workspaceId_example",
+                "Id_": "Id__example"
+            };
+        },
+
+        // @return Workspace
+        GetWorkspace: ($Id_) => {
+            return {
+                "Id_": "Id__example"
+            };
+        },
+
+        // @return GetWorkspaceAnalyticsResponse
+        GetWorkspaceAnalytics: ($workspaceId, $startTime, $endTime) => {
+            return {
+                "workspaceId": "workspaceId_example",
+                "startTime": "2013-10-20T19:20:30+01:00",
+                "endTime": "2013-10-20T19:20:30+01:00"
+            };
+        },
+
+        // @return ListAccountsResponse
+        ListAccounts: ($pageSize, $pageToken, $filter) => {
+            return {
+                "pageSize": "56",
+                "pageToken": "pageToken_example",
+                "filter": "filter_example"
+            };
+        },
+
         // @return ListScrapingJobsResponse
         ListScrapingJobs: ($userId, $orgId, $tenantId) => {
             return {
                 "userId": "userId_example",
                 "orgId": "orgId_example",
                 "tenantId": "tenantId_example"
+            };
+        },
+
+        // @return ListWorkflowsResponse
+        ListWorkflows: ($workspaceId, $pageSize, $pageToken, $filter) => {
+            return {
+                "workspaceId": "workspaceId_example",
+                "pageSize": "56",
+                "pageToken": "pageToken_example",
+                "filter": "filter_example"
+            };
+        },
+
+        // @return ListWorkspacesResponse
+        ListWorkspaces: ($accountId, $pageSize, $pageToken) => {
+            return {
+                "accountId": "accountId_example",
+                "pageSize": "56",
+                "pageToken": "pageToken_example"
             };
         },
 
@@ -71,6 +130,13 @@ export default {
             };
         },
 
+        // @return CreateWorkspaceResponse
+        CreateWorkspace: ($createWorkspaceRequest) => {
+            return {
+                "createWorkspaceRequest": ""
+            };
+        },
+
         // @return DeleteAccountResponse
         DeleteAccount: ($Id_) => {
             return {
@@ -88,10 +154,64 @@ export default {
             };
         },
 
+        // @return DeleteWorkspaceResponse
+        DeleteWorkspace: ($Id_) => {
+            return {
+                "Id_": "Id__example"
+            };
+        },
+
+        // @return CreateWorkflowResponse
+        LeadScraperServiceCreateWorkflow: ($workspaceId, $createWorkflowBody) => {
+            return {
+                "workspaceId": "workspaceId_example",
+                "createWorkflowBody": ""
+            };
+        },
+
+        // @return PauseWorkflowResponse
+        PauseWorkflow: ($workspaceId, $Id_, $pauseWorkflowBody) => {
+            return {
+                "workspaceId": "workspaceId_example",
+                "Id_": "Id__example",
+                "pauseWorkflowBody": ""
+            };
+        },
+
+        // @return TriggerWorkflowResponse
+        TriggerWorkflow: ($workspaceId, $Id_, $triggerWorkflowBody) => {
+            return {
+                "workspaceId": "workspaceId_example",
+                "Id_": "Id__example",
+                "triggerWorkflowBody": ""
+            };
+        },
+
         // @return UpdateAccountResponse
         UpdateAccount: ($updateAccountRequest) => {
             return {
                 "updateAccountRequest": ""
+            };
+        },
+
+        // @return UpdateAccountSettingsResponse
+        UpdateAccountSettings: ($updateAccountSettingsRequest) => {
+            return {
+                "updateAccountSettingsRequest": ""
+            };
+        },
+
+        // @return ScrapingWorkflow
+        UpdateWorkflow: ($updateWorkflowRequest) => {
+            return {
+                "updateWorkflowRequest": ""
+            };
+        },
+
+        // @return UpdateWorkspaceResponse
+        UpdateWorkspace: ($updateWorkspaceRequest) => {
+            return {
+                "updateWorkspaceRequest": ""
             };
         },
 

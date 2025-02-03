@@ -190,6 +190,90 @@ pub enum CreateScrapingJobResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum CreateWorkspaceResponse {
+    /// A successful response.
+    ASuccessfulResponse
+    (models::CreateWorkspaceResponse)
+    ,
+    /// Workspace created successfully
+    WorkspaceCreatedSuccessfully
+    (models::CreateWorkspaceResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum DeleteAccountResponse {
     /// Account deleted successfully
     AccountDeletedSuccessfully
@@ -274,6 +358,86 @@ pub enum DeleteScrapingJobResponse {
     /// Job deleted successfully
     JobDeletedSuccessfully
     (models::DeleteScrapingJobResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum DeleteWorkspaceResponse {
+    /// Workspace deleted successfully
+    WorkspaceDeletedSuccessfully
+    (models::DeleteWorkspaceResponse)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -510,10 +674,494 @@ pub enum GetAccountResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum GetAccountUsageResponse {
+    /// Usage details retrieved successfully
+    UsageDetailsRetrievedSuccessfully
+    (models::GetAccountUsageResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum GetScrapingJobResponse {
     /// Successful response
     SuccessfulResponse
     (models::GetScrapingJobResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum GetWorkflowResponse {
+    /// Workflow retrieved successfully
+    WorkflowRetrievedSuccessfully
+    (models::ScrapingWorkflow)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum GetWorkspaceResponse {
+    /// Workspace retrieved successfully
+    WorkspaceRetrievedSuccessfully
+    (models::Workspace)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum GetWorkspaceAnalyticsResponse {
+    /// Analytics data retrieved successfully
+    AnalyticsDataRetrievedSuccessfully
+    (models::GetWorkspaceAnalyticsResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum LeadScraperServiceCreateWorkflowResponse {
+    /// A successful response.
+    ASuccessfulResponse
+    (models::CreateWorkflowResponse)
+    ,
+    /// Workflow created successfully
+    WorkflowCreatedSuccessfully
+    (models::CreateWorkflowResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum ListAccountsResponse {
+    /// Accounts retrieved successfully
+    AccountsRetrievedSuccessfully
+    (models::ListAccountsResponse)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -670,6 +1318,326 @@ pub enum ListScrapingJobsResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum ListWorkflowsResponse {
+    /// Workflows retrieved successfully
+    WorkflowsRetrievedSuccessfully
+    (models::ListWorkflowsResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum ListWorkspacesResponse {
+    /// Workspaces retrieved successfully
+    WorkspacesRetrievedSuccessfully
+    (models::ListWorkspacesResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum PauseWorkflowResponse {
+    /// Workflow paused successfully
+    WorkflowPausedSuccessfully
+    (models::PauseWorkflowResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum TriggerWorkflowResponse {
+    /// Workflow triggered successfully
+    WorkflowTriggeredSuccessfully
+    (models::TriggerWorkflowResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum UpdateAccountResponse {
     /// Account updated successfully
     AccountUpdatedSuccessfully
@@ -748,6 +1716,894 @@ pub enum UpdateAccountResponse {
     (models::RpcPeriodStatus)
 }
 
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum UpdateAccountSettingsResponse {
+    /// Settings updated successfully
+    SettingsUpdatedSuccessfully
+    (models::UpdateAccountSettingsResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum UpdateWorkflowResponse {
+    /// Workflow updated successfully
+    WorkflowUpdatedSuccessfully
+    (models::ScrapingWorkflow)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum UpdateWorkspaceResponse {
+    /// Workspace updated successfully
+    WorkspaceUpdatedSuccessfully
+    (models::UpdateWorkspaceResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum CreateAccount1Response {
+    /// A successful response.
+    ASuccessfulResponse
+    (models::CreateAccountResponse1)
+    ,
+    /// Account created successfully
+    AccountCreatedSuccessfully
+    (models::CreateAccountResponse1)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse1)
+    ,
+    /// Forbidden - Insufficient permissions
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::Status)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum CreateWorkspace1Response {
+    /// A successful response.
+    ASuccessfulResponse
+    (models::CreateWorkspaceResponse1)
+    ,
+    /// Workspace created successfully
+    WorkspaceCreatedSuccessfully
+    (models::CreateWorkspaceResponse1)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse1)
+    ,
+    /// Forbidden - Insufficient permissions
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::Status)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum DeleteAccount1Response {
+    /// Account deleted successfully
+    AccountDeletedSuccessfully
+    (models::DeleteAccountResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse1)
+    ,
+    /// Forbidden - Insufficient permissions
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::Status)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum DeleteWorkspace1Response {
+    /// Workspace deleted successfully
+    WorkspaceDeletedSuccessfully
+    (models::DeleteWorkspaceResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse1)
+    ,
+    /// Forbidden - Insufficient permissions
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::Status)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum GetAccount1Response {
+    /// Account details retrieved successfully
+    AccountDetailsRetrievedSuccessfully
+    (models::GetAccountResponse1)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse1)
+    ,
+    /// Forbidden - Insufficient permissions
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::Status)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum GetWorkspace1Response {
+    /// Workspace retrieved successfully
+    WorkspaceRetrievedSuccessfully
+    (models::GetWorkspaceResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse1)
+    ,
+    /// Forbidden - Insufficient permissions
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::Status)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum GetWorkspaceAnalytics1Response {
+    /// Analytics data retrieved successfully
+    AnalyticsDataRetrievedSuccessfully
+    (models::GetWorkspaceAnalyticsResponse1)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse1)
+    ,
+    /// Forbidden - Insufficient permissions
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::Status)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum GetWorkspaceComplianceReportResponse {
+    /// Compliance report retrieved successfully
+    ComplianceReportRetrievedSuccessfully
+    (models::GetWorkspaceComplianceReportResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse1)
+    ,
+    /// Forbidden - Insufficient permissions
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::Status)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum GetWorkspaceStorageStatsResponse {
+    /// Storage statistics retrieved successfully
+    StorageStatisticsRetrievedSuccessfully
+    (models::GetWorkspaceStorageStatsResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse1)
+    ,
+    /// Forbidden - Insufficient permissions
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::Status)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum ListWorkspaceSharingsResponse {
+    /// Workspace sharings retrieved successfully
+    WorkspaceSharingsRetrievedSuccessfully
+    (models::ListWorkspaceSharingsResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse1)
+    ,
+    /// Forbidden - Insufficient permissions
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::Status)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum ListWorkspaces1Response {
+    /// Workspaces retrieved successfully
+    WorkspacesRetrievedSuccessfully
+    (models::ListWorkspacesResponse1)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse1)
+    ,
+    /// Forbidden - Insufficient permissions
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::Status)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum RemoveWorkspaceSharingResponse {
+    /// Workspace sharing removed successfully
+    WorkspaceSharingRemovedSuccessfully
+    (models::RemoveWorkspaceSharingResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse1)
+    ,
+    /// Forbidden - Insufficient permissions
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::Status)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum ShareWorkspaceResponse {
+    /// Workspace shared successfully
+    WorkspaceSharedSuccessfully
+    (models::ShareWorkspaceResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse1)
+    ,
+    /// Forbidden - Insufficient permissions
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::Status)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum UpdateAccount1Response {
+    /// Account updated successfully
+    AccountUpdatedSuccessfully
+    (models::UpdateAccountResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse1)
+    ,
+    /// Forbidden - Insufficient permissions
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::Status)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum UpdateWorkspace1Response {
+    /// Workspace updated successfully
+    WorkspaceUpdatedSuccessfully
+    (models::UpdateWorkspaceResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse1)
+    ,
+    /// Forbidden - Insufficient permissions
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::Status)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum UpdateWorkspaceSharingResponse {
+    /// Workspace sharing updated successfully
+    WorkspaceSharingUpdatedSuccessfully
+    (models::UpdateWorkspaceSharingResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse1)
+    ,
+    /// Forbidden - Insufficient permissions
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::Status)
+}
+
 /// API
 #[async_trait]
 #[allow(clippy::too_many_arguments, clippy::ptr_arg)]
@@ -768,6 +2624,12 @@ pub trait Api<C: Send + Sync> {
         create_scraping_job_request: models::CreateScrapingJobRequest,
         context: &C) -> Result<CreateScrapingJobResponse, ApiError>;
 
+    /// Create a new workspace
+    async fn create_workspace(
+        &self,
+        create_workspace_request: models::CreateWorkspaceRequest,
+        context: &C) -> Result<CreateWorkspaceResponse, ApiError>;
+
     /// Delete account
     async fn delete_account(
         &self,
@@ -782,6 +2644,12 @@ pub trait Api<C: Send + Sync> {
         org_id: String,
         tenant_id: String,
         context: &C) -> Result<DeleteScrapingJobResponse, ApiError>;
+
+    /// Delete a workspace
+    async fn delete_workspace(
+        &self,
+        id: String,
+        context: &C) -> Result<DeleteWorkspaceResponse, ApiError>;
 
     /// Download job results as CSV
     async fn download_scraping_results(
@@ -798,6 +2666,12 @@ pub trait Api<C: Send + Sync> {
         id: String,
         context: &C) -> Result<GetAccountResponse, ApiError>;
 
+    /// Get account usage
+    async fn get_account_usage(
+        &self,
+        id: String,
+        context: &C) -> Result<GetAccountUsageResponse, ApiError>;
+
     /// Get a specific job
     async fn get_scraping_job(
         &self,
@@ -807,6 +2681,42 @@ pub trait Api<C: Send + Sync> {
         tenant_id: String,
         context: &C) -> Result<GetScrapingJobResponse, ApiError>;
 
+    /// Get workflow details
+    async fn get_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        context: &C) -> Result<GetWorkflowResponse, ApiError>;
+
+    /// Get workspace details
+    async fn get_workspace(
+        &self,
+        id: String,
+        context: &C) -> Result<GetWorkspaceResponse, ApiError>;
+
+    /// Get workspace analytics
+    async fn get_workspace_analytics(
+        &self,
+        workspace_id: String,
+        start_time: Option<chrono::DateTime::<chrono::Utc>>,
+        end_time: Option<chrono::DateTime::<chrono::Utc>>,
+        context: &C) -> Result<GetWorkspaceAnalyticsResponse, ApiError>;
+
+    /// Create a new workflow
+    async fn lead_scraper_service_create_workflow(
+        &self,
+        workspace_id: String,
+        create_workflow_body: models::CreateWorkflowBody,
+        context: &C) -> Result<LeadScraperServiceCreateWorkflowResponse, ApiError>;
+
+    /// List all accounts
+    async fn list_accounts(
+        &self,
+        page_size: Option<i32>,
+        page_token: Option<String>,
+        filter: Option<String>,
+        context: &C) -> Result<ListAccountsResponse, ApiError>;
+
     /// Get all jobs
     async fn list_scraping_jobs(
         &self,
@@ -815,11 +2725,167 @@ pub trait Api<C: Send + Sync> {
         tenant_id: String,
         context: &C) -> Result<ListScrapingJobsResponse, ApiError>;
 
+    /// List workflows
+    async fn list_workflows(
+        &self,
+        workspace_id: String,
+        page_size: Option<i32>,
+        page_token: Option<String>,
+        filter: Option<String>,
+        context: &C) -> Result<ListWorkflowsResponse, ApiError>;
+
+    /// List workspaces
+    async fn list_workspaces(
+        &self,
+        account_id: Option<String>,
+        page_size: Option<i32>,
+        page_token: Option<String>,
+        context: &C) -> Result<ListWorkspacesResponse, ApiError>;
+
+    /// Pause workflow execution
+    async fn pause_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        pause_workflow_body: models::PauseWorkflowBody,
+        context: &C) -> Result<PauseWorkflowResponse, ApiError>;
+
+    /// Trigger workflow execution
+    async fn trigger_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        trigger_workflow_body: models::TriggerWorkflowBody,
+        context: &C) -> Result<TriggerWorkflowResponse, ApiError>;
+
     /// Update account details
     async fn update_account(
         &self,
         update_account_request: models::UpdateAccountRequest,
         context: &C) -> Result<UpdateAccountResponse, ApiError>;
+
+    /// Update account settings
+    async fn update_account_settings(
+        &self,
+        update_account_settings_request: models::UpdateAccountSettingsRequest,
+        context: &C) -> Result<UpdateAccountSettingsResponse, ApiError>;
+
+    /// Update workflow details
+    async fn update_workflow(
+        &self,
+        update_workflow_request: models::UpdateWorkflowRequest,
+        context: &C) -> Result<UpdateWorkflowResponse, ApiError>;
+
+    /// Update workspace details
+    async fn update_workspace(
+        &self,
+        update_workspace_request: models::UpdateWorkspaceRequest,
+        context: &C) -> Result<UpdateWorkspaceResponse, ApiError>;
+
+    /// Create a new account
+    async fn create_account1(
+        &self,
+        create_account_request1: models::CreateAccountRequest1,
+        context: &C) -> Result<CreateAccount1Response, ApiError>;
+
+    /// Create workspace
+    async fn create_workspace1(
+        &self,
+        create_workspace_request1: models::CreateWorkspaceRequest1,
+        context: &C) -> Result<CreateWorkspace1Response, ApiError>;
+
+    /// Delete account
+    async fn delete_account1(
+        &self,
+        id: String,
+        context: &C) -> Result<DeleteAccount1Response, ApiError>;
+
+    /// Delete workspace
+    async fn delete_workspace1(
+        &self,
+        id: String,
+        context: &C) -> Result<DeleteWorkspace1Response, ApiError>;
+
+    /// Get account details
+    async fn get_account1(
+        &self,
+        id: String,
+        context: &C) -> Result<GetAccount1Response, ApiError>;
+
+    /// Get workspace details
+    async fn get_workspace1(
+        &self,
+        id: String,
+        context: &C) -> Result<GetWorkspace1Response, ApiError>;
+
+    /// Get workspace analytics
+    async fn get_workspace_analytics1(
+        &self,
+        workspace_id: String,
+        start_time: Option<chrono::DateTime::<chrono::Utc>>,
+        end_time: Option<chrono::DateTime::<chrono::Utc>>,
+        context: &C) -> Result<GetWorkspaceAnalytics1Response, ApiError>;
+
+    /// Get compliance report
+    async fn get_workspace_compliance_report(
+        &self,
+        workspace_id: String,
+        compliance_type: Option<String>,
+        context: &C) -> Result<GetWorkspaceComplianceReportResponse, ApiError>;
+
+    /// Get storage statistics
+    async fn get_workspace_storage_stats(
+        &self,
+        workspace_id: String,
+        context: &C) -> Result<GetWorkspaceStorageStatsResponse, ApiError>;
+
+    /// List workspace sharings
+    async fn list_workspace_sharings(
+        &self,
+        workspace_id: String,
+        page_size: Option<i32>,
+        page_token: Option<String>,
+        context: &C) -> Result<ListWorkspaceSharingsResponse, ApiError>;
+
+    /// List workspaces
+    async fn list_workspaces1(
+        &self,
+        account_id: Option<String>,
+        page_size: Option<i32>,
+        page_token: Option<String>,
+        filter: Option<String>,
+        context: &C) -> Result<ListWorkspaces1Response, ApiError>;
+
+    /// Remove workspace sharing
+    async fn remove_workspace_sharing(
+        &self,
+        sharing_id: String,
+        context: &C) -> Result<RemoveWorkspaceSharingResponse, ApiError>;
+
+    /// Share workspace
+    async fn share_workspace(
+        &self,
+        workspace_id: String,
+        share_workspace_body: models::ShareWorkspaceBody,
+        context: &C) -> Result<ShareWorkspaceResponse, ApiError>;
+
+    /// Update account details
+    async fn update_account1(
+        &self,
+        update_account_request: models::UpdateAccountRequest,
+        context: &C) -> Result<UpdateAccount1Response, ApiError>;
+
+    /// Update workspace
+    async fn update_workspace1(
+        &self,
+        update_workspace_request: models::UpdateWorkspaceRequest,
+        context: &C) -> Result<UpdateWorkspace1Response, ApiError>;
+
+    /// Update workspace sharing
+    async fn update_workspace_sharing(
+        &self,
+        update_workspace_sharing_request: models::UpdateWorkspaceSharingRequest,
+        context: &C) -> Result<UpdateWorkspaceSharingResponse, ApiError>;
 
 }
 
@@ -844,6 +2910,12 @@ pub trait ApiNoContext<C: Send + Sync> {
         create_scraping_job_request: models::CreateScrapingJobRequest,
         ) -> Result<CreateScrapingJobResponse, ApiError>;
 
+    /// Create a new workspace
+    async fn create_workspace(
+        &self,
+        create_workspace_request: models::CreateWorkspaceRequest,
+        ) -> Result<CreateWorkspaceResponse, ApiError>;
+
     /// Delete account
     async fn delete_account(
         &self,
@@ -858,6 +2930,12 @@ pub trait ApiNoContext<C: Send + Sync> {
         org_id: String,
         tenant_id: String,
         ) -> Result<DeleteScrapingJobResponse, ApiError>;
+
+    /// Delete a workspace
+    async fn delete_workspace(
+        &self,
+        id: String,
+        ) -> Result<DeleteWorkspaceResponse, ApiError>;
 
     /// Download job results as CSV
     async fn download_scraping_results(
@@ -874,6 +2952,12 @@ pub trait ApiNoContext<C: Send + Sync> {
         id: String,
         ) -> Result<GetAccountResponse, ApiError>;
 
+    /// Get account usage
+    async fn get_account_usage(
+        &self,
+        id: String,
+        ) -> Result<GetAccountUsageResponse, ApiError>;
+
     /// Get a specific job
     async fn get_scraping_job(
         &self,
@@ -883,6 +2967,42 @@ pub trait ApiNoContext<C: Send + Sync> {
         tenant_id: String,
         ) -> Result<GetScrapingJobResponse, ApiError>;
 
+    /// Get workflow details
+    async fn get_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        ) -> Result<GetWorkflowResponse, ApiError>;
+
+    /// Get workspace details
+    async fn get_workspace(
+        &self,
+        id: String,
+        ) -> Result<GetWorkspaceResponse, ApiError>;
+
+    /// Get workspace analytics
+    async fn get_workspace_analytics(
+        &self,
+        workspace_id: String,
+        start_time: Option<chrono::DateTime::<chrono::Utc>>,
+        end_time: Option<chrono::DateTime::<chrono::Utc>>,
+        ) -> Result<GetWorkspaceAnalyticsResponse, ApiError>;
+
+    /// Create a new workflow
+    async fn lead_scraper_service_create_workflow(
+        &self,
+        workspace_id: String,
+        create_workflow_body: models::CreateWorkflowBody,
+        ) -> Result<LeadScraperServiceCreateWorkflowResponse, ApiError>;
+
+    /// List all accounts
+    async fn list_accounts(
+        &self,
+        page_size: Option<i32>,
+        page_token: Option<String>,
+        filter: Option<String>,
+        ) -> Result<ListAccountsResponse, ApiError>;
+
     /// Get all jobs
     async fn list_scraping_jobs(
         &self,
@@ -891,11 +3011,167 @@ pub trait ApiNoContext<C: Send + Sync> {
         tenant_id: String,
         ) -> Result<ListScrapingJobsResponse, ApiError>;
 
+    /// List workflows
+    async fn list_workflows(
+        &self,
+        workspace_id: String,
+        page_size: Option<i32>,
+        page_token: Option<String>,
+        filter: Option<String>,
+        ) -> Result<ListWorkflowsResponse, ApiError>;
+
+    /// List workspaces
+    async fn list_workspaces(
+        &self,
+        account_id: Option<String>,
+        page_size: Option<i32>,
+        page_token: Option<String>,
+        ) -> Result<ListWorkspacesResponse, ApiError>;
+
+    /// Pause workflow execution
+    async fn pause_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        pause_workflow_body: models::PauseWorkflowBody,
+        ) -> Result<PauseWorkflowResponse, ApiError>;
+
+    /// Trigger workflow execution
+    async fn trigger_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        trigger_workflow_body: models::TriggerWorkflowBody,
+        ) -> Result<TriggerWorkflowResponse, ApiError>;
+
     /// Update account details
     async fn update_account(
         &self,
         update_account_request: models::UpdateAccountRequest,
         ) -> Result<UpdateAccountResponse, ApiError>;
+
+    /// Update account settings
+    async fn update_account_settings(
+        &self,
+        update_account_settings_request: models::UpdateAccountSettingsRequest,
+        ) -> Result<UpdateAccountSettingsResponse, ApiError>;
+
+    /// Update workflow details
+    async fn update_workflow(
+        &self,
+        update_workflow_request: models::UpdateWorkflowRequest,
+        ) -> Result<UpdateWorkflowResponse, ApiError>;
+
+    /// Update workspace details
+    async fn update_workspace(
+        &self,
+        update_workspace_request: models::UpdateWorkspaceRequest,
+        ) -> Result<UpdateWorkspaceResponse, ApiError>;
+
+    /// Create a new account
+    async fn create_account1(
+        &self,
+        create_account_request1: models::CreateAccountRequest1,
+        ) -> Result<CreateAccount1Response, ApiError>;
+
+    /// Create workspace
+    async fn create_workspace1(
+        &self,
+        create_workspace_request1: models::CreateWorkspaceRequest1,
+        ) -> Result<CreateWorkspace1Response, ApiError>;
+
+    /// Delete account
+    async fn delete_account1(
+        &self,
+        id: String,
+        ) -> Result<DeleteAccount1Response, ApiError>;
+
+    /// Delete workspace
+    async fn delete_workspace1(
+        &self,
+        id: String,
+        ) -> Result<DeleteWorkspace1Response, ApiError>;
+
+    /// Get account details
+    async fn get_account1(
+        &self,
+        id: String,
+        ) -> Result<GetAccount1Response, ApiError>;
+
+    /// Get workspace details
+    async fn get_workspace1(
+        &self,
+        id: String,
+        ) -> Result<GetWorkspace1Response, ApiError>;
+
+    /// Get workspace analytics
+    async fn get_workspace_analytics1(
+        &self,
+        workspace_id: String,
+        start_time: Option<chrono::DateTime::<chrono::Utc>>,
+        end_time: Option<chrono::DateTime::<chrono::Utc>>,
+        ) -> Result<GetWorkspaceAnalytics1Response, ApiError>;
+
+    /// Get compliance report
+    async fn get_workspace_compliance_report(
+        &self,
+        workspace_id: String,
+        compliance_type: Option<String>,
+        ) -> Result<GetWorkspaceComplianceReportResponse, ApiError>;
+
+    /// Get storage statistics
+    async fn get_workspace_storage_stats(
+        &self,
+        workspace_id: String,
+        ) -> Result<GetWorkspaceStorageStatsResponse, ApiError>;
+
+    /// List workspace sharings
+    async fn list_workspace_sharings(
+        &self,
+        workspace_id: String,
+        page_size: Option<i32>,
+        page_token: Option<String>,
+        ) -> Result<ListWorkspaceSharingsResponse, ApiError>;
+
+    /// List workspaces
+    async fn list_workspaces1(
+        &self,
+        account_id: Option<String>,
+        page_size: Option<i32>,
+        page_token: Option<String>,
+        filter: Option<String>,
+        ) -> Result<ListWorkspaces1Response, ApiError>;
+
+    /// Remove workspace sharing
+    async fn remove_workspace_sharing(
+        &self,
+        sharing_id: String,
+        ) -> Result<RemoveWorkspaceSharingResponse, ApiError>;
+
+    /// Share workspace
+    async fn share_workspace(
+        &self,
+        workspace_id: String,
+        share_workspace_body: models::ShareWorkspaceBody,
+        ) -> Result<ShareWorkspaceResponse, ApiError>;
+
+    /// Update account details
+    async fn update_account1(
+        &self,
+        update_account_request: models::UpdateAccountRequest,
+        ) -> Result<UpdateAccount1Response, ApiError>;
+
+    /// Update workspace
+    async fn update_workspace1(
+        &self,
+        update_workspace_request: models::UpdateWorkspaceRequest,
+        ) -> Result<UpdateWorkspace1Response, ApiError>;
+
+    /// Update workspace sharing
+    async fn update_workspace_sharing(
+        &self,
+        update_workspace_sharing_request: models::UpdateWorkspaceSharingRequest,
+        ) -> Result<UpdateWorkspaceSharingResponse, ApiError>;
 
 }
 
@@ -942,6 +3218,16 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         self.api().create_scraping_job(create_scraping_job_request, &context).await
     }
 
+    /// Create a new workspace
+    async fn create_workspace(
+        &self,
+        create_workspace_request: models::CreateWorkspaceRequest,
+        ) -> Result<CreateWorkspaceResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().create_workspace(create_workspace_request, &context).await
+    }
+
     /// Delete account
     async fn delete_account(
         &self,
@@ -963,6 +3249,16 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().delete_scraping_job(job_id, user_id, org_id, tenant_id, &context).await
+    }
+
+    /// Delete a workspace
+    async fn delete_workspace(
+        &self,
+        id: String,
+        ) -> Result<DeleteWorkspaceResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().delete_workspace(id, &context).await
     }
 
     /// Download job results as CSV
@@ -988,6 +3284,16 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         self.api().get_account(id, &context).await
     }
 
+    /// Get account usage
+    async fn get_account_usage(
+        &self,
+        id: String,
+        ) -> Result<GetAccountUsageResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_account_usage(id, &context).await
+    }
+
     /// Get a specific job
     async fn get_scraping_job(
         &self,
@@ -999,6 +3305,62 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().get_scraping_job(job_id, user_id, org_id, tenant_id, &context).await
+    }
+
+    /// Get workflow details
+    async fn get_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        ) -> Result<GetWorkflowResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_workflow(workspace_id, id, &context).await
+    }
+
+    /// Get workspace details
+    async fn get_workspace(
+        &self,
+        id: String,
+        ) -> Result<GetWorkspaceResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_workspace(id, &context).await
+    }
+
+    /// Get workspace analytics
+    async fn get_workspace_analytics(
+        &self,
+        workspace_id: String,
+        start_time: Option<chrono::DateTime::<chrono::Utc>>,
+        end_time: Option<chrono::DateTime::<chrono::Utc>>,
+        ) -> Result<GetWorkspaceAnalyticsResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_workspace_analytics(workspace_id, start_time, end_time, &context).await
+    }
+
+    /// Create a new workflow
+    async fn lead_scraper_service_create_workflow(
+        &self,
+        workspace_id: String,
+        create_workflow_body: models::CreateWorkflowBody,
+        ) -> Result<LeadScraperServiceCreateWorkflowResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().lead_scraper_service_create_workflow(workspace_id, create_workflow_body, &context).await
+    }
+
+    /// List all accounts
+    async fn list_accounts(
+        &self,
+        page_size: Option<i32>,
+        page_token: Option<String>,
+        filter: Option<String>,
+        ) -> Result<ListAccountsResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().list_accounts(page_size, page_token, filter, &context).await
     }
 
     /// Get all jobs
@@ -1013,6 +3375,55 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         self.api().list_scraping_jobs(user_id, org_id, tenant_id, &context).await
     }
 
+    /// List workflows
+    async fn list_workflows(
+        &self,
+        workspace_id: String,
+        page_size: Option<i32>,
+        page_token: Option<String>,
+        filter: Option<String>,
+        ) -> Result<ListWorkflowsResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().list_workflows(workspace_id, page_size, page_token, filter, &context).await
+    }
+
+    /// List workspaces
+    async fn list_workspaces(
+        &self,
+        account_id: Option<String>,
+        page_size: Option<i32>,
+        page_token: Option<String>,
+        ) -> Result<ListWorkspacesResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().list_workspaces(account_id, page_size, page_token, &context).await
+    }
+
+    /// Pause workflow execution
+    async fn pause_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        pause_workflow_body: models::PauseWorkflowBody,
+        ) -> Result<PauseWorkflowResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().pause_workflow(workspace_id, id, pause_workflow_body, &context).await
+    }
+
+    /// Trigger workflow execution
+    async fn trigger_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        trigger_workflow_body: models::TriggerWorkflowBody,
+        ) -> Result<TriggerWorkflowResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().trigger_workflow(workspace_id, id, trigger_workflow_body, &context).await
+    }
+
     /// Update account details
     async fn update_account(
         &self,
@@ -1021,6 +3432,205 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().update_account(update_account_request, &context).await
+    }
+
+    /// Update account settings
+    async fn update_account_settings(
+        &self,
+        update_account_settings_request: models::UpdateAccountSettingsRequest,
+        ) -> Result<UpdateAccountSettingsResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().update_account_settings(update_account_settings_request, &context).await
+    }
+
+    /// Update workflow details
+    async fn update_workflow(
+        &self,
+        update_workflow_request: models::UpdateWorkflowRequest,
+        ) -> Result<UpdateWorkflowResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().update_workflow(update_workflow_request, &context).await
+    }
+
+    /// Update workspace details
+    async fn update_workspace(
+        &self,
+        update_workspace_request: models::UpdateWorkspaceRequest,
+        ) -> Result<UpdateWorkspaceResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().update_workspace(update_workspace_request, &context).await
+    }
+
+    /// Create a new account
+    async fn create_account1(
+        &self,
+        create_account_request1: models::CreateAccountRequest1,
+        ) -> Result<CreateAccount1Response, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().create_account1(create_account_request1, &context).await
+    }
+
+    /// Create workspace
+    async fn create_workspace1(
+        &self,
+        create_workspace_request1: models::CreateWorkspaceRequest1,
+        ) -> Result<CreateWorkspace1Response, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().create_workspace1(create_workspace_request1, &context).await
+    }
+
+    /// Delete account
+    async fn delete_account1(
+        &self,
+        id: String,
+        ) -> Result<DeleteAccount1Response, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().delete_account1(id, &context).await
+    }
+
+    /// Delete workspace
+    async fn delete_workspace1(
+        &self,
+        id: String,
+        ) -> Result<DeleteWorkspace1Response, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().delete_workspace1(id, &context).await
+    }
+
+    /// Get account details
+    async fn get_account1(
+        &self,
+        id: String,
+        ) -> Result<GetAccount1Response, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_account1(id, &context).await
+    }
+
+    /// Get workspace details
+    async fn get_workspace1(
+        &self,
+        id: String,
+        ) -> Result<GetWorkspace1Response, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_workspace1(id, &context).await
+    }
+
+    /// Get workspace analytics
+    async fn get_workspace_analytics1(
+        &self,
+        workspace_id: String,
+        start_time: Option<chrono::DateTime::<chrono::Utc>>,
+        end_time: Option<chrono::DateTime::<chrono::Utc>>,
+        ) -> Result<GetWorkspaceAnalytics1Response, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_workspace_analytics1(workspace_id, start_time, end_time, &context).await
+    }
+
+    /// Get compliance report
+    async fn get_workspace_compliance_report(
+        &self,
+        workspace_id: String,
+        compliance_type: Option<String>,
+        ) -> Result<GetWorkspaceComplianceReportResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_workspace_compliance_report(workspace_id, compliance_type, &context).await
+    }
+
+    /// Get storage statistics
+    async fn get_workspace_storage_stats(
+        &self,
+        workspace_id: String,
+        ) -> Result<GetWorkspaceStorageStatsResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_workspace_storage_stats(workspace_id, &context).await
+    }
+
+    /// List workspace sharings
+    async fn list_workspace_sharings(
+        &self,
+        workspace_id: String,
+        page_size: Option<i32>,
+        page_token: Option<String>,
+        ) -> Result<ListWorkspaceSharingsResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().list_workspace_sharings(workspace_id, page_size, page_token, &context).await
+    }
+
+    /// List workspaces
+    async fn list_workspaces1(
+        &self,
+        account_id: Option<String>,
+        page_size: Option<i32>,
+        page_token: Option<String>,
+        filter: Option<String>,
+        ) -> Result<ListWorkspaces1Response, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().list_workspaces1(account_id, page_size, page_token, filter, &context).await
+    }
+
+    /// Remove workspace sharing
+    async fn remove_workspace_sharing(
+        &self,
+        sharing_id: String,
+        ) -> Result<RemoveWorkspaceSharingResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().remove_workspace_sharing(sharing_id, &context).await
+    }
+
+    /// Share workspace
+    async fn share_workspace(
+        &self,
+        workspace_id: String,
+        share_workspace_body: models::ShareWorkspaceBody,
+        ) -> Result<ShareWorkspaceResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().share_workspace(workspace_id, share_workspace_body, &context).await
+    }
+
+    /// Update account details
+    async fn update_account1(
+        &self,
+        update_account_request: models::UpdateAccountRequest,
+        ) -> Result<UpdateAccount1Response, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().update_account1(update_account_request, &context).await
+    }
+
+    /// Update workspace
+    async fn update_workspace1(
+        &self,
+        update_workspace_request: models::UpdateWorkspaceRequest,
+        ) -> Result<UpdateWorkspace1Response, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().update_workspace1(update_workspace_request, &context).await
+    }
+
+    /// Update workspace sharing
+    async fn update_workspace_sharing(
+        &self,
+        update_workspace_sharing_request: models::UpdateWorkspaceSharingRequest,
+        ) -> Result<UpdateWorkspaceSharingResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().update_workspace_sharing(update_workspace_sharing_request, &context).await
     }
 
 }

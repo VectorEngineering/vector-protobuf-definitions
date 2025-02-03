@@ -21,7 +21,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "PaymentRequiredErrorMessageResponse", description = "Indicates that payment is required to proceed")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T06:30:06.935816-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T10:37:17.791439-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class PaymentRequiredErrorMessageResponse {
 
   private Integer code;

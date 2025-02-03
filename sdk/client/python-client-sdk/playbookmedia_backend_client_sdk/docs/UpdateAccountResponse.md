@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**account** | [**Account**](Account.md) |  | [optional] 
+**account** | [**Account1**](Account1.md) |  | [optional] 
 
 ## Example
 

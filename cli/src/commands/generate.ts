@@ -12,6 +12,7 @@ import { parse as parseYaml } from 'yaml';
 // Register Handlebars helpers
 Handlebars.registerHelper('uppercase', (str: string) => str.toUpperCase());
 Handlebars.registerHelper('lowercase', (str: string) => str.toLowerCase());
+Handlebars.registerHelper('replace', (str: string, find: string, replace: string) => str.split(find).join(replace));
 Handlebars.registerHelper('capitalize', (str: string) => {
     if (!str) return '';
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -98,7 +99,7 @@ export async function generate(options: GenerateOptions) {
         const templateFiles = await glob('**/*.hbs', { cwd: templateDir });
 
         // Create src, routes, and middleware directories
-        const srcDir = join(options.output, 'src');
+        const srcDir = options.output;
         const routesDir = join(srcDir, 'routes');
         const middlewareDir = join(srcDir, 'middleware');
         await mkdir(srcDir, { recursive: true });
@@ -154,7 +155,13 @@ export const ${Handlebars.helpers.basename(openApiSpec.info.title)}Router = rout
                 await writeFile(join(routesDir, 'index.ts'), indexContent);
             } else {
                 // Handle other templates
-                let outputPath = join(srcDir, templateFile.replace('.hbs', '.ts'));
+                let outputPath = join(srcDir, templateFile.replace('.hbs', ''));
+
+                // If the file doesn't end in .json or .toml, append .ts
+                if (!outputPath.endsWith('.json') && !outputPath.endsWith('.toml')) {
+                    outputPath += '.ts';
+                }
+
                 const rendered = template({
                     zodSchemas: zodClientResult,
                     openApiSpec,

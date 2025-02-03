@@ -17,19 +17,42 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import StrictStr
+from datetime import datetime
+from pydantic import StrictInt, StrictStr
+from typing import Optional
 from playbookmedia_backend_client_sdk.models.create_account_request import CreateAccountRequest
 from playbookmedia_backend_client_sdk.models.create_account_response import CreateAccountResponse
 from playbookmedia_backend_client_sdk.models.create_scraping_job_request import CreateScrapingJobRequest
 from playbookmedia_backend_client_sdk.models.create_scraping_job_response import CreateScrapingJobResponse
+from playbookmedia_backend_client_sdk.models.create_workflow_body import CreateWorkflowBody
+from playbookmedia_backend_client_sdk.models.create_workflow_response import CreateWorkflowResponse
+from playbookmedia_backend_client_sdk.models.create_workspace_request import CreateWorkspaceRequest
+from playbookmedia_backend_client_sdk.models.create_workspace_response import CreateWorkspaceResponse
 from playbookmedia_backend_client_sdk.models.delete_account_response import DeleteAccountResponse
 from playbookmedia_backend_client_sdk.models.delete_scraping_job_response import DeleteScrapingJobResponse
+from playbookmedia_backend_client_sdk.models.delete_workspace_response import DeleteWorkspaceResponse
 from playbookmedia_backend_client_sdk.models.download_scraping_results_response import DownloadScrapingResultsResponse
 from playbookmedia_backend_client_sdk.models.get_account_response import GetAccountResponse
+from playbookmedia_backend_client_sdk.models.get_account_usage_response import GetAccountUsageResponse
 from playbookmedia_backend_client_sdk.models.get_scraping_job_response import GetScrapingJobResponse
+from playbookmedia_backend_client_sdk.models.get_workspace_analytics_response import GetWorkspaceAnalyticsResponse
+from playbookmedia_backend_client_sdk.models.list_accounts_response import ListAccountsResponse
 from playbookmedia_backend_client_sdk.models.list_scraping_jobs_response import ListScrapingJobsResponse
+from playbookmedia_backend_client_sdk.models.list_workflows_response import ListWorkflowsResponse
+from playbookmedia_backend_client_sdk.models.list_workspaces_response import ListWorkspacesResponse
+from playbookmedia_backend_client_sdk.models.pause_workflow_body import PauseWorkflowBody
+from playbookmedia_backend_client_sdk.models.pause_workflow_response import PauseWorkflowResponse
+from playbookmedia_backend_client_sdk.models.scraping_workflow import ScrapingWorkflow
+from playbookmedia_backend_client_sdk.models.trigger_workflow_body import TriggerWorkflowBody
+from playbookmedia_backend_client_sdk.models.trigger_workflow_response import TriggerWorkflowResponse
 from playbookmedia_backend_client_sdk.models.update_account_request import UpdateAccountRequest
 from playbookmedia_backend_client_sdk.models.update_account_response import UpdateAccountResponse
+from playbookmedia_backend_client_sdk.models.update_account_settings_request import UpdateAccountSettingsRequest
+from playbookmedia_backend_client_sdk.models.update_account_settings_response import UpdateAccountSettingsResponse
+from playbookmedia_backend_client_sdk.models.update_workflow_request import UpdateWorkflowRequest
+from playbookmedia_backend_client_sdk.models.update_workspace_request import UpdateWorkspaceRequest
+from playbookmedia_backend_client_sdk.models.update_workspace_response import UpdateWorkspaceResponse
+from playbookmedia_backend_client_sdk.models.workspace import Workspace
 
 from playbookmedia_backend_client_sdk.api_client import ApiClient, RequestSerialized
 from playbookmedia_backend_client_sdk.api_response import ApiResponse
@@ -688,6 +711,333 @@ class LeadScraperServiceApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/lead-scraper-microservice/api/v1/jobs',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def create_workspace(
+        self,
+        create_workspace_request: CreateWorkspaceRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> CreateWorkspaceResponse:
+        """Create a new workspace
+
+        Creates a new workspace for a given account
+
+        :param create_workspace_request: (required)
+        :type create_workspace_request: CreateWorkspaceRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_workspace_serialize(
+            create_workspace_request=create_workspace_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CreateWorkspaceResponse",
+            '201': "CreateWorkspaceResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def create_workspace_with_http_info(
+        self,
+        create_workspace_request: CreateWorkspaceRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[CreateWorkspaceResponse]:
+        """Create a new workspace
+
+        Creates a new workspace for a given account
+
+        :param create_workspace_request: (required)
+        :type create_workspace_request: CreateWorkspaceRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_workspace_serialize(
+            create_workspace_request=create_workspace_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CreateWorkspaceResponse",
+            '201': "CreateWorkspaceResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def create_workspace_without_preload_content(
+        self,
+        create_workspace_request: CreateWorkspaceRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Create a new workspace
+
+        Creates a new workspace for a given account
+
+        :param create_workspace_request: (required)
+        :type create_workspace_request: CreateWorkspaceRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_workspace_serialize(
+            create_workspace_request=create_workspace_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CreateWorkspaceResponse",
+            '201': "CreateWorkspaceResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _create_workspace_serialize(
+        self,
+        create_workspace_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_workspace_request is not None:
+            _body_params = create_workspace_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json', 
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/lead-scraper-microservice/api/v1/workspaces',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1375,6 +1725,316 @@ class LeadScraperServiceApi:
 
 
     @validate_call
+    async def delete_workspace(
+        self,
+        id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> DeleteWorkspaceResponse:
+        """Delete a workspace
+
+        Deletes a specific workspace
+
+        :param id: (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_workspace_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteWorkspaceResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def delete_workspace_with_http_info(
+        self,
+        id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[DeleteWorkspaceResponse]:
+        """Delete a workspace
+
+        Deletes a specific workspace
+
+        :param id: (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_workspace_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteWorkspaceResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def delete_workspace_without_preload_content(
+        self,
+        id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Delete a workspace
+
+        Deletes a specific workspace
+
+        :param id: (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_workspace_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteWorkspaceResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _delete_workspace_serialize(
+        self,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path='/lead-scraper-microservice/api/v1/workspace/{id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     async def download_scraping_results(
         self,
         job_id: StrictStr,
@@ -2046,6 +2706,316 @@ class LeadScraperServiceApi:
 
 
     @validate_call
+    async def get_account_usage(
+        self,
+        id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetAccountUsageResponse:
+        """Get account usage
+
+        Retrieves usage details for a given account
+
+        :param id: (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_account_usage_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetAccountUsageResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def get_account_usage_with_http_info(
+        self,
+        id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetAccountUsageResponse]:
+        """Get account usage
+
+        Retrieves usage details for a given account
+
+        :param id: (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_account_usage_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetAccountUsageResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def get_account_usage_without_preload_content(
+        self,
+        id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get account usage
+
+        Retrieves usage details for a given account
+
+        :param id: (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_account_usage_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetAccountUsageResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_account_usage_serialize(
+        self,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/lead-scraper-microservice/api/v1/accounts/{id}/usage',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     async def get_scraping_job(
         self,
         job_id: StrictStr,
@@ -2391,6 +3361,1691 @@ class LeadScraperServiceApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/lead-scraper-microservice/api/v1/jobs/{jobId}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def get_workflow(
+        self,
+        workspace_id: StrictStr,
+        id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ScrapingWorkflow:
+        """Get workflow details
+
+        Retrieves details of a specific workflow
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param id: (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_workflow_serialize(
+            workspace_id=workspace_id,
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ScrapingWorkflow",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def get_workflow_with_http_info(
+        self,
+        workspace_id: StrictStr,
+        id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ScrapingWorkflow]:
+        """Get workflow details
+
+        Retrieves details of a specific workflow
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param id: (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_workflow_serialize(
+            workspace_id=workspace_id,
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ScrapingWorkflow",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def get_workflow_without_preload_content(
+        self,
+        workspace_id: StrictStr,
+        id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get workflow details
+
+        Retrieves details of a specific workflow
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param id: (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_workflow_serialize(
+            workspace_id=workspace_id,
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ScrapingWorkflow",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_workflow_serialize(
+        self,
+        workspace_id,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if workspace_id is not None:
+            _path_params['workspaceId'] = workspace_id
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def get_workspace(
+        self,
+        id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Workspace:
+        """Get workspace details
+
+        Retrieves details of a specific workspace
+
+        :param id: (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_workspace_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Workspace",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def get_workspace_with_http_info(
+        self,
+        id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Workspace]:
+        """Get workspace details
+
+        Retrieves details of a specific workspace
+
+        :param id: (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_workspace_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Workspace",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def get_workspace_without_preload_content(
+        self,
+        id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get workspace details
+
+        Retrieves details of a specific workspace
+
+        :param id: (required)
+        :type id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_workspace_serialize(
+            id=id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "Workspace",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_workspace_serialize(
+        self,
+        id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/lead-scraper-microservice/api/v1/workspace/{id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def get_workspace_analytics(
+        self,
+        workspace_id: StrictStr,
+        start_time: Optional[datetime] = None,
+        end_time: Optional[datetime] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetWorkspaceAnalyticsResponse:
+        """Get workspace analytics
+
+        Retrieves analytics data for a specific workspace
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param start_time:
+        :type start_time: datetime
+        :param end_time:
+        :type end_time: datetime
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_workspace_analytics_serialize(
+            workspace_id=workspace_id,
+            start_time=start_time,
+            end_time=end_time,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetWorkspaceAnalyticsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def get_workspace_analytics_with_http_info(
+        self,
+        workspace_id: StrictStr,
+        start_time: Optional[datetime] = None,
+        end_time: Optional[datetime] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetWorkspaceAnalyticsResponse]:
+        """Get workspace analytics
+
+        Retrieves analytics data for a specific workspace
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param start_time:
+        :type start_time: datetime
+        :param end_time:
+        :type end_time: datetime
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_workspace_analytics_serialize(
+            workspace_id=workspace_id,
+            start_time=start_time,
+            end_time=end_time,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetWorkspaceAnalyticsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def get_workspace_analytics_without_preload_content(
+        self,
+        workspace_id: StrictStr,
+        start_time: Optional[datetime] = None,
+        end_time: Optional[datetime] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get workspace analytics
+
+        Retrieves analytics data for a specific workspace
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param start_time:
+        :type start_time: datetime
+        :param end_time:
+        :type end_time: datetime
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_workspace_analytics_serialize(
+            workspace_id=workspace_id,
+            start_time=start_time,
+            end_time=end_time,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetWorkspaceAnalyticsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_workspace_analytics_serialize(
+        self,
+        workspace_id,
+        start_time,
+        end_time,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if workspace_id is not None:
+            _path_params['workspaceId'] = workspace_id
+        # process the query parameters
+        if start_time is not None:
+            if isinstance(start_time, datetime):
+                _query_params.append(
+                    (
+                        'startTime',
+                        start_time.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('startTime', start_time))
+            
+        if end_time is not None:
+            if isinstance(end_time, datetime):
+                _query_params.append(
+                    (
+                        'endTime',
+                        end_time.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('endTime', end_time))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def lead_scraper_service_create_workflow(
+        self,
+        workspace_id: StrictStr,
+        create_workflow_body: CreateWorkflowBody,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> CreateWorkflowResponse:
+        """Create a new workflow
+
+        This endpoint creates a new workflow configuration for a specific workspace  Required parameters: - workspace_id: Parent workspace ID - name: Human-readable workflow name - description: Optional workflow description - parameters: Job parameters for the workflow  Example: ```json
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param create_workflow_body: (required)
+        :type create_workflow_body: CreateWorkflowBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._lead_scraper_service_create_workflow_serialize(
+            workspace_id=workspace_id,
+            create_workflow_body=create_workflow_body,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CreateWorkflowResponse",
+            '201': "CreateWorkflowResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def lead_scraper_service_create_workflow_with_http_info(
+        self,
+        workspace_id: StrictStr,
+        create_workflow_body: CreateWorkflowBody,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[CreateWorkflowResponse]:
+        """Create a new workflow
+
+        This endpoint creates a new workflow configuration for a specific workspace  Required parameters: - workspace_id: Parent workspace ID - name: Human-readable workflow name - description: Optional workflow description - parameters: Job parameters for the workflow  Example: ```json
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param create_workflow_body: (required)
+        :type create_workflow_body: CreateWorkflowBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._lead_scraper_service_create_workflow_serialize(
+            workspace_id=workspace_id,
+            create_workflow_body=create_workflow_body,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CreateWorkflowResponse",
+            '201': "CreateWorkflowResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def lead_scraper_service_create_workflow_without_preload_content(
+        self,
+        workspace_id: StrictStr,
+        create_workflow_body: CreateWorkflowBody,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Create a new workflow
+
+        This endpoint creates a new workflow configuration for a specific workspace  Required parameters: - workspace_id: Parent workspace ID - name: Human-readable workflow name - description: Optional workflow description - parameters: Job parameters for the workflow  Example: ```json
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param create_workflow_body: (required)
+        :type create_workflow_body: CreateWorkflowBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._lead_scraper_service_create_workflow_serialize(
+            workspace_id=workspace_id,
+            create_workflow_body=create_workflow_body,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "CreateWorkflowResponse",
+            '201': "CreateWorkflowResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _lead_scraper_service_create_workflow_serialize(
+        self,
+        workspace_id,
+        create_workflow_body,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if workspace_id is not None:
+            _path_params['workspaceId'] = workspace_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if create_workflow_body is not None:
+            _body_params = create_workflow_body
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json', 
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def list_accounts(
+        self,
+        page_size: Optional[StrictInt] = None,
+        page_token: Optional[StrictStr] = None,
+        filter: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ListAccountsResponse:
+        """List all accounts
+
+        Retrieves a list of accounts
+
+        :param page_size:
+        :type page_size: int
+        :param page_token:
+        :type page_token: str
+        :param filter:
+        :type filter: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_accounts_serialize(
+            page_size=page_size,
+            page_token=page_token,
+            filter=filter,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListAccountsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def list_accounts_with_http_info(
+        self,
+        page_size: Optional[StrictInt] = None,
+        page_token: Optional[StrictStr] = None,
+        filter: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ListAccountsResponse]:
+        """List all accounts
+
+        Retrieves a list of accounts
+
+        :param page_size:
+        :type page_size: int
+        :param page_token:
+        :type page_token: str
+        :param filter:
+        :type filter: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_accounts_serialize(
+            page_size=page_size,
+            page_token=page_token,
+            filter=filter,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListAccountsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def list_accounts_without_preload_content(
+        self,
+        page_size: Optional[StrictInt] = None,
+        page_token: Optional[StrictStr] = None,
+        filter: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """List all accounts
+
+        Retrieves a list of accounts
+
+        :param page_size:
+        :type page_size: int
+        :param page_token:
+        :type page_token: str
+        :param filter:
+        :type filter: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_accounts_serialize(
+            page_size=page_size,
+            page_token=page_token,
+            filter=filter,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListAccountsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_accounts_serialize(
+        self,
+        page_size,
+        page_token,
+        filter,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if page_size is not None:
+            
+            _query_params.append(('pageSize', page_size))
+            
+        if page_token is not None:
+            
+            _query_params.append(('pageToken', page_token))
+            
+        if filter is not None:
+            
+            _query_params.append(('filter', filter))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/lead-scraper-microservice/api/v1/accounts',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2753,6 +5408,1421 @@ class LeadScraperServiceApi:
 
 
     @validate_call
+    async def list_workflows(
+        self,
+        workspace_id: StrictStr,
+        page_size: Optional[StrictInt] = None,
+        page_token: Optional[StrictStr] = None,
+        filter: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ListWorkflowsResponse:
+        """List workflows
+
+        Retrieves a list of workflows for a given workspace
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param page_size:
+        :type page_size: int
+        :param page_token:
+        :type page_token: str
+        :param filter:
+        :type filter: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_workflows_serialize(
+            workspace_id=workspace_id,
+            page_size=page_size,
+            page_token=page_token,
+            filter=filter,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListWorkflowsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def list_workflows_with_http_info(
+        self,
+        workspace_id: StrictStr,
+        page_size: Optional[StrictInt] = None,
+        page_token: Optional[StrictStr] = None,
+        filter: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ListWorkflowsResponse]:
+        """List workflows
+
+        Retrieves a list of workflows for a given workspace
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param page_size:
+        :type page_size: int
+        :param page_token:
+        :type page_token: str
+        :param filter:
+        :type filter: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_workflows_serialize(
+            workspace_id=workspace_id,
+            page_size=page_size,
+            page_token=page_token,
+            filter=filter,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListWorkflowsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def list_workflows_without_preload_content(
+        self,
+        workspace_id: StrictStr,
+        page_size: Optional[StrictInt] = None,
+        page_token: Optional[StrictStr] = None,
+        filter: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """List workflows
+
+        Retrieves a list of workflows for a given workspace
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param page_size:
+        :type page_size: int
+        :param page_token:
+        :type page_token: str
+        :param filter:
+        :type filter: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_workflows_serialize(
+            workspace_id=workspace_id,
+            page_size=page_size,
+            page_token=page_token,
+            filter=filter,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListWorkflowsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_workflows_serialize(
+        self,
+        workspace_id,
+        page_size,
+        page_token,
+        filter,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if workspace_id is not None:
+            _path_params['workspaceId'] = workspace_id
+        # process the query parameters
+        if page_size is not None:
+            
+            _query_params.append(('pageSize', page_size))
+            
+        if page_token is not None:
+            
+            _query_params.append(('pageToken', page_token))
+            
+        if filter is not None:
+            
+            _query_params.append(('filter', filter))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def list_workspaces(
+        self,
+        account_id: Optional[StrictStr] = None,
+        page_size: Optional[StrictInt] = None,
+        page_token: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ListWorkspacesResponse:
+        """List workspaces
+
+        Retrieves a list of workspaces for a given account
+
+        :param account_id:
+        :type account_id: str
+        :param page_size:
+        :type page_size: int
+        :param page_token:
+        :type page_token: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_workspaces_serialize(
+            account_id=account_id,
+            page_size=page_size,
+            page_token=page_token,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListWorkspacesResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def list_workspaces_with_http_info(
+        self,
+        account_id: Optional[StrictStr] = None,
+        page_size: Optional[StrictInt] = None,
+        page_token: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ListWorkspacesResponse]:
+        """List workspaces
+
+        Retrieves a list of workspaces for a given account
+
+        :param account_id:
+        :type account_id: str
+        :param page_size:
+        :type page_size: int
+        :param page_token:
+        :type page_token: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_workspaces_serialize(
+            account_id=account_id,
+            page_size=page_size,
+            page_token=page_token,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListWorkspacesResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def list_workspaces_without_preload_content(
+        self,
+        account_id: Optional[StrictStr] = None,
+        page_size: Optional[StrictInt] = None,
+        page_token: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """List workspaces
+
+        Retrieves a list of workspaces for a given account
+
+        :param account_id:
+        :type account_id: str
+        :param page_size:
+        :type page_size: int
+        :param page_token:
+        :type page_token: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_workspaces_serialize(
+            account_id=account_id,
+            page_size=page_size,
+            page_token=page_token,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListWorkspacesResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_workspaces_serialize(
+        self,
+        account_id,
+        page_size,
+        page_token,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if account_id is not None:
+            
+            _query_params.append(('accountId', account_id))
+            
+        if page_size is not None:
+            
+            _query_params.append(('pageSize', page_size))
+            
+        if page_token is not None:
+            
+            _query_params.append(('pageToken', page_token))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/lead-scraper-microservice/api/v1/workspaces',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def pause_workflow(
+        self,
+        workspace_id: StrictStr,
+        id: StrictStr,
+        pause_workflow_body: PauseWorkflowBody,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> PauseWorkflowResponse:
+        """Pause workflow execution
+
+        Pauses the execution of a specific workflow
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param id: (required)
+        :type id: str
+        :param pause_workflow_body: (required)
+        :type pause_workflow_body: PauseWorkflowBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._pause_workflow_serialize(
+            workspace_id=workspace_id,
+            id=id,
+            pause_workflow_body=pause_workflow_body,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PauseWorkflowResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def pause_workflow_with_http_info(
+        self,
+        workspace_id: StrictStr,
+        id: StrictStr,
+        pause_workflow_body: PauseWorkflowBody,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[PauseWorkflowResponse]:
+        """Pause workflow execution
+
+        Pauses the execution of a specific workflow
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param id: (required)
+        :type id: str
+        :param pause_workflow_body: (required)
+        :type pause_workflow_body: PauseWorkflowBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._pause_workflow_serialize(
+            workspace_id=workspace_id,
+            id=id,
+            pause_workflow_body=pause_workflow_body,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PauseWorkflowResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def pause_workflow_without_preload_content(
+        self,
+        workspace_id: StrictStr,
+        id: StrictStr,
+        pause_workflow_body: PauseWorkflowBody,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Pause workflow execution
+
+        Pauses the execution of a specific workflow
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param id: (required)
+        :type id: str
+        :param pause_workflow_body: (required)
+        :type pause_workflow_body: PauseWorkflowBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._pause_workflow_serialize(
+            workspace_id=workspace_id,
+            id=id,
+            pause_workflow_body=pause_workflow_body,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "PauseWorkflowResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _pause_workflow_serialize(
+        self,
+        workspace_id,
+        id,
+        pause_workflow_body,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if workspace_id is not None:
+            _path_params['workspaceId'] = workspace_id
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if pause_workflow_body is not None:
+            _body_params = pause_workflow_body
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json', 
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def trigger_workflow(
+        self,
+        workspace_id: StrictStr,
+        id: StrictStr,
+        trigger_workflow_body: TriggerWorkflowBody,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> TriggerWorkflowResponse:
+        """Trigger workflow execution
+
+        Triggers the execution of a specific workflow
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param id: (required)
+        :type id: str
+        :param trigger_workflow_body: (required)
+        :type trigger_workflow_body: TriggerWorkflowBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._trigger_workflow_serialize(
+            workspace_id=workspace_id,
+            id=id,
+            trigger_workflow_body=trigger_workflow_body,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TriggerWorkflowResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def trigger_workflow_with_http_info(
+        self,
+        workspace_id: StrictStr,
+        id: StrictStr,
+        trigger_workflow_body: TriggerWorkflowBody,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[TriggerWorkflowResponse]:
+        """Trigger workflow execution
+
+        Triggers the execution of a specific workflow
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param id: (required)
+        :type id: str
+        :param trigger_workflow_body: (required)
+        :type trigger_workflow_body: TriggerWorkflowBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._trigger_workflow_serialize(
+            workspace_id=workspace_id,
+            id=id,
+            trigger_workflow_body=trigger_workflow_body,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TriggerWorkflowResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def trigger_workflow_without_preload_content(
+        self,
+        workspace_id: StrictStr,
+        id: StrictStr,
+        trigger_workflow_body: TriggerWorkflowBody,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Trigger workflow execution
+
+        Triggers the execution of a specific workflow
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param id: (required)
+        :type id: str
+        :param trigger_workflow_body: (required)
+        :type trigger_workflow_body: TriggerWorkflowBody
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._trigger_workflow_serialize(
+            workspace_id=workspace_id,
+            id=id,
+            trigger_workflow_body=trigger_workflow_body,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "TriggerWorkflowResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _trigger_workflow_serialize(
+        self,
+        workspace_id,
+        id,
+        trigger_workflow_body,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if workspace_id is not None:
+            _path_params['workspaceId'] = workspace_id
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if trigger_workflow_body is not None:
+            _body_params = trigger_workflow_body
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json', 
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     async def update_account(
         self,
         update_account_request: UpdateAccountRequest,
@@ -3061,6 +7131,978 @@ class LeadScraperServiceApi:
         return self.api_client.param_serialize(
             method='PUT',
             resource_path='/lead-scraper-microservice/api/v1/accounts',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def update_account_settings(
+        self,
+        update_account_settings_request: UpdateAccountSettingsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UpdateAccountSettingsResponse:
+        """Update account settings
+
+        Updates the settings for a given account
+
+        :param update_account_settings_request: (required)
+        :type update_account_settings_request: UpdateAccountSettingsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_account_settings_serialize(
+            update_account_settings_request=update_account_settings_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UpdateAccountSettingsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def update_account_settings_with_http_info(
+        self,
+        update_account_settings_request: UpdateAccountSettingsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[UpdateAccountSettingsResponse]:
+        """Update account settings
+
+        Updates the settings for a given account
+
+        :param update_account_settings_request: (required)
+        :type update_account_settings_request: UpdateAccountSettingsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_account_settings_serialize(
+            update_account_settings_request=update_account_settings_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UpdateAccountSettingsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def update_account_settings_without_preload_content(
+        self,
+        update_account_settings_request: UpdateAccountSettingsRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update account settings
+
+        Updates the settings for a given account
+
+        :param update_account_settings_request: (required)
+        :type update_account_settings_request: UpdateAccountSettingsRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_account_settings_serialize(
+            update_account_settings_request=update_account_settings_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UpdateAccountSettingsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _update_account_settings_serialize(
+        self,
+        update_account_settings_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if update_account_settings_request is not None:
+            _body_params = update_account_settings_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json', 
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/lead-scraper-microservice/api/v1/accounts/settings',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def update_workflow(
+        self,
+        update_workflow_request: UpdateWorkflowRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ScrapingWorkflow:
+        """Update workflow details
+
+        Updates the details of a specific workflow
+
+        :param update_workflow_request: (required)
+        :type update_workflow_request: UpdateWorkflowRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_workflow_serialize(
+            update_workflow_request=update_workflow_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ScrapingWorkflow",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def update_workflow_with_http_info(
+        self,
+        update_workflow_request: UpdateWorkflowRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ScrapingWorkflow]:
+        """Update workflow details
+
+        Updates the details of a specific workflow
+
+        :param update_workflow_request: (required)
+        :type update_workflow_request: UpdateWorkflowRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_workflow_serialize(
+            update_workflow_request=update_workflow_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ScrapingWorkflow",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def update_workflow_without_preload_content(
+        self,
+        update_workflow_request: UpdateWorkflowRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update workflow details
+
+        Updates the details of a specific workflow
+
+        :param update_workflow_request: (required)
+        :type update_workflow_request: UpdateWorkflowRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_workflow_serialize(
+            update_workflow_request=update_workflow_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ScrapingWorkflow",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _update_workflow_serialize(
+        self,
+        update_workflow_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if update_workflow_request is not None:
+            _body_params = update_workflow_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json', 
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/lead-scraper-microservice/api/v1/workspaces/workflow',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def update_workspace(
+        self,
+        update_workspace_request: UpdateWorkspaceRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> UpdateWorkspaceResponse:
+        """Update workspace details
+
+        Updates the details of a specific workspace
+
+        :param update_workspace_request: (required)
+        :type update_workspace_request: UpdateWorkspaceRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_workspace_serialize(
+            update_workspace_request=update_workspace_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UpdateWorkspaceResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def update_workspace_with_http_info(
+        self,
+        update_workspace_request: UpdateWorkspaceRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[UpdateWorkspaceResponse]:
+        """Update workspace details
+
+        Updates the details of a specific workspace
+
+        :param update_workspace_request: (required)
+        :type update_workspace_request: UpdateWorkspaceRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_workspace_serialize(
+            update_workspace_request=update_workspace_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UpdateWorkspaceResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def update_workspace_without_preload_content(
+        self,
+        update_workspace_request: UpdateWorkspaceRequest,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Update workspace details
+
+        Updates the details of a specific workspace
+
+        :param update_workspace_request: (required)
+        :type update_workspace_request: UpdateWorkspaceRequest
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_workspace_serialize(
+            update_workspace_request=update_workspace_request,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "UpdateWorkspaceResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _update_workspace_serialize(
+        self,
+        update_workspace_request,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if update_workspace_request is not None:
+            _body_params = update_workspace_request
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json', 
+                        'application/x-www-form-urlencoded'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='PUT',
+            resource_path='/lead-scraper-microservice/api/v1/workspace',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

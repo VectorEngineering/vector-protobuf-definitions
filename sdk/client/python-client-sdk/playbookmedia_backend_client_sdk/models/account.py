@@ -23,6 +23,9 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from playbookmedia_backend_client_sdk.models.account_settings import AccountSettings
 from playbookmedia_backend_client_sdk.models.account_status import AccountStatus
+from playbookmedia_backend_client_sdk.models.permission import Permission
+from playbookmedia_backend_client_sdk.models.role import Role
+from playbookmedia_backend_client_sdk.models.timezone import Timezone
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -36,11 +39,11 @@ class Account(BaseModel):
     deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     account_status: Optional[AccountStatus] = Field(default=AccountStatus.UNSPECIFIED, alias="accountStatus")
-    roles: Optional[List[StrictStr]] = None
-    permissions: Optional[List[StrictStr]] = None
+    roles: Optional[List[Role]] = None
+    permissions: Optional[List[Permission]] = None
     mfa_enabled: Optional[StrictBool] = Field(default=None, alias="mfaEnabled")
     last_login_at: Optional[datetime] = Field(default=None, alias="lastLoginAt")
-    timezone: Optional[StrictStr] = None
+    timezone: Optional[Timezone] = Timezone.UNSPECIFIED
     total_jobs_run: Optional[StrictInt] = Field(default=None, alias="totalJobsRun")
     monthly_job_limit: Optional[StrictInt] = Field(default=None, alias="monthlyJobLimit")
     concurrent_job_limit: Optional[StrictInt] = Field(default=None, alias="concurrentJobLimit")
@@ -119,7 +122,7 @@ class Account(BaseModel):
             "permissions": obj.get("permissions"),
             "mfaEnabled": obj.get("mfaEnabled"),
             "lastLoginAt": obj.get("lastLoginAt"),
-            "timezone": obj.get("timezone"),
+            "timezone": obj.get("timezone") if obj.get("timezone") is not None else Timezone.UNSPECIFIED,
             "totalJobsRun": obj.get("totalJobsRun"),
             "monthlyJobLimit": obj.get("monthlyJobLimit"),
             "concurrentJobLimit": obj.get("concurrentJobLimit"),

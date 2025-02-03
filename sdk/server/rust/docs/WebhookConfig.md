@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **successful_calls** | **i32** |  | [optional] [default to None]
 **failed_calls** | **i32** |  | [optional] [default to None]
 **metadata** | [***serde_json::Value**](.md) |  | [optional] [default to None]
+**webhook_name** | **String** |  | [optional] [default to None]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

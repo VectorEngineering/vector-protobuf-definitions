@@ -11,6 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.AccountSettings;
 import org.openapitools.model.AccountStatus;
+import org.openapitools.model.Permission;
+import org.openapitools.model.Role;
+import org.openapitools.model.Timezone;
 import org.openapitools.model.Workspace;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -28,7 +31,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "Account", description = "Account represents a user account within the workspace service. It serves as the top-level container for all user-specific workspaces and settings.  Key features: - Unique identification via Auth0 - Organization and tenant context - Audit timestamps - Associated scraping jobs  Database considerations: - Uses GORM for ORM mapping - Includes indexes for efficient querying - Supports soft deletes via deleted_at  Usage example: ```go account := &Account{     AuthPlatformUserId: \"auth0|123\",     OrgId: \"org_123\",     TenantId: \"tenant_456\", } ```")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T06:30:06.935816-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T10:37:17.791439-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class Account {
 
   private String id;
@@ -46,17 +49,17 @@ public class Account {
   private AccountStatus accountStatus = AccountStatus.UNSPECIFIED;
 
   @Valid
-  private List<String> roles = new ArrayList<>();
+  private List<Role> roles = new ArrayList<>();
 
   @Valid
-  private List<String> permissions = new ArrayList<>();
+  private List<Permission> permissions = new ArrayList<>();
 
   private Boolean mfaEnabled;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime lastLoginAt;
 
-  private String timezone;
+  private Timezone timezone = Timezone.UNSPECIFIED;
 
   private Integer totalJobsRun;
 
@@ -189,12 +192,12 @@ public class Account {
     this.accountStatus = accountStatus;
   }
 
-  public Account roles(List<String> roles) {
+  public Account roles(List<Role> roles) {
     this.roles = roles;
     return this;
   }
 
-  public Account addRolesItem(String rolesItem) {
+  public Account addRolesItem(Role rolesItem) {
     if (this.roles == null) {
       this.roles = new ArrayList<>();
     }
@@ -206,23 +209,23 @@ public class Account {
    * Get roles
    * @return roles
    */
-  
+  @Valid 
   @Schema(name = "roles", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("roles")
-  public List<String> getRoles() {
+  public List<Role> getRoles() {
     return roles;
   }
 
-  public void setRoles(List<String> roles) {
+  public void setRoles(List<Role> roles) {
     this.roles = roles;
   }
 
-  public Account permissions(List<String> permissions) {
+  public Account permissions(List<Permission> permissions) {
     this.permissions = permissions;
     return this;
   }
 
-  public Account addPermissionsItem(String permissionsItem) {
+  public Account addPermissionsItem(Permission permissionsItem) {
     if (this.permissions == null) {
       this.permissions = new ArrayList<>();
     }
@@ -234,14 +237,14 @@ public class Account {
    * Get permissions
    * @return permissions
    */
-  
+  @Valid 
   @Schema(name = "permissions", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("permissions")
-  public List<String> getPermissions() {
+  public List<Permission> getPermissions() {
     return permissions;
   }
 
-  public void setPermissions(List<String> permissions) {
+  public void setPermissions(List<Permission> permissions) {
     this.permissions = permissions;
   }
 
@@ -285,7 +288,7 @@ public class Account {
     this.lastLoginAt = lastLoginAt;
   }
 
-  public Account timezone(String timezone) {
+  public Account timezone(Timezone timezone) {
     this.timezone = timezone;
     return this;
   }
@@ -294,14 +297,14 @@ public class Account {
    * Get timezone
    * @return timezone
    */
-  
+  @Valid 
   @Schema(name = "timezone", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("timezone")
-  public String getTimezone() {
+  public Timezone getTimezone() {
     return timezone;
   }
 
-  public void setTimezone(String timezone) {
+  public void setTimezone(Timezone timezone) {
     this.timezone = timezone;
   }
 

@@ -1542,7 +1542,7 @@ func RegisterLeadScraperServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/CreateWorkspace", runtime.WithHTTPPathPattern("/v1/workspaces"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/CreateWorkspace", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1567,7 +1567,7 @@ func RegisterLeadScraperServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/ListWorkspaces", runtime.WithHTTPPathPattern("/v1/workspaces"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/ListWorkspaces", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1592,7 +1592,7 @@ func RegisterLeadScraperServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/GetAccountUsage", runtime.WithHTTPPathPattern("/v1/accounts/{id}/usage"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/GetAccountUsage", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/accounts/{id}/usage"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1617,7 +1617,7 @@ func RegisterLeadScraperServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/UpdateAccountSettings", runtime.WithHTTPPathPattern("/v1/accounts/settings"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/UpdateAccountSettings", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/accounts/settings"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1642,7 +1642,7 @@ func RegisterLeadScraperServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/ListAccounts", runtime.WithHTTPPathPattern("/v1/accounts"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/ListAccounts", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/accounts"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1667,7 +1667,7 @@ func RegisterLeadScraperServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/CreateWorkflow", runtime.WithHTTPPathPattern("/v1/workspaces/{workspace_id}/workflows"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/CreateWorkflow", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1692,7 +1692,7 @@ func RegisterLeadScraperServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/GetWorkflow", runtime.WithHTTPPathPattern("/v1/workspaces/{workspace_id}/workflows/{id}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/GetWorkflow", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1717,7 +1717,7 @@ func RegisterLeadScraperServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/UpdateWorkflow", runtime.WithHTTPPathPattern("/v1/workspaces/workflow"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/UpdateWorkflow", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces/workflow"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1742,7 +1742,7 @@ func RegisterLeadScraperServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/ListWorkflows", runtime.WithHTTPPathPattern("/v1/workspaces/{workspace_id}/workflows"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/ListWorkflows", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1767,7 +1767,7 @@ func RegisterLeadScraperServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/TriggerWorkflow", runtime.WithHTTPPathPattern("/v1/workspaces/{workspace_id}/workflows/{id}/trigger"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/TriggerWorkflow", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}/trigger"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1792,7 +1792,7 @@ func RegisterLeadScraperServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/PauseWorkflow", runtime.WithHTTPPathPattern("/v1/workspaces/{workspace_id}/workflows/{id}/pause"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/PauseWorkflow", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}/pause"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1817,7 +1817,7 @@ func RegisterLeadScraperServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/GetWorkspaceAnalytics", runtime.WithHTTPPathPattern("/v1/workspaces/{workspace_id}/analytics"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/GetWorkspaceAnalytics", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/analytics"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1842,7 +1842,7 @@ func RegisterLeadScraperServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/GetWorkspace", runtime.WithHTTPPathPattern("/v1/workspace/{id}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/GetWorkspace", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspace/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1867,7 +1867,7 @@ func RegisterLeadScraperServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/UpdateWorkspace", runtime.WithHTTPPathPattern("/v1/workspace"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/UpdateWorkspace", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspace"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1892,7 +1892,7 @@ func RegisterLeadScraperServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/DeleteWorkspace", runtime.WithHTTPPathPattern("/v1/workspace/{id}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/DeleteWorkspace", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspace/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2154,7 +2154,7 @@ func RegisterLeadScraperServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/CreateWorkspace", runtime.WithHTTPPathPattern("/v1/workspaces"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/CreateWorkspace", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2176,7 +2176,7 @@ func RegisterLeadScraperServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/ListWorkspaces", runtime.WithHTTPPathPattern("/v1/workspaces"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/ListWorkspaces", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2198,7 +2198,7 @@ func RegisterLeadScraperServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/GetAccountUsage", runtime.WithHTTPPathPattern("/v1/accounts/{id}/usage"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/GetAccountUsage", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/accounts/{id}/usage"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2220,7 +2220,7 @@ func RegisterLeadScraperServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/UpdateAccountSettings", runtime.WithHTTPPathPattern("/v1/accounts/settings"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/UpdateAccountSettings", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/accounts/settings"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2242,7 +2242,7 @@ func RegisterLeadScraperServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/ListAccounts", runtime.WithHTTPPathPattern("/v1/accounts"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/ListAccounts", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/accounts"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2264,7 +2264,7 @@ func RegisterLeadScraperServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/CreateWorkflow", runtime.WithHTTPPathPattern("/v1/workspaces/{workspace_id}/workflows"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/CreateWorkflow", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2286,7 +2286,7 @@ func RegisterLeadScraperServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/GetWorkflow", runtime.WithHTTPPathPattern("/v1/workspaces/{workspace_id}/workflows/{id}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/GetWorkflow", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2308,7 +2308,7 @@ func RegisterLeadScraperServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/UpdateWorkflow", runtime.WithHTTPPathPattern("/v1/workspaces/workflow"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/UpdateWorkflow", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces/workflow"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2330,7 +2330,7 @@ func RegisterLeadScraperServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/ListWorkflows", runtime.WithHTTPPathPattern("/v1/workspaces/{workspace_id}/workflows"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/ListWorkflows", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2352,7 +2352,7 @@ func RegisterLeadScraperServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/TriggerWorkflow", runtime.WithHTTPPathPattern("/v1/workspaces/{workspace_id}/workflows/{id}/trigger"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/TriggerWorkflow", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}/trigger"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2374,7 +2374,7 @@ func RegisterLeadScraperServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/PauseWorkflow", runtime.WithHTTPPathPattern("/v1/workspaces/{workspace_id}/workflows/{id}/pause"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/PauseWorkflow", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}/pause"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2396,7 +2396,7 @@ func RegisterLeadScraperServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/GetWorkspaceAnalytics", runtime.WithHTTPPathPattern("/v1/workspaces/{workspace_id}/analytics"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/GetWorkspaceAnalytics", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/analytics"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2418,7 +2418,7 @@ func RegisterLeadScraperServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/GetWorkspace", runtime.WithHTTPPathPattern("/v1/workspace/{id}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/GetWorkspace", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspace/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2440,7 +2440,7 @@ func RegisterLeadScraperServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/UpdateWorkspace", runtime.WithHTTPPathPattern("/v1/workspace"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/UpdateWorkspace", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspace"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2462,7 +2462,7 @@ func RegisterLeadScraperServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/DeleteWorkspace", runtime.WithHTTPPathPattern("/v1/workspace/{id}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/DeleteWorkspace", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/workspace/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2500,35 +2500,35 @@ var (
 
 	pattern_LeadScraperService_DeleteAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"lead-scraper-microservice", "api", "v1", "accounts", "id"}, ""))
 
-	pattern_LeadScraperService_CreateWorkspace_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "workspaces"}, ""))
+	pattern_LeadScraperService_CreateWorkspace_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"lead-scraper-microservice", "api", "v1", "workspaces"}, ""))
 
-	pattern_LeadScraperService_ListWorkspaces_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "workspaces"}, ""))
+	pattern_LeadScraperService_ListWorkspaces_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"lead-scraper-microservice", "api", "v1", "workspaces"}, ""))
 
-	pattern_LeadScraperService_GetAccountUsage_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "accounts", "id", "usage"}, ""))
+	pattern_LeadScraperService_GetAccountUsage_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"lead-scraper-microservice", "api", "v1", "accounts", "id", "usage"}, ""))
 
-	pattern_LeadScraperService_UpdateAccountSettings_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "accounts", "settings"}, ""))
+	pattern_LeadScraperService_UpdateAccountSettings_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"lead-scraper-microservice", "api", "v1", "accounts", "settings"}, ""))
 
-	pattern_LeadScraperService_ListAccounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "accounts"}, ""))
+	pattern_LeadScraperService_ListAccounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"lead-scraper-microservice", "api", "v1", "accounts"}, ""))
 
-	pattern_LeadScraperService_CreateWorkflow_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "workspaces", "workspace_id", "workflows"}, ""))
+	pattern_LeadScraperService_CreateWorkflow_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"lead-scraper-microservice", "api", "v1", "workspaces", "workspace_id", "workflows"}, ""))
 
-	pattern_LeadScraperService_GetWorkflow_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "workspaces", "workspace_id", "workflows", "id"}, ""))
+	pattern_LeadScraperService_GetWorkflow_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5, 1, 0, 4, 1, 5, 6}, []string{"lead-scraper-microservice", "api", "v1", "workspaces", "workspace_id", "workflows", "id"}, ""))
 
-	pattern_LeadScraperService_UpdateWorkflow_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "workspaces", "workflow"}, ""))
+	pattern_LeadScraperService_UpdateWorkflow_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"lead-scraper-microservice", "api", "v1", "workspaces", "workflow"}, ""))
 
-	pattern_LeadScraperService_ListWorkflows_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "workspaces", "workspace_id", "workflows"}, ""))
+	pattern_LeadScraperService_ListWorkflows_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"lead-scraper-microservice", "api", "v1", "workspaces", "workspace_id", "workflows"}, ""))
 
-	pattern_LeadScraperService_TriggerWorkflow_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"v1", "workspaces", "workspace_id", "workflows", "id", "trigger"}, ""))
+	pattern_LeadScraperService_TriggerWorkflow_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5, 1, 0, 4, 1, 5, 6, 2, 7}, []string{"lead-scraper-microservice", "api", "v1", "workspaces", "workspace_id", "workflows", "id", "trigger"}, ""))
 
-	pattern_LeadScraperService_PauseWorkflow_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"v1", "workspaces", "workspace_id", "workflows", "id", "pause"}, ""))
+	pattern_LeadScraperService_PauseWorkflow_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5, 1, 0, 4, 1, 5, 6, 2, 7}, []string{"lead-scraper-microservice", "api", "v1", "workspaces", "workspace_id", "workflows", "id", "pause"}, ""))
 
-	pattern_LeadScraperService_GetWorkspaceAnalytics_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "workspaces", "workspace_id", "analytics"}, ""))
+	pattern_LeadScraperService_GetWorkspaceAnalytics_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"lead-scraper-microservice", "api", "v1", "workspaces", "workspace_id", "analytics"}, ""))
 
-	pattern_LeadScraperService_GetWorkspace_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "workspace", "id"}, ""))
+	pattern_LeadScraperService_GetWorkspace_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"lead-scraper-microservice", "api", "v1", "workspace", "id"}, ""))
 
-	pattern_LeadScraperService_UpdateWorkspace_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "workspace"}, ""))
+	pattern_LeadScraperService_UpdateWorkspace_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"lead-scraper-microservice", "api", "v1", "workspace"}, ""))
 
-	pattern_LeadScraperService_DeleteWorkspace_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "workspace", "id"}, ""))
+	pattern_LeadScraperService_DeleteWorkspace_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"lead-scraper-microservice", "api", "v1", "workspace", "id"}, ""))
 )
 
 var (

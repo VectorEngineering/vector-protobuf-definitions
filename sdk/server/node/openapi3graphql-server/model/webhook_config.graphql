@@ -31,6 +31,7 @@ type WebhookConfig {
   successfulCalls: Int!
   failedCalls: Int!
   metadata: TodoObjectMapping
+  webhookName: String!
 }
 
 input WebhookConfigInput {
@@ -56,5 +57,6 @@ input WebhookConfigInput {
     successfulCalls: Int!
     failedCalls: Int!
     metadata: TodoObjectMapping
+    webhookName: String!
 }
 

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | [**RpcStatus**](RpcStatus.md) |  | [optional] 
+**status** | [**Status**](Status.md) |  | [optional] 
 
 ## Example
 

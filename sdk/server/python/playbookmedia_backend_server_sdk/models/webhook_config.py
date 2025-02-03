@@ -18,7 +18,7 @@ class WebhookConfig(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, url=None, auth_type=None, auth_token=None, custom_headers=None, max_retries=None, retry_interval=None, trigger_events=None, included_fields=None, include_full_results=None, payload_format=PayloadFormat.UNSPECIFIED, verify_ssl=None, signing_secret=None, rate_limit=None, rate_limit_interval=None, created_at=None, updated_at=None, last_triggered_at=None, successful_calls=None, failed_calls=None, metadata=None):  # noqa: E501
+    def __init__(self, id=None, url=None, auth_type=None, auth_token=None, custom_headers=None, max_retries=None, retry_interval=None, trigger_events=None, included_fields=None, include_full_results=None, payload_format=PayloadFormat.UNSPECIFIED, verify_ssl=None, signing_secret=None, rate_limit=None, rate_limit_interval=None, created_at=None, updated_at=None, last_triggered_at=None, successful_calls=None, failed_calls=None, metadata=None, webhook_name=None):  # noqa: E501
         """WebhookConfig - a model defined in OpenAPI
 
         :param id: The id of this WebhookConfig.  # noqa: E501
@@ -63,6 +63,8 @@ class WebhookConfig(Model):
         :type failed_calls: int
         :param metadata: The metadata of this WebhookConfig.  # noqa: E501
         :type metadata: object
+        :param webhook_name: The webhook_name of this WebhookConfig.  # noqa: E501
+        :type webhook_name: str
         """
         self.openapi_types = {
             'id': str,
@@ -85,7 +87,8 @@ class WebhookConfig(Model):
             'last_triggered_at': datetime,
             'successful_calls': int,
             'failed_calls': int,
-            'metadata': object
+            'metadata': object,
+            'webhook_name': str
         }
 
         self.attribute_map = {
@@ -109,7 +112,8 @@ class WebhookConfig(Model):
             'last_triggered_at': 'lastTriggeredAt',
             'successful_calls': 'successfulCalls',
             'failed_calls': 'failedCalls',
-            'metadata': 'metadata'
+            'metadata': 'metadata',
+            'webhook_name': 'webhookName'
         }
 
         self._id = id
@@ -133,6 +137,7 @@ class WebhookConfig(Model):
         self._successful_calls = successful_calls
         self._failed_calls = failed_calls
         self._metadata = metadata
+        self._webhook_name = webhook_name
 
     @classmethod
     def from_dict(cls, dikt) -> 'WebhookConfig':
@@ -587,3 +592,24 @@ class WebhookConfig(Model):
         """
 
         self._metadata = metadata
+
+    @property
+    def webhook_name(self) -> str:
+        """Gets the webhook_name of this WebhookConfig.
+
+
+        :return: The webhook_name of this WebhookConfig.
+        :rtype: str
+        """
+        return self._webhook_name
+
+    @webhook_name.setter
+    def webhook_name(self, webhook_name: str):
+        """Sets the webhook_name of this WebhookConfig.
+
+
+        :param webhook_name: The webhook_name of this WebhookConfig.
+        :type webhook_name: str
+        """
+
+        self._webhook_name = webhook_name

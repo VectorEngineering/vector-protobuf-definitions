@@ -1,56 +1,37 @@
-import { OpenAPIHono } from "@hono/zod-openapi";
-import { cors } from "hono/cors";
-import { swaggerUI } from "@hono/swagger-ui";
-import { requestId } from "hono/request-id";
-import { {{basename openApiSpec.info.title}}Router } from "./routes";
-import type { Env } from "./types";
-import type { MiddlewareHandler } from "hono";
-import { trimTrailingSlash } from 'hono/trailing-slash'
-import { timing, setMetric, startTime, endTime } from 'hono/timing'
-import type { TimingVariables } from 'hono/timing'
 // Import user-defined middleware
 import * as middleware from "./middleware";
-import { timeout } from 'hono/timeout'
-import { secureHeaders } from 'hono/secure-headers'
-import { prettyJSON } from 'hono/pretty-json'
-import { csrf } from 'hono/csrf'
-import { compress } from 'hono/compress'
 
-type Variables = TimingVariables
+import type { Env } from "./types";
+import { LeadScrapingServiceAPIRouter } from "./routes";
+import type { MiddlewareHandler } from "hono";
+import { OpenAPIHono } from "@hono/zod-openapi";
+import { compress } from 'hono/compress';
+import { cors } from "hono/cors";
+import { csrf } from 'hono/csrf';
+import { prettyJSON } from 'hono/pretty-json';
+import { secureHeaders } from 'hono/secure-headers';
+import { swaggerUI } from "@hono/swagger-ui";
+import { timing } from 'hono/timing';
 
-const app = new OpenAPIHono<{
-  Bindings: Env;
-  Variables: Variables;
-}>(
-  {
-    defaultHook: (result, c) => {
-      if (!result.success) {
-        return c.json({ success: false, errors: result.error.errors }, 422);
-      }
-    },
-  }
-);
+const app = new OpenAPIHono<Env>({
+  defaultHook: (result, c) => {
+    if (!result.success) {
+      return c.json({ success: false, errors: result.error.errors }, 422);
+    }
+  },
+});
 
 // CORS middleware
 app.use("*", cors({
   origin: "*",
-  allowMethods: [{{#each openApiSpec.paths}}{{#with this}}{{#if get}}"GET",{{/if}}{{#if post}}"POST",{{/if}}{{#if put}}"PUT",{{/if}}{{#if delete}}"DELETE",{{/if}}{{/with}}{{/each}}"OPTIONS"],
+  allowMethods: ["POST", "PUT", "GET", "DELETE", "GET", "POST", "GET", "DELETE", "GET", "OPTIONS"],
   allowHeaders: ["Content-Type", "Authorization"],
   exposeHeaders: ["Content-Length", "X-Request-Id"],
   maxAge: 86400,
 }));
 
-// Request ID middleware
-app.use("*", requestId());
-
-// Append trailing slash middleware
-app.use("*", trimTrailingSlash())
-
 // Timing middleware
 app.use("*", timing());
-
-// Timeout middleware
-app.use('*', timeout(5000))
 
 // Secure headers middleware
 app.use("*", secureHeaders())
@@ -67,7 +48,7 @@ app.use("*", compress())
 // Apply user-defined middleware
 Object.values(middleware).forEach(mw => {
   if (typeof mw === 'function') {
-    app.use("*", mw as MiddlewareHandler<{ Bindings: Env }>);
+    app.use("*", mw as MiddlewareHandler<Env, "*">);
   }
 });
 
@@ -80,8 +61,8 @@ app.get("/", swaggerUI({
 app.doc("/openapi", {
   openapi: "3.1.0",
   info: {
-    version: "{{openApiSpec.info.version}}",
-    title: "{{openApiSpec.info.title}}",
+    version: "1.0",
+    title: "Lead Scraping Service API",
   },
 });
 
@@ -92,7 +73,20 @@ app.openAPIRegistry.registerComponent("securitySchemes", "Bearer", {
 });
 
 // API routes
-app.route("/api", {{basename openApiSpec.info.title}}Router);
+app.route("/api", LeadScrapingServiceAPIRouter);
+
+// Error handling
+app.onError((err, c) => {
+  console.error(`${err}`);
+  const error = err instanceof Error ? err.message : 'Internal Server Error';
+  return c.json({ error }, 500);
+});
+
+
+// 404 handler
+app.notFound((c) => {
+  return c.json({ error: 'Not Found' }, 404);
+});
 
 export type AppType = typeof app;
 export default app; 

@@ -1,12 +1,10 @@
-import { Hono } from "hono";
 import { ApiClient } from '../client';
 import type { Env } from '../types';
 import { HTTPException } from 'hono/http-exception';
+import { Hono } from "hono";
 
 // Route handler for {{path}}
-const router = new Hono<{
-  Bindings: Env;
-}>();
+const router = new Hono<{ Bindings: Env }>();
 
 {{#if pathItem.get}}
 router.get("/", async (c) => {

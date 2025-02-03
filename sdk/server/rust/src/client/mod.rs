@@ -38,13 +38,44 @@ const ID_ENCODE_SET: &AsciiSet = &FRAGMENT_ENCODE_SET.add(b'|');
 use crate::{Api,
      CreateAccountResponse,
      CreateScrapingJobResponse,
+     CreateWorkspaceResponse,
      DeleteAccountResponse,
      DeleteScrapingJobResponse,
+     DeleteWorkspaceResponse,
      DownloadScrapingResultsResponse,
      GetAccountResponse,
+     GetAccountUsageResponse,
      GetScrapingJobResponse,
+     GetWorkflowResponse,
+     GetWorkspaceResponse,
+     GetWorkspaceAnalyticsResponse,
+     LeadScraperServiceCreateWorkflowResponse,
+     ListAccountsResponse,
      ListScrapingJobsResponse,
-     UpdateAccountResponse
+     ListWorkflowsResponse,
+     ListWorkspacesResponse,
+     PauseWorkflowResponse,
+     TriggerWorkflowResponse,
+     UpdateAccountResponse,
+     UpdateAccountSettingsResponse,
+     UpdateWorkflowResponse,
+     UpdateWorkspaceResponse,
+     CreateAccount1Response,
+     CreateWorkspace1Response,
+     DeleteAccount1Response,
+     DeleteWorkspace1Response,
+     GetAccount1Response,
+     GetWorkspace1Response,
+     GetWorkspaceAnalytics1Response,
+     GetWorkspaceComplianceReportResponse,
+     GetWorkspaceStorageStatsResponse,
+     ListWorkspaceSharingsResponse,
+     ListWorkspaces1Response,
+     RemoveWorkspaceSharingResponse,
+     ShareWorkspaceResponse,
+     UpdateAccount1Response,
+     UpdateWorkspace1Response,
+     UpdateWorkspaceSharingResponse
      };
 
 /// Convert input into a base path, e.g. "http://example:123". Also checks the scheme as it goes.
@@ -1093,6 +1124,358 @@ impl<S, C> Api<C> for Client<S, C> where
         }
     }
 
+    async fn create_workspace(
+        &self,
+        param_create_workspace_request: models::CreateWorkspaceRequest,
+        context: &C) -> Result<CreateWorkspaceResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/lead-scraper-microservice/api/v1/workspaces",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let body = serde_json::to_string(&param_create_workspace_request).expect("impossible to fail to serialize");
+                *request.body_mut() = Body::from(body);
+
+        let header = "application/json";
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", header, e)))
+        });
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::CreateWorkspaceResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::ASuccessfulResponse
+                    (body)
+                )
+            }
+            201 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::CreateWorkspaceResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::WorkspaceCreatedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::Unauthorized
+                    (body)
+                )
+            }
+            402 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PaymentRequiredErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::PaymentRequired
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::NotFound
+                    (body)
+                )
+            }
+            405 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::MethodNotAllowedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::MethodNotAllowed
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::Conflict
+                    (body)
+                )
+            }
+            410 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GoneErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::Gone
+                    (body)
+                )
+            }
+            412 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PreconditionFailedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::PreconditionFailed
+                    (body)
+                )
+            }
+            422 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UnprocessableEntityErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::UnprocessableEntity
+                    (body)
+                )
+            }
+            425 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::TooEarlyErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::TooEarly
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::InternalServerError
+                    (body)
+                )
+            }
+            501 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotImplementedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::NotImplemented
+                    (body)
+                )
+            }
+            502 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::BadGatewayErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::BadGateway
+                    (body)
+                )
+            }
+            503 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ServiceUnavailableErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::ServiceUnavailable
+                    (body)
+                )
+            }
+            504 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GatewayTimeoutErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::GatewayTimeout
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspaceResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
     async fn delete_account(
         &self,
         param_id: String,
@@ -1741,6 +2124,337 @@ impl<S, C> Api<C> for Client<S, C> where
                     ApiError(format!("Response body did not match the schema: {}", e))
                 })?;
                 Ok(DeleteScrapingJobResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn delete_workspace(
+        &self,
+        param_id: String,
+        context: &C) -> Result<DeleteWorkspaceResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/lead-scraper-microservice/api/v1/workspace/{id}",
+            self.base_path
+            ,id=utf8_percent_encode(&param_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("DELETE")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::DeleteWorkspaceResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::WorkspaceDeletedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::Unauthorized
+                    (body)
+                )
+            }
+            402 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PaymentRequiredErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::PaymentRequired
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::NotFound
+                    (body)
+                )
+            }
+            405 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::MethodNotAllowedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::MethodNotAllowed
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::Conflict
+                    (body)
+                )
+            }
+            410 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GoneErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::Gone
+                    (body)
+                )
+            }
+            412 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PreconditionFailedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::PreconditionFailed
+                    (body)
+                )
+            }
+            422 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UnprocessableEntityErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::UnprocessableEntity
+                    (body)
+                )
+            }
+            425 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::TooEarlyErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::TooEarly
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::InternalServerError
+                    (body)
+                )
+            }
+            501 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotImplementedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::NotImplemented
+                    (body)
+                )
+            }
+            502 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::BadGatewayErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::BadGateway
+                    (body)
+                )
+            }
+            503 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ServiceUnavailableErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::ServiceUnavailable
+                    (body)
+                )
+            }
+            504 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GatewayTimeoutErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::GatewayTimeout
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspaceResponse::AnUnexpectedErrorResponse
                     (body)
                 )
             }
@@ -2435,6 +3149,337 @@ impl<S, C> Api<C> for Client<S, C> where
         }
     }
 
+    async fn get_account_usage(
+        &self,
+        param_id: String,
+        context: &C) -> Result<GetAccountUsageResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/lead-scraper-microservice/api/v1/accounts/{id}/usage",
+            self.base_path
+            ,id=utf8_percent_encode(&param_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GetAccountUsageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::UsageDetailsRetrievedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::Unauthorized
+                    (body)
+                )
+            }
+            402 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PaymentRequiredErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::PaymentRequired
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::NotFound
+                    (body)
+                )
+            }
+            405 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::MethodNotAllowedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::MethodNotAllowed
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::Conflict
+                    (body)
+                )
+            }
+            410 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GoneErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::Gone
+                    (body)
+                )
+            }
+            412 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PreconditionFailedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::PreconditionFailed
+                    (body)
+                )
+            }
+            422 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UnprocessableEntityErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::UnprocessableEntity
+                    (body)
+                )
+            }
+            425 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::TooEarlyErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::TooEarly
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::InternalServerError
+                    (body)
+                )
+            }
+            501 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotImplementedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::NotImplemented
+                    (body)
+                )
+            }
+            502 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::BadGatewayErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::BadGateway
+                    (body)
+                )
+            }
+            503 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ServiceUnavailableErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::ServiceUnavailable
+                    (body)
+                )
+            }
+            504 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GatewayTimeoutErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::GatewayTimeout
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccountUsageResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
     async fn get_scraping_job(
         &self,
         param_job_id: String,
@@ -2752,6 +3797,1709 @@ impl<S, C> Api<C> for Client<S, C> where
                     ApiError(format!("Response body did not match the schema: {}", e))
                 })?;
                 Ok(GetScrapingJobResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_workflow(
+        &self,
+        param_workspace_id: String,
+        param_id: String,
+        context: &C) -> Result<GetWorkflowResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}",
+            self.base_path
+            ,workspace_id=utf8_percent_encode(&param_workspace_id.to_string(), ID_ENCODE_SET)
+            ,id=utf8_percent_encode(&param_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ScrapingWorkflow>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::WorkflowRetrievedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::Unauthorized
+                    (body)
+                )
+            }
+            402 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PaymentRequiredErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::PaymentRequired
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::NotFound
+                    (body)
+                )
+            }
+            405 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::MethodNotAllowedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::MethodNotAllowed
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::Conflict
+                    (body)
+                )
+            }
+            410 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GoneErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::Gone
+                    (body)
+                )
+            }
+            412 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PreconditionFailedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::PreconditionFailed
+                    (body)
+                )
+            }
+            422 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UnprocessableEntityErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::UnprocessableEntity
+                    (body)
+                )
+            }
+            425 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::TooEarlyErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::TooEarly
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::InternalServerError
+                    (body)
+                )
+            }
+            501 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotImplementedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::NotImplemented
+                    (body)
+                )
+            }
+            502 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::BadGatewayErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::BadGateway
+                    (body)
+                )
+            }
+            503 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ServiceUnavailableErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::ServiceUnavailable
+                    (body)
+                )
+            }
+            504 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GatewayTimeoutErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::GatewayTimeout
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkflowResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_workspace(
+        &self,
+        param_id: String,
+        context: &C) -> Result<GetWorkspaceResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/lead-scraper-microservice/api/v1/workspace/{id}",
+            self.base_path
+            ,id=utf8_percent_encode(&param_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::Workspace>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::WorkspaceRetrievedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::Unauthorized
+                    (body)
+                )
+            }
+            402 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PaymentRequiredErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::PaymentRequired
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::NotFound
+                    (body)
+                )
+            }
+            405 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::MethodNotAllowedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::MethodNotAllowed
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::Conflict
+                    (body)
+                )
+            }
+            410 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GoneErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::Gone
+                    (body)
+                )
+            }
+            412 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PreconditionFailedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::PreconditionFailed
+                    (body)
+                )
+            }
+            422 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UnprocessableEntityErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::UnprocessableEntity
+                    (body)
+                )
+            }
+            425 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::TooEarlyErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::TooEarly
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::InternalServerError
+                    (body)
+                )
+            }
+            501 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotImplementedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::NotImplemented
+                    (body)
+                )
+            }
+            502 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::BadGatewayErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::BadGateway
+                    (body)
+                )
+            }
+            503 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ServiceUnavailableErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::ServiceUnavailable
+                    (body)
+                )
+            }
+            504 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GatewayTimeoutErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::GatewayTimeout
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_workspace_analytics(
+        &self,
+        param_workspace_id: String,
+        param_start_time: Option<chrono::DateTime::<chrono::Utc>>,
+        param_end_time: Option<chrono::DateTime::<chrono::Utc>>,
+        context: &C) -> Result<GetWorkspaceAnalyticsResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/analytics",
+            self.base_path
+            ,workspace_id=utf8_percent_encode(&param_workspace_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_start_time) = param_start_time {
+                query_string.append_pair("startTime",
+                    &param_start_time.to_string());
+            }
+            if let Some(param_end_time) = param_end_time {
+                query_string.append_pair("endTime",
+                    &param_end_time.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GetWorkspaceAnalyticsResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::AnalyticsDataRetrievedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::Unauthorized
+                    (body)
+                )
+            }
+            402 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PaymentRequiredErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::PaymentRequired
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::NotFound
+                    (body)
+                )
+            }
+            405 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::MethodNotAllowedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::MethodNotAllowed
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::Conflict
+                    (body)
+                )
+            }
+            410 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GoneErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::Gone
+                    (body)
+                )
+            }
+            412 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PreconditionFailedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::PreconditionFailed
+                    (body)
+                )
+            }
+            422 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UnprocessableEntityErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::UnprocessableEntity
+                    (body)
+                )
+            }
+            425 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::TooEarlyErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::TooEarly
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::InternalServerError
+                    (body)
+                )
+            }
+            501 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotImplementedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::NotImplemented
+                    (body)
+                )
+            }
+            502 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::BadGatewayErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::BadGateway
+                    (body)
+                )
+            }
+            503 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ServiceUnavailableErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::ServiceUnavailable
+                    (body)
+                )
+            }
+            504 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GatewayTimeoutErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::GatewayTimeout
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalyticsResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn lead_scraper_service_create_workflow(
+        &self,
+        param_workspace_id: String,
+        param_create_workflow_body: models::CreateWorkflowBody,
+        context: &C) -> Result<LeadScraperServiceCreateWorkflowResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows",
+            self.base_path
+            ,workspace_id=utf8_percent_encode(&param_workspace_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let body = serde_json::to_string(&param_create_workflow_body).expect("impossible to fail to serialize");
+                *request.body_mut() = Body::from(body);
+
+        let header = "application/json";
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", header, e)))
+        });
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::CreateWorkflowResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::ASuccessfulResponse
+                    (body)
+                )
+            }
+            201 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::CreateWorkflowResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::WorkflowCreatedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::Unauthorized
+                    (body)
+                )
+            }
+            402 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PaymentRequiredErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::PaymentRequired
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::NotFound
+                    (body)
+                )
+            }
+            405 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::MethodNotAllowedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::MethodNotAllowed
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::Conflict
+                    (body)
+                )
+            }
+            410 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GoneErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::Gone
+                    (body)
+                )
+            }
+            412 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PreconditionFailedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::PreconditionFailed
+                    (body)
+                )
+            }
+            422 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UnprocessableEntityErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::UnprocessableEntity
+                    (body)
+                )
+            }
+            425 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::TooEarlyErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::TooEarly
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::InternalServerError
+                    (body)
+                )
+            }
+            501 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotImplementedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::NotImplemented
+                    (body)
+                )
+            }
+            502 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::BadGatewayErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::BadGateway
+                    (body)
+                )
+            }
+            503 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ServiceUnavailableErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::ServiceUnavailable
+                    (body)
+                )
+            }
+            504 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GatewayTimeoutErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::GatewayTimeout
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(LeadScraperServiceCreateWorkflowResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn list_accounts(
+        &self,
+        param_page_size: Option<i32>,
+        param_page_token: Option<String>,
+        param_filter: Option<String>,
+        context: &C) -> Result<ListAccountsResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/lead-scraper-microservice/api/v1/accounts",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_page_size) = param_page_size {
+                query_string.append_pair("pageSize",
+                    &param_page_size.to_string());
+            }
+            if let Some(param_page_token) = param_page_token {
+                query_string.append_pair("pageToken",
+                    &param_page_token);
+            }
+            if let Some(param_filter) = param_filter {
+                query_string.append_pair("filter",
+                    &param_filter);
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ListAccountsResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::AccountsRetrievedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::Unauthorized
+                    (body)
+                )
+            }
+            402 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PaymentRequiredErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::PaymentRequired
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::NotFound
+                    (body)
+                )
+            }
+            405 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::MethodNotAllowedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::MethodNotAllowed
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::Conflict
+                    (body)
+                )
+            }
+            410 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GoneErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::Gone
+                    (body)
+                )
+            }
+            412 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PreconditionFailedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::PreconditionFailed
+                    (body)
+                )
+            }
+            422 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UnprocessableEntityErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::UnprocessableEntity
+                    (body)
+                )
+            }
+            425 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::TooEarlyErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::TooEarly
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::InternalServerError
+                    (body)
+                )
+            }
+            501 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotImplementedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::NotImplemented
+                    (body)
+                )
+            }
+            502 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::BadGatewayErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::BadGateway
+                    (body)
+                )
+            }
+            503 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ServiceUnavailableErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::ServiceUnavailable
+                    (body)
+                )
+            }
+            504 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GatewayTimeoutErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::GatewayTimeout
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListAccountsResponse::AnUnexpectedErrorResponse
                     (body)
                 )
             }
@@ -3113,6 +5861,1380 @@ impl<S, C> Api<C> for Client<S, C> where
         }
     }
 
+    async fn list_workflows(
+        &self,
+        param_workspace_id: String,
+        param_page_size: Option<i32>,
+        param_page_token: Option<String>,
+        param_filter: Option<String>,
+        context: &C) -> Result<ListWorkflowsResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows",
+            self.base_path
+            ,workspace_id=utf8_percent_encode(&param_workspace_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_page_size) = param_page_size {
+                query_string.append_pair("pageSize",
+                    &param_page_size.to_string());
+            }
+            if let Some(param_page_token) = param_page_token {
+                query_string.append_pair("pageToken",
+                    &param_page_token);
+            }
+            if let Some(param_filter) = param_filter {
+                query_string.append_pair("filter",
+                    &param_filter);
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ListWorkflowsResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::WorkflowsRetrievedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::Unauthorized
+                    (body)
+                )
+            }
+            402 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PaymentRequiredErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::PaymentRequired
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::NotFound
+                    (body)
+                )
+            }
+            405 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::MethodNotAllowedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::MethodNotAllowed
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::Conflict
+                    (body)
+                )
+            }
+            410 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GoneErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::Gone
+                    (body)
+                )
+            }
+            412 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PreconditionFailedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::PreconditionFailed
+                    (body)
+                )
+            }
+            422 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UnprocessableEntityErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::UnprocessableEntity
+                    (body)
+                )
+            }
+            425 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::TooEarlyErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::TooEarly
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::InternalServerError
+                    (body)
+                )
+            }
+            501 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotImplementedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::NotImplemented
+                    (body)
+                )
+            }
+            502 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::BadGatewayErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::BadGateway
+                    (body)
+                )
+            }
+            503 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ServiceUnavailableErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::ServiceUnavailable
+                    (body)
+                )
+            }
+            504 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GatewayTimeoutErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::GatewayTimeout
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkflowsResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn list_workspaces(
+        &self,
+        param_account_id: Option<String>,
+        param_page_size: Option<i32>,
+        param_page_token: Option<String>,
+        context: &C) -> Result<ListWorkspacesResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/lead-scraper-microservice/api/v1/workspaces",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_account_id) = param_account_id {
+                query_string.append_pair("accountId",
+                    &param_account_id);
+            }
+            if let Some(param_page_size) = param_page_size {
+                query_string.append_pair("pageSize",
+                    &param_page_size.to_string());
+            }
+            if let Some(param_page_token) = param_page_token {
+                query_string.append_pair("pageToken",
+                    &param_page_token);
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ListWorkspacesResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::WorkspacesRetrievedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::Unauthorized
+                    (body)
+                )
+            }
+            402 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PaymentRequiredErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::PaymentRequired
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::NotFound
+                    (body)
+                )
+            }
+            405 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::MethodNotAllowedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::MethodNotAllowed
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::Conflict
+                    (body)
+                )
+            }
+            410 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GoneErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::Gone
+                    (body)
+                )
+            }
+            412 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PreconditionFailedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::PreconditionFailed
+                    (body)
+                )
+            }
+            422 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UnprocessableEntityErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::UnprocessableEntity
+                    (body)
+                )
+            }
+            425 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::TooEarlyErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::TooEarly
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::InternalServerError
+                    (body)
+                )
+            }
+            501 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotImplementedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::NotImplemented
+                    (body)
+                )
+            }
+            502 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::BadGatewayErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::BadGateway
+                    (body)
+                )
+            }
+            503 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ServiceUnavailableErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::ServiceUnavailable
+                    (body)
+                )
+            }
+            504 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GatewayTimeoutErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::GatewayTimeout
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspacesResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn pause_workflow(
+        &self,
+        param_workspace_id: String,
+        param_id: String,
+        param_pause_workflow_body: models::PauseWorkflowBody,
+        context: &C) -> Result<PauseWorkflowResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}/pause",
+            self.base_path
+            ,workspace_id=utf8_percent_encode(&param_workspace_id.to_string(), ID_ENCODE_SET)
+            ,id=utf8_percent_encode(&param_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let body = serde_json::to_string(&param_pause_workflow_body).expect("impossible to fail to serialize");
+                *request.body_mut() = Body::from(body);
+
+        let header = "application/json";
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", header, e)))
+        });
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PauseWorkflowResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::WorkflowPausedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::Unauthorized
+                    (body)
+                )
+            }
+            402 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PaymentRequiredErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::PaymentRequired
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::NotFound
+                    (body)
+                )
+            }
+            405 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::MethodNotAllowedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::MethodNotAllowed
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::Conflict
+                    (body)
+                )
+            }
+            410 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GoneErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::Gone
+                    (body)
+                )
+            }
+            412 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PreconditionFailedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::PreconditionFailed
+                    (body)
+                )
+            }
+            422 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UnprocessableEntityErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::UnprocessableEntity
+                    (body)
+                )
+            }
+            425 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::TooEarlyErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::TooEarly
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::InternalServerError
+                    (body)
+                )
+            }
+            501 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotImplementedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::NotImplemented
+                    (body)
+                )
+            }
+            502 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::BadGatewayErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::BadGateway
+                    (body)
+                )
+            }
+            503 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ServiceUnavailableErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::ServiceUnavailable
+                    (body)
+                )
+            }
+            504 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GatewayTimeoutErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::GatewayTimeout
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(PauseWorkflowResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn trigger_workflow(
+        &self,
+        param_workspace_id: String,
+        param_id: String,
+        param_trigger_workflow_body: models::TriggerWorkflowBody,
+        context: &C) -> Result<TriggerWorkflowResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}/trigger",
+            self.base_path
+            ,workspace_id=utf8_percent_encode(&param_workspace_id.to_string(), ID_ENCODE_SET)
+            ,id=utf8_percent_encode(&param_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let body = serde_json::to_string(&param_trigger_workflow_body).expect("impossible to fail to serialize");
+                *request.body_mut() = Body::from(body);
+
+        let header = "application/json";
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", header, e)))
+        });
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::TriggerWorkflowResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::WorkflowTriggeredSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::Unauthorized
+                    (body)
+                )
+            }
+            402 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PaymentRequiredErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::PaymentRequired
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::NotFound
+                    (body)
+                )
+            }
+            405 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::MethodNotAllowedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::MethodNotAllowed
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::Conflict
+                    (body)
+                )
+            }
+            410 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GoneErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::Gone
+                    (body)
+                )
+            }
+            412 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PreconditionFailedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::PreconditionFailed
+                    (body)
+                )
+            }
+            422 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UnprocessableEntityErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::UnprocessableEntity
+                    (body)
+                )
+            }
+            425 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::TooEarlyErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::TooEarly
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::InternalServerError
+                    (body)
+                )
+            }
+            501 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotImplementedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::NotImplemented
+                    (body)
+                )
+            }
+            502 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::BadGatewayErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::BadGateway
+                    (body)
+                )
+            }
+            503 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ServiceUnavailableErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::ServiceUnavailable
+                    (body)
+                )
+            }
+            504 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GatewayTimeoutErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::GatewayTimeout
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(TriggerWorkflowResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
     async fn update_account(
         &self,
         param_update_account_request: models::UpdateAccountRequest,
@@ -3148,7 +7270,6 @@ impl<S, C> Api<C> for Client<S, C> where
         };
 
         let body = serde_json::to_string(&param_update_account_request).expect("impossible to fail to serialize");
-
                 *request.body_mut() = Body::from(body);
 
         let header = "application/json";
@@ -3156,7 +7277,6 @@ impl<S, C> Api<C> for Client<S, C> where
             Ok(h) => h,
             Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", header, e)))
         });
-
         let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
         request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
             Ok(h) => h,
@@ -3430,6 +7550,4196 @@ impl<S, C> Api<C> for Client<S, C> where
                     ApiError(format!("Response body did not match the schema: {}", e))
                 })?;
                 Ok(UpdateAccountResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn update_account_settings(
+        &self,
+        param_update_account_settings_request: models::UpdateAccountSettingsRequest,
+        context: &C) -> Result<UpdateAccountSettingsResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/lead-scraper-microservice/api/v1/accounts/settings",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("PUT")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let body = serde_json::to_string(&param_update_account_settings_request).expect("impossible to fail to serialize");
+                *request.body_mut() = Body::from(body);
+
+        let header = "application/json";
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", header, e)))
+        });
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UpdateAccountSettingsResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::SettingsUpdatedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::Unauthorized
+                    (body)
+                )
+            }
+            402 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PaymentRequiredErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::PaymentRequired
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::NotFound
+                    (body)
+                )
+            }
+            405 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::MethodNotAllowedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::MethodNotAllowed
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::Conflict
+                    (body)
+                )
+            }
+            410 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GoneErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::Gone
+                    (body)
+                )
+            }
+            412 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PreconditionFailedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::PreconditionFailed
+                    (body)
+                )
+            }
+            422 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UnprocessableEntityErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::UnprocessableEntity
+                    (body)
+                )
+            }
+            425 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::TooEarlyErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::TooEarly
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::InternalServerError
+                    (body)
+                )
+            }
+            501 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotImplementedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::NotImplemented
+                    (body)
+                )
+            }
+            502 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::BadGatewayErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::BadGateway
+                    (body)
+                )
+            }
+            503 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ServiceUnavailableErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::ServiceUnavailable
+                    (body)
+                )
+            }
+            504 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GatewayTimeoutErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::GatewayTimeout
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccountSettingsResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn update_workflow(
+        &self,
+        param_update_workflow_request: models::UpdateWorkflowRequest,
+        context: &C) -> Result<UpdateWorkflowResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/lead-scraper-microservice/api/v1/workspaces/workflow",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("PUT")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let body = serde_json::to_string(&param_update_workflow_request).expect("impossible to fail to serialize");
+                *request.body_mut() = Body::from(body);
+
+        let header = "application/json";
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", header, e)))
+        });
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ScrapingWorkflow>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::WorkflowUpdatedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::Unauthorized
+                    (body)
+                )
+            }
+            402 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PaymentRequiredErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::PaymentRequired
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::NotFound
+                    (body)
+                )
+            }
+            405 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::MethodNotAllowedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::MethodNotAllowed
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::Conflict
+                    (body)
+                )
+            }
+            410 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GoneErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::Gone
+                    (body)
+                )
+            }
+            412 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PreconditionFailedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::PreconditionFailed
+                    (body)
+                )
+            }
+            422 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UnprocessableEntityErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::UnprocessableEntity
+                    (body)
+                )
+            }
+            425 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::TooEarlyErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::TooEarly
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::InternalServerError
+                    (body)
+                )
+            }
+            501 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotImplementedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::NotImplemented
+                    (body)
+                )
+            }
+            502 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::BadGatewayErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::BadGateway
+                    (body)
+                )
+            }
+            503 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ServiceUnavailableErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::ServiceUnavailable
+                    (body)
+                )
+            }
+            504 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GatewayTimeoutErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::GatewayTimeout
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkflowResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn update_workspace(
+        &self,
+        param_update_workspace_request: models::UpdateWorkspaceRequest,
+        context: &C) -> Result<UpdateWorkspaceResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/lead-scraper-microservice/api/v1/workspace",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("PUT")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let body = serde_json::to_string(&param_update_workspace_request).expect("impossible to fail to serialize");
+
+                *request.body_mut() = Body::from(body);
+
+        let header = "application/json";
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", header, e)))
+        });
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UpdateWorkspaceResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::WorkspaceUpdatedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::Unauthorized
+                    (body)
+                )
+            }
+            402 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PaymentRequiredErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::PaymentRequired
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::NotFound
+                    (body)
+                )
+            }
+            405 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::MethodNotAllowedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::MethodNotAllowed
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::Conflict
+                    (body)
+                )
+            }
+            410 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GoneErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::Gone
+                    (body)
+                )
+            }
+            412 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::PreconditionFailedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::PreconditionFailed
+                    (body)
+                )
+            }
+            422 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UnprocessableEntityErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::UnprocessableEntity
+                    (body)
+                )
+            }
+            425 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::TooEarlyErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::TooEarly
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::InternalServerError
+                    (body)
+                )
+            }
+            501 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotImplementedErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::NotImplemented
+                    (body)
+                )
+            }
+            502 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::BadGatewayErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::BadGateway
+                    (body)
+                )
+            }
+            503 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ServiceUnavailableErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::ServiceUnavailable
+                    (body)
+                )
+            }
+            504 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GatewayTimeoutErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::GatewayTimeout
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RpcPeriodStatus>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn create_account1(
+        &self,
+        param_create_account_request1: models::CreateAccountRequest1,
+        context: &C) -> Result<CreateAccount1Response, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/workspace-service/v1/accounts",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        // Body parameter
+        let body = serde_json::to_string(&param_create_account_request1).expect("impossible to fail to serialize");
+                *request.body_mut() = Body::from(body);
+
+        let header = "application/json";
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", header, e)))
+        });
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::CreateAccountResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateAccount1Response::ASuccessfulResponse
+                    (body)
+                )
+            }
+            201 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::CreateAccountResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateAccount1Response::AccountCreatedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateAccount1Response::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateAccount1Response::Unauthorized
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateAccount1Response::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateAccount1Response::NotFound
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateAccount1Response::Conflict
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateAccount1Response::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateAccount1Response::InternalServerError
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateAccount1Response::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn create_workspace1(
+        &self,
+        param_create_workspace_request1: models::CreateWorkspaceRequest1,
+        context: &C) -> Result<CreateWorkspace1Response, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/workspace-service/v1/workspaces",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let body = serde_json::to_string(&param_create_workspace_request1).expect("impossible to fail to serialize");
+                *request.body_mut() = Body::from(body);
+
+        let header = "application/json";
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", header, e)))
+        });
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::CreateWorkspaceResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspace1Response::ASuccessfulResponse
+                    (body)
+                )
+            }
+            201 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::CreateWorkspaceResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspace1Response::WorkspaceCreatedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspace1Response::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspace1Response::Unauthorized
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspace1Response::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspace1Response::NotFound
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspace1Response::Conflict
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspace1Response::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspace1Response::InternalServerError
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(CreateWorkspace1Response::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn delete_account1(
+        &self,
+        param_id: String,
+        context: &C) -> Result<DeleteAccount1Response, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/workspace-service/v1/accounts/{id}",
+            self.base_path
+            ,id=utf8_percent_encode(&param_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("DELETE")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::DeleteAccountResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteAccount1Response::AccountDeletedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteAccount1Response::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteAccount1Response::Unauthorized
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteAccount1Response::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteAccount1Response::NotFound
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteAccount1Response::Conflict
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteAccount1Response::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteAccount1Response::InternalServerError
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteAccount1Response::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn delete_workspace1(
+        &self,
+        param_id: String,
+        context: &C) -> Result<DeleteWorkspace1Response, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/workspace-service/v1/workspaces/{id}",
+            self.base_path
+            ,id=utf8_percent_encode(&param_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("DELETE")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::DeleteWorkspaceResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspace1Response::WorkspaceDeletedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspace1Response::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspace1Response::Unauthorized
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspace1Response::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspace1Response::NotFound
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspace1Response::Conflict
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspace1Response::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspace1Response::InternalServerError
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(DeleteWorkspace1Response::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_account1(
+        &self,
+        param_id: String,
+        context: &C) -> Result<GetAccount1Response, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/workspace-service/v1/accounts/{id}",
+            self.base_path
+            ,id=utf8_percent_encode(&param_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GetAccountResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccount1Response::AccountDetailsRetrievedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccount1Response::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccount1Response::Unauthorized
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccount1Response::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccount1Response::NotFound
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccount1Response::Conflict
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccount1Response::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccount1Response::InternalServerError
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetAccount1Response::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_workspace1(
+        &self,
+        param_id: String,
+        context: &C) -> Result<GetWorkspace1Response, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/workspace-service/v1/workspaces/{id}",
+            self.base_path
+            ,id=utf8_percent_encode(&param_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GetWorkspaceResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspace1Response::WorkspaceRetrievedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspace1Response::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspace1Response::Unauthorized
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspace1Response::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspace1Response::NotFound
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspace1Response::Conflict
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspace1Response::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspace1Response::InternalServerError
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspace1Response::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_workspace_analytics1(
+        &self,
+        param_workspace_id: String,
+        param_start_time: Option<chrono::DateTime::<chrono::Utc>>,
+        param_end_time: Option<chrono::DateTime::<chrono::Utc>>,
+        context: &C) -> Result<GetWorkspaceAnalytics1Response, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/workspace-service/v1/workspaces/analytics/{workspace_id}",
+            self.base_path
+            ,workspace_id=utf8_percent_encode(&param_workspace_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_start_time) = param_start_time {
+                query_string.append_pair("startTime",
+                    &param_start_time.to_string());
+            }
+            if let Some(param_end_time) = param_end_time {
+                query_string.append_pair("endTime",
+                    &param_end_time.to_string());
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GetWorkspaceAnalyticsResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalytics1Response::AnalyticsDataRetrievedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalytics1Response::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalytics1Response::Unauthorized
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalytics1Response::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalytics1Response::NotFound
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalytics1Response::Conflict
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalytics1Response::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalytics1Response::InternalServerError
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceAnalytics1Response::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_workspace_compliance_report(
+        &self,
+        param_workspace_id: String,
+        param_compliance_type: Option<String>,
+        context: &C) -> Result<GetWorkspaceComplianceReportResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/workspace-service/v1/workspaces/compliance-report/{workspace_id}",
+            self.base_path
+            ,workspace_id=utf8_percent_encode(&param_workspace_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_compliance_type) = param_compliance_type {
+                query_string.append_pair("complianceType",
+                    &param_compliance_type);
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GetWorkspaceComplianceReportResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceComplianceReportResponse::ComplianceReportRetrievedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceComplianceReportResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceComplianceReportResponse::Unauthorized
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceComplianceReportResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceComplianceReportResponse::NotFound
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceComplianceReportResponse::Conflict
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceComplianceReportResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceComplianceReportResponse::InternalServerError
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceComplianceReportResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn get_workspace_storage_stats(
+        &self,
+        param_workspace_id: String,
+        context: &C) -> Result<GetWorkspaceStorageStatsResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/workspace-service/v1/workspaces/storage-stats/{workspace_id}",
+            self.base_path
+            ,workspace_id=utf8_percent_encode(&param_workspace_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::GetWorkspaceStorageStatsResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceStorageStatsResponse::StorageStatisticsRetrievedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceStorageStatsResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceStorageStatsResponse::Unauthorized
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceStorageStatsResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceStorageStatsResponse::NotFound
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceStorageStatsResponse::Conflict
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceStorageStatsResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceStorageStatsResponse::InternalServerError
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(GetWorkspaceStorageStatsResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn list_workspace_sharings(
+        &self,
+        param_workspace_id: String,
+        param_page_size: Option<i32>,
+        param_page_token: Option<String>,
+        context: &C) -> Result<ListWorkspaceSharingsResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/workspace-service/v1/workspaces/sharings/{workspace_id}",
+            self.base_path
+            ,workspace_id=utf8_percent_encode(&param_workspace_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_page_size) = param_page_size {
+                query_string.append_pair("pageSize",
+                    &param_page_size.to_string());
+            }
+            if let Some(param_page_token) = param_page_token {
+                query_string.append_pair("pageToken",
+                    &param_page_token);
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ListWorkspaceSharingsResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaceSharingsResponse::WorkspaceSharingsRetrievedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaceSharingsResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaceSharingsResponse::Unauthorized
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaceSharingsResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaceSharingsResponse::NotFound
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaceSharingsResponse::Conflict
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaceSharingsResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaceSharingsResponse::InternalServerError
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaceSharingsResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn list_workspaces1(
+        &self,
+        param_account_id: Option<String>,
+        param_page_size: Option<i32>,
+        param_page_token: Option<String>,
+        param_filter: Option<String>,
+        context: &C) -> Result<ListWorkspaces1Response, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/workspace-service/v1/workspaces/list",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_account_id) = param_account_id {
+                query_string.append_pair("accountId",
+                    &param_account_id);
+            }
+            if let Some(param_page_size) = param_page_size {
+                query_string.append_pair("pageSize",
+                    &param_page_size.to_string());
+            }
+            if let Some(param_page_token) = param_page_token {
+                query_string.append_pair("pageToken",
+                    &param_page_token);
+            }
+            if let Some(param_filter) = param_filter {
+                query_string.append_pair("filter",
+                    &param_filter);
+            }
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("GET")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ListWorkspacesResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaces1Response::WorkspacesRetrievedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaces1Response::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaces1Response::Unauthorized
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaces1Response::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaces1Response::NotFound
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaces1Response::Conflict
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaces1Response::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaces1Response::InternalServerError
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ListWorkspaces1Response::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn remove_workspace_sharing(
+        &self,
+        param_sharing_id: String,
+        context: &C) -> Result<RemoveWorkspaceSharingResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/workspace-service/v1/workspace-sharings/{sharing_id}",
+            self.base_path
+            ,sharing_id=utf8_percent_encode(&param_sharing_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("DELETE")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RemoveWorkspaceSharingResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(RemoveWorkspaceSharingResponse::WorkspaceSharingRemovedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(RemoveWorkspaceSharingResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(RemoveWorkspaceSharingResponse::Unauthorized
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(RemoveWorkspaceSharingResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(RemoveWorkspaceSharingResponse::NotFound
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(RemoveWorkspaceSharingResponse::Conflict
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(RemoveWorkspaceSharingResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(RemoveWorkspaceSharingResponse::InternalServerError
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(RemoveWorkspaceSharingResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn share_workspace(
+        &self,
+        param_workspace_id: String,
+        param_share_workspace_body: models::ShareWorkspaceBody,
+        context: &C) -> Result<ShareWorkspaceResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/workspace-service/v1/workspaces/{workspace_id}/share",
+            self.base_path
+            ,workspace_id=utf8_percent_encode(&param_workspace_id.to_string(), ID_ENCODE_SET)
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("POST")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let body = serde_json::to_string(&param_share_workspace_body).expect("impossible to fail to serialize");
+                *request.body_mut() = Body::from(body);
+
+        let header = "application/json";
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", header, e)))
+        });
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ShareWorkspaceResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ShareWorkspaceResponse::WorkspaceSharedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ShareWorkspaceResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ShareWorkspaceResponse::Unauthorized
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ShareWorkspaceResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ShareWorkspaceResponse::NotFound
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ShareWorkspaceResponse::Conflict
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ShareWorkspaceResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ShareWorkspaceResponse::InternalServerError
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(ShareWorkspaceResponse::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn update_account1(
+        &self,
+        param_update_account_request: models::UpdateAccountRequest,
+        context: &C) -> Result<UpdateAccount1Response, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/workspace-service/v1/accounts",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("PUT")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let body = serde_json::to_string(&param_update_account_request).expect("impossible to fail to serialize");
+                *request.body_mut() = Body::from(body);
+
+        let header = "application/json";
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", header, e)))
+        });
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UpdateAccountResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccount1Response::AccountUpdatedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccount1Response::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccount1Response::Unauthorized
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccount1Response::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccount1Response::NotFound
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccount1Response::Conflict
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccount1Response::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccount1Response::InternalServerError
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateAccount1Response::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn update_workspace1(
+        &self,
+        param_update_workspace_request: models::UpdateWorkspaceRequest,
+        context: &C) -> Result<UpdateWorkspace1Response, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/workspace-service/v1/workspaces",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("PUT")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let body = serde_json::to_string(&param_update_workspace_request).expect("impossible to fail to serialize");
+                *request.body_mut() = Body::from(body);
+
+        let header = "application/json";
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", header, e)))
+        });
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UpdateWorkspaceResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspace1Response::WorkspaceUpdatedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspace1Response::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspace1Response::Unauthorized
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspace1Response::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspace1Response::NotFound
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspace1Response::Conflict
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspace1Response::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspace1Response::InternalServerError
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspace1Response::AnUnexpectedErrorResponse
+                    (body)
+                )
+            }
+            code => {
+                let headers = response.headers().clone();
+                let body = response.into_body()
+                       .take(100)
+                       .into_raw().await;
+                Err(ApiError(format!("Unexpected response code {}:\n{:?}\n\n{}",
+                    code,
+                    headers,
+                    match body {
+                        Ok(body) => match String::from_utf8(body) {
+                            Ok(body) => body,
+                            Err(e) => format!("<Body was not UTF8: {:?}>", e),
+                        },
+                        Err(e) => format!("<Failed to read body: {}>", e),
+                    }
+                )))
+            }
+        }
+    }
+
+    async fn update_workspace_sharing(
+        &self,
+        param_update_workspace_sharing_request: models::UpdateWorkspaceSharingRequest,
+        context: &C) -> Result<UpdateWorkspaceSharingResponse, ApiError>
+    {
+        let mut client_service = self.client_service.clone();
+        let mut uri = format!(
+            "{}/workspace-service/v1/workspace-sharings",
+            self.base_path
+        );
+
+        // Query parameters
+        let query_string = {
+            let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            query_string.finish()
+        };
+        if !query_string.is_empty() {
+            uri += "?";
+            uri += &query_string;
+        }
+
+        let uri = match Uri::from_str(&uri) {
+            Ok(uri) => uri,
+            Err(err) => return Err(ApiError(format!("Unable to build URI: {}", err))),
+        };
+
+        let mut request = match Request::builder()
+            .method("PUT")
+            .uri(uri)
+            .body(Body::empty()) {
+                Ok(req) => req,
+                Err(e) => return Err(ApiError(format!("Unable to create request: {}", e)))
+        };
+
+        let body = serde_json::to_string(&param_update_workspace_sharing_request).expect("impossible to fail to serialize");
+
+                *request.body_mut() = Body::from(body);
+
+        let header = "application/json";
+        request.headers_mut().insert(CONTENT_TYPE, match HeaderValue::from_str(header) {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create header: {} - {}", header, e)))
+        });
+
+        let header = HeaderValue::from_str(Has::<XSpanIdString>::get(context).0.as_str());
+        request.headers_mut().insert(HeaderName::from_static("x-span-id"), match header {
+            Ok(h) => h,
+            Err(e) => return Err(ApiError(format!("Unable to create X-Span ID header value: {}", e)))
+        });
+
+        let response = client_service.call((request, context.clone()))
+            .map_err(|e| ApiError(format!("No response received: {}", e))).await?;
+
+        match response.status().as_u16() {
+            200 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::UpdateWorkspaceSharingResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceSharingResponse::WorkspaceSharingUpdatedSuccessfully
+                    (body)
+                )
+            }
+            400 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ValidationErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceSharingResponse::BadRequest
+                    (body)
+                )
+            }
+            401 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::AuthenticationErrorMessageResponse1>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceSharingResponse::Unauthorized
+                    (body)
+                )
+            }
+            403 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ForbiddenErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceSharingResponse::Forbidden
+                    (body)
+                )
+            }
+            404 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::NotFoundErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceSharingResponse::NotFound
+                    (body)
+                )
+            }
+            409 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::ConflictErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceSharingResponse::Conflict
+                    (body)
+                )
+            }
+            429 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::RateLimitErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceSharingResponse::TooManyRequests
+                    (body)
+                )
+            }
+            500 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::InternalErrorMessageResponse>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceSharingResponse::InternalServerError
+                    (body)
+                )
+            }
+            0 => {
+                let body = response.into_body();
+                let body = body
+                        .into_raw()
+                        .map_err(|e| ApiError(format!("Failed to read response: {}", e))).await?;
+                let body = str::from_utf8(&body)
+                    .map_err(|e| ApiError(format!("Response was not valid UTF8: {}", e)))?;
+                let body = serde_json::from_str::<models::Status>(body).map_err(|e| {
+                    ApiError(format!("Response body did not match the schema: {}", e))
+                })?;
+                Ok(UpdateWorkspaceSharingResponse::AnUnexpectedErrorResponse
                     (body)
                 )
             }

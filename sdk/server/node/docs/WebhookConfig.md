@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **successfulCalls** | **Int!** |  | [optional] [default to null]
 **failedCalls** | **Int!** |  | [optional] [default to null]
 **metadata** | [***TodoObjectMapping**](.md) |  | [optional] [default to null]
+**webhookName** | **String!** |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

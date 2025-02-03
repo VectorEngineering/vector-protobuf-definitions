@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **status** | [**BackgroundJobStatus**](BackgroundJobStatus.md) |  | [optional] [default to BackgroundJobStatus.UNSPECIFIED]
 **name** | **str** |  | [optional] 
 **keywords** | **List[str]** |  | [optional] 
-**lang** | **str** |  | [optional] 
+**lang** | [**Language**](Language.md) |  | [optional] [default to Language.UNSPECIFIED]
 **zoom** | **int** |  | [optional] 
 **lat** | **str** |  | [optional] 
 **lon** | **str** |  | [optional] 

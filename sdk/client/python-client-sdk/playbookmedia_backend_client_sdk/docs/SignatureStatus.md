@@ -1,0 +1,20 @@
+# SignatureStatus
+
+
+## Enum
+
+* `SIGNATURE_STATUS_UNSPECIFIED` (value: `'SIGNATURE_STATUS_UNSPECIFIED'`)
+
+* `SIGNATURE_STATUS_PENDING` (value: `'SIGNATURE_STATUS_PENDING'`)
+
+* `SIGNATURE_STATUS_SIGNED` (value: `'SIGNATURE_STATUS_SIGNED'`)
+
+* `SIGNATURE_STATUS_REJECTED` (value: `'SIGNATURE_STATUS_REJECTED'`)
+
+* `SIGNATURE_STATUS_EXPIRED` (value: `'SIGNATURE_STATUS_EXPIRED'`)
+
+* `SIGNATURE_STATUS_REVOKED` (value: `'SIGNATURE_STATUS_REVOKED'`)
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

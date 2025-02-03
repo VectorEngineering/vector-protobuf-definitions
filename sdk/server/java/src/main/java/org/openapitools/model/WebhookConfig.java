@@ -29,7 +29,7 @@ import javax.annotation.Generated;
  * WebhookConfig
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T06:30:06.935816-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T10:37:17.791439-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class WebhookConfig {
 
   private String id;
@@ -79,6 +79,8 @@ public class WebhookConfig {
   private Integer failedCalls;
 
   private Object metadata;
+
+  private String webhookName;
 
   public WebhookConfig id(String id) {
     this.id = id;
@@ -524,6 +526,26 @@ public class WebhookConfig {
     this.metadata = metadata;
   }
 
+  public WebhookConfig webhookName(String webhookName) {
+    this.webhookName = webhookName;
+    return this;
+  }
+
+  /**
+   * Get webhookName
+   * @return webhookName
+   */
+  
+  @Schema(name = "webhookName", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("webhookName")
+  public String getWebhookName() {
+    return webhookName;
+  }
+
+  public void setWebhookName(String webhookName) {
+    this.webhookName = webhookName;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -553,12 +575,13 @@ public class WebhookConfig {
         Objects.equals(this.lastTriggeredAt, webhookConfig.lastTriggeredAt) &&
         Objects.equals(this.successfulCalls, webhookConfig.successfulCalls) &&
         Objects.equals(this.failedCalls, webhookConfig.failedCalls) &&
-        Objects.equals(this.metadata, webhookConfig.metadata);
+        Objects.equals(this.metadata, webhookConfig.metadata) &&
+        Objects.equals(this.webhookName, webhookConfig.webhookName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, url, authType, authToken, customHeaders, maxRetries, retryInterval, triggerEvents, includedFields, includeFullResults, payloadFormat, verifySsl, signingSecret, rateLimit, rateLimitInterval, createdAt, updatedAt, lastTriggeredAt, successfulCalls, failedCalls, metadata);
+    return Objects.hash(id, url, authType, authToken, customHeaders, maxRetries, retryInterval, triggerEvents, includedFields, includeFullResults, payloadFormat, verifySsl, signingSecret, rateLimit, rateLimitInterval, createdAt, updatedAt, lastTriggeredAt, successfulCalls, failedCalls, metadata, webhookName);
   }
 
   @Override
@@ -586,6 +609,7 @@ public class WebhookConfig {
     sb.append("    successfulCalls: ").append(toIndentedString(successfulCalls)).append("\n");
     sb.append("    failedCalls: ").append(toIndentedString(failedCalls)).append("\n");
     sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
+    sb.append("    webhookName: ").append(toIndentedString(webhookName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -11,6 +11,7 @@ import java.util.List;
 import org.openapitools.model.APIKey;
 import org.openapitools.model.ScrapingJob;
 import org.openapitools.model.ScrapingWorkflow;
+import org.openapitools.model.WebhookConfig;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -26,7 +27,7 @@ import javax.annotation.Generated;
  * Workspace
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T06:30:06.935816-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T10:37:17.791439-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class Workspace {
 
   private String id;
@@ -77,6 +78,9 @@ public class Workspace {
 
   @Valid
   private List<@Valid APIKey> apiKeys = new ArrayList<>();
+
+  @Valid
+  private List<@Valid WebhookConfig> webhooks = new ArrayList<>();
 
   public Workspace id(String id) {
     this.id = id;
@@ -522,6 +526,34 @@ public class Workspace {
     this.apiKeys = apiKeys;
   }
 
+  public Workspace webhooks(List<@Valid WebhookConfig> webhooks) {
+    this.webhooks = webhooks;
+    return this;
+  }
+
+  public Workspace addWebhooksItem(WebhookConfig webhooksItem) {
+    if (this.webhooks == null) {
+      this.webhooks = new ArrayList<>();
+    }
+    this.webhooks.add(webhooksItem);
+    return this;
+  }
+
+  /**
+   * Get webhooks
+   * @return webhooks
+   */
+  @Valid 
+  @Schema(name = "webhooks", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("webhooks")
+  public List<@Valid WebhookConfig> getWebhooks() {
+    return webhooks;
+  }
+
+  public void setWebhooks(List<@Valid WebhookConfig> webhooks) {
+    this.webhooks = webhooks;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -551,12 +583,13 @@ public class Workspace {
         Objects.equals(this.totalLeadsCollected, workspace.totalLeadsCollected) &&
         Objects.equals(this.lastJobRun, workspace.lastJobRun) &&
         Objects.equals(this.scrapingJobs, workspace.scrapingJobs) &&
-        Objects.equals(this.apiKeys, workspace.apiKeys);
+        Objects.equals(this.apiKeys, workspace.apiKeys) &&
+        Objects.equals(this.webhooks, workspace.webhooks);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, industry, domain, gdprCompliant, hipaaCompliant, soc2Compliant, storageQuota, usedStorage, createdAt, updatedAt, deletedAt, workflows, jobsRunThisMonth, workspaceJobLimit, dailyJobQuota, activeScrapers, totalLeadsCollected, lastJobRun, scrapingJobs, apiKeys);
+    return Objects.hash(id, name, industry, domain, gdprCompliant, hipaaCompliant, soc2Compliant, storageQuota, usedStorage, createdAt, updatedAt, deletedAt, workflows, jobsRunThisMonth, workspaceJobLimit, dailyJobQuota, activeScrapers, totalLeadsCollected, lastJobRun, scrapingJobs, apiKeys, webhooks);
   }
 
   @Override
@@ -584,6 +617,7 @@ public class Workspace {
     sb.append("    lastJobRun: ").append(toIndentedString(lastJobRun)).append("\n");
     sb.append("    scrapingJobs: ").append(toIndentedString(scrapingJobs)).append("\n");
     sb.append("    apiKeys: ").append(toIndentedString(apiKeys)).append("\n");
+    sb.append("    webhooks: ").append(toIndentedString(webhooks)).append("\n");
     sb.append("}");
     return sb.toString();
   }

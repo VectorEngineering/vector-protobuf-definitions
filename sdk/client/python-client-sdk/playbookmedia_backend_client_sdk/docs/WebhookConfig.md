@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **successful_calls** | **int** |  | [optional] 
 **failed_calls** | **int** |  | [optional] 
 **metadata** | **object** |  | [optional] 
+**webhook_name** | **str** |  | [optional] 
 
 ## Example
 

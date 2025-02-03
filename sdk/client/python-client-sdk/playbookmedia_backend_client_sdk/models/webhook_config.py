@@ -52,7 +52,8 @@ class WebhookConfig(BaseModel):
     successful_calls: Optional[StrictInt] = Field(default=None, alias="successfulCalls")
     failed_calls: Optional[StrictInt] = Field(default=None, alias="failedCalls")
     metadata: Optional[Dict[str, Any]] = None
-    __properties: ClassVar[List[str]] = ["id", "url", "authType", "authToken", "customHeaders", "maxRetries", "retryInterval", "triggerEvents", "includedFields", "includeFullResults", "payloadFormat", "verifySsl", "signingSecret", "rateLimit", "rateLimitInterval", "createdAt", "updatedAt", "lastTriggeredAt", "successfulCalls", "failedCalls", "metadata"]
+    webhook_name: Optional[StrictStr] = Field(default=None, alias="webhookName")
+    __properties: ClassVar[List[str]] = ["id", "url", "authType", "authToken", "customHeaders", "maxRetries", "retryInterval", "triggerEvents", "includedFields", "includeFullResults", "payloadFormat", "verifySsl", "signingSecret", "rateLimit", "rateLimitInterval", "createdAt", "updatedAt", "lastTriggeredAt", "successfulCalls", "failedCalls", "metadata", "webhookName"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -125,7 +126,8 @@ class WebhookConfig(BaseModel):
             "lastTriggeredAt": obj.get("lastTriggeredAt"),
             "successfulCalls": obj.get("successfulCalls"),
             "failedCalls": obj.get("failedCalls"),
-            "metadata": obj.get("metadata")
+            "metadata": obj.get("metadata"),
+            "webhookName": obj.get("webhookName")
         })
         return _obj
 

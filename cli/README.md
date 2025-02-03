@@ -228,6 +228,3 @@ pnpm run build
 ```bash
 node dist/index.js
 ```
-
-### 2. Direct Execution
-// ... existing code ...

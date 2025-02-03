@@ -18,10 +18,12 @@ Handlebars.registerHelper('capitalize', (str: string) => {
 });
 Handlebars.registerHelper('basename', (path: string) => {
     if (!path) return '';
-    // Remove leading slash and split by slashes
-    const parts = path.replace(/^\//, '').split('/');
-    // Get the last meaningful part
-    return parts[parts.length - 1];
+    // Remove leading slash and special characters, then convert to PascalCase
+    const clean = path.replace(/^\//, '').replace(/[^a-zA-Z0-9]/g, ' ').trim();
+    return clean
+        .split(/\s+/)
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join('');
 });
 Handlebars.registerHelper('eq', (a: any, b: any) => a === b);
 Handlebars.registerHelper('add', (a: number, b: number) => a + b);
@@ -33,11 +35,18 @@ Handlebars.registerHelper('lookup', (ref: string, prefix: string) => {
     }
     return ref;
 });
+Handlebars.registerHelper('routeFilename', (path: string) => {
+    if (!path) return '';
+    // Remove leading slash and convert path segments to filename
+    const clean = path.replace(/^\//, '').replace(/\//g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+    return clean || 'index';
+});
 
 interface GenerateOptions {
     input: string;
     output: string;
     template?: string;
+    framework?: 'worker' | 'hono';
 }
 
 export async function generate(options: GenerateOptions) {
@@ -65,15 +74,76 @@ export async function generate(options: GenerateOptions) {
         const templateDir = options.template || join(process.cwd(), 'templates');
         const templateFiles = await glob('**/*.hbs', { cwd: templateDir });
 
+        // Create src directory for Hono framework
+        if (options.framework === 'hono') {
+            await mkdir(join(options.output, 'src'), { recursive: true });
+            await mkdir(join(options.output, 'src', 'routes'), { recursive: true });
+        }
+
         for (const templateFile of templateFiles) {
             const templatePath = join(templateDir, templateFile);
             const templateContent = await readFile(templatePath, 'utf-8');
             const template = Handlebars.compile(templateContent);
 
-            const outputPath = join(
+            // Special handling for route template
+            if (templateFile === 'route.hbs' && options.framework === 'hono') {
+                // Generate a route file for each path
+                for (const [path, pathItem] of Object.entries(openApiSpec.paths || {})) {
+                    const routeData = {
+                        path,
+                        pathItem,
+                        openApiSpec,
+                        zodSchemas: zodClientResult,
+                    };
+
+                    const routeFileName = Handlebars.helpers.routeFilename(path);
+                    const outputPath = join(options.output, 'src', 'routes', `${routeFileName}.ts`);
+
+                    // Create route file
+                    const rendered = template(routeData);
+                    await writeFile(outputPath, rendered);
+                }
+
+                // Generate routes/index.ts to export all routes
+                const routeIndexPath = join(options.output, 'src', 'routes', 'index.ts');
+                const routeIndexContent = `import { Hono } from 'hono';
+import type { Env } from '../types';
+
+const router = new Hono<{ Bindings: Env }>();
+
+${Object.keys(openApiSpec.paths || {}).map(path => {
+                    const routeName = Handlebars.helpers.routeFilename(path);
+                    return `import { ${routeName}Router } from './${routeName}';
+router.route('${path}', ${routeName}Router);`;
+                }).join('\n\n')}
+
+export const ${Handlebars.helpers.basename(openApiSpec.info.title)}Router = router;
+`;
+                await writeFile(routeIndexPath, routeIndexContent);
+                continue;
+            }
+
+            let outputPath = join(
                 options.output,
                 templateFile.replace('.hbs', '.ts')
             );
+
+            // Handle Hono framework specific paths
+            if (options.framework === 'hono') {
+                switch (templateFile) {
+                    case 'index.hbs':
+                        outputPath = join(options.output, 'src', 'index.ts');
+                        break;
+                    case 'types.hbs':
+                        outputPath = join(options.output, 'src', 'types.ts');
+                        break;
+                    case 'client.hbs':
+                        outputPath = join(options.output, 'src', 'client.ts');
+                        break;
+                    default:
+                        outputPath = join(options.output, templateFile.replace('.hbs', '.ts'));
+                }
+            }
 
             // Create output directory if it doesn't exist
             await mkdir(dirname(outputPath), { recursive: true });

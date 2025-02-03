@@ -1,0 +1,87 @@
+import { Hono } from "hono";
+import { ApiClient } from './client';
+import type { Env } from './types';
+
+const router = new Hono<{
+  Bindings: Env;
+}>();
+
+{{#each openApiSpec.paths as |pathItem path|}}
+{{#if pathItem.get}}
+router.get("{{path}}", async (c) => {
+  const client = new ApiClient(c.env.API_BASE_URL);
+  {{#if pathItem.get.parameters}}
+  const params = {
+    {{#each pathItem.get.parameters}}
+    {{#if (eq this.in "query")}}
+    {{this.name}}: c.req.query("{{this.name}}"){{#if this.required}} || ''{{/if}},
+    {{/if}}
+    {{#if (eq this.in "path")}}
+    {{this.name}}: c.req.param("{{this.name}}"),
+    {{/if}}
+    {{/each}}
+  };
+  const response = await client.get{{capitalize (basename path)}}(params);
+  {{else}}
+  const response = await client.get{{capitalize (basename path)}}();
+  {{/if}}
+  return c.json(response);
+});
+{{/if}}
+
+{{#if pathItem.post}}
+router.post("{{path}}", async (c) => {
+  const client = new ApiClient(c.env.API_BASE_URL);
+  const data = await c.req.json();
+  const response = await client.create{{capitalize (basename path)}}(data);
+  return c.json(response, 201);
+});
+{{/if}}
+
+{{#if pathItem.put}}
+router.put("{{path}}", async (c) => {
+  const client = new ApiClient(c.env.API_BASE_URL);
+  const data = await c.req.json();
+  {{#if pathItem.put.parameters}}
+  const params = {
+    {{#each pathItem.put.parameters}}
+    {{#if (eq this.in "query")}}
+    {{this.name}}: c.req.query("{{this.name}}"){{#if this.required}} || ''{{/if}},
+    {{/if}}
+    {{#if (eq this.in "path")}}
+    {{this.name}}: c.req.param("{{this.name}}"),
+    {{/if}}
+    {{/each}}
+  };
+  const response = await client.update{{capitalize (basename path)}}(params, data);
+  {{else}}
+  const response = await client.update{{capitalize (basename path)}}(data);
+  {{/if}}
+  return c.json(response);
+});
+{{/if}}
+
+{{#if pathItem.delete}}
+router.delete("{{path}}", async (c) => {
+  const client = new ApiClient(c.env.API_BASE_URL);
+  {{#if pathItem.delete.parameters}}
+  const params = {
+    {{#each pathItem.delete.parameters}}
+    {{#if (eq this.in "query")}}
+    {{this.name}}: c.req.query("{{this.name}}"){{#if this.required}} || ''{{/if}},
+    {{/if}}
+    {{#if (eq this.in "path")}}
+    {{this.name}}: c.req.param("{{this.name}}"),
+    {{/if}}
+    {{/each}}
+  };
+  const response = await client.delete{{capitalize (basename path)}}(params);
+  {{else}}
+  const response = await client.delete{{capitalize (basename path)}}();
+  {{/if}}
+  return c.json(response);
+});
+{{/if}}
+{{/each}}
+
+export const {{capitalize (basename openApiSpec.info.title)}}Router = router; 

@@ -5817,12 +5817,11 @@ components:
         roles:
           type: array
           items:
-            type: string
-          title: Role-based access control
+            $ref: "#/components/schemas/Role"
         permissions:
           type: array
           items:
-            type: string
+            $ref: "#/components/schemas/Permission"
         mfaEnabled:
           type: boolean
           title: Security settings
@@ -5830,7 +5829,7 @@ components:
           type: string
           format: date-time
         timezone:
-          type: string
+          $ref: "#/components/schemas/Timezone"
         totalJobsRun:
           type: integer
           format: int32
@@ -6765,6 +6764,43 @@ components:
         totalRuns:
           type: integer
           format: int32
+    Language:
+      type: string
+      enum:
+        - LANGUAGE_UNSPECIFIED
+        - LANGUAGE_ENGLISH
+        - LANGUAGE_SPANISH
+        - LANGUAGE_FRENCH
+        - LANGUAGE_GERMAN
+        - LANGUAGE_ITALIAN
+        - LANGUAGE_PORTUGUESE
+        - LANGUAGE_DUTCH
+        - LANGUAGE_RUSSIAN
+        - LANGUAGE_CHINESE
+        - LANGUAGE_JAPANESE
+        - LANGUAGE_KOREAN
+        - LANGUAGE_ARABIC
+        - LANGUAGE_HINDI
+        - LANGUAGE_GREEK
+        - LANGUAGE_TURKISH
+      default: LANGUAGE_UNSPECIFIED
+      description: |-
+        - LANGUAGE_ENGLISH: en
+         - LANGUAGE_SPANISH: es
+         - LANGUAGE_FRENCH: fr
+         - LANGUAGE_GERMAN: de
+         - LANGUAGE_ITALIAN: it
+         - LANGUAGE_PORTUGUESE: pt
+         - LANGUAGE_DUTCH: nl
+         - LANGUAGE_RUSSIAN: ru
+         - LANGUAGE_CHINESE: zh
+         - LANGUAGE_JAPANESE: ja
+         - LANGUAGE_KOREAN: ko
+         - LANGUAGE_ARABIC: ar
+         - LANGUAGE_HINDI: hi
+         - LANGUAGE_GREEK: el
+         - LANGUAGE_TURKISH: tr
+      title: ISO 639-1 language code (e.g., "en", "el")
     Lead:
       type: object
       properties:
@@ -7293,6 +7329,18 @@ components:
           $ref: "#/components/schemas/ErrorResponse"
       description: Indicates that payment is required to proceed
       title: Payment Required Error Response
+    Permission:
+      type: string
+      enum:
+        - PERMISSION_UNSPECIFIED
+        - PERMISSION_READ
+        - PERMISSION_WRITE
+        - PERMISSION_DELETE
+        - PERMISSION_MANAGE_USERS
+        - PERMISSION_MANAGE_BILLING
+        - PERMISSION_VIEW_ANALYTICS
+        - PERMISSION_MANAGE_WORKFLOWS
+      default: PERMISSION_UNSPECIFIED
     PreconditionFailedErrorMessageResponse:
       type: object
       example:
@@ -7492,6 +7540,16 @@ components:
           type: string
           format: date-time
       title: Detailed reviews
+    Role:
+      type: string
+      enum:
+        - ROLE_UNSPECIFIED
+        - ROLE_ADMIN
+        - ROLE_USER
+        - ROLE_VIEWER
+        - ROLE_MANAGER
+      default: ROLE_UNSPECIFIED
+      title: Role-based access control
     SchemaValidation:
       type: object
       properties:
@@ -7538,8 +7596,7 @@ components:
             type: string
           title: Search terms for Google Maps
         lang:
-          type: string
-          title: ISO 639-1 language code (e.g., "en", "el")
+          $ref: "#/components/schemas/Language"
         zoom:
           type: integer
           format: int32
@@ -7639,6 +7696,8 @@ components:
         id:
           type: string
           format: uint64
+        name:
+          type: string
         cronExpression:
           type: string
           title: Scheduling options
@@ -7659,11 +7718,6 @@ components:
           type: integer
           format: int32
         alertEmails:
-          type: string
-        orgId:
-          type: string
-          title: Org context
-        tenantId:
           type: string
         createdAt:
           type: string
@@ -7718,11 +7772,6 @@ components:
           title: Data retention
         anonymizePii:
           type: boolean
-        webhooks:
-          type: array
-          items:
-            $ref: "#/components/schemas/WebhookConfig"
-          title: Replace embedded webhook config with relationship
         notificationSlackChannel:
           type: string
           title: Notification preferences can stay as they provide quick access to common
@@ -7845,6 +7894,21 @@ components:
           additionalProperties:
             type: string
           title: Additional hints
+    Timezone:
+      type: string
+      enum:
+        - TIMEZONE_UNSPECIFIED
+        - TIMEZONE_UTC
+        - TIMEZONE_EST
+        - TIMEZONE_CST
+        - TIMEZONE_MST
+        - TIMEZONE_PST
+        - TIMEZONE_GMT
+        - TIMEZONE_CET
+        - TIMEZONE_IST
+        - TIMEZONE_JST
+        - TIMEZONE_AEST
+      default: TIMEZONE_UNSPECIFIED
     TokenInfo:
       type: object
       properties:
@@ -8130,6 +8194,9 @@ components:
         metadata:
           type: object
           title: Flexible metadata storage using Google struct
+        webhookName:
+          type: string
+          title: Webhook name
       title: |-
         WebhookConfig represents a webhook integration configuration
         It defines how and when notifications should be sent to external systems
@@ -8246,6 +8313,11 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/APIKey"
+        webhooks:
+          type: array
+          items:
+            $ref: "#/components/schemas/WebhookConfig"
+          title: embedded webhook config with relationship
       title: Workspace represents a business entity with multiple accounts
     rpc.Status:
       type: object

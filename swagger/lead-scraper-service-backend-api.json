@@ -8670,14 +8670,13 @@
                     "roles": {
                         "type": "array",
                         "items": {
-                            "type": "string"
-                        },
-                        "title": "Role-based access control"
+                            "$ref": "#/components/schemas/Role"
+                        }
                     },
                     "permissions": {
                         "type": "array",
                         "items": {
-                            "type": "string"
+                            "$ref": "#/components/schemas/Permission"
                         }
                     },
                     "mfaEnabled": {
@@ -8689,7 +8688,7 @@
                         "format": "date-time"
                     },
                     "timezone": {
-                        "type": "string"
+                        "$ref": "#/components/schemas/Timezone"
                     },
                     "totalJobsRun": {
                         "type": "integer",
@@ -9621,6 +9620,30 @@
                     }
                 }
             },
+            "Language": {
+                "type": "string",
+                "enum": [
+                    "LANGUAGE_UNSPECIFIED",
+                    "LANGUAGE_ENGLISH",
+                    "LANGUAGE_SPANISH",
+                    "LANGUAGE_FRENCH",
+                    "LANGUAGE_GERMAN",
+                    "LANGUAGE_ITALIAN",
+                    "LANGUAGE_PORTUGUESE",
+                    "LANGUAGE_DUTCH",
+                    "LANGUAGE_RUSSIAN",
+                    "LANGUAGE_CHINESE",
+                    "LANGUAGE_JAPANESE",
+                    "LANGUAGE_KOREAN",
+                    "LANGUAGE_ARABIC",
+                    "LANGUAGE_HINDI",
+                    "LANGUAGE_GREEK",
+                    "LANGUAGE_TURKISH"
+                ],
+                "default": "LANGUAGE_UNSPECIFIED",
+                "description": "- LANGUAGE_ENGLISH: en\n - LANGUAGE_SPANISH: es\n - LANGUAGE_FRENCH: fr\n - LANGUAGE_GERMAN: de\n - LANGUAGE_ITALIAN: it\n - LANGUAGE_PORTUGUESE: pt\n - LANGUAGE_DUTCH: nl\n - LANGUAGE_RUSSIAN: ru\n - LANGUAGE_CHINESE: zh\n - LANGUAGE_JAPANESE: ja\n - LANGUAGE_KOREAN: ko\n - LANGUAGE_ARABIC: ar\n - LANGUAGE_HINDI: hi\n - LANGUAGE_GREEK: el\n - LANGUAGE_TURKISH: tr",
+                "title": "ISO 639-1 language code (e.g., \"en\", \"el\")"
+            },
             "Lead": {
                 "type": "object",
                 "properties": {
@@ -10326,6 +10349,20 @@
                 "description": "Indicates that payment is required to proceed",
                 "title": "Payment Required Error Response"
             },
+            "Permission": {
+                "type": "string",
+                "enum": [
+                    "PERMISSION_UNSPECIFIED",
+                    "PERMISSION_READ",
+                    "PERMISSION_WRITE",
+                    "PERMISSION_DELETE",
+                    "PERMISSION_MANAGE_USERS",
+                    "PERMISSION_MANAGE_BILLING",
+                    "PERMISSION_VIEW_ANALYTICS",
+                    "PERMISSION_MANAGE_WORKFLOWS"
+                ],
+                "default": "PERMISSION_UNSPECIFIED"
+            },
             "PreconditionFailedErrorMessageResponse": {
                 "type": "object",
                 "example": {
@@ -10599,6 +10636,18 @@
                 },
                 "title": "Detailed reviews"
             },
+            "Role": {
+                "type": "string",
+                "enum": [
+                    "ROLE_UNSPECIFIED",
+                    "ROLE_ADMIN",
+                    "ROLE_USER",
+                    "ROLE_VIEWER",
+                    "ROLE_MANAGER"
+                ],
+                "default": "ROLE_UNSPECIFIED",
+                "title": "Role-based access control"
+            },
             "SchemaValidation": {
                 "type": "object",
                 "properties": {
@@ -10661,8 +10710,7 @@
                         "title": "Search terms for Google Maps"
                     },
                     "lang": {
-                        "type": "string",
-                        "title": "ISO 639-1 language code (e.g., \"en\", \"el\")"
+                        "$ref": "#/components/schemas/Language"
                     },
                     "zoom": {
                         "type": "integer",
@@ -10734,6 +10782,9 @@
                         "type": "string",
                         "format": "uint64"
                     },
+                    "name": {
+                        "type": "string"
+                    },
                     "cronExpression": {
                         "type": "string",
                         "title": "Scheduling options"
@@ -10760,13 +10811,6 @@
                         "format": "int32"
                     },
                     "alertEmails": {
-                        "type": "string"
-                    },
-                    "orgId": {
-                        "type": "string",
-                        "title": "Org context"
-                    },
-                    "tenantId": {
                         "type": "string"
                     },
                     "createdAt": {
@@ -10840,13 +10884,6 @@
                     },
                     "anonymizePii": {
                         "type": "boolean"
-                    },
-                    "webhooks": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/WebhookConfig"
-                        },
-                        "title": "Replace embedded webhook config with relationship"
                     },
                     "notificationSlackChannel": {
                         "type": "string",
@@ -11020,6 +11057,23 @@
                         "title": "Additional hints"
                     }
                 }
+            },
+            "Timezone": {
+                "type": "string",
+                "enum": [
+                    "TIMEZONE_UNSPECIFIED",
+                    "TIMEZONE_UTC",
+                    "TIMEZONE_EST",
+                    "TIMEZONE_CST",
+                    "TIMEZONE_MST",
+                    "TIMEZONE_PST",
+                    "TIMEZONE_GMT",
+                    "TIMEZONE_CET",
+                    "TIMEZONE_IST",
+                    "TIMEZONE_JST",
+                    "TIMEZONE_AEST"
+                ],
+                "default": "TIMEZONE_UNSPECIFIED"
             },
             "TokenInfo": {
                 "type": "object",
@@ -11388,6 +11442,10 @@
                     "metadata": {
                         "type": "object",
                         "title": "Flexible metadata storage using Google struct"
+                    },
+                    "webhookName": {
+                        "type": "string",
+                        "title": "Webhook name"
                     }
                 },
                 "title": "WebhookConfig represents a webhook integration configuration\nIt defines how and when notifications should be sent to external systems"
@@ -11504,6 +11562,13 @@
                         "items": {
                             "$ref": "#/components/schemas/APIKey"
                         }
+                    },
+                    "webhooks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WebhookConfig"
+                        },
+                        "title": "embedded webhook config with relationship"
                     }
                 },
                 "title": "Workspace represents a business entity with multiple accounts"

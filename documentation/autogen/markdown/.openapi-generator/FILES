@@ -46,6 +46,7 @@ Models/IncludedField.md
 Models/InternalErrorCode.md
 Models/InternalErrorMessageResponse.md
 Models/JobSuccessRate.md
+Models/Language.md
 Models/Lead.md
 Models/LimitInfo.md
 Models/ListAccountsResponse.md
@@ -65,6 +66,7 @@ Models/PauseWorkflowResponse.md
 Models/PayloadFormat.md
 Models/PaymentInfo.md
 Models/PaymentRequiredErrorMessageResponse.md
+Models/Permission.md
 Models/PreconditionFailedErrorMessageResponse.md
 Models/QuotaInfo.md
 Models/RateLimitContext.md
@@ -74,6 +76,7 @@ Models/ResourceUtilization.md
 Models/ResourceValidation.md
 Models/RevenueRange.md
 Models/Review.md
+Models/Role.md
 Models/SchemaValidation.md
 Models/ScrapingJob.md
 Models/ScrapingWorkflow.md
@@ -81,6 +84,7 @@ Models/ServiceStatus.md
 Models/ServiceUnavailableErrorMessageResponse.md
 Models/SessionInfo.md
 Models/Suggestions.md
+Models/Timezone.md
 Models/TokenInfo.md
 Models/TooEarlyErrorMessageResponse.md
 Models/TriggerEvent.md

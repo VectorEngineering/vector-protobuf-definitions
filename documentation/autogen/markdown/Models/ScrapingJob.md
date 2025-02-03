@@ -11,7 +11,7 @@
 | **status** | [**BackgroundJobStatus**](BackgroundJobStatus.md) |  | [optional] [default to null] |
 | **name** | **String** |  | [optional] [default to null] |
 | **keywords** | **List** |  | [optional] [default to null] |
-| **lang** | **String** |  | [optional] [default to null] |
+| **lang** | [**Language**](Language.md) |  | [optional] [default to null] |
 | **zoom** | **Integer** |  | [optional] [default to null] |
 | **lat** | **String** |  | [optional] [default to null] |
 | **lon** | **String** |  | [optional] [default to null] |

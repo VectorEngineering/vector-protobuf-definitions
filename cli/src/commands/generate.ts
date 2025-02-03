@@ -82,11 +82,23 @@ export async function generate(options: GenerateOptions) {
         const templateDir = options.template || join(process.cwd(), 'templates');
         const templateFiles = await glob('**/*.hbs', { cwd: templateDir });
 
-        // Create src and routes directories
+        // Create src, routes, and middleware directories
         const srcDir = join(options.output, 'src');
         const routesDir = join(srcDir, 'routes');
+        const middlewareDir = join(srcDir, 'middleware');
         await mkdir(srcDir, { recursive: true });
         await mkdir(routesDir, { recursive: true });
+        await mkdir(middlewareDir, { recursive: true });
+
+        // Copy middleware templates
+        const rateLimitTemplate = await readFile(join(templateDir, 'middleware', 'rateLimit.hbs'), 'utf-8');
+        await writeFile(join(middlewareDir, 'rateLimit.ts'), rateLimitTemplate);
+
+        const authTemplate = await readFile(join(templateDir, 'middleware', 'auth.hbs'), 'utf-8');
+        await writeFile(join(middlewareDir, 'auth.ts'), authTemplate);
+
+        const middlewareIndexTemplate = await readFile(join(templateDir, 'middleware', 'index.hbs'), 'utf-8');
+        await writeFile(join(middlewareDir, 'index.ts'), middlewareIndexTemplate);
 
         for (const templateFile of templateFiles) {
             const templatePath = join(templateDir, templateFile);
@@ -126,21 +138,7 @@ export const ${Handlebars.helpers.basename(openApiSpec.info.title)}Router = rout
                 await writeFile(join(routesDir, 'index.ts'), indexContent);
             } else {
                 // Handle other templates
-                let outputPath = '';
-                switch (templateFile) {
-                    case 'index.hbs':
-                        outputPath = join(srcDir, 'index.ts');
-                        break;
-                    case 'types.hbs':
-                        outputPath = join(srcDir, 'types.ts');
-                        break;
-                    case 'client.hbs':
-                        outputPath = join(srcDir, 'client.ts');
-                        break;
-                    default:
-                        outputPath = join(options.output, templateFile.replace('.hbs', '.ts'));
-                }
-
+                let outputPath = join(srcDir, templateFile.replace('.hbs', '.ts'));
                 const rendered = template({
                     zodSchemas: zodClientResult,
                     openApiSpec,

@@ -9,7 +9,7 @@ info:
     name: Apache 2.0 License
     url: https://github.com/SolomonAIEngineering/backend-monorepo/blob/main/LICENSE
   title: Lead Scraping Service API
-  version: "1.0"
+  version: "1.0.1"
   x-api-version: v2
 externalDocs:
   description: Vector User Service Documentation

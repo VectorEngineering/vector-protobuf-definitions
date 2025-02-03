@@ -1,12 +1,14 @@
+import * as schema from "./db/schema";
+
+import type { Session, User } from "./db/schema";
+import { and, eq } from "drizzle-orm";
+import { decryptKey, generateKey } from "./utils/key";
+
+import { Hono } from "hono";
 import { betterAuth } from "better-auth";
-import type { User, Session } from "./db/schema";
+import { createMiddleware } from "hono/factory";
 import { drizzle } from "drizzle-orm/d1";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import * as schema from "./db/schema";
-import { createMiddleware } from "hono/factory";
-import { Hono } from "hono";
-import { generateKey, decryptKey } from "./utils/key";
-import { and, eq } from "drizzle-orm";
 
 const app = new Hono<{
 	Bindings: Env;

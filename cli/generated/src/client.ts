@@ -2660,66 +2660,66 @@ export class ApiClient {
   }
 
 
-  async createLeadScraperMicroserviceApiV1Accounts(data: z.infer<typeof CreateAccountRequest>,) {
-    return this.client.post("/lead-scraper-microservice/api/v1/accounts", data, {
+    async createLeadScraperMicroserviceApiV1Accounts(data: z.infer<typeof CreateAccountRequest>, ) {
+      return this.client.post("/lead-scraper-microservice/api/v1/accounts", data, { 
+        
+      });
+    }
 
-    });
-  }
+    async updateLeadScraperMicroserviceApiV1Accounts(data: z.infer<typeof schemas.UpdateAccountRequest>, ) {
+      return this.client.put("/lead-scraper-microservice/api/v1/accounts", data, { 
+        
+      });
+    }
 
-  async updateLeadScraperMicroserviceApiV1Accounts(data: z.infer<typeof schemas.UpdateAccountRequest>,) {
-    return this.client.put("/lead-scraper-microservice/api/v1/accounts", data, {
-
-    });
-  }
-
-  async getLeadScraperMicroserviceApiV1AccountsId(params: { id: string; }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/accounts/:id", {
-      params: { id: params.id, },
-    });
-  }
-
-
-
-  async deleteLeadScraperMicroserviceApiV1AccountsId(params: { id: string; }) {
-    return this.client.delete("/lead-scraper-microservice/api/v1/accounts/:id", undefined, {
-      params: { id: params.id, },
-    });
-  }
-  async getLeadScraperMicroserviceApiV1Jobs(params: { userId: string; orgId: string; tenantId: string; }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/jobs", {
-
-      queries: { userId: params.userId, orgId: params.orgId, tenantId: params.tenantId }
-    });
-  }
-
-  async createLeadScraperMicroserviceApiV1Jobs(data: z.infer<typeof CreateScrapingJobRequest>,) {
-    return this.client.post("/lead-scraper-microservice/api/v1/jobs", data, {
-
-    });
-  }
-
-
-  async getLeadScraperMicroserviceApiV1JobsJobId(params: { jobId: string; userId: string; orgId: string; tenantId: string; }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/jobs/:jobId", {
-      params: { jobId: params.jobId, },
-      queries: { userId: params.userId, orgId: params.orgId, tenantId: params.tenantId }
-    });
-  }
+    async getLeadScraperMicroserviceApiV1AccountsId(params: { id: string;  }) {
+      return this.client.get("/lead-scraper-microservice/api/v1/accounts/:id", { 
+        params: { id: params.id, },
+      });
+    }
 
 
 
-  async deleteLeadScraperMicroserviceApiV1JobsJobId(params: { jobId: string; userId: string; orgId: string; tenantId: string; }) {
-    return this.client.delete("/lead-scraper-microservice/api/v1/jobs/:jobId", undefined, {
-      params: { jobId: params.jobId, },
-      queries: { userId: params.userId, orgId: params.orgId, tenantId: params.tenantId }
-    });
-  }
-  async getLeadScraperMicroserviceApiV1JobsJobIdDownload(params: { jobId: string; userId: string; orgId: string; tenantId: string; }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/jobs/:jobId/download", {
-      params: { jobId: params.jobId, },
-      queries: { userId: params.userId, orgId: params.orgId, tenantId: params.tenantId }
-    });
-  }
+    async deleteLeadScraperMicroserviceApiV1AccountsId(params: { id: string;  }) {
+      return this.client.delete("/lead-scraper-microservice/api/v1/accounts/:id", undefined, { 
+        params: { id: params.id, },
+      });
+    }
+    async getLeadScraperMicroserviceApiV1Jobs(params: { userId: string; orgId: string; tenantId: string;  }) {
+      return this.client.get("/lead-scraper-microservice/api/v1/jobs", { 
+        
+        queries: { userId: params.userId, orgId: params.orgId, tenantId: params.tenantId }
+      });
+    }
+
+    async createLeadScraperMicroserviceApiV1Jobs(data: z.infer<typeof CreateScrapingJobRequest>, ) {
+      return this.client.post("/lead-scraper-microservice/api/v1/jobs", data, { 
+        
+      });
+    }
+
+
+    async getLeadScraperMicroserviceApiV1JobsJobId(params: { jobId: string; userId: string; orgId: string; tenantId: string;  }) {
+      return this.client.get("/lead-scraper-microservice/api/v1/jobs/:jobId", { 
+        params: { jobId: params.jobId, },
+        queries: { userId: params.userId, orgId: params.orgId, tenantId: params.tenantId }
+      });
+    }
+
+
+
+    async deleteLeadScraperMicroserviceApiV1JobsJobId(params: { jobId: string; userId: string; orgId: string; tenantId: string;  }) {
+      return this.client.delete("/lead-scraper-microservice/api/v1/jobs/:jobId", undefined, { 
+        params: { jobId: params.jobId, },
+        queries: { userId: params.userId, orgId: params.orgId, tenantId: params.tenantId }
+      });
+    }
+    async getLeadScraperMicroserviceApiV1JobsJobIdDownload(params: { jobId: string; userId: string; orgId: string; tenantId: string;  }) {
+      return this.client.get("/lead-scraper-microservice/api/v1/jobs/:jobId/download", { 
+        params: { jobId: params.jobId, },
+        queries: { userId: params.userId, orgId: params.orgId, tenantId: params.tenantId }
+      });
+    }
 
 
 

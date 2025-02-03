@@ -1,0 +1,61 @@
+// Generated TypeScript API Client
+import { type ZodiosInstance } from "@zodios/core";
+
+{{{zodSchemas}}}
+
+export class ApiClient {
+  private readonly client: ZodiosInstance<typeof endpoints>;
+
+  constructor(baseUrl: string, options?: ZodiosOptions) {
+    this.client = new Zodios(baseUrl, endpoints, options);
+  }
+
+  {{#each openApiSpec.paths}}
+    {{#with this}}
+    {{#if get}}
+  /**
+   * {{get.summary}}
+   * {{get.description}}
+   */
+  async get{{capitalize (basename @key)}}({{#if get.parameters}}params: { {{#each get.parameters}}{{name}}{{#unless required}}?{{/unless}}: string;{{/each}} }{{/if}}) {
+    return this.client.get('{{@key}}'{{#if get.parameters}}, { params }{{/if}});
+  }
+    {{/if}}
+
+    {{#if post}}
+  /**
+   * {{post.summary}}
+   * {{post.description}}
+   */
+  async create{{capitalize (basename @key)}}({{#if post.requestBody}}data: z.infer<typeof schemas.CreateUser>{{/if}}) {
+    return this.client.post('{{@key}}', data);
+  }
+    {{/if}}
+
+    {{#if put}}
+  /**
+   * {{put.summary}}
+   * {{put.description}}
+   */
+  async update{{capitalize (basename @key)}}({{#if put.parameters}}params: { {{#each put.parameters}}{{name}}{{#unless required}}?{{/unless}}: string;{{/each}} },{{/if}}{{#if put.requestBody}}data: z.infer<typeof schemas.UpdateUser>{{/if}}) {
+    return this.client.put('{{@key}}'{{#if put.parameters}}, { params }{{/if}}{{#if put.requestBody}}, { body: data }{{/if}});
+  }
+    {{/if}}
+
+    {{#if delete}}
+  /**
+   * {{delete.summary}}
+   * {{delete.description}}
+   */
+  async delete{{capitalize (basename @key)}}({{#if delete.parameters}}params: { {{#each delete.parameters}}{{name}}{{#unless required}}?{{/unless}}: string;{{/each}} }{{/if}}) {
+    return this.client.delete('{{@key}}'{{#if delete.parameters}}, { params }{{/if}});
+  }
+    {{/if}}
+    {{/with}}
+  {{/each}}
+}
+
+// Export types for public use
+{{#each openApiSpec.components.schemas}}
+export type {{@key}} = z.infer<typeof schemas.{{@key}}>;
+{{/each}}

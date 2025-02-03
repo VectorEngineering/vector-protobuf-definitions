@@ -84,6 +84,9 @@ func newWorkspaceORM(db *gorm.DB, opts ...gen.DOOption) workspaceORM {
 						}
 					}
 				}
+				Webhooks struct {
+					field.RelationField
+				}
 				Workflows struct {
 					field.RelationField
 					Workspace struct {
@@ -126,6 +129,9 @@ func newWorkspaceORM(db *gorm.DB, opts ...gen.DOOption) workspaceORM {
 							field.RelationField
 						}
 					}
+				}
+				Webhooks struct {
+					field.RelationField
 				}
 				Workflows struct {
 					field.RelationField
@@ -211,6 +217,11 @@ func newWorkspaceORM(db *gorm.DB, opts ...gen.DOOption) workspaceORM {
 						},
 					},
 				},
+				Webhooks: struct {
+					field.RelationField
+				}{
+					RelationField: field.NewRelation("ApiKeys.Account.Workspaces.Webhooks", "lead_scraper_servicev1.WebhookConfigORM"),
+				},
 				Workflows: struct {
 					field.RelationField
 					Workspace struct {
@@ -245,6 +256,12 @@ func newWorkspaceORM(db *gorm.DB, opts ...gen.DOOption) workspaceORM {
 		db: db.Session(&gorm.Session{}),
 
 		RelationField: field.NewRelation("ScrapingJobs", "lead_scraper_servicev1.ScrapingJobORM"),
+	}
+
+	_workspaceORM.Webhooks = workspaceORMHasManyWebhooks{
+		db: db.Session(&gorm.Session{}),
+
+		RelationField: field.NewRelation("Webhooks", "lead_scraper_servicev1.WebhookConfigORM"),
 	}
 
 	_workspaceORM.Workflows = workspaceORMHasManyWorkflows{
@@ -284,6 +301,8 @@ type workspaceORM struct {
 	ApiKeys             workspaceORMHasManyApiKeys
 
 	ScrapingJobs workspaceORMHasManyScrapingJobs
+
+	Webhooks workspaceORMHasManyWebhooks
 
 	Workflows workspaceORMHasManyWorkflows
 
@@ -337,7 +356,7 @@ func (w *workspaceORM) GetFieldByName(fieldName string) (field.OrderExpr, bool) 
 }
 
 func (w *workspaceORM) fillFieldMap() {
-	w.fieldMap = make(map[string]field.Expr, 22)
+	w.fieldMap = make(map[string]field.Expr, 23)
 	w.fieldMap["account_id"] = w.AccountId
 	w.fieldMap["active_scrapers"] = w.ActiveScrapers
 	w.fieldMap["created_at"] = w.CreatedAt
@@ -405,6 +424,9 @@ type workspaceORMHasManyApiKeys struct {
 						field.RelationField
 					}
 				}
+			}
+			Webhooks struct {
+				field.RelationField
 			}
 			Workflows struct {
 				field.RelationField
@@ -555,6 +577,77 @@ func (a workspaceORMHasManyScrapingJobsTx) Clear() error {
 }
 
 func (a workspaceORMHasManyScrapingJobsTx) Count() int64 {
+	return a.tx.Count()
+}
+
+type workspaceORMHasManyWebhooks struct {
+	db *gorm.DB
+
+	field.RelationField
+}
+
+func (a workspaceORMHasManyWebhooks) Where(conds ...field.Expr) *workspaceORMHasManyWebhooks {
+	if len(conds) == 0 {
+		return &a
+	}
+
+	exprs := make([]clause.Expression, 0, len(conds))
+	for _, cond := range conds {
+		exprs = append(exprs, cond.BeCond().(clause.Expression))
+	}
+	a.db = a.db.Clauses(clause.Where{Exprs: exprs})
+	return &a
+}
+
+func (a workspaceORMHasManyWebhooks) WithContext(ctx context.Context) *workspaceORMHasManyWebhooks {
+	a.db = a.db.WithContext(ctx)
+	return &a
+}
+
+func (a workspaceORMHasManyWebhooks) Session(session *gorm.Session) *workspaceORMHasManyWebhooks {
+	a.db = a.db.Session(session)
+	return &a
+}
+
+func (a workspaceORMHasManyWebhooks) Model(m *lead_scraper_servicev1.WorkspaceORM) *workspaceORMHasManyWebhooksTx {
+	return &workspaceORMHasManyWebhooksTx{a.db.Model(m).Association(a.Name())}
+}
+
+type workspaceORMHasManyWebhooksTx struct{ tx *gorm.Association }
+
+func (a workspaceORMHasManyWebhooksTx) Find() (result []*lead_scraper_servicev1.WebhookConfigORM, err error) {
+	return result, a.tx.Find(&result)
+}
+
+func (a workspaceORMHasManyWebhooksTx) Append(values ...*lead_scraper_servicev1.WebhookConfigORM) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Append(targetValues...)
+}
+
+func (a workspaceORMHasManyWebhooksTx) Replace(values ...*lead_scraper_servicev1.WebhookConfigORM) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Replace(targetValues...)
+}
+
+func (a workspaceORMHasManyWebhooksTx) Delete(values ...*lead_scraper_servicev1.WebhookConfigORM) (err error) {
+	targetValues := make([]interface{}, len(values))
+	for i, v := range values {
+		targetValues[i] = v
+	}
+	return a.tx.Delete(targetValues...)
+}
+
+func (a workspaceORMHasManyWebhooksTx) Clear() error {
+	return a.tx.Clear()
+}
+
+func (a workspaceORMHasManyWebhooksTx) Count() int64 {
 	return a.tx.Count()
 }
 

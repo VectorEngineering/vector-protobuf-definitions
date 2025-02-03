@@ -22,6 +22,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from playbookmedia_backend_client_sdk.models.output_format import OutputFormat
+from playbookmedia_backend_client_sdk.models.webhook_config import WebhookConfig
 from playbookmedia_backend_client_sdk.models.workflow_status import WorkflowStatus
 from typing import Optional, Set
 from typing_extensions import Self
@@ -58,7 +59,7 @@ class ScrapingWorkflow(BaseModel):
     output_destination: Optional[StrictStr] = Field(default=None, alias="outputDestination")
     data_retention: Optional[StrictStr] = Field(default=None, alias="dataRetention")
     anonymize_pii: Optional[StrictBool] = Field(default=None, alias="anonymizePii")
-    notification_webhook_url: Optional[StrictStr] = Field(default=None, alias="notificationWebhookUrl")
+    webhooks: Optional[List[WebhookConfig]] = None
     notification_slack_channel: Optional[StrictStr] = Field(default=None, alias="notificationSlackChannel")
     notification_email_group: Optional[StrictStr] = Field(default=None, alias="notificationEmailGroup")
     notification_notify_on_start: Optional[StrictBool] = Field(default=None, alias="notificationNotifyOnStart")
@@ -75,7 +76,7 @@ class ScrapingWorkflow(BaseModel):
     respect_robots_txt: Optional[StrictBool] = Field(default=None, alias="respectRobotsTxt")
     accept_terms_of_service: Optional[StrictBool] = Field(default=None, alias="acceptTermsOfService")
     user_agent: Optional[StrictStr] = Field(default=None, alias="userAgent")
-    __properties: ClassVar[List[str]] = ["id", "cronExpression", "nextRunTime", "lastRunTime", "status", "retryCount", "maxRetries", "alertEmails", "orgId", "tenantId", "createdAt", "updatedAt", "deletedAt", "jobs", "workspace", "geoFencingRadius", "geoFencingLat", "geoFencingLon", "geoFencingZoomMin", "geoFencingZoomMax", "includeReviews", "includePhotos", "includeBusinessHours", "maxReviewsPerBusiness", "outputFormat", "outputDestination", "dataRetention", "anonymizePii", "notificationWebhookUrl", "notificationSlackChannel", "notificationEmailGroup", "notificationNotifyOnStart", "notificationNotifyOnComplete", "notificationNotifyOnFailure", "contentFilterAllowedCountries", "contentFilterExcludedTypes", "contentFilterMinimumRating", "contentFilterMinimumReviews", "qosMaxConcurrentRequests", "qosMaxRetries", "qosRequestTimeout", "qosEnableJavascript", "respectRobotsTxt", "acceptTermsOfService", "userAgent"]
+    __properties: ClassVar[List[str]] = ["id", "cronExpression", "nextRunTime", "lastRunTime", "status", "retryCount", "maxRetries", "alertEmails", "orgId", "tenantId", "createdAt", "updatedAt", "deletedAt", "jobs", "workspace", "geoFencingRadius", "geoFencingLat", "geoFencingLon", "geoFencingZoomMin", "geoFencingZoomMax", "includeReviews", "includePhotos", "includeBusinessHours", "maxReviewsPerBusiness", "outputFormat", "outputDestination", "dataRetention", "anonymizePii", "webhooks", "notificationSlackChannel", "notificationEmailGroup", "notificationNotifyOnStart", "notificationNotifyOnComplete", "notificationNotifyOnFailure", "contentFilterAllowedCountries", "contentFilterExcludedTypes", "contentFilterMinimumRating", "contentFilterMinimumReviews", "qosMaxConcurrentRequests", "qosMaxRetries", "qosRequestTimeout", "qosEnableJavascript", "respectRobotsTxt", "acceptTermsOfService", "userAgent"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -126,6 +127,13 @@ class ScrapingWorkflow(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of workspace
         if self.workspace:
             _dict['workspace'] = self.workspace.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in webhooks (list)
+        _items = []
+        if self.webhooks:
+            for _item in self.webhooks:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['webhooks'] = _items
         return _dict
 
     @classmethod
@@ -166,7 +174,7 @@ class ScrapingWorkflow(BaseModel):
             "outputDestination": obj.get("outputDestination"),
             "dataRetention": obj.get("dataRetention"),
             "anonymizePii": obj.get("anonymizePii"),
-            "notificationWebhookUrl": obj.get("notificationWebhookUrl"),
+            "webhooks": [WebhookConfig.from_dict(_item) for _item in obj["webhooks"]] if obj.get("webhooks") is not None else None,
             "notificationSlackChannel": obj.get("notificationSlackChannel"),
             "notificationEmailGroup": obj.get("notificationEmailGroup"),
             "notificationNotifyOnStart": obj.get("notificationNotifyOnStart"),

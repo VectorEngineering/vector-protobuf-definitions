@@ -91,6 +91,9 @@ func newTenantORM(db *gorm.DB, opts ...gen.DOOption) tenantORM {
 					}
 				}
 			}
+			Webhooks struct {
+				field.RelationField
+			}
 			Workflows struct {
 				field.RelationField
 				Workspace struct {
@@ -190,6 +193,11 @@ func newTenantORM(db *gorm.DB, opts ...gen.DOOption) tenantORM {
 						RelationField: field.NewRelation("Accounts.Workspaces.ScrapingJobs.Leads.SpecialHours", "lead_scraper_servicev1.BusinessHoursORM"),
 					},
 				},
+			},
+			Webhooks: struct {
+				field.RelationField
+			}{
+				RelationField: field.NewRelation("Accounts.Workspaces.Webhooks", "lead_scraper_servicev1.WebhookConfigORM"),
 			},
 			Workflows: struct {
 				field.RelationField
@@ -420,6 +428,9 @@ type tenantORMHasManyAccounts struct {
 					field.RelationField
 				}
 			}
+		}
+		Webhooks struct {
+			field.RelationField
 		}
 		Workflows struct {
 			field.RelationField

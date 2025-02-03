@@ -31,7 +31,7 @@ Name | Type | Description | Notes
 **outputDestination** | **String!** |  | [optional] [default to null]
 **dataRetention** | **String!** |  | [optional] [default to null]
 **anonymizePii** | **Boolean!** |  | [optional] [default to null]
-**notificationWebhookUrl** | **String!** |  | [optional] [default to null]
+**webhooks** | [**WebhookConfig**](WebhookConfig.md) |  | [optional] [default to null]
 **notificationSlackChannel** | **String!** |  | [optional] [default to null]
 **notificationEmailGroup** | **String!** |  | [optional] [default to null]
 **notificationNotifyOnStart** | **Boolean!** |  | [optional] [default to null]

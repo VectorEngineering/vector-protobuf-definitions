@@ -1753,6 +1753,40 @@ func (m *Workspace) validate(all bool) error {
 
 	}
 
+	for idx, item := range m.GetWebhooks() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, WorkspaceValidationError{
+						field:  fmt.Sprintf("Webhooks[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, WorkspaceValidationError{
+						field:  fmt.Sprintf("Webhooks[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return WorkspaceValidationError{
+					field:  fmt.Sprintf("Webhooks[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
 	if len(errors) > 0 {
 		return WorkspaceMultiError(errors)
 	}
@@ -1943,7 +1977,16 @@ func (m *ScrapingJob) validate(all bool) error {
 
 	// no validation rules for Name
 
-	// no validation rules for Lang
+	if _, ok := ScrapingJob_Language_name[int32(m.GetLang())]; !ok {
+		err := ScrapingJobValidationError{
+			field:  "Lang",
+			reason: "value must be one of the defined enum values",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if val := m.GetZoom(); val < 1 || val > 20 {
 		err := ScrapingJobValidationError{
@@ -1964,7 +2007,16 @@ func (m *ScrapingJob) validate(all bool) error {
 
 	// no validation rules for Radius
 
-	// no validation rules for Depth
+	if val := m.GetDepth(); val < 1 || val > 10 {
+		err := ScrapingJobValidationError{
+			field:  "Depth",
+			reason: "value must be inside range [1, 10]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	// no validation rules for Email
 
@@ -2163,6 +2215,8 @@ func (m *ScrapingWorkflow) validate(all bool) error {
 
 	// no validation rules for Id
 
+	// no validation rules for Name
+
 	// no validation rules for CronExpression
 
 	if all {
@@ -2239,28 +2293,6 @@ func (m *ScrapingWorkflow) validate(all bool) error {
 	}
 
 	// no validation rules for AlertEmails
-
-	if utf8.RuneCountInString(m.GetOrgId()) < 1 {
-		err := ScrapingWorkflowValidationError{
-			field:  "OrgId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if utf8.RuneCountInString(m.GetTenantId()) < 1 {
-		err := ScrapingWorkflowValidationError{
-			field:  "TenantId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
 
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
@@ -2519,27 +2551,6 @@ func (m *ScrapingWorkflow) validate(all bool) error {
 
 	// no validation rules for AnonymizePii
 
-	if uri, err := url.Parse(m.GetNotificationWebhookUrl()); err != nil {
-		err = ScrapingWorkflowValidationError{
-			field:  "NotificationWebhookUrl",
-			reason: "value must be a valid URI",
-			cause:  err,
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	} else if !uri.IsAbs() {
-		err := ScrapingWorkflowValidationError{
-			field:  "NotificationWebhookUrl",
-			reason: "value must be absolute",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
 	// no validation rules for NotificationSlackChannel
 
 	// no validation rules for NotificationEmailGroup
@@ -2709,6 +2720,345 @@ var _ interface {
 	ErrorName() string
 } = ScrapingWorkflowValidationError{}
 
+// Validate checks the field values on WebhookConfig with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *WebhookConfig) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on WebhookConfig with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in WebhookConfigMultiError, or
+// nil if none found.
+func (m *WebhookConfig) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *WebhookConfig) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Id
+
+	if uri, err := url.Parse(m.GetUrl()); err != nil {
+		err = WebhookConfigValidationError{
+			field:  "Url",
+			reason: "value must be a valid URI",
+			cause:  err,
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	} else if !uri.IsAbs() {
+		err := WebhookConfigValidationError{
+			field:  "Url",
+			reason: "value must be absolute",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for AuthType
+
+	// no validation rules for AuthToken
+
+	// no validation rules for CustomHeaders
+
+	if val := m.GetMaxRetries(); val < 0 || val > 5 {
+		err := WebhookConfigValidationError{
+			field:  "MaxRetries",
+			reason: "value must be inside range [0, 5]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetRetryInterval()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, WebhookConfigValidationError{
+					field:  "RetryInterval",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, WebhookConfigValidationError{
+					field:  "RetryInterval",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRetryInterval()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WebhookConfigValidationError{
+				field:  "RetryInterval",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for IncludeFullResults
+
+	if _, ok := WebhookConfig_PayloadFormat_name[int32(m.GetPayloadFormat())]; !ok {
+		err := WebhookConfigValidationError{
+			field:  "PayloadFormat",
+			reason: "value must be one of the defined enum values",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for VerifySsl
+
+	// no validation rules for SigningSecret
+
+	// no validation rules for RateLimit
+
+	if all {
+		switch v := interface{}(m.GetRateLimitInterval()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, WebhookConfigValidationError{
+					field:  "RateLimitInterval",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, WebhookConfigValidationError{
+					field:  "RateLimitInterval",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetRateLimitInterval()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WebhookConfigValidationError{
+				field:  "RateLimitInterval",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetCreatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, WebhookConfigValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, WebhookConfigValidationError{
+					field:  "CreatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetCreatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WebhookConfigValidationError{
+				field:  "CreatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetUpdatedAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, WebhookConfigValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, WebhookConfigValidationError{
+					field:  "UpdatedAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetUpdatedAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WebhookConfigValidationError{
+				field:  "UpdatedAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if all {
+		switch v := interface{}(m.GetLastTriggeredAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, WebhookConfigValidationError{
+					field:  "LastTriggeredAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, WebhookConfigValidationError{
+					field:  "LastTriggeredAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetLastTriggeredAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WebhookConfigValidationError{
+				field:  "LastTriggeredAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for SuccessfulCalls
+
+	// no validation rules for FailedCalls
+
+	if all {
+		switch v := interface{}(m.GetMetadata()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, WebhookConfigValidationError{
+					field:  "Metadata",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, WebhookConfigValidationError{
+					field:  "Metadata",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetMetadata()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return WebhookConfigValidationError{
+				field:  "Metadata",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for WebhookName
+
+	if len(errors) > 0 {
+		return WebhookConfigMultiError(errors)
+	}
+
+	return nil
+}
+
+// WebhookConfigMultiError is an error wrapping multiple validation errors
+// returned by WebhookConfig.ValidateAll() if the designated constraints
+// aren't met.
+type WebhookConfigMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m WebhookConfigMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m WebhookConfigMultiError) AllErrors() []error { return m }
+
+// WebhookConfigValidationError is the validation error returned by
+// WebhookConfig.Validate if the designated constraints aren't met.
+type WebhookConfigValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e WebhookConfigValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e WebhookConfigValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e WebhookConfigValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e WebhookConfigValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e WebhookConfigValidationError) ErrorName() string { return "WebhookConfigValidationError" }
+
+// Error satisfies the builtin error interface
+func (e WebhookConfigValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sWebhookConfig.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = WebhookConfigValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = WebhookConfigValidationError{}
+
 // Validate checks the field values on Lead with the rules defined in the proto
 // definition for this message. If any rules are violated, the first error
 // encountered is returned, or nil if there are no violations.
@@ -2796,10 +3146,10 @@ func (m *Lead) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if val := m.GetGoogleRating(); val < 0 || val > 5 {
+	if val := m.GetGoogleRating(); val < 0 || val > 10 {
 		err := LeadValidationError{
 			field:  "GoogleRating",
-			reason: "value must be inside range [0, 5]",
+			reason: "value must be inside range [0, 10]",
 		}
 		if !all {
 			return err

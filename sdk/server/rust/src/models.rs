@@ -7430,6 +7430,158 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 }
 
 
+/// - INCLUDED_FIELD_NAME: Core business information  - INCLUDED_FIELD_LOCATION: city, state, country  - INCLUDED_FIELD_COORDINATES: Geographic data  latitude, longitude  - INCLUDED_FIELD_GOOGLE_RATING: Ratings and reviews  - INCLUDED_FIELD_BUSINESS_HOURS: Business details  - INCLUDED_FIELD_PHOTOS: Rich media  - INCLUDED_FIELD_BUSINESS_TYPES: Categories and attributes  - INCLUDED_FIELD_SOCIAL_PROFILES: Social media  - INCLUDED_FIELD_EMPLOYEE_COUNT: Enhanced business data  - INCLUDED_FIELD_NAICS_CODE: Industry classification  - INCLUDED_FIELD_SCRAPING_METADATA: Metadata  timestamps, session info  - INCLUDED_FIELD_COMPLIANCE_INFO: sustainability, certifications  - INCLUDED_FIELD_ALTERNATE_PHONES: Contact information
+/// Enumeration of values.
+/// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
+/// which helps with FFI.
+#[allow(non_camel_case_types)]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "conversion", derive(frunk_enum_derive::LabelledGenericEnum))]
+pub enum IncludedField {
+    #[serde(rename = "INCLUDED_FIELD_UNSPECIFIED")]
+    Unspecified,
+    #[serde(rename = "INCLUDED_FIELD_NAME")]
+    Name,
+    #[serde(rename = "INCLUDED_FIELD_WEBSITE")]
+    Website,
+    #[serde(rename = "INCLUDED_FIELD_PHONE")]
+    Phone,
+    #[serde(rename = "INCLUDED_FIELD_ADDRESS")]
+    Address,
+    #[serde(rename = "INCLUDED_FIELD_LOCATION")]
+    Location,
+    #[serde(rename = "INCLUDED_FIELD_COORDINATES")]
+    Coordinates,
+    #[serde(rename = "INCLUDED_FIELD_GOOGLE_RATING")]
+    GoogleRating,
+    #[serde(rename = "INCLUDED_FIELD_REVIEW_COUNT")]
+    ReviewCount,
+    #[serde(rename = "INCLUDED_FIELD_REVIEWS")]
+    Reviews,
+    #[serde(rename = "INCLUDED_FIELD_BUSINESS_HOURS")]
+    BusinessHours,
+    #[serde(rename = "INCLUDED_FIELD_BUSINESS_STATUS")]
+    BusinessStatus,
+    #[serde(rename = "INCLUDED_FIELD_PLACE_ID")]
+    PlaceId,
+    #[serde(rename = "INCLUDED_FIELD_GOOGLE_MAPS_URL")]
+    GoogleMapsUrl,
+    #[serde(rename = "INCLUDED_FIELD_PHOTOS")]
+    Photos,
+    #[serde(rename = "INCLUDED_FIELD_MAIN_PHOTO")]
+    MainPhoto,
+    #[serde(rename = "INCLUDED_FIELD_BUSINESS_TYPES")]
+    BusinessTypes,
+    #[serde(rename = "INCLUDED_FIELD_AMENITIES")]
+    Amenities,
+    #[serde(rename = "INCLUDED_FIELD_PAYMENT_METHODS")]
+    PaymentMethods,
+    #[serde(rename = "INCLUDED_FIELD_SOCIAL_PROFILES")]
+    SocialProfiles,
+    #[serde(rename = "INCLUDED_FIELD_EMPLOYEE_COUNT")]
+    EmployeeCount,
+    #[serde(rename = "INCLUDED_FIELD_REVENUE_INFO")]
+    RevenueInfo,
+    #[serde(rename = "INCLUDED_FIELD_FOUNDED_YEAR")]
+    FoundedYear,
+    #[serde(rename = "INCLUDED_FIELD_CERTIFICATIONS")]
+    Certifications,
+    #[serde(rename = "INCLUDED_FIELD_NAICS_CODE")]
+    NaicsCode,
+    #[serde(rename = "INCLUDED_FIELD_SIC_CODE")]
+    SicCode,
+    #[serde(rename = "INCLUDED_FIELD_SCRAPING_METADATA")]
+    ScrapingMetadata,
+    #[serde(rename = "INCLUDED_FIELD_COMPLIANCE_INFO")]
+    ComplianceInfo,
+    #[serde(rename = "INCLUDED_FIELD_ALTERNATE_PHONES")]
+    AlternatePhones,
+    #[serde(rename = "INCLUDED_FIELD_CONTACT_PERSON")]
+    ContactPerson,
+    #[serde(rename = "INCLUDED_FIELD_CONTACT_EMAIL")]
+    ContactEmail,
+}
+
+impl std::fmt::Display for IncludedField {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            IncludedField::Unspecified => write!(f, "INCLUDED_FIELD_UNSPECIFIED"),
+            IncludedField::Name => write!(f, "INCLUDED_FIELD_NAME"),
+            IncludedField::Website => write!(f, "INCLUDED_FIELD_WEBSITE"),
+            IncludedField::Phone => write!(f, "INCLUDED_FIELD_PHONE"),
+            IncludedField::Address => write!(f, "INCLUDED_FIELD_ADDRESS"),
+            IncludedField::Location => write!(f, "INCLUDED_FIELD_LOCATION"),
+            IncludedField::Coordinates => write!(f, "INCLUDED_FIELD_COORDINATES"),
+            IncludedField::GoogleRating => write!(f, "INCLUDED_FIELD_GOOGLE_RATING"),
+            IncludedField::ReviewCount => write!(f, "INCLUDED_FIELD_REVIEW_COUNT"),
+            IncludedField::Reviews => write!(f, "INCLUDED_FIELD_REVIEWS"),
+            IncludedField::BusinessHours => write!(f, "INCLUDED_FIELD_BUSINESS_HOURS"),
+            IncludedField::BusinessStatus => write!(f, "INCLUDED_FIELD_BUSINESS_STATUS"),
+            IncludedField::PlaceId => write!(f, "INCLUDED_FIELD_PLACE_ID"),
+            IncludedField::GoogleMapsUrl => write!(f, "INCLUDED_FIELD_GOOGLE_MAPS_URL"),
+            IncludedField::Photos => write!(f, "INCLUDED_FIELD_PHOTOS"),
+            IncludedField::MainPhoto => write!(f, "INCLUDED_FIELD_MAIN_PHOTO"),
+            IncludedField::BusinessTypes => write!(f, "INCLUDED_FIELD_BUSINESS_TYPES"),
+            IncludedField::Amenities => write!(f, "INCLUDED_FIELD_AMENITIES"),
+            IncludedField::PaymentMethods => write!(f, "INCLUDED_FIELD_PAYMENT_METHODS"),
+            IncludedField::SocialProfiles => write!(f, "INCLUDED_FIELD_SOCIAL_PROFILES"),
+            IncludedField::EmployeeCount => write!(f, "INCLUDED_FIELD_EMPLOYEE_COUNT"),
+            IncludedField::RevenueInfo => write!(f, "INCLUDED_FIELD_REVENUE_INFO"),
+            IncludedField::FoundedYear => write!(f, "INCLUDED_FIELD_FOUNDED_YEAR"),
+            IncludedField::Certifications => write!(f, "INCLUDED_FIELD_CERTIFICATIONS"),
+            IncludedField::NaicsCode => write!(f, "INCLUDED_FIELD_NAICS_CODE"),
+            IncludedField::SicCode => write!(f, "INCLUDED_FIELD_SIC_CODE"),
+            IncludedField::ScrapingMetadata => write!(f, "INCLUDED_FIELD_SCRAPING_METADATA"),
+            IncludedField::ComplianceInfo => write!(f, "INCLUDED_FIELD_COMPLIANCE_INFO"),
+            IncludedField::AlternatePhones => write!(f, "INCLUDED_FIELD_ALTERNATE_PHONES"),
+            IncludedField::ContactPerson => write!(f, "INCLUDED_FIELD_CONTACT_PERSON"),
+            IncludedField::ContactEmail => write!(f, "INCLUDED_FIELD_CONTACT_EMAIL"),
+        }
+    }
+}
+
+impl std::str::FromStr for IncludedField {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s {
+            "INCLUDED_FIELD_UNSPECIFIED" => std::result::Result::Ok(IncludedField::Unspecified),
+            "INCLUDED_FIELD_NAME" => std::result::Result::Ok(IncludedField::Name),
+            "INCLUDED_FIELD_WEBSITE" => std::result::Result::Ok(IncludedField::Website),
+            "INCLUDED_FIELD_PHONE" => std::result::Result::Ok(IncludedField::Phone),
+            "INCLUDED_FIELD_ADDRESS" => std::result::Result::Ok(IncludedField::Address),
+            "INCLUDED_FIELD_LOCATION" => std::result::Result::Ok(IncludedField::Location),
+            "INCLUDED_FIELD_COORDINATES" => std::result::Result::Ok(IncludedField::Coordinates),
+            "INCLUDED_FIELD_GOOGLE_RATING" => std::result::Result::Ok(IncludedField::GoogleRating),
+            "INCLUDED_FIELD_REVIEW_COUNT" => std::result::Result::Ok(IncludedField::ReviewCount),
+            "INCLUDED_FIELD_REVIEWS" => std::result::Result::Ok(IncludedField::Reviews),
+            "INCLUDED_FIELD_BUSINESS_HOURS" => std::result::Result::Ok(IncludedField::BusinessHours),
+            "INCLUDED_FIELD_BUSINESS_STATUS" => std::result::Result::Ok(IncludedField::BusinessStatus),
+            "INCLUDED_FIELD_PLACE_ID" => std::result::Result::Ok(IncludedField::PlaceId),
+            "INCLUDED_FIELD_GOOGLE_MAPS_URL" => std::result::Result::Ok(IncludedField::GoogleMapsUrl),
+            "INCLUDED_FIELD_PHOTOS" => std::result::Result::Ok(IncludedField::Photos),
+            "INCLUDED_FIELD_MAIN_PHOTO" => std::result::Result::Ok(IncludedField::MainPhoto),
+            "INCLUDED_FIELD_BUSINESS_TYPES" => std::result::Result::Ok(IncludedField::BusinessTypes),
+            "INCLUDED_FIELD_AMENITIES" => std::result::Result::Ok(IncludedField::Amenities),
+            "INCLUDED_FIELD_PAYMENT_METHODS" => std::result::Result::Ok(IncludedField::PaymentMethods),
+            "INCLUDED_FIELD_SOCIAL_PROFILES" => std::result::Result::Ok(IncludedField::SocialProfiles),
+            "INCLUDED_FIELD_EMPLOYEE_COUNT" => std::result::Result::Ok(IncludedField::EmployeeCount),
+            "INCLUDED_FIELD_REVENUE_INFO" => std::result::Result::Ok(IncludedField::RevenueInfo),
+            "INCLUDED_FIELD_FOUNDED_YEAR" => std::result::Result::Ok(IncludedField::FoundedYear),
+            "INCLUDED_FIELD_CERTIFICATIONS" => std::result::Result::Ok(IncludedField::Certifications),
+            "INCLUDED_FIELD_NAICS_CODE" => std::result::Result::Ok(IncludedField::NaicsCode),
+            "INCLUDED_FIELD_SIC_CODE" => std::result::Result::Ok(IncludedField::SicCode),
+            "INCLUDED_FIELD_SCRAPING_METADATA" => std::result::Result::Ok(IncludedField::ScrapingMetadata),
+            "INCLUDED_FIELD_COMPLIANCE_INFO" => std::result::Result::Ok(IncludedField::ComplianceInfo),
+            "INCLUDED_FIELD_ALTERNATE_PHONES" => std::result::Result::Ok(IncludedField::AlternatePhones),
+            "INCLUDED_FIELD_CONTACT_PERSON" => std::result::Result::Ok(IncludedField::ContactPerson),
+            "INCLUDED_FIELD_CONTACT_EMAIL" => std::result::Result::Ok(IncludedField::ContactEmail),
+            _ => std::result::Result::Err(format!("Value not valid: {}", s)),
+        }
+    }
+}
+
 /// - INTERNAL_ERROR: General internal errors  - RESOURCE_EXHAUSTED: Resource exhaustion errors  - CANCELLED: Operation errors  - UNAVAILABLE: Availability errors  - DEPENDENCY_FAILURE: New internal error codes  Failure in external dependency  - CONFIGURATION_ERROR: Service configuration error  - SECURITY_BREACH_DETECTED: Potential security breach detected
 /// Enumeration of values.
 /// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
@@ -10690,6 +10842,38 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 }
 
 
+/// `NullValue` is a singleton enumeration to represent the null value for the `Value` type union.   The JSON representation for `NullValue` is JSON `null`.   - NULL_VALUE: Null value.
+/// Enumeration of values.
+/// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
+/// which helps with FFI.
+#[allow(non_camel_case_types)]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "conversion", derive(frunk_enum_derive::LabelledGenericEnum))]
+pub enum NullValue {
+    #[serde(rename = "NULL_VALUE")]
+    NullValue,
+}
+
+impl std::fmt::Display for NullValue {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            NullValue::NullValue => write!(f, "NULL_VALUE"),
+        }
+    }
+}
+
+impl std::str::FromStr for NullValue {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s {
+            "NULL_VALUE" => std::result::Result::Ok(NullValue::NullValue),
+            _ => std::result::Result::Err(format!("Value not valid: {}", s)),
+        }
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct OperationDetails {
@@ -11167,6 +11351,57 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
     }
 }
 
+
+/// Enumeration of values.
+/// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
+/// which helps with FFI.
+#[allow(non_camel_case_types)]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "conversion", derive(frunk_enum_derive::LabelledGenericEnum))]
+pub enum PayloadFormat {
+    #[serde(rename = "PAYLOAD_FORMAT_UNSPECIFIED")]
+    Unspecified,
+    #[serde(rename = "PAYLOAD_FORMAT_JSON")]
+    Json,
+    #[serde(rename = "PAYLOAD_FORMAT_XML")]
+    Xml,
+    #[serde(rename = "PAYLOAD_FORMAT_FORM_DATA")]
+    FormData,
+    #[serde(rename = "PAYLOAD_FORMAT_PROTOBUF")]
+    Protobuf,
+    #[serde(rename = "PAYLOAD_FORMAT_YAML")]
+    Yaml,
+}
+
+impl std::fmt::Display for PayloadFormat {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            PayloadFormat::Unspecified => write!(f, "PAYLOAD_FORMAT_UNSPECIFIED"),
+            PayloadFormat::Json => write!(f, "PAYLOAD_FORMAT_JSON"),
+            PayloadFormat::Xml => write!(f, "PAYLOAD_FORMAT_XML"),
+            PayloadFormat::FormData => write!(f, "PAYLOAD_FORMAT_FORM_DATA"),
+            PayloadFormat::Protobuf => write!(f, "PAYLOAD_FORMAT_PROTOBUF"),
+            PayloadFormat::Yaml => write!(f, "PAYLOAD_FORMAT_YAML"),
+        }
+    }
+}
+
+impl std::str::FromStr for PayloadFormat {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s {
+            "PAYLOAD_FORMAT_UNSPECIFIED" => std::result::Result::Ok(PayloadFormat::Unspecified),
+            "PAYLOAD_FORMAT_JSON" => std::result::Result::Ok(PayloadFormat::Json),
+            "PAYLOAD_FORMAT_XML" => std::result::Result::Ok(PayloadFormat::Xml),
+            "PAYLOAD_FORMAT_FORM_DATA" => std::result::Result::Ok(PayloadFormat::FormData),
+            "PAYLOAD_FORMAT_PROTOBUF" => std::result::Result::Ok(PayloadFormat::Protobuf),
+            "PAYLOAD_FORMAT_YAML" => std::result::Result::Ok(PayloadFormat::Yaml),
+            _ => std::result::Result::Err(format!("Value not valid: {}", s)),
+        }
+    }
+}
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
@@ -13877,9 +14112,9 @@ pub struct ScrapingWorkflow {
     #[serde(skip_serializing_if="Option::is_none")]
     pub anonymize_pii: Option<bool>,
 
-    #[serde(rename = "notificationWebhookUrl")]
+    #[serde(rename = "webhooks")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub notification_webhook_url: Option<String>,
+    pub webhooks: Option<Vec<models::WebhookConfig>>,
 
     #[serde(rename = "notificationSlackChannel")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -13980,7 +14215,7 @@ impl ScrapingWorkflow {
             output_destination: None,
             data_retention: None,
             anonymize_pii: None,
-            notification_webhook_url: None,
+            webhooks: None,
             notification_slack_channel: None,
             notification_email_group: None,
             notification_notify_on_start: None,
@@ -14177,13 +14412,7 @@ impl std::string::ToString for ScrapingWorkflow {
                 ].join(",")
             }),
 
-
-            self.notification_webhook_url.as_ref().map(|notification_webhook_url| {
-                [
-                    "notificationWebhookUrl".to_string(),
-                    notification_webhook_url.to_string(),
-                ].join(",")
-            }),
+            // Skipping webhooks in query parameter serialization
 
 
             self.notification_slack_channel.as_ref().map(|notification_slack_channel| {
@@ -14358,7 +14587,7 @@ impl std::str::FromStr for ScrapingWorkflow {
             pub output_destination: Vec<String>,
             pub data_retention: Vec<String>,
             pub anonymize_pii: Vec<bool>,
-            pub notification_webhook_url: Vec<String>,
+            pub webhooks: Vec<Vec<models::WebhookConfig>>,
             pub notification_slack_channel: Vec<String>,
             pub notification_email_group: Vec<String>,
             pub notification_notify_on_start: Vec<bool>,
@@ -14447,8 +14676,7 @@ impl std::str::FromStr for ScrapingWorkflow {
                     "dataRetention" => intermediate_rep.data_retention.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "anonymizePii" => intermediate_rep.anonymize_pii.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "notificationWebhookUrl" => intermediate_rep.notification_webhook_url.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "webhooks" => return std::result::Result::Err("Parsing a container in this style is not supported in ScrapingWorkflow".to_string()),
                     #[allow(clippy::redundant_clone)]
                     "notificationSlackChannel" => intermediate_rep.notification_slack_channel.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
@@ -14517,7 +14745,7 @@ impl std::str::FromStr for ScrapingWorkflow {
             output_destination: intermediate_rep.output_destination.into_iter().next(),
             data_retention: intermediate_rep.data_retention.into_iter().next(),
             anonymize_pii: intermediate_rep.anonymize_pii.into_iter().next(),
-            notification_webhook_url: intermediate_rep.notification_webhook_url.into_iter().next(),
+            webhooks: intermediate_rep.webhooks.into_iter().next(),
             notification_slack_channel: intermediate_rep.notification_slack_channel.into_iter().next(),
             notification_email_group: intermediate_rep.notification_email_group.into_iter().next(),
             notification_notify_on_start: intermediate_rep.notification_notify_on_start.into_iter().next(),
@@ -15568,6 +15796,77 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
     }
 }
 
+
+/// Enumeration of values.
+/// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
+/// which helps with FFI.
+#[allow(non_camel_case_types)]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "conversion", derive(frunk_enum_derive::LabelledGenericEnum))]
+pub enum TriggerEvent {
+    #[serde(rename = "TRIGGER_EVENT_UNSPECIFIED")]
+    Unspecified,
+    #[serde(rename = "TRIGGER_EVENT_JOB_STARTED")]
+    JobStarted,
+    #[serde(rename = "TRIGGER_EVENT_JOB_COMPLETED")]
+    JobCompleted,
+    #[serde(rename = "TRIGGER_EVENT_JOB_FAILED")]
+    JobFailed,
+    #[serde(rename = "TRIGGER_EVENT_LEAD_FOUND")]
+    LeadFound,
+    #[serde(rename = "TRIGGER_EVENT_QUOTA_EXCEEDED")]
+    QuotaExceeded,
+    #[serde(rename = "TRIGGER_EVENT_ERROR_THRESHOLD_REACHED")]
+    ErrorThresholdReached,
+    #[serde(rename = "TRIGGER_EVENT_RATE_LIMIT_REACHED")]
+    RateLimitReached,
+    #[serde(rename = "TRIGGER_EVENT_DATA_VALIDATION_FAILED")]
+    DataValidationFailed,
+    #[serde(rename = "TRIGGER_EVENT_NEW_PROXY_NEEDED")]
+    NewProxyNeeded,
+    #[serde(rename = "TRIGGER_EVENT_SCHEDULED_MAINTENANCE")]
+    ScheduledMaintenance,
+}
+
+impl std::fmt::Display for TriggerEvent {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            TriggerEvent::Unspecified => write!(f, "TRIGGER_EVENT_UNSPECIFIED"),
+            TriggerEvent::JobStarted => write!(f, "TRIGGER_EVENT_JOB_STARTED"),
+            TriggerEvent::JobCompleted => write!(f, "TRIGGER_EVENT_JOB_COMPLETED"),
+            TriggerEvent::JobFailed => write!(f, "TRIGGER_EVENT_JOB_FAILED"),
+            TriggerEvent::LeadFound => write!(f, "TRIGGER_EVENT_LEAD_FOUND"),
+            TriggerEvent::QuotaExceeded => write!(f, "TRIGGER_EVENT_QUOTA_EXCEEDED"),
+            TriggerEvent::ErrorThresholdReached => write!(f, "TRIGGER_EVENT_ERROR_THRESHOLD_REACHED"),
+            TriggerEvent::RateLimitReached => write!(f, "TRIGGER_EVENT_RATE_LIMIT_REACHED"),
+            TriggerEvent::DataValidationFailed => write!(f, "TRIGGER_EVENT_DATA_VALIDATION_FAILED"),
+            TriggerEvent::NewProxyNeeded => write!(f, "TRIGGER_EVENT_NEW_PROXY_NEEDED"),
+            TriggerEvent::ScheduledMaintenance => write!(f, "TRIGGER_EVENT_SCHEDULED_MAINTENANCE"),
+        }
+    }
+}
+
+impl std::str::FromStr for TriggerEvent {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s {
+            "TRIGGER_EVENT_UNSPECIFIED" => std::result::Result::Ok(TriggerEvent::Unspecified),
+            "TRIGGER_EVENT_JOB_STARTED" => std::result::Result::Ok(TriggerEvent::JobStarted),
+            "TRIGGER_EVENT_JOB_COMPLETED" => std::result::Result::Ok(TriggerEvent::JobCompleted),
+            "TRIGGER_EVENT_JOB_FAILED" => std::result::Result::Ok(TriggerEvent::JobFailed),
+            "TRIGGER_EVENT_LEAD_FOUND" => std::result::Result::Ok(TriggerEvent::LeadFound),
+            "TRIGGER_EVENT_QUOTA_EXCEEDED" => std::result::Result::Ok(TriggerEvent::QuotaExceeded),
+            "TRIGGER_EVENT_ERROR_THRESHOLD_REACHED" => std::result::Result::Ok(TriggerEvent::ErrorThresholdReached),
+            "TRIGGER_EVENT_RATE_LIMIT_REACHED" => std::result::Result::Ok(TriggerEvent::RateLimitReached),
+            "TRIGGER_EVENT_DATA_VALIDATION_FAILED" => std::result::Result::Ok(TriggerEvent::DataValidationFailed),
+            "TRIGGER_EVENT_NEW_PROXY_NEEDED" => std::result::Result::Ok(TriggerEvent::NewProxyNeeded),
+            "TRIGGER_EVENT_SCHEDULED_MAINTENANCE" => std::result::Result::Ok(TriggerEvent::ScheduledMaintenance),
+            _ => std::result::Result::Err(format!("Value not valid: {}", s)),
+        }
+    }
+}
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
@@ -17244,6 +17543,420 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into ValidationErrorMessageResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct WebhookConfig {
+    #[serde(rename = "id")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub id: Option<String>,
+
+    #[serde(rename = "url")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub url: Option<String>,
+
+    /// e.g., \"basic\", \"bearer\", \"custom\"
+    #[serde(rename = "authType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub auth_type: Option<String>,
+
+    #[serde(rename = "authToken")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub auth_token: Option<String>,
+
+    #[serde(rename = "customHeaders")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub custom_headers: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "maxRetries")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub max_retries: Option<i32>,
+
+    #[serde(rename = "retryInterval")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub retry_interval: Option<String>,
+
+    #[serde(rename = "triggerEvents")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub trigger_events: Option<Vec<models::TriggerEvent>>,
+
+    #[serde(rename = "includedFields")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub included_fields: Option<Vec<models::IncludedField>>,
+
+    #[serde(rename = "includeFullResults")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub include_full_results: Option<bool>,
+
+    #[serde(rename = "payloadFormat")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub payload_format: Option<models::PayloadFormat>,
+
+    #[serde(rename = "verifySsl")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub verify_ssl: Option<bool>,
+
+    #[serde(rename = "signingSecret")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub signing_secret: Option<String>,
+
+    #[serde(rename = "rateLimit")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub rate_limit: Option<i32>,
+
+    #[serde(rename = "rateLimitInterval")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub rate_limit_interval: Option<String>,
+
+    #[serde(rename = "createdAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "updatedAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub updated_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "lastTriggeredAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub last_triggered_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "successfulCalls")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub successful_calls: Option<i32>,
+
+    #[serde(rename = "failedCalls")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub failed_calls: Option<i32>,
+
+    #[serde(rename = "metadata")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub metadata: Option<serde_json::Value>,
+
+}
+
+
+impl WebhookConfig {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> WebhookConfig {
+        WebhookConfig {
+            id: None,
+            url: None,
+            auth_type: None,
+            auth_token: None,
+            custom_headers: None,
+            max_retries: None,
+            retry_interval: None,
+            trigger_events: None,
+            included_fields: None,
+            include_full_results: None,
+            payload_format: None,
+            verify_ssl: None,
+            signing_secret: None,
+            rate_limit: None,
+            rate_limit_interval: None,
+            created_at: None,
+            updated_at: None,
+            last_triggered_at: None,
+            successful_calls: None,
+            failed_calls: None,
+            metadata: None,
+        }
+    }
+}
+
+/// Converts the WebhookConfig value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for WebhookConfig {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.id.as_ref().map(|id| {
+                [
+                    "id".to_string(),
+                    id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.url.as_ref().map(|url| {
+                [
+                    "url".to_string(),
+                    url.to_string(),
+                ].join(",")
+            }),
+
+
+            self.auth_type.as_ref().map(|auth_type| {
+                [
+                    "authType".to_string(),
+                    auth_type.to_string(),
+                ].join(",")
+            }),
+
+
+            self.auth_token.as_ref().map(|auth_token| {
+                [
+                    "authToken".to_string(),
+                    auth_token.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping customHeaders in query parameter serialization
+
+
+            self.max_retries.as_ref().map(|max_retries| {
+                [
+                    "maxRetries".to_string(),
+                    max_retries.to_string(),
+                ].join(",")
+            }),
+
+
+            self.retry_interval.as_ref().map(|retry_interval| {
+                [
+                    "retryInterval".to_string(),
+                    retry_interval.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping triggerEvents in query parameter serialization
+
+            // Skipping includedFields in query parameter serialization
+
+
+            self.include_full_results.as_ref().map(|include_full_results| {
+                [
+                    "includeFullResults".to_string(),
+                    include_full_results.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping payloadFormat in query parameter serialization
+
+
+            self.verify_ssl.as_ref().map(|verify_ssl| {
+                [
+                    "verifySsl".to_string(),
+                    verify_ssl.to_string(),
+                ].join(",")
+            }),
+
+
+            self.signing_secret.as_ref().map(|signing_secret| {
+                [
+                    "signingSecret".to_string(),
+                    signing_secret.to_string(),
+                ].join(",")
+            }),
+
+
+            self.rate_limit.as_ref().map(|rate_limit| {
+                [
+                    "rateLimit".to_string(),
+                    rate_limit.to_string(),
+                ].join(",")
+            }),
+
+
+            self.rate_limit_interval.as_ref().map(|rate_limit_interval| {
+                [
+                    "rateLimitInterval".to_string(),
+                    rate_limit_interval.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping createdAt in query parameter serialization
+
+            // Skipping updatedAt in query parameter serialization
+
+            // Skipping lastTriggeredAt in query parameter serialization
+
+
+            self.successful_calls.as_ref().map(|successful_calls| {
+                [
+                    "successfulCalls".to_string(),
+                    successful_calls.to_string(),
+                ].join(",")
+            }),
+
+
+            self.failed_calls.as_ref().map(|failed_calls| {
+                [
+                    "failedCalls".to_string(),
+                    failed_calls.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping metadata in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a WebhookConfig value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for WebhookConfig {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub id: Vec<String>,
+            pub url: Vec<String>,
+            pub auth_type: Vec<String>,
+            pub auth_token: Vec<String>,
+            pub custom_headers: Vec<std::collections::HashMap<String, String>>,
+            pub max_retries: Vec<i32>,
+            pub retry_interval: Vec<String>,
+            pub trigger_events: Vec<Vec<models::TriggerEvent>>,
+            pub included_fields: Vec<Vec<models::IncludedField>>,
+            pub include_full_results: Vec<bool>,
+            pub payload_format: Vec<models::PayloadFormat>,
+            pub verify_ssl: Vec<bool>,
+            pub signing_secret: Vec<String>,
+            pub rate_limit: Vec<i32>,
+            pub rate_limit_interval: Vec<String>,
+            pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub last_triggered_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub successful_calls: Vec<i32>,
+            pub failed_calls: Vec<i32>,
+            pub metadata: Vec<serde_json::Value>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing WebhookConfig".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "id" => intermediate_rep.id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "url" => intermediate_rep.url.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "authType" => intermediate_rep.auth_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "authToken" => intermediate_rep.auth_token.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "customHeaders" => return std::result::Result::Err("Parsing a container in this style is not supported in WebhookConfig".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "maxRetries" => intermediate_rep.max_retries.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "retryInterval" => intermediate_rep.retry_interval.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "triggerEvents" => return std::result::Result::Err("Parsing a container in this style is not supported in WebhookConfig".to_string()),
+                    "includedFields" => return std::result::Result::Err("Parsing a container in this style is not supported in WebhookConfig".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "includeFullResults" => intermediate_rep.include_full_results.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "payloadFormat" => intermediate_rep.payload_format.push(<models::PayloadFormat as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "verifySsl" => intermediate_rep.verify_ssl.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "signingSecret" => intermediate_rep.signing_secret.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "rateLimit" => intermediate_rep.rate_limit.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "rateLimitInterval" => intermediate_rep.rate_limit_interval.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "lastTriggeredAt" => intermediate_rep.last_triggered_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "successfulCalls" => intermediate_rep.successful_calls.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "failedCalls" => intermediate_rep.failed_calls.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "metadata" => intermediate_rep.metadata.push(<serde_json::Value as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing WebhookConfig".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(WebhookConfig {
+            id: intermediate_rep.id.into_iter().next(),
+            url: intermediate_rep.url.into_iter().next(),
+            auth_type: intermediate_rep.auth_type.into_iter().next(),
+            auth_token: intermediate_rep.auth_token.into_iter().next(),
+            custom_headers: intermediate_rep.custom_headers.into_iter().next(),
+            max_retries: intermediate_rep.max_retries.into_iter().next(),
+            retry_interval: intermediate_rep.retry_interval.into_iter().next(),
+            trigger_events: intermediate_rep.trigger_events.into_iter().next(),
+            included_fields: intermediate_rep.included_fields.into_iter().next(),
+            include_full_results: intermediate_rep.include_full_results.into_iter().next(),
+            payload_format: intermediate_rep.payload_format.into_iter().next(),
+            verify_ssl: intermediate_rep.verify_ssl.into_iter().next(),
+            signing_secret: intermediate_rep.signing_secret.into_iter().next(),
+            rate_limit: intermediate_rep.rate_limit.into_iter().next(),
+            rate_limit_interval: intermediate_rep.rate_limit_interval.into_iter().next(),
+            created_at: intermediate_rep.created_at.into_iter().next(),
+            updated_at: intermediate_rep.updated_at.into_iter().next(),
+            last_triggered_at: intermediate_rep.last_triggered_at.into_iter().next(),
+            successful_calls: intermediate_rep.successful_calls.into_iter().next(),
+            failed_calls: intermediate_rep.failed_calls.into_iter().next(),
+            metadata: intermediate_rep.metadata.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<WebhookConfig> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<WebhookConfig>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<WebhookConfig>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for WebhookConfig - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<WebhookConfig> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <WebhookConfig as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into WebhookConfig - {}",
                                 value, err))
                     }
              },

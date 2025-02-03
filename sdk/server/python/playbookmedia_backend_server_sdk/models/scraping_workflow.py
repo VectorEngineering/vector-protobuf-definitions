@@ -5,12 +5,14 @@ from typing import List, Dict  # noqa: F401
 from playbookmedia_backend_server_sdk.models.base_model import Model
 from playbookmedia_backend_server_sdk.models.output_format import OutputFormat
 from playbookmedia_backend_server_sdk.models.scraping_job import ScrapingJob
+from playbookmedia_backend_server_sdk.models.webhook_config import WebhookConfig
 from playbookmedia_backend_server_sdk.models.workflow_status import WorkflowStatus
 from playbookmedia_backend_server_sdk.models.workspace import Workspace
 from playbookmedia_backend_server_sdk import util
 
 from playbookmedia_backend_server_sdk.models.output_format import OutputFormat  # noqa: E501
 from playbookmedia_backend_server_sdk.models.scraping_job import ScrapingJob  # noqa: E501
+from playbookmedia_backend_server_sdk.models.webhook_config import WebhookConfig  # noqa: E501
 from playbookmedia_backend_server_sdk.models.workflow_status import WorkflowStatus  # noqa: E501
 from playbookmedia_backend_server_sdk.models.workspace import Workspace  # noqa: E501
 
@@ -20,7 +22,7 @@ class ScrapingWorkflow(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, cron_expression=None, next_run_time=None, last_run_time=None, status=WorkflowStatus.UNSPECIFIED, retry_count=None, max_retries=None, alert_emails=None, org_id=None, tenant_id=None, created_at=None, updated_at=None, deleted_at=None, jobs=None, workspace=None, geo_fencing_radius=None, geo_fencing_lat=None, geo_fencing_lon=None, geo_fencing_zoom_min=None, geo_fencing_zoom_max=None, include_reviews=None, include_photos=None, include_business_hours=None, max_reviews_per_business=None, output_format=OutputFormat.UNSPECIFIED, output_destination=None, data_retention=None, anonymize_pii=None, notification_webhook_url=None, notification_slack_channel=None, notification_email_group=None, notification_notify_on_start=None, notification_notify_on_complete=None, notification_notify_on_failure=None, content_filter_allowed_countries=None, content_filter_excluded_types=None, content_filter_minimum_rating=None, content_filter_minimum_reviews=None, qos_max_concurrent_requests=None, qos_max_retries=None, qos_request_timeout=None, qos_enable_javascript=None, respect_robots_txt=None, accept_terms_of_service=None, user_agent=None):  # noqa: E501
+    def __init__(self, id=None, cron_expression=None, next_run_time=None, last_run_time=None, status=WorkflowStatus.UNSPECIFIED, retry_count=None, max_retries=None, alert_emails=None, org_id=None, tenant_id=None, created_at=None, updated_at=None, deleted_at=None, jobs=None, workspace=None, geo_fencing_radius=None, geo_fencing_lat=None, geo_fencing_lon=None, geo_fencing_zoom_min=None, geo_fencing_zoom_max=None, include_reviews=None, include_photos=None, include_business_hours=None, max_reviews_per_business=None, output_format=OutputFormat.UNSPECIFIED, output_destination=None, data_retention=None, anonymize_pii=None, webhooks=None, notification_slack_channel=None, notification_email_group=None, notification_notify_on_start=None, notification_notify_on_complete=None, notification_notify_on_failure=None, content_filter_allowed_countries=None, content_filter_excluded_types=None, content_filter_minimum_rating=None, content_filter_minimum_reviews=None, qos_max_concurrent_requests=None, qos_max_retries=None, qos_request_timeout=None, qos_enable_javascript=None, respect_robots_txt=None, accept_terms_of_service=None, user_agent=None):  # noqa: E501
         """ScrapingWorkflow - a model defined in OpenAPI
 
         :param id: The id of this ScrapingWorkflow.  # noqa: E501
@@ -79,8 +81,8 @@ class ScrapingWorkflow(Model):
         :type data_retention: str
         :param anonymize_pii: The anonymize_pii of this ScrapingWorkflow.  # noqa: E501
         :type anonymize_pii: bool
-        :param notification_webhook_url: The notification_webhook_url of this ScrapingWorkflow.  # noqa: E501
-        :type notification_webhook_url: str
+        :param webhooks: The webhooks of this ScrapingWorkflow.  # noqa: E501
+        :type webhooks: List[WebhookConfig]
         :param notification_slack_channel: The notification_slack_channel of this ScrapingWorkflow.  # noqa: E501
         :type notification_slack_channel: str
         :param notification_email_group: The notification_email_group of this ScrapingWorkflow.  # noqa: E501
@@ -143,7 +145,7 @@ class ScrapingWorkflow(Model):
             'output_destination': str,
             'data_retention': str,
             'anonymize_pii': bool,
-            'notification_webhook_url': str,
+            'webhooks': List[WebhookConfig],
             'notification_slack_channel': str,
             'notification_email_group': str,
             'notification_notify_on_start': bool,
@@ -191,7 +193,7 @@ class ScrapingWorkflow(Model):
             'output_destination': 'outputDestination',
             'data_retention': 'dataRetention',
             'anonymize_pii': 'anonymizePii',
-            'notification_webhook_url': 'notificationWebhookUrl',
+            'webhooks': 'webhooks',
             'notification_slack_channel': 'notificationSlackChannel',
             'notification_email_group': 'notificationEmailGroup',
             'notification_notify_on_start': 'notificationNotifyOnStart',
@@ -238,7 +240,7 @@ class ScrapingWorkflow(Model):
         self._output_destination = output_destination
         self._data_retention = data_retention
         self._anonymize_pii = anonymize_pii
-        self._notification_webhook_url = notification_webhook_url
+        self._webhooks = webhooks
         self._notification_slack_channel = notification_slack_channel
         self._notification_email_group = notification_email_group
         self._notification_notify_on_start = notification_notify_on_start
@@ -856,25 +858,25 @@ class ScrapingWorkflow(Model):
         self._anonymize_pii = anonymize_pii
 
     @property
-    def notification_webhook_url(self) -> str:
-        """Gets the notification_webhook_url of this ScrapingWorkflow.
+    def webhooks(self) -> List[WebhookConfig]:
+        """Gets the webhooks of this ScrapingWorkflow.
 
 
-        :return: The notification_webhook_url of this ScrapingWorkflow.
-        :rtype: str
+        :return: The webhooks of this ScrapingWorkflow.
+        :rtype: List[WebhookConfig]
         """
-        return self._notification_webhook_url
+        return self._webhooks
 
-    @notification_webhook_url.setter
-    def notification_webhook_url(self, notification_webhook_url: str):
-        """Sets the notification_webhook_url of this ScrapingWorkflow.
+    @webhooks.setter
+    def webhooks(self, webhooks: List[WebhookConfig]):
+        """Sets the webhooks of this ScrapingWorkflow.
 
 
-        :param notification_webhook_url: The notification_webhook_url of this ScrapingWorkflow.
-        :type notification_webhook_url: str
+        :param webhooks: The webhooks of this ScrapingWorkflow.
+        :type webhooks: List[WebhookConfig]
         """
 
-        self._notification_webhook_url = notification_webhook_url
+        self._webhooks = webhooks
 
     @property
     def notification_slack_channel(self) -> str:

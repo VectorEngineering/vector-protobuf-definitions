@@ -6,10 +6,14 @@ import org.openapitools.model.AuthErrorCode;
 import org.openapitools.model.BackgroundJobStatus;
 import org.openapitools.model.DayOfWeek;
 import org.openapitools.model.EmployeeBenefit;
+import org.openapitools.model.IncludedField;
 import org.openapitools.model.InternalErrorCode;
 import org.openapitools.model.NotFoundErrorCode;
+import org.openapitools.model.NullValue;
 import org.openapitools.model.OutputFormat;
+import org.openapitools.model.PayloadFormat;
 import org.openapitools.model.RevenueRange;
+import org.openapitools.model.TriggerEvent;
 import org.openapitools.model.ValidationErrorCode;
 import org.openapitools.model.WorkflowStatus;
 
@@ -74,6 +78,15 @@ public class EnumConverterConfiguration {
             }
         };
     }
+    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.includedFieldConverter")
+    Converter<String, IncludedField> includedFieldConverter() {
+        return new Converter<String, IncludedField>() {
+            @Override
+            public IncludedField convert(String source) {
+                return IncludedField.fromValue(source);
+            }
+        };
+    }
     @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.internalErrorCodeConverter")
     Converter<String, InternalErrorCode> internalErrorCodeConverter() {
         return new Converter<String, InternalErrorCode>() {
@@ -92,6 +105,15 @@ public class EnumConverterConfiguration {
             }
         };
     }
+    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.nullValueConverter")
+    Converter<String, NullValue> nullValueConverter() {
+        return new Converter<String, NullValue>() {
+            @Override
+            public NullValue convert(String source) {
+                return NullValue.fromValue(source);
+            }
+        };
+    }
     @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.outputFormatConverter")
     Converter<String, OutputFormat> outputFormatConverter() {
         return new Converter<String, OutputFormat>() {
@@ -101,12 +123,30 @@ public class EnumConverterConfiguration {
             }
         };
     }
+    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.payloadFormatConverter")
+    Converter<String, PayloadFormat> payloadFormatConverter() {
+        return new Converter<String, PayloadFormat>() {
+            @Override
+            public PayloadFormat convert(String source) {
+                return PayloadFormat.fromValue(source);
+            }
+        };
+    }
     @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.revenueRangeConverter")
     Converter<String, RevenueRange> revenueRangeConverter() {
         return new Converter<String, RevenueRange>() {
             @Override
             public RevenueRange convert(String source) {
                 return RevenueRange.fromValue(source);
+            }
+        };
+    }
+    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.triggerEventConverter")
+    Converter<String, TriggerEvent> triggerEventConverter() {
+        return new Converter<String, TriggerEvent>() {
+            @Override
+            public TriggerEvent convert(String source) {
+                return TriggerEvent.fromValue(source);
             }
         };
     }

@@ -29,6 +29,7 @@ var (
 	ScrapingWorkflowORM *scrapingWorkflowORM
 	TenantAPIKeyORM     *tenantAPIKeyORM
 	TenantORM           *tenantORM
+	WebhookConfigORM    *webhookConfigORM
 	WorkspaceORM        *workspaceORM
 )
 
@@ -46,6 +47,7 @@ func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	ScrapingWorkflowORM = &Q.ScrapingWorkflowORM
 	TenantAPIKeyORM = &Q.TenantAPIKeyORM
 	TenantORM = &Q.TenantORM
+	WebhookConfigORM = &Q.WebhookConfigORM
 	WorkspaceORM = &Q.WorkspaceORM
 }
 
@@ -64,6 +66,7 @@ func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 		ScrapingWorkflowORM: newScrapingWorkflowORM(db, opts...),
 		TenantAPIKeyORM:     newTenantAPIKeyORM(db, opts...),
 		TenantORM:           newTenantORM(db, opts...),
+		WebhookConfigORM:    newWebhookConfigORM(db, opts...),
 		WorkspaceORM:        newWorkspaceORM(db, opts...),
 	}
 }
@@ -83,6 +86,7 @@ type Query struct {
 	ScrapingWorkflowORM scrapingWorkflowORM
 	TenantAPIKeyORM     tenantAPIKeyORM
 	TenantORM           tenantORM
+	WebhookConfigORM    webhookConfigORM
 	WorkspaceORM        workspaceORM
 }
 
@@ -103,6 +107,7 @@ func (q *Query) clone(db *gorm.DB) *Query {
 		ScrapingWorkflowORM: q.ScrapingWorkflowORM.clone(db),
 		TenantAPIKeyORM:     q.TenantAPIKeyORM.clone(db),
 		TenantORM:           q.TenantORM.clone(db),
+		WebhookConfigORM:    q.WebhookConfigORM.clone(db),
 		WorkspaceORM:        q.WorkspaceORM.clone(db),
 	}
 }
@@ -130,6 +135,7 @@ func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 		ScrapingWorkflowORM: q.ScrapingWorkflowORM.replaceDB(db),
 		TenantAPIKeyORM:     q.TenantAPIKeyORM.replaceDB(db),
 		TenantORM:           q.TenantORM.replaceDB(db),
+		WebhookConfigORM:    q.WebhookConfigORM.replaceDB(db),
 		WorkspaceORM:        q.WorkspaceORM.replaceDB(db),
 	}
 }
@@ -147,6 +153,7 @@ type queryCtx struct {
 	ScrapingWorkflowORM IScrapingWorkflowORMDo
 	TenantAPIKeyORM     ITenantAPIKeyORMDo
 	TenantORM           ITenantORMDo
+	WebhookConfigORM    IWebhookConfigORMDo
 	WorkspaceORM        IWorkspaceORMDo
 }
 
@@ -164,6 +171,7 @@ func (q *Query) WithContext(ctx context.Context) *queryCtx {
 		ScrapingWorkflowORM: q.ScrapingWorkflowORM.WithContext(ctx),
 		TenantAPIKeyORM:     q.TenantAPIKeyORM.WithContext(ctx),
 		TenantORM:           q.TenantORM.WithContext(ctx),
+		WebhookConfigORM:    q.WebhookConfigORM.WithContext(ctx),
 		WorkspaceORM:        q.WorkspaceORM.WithContext(ctx),
 	}
 }

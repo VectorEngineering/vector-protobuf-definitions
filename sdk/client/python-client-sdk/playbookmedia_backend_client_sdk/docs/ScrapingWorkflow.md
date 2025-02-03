@@ -33,7 +33,7 @@ Name | Type | Description | Notes
 **output_destination** | **str** |  | [optional] 
 **data_retention** | **str** |  | [optional] 
 **anonymize_pii** | **bool** |  | [optional] 
-**notification_webhook_url** | **str** |  | [optional] 
+**webhooks** | [**List[WebhookConfig]**](WebhookConfig.md) |  | [optional] 
 **notification_slack_channel** | **str** |  | [optional] 
 **notification_email_group** | **str** |  | [optional] 
 **notification_notify_on_start** | **bool** |  | [optional] 

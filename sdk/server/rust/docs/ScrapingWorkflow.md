@@ -31,7 +31,7 @@ Name | Type | Description | Notes
 **output_destination** | **String** |  | [optional] [default to None]
 **data_retention** | **String** |  | [optional] [default to None]
 **anonymize_pii** | **bool** |  | [optional] [default to None]
-**notification_webhook_url** | **String** |  | [optional] [default to None]
+**webhooks** | [**Vec<models::WebhookConfig>**](WebhookConfig.md) |  | [optional] [default to None]
 **notification_slack_channel** | **String** |  | [optional] [default to None]
 **notification_email_group** | **String** |  | [optional] [default to None]
 **notification_notify_on_start** | **bool** |  | [optional] [default to None]

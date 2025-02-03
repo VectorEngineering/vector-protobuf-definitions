@@ -37,7 +37,7 @@ type ScrapingWorkflow {
   outputDestination: String!
   dataRetention: String!
   anonymizePii: Boolean!
-  notificationWebhookUrl: String!
+  webhooks: [WebhookConfig!]
   notificationSlackChannel: String!
   notificationEmailGroup: String!
   notificationNotifyOnStart: Boolean!
@@ -85,7 +85,7 @@ input ScrapingWorkflowInput {
     outputDestination: String!
     dataRetention: String!
     anonymizePii: Boolean!
-    notificationWebhookUrl: String!
+    webhooks: [WebhookConfigInput]
     notificationSlackChannel: String!
     notificationEmailGroup: String!
     notificationNotifyOnStart: Boolean!

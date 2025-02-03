@@ -152,6 +152,9 @@ func newLeadORM(db *gorm.DB, opts ...gen.DOOption) leadORM {
 				ScrapingJobs struct {
 					field.RelationField
 				}
+				Webhooks struct {
+					field.RelationField
+				}
 				Workflows struct {
 					field.RelationField
 					Workspace struct {
@@ -196,6 +199,9 @@ func newLeadORM(db *gorm.DB, opts ...gen.DOOption) leadORM {
 					}
 				}
 				ScrapingJobs struct {
+					field.RelationField
+				}
+				Webhooks struct {
 					field.RelationField
 				}
 				Workflows struct {
@@ -256,6 +262,11 @@ func newLeadORM(db *gorm.DB, opts ...gen.DOOption) leadORM {
 					field.RelationField
 				}{
 					RelationField: field.NewRelation("Job.Leads.Workspace.ScrapingJobs", "lead_scraper_servicev1.ScrapingJobORM"),
+				},
+				Webhooks: struct {
+					field.RelationField
+				}{
+					RelationField: field.NewRelation("Job.Leads.Workspace.Webhooks", "lead_scraper_servicev1.WebhookConfigORM"),
 				},
 				Workflows: struct {
 					field.RelationField
@@ -833,6 +844,9 @@ type leadORMBelongsToJob struct {
 				}
 			}
 			ScrapingJobs struct {
+				field.RelationField
+			}
+			Webhooks struct {
 				field.RelationField
 			}
 			Workflows struct {

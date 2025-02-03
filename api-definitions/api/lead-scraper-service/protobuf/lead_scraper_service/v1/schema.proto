@@ -6,6 +6,7 @@ import "protoc-gen-gorm/options/gorm.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
 import "validate/validate.proto";
+import "google/protobuf/struct.proto";
 
 option go_package = "github.com/VectorEngineering/vector-protobuf-definitions/api-definitions/pkg/generated/lead_scraper_service/v1";
 
@@ -393,15 +394,49 @@ message Account {
         ACCOUNT_STATUS_PENDING_VERIFICATION = 3;
     }
     AccountStatus account_status = 10;
-
     // Role-based access control
-    repeated string roles = 11 [(gorm.field).tag = {type: "text[]"}];
-    repeated string permissions = 12 [(gorm.field).tag = {type: "text[]"}];
+    enum Role {
+        ROLE_UNSPECIFIED = 0;
+        ROLE_ADMIN = 1;
+        ROLE_USER = 2;
+        ROLE_VIEWER = 3;
+        ROLE_MANAGER = 4;
+    }
+    repeated Role roles = 11 [
+        (gorm.field).tag = {index: "idx_accounts_roles"}
+    ];
+
+    enum Permission {
+        PERMISSION_UNSPECIFIED = 0;
+        PERMISSION_READ = 1;
+        PERMISSION_WRITE = 2;
+        PERMISSION_DELETE = 3;
+        PERMISSION_MANAGE_USERS = 4;
+        PERMISSION_MANAGE_BILLING = 5;
+        PERMISSION_VIEW_ANALYTICS = 6;
+        PERMISSION_MANAGE_WORKFLOWS = 7;
+    }
+    repeated Permission permissions = 12 [
+        (gorm.field).tag = {index: "idx_accounts_permissions"}
+    ];
 
     // Security settings
     bool mfa_enabled = 13;
     google.protobuf.Timestamp last_login_at = 14;
-    string timezone = 15;
+    enum Timezone {
+        TIMEZONE_UNSPECIFIED = 0;
+        TIMEZONE_UTC = 1;
+        TIMEZONE_EST = 2;
+        TIMEZONE_CST = 3;
+        TIMEZONE_MST = 4;
+        TIMEZONE_PST = 5;
+        TIMEZONE_GMT = 6;
+        TIMEZONE_CET = 7;
+        TIMEZONE_IST = 8;
+        TIMEZONE_JST = 9;
+        TIMEZONE_AEST = 10;
+    }
+    Timezone timezone = 15;
 
     // Usage tracking
     int32 total_jobs_run = 17;
@@ -488,6 +523,13 @@ message Workspace {
         disable_association_autoupdate: false
         preload: true
     }];
+
+    // embedded webhook config with relationship
+    repeated WebhookConfig webhooks = 24 [(gorm.field).has_many = {
+        disable_association_autocreate: false
+        disable_association_autoupdate: false
+        preload: true
+    }];
 }
 
 /**
@@ -544,7 +586,25 @@ message ScrapingJob {
     repeated string keywords = 8;
 
     // ISO 639-1 language code (e.g., "en", "el")
-    string lang = 9;
+    enum Language {
+        LANGUAGE_UNSPECIFIED = 0;
+        LANGUAGE_ENGLISH = 1;    // en
+        LANGUAGE_SPANISH = 2;    // es
+        LANGUAGE_FRENCH = 3;     // fr
+        LANGUAGE_GERMAN = 4;     // de
+        LANGUAGE_ITALIAN = 5;    // it
+        LANGUAGE_PORTUGUESE = 6; // pt
+        LANGUAGE_DUTCH = 7;      // nl
+        LANGUAGE_RUSSIAN = 8;    // ru
+        LANGUAGE_CHINESE = 9;    // zh
+        LANGUAGE_JAPANESE = 10;  // ja
+        LANGUAGE_KOREAN = 11;    // ko
+        LANGUAGE_ARABIC = 12;    // ar
+        LANGUAGE_HINDI = 13;     // hi
+        LANGUAGE_GREEK = 14;     // el
+        LANGUAGE_TURKISH = 15;   // tr
+    }
+    Language lang = 9 [(validate.rules).enum.defined_only = true];
 
     // Map zoom level (1-20)
     int32 zoom = 10 [
@@ -564,7 +624,7 @@ message ScrapingJob {
     int32 radius = 14;
 
     // Depth of recursive search (1-10)
-    int32 depth = 15;
+    int32 depth = 15 [(validate.rules).int32 = {gte: 1, lte: 10}];
 
     // Whether to extract email addresses
     bool email = 16;
@@ -596,8 +656,9 @@ message ScrapingWorkflow {
 
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
     
+    string name = 2 [(gorm.field).tag = {index: "idx_scraping_workflows_name"}];
     // Scheduling options
-    string cron_expression = 2;
+    string cron_expression = 3;
     // Execution settings
     google.protobuf.Timestamp next_run_time = 4;
     google.protobuf.Timestamp last_run_time = 5;
@@ -607,10 +668,6 @@ message ScrapingWorkflow {
     int32 retry_count = 7;
     int32 max_retries = 8 [(validate.rules).int32 = {gt: 0}];
     string alert_emails = 9;
-    
-    // Org context
-    string org_id = 10 [(validate.rules).string.min_len = 1];
-    string tenant_id = 11 [(validate.rules).string.min_len = 1];
     
     // Audit fields
     google.protobuf.Timestamp created_at = 12;
@@ -649,7 +706,8 @@ message ScrapingWorkflow {
     google.protobuf.Duration data_retention = 29;
     bool anonymize_pii = 30;
 
-    string notification_webhook_url = 31 [(validate.rules).string.uri = true];
+    
+    // Notification preferences can stay as they provide quick access to common notification channels
     string notification_slack_channel = 32;
     string notification_email_group = 33;
     bool notification_notify_on_start = 34;
@@ -673,6 +731,139 @@ message ScrapingWorkflow {
 }
 
 /**
+ * WebhookConfig represents a webhook integration configuration
+ * It defines how and when notifications should be sent to external systems
+ */
+message WebhookConfig {
+    option (gorm.opts) = {
+        ormable: true
+        table: "webhook_configs"
+    };
+
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true, index: "idx_webhook_configs_id"}];
+    
+    // URL to send webhook notifications to
+    string url = 2 [(validate.rules).string.uri = true];
+    
+    // Authentication
+    string auth_type = 3; // e.g., "basic", "bearer", "custom"
+    string auth_token = 4;
+    map<string, string> custom_headers = 5;
+    
+    // Retry configuration
+    int32 max_retries = 6 [(validate.rules).int32 = {gte: 0, lte: 5}];
+    google.protobuf.Duration retry_interval = 7;
+    
+    // Event triggers using enum
+    enum TriggerEvent {
+        TRIGGER_EVENT_UNSPECIFIED = 0;
+        TRIGGER_EVENT_JOB_STARTED = 1;
+        TRIGGER_EVENT_JOB_COMPLETED = 2;
+        TRIGGER_EVENT_JOB_FAILED = 3;
+        TRIGGER_EVENT_LEAD_FOUND = 4;
+        TRIGGER_EVENT_QUOTA_EXCEEDED = 5;
+        TRIGGER_EVENT_ERROR_THRESHOLD_REACHED = 6;
+        TRIGGER_EVENT_RATE_LIMIT_REACHED = 7;
+        TRIGGER_EVENT_DATA_VALIDATION_FAILED = 8;
+        TRIGGER_EVENT_NEW_PROXY_NEEDED = 9;
+        TRIGGER_EVENT_SCHEDULED_MAINTENANCE = 10;
+    }
+    repeated TriggerEvent trigger_events = 8;
+    
+    // Payload customization with enum - aligned with Lead message fields
+    enum IncludedField {
+        INCLUDED_FIELD_UNSPECIFIED = 0;
+        
+        // Core business information
+        INCLUDED_FIELD_NAME = 1;
+        INCLUDED_FIELD_WEBSITE = 2;
+        INCLUDED_FIELD_PHONE = 3;
+        INCLUDED_FIELD_ADDRESS = 4;
+        INCLUDED_FIELD_LOCATION = 5;  // city, state, country
+        
+        // Geographic data
+        INCLUDED_FIELD_COORDINATES = 6;  // latitude, longitude
+        
+        // Ratings and reviews
+        INCLUDED_FIELD_GOOGLE_RATING = 7;
+        INCLUDED_FIELD_REVIEW_COUNT = 8;
+        INCLUDED_FIELD_REVIEWS = 9;
+        
+        // Business details
+        INCLUDED_FIELD_BUSINESS_HOURS = 10;
+        INCLUDED_FIELD_BUSINESS_STATUS = 11;
+        INCLUDED_FIELD_PLACE_ID = 12;
+        INCLUDED_FIELD_GOOGLE_MAPS_URL = 13;
+        
+        // Rich media
+        INCLUDED_FIELD_PHOTOS = 14;
+        INCLUDED_FIELD_MAIN_PHOTO = 15;
+        
+        // Categories and attributes
+        INCLUDED_FIELD_BUSINESS_TYPES = 16;
+        INCLUDED_FIELD_AMENITIES = 17;
+        INCLUDED_FIELD_PAYMENT_METHODS = 18;
+        
+        // Social media
+        INCLUDED_FIELD_SOCIAL_PROFILES = 19;
+        
+        // Enhanced business data
+        INCLUDED_FIELD_EMPLOYEE_COUNT = 20;
+        INCLUDED_FIELD_REVENUE_INFO = 21;
+        INCLUDED_FIELD_FOUNDED_YEAR = 22;
+        INCLUDED_FIELD_CERTIFICATIONS = 23;
+        
+        // Industry classification
+        INCLUDED_FIELD_NAICS_CODE = 24;
+        INCLUDED_FIELD_SIC_CODE = 25;
+        
+        // Metadata
+        INCLUDED_FIELD_SCRAPING_METADATA = 26;  // timestamps, session info
+        INCLUDED_FIELD_COMPLIANCE_INFO = 27;    // sustainability, certifications
+        
+        // Contact information
+        INCLUDED_FIELD_ALTERNATE_PHONES = 28;
+        INCLUDED_FIELD_CONTACT_PERSON = 29;
+        INCLUDED_FIELD_CONTACT_EMAIL = 30;
+    }
+    repeated IncludedField included_fields = 10;
+    
+    // Payload format enum
+    enum PayloadFormat {
+        PAYLOAD_FORMAT_UNSPECIFIED = 0;
+        PAYLOAD_FORMAT_JSON = 1;
+        PAYLOAD_FORMAT_XML = 2;
+        PAYLOAD_FORMAT_FORM_DATA = 3;
+        PAYLOAD_FORMAT_PROTOBUF = 4;
+        PAYLOAD_FORMAT_YAML = 5;
+    }
+    
+    bool include_full_results = 9;
+    PayloadFormat payload_format = 11 [(validate.rules).enum.defined_only = true];
+    
+    // Security
+    bool verify_ssl = 12;
+    string signing_secret = 13;
+    
+    // Rate limiting
+    int32 rate_limit = 14;
+    google.protobuf.Duration rate_limit_interval = 15;
+    
+    // Audit
+    google.protobuf.Timestamp created_at = 16;
+    google.protobuf.Timestamp updated_at = 17;
+    google.protobuf.Timestamp last_triggered_at = 18;
+    int32 successful_calls = 19;
+    int32 failed_calls = 20;
+
+    // Flexible metadata storage using Google struct
+    google.protobuf.Struct metadata = 21;
+
+    // Webhook name
+    string webhook_name = 22 [(gorm.field).tag = {index: "idx_webhook_configs_webhook_name"}];
+}
+
+/**
  * Lead represents a scraped business entity
  */
 message Lead {
@@ -681,7 +872,7 @@ message Lead {
         table: "leads"
     };
 
-    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true, index: "idx_leads_id"}];
     
     // Business details
     string name = 2 [
@@ -698,7 +889,7 @@ message Lead {
     // Scraped data
     double latitude = 9 [(validate.rules).double = {gte: -90, lte: 90}];
     double longitude = 10 [(validate.rules).double = {gte: -180, lte: 180}];
-    float google_rating = 11 [(validate.rules).float = {gte: 0, lte: 5}];
+    float google_rating = 11 [(validate.rules).float = {gte: 0, lte: 10}];
     int32 review_count = 12 [(validate.rules).int32 = {gte: 0}];
     
     // Enrichment data
@@ -862,7 +1053,7 @@ message Review {
         table: "reviews"
     };
 
-    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true, index: "idx_reviews_id"}];
     string author = 2 [(gorm.field).tag = {index: "idx_reviews_author"}];
     float rating = 3;
     string text = 4;

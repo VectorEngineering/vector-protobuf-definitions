@@ -50,6 +50,7 @@ src/main/java/org/openapitools/model/GetWorkflowResponse.java
 src/main/java/org/openapitools/model/GetWorkspaceAnalyticsResponse.java
 src/main/java/org/openapitools/model/GetWorkspaceResponse.java
 src/main/java/org/openapitools/model/GoneErrorMessageResponse.java
+src/main/java/org/openapitools/model/IncludedField.java
 src/main/java/org/openapitools/model/InternalErrorCode.java
 src/main/java/org/openapitools/model/InternalErrorMessageResponse.java
 src/main/java/org/openapitools/model/JobSuccessRate.java
@@ -64,10 +65,12 @@ src/main/java/org/openapitools/model/MethodNotAllowedErrorMessageResponse.java
 src/main/java/org/openapitools/model/NotFoundErrorCode.java
 src/main/java/org/openapitools/model/NotFoundErrorMessageResponse.java
 src/main/java/org/openapitools/model/NotImplementedErrorMessageResponse.java
+src/main/java/org/openapitools/model/NullValue.java
 src/main/java/org/openapitools/model/OperationDetails.java
 src/main/java/org/openapitools/model/OutputFormat.java
 src/main/java/org/openapitools/model/PauseWorkflowBody.java
 src/main/java/org/openapitools/model/PauseWorkflowResponse.java
+src/main/java/org/openapitools/model/PayloadFormat.java
 src/main/java/org/openapitools/model/PaymentInfo.java
 src/main/java/org/openapitools/model/PaymentRequiredErrorMessageResponse.java
 src/main/java/org/openapitools/model/PreconditionFailedErrorMessageResponse.java
@@ -89,6 +92,7 @@ src/main/java/org/openapitools/model/SessionInfo.java
 src/main/java/org/openapitools/model/Suggestions.java
 src/main/java/org/openapitools/model/TokenInfo.java
 src/main/java/org/openapitools/model/TooEarlyErrorMessageResponse.java
+src/main/java/org/openapitools/model/TriggerEvent.java
 src/main/java/org/openapitools/model/TriggerWorkflowBody.java
 src/main/java/org/openapitools/model/TriggerWorkflowResponse.java
 src/main/java/org/openapitools/model/UnprocessableEntityErrorMessageResponse.java
@@ -102,6 +106,7 @@ src/main/java/org/openapitools/model/UpdateWorkspaceRequest.java
 src/main/java/org/openapitools/model/UpdateWorkspaceResponse.java
 src/main/java/org/openapitools/model/ValidationErrorCode.java
 src/main/java/org/openapitools/model/ValidationErrorMessageResponse.java
+src/main/java/org/openapitools/model/WebhookConfig.java
 src/main/java/org/openapitools/model/WorkflowStatus.java
 src/main/java/org/openapitools/model/Workspace.java
 src/main/resources/application.properties

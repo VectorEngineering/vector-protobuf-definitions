@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.OutputFormat;
 import org.openapitools.model.ScrapingJob;
+import org.openapitools.model.WebhookConfig;
 import org.openapitools.model.WorkflowStatus;
 import org.openapitools.model.Workspace;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,7 +29,7 @@ import javax.annotation.Generated;
  * ScrapingWorkflow
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-02T05:34:49.009100-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T06:30:06.935816-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ScrapingWorkflow {
 
   private String id;
@@ -93,7 +94,8 @@ public class ScrapingWorkflow {
 
   private Boolean anonymizePii;
 
-  private String notificationWebhookUrl;
+  @Valid
+  private List<@Valid WebhookConfig> webhooks = new ArrayList<>();
 
   private String notificationSlackChannel;
 
@@ -697,24 +699,32 @@ public class ScrapingWorkflow {
     this.anonymizePii = anonymizePii;
   }
 
-  public ScrapingWorkflow notificationWebhookUrl(String notificationWebhookUrl) {
-    this.notificationWebhookUrl = notificationWebhookUrl;
+  public ScrapingWorkflow webhooks(List<@Valid WebhookConfig> webhooks) {
+    this.webhooks = webhooks;
+    return this;
+  }
+
+  public ScrapingWorkflow addWebhooksItem(WebhookConfig webhooksItem) {
+    if (this.webhooks == null) {
+      this.webhooks = new ArrayList<>();
+    }
+    this.webhooks.add(webhooksItem);
     return this;
   }
 
   /**
-   * Get notificationWebhookUrl
-   * @return notificationWebhookUrl
+   * Get webhooks
+   * @return webhooks
    */
-  
-  @Schema(name = "notificationWebhookUrl", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("notificationWebhookUrl")
-  public String getNotificationWebhookUrl() {
-    return notificationWebhookUrl;
+  @Valid 
+  @Schema(name = "webhooks", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("webhooks")
+  public List<@Valid WebhookConfig> getWebhooks() {
+    return webhooks;
   }
 
-  public void setNotificationWebhookUrl(String notificationWebhookUrl) {
-    this.notificationWebhookUrl = notificationWebhookUrl;
+  public void setWebhooks(List<@Valid WebhookConfig> webhooks) {
+    this.webhooks = webhooks;
   }
 
   public ScrapingWorkflow notificationSlackChannel(String notificationSlackChannel) {
@@ -1090,7 +1100,7 @@ public class ScrapingWorkflow {
         Objects.equals(this.outputDestination, scrapingWorkflow.outputDestination) &&
         Objects.equals(this.dataRetention, scrapingWorkflow.dataRetention) &&
         Objects.equals(this.anonymizePii, scrapingWorkflow.anonymizePii) &&
-        Objects.equals(this.notificationWebhookUrl, scrapingWorkflow.notificationWebhookUrl) &&
+        Objects.equals(this.webhooks, scrapingWorkflow.webhooks) &&
         Objects.equals(this.notificationSlackChannel, scrapingWorkflow.notificationSlackChannel) &&
         Objects.equals(this.notificationEmailGroup, scrapingWorkflow.notificationEmailGroup) &&
         Objects.equals(this.notificationNotifyOnStart, scrapingWorkflow.notificationNotifyOnStart) &&
@@ -1111,7 +1121,7 @@ public class ScrapingWorkflow {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, cronExpression, nextRunTime, lastRunTime, status, retryCount, maxRetries, alertEmails, orgId, tenantId, createdAt, updatedAt, deletedAt, jobs, workspace, geoFencingRadius, geoFencingLat, geoFencingLon, geoFencingZoomMin, geoFencingZoomMax, includeReviews, includePhotos, includeBusinessHours, maxReviewsPerBusiness, outputFormat, outputDestination, dataRetention, anonymizePii, notificationWebhookUrl, notificationSlackChannel, notificationEmailGroup, notificationNotifyOnStart, notificationNotifyOnComplete, notificationNotifyOnFailure, contentFilterAllowedCountries, contentFilterExcludedTypes, contentFilterMinimumRating, contentFilterMinimumReviews, qosMaxConcurrentRequests, qosMaxRetries, qosRequestTimeout, qosEnableJavascript, respectRobotsTxt, acceptTermsOfService, userAgent);
+    return Objects.hash(id, cronExpression, nextRunTime, lastRunTime, status, retryCount, maxRetries, alertEmails, orgId, tenantId, createdAt, updatedAt, deletedAt, jobs, workspace, geoFencingRadius, geoFencingLat, geoFencingLon, geoFencingZoomMin, geoFencingZoomMax, includeReviews, includePhotos, includeBusinessHours, maxReviewsPerBusiness, outputFormat, outputDestination, dataRetention, anonymizePii, webhooks, notificationSlackChannel, notificationEmailGroup, notificationNotifyOnStart, notificationNotifyOnComplete, notificationNotifyOnFailure, contentFilterAllowedCountries, contentFilterExcludedTypes, contentFilterMinimumRating, contentFilterMinimumReviews, qosMaxConcurrentRequests, qosMaxRetries, qosRequestTimeout, qosEnableJavascript, respectRobotsTxt, acceptTermsOfService, userAgent);
   }
 
   @Override
@@ -1146,7 +1156,7 @@ public class ScrapingWorkflow {
     sb.append("    outputDestination: ").append(toIndentedString(outputDestination)).append("\n");
     sb.append("    dataRetention: ").append(toIndentedString(dataRetention)).append("\n");
     sb.append("    anonymizePii: ").append(toIndentedString(anonymizePii)).append("\n");
-    sb.append("    notificationWebhookUrl: ").append(toIndentedString(notificationWebhookUrl)).append("\n");
+    sb.append("    webhooks: ").append(toIndentedString(webhooks)).append("\n");
     sb.append("    notificationSlackChannel: ").append(toIndentedString(notificationSlackChannel)).append("\n");
     sb.append("    notificationEmailGroup: ").append(toIndentedString(notificationEmailGroup)).append("\n");
     sb.append("    notificationNotifyOnStart: ").append(toIndentedString(notificationNotifyOnStart)).append("\n");

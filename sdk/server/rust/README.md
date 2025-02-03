@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-02T05:34:50.678086-05:00[America/New_York]
+- Build date: 2025-02-03T06:30:08.573932-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -157,6 +157,7 @@ Method | HTTP request | Description
  - [GetWorkspaceAnalyticsResponse](docs/GetWorkspaceAnalyticsResponse.md)
  - [GetWorkspaceResponse](docs/GetWorkspaceResponse.md)
  - [GoneErrorMessageResponse](docs/GoneErrorMessageResponse.md)
+ - [IncludedField](docs/IncludedField.md)
  - [InternalErrorCode](docs/InternalErrorCode.md)
  - [InternalErrorMessageResponse](docs/InternalErrorMessageResponse.md)
  - [JobSuccessRate](docs/JobSuccessRate.md)
@@ -171,10 +172,12 @@ Method | HTTP request | Description
  - [NotFoundErrorCode](docs/NotFoundErrorCode.md)
  - [NotFoundErrorMessageResponse](docs/NotFoundErrorMessageResponse.md)
  - [NotImplementedErrorMessageResponse](docs/NotImplementedErrorMessageResponse.md)
+ - [NullValue](docs/NullValue.md)
  - [OperationDetails](docs/OperationDetails.md)
  - [OutputFormat](docs/OutputFormat.md)
  - [PauseWorkflowBody](docs/PauseWorkflowBody.md)
  - [PauseWorkflowResponse](docs/PauseWorkflowResponse.md)
+ - [PayloadFormat](docs/PayloadFormat.md)
  - [PaymentInfo](docs/PaymentInfo.md)
  - [PaymentRequiredErrorMessageResponse](docs/PaymentRequiredErrorMessageResponse.md)
  - [PreconditionFailedErrorMessageResponse](docs/PreconditionFailedErrorMessageResponse.md)
@@ -196,6 +199,7 @@ Method | HTTP request | Description
  - [Suggestions](docs/Suggestions.md)
  - [TokenInfo](docs/TokenInfo.md)
  - [TooEarlyErrorMessageResponse](docs/TooEarlyErrorMessageResponse.md)
+ - [TriggerEvent](docs/TriggerEvent.md)
  - [TriggerWorkflowBody](docs/TriggerWorkflowBody.md)
  - [TriggerWorkflowResponse](docs/TriggerWorkflowResponse.md)
  - [UnprocessableEntityErrorMessageResponse](docs/UnprocessableEntityErrorMessageResponse.md)
@@ -209,6 +213,7 @@ Method | HTTP request | Description
  - [UpdateWorkspaceResponse](docs/UpdateWorkspaceResponse.md)
  - [ValidationErrorCode](docs/ValidationErrorCode.md)
  - [ValidationErrorMessageResponse](docs/ValidationErrorMessageResponse.md)
+ - [WebhookConfig](docs/WebhookConfig.md)
  - [WorkflowStatus](docs/WorkflowStatus.md)
  - [Workspace](docs/Workspace.md)
 

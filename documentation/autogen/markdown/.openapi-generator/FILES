@@ -42,6 +42,7 @@ Models/GetWorkflowResponse.md
 Models/GetWorkspaceAnalyticsResponse.md
 Models/GetWorkspaceResponse.md
 Models/GoneErrorMessageResponse.md
+Models/IncludedField.md
 Models/InternalErrorCode.md
 Models/InternalErrorMessageResponse.md
 Models/JobSuccessRate.md
@@ -56,10 +57,12 @@ Models/MethodNotAllowedErrorMessageResponse.md
 Models/NotFoundErrorCode.md
 Models/NotFoundErrorMessageResponse.md
 Models/NotImplementedErrorMessageResponse.md
+Models/NullValue.md
 Models/OperationDetails.md
 Models/OutputFormat.md
 Models/PauseWorkflowBody.md
 Models/PauseWorkflowResponse.md
+Models/PayloadFormat.md
 Models/PaymentInfo.md
 Models/PaymentRequiredErrorMessageResponse.md
 Models/PreconditionFailedErrorMessageResponse.md
@@ -80,6 +83,7 @@ Models/SessionInfo.md
 Models/Suggestions.md
 Models/TokenInfo.md
 Models/TooEarlyErrorMessageResponse.md
+Models/TriggerEvent.md
 Models/TriggerWorkflowBody.md
 Models/TriggerWorkflowResponse.md
 Models/UnprocessableEntityErrorMessageResponse.md
@@ -93,6 +97,7 @@ Models/UpdateWorkspaceRequest.md
 Models/UpdateWorkspaceResponse.md
 Models/ValidationErrorCode.md
 Models/ValidationErrorMessageResponse.md
+Models/WebhookConfig.md
 Models/WorkflowStatus.md
 Models/Workspace.md
 Models/rpc.Status.md

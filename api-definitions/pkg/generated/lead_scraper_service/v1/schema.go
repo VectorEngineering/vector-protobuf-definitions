@@ -17,6 +17,7 @@ func GetDatabaseSchemas() []interface{} {
 		TenantAPIKeyORM{},
 		TenantORM{},
 		OrganizationORM{},
+		WebhookConfigORM{},
 	}
 
 	return models

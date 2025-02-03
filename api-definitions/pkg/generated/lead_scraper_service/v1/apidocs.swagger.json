@@ -5048,14 +5048,13 @@
         "roles": {
           "type": "array",
           "items": {
-            "type": "string"
-          },
-          "title": "Role-based access control"
+            "$ref": "#/definitions/Role"
+          }
         },
         "permissions": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Permission"
           }
         },
         "mfaEnabled": {
@@ -5067,7 +5066,7 @@
           "format": "date-time"
         },
         "timezone": {
-          "type": "string"
+          "$ref": "#/definitions/Timezone"
         },
         "totalJobsRun": {
           "type": "integer",
@@ -5881,6 +5880,45 @@
       "description": "Indicates that the resource requested is no longer available and will not be available again",
       "title": "Gone Error Response"
     },
+    "IncludedField": {
+      "type": "string",
+      "enum": [
+        "INCLUDED_FIELD_UNSPECIFIED",
+        "INCLUDED_FIELD_NAME",
+        "INCLUDED_FIELD_WEBSITE",
+        "INCLUDED_FIELD_PHONE",
+        "INCLUDED_FIELD_ADDRESS",
+        "INCLUDED_FIELD_LOCATION",
+        "INCLUDED_FIELD_COORDINATES",
+        "INCLUDED_FIELD_GOOGLE_RATING",
+        "INCLUDED_FIELD_REVIEW_COUNT",
+        "INCLUDED_FIELD_REVIEWS",
+        "INCLUDED_FIELD_BUSINESS_HOURS",
+        "INCLUDED_FIELD_BUSINESS_STATUS",
+        "INCLUDED_FIELD_PLACE_ID",
+        "INCLUDED_FIELD_GOOGLE_MAPS_URL",
+        "INCLUDED_FIELD_PHOTOS",
+        "INCLUDED_FIELD_MAIN_PHOTO",
+        "INCLUDED_FIELD_BUSINESS_TYPES",
+        "INCLUDED_FIELD_AMENITIES",
+        "INCLUDED_FIELD_PAYMENT_METHODS",
+        "INCLUDED_FIELD_SOCIAL_PROFILES",
+        "INCLUDED_FIELD_EMPLOYEE_COUNT",
+        "INCLUDED_FIELD_REVENUE_INFO",
+        "INCLUDED_FIELD_FOUNDED_YEAR",
+        "INCLUDED_FIELD_CERTIFICATIONS",
+        "INCLUDED_FIELD_NAICS_CODE",
+        "INCLUDED_FIELD_SIC_CODE",
+        "INCLUDED_FIELD_SCRAPING_METADATA",
+        "INCLUDED_FIELD_COMPLIANCE_INFO",
+        "INCLUDED_FIELD_ALTERNATE_PHONES",
+        "INCLUDED_FIELD_CONTACT_PERSON",
+        "INCLUDED_FIELD_CONTACT_EMAIL"
+      ],
+      "default": "INCLUDED_FIELD_UNSPECIFIED",
+      "description": "- INCLUDED_FIELD_NAME: Core business information\n - INCLUDED_FIELD_LOCATION: city, state, country\n - INCLUDED_FIELD_COORDINATES: Geographic data\n\nlatitude, longitude\n - INCLUDED_FIELD_GOOGLE_RATING: Ratings and reviews\n - INCLUDED_FIELD_BUSINESS_HOURS: Business details\n - INCLUDED_FIELD_PHOTOS: Rich media\n - INCLUDED_FIELD_BUSINESS_TYPES: Categories and attributes\n - INCLUDED_FIELD_SOCIAL_PROFILES: Social media\n - INCLUDED_FIELD_EMPLOYEE_COUNT: Enhanced business data\n - INCLUDED_FIELD_NAICS_CODE: Industry classification\n - INCLUDED_FIELD_SCRAPING_METADATA: Metadata\n\ntimestamps, session info\n - INCLUDED_FIELD_COMPLIANCE_INFO: sustainability, certifications\n - INCLUDED_FIELD_ALTERNATE_PHONES: Contact information",
+      "title": "Payload customization with enum - aligned with Lead message fields"
+    },
     "InternalErrorCode": {
       "type": "string",
       "enum": [
@@ -5971,6 +6009,30 @@
           "format": "int32"
         }
       }
+    },
+    "Language": {
+      "type": "string",
+      "enum": [
+        "LANGUAGE_UNSPECIFIED",
+        "LANGUAGE_ENGLISH",
+        "LANGUAGE_SPANISH",
+        "LANGUAGE_FRENCH",
+        "LANGUAGE_GERMAN",
+        "LANGUAGE_ITALIAN",
+        "LANGUAGE_PORTUGUESE",
+        "LANGUAGE_DUTCH",
+        "LANGUAGE_RUSSIAN",
+        "LANGUAGE_CHINESE",
+        "LANGUAGE_JAPANESE",
+        "LANGUAGE_KOREAN",
+        "LANGUAGE_ARABIC",
+        "LANGUAGE_HINDI",
+        "LANGUAGE_GREEK",
+        "LANGUAGE_TURKISH"
+      ],
+      "default": "LANGUAGE_UNSPECIFIED",
+      "description": "- LANGUAGE_ENGLISH: en\n - LANGUAGE_SPANISH: es\n - LANGUAGE_FRENCH: fr\n - LANGUAGE_GERMAN: de\n - LANGUAGE_ITALIAN: it\n - LANGUAGE_PORTUGUESE: pt\n - LANGUAGE_DUTCH: nl\n - LANGUAGE_RUSSIAN: ru\n - LANGUAGE_CHINESE: zh\n - LANGUAGE_JAPANESE: ja\n - LANGUAGE_KOREAN: ko\n - LANGUAGE_ARABIC: ar\n - LANGUAGE_HINDI: hi\n - LANGUAGE_GREEK: el\n - LANGUAGE_TURKISH: tr",
+      "title": "ISO 639-1 language code (e.g., \"en\", \"el\")"
     },
     "Lead": {
       "type": "object",
@@ -6550,6 +6612,14 @@
       "description": "Represents errors when the requested functionality is not implemented",
       "title": "Not Implemented Error Response"
     },
+    "NullValue": {
+      "type": "string",
+      "enum": [
+        "NULL_VALUE"
+      ],
+      "default": "NULL_VALUE",
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+    },
     "OperationDetails": {
       "type": "object",
       "properties": {
@@ -6614,6 +6684,19 @@
         }
       }
     },
+    "PayloadFormat": {
+      "type": "string",
+      "enum": [
+        "PAYLOAD_FORMAT_UNSPECIFIED",
+        "PAYLOAD_FORMAT_JSON",
+        "PAYLOAD_FORMAT_XML",
+        "PAYLOAD_FORMAT_FORM_DATA",
+        "PAYLOAD_FORMAT_PROTOBUF",
+        "PAYLOAD_FORMAT_YAML"
+      ],
+      "default": "PAYLOAD_FORMAT_UNSPECIFIED",
+      "title": "Payload format enum"
+    },
     "PaymentInfo": {
       "type": "object",
       "properties": {
@@ -6668,6 +6751,20 @@
       },
       "description": "Indicates that payment is required to proceed",
       "title": "Payment Required Error Response"
+    },
+    "Permission": {
+      "type": "string",
+      "enum": [
+        "PERMISSION_UNSPECIFIED",
+        "PERMISSION_READ",
+        "PERMISSION_WRITE",
+        "PERMISSION_DELETE",
+        "PERMISSION_MANAGE_USERS",
+        "PERMISSION_MANAGE_BILLING",
+        "PERMISSION_VIEW_ANALYTICS",
+        "PERMISSION_MANAGE_WORKFLOWS"
+      ],
+      "default": "PERMISSION_UNSPECIFIED"
     },
     "PreconditionFailedErrorMessageResponse": {
       "type": "object",
@@ -6945,6 +7042,18 @@
       },
       "title": "Detailed reviews"
     },
+    "Role": {
+      "type": "string",
+      "enum": [
+        "ROLE_UNSPECIFIED",
+        "ROLE_ADMIN",
+        "ROLE_USER",
+        "ROLE_VIEWER",
+        "ROLE_MANAGER"
+      ],
+      "default": "ROLE_UNSPECIFIED",
+      "title": "Role-based access control"
+    },
     "SchemaValidation": {
       "type": "object",
       "properties": {
@@ -7007,8 +7116,7 @@
           "title": "Search terms for Google Maps"
         },
         "lang": {
-          "type": "string",
-          "title": "ISO 639-1 language code (e.g., \"en\", \"el\")"
+          "$ref": "#/definitions/Language"
         },
         "zoom": {
           "type": "integer",
@@ -7081,6 +7189,9 @@
           "type": "string",
           "format": "uint64"
         },
+        "name": {
+          "type": "string"
+        },
         "cronExpression": {
           "type": "string",
           "title": "Scheduling options"
@@ -7107,13 +7218,6 @@
           "format": "int32"
         },
         "alertEmails": {
-          "type": "string"
-        },
-        "orgId": {
-          "type": "string",
-          "title": "Org context"
-        },
-        "tenantId": {
           "type": "string"
         },
         "createdAt": {
@@ -7189,11 +7293,9 @@
         "anonymizePii": {
           "type": "boolean"
         },
-        "notificationWebhookUrl": {
-          "type": "string"
-        },
         "notificationSlackChannel": {
-          "type": "string"
+          "type": "string",
+          "title": "Notification preferences can stay as they provide quick access to common notification channels"
         },
         "notificationEmailGroup": {
           "type": "string"
@@ -7367,6 +7469,23 @@
         }
       }
     },
+    "Timezone": {
+      "type": "string",
+      "enum": [
+        "TIMEZONE_UNSPECIFIED",
+        "TIMEZONE_UTC",
+        "TIMEZONE_EST",
+        "TIMEZONE_CST",
+        "TIMEZONE_MST",
+        "TIMEZONE_PST",
+        "TIMEZONE_GMT",
+        "TIMEZONE_CET",
+        "TIMEZONE_IST",
+        "TIMEZONE_JST",
+        "TIMEZONE_AEST"
+      ],
+      "default": "TIMEZONE_UNSPECIFIED"
+    },
     "TokenInfo": {
       "type": "object",
       "properties": {
@@ -7419,6 +7538,24 @@
       },
       "description": "Indicates that the server is unwilling to risk processing a request that might be replayed",
       "title": "Too Early Error Response"
+    },
+    "TriggerEvent": {
+      "type": "string",
+      "enum": [
+        "TRIGGER_EVENT_UNSPECIFIED",
+        "TRIGGER_EVENT_JOB_STARTED",
+        "TRIGGER_EVENT_JOB_COMPLETED",
+        "TRIGGER_EVENT_JOB_FAILED",
+        "TRIGGER_EVENT_LEAD_FOUND",
+        "TRIGGER_EVENT_QUOTA_EXCEEDED",
+        "TRIGGER_EVENT_ERROR_THRESHOLD_REACHED",
+        "TRIGGER_EVENT_RATE_LIMIT_REACHED",
+        "TRIGGER_EVENT_DATA_VALIDATION_FAILED",
+        "TRIGGER_EVENT_NEW_PROXY_NEEDED",
+        "TRIGGER_EVENT_SCHEDULED_MAINTENANCE"
+      ],
+      "default": "TRIGGER_EVENT_UNSPECIFIED",
+      "title": "Event triggers using enum"
     },
     "TriggerWorkflowBody": {
       "type": "object",
@@ -7632,6 +7769,104 @@
       "description": "Represents data validation and business logic errors",
       "title": "Validation Error Response"
     },
+    "WebhookConfig": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "url": {
+          "type": "string",
+          "title": "URL to send webhook notifications to"
+        },
+        "authType": {
+          "type": "string",
+          "description": "e.g., \"basic\", \"bearer\", \"custom\"",
+          "title": "Authentication"
+        },
+        "authToken": {
+          "type": "string"
+        },
+        "customHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "maxRetries": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Retry configuration"
+        },
+        "retryInterval": {
+          "type": "string"
+        },
+        "triggerEvents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TriggerEvent"
+          }
+        },
+        "includedFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IncludedField"
+          }
+        },
+        "includeFullResults": {
+          "type": "boolean"
+        },
+        "payloadFormat": {
+          "$ref": "#/definitions/PayloadFormat"
+        },
+        "verifySsl": {
+          "type": "boolean",
+          "title": "Security"
+        },
+        "signingSecret": {
+          "type": "string"
+        },
+        "rateLimit": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Rate limiting"
+        },
+        "rateLimitInterval": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Audit"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastTriggeredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "successfulCalls": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "failedCalls": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "metadata": {
+          "type": "object",
+          "title": "Flexible metadata storage using Google struct"
+        },
+        "webhookName": {
+          "type": "string",
+          "title": "Webhook name"
+        }
+      },
+      "title": "WebhookConfig represents a webhook integration configuration\nIt defines how and when notifications should be sent to external systems"
+    },
     "WorkflowStatus": {
       "type": "string",
       "enum": [
@@ -7747,6 +7982,14 @@
             "type": "object",
             "$ref": "#/definitions/APIKey"
           }
+        },
+        "webhooks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/WebhookConfig"
+          },
+          "title": "embedded webhook config with relationship"
         }
       },
       "title": "Workspace represents a business entity with multiple accounts"

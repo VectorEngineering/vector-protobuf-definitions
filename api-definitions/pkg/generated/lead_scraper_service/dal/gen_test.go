@@ -89,6 +89,7 @@ func Test_WithContext(t *testing.T) {
 		qCtx.ScrapingWorkflowORM.UnderlyingDB().Statement.Context,
 		qCtx.TenantAPIKeyORM.UnderlyingDB().Statement.Context,
 		qCtx.TenantORM.UnderlyingDB().Statement.Context,
+		qCtx.WebhookConfigORM.UnderlyingDB().Statement.Context,
 		qCtx.WorkspaceORM.UnderlyingDB().Statement.Context,
 	} {
 		if v := ctx.Value(key); v != value {

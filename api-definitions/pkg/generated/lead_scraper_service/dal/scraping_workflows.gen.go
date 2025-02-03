@@ -53,14 +53,13 @@ func newScrapingWorkflowORM(db *gorm.DB, opts ...gen.DOOption) scrapingWorkflowO
 	_scrapingWorkflowORM.LastRunTime = field.NewTime(tableName, "last_run_time")
 	_scrapingWorkflowORM.MaxRetries = field.NewInt32(tableName, "max_retries")
 	_scrapingWorkflowORM.MaxReviewsPerBusiness = field.NewInt32(tableName, "max_reviews_per_business")
+	_scrapingWorkflowORM.Name = field.NewString(tableName, "name")
 	_scrapingWorkflowORM.NextRunTime = field.NewTime(tableName, "next_run_time")
 	_scrapingWorkflowORM.NotificationEmailGroup = field.NewString(tableName, "notification_email_group")
 	_scrapingWorkflowORM.NotificationNotifyOnComplete = field.NewBool(tableName, "notification_notify_on_complete")
 	_scrapingWorkflowORM.NotificationNotifyOnFailure = field.NewBool(tableName, "notification_notify_on_failure")
 	_scrapingWorkflowORM.NotificationNotifyOnStart = field.NewBool(tableName, "notification_notify_on_start")
 	_scrapingWorkflowORM.NotificationSlackChannel = field.NewString(tableName, "notification_slack_channel")
-	_scrapingWorkflowORM.NotificationWebhookUrl = field.NewString(tableName, "notification_webhook_url")
-	_scrapingWorkflowORM.OrgId = field.NewString(tableName, "org_id")
 	_scrapingWorkflowORM.OutputDestination = field.NewString(tableName, "output_destination")
 	_scrapingWorkflowORM.OutputFormat = field.NewString(tableName, "output_format")
 	_scrapingWorkflowORM.QosEnableJavascript = field.NewBool(tableName, "qos_enable_javascript")
@@ -70,7 +69,6 @@ func newScrapingWorkflowORM(db *gorm.DB, opts ...gen.DOOption) scrapingWorkflowO
 	_scrapingWorkflowORM.RespectRobotsTxt = field.NewBool(tableName, "respect_robots_txt")
 	_scrapingWorkflowORM.RetryCount = field.NewInt32(tableName, "retry_count")
 	_scrapingWorkflowORM.Status = field.NewString(tableName, "status")
-	_scrapingWorkflowORM.TenantId = field.NewString(tableName, "tenant_id")
 	_scrapingWorkflowORM.UpdatedAt = field.NewTime(tableName, "updated_at")
 	_scrapingWorkflowORM.UserAgent = field.NewString(tableName, "user_agent")
 	_scrapingWorkflowORM.WorkspaceId = field.NewUint64(tableName, "workspace_id")
@@ -101,6 +99,9 @@ func newScrapingWorkflowORM(db *gorm.DB, opts ...gen.DOOption) scrapingWorkflowO
 					}
 				}
 				ScrapingJobs struct {
+					field.RelationField
+				}
+				Webhooks struct {
 					field.RelationField
 				}
 				Workflows struct {
@@ -147,6 +148,9 @@ func newScrapingWorkflowORM(db *gorm.DB, opts ...gen.DOOption) scrapingWorkflowO
 					}
 				}
 				ScrapingJobs struct {
+					field.RelationField
+				}
+				Webhooks struct {
 					field.RelationField
 				}
 				Workflows struct {
@@ -207,6 +211,11 @@ func newScrapingWorkflowORM(db *gorm.DB, opts ...gen.DOOption) scrapingWorkflowO
 					field.RelationField
 				}{
 					RelationField: field.NewRelation("Jobs.Leads.Workspace.ScrapingJobs", "lead_scraper_servicev1.ScrapingJobORM"),
+				},
+				Webhooks: struct {
+					field.RelationField
+				}{
+					RelationField: field.NewRelation("Jobs.Leads.Workspace.Webhooks", "lead_scraper_servicev1.WebhookConfigORM"),
 				},
 				Workflows: struct {
 					field.RelationField
@@ -286,14 +295,13 @@ type scrapingWorkflowORM struct {
 	LastRunTime                   field.Time
 	MaxRetries                    field.Int32
 	MaxReviewsPerBusiness         field.Int32
+	Name                          field.String
 	NextRunTime                   field.Time
 	NotificationEmailGroup        field.String
 	NotificationNotifyOnComplete  field.Bool
 	NotificationNotifyOnFailure   field.Bool
 	NotificationNotifyOnStart     field.Bool
 	NotificationSlackChannel      field.String
-	NotificationWebhookUrl        field.String
-	OrgId                         field.String
 	OutputDestination             field.String
 	OutputFormat                  field.String
 	QosEnableJavascript           field.Bool
@@ -303,7 +311,6 @@ type scrapingWorkflowORM struct {
 	RespectRobotsTxt              field.Bool
 	RetryCount                    field.Int32
 	Status                        field.String
-	TenantId                      field.String
 	UpdatedAt                     field.Time
 	UserAgent                     field.String
 	WorkspaceId                   field.Uint64
@@ -349,14 +356,13 @@ func (s *scrapingWorkflowORM) updateTableName(table string) *scrapingWorkflowORM
 	s.LastRunTime = field.NewTime(table, "last_run_time")
 	s.MaxRetries = field.NewInt32(table, "max_retries")
 	s.MaxReviewsPerBusiness = field.NewInt32(table, "max_reviews_per_business")
+	s.Name = field.NewString(table, "name")
 	s.NextRunTime = field.NewTime(table, "next_run_time")
 	s.NotificationEmailGroup = field.NewString(table, "notification_email_group")
 	s.NotificationNotifyOnComplete = field.NewBool(table, "notification_notify_on_complete")
 	s.NotificationNotifyOnFailure = field.NewBool(table, "notification_notify_on_failure")
 	s.NotificationNotifyOnStart = field.NewBool(table, "notification_notify_on_start")
 	s.NotificationSlackChannel = field.NewString(table, "notification_slack_channel")
-	s.NotificationWebhookUrl = field.NewString(table, "notification_webhook_url")
-	s.OrgId = field.NewString(table, "org_id")
 	s.OutputDestination = field.NewString(table, "output_destination")
 	s.OutputFormat = field.NewString(table, "output_format")
 	s.QosEnableJavascript = field.NewBool(table, "qos_enable_javascript")
@@ -366,7 +372,6 @@ func (s *scrapingWorkflowORM) updateTableName(table string) *scrapingWorkflowORM
 	s.RespectRobotsTxt = field.NewBool(table, "respect_robots_txt")
 	s.RetryCount = field.NewInt32(table, "retry_count")
 	s.Status = field.NewString(table, "status")
-	s.TenantId = field.NewString(table, "tenant_id")
 	s.UpdatedAt = field.NewTime(table, "updated_at")
 	s.UserAgent = field.NewString(table, "user_agent")
 	s.WorkspaceId = field.NewUint64(table, "workspace_id")
@@ -386,7 +391,7 @@ func (s *scrapingWorkflowORM) GetFieldByName(fieldName string) (field.OrderExpr,
 }
 
 func (s *scrapingWorkflowORM) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 46)
+	s.fieldMap = make(map[string]field.Expr, 44)
 	s.fieldMap["accept_terms_of_service"] = s.AcceptTermsOfService
 	s.fieldMap["alert_emails"] = s.AlertEmails
 	s.fieldMap["anonymize_pii"] = s.AnonymizePii
@@ -410,14 +415,13 @@ func (s *scrapingWorkflowORM) fillFieldMap() {
 	s.fieldMap["last_run_time"] = s.LastRunTime
 	s.fieldMap["max_retries"] = s.MaxRetries
 	s.fieldMap["max_reviews_per_business"] = s.MaxReviewsPerBusiness
+	s.fieldMap["name"] = s.Name
 	s.fieldMap["next_run_time"] = s.NextRunTime
 	s.fieldMap["notification_email_group"] = s.NotificationEmailGroup
 	s.fieldMap["notification_notify_on_complete"] = s.NotificationNotifyOnComplete
 	s.fieldMap["notification_notify_on_failure"] = s.NotificationNotifyOnFailure
 	s.fieldMap["notification_notify_on_start"] = s.NotificationNotifyOnStart
 	s.fieldMap["notification_slack_channel"] = s.NotificationSlackChannel
-	s.fieldMap["notification_webhook_url"] = s.NotificationWebhookUrl
-	s.fieldMap["org_id"] = s.OrgId
 	s.fieldMap["output_destination"] = s.OutputDestination
 	s.fieldMap["output_format"] = s.OutputFormat
 	s.fieldMap["qos_enable_javascript"] = s.QosEnableJavascript
@@ -427,7 +431,6 @@ func (s *scrapingWorkflowORM) fillFieldMap() {
 	s.fieldMap["respect_robots_txt"] = s.RespectRobotsTxt
 	s.fieldMap["retry_count"] = s.RetryCount
 	s.fieldMap["status"] = s.Status
-	s.fieldMap["tenant_id"] = s.TenantId
 	s.fieldMap["updated_at"] = s.UpdatedAt
 	s.fieldMap["user_agent"] = s.UserAgent
 	s.fieldMap["workspace_id"] = s.WorkspaceId
@@ -472,6 +475,9 @@ type scrapingWorkflowORMHasManyJobs struct {
 				}
 			}
 			ScrapingJobs struct {
+				field.RelationField
+			}
+			Webhooks struct {
 				field.RelationField
 			}
 			Workflows struct {

@@ -138,6 +138,9 @@ func newAPIKeyORM(db *gorm.DB, opts ...gen.DOOption) aPIKeyORM {
 					}
 				}
 			}
+			Webhooks struct {
+				field.RelationField
+			}
 			Workflows struct {
 				field.RelationField
 				Workspace struct {
@@ -237,6 +240,11 @@ func newAPIKeyORM(db *gorm.DB, opts ...gen.DOOption) aPIKeyORM {
 						RelationField: field.NewRelation("Account.Workspaces.ScrapingJobs.Leads.SpecialHours", "lead_scraper_servicev1.BusinessHoursORM"),
 					},
 				},
+			},
+			Webhooks: struct {
+				field.RelationField
+			}{
+				RelationField: field.NewRelation("Account.Workspaces.Webhooks", "lead_scraper_servicev1.WebhookConfigORM"),
 			},
 			Workflows: struct {
 				field.RelationField
@@ -566,6 +574,9 @@ type aPIKeyORMBelongsToAccount struct {
 					field.RelationField
 				}
 			}
+		}
+		Webhooks struct {
+			field.RelationField
 		}
 		Workflows struct {
 			field.RelationField

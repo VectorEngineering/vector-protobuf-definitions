@@ -8,6 +8,7 @@ import (
 	pq "github.com/lib/pq"
 	field_mask "google.golang.org/genproto/protobuf/field_mask"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	gorm "gorm.io/gorm"
 	strings "strings"
@@ -657,8 +658,6 @@ type AccountORM struct {
 	LastLoginAt        *time.Time
 	MfaEnabled         bool
 	MonthlyJobLimit    int32
-	Permissions        pq.StringArray      `gorm:"type:text[]"`
-	Roles              pq.StringArray      `gorm:"type:text[]"`
 	Settings           *AccountSettingsORM `gorm:"foreignKey:AccountId;references:Id"`
 	TenantId           *uint64
 	Timezone           string
@@ -693,20 +692,14 @@ func (m *Account) ToORM(ctx context.Context) (AccountORM, error) {
 		to.CreatedAt = &t
 	}
 	to.AccountStatus = Account_AccountStatus_name[int32(m.AccountStatus)]
-	if m.Roles != nil {
-		to.Roles = make(pq.StringArray, len(m.Roles))
-		copy(to.Roles, m.Roles)
-	}
-	if m.Permissions != nil {
-		to.Permissions = make(pq.StringArray, len(m.Permissions))
-		copy(to.Permissions, m.Permissions)
-	}
+	// Repeated type enum is not an ORMable message type
+	// Repeated type enum is not an ORMable message type
 	to.MfaEnabled = m.MfaEnabled
 	if m.LastLoginAt != nil {
 		t := m.LastLoginAt.AsTime()
 		to.LastLoginAt = &t
 	}
-	to.Timezone = m.Timezone
+	to.Timezone = Account_Timezone_name[int32(m.Timezone)]
 	to.TotalJobsRun = m.TotalJobsRun
 	to.MonthlyJobLimit = m.MonthlyJobLimit
 	to.ConcurrentJobLimit = m.ConcurrentJobLimit
@@ -754,19 +747,13 @@ func (m *AccountORM) ToPB(ctx context.Context) (Account, error) {
 		to.CreatedAt = timestamppb.New(*m.CreatedAt)
 	}
 	to.AccountStatus = Account_AccountStatus(Account_AccountStatus_value[m.AccountStatus])
-	if m.Roles != nil {
-		to.Roles = make(pq.StringArray, len(m.Roles))
-		copy(to.Roles, m.Roles)
-	}
-	if m.Permissions != nil {
-		to.Permissions = make(pq.StringArray, len(m.Permissions))
-		copy(to.Permissions, m.Permissions)
-	}
+	// Repeated type enum is not an ORMable message type
+	// Repeated type enum is not an ORMable message type
 	to.MfaEnabled = m.MfaEnabled
 	if m.LastLoginAt != nil {
 		to.LastLoginAt = timestamppb.New(*m.LastLoginAt)
 	}
-	to.Timezone = m.Timezone
+	to.Timezone = Account_Timezone(Account_Timezone_value[m.Timezone])
 	to.TotalJobsRun = m.TotalJobsRun
 	to.MonthlyJobLimit = m.MonthlyJobLimit
 	to.ConcurrentJobLimit = m.ConcurrentJobLimit
@@ -838,6 +825,7 @@ type WorkspaceORM struct {
 	TotalLeadsCollected int32
 	UpdatedAt           *time.Time
 	UsedStorage         int64
+	Webhooks            []*WebhookConfigORM    `gorm:"foreignKey:WorkspaceId;references:Id"`
 	Workflows           []*ScrapingWorkflowORM `gorm:"foreignKey:WorkspaceId;references:Id"`
 	WorkspaceJobLimit   int32
 }
@@ -920,6 +908,17 @@ func (m *Workspace) ToORM(ctx context.Context) (WorkspaceORM, error) {
 			to.ApiKeys = append(to.ApiKeys, nil)
 		}
 	}
+	for _, v := range m.Webhooks {
+		if v != nil {
+			if tempWebhooks, cErr := v.ToORM(ctx); cErr == nil {
+				to.Webhooks = append(to.Webhooks, &tempWebhooks)
+			} else {
+				return to, cErr
+			}
+		} else {
+			to.Webhooks = append(to.Webhooks, nil)
+		}
+	}
 	if posthook, ok := interface{}(m).(WorkspaceWithAfterToORM); ok {
 		err = posthook.AfterToORM(ctx, &to)
 	}
@@ -993,6 +992,17 @@ func (m *WorkspaceORM) ToPB(ctx context.Context) (Workspace, error) {
 			}
 		} else {
 			to.ApiKeys = append(to.ApiKeys, nil)
+		}
+	}
+	for _, v := range m.Webhooks {
+		if v != nil {
+			if tempWebhooks, cErr := v.ToPB(ctx); cErr == nil {
+				to.Webhooks = append(to.Webhooks, &tempWebhooks)
+			} else {
+				return to, cErr
+			}
+		} else {
+			to.Webhooks = append(to.Webhooks, nil)
 		}
 	}
 	if posthook, ok := interface{}(m).(WorkspaceWithAfterToPB); ok {
@@ -1079,7 +1089,7 @@ func (m *ScrapingJob) ToORM(ctx context.Context) (ScrapingJobORM, error) {
 		to.Keywords = make(pq.StringArray, len(m.Keywords))
 		copy(to.Keywords, m.Keywords)
 	}
-	to.Lang = m.Lang
+	to.Lang = ScrapingJob_Language_name[int32(m.Lang)]
 	to.Zoom = m.Zoom
 	to.Lat = m.Lat
 	to.Lon = m.Lon
@@ -1140,7 +1150,7 @@ func (m *ScrapingJobORM) ToPB(ctx context.Context) (ScrapingJob, error) {
 		to.Keywords = make(pq.StringArray, len(m.Keywords))
 		copy(to.Keywords, m.Keywords)
 	}
-	to.Lang = m.Lang
+	to.Lang = ScrapingJob_Language(ScrapingJob_Language_value[m.Lang])
 	to.Zoom = m.Zoom
 	to.Lat = m.Lat
 	to.Lon = m.Lon
@@ -1224,14 +1234,13 @@ type ScrapingWorkflowORM struct {
 	LastRunTime                   *time.Time
 	MaxRetries                    int32
 	MaxReviewsPerBusiness         int32
+	Name                          string `gorm:"index:idx_scraping_workflows_name"`
 	NextRunTime                   *time.Time
 	NotificationEmailGroup        string
 	NotificationNotifyOnComplete  bool
 	NotificationNotifyOnFailure   bool
 	NotificationNotifyOnStart     bool
 	NotificationSlackChannel      string
-	NotificationWebhookUrl        string
-	OrgId                         string
 	OutputDestination             string
 	OutputFormat                  string
 	QosEnableJavascript           bool
@@ -1241,7 +1250,6 @@ type ScrapingWorkflowORM struct {
 	RespectRobotsTxt              bool
 	RetryCount                    int32
 	Status                        string
-	TenantId                      string
 	UpdatedAt                     *time.Time
 	UserAgent                     string
 	Workspace                     *WorkspaceORM `gorm:"foreignKey:WorkspaceId;references:Id"`
@@ -1264,6 +1272,7 @@ func (m *ScrapingWorkflow) ToORM(ctx context.Context) (ScrapingWorkflowORM, erro
 		}
 	}
 	to.Id = m.Id
+	to.Name = m.Name
 	to.CronExpression = m.CronExpression
 	if m.NextRunTime != nil {
 		t := m.NextRunTime.AsTime()
@@ -1277,8 +1286,6 @@ func (m *ScrapingWorkflow) ToORM(ctx context.Context) (ScrapingWorkflowORM, erro
 	to.RetryCount = m.RetryCount
 	to.MaxRetries = m.MaxRetries
 	to.AlertEmails = m.AlertEmails
-	to.OrgId = m.OrgId
-	to.TenantId = m.TenantId
 	if m.CreatedAt != nil {
 		t := m.CreatedAt.AsTime()
 		to.CreatedAt = &t
@@ -1325,7 +1332,6 @@ func (m *ScrapingWorkflow) ToORM(ctx context.Context) (ScrapingWorkflowORM, erro
 		to.DataRetention = &t
 	}
 	to.AnonymizePii = m.AnonymizePii
-	to.NotificationWebhookUrl = m.NotificationWebhookUrl
 	to.NotificationSlackChannel = m.NotificationSlackChannel
 	to.NotificationEmailGroup = m.NotificationEmailGroup
 	to.NotificationNotifyOnStart = m.NotificationNotifyOnStart
@@ -1368,6 +1374,7 @@ func (m *ScrapingWorkflowORM) ToPB(ctx context.Context) (ScrapingWorkflow, error
 		}
 	}
 	to.Id = m.Id
+	to.Name = m.Name
 	to.CronExpression = m.CronExpression
 	if m.NextRunTime != nil {
 		to.NextRunTime = timestamppb.New(*m.NextRunTime)
@@ -1379,8 +1386,6 @@ func (m *ScrapingWorkflowORM) ToPB(ctx context.Context) (ScrapingWorkflow, error
 	to.RetryCount = m.RetryCount
 	to.MaxRetries = m.MaxRetries
 	to.AlertEmails = m.AlertEmails
-	to.OrgId = m.OrgId
-	to.TenantId = m.TenantId
 	if m.CreatedAt != nil {
 		to.CreatedAt = timestamppb.New(*m.CreatedAt)
 	}
@@ -1423,7 +1428,6 @@ func (m *ScrapingWorkflowORM) ToPB(ctx context.Context) (ScrapingWorkflow, error
 		to.DataRetention = durationpb.New(*m.DataRetention)
 	}
 	to.AnonymizePii = m.AnonymizePii
-	to.NotificationWebhookUrl = m.NotificationWebhookUrl
 	to.NotificationSlackChannel = m.NotificationSlackChannel
 	to.NotificationEmailGroup = m.NotificationEmailGroup
 	to.NotificationNotifyOnStart = m.NotificationNotifyOnStart
@@ -1477,6 +1481,155 @@ type ScrapingWorkflowWithAfterToPB interface {
 	AfterToPB(context.Context, *ScrapingWorkflow) error
 }
 
+type WebhookConfigORM struct {
+	AuthToken          string
+	AuthType           string
+	CreatedAt          *time.Time
+	FailedCalls        int32
+	Id                 uint64 `gorm:"primaryKey;index:idx_webhook_configs_id"`
+	IncludeFullResults bool
+	LastTriggeredAt    *time.Time
+	MaxRetries         int32
+	PayloadFormat      string
+	RateLimit          int32
+	RateLimitInterval  *time.Duration
+	RetryInterval      *time.Duration
+	SigningSecret      string
+	SuccessfulCalls    int32
+	UpdatedAt          *time.Time
+	Url                string
+	VerifySsl          bool
+	WebhookName        string `gorm:"index:idx_webhook_configs_webhook_name"`
+	WorkspaceId        *uint64
+}
+
+// TableName overrides the default tablename generated by GORM
+func (WebhookConfigORM) TableName() string {
+	return "webhook_configs"
+}
+
+// ToORM runs the BeforeToORM hook if present, converts the fields of this
+// object to ORM format, runs the AfterToORM hook, then returns the ORM object
+func (m *WebhookConfig) ToORM(ctx context.Context) (WebhookConfigORM, error) {
+	to := WebhookConfigORM{}
+	var err error
+	if prehook, ok := interface{}(m).(WebhookConfigWithBeforeToORM); ok {
+		if err = prehook.BeforeToORM(ctx, &to); err != nil {
+			return to, err
+		}
+	}
+	to.Id = m.Id
+	to.Url = m.Url
+	to.AuthType = m.AuthType
+	to.AuthToken = m.AuthToken
+	// Repeated type CustomHeadersEntry is not an ORMable message type
+	to.MaxRetries = m.MaxRetries
+	if m.RetryInterval != nil {
+		t := m.RetryInterval.AsDuration()
+		to.RetryInterval = &t
+	}
+	// Repeated type enum is not an ORMable message type
+	// Repeated type enum is not an ORMable message type
+	to.IncludeFullResults = m.IncludeFullResults
+	to.PayloadFormat = WebhookConfig_PayloadFormat_name[int32(m.PayloadFormat)]
+	to.VerifySsl = m.VerifySsl
+	to.SigningSecret = m.SigningSecret
+	to.RateLimit = m.RateLimit
+	if m.RateLimitInterval != nil {
+		t := m.RateLimitInterval.AsDuration()
+		to.RateLimitInterval = &t
+	}
+	if m.CreatedAt != nil {
+		t := m.CreatedAt.AsTime()
+		to.CreatedAt = &t
+	}
+	if m.UpdatedAt != nil {
+		t := m.UpdatedAt.AsTime()
+		to.UpdatedAt = &t
+	}
+	if m.LastTriggeredAt != nil {
+		t := m.LastTriggeredAt.AsTime()
+		to.LastTriggeredAt = &t
+	}
+	to.SuccessfulCalls = m.SuccessfulCalls
+	to.FailedCalls = m.FailedCalls
+	to.WebhookName = m.WebhookName
+	if posthook, ok := interface{}(m).(WebhookConfigWithAfterToORM); ok {
+		err = posthook.AfterToORM(ctx, &to)
+	}
+	return to, err
+}
+
+// ToPB runs the BeforeToPB hook if present, converts the fields of this
+// object to PB format, runs the AfterToPB hook, then returns the PB object
+func (m *WebhookConfigORM) ToPB(ctx context.Context) (WebhookConfig, error) {
+	to := WebhookConfig{}
+	var err error
+	if prehook, ok := interface{}(m).(WebhookConfigWithBeforeToPB); ok {
+		if err = prehook.BeforeToPB(ctx, &to); err != nil {
+			return to, err
+		}
+	}
+	to.Id = m.Id
+	to.Url = m.Url
+	to.AuthType = m.AuthType
+	to.AuthToken = m.AuthToken
+	// Repeated type CustomHeadersEntry is not an ORMable message type
+	to.MaxRetries = m.MaxRetries
+	if m.RetryInterval != nil {
+		to.RetryInterval = durationpb.New(*m.RetryInterval)
+	}
+	// Repeated type enum is not an ORMable message type
+	// Repeated type enum is not an ORMable message type
+	to.IncludeFullResults = m.IncludeFullResults
+	to.PayloadFormat = WebhookConfig_PayloadFormat(WebhookConfig_PayloadFormat_value[m.PayloadFormat])
+	to.VerifySsl = m.VerifySsl
+	to.SigningSecret = m.SigningSecret
+	to.RateLimit = m.RateLimit
+	if m.RateLimitInterval != nil {
+		to.RateLimitInterval = durationpb.New(*m.RateLimitInterval)
+	}
+	if m.CreatedAt != nil {
+		to.CreatedAt = timestamppb.New(*m.CreatedAt)
+	}
+	if m.UpdatedAt != nil {
+		to.UpdatedAt = timestamppb.New(*m.UpdatedAt)
+	}
+	if m.LastTriggeredAt != nil {
+		to.LastTriggeredAt = timestamppb.New(*m.LastTriggeredAt)
+	}
+	to.SuccessfulCalls = m.SuccessfulCalls
+	to.FailedCalls = m.FailedCalls
+	to.WebhookName = m.WebhookName
+	if posthook, ok := interface{}(m).(WebhookConfigWithAfterToPB); ok {
+		err = posthook.AfterToPB(ctx, &to)
+	}
+	return to, err
+}
+
+// The following are interfaces you can implement for special behavior during ORM/PB conversions
+// of type WebhookConfig the arg will be the target, the caller the one being converted from
+
+// WebhookConfigBeforeToORM called before default ToORM code
+type WebhookConfigWithBeforeToORM interface {
+	BeforeToORM(context.Context, *WebhookConfigORM) error
+}
+
+// WebhookConfigAfterToORM called after default ToORM code
+type WebhookConfigWithAfterToORM interface {
+	AfterToORM(context.Context, *WebhookConfigORM) error
+}
+
+// WebhookConfigBeforeToPB called before default ToPB code
+type WebhookConfigWithBeforeToPB interface {
+	BeforeToPB(context.Context, *WebhookConfig) error
+}
+
+// WebhookConfigAfterToPB called after default ToPB code
+type WebhookConfigWithAfterToPB interface {
+	AfterToPB(context.Context, *WebhookConfig) error
+}
+
 type LeadORM struct {
 	Address                  string
 	AlternatePhones          pq.StringArray `gorm:"type:text[]"`
@@ -1506,7 +1659,7 @@ type LeadORM struct {
 	GoogleRating             float32
 	HasLitigationHistory     bool
 	HasSslCertificate        bool
-	Id                       uint64 `gorm:"primaryKey"`
+	Id                       uint64 `gorm:"primaryKey;index:idx_leads_id"`
 	Industry                 string
 	IsFranchise              bool
 	IsGreenCertified         bool
@@ -1965,7 +2118,7 @@ type ReviewORM struct {
 	Author          string `gorm:"index:idx_reviews_author"`
 	CreatedAt       *time.Time
 	DeletedAt       *time.Time
-	Id              uint64 `gorm:"primaryKey"`
+	Id              uint64 `gorm:"primaryKey;index:idx_reviews_id"`
 	Language        string
 	LeadId          *uint64
 	ProfilePhotoUrl string
@@ -2886,7 +3039,7 @@ func DefaultCreateOrganization(ctx context.Context, in *Organization, db *gorm.D
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("Workspaces").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(OrganizationORMWithAfterCreate_); ok {
@@ -3059,7 +3212,7 @@ func DefaultStrictUpdateOrganization(ctx context.Context, in *Organization, db *
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(OrganizationORMWithAfterStrictUpdateSave); ok {
@@ -3616,7 +3769,7 @@ func DefaultStrictUpdateTenant(ctx context.Context, in *Tenant, db *gorm.DB) (*T
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(TenantORMWithAfterStrictUpdateSave); ok {
@@ -4597,7 +4750,7 @@ func DefaultCreateAccount(ctx context.Context, in *Account, db *gorm.DB) (*Accou
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("Workspaces").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(AccountORMWithAfterCreate_); ok {
@@ -4770,7 +4923,7 @@ func DefaultStrictUpdateAccount(ctx context.Context, in *Account, db *gorm.DB) (
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(AccountORMWithAfterStrictUpdateSave); ok {
@@ -5090,7 +5243,7 @@ func DefaultCreateWorkspace(ctx context.Context, in *Workspace, db *gorm.DB) (*W
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Webhooks").Preload("ApiKeys").Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(WorkspaceORMWithAfterCreate_); ok {
@@ -5258,6 +5411,15 @@ func DefaultStrictUpdateWorkspace(ctx context.Context, in *Workspace, db *gorm.D
 	if err = db.Where(filterScrapingJobs).Delete(ScrapingJobORM{}).Error; err != nil {
 		return nil, err
 	}
+	filterWebhooks := WebhookConfigORM{}
+	if ormObj.Id == 0 {
+		return nil, errors.EmptyIdError
+	}
+	filterWebhooks.WorkspaceId = new(uint64)
+	*filterWebhooks.WorkspaceId = ormObj.Id
+	if err = db.Where(filterWebhooks).Delete(WebhookConfigORM{}).Error; err != nil {
+		return nil, err
+	}
 	filterWorkflows := ScrapingWorkflowORM{}
 	if ormObj.Id == 0 {
 		return nil, errors.EmptyIdError
@@ -5272,7 +5434,7 @@ func DefaultStrictUpdateWorkspace(ctx context.Context, in *Workspace, db *gorm.D
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("Webhooks").Preload("ApiKeys").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(WorkspaceORMWithAfterStrictUpdateSave); ok {
@@ -5544,6 +5706,10 @@ func DefaultApplyFieldMaskWorkspace(ctx context.Context, patchee *Workspace, pat
 			patchee.ApiKeys = patcher.ApiKeys
 			continue
 		}
+		if f == prefix+"Webhooks" {
+			patchee.Webhooks = patcher.Webhooks
+			continue
+		}
 	}
 	if err != nil {
 		return nil, err
@@ -5614,7 +5780,7 @@ func DefaultCreateScrapingJob(ctx context.Context, in *ScrapingJob, db *gorm.DB)
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Preload("Webhooks").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingJobORMWithAfterCreate_); ok {
@@ -5778,7 +5944,7 @@ func DefaultStrictUpdateScrapingJob(ctx context.Context, in *ScrapingJob, db *go
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Preload("Webhooks").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingJobORMWithAfterStrictUpdateSave); ok {
@@ -6100,7 +6266,7 @@ func DefaultCreateScrapingWorkflow(ctx context.Context, in *ScrapingWorkflow, db
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Preload("Webhooks").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingWorkflowORMWithAfterCreate_); ok {
@@ -6264,7 +6430,7 @@ func DefaultStrictUpdateScrapingWorkflow(ctx context.Context, in *ScrapingWorkfl
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Preload("Webhooks").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(ScrapingWorkflowORMWithAfterStrictUpdateSave); ok {
@@ -6384,6 +6550,10 @@ func DefaultApplyFieldMaskScrapingWorkflow(ctx context.Context, patchee *Scrapin
 			patchee.Id = patcher.Id
 			continue
 		}
+		if f == prefix+"Name" {
+			patchee.Name = patcher.Name
+			continue
+		}
 		if f == prefix+"CronExpression" {
 			patchee.CronExpression = patcher.CronExpression
 			continue
@@ -6448,14 +6618,6 @@ func DefaultApplyFieldMaskScrapingWorkflow(ctx context.Context, patchee *Scrapin
 		}
 		if f == prefix+"AlertEmails" {
 			patchee.AlertEmails = patcher.AlertEmails
-			continue
-		}
-		if f == prefix+"OrgId" {
-			patchee.OrgId = patcher.OrgId
-			continue
-		}
-		if f == prefix+"TenantId" {
-			patchee.TenantId = patcher.TenantId
 			continue
 		}
 		if !updatedCreatedAt && strings.HasPrefix(f, prefix+"CreatedAt.") {
@@ -6623,10 +6785,6 @@ func DefaultApplyFieldMaskScrapingWorkflow(ctx context.Context, patchee *Scrapin
 			patchee.AnonymizePii = patcher.AnonymizePii
 			continue
 		}
-		if f == prefix+"NotificationWebhookUrl" {
-			patchee.NotificationWebhookUrl = patcher.NotificationWebhookUrl
-			continue
-		}
 		if f == prefix+"NotificationSlackChannel" {
 			patchee.NotificationSlackChannel = patcher.NotificationSlackChannel
 			continue
@@ -6766,6 +6924,547 @@ type ScrapingWorkflowORMWithAfterListFind interface {
 	AfterListFind(context.Context, *gorm.DB, *[]ScrapingWorkflowORM) error
 }
 
+// DefaultCreateWebhookConfig executes a basic gorm create call
+func DefaultCreateWebhookConfig(ctx context.Context, in *WebhookConfig, db *gorm.DB) (*WebhookConfig, error) {
+	if in == nil {
+		return nil, errors.NilArgumentError
+	}
+	ormObj, err := in.ToORM(ctx)
+	if err != nil {
+		return nil, err
+	}
+	if hook, ok := interface{}(&ormObj).(WebhookConfigORMWithBeforeCreate_); ok {
+		if db, err = hook.BeforeCreate_(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	if err = db.Omit().Create(&ormObj).Error; err != nil {
+		return nil, err
+	}
+	if hook, ok := interface{}(&ormObj).(WebhookConfigORMWithAfterCreate_); ok {
+		if err = hook.AfterCreate_(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	pbResponse, err := ormObj.ToPB(ctx)
+	return &pbResponse, err
+}
+
+type WebhookConfigORMWithBeforeCreate_ interface {
+	BeforeCreate_(context.Context, *gorm.DB) (*gorm.DB, error)
+}
+type WebhookConfigORMWithAfterCreate_ interface {
+	AfterCreate_(context.Context, *gorm.DB) error
+}
+
+func DefaultReadWebhookConfig(ctx context.Context, in *WebhookConfig, db *gorm.DB) (*WebhookConfig, error) {
+	if in == nil {
+		return nil, errors.NilArgumentError
+	}
+	ormObj, err := in.ToORM(ctx)
+	if err != nil {
+		return nil, err
+	}
+	if ormObj.Id == 0 {
+		return nil, errors.EmptyIdError
+	}
+	if hook, ok := interface{}(&ormObj).(WebhookConfigORMWithBeforeReadApplyQuery); ok {
+		if db, err = hook.BeforeReadApplyQuery(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	if hook, ok := interface{}(&ormObj).(WebhookConfigORMWithBeforeReadFind); ok {
+		if db, err = hook.BeforeReadFind(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	ormResponse := WebhookConfigORM{}
+	if err = db.Where(&ormObj).First(&ormResponse).Error; err != nil {
+		return nil, err
+	}
+	if hook, ok := interface{}(&ormResponse).(WebhookConfigORMWithAfterReadFind); ok {
+		if err = hook.AfterReadFind(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	pbResponse, err := ormResponse.ToPB(ctx)
+	return &pbResponse, err
+}
+
+type WebhookConfigORMWithBeforeReadApplyQuery interface {
+	BeforeReadApplyQuery(context.Context, *gorm.DB) (*gorm.DB, error)
+}
+type WebhookConfigORMWithBeforeReadFind interface {
+	BeforeReadFind(context.Context, *gorm.DB) (*gorm.DB, error)
+}
+type WebhookConfigORMWithAfterReadFind interface {
+	AfterReadFind(context.Context, *gorm.DB) error
+}
+
+func DefaultDeleteWebhookConfig(ctx context.Context, in *WebhookConfig, db *gorm.DB) error {
+	if in == nil {
+		return errors.NilArgumentError
+	}
+	ormObj, err := in.ToORM(ctx)
+	if err != nil {
+		return err
+	}
+	if ormObj.Id == 0 {
+		return errors.EmptyIdError
+	}
+	if hook, ok := interface{}(&ormObj).(WebhookConfigORMWithBeforeDelete_); ok {
+		if db, err = hook.BeforeDelete_(ctx, db); err != nil {
+			return err
+		}
+	}
+	err = db.Where(&ormObj).Delete(&WebhookConfigORM{}).Error
+	if err != nil {
+		return err
+	}
+	if hook, ok := interface{}(&ormObj).(WebhookConfigORMWithAfterDelete_); ok {
+		err = hook.AfterDelete_(ctx, db)
+	}
+	return err
+}
+
+type WebhookConfigORMWithBeforeDelete_ interface {
+	BeforeDelete_(context.Context, *gorm.DB) (*gorm.DB, error)
+}
+type WebhookConfigORMWithAfterDelete_ interface {
+	AfterDelete_(context.Context, *gorm.DB) error
+}
+
+func DefaultDeleteWebhookConfigSet(ctx context.Context, in []*WebhookConfig, db *gorm.DB) error {
+	if in == nil {
+		return errors.NilArgumentError
+	}
+	var err error
+	keys := []uint64{}
+	for _, obj := range in {
+		ormObj, err := obj.ToORM(ctx)
+		if err != nil {
+			return err
+		}
+		if ormObj.Id == 0 {
+			return errors.EmptyIdError
+		}
+		keys = append(keys, ormObj.Id)
+	}
+	if hook, ok := (interface{}(&WebhookConfigORM{})).(WebhookConfigORMWithBeforeDeleteSet); ok {
+		if db, err = hook.BeforeDeleteSet(ctx, in, db); err != nil {
+			return err
+		}
+	}
+	err = db.Where("id in (?)", keys).Delete(&WebhookConfigORM{}).Error
+	if err != nil {
+		return err
+	}
+	if hook, ok := (interface{}(&WebhookConfigORM{})).(WebhookConfigORMWithAfterDeleteSet); ok {
+		err = hook.AfterDeleteSet(ctx, in, db)
+	}
+	return err
+}
+
+type WebhookConfigORMWithBeforeDeleteSet interface {
+	BeforeDeleteSet(context.Context, []*WebhookConfig, *gorm.DB) (*gorm.DB, error)
+}
+type WebhookConfigORMWithAfterDeleteSet interface {
+	AfterDeleteSet(context.Context, []*WebhookConfig, *gorm.DB) error
+}
+
+// DefaultStrictUpdateWebhookConfig clears / replaces / appends first level 1:many children and then executes a gorm update call
+func DefaultStrictUpdateWebhookConfig(ctx context.Context, in *WebhookConfig, db *gorm.DB) (*WebhookConfig, error) {
+	if in == nil {
+		return nil, fmt.Errorf("Nil argument to DefaultStrictUpdateWebhookConfig")
+	}
+	ormObj, err := in.ToORM(ctx)
+	if err != nil {
+		return nil, err
+	}
+	lockedRow := &WebhookConfigORM{}
+	db.Model(&ormObj).Set("gorm:query_option", "FOR UPDATE").Where("id=?", ormObj.Id).First(lockedRow)
+	if hook, ok := interface{}(&ormObj).(WebhookConfigORMWithBeforeStrictUpdateCleanup); ok {
+		if db, err = hook.BeforeStrictUpdateCleanup(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	if hook, ok := interface{}(&ormObj).(WebhookConfigORMWithBeforeStrictUpdateSave); ok {
+		if db, err = hook.BeforeStrictUpdateSave(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	if err = db.Omit().Save(&ormObj).Error; err != nil {
+		return nil, err
+	}
+	if hook, ok := interface{}(&ormObj).(WebhookConfigORMWithAfterStrictUpdateSave); ok {
+		if err = hook.AfterStrictUpdateSave(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	pbResponse, err := ormObj.ToPB(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return &pbResponse, err
+}
+
+type WebhookConfigORMWithBeforeStrictUpdateCleanup interface {
+	BeforeStrictUpdateCleanup(context.Context, *gorm.DB) (*gorm.DB, error)
+}
+type WebhookConfigORMWithBeforeStrictUpdateSave interface {
+	BeforeStrictUpdateSave(context.Context, *gorm.DB) (*gorm.DB, error)
+}
+type WebhookConfigORMWithAfterStrictUpdateSave interface {
+	AfterStrictUpdateSave(context.Context, *gorm.DB) error
+}
+
+// DefaultPatchWebhookConfig executes a basic gorm update call with patch behavior
+func DefaultPatchWebhookConfig(ctx context.Context, in *WebhookConfig, updateMask *field_mask.FieldMask, db *gorm.DB) (*WebhookConfig, error) {
+	if in == nil {
+		return nil, errors.NilArgumentError
+	}
+	var pbObj WebhookConfig
+	var err error
+	if hook, ok := interface{}(&pbObj).(WebhookConfigWithBeforePatchRead); ok {
+		if db, err = hook.BeforePatchRead(ctx, in, updateMask, db); err != nil {
+			return nil, err
+		}
+	}
+	pbReadRes, err := DefaultReadWebhookConfig(ctx, &WebhookConfig{Id: in.GetId()}, db)
+	if err != nil {
+		return nil, err
+	}
+	pbObj = *pbReadRes
+	if hook, ok := interface{}(&pbObj).(WebhookConfigWithBeforePatchApplyFieldMask); ok {
+		if db, err = hook.BeforePatchApplyFieldMask(ctx, in, updateMask, db); err != nil {
+			return nil, err
+		}
+	}
+	if _, err := DefaultApplyFieldMaskWebhookConfig(ctx, &pbObj, in, updateMask, "", db); err != nil {
+		return nil, err
+	}
+	if hook, ok := interface{}(&pbObj).(WebhookConfigWithBeforePatchSave); ok {
+		if db, err = hook.BeforePatchSave(ctx, in, updateMask, db); err != nil {
+			return nil, err
+		}
+	}
+	pbResponse, err := DefaultStrictUpdateWebhookConfig(ctx, &pbObj, db)
+	if err != nil {
+		return nil, err
+	}
+	if hook, ok := interface{}(pbResponse).(WebhookConfigWithAfterPatchSave); ok {
+		if err = hook.AfterPatchSave(ctx, in, updateMask, db); err != nil {
+			return nil, err
+		}
+	}
+	return pbResponse, nil
+}
+
+type WebhookConfigWithBeforePatchRead interface {
+	BeforePatchRead(context.Context, *WebhookConfig, *field_mask.FieldMask, *gorm.DB) (*gorm.DB, error)
+}
+type WebhookConfigWithBeforePatchApplyFieldMask interface {
+	BeforePatchApplyFieldMask(context.Context, *WebhookConfig, *field_mask.FieldMask, *gorm.DB) (*gorm.DB, error)
+}
+type WebhookConfigWithBeforePatchSave interface {
+	BeforePatchSave(context.Context, *WebhookConfig, *field_mask.FieldMask, *gorm.DB) (*gorm.DB, error)
+}
+type WebhookConfigWithAfterPatchSave interface {
+	AfterPatchSave(context.Context, *WebhookConfig, *field_mask.FieldMask, *gorm.DB) error
+}
+
+// DefaultPatchSetWebhookConfig executes a bulk gorm update call with patch behavior
+func DefaultPatchSetWebhookConfig(ctx context.Context, objects []*WebhookConfig, updateMasks []*field_mask.FieldMask, db *gorm.DB) ([]*WebhookConfig, error) {
+	if len(objects) != len(updateMasks) {
+		return nil, fmt.Errorf(errors.BadRepeatedFieldMaskTpl, len(updateMasks), len(objects))
+	}
+
+	results := make([]*WebhookConfig, 0, len(objects))
+	for i, patcher := range objects {
+		pbResponse, err := DefaultPatchWebhookConfig(ctx, patcher, updateMasks[i], db)
+		if err != nil {
+			return nil, err
+		}
+
+		results = append(results, pbResponse)
+	}
+
+	return results, nil
+}
+
+// DefaultApplyFieldMaskWebhookConfig patches an pbObject with patcher according to a field mask.
+func DefaultApplyFieldMaskWebhookConfig(ctx context.Context, patchee *WebhookConfig, patcher *WebhookConfig, updateMask *field_mask.FieldMask, prefix string, db *gorm.DB) (*WebhookConfig, error) {
+	if patcher == nil {
+		return nil, nil
+	} else if patchee == nil {
+		return nil, errors.NilArgumentError
+	}
+	var err error
+	var updatedRetryInterval bool
+	var updatedRateLimitInterval bool
+	var updatedCreatedAt bool
+	var updatedUpdatedAt bool
+	var updatedLastTriggeredAt bool
+	var updatedMetadata bool
+	for i, f := range updateMask.Paths {
+		if f == prefix+"Id" {
+			patchee.Id = patcher.Id
+			continue
+		}
+		if f == prefix+"Url" {
+			patchee.Url = patcher.Url
+			continue
+		}
+		if f == prefix+"AuthType" {
+			patchee.AuthType = patcher.AuthType
+			continue
+		}
+		if f == prefix+"AuthToken" {
+			patchee.AuthToken = patcher.AuthToken
+			continue
+		}
+		if f == prefix+"CustomHeaders" {
+			patchee.CustomHeaders = patcher.CustomHeaders
+			continue
+		}
+		if f == prefix+"MaxRetries" {
+			patchee.MaxRetries = patcher.MaxRetries
+			continue
+		}
+		if !updatedRetryInterval && strings.HasPrefix(f, prefix+"RetryInterval.") {
+			if patcher.RetryInterval == nil {
+				patchee.RetryInterval = nil
+				continue
+			}
+			if patchee.RetryInterval == nil {
+				patchee.RetryInterval = &durationpb.Duration{}
+			}
+			childMask := &field_mask.FieldMask{}
+			for j := i; j < len(updateMask.Paths); j++ {
+				if trimPath := strings.TrimPrefix(updateMask.Paths[j], prefix+"RetryInterval."); trimPath != updateMask.Paths[j] {
+					childMask.Paths = append(childMask.Paths, trimPath)
+				}
+			}
+			if err := gorm1.MergeWithMask(patcher.RetryInterval, patchee.RetryInterval, childMask); err != nil {
+				return nil, nil
+			}
+		}
+		if f == prefix+"RetryInterval" {
+			updatedRetryInterval = true
+			patchee.RetryInterval = patcher.RetryInterval
+			continue
+		}
+		if f == prefix+"TriggerEvents" {
+			patchee.TriggerEvents = patcher.TriggerEvents
+			continue
+		}
+		if f == prefix+"IncludedFields" {
+			patchee.IncludedFields = patcher.IncludedFields
+			continue
+		}
+		if f == prefix+"IncludeFullResults" {
+			patchee.IncludeFullResults = patcher.IncludeFullResults
+			continue
+		}
+		if f == prefix+"PayloadFormat" {
+			patchee.PayloadFormat = patcher.PayloadFormat
+			continue
+		}
+		if f == prefix+"VerifySsl" {
+			patchee.VerifySsl = patcher.VerifySsl
+			continue
+		}
+		if f == prefix+"SigningSecret" {
+			patchee.SigningSecret = patcher.SigningSecret
+			continue
+		}
+		if f == prefix+"RateLimit" {
+			patchee.RateLimit = patcher.RateLimit
+			continue
+		}
+		if !updatedRateLimitInterval && strings.HasPrefix(f, prefix+"RateLimitInterval.") {
+			if patcher.RateLimitInterval == nil {
+				patchee.RateLimitInterval = nil
+				continue
+			}
+			if patchee.RateLimitInterval == nil {
+				patchee.RateLimitInterval = &durationpb.Duration{}
+			}
+			childMask := &field_mask.FieldMask{}
+			for j := i; j < len(updateMask.Paths); j++ {
+				if trimPath := strings.TrimPrefix(updateMask.Paths[j], prefix+"RateLimitInterval."); trimPath != updateMask.Paths[j] {
+					childMask.Paths = append(childMask.Paths, trimPath)
+				}
+			}
+			if err := gorm1.MergeWithMask(patcher.RateLimitInterval, patchee.RateLimitInterval, childMask); err != nil {
+				return nil, nil
+			}
+		}
+		if f == prefix+"RateLimitInterval" {
+			updatedRateLimitInterval = true
+			patchee.RateLimitInterval = patcher.RateLimitInterval
+			continue
+		}
+		if !updatedCreatedAt && strings.HasPrefix(f, prefix+"CreatedAt.") {
+			if patcher.CreatedAt == nil {
+				patchee.CreatedAt = nil
+				continue
+			}
+			if patchee.CreatedAt == nil {
+				patchee.CreatedAt = &timestamppb.Timestamp{}
+			}
+			childMask := &field_mask.FieldMask{}
+			for j := i; j < len(updateMask.Paths); j++ {
+				if trimPath := strings.TrimPrefix(updateMask.Paths[j], prefix+"CreatedAt."); trimPath != updateMask.Paths[j] {
+					childMask.Paths = append(childMask.Paths, trimPath)
+				}
+			}
+			if err := gorm1.MergeWithMask(patcher.CreatedAt, patchee.CreatedAt, childMask); err != nil {
+				return nil, nil
+			}
+		}
+		if f == prefix+"CreatedAt" {
+			updatedCreatedAt = true
+			patchee.CreatedAt = patcher.CreatedAt
+			continue
+		}
+		if !updatedUpdatedAt && strings.HasPrefix(f, prefix+"UpdatedAt.") {
+			if patcher.UpdatedAt == nil {
+				patchee.UpdatedAt = nil
+				continue
+			}
+			if patchee.UpdatedAt == nil {
+				patchee.UpdatedAt = &timestamppb.Timestamp{}
+			}
+			childMask := &field_mask.FieldMask{}
+			for j := i; j < len(updateMask.Paths); j++ {
+				if trimPath := strings.TrimPrefix(updateMask.Paths[j], prefix+"UpdatedAt."); trimPath != updateMask.Paths[j] {
+					childMask.Paths = append(childMask.Paths, trimPath)
+				}
+			}
+			if err := gorm1.MergeWithMask(patcher.UpdatedAt, patchee.UpdatedAt, childMask); err != nil {
+				return nil, nil
+			}
+		}
+		if f == prefix+"UpdatedAt" {
+			updatedUpdatedAt = true
+			patchee.UpdatedAt = patcher.UpdatedAt
+			continue
+		}
+		if !updatedLastTriggeredAt && strings.HasPrefix(f, prefix+"LastTriggeredAt.") {
+			if patcher.LastTriggeredAt == nil {
+				patchee.LastTriggeredAt = nil
+				continue
+			}
+			if patchee.LastTriggeredAt == nil {
+				patchee.LastTriggeredAt = &timestamppb.Timestamp{}
+			}
+			childMask := &field_mask.FieldMask{}
+			for j := i; j < len(updateMask.Paths); j++ {
+				if trimPath := strings.TrimPrefix(updateMask.Paths[j], prefix+"LastTriggeredAt."); trimPath != updateMask.Paths[j] {
+					childMask.Paths = append(childMask.Paths, trimPath)
+				}
+			}
+			if err := gorm1.MergeWithMask(patcher.LastTriggeredAt, patchee.LastTriggeredAt, childMask); err != nil {
+				return nil, nil
+			}
+		}
+		if f == prefix+"LastTriggeredAt" {
+			updatedLastTriggeredAt = true
+			patchee.LastTriggeredAt = patcher.LastTriggeredAt
+			continue
+		}
+		if f == prefix+"SuccessfulCalls" {
+			patchee.SuccessfulCalls = patcher.SuccessfulCalls
+			continue
+		}
+		if f == prefix+"FailedCalls" {
+			patchee.FailedCalls = patcher.FailedCalls
+			continue
+		}
+		if !updatedMetadata && strings.HasPrefix(f, prefix+"Metadata.") {
+			if patcher.Metadata == nil {
+				patchee.Metadata = nil
+				continue
+			}
+			if patchee.Metadata == nil {
+				patchee.Metadata = &structpb.Struct{}
+			}
+			childMask := &field_mask.FieldMask{}
+			for j := i; j < len(updateMask.Paths); j++ {
+				if trimPath := strings.TrimPrefix(updateMask.Paths[j], prefix+"Metadata."); trimPath != updateMask.Paths[j] {
+					childMask.Paths = append(childMask.Paths, trimPath)
+				}
+			}
+			if err := gorm1.MergeWithMask(patcher.Metadata, patchee.Metadata, childMask); err != nil {
+				return nil, nil
+			}
+		}
+		if f == prefix+"Metadata" {
+			updatedMetadata = true
+			patchee.Metadata = patcher.Metadata
+			continue
+		}
+		if f == prefix+"WebhookName" {
+			patchee.WebhookName = patcher.WebhookName
+			continue
+		}
+	}
+	if err != nil {
+		return nil, err
+	}
+	return patchee, nil
+}
+
+// DefaultListWebhookConfig executes a gorm list call
+func DefaultListWebhookConfig(ctx context.Context, db *gorm.DB) ([]*WebhookConfig, error) {
+	in := WebhookConfig{}
+	ormObj, err := in.ToORM(ctx)
+	if err != nil {
+		return nil, err
+	}
+	if hook, ok := interface{}(&ormObj).(WebhookConfigORMWithBeforeListApplyQuery); ok {
+		if db, err = hook.BeforeListApplyQuery(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	if hook, ok := interface{}(&ormObj).(WebhookConfigORMWithBeforeListFind); ok {
+		if db, err = hook.BeforeListFind(ctx, db); err != nil {
+			return nil, err
+		}
+	}
+	db = db.Where(&ormObj)
+	db = db.Order("id")
+	ormResponse := []WebhookConfigORM{}
+	if err := db.Find(&ormResponse).Error; err != nil {
+		return nil, err
+	}
+	if hook, ok := interface{}(&ormObj).(WebhookConfigORMWithAfterListFind); ok {
+		if err = hook.AfterListFind(ctx, db, &ormResponse); err != nil {
+			return nil, err
+		}
+	}
+	pbResponse := []*WebhookConfig{}
+	for _, responseEntry := range ormResponse {
+		temp, err := responseEntry.ToPB(ctx)
+		if err != nil {
+			return nil, err
+		}
+		pbResponse = append(pbResponse, &temp)
+	}
+	return pbResponse, nil
+}
+
+type WebhookConfigORMWithBeforeListApplyQuery interface {
+	BeforeListApplyQuery(context.Context, *gorm.DB) (*gorm.DB, error)
+}
+type WebhookConfigORMWithBeforeListFind interface {
+	BeforeListFind(context.Context, *gorm.DB) (*gorm.DB, error)
+}
+type WebhookConfigORMWithAfterListFind interface {
+	AfterListFind(context.Context, *gorm.DB, *[]WebhookConfigORM) error
+}
+
 // DefaultCreateLead executes a basic gorm create call
 func DefaultCreateLead(ctx context.Context, in *Lead, db *gorm.DB) (*Lead, error) {
 	if in == nil {
@@ -6780,7 +7479,7 @@ func DefaultCreateLead(ctx context.Context, in *Lead, db *gorm.DB) (*Lead, error
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ApiKeys").Preload("ScrapingJobs").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Preload("Webhooks").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(LeadORMWithAfterCreate_); ok {
@@ -6962,7 +7661,7 @@ func DefaultStrictUpdateLead(ctx context.Context, in *Lead, db *gorm.DB) (*Lead,
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ApiKeys").Preload("ScrapingJobs").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Preload("Webhooks").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(LeadORMWithAfterStrictUpdateSave); ok {
@@ -8951,7 +9650,7 @@ func DefaultCreateAPIKey(ctx context.Context, in *APIKey, db *gorm.DB) (*APIKey,
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("ScrapingJobs").Preload("ApiKeys").Preload("Settings").Preload("Workspaces").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ScrapingJobs").Preload("Webhooks").Preload("ApiKeys").Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(APIKeyORMWithAfterCreate_); ok {
@@ -9106,7 +9805,7 @@ func DefaultStrictUpdateAPIKey(ctx context.Context, in *APIKey, db *gorm.DB) (*A
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Workspaces").Preload("Settings").Preload("ScrapingJobs").Preload("ApiKeys").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("ApiKeys").Preload("Webhooks").Preload("ScrapingJobs").Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(APIKeyORMWithAfterStrictUpdateSave); ok {

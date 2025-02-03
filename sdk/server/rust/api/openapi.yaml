@@ -2254,7 +2254,7 @@ components:
         }
         ```
       example:
-        averageResponseTime: 0.10263654
+        averageResponseTime: 3.0205798
         lastRotationDate: 2000-01-23T04:56:07.000+00:00
         documentationUrl: documentationUrl
         workspace: null
@@ -2269,7 +2269,7 @@ components:
         lastRotatedAt: 2000-01-23T04:56:07.000+00:00
         dataClassification: dataClassification
         id: id
-        costPerRequest: 6.519181
+        costPerRequest: 7.7403517
         requireRequestSigning: true
         updatedAt: 2000-01-23T04:56:07.000+00:00
         allowedDomains:
@@ -2278,8 +2278,8 @@ components:
         approvedIntegrations:
         - approvedIntegrations
         - approvedIntegrations
-        requestsPerSecond: 7
-        rotationFrequencyDays: 7
+        requestsPerSecond: 0
+        rotationFrequencyDays: 5
         recentErrors: recentErrors
         endpointUsageJson: endpointUsageJson
         tags:
@@ -2293,7 +2293,7 @@ components:
         - allowedIps
         - allowedIps
         name: name
-        concurrentRequests: 7
+        concurrentRequests: 8
         status: STATUS_UNSPECIFIED
         supportContact: supportContact
         supportedFeatures:
@@ -2311,9 +2311,9 @@ components:
         - monitoringIntegrations
         - monitoringIntegrations
         keyHash: keyHash
-        quotaAlertThreshold: 3.0205798
-        successRate: 8.969579
-        successfulRequestsCount: 4
+        quotaAlertThreshold: 3.2588565
+        successRate: 7.0483656
+        successfulRequestsCount: 3
         totalErrors: totalErrors
         clientSecretHash: clientSecretHash
         lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -2330,7 +2330,7 @@ components:
         lastUsedAt: 2000-01-23T04:56:07.000+00:00
         lastRotationReason: lastRotationReason
         tenantId: tenantId
-        requestsPerDay: 0
+        requestsPerDay: 4
         scopes:
         - scopes
         - scopes
@@ -2342,7 +2342,7 @@ components:
         - allowedSignatureAlgorithms
         billingTier: billingTier
         account: null
-        errorAlertThreshold: 3.05761
+        errorAlertThreshold: 4.078846
       properties:
         id:
           format: uint64
@@ -2619,11 +2619,11 @@ components:
         mfaEnabled: true
         id: id
         workspaces:
-        - activeScrapers: 3
+        - activeScrapers: 7
           storageQuota: storageQuota
-          dailyJobQuota: 6
+          dailyJobQuota: 0
           apiKeys:
-          - averageResponseTime: 0.10263654
+          - averageResponseTime: 3.0205798
             lastRotationDate: 2000-01-23T04:56:07.000+00:00
             documentationUrl: documentationUrl
             workspace: null
@@ -2638,7 +2638,7 @@ components:
             lastRotatedAt: 2000-01-23T04:56:07.000+00:00
             dataClassification: dataClassification
             id: id
-            costPerRequest: 6.519181
+            costPerRequest: 7.7403517
             requireRequestSigning: true
             updatedAt: 2000-01-23T04:56:07.000+00:00
             allowedDomains:
@@ -2647,8 +2647,8 @@ components:
             approvedIntegrations:
             - approvedIntegrations
             - approvedIntegrations
-            requestsPerSecond: 7
-            rotationFrequencyDays: 7
+            requestsPerSecond: 0
+            rotationFrequencyDays: 5
             recentErrors: recentErrors
             endpointUsageJson: endpointUsageJson
             tags:
@@ -2662,7 +2662,7 @@ components:
             - allowedIps
             - allowedIps
             name: name
-            concurrentRequests: 7
+            concurrentRequests: 8
             status: STATUS_UNSPECIFIED
             supportContact: supportContact
             supportedFeatures:
@@ -2680,9 +2680,9 @@ components:
             - monitoringIntegrations
             - monitoringIntegrations
             keyHash: keyHash
-            quotaAlertThreshold: 3.0205798
-            successRate: 8.969579
-            successfulRequestsCount: 4
+            quotaAlertThreshold: 3.2588565
+            successRate: 7.0483656
+            successfulRequestsCount: 3
             totalErrors: totalErrors
             clientSecretHash: clientSecretHash
             lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -2699,7 +2699,7 @@ components:
             lastUsedAt: 2000-01-23T04:56:07.000+00:00
             lastRotationReason: lastRotationReason
             tenantId: tenantId
-            requestsPerDay: 0
+            requestsPerDay: 4
             scopes:
             - scopes
             - scopes
@@ -2711,8 +2711,8 @@ components:
             - allowedSignatureAlgorithms
             billingTier: billingTier
             account: null
-            errorAlertThreshold: 3.05761
-          - averageResponseTime: 0.10263654
+            errorAlertThreshold: 4.078846
+          - averageResponseTime: 3.0205798
             lastRotationDate: 2000-01-23T04:56:07.000+00:00
             documentationUrl: documentationUrl
             workspace: null
@@ -2727,7 +2727,7 @@ components:
             lastRotatedAt: 2000-01-23T04:56:07.000+00:00
             dataClassification: dataClassification
             id: id
-            costPerRequest: 6.519181
+            costPerRequest: 7.7403517
             requireRequestSigning: true
             updatedAt: 2000-01-23T04:56:07.000+00:00
             allowedDomains:
@@ -2736,8 +2736,8 @@ components:
             approvedIntegrations:
             - approvedIntegrations
             - approvedIntegrations
-            requestsPerSecond: 7
-            rotationFrequencyDays: 7
+            requestsPerSecond: 0
+            rotationFrequencyDays: 5
             recentErrors: recentErrors
             endpointUsageJson: endpointUsageJson
             tags:
@@ -2751,7 +2751,7 @@ components:
             - allowedIps
             - allowedIps
             name: name
-            concurrentRequests: 7
+            concurrentRequests: 8
             status: STATUS_UNSPECIFIED
             supportContact: supportContact
             supportedFeatures:
@@ -2769,9 +2769,9 @@ components:
             - monitoringIntegrations
             - monitoringIntegrations
             keyHash: keyHash
-            quotaAlertThreshold: 3.0205798
-            successRate: 8.969579
-            successfulRequestsCount: 4
+            quotaAlertThreshold: 3.2588565
+            successRate: 7.0483656
+            successfulRequestsCount: 3
             totalErrors: totalErrors
             clientSecretHash: clientSecretHash
             lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -2788,7 +2788,7 @@ components:
             lastUsedAt: 2000-01-23T04:56:07.000+00:00
             lastRotationReason: lastRotationReason
             tenantId: tenantId
-            requestsPerDay: 0
+            requestsPerDay: 4
             scopes:
             - scopes
             - scopes
@@ -2800,14 +2800,13 @@ components:
             - allowedSignatureAlgorithms
             billingTier: billingTier
             account: null
-            errorAlertThreshold: 3.05761
+            errorAlertThreshold: 4.078846
           industry: industry
           workflows:
           - workspace: null
             notificationNotifyOnFailure: true
             geoFencingLat: 6.683562403749608
-            notificationWebhookUrl: notificationWebhookUrl
-            contentFilterMinimumReviews: 1
+            contentFilterMinimumReviews: 5
             includePhotos: true
             geoFencingZoomMin: 9
             maxReviewsPerBusiness: 3
@@ -2818,8 +2817,8 @@ components:
             orgId: orgId
             notificationNotifyOnComplete: true
             createdAt: 2000-01-23T04:56:07.000+00:00
-            qosMaxConcurrentRequests: 2
-            contentFilterMinimumRating: 6.965118
+            qosMaxConcurrentRequests: 6
+            contentFilterMinimumRating: 6.878052
             qosEnableJavascript: true
             includeBusinessHours: true
             qosRequestTimeout: qosRequestTimeout
@@ -3530,7 +3529,7 @@ components:
               updatedAt: 2000-01-23T04:56:07.000+00:00
             notificationSlackChannel: notificationSlackChannel
             userAgent: userAgent
-            qosMaxRetries: 6
+            qosMaxRetries: 3
             geoFencingLon: 8.762042012749001
             cronExpression: cronExpression
             maxRetries: 5
@@ -3538,6 +3537,59 @@ components:
             dataRetention: dataRetention
             nextRunTime: 2000-01-23T04:56:07.000+00:00
             lastRunTime: 2000-01-23T04:56:07.000+00:00
+            webhooks:
+            - metadata: "{}"
+              rateLimit: 1
+              failedCalls: 6
+              authToken: authToken
+              successfulCalls: 2
+              payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+              url: url
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              maxRetries: 6
+              signingSecret: signingSecret
+              rateLimitInterval: rateLimitInterval
+              includeFullResults: true
+              triggerEvents:
+              - TRIGGER_EVENT_UNSPECIFIED
+              - TRIGGER_EVENT_UNSPECIFIED
+              verifySsl: true
+              retryInterval: retryInterval
+              includedFields:
+              - INCLUDED_FIELD_UNSPECIFIED
+              - INCLUDED_FIELD_UNSPECIFIED
+              id: id
+              lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+              authType: authType
+              customHeaders:
+                key: customHeaders
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - metadata: "{}"
+              rateLimit: 1
+              failedCalls: 6
+              authToken: authToken
+              successfulCalls: 2
+              payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+              url: url
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              maxRetries: 6
+              signingSecret: signingSecret
+              rateLimitInterval: rateLimitInterval
+              includeFullResults: true
+              triggerEvents:
+              - TRIGGER_EVENT_UNSPECIFIED
+              - TRIGGER_EVENT_UNSPECIFIED
+              verifySsl: true
+              retryInterval: retryInterval
+              includedFields:
+              - INCLUDED_FIELD_UNSPECIFIED
+              - INCLUDED_FIELD_UNSPECIFIED
+              id: id
+              lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+              authType: authType
+              customHeaders:
+                key: customHeaders
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             notificationEmailGroup: notificationEmailGroup
             tenantId: tenantId
             contentFilterExcludedTypes:
@@ -3549,8 +3601,7 @@ components:
           - workspace: null
             notificationNotifyOnFailure: true
             geoFencingLat: 6.683562403749608
-            notificationWebhookUrl: notificationWebhookUrl
-            contentFilterMinimumReviews: 1
+            contentFilterMinimumReviews: 5
             includePhotos: true
             geoFencingZoomMin: 9
             maxReviewsPerBusiness: 3
@@ -3561,8 +3612,8 @@ components:
             orgId: orgId
             notificationNotifyOnComplete: true
             createdAt: 2000-01-23T04:56:07.000+00:00
-            qosMaxConcurrentRequests: 2
-            contentFilterMinimumRating: 6.965118
+            qosMaxConcurrentRequests: 6
+            contentFilterMinimumRating: 6.878052
             qosEnableJavascript: true
             includeBusinessHours: true
             qosRequestTimeout: qosRequestTimeout
@@ -4273,7 +4324,7 @@ components:
               updatedAt: 2000-01-23T04:56:07.000+00:00
             notificationSlackChannel: notificationSlackChannel
             userAgent: userAgent
-            qosMaxRetries: 6
+            qosMaxRetries: 3
             geoFencingLon: 8.762042012749001
             cronExpression: cronExpression
             maxRetries: 5
@@ -4281,6 +4332,59 @@ components:
             dataRetention: dataRetention
             nextRunTime: 2000-01-23T04:56:07.000+00:00
             lastRunTime: 2000-01-23T04:56:07.000+00:00
+            webhooks:
+            - metadata: "{}"
+              rateLimit: 1
+              failedCalls: 6
+              authToken: authToken
+              successfulCalls: 2
+              payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+              url: url
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              maxRetries: 6
+              signingSecret: signingSecret
+              rateLimitInterval: rateLimitInterval
+              includeFullResults: true
+              triggerEvents:
+              - TRIGGER_EVENT_UNSPECIFIED
+              - TRIGGER_EVENT_UNSPECIFIED
+              verifySsl: true
+              retryInterval: retryInterval
+              includedFields:
+              - INCLUDED_FIELD_UNSPECIFIED
+              - INCLUDED_FIELD_UNSPECIFIED
+              id: id
+              lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+              authType: authType
+              customHeaders:
+                key: customHeaders
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - metadata: "{}"
+              rateLimit: 1
+              failedCalls: 6
+              authToken: authToken
+              successfulCalls: 2
+              payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+              url: url
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              maxRetries: 6
+              signingSecret: signingSecret
+              rateLimitInterval: rateLimitInterval
+              includeFullResults: true
+              triggerEvents:
+              - TRIGGER_EVENT_UNSPECIFIED
+              - TRIGGER_EVENT_UNSPECIFIED
+              verifySsl: true
+              retryInterval: retryInterval
+              includedFields:
+              - INCLUDED_FIELD_UNSPECIFIED
+              - INCLUDED_FIELD_UNSPECIFIED
+              id: id
+              lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+              authType: authType
+              customHeaders:
+                key: customHeaders
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             notificationEmailGroup: notificationEmailGroup
             tenantId: tenantId
             contentFilterExcludedTypes:
@@ -4292,7 +4396,7 @@ components:
           hipaaCompliant: true
           gdprCompliant: true
           soc2Compliant: true
-          totalLeadsCollected: 3
+          totalLeadsCollected: 6
           lastJobRun: 2000-01-23T04:56:07.000+00:00
           createdAt: 2000-01-23T04:56:07.000+00:00
           scrapingJobs:
@@ -4991,18 +5095,18 @@ components:
             status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             updatedAt: 2000-01-23T04:56:07.000+00:00
           deletedAt: 2000-01-23T04:56:07.000+00:00
-          workspaceJobLimit: 5
+          workspaceJobLimit: 7
           domain: domain
           name: name
           id: id
           usedStorage: usedStorage
           updatedAt: 2000-01-23T04:56:07.000+00:00
-          jobsRunThisMonth: 6
-        - activeScrapers: 3
+          jobsRunThisMonth: 3
+        - activeScrapers: 7
           storageQuota: storageQuota
-          dailyJobQuota: 6
+          dailyJobQuota: 0
           apiKeys:
-          - averageResponseTime: 0.10263654
+          - averageResponseTime: 3.0205798
             lastRotationDate: 2000-01-23T04:56:07.000+00:00
             documentationUrl: documentationUrl
             workspace: null
@@ -5017,7 +5121,7 @@ components:
             lastRotatedAt: 2000-01-23T04:56:07.000+00:00
             dataClassification: dataClassification
             id: id
-            costPerRequest: 6.519181
+            costPerRequest: 7.7403517
             requireRequestSigning: true
             updatedAt: 2000-01-23T04:56:07.000+00:00
             allowedDomains:
@@ -5026,8 +5130,8 @@ components:
             approvedIntegrations:
             - approvedIntegrations
             - approvedIntegrations
-            requestsPerSecond: 7
-            rotationFrequencyDays: 7
+            requestsPerSecond: 0
+            rotationFrequencyDays: 5
             recentErrors: recentErrors
             endpointUsageJson: endpointUsageJson
             tags:
@@ -5041,7 +5145,7 @@ components:
             - allowedIps
             - allowedIps
             name: name
-            concurrentRequests: 7
+            concurrentRequests: 8
             status: STATUS_UNSPECIFIED
             supportContact: supportContact
             supportedFeatures:
@@ -5059,9 +5163,9 @@ components:
             - monitoringIntegrations
             - monitoringIntegrations
             keyHash: keyHash
-            quotaAlertThreshold: 3.0205798
-            successRate: 8.969579
-            successfulRequestsCount: 4
+            quotaAlertThreshold: 3.2588565
+            successRate: 7.0483656
+            successfulRequestsCount: 3
             totalErrors: totalErrors
             clientSecretHash: clientSecretHash
             lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -5078,7 +5182,7 @@ components:
             lastUsedAt: 2000-01-23T04:56:07.000+00:00
             lastRotationReason: lastRotationReason
             tenantId: tenantId
-            requestsPerDay: 0
+            requestsPerDay: 4
             scopes:
             - scopes
             - scopes
@@ -5090,8 +5194,8 @@ components:
             - allowedSignatureAlgorithms
             billingTier: billingTier
             account: null
-            errorAlertThreshold: 3.05761
-          - averageResponseTime: 0.10263654
+            errorAlertThreshold: 4.078846
+          - averageResponseTime: 3.0205798
             lastRotationDate: 2000-01-23T04:56:07.000+00:00
             documentationUrl: documentationUrl
             workspace: null
@@ -5106,7 +5210,7 @@ components:
             lastRotatedAt: 2000-01-23T04:56:07.000+00:00
             dataClassification: dataClassification
             id: id
-            costPerRequest: 6.519181
+            costPerRequest: 7.7403517
             requireRequestSigning: true
             updatedAt: 2000-01-23T04:56:07.000+00:00
             allowedDomains:
@@ -5115,8 +5219,8 @@ components:
             approvedIntegrations:
             - approvedIntegrations
             - approvedIntegrations
-            requestsPerSecond: 7
-            rotationFrequencyDays: 7
+            requestsPerSecond: 0
+            rotationFrequencyDays: 5
             recentErrors: recentErrors
             endpointUsageJson: endpointUsageJson
             tags:
@@ -5130,7 +5234,7 @@ components:
             - allowedIps
             - allowedIps
             name: name
-            concurrentRequests: 7
+            concurrentRequests: 8
             status: STATUS_UNSPECIFIED
             supportContact: supportContact
             supportedFeatures:
@@ -5148,9 +5252,9 @@ components:
             - monitoringIntegrations
             - monitoringIntegrations
             keyHash: keyHash
-            quotaAlertThreshold: 3.0205798
-            successRate: 8.969579
-            successfulRequestsCount: 4
+            quotaAlertThreshold: 3.2588565
+            successRate: 7.0483656
+            successfulRequestsCount: 3
             totalErrors: totalErrors
             clientSecretHash: clientSecretHash
             lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -5167,7 +5271,7 @@ components:
             lastUsedAt: 2000-01-23T04:56:07.000+00:00
             lastRotationReason: lastRotationReason
             tenantId: tenantId
-            requestsPerDay: 0
+            requestsPerDay: 4
             scopes:
             - scopes
             - scopes
@@ -5179,14 +5283,13 @@ components:
             - allowedSignatureAlgorithms
             billingTier: billingTier
             account: null
-            errorAlertThreshold: 3.05761
+            errorAlertThreshold: 4.078846
           industry: industry
           workflows:
           - workspace: null
             notificationNotifyOnFailure: true
             geoFencingLat: 6.683562403749608
-            notificationWebhookUrl: notificationWebhookUrl
-            contentFilterMinimumReviews: 1
+            contentFilterMinimumReviews: 5
             includePhotos: true
             geoFencingZoomMin: 9
             maxReviewsPerBusiness: 3
@@ -5197,8 +5300,8 @@ components:
             orgId: orgId
             notificationNotifyOnComplete: true
             createdAt: 2000-01-23T04:56:07.000+00:00
-            qosMaxConcurrentRequests: 2
-            contentFilterMinimumRating: 6.965118
+            qosMaxConcurrentRequests: 6
+            contentFilterMinimumRating: 6.878052
             qosEnableJavascript: true
             includeBusinessHours: true
             qosRequestTimeout: qosRequestTimeout
@@ -5909,7 +6012,7 @@ components:
               updatedAt: 2000-01-23T04:56:07.000+00:00
             notificationSlackChannel: notificationSlackChannel
             userAgent: userAgent
-            qosMaxRetries: 6
+            qosMaxRetries: 3
             geoFencingLon: 8.762042012749001
             cronExpression: cronExpression
             maxRetries: 5
@@ -5917,6 +6020,59 @@ components:
             dataRetention: dataRetention
             nextRunTime: 2000-01-23T04:56:07.000+00:00
             lastRunTime: 2000-01-23T04:56:07.000+00:00
+            webhooks:
+            - metadata: "{}"
+              rateLimit: 1
+              failedCalls: 6
+              authToken: authToken
+              successfulCalls: 2
+              payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+              url: url
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              maxRetries: 6
+              signingSecret: signingSecret
+              rateLimitInterval: rateLimitInterval
+              includeFullResults: true
+              triggerEvents:
+              - TRIGGER_EVENT_UNSPECIFIED
+              - TRIGGER_EVENT_UNSPECIFIED
+              verifySsl: true
+              retryInterval: retryInterval
+              includedFields:
+              - INCLUDED_FIELD_UNSPECIFIED
+              - INCLUDED_FIELD_UNSPECIFIED
+              id: id
+              lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+              authType: authType
+              customHeaders:
+                key: customHeaders
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - metadata: "{}"
+              rateLimit: 1
+              failedCalls: 6
+              authToken: authToken
+              successfulCalls: 2
+              payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+              url: url
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              maxRetries: 6
+              signingSecret: signingSecret
+              rateLimitInterval: rateLimitInterval
+              includeFullResults: true
+              triggerEvents:
+              - TRIGGER_EVENT_UNSPECIFIED
+              - TRIGGER_EVENT_UNSPECIFIED
+              verifySsl: true
+              retryInterval: retryInterval
+              includedFields:
+              - INCLUDED_FIELD_UNSPECIFIED
+              - INCLUDED_FIELD_UNSPECIFIED
+              id: id
+              lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+              authType: authType
+              customHeaders:
+                key: customHeaders
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             notificationEmailGroup: notificationEmailGroup
             tenantId: tenantId
             contentFilterExcludedTypes:
@@ -5928,8 +6084,7 @@ components:
           - workspace: null
             notificationNotifyOnFailure: true
             geoFencingLat: 6.683562403749608
-            notificationWebhookUrl: notificationWebhookUrl
-            contentFilterMinimumReviews: 1
+            contentFilterMinimumReviews: 5
             includePhotos: true
             geoFencingZoomMin: 9
             maxReviewsPerBusiness: 3
@@ -5940,8 +6095,8 @@ components:
             orgId: orgId
             notificationNotifyOnComplete: true
             createdAt: 2000-01-23T04:56:07.000+00:00
-            qosMaxConcurrentRequests: 2
-            contentFilterMinimumRating: 6.965118
+            qosMaxConcurrentRequests: 6
+            contentFilterMinimumRating: 6.878052
             qosEnableJavascript: true
             includeBusinessHours: true
             qosRequestTimeout: qosRequestTimeout
@@ -6652,7 +6807,7 @@ components:
               updatedAt: 2000-01-23T04:56:07.000+00:00
             notificationSlackChannel: notificationSlackChannel
             userAgent: userAgent
-            qosMaxRetries: 6
+            qosMaxRetries: 3
             geoFencingLon: 8.762042012749001
             cronExpression: cronExpression
             maxRetries: 5
@@ -6660,6 +6815,59 @@ components:
             dataRetention: dataRetention
             nextRunTime: 2000-01-23T04:56:07.000+00:00
             lastRunTime: 2000-01-23T04:56:07.000+00:00
+            webhooks:
+            - metadata: "{}"
+              rateLimit: 1
+              failedCalls: 6
+              authToken: authToken
+              successfulCalls: 2
+              payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+              url: url
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              maxRetries: 6
+              signingSecret: signingSecret
+              rateLimitInterval: rateLimitInterval
+              includeFullResults: true
+              triggerEvents:
+              - TRIGGER_EVENT_UNSPECIFIED
+              - TRIGGER_EVENT_UNSPECIFIED
+              verifySsl: true
+              retryInterval: retryInterval
+              includedFields:
+              - INCLUDED_FIELD_UNSPECIFIED
+              - INCLUDED_FIELD_UNSPECIFIED
+              id: id
+              lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+              authType: authType
+              customHeaders:
+                key: customHeaders
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - metadata: "{}"
+              rateLimit: 1
+              failedCalls: 6
+              authToken: authToken
+              successfulCalls: 2
+              payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+              url: url
+              createdAt: 2000-01-23T04:56:07.000+00:00
+              maxRetries: 6
+              signingSecret: signingSecret
+              rateLimitInterval: rateLimitInterval
+              includeFullResults: true
+              triggerEvents:
+              - TRIGGER_EVENT_UNSPECIFIED
+              - TRIGGER_EVENT_UNSPECIFIED
+              verifySsl: true
+              retryInterval: retryInterval
+              includedFields:
+              - INCLUDED_FIELD_UNSPECIFIED
+              - INCLUDED_FIELD_UNSPECIFIED
+              id: id
+              lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+              authType: authType
+              customHeaders:
+                key: customHeaders
+              updatedAt: 2000-01-23T04:56:07.000+00:00
             notificationEmailGroup: notificationEmailGroup
             tenantId: tenantId
             contentFilterExcludedTypes:
@@ -6671,7 +6879,7 @@ components:
           hipaaCompliant: true
           gdprCompliant: true
           soc2Compliant: true
-          totalLeadsCollected: 3
+          totalLeadsCollected: 6
           lastJobRun: 2000-01-23T04:56:07.000+00:00
           createdAt: 2000-01-23T04:56:07.000+00:00
           scrapingJobs:
@@ -7370,13 +7578,13 @@ components:
             status: BACKGROUND_JOB_STATUS_UNSPECIFIED
             updatedAt: 2000-01-23T04:56:07.000+00:00
           deletedAt: 2000-01-23T04:56:07.000+00:00
-          workspaceJobLimit: 5
+          workspaceJobLimit: 7
           domain: domain
           name: name
           id: id
           usedStorage: usedStorage
           updatedAt: 2000-01-23T04:56:07.000+00:00
-          jobsRunThisMonth: 6
+          jobsRunThisMonth: 3
         email: email
         totalJobsRun: 0
       properties:
@@ -7873,11 +8081,11 @@ components:
           mfaEnabled: true
           id: id
           workspaces:
-          - activeScrapers: 3
+          - activeScrapers: 7
             storageQuota: storageQuota
-            dailyJobQuota: 6
+            dailyJobQuota: 0
             apiKeys:
-            - averageResponseTime: 0.10263654
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -7892,7 +8100,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -7901,8 +8109,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -7916,7 +8124,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -7934,9 +8142,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -7953,7 +8161,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -7965,8 +8173,8 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
-            - averageResponseTime: 0.10263654
+              errorAlertThreshold: 4.078846
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -7981,7 +8189,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -7990,8 +8198,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -8005,7 +8213,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -8023,9 +8231,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -8042,7 +8250,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -8054,14 +8262,13 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
+              errorAlertThreshold: 4.078846
             industry: industry
             workflows:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -8072,8 +8279,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -8784,7 +8991,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -8792,6 +8999,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -8803,8 +9063,7 @@ components:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -8815,8 +9074,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -9527,7 +9786,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -9535,6 +9794,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -9546,7 +9858,7 @@ components:
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
-            totalLeadsCollected: 3
+            totalLeadsCollected: 6
             lastJobRun: 2000-01-23T04:56:07.000+00:00
             createdAt: 2000-01-23T04:56:07.000+00:00
             scrapingJobs:
@@ -10245,18 +10557,18 @@ components:
               status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               updatedAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            workspaceJobLimit: 5
+            workspaceJobLimit: 7
             domain: domain
             name: name
             id: id
             usedStorage: usedStorage
             updatedAt: 2000-01-23T04:56:07.000+00:00
-            jobsRunThisMonth: 6
-          - activeScrapers: 3
+            jobsRunThisMonth: 3
+          - activeScrapers: 7
             storageQuota: storageQuota
-            dailyJobQuota: 6
+            dailyJobQuota: 0
             apiKeys:
-            - averageResponseTime: 0.10263654
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -10271,7 +10583,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -10280,8 +10592,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -10295,7 +10607,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -10313,9 +10625,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -10332,7 +10644,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -10344,8 +10656,8 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
-            - averageResponseTime: 0.10263654
+              errorAlertThreshold: 4.078846
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -10360,7 +10672,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -10369,8 +10681,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -10384,7 +10696,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -10402,9 +10714,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -10421,7 +10733,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -10433,14 +10745,13 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
+              errorAlertThreshold: 4.078846
             industry: industry
             workflows:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -10451,8 +10762,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -11163,7 +11474,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -11171,6 +11482,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -11182,8 +11546,7 @@ components:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -11194,8 +11557,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -11906,7 +12269,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -11914,6 +12277,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -11925,7 +12341,7 @@ components:
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
-            totalLeadsCollected: 3
+            totalLeadsCollected: 6
             lastJobRun: 2000-01-23T04:56:07.000+00:00
             createdAt: 2000-01-23T04:56:07.000+00:00
             scrapingJobs:
@@ -12624,13 +13040,13 @@ components:
               status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               updatedAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            workspaceJobLimit: 5
+            workspaceJobLimit: 7
             domain: domain
             name: name
             id: id
             usedStorage: usedStorage
             updatedAt: 2000-01-23T04:56:07.000+00:00
-            jobsRunThisMonth: 6
+            jobsRunThisMonth: 3
           email: email
           totalJobsRun: 0
       properties:
@@ -12672,11 +13088,11 @@ components:
           mfaEnabled: true
           id: id
           workspaces:
-          - activeScrapers: 3
+          - activeScrapers: 7
             storageQuota: storageQuota
-            dailyJobQuota: 6
+            dailyJobQuota: 0
             apiKeys:
-            - averageResponseTime: 0.10263654
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -12691,7 +13107,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -12700,8 +13116,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -12715,7 +13131,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -12733,9 +13149,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -12752,7 +13168,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -12764,8 +13180,8 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
-            - averageResponseTime: 0.10263654
+              errorAlertThreshold: 4.078846
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -12780,7 +13196,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -12789,8 +13205,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -12804,7 +13220,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -12822,9 +13238,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -12841,7 +13257,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -12853,14 +13269,13 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
+              errorAlertThreshold: 4.078846
             industry: industry
             workflows:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -12871,8 +13286,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -13583,7 +13998,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -13591,6 +14006,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -13602,8 +14070,7 @@ components:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -13614,8 +14081,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -14326,7 +14793,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -14334,6 +14801,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -14345,7 +14865,7 @@ components:
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
-            totalLeadsCollected: 3
+            totalLeadsCollected: 6
             lastJobRun: 2000-01-23T04:56:07.000+00:00
             createdAt: 2000-01-23T04:56:07.000+00:00
             scrapingJobs:
@@ -15044,18 +15564,18 @@ components:
               status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               updatedAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            workspaceJobLimit: 5
+            workspaceJobLimit: 7
             domain: domain
             name: name
             id: id
             usedStorage: usedStorage
             updatedAt: 2000-01-23T04:56:07.000+00:00
-            jobsRunThisMonth: 6
-          - activeScrapers: 3
+            jobsRunThisMonth: 3
+          - activeScrapers: 7
             storageQuota: storageQuota
-            dailyJobQuota: 6
+            dailyJobQuota: 0
             apiKeys:
-            - averageResponseTime: 0.10263654
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -15070,7 +15590,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -15079,8 +15599,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -15094,7 +15614,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -15112,9 +15632,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -15131,7 +15651,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -15143,8 +15663,8 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
-            - averageResponseTime: 0.10263654
+              errorAlertThreshold: 4.078846
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -15159,7 +15679,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -15168,8 +15688,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -15183,7 +15703,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -15201,9 +15721,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -15220,7 +15740,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -15232,14 +15752,13 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
+              errorAlertThreshold: 4.078846
             industry: industry
             workflows:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -15250,8 +15769,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -15962,7 +16481,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -15970,6 +16489,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -15981,8 +16553,7 @@ components:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -15993,8 +16564,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -16705,7 +17276,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -16713,6 +17284,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -16724,7 +17348,7 @@ components:
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
-            totalLeadsCollected: 3
+            totalLeadsCollected: 6
             lastJobRun: 2000-01-23T04:56:07.000+00:00
             createdAt: 2000-01-23T04:56:07.000+00:00
             scrapingJobs:
@@ -17423,13 +18047,13 @@ components:
               status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               updatedAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            workspaceJobLimit: 5
+            workspaceJobLimit: 7
             domain: domain
             name: name
             id: id
             usedStorage: usedStorage
             updatedAt: 2000-01-23T04:56:07.000+00:00
-            jobsRunThisMonth: 6
+            jobsRunThisMonth: 3
           email: email
           totalJobsRun: 0
       properties:
@@ -17734,11 +18358,11 @@ components:
           mfaEnabled: true
           id: id
           workspaces:
-          - activeScrapers: 3
+          - activeScrapers: 7
             storageQuota: storageQuota
-            dailyJobQuota: 6
+            dailyJobQuota: 0
             apiKeys:
-            - averageResponseTime: 0.10263654
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -17753,7 +18377,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -17762,8 +18386,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -17777,7 +18401,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -17795,9 +18419,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -17814,7 +18438,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -17826,8 +18450,8 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
-            - averageResponseTime: 0.10263654
+              errorAlertThreshold: 4.078846
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -17842,7 +18466,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -17851,8 +18475,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -17866,7 +18490,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -17884,9 +18508,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -17903,7 +18527,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -17915,14 +18539,13 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
+              errorAlertThreshold: 4.078846
             industry: industry
             workflows:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -17933,8 +18556,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -18645,7 +19268,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -18653,6 +19276,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -18664,8 +19340,7 @@ components:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -18676,8 +19351,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -19388,7 +20063,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -19396,6 +20071,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -19407,7 +20135,7 @@ components:
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
-            totalLeadsCollected: 3
+            totalLeadsCollected: 6
             lastJobRun: 2000-01-23T04:56:07.000+00:00
             createdAt: 2000-01-23T04:56:07.000+00:00
             scrapingJobs:
@@ -20106,18 +20834,18 @@ components:
               status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               updatedAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            workspaceJobLimit: 5
+            workspaceJobLimit: 7
             domain: domain
             name: name
             id: id
             usedStorage: usedStorage
             updatedAt: 2000-01-23T04:56:07.000+00:00
-            jobsRunThisMonth: 6
-          - activeScrapers: 3
+            jobsRunThisMonth: 3
+          - activeScrapers: 7
             storageQuota: storageQuota
-            dailyJobQuota: 6
+            dailyJobQuota: 0
             apiKeys:
-            - averageResponseTime: 0.10263654
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -20132,7 +20860,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -20141,8 +20869,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -20156,7 +20884,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -20174,9 +20902,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -20193,7 +20921,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -20205,8 +20933,8 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
-            - averageResponseTime: 0.10263654
+              errorAlertThreshold: 4.078846
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -20221,7 +20949,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -20230,8 +20958,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -20245,7 +20973,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -20263,9 +20991,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -20282,7 +21010,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -20294,14 +21022,13 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
+              errorAlertThreshold: 4.078846
             industry: industry
             workflows:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -20312,8 +21039,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -21024,7 +21751,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -21032,6 +21759,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -21043,8 +21823,7 @@ components:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -21055,8 +21834,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -21767,7 +22546,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -21775,6 +22554,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -21786,7 +22618,7 @@ components:
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
-            totalLeadsCollected: 3
+            totalLeadsCollected: 6
             lastJobRun: 2000-01-23T04:56:07.000+00:00
             createdAt: 2000-01-23T04:56:07.000+00:00
             scrapingJobs:
@@ -22485,13 +23317,13 @@ components:
               status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               updatedAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            workspaceJobLimit: 5
+            workspaceJobLimit: 7
             domain: domain
             name: name
             id: id
             usedStorage: usedStorage
             updatedAt: 2000-01-23T04:56:07.000+00:00
-            jobsRunThisMonth: 6
+            jobsRunThisMonth: 3
           email: email
           totalJobsRun: 0
       properties:
@@ -22918,6 +23750,60 @@ components:
           $ref: '#/components/schemas/ErrorResponse'
       title: Gone Error Response
       type: object
+    IncludedField:
+      default: INCLUDED_FIELD_UNSPECIFIED
+      description: |-
+        - INCLUDED_FIELD_NAME: Core business information
+         - INCLUDED_FIELD_LOCATION: city, state, country
+         - INCLUDED_FIELD_COORDINATES: Geographic data
+
+        latitude, longitude
+         - INCLUDED_FIELD_GOOGLE_RATING: Ratings and reviews
+         - INCLUDED_FIELD_BUSINESS_HOURS: Business details
+         - INCLUDED_FIELD_PHOTOS: Rich media
+         - INCLUDED_FIELD_BUSINESS_TYPES: Categories and attributes
+         - INCLUDED_FIELD_SOCIAL_PROFILES: Social media
+         - INCLUDED_FIELD_EMPLOYEE_COUNT: Enhanced business data
+         - INCLUDED_FIELD_NAICS_CODE: Industry classification
+         - INCLUDED_FIELD_SCRAPING_METADATA: Metadata
+
+        timestamps, session info
+         - INCLUDED_FIELD_COMPLIANCE_INFO: sustainability, certifications
+         - INCLUDED_FIELD_ALTERNATE_PHONES: Contact information
+      enum:
+      - INCLUDED_FIELD_UNSPECIFIED
+      - INCLUDED_FIELD_NAME
+      - INCLUDED_FIELD_WEBSITE
+      - INCLUDED_FIELD_PHONE
+      - INCLUDED_FIELD_ADDRESS
+      - INCLUDED_FIELD_LOCATION
+      - INCLUDED_FIELD_COORDINATES
+      - INCLUDED_FIELD_GOOGLE_RATING
+      - INCLUDED_FIELD_REVIEW_COUNT
+      - INCLUDED_FIELD_REVIEWS
+      - INCLUDED_FIELD_BUSINESS_HOURS
+      - INCLUDED_FIELD_BUSINESS_STATUS
+      - INCLUDED_FIELD_PLACE_ID
+      - INCLUDED_FIELD_GOOGLE_MAPS_URL
+      - INCLUDED_FIELD_PHOTOS
+      - INCLUDED_FIELD_MAIN_PHOTO
+      - INCLUDED_FIELD_BUSINESS_TYPES
+      - INCLUDED_FIELD_AMENITIES
+      - INCLUDED_FIELD_PAYMENT_METHODS
+      - INCLUDED_FIELD_SOCIAL_PROFILES
+      - INCLUDED_FIELD_EMPLOYEE_COUNT
+      - INCLUDED_FIELD_REVENUE_INFO
+      - INCLUDED_FIELD_FOUNDED_YEAR
+      - INCLUDED_FIELD_CERTIFICATIONS
+      - INCLUDED_FIELD_NAICS_CODE
+      - INCLUDED_FIELD_SIC_CODE
+      - INCLUDED_FIELD_SCRAPING_METADATA
+      - INCLUDED_FIELD_COMPLIANCE_INFO
+      - INCLUDED_FIELD_ALTERNATE_PHONES
+      - INCLUDED_FIELD_CONTACT_PERSON
+      - INCLUDED_FIELD_CONTACT_EMAIL
+      title: Payload customization with enum - aligned with Lead message fields
+      type: string
     InternalErrorCode:
       default: NO_INTERNAL_ERROR
       description: |-
@@ -24270,6 +25156,18 @@ components:
           $ref: '#/components/schemas/ErrorResponse'
       title: Not Implemented Error Response
       type: object
+    NullValue:
+      default: NULL_VALUE
+      description: |-
+        `NullValue` is a singleton enumeration to represent the null value for the
+        `Value` type union.
+
+         The JSON representation for `NullValue` is JSON `null`.
+
+         - NULL_VALUE: Null value.
+      enum:
+      - NULL_VALUE
+      type: string
     OperationDetails:
       properties:
         operationId:
@@ -24316,6 +25214,17 @@ components:
         workflow:
           $ref: '#/components/schemas/ScrapingWorkflow'
       type: object
+    PayloadFormat:
+      default: PAYLOAD_FORMAT_UNSPECIFIED
+      enum:
+      - PAYLOAD_FORMAT_UNSPECIFIED
+      - PAYLOAD_FORMAT_JSON
+      - PAYLOAD_FORMAT_XML
+      - PAYLOAD_FORMAT_FORM_DATA
+      - PAYLOAD_FORMAT_PROTOBUF
+      - PAYLOAD_FORMAT_YAML
+      title: Payload format enum
+      type: string
     PaymentInfo:
       properties:
         amountDue:
@@ -25044,8 +25953,7 @@ components:
         workspace: null
         notificationNotifyOnFailure: true
         geoFencingLat: 6.683562403749608
-        notificationWebhookUrl: notificationWebhookUrl
-        contentFilterMinimumReviews: 1
+        contentFilterMinimumReviews: 5
         includePhotos: true
         geoFencingZoomMin: 9
         maxReviewsPerBusiness: 3
@@ -25056,8 +25964,8 @@ components:
         orgId: orgId
         notificationNotifyOnComplete: true
         createdAt: 2000-01-23T04:56:07.000+00:00
-        qosMaxConcurrentRequests: 2
-        contentFilterMinimumRating: 6.965118
+        qosMaxConcurrentRequests: 6
+        contentFilterMinimumRating: 6.878052
         qosEnableJavascript: true
         includeBusinessHours: true
         qosRequestTimeout: qosRequestTimeout
@@ -25768,7 +26676,7 @@ components:
           updatedAt: 2000-01-23T04:56:07.000+00:00
         notificationSlackChannel: notificationSlackChannel
         userAgent: userAgent
-        qosMaxRetries: 6
+        qosMaxRetries: 3
         geoFencingLon: 8.762042012749001
         cronExpression: cronExpression
         maxRetries: 5
@@ -25776,6 +26684,59 @@ components:
         dataRetention: dataRetention
         nextRunTime: 2000-01-23T04:56:07.000+00:00
         lastRunTime: 2000-01-23T04:56:07.000+00:00
+        webhooks:
+        - metadata: "{}"
+          rateLimit: 1
+          failedCalls: 6
+          authToken: authToken
+          successfulCalls: 2
+          payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+          url: url
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          maxRetries: 6
+          signingSecret: signingSecret
+          rateLimitInterval: rateLimitInterval
+          includeFullResults: true
+          triggerEvents:
+          - TRIGGER_EVENT_UNSPECIFIED
+          - TRIGGER_EVENT_UNSPECIFIED
+          verifySsl: true
+          retryInterval: retryInterval
+          includedFields:
+          - INCLUDED_FIELD_UNSPECIFIED
+          - INCLUDED_FIELD_UNSPECIFIED
+          id: id
+          lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+          authType: authType
+          customHeaders:
+            key: customHeaders
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - metadata: "{}"
+          rateLimit: 1
+          failedCalls: 6
+          authToken: authToken
+          successfulCalls: 2
+          payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+          url: url
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          maxRetries: 6
+          signingSecret: signingSecret
+          rateLimitInterval: rateLimitInterval
+          includeFullResults: true
+          triggerEvents:
+          - TRIGGER_EVENT_UNSPECIFIED
+          - TRIGGER_EVENT_UNSPECIFIED
+          verifySsl: true
+          retryInterval: retryInterval
+          includedFields:
+          - INCLUDED_FIELD_UNSPECIFIED
+          - INCLUDED_FIELD_UNSPECIFIED
+          id: id
+          lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+          authType: authType
+          customHeaders:
+            key: customHeaders
+          updatedAt: 2000-01-23T04:56:07.000+00:00
         notificationEmailGroup: notificationEmailGroup
         tenantId: tenantId
         contentFilterExcludedTypes:
@@ -25867,9 +26828,14 @@ components:
           type: string
         anonymizePii:
           type: boolean
-        notificationWebhookUrl:
-          type: string
+        webhooks:
+          items:
+            $ref: '#/components/schemas/WebhookConfig'
+          title: Replace embedded webhook config with relationship
+          type: array
         notificationSlackChannel:
+          title: Notification preferences can stay as they provide quick access to
+            common notification channels
           type: string
         notificationEmailGroup:
           type: string
@@ -26029,6 +26995,22 @@ components:
           $ref: '#/components/schemas/ErrorResponse'
       title: Too Early Error Response
       type: object
+    TriggerEvent:
+      default: TRIGGER_EVENT_UNSPECIFIED
+      enum:
+      - TRIGGER_EVENT_UNSPECIFIED
+      - TRIGGER_EVENT_JOB_STARTED
+      - TRIGGER_EVENT_JOB_COMPLETED
+      - TRIGGER_EVENT_JOB_FAILED
+      - TRIGGER_EVENT_LEAD_FOUND
+      - TRIGGER_EVENT_QUOTA_EXCEEDED
+      - TRIGGER_EVENT_ERROR_THRESHOLD_REACHED
+      - TRIGGER_EVENT_RATE_LIMIT_REACHED
+      - TRIGGER_EVENT_DATA_VALIDATION_FAILED
+      - TRIGGER_EVENT_NEW_PROXY_NEEDED
+      - TRIGGER_EVENT_SCHEDULED_MAINTENANCE
+      title: Event triggers using enum
+      type: string
     TriggerWorkflowBody:
       properties:
         parameters:
@@ -26100,11 +27082,11 @@ components:
           mfaEnabled: true
           id: id
           workspaces:
-          - activeScrapers: 3
+          - activeScrapers: 7
             storageQuota: storageQuota
-            dailyJobQuota: 6
+            dailyJobQuota: 0
             apiKeys:
-            - averageResponseTime: 0.10263654
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -26119,7 +27101,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -26128,8 +27110,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -26143,7 +27125,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -26161,9 +27143,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -26180,7 +27162,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -26192,8 +27174,8 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
-            - averageResponseTime: 0.10263654
+              errorAlertThreshold: 4.078846
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -26208,7 +27190,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -26217,8 +27199,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -26232,7 +27214,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -26250,9 +27232,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -26269,7 +27251,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -26281,14 +27263,13 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
+              errorAlertThreshold: 4.078846
             industry: industry
             workflows:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -26299,8 +27280,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -27011,7 +27992,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -27019,6 +28000,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -27030,8 +28064,7 @@ components:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -27042,8 +28075,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -27754,7 +28787,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -27762,6 +28795,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -27773,7 +28859,7 @@ components:
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
-            totalLeadsCollected: 3
+            totalLeadsCollected: 6
             lastJobRun: 2000-01-23T04:56:07.000+00:00
             createdAt: 2000-01-23T04:56:07.000+00:00
             scrapingJobs:
@@ -28472,18 +29558,18 @@ components:
               status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               updatedAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            workspaceJobLimit: 5
+            workspaceJobLimit: 7
             domain: domain
             name: name
             id: id
             usedStorage: usedStorage
             updatedAt: 2000-01-23T04:56:07.000+00:00
-            jobsRunThisMonth: 6
-          - activeScrapers: 3
+            jobsRunThisMonth: 3
+          - activeScrapers: 7
             storageQuota: storageQuota
-            dailyJobQuota: 6
+            dailyJobQuota: 0
             apiKeys:
-            - averageResponseTime: 0.10263654
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -28498,7 +29584,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -28507,8 +29593,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -28522,7 +29608,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -28540,9 +29626,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -28559,7 +29645,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -28571,8 +29657,8 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
-            - averageResponseTime: 0.10263654
+              errorAlertThreshold: 4.078846
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -28587,7 +29673,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -28596,8 +29682,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -28611,7 +29697,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -28629,9 +29715,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -28648,7 +29734,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -28660,14 +29746,13 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
+              errorAlertThreshold: 4.078846
             industry: industry
             workflows:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -28678,8 +29763,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -29390,7 +30475,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -29398,6 +30483,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -29409,8 +30547,7 @@ components:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -29421,8 +30558,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -30133,7 +31270,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -30141,6 +31278,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -30152,7 +31342,7 @@ components:
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
-            totalLeadsCollected: 3
+            totalLeadsCollected: 6
             lastJobRun: 2000-01-23T04:56:07.000+00:00
             createdAt: 2000-01-23T04:56:07.000+00:00
             scrapingJobs:
@@ -30851,13 +32041,13 @@ components:
               status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               updatedAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            workspaceJobLimit: 5
+            workspaceJobLimit: 7
             domain: domain
             name: name
             id: id
             usedStorage: usedStorage
             updatedAt: 2000-01-23T04:56:07.000+00:00
-            jobsRunThisMonth: 6
+            jobsRunThisMonth: 3
           email: email
           totalJobsRun: 0
       properties:
@@ -30895,11 +32085,11 @@ components:
           mfaEnabled: true
           id: id
           workspaces:
-          - activeScrapers: 3
+          - activeScrapers: 7
             storageQuota: storageQuota
-            dailyJobQuota: 6
+            dailyJobQuota: 0
             apiKeys:
-            - averageResponseTime: 0.10263654
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -30914,7 +32104,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -30923,8 +32113,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -30938,7 +32128,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -30956,9 +32146,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -30975,7 +32165,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -30987,8 +32177,8 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
-            - averageResponseTime: 0.10263654
+              errorAlertThreshold: 4.078846
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -31003,7 +32193,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -31012,8 +32202,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -31027,7 +32217,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -31045,9 +32235,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -31064,7 +32254,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -31076,14 +32266,13 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
+              errorAlertThreshold: 4.078846
             industry: industry
             workflows:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -31094,8 +32283,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -31806,7 +32995,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -31814,6 +33003,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -31825,8 +33067,7 @@ components:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -31837,8 +33078,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -32549,7 +33790,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -32557,6 +33798,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -32568,7 +33862,7 @@ components:
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
-            totalLeadsCollected: 3
+            totalLeadsCollected: 6
             lastJobRun: 2000-01-23T04:56:07.000+00:00
             createdAt: 2000-01-23T04:56:07.000+00:00
             scrapingJobs:
@@ -33267,18 +34561,18 @@ components:
               status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               updatedAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            workspaceJobLimit: 5
+            workspaceJobLimit: 7
             domain: domain
             name: name
             id: id
             usedStorage: usedStorage
             updatedAt: 2000-01-23T04:56:07.000+00:00
-            jobsRunThisMonth: 6
-          - activeScrapers: 3
+            jobsRunThisMonth: 3
+          - activeScrapers: 7
             storageQuota: storageQuota
-            dailyJobQuota: 6
+            dailyJobQuota: 0
             apiKeys:
-            - averageResponseTime: 0.10263654
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -33293,7 +34587,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -33302,8 +34596,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -33317,7 +34611,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -33335,9 +34629,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -33354,7 +34648,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -33366,8 +34660,8 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
-            - averageResponseTime: 0.10263654
+              errorAlertThreshold: 4.078846
+            - averageResponseTime: 3.0205798
               lastRotationDate: 2000-01-23T04:56:07.000+00:00
               documentationUrl: documentationUrl
               workspace: null
@@ -33382,7 +34676,7 @@ components:
               lastRotatedAt: 2000-01-23T04:56:07.000+00:00
               dataClassification: dataClassification
               id: id
-              costPerRequest: 6.519181
+              costPerRequest: 7.7403517
               requireRequestSigning: true
               updatedAt: 2000-01-23T04:56:07.000+00:00
               allowedDomains:
@@ -33391,8 +34685,8 @@ components:
               approvedIntegrations:
               - approvedIntegrations
               - approvedIntegrations
-              requestsPerSecond: 7
-              rotationFrequencyDays: 7
+              requestsPerSecond: 0
+              rotationFrequencyDays: 5
               recentErrors: recentErrors
               endpointUsageJson: endpointUsageJson
               tags:
@@ -33406,7 +34700,7 @@ components:
               - allowedIps
               - allowedIps
               name: name
-              concurrentRequests: 7
+              concurrentRequests: 8
               status: STATUS_UNSPECIFIED
               supportContact: supportContact
               supportedFeatures:
@@ -33424,9 +34718,9 @@ components:
               - monitoringIntegrations
               - monitoringIntegrations
               keyHash: keyHash
-              quotaAlertThreshold: 3.0205798
-              successRate: 8.969579
-              successfulRequestsCount: 4
+              quotaAlertThreshold: 3.2588565
+              successRate: 7.0483656
+              successfulRequestsCount: 3
               totalErrors: totalErrors
               clientSecretHash: clientSecretHash
               lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -33443,7 +34737,7 @@ components:
               lastUsedAt: 2000-01-23T04:56:07.000+00:00
               lastRotationReason: lastRotationReason
               tenantId: tenantId
-              requestsPerDay: 0
+              requestsPerDay: 4
               scopes:
               - scopes
               - scopes
@@ -33455,14 +34749,13 @@ components:
               - allowedSignatureAlgorithms
               billingTier: billingTier
               account: null
-              errorAlertThreshold: 3.05761
+              errorAlertThreshold: 4.078846
             industry: industry
             workflows:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -33473,8 +34766,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -34185,7 +35478,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -34193,6 +35486,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -34204,8 +35550,7 @@ components:
             - workspace: null
               notificationNotifyOnFailure: true
               geoFencingLat: 6.683562403749608
-              notificationWebhookUrl: notificationWebhookUrl
-              contentFilterMinimumReviews: 1
+              contentFilterMinimumReviews: 5
               includePhotos: true
               geoFencingZoomMin: 9
               maxReviewsPerBusiness: 3
@@ -34216,8 +35561,8 @@ components:
               orgId: orgId
               notificationNotifyOnComplete: true
               createdAt: 2000-01-23T04:56:07.000+00:00
-              qosMaxConcurrentRequests: 2
-              contentFilterMinimumRating: 6.965118
+              qosMaxConcurrentRequests: 6
+              contentFilterMinimumRating: 6.878052
               qosEnableJavascript: true
               includeBusinessHours: true
               qosRequestTimeout: qosRequestTimeout
@@ -34928,7 +36273,7 @@ components:
                 updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationSlackChannel: notificationSlackChannel
               userAgent: userAgent
-              qosMaxRetries: 6
+              qosMaxRetries: 3
               geoFencingLon: 8.762042012749001
               cronExpression: cronExpression
               maxRetries: 5
@@ -34936,6 +36281,59 @@ components:
               dataRetention: dataRetention
               nextRunTime: 2000-01-23T04:56:07.000+00:00
               lastRunTime: 2000-01-23T04:56:07.000+00:00
+              webhooks:
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
+              - metadata: "{}"
+                rateLimit: 1
+                failedCalls: 6
+                authToken: authToken
+                successfulCalls: 2
+                payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+                url: url
+                createdAt: 2000-01-23T04:56:07.000+00:00
+                maxRetries: 6
+                signingSecret: signingSecret
+                rateLimitInterval: rateLimitInterval
+                includeFullResults: true
+                triggerEvents:
+                - TRIGGER_EVENT_UNSPECIFIED
+                - TRIGGER_EVENT_UNSPECIFIED
+                verifySsl: true
+                retryInterval: retryInterval
+                includedFields:
+                - INCLUDED_FIELD_UNSPECIFIED
+                - INCLUDED_FIELD_UNSPECIFIED
+                id: id
+                lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+                authType: authType
+                customHeaders:
+                  key: customHeaders
+                updatedAt: 2000-01-23T04:56:07.000+00:00
               notificationEmailGroup: notificationEmailGroup
               tenantId: tenantId
               contentFilterExcludedTypes:
@@ -34947,7 +36345,7 @@ components:
             hipaaCompliant: true
             gdprCompliant: true
             soc2Compliant: true
-            totalLeadsCollected: 3
+            totalLeadsCollected: 6
             lastJobRun: 2000-01-23T04:56:07.000+00:00
             createdAt: 2000-01-23T04:56:07.000+00:00
             scrapingJobs:
@@ -35646,13 +37044,13 @@ components:
               status: BACKGROUND_JOB_STATUS_UNSPECIFIED
               updatedAt: 2000-01-23T04:56:07.000+00:00
             deletedAt: 2000-01-23T04:56:07.000+00:00
-            workspaceJobLimit: 5
+            workspaceJobLimit: 7
             domain: domain
             name: name
             id: id
             usedStorage: usedStorage
             updatedAt: 2000-01-23T04:56:07.000+00:00
-            jobsRunThisMonth: 6
+            jobsRunThisMonth: 3
           email: email
           totalJobsRun: 0
       properties:
@@ -35771,6 +37169,103 @@ components:
           $ref: '#/components/schemas/ErrorResponse'
       title: Validation Error Response
       type: object
+    WebhookConfig:
+      example:
+        metadata: "{}"
+        rateLimit: 1
+        failedCalls: 6
+        authToken: authToken
+        successfulCalls: 2
+        payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+        url: url
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        maxRetries: 6
+        signingSecret: signingSecret
+        rateLimitInterval: rateLimitInterval
+        includeFullResults: true
+        triggerEvents:
+        - TRIGGER_EVENT_UNSPECIFIED
+        - TRIGGER_EVENT_UNSPECIFIED
+        verifySsl: true
+        retryInterval: retryInterval
+        includedFields:
+        - INCLUDED_FIELD_UNSPECIFIED
+        - INCLUDED_FIELD_UNSPECIFIED
+        id: id
+        lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+        authType: authType
+        customHeaders:
+          key: customHeaders
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          format: uint64
+          type: string
+        url:
+          title: URL to send webhook notifications to
+          type: string
+        authType:
+          description: "e.g., \"basic\", \"bearer\", \"custom\""
+          title: Authentication
+          type: string
+        authToken:
+          type: string
+        customHeaders:
+          additionalProperties:
+            type: string
+          type: object
+        maxRetries:
+          format: int32
+          title: Retry configuration
+          type: integer
+        retryInterval:
+          type: string
+        triggerEvents:
+          items:
+            $ref: '#/components/schemas/TriggerEvent'
+          type: array
+        includedFields:
+          items:
+            $ref: '#/components/schemas/IncludedField'
+          type: array
+        includeFullResults:
+          type: boolean
+        payloadFormat:
+          $ref: '#/components/schemas/PayloadFormat'
+        verifySsl:
+          title: Security
+          type: boolean
+        signingSecret:
+          type: string
+        rateLimit:
+          format: int32
+          title: Rate limiting
+          type: integer
+        rateLimitInterval:
+          type: string
+        createdAt:
+          format: date-time
+          title: Audit
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        lastTriggeredAt:
+          format: date-time
+          type: string
+        successfulCalls:
+          format: int32
+          type: integer
+        failedCalls:
+          format: int32
+          type: integer
+        metadata:
+          title: Flexible metadata storage using Google struct
+          type: object
+      title: |-
+        WebhookConfig represents a webhook integration configuration
+        It defines how and when notifications should be sent to external systems
+      type: object
     WorkflowStatus:
       default: WORKFLOW_STATUS_UNSPECIFIED
       description: |-
@@ -35809,11 +37304,11 @@ components:
       type: string
     Workspace:
       example:
-        activeScrapers: 3
+        activeScrapers: 7
         storageQuota: storageQuota
-        dailyJobQuota: 6
+        dailyJobQuota: 0
         apiKeys:
-        - averageResponseTime: 0.10263654
+        - averageResponseTime: 3.0205798
           lastRotationDate: 2000-01-23T04:56:07.000+00:00
           documentationUrl: documentationUrl
           workspace: null
@@ -35828,7 +37323,7 @@ components:
           lastRotatedAt: 2000-01-23T04:56:07.000+00:00
           dataClassification: dataClassification
           id: id
-          costPerRequest: 6.519181
+          costPerRequest: 7.7403517
           requireRequestSigning: true
           updatedAt: 2000-01-23T04:56:07.000+00:00
           allowedDomains:
@@ -35837,8 +37332,8 @@ components:
           approvedIntegrations:
           - approvedIntegrations
           - approvedIntegrations
-          requestsPerSecond: 7
-          rotationFrequencyDays: 7
+          requestsPerSecond: 0
+          rotationFrequencyDays: 5
           recentErrors: recentErrors
           endpointUsageJson: endpointUsageJson
           tags:
@@ -35852,7 +37347,7 @@ components:
           - allowedIps
           - allowedIps
           name: name
-          concurrentRequests: 7
+          concurrentRequests: 8
           status: STATUS_UNSPECIFIED
           supportContact: supportContact
           supportedFeatures:
@@ -35870,9 +37365,9 @@ components:
           - monitoringIntegrations
           - monitoringIntegrations
           keyHash: keyHash
-          quotaAlertThreshold: 3.0205798
-          successRate: 8.969579
-          successfulRequestsCount: 4
+          quotaAlertThreshold: 3.2588565
+          successRate: 7.0483656
+          successfulRequestsCount: 3
           totalErrors: totalErrors
           clientSecretHash: clientSecretHash
           lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -35889,7 +37384,7 @@ components:
           lastUsedAt: 2000-01-23T04:56:07.000+00:00
           lastRotationReason: lastRotationReason
           tenantId: tenantId
-          requestsPerDay: 0
+          requestsPerDay: 4
           scopes:
           - scopes
           - scopes
@@ -35901,8 +37396,8 @@ components:
           - allowedSignatureAlgorithms
           billingTier: billingTier
           account: null
-          errorAlertThreshold: 3.05761
-        - averageResponseTime: 0.10263654
+          errorAlertThreshold: 4.078846
+        - averageResponseTime: 3.0205798
           lastRotationDate: 2000-01-23T04:56:07.000+00:00
           documentationUrl: documentationUrl
           workspace: null
@@ -35917,7 +37412,7 @@ components:
           lastRotatedAt: 2000-01-23T04:56:07.000+00:00
           dataClassification: dataClassification
           id: id
-          costPerRequest: 6.519181
+          costPerRequest: 7.7403517
           requireRequestSigning: true
           updatedAt: 2000-01-23T04:56:07.000+00:00
           allowedDomains:
@@ -35926,8 +37421,8 @@ components:
           approvedIntegrations:
           - approvedIntegrations
           - approvedIntegrations
-          requestsPerSecond: 7
-          rotationFrequencyDays: 7
+          requestsPerSecond: 0
+          rotationFrequencyDays: 5
           recentErrors: recentErrors
           endpointUsageJson: endpointUsageJson
           tags:
@@ -35941,7 +37436,7 @@ components:
           - allowedIps
           - allowedIps
           name: name
-          concurrentRequests: 7
+          concurrentRequests: 8
           status: STATUS_UNSPECIFIED
           supportContact: supportContact
           supportedFeatures:
@@ -35959,9 +37454,9 @@ components:
           - monitoringIntegrations
           - monitoringIntegrations
           keyHash: keyHash
-          quotaAlertThreshold: 3.0205798
-          successRate: 8.969579
-          successfulRequestsCount: 4
+          quotaAlertThreshold: 3.2588565
+          successRate: 7.0483656
+          successfulRequestsCount: 3
           totalErrors: totalErrors
           clientSecretHash: clientSecretHash
           lastSecurityReviewAt: 2000-01-23T04:56:07.000+00:00
@@ -35978,7 +37473,7 @@ components:
           lastUsedAt: 2000-01-23T04:56:07.000+00:00
           lastRotationReason: lastRotationReason
           tenantId: tenantId
-          requestsPerDay: 0
+          requestsPerDay: 4
           scopes:
           - scopes
           - scopes
@@ -35990,14 +37485,13 @@ components:
           - allowedSignatureAlgorithms
           billingTier: billingTier
           account: null
-          errorAlertThreshold: 3.05761
+          errorAlertThreshold: 4.078846
         industry: industry
         workflows:
         - workspace: null
           notificationNotifyOnFailure: true
           geoFencingLat: 6.683562403749608
-          notificationWebhookUrl: notificationWebhookUrl
-          contentFilterMinimumReviews: 1
+          contentFilterMinimumReviews: 5
           includePhotos: true
           geoFencingZoomMin: 9
           maxReviewsPerBusiness: 3
@@ -36008,8 +37502,8 @@ components:
           orgId: orgId
           notificationNotifyOnComplete: true
           createdAt: 2000-01-23T04:56:07.000+00:00
-          qosMaxConcurrentRequests: 2
-          contentFilterMinimumRating: 6.965118
+          qosMaxConcurrentRequests: 6
+          contentFilterMinimumRating: 6.878052
           qosEnableJavascript: true
           includeBusinessHours: true
           qosRequestTimeout: qosRequestTimeout
@@ -36720,7 +38214,7 @@ components:
             updatedAt: 2000-01-23T04:56:07.000+00:00
           notificationSlackChannel: notificationSlackChannel
           userAgent: userAgent
-          qosMaxRetries: 6
+          qosMaxRetries: 3
           geoFencingLon: 8.762042012749001
           cronExpression: cronExpression
           maxRetries: 5
@@ -36728,6 +38222,59 @@ components:
           dataRetention: dataRetention
           nextRunTime: 2000-01-23T04:56:07.000+00:00
           lastRunTime: 2000-01-23T04:56:07.000+00:00
+          webhooks:
+          - metadata: "{}"
+            rateLimit: 1
+            failedCalls: 6
+            authToken: authToken
+            successfulCalls: 2
+            payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+            url: url
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            maxRetries: 6
+            signingSecret: signingSecret
+            rateLimitInterval: rateLimitInterval
+            includeFullResults: true
+            triggerEvents:
+            - TRIGGER_EVENT_UNSPECIFIED
+            - TRIGGER_EVENT_UNSPECIFIED
+            verifySsl: true
+            retryInterval: retryInterval
+            includedFields:
+            - INCLUDED_FIELD_UNSPECIFIED
+            - INCLUDED_FIELD_UNSPECIFIED
+            id: id
+            lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+            authType: authType
+            customHeaders:
+              key: customHeaders
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - metadata: "{}"
+            rateLimit: 1
+            failedCalls: 6
+            authToken: authToken
+            successfulCalls: 2
+            payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+            url: url
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            maxRetries: 6
+            signingSecret: signingSecret
+            rateLimitInterval: rateLimitInterval
+            includeFullResults: true
+            triggerEvents:
+            - TRIGGER_EVENT_UNSPECIFIED
+            - TRIGGER_EVENT_UNSPECIFIED
+            verifySsl: true
+            retryInterval: retryInterval
+            includedFields:
+            - INCLUDED_FIELD_UNSPECIFIED
+            - INCLUDED_FIELD_UNSPECIFIED
+            id: id
+            lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+            authType: authType
+            customHeaders:
+              key: customHeaders
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           notificationEmailGroup: notificationEmailGroup
           tenantId: tenantId
           contentFilterExcludedTypes:
@@ -36739,8 +38286,7 @@ components:
         - workspace: null
           notificationNotifyOnFailure: true
           geoFencingLat: 6.683562403749608
-          notificationWebhookUrl: notificationWebhookUrl
-          contentFilterMinimumReviews: 1
+          contentFilterMinimumReviews: 5
           includePhotos: true
           geoFencingZoomMin: 9
           maxReviewsPerBusiness: 3
@@ -36751,8 +38297,8 @@ components:
           orgId: orgId
           notificationNotifyOnComplete: true
           createdAt: 2000-01-23T04:56:07.000+00:00
-          qosMaxConcurrentRequests: 2
-          contentFilterMinimumRating: 6.965118
+          qosMaxConcurrentRequests: 6
+          contentFilterMinimumRating: 6.878052
           qosEnableJavascript: true
           includeBusinessHours: true
           qosRequestTimeout: qosRequestTimeout
@@ -37463,7 +39009,7 @@ components:
             updatedAt: 2000-01-23T04:56:07.000+00:00
           notificationSlackChannel: notificationSlackChannel
           userAgent: userAgent
-          qosMaxRetries: 6
+          qosMaxRetries: 3
           geoFencingLon: 8.762042012749001
           cronExpression: cronExpression
           maxRetries: 5
@@ -37471,6 +39017,59 @@ components:
           dataRetention: dataRetention
           nextRunTime: 2000-01-23T04:56:07.000+00:00
           lastRunTime: 2000-01-23T04:56:07.000+00:00
+          webhooks:
+          - metadata: "{}"
+            rateLimit: 1
+            failedCalls: 6
+            authToken: authToken
+            successfulCalls: 2
+            payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+            url: url
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            maxRetries: 6
+            signingSecret: signingSecret
+            rateLimitInterval: rateLimitInterval
+            includeFullResults: true
+            triggerEvents:
+            - TRIGGER_EVENT_UNSPECIFIED
+            - TRIGGER_EVENT_UNSPECIFIED
+            verifySsl: true
+            retryInterval: retryInterval
+            includedFields:
+            - INCLUDED_FIELD_UNSPECIFIED
+            - INCLUDED_FIELD_UNSPECIFIED
+            id: id
+            lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+            authType: authType
+            customHeaders:
+              key: customHeaders
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - metadata: "{}"
+            rateLimit: 1
+            failedCalls: 6
+            authToken: authToken
+            successfulCalls: 2
+            payloadFormat: PAYLOAD_FORMAT_UNSPECIFIED
+            url: url
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            maxRetries: 6
+            signingSecret: signingSecret
+            rateLimitInterval: rateLimitInterval
+            includeFullResults: true
+            triggerEvents:
+            - TRIGGER_EVENT_UNSPECIFIED
+            - TRIGGER_EVENT_UNSPECIFIED
+            verifySsl: true
+            retryInterval: retryInterval
+            includedFields:
+            - INCLUDED_FIELD_UNSPECIFIED
+            - INCLUDED_FIELD_UNSPECIFIED
+            id: id
+            lastTriggeredAt: 2000-01-23T04:56:07.000+00:00
+            authType: authType
+            customHeaders:
+              key: customHeaders
+            updatedAt: 2000-01-23T04:56:07.000+00:00
           notificationEmailGroup: notificationEmailGroup
           tenantId: tenantId
           contentFilterExcludedTypes:
@@ -37482,7 +39081,7 @@ components:
         hipaaCompliant: true
         gdprCompliant: true
         soc2Compliant: true
-        totalLeadsCollected: 3
+        totalLeadsCollected: 6
         lastJobRun: 2000-01-23T04:56:07.000+00:00
         createdAt: 2000-01-23T04:56:07.000+00:00
         scrapingJobs:
@@ -38181,13 +39780,13 @@ components:
           status: BACKGROUND_JOB_STATUS_UNSPECIFIED
           updatedAt: 2000-01-23T04:56:07.000+00:00
         deletedAt: 2000-01-23T04:56:07.000+00:00
-        workspaceJobLimit: 5
+        workspaceJobLimit: 7
         domain: domain
         name: name
         id: id
         usedStorage: usedStorage
         updatedAt: 2000-01-23T04:56:07.000+00:00
-        jobsRunThisMonth: 6
+        jobsRunThisMonth: 3
       properties:
         id:
           format: uint64
@@ -38269,7 +39868,7 @@ components:
         You can find out more about this error model and how to work with it in the
         [API Design Guide](https://cloud.google.com/apis/design/errors).
       example:
-        code: 7
+        code: 0
         details:
         - '@type': '@type'
         - '@type': '@type'

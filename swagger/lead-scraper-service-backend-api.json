@@ -9493,6 +9493,45 @@
                 "description": "Indicates that the resource requested is no longer available and will not be available again",
                 "title": "Gone Error Response"
             },
+            "IncludedField": {
+                "type": "string",
+                "enum": [
+                    "INCLUDED_FIELD_UNSPECIFIED",
+                    "INCLUDED_FIELD_NAME",
+                    "INCLUDED_FIELD_WEBSITE",
+                    "INCLUDED_FIELD_PHONE",
+                    "INCLUDED_FIELD_ADDRESS",
+                    "INCLUDED_FIELD_LOCATION",
+                    "INCLUDED_FIELD_COORDINATES",
+                    "INCLUDED_FIELD_GOOGLE_RATING",
+                    "INCLUDED_FIELD_REVIEW_COUNT",
+                    "INCLUDED_FIELD_REVIEWS",
+                    "INCLUDED_FIELD_BUSINESS_HOURS",
+                    "INCLUDED_FIELD_BUSINESS_STATUS",
+                    "INCLUDED_FIELD_PLACE_ID",
+                    "INCLUDED_FIELD_GOOGLE_MAPS_URL",
+                    "INCLUDED_FIELD_PHOTOS",
+                    "INCLUDED_FIELD_MAIN_PHOTO",
+                    "INCLUDED_FIELD_BUSINESS_TYPES",
+                    "INCLUDED_FIELD_AMENITIES",
+                    "INCLUDED_FIELD_PAYMENT_METHODS",
+                    "INCLUDED_FIELD_SOCIAL_PROFILES",
+                    "INCLUDED_FIELD_EMPLOYEE_COUNT",
+                    "INCLUDED_FIELD_REVENUE_INFO",
+                    "INCLUDED_FIELD_FOUNDED_YEAR",
+                    "INCLUDED_FIELD_CERTIFICATIONS",
+                    "INCLUDED_FIELD_NAICS_CODE",
+                    "INCLUDED_FIELD_SIC_CODE",
+                    "INCLUDED_FIELD_SCRAPING_METADATA",
+                    "INCLUDED_FIELD_COMPLIANCE_INFO",
+                    "INCLUDED_FIELD_ALTERNATE_PHONES",
+                    "INCLUDED_FIELD_CONTACT_PERSON",
+                    "INCLUDED_FIELD_CONTACT_EMAIL"
+                ],
+                "default": "INCLUDED_FIELD_UNSPECIFIED",
+                "description": "- INCLUDED_FIELD_NAME: Core business information\n - INCLUDED_FIELD_LOCATION: city, state, country\n - INCLUDED_FIELD_COORDINATES: Geographic data\n\nlatitude, longitude\n - INCLUDED_FIELD_GOOGLE_RATING: Ratings and reviews\n - INCLUDED_FIELD_BUSINESS_HOURS: Business details\n - INCLUDED_FIELD_PHOTOS: Rich media\n - INCLUDED_FIELD_BUSINESS_TYPES: Categories and attributes\n - INCLUDED_FIELD_SOCIAL_PROFILES: Social media\n - INCLUDED_FIELD_EMPLOYEE_COUNT: Enhanced business data\n - INCLUDED_FIELD_NAICS_CODE: Industry classification\n - INCLUDED_FIELD_SCRAPING_METADATA: Metadata\n\ntimestamps, session info\n - INCLUDED_FIELD_COMPLIANCE_INFO: sustainability, certifications\n - INCLUDED_FIELD_ALTERNATE_PHONES: Contact information",
+                "title": "Payload customization with enum - aligned with Lead message fields"
+            },
             "InternalErrorCode": {
                 "type": "string",
                 "enum": [
@@ -10148,6 +10187,14 @@
                 "description": "Represents errors when the requested functionality is not implemented",
                 "title": "Not Implemented Error Response"
             },
+            "NullValue": {
+                "type": "string",
+                "enum": [
+                    "NULL_VALUE"
+                ],
+                "default": "NULL_VALUE",
+                "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+            },
             "OperationDetails": {
                 "type": "object",
                 "properties": {
@@ -10211,6 +10258,19 @@
                         "$ref": "#/components/schemas/ScrapingWorkflow"
                     }
                 }
+            },
+            "PayloadFormat": {
+                "type": "string",
+                "enum": [
+                    "PAYLOAD_FORMAT_UNSPECIFIED",
+                    "PAYLOAD_FORMAT_JSON",
+                    "PAYLOAD_FORMAT_XML",
+                    "PAYLOAD_FORMAT_FORM_DATA",
+                    "PAYLOAD_FORMAT_PROTOBUF",
+                    "PAYLOAD_FORMAT_YAML"
+                ],
+                "default": "PAYLOAD_FORMAT_UNSPECIFIED",
+                "title": "Payload format enum"
             },
             "PaymentInfo": {
                 "type": "object",
@@ -10781,11 +10841,16 @@
                     "anonymizePii": {
                         "type": "boolean"
                     },
-                    "notificationWebhookUrl": {
-                        "type": "string"
+                    "webhooks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/WebhookConfig"
+                        },
+                        "title": "Replace embedded webhook config with relationship"
                     },
                     "notificationSlackChannel": {
-                        "type": "string"
+                        "type": "string",
+                        "title": "Notification preferences can stay as they provide quick access to common notification channels"
                     },
                     "notificationEmailGroup": {
                         "type": "string"
@@ -11008,6 +11073,24 @@
                 "description": "Indicates that the server is unwilling to risk processing a request that might be replayed",
                 "title": "Too Early Error Response"
             },
+            "TriggerEvent": {
+                "type": "string",
+                "enum": [
+                    "TRIGGER_EVENT_UNSPECIFIED",
+                    "TRIGGER_EVENT_JOB_STARTED",
+                    "TRIGGER_EVENT_JOB_COMPLETED",
+                    "TRIGGER_EVENT_JOB_FAILED",
+                    "TRIGGER_EVENT_LEAD_FOUND",
+                    "TRIGGER_EVENT_QUOTA_EXCEEDED",
+                    "TRIGGER_EVENT_ERROR_THRESHOLD_REACHED",
+                    "TRIGGER_EVENT_RATE_LIMIT_REACHED",
+                    "TRIGGER_EVENT_DATA_VALIDATION_FAILED",
+                    "TRIGGER_EVENT_NEW_PROXY_NEEDED",
+                    "TRIGGER_EVENT_SCHEDULED_MAINTENANCE"
+                ],
+                "default": "TRIGGER_EVENT_UNSPECIFIED",
+                "title": "Event triggers using enum"
+            },
             "TriggerWorkflowBody": {
                 "type": "object",
                 "properties": {
@@ -11214,6 +11297,100 @@
                 },
                 "description": "Represents data validation and business logic errors",
                 "title": "Validation Error Response"
+            },
+            "WebhookConfig": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uint64"
+                    },
+                    "url": {
+                        "type": "string",
+                        "title": "URL to send webhook notifications to"
+                    },
+                    "authType": {
+                        "type": "string",
+                        "description": "e.g., \"basic\", \"bearer\", \"custom\"",
+                        "title": "Authentication"
+                    },
+                    "authToken": {
+                        "type": "string"
+                    },
+                    "customHeaders": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "maxRetries": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "Retry configuration"
+                    },
+                    "retryInterval": {
+                        "type": "string"
+                    },
+                    "triggerEvents": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TriggerEvent"
+                        }
+                    },
+                    "includedFields": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/IncludedField"
+                        }
+                    },
+                    "includeFullResults": {
+                        "type": "boolean"
+                    },
+                    "payloadFormat": {
+                        "$ref": "#/components/schemas/PayloadFormat"
+                    },
+                    "verifySsl": {
+                        "type": "boolean",
+                        "title": "Security"
+                    },
+                    "signingSecret": {
+                        "type": "string"
+                    },
+                    "rateLimit": {
+                        "type": "integer",
+                        "format": "int32",
+                        "title": "Rate limiting"
+                    },
+                    "rateLimitInterval": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "title": "Audit"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "lastTriggeredAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "successfulCalls": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "failedCalls": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "title": "Flexible metadata storage using Google struct"
+                    }
+                },
+                "title": "WebhookConfig represents a webhook integration configuration\nIt defines how and when notifications should be sent to external systems"
             },
             "WorkflowStatus": {
                 "type": "string",

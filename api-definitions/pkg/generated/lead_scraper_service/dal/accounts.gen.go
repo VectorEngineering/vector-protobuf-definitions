@@ -40,8 +40,6 @@ func newAccountORM(db *gorm.DB, opts ...gen.DOOption) accountORM {
 	_accountORM.LastLoginAt = field.NewTime(tableName, "last_login_at")
 	_accountORM.MfaEnabled = field.NewBool(tableName, "mfa_enabled")
 	_accountORM.MonthlyJobLimit = field.NewInt32(tableName, "monthly_job_limit")
-	_accountORM.Permissions = field.NewField(tableName, "permissions")
-	_accountORM.Roles = field.NewField(tableName, "roles")
 	_accountORM.TenantId = field.NewUint64(tableName, "tenant_id")
 	_accountORM.Timezone = field.NewString(tableName, "timezone")
 	_accountORM.TotalJobsRun = field.NewInt32(tableName, "total_jobs_run")
@@ -166,6 +164,11 @@ func newAccountORM(db *gorm.DB, opts ...gen.DOOption) accountORM {
 				},
 			},
 		},
+		Webhooks: struct {
+			field.RelationField
+		}{
+			RelationField: field.NewRelation("Workspaces.Webhooks", "lead_scraper_servicev1.WebhookConfigORM"),
+		},
 		Workflows: struct {
 			field.RelationField
 			Workspace struct {
@@ -208,8 +211,6 @@ type accountORM struct {
 	LastLoginAt        field.Time
 	MfaEnabled         field.Bool
 	MonthlyJobLimit    field.Int32
-	Permissions        field.Field
-	Roles              field.Field
 	TenantId           field.Uint64
 	Timezone           field.String
 	TotalJobsRun       field.Int32
@@ -242,8 +243,6 @@ func (a *accountORM) updateTableName(table string) *accountORM {
 	a.LastLoginAt = field.NewTime(table, "last_login_at")
 	a.MfaEnabled = field.NewBool(table, "mfa_enabled")
 	a.MonthlyJobLimit = field.NewInt32(table, "monthly_job_limit")
-	a.Permissions = field.NewField(table, "permissions")
-	a.Roles = field.NewField(table, "roles")
 	a.TenantId = field.NewUint64(table, "tenant_id")
 	a.Timezone = field.NewString(table, "timezone")
 	a.TotalJobsRun = field.NewInt32(table, "total_jobs_run")
@@ -263,7 +262,7 @@ func (a *accountORM) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (a *accountORM) fillFieldMap() {
-	a.fieldMap = make(map[string]field.Expr, 17)
+	a.fieldMap = make(map[string]field.Expr, 15)
 	a.fieldMap["account_status"] = a.AccountStatus
 	a.fieldMap["auth_platform_user_id"] = a.AuthPlatformUserId
 	a.fieldMap["concurrent_job_limit"] = a.ConcurrentJobLimit
@@ -274,8 +273,6 @@ func (a *accountORM) fillFieldMap() {
 	a.fieldMap["last_login_at"] = a.LastLoginAt
 	a.fieldMap["mfa_enabled"] = a.MfaEnabled
 	a.fieldMap["monthly_job_limit"] = a.MonthlyJobLimit
-	a.fieldMap["permissions"] = a.Permissions
-	a.fieldMap["roles"] = a.Roles
 	a.fieldMap["tenant_id"] = a.TenantId
 	a.fieldMap["timezone"] = a.Timezone
 	a.fieldMap["total_jobs_run"] = a.TotalJobsRun
@@ -403,6 +400,9 @@ type accountORMHasManyWorkspaces struct {
 				field.RelationField
 			}
 		}
+	}
+	Webhooks struct {
+		field.RelationField
 	}
 	Workflows struct {
 		field.RelationField

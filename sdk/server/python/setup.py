@@ -2,7 +2,7 @@ import sys
 from setuptools import setup, find_packages
 
 NAME = "playbookmedia_backend_server_sdk"
-VERSION = "1.9.2"
+VERSION = "1.9.3"
 
 # To install the library, run the following
 #

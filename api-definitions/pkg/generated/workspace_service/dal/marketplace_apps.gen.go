@@ -795,8 +795,7 @@ type IMarketplaceAppORMDo interface {
 	GetDeleted() (result []workspace_servicev1.MarketplaceAppORM, err error)
 	SoftDelete(id uint64) (err error)
 	Restore(id uint64) (err error)
-	CreateInBatch(items []workspace_servicev1.MarketplaceAppORM, batchSize int) (err error)
-	DeleteInBatch(ids []uint64) (err error)
+	DeleteInBatch(ids []uint64, batchSize int) (err error)
 	GetByTimeRange(startTime time.Time, endTime time.Time) (result []workspace_servicev1.MarketplaceAppORM, err error)
 	FindBy(columnName string, operator string, value interface{}) (result []workspace_servicev1.MarketplaceAppORM, err error)
 	FindByPattern(columnName string, pattern string) (result []workspace_servicev1.MarketplaceAppORM, err error)
@@ -1050,25 +1049,14 @@ func (m marketplaceAppORMDo) Restore(id uint64) (err error) {
 	return
 }
 
-// INSERT INTO @@table (columns) VALUES (values...)
-func (m marketplaceAppORMDo) CreateInBatch(items []workspace_servicev1.MarketplaceAppORM, batchSize int) (err error) {
-	var generateSQL strings.Builder
-	generateSQL.WriteString("INSERT INTO marketplace_apps (columns) VALUES (values...) ")
-
-	var executeSQL *gorm.DB
-	executeSQL = m.UnderlyingDB().Exec(generateSQL.String()) // ignore_security_alert
-	err = executeSQL.Error
-
-	return
-}
-
 // DELETE FROM @@table
 // {{where}}
 //
 //	id IN (@ids)
 //
 // {{end}}
-func (m marketplaceAppORMDo) DeleteInBatch(ids []uint64) (err error) {
+// LIMIT @batchSize
+func (m marketplaceAppORMDo) DeleteInBatch(ids []uint64, batchSize int) (err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
@@ -1077,6 +1065,8 @@ func (m marketplaceAppORMDo) DeleteInBatch(ids []uint64) (err error) {
 	params = append(params, ids)
 	whereSQL0.WriteString("id IN (?) ")
 	helper.JoinWhereBuilder(&generateSQL, whereSQL0)
+	params = append(params, batchSize)
+	generateSQL.WriteString("LIMIT ? ")
 
 	var executeSQL *gorm.DB
 	executeSQL = m.UnderlyingDB().Exec(generateSQL.String(), params...) // ignore_security_alert

@@ -308,20 +308,6 @@ func Test_signatureRequestORM_Restore(t *testing.T) {
 	}
 }
 
-var SignatureRequestORMCreateInBatchTestCase = []TestCase{}
-
-func Test_signatureRequestORM_CreateInBatch(t *testing.T) {
-	signatureRequestORM := newSignatureRequestORM(_gen_test_db)
-	do := signatureRequestORM.WithContext(context.Background()).Debug()
-
-	for i, tt := range SignatureRequestORMCreateInBatchTestCase {
-		t.Run("CreateInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.CreateInBatch(tt.Input.Args[0].([]workspace_servicev1.SignatureRequestORM), tt.Input.Args[1].(int))
-			assert(t, "CreateInBatch", res1, tt.Expectation.Ret[0])
-		})
-	}
-}
-
 var SignatureRequestORMDeleteInBatchTestCase = []TestCase{}
 
 func Test_signatureRequestORM_DeleteInBatch(t *testing.T) {
@@ -330,7 +316,7 @@ func Test_signatureRequestORM_DeleteInBatch(t *testing.T) {
 
 	for i, tt := range SignatureRequestORMDeleteInBatchTestCase {
 		t.Run("DeleteInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64))
+			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64), tt.Input.Args[1].(int))
 			assert(t, "DeleteInBatch", res1, tt.Expectation.Ret[0])
 		})
 	}

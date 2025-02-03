@@ -308,20 +308,6 @@ func Test_accountORM_Restore(t *testing.T) {
 	}
 }
 
-var AccountORMCreateInBatchTestCase = []TestCase{}
-
-func Test_accountORM_CreateInBatch(t *testing.T) {
-	accountORM := newAccountORM(_gen_test_db)
-	do := accountORM.WithContext(context.Background()).Debug()
-
-	for i, tt := range AccountORMCreateInBatchTestCase {
-		t.Run("CreateInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.CreateInBatch(tt.Input.Args[0].([]workspace_servicev1.AccountORM), tt.Input.Args[1].(int))
-			assert(t, "CreateInBatch", res1, tt.Expectation.Ret[0])
-		})
-	}
-}
-
 var AccountORMDeleteInBatchTestCase = []TestCase{}
 
 func Test_accountORM_DeleteInBatch(t *testing.T) {
@@ -330,7 +316,7 @@ func Test_accountORM_DeleteInBatch(t *testing.T) {
 
 	for i, tt := range AccountORMDeleteInBatchTestCase {
 		t.Run("DeleteInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64))
+			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64), tt.Input.Args[1].(int))
 			assert(t, "DeleteInBatch", res1, tt.Expectation.Ret[0])
 		})
 	}

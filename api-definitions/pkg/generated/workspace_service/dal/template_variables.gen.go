@@ -206,8 +206,7 @@ type ITemplateVariableORMDo interface {
 	GetDeleted() (result []workspace_servicev1.TemplateVariableORM, err error)
 	SoftDelete(id uint64) (err error)
 	Restore(id uint64) (err error)
-	CreateInBatch(items []workspace_servicev1.TemplateVariableORM, batchSize int) (err error)
-	DeleteInBatch(ids []uint64) (err error)
+	DeleteInBatch(ids []uint64, batchSize int) (err error)
 	GetByTimeRange(startTime time.Time, endTime time.Time) (result []workspace_servicev1.TemplateVariableORM, err error)
 	FindBy(columnName string, operator string, value interface{}) (result []workspace_servicev1.TemplateVariableORM, err error)
 	FindByPattern(columnName string, pattern string) (result []workspace_servicev1.TemplateVariableORM, err error)
@@ -461,25 +460,14 @@ func (t templateVariableORMDo) Restore(id uint64) (err error) {
 	return
 }
 
-// INSERT INTO @@table (columns) VALUES (values...)
-func (t templateVariableORMDo) CreateInBatch(items []workspace_servicev1.TemplateVariableORM, batchSize int) (err error) {
-	var generateSQL strings.Builder
-	generateSQL.WriteString("INSERT INTO template_variables (columns) VALUES (values...) ")
-
-	var executeSQL *gorm.DB
-	executeSQL = t.UnderlyingDB().Exec(generateSQL.String()) // ignore_security_alert
-	err = executeSQL.Error
-
-	return
-}
-
 // DELETE FROM @@table
 // {{where}}
 //
 //	id IN (@ids)
 //
 // {{end}}
-func (t templateVariableORMDo) DeleteInBatch(ids []uint64) (err error) {
+// LIMIT @batchSize
+func (t templateVariableORMDo) DeleteInBatch(ids []uint64, batchSize int) (err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
@@ -488,6 +476,8 @@ func (t templateVariableORMDo) DeleteInBatch(ids []uint64) (err error) {
 	params = append(params, ids)
 	whereSQL0.WriteString("id IN (?) ")
 	helper.JoinWhereBuilder(&generateSQL, whereSQL0)
+	params = append(params, batchSize)
+	generateSQL.WriteString("LIMIT ? ")
 
 	var executeSQL *gorm.DB
 	executeSQL = t.UnderlyingDB().Exec(generateSQL.String(), params...) // ignore_security_alert

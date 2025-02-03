@@ -308,20 +308,6 @@ func Test_aPIKeyORM_Restore(t *testing.T) {
 	}
 }
 
-var APIKeyORMCreateInBatchTestCase = []TestCase{}
-
-func Test_aPIKeyORM_CreateInBatch(t *testing.T) {
-	aPIKeyORM := newAPIKeyORM(_gen_test_db)
-	do := aPIKeyORM.WithContext(context.Background()).Debug()
-
-	for i, tt := range APIKeyORMCreateInBatchTestCase {
-		t.Run("CreateInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.CreateInBatch(tt.Input.Args[0].([]lead_scraper_servicev1.APIKeyORM), tt.Input.Args[1].(int))
-			assert(t, "CreateInBatch", res1, tt.Expectation.Ret[0])
-		})
-	}
-}
-
 var APIKeyORMDeleteInBatchTestCase = []TestCase{}
 
 func Test_aPIKeyORM_DeleteInBatch(t *testing.T) {
@@ -330,7 +316,7 @@ func Test_aPIKeyORM_DeleteInBatch(t *testing.T) {
 
 	for i, tt := range APIKeyORMDeleteInBatchTestCase {
 		t.Run("DeleteInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64))
+			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64), tt.Input.Args[1].(int))
 			assert(t, "DeleteInBatch", res1, tt.Expectation.Ret[0])
 		})
 	}

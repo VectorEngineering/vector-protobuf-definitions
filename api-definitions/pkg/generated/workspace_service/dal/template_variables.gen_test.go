@@ -308,20 +308,6 @@ func Test_templateVariableORM_Restore(t *testing.T) {
 	}
 }
 
-var TemplateVariableORMCreateInBatchTestCase = []TestCase{}
-
-func Test_templateVariableORM_CreateInBatch(t *testing.T) {
-	templateVariableORM := newTemplateVariableORM(_gen_test_db)
-	do := templateVariableORM.WithContext(context.Background()).Debug()
-
-	for i, tt := range TemplateVariableORMCreateInBatchTestCase {
-		t.Run("CreateInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.CreateInBatch(tt.Input.Args[0].([]workspace_servicev1.TemplateVariableORM), tt.Input.Args[1].(int))
-			assert(t, "CreateInBatch", res1, tt.Expectation.Ret[0])
-		})
-	}
-}
-
 var TemplateVariableORMDeleteInBatchTestCase = []TestCase{}
 
 func Test_templateVariableORM_DeleteInBatch(t *testing.T) {
@@ -330,7 +316,7 @@ func Test_templateVariableORM_DeleteInBatch(t *testing.T) {
 
 	for i, tt := range TemplateVariableORMDeleteInBatchTestCase {
 		t.Run("DeleteInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64))
+			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64), tt.Input.Args[1].(int))
 			assert(t, "DeleteInBatch", res1, tt.Expectation.Ret[0])
 		})
 	}

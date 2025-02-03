@@ -308,20 +308,6 @@ func Test_webhookConfigORM_Restore(t *testing.T) {
 	}
 }
 
-var WebhookConfigORMCreateInBatchTestCase = []TestCase{}
-
-func Test_webhookConfigORM_CreateInBatch(t *testing.T) {
-	webhookConfigORM := newWebhookConfigORM(_gen_test_db)
-	do := webhookConfigORM.WithContext(context.Background()).Debug()
-
-	for i, tt := range WebhookConfigORMCreateInBatchTestCase {
-		t.Run("CreateInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.CreateInBatch(tt.Input.Args[0].([]lead_scraper_servicev1.WebhookConfigORM), tt.Input.Args[1].(int))
-			assert(t, "CreateInBatch", res1, tt.Expectation.Ret[0])
-		})
-	}
-}
-
 var WebhookConfigORMDeleteInBatchTestCase = []TestCase{}
 
 func Test_webhookConfigORM_DeleteInBatch(t *testing.T) {
@@ -330,7 +316,7 @@ func Test_webhookConfigORM_DeleteInBatch(t *testing.T) {
 
 	for i, tt := range WebhookConfigORMDeleteInBatchTestCase {
 		t.Run("DeleteInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64))
+			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64), tt.Input.Args[1].(int))
 			assert(t, "DeleteInBatch", res1, tt.Expectation.Ret[0])
 		})
 	}

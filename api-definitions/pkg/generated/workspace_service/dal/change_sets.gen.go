@@ -186,8 +186,7 @@ type IChangeSetORMDo interface {
 	GetDeleted() (result []workspace_servicev1.ChangeSetORM, err error)
 	SoftDelete(id uint64) (err error)
 	Restore(id uint64) (err error)
-	CreateInBatch(items []workspace_servicev1.ChangeSetORM, batchSize int) (err error)
-	DeleteInBatch(ids []uint64) (err error)
+	DeleteInBatch(ids []uint64, batchSize int) (err error)
 	GetByTimeRange(startTime time.Time, endTime time.Time) (result []workspace_servicev1.ChangeSetORM, err error)
 	FindBy(columnName string, operator string, value interface{}) (result []workspace_servicev1.ChangeSetORM, err error)
 	FindByPattern(columnName string, pattern string) (result []workspace_servicev1.ChangeSetORM, err error)
@@ -441,25 +440,14 @@ func (c changeSetORMDo) Restore(id uint64) (err error) {
 	return
 }
 
-// INSERT INTO @@table (columns) VALUES (values...)
-func (c changeSetORMDo) CreateInBatch(items []workspace_servicev1.ChangeSetORM, batchSize int) (err error) {
-	var generateSQL strings.Builder
-	generateSQL.WriteString("INSERT INTO change_sets (columns) VALUES (values...) ")
-
-	var executeSQL *gorm.DB
-	executeSQL = c.UnderlyingDB().Exec(generateSQL.String()) // ignore_security_alert
-	err = executeSQL.Error
-
-	return
-}
-
 // DELETE FROM @@table
 // {{where}}
 //
 //	id IN (@ids)
 //
 // {{end}}
-func (c changeSetORMDo) DeleteInBatch(ids []uint64) (err error) {
+// LIMIT @batchSize
+func (c changeSetORMDo) DeleteInBatch(ids []uint64, batchSize int) (err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
@@ -468,6 +456,8 @@ func (c changeSetORMDo) DeleteInBatch(ids []uint64) (err error) {
 	params = append(params, ids)
 	whereSQL0.WriteString("id IN (?) ")
 	helper.JoinWhereBuilder(&generateSQL, whereSQL0)
+	params = append(params, batchSize)
+	generateSQL.WriteString("LIMIT ? ")
 
 	var executeSQL *gorm.DB
 	executeSQL = c.UnderlyingDB().Exec(generateSQL.String(), params...) // ignore_security_alert

@@ -23,7 +23,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "ConflictErrorMessageResponse", description = "Represents resource conflict errors")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T14:07:42.394803-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T15:12:04.029446-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ConflictErrorMessageResponse {
 
   private ValidationErrorCode code = ValidationErrorCode.NO_ERROR;

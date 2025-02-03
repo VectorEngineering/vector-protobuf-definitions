@@ -190,8 +190,7 @@ type IWorkspaceComplianceORMDo interface {
 	GetDeleted() (result []workspace_servicev1.WorkspaceComplianceORM, err error)
 	SoftDelete(id uint64) (err error)
 	Restore(id uint64) (err error)
-	CreateInBatch(items []workspace_servicev1.WorkspaceComplianceORM, batchSize int) (err error)
-	DeleteInBatch(ids []uint64) (err error)
+	DeleteInBatch(ids []uint64, batchSize int) (err error)
 	GetByTimeRange(startTime time.Time, endTime time.Time) (result []workspace_servicev1.WorkspaceComplianceORM, err error)
 	FindBy(columnName string, operator string, value interface{}) (result []workspace_servicev1.WorkspaceComplianceORM, err error)
 	FindByPattern(columnName string, pattern string) (result []workspace_servicev1.WorkspaceComplianceORM, err error)
@@ -445,25 +444,14 @@ func (w workspaceComplianceORMDo) Restore(id uint64) (err error) {
 	return
 }
 
-// INSERT INTO @@table (columns) VALUES (values...)
-func (w workspaceComplianceORMDo) CreateInBatch(items []workspace_servicev1.WorkspaceComplianceORM, batchSize int) (err error) {
-	var generateSQL strings.Builder
-	generateSQL.WriteString("INSERT INTO workspace_compliance (columns) VALUES (values...) ")
-
-	var executeSQL *gorm.DB
-	executeSQL = w.UnderlyingDB().Exec(generateSQL.String()) // ignore_security_alert
-	err = executeSQL.Error
-
-	return
-}
-
 // DELETE FROM @@table
 // {{where}}
 //
 //	id IN (@ids)
 //
 // {{end}}
-func (w workspaceComplianceORMDo) DeleteInBatch(ids []uint64) (err error) {
+// LIMIT @batchSize
+func (w workspaceComplianceORMDo) DeleteInBatch(ids []uint64, batchSize int) (err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
@@ -472,6 +460,8 @@ func (w workspaceComplianceORMDo) DeleteInBatch(ids []uint64) (err error) {
 	params = append(params, ids)
 	whereSQL0.WriteString("id IN (?) ")
 	helper.JoinWhereBuilder(&generateSQL, whereSQL0)
+	params = append(params, batchSize)
+	generateSQL.WriteString("LIMIT ? ")
 
 	var executeSQL *gorm.DB
 	executeSQL = w.UnderlyingDB().Exec(generateSQL.String(), params...) // ignore_security_alert

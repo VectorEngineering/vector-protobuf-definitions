@@ -289,8 +289,7 @@ type IFolderMetadataORMDo interface {
 	GetDeleted() (result []workspace_servicev1.FolderMetadataORM, err error)
 	SoftDelete(id uint64) (err error)
 	Restore(id uint64) (err error)
-	CreateInBatch(items []workspace_servicev1.FolderMetadataORM, batchSize int) (err error)
-	DeleteInBatch(ids []uint64) (err error)
+	DeleteInBatch(ids []uint64, batchSize int) (err error)
 	GetByTimeRange(startTime time.Time, endTime time.Time) (result []workspace_servicev1.FolderMetadataORM, err error)
 	FindBy(columnName string, operator string, value interface{}) (result []workspace_servicev1.FolderMetadataORM, err error)
 	FindByPattern(columnName string, pattern string) (result []workspace_servicev1.FolderMetadataORM, err error)
@@ -544,25 +543,14 @@ func (f folderMetadataORMDo) Restore(id uint64) (err error) {
 	return
 }
 
-// INSERT INTO @@table (columns) VALUES (values...)
-func (f folderMetadataORMDo) CreateInBatch(items []workspace_servicev1.FolderMetadataORM, batchSize int) (err error) {
-	var generateSQL strings.Builder
-	generateSQL.WriteString("INSERT INTO folders (columns) VALUES (values...) ")
-
-	var executeSQL *gorm.DB
-	executeSQL = f.UnderlyingDB().Exec(generateSQL.String()) // ignore_security_alert
-	err = executeSQL.Error
-
-	return
-}
-
 // DELETE FROM @@table
 // {{where}}
 //
 //	id IN (@ids)
 //
 // {{end}}
-func (f folderMetadataORMDo) DeleteInBatch(ids []uint64) (err error) {
+// LIMIT @batchSize
+func (f folderMetadataORMDo) DeleteInBatch(ids []uint64, batchSize int) (err error) {
 	var params []interface{}
 
 	var generateSQL strings.Builder
@@ -571,6 +559,8 @@ func (f folderMetadataORMDo) DeleteInBatch(ids []uint64) (err error) {
 	params = append(params, ids)
 	whereSQL0.WriteString("id IN (?) ")
 	helper.JoinWhereBuilder(&generateSQL, whereSQL0)
+	params = append(params, batchSize)
+	generateSQL.WriteString("LIMIT ? ")
 
 	var executeSQL *gorm.DB
 	executeSQL = f.UnderlyingDB().Exec(generateSQL.String(), params...) // ignore_security_alert

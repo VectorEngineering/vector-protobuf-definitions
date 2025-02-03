@@ -4,8 +4,8 @@ import (
 	"time"
 
 	leadScraperServiceProto "github.com/VectorEngineering/vector-protobuf-definitions/api-definitions/pkg/generated/lead_scraper_service/v1"
-	"gorm.io/gen"
 	workspaceServiceProto "github.com/VectorEngineering/vector-protobuf-definitions/api-definitions/pkg/generated/workspace_service/v1"
+	"gorm.io/gen"
 )
 
 // Querier is the interface of added queries that the various
@@ -79,14 +79,12 @@ type Querier interface {
 	//  {{end}}
 	Restore(id uint64) error
 
-	// INSERT INTO @@table (columns) VALUES (values...)
-	CreateInBatch(items []gen.T, batchSize int) error
-
 	// DELETE FROM @@table
 	//  {{where}}
 	//      id IN (@ids)
 	//  {{end}}
-	DeleteInBatch(ids []uint64) error
+	// LIMIT @batchSize
+	DeleteInBatch(ids []uint64, batchSize int) error
 
 	// SELECT * FROM @@table
 	//  {{where}}

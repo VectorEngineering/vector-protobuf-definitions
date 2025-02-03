@@ -308,20 +308,6 @@ func Test_tenantAPIKeyORM_Restore(t *testing.T) {
 	}
 }
 
-var TenantAPIKeyORMCreateInBatchTestCase = []TestCase{}
-
-func Test_tenantAPIKeyORM_CreateInBatch(t *testing.T) {
-	tenantAPIKeyORM := newTenantAPIKeyORM(_gen_test_db)
-	do := tenantAPIKeyORM.WithContext(context.Background()).Debug()
-
-	for i, tt := range TenantAPIKeyORMCreateInBatchTestCase {
-		t.Run("CreateInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.CreateInBatch(tt.Input.Args[0].([]lead_scraper_servicev1.TenantAPIKeyORM), tt.Input.Args[1].(int))
-			assert(t, "CreateInBatch", res1, tt.Expectation.Ret[0])
-		})
-	}
-}
-
 var TenantAPIKeyORMDeleteInBatchTestCase = []TestCase{}
 
 func Test_tenantAPIKeyORM_DeleteInBatch(t *testing.T) {
@@ -330,7 +316,7 @@ func Test_tenantAPIKeyORM_DeleteInBatch(t *testing.T) {
 
 	for i, tt := range TenantAPIKeyORMDeleteInBatchTestCase {
 		t.Run("DeleteInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64))
+			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64), tt.Input.Args[1].(int))
 			assert(t, "DeleteInBatch", res1, tt.Expectation.Ret[0])
 		})
 	}

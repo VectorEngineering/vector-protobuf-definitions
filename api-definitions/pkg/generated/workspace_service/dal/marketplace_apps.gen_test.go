@@ -308,20 +308,6 @@ func Test_marketplaceAppORM_Restore(t *testing.T) {
 	}
 }
 
-var MarketplaceAppORMCreateInBatchTestCase = []TestCase{}
-
-func Test_marketplaceAppORM_CreateInBatch(t *testing.T) {
-	marketplaceAppORM := newMarketplaceAppORM(_gen_test_db)
-	do := marketplaceAppORM.WithContext(context.Background()).Debug()
-
-	for i, tt := range MarketplaceAppORMCreateInBatchTestCase {
-		t.Run("CreateInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.CreateInBatch(tt.Input.Args[0].([]workspace_servicev1.MarketplaceAppORM), tt.Input.Args[1].(int))
-			assert(t, "CreateInBatch", res1, tt.Expectation.Ret[0])
-		})
-	}
-}
-
 var MarketplaceAppORMDeleteInBatchTestCase = []TestCase{}
 
 func Test_marketplaceAppORM_DeleteInBatch(t *testing.T) {
@@ -330,7 +316,7 @@ func Test_marketplaceAppORM_DeleteInBatch(t *testing.T) {
 
 	for i, tt := range MarketplaceAppORMDeleteInBatchTestCase {
 		t.Run("DeleteInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64))
+			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64), tt.Input.Args[1].(int))
 			assert(t, "DeleteInBatch", res1, tt.Expectation.Ret[0])
 		})
 	}

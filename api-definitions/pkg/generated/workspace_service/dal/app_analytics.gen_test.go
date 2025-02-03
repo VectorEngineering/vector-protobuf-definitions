@@ -308,20 +308,6 @@ func Test_appAnalyticsORM_Restore(t *testing.T) {
 	}
 }
 
-var AppAnalyticsORMCreateInBatchTestCase = []TestCase{}
-
-func Test_appAnalyticsORM_CreateInBatch(t *testing.T) {
-	appAnalyticsORM := newAppAnalyticsORM(_gen_test_db)
-	do := appAnalyticsORM.WithContext(context.Background()).Debug()
-
-	for i, tt := range AppAnalyticsORMCreateInBatchTestCase {
-		t.Run("CreateInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.CreateInBatch(tt.Input.Args[0].([]workspace_servicev1.AppAnalyticsORM), tt.Input.Args[1].(int))
-			assert(t, "CreateInBatch", res1, tt.Expectation.Ret[0])
-		})
-	}
-}
-
 var AppAnalyticsORMDeleteInBatchTestCase = []TestCase{}
 
 func Test_appAnalyticsORM_DeleteInBatch(t *testing.T) {
@@ -330,7 +316,7 @@ func Test_appAnalyticsORM_DeleteInBatch(t *testing.T) {
 
 	for i, tt := range AppAnalyticsORMDeleteInBatchTestCase {
 		t.Run("DeleteInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64))
+			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64), tt.Input.Args[1].(int))
 			assert(t, "DeleteInBatch", res1, tt.Expectation.Ret[0])
 		})
 	}

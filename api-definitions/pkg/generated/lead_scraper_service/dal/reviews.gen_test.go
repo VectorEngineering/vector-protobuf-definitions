@@ -308,20 +308,6 @@ func Test_reviewORM_Restore(t *testing.T) {
 	}
 }
 
-var ReviewORMCreateInBatchTestCase = []TestCase{}
-
-func Test_reviewORM_CreateInBatch(t *testing.T) {
-	reviewORM := newReviewORM(_gen_test_db)
-	do := reviewORM.WithContext(context.Background()).Debug()
-
-	for i, tt := range ReviewORMCreateInBatchTestCase {
-		t.Run("CreateInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.CreateInBatch(tt.Input.Args[0].([]lead_scraper_servicev1.ReviewORM), tt.Input.Args[1].(int))
-			assert(t, "CreateInBatch", res1, tt.Expectation.Ret[0])
-		})
-	}
-}
-
 var ReviewORMDeleteInBatchTestCase = []TestCase{}
 
 func Test_reviewORM_DeleteInBatch(t *testing.T) {
@@ -330,7 +316,7 @@ func Test_reviewORM_DeleteInBatch(t *testing.T) {
 
 	for i, tt := range ReviewORMDeleteInBatchTestCase {
 		t.Run("DeleteInBatch_"+strconv.Itoa(i), func(t *testing.T) {
-			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64))
+			res1 := do.DeleteInBatch(tt.Input.Args[0].([]uint64), tt.Input.Args[1].(int))
 			assert(t, "DeleteInBatch", res1, tt.Expectation.Ret[0])
 		})
 	}

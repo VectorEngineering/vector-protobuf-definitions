@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { SampleAPIRouter } from "./route";
+import { SampleAPIRouter } from "./routes";
 import type { Env } from "./types";
 
 const app = new Hono<{

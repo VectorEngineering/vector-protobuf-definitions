@@ -37,8 +37,16 @@ Handlebars.registerHelper('lookup', (ref: string, prefix: string) => {
 });
 Handlebars.registerHelper('routeFilename', (path: string) => {
     if (!path) return '';
-    // Remove leading slash and convert path segments to filename
-    const clean = path.replace(/^\//, '').replace(/\//g, '-').replace(/[^a-zA-Z0-9-]/g, '');
+    // Remove leading slash and convert path segments to camelCase
+    const clean = path.replace(/^\//, '')
+        .split('/')
+        .map(segment => segment.replace(/[^a-zA-Z0-9]/g, ' '))
+        .map(segment => segment.trim())
+        .map(segment => segment.split(/\s+/)
+            .map((word, i) => i === 0 ? word.toLowerCase() : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+            .join('')
+        )
+        .join('-');
     return clean || 'index';
 });
 
@@ -74,44 +82,40 @@ export async function generate(options: GenerateOptions) {
         const templateDir = options.template || join(process.cwd(), 'templates');
         const templateFiles = await glob('**/*.hbs', { cwd: templateDir });
 
-        // Create src directory for Hono framework
-        if (options.framework === 'hono') {
-            await mkdir(join(options.output, 'src'), { recursive: true });
-            await mkdir(join(options.output, 'src', 'routes'), { recursive: true });
-        }
+        // Create src and routes directories
+        const srcDir = join(options.output, 'src');
+        const routesDir = join(srcDir, 'routes');
+        await mkdir(srcDir, { recursive: true });
+        await mkdir(routesDir, { recursive: true });
 
         for (const templateFile of templateFiles) {
             const templatePath = join(templateDir, templateFile);
             const templateContent = await readFile(templatePath, 'utf-8');
             const template = Handlebars.compile(templateContent);
 
-            // Special handling for route template
-            if (templateFile === 'route.hbs' && options.framework === 'hono') {
-                // Generate a route file for each path
+            if (templateFile === 'route.hbs') {
+                // Generate individual route files
                 for (const [path, pathItem] of Object.entries(openApiSpec.paths || {})) {
-                    const routeData = {
+                    const routeFileName = Handlebars.helpers.routeFilename(path);
+                    const routeFilePath = join(routesDir, `${routeFileName}.ts`);
+
+                    const routeContent = template({
                         path,
                         pathItem,
                         openApiSpec,
                         zodSchemas: zodClientResult,
-                    };
+                    });
 
-                    const routeFileName = Handlebars.helpers.routeFilename(path);
-                    const outputPath = join(options.output, 'src', 'routes', `${routeFileName}.ts`);
-
-                    // Create route file
-                    const rendered = template(routeData);
-                    await writeFile(outputPath, rendered);
+                    await writeFile(routeFilePath, routeContent);
                 }
 
-                // Generate routes/index.ts to export all routes
-                const routeIndexPath = join(options.output, 'src', 'routes', 'index.ts');
-                const routeIndexContent = `import { Hono } from 'hono';
+                // Generate routes index file
+                const indexContent = `import { Hono } from 'hono';
 import type { Env } from '../types';
 
 const router = new Hono<{ Bindings: Env }>();
 
-${Object.keys(openApiSpec.paths || {}).map(path => {
+${Object.entries(openApiSpec.paths || {}).map(([path, _]) => {
                     const routeName = Handlebars.helpers.routeFilename(path);
                     return `import { ${routeName}Router } from './${routeName}';
 router.route('${path}', ${routeName}Router);`;
@@ -119,42 +123,32 @@ router.route('${path}', ${routeName}Router);`;
 
 export const ${Handlebars.helpers.basename(openApiSpec.info.title)}Router = router;
 `;
-                await writeFile(routeIndexPath, routeIndexContent);
-                continue;
-            }
-
-            let outputPath = join(
-                options.output,
-                templateFile.replace('.hbs', '.ts')
-            );
-
-            // Handle Hono framework specific paths
-            if (options.framework === 'hono') {
+                await writeFile(join(routesDir, 'index.ts'), indexContent);
+            } else {
+                // Handle other templates
+                let outputPath = '';
                 switch (templateFile) {
                     case 'index.hbs':
-                        outputPath = join(options.output, 'src', 'index.ts');
+                        outputPath = join(srcDir, 'index.ts');
                         break;
                     case 'types.hbs':
-                        outputPath = join(options.output, 'src', 'types.ts');
+                        outputPath = join(srcDir, 'types.ts');
                         break;
                     case 'client.hbs':
-                        outputPath = join(options.output, 'src', 'client.ts');
+                        outputPath = join(srcDir, 'client.ts');
                         break;
                     default:
                         outputPath = join(options.output, templateFile.replace('.hbs', '.ts'));
                 }
+
+                const rendered = template({
+                    zodSchemas: zodClientResult,
+                    openApiSpec,
+                });
+
+                await mkdir(dirname(outputPath), { recursive: true });
+                await writeFile(outputPath, rendered);
             }
-
-            // Create output directory if it doesn't exist
-            await mkdir(dirname(outputPath), { recursive: true });
-
-            // Render template with generated code
-            const rendered = template({
-                zodSchemas: zodClientResult,
-                openApiSpec,
-            });
-
-            await writeFile(outputPath, rendered);
         }
 
         spinner.succeed(chalk.green('API client generated successfully'));

@@ -1,14 +1,14 @@
 import { Hono } from "hono";
-import { ApiClient } from './client';
-import type { Env } from './types';
+import { ApiClient } from '../client';
+import type { Env } from '../types';
 
+// Route handler for {{path}}
 const router = new Hono<{
   Bindings: Env;
 }>();
 
-{{#each openApiSpec.paths as |pathItem path|}}
 {{#if pathItem.get}}
-router.get("{{path}}", async (c) => {
+router.get("/", async (c) => {
   const client = new ApiClient(c.env.API_BASE_URL);
   {{#if pathItem.get.parameters}}
   const params = {
@@ -30,7 +30,7 @@ router.get("{{path}}", async (c) => {
 {{/if}}
 
 {{#if pathItem.post}}
-router.post("{{path}}", async (c) => {
+router.post("/", async (c) => {
   const client = new ApiClient(c.env.API_BASE_URL);
   const data = await c.req.json();
   const response = await client.create{{capitalize (basename path)}}(data);
@@ -39,7 +39,7 @@ router.post("{{path}}", async (c) => {
 {{/if}}
 
 {{#if pathItem.put}}
-router.put("{{path}}", async (c) => {
+router.put("/", async (c) => {
   const client = new ApiClient(c.env.API_BASE_URL);
   const data = await c.req.json();
   {{#if pathItem.put.parameters}}
@@ -62,7 +62,7 @@ router.put("{{path}}", async (c) => {
 {{/if}}
 
 {{#if pathItem.delete}}
-router.delete("{{path}}", async (c) => {
+router.delete("/", async (c) => {
   const client = new ApiClient(c.env.API_BASE_URL);
   {{#if pathItem.delete.parameters}}
   const params = {
@@ -82,6 +82,5 @@ router.delete("{{path}}", async (c) => {
   return c.json(response);
 });
 {{/if}}
-{{/each}}
 
-export const {{capitalize (basename openApiSpec.info.title)}}Router = router; 
+export const {{routeFilename path}}Router = router; 

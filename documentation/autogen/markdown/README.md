@@ -9,60 +9,135 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 |------------ | ------------- | ------------- | -------------|
 | *LeadScraperServiceApi* | [**createAccount**](Apis/LeadScraperServiceApi.md#createaccount) | **POST** /lead-scraper-microservice/api/v1/accounts | Create a new account |
 *LeadScraperServiceApi* | [**createScrapingJob**](Apis/LeadScraperServiceApi.md#createscrapingjob) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task |
+*LeadScraperServiceApi* | [**createWorkspace**](Apis/LeadScraperServiceApi.md#createworkspace) | **POST** /lead-scraper-microservice/api/v1/workspaces | Create a new workspace |
 *LeadScraperServiceApi* | [**deleteAccount**](Apis/LeadScraperServiceApi.md#deleteaccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account |
 *LeadScraperServiceApi* | [**deleteScrapingJob**](Apis/LeadScraperServiceApi.md#deletescrapingjob) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job |
+*LeadScraperServiceApi* | [**deleteWorkspace**](Apis/LeadScraperServiceApi.md#deleteworkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace |
 *LeadScraperServiceApi* | [**downloadScrapingResults**](Apis/LeadScraperServiceApi.md#downloadscrapingresults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV |
 *LeadScraperServiceApi* | [**getAccount**](Apis/LeadScraperServiceApi.md#getaccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details |
+*LeadScraperServiceApi* | [**getAccountUsage**](Apis/LeadScraperServiceApi.md#getaccountusage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage |
 *LeadScraperServiceApi* | [**getScrapingJob**](Apis/LeadScraperServiceApi.md#getscrapingjob) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job |
+*LeadScraperServiceApi* | [**getWorkflow**](Apis/LeadScraperServiceApi.md#getworkflow) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Get workflow details |
+*LeadScraperServiceApi* | [**getWorkspace**](Apis/LeadScraperServiceApi.md#getworkspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details |
+*LeadScraperServiceApi* | [**getWorkspaceAnalytics**](Apis/LeadScraperServiceApi.md#getworkspaceanalytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics |
+*LeadScraperServiceApi* | [**leadScraperServiceCreateWorkflow**](Apis/LeadScraperServiceApi.md#leadscraperservicecreateworkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow |
+*LeadScraperServiceApi* | [**listAccounts**](Apis/LeadScraperServiceApi.md#listaccounts) | **GET** /lead-scraper-microservice/api/v1/accounts | List all accounts |
 *LeadScraperServiceApi* | [**listScrapingJobs**](Apis/LeadScraperServiceApi.md#listscrapingjobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs |
+*LeadScraperServiceApi* | [**listWorkflows**](Apis/LeadScraperServiceApi.md#listworkflows) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | List workflows |
+*LeadScraperServiceApi* | [**listWorkspaces**](Apis/LeadScraperServiceApi.md#listworkspaces) | **GET** /lead-scraper-microservice/api/v1/workspaces | List workspaces |
+*LeadScraperServiceApi* | [**pauseWorkflow**](Apis/LeadScraperServiceApi.md#pauseworkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution |
+*LeadScraperServiceApi* | [**triggerWorkflow**](Apis/LeadScraperServiceApi.md#triggerworkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution |
 *LeadScraperServiceApi* | [**updateAccount**](Apis/LeadScraperServiceApi.md#updateaccount) | **PUT** /lead-scraper-microservice/api/v1/accounts | Update account details |
+*LeadScraperServiceApi* | [**updateAccountSettings**](Apis/LeadScraperServiceApi.md#updateaccountsettings) | **PUT** /lead-scraper-microservice/api/v1/accounts/settings | Update account settings |
+*LeadScraperServiceApi* | [**updateWorkflow**](Apis/LeadScraperServiceApi.md#updateworkflow) | **PUT** /lead-scraper-microservice/api/v1/workspaces/workflow | Update workflow details |
+*LeadScraperServiceApi* | [**updateWorkspace**](Apis/LeadScraperServiceApi.md#updateworkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details |
+| *WorkspaceServiceApi* | [**createAccount1**](Apis/WorkspaceServiceApi.md#createaccount1) | **POST** /workspace-service/v1/accounts | Create a new account |
+*WorkspaceServiceApi* | [**createWorkspace1**](Apis/WorkspaceServiceApi.md#createworkspace1) | **POST** /workspace-service/v1/workspaces | Create workspace |
+*WorkspaceServiceApi* | [**deleteAccount1**](Apis/WorkspaceServiceApi.md#deleteaccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account |
+*WorkspaceServiceApi* | [**deleteWorkspace1**](Apis/WorkspaceServiceApi.md#deleteworkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace |
+*WorkspaceServiceApi* | [**getAccount1**](Apis/WorkspaceServiceApi.md#getaccount1) | **GET** /workspace-service/v1/accounts/{id} | Get account details |
+*WorkspaceServiceApi* | [**getWorkspace1**](Apis/WorkspaceServiceApi.md#getworkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details |
+*WorkspaceServiceApi* | [**getWorkspaceAnalytics1**](Apis/WorkspaceServiceApi.md#getworkspaceanalytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics |
+*WorkspaceServiceApi* | [**getWorkspaceComplianceReport**](Apis/WorkspaceServiceApi.md#getworkspacecompliancereport) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report |
+*WorkspaceServiceApi* | [**getWorkspaceStorageStats**](Apis/WorkspaceServiceApi.md#getworkspacestoragestats) | **GET** /workspace-service/v1/workspaces/storage-stats/{workspaceId} | Get storage statistics |
+*WorkspaceServiceApi* | [**listWorkspaceSharings**](Apis/WorkspaceServiceApi.md#listworkspacesharings) | **GET** /workspace-service/v1/workspaces/sharings/{workspaceId} | List workspace sharings |
+*WorkspaceServiceApi* | [**listWorkspaces1**](Apis/WorkspaceServiceApi.md#listworkspaces1) | **GET** /workspace-service/v1/workspaces/list | List workspaces |
+*WorkspaceServiceApi* | [**removeWorkspaceSharing**](Apis/WorkspaceServiceApi.md#removeworkspacesharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing |
+*WorkspaceServiceApi* | [**shareWorkspace**](Apis/WorkspaceServiceApi.md#shareworkspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace |
+*WorkspaceServiceApi* | [**updateAccount1**](Apis/WorkspaceServiceApi.md#updateaccount1) | **PUT** /workspace-service/v1/accounts | Update account details |
+*WorkspaceServiceApi* | [**updateWorkspace1**](Apis/WorkspaceServiceApi.md#updateworkspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace |
+*WorkspaceServiceApi* | [**updateWorkspaceSharing**](Apis/WorkspaceServiceApi.md#updateworkspacesharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing |
 
 
 <a name="documentation-for-models"></a>
 ## Documentation for Models
 
+ - [AIAssistanceLog](./Models/AIAssistanceLog.md)
  - [APIInfo](./Models/APIInfo.md)
  - [APIKey](./Models/APIKey.md)
  - [APIKey.Status](./Models/APIKey.Status.md)
  - [Account](./Models/Account.md)
+ - [Account1](./Models/Account1.md)
  - [AccountSettings](./Models/AccountSettings.md)
  - [AccountStatus](./Models/AccountStatus.md)
+ - [ActivityMetrics](./Models/ActivityMetrics.md)
  - [Any](./Models/Any.md)
+ - [AppAnalytics](./Models/AppAnalytics.md)
+ - [AppCategory](./Models/AppCategory.md)
+ - [AppDevelopmentInfo](./Models/AppDevelopmentInfo.md)
+ - [AppInstallation](./Models/AppInstallation.md)
+ - [AppPermission](./Models/AppPermission.md)
+ - [AppReview](./Models/AppReview.md)
+ - [AppVersion](./Models/AppVersion.md)
+ - [AppWebhook](./Models/AppWebhook.md)
  - [AuthContext](./Models/AuthContext.md)
  - [AuthErrorCode](./Models/AuthErrorCode.md)
  - [AuthenticationErrorMessageResponse](./Models/AuthenticationErrorMessageResponse.md)
+ - [AuthenticationErrorMessageResponse1](./Models/AuthenticationErrorMessageResponse1.md)
  - [AvailabilityInfo](./Models/AvailabilityInfo.md)
  - [BackgroundJobStatus](./Models/BackgroundJobStatus.md)
  - [BadGatewayErrorMessageResponse](./Models/BadGatewayErrorMessageResponse.md)
+ - [BranchMerge](./Models/BranchMerge.md)
+ - [BranchPolicy](./Models/BranchPolicy.md)
  - [BusinessHours](./Models/BusinessHours.md)
+ - [ChangeSet](./Models/ChangeSet.md)
+ - [CommentThread](./Models/CommentThread.md)
+ - [ComplianceCheck](./Models/ComplianceCheck.md)
+ - [ComplianceLevel](./Models/ComplianceLevel.md)
+ - [ComplianceMetrics](./Models/ComplianceMetrics.md)
+ - [ComplianceScore](./Models/ComplianceScore.md)
+ - [ComplianceViolation](./Models/ComplianceViolation.md)
  - [ConflictErrorMessageResponse](./Models/ConflictErrorMessageResponse.md)
  - [ConflictInfo](./Models/ConflictInfo.md)
+ - [ContextualSummary](./Models/ContextualSummary.md)
+ - [ContractIntelligence](./Models/ContractIntelligence.md)
  - [CreateAccountRequest](./Models/CreateAccountRequest.md)
+ - [CreateAccountRequest1](./Models/CreateAccountRequest1.md)
  - [CreateAccountResponse](./Models/CreateAccountResponse.md)
+ - [CreateAccountResponse1](./Models/CreateAccountResponse1.md)
  - [CreateScrapingJobRequest](./Models/CreateScrapingJobRequest.md)
  - [CreateScrapingJobResponse](./Models/CreateScrapingJobResponse.md)
  - [CreateWorkflowBody](./Models/CreateWorkflowBody.md)
  - [CreateWorkflowResponse](./Models/CreateWorkflowResponse.md)
  - [CreateWorkspaceRequest](./Models/CreateWorkspaceRequest.md)
+ - [CreateWorkspaceRequest1](./Models/CreateWorkspaceRequest1.md)
  - [CreateWorkspaceResponse](./Models/CreateWorkspaceResponse.md)
+ - [CreateWorkspaceResponse1](./Models/CreateWorkspaceResponse1.md)
+ - [DataProfile](./Models/DataProfile.md)
  - [DayOfWeek](./Models/DayOfWeek.md)
  - [DeleteAccountResponse](./Models/DeleteAccountResponse.md)
  - [DeleteScrapingJobResponse](./Models/DeleteScrapingJobResponse.md)
  - [DeleteWorkspaceResponse](./Models/DeleteWorkspaceResponse.md)
  - [Dependency](./Models/Dependency.md)
+ - [DocumentBranch](./Models/DocumentBranch.md)
+ - [DocumentInstance](./Models/DocumentInstance.md)
+ - [DocumentSnapshot](./Models/DocumentSnapshot.md)
+ - [DocumentStatus](./Models/DocumentStatus.md)
+ - [DocumentTemplate](./Models/DocumentTemplate.md)
+ - [DocumentVersion](./Models/DocumentVersion.md)
  - [DownloadScrapingResultsResponse](./Models/DownloadScrapingResultsResponse.md)
  - [EmployeeBenefit](./Models/EmployeeBenefit.md)
  - [ErrorResponse](./Models/ErrorResponse.md)
+ - [ExplanationBlock](./Models/ExplanationBlock.md)
  - [FieldError](./Models/FieldError.md)
  - [FieldViolation](./Models/FieldViolation.md)
+ - [FileEmbeddings](./Models/FileEmbeddings.md)
+ - [FileMetadata](./Models/FileMetadata.md)
+ - [FileSharing](./Models/FileSharing.md)
+ - [FileVersion](./Models/FileVersion.md)
+ - [FolderMetadata](./Models/FolderMetadata.md)
  - [ForbiddenErrorMessageResponse](./Models/ForbiddenErrorMessageResponse.md)
  - [GatewayTimeoutErrorMessageResponse](./Models/GatewayTimeoutErrorMessageResponse.md)
  - [GetAccountResponse](./Models/GetAccountResponse.md)
+ - [GetAccountResponse1](./Models/GetAccountResponse1.md)
  - [GetAccountUsageResponse](./Models/GetAccountUsageResponse.md)
  - [GetScrapingJobResponse](./Models/GetScrapingJobResponse.md)
  - [GetWorkflowResponse](./Models/GetWorkflowResponse.md)
  - [GetWorkspaceAnalyticsResponse](./Models/GetWorkspaceAnalyticsResponse.md)
+ - [GetWorkspaceAnalyticsResponse1](./Models/GetWorkspaceAnalyticsResponse1.md)
+ - [GetWorkspaceComplianceReportResponse](./Models/GetWorkspaceComplianceReportResponse.md)
  - [GetWorkspaceResponse](./Models/GetWorkspaceResponse.md)
+ - [GetWorkspaceStorageStatsResponse](./Models/GetWorkspaceStorageStatsResponse.md)
  - [GoneErrorMessageResponse](./Models/GoneErrorMessageResponse.md)
  - [IncludedField](./Models/IncludedField.md)
  - [InternalErrorCode](./Models/InternalErrorCode.md)
@@ -72,11 +147,18 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [Lead](./Models/Lead.md)
  - [LimitInfo](./Models/LimitInfo.md)
  - [ListAccountsResponse](./Models/ListAccountsResponse.md)
+ - [ListAccountsResponse1](./Models/ListAccountsResponse1.md)
  - [ListScrapingJobsResponse](./Models/ListScrapingJobsResponse.md)
  - [ListWorkflowsResponse](./Models/ListWorkflowsResponse.md)
+ - [ListWorkspaceSharingsResponse](./Models/ListWorkspaceSharingsResponse.md)
  - [ListWorkspacesResponse](./Models/ListWorkspacesResponse.md)
+ - [ListWorkspacesResponse1](./Models/ListWorkspacesResponse1.md)
  - [MFAInfo](./Models/MFAInfo.md)
+ - [MarketplaceApp](./Models/MarketplaceApp.md)
+ - [MergeRequest](./Models/MergeRequest.md)
  - [MethodNotAllowedErrorMessageResponse](./Models/MethodNotAllowedErrorMessageResponse.md)
+ - [NegotiationHistory](./Models/NegotiationHistory.md)
+ - [NegotiationRound](./Models/NegotiationRound.md)
  - [NotFoundErrorCode](./Models/NotFoundErrorCode.md)
  - [NotFoundErrorMessageResponse](./Models/NotFoundErrorMessageResponse.md)
  - [NotImplementedErrorMessageResponse](./Models/NotImplementedErrorMessageResponse.md)
@@ -90,14 +172,17 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [PaymentRequiredErrorMessageResponse](./Models/PaymentRequiredErrorMessageResponse.md)
  - [Permission](./Models/Permission.md)
  - [PreconditionFailedErrorMessageResponse](./Models/PreconditionFailedErrorMessageResponse.md)
+ - [PricingModel](./Models/PricingModel.md)
  - [QuotaInfo](./Models/QuotaInfo.md)
  - [RateLimitContext](./Models/RateLimitContext.md)
  - [RateLimitErrorMessageResponse](./Models/RateLimitErrorMessageResponse.md)
+ - [RemoveWorkspaceSharingResponse](./Models/RemoveWorkspaceSharingResponse.md)
  - [ResourceInfo](./Models/ResourceInfo.md)
  - [ResourceUtilization](./Models/ResourceUtilization.md)
  - [ResourceValidation](./Models/ResourceValidation.md)
  - [RevenueRange](./Models/RevenueRange.md)
  - [Review](./Models/Review.md)
+ - [RiskAssessment](./Models/RiskAssessment.md)
  - [Role](./Models/Role.md)
  - [SchemaValidation](./Models/SchemaValidation.md)
  - [ScrapingJob](./Models/ScrapingJob.md)
@@ -105,7 +190,18 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [ServiceStatus](./Models/ServiceStatus.md)
  - [ServiceUnavailableErrorMessageResponse](./Models/ServiceUnavailableErrorMessageResponse.md)
  - [SessionInfo](./Models/SessionInfo.md)
+ - [ShareWorkspaceBody](./Models/ShareWorkspaceBody.md)
+ - [ShareWorkspaceResponse](./Models/ShareWorkspaceResponse.md)
+ - [SignatureBlock](./Models/SignatureBlock.md)
+ - [SignatureRequest](./Models/SignatureRequest.md)
+ - [SignatureStatus](./Models/SignatureStatus.md)
+ - [SignatureWorkflow](./Models/SignatureWorkflow.md)
+ - [Status](./Models/Status.md)
+ - [StorageBreakdown](./Models/StorageBreakdown.md)
  - [Suggestions](./Models/Suggestions.md)
+ - [TemplateType](./Models/TemplateType.md)
+ - [TemplateVariable](./Models/TemplateVariable.md)
+ - [TemplateVersion](./Models/TemplateVersion.md)
  - [Timezone](./Models/Timezone.md)
  - [TokenInfo](./Models/TokenInfo.md)
  - [TooEarlyErrorMessageResponse](./Models/TooEarlyErrorMessageResponse.md)
@@ -121,11 +217,18 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [UpdateWorkflowResponse](./Models/UpdateWorkflowResponse.md)
  - [UpdateWorkspaceRequest](./Models/UpdateWorkspaceRequest.md)
  - [UpdateWorkspaceResponse](./Models/UpdateWorkspaceResponse.md)
+ - [UpdateWorkspaceSharingRequest](./Models/UpdateWorkspaceSharingRequest.md)
+ - [UpdateWorkspaceSharingResponse](./Models/UpdateWorkspaceSharingResponse.md)
+ - [UserActivity](./Models/UserActivity.md)
  - [ValidationErrorCode](./Models/ValidationErrorCode.md)
  - [ValidationErrorMessageResponse](./Models/ValidationErrorMessageResponse.md)
  - [WebhookConfig](./Models/WebhookConfig.md)
  - [WorkflowStatus](./Models/WorkflowStatus.md)
  - [Workspace](./Models/Workspace.md)
+ - [Workspace1](./Models/Workspace1.md)
+ - [WorkspaceActivity](./Models/WorkspaceActivity.md)
+ - [WorkspaceCompliance](./Models/WorkspaceCompliance.md)
+ - [WorkspaceSharing](./Models/WorkspaceSharing.md)
  - [rpc.Status](./Models/rpc.Status.md)
 
 

@@ -25,7 +25,7 @@ import javax.annotation.Generated;
  * AppWebhook
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T14:01:35.727997-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T14:07:42.394803-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class AppWebhook {
 
   private String id;

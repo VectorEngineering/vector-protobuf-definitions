@@ -10,6 +10,887 @@
 	},
 	"item": [
 	        {
+	            "name": "workspace-service",
+	            "item": [
+	                        {
+    "name": "/workspace-service/v1/accounts",
+                "description": "Creates a new user account with initial workspace",
+                 "item": [
+                            {
+                                "name": "Create a new account",
+                                "request": {
+                                    "method": "POST",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"auth0UserId\": \"<string>\",\n \"email\": \"<string>\",\n \"baseDirectory\": \"<string>\",\n \"region\": \"<string>\",\n \"orgId\": \"<string>\",\n \"tenantId\": \"<string>\",\n \"roles\": \"<string>\",\n \"permissions\": \"<string>\",\n \"mfaEnabled\": \"<string>\",\n \"complianceLevel\": \"<string>\",\n \"preferences\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/workspace-service/v1/accounts",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "workspace-service",
+                                            "v1",
+                                            "accounts"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Creates a new user account with initial workspace"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/workspace-service/v1/accounts",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "Update account details",
+                                "request": {
+                                    "method": "PUT",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"account\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/workspace-service/v1/accounts",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "workspace-service",
+                                            "v1",
+                                            "accounts"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": ""
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/workspace-service/v1/accounts/:id",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "Delete account",
+                                "request": {
+                                    "method": "DELETE",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/workspace-service/v1/accounts/:id",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "workspace-service",
+                                            "v1",
+                                            "accounts",
+                                            ":id"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "id",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": ""
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/workspace-service/v1/accounts/:id",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "Get account details",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/workspace-service/v1/accounts/:id",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "workspace-service",
+                                            "v1",
+                                            "accounts",
+                                            ":id"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "id",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": ""
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/workspace-service/v1/workspace-sharings",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "Update workspace sharing",
+                                "request": {
+                                    "method": "PUT",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"sharing\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/workspace-service/v1/workspace-sharings",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "workspace-service",
+                                            "v1",
+                                            "workspace-sharings"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": ""
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/workspace-service/v1/workspace-sharings/:sharingId",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "Remove workspace sharing",
+                                "request": {
+                                    "method": "DELETE",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/workspace-service/v1/workspace-sharings/:sharingId",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "workspace-service",
+                                            "v1",
+                                            "workspace-sharings",
+                                            ":sharingId"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "sharingId",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": ""
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/workspace-service/v1/workspaces",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "Create workspace",
+                                "request": {
+                                    "method": "POST",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"accountId\": \"<string>\",\n \"name\": \"<string>\",\n \"storageQuota\": \"<string>\",\n \"allowPublicSharing\": \"<string>\",\n \"requireApproval\": \"<string>\",\n \"gdprCompliant\": \"<string>\",\n \"hipaaCompliant\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/workspace-service/v1/workspaces",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "workspace-service",
+                                            "v1",
+                                            "workspaces"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": ""
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/workspace-service/v1/workspaces",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "Update workspace",
+                                "request": {
+                                    "method": "PUT",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"workspace\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/workspace-service/v1/workspaces",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "workspace-service",
+                                            "v1",
+                                            "workspaces"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": ""
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/workspace-service/v1/workspaces/:id",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "Delete workspace",
+                                "request": {
+                                    "method": "DELETE",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/workspace-service/v1/workspaces/:id",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "workspace-service",
+                                            "v1",
+                                            "workspaces",
+                                            ":id"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "id",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": ""
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/workspace-service/v1/workspaces/:id",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "Get workspace details",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/workspace-service/v1/workspaces/:id",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "workspace-service",
+                                            "v1",
+                                            "workspaces",
+                                            ":id"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "id",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": ""
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/workspace-service/v1/workspaces/:workspaceId/share",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "Share workspace",
+                                "request": {
+                                    "method": "POST",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"sharedWithEmail\": \"<string>\",\n \"permissionLevel\": \"<string>\",\n \"expiresAt\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/workspace-service/v1/workspaces/:workspaceId/share",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "workspace-service",
+                                            "v1",
+                                            "workspaces",
+                                            ":workspaceId",
+                                            "share"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "workspaceId",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": ""
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/workspace-service/v1/workspaces/analytics/:workspaceId",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "Get workspace analytics",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/workspace-service/v1/workspaces/analytics/:workspaceId",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "workspace-service",
+                                            "v1",
+                                            "workspaces",
+                                            "analytics",
+                                            ":workspaceId"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "workspaceId",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                            {
+                                                "key": "startTime",
+                                                "value": "2013-10-20T19:20:30+01:00",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "endTime",
+                                                "value": "2013-10-20T19:20:30+01:00",
+                                                "description": "",
+                                                "disabled": true
+                                            }
+                                        ]
+                                    },
+                                    "description": ""
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/workspace-service/v1/workspaces/compliance-report/:workspaceId",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "Get compliance report",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/workspace-service/v1/workspaces/compliance-report/:workspaceId",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "workspace-service",
+                                            "v1",
+                                            "workspaces",
+                                            "compliance-report",
+                                            ":workspaceId"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "workspaceId",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                            {
+                                                "key": "complianceType",
+                                                "value": "complianceType_example",
+                                                "description": "",
+                                                "disabled": true
+                                            }
+                                        ]
+                                    },
+                                    "description": ""
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/workspace-service/v1/workspaces/list",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "List workspaces",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/workspace-service/v1/workspaces/list",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "workspace-service",
+                                            "v1",
+                                            "workspaces",
+                                            "list"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                            {
+                                                "key": "accountId",
+                                                "value": "accountId_example",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "pageSize",
+                                                "value": "56",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "pageToken",
+                                                "value": "pageToken_example",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "filter",
+                                                "value": "filter_example",
+                                                "description": "",
+                                                "disabled": true
+                                            }
+                                        ]
+                                    },
+                                    "description": ""
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/workspace-service/v1/workspaces/sharings/:workspaceId",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "List workspace sharings",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/workspace-service/v1/workspaces/sharings/:workspaceId",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "workspace-service",
+                                            "v1",
+                                            "workspaces",
+                                            "sharings",
+                                            ":workspaceId"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "workspaceId",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                            {
+                                                "key": "pageSize",
+                                                "value": "56",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "pageToken",
+                                                "value": "pageToken_example",
+                                                "description": "",
+                                                "disabled": true
+                                            }
+                                        ]
+                                    },
+                                    "description": ""
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/workspace-service/v1/workspaces/storage-stats/:workspaceId",
+                "description": "",
+                 "item": [
+                            {
+                                "name": "Get storage statistics",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/workspace-service/v1/workspaces/storage-stats/:workspaceId",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "workspace-service",
+                                            "v1",
+                                            "workspaces",
+                                            "storage-stats",
+                                            ":workspaceId"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "workspaceId",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": ""
+                                }
+                            }
+                            ]
+                        }
+	                    ]
+	        },
+	        {
 	            "name": "lead-scraper-service",
 	            "item": [
 	                        {
@@ -60,6 +941,70 @@
                                         ]
                                     },
                                     "description": "Creates a new user account in the workspace service"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/accounts",
+                "description": "Retrieves a list of accounts",
+                 "item": [
+                            {
+                                "name": "List all accounts",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "accounts"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                            {
+                                                "key": "pageSize",
+                                                "value": "56",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "pageToken",
+                                                "value": "pageToken_example",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "filter",
+                                                "value": "filter_example",
+                                                "description": "",
+                                                "disabled": true
+                                            }
+                                        ]
+                                    },
+                                    "description": "Retrieves a list of accounts"
                                 }
                             }
                             ]
@@ -216,6 +1161,112 @@
                                         ]
                                     },
                                     "description": "Retrieves details of a specific account"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/accounts/:id/usage",
+                "description": "Retrieves usage details for a given account",
+                 "item": [
+                            {
+                                "name": "Get account usage",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts/:id/usage",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "accounts",
+                                            ":id",
+                                            "usage"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "id",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Retrieves usage details for a given account"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/accounts/settings",
+                "description": "Updates the settings for a given account",
+                 "item": [
+                            {
+                                "name": "Update account settings",
+                                "request": {
+                                    "method": "PUT",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"settings\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts/settings",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "accounts",
+                                            "settings"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Updates the settings for a given account"
                                 }
                             }
                             ]
@@ -543,6 +1594,717 @@
                                         ]
                                     },
                                     "description": "This endpoint downloads the results of a Google Maps scraping job as CSV"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/workspace",
+                "description": "Updates the details of a specific workspace",
+                 "item": [
+                            {
+                                "name": "Update workspace details",
+                                "request": {
+                                    "method": "PUT",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"workspace\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/workspace",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "workspace"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Updates the details of a specific workspace"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/workspace/:id",
+                "description": "Deletes a specific workspace",
+                 "item": [
+                            {
+                                "name": "Delete a workspace",
+                                "request": {
+                                    "method": "DELETE",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/workspace/:id",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "workspace",
+                                            ":id"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "id",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Deletes a specific workspace"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/workspace/:id",
+                "description": "Retrieves details of a specific workspace",
+                 "item": [
+                            {
+                                "name": "Get workspace details",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/workspace/:id",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "workspace",
+                                            ":id"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "id",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Retrieves details of a specific workspace"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/workspaces",
+                "description": "Creates a new workspace for a given account",
+                 "item": [
+                            {
+                                "name": "Create a new workspace",
+                                "request": {
+                                    "method": "POST",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"workspace\": \"<string>\",\n \"accountId\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/workspaces",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "workspaces"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Creates a new workspace for a given account"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/workspaces",
+                "description": "Retrieves a list of workspaces for a given account",
+                 "item": [
+                            {
+                                "name": "List workspaces",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/workspaces",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "workspaces"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                            {
+                                                "key": "accountId",
+                                                "value": "accountId_example",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "pageSize",
+                                                "value": "56",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "pageToken",
+                                                "value": "pageToken_example",
+                                                "description": "",
+                                                "disabled": true
+                                            }
+                                        ]
+                                    },
+                                    "description": "Retrieves a list of workspaces for a given account"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/analytics",
+                "description": "Retrieves analytics data for a specific workspace",
+                 "item": [
+                            {
+                                "name": "Get workspace analytics",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/workspaces/:workspaceId/analytics",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "workspaces",
+                                            ":workspaceId",
+                                            "analytics"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "workspaceId",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                            {
+                                                "key": "startTime",
+                                                "value": "2013-10-20T19:20:30+01:00",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "endTime",
+                                                "value": "2013-10-20T19:20:30+01:00",
+                                                "description": "",
+                                                "disabled": true
+                                            }
+                                        ]
+                                    },
+                                    "description": "Retrieves analytics data for a specific workspace"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows",
+                "description": "This endpoint creates a new workflow configuration for a specific workspace  Required parameters: - workspace_id: Parent workspace ID - name: Human-readable workflow name - description: Optional workflow description - parameters: Job parameters for the workflow  Example: ```json",
+                 "item": [
+                            {
+                                "name": "Create a new workflow",
+                                "request": {
+                                    "method": "POST",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"workflow\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "workspaces",
+                                            ":workspaceId",
+                                            "workflows"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "workspaceId",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "This endpoint creates a new workflow configuration for a specific workspace  Required parameters: - workspace_id: Parent workspace ID - name: Human-readable workflow name - description: Optional workflow description - parameters: Job parameters for the workflow  Example: ```json"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows",
+                "description": "Retrieves a list of workflows for a given workspace",
+                 "item": [
+                            {
+                                "name": "List workflows",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "workspaces",
+                                            ":workspaceId",
+                                            "workflows"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "workspaceId",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                            {
+                                                "key": "pageSize",
+                                                "value": "56",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "pageToken",
+                                                "value": "pageToken_example",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "filter",
+                                                "value": "filter_example",
+                                                "description": "",
+                                                "disabled": true
+                                            }
+                                        ]
+                                    },
+                                    "description": "Retrieves a list of workflows for a given workspace"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id",
+                "description": "Retrieves details of a specific workflow",
+                 "item": [
+                            {
+                                "name": "Get workflow details",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "workspaces",
+                                            ":workspaceId",
+                                            "workflows",
+                                            ":id"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "workspaceId",
+                                                "value": "",
+                                                "description": ""
+                                            },
+                                            {
+                                                "key": "id",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Retrieves details of a specific workflow"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id/pause",
+                "description": "Pauses the execution of a specific workflow",
+                 "item": [
+                            {
+                                "name": "Pause workflow execution",
+                                "request": {
+                                    "method": "POST",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"pause\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id/pause",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "workspaces",
+                                            ":workspaceId",
+                                            "workflows",
+                                            ":id",
+                                            "pause"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "workspaceId",
+                                                "value": "",
+                                                "description": ""
+                                            },
+                                            {
+                                                "key": "id",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Pauses the execution of a specific workflow"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id/trigger",
+                "description": "Triggers the execution of a specific workflow",
+                 "item": [
+                            {
+                                "name": "Trigger workflow execution",
+                                "request": {
+                                    "method": "POST",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"parameters\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id/trigger",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "workspaces",
+                                            ":workspaceId",
+                                            "workflows",
+                                            ":id",
+                                            "trigger"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "workspaceId",
+                                                "value": "",
+                                                "description": ""
+                                            },
+                                            {
+                                                "key": "id",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Triggers the execution of a specific workflow"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/workspaces/workflow",
+                "description": "Updates the details of a specific workflow",
+                 "item": [
+                            {
+                                "name": "Update workflow details",
+                                "request": {
+                                    "method": "PUT",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"workflow\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/workspaces/workflow",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "workspaces",
+                                            "workflow"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Updates the details of a specific workflow"
                                 }
                             }
                             ]

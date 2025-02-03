@@ -28,26 +28,41 @@ Handlebars.registerHelper('basename', (path: string) => {
 Handlebars.registerHelper('eq', (a: any, b: any) => a === b);
 Handlebars.registerHelper('add', (a: number, b: number) => a + b);
 Handlebars.registerHelper('lookup', (ref: string, prefix: string) => {
-    if (!ref) return '';
+    if (!ref || typeof ref !== 'string') return '';
     // Handle OpenAPI refs like "#/components/schemas/User"
     if (ref.startsWith(prefix)) {
-        return `schemas.${ref.slice(prefix.length)}`;
+        return ref.slice(prefix.length);
     }
     return ref;
 });
 Handlebars.registerHelper('routeFilename', (path: string) => {
     if (!path) return '';
     // Remove leading slash and convert path segments to camelCase
-    const clean = path.replace(/^\//, '')
+    return path.replace(/^\//, '')
         .split('/')
-        .map(segment => segment.replace(/[^a-zA-Z0-9]/g, ' '))
-        .map(segment => segment.trim())
-        .map(segment => segment.split(/\s+/)
+        .map(segment => segment
+            .replace(/[^a-zA-Z0-9]/g, ' ')
+            .trim()
+            .split(/\s+/)
             .map((word, i) => i === 0 ? word.toLowerCase() : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
             .join('')
         )
-        .join('-');
-    return clean || 'index';
+        .join('');
+});
+
+Handlebars.registerHelper('routePath', (path: string) => {
+    if (!path) return '';
+    return path.replace(/\{([^}]+)\}/g, ':$1');
+});
+
+Handlebars.registerHelper('replacePathParams', (path: string) => {
+    if (!path) return '';
+    // Convert {param} to :param format
+    return path.replace(/\{([^}]+)\}/g, ':$1');
+});
+
+Handlebars.registerHelper('hasQueryParams', function (parameters) {
+    return parameters?.some((p: any) => p.in === 'query');
 });
 
 interface GenerateOptions {
@@ -129,8 +144,9 @@ const router = new Hono<{ Bindings: Env }>();
 
 ${Object.entries(openApiSpec.paths || {}).map(([path, _]) => {
                     const routeName = Handlebars.helpers.routeFilename(path);
+                    const routePath = Handlebars.helpers.routePath(path);
                     return `import { ${routeName}Router } from './${routeName}';
-router.route('${path}', ${routeName}Router);`;
+router.route('${routePath}', ${routeName}Router);`;
                 }).join('\n\n')}
 
 export const ${Handlebars.helpers.basename(openApiSpec.info.title)}Router = router;

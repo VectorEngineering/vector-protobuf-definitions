@@ -1,6 +1,7 @@
 // Generated TypeScript API Client
-import { type ZodiosInstance } from "@zodios/core";
+import type { ZodiosInstance } from "@zodios/core";
 
+// Generated schemas
 {{{zodSchemas}}}
 
 export class ApiClient {
@@ -11,51 +12,50 @@ export class ApiClient {
   }
 
   {{#each openApiSpec.paths}}
-    {{#with this}}
-    {{#if get}}
-  /**
-   * {{get.summary}}
-   * {{get.description}}
-   */
-  async get{{capitalize (basename @key)}}({{#if get.parameters}}params: { {{#each get.parameters}}{{name}}{{#unless required}}?{{/unless}}: string;{{/each}} }{{/if}}) {
-    return this.client.get('{{@key}}'{{#if get.parameters}}, { params }{{/if}});
-  }
-    {{/if}}
+  {{#with this}}
+  {{#if get}}
+    async get{{capitalize (basename @key)}}({{#if get.parameters}}params: { {{#each get.parameters}}{{this.name}}: string{{#unless this.required}} | undefined{{/unless}}; {{/each}} }{{/if}}) {
+      return this.client.get("{{replacePathParams @key}}", { 
+        {{#each get.parameters}}{{#if (eq this.in "path")}}params: { {{#each ../get.parameters}}{{#if (eq this.in "path")}}{{this.name}}: params.{{this.name}},{{/if}}{{/each}} },{{/if}}{{/each}}
+        {{#if (hasQueryParams get.parameters)}}
+        queries: { {{#each get.parameters}}{{#if (eq this.in "query")}}{{this.name}}: params.{{this.name}}{{#unless @last}}, {{/unless}}{{/if}}{{/each}} }
+        {{/if}}
+      });
+    }
+  {{/if}}
 
-    {{#if post}}
-  /**
-   * {{post.summary}}
-   * {{post.description}}
-   */
-  async create{{capitalize (basename @key)}}({{#if post.requestBody}}data: z.infer<typeof schemas.CreateUser>{{/if}}) {
-    return this.client.post('{{@key}}', data);
-  }
-    {{/if}}
+  {{#if post}}
+    async create{{capitalize (basename @key)}}({{#if post.requestBody}}data: z.infer<typeof {{lookup post.requestBody.content.[application/json].schema.$ref "#/components/schemas/"}}>, {{/if}}{{#if post.parameters}}params: { {{#each post.parameters}}{{this.name}}: string{{#unless this.required}} | undefined{{/unless}}; {{/each}} }{{/if}}) {
+      return this.client.post("{{replacePathParams @key}}", {{#if post.requestBody}}data{{else}}undefined{{/if}}, { 
+        {{#each post.parameters}}{{#if (eq this.in "path")}}params: { {{#each ../post.parameters}}{{#if (eq this.in "path")}}{{this.name}}: params.{{this.name}},{{/if}}{{/each}} },{{/if}}{{/each}}
+        {{#if (hasQueryParams post.parameters)}}
+        queries: { {{#each post.parameters}}{{#if (eq this.in "query")}}{{this.name}}: params.{{this.name}}{{#unless @last}}, {{/unless}}{{/if}}{{/each}} }
+        {{/if}}
+      });
+    }
+  {{/if}}
 
-    {{#if put}}
-  /**
-   * {{put.summary}}
-   * {{put.description}}
-   */
-  async update{{capitalize (basename @key)}}({{#if put.parameters}}params: { {{#each put.parameters}}{{name}}{{#unless required}}?{{/unless}}: string;{{/each}} },{{/if}}{{#if put.requestBody}}data: z.infer<typeof schemas.UpdateUser>{{/if}}) {
-    return this.client.put('{{@key}}'{{#if put.parameters}}, { params }{{/if}}{{#if put.requestBody}}, { body: data }{{/if}});
-  }
-    {{/if}}
+  {{#if put}}
+    async update{{capitalize (basename @key)}}({{#if put.requestBody}}data: z.infer<typeof schemas.{{lookup put.requestBody.content.[application/json].schema.$ref "#/components/schemas/"}}>, {{/if}}{{#if put.parameters}}params: { {{#each put.parameters}}{{this.name}}: string{{#unless this.required}} | undefined{{/unless}}; {{/each}} }{{/if}}) {
+      return this.client.put("{{replacePathParams @key}}", {{#if put.requestBody}}data{{else}}undefined{{/if}}, { 
+        {{#each put.parameters}}{{#if (eq this.in "path")}}params: { {{#each ../put.parameters}}{{#if (eq this.in "path")}}{{this.name}}: params.{{this.name}},{{/if}}{{/each}} },{{/if}}{{/each}}
+        {{#if (hasQueryParams put.parameters)}}
+        queries: { {{#each put.parameters}}{{#if (eq this.in "query")}}{{this.name}}: params.{{this.name}}{{#unless @last}}, {{/unless}}{{/if}}{{/each}} }
+        {{/if}}
+      });
+    }
+  {{/if}}
 
-    {{#if delete}}
-  /**
-   * {{delete.summary}}
-   * {{delete.description}}
-   */
-  async delete{{capitalize (basename @key)}}({{#if delete.parameters}}params: { {{#each delete.parameters}}{{name}}{{#unless required}}?{{/unless}}: string;{{/each}} }{{/if}}) {
-    return this.client.delete('{{@key}}'{{#if delete.parameters}}, { params }{{/if}});
-  }
-    {{/if}}
-    {{/with}}
+  {{#if delete}}
+    async delete{{capitalize (basename @key)}}({{#if delete.parameters}}params: { {{#each delete.parameters}}{{this.name}}: string{{#unless this.required}} | undefined{{/unless}}; {{/each}} }{{/if}}) {
+      return this.client.delete("{{replacePathParams @key}}", undefined, { 
+        {{#each delete.parameters}}{{#if (eq this.in "path")}}params: { {{#each ../delete.parameters}}{{#if (eq this.in "path")}}{{this.name}}: params.{{this.name}},{{/if}}{{/each}} },{{/if}}{{/each}}
+        {{#if (hasQueryParams delete.parameters)}}
+        queries: { {{#each delete.parameters}}{{#if (eq this.in "query")}}{{this.name}}: params.{{this.name}}{{#unless @last}}, {{/unless}}{{/if}}{{/each}} }
+        {{/if}}
+      });
+    }
+  {{/if}}
+  {{/with}}
   {{/each}}
 }
-
-// Export types for public use
-{{#each openApiSpec.components.schemas}}
-export type {{@key}} = z.infer<typeof schemas.{{@key}}>;
-{{/each}}

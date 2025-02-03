@@ -25,9 +25,57 @@ export default {
       const url = new URL(request.url);
       const path = url.pathname;
 
-      if (path === '/users') {
+      if (path === '/lead-scraper-microservice/api/v1/accounts') {
+
+        if (request.method === 'POST') {
+          const data = await request.json();
+          const response = await client.createLeadScraperMicroserviceApiV1Accounts(data);
+          return new Response(JSON.stringify(response), {
+            status: 201,
+            headers: { 'Content-Type': 'application/json' },
+          });
+        }
+
+        if (request.method === 'PUT') {
+          const data = await request.json();
+          const response = await client.updateLeadScraperMicroserviceApiV1Accounts(data);
+          return new Response(JSON.stringify(response), {
+            headers: { 'Content-Type': 'application/json' },
+          });
+        }
+
+      }
+      if (path === '/lead-scraper-microservice/api/v1/accounts/{id}') {
         if (request.method === 'GET') {
-          const response = await client.getUsers();
+          const params = {
+            id: path.split('/')[1],
+          };
+          const response = await client.getLeadScraperMicroserviceApiV1AccountsId(params);
+          return new Response(JSON.stringify(response), {
+            headers: { 'Content-Type': 'application/json' },
+          });
+        }
+
+
+
+        if (request.method === 'DELETE') {
+          const params = {
+            id: path.split('/')[1],
+          };
+          const response = await client.deleteLeadScraperMicroserviceApiV1AccountsId(params);
+          return new Response(JSON.stringify(response), {
+            headers: { 'Content-Type': 'application/json' },
+          });
+        }
+      }
+      if (path === '/lead-scraper-microservice/api/v1/jobs') {
+        if (request.method === 'GET') {
+          const params = {
+            userId: url.searchParams.get('userId') || '',
+            orgId: url.searchParams.get('orgId') || '',
+            tenantId: url.searchParams.get('tenantId') || '',
+          };
+          const response = await client.getLeadScraperMicroserviceApiV1Jobs(params);
           return new Response(JSON.stringify(response), {
             headers: { 'Content-Type': 'application/json' },
           });
@@ -35,12 +83,58 @@ export default {
 
         if (request.method === 'POST') {
           const data = await request.json();
-          const response = await client.createUsers(data);
+          const response = await client.createLeadScraperMicroserviceApiV1Jobs(data);
           return new Response(JSON.stringify(response), {
             status: 201,
             headers: { 'Content-Type': 'application/json' },
           });
         }
+
+
+      }
+      if (path === '/lead-scraper-microservice/api/v1/jobs/{jobId}') {
+        if (request.method === 'GET') {
+          const params = {
+            jobId: path.split('/')[1],
+            userId: url.searchParams.get('userId') || '',
+            orgId: url.searchParams.get('orgId') || '',
+            tenantId: url.searchParams.get('tenantId') || '',
+          };
+          const response = await client.getLeadScraperMicroserviceApiV1JobsJobId(params);
+          return new Response(JSON.stringify(response), {
+            headers: { 'Content-Type': 'application/json' },
+          });
+        }
+
+
+
+        if (request.method === 'DELETE') {
+          const params = {
+            jobId: path.split('/')[1],
+            userId: url.searchParams.get('userId') || '',
+            orgId: url.searchParams.get('orgId') || '',
+            tenantId: url.searchParams.get('tenantId') || '',
+          };
+          const response = await client.deleteLeadScraperMicroserviceApiV1JobsJobId(params);
+          return new Response(JSON.stringify(response), {
+            headers: { 'Content-Type': 'application/json' },
+          });
+        }
+      }
+      if (path === '/lead-scraper-microservice/api/v1/jobs/{jobId}/download') {
+        if (request.method === 'GET') {
+          const params = {
+            jobId: path.split('/')[1],
+            userId: url.searchParams.get('userId') || '',
+            orgId: url.searchParams.get('orgId') || '',
+            tenantId: url.searchParams.get('tenantId') || '',
+          };
+          const response = await client.getLeadScraperMicroserviceApiV1JobsJobIdDownload(params);
+          return new Response(JSON.stringify(response), {
+            headers: { 'Content-Type': 'application/json' },
+          });
+        }
+
 
 
       }

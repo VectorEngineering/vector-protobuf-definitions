@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { ApiClient } from '../client';
 import type { Env } from '../types';
+import { HTTPException } from 'hono/http-exception';
 
 // Route handler for {{path}}
 const router = new Hono<{
@@ -17,7 +18,7 @@ router.get("/", async (c) => {
     {{this.name}}: c.req.query("{{this.name}}"){{#if this.required}} || ''{{/if}},
     {{/if}}
     {{#if (eq this.in "path")}}
-    {{this.name}}: c.req.param("{{this.name}}"),
+    {{this.name}}: c.req.param("{{this.name}}") || (() => { throw new HTTPException(400, { message: "Missing required path parameter: {{this.name}}" }) })(),
     {{/if}}
     {{/each}}
   };
@@ -49,7 +50,7 @@ router.put("/", async (c) => {
     {{this.name}}: c.req.query("{{this.name}}"){{#if this.required}} || ''{{/if}},
     {{/if}}
     {{#if (eq this.in "path")}}
-    {{this.name}}: c.req.param("{{this.name}}"),
+    {{this.name}}: c.req.param("{{this.name}}") || (() => { throw new HTTPException(400, { message: "Missing required path parameter: {{this.name}}" }) })(),
     {{/if}}
     {{/each}}
   };
@@ -71,7 +72,7 @@ router.delete("/", async (c) => {
     {{this.name}}: c.req.query("{{this.name}}"){{#if this.required}} || ''{{/if}},
     {{/if}}
     {{#if (eq this.in "path")}}
-    {{this.name}}: c.req.param("{{this.name}}"),
+    {{this.name}}: c.req.param("{{this.name}}") || (() => { throw new HTTPException(400, { message: "Missing required path parameter: {{this.name}}" }) })(),
     {{/if}}
     {{/each}}
   };

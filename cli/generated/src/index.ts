@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { SampleAPIRouter } from "./routes";
+import { LeadScrapingServiceAPIRouter } from "./routes";
 import type { Env } from "./types";
 import type { MiddlewareHandler } from "hono";
 
@@ -14,7 +14,7 @@ const app = new Hono<{
 // CORS middleware
 app.use("*", cors({
   origin: "*",
-  allowMethods: ["GET","POST","OPTIONS"],
+  allowMethods: ["POST","PUT","GET","DELETE","GET","POST","GET","DELETE","GET","OPTIONS"],
   allowHeaders: ["Content-Type", "Authorization"],
   exposeHeaders: ["Content-Length", "X-Request-Id"],
   maxAge: 86400,
@@ -28,6 +28,6 @@ Object.values(middleware).forEach(mw => {
 });
 
 // API routes
-app.route("/api", SampleAPIRouter);
+app.route("/api", LeadScrapingServiceAPIRouter);
 
 export default app; 

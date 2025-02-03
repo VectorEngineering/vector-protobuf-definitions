@@ -1,3 +1,5 @@
+import { KVNamespace } from '@cloudflare/workers-types';
+
 export interface Env {
   // Environment variables
   API_BASE_URL: string;

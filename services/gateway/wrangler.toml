@@ -2,10 +2,49 @@ name = "gateway"
 main = "index.ts"
 compatibility_date = "2024-01-01"
 
+# Enable the AI binding
+ai = { binding = true }
+
+# Configure KV namespace for caching
+kv_namespaces = [
+  { binding = "CACHE", id = "xxxx", preview_id = "xxxx" }
+]
+
+# Configure environment variables
 [vars]
+API_SECRET_KEY = "xxxx"  # Replace with actual secret key
 API_KEY = ""  # Add your API key here
 SECRET = ""   # Add your secret here
 ENVIRONMENT = "development"
+
+# Configure routes
+routes = [
+  { pattern = "api.example.com/ai*", zone_id = "xxxx" }
+]
+
+# Configure dev settings
+[dev]
+port = 8787
+local_protocol = "http"
+
+# Configure miniflare for local development
+[miniflare]
+kv_persist = true
+cache_persist = true
+
+# Configure build settings
+[build]
+command = "npm run build"
+watch_dir = "src"
+
+[build.upload]
+format = "modules"
+main = "./index.mjs"
+dir = "dist"
+
+# Configure triggers
+[triggers]
+crons = []
 
 # D1 Database binding
 [[d1_databases]]
@@ -38,13 +77,6 @@ bucket_name = "gateway-storage"  # Replace with your actual bucket name
 [[services]]
 binding = "TELLER_CERT"
 service = "teller-service"  # Replace with your actual service name
-
-# AI binding - correct format
-[ai]
-binding = "AI"
-
-[triggers]
-crons = []
 
 [env.production]
 vars = { ENVIRONMENT = "production" }

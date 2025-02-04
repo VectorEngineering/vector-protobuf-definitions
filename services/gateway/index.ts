@@ -5,6 +5,7 @@ import type { Env } from "./types";
 import { LeadScrapingServiceAPIRouter } from "./routes";
 import type { MiddlewareHandler } from "hono";
 import { OpenAPIHono } from "@hono/zod-openapi";
+import aiRouter from "./routes/ai";
 import { compress } from "hono/compress";
 import { cors } from "hono/cors";
 import { csrf } from "hono/csrf";
@@ -90,7 +91,8 @@ app.openAPIRegistry.registerComponent("securitySchemes", "Bearer", {
 });
 
 // API routes
-app.route("/api", LeadScrapingServiceAPIRouter);
+app.route("/api/v1/core-backend", LeadScrapingServiceAPIRouter);
+app.route("/api/v1/inference", aiRouter);
 
 // Error handling
 app.onError((err, c) => {

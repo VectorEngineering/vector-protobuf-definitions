@@ -6,10 +6,7 @@ import { generate } from './commands/generate.js';
 
 const program = new Command();
 
-program
-  .name('vector')
-  .description('Vector API CLI tool')
-  .version('0.1.0');
+program.name('vector').description('Vector API CLI tool').version('0.1.0');
 
 program
   .command('generate')
@@ -23,4 +20,4 @@ if (!process.argv.slice(2).length) {
   program.outputHelp();
 } else {
   program.parse();
-} 
+}

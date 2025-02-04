@@ -6,16 +6,16 @@ import { bearerAuth } from "hono/bearer-auth";
 
 // Define privilege levels
 export enum TokenPrivilege {
-  READ = 'read',
-  WRITE = 'write',
-  ADMIN = 'admin'
+  READ = "read",
+  WRITE = "write",
+  ADMIN = "admin",
 }
 
 // Define allowed methods for each privilege level
 const privilegeMethods = {
-  [TokenPrivilege.READ]: ['GET'],
-  [TokenPrivilege.WRITE]: ['GET', 'POST', 'PUT', 'PATCH'],
-  [TokenPrivilege.ADMIN]: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
+  [TokenPrivilege.READ]: ["GET"],
+  [TokenPrivilege.WRITE]: ["GET", "POST", "PUT", "PATCH"],
+  [TokenPrivilege.ADMIN]: ["GET", "POST", "PUT", "PATCH", "DELETE"],
 };
 
 export const auth: MiddlewareHandler<Env> = async (c: Context, next: Next) => {
@@ -29,7 +29,7 @@ export const auth: MiddlewareHandler<Env> = async (c: Context, next: Next) => {
     try {
       // Verify the bearer token
       const bearer = bearerAuth({
-        token: token // Pass the token to verify against
+        token: token, // Pass the token to verify against
       });
 
       await bearer(c, next);
@@ -48,7 +48,7 @@ export const auth: MiddlewareHandler<Env> = async (c: Context, next: Next) => {
 
       if (!allowedMethods.includes(method)) {
         throw new HTTPException(403, {
-          message: `Insufficient privileges. This token has ${privilege} privileges which don't allow ${method} requests.`
+          message: `Insufficient privileges. This token has ${privilege} privileges which don't allow ${method} requests.`,
         });
       }
 
@@ -60,7 +60,10 @@ export const auth: MiddlewareHandler<Env> = async (c: Context, next: Next) => {
 
   // Fall back to API key authentication
   if (!apiKey) {
-    throw new HTTPException(401, { message: "Missing authentication. Please provide either a Bearer token or API key" });
+    throw new HTTPException(401, {
+      message:
+        "Missing authentication. Please provide either a Bearer token or API key",
+    });
   }
 
   // Validate API key
@@ -70,4 +73,4 @@ export const auth: MiddlewareHandler<Env> = async (c: Context, next: Next) => {
 
   // API keys have full privileges by default
   await next();
-}; 
+};

@@ -10,11 +10,11 @@
 
 type ListWorkspacesResponse {
   workspaces: [Workspace!]
-  nextPageToken: String!
+  nextPageNumber: Int!
 }
 
 input ListWorkspacesResponseInput {
     workspaces: [WorkspaceInput]
-    nextPageToken: String!
+    nextPageNumber: Int!
 }
 

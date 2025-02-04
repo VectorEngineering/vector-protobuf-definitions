@@ -242,11 +242,12 @@ paths:
           schema:
             type: integer
             format: int32
-        - name: pageToken
+        - name: pageNumber
           in: query
           required: false
           schema:
-            type: string
+            type: integer
+            format: int32
         - name: filter
           in: query
           required: false
@@ -3634,11 +3635,12 @@ paths:
           schema:
             type: integer
             format: int32
-        - name: pageToken
+        - name: pageNumber
           in: query
           required: false
           schema:
-            type: string
+            type: integer
+            format: int32
       tags:
         - lead-scraper-service
     post:
@@ -4548,11 +4550,12 @@ paths:
           schema:
             type: integer
             format: int32
-        - name: pageToken
+        - name: pageNumber
           in: query
           required: false
           schema:
-            type: string
+            type: integer
+            format: int32
         - name: filter
           in: query
           required: false
@@ -7073,8 +7076,9 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Account"
-        nextPageToken:
-          type: string
+        nextPageNumber:
+          type: integer
+          format: int32
     ListScrapingJobsResponse:
       type: object
       properties:
@@ -7091,8 +7095,9 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/ScrapingWorkflow"
-        nextPageToken:
-          type: string
+        nextPageNumber:
+          type: integer
+          format: int32
     ListWorkspacesResponse:
       type: object
       properties:
@@ -7100,8 +7105,9 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Workspace"
-        nextPageToken:
-          type: string
+        nextPageNumber:
+          type: integer
+          format: int32
     MFAInfo:
       type: object
       properties:

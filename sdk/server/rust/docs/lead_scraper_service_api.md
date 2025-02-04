@@ -447,7 +447,7 @@ Optional parameters are passed through a map[string]interface{}.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page_size** | **i32**|  | 
- **page_token** | **String**|  | 
+ **page_number** | **i32**|  | 
  **filter** | **String**|  | 
 
 ### Return type
@@ -514,7 +514,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **workspace_id** | **String**|  | 
  **page_size** | **i32**|  | 
- **page_token** | **String**|  | 
+ **page_number** | **i32**|  | 
  **filter** | **String**|  | 
 
 ### Return type
@@ -551,7 +551,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **account_id** | **String**|  | 
  **page_size** | **i32**|  | 
- **page_token** | **String**|  | 
+ **page_number** | **i32**|  | 
 
 ### Return type
 

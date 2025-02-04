@@ -422,11 +422,12 @@
                         }
                     },
                     {
-                        "name": "pageToken",
+                        "name": "pageNumber",
                         "in": "query",
                         "required": false,
                         "schema": {
-                            "type": "string"
+                            "type": "integer",
+                            "format": "int32"
                         }
                     },
                     {
@@ -5533,11 +5534,12 @@
                         }
                     },
                     {
-                        "name": "pageToken",
+                        "name": "pageNumber",
                         "in": "query",
                         "required": false,
                         "schema": {
-                            "type": "string"
+                            "type": "integer",
+                            "format": "int32"
                         }
                     }
                 ],
@@ -6910,11 +6912,12 @@
                         }
                     },
                     {
-                        "name": "pageToken",
+                        "name": "pageNumber",
                         "in": "query",
                         "required": false,
                         "schema": {
-                            "type": "string"
+                            "type": "integer",
+                            "format": "int32"
                         }
                     },
                     {
@@ -12857,8 +12860,9 @@
                             "$ref": "#/components/schemas/Account"
                         }
                     },
-                    "nextPageToken": {
-                        "type": "string"
+                    "nextPageNumber": {
+                        "type": "integer",
+                        "format": "int32"
                     }
                 }
             },
@@ -12883,8 +12887,9 @@
                             "$ref": "#/components/schemas/ScrapingWorkflow"
                         }
                     },
-                    "nextPageToken": {
-                        "type": "string"
+                    "nextPageNumber": {
+                        "type": "integer",
+                        "format": "int32"
                     }
                 }
             },
@@ -12897,8 +12902,9 @@
                             "$ref": "#/components/schemas/Workspace"
                         }
                     },
-                    "nextPageToken": {
-                        "type": "string"
+                    "nextPageNumber": {
+                        "type": "integer",
+                        "format": "int32"
                     }
                 }
             },

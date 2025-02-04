@@ -1,19 +1,47 @@
-name = "{{name}}"
-main = "src/index.ts"
+name = "gateway"
+main = "index.ts"
 compatibility_date = "2024-01-01"
 
 [vars]
-API_KEY = ""
-SECRET = ""
+API_KEY = ""  # Add your API key here
+SECRET = ""   # Add your secret here
+ENVIRONMENT = "development"
 
+# D1 Database binding
 [[d1_databases]]
 binding = "USERS_DATABASE"
 database_name = "users"
-database_id = ""
+database_id = ""  # Add your D1 database ID from Cloudflare Dashboard
 
+# KV Namespace bindings
 [[kv_namespaces]]
 binding = "AUTH_STORE"
-id = ""
+preview_id = "example_id_1"  # Add preview ID for local development
+id = ""  # Add production ID from Cloudflare Dashboard
+
+[[kv_namespaces]]
+binding = "ENRICH_KV"
+preview_id = "example_id_2"  # Add preview ID for local development
+id = ""  # Add production ID from Cloudflare Dashboard
+
+[[kv_namespaces]]
+binding = "KV"
+preview_id = "example_id_3"  # Add preview ID for local development
+id = ""  # Add production ID from Cloudflare Dashboard
+
+# R2 Bucket binding
+[[r2_buckets]]
+binding = "STORAGE"
+bucket_name = "gateway-storage"  # Replace with your actual bucket name
+
+# Service binding for TELLER_CERT
+[[services]]
+binding = "TELLER_CERT"
+service = "teller-service"  # Replace with your actual service name
+
+# AI binding - correct format
+[ai]
+binding = "AI"
 
 [triggers]
 crons = []

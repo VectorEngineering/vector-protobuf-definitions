@@ -5182,7 +5182,7 @@ impl<S, C> Api<C> for Client<S, C> where
     async fn list_accounts(
         &self,
         param_page_size: Option<i32>,
-        param_page_token: Option<String>,
+        param_page_number: Option<i32>,
         param_filter: Option<String>,
         context: &C) -> Result<ListAccountsResponse, ApiError>
     {
@@ -5199,9 +5199,9 @@ impl<S, C> Api<C> for Client<S, C> where
                 query_string.append_pair("pageSize",
                     &param_page_size.to_string());
             }
-            if let Some(param_page_token) = param_page_token {
-                query_string.append_pair("pageToken",
-                    &param_page_token);
+            if let Some(param_page_number) = param_page_number {
+                query_string.append_pair("pageNumber",
+                    &param_page_number.to_string());
             }
             if let Some(param_filter) = param_filter {
                 query_string.append_pair("filter",
@@ -5865,7 +5865,7 @@ impl<S, C> Api<C> for Client<S, C> where
         &self,
         param_workspace_id: String,
         param_page_size: Option<i32>,
-        param_page_token: Option<String>,
+        param_page_number: Option<i32>,
         param_filter: Option<String>,
         context: &C) -> Result<ListWorkflowsResponse, ApiError>
     {
@@ -5883,9 +5883,9 @@ impl<S, C> Api<C> for Client<S, C> where
                 query_string.append_pair("pageSize",
                     &param_page_size.to_string());
             }
-            if let Some(param_page_token) = param_page_token {
-                query_string.append_pair("pageToken",
-                    &param_page_token);
+            if let Some(param_page_number) = param_page_number {
+                query_string.append_pair("pageNumber",
+                    &param_page_number.to_string());
             }
             if let Some(param_filter) = param_filter {
                 query_string.append_pair("filter",
@@ -6211,7 +6211,7 @@ impl<S, C> Api<C> for Client<S, C> where
         &self,
         param_account_id: Option<String>,
         param_page_size: Option<i32>,
-        param_page_token: Option<String>,
+        param_page_number: Option<i32>,
         context: &C) -> Result<ListWorkspacesResponse, ApiError>
     {
         let mut client_service = self.client_service.clone();
@@ -6231,9 +6231,9 @@ impl<S, C> Api<C> for Client<S, C> where
                 query_string.append_pair("pageSize",
                     &param_page_size.to_string());
             }
-            if let Some(param_page_token) = param_page_token {
-                query_string.append_pair("pageToken",
-                    &param_page_token);
+            if let Some(param_page_number) = param_page_number {
+                query_string.append_pair("pageNumber",
+                    &param_page_number.to_string());
             }
             query_string.finish()
         };

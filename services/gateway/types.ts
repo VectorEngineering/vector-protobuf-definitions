@@ -1,6 +1,6 @@
-import { Ai, Fetcher, KVNamespace, R2Bucket } from '@cloudflare/workers-types';
+import { Ai, Fetcher, KVNamespace, R2Bucket } from "@cloudflare/workers-types";
 
-import { Env as HonoEnv } from 'hono'
+import { Env as HonoEnv } from "hono";
 
 export interface Env extends HonoEnv {
   // Environment variables
@@ -11,4 +11,4 @@ export interface Env extends HonoEnv {
 }
 
 // Export generated types
-export * from './client'; 
+export * from "./client";

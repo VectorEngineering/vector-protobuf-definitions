@@ -14,26 +14,26 @@ class ListAccountsResponse(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, accounts=None, next_page_token=None):  # noqa: E501
+    def __init__(self, accounts=None, next_page_number=None):  # noqa: E501
         """ListAccountsResponse - a model defined in OpenAPI
 
         :param accounts: The accounts of this ListAccountsResponse.  # noqa: E501
         :type accounts: List[Account]
-        :param next_page_token: The next_page_token of this ListAccountsResponse.  # noqa: E501
-        :type next_page_token: str
+        :param next_page_number: The next_page_number of this ListAccountsResponse.  # noqa: E501
+        :type next_page_number: int
         """
         self.openapi_types = {
             'accounts': List[Account],
-            'next_page_token': str
+            'next_page_number': int
         }
 
         self.attribute_map = {
             'accounts': 'accounts',
-            'next_page_token': 'nextPageToken'
+            'next_page_number': 'nextPageNumber'
         }
 
         self._accounts = accounts
-        self._next_page_token = next_page_token
+        self._next_page_number = next_page_number
 
     @classmethod
     def from_dict(cls, dikt) -> 'ListAccountsResponse':
@@ -68,22 +68,22 @@ class ListAccountsResponse(Model):
         self._accounts = accounts
 
     @property
-    def next_page_token(self) -> str:
-        """Gets the next_page_token of this ListAccountsResponse.
+    def next_page_number(self) -> int:
+        """Gets the next_page_number of this ListAccountsResponse.
 
 
-        :return: The next_page_token of this ListAccountsResponse.
-        :rtype: str
+        :return: The next_page_number of this ListAccountsResponse.
+        :rtype: int
         """
-        return self._next_page_token
+        return self._next_page_number
 
-    @next_page_token.setter
-    def next_page_token(self, next_page_token: str):
-        """Sets the next_page_token of this ListAccountsResponse.
+    @next_page_number.setter
+    def next_page_number(self, next_page_number: int):
+        """Sets the next_page_number of this ListAccountsResponse.
 
 
-        :param next_page_token: The next_page_token of this ListAccountsResponse.
-        :type next_page_token: str
+        :param next_page_number: The next_page_number of this ListAccountsResponse.
+        :type next_page_number: int
         """
 
-        self._next_page_token = next_page_token
+        self._next_page_number = next_page_number

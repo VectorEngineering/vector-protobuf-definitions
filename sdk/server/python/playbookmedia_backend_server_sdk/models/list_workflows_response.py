@@ -14,26 +14,26 @@ class ListWorkflowsResponse(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, workflows=None, next_page_token=None):  # noqa: E501
+    def __init__(self, workflows=None, next_page_number=None):  # noqa: E501
         """ListWorkflowsResponse - a model defined in OpenAPI
 
         :param workflows: The workflows of this ListWorkflowsResponse.  # noqa: E501
         :type workflows: List[ScrapingWorkflow]
-        :param next_page_token: The next_page_token of this ListWorkflowsResponse.  # noqa: E501
-        :type next_page_token: str
+        :param next_page_number: The next_page_number of this ListWorkflowsResponse.  # noqa: E501
+        :type next_page_number: int
         """
         self.openapi_types = {
             'workflows': List[ScrapingWorkflow],
-            'next_page_token': str
+            'next_page_number': int
         }
 
         self.attribute_map = {
             'workflows': 'workflows',
-            'next_page_token': 'nextPageToken'
+            'next_page_number': 'nextPageNumber'
         }
 
         self._workflows = workflows
-        self._next_page_token = next_page_token
+        self._next_page_number = next_page_number
 
     @classmethod
     def from_dict(cls, dikt) -> 'ListWorkflowsResponse':
@@ -68,22 +68,22 @@ class ListWorkflowsResponse(Model):
         self._workflows = workflows
 
     @property
-    def next_page_token(self) -> str:
-        """Gets the next_page_token of this ListWorkflowsResponse.
+    def next_page_number(self) -> int:
+        """Gets the next_page_number of this ListWorkflowsResponse.
 
 
-        :return: The next_page_token of this ListWorkflowsResponse.
-        :rtype: str
+        :return: The next_page_number of this ListWorkflowsResponse.
+        :rtype: int
         """
-        return self._next_page_token
+        return self._next_page_number
 
-    @next_page_token.setter
-    def next_page_token(self, next_page_token: str):
-        """Sets the next_page_token of this ListWorkflowsResponse.
+    @next_page_number.setter
+    def next_page_number(self, next_page_number: int):
+        """Sets the next_page_number of this ListWorkflowsResponse.
 
 
-        :param next_page_token: The next_page_token of this ListWorkflowsResponse.
-        :type next_page_token: str
+        :param next_page_number: The next_page_number of this ListWorkflowsResponse.
+        :type next_page_number: int
         """
 
-        self._next_page_token = next_page_token
+        self._next_page_number = next_page_number

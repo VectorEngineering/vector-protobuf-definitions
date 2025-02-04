@@ -10,11 +10,11 @@
 
 type ListWorkflowsResponse {
   workflows: [ScrapingWorkflow!]
-  nextPageToken: String!
+  nextPageNumber: Int!
 }
 
 input ListWorkflowsResponseInput {
     workflows: [ScrapingWorkflowInput]
-    nextPageToken: String!
+    nextPageNumber: Int!
 }
 

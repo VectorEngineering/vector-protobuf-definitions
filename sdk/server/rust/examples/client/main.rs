@@ -274,7 +274,7 @@ fn main() {
         Some("ListAccounts") => {
             let result = rt.block_on(client.list_accounts(
                   Some(56),
-                  Some("page_token_example".to_string()),
+                  Some(56),
                   Some("filter_example".to_string())
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
@@ -291,7 +291,7 @@ fn main() {
             let result = rt.block_on(client.list_workflows(
                   "workspace_id_example".to_string(),
                   Some(56),
-                  Some("page_token_example".to_string()),
+                  Some(56),
                   Some("filter_example".to_string())
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
@@ -300,7 +300,7 @@ fn main() {
             let result = rt.block_on(client.list_workspaces(
                   Some("account_id_example".to_string()),
                   Some(56),
-                  Some("page_token_example".to_string())
+                  Some(56)
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },

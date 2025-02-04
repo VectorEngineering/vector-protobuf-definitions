@@ -219,10 +219,10 @@ type Query {
   # List all accounts
   # Retrieves a list of accounts
   # @param Int! pageSize 
-  # @param String! pageToken 
+  # @param Int! pageNumber 
   # @param String! filter 
   # @return [ListAccountsResponse]
-  ListAccounts(pageSize: Int!, pageToken: String!, filter: String!): ListAccountsResponse
+  ListAccounts(pageSize: Int!, pageNumber: Int!, filter: String!): ListAccountsResponse
   # Get all jobs
   # This endpoint retrieves all Google Maps scraping jobs
   # @param String! userId 
@@ -234,16 +234,16 @@ type Query {
   # Retrieves a list of workflows for a given workspace
   # @param String! workspaceId 
   # @param Int! pageSize 
-  # @param String! pageToken 
+  # @param Int! pageNumber 
   # @param String! filter 
   # @return [ListWorkflowsResponse]
-  ListWorkflows(workspaceId: String!, pageSize: Int!, pageToken: String!, filter: String!): ListWorkflowsResponse
+  ListWorkflows(workspaceId: String!, pageSize: Int!, pageNumber: Int!, filter: String!): ListWorkflowsResponse
   # List workspaces
   # Retrieves a list of workspaces for a given account
   # @param String! accountId 
   # @param Int! pageSize 
-  # @param String! pageToken 
+  # @param Int! pageNumber 
   # @return [ListWorkspacesResponse]
-  ListWorkspaces(accountId: String!, pageSize: Int!, pageToken: String!): ListWorkspacesResponse
+  ListWorkspaces(accountId: String!, pageSize: Int!, pageNumber: Int!): ListWorkspacesResponse
 }
 

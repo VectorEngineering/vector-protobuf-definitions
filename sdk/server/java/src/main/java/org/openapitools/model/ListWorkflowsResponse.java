@@ -22,13 +22,13 @@ import javax.annotation.Generated;
  * ListWorkflowsResponse
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T15:12:04.029446-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T20:00:13.934981-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ListWorkflowsResponse {
 
   @Valid
   private List<@Valid ScrapingWorkflow> workflows = new ArrayList<>();
 
-  private String nextPageToken;
+  private Integer nextPageNumber;
 
   public ListWorkflowsResponse workflows(List<@Valid ScrapingWorkflow> workflows) {
     this.workflows = workflows;
@@ -58,24 +58,24 @@ public class ListWorkflowsResponse {
     this.workflows = workflows;
   }
 
-  public ListWorkflowsResponse nextPageToken(String nextPageToken) {
-    this.nextPageToken = nextPageToken;
+  public ListWorkflowsResponse nextPageNumber(Integer nextPageNumber) {
+    this.nextPageNumber = nextPageNumber;
     return this;
   }
 
   /**
-   * Get nextPageToken
-   * @return nextPageToken
+   * Get nextPageNumber
+   * @return nextPageNumber
    */
   
-  @Schema(name = "nextPageToken", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("nextPageToken")
-  public String getNextPageToken() {
-    return nextPageToken;
+  @Schema(name = "nextPageNumber", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("nextPageNumber")
+  public Integer getNextPageNumber() {
+    return nextPageNumber;
   }
 
-  public void setNextPageToken(String nextPageToken) {
-    this.nextPageToken = nextPageToken;
+  public void setNextPageNumber(Integer nextPageNumber) {
+    this.nextPageNumber = nextPageNumber;
   }
 
   @Override
@@ -88,12 +88,12 @@ public class ListWorkflowsResponse {
     }
     ListWorkflowsResponse listWorkflowsResponse = (ListWorkflowsResponse) o;
     return Objects.equals(this.workflows, listWorkflowsResponse.workflows) &&
-        Objects.equals(this.nextPageToken, listWorkflowsResponse.nextPageToken);
+        Objects.equals(this.nextPageNumber, listWorkflowsResponse.nextPageNumber);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(workflows, nextPageToken);
+    return Objects.hash(workflows, nextPageNumber);
   }
 
   @Override
@@ -101,7 +101,7 @@ public class ListWorkflowsResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class ListWorkflowsResponse {\n");
     sb.append("    workflows: ").append(toIndentedString(workflows)).append("\n");
-    sb.append("    nextPageToken: ").append(toIndentedString(nextPageToken)).append("\n");
+    sb.append("    nextPageNumber: ").append(toIndentedString(nextPageNumber)).append("\n");
     sb.append("}");
     return sb.toString();
   }

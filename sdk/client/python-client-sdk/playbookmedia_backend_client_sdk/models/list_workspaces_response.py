@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from playbookmedia_backend_client_sdk.models.workspace import Workspace
 from typing import Optional, Set
@@ -29,8 +29,8 @@ class ListWorkspacesResponse(BaseModel):
     ListWorkspacesResponse
     """ # noqa: E501
     workspaces: Optional[List[Workspace]] = None
-    next_page_token: Optional[StrictStr] = Field(default=None, alias="nextPageToken")
-    __properties: ClassVar[List[str]] = ["workspaces", "nextPageToken"]
+    next_page_number: Optional[StrictInt] = Field(default=None, alias="nextPageNumber")
+    __properties: ClassVar[List[str]] = ["workspaces", "nextPageNumber"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,7 +91,7 @@ class ListWorkspacesResponse(BaseModel):
 
         _obj = cls.model_validate({
             "workspaces": [Workspace.from_dict(_item) for _item in obj["workspaces"]] if obj.get("workspaces") is not None else None,
-            "nextPageToken": obj.get("nextPageToken")
+            "nextPageNumber": obj.get("nextPageNumber")
         })
         return _obj
 

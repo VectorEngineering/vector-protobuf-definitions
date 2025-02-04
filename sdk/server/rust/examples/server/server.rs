@@ -309,11 +309,11 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
     async fn list_accounts(
         &self,
         page_size: Option<i32>,
-        page_token: Option<String>,
+        page_number: Option<i32>,
         filter: Option<String>,
         context: &C) -> Result<ListAccountsResponse, ApiError>
     {
-        info!("list_accounts({:?}, {:?}, {:?}) - X-Span-ID: {:?}", page_size, page_token, filter, context.get().0.clone());
+        info!("list_accounts({:?}, {:?}, {:?}) - X-Span-ID: {:?}", page_size, page_number, filter, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -334,11 +334,11 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         &self,
         workspace_id: String,
         page_size: Option<i32>,
-        page_token: Option<String>,
+        page_number: Option<i32>,
         filter: Option<String>,
         context: &C) -> Result<ListWorkflowsResponse, ApiError>
     {
-        info!("list_workflows(\"{}\", {:?}, {:?}, {:?}) - X-Span-ID: {:?}", workspace_id, page_size, page_token, filter, context.get().0.clone());
+        info!("list_workflows(\"{}\", {:?}, {:?}, {:?}) - X-Span-ID: {:?}", workspace_id, page_size, page_number, filter, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -347,10 +347,10 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         &self,
         account_id: Option<String>,
         page_size: Option<i32>,
-        page_token: Option<String>,
+        page_number: Option<i32>,
         context: &C) -> Result<ListWorkspacesResponse, ApiError>
     {
-        info!("list_workspaces({:?}, {:?}, {:?}) - X-Span-ID: {:?}", account_id, page_size, page_token, context.get().0.clone());
+        info!("list_workspaces({:?}, {:?}, {:?}) - X-Span-ID: {:?}", account_id, page_size, page_number, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

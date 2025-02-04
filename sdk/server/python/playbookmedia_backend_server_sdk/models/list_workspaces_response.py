@@ -14,26 +14,26 @@ class ListWorkspacesResponse(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, workspaces=None, next_page_token=None):  # noqa: E501
+    def __init__(self, workspaces=None, next_page_number=None):  # noqa: E501
         """ListWorkspacesResponse - a model defined in OpenAPI
 
         :param workspaces: The workspaces of this ListWorkspacesResponse.  # noqa: E501
         :type workspaces: List[Workspace]
-        :param next_page_token: The next_page_token of this ListWorkspacesResponse.  # noqa: E501
-        :type next_page_token: str
+        :param next_page_number: The next_page_number of this ListWorkspacesResponse.  # noqa: E501
+        :type next_page_number: int
         """
         self.openapi_types = {
             'workspaces': List[Workspace],
-            'next_page_token': str
+            'next_page_number': int
         }
 
         self.attribute_map = {
             'workspaces': 'workspaces',
-            'next_page_token': 'nextPageToken'
+            'next_page_number': 'nextPageNumber'
         }
 
         self._workspaces = workspaces
-        self._next_page_token = next_page_token
+        self._next_page_number = next_page_number
 
     @classmethod
     def from_dict(cls, dikt) -> 'ListWorkspacesResponse':
@@ -68,22 +68,22 @@ class ListWorkspacesResponse(Model):
         self._workspaces = workspaces
 
     @property
-    def next_page_token(self) -> str:
-        """Gets the next_page_token of this ListWorkspacesResponse.
+    def next_page_number(self) -> int:
+        """Gets the next_page_number of this ListWorkspacesResponse.
 
 
-        :return: The next_page_token of this ListWorkspacesResponse.
-        :rtype: str
+        :return: The next_page_number of this ListWorkspacesResponse.
+        :rtype: int
         """
-        return self._next_page_token
+        return self._next_page_number
 
-    @next_page_token.setter
-    def next_page_token(self, next_page_token: str):
-        """Sets the next_page_token of this ListWorkspacesResponse.
+    @next_page_number.setter
+    def next_page_number(self, next_page_number: int):
+        """Sets the next_page_number of this ListWorkspacesResponse.
 
 
-        :param next_page_token: The next_page_token of this ListWorkspacesResponse.
-        :type next_page_token: str
+        :param next_page_number: The next_page_number of this ListWorkspacesResponse.
+        :type next_page_number: int
         """
 
-        self._next_page_token = next_page_token
+        self._next_page_number = next_page_number

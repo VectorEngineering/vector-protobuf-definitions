@@ -275,15 +275,15 @@ def lead_scraper_service_create_workflow(workspace_id, create_workflow_body):  #
     return 'do some magic!'
 
 
-def list_accounts(page_size=None, page_token=None, filter=None):  # noqa: E501
+def list_accounts(page_size=None, page_number=None, filter=None):  # noqa: E501
     """List all accounts
 
     Retrieves a list of accounts # noqa: E501
 
     :param page_size: 
     :type page_size: int
-    :param page_token: 
-    :type page_token: str
+    :param page_number: 
+    :type page_number: int
     :param filter: 
     :type filter: str
 
@@ -309,7 +309,7 @@ def list_scraping_jobs(user_id, org_id, tenant_id):  # noqa: E501
     return 'do some magic!'
 
 
-def list_workflows(workspace_id, page_size=None, page_token=None, filter=None):  # noqa: E501
+def list_workflows(workspace_id, page_size=None, page_number=None, filter=None):  # noqa: E501
     """List workflows
 
     Retrieves a list of workflows for a given workspace # noqa: E501
@@ -318,8 +318,8 @@ def list_workflows(workspace_id, page_size=None, page_token=None, filter=None): 
     :type workspace_id: str
     :param page_size: 
     :type page_size: int
-    :param page_token: 
-    :type page_token: str
+    :param page_number: 
+    :type page_number: int
     :param filter: 
     :type filter: str
 
@@ -328,7 +328,7 @@ def list_workflows(workspace_id, page_size=None, page_token=None, filter=None): 
     return 'do some magic!'
 
 
-def list_workspaces(account_id=None, page_size=None, page_token=None):  # noqa: E501
+def list_workspaces(account_id=None, page_size=None, page_number=None):  # noqa: E501
     """List workspaces
 
     Retrieves a list of workspaces for a given account # noqa: E501
@@ -337,8 +337,8 @@ def list_workspaces(account_id=None, page_size=None, page_token=None):  # noqa: 
     :type account_id: str
     :param page_size: 
     :type page_size: int
-    :param page_token: 
-    :type page_token: str
+    :param page_number: 
+    :type page_number: int
 
     :rtype: Union[ListWorkspacesResponse, Tuple[ListWorkspacesResponse, int], Tuple[ListWorkspacesResponse, int, Dict[str, str]]
     """

@@ -4412,19 +4412,19 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                     },
                     None => None,
                 };
-                let param_page_token = query_params.iter().filter(|e| e.0 == "pageToken").map(|e| e.1.clone())
+                let param_page_number = query_params.iter().filter(|e| e.0 == "pageNumber").map(|e| e.1.clone())
                     .next();
-                let param_page_token = match param_page_token {
-                    Some(param_page_token) => {
-                        let param_page_token =
-                            <String as std::str::FromStr>::from_str
-                                (&param_page_token);
-                        match param_page_token {
-                            Ok(param_page_token) => Some(param_page_token),
+                let param_page_number = match param_page_number {
+                    Some(param_page_number) => {
+                        let param_page_number =
+                            <i32 as std::str::FromStr>::from_str
+                                (&param_page_number);
+                        match param_page_number {
+                            Ok(param_page_number) => Some(param_page_number),
                             Err(e) => return Ok(Response::builder()
                                 .status(StatusCode::BAD_REQUEST)
-                                .body(Body::from(format!("Couldn't parse query parameter pageToken - doesn't match schema: {}", e)))
-                                .expect("Unable to create Bad Request response for invalid query parameter pageToken")),
+                                .body(Body::from(format!("Couldn't parse query parameter pageNumber - doesn't match schema: {}", e)))
+                                .expect("Unable to create Bad Request response for invalid query parameter pageNumber")),
                         }
                     },
                     None => None,
@@ -4449,7 +4449,7 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
                                 let result = api_impl.list_accounts(
                                             param_page_size,
-                                            param_page_token,
+                                            param_page_number,
                                             param_filter,
                                         &context
                                     ).await;
@@ -5038,19 +5038,19 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                     },
                     None => None,
                 };
-                let param_page_token = query_params.iter().filter(|e| e.0 == "pageToken").map(|e| e.1.clone())
+                let param_page_number = query_params.iter().filter(|e| e.0 == "pageNumber").map(|e| e.1.clone())
                     .next();
-                let param_page_token = match param_page_token {
-                    Some(param_page_token) => {
-                        let param_page_token =
-                            <String as std::str::FromStr>::from_str
-                                (&param_page_token);
-                        match param_page_token {
-                            Ok(param_page_token) => Some(param_page_token),
+                let param_page_number = match param_page_number {
+                    Some(param_page_number) => {
+                        let param_page_number =
+                            <i32 as std::str::FromStr>::from_str
+                                (&param_page_number);
+                        match param_page_number {
+                            Ok(param_page_number) => Some(param_page_number),
                             Err(e) => return Ok(Response::builder()
                                 .status(StatusCode::BAD_REQUEST)
-                                .body(Body::from(format!("Couldn't parse query parameter pageToken - doesn't match schema: {}", e)))
-                                .expect("Unable to create Bad Request response for invalid query parameter pageToken")),
+                                .body(Body::from(format!("Couldn't parse query parameter pageNumber - doesn't match schema: {}", e)))
+                                .expect("Unable to create Bad Request response for invalid query parameter pageNumber")),
                         }
                     },
                     None => None,
@@ -5076,7 +5076,7 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                                 let result = api_impl.list_workflows(
                                             param_workspace_id,
                                             param_page_size,
-                                            param_page_token,
+                                            param_page_number,
                                             param_filter,
                                         &context
                                     ).await;
@@ -5347,19 +5347,19 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                     },
                     None => None,
                 };
-                let param_page_token = query_params.iter().filter(|e| e.0 == "pageToken").map(|e| e.1.clone())
+                let param_page_number = query_params.iter().filter(|e| e.0 == "pageNumber").map(|e| e.1.clone())
                     .next();
-                let param_page_token = match param_page_token {
-                    Some(param_page_token) => {
-                        let param_page_token =
-                            <String as std::str::FromStr>::from_str
-                                (&param_page_token);
-                        match param_page_token {
-                            Ok(param_page_token) => Some(param_page_token),
+                let param_page_number = match param_page_number {
+                    Some(param_page_number) => {
+                        let param_page_number =
+                            <i32 as std::str::FromStr>::from_str
+                                (&param_page_number);
+                        match param_page_number {
+                            Ok(param_page_number) => Some(param_page_number),
                             Err(e) => return Ok(Response::builder()
                                 .status(StatusCode::BAD_REQUEST)
-                                .body(Body::from(format!("Couldn't parse query parameter pageToken - doesn't match schema: {}", e)))
-                                .expect("Unable to create Bad Request response for invalid query parameter pageToken")),
+                                .body(Body::from(format!("Couldn't parse query parameter pageNumber - doesn't match schema: {}", e)))
+                                .expect("Unable to create Bad Request response for invalid query parameter pageNumber")),
                         }
                     },
                     None => None,
@@ -5368,7 +5368,7 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                                 let result = api_impl.list_workspaces(
                                             param_account_id,
                                             param_page_size,
-                                            param_page_token,
+                                            param_page_number,
                                         &context
                                     ).await;
                                 let mut response = Response::new(Body::empty());

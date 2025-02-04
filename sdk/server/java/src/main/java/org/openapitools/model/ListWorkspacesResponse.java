@@ -22,13 +22,13 @@ import javax.annotation.Generated;
  * ListWorkspacesResponse
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T15:12:04.029446-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-03T20:00:13.934981-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ListWorkspacesResponse {
 
   @Valid
   private List<@Valid Workspace> workspaces = new ArrayList<>();
 
-  private String nextPageToken;
+  private Integer nextPageNumber;
 
   public ListWorkspacesResponse workspaces(List<@Valid Workspace> workspaces) {
     this.workspaces = workspaces;
@@ -58,24 +58,24 @@ public class ListWorkspacesResponse {
     this.workspaces = workspaces;
   }
 
-  public ListWorkspacesResponse nextPageToken(String nextPageToken) {
-    this.nextPageToken = nextPageToken;
+  public ListWorkspacesResponse nextPageNumber(Integer nextPageNumber) {
+    this.nextPageNumber = nextPageNumber;
     return this;
   }
 
   /**
-   * Get nextPageToken
-   * @return nextPageToken
+   * Get nextPageNumber
+   * @return nextPageNumber
    */
   
-  @Schema(name = "nextPageToken", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("nextPageToken")
-  public String getNextPageToken() {
-    return nextPageToken;
+  @Schema(name = "nextPageNumber", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("nextPageNumber")
+  public Integer getNextPageNumber() {
+    return nextPageNumber;
   }
 
-  public void setNextPageToken(String nextPageToken) {
-    this.nextPageToken = nextPageToken;
+  public void setNextPageNumber(Integer nextPageNumber) {
+    this.nextPageNumber = nextPageNumber;
   }
 
   @Override
@@ -88,12 +88,12 @@ public class ListWorkspacesResponse {
     }
     ListWorkspacesResponse listWorkspacesResponse = (ListWorkspacesResponse) o;
     return Objects.equals(this.workspaces, listWorkspacesResponse.workspaces) &&
-        Objects.equals(this.nextPageToken, listWorkspacesResponse.nextPageToken);
+        Objects.equals(this.nextPageNumber, listWorkspacesResponse.nextPageNumber);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(workspaces, nextPageToken);
+    return Objects.hash(workspaces, nextPageNumber);
   }
 
   @Override
@@ -101,7 +101,7 @@ public class ListWorkspacesResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class ListWorkspacesResponse {\n");
     sb.append("    workspaces: ").append(toIndentedString(workspaces)).append("\n");
-    sb.append("    nextPageToken: ").append(toIndentedString(nextPageToken)).append("\n");
+    sb.append("    nextPageNumber: ").append(toIndentedString(nextPageNumber)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -130,7 +130,7 @@ Create a new workflow
 This endpoint creates a new workflow configuration for a specific workspace  Required parameters: - workspace_id: Parent workspace ID - name: Human-readable workflow name - description: Optional workflow description - parameters: Job parameters for the workflow  Example: &#x60;&#x60;&#x60;json
 <a name="ListAccounts"></a>
 # **ListAccounts**
-> ListAccountsResponse ListAccounts(pageSize, pageToken, filter)
+> ListAccountsResponse ListAccounts(pageSize, pageNumber, filter)
 
 List all accounts
 
@@ -144,14 +144,14 @@ Get all jobs
 This endpoint retrieves all Google Maps scraping jobs
 <a name="ListWorkflows"></a>
 # **ListWorkflows**
-> ListWorkflowsResponse ListWorkflows(workspaceId, pageSize, pageToken, filter)
+> ListWorkflowsResponse ListWorkflows(workspaceId, pageSize, pageNumber, filter)
 
 List workflows
 
 Retrieves a list of workflows for a given workspace
 <a name="ListWorkspaces"></a>
 # **ListWorkspaces**
-> ListWorkspacesResponse ListWorkspaces(accountId, pageSize, pageToken)
+> ListWorkspacesResponse ListWorkspaces(accountId, pageSize, pageNumber)
 
 List workspaces
 

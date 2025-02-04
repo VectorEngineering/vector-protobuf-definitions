@@ -4719,7 +4719,7 @@ class LeadScraperServiceApi:
     async def list_accounts(
         self,
         page_size: Optional[StrictInt] = None,
-        page_token: Optional[StrictStr] = None,
+        page_number: Optional[StrictInt] = None,
         filter: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -4740,8 +4740,8 @@ class LeadScraperServiceApi:
 
         :param page_size:
         :type page_size: int
-        :param page_token:
-        :type page_token: str
+        :param page_number:
+        :type page_number: int
         :param filter:
         :type filter: str
         :param _request_timeout: timeout setting for this request. If one
@@ -4768,7 +4768,7 @@ class LeadScraperServiceApi:
 
         _param = self._list_accounts_serialize(
             page_size=page_size,
-            page_token=page_token,
+            page_number=page_number,
             filter=filter,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4811,7 +4811,7 @@ class LeadScraperServiceApi:
     async def list_accounts_with_http_info(
         self,
         page_size: Optional[StrictInt] = None,
-        page_token: Optional[StrictStr] = None,
+        page_number: Optional[StrictInt] = None,
         filter: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -4832,8 +4832,8 @@ class LeadScraperServiceApi:
 
         :param page_size:
         :type page_size: int
-        :param page_token:
-        :type page_token: str
+        :param page_number:
+        :type page_number: int
         :param filter:
         :type filter: str
         :param _request_timeout: timeout setting for this request. If one
@@ -4860,7 +4860,7 @@ class LeadScraperServiceApi:
 
         _param = self._list_accounts_serialize(
             page_size=page_size,
-            page_token=page_token,
+            page_number=page_number,
             filter=filter,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4903,7 +4903,7 @@ class LeadScraperServiceApi:
     async def list_accounts_without_preload_content(
         self,
         page_size: Optional[StrictInt] = None,
-        page_token: Optional[StrictStr] = None,
+        page_number: Optional[StrictInt] = None,
         filter: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -4924,8 +4924,8 @@ class LeadScraperServiceApi:
 
         :param page_size:
         :type page_size: int
-        :param page_token:
-        :type page_token: str
+        :param page_number:
+        :type page_number: int
         :param filter:
         :type filter: str
         :param _request_timeout: timeout setting for this request. If one
@@ -4952,7 +4952,7 @@ class LeadScraperServiceApi:
 
         _param = self._list_accounts_serialize(
             page_size=page_size,
-            page_token=page_token,
+            page_number=page_number,
             filter=filter,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4990,7 +4990,7 @@ class LeadScraperServiceApi:
     def _list_accounts_serialize(
         self,
         page_size,
-        page_token,
+        page_number,
         filter,
         _request_auth,
         _content_type,
@@ -5016,9 +5016,9 @@ class LeadScraperServiceApi:
             
             _query_params.append(('pageSize', page_size))
             
-        if page_token is not None:
+        if page_number is not None:
             
-            _query_params.append(('pageToken', page_token))
+            _query_params.append(('pageNumber', page_number))
             
         if filter is not None:
             
@@ -5412,7 +5412,7 @@ class LeadScraperServiceApi:
         self,
         workspace_id: StrictStr,
         page_size: Optional[StrictInt] = None,
-        page_token: Optional[StrictStr] = None,
+        page_number: Optional[StrictInt] = None,
         filter: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -5435,8 +5435,8 @@ class LeadScraperServiceApi:
         :type workspace_id: str
         :param page_size:
         :type page_size: int
-        :param page_token:
-        :type page_token: str
+        :param page_number:
+        :type page_number: int
         :param filter:
         :type filter: str
         :param _request_timeout: timeout setting for this request. If one
@@ -5464,7 +5464,7 @@ class LeadScraperServiceApi:
         _param = self._list_workflows_serialize(
             workspace_id=workspace_id,
             page_size=page_size,
-            page_token=page_token,
+            page_number=page_number,
             filter=filter,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5508,7 +5508,7 @@ class LeadScraperServiceApi:
         self,
         workspace_id: StrictStr,
         page_size: Optional[StrictInt] = None,
-        page_token: Optional[StrictStr] = None,
+        page_number: Optional[StrictInt] = None,
         filter: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -5531,8 +5531,8 @@ class LeadScraperServiceApi:
         :type workspace_id: str
         :param page_size:
         :type page_size: int
-        :param page_token:
-        :type page_token: str
+        :param page_number:
+        :type page_number: int
         :param filter:
         :type filter: str
         :param _request_timeout: timeout setting for this request. If one
@@ -5560,7 +5560,7 @@ class LeadScraperServiceApi:
         _param = self._list_workflows_serialize(
             workspace_id=workspace_id,
             page_size=page_size,
-            page_token=page_token,
+            page_number=page_number,
             filter=filter,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5604,7 +5604,7 @@ class LeadScraperServiceApi:
         self,
         workspace_id: StrictStr,
         page_size: Optional[StrictInt] = None,
-        page_token: Optional[StrictStr] = None,
+        page_number: Optional[StrictInt] = None,
         filter: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -5627,8 +5627,8 @@ class LeadScraperServiceApi:
         :type workspace_id: str
         :param page_size:
         :type page_size: int
-        :param page_token:
-        :type page_token: str
+        :param page_number:
+        :type page_number: int
         :param filter:
         :type filter: str
         :param _request_timeout: timeout setting for this request. If one
@@ -5656,7 +5656,7 @@ class LeadScraperServiceApi:
         _param = self._list_workflows_serialize(
             workspace_id=workspace_id,
             page_size=page_size,
-            page_token=page_token,
+            page_number=page_number,
             filter=filter,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5695,7 +5695,7 @@ class LeadScraperServiceApi:
         self,
         workspace_id,
         page_size,
-        page_token,
+        page_number,
         filter,
         _request_auth,
         _content_type,
@@ -5723,9 +5723,9 @@ class LeadScraperServiceApi:
             
             _query_params.append(('pageSize', page_size))
             
-        if page_token is not None:
+        if page_number is not None:
             
-            _query_params.append(('pageToken', page_token))
+            _query_params.append(('pageNumber', page_number))
             
         if filter is not None:
             
@@ -5773,7 +5773,7 @@ class LeadScraperServiceApi:
         self,
         account_id: Optional[StrictStr] = None,
         page_size: Optional[StrictInt] = None,
-        page_token: Optional[StrictStr] = None,
+        page_number: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5795,8 +5795,8 @@ class LeadScraperServiceApi:
         :type account_id: str
         :param page_size:
         :type page_size: int
-        :param page_token:
-        :type page_token: str
+        :param page_number:
+        :type page_number: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5822,7 +5822,7 @@ class LeadScraperServiceApi:
         _param = self._list_workspaces_serialize(
             account_id=account_id,
             page_size=page_size,
-            page_token=page_token,
+            page_number=page_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5865,7 +5865,7 @@ class LeadScraperServiceApi:
         self,
         account_id: Optional[StrictStr] = None,
         page_size: Optional[StrictInt] = None,
-        page_token: Optional[StrictStr] = None,
+        page_number: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5887,8 +5887,8 @@ class LeadScraperServiceApi:
         :type account_id: str
         :param page_size:
         :type page_size: int
-        :param page_token:
-        :type page_token: str
+        :param page_number:
+        :type page_number: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -5914,7 +5914,7 @@ class LeadScraperServiceApi:
         _param = self._list_workspaces_serialize(
             account_id=account_id,
             page_size=page_size,
-            page_token=page_token,
+            page_number=page_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5957,7 +5957,7 @@ class LeadScraperServiceApi:
         self,
         account_id: Optional[StrictStr] = None,
         page_size: Optional[StrictInt] = None,
-        page_token: Optional[StrictStr] = None,
+        page_number: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5979,8 +5979,8 @@ class LeadScraperServiceApi:
         :type account_id: str
         :param page_size:
         :type page_size: int
-        :param page_token:
-        :type page_token: str
+        :param page_number:
+        :type page_number: int
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6006,7 +6006,7 @@ class LeadScraperServiceApi:
         _param = self._list_workspaces_serialize(
             account_id=account_id,
             page_size=page_size,
-            page_token=page_token,
+            page_number=page_number,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6044,7 +6044,7 @@ class LeadScraperServiceApi:
         self,
         account_id,
         page_size,
-        page_token,
+        page_number,
         _request_auth,
         _content_type,
         _headers,
@@ -6073,9 +6073,9 @@ class LeadScraperServiceApi:
             
             _query_params.append(('pageSize', page_size))
             
-        if page_token is not None:
+        if page_number is not None:
             
-            _query_params.append(('pageToken', page_token))
+            _query_params.append(('pageNumber', page_number))
             
         # process the header parameters
         # process the form parameters

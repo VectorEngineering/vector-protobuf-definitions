@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **workflows** | [**List[ScrapingWorkflow]**](ScrapingWorkflow.md) |  | [optional] 
-**next_page_token** | **str** |  | [optional] 
+**next_page_number** | **int** |  | [optional] 
 
 ## Example
 

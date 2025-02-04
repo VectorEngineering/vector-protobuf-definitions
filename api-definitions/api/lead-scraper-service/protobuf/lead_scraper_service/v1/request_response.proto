@@ -180,13 +180,13 @@ message DeleteAccountRequest {
 
 message ListAccountsRequest {
     int32 page_size = 1 [(validate.rules).int32 = {gte: 1, lte: 100}];
-    string page_token = 2;
+    int32 page_number = 2;
     string filter = 3;
 }
 
 message ListAccountsResponse {
     repeated Account accounts = 1;
-    string next_page_token = 2;
+    int32 next_page_number = 2;
 }
 
 // Workspace Management Messages
@@ -214,12 +214,12 @@ message DeleteWorkspaceRequest {
 message ListWorkspacesRequest {
     string account_id = 1 [(validate.rules).string.min_len = 1];
     int32 page_size = 2 [(validate.rules).int32 = {gte: 1, lte: 100}];
-    string page_token = 3;
+    int32 page_number = 3;
 }
 
 message ListWorkspacesResponse {
     repeated Workspace workspaces = 1;
-    string next_page_token = 2;
+    int32 next_page_number = 2;
 }
 
 // GetAccountUsageRequest represents a request to get account usage details
@@ -264,13 +264,13 @@ message UpdateWorkflowRequest {
 message ListWorkflowsRequest {
     string workspace_id = 1 [(validate.rules).string.min_len = 1];
     int32 page_size = 2 [(validate.rules).int32 = {gte: 1, lte: 100}];
-    string page_token = 3;
+    int32 page_number = 3;
     string filter = 4;
 }
 
 message ListWorkflowsResponse {
     repeated ScrapingWorkflow workflows = 1;
-    string next_page_token = 2;
+    int32 next_page_number = 2;
 }
 
 message TriggerWorkflowRequest {

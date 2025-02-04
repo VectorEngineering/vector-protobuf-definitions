@@ -1997,7 +1997,7 @@ func (m *ListAccountsRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	// no validation rules for PageToken
+	// no validation rules for PageNumber
 
 	// no validation rules for Filter
 
@@ -2137,7 +2137,7 @@ func (m *ListAccountsResponse) validate(all bool) error {
 
 	}
 
-	// no validation rules for NextPageToken
+	// no validation rules for NextPageNumber
 
 	if len(errors) > 0 {
 		return ListAccountsResponseMultiError(errors)
@@ -2915,7 +2915,7 @@ func (m *ListWorkspacesRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	// no validation rules for PageToken
+	// no validation rules for PageNumber
 
 	if len(errors) > 0 {
 		return ListWorkspacesRequestMultiError(errors)
@@ -3053,7 +3053,7 @@ func (m *ListWorkspacesResponse) validate(all bool) error {
 
 	}
 
-	// no validation rules for NextPageToken
+	// no validation rules for NextPageNumber
 
 	if len(errors) > 0 {
 		return ListWorkspacesResponseMultiError(errors)
@@ -4123,7 +4123,7 @@ func (m *ListWorkflowsRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	// no validation rules for PageToken
+	// no validation rules for PageNumber
 
 	// no validation rules for Filter
 
@@ -4263,7 +4263,7 @@ func (m *ListWorkflowsResponse) validate(all bool) error {
 
 	}
 
-	// no validation rules for NextPageToken
+	// no validation rules for NextPageNumber
 
 	if len(errors) > 0 {
 		return ListWorkflowsResponseMultiError(errors)

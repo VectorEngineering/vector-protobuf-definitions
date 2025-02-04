@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
 from playbookmedia_backend_client_sdk.models.account import Account
 from typing import Optional, Set
@@ -29,8 +29,8 @@ class ListAccountsResponse(BaseModel):
     ListAccountsResponse
     """ # noqa: E501
     accounts: Optional[List[Account]] = None
-    next_page_token: Optional[StrictStr] = Field(default=None, alias="nextPageToken")
-    __properties: ClassVar[List[str]] = ["accounts", "nextPageToken"]
+    next_page_number: Optional[StrictInt] = Field(default=None, alias="nextPageNumber")
+    __properties: ClassVar[List[str]] = ["accounts", "nextPageNumber"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,7 +91,7 @@ class ListAccountsResponse(BaseModel):
 
         _obj = cls.model_validate({
             "accounts": [Account.from_dict(_item) for _item in obj["accounts"]] if obj.get("accounts") is not None else None,
-            "nextPageToken": obj.get("nextPageToken")
+            "nextPageNumber": obj.get("nextPageNumber")
         })
         return _obj
 

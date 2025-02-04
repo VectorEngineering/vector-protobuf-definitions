@@ -1269,7 +1269,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_accounts**
-> ListAccountsResponse list_accounts(page_size=page_size, page_token=page_token, filter=filter)
+> ListAccountsResponse list_accounts(page_size=page_size, page_number=page_number, filter=filter)
 
 List all accounts
 
@@ -1296,12 +1296,12 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
     # Create an instance of the API class
     api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
     page_size = 56 # int |  (optional)
-    page_token = 'page_token_example' # str |  (optional)
+    page_number = 56 # int |  (optional)
     filter = 'filter_example' # str |  (optional)
 
     try:
         # List all accounts
-        api_response = await api_instance.list_accounts(page_size=page_size, page_token=page_token, filter=filter)
+        api_response = await api_instance.list_accounts(page_size=page_size, page_number=page_number, filter=filter)
         print("The response of LeadScraperServiceApi->list_accounts:\n")
         pprint(api_response)
     except Exception as e:
@@ -1316,7 +1316,7 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **page_size** | **int**|  | [optional] 
- **page_token** | **str**|  | [optional] 
+ **page_number** | **int**|  | [optional] 
  **filter** | **str**|  | [optional] 
 
 ### Return type
@@ -1449,7 +1449,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_workflows**
-> ListWorkflowsResponse list_workflows(workspace_id, page_size=page_size, page_token=page_token, filter=filter)
+> ListWorkflowsResponse list_workflows(workspace_id, page_size=page_size, page_number=page_number, filter=filter)
 
 List workflows
 
@@ -1477,12 +1477,12 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
     api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
     workspace_id = 'workspace_id_example' # str | 
     page_size = 56 # int |  (optional)
-    page_token = 'page_token_example' # str |  (optional)
+    page_number = 56 # int |  (optional)
     filter = 'filter_example' # str |  (optional)
 
     try:
         # List workflows
-        api_response = await api_instance.list_workflows(workspace_id, page_size=page_size, page_token=page_token, filter=filter)
+        api_response = await api_instance.list_workflows(workspace_id, page_size=page_size, page_number=page_number, filter=filter)
         print("The response of LeadScraperServiceApi->list_workflows:\n")
         pprint(api_response)
     except Exception as e:
@@ -1498,7 +1498,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **workspace_id** | **str**|  | 
  **page_size** | **int**|  | [optional] 
- **page_token** | **str**|  | [optional] 
+ **page_number** | **int**|  | [optional] 
  **filter** | **str**|  | [optional] 
 
 ### Return type
@@ -1541,7 +1541,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_workspaces**
-> ListWorkspacesResponse list_workspaces(account_id=account_id, page_size=page_size, page_token=page_token)
+> ListWorkspacesResponse list_workspaces(account_id=account_id, page_size=page_size, page_number=page_number)
 
 List workspaces
 
@@ -1569,11 +1569,11 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
     api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
     account_id = 'account_id_example' # str |  (optional)
     page_size = 56 # int |  (optional)
-    page_token = 'page_token_example' # str |  (optional)
+    page_number = 56 # int |  (optional)
 
     try:
         # List workspaces
-        api_response = await api_instance.list_workspaces(account_id=account_id, page_size=page_size, page_token=page_token)
+        api_response = await api_instance.list_workspaces(account_id=account_id, page_size=page_size, page_number=page_number)
         print("The response of LeadScraperServiceApi->list_workspaces:\n")
         pprint(api_response)
     except Exception as e:
@@ -1589,7 +1589,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **account_id** | **str**|  | [optional] 
  **page_size** | **int**|  | [optional] 
- **page_token** | **str**|  | [optional] 
+ **page_number** | **int**|  | [optional] 
 
 ### Return type
 

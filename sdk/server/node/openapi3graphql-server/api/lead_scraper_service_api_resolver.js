@@ -76,10 +76,10 @@ export default {
         },
 
         // @return ListAccountsResponse
-        ListAccounts: ($pageSize, $pageToken, $filter) => {
+        ListAccounts: ($pageSize, $pageNumber, $filter) => {
             return {
                 "pageSize": "56",
-                "pageToken": "pageToken_example",
+                "pageNumber": "56",
                 "filter": "filter_example"
             };
         },
@@ -94,21 +94,21 @@ export default {
         },
 
         // @return ListWorkflowsResponse
-        ListWorkflows: ($workspaceId, $pageSize, $pageToken, $filter) => {
+        ListWorkflows: ($workspaceId, $pageSize, $pageNumber, $filter) => {
             return {
                 "workspaceId": "workspaceId_example",
                 "pageSize": "56",
-                "pageToken": "pageToken_example",
+                "pageNumber": "56",
                 "filter": "filter_example"
             };
         },
 
         // @return ListWorkspacesResponse
-        ListWorkspaces: ($accountId, $pageSize, $pageToken) => {
+        ListWorkspaces: ($accountId, $pageSize, $pageNumber) => {
             return {
                 "accountId": "accountId_example",
                 "pageSize": "56",
-                "pageToken": "pageToken_example"
+                "pageNumber": "56"
             };
         },
 

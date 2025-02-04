@@ -19357,9 +19357,9 @@ pub struct ListAccountsResponse {
     #[serde(skip_serializing_if="Option::is_none")]
     pub accounts: Option<Vec<models::Account>>,
 
-    #[serde(rename = "nextPageToken")]
+    #[serde(rename = "nextPageNumber")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub next_page_token: Option<String>,
+    pub next_page_number: Option<i32>,
 
 }
 
@@ -19369,7 +19369,7 @@ impl ListAccountsResponse {
     pub fn new() -> ListAccountsResponse {
         ListAccountsResponse {
             accounts: None,
-            next_page_token: None,
+            next_page_number: None,
         }
     }
 }
@@ -19383,10 +19383,10 @@ impl std::string::ToString for ListAccountsResponse {
             // Skipping accounts in query parameter serialization
 
 
-            self.next_page_token.as_ref().map(|next_page_token| {
+            self.next_page_number.as_ref().map(|next_page_number| {
                 [
-                    "nextPageToken".to_string(),
-                    next_page_token.to_string(),
+                    "nextPageNumber".to_string(),
+                    next_page_number.to_string(),
                 ].join(",")
             }),
 
@@ -19408,7 +19408,7 @@ impl std::str::FromStr for ListAccountsResponse {
         #[allow(dead_code)]
         struct IntermediateRep {
             pub accounts: Vec<Vec<models::Account>>,
-            pub next_page_token: Vec<String>,
+            pub next_page_number: Vec<i32>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -19428,7 +19428,7 @@ impl std::str::FromStr for ListAccountsResponse {
                 match key {
                     "accounts" => return std::result::Result::Err("Parsing a container in this style is not supported in ListAccountsResponse".to_string()),
                     #[allow(clippy::redundant_clone)]
-                    "nextPageToken" => intermediate_rep.next_page_token.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "nextPageNumber" => intermediate_rep.next_page_number.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing ListAccountsResponse".to_string())
                 }
             }
@@ -19440,7 +19440,7 @@ impl std::str::FromStr for ListAccountsResponse {
         // Use the intermediate representation to return the struct
         std::result::Result::Ok(ListAccountsResponse {
             accounts: intermediate_rep.accounts.into_iter().next(),
-            next_page_token: intermediate_rep.next_page_token.into_iter().next(),
+            next_page_number: intermediate_rep.next_page_number.into_iter().next(),
         })
     }
 }
@@ -19759,9 +19759,9 @@ pub struct ListWorkflowsResponse {
     #[serde(skip_serializing_if="Option::is_none")]
     pub workflows: Option<Vec<models::ScrapingWorkflow>>,
 
-    #[serde(rename = "nextPageToken")]
+    #[serde(rename = "nextPageNumber")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub next_page_token: Option<String>,
+    pub next_page_number: Option<i32>,
 
 }
 
@@ -19771,7 +19771,7 @@ impl ListWorkflowsResponse {
     pub fn new() -> ListWorkflowsResponse {
         ListWorkflowsResponse {
             workflows: None,
-            next_page_token: None,
+            next_page_number: None,
         }
     }
 }
@@ -19785,10 +19785,10 @@ impl std::string::ToString for ListWorkflowsResponse {
             // Skipping workflows in query parameter serialization
 
 
-            self.next_page_token.as_ref().map(|next_page_token| {
+            self.next_page_number.as_ref().map(|next_page_number| {
                 [
-                    "nextPageToken".to_string(),
-                    next_page_token.to_string(),
+                    "nextPageNumber".to_string(),
+                    next_page_number.to_string(),
                 ].join(",")
             }),
 
@@ -19810,7 +19810,7 @@ impl std::str::FromStr for ListWorkflowsResponse {
         #[allow(dead_code)]
         struct IntermediateRep {
             pub workflows: Vec<Vec<models::ScrapingWorkflow>>,
-            pub next_page_token: Vec<String>,
+            pub next_page_number: Vec<i32>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -19830,7 +19830,7 @@ impl std::str::FromStr for ListWorkflowsResponse {
                 match key {
                     "workflows" => return std::result::Result::Err("Parsing a container in this style is not supported in ListWorkflowsResponse".to_string()),
                     #[allow(clippy::redundant_clone)]
-                    "nextPageToken" => intermediate_rep.next_page_token.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "nextPageNumber" => intermediate_rep.next_page_number.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing ListWorkflowsResponse".to_string())
                 }
             }
@@ -19842,7 +19842,7 @@ impl std::str::FromStr for ListWorkflowsResponse {
         // Use the intermediate representation to return the struct
         std::result::Result::Ok(ListWorkflowsResponse {
             workflows: intermediate_rep.workflows.into_iter().next(),
-            next_page_token: intermediate_rep.next_page_token.into_iter().next(),
+            next_page_number: intermediate_rep.next_page_number.into_iter().next(),
         })
     }
 }
@@ -20044,9 +20044,9 @@ pub struct ListWorkspacesResponse {
     #[serde(skip_serializing_if="Option::is_none")]
     pub workspaces: Option<Vec<models::Workspace>>,
 
-    #[serde(rename = "nextPageToken")]
+    #[serde(rename = "nextPageNumber")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub next_page_token: Option<String>,
+    pub next_page_number: Option<i32>,
 
 }
 
@@ -20056,7 +20056,7 @@ impl ListWorkspacesResponse {
     pub fn new() -> ListWorkspacesResponse {
         ListWorkspacesResponse {
             workspaces: None,
-            next_page_token: None,
+            next_page_number: None,
         }
     }
 }
@@ -20070,10 +20070,10 @@ impl std::string::ToString for ListWorkspacesResponse {
             // Skipping workspaces in query parameter serialization
 
 
-            self.next_page_token.as_ref().map(|next_page_token| {
+            self.next_page_number.as_ref().map(|next_page_number| {
                 [
-                    "nextPageToken".to_string(),
-                    next_page_token.to_string(),
+                    "nextPageNumber".to_string(),
+                    next_page_number.to_string(),
                 ].join(",")
             }),
 
@@ -20095,7 +20095,7 @@ impl std::str::FromStr for ListWorkspacesResponse {
         #[allow(dead_code)]
         struct IntermediateRep {
             pub workspaces: Vec<Vec<models::Workspace>>,
-            pub next_page_token: Vec<String>,
+            pub next_page_number: Vec<i32>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -20115,7 +20115,7 @@ impl std::str::FromStr for ListWorkspacesResponse {
                 match key {
                     "workspaces" => return std::result::Result::Err("Parsing a container in this style is not supported in ListWorkspacesResponse".to_string()),
                     #[allow(clippy::redundant_clone)]
-                    "nextPageToken" => intermediate_rep.next_page_token.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "nextPageNumber" => intermediate_rep.next_page_number.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing ListWorkspacesResponse".to_string())
                 }
             }
@@ -20127,7 +20127,7 @@ impl std::str::FromStr for ListWorkspacesResponse {
         // Use the intermediate representation to return the struct
         std::result::Result::Ok(ListWorkspacesResponse {
             workspaces: intermediate_rep.workspaces.into_iter().next(),
-            next_page_token: intermediate_rep.next_page_token.into_iter().next(),
+            next_page_number: intermediate_rep.next_page_number.into_iter().next(),
         })
     }
 }

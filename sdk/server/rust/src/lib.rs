@@ -2713,7 +2713,7 @@ pub trait Api<C: Send + Sync> {
     async fn list_accounts(
         &self,
         page_size: Option<i32>,
-        page_token: Option<String>,
+        page_number: Option<i32>,
         filter: Option<String>,
         context: &C) -> Result<ListAccountsResponse, ApiError>;
 
@@ -2730,7 +2730,7 @@ pub trait Api<C: Send + Sync> {
         &self,
         workspace_id: String,
         page_size: Option<i32>,
-        page_token: Option<String>,
+        page_number: Option<i32>,
         filter: Option<String>,
         context: &C) -> Result<ListWorkflowsResponse, ApiError>;
 
@@ -2739,7 +2739,7 @@ pub trait Api<C: Send + Sync> {
         &self,
         account_id: Option<String>,
         page_size: Option<i32>,
-        page_token: Option<String>,
+        page_number: Option<i32>,
         context: &C) -> Result<ListWorkspacesResponse, ApiError>;
 
     /// Pause workflow execution
@@ -2999,7 +2999,7 @@ pub trait ApiNoContext<C: Send + Sync> {
     async fn list_accounts(
         &self,
         page_size: Option<i32>,
-        page_token: Option<String>,
+        page_number: Option<i32>,
         filter: Option<String>,
         ) -> Result<ListAccountsResponse, ApiError>;
 
@@ -3016,7 +3016,7 @@ pub trait ApiNoContext<C: Send + Sync> {
         &self,
         workspace_id: String,
         page_size: Option<i32>,
-        page_token: Option<String>,
+        page_number: Option<i32>,
         filter: Option<String>,
         ) -> Result<ListWorkflowsResponse, ApiError>;
 
@@ -3025,7 +3025,7 @@ pub trait ApiNoContext<C: Send + Sync> {
         &self,
         account_id: Option<String>,
         page_size: Option<i32>,
-        page_token: Option<String>,
+        page_number: Option<i32>,
         ) -> Result<ListWorkspacesResponse, ApiError>;
 
     /// Pause workflow execution
@@ -3355,12 +3355,12 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     async fn list_accounts(
         &self,
         page_size: Option<i32>,
-        page_token: Option<String>,
+        page_number: Option<i32>,
         filter: Option<String>,
         ) -> Result<ListAccountsResponse, ApiError>
     {
         let context = self.context().clone();
-        self.api().list_accounts(page_size, page_token, filter, &context).await
+        self.api().list_accounts(page_size, page_number, filter, &context).await
     }
 
     /// Get all jobs
@@ -3380,12 +3380,12 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         &self,
         workspace_id: String,
         page_size: Option<i32>,
-        page_token: Option<String>,
+        page_number: Option<i32>,
         filter: Option<String>,
         ) -> Result<ListWorkflowsResponse, ApiError>
     {
         let context = self.context().clone();
-        self.api().list_workflows(workspace_id, page_size, page_token, filter, &context).await
+        self.api().list_workflows(workspace_id, page_size, page_number, filter, &context).await
     }
 
     /// List workspaces
@@ -3393,11 +3393,11 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         &self,
         account_id: Option<String>,
         page_size: Option<i32>,
-        page_token: Option<String>,
+        page_number: Option<i32>,
         ) -> Result<ListWorkspacesResponse, ApiError>
     {
         let context = self.context().clone();
-        self.api().list_workspaces(account_id, page_size, page_token, &context).await
+        self.api().list_workspaces(account_id, page_size, page_number, &context).await
     }
 
     /// Pause workflow execution

@@ -10,6 +10,7 @@ import enrich from "./routes/webpage/enrich";
 import extractContacts from "./routes/webpage/extract-contacts";
 import extractText from "./routes/webpage/extract-text";
 import leadgen from "./routes/webpage/leadgen";
+import leadsRouter from "./routes/leads";
 import markdownConvert from "./routes/webpage/markdown-convert";
 import metadata from "./routes/webpage/metadata";
 import sanitize from "./routes/webpage/sanitize";
@@ -45,6 +46,9 @@ aiRouter.route("/extract-contacts", extractContacts);
 aiRouter.route("/analyze-company", analyzeCompany);
 aiRouter.route("/analyze-lead", analyzeLead);
 aiRouter.route("/leadgen", leadgen);
+
+// Mount leads analysis routes
+aiRouter.route("/leads", leadsRouter);
 
 /**
  * Error handler for unsupported methods

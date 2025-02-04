@@ -1,3 +1,4 @@
+import { BusinessHoursAnalysisSchema, BusinessIntelligenceSchema, BusinessQualificationSchema } from "../routes/webpage/schemas";
 import {
     analyzeStructure,
     cleanHtml,
@@ -231,5 +232,106 @@ Do not include speculative information.`,
     defaultParams: {
         temperature: 0.2,
         maxTokens: 2500,
+    },
+});
+
+/**
+ * Handler for analyzing business hours and contact timing
+ */
+export const businessHoursHandler = createCompletionHandler({
+    systemPrompt: `You are an expert at analyzing business operational patterns and determining optimal contact times. Analyze the provided business data to:
+1. Determine the best times to contact based on operational hours and traffic patterns
+2. Identify peak business hours and quiet periods
+3. Extract operational insights that could impact engagement
+4. Consider day-of-week variations and seasonal patterns
+5. Account for business type and customer behavior
+6. Return only factual, data-driven insights`,
+    defaultModel: "@cf/mistral/7b-instruct-v0.2",
+    inputTransformer: (data) => {
+        return `Analyze this business data to determine optimal contact times and operational patterns. Format as JSON:
+
+Business Data:
+${JSON.stringify(data, null, 2)}`;
+    },
+    outputTransformer: (output) => {
+        try {
+            const parsed = JSON.parse(output);
+            const validated = BusinessHoursAnalysisSchema.parse(parsed);
+            return JSON.stringify(validated);
+        } catch (error) {
+            throw new Error("Invalid business hours analysis format");
+        }
+    },
+    defaultParams: {
+        temperature: 0.2,
+        maxTokens: 1500,
+    },
+});
+
+/**
+ * Handler for business qualification analysis
+ */
+export const businessQualificationHandler = createCompletionHandler({
+    systemPrompt: `You are an expert at qualifying business leads and assessing their potential value. Analyze the provided business data to:
+1. Calculate overall qualification score based on multiple criteria
+2. Evaluate location and market presence
+3. Assess business type and operational maturity
+4. Identify customer base characteristics
+5. Detect risk factors and growth indicators
+6. Provide evidence-based scoring
+7. Return only factual, verifiable information`,
+    defaultModel: "@cf/mistral/7b-instruct-v0.2",
+    inputTransformer: (data) => {
+        return `Analyze this business data to assess qualification and potential value. Format as JSON:
+
+Business Data:
+${JSON.stringify(data, null, 2)}`;
+    },
+    outputTransformer: (output) => {
+        try {
+            const parsed = JSON.parse(output);
+            const validated = BusinessQualificationSchema.parse(parsed);
+            return JSON.stringify(validated);
+        } catch (error) {
+            throw new Error("Invalid business qualification format");
+        }
+    },
+    defaultParams: {
+        temperature: 0.3,
+        maxTokens: 2000,
+    },
+});
+
+/**
+ * Handler for business intelligence analysis
+ */
+export const businessIntelligenceHandler = createCompletionHandler({
+    systemPrompt: `You are an expert at extracting business intelligence and market insights. Analyze the provided business data to:
+1. Extract customer demographics and behavior patterns
+2. Identify competitive strengths and unique selling points
+3. Analyze operational metrics and performance indicators
+4. Generate actionable recommendations
+5. Consider market positioning and differentiation
+6. Evaluate customer sentiment and satisfaction
+7. Return only factual, data-supported insights`,
+    defaultModel: "@cf/mistral/7b-instruct-v0.2",
+    inputTransformer: (data) => {
+        return `Analyze this business data to extract intelligence and insights. Format as JSON:
+
+Business Data:
+${JSON.stringify(data, null, 2)}`;
+    },
+    outputTransformer: (output) => {
+        try {
+            const parsed = JSON.parse(output);
+            const validated = BusinessIntelligenceSchema.parse(parsed);
+            return JSON.stringify(validated);
+        } catch (error) {
+            throw new Error("Invalid business intelligence format");
+        }
+    },
+    defaultParams: {
+        temperature: 0.3,
+        maxTokens: 2000,
     },
 }); 

@@ -41,12 +41,27 @@ export default {
             };
         },
 
+        // @return GetOrganizationResponse
+        GetOrganization: ($Id_) => {
+            return {
+                "Id_": "Id__example"
+            };
+        },
+
         // @return GetScrapingJobResponse
         GetScrapingJob: ($jobId, $userId, $orgId, $tenantId) => {
             return {
                 "jobId": "jobId_example",
                 "userId": "userId_example",
                 "orgId": "orgId_example",
+                "tenantId": "tenantId_example"
+            };
+        },
+
+        // @return GetTenantResponse
+        GetTenant: ($organizationId, $tenantId) => {
+            return {
+                "organizationId": "organizationId_example",
                 "tenantId": "tenantId_example"
             };
         },
@@ -84,12 +99,29 @@ export default {
             };
         },
 
+        // @return ListOrganizationsResponse
+        ListOrganizations: ($pageSize, $pageNumber) => {
+            return {
+                "pageSize": "56",
+                "pageNumber": "56"
+            };
+        },
+
         // @return ListScrapingJobsResponse
         ListScrapingJobs: ($userId, $orgId, $tenantId) => {
             return {
                 "userId": "userId_example",
                 "orgId": "orgId_example",
                 "tenantId": "tenantId_example"
+            };
+        },
+
+        // @return ListTenantsResponse
+        ListTenants: ($organizationId, $pageSize, $pageNumber) => {
+            return {
+                "organizationId": "organizationId_example",
+                "pageSize": "56",
+                "pageNumber": "56"
             };
         },
 
@@ -123,10 +155,25 @@ export default {
             };
         },
 
+        // @return CreateOrganizationResponse
+        CreateOrganization: ($createOrganizationRequest) => {
+            return {
+                "createOrganizationRequest": ""
+            };
+        },
+
         // @return CreateScrapingJobResponse
         CreateScrapingJob: ($createScrapingJobRequest) => {
             return {
                 "createScrapingJobRequest": ""
+            };
+        },
+
+        // @return CreateTenantResponse
+        CreateTenant: ($organizationId, $createTenantBody) => {
+            return {
+                "organizationId": "organizationId_example",
+                "createTenantBody": ""
             };
         },
 
@@ -144,12 +191,27 @@ export default {
             };
         },
 
+        // @return DeleteOrganizationResponse
+        DeleteOrganization: ($Id_) => {
+            return {
+                "Id_": "Id__example"
+            };
+        },
+
         // @return DeleteScrapingJobResponse
         DeleteScrapingJob: ($jobId, $userId, $orgId, $tenantId) => {
             return {
                 "jobId": "jobId_example",
                 "userId": "userId_example",
                 "orgId": "orgId_example",
+                "tenantId": "tenantId_example"
+            };
+        },
+
+        // @return DeleteTenantResponse
+        DeleteTenant: ($organizationId, $tenantId) => {
+            return {
+                "organizationId": "organizationId_example",
                 "tenantId": "tenantId_example"
             };
         },
@@ -198,6 +260,20 @@ export default {
         UpdateAccountSettings: ($updateAccountSettingsRequest) => {
             return {
                 "updateAccountSettingsRequest": ""
+            };
+        },
+
+        // @return UpdateOrganizationResponse
+        UpdateOrganization: ($updateOrganizationRequest) => {
+            return {
+                "updateOrganizationRequest": ""
+            };
+        },
+
+        // @return UpdateTenantResponse
+        UpdateTenant: ($updateTenantRequest) => {
+            return {
+                "updateTenantRequest": ""
             };
         },
 

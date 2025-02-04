@@ -867,4 +867,328 @@ service LeadScraperService {
             }
         };
     }
+
+    // Tenant Management
+    /**
+     * CreateTenant establishes a new tenant in the system
+     * 
+     * A tenant represents the top-level organizational unit that can contain
+     * multiple organizations. This endpoint sets up the necessary infrastructure
+     * for multi-tenant isolation.
+     * 
+     * Features:
+     * - Automatic resource provisioning
+     * - Custom domain support
+     * - Billing configuration
+     * - Security policy initialization
+     * 
+     * Required permissions:
+     * - create:tenant (system admin only)
+     */
+    rpc CreateTenant(CreateTenantRequest) returns (CreateTenantResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/organizations/{organization_id}/tenants"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a new tenant"
+            tags: ["lead-scraper-service"],
+            operation_id: "CreateTenant",
+            description: "Creates a new tenant in the system",
+            responses: {
+                key: "201"
+                value: {
+                    description: "Tenant created successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.CreateTenantResponse" } }
+                }
+            }
+        };
+    }
+
+    /**
+     * GetTenant retrieves detailed tenant information
+     * 
+     * Returns comprehensive information about a tenant including:
+     * - Basic metadata
+     * - Resource utilization
+     * - Organization list
+     * - Configuration settings
+     * - Billing status
+     * 
+     * Required permissions:
+     * - read:tenant
+     */
+    rpc GetTenant(GetTenantRequest) returns (GetTenantResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/organizations/tenants/{organization_id}/{tenant_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get tenant details"
+            tags: ["lead-scraper-service"],
+            operation_id: "GetTenant",
+            description: "Retrieves details of a specific tenant",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Tenant retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.GetTenantResponse" } }
+                }
+            }
+        };
+    }
+
+    /**
+     * UpdateTenant modifies tenant configuration
+     * 
+     * Allows updating various tenant settings including:
+     * - Name and description
+     * - Domain configuration
+     * - Security policies
+     * - Resource limits
+     * - Billing settings
+     * 
+     * Required permissions:
+     * - update:tenant
+     */
+    rpc UpdateTenant(UpdateTenantRequest) returns (UpdateTenantResponse) {
+        option (google.api.http) = {
+            put: "/lead-scraper-microservice/api/v1/organizations/tenants"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Update tenant details"
+            tags: ["lead-scraper-service"],
+            operation_id: "UpdateTenant",
+            description: "Updates the configuration of a specific tenant",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Tenant updated successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.UpdateTenantResponse" } }
+                }
+            }
+        };
+    }
+
+    /**
+     * DeleteTenant removes a tenant and all associated resources
+     * 
+     * This is a destructive operation that:
+     * - Removes all tenant data
+     * - Deletes associated organizations
+     * - Cleans up resources
+     * - Archives audit logs
+     * 
+     * Required permissions:
+     * - delete:tenant (system admin only)
+     */
+    rpc DeleteTenant(DeleteTenantRequest) returns (DeleteTenantResponse) {
+        option (google.api.http) = {
+            delete: "/lead-scraper-microservice/api/v1/organization/tenants/{organization_id}/{tenant_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete a tenant"
+            tags: ["lead-scraper-service"],
+            operation_id: "DeleteTenant",
+            description: "Permanently deletes a tenant and all associated resources",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Tenant deleted successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.DeleteTenantResponse" } }
+                }
+            }
+        };
+    }
+
+    /**
+     * ListTenants retrieves all tenants in the system
+     * 
+     * Features:
+     * - Pagination support
+     * - Filtering options
+     * - Sorting capabilities
+     * - Field selection
+     * 
+     * Required permissions:
+     * - list:tenant (system admin only)
+     */
+    rpc ListTenants(ListTenantsRequest) returns (ListTenantsResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/organization/tenants/{organization_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "List all tenants"
+            tags: ["lead-scraper-service"],
+            operation_id: "ListTenants",
+            description: "Retrieves a list of all tenants in the system",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Tenants retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.ListTenantsResponse" } }
+                }
+            }
+        };
+    }
+
+    // Organization Management
+    /**
+     * CreateOrganization establishes a new organization within a tenant
+     * 
+     * Organizations represent business units within a tenant that can:
+     * - Manage their own users
+     * - Have separate billing
+     * - Maintain isolated resources
+     * - Configure custom policies
+     * 
+     * Required permissions:
+     * - create:organization
+     */
+    rpc CreateOrganization(CreateOrganizationRequest) returns (CreateOrganizationResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/organization"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a new organization"
+            tags: ["lead-scraper-service"],
+            operation_id: "CreateOrganization",
+            description: "Creates a new organization within a tenant",
+            responses: {
+                key: "201"
+                value: {
+                    description: "Organization created successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.CreateOrganizationResponse" } }
+                }
+            }
+        };
+    }
+
+    /**
+     * GetOrganization retrieves detailed organization information
+     * 
+     * Returns comprehensive information including:
+     * - Basic metadata
+     * - Member list
+     * - Resource usage
+     * - Billing status
+     * - Policy configuration
+     * 
+     * Required permissions:
+     * - read:organization
+     */
+    rpc GetOrganization(GetOrganizationRequest) returns (GetOrganizationResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/organization/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get organization details"
+            tags: ["lead-scraper-service"],
+            operation_id: "GetOrganization",
+            description: "Retrieves details of a specific organization",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Organization retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.GetOrganizationResponse" } }
+                }
+            }
+        };
+    }
+
+    /**
+     * UpdateOrganization modifies organization configuration
+     * 
+     * Allows updating:
+     * - Basic information
+     * - Security policies
+     * - Resource limits
+     * - Member permissions
+     * - Integration settings
+     * 
+     * Required permissions:
+     * - update:organization
+     */
+    rpc UpdateOrganization(UpdateOrganizationRequest) returns (UpdateOrganizationResponse) {
+        option (google.api.http) = {
+            put: "/lead-scraper-microservice/api/v1/organization"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Update organization details"
+            tags: ["lead-scraper-service"],
+            operation_id: "UpdateOrganization",
+            description: "Updates the configuration of a specific organization",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Organization updated successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.UpdateOrganizationResponse" } }
+                }
+            }
+        };
+    }
+
+    /**
+     * DeleteOrganization removes an organization and its resources
+     * 
+     * This operation:
+     * - Removes organization data
+     * - Deletes member associations
+     * - Cleans up resources
+     * - Archives audit logs
+     * 
+     * Required permissions:
+     * - delete:organization
+     */
+    rpc DeleteOrganization(DeleteOrganizationRequest) returns (DeleteOrganizationResponse) {
+        option (google.api.http) = {
+            delete: "/lead-scraper-microservice/api/v1/organization/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete an organization"
+            tags: ["lead-scraper-service"],
+            operation_id: "DeleteOrganization",
+            description: "Permanently deletes an organization and all associated resources",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Organization deleted successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.DeleteOrganizationResponse" } }
+                }
+            }
+        };
+    }
+
+    /**
+     * ListOrganizations retrieves all organizations in a tenant
+     * 
+     * Features:
+     * - Pagination support
+     * - Filtering by status
+     * - Sorting options
+     * - Field selection
+     * 
+     * Required permissions:
+     * - list:organization
+     */
+    rpc ListOrganizations(ListOrganizationsRequest) returns (ListOrganizationsResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/organization"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "List all organizations"
+            tags: ["lead-scraper-service"],
+            operation_id: "ListOrganizations",
+            description: "Retrieves a list of all organizations in a tenant",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Organizations retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.ListOrganizationsResponse" } }
+                }
+            }
+        };
+    }
 }

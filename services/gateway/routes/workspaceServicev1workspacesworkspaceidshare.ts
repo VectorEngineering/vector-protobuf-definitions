@@ -9,8 +9,20 @@ const router = new Hono<{ Bindings: Env }>();
 router.post("/", async (c) => {
   const client = new ApiClient(c.env.API_BASE_URL);
   const data = await c.req.json();
+  const params = {
+    workspaceId:
+      c.req.param("workspaceId") ||
+      (() => {
+        throw new HTTPException(400, {
+          message: "Missing required path parameter: workspaceId",
+        });
+      })(),
+  };
   const response =
-    await client.createWorkspaceServiceV1WorkspacesWorkspaceIdShare(data);
+    await client.createWorkspaceServiceV1WorkspacesWorkspaceIdShare(
+      data,
+      params,
+    );
   return c.json(response, 201);
 });
 

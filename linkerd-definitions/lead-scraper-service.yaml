@@ -102,3 +102,43 @@ spec:
       method: POST
       pathRegex: /lead_scraper_service\.v1\.LeadScraperService/DeleteWorkspace
     name: DeleteWorkspace
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/CreateTenant
+    name: CreateTenant
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetTenant
+    name: GetTenant
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/UpdateTenant
+    name: UpdateTenant
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/DeleteTenant
+    name: DeleteTenant
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/ListTenants
+    name: ListTenants
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/CreateOrganization
+    name: CreateOrganization
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetOrganization
+    name: GetOrganization
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/UpdateOrganization
+    name: UpdateOrganization
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/DeleteOrganization
+    name: DeleteOrganization
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/ListOrganizations
+    name: ListOrganizations

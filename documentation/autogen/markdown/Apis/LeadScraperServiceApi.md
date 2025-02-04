@@ -5,27 +5,37 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createAccount**](LeadScraperServiceApi.md#createAccount) | **POST** /lead-scraper-microservice/api/v1/accounts | Create a new account |
+| [**createOrganization**](LeadScraperServiceApi.md#createOrganization) | **POST** /lead-scraper-microservice/api/v1/organization | Create a new organization |
 | [**createScrapingJob**](LeadScraperServiceApi.md#createScrapingJob) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task |
+| [**createTenant**](LeadScraperServiceApi.md#createTenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant |
 | [**createWorkspace**](LeadScraperServiceApi.md#createWorkspace) | **POST** /lead-scraper-microservice/api/v1/workspaces | Create a new workspace |
 | [**deleteAccount**](LeadScraperServiceApi.md#deleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account |
+| [**deleteOrganization**](LeadScraperServiceApi.md#deleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization |
 | [**deleteScrapingJob**](LeadScraperServiceApi.md#deleteScrapingJob) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job |
+| [**deleteTenant**](LeadScraperServiceApi.md#deleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant |
 | [**deleteWorkspace**](LeadScraperServiceApi.md#deleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace |
 | [**downloadScrapingResults**](LeadScraperServiceApi.md#downloadScrapingResults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV |
 | [**getAccount**](LeadScraperServiceApi.md#getAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details |
 | [**getAccountUsage**](LeadScraperServiceApi.md#getAccountUsage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage |
+| [**getOrganization**](LeadScraperServiceApi.md#getOrganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details |
 | [**getScrapingJob**](LeadScraperServiceApi.md#getScrapingJob) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job |
+| [**getTenant**](LeadScraperServiceApi.md#getTenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details |
 | [**getWorkflow**](LeadScraperServiceApi.md#getWorkflow) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Get workflow details |
 | [**getWorkspace**](LeadScraperServiceApi.md#getWorkspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details |
 | [**getWorkspaceAnalytics**](LeadScraperServiceApi.md#getWorkspaceAnalytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics |
 | [**leadScraperServiceCreateWorkflow**](LeadScraperServiceApi.md#leadScraperServiceCreateWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow |
 | [**listAccounts**](LeadScraperServiceApi.md#listAccounts) | **GET** /lead-scraper-microservice/api/v1/accounts | List all accounts |
+| [**listOrganizations**](LeadScraperServiceApi.md#listOrganizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations |
 | [**listScrapingJobs**](LeadScraperServiceApi.md#listScrapingJobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs |
+| [**listTenants**](LeadScraperServiceApi.md#listTenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants |
 | [**listWorkflows**](LeadScraperServiceApi.md#listWorkflows) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | List workflows |
 | [**listWorkspaces**](LeadScraperServiceApi.md#listWorkspaces) | **GET** /lead-scraper-microservice/api/v1/workspaces | List workspaces |
 | [**pauseWorkflow**](LeadScraperServiceApi.md#pauseWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution |
 | [**triggerWorkflow**](LeadScraperServiceApi.md#triggerWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution |
 | [**updateAccount**](LeadScraperServiceApi.md#updateAccount) | **PUT** /lead-scraper-microservice/api/v1/accounts | Update account details |
 | [**updateAccountSettings**](LeadScraperServiceApi.md#updateAccountSettings) | **PUT** /lead-scraper-microservice/api/v1/accounts/settings | Update account settings |
+| [**updateOrganization**](LeadScraperServiceApi.md#updateOrganization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details |
+| [**updateTenant**](LeadScraperServiceApi.md#updateTenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details |
 | [**updateWorkflow**](LeadScraperServiceApi.md#updateWorkflow) | **PUT** /lead-scraper-microservice/api/v1/workspaces/workflow | Update workflow details |
 | [**updateWorkspace**](LeadScraperServiceApi.md#updateWorkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details |
 
@@ -57,6 +67,33 @@ No authorization required
 - **Content-Type**: application/json, application/x-www-form-urlencoded
 - **Accept**: application/json, 
 
+<a name="createOrganization"></a>
+# **createOrganization**
+> CreateOrganizationResponse createOrganization(CreateOrganizationRequest)
+
+Create a new organization
+
+    Creates a new organization within a tenant
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **CreateOrganizationRequest** | [**CreateOrganizationRequest**](../Models/CreateOrganizationRequest.md)|  | |
+
+### Return type
+
+[**CreateOrganizationResponse**](../Models/CreateOrganizationResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
 <a name="createScrapingJob"></a>
 # **createScrapingJob**
 > CreateScrapingJobResponse createScrapingJob(CreateScrapingJobRequest)
@@ -74,6 +111,34 @@ Create a new job scraping task
 ### Return type
 
 [**CreateScrapingJobResponse**](../Models/CreateScrapingJobResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
+<a name="createTenant"></a>
+# **createTenant**
+> CreateTenantResponse createTenant(organizationId, CreateTenantBody)
+
+Create a new tenant
+
+    Creates a new tenant in the system
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | **String**|  | [default to null] |
+| **CreateTenantBody** | [**CreateTenantBody**](../Models/CreateTenantBody.md)|  | |
+
+### Return type
+
+[**CreateTenantResponse**](../Models/CreateTenantResponse.md)
 
 ### Authorization
 
@@ -138,6 +203,33 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
+<a name="deleteOrganization"></a>
+# **deleteOrganization**
+> DeleteOrganizationResponse deleteOrganization(id)
+
+Delete an organization
+
+    Permanently deletes an organization and all associated resources
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **String**|  | [default to null] |
+
+### Return type
+
+[**DeleteOrganizationResponse**](../Models/DeleteOrganizationResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
 <a name="deleteScrapingJob"></a>
 # **deleteScrapingJob**
 > DeleteScrapingJobResponse deleteScrapingJob(jobId, userId, orgId, tenantId)
@@ -158,6 +250,34 @@ Delete a specific job
 ### Return type
 
 [**DeleteScrapingJobResponse**](../Models/DeleteScrapingJobResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="deleteTenant"></a>
+# **deleteTenant**
+> DeleteTenantResponse deleteTenant(organizationId, tenantId)
+
+Delete a tenant
+
+    Permanently deletes a tenant and all associated resources
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | **String**|  | [default to null] |
+| **tenantId** | **String**|  | [default to null] |
+
+### Return type
+
+[**DeleteTenantResponse**](../Models/DeleteTenantResponse.md)
 
 ### Authorization
 
@@ -279,6 +399,33 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
+<a name="getOrganization"></a>
+# **getOrganization**
+> GetOrganizationResponse getOrganization(id)
+
+Get organization details
+
+    Retrieves details of a specific organization
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **String**|  | [default to null] |
+
+### Return type
+
+[**GetOrganizationResponse**](../Models/GetOrganizationResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
 <a name="getScrapingJob"></a>
 # **getScrapingJob**
 > GetScrapingJobResponse getScrapingJob(jobId, userId, orgId, tenantId)
@@ -299,6 +446,34 @@ Get a specific job
 ### Return type
 
 [**GetScrapingJobResponse**](../Models/GetScrapingJobResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="getTenant"></a>
+# **getTenant**
+> GetTenantResponse getTenant(organizationId, tenantId)
+
+Get tenant details
+
+    Retrieves details of a specific tenant
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | **String**|  | [default to null] |
+| **tenantId** | **String**|  | [default to null] |
+
+### Return type
+
+[**GetTenantResponse**](../Models/GetTenantResponse.md)
 
 ### Authorization
 
@@ -423,7 +598,7 @@ No authorization required
 
 <a name="listAccounts"></a>
 # **listAccounts**
-> ListAccountsResponse listAccounts(pageSize, pageToken, filter)
+> ListAccountsResponse listAccounts(pageSize, pageNumber, filter)
 
 List all accounts
 
@@ -434,12 +609,40 @@ List all accounts
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **pageSize** | **Integer**|  | [optional] [default to null] |
-| **pageToken** | **String**|  | [optional] [default to null] |
+| **pageNumber** | **Integer**|  | [optional] [default to null] |
 | **filter** | **String**|  | [optional] [default to null] |
 
 ### Return type
 
 [**ListAccountsResponse**](../Models/ListAccountsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="listOrganizations"></a>
+# **listOrganizations**
+> ListOrganizationsResponse listOrganizations(pageSize, pageNumber)
+
+List all organizations
+
+    Retrieves a list of all organizations in a tenant
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **pageSize** | **Integer**|  | [optional] [default to null] |
+| **pageNumber** | **Integer**|  | [optional] [default to null] |
+
+### Return type
+
+[**ListOrganizationsResponse**](../Models/ListOrganizationsResponse.md)
 
 ### Authorization
 
@@ -479,9 +682,38 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
+<a name="listTenants"></a>
+# **listTenants**
+> ListTenantsResponse listTenants(organizationId, pageSize, pageNumber)
+
+List all tenants
+
+    Retrieves a list of all tenants in the system
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | **String**|  | [default to null] |
+| **pageSize** | **Integer**|  | [optional] [default to null] |
+| **pageNumber** | **Integer**|  | [optional] [default to null] |
+
+### Return type
+
+[**ListTenantsResponse**](../Models/ListTenantsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
 <a name="listWorkflows"></a>
 # **listWorkflows**
-> ListWorkflowsResponse listWorkflows(workspaceId, pageSize, pageToken, filter)
+> ListWorkflowsResponse listWorkflows(workspaceId, pageSize, pageNumber, filter)
 
 List workflows
 
@@ -493,7 +725,7 @@ List workflows
 |------------- | ------------- | ------------- | -------------|
 | **workspaceId** | **String**|  | [default to null] |
 | **pageSize** | **Integer**|  | [optional] [default to null] |
-| **pageToken** | **String**|  | [optional] [default to null] |
+| **pageNumber** | **Integer**|  | [optional] [default to null] |
 | **filter** | **String**|  | [optional] [default to null] |
 
 ### Return type
@@ -511,7 +743,7 @@ No authorization required
 
 <a name="listWorkspaces"></a>
 # **listWorkspaces**
-> ListWorkspacesResponse listWorkspaces(accountId, pageSize, pageToken)
+> ListWorkspacesResponse listWorkspaces(accountId, pageSize, pageNumber)
 
 List workspaces
 
@@ -523,7 +755,7 @@ List workspaces
 |------------- | ------------- | ------------- | -------------|
 | **accountId** | **String**|  | [optional] [default to null] |
 | **pageSize** | **Integer**|  | [optional] [default to null] |
-| **pageToken** | **String**|  | [optional] [default to null] |
+| **pageNumber** | **Integer**|  | [optional] [default to null] |
 
 ### Return type
 
@@ -640,6 +872,60 @@ Update account settings
 ### Return type
 
 [**UpdateAccountSettingsResponse**](../Models/UpdateAccountSettingsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
+<a name="updateOrganization"></a>
+# **updateOrganization**
+> UpdateOrganizationResponse updateOrganization(UpdateOrganizationRequest)
+
+Update organization details
+
+    Updates the configuration of a specific organization
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **UpdateOrganizationRequest** | [**UpdateOrganizationRequest**](../Models/UpdateOrganizationRequest.md)|  | |
+
+### Return type
+
+[**UpdateOrganizationResponse**](../Models/UpdateOrganizationResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
+<a name="updateTenant"></a>
+# **updateTenant**
+> UpdateTenantResponse updateTenant(UpdateTenantRequest)
+
+Update tenant details
+
+    Updates the configuration of a specific tenant
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **UpdateTenantRequest** | [**UpdateTenantRequest**](../Models/UpdateTenantRequest.md)|  | |
+
+### Return type
+
+[**UpdateTenantResponse**](../Models/UpdateTenantResponse.md)
 
 ### Authorization
 

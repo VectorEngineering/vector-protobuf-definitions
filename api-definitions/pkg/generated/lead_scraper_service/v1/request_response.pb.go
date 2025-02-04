@@ -2753,6 +2753,1020 @@ func (x *CreateWorkflowResponse) GetWorkflow() *ScrapingWorkflow {
 	return nil
 }
 
+// Tenant Management Messages
+type CreateTenantRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Tenant         *Tenant `protobuf:"bytes,1,opt,name=tenant,proto3" json:"tenant,omitempty"`
+	OrganizationId uint64  `protobuf:"varint,2,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+}
+
+func (x *CreateTenantRequest) Reset() {
+	*x = CreateTenantRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[48]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateTenantRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateTenantRequest) ProtoMessage() {}
+
+func (x *CreateTenantRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[48]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateTenantRequest.ProtoReflect.Descriptor instead.
+func (*CreateTenantRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *CreateTenantRequest) GetTenant() *Tenant {
+	if x != nil {
+		return x.Tenant
+	}
+	return nil
+}
+
+func (x *CreateTenantRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+type CreateTenantResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	TenantId uint64 `protobuf:"varint,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+}
+
+func (x *CreateTenantResponse) Reset() {
+	*x = CreateTenantResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[49]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateTenantResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateTenantResponse) ProtoMessage() {}
+
+func (x *CreateTenantResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[49]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateTenantResponse.ProtoReflect.Descriptor instead.
+func (*CreateTenantResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *CreateTenantResponse) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+type GetTenantRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	TenantId       uint64 `protobuf:"varint,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	OrganizationId uint64 `protobuf:"varint,2,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+}
+
+func (x *GetTenantRequest) Reset() {
+	*x = GetTenantRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[50]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetTenantRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTenantRequest) ProtoMessage() {}
+
+func (x *GetTenantRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[50]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTenantRequest.ProtoReflect.Descriptor instead.
+func (*GetTenantRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *GetTenantRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *GetTenantRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+type GetTenantResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Tenant *Tenant `protobuf:"bytes,1,opt,name=tenant,proto3" json:"tenant,omitempty"`
+}
+
+func (x *GetTenantResponse) Reset() {
+	*x = GetTenantResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[51]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetTenantResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTenantResponse) ProtoMessage() {}
+
+func (x *GetTenantResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[51]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTenantResponse.ProtoReflect.Descriptor instead.
+func (*GetTenantResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{51}
+}
+
+func (x *GetTenantResponse) GetTenant() *Tenant {
+	if x != nil {
+		return x.Tenant
+	}
+	return nil
+}
+
+type UpdateTenantRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Tenant *Tenant `protobuf:"bytes,1,opt,name=tenant,proto3" json:"tenant,omitempty"`
+}
+
+func (x *UpdateTenantRequest) Reset() {
+	*x = UpdateTenantRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[52]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateTenantRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTenantRequest) ProtoMessage() {}
+
+func (x *UpdateTenantRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[52]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTenantRequest.ProtoReflect.Descriptor instead.
+func (*UpdateTenantRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{52}
+}
+
+func (x *UpdateTenantRequest) GetTenant() *Tenant {
+	if x != nil {
+		return x.Tenant
+	}
+	return nil
+}
+
+type UpdateTenantResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Tenant *Tenant `protobuf:"bytes,1,opt,name=tenant,proto3" json:"tenant,omitempty"`
+}
+
+func (x *UpdateTenantResponse) Reset() {
+	*x = UpdateTenantResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[53]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateTenantResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTenantResponse) ProtoMessage() {}
+
+func (x *UpdateTenantResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[53]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTenantResponse.ProtoReflect.Descriptor instead.
+func (*UpdateTenantResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{53}
+}
+
+func (x *UpdateTenantResponse) GetTenant() *Tenant {
+	if x != nil {
+		return x.Tenant
+	}
+	return nil
+}
+
+type DeleteTenantRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	TenantId       uint64 `protobuf:"varint,1,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	OrganizationId uint64 `protobuf:"varint,2,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+}
+
+func (x *DeleteTenantRequest) Reset() {
+	*x = DeleteTenantRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[54]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteTenantRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTenantRequest) ProtoMessage() {}
+
+func (x *DeleteTenantRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[54]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTenantRequest.ProtoReflect.Descriptor instead.
+func (*DeleteTenantRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{54}
+}
+
+func (x *DeleteTenantRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *DeleteTenantRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+type DeleteTenantResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success bool `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+}
+
+func (x *DeleteTenantResponse) Reset() {
+	*x = DeleteTenantResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[55]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteTenantResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTenantResponse) ProtoMessage() {}
+
+func (x *DeleteTenantResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[55]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTenantResponse.ProtoReflect.Descriptor instead.
+func (*DeleteTenantResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{55}
+}
+
+func (x *DeleteTenantResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+type ListTenantsRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	PageSize       int32  `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageNumber     int32  `protobuf:"varint,2,opt,name=page_number,json=pageNumber,proto3" json:"page_number,omitempty"`
+	OrganizationId uint64 `protobuf:"varint,3,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+}
+
+func (x *ListTenantsRequest) Reset() {
+	*x = ListTenantsRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[56]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListTenantsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTenantsRequest) ProtoMessage() {}
+
+func (x *ListTenantsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[56]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTenantsRequest.ProtoReflect.Descriptor instead.
+func (*ListTenantsRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{56}
+}
+
+func (x *ListTenantsRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListTenantsRequest) GetPageNumber() int32 {
+	if x != nil {
+		return x.PageNumber
+	}
+	return 0
+}
+
+func (x *ListTenantsRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+type ListTenantsResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Tenants        []*Tenant `protobuf:"bytes,1,rep,name=tenants,proto3" json:"tenants,omitempty"`
+	NextPageNumber int32     `protobuf:"varint,3,opt,name=next_page_number,json=nextPageNumber,proto3" json:"next_page_number,omitempty"`
+}
+
+func (x *ListTenantsResponse) Reset() {
+	*x = ListTenantsResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[57]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListTenantsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTenantsResponse) ProtoMessage() {}
+
+func (x *ListTenantsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[57]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTenantsResponse.ProtoReflect.Descriptor instead.
+func (*ListTenantsResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{57}
+}
+
+func (x *ListTenantsResponse) GetTenants() []*Tenant {
+	if x != nil {
+		return x.Tenants
+	}
+	return nil
+}
+
+func (x *ListTenantsResponse) GetNextPageNumber() int32 {
+	if x != nil {
+		return x.NextPageNumber
+	}
+	return 0
+}
+
+// Organization Management Messages
+type CreateOrganizationRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Organization *Organization `protobuf:"bytes,1,opt,name=organization,proto3" json:"organization,omitempty"`
+}
+
+func (x *CreateOrganizationRequest) Reset() {
+	*x = CreateOrganizationRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[58]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateOrganizationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateOrganizationRequest) ProtoMessage() {}
+
+func (x *CreateOrganizationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[58]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateOrganizationRequest.ProtoReflect.Descriptor instead.
+func (*CreateOrganizationRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{58}
+}
+
+func (x *CreateOrganizationRequest) GetOrganization() *Organization {
+	if x != nil {
+		return x.Organization
+	}
+	return nil
+}
+
+type CreateOrganizationResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Organization *Organization `protobuf:"bytes,1,opt,name=organization,proto3" json:"organization,omitempty"`
+}
+
+func (x *CreateOrganizationResponse) Reset() {
+	*x = CreateOrganizationResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[59]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateOrganizationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateOrganizationResponse) ProtoMessage() {}
+
+func (x *CreateOrganizationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[59]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateOrganizationResponse.ProtoReflect.Descriptor instead.
+func (*CreateOrganizationResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{59}
+}
+
+func (x *CreateOrganizationResponse) GetOrganization() *Organization {
+	if x != nil {
+		return x.Organization
+	}
+	return nil
+}
+
+type GetOrganizationRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *GetOrganizationRequest) Reset() {
+	*x = GetOrganizationRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[60]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetOrganizationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOrganizationRequest) ProtoMessage() {}
+
+func (x *GetOrganizationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[60]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOrganizationRequest.ProtoReflect.Descriptor instead.
+func (*GetOrganizationRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{60}
+}
+
+func (x *GetOrganizationRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type GetOrganizationResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Organization *Organization `protobuf:"bytes,1,opt,name=organization,proto3" json:"organization,omitempty"`
+}
+
+func (x *GetOrganizationResponse) Reset() {
+	*x = GetOrganizationResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[61]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetOrganizationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetOrganizationResponse) ProtoMessage() {}
+
+func (x *GetOrganizationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[61]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetOrganizationResponse.ProtoReflect.Descriptor instead.
+func (*GetOrganizationResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{61}
+}
+
+func (x *GetOrganizationResponse) GetOrganization() *Organization {
+	if x != nil {
+		return x.Organization
+	}
+	return nil
+}
+
+type UpdateOrganizationRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Organization *Organization `protobuf:"bytes,1,opt,name=organization,proto3" json:"organization,omitempty"`
+}
+
+func (x *UpdateOrganizationRequest) Reset() {
+	*x = UpdateOrganizationRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[62]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateOrganizationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateOrganizationRequest) ProtoMessage() {}
+
+func (x *UpdateOrganizationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[62]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateOrganizationRequest.ProtoReflect.Descriptor instead.
+func (*UpdateOrganizationRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{62}
+}
+
+func (x *UpdateOrganizationRequest) GetOrganization() *Organization {
+	if x != nil {
+		return x.Organization
+	}
+	return nil
+}
+
+type UpdateOrganizationResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Organization *Organization `protobuf:"bytes,1,opt,name=organization,proto3" json:"organization,omitempty"`
+}
+
+func (x *UpdateOrganizationResponse) Reset() {
+	*x = UpdateOrganizationResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[63]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateOrganizationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateOrganizationResponse) ProtoMessage() {}
+
+func (x *UpdateOrganizationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[63]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateOrganizationResponse.ProtoReflect.Descriptor instead.
+func (*UpdateOrganizationResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{63}
+}
+
+func (x *UpdateOrganizationResponse) GetOrganization() *Organization {
+	if x != nil {
+		return x.Organization
+	}
+	return nil
+}
+
+type DeleteOrganizationRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *DeleteOrganizationRequest) Reset() {
+	*x = DeleteOrganizationRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[64]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteOrganizationRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOrganizationRequest) ProtoMessage() {}
+
+func (x *DeleteOrganizationRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[64]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOrganizationRequest.ProtoReflect.Descriptor instead.
+func (*DeleteOrganizationRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{64}
+}
+
+func (x *DeleteOrganizationRequest) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type DeleteOrganizationResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success bool `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+}
+
+func (x *DeleteOrganizationResponse) Reset() {
+	*x = DeleteOrganizationResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[65]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteOrganizationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteOrganizationResponse) ProtoMessage() {}
+
+func (x *DeleteOrganizationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[65]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteOrganizationResponse.ProtoReflect.Descriptor instead.
+func (*DeleteOrganizationResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{65}
+}
+
+func (x *DeleteOrganizationResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+type ListOrganizationsRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	PageSize   int32 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageNumber int32 `protobuf:"varint,2,opt,name=page_number,json=pageNumber,proto3" json:"page_number,omitempty"`
+}
+
+func (x *ListOrganizationsRequest) Reset() {
+	*x = ListOrganizationsRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[66]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListOrganizationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOrganizationsRequest) ProtoMessage() {}
+
+func (x *ListOrganizationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[66]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOrganizationsRequest.ProtoReflect.Descriptor instead.
+func (*ListOrganizationsRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{66}
+}
+
+func (x *ListOrganizationsRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListOrganizationsRequest) GetPageNumber() int32 {
+	if x != nil {
+		return x.PageNumber
+	}
+	return 0
+}
+
+type ListOrganizationsResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Organizations  []*Organization `protobuf:"bytes,1,rep,name=organizations,proto3" json:"organizations,omitempty"`
+	TotalCount     int32           `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	NextPageNumber int32           `protobuf:"varint,3,opt,name=next_page_number,json=nextPageNumber,proto3" json:"next_page_number,omitempty"`
+}
+
+func (x *ListOrganizationsResponse) Reset() {
+	*x = ListOrganizationsResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[67]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListOrganizationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListOrganizationsResponse) ProtoMessage() {}
+
+func (x *ListOrganizationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[67]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListOrganizationsResponse.ProtoReflect.Descriptor instead.
+func (*ListOrganizationsResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{67}
+}
+
+func (x *ListOrganizationsResponse) GetOrganizations() []*Organization {
+	if x != nil {
+		return x.Organizations
+	}
+	return nil
+}
+
+func (x *ListOrganizationsResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+func (x *ListOrganizationsResponse) GetNextPageNumber() int32 {
+	if x != nil {
+		return x.NextPageNumber
+	}
+	return 0
+}
+
 type GetWorkspaceAnalyticsResponse_JobSuccessRate struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2766,7 +3780,7 @@ type GetWorkspaceAnalyticsResponse_JobSuccessRate struct {
 func (x *GetWorkspaceAnalyticsResponse_JobSuccessRate) Reset() {
 	*x = GetWorkspaceAnalyticsResponse_JobSuccessRate{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[49]
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[69]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2779,7 +3793,7 @@ func (x *GetWorkspaceAnalyticsResponse_JobSuccessRate) String() string {
 func (*GetWorkspaceAnalyticsResponse_JobSuccessRate) ProtoMessage() {}
 
 func (x *GetWorkspaceAnalyticsResponse_JobSuccessRate) ProtoReflect() protoreflect.Message {
-	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[49]
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[69]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3218,28 +4232,151 @@ var file_lead_scraper_service_v1_request_response_proto_rawDesc = []byte{
 	0x32, 0x29, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f,
 	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x53, 0x63, 0x72, 0x61, 0x70,
 	0x69, 0x6e, 0x67, 0x57, 0x6f, 0x72, 0x6b, 0x66, 0x6c, 0x6f, 0x77, 0x52, 0x08, 0x77, 0x6f, 0x72,
-	0x6b, 0x66, 0x6c, 0x6f, 0x77, 0x42, 0xc8, 0x02, 0x0a, 0x1b, 0x63, 0x6f, 0x6d, 0x2e, 0x6c, 0x65,
-	0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69,
-	0x63, 0x65, 0x2e, 0x76, 0x31, 0x42, 0x14, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x9d, 0x01,
-	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x56, 0x65, 0x63, 0x74, 0x6f,
-	0x72, 0x45, 0x6e, 0x67, 0x69, 0x6e, 0x65, 0x65, 0x72, 0x69, 0x6e, 0x67, 0x2f, 0x76, 0x65, 0x63,
-	0x74, 0x6f, 0x72, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2d, 0x64, 0x65, 0x66,
-	0x69, 0x6e, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2d, 0x64, 0x65, 0x66,
-	0x69, 0x6e, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2f, 0x70, 0x6b, 0x67, 0x2f, 0x67, 0x65, 0x6e,
-	0x65, 0x72, 0x61, 0x74, 0x65, 0x64, 0x2f, 0x6c, 0x65, 0x61, 0x64, 0x2d, 0x73, 0x63, 0x72, 0x61,
-	0x70, 0x65, 0x72, 0x2d, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x76, 0x31, 0x2f, 0x6c,
-	0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76,
-	0x69, 0x63, 0x65, 0x2f, 0x76, 0x31, 0x3b, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61,
-	0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x76, 0x31, 0xa2, 0x02, 0x03,
-	0x4c, 0x58, 0x58, 0xaa, 0x02, 0x15, 0x4c, 0x65, 0x61, 0x64, 0x53, 0x63, 0x72, 0x61, 0x70, 0x65,
-	0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x15, 0x4c, 0x65,
-	0x61, 0x64, 0x53, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
-	0x5c, 0x56, 0x31, 0xe2, 0x02, 0x21, 0x4c, 0x65, 0x61, 0x64, 0x53, 0x63, 0x72, 0x61, 0x70, 0x65,
-	0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d,
-	0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x16, 0x4c, 0x65, 0x61, 0x64, 0x53, 0x63,
-	0x72, 0x61, 0x70, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x3a, 0x3a, 0x56, 0x31,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6b, 0x66, 0x6c, 0x6f, 0x77, 0x22, 0x8a, 0x01, 0x0a, 0x13, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x41, 0x0a,
+	0x06, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e,
+	0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72,
+	0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x42, 0x08,
+	0xfa, 0x42, 0x05, 0x8a, 0x01, 0x02, 0x10, 0x01, 0x52, 0x06, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74,
+	0x12, 0x30, 0x0a, 0x0f, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02,
+	0x20, 0x00, 0x52, 0x0e, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x49, 0x64, 0x22, 0x33, 0x0a, 0x14, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x65, 0x6e, 0x61,
+	0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x74, 0x65,
+	0x6e, 0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x08, 0x74,
+	0x65, 0x6e, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x22, 0x6a, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x54, 0x65,
+	0x6e, 0x61, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x24, 0x0a, 0x09, 0x74,
+	0x65, 0x6e, 0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07,
+	0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x08, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x49,
+	0x64, 0x12, 0x30, 0x0a, 0x0f, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32,
+	0x02, 0x20, 0x00, 0x52, 0x0e, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x49, 0x64, 0x22, 0x4c, 0x0a, 0x11, 0x47, 0x65, 0x74, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x37, 0x0a, 0x06, 0x74, 0x65, 0x6e, 0x61,
+	0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f,
+	0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e,
+	0x76, 0x31, 0x2e, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x52, 0x06, 0x74, 0x65, 0x6e, 0x61, 0x6e,
+	0x74, 0x22, 0x58, 0x0a, 0x13, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x65, 0x6e, 0x61, 0x6e,
+	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x41, 0x0a, 0x06, 0x74, 0x65, 0x6e, 0x61,
+	0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f,
+	0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e,
+	0x76, 0x31, 0x2e, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x42, 0x08, 0xfa, 0x42, 0x05, 0x8a, 0x01,
+	0x02, 0x10, 0x01, 0x52, 0x06, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x22, 0x4f, 0x0a, 0x14, 0x55,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x37, 0x0a, 0x06, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70,
+	0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x65,
+	0x6e, 0x61, 0x6e, 0x74, 0x52, 0x06, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x22, 0x6d, 0x0a, 0x13,
+	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x12, 0x24, 0x0a, 0x09, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52,
+	0x08, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x30, 0x0a, 0x0f, 0x6f, 0x72, 0x67,
+	0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0e, 0x6f, 0x72, 0x67,
+	0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x22, 0x30, 0x0a, 0x14, 0x44,
+	0x65, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x22, 0x8f, 0x01,
+	0x0a, 0x12, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x73, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x26, 0x0a, 0x09, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x73, 0x69, 0x7a,
+	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x42, 0x09, 0xfa, 0x42, 0x06, 0x1a, 0x04, 0x18, 0x64,
+	0x28, 0x01, 0x52, 0x08, 0x70, 0x61, 0x67, 0x65, 0x53, 0x69, 0x7a, 0x65, 0x12, 0x1f, 0x0a, 0x0b,
+	0x70, 0x61, 0x67, 0x65, 0x5f, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x05, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x30, 0x0a,
+	0x0f, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52,
+	0x0e, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x22,
+	0x7a, 0x0a, 0x13, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x73, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x39, 0x0a, 0x07, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74,
+	0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73,
+	0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76,
+	0x31, 0x2e, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x52, 0x07, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74,
+	0x73, 0x12, 0x28, 0x0a, 0x10, 0x6e, 0x65, 0x78, 0x74, 0x5f, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x6e,
+	0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0e, 0x6e, 0x65, 0x78,
+	0x74, 0x50, 0x61, 0x67, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x22, 0x70, 0x0a, 0x19, 0x43,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x4f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x53, 0x0a, 0x0c, 0x6f, 0x72, 0x67, 0x61,
+	0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x25,
+	0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65,
+	0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x4f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x08, 0xfa, 0x42, 0x05, 0x8a, 0x01, 0x02, 0x10, 0x01, 0x52,
+	0x0c, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x67, 0x0a,
+	0x1a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x49, 0x0a, 0x0c, 0x6f,
+	0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x25, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72,
+	0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x4f, 0x72, 0x67, 0x61,
+	0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0c, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69,
+	0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x31, 0x0a, 0x16, 0x47, 0x65, 0x74, 0x4f, 0x72, 0x67,
+	0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x17, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42,
+	0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x02, 0x69, 0x64, 0x22, 0x64, 0x0a, 0x17, 0x47, 0x65, 0x74,
+	0x4f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x12, 0x49, 0x0a, 0x0c, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x25, 0x2e, 0x6c, 0x65, 0x61,
+	0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x2e, 0x76, 0x31, 0x2e, 0x4f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x52, 0x0c, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22,
+	0x70, 0x0a, 0x19, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x53, 0x0a, 0x0c,
+	0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x25, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65,
+	0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x4f, 0x72, 0x67,
+	0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x08, 0xfa, 0x42, 0x05, 0x8a, 0x01,
+	0x02, 0x10, 0x01, 0x52, 0x0c, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x22, 0x67, 0x0a, 0x1a, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4f, 0x72, 0x67, 0x61, 0x6e,
+	0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x49, 0x0a, 0x0c, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x25, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72,
+	0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e,
+	0x4f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0c, 0x6f, 0x72,
+	0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x34, 0x0a, 0x19, 0x44, 0x65,
+	0x6c, 0x65, 0x74, 0x65, 0x4f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x17, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x02, 0x69, 0x64,
+	0x22, 0x36, 0x0a, 0x1a, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x4f, 0x72, 0x67, 0x61, 0x6e, 0x69,
+	0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18,
+	0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52,
+	0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x22, 0x63, 0x0a, 0x18, 0x4c, 0x69, 0x73, 0x74,
+	0x4f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x26, 0x0a, 0x09, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x73, 0x69, 0x7a,
+	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x42, 0x09, 0xfa, 0x42, 0x06, 0x1a, 0x04, 0x18, 0x64,
+	0x28, 0x01, 0x52, 0x08, 0x70, 0x61, 0x67, 0x65, 0x53, 0x69, 0x7a, 0x65, 0x12, 0x1f, 0x0a, 0x0b,
+	0x70, 0x61, 0x67, 0x65, 0x5f, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x05, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x22, 0xb3, 0x01,
+	0x0a, 0x19, 0x4c, 0x69, 0x73, 0x74, 0x4f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4b, 0x0a, 0x0d, 0x6f,
+	0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x25, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65,
+	0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x4f, 0x72, 0x67,
+	0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0d, 0x6f, 0x72, 0x67, 0x61, 0x6e,
+	0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x74, 0x6f, 0x74, 0x61,
+	0x6c, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x74,
+	0x6f, 0x74, 0x61, 0x6c, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x28, 0x0a, 0x10, 0x6e, 0x65, 0x78,
+	0x74, 0x5f, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x05, 0x52, 0x0e, 0x6e, 0x65, 0x78, 0x74, 0x50, 0x61, 0x67, 0x65, 0x4e, 0x75, 0x6d,
+	0x62, 0x65, 0x72, 0x42, 0xc8, 0x02, 0x0a, 0x1b, 0x63, 0x6f, 0x6d, 0x2e, 0x6c, 0x65, 0x61, 0x64,
+	0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
+	0x2e, 0x76, 0x31, 0x42, 0x14, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x9d, 0x01, 0x67, 0x69,
+	0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x56, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x45,
+	0x6e, 0x67, 0x69, 0x6e, 0x65, 0x65, 0x72, 0x69, 0x6e, 0x67, 0x2f, 0x76, 0x65, 0x63, 0x74, 0x6f,
+	0x72, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2d, 0x64, 0x65, 0x66, 0x69, 0x6e,
+	0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2f, 0x61, 0x70, 0x69, 0x2d, 0x64, 0x65, 0x66, 0x69, 0x6e,
+	0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2f, 0x70, 0x6b, 0x67, 0x2f, 0x67, 0x65, 0x6e, 0x65, 0x72,
+	0x61, 0x74, 0x65, 0x64, 0x2f, 0x6c, 0x65, 0x61, 0x64, 0x2d, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65,
+	0x72, 0x2d, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x76, 0x31, 0x2f, 0x6c, 0x65, 0x61,
+	0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x2f, 0x76, 0x31, 0x3b, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65,
+	0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4c, 0x58,
+	0x58, 0xaa, 0x02, 0x15, 0x4c, 0x65, 0x61, 0x64, 0x53, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x53,
+	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x15, 0x4c, 0x65, 0x61, 0x64,
+	0x53, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5c, 0x56,
+	0x31, 0xe2, 0x02, 0x21, 0x4c, 0x65, 0x61, 0x64, 0x53, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x53,
+	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74,
+	0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x16, 0x4c, 0x65, 0x61, 0x64, 0x53, 0x63, 0x72, 0x61,
+	0x70, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -3254,7 +4391,7 @@ func file_lead_scraper_service_v1_request_response_proto_rawDescGZIP() []byte {
 	return file_lead_scraper_service_v1_request_response_proto_rawDescData
 }
 
-var file_lead_scraper_service_v1_request_response_proto_msgTypes = make([]protoimpl.MessageInfo, 50)
+var file_lead_scraper_service_v1_request_response_proto_msgTypes = make([]protoimpl.MessageInfo, 70)
 var file_lead_scraper_service_v1_request_response_proto_goTypes = []interface{}{
 	(*CreateScrapingJobRequest)(nil),                     // 0: lead_scraper_service.v1.CreateScrapingJobRequest
 	(*CreateScrapingJobResponse)(nil),                    // 1: lead_scraper_service.v1.CreateScrapingJobResponse
@@ -3304,52 +4441,85 @@ var file_lead_scraper_service_v1_request_response_proto_goTypes = []interface{}{
 	(*GetWorkflowResponse)(nil),                          // 45: lead_scraper_service.v1.GetWorkflowResponse
 	(*UpdateWorkflowResponse)(nil),                       // 46: lead_scraper_service.v1.UpdateWorkflowResponse
 	(*CreateWorkflowResponse)(nil),                       // 47: lead_scraper_service.v1.CreateWorkflowResponse
-	nil,                                                  // 48: lead_scraper_service.v1.TriggerWorkflowRequest.ParametersEntry
-	(*GetWorkspaceAnalyticsResponse_JobSuccessRate)(nil), // 49: lead_scraper_service.v1.GetWorkspaceAnalyticsResponse.JobSuccessRate
-	(BackgroundJobStatus)(0),                             // 50: lead_scraper_service.v1.BackgroundJobStatus
-	(*ScrapingJob)(nil),                                  // 51: lead_scraper_service.v1.ScrapingJob
-	(*Account)(nil),                                      // 52: lead_scraper_service.v1.Account
-	(*Workspace)(nil),                                    // 53: lead_scraper_service.v1.Workspace
-	(*timestamppb.Timestamp)(nil),                        // 54: google.protobuf.Timestamp
-	(*AccountSettings)(nil),                              // 55: lead_scraper_service.v1.AccountSettings
-	(*ScrapingWorkflow)(nil),                             // 56: lead_scraper_service.v1.ScrapingWorkflow
+	(*CreateTenantRequest)(nil),                          // 48: lead_scraper_service.v1.CreateTenantRequest
+	(*CreateTenantResponse)(nil),                         // 49: lead_scraper_service.v1.CreateTenantResponse
+	(*GetTenantRequest)(nil),                             // 50: lead_scraper_service.v1.GetTenantRequest
+	(*GetTenantResponse)(nil),                            // 51: lead_scraper_service.v1.GetTenantResponse
+	(*UpdateTenantRequest)(nil),                          // 52: lead_scraper_service.v1.UpdateTenantRequest
+	(*UpdateTenantResponse)(nil),                         // 53: lead_scraper_service.v1.UpdateTenantResponse
+	(*DeleteTenantRequest)(nil),                          // 54: lead_scraper_service.v1.DeleteTenantRequest
+	(*DeleteTenantResponse)(nil),                         // 55: lead_scraper_service.v1.DeleteTenantResponse
+	(*ListTenantsRequest)(nil),                           // 56: lead_scraper_service.v1.ListTenantsRequest
+	(*ListTenantsResponse)(nil),                          // 57: lead_scraper_service.v1.ListTenantsResponse
+	(*CreateOrganizationRequest)(nil),                    // 58: lead_scraper_service.v1.CreateOrganizationRequest
+	(*CreateOrganizationResponse)(nil),                   // 59: lead_scraper_service.v1.CreateOrganizationResponse
+	(*GetOrganizationRequest)(nil),                       // 60: lead_scraper_service.v1.GetOrganizationRequest
+	(*GetOrganizationResponse)(nil),                      // 61: lead_scraper_service.v1.GetOrganizationResponse
+	(*UpdateOrganizationRequest)(nil),                    // 62: lead_scraper_service.v1.UpdateOrganizationRequest
+	(*UpdateOrganizationResponse)(nil),                   // 63: lead_scraper_service.v1.UpdateOrganizationResponse
+	(*DeleteOrganizationRequest)(nil),                    // 64: lead_scraper_service.v1.DeleteOrganizationRequest
+	(*DeleteOrganizationResponse)(nil),                   // 65: lead_scraper_service.v1.DeleteOrganizationResponse
+	(*ListOrganizationsRequest)(nil),                     // 66: lead_scraper_service.v1.ListOrganizationsRequest
+	(*ListOrganizationsResponse)(nil),                    // 67: lead_scraper_service.v1.ListOrganizationsResponse
+	nil,                                                  // 68: lead_scraper_service.v1.TriggerWorkflowRequest.ParametersEntry
+	(*GetWorkspaceAnalyticsResponse_JobSuccessRate)(nil), // 69: lead_scraper_service.v1.GetWorkspaceAnalyticsResponse.JobSuccessRate
+	(BackgroundJobStatus)(0),                             // 70: lead_scraper_service.v1.BackgroundJobStatus
+	(*ScrapingJob)(nil),                                  // 71: lead_scraper_service.v1.ScrapingJob
+	(*Account)(nil),                                      // 72: lead_scraper_service.v1.Account
+	(*Workspace)(nil),                                    // 73: lead_scraper_service.v1.Workspace
+	(*timestamppb.Timestamp)(nil),                        // 74: google.protobuf.Timestamp
+	(*AccountSettings)(nil),                              // 75: lead_scraper_service.v1.AccountSettings
+	(*ScrapingWorkflow)(nil),                             // 76: lead_scraper_service.v1.ScrapingWorkflow
+	(*Tenant)(nil),                                       // 77: lead_scraper_service.v1.Tenant
+	(*Organization)(nil),                                 // 78: lead_scraper_service.v1.Organization
 }
 var file_lead_scraper_service_v1_request_response_proto_depIdxs = []int32{
-	50, // 0: lead_scraper_service.v1.CreateScrapingJobResponse.status:type_name -> lead_scraper_service.v1.BackgroundJobStatus
-	51, // 1: lead_scraper_service.v1.GetScrapingJobResponse.job:type_name -> lead_scraper_service.v1.ScrapingJob
-	51, // 2: lead_scraper_service.v1.ListScrapingJobsResponse.jobs:type_name -> lead_scraper_service.v1.ScrapingJob
-	52, // 3: lead_scraper_service.v1.CreateAccountRequest.account:type_name -> lead_scraper_service.v1.Account
-	52, // 4: lead_scraper_service.v1.UpdateAccountRequest.account:type_name -> lead_scraper_service.v1.Account
-	52, // 5: lead_scraper_service.v1.ListAccountsResponse.accounts:type_name -> lead_scraper_service.v1.Account
-	53, // 6: lead_scraper_service.v1.CreateWorkspaceRequest.workspace:type_name -> lead_scraper_service.v1.Workspace
-	53, // 7: lead_scraper_service.v1.CreateWorkspaceResponse.workspace:type_name -> lead_scraper_service.v1.Workspace
-	53, // 8: lead_scraper_service.v1.UpdateWorkspaceRequest.workspace:type_name -> lead_scraper_service.v1.Workspace
-	53, // 9: lead_scraper_service.v1.ListWorkspacesResponse.workspaces:type_name -> lead_scraper_service.v1.Workspace
-	54, // 10: lead_scraper_service.v1.GetAccountUsageResponse.reset_time:type_name -> google.protobuf.Timestamp
-	55, // 11: lead_scraper_service.v1.UpdateAccountSettingsRequest.settings:type_name -> lead_scraper_service.v1.AccountSettings
-	55, // 12: lead_scraper_service.v1.UpdateAccountSettingsResponse.settings:type_name -> lead_scraper_service.v1.AccountSettings
-	56, // 13: lead_scraper_service.v1.CreateWorkflowRequest.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
-	56, // 14: lead_scraper_service.v1.UpdateWorkflowRequest.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
-	56, // 15: lead_scraper_service.v1.ListWorkflowsResponse.workflows:type_name -> lead_scraper_service.v1.ScrapingWorkflow
-	48, // 16: lead_scraper_service.v1.TriggerWorkflowRequest.parameters:type_name -> lead_scraper_service.v1.TriggerWorkflowRequest.ParametersEntry
-	50, // 17: lead_scraper_service.v1.TriggerWorkflowResponse.status:type_name -> lead_scraper_service.v1.BackgroundJobStatus
-	56, // 18: lead_scraper_service.v1.PauseWorkflowResponse.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
-	54, // 19: lead_scraper_service.v1.GetWorkspaceAnalyticsRequest.start_time:type_name -> google.protobuf.Timestamp
-	54, // 20: lead_scraper_service.v1.GetWorkspaceAnalyticsRequest.end_time:type_name -> google.protobuf.Timestamp
-	49, // 21: lead_scraper_service.v1.GetWorkspaceAnalyticsResponse.success_rates:type_name -> lead_scraper_service.v1.GetWorkspaceAnalyticsResponse.JobSuccessRate
-	53, // 22: lead_scraper_service.v1.GetWorkspaceResponse.workspace:type_name -> lead_scraper_service.v1.Workspace
-	53, // 23: lead_scraper_service.v1.UpdateWorkspaceResponse.workspace:type_name -> lead_scraper_service.v1.Workspace
-	52, // 24: lead_scraper_service.v1.GetAccountResponse.account:type_name -> lead_scraper_service.v1.Account
-	52, // 25: lead_scraper_service.v1.UpdateAccountResponse.account:type_name -> lead_scraper_service.v1.Account
-	52, // 26: lead_scraper_service.v1.CreateAccountResponse.account:type_name -> lead_scraper_service.v1.Account
-	56, // 27: lead_scraper_service.v1.GetWorkflowResponse.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
-	56, // 28: lead_scraper_service.v1.UpdateWorkflowResponse.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
-	56, // 29: lead_scraper_service.v1.CreateWorkflowResponse.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
-	30, // [30:30] is the sub-list for method output_type
-	30, // [30:30] is the sub-list for method input_type
-	30, // [30:30] is the sub-list for extension type_name
-	30, // [30:30] is the sub-list for extension extendee
-	0,  // [0:30] is the sub-list for field type_name
+	70, // 0: lead_scraper_service.v1.CreateScrapingJobResponse.status:type_name -> lead_scraper_service.v1.BackgroundJobStatus
+	71, // 1: lead_scraper_service.v1.GetScrapingJobResponse.job:type_name -> lead_scraper_service.v1.ScrapingJob
+	71, // 2: lead_scraper_service.v1.ListScrapingJobsResponse.jobs:type_name -> lead_scraper_service.v1.ScrapingJob
+	72, // 3: lead_scraper_service.v1.CreateAccountRequest.account:type_name -> lead_scraper_service.v1.Account
+	72, // 4: lead_scraper_service.v1.UpdateAccountRequest.account:type_name -> lead_scraper_service.v1.Account
+	72, // 5: lead_scraper_service.v1.ListAccountsResponse.accounts:type_name -> lead_scraper_service.v1.Account
+	73, // 6: lead_scraper_service.v1.CreateWorkspaceRequest.workspace:type_name -> lead_scraper_service.v1.Workspace
+	73, // 7: lead_scraper_service.v1.CreateWorkspaceResponse.workspace:type_name -> lead_scraper_service.v1.Workspace
+	73, // 8: lead_scraper_service.v1.UpdateWorkspaceRequest.workspace:type_name -> lead_scraper_service.v1.Workspace
+	73, // 9: lead_scraper_service.v1.ListWorkspacesResponse.workspaces:type_name -> lead_scraper_service.v1.Workspace
+	74, // 10: lead_scraper_service.v1.GetAccountUsageResponse.reset_time:type_name -> google.protobuf.Timestamp
+	75, // 11: lead_scraper_service.v1.UpdateAccountSettingsRequest.settings:type_name -> lead_scraper_service.v1.AccountSettings
+	75, // 12: lead_scraper_service.v1.UpdateAccountSettingsResponse.settings:type_name -> lead_scraper_service.v1.AccountSettings
+	76, // 13: lead_scraper_service.v1.CreateWorkflowRequest.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
+	76, // 14: lead_scraper_service.v1.UpdateWorkflowRequest.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
+	76, // 15: lead_scraper_service.v1.ListWorkflowsResponse.workflows:type_name -> lead_scraper_service.v1.ScrapingWorkflow
+	68, // 16: lead_scraper_service.v1.TriggerWorkflowRequest.parameters:type_name -> lead_scraper_service.v1.TriggerWorkflowRequest.ParametersEntry
+	70, // 17: lead_scraper_service.v1.TriggerWorkflowResponse.status:type_name -> lead_scraper_service.v1.BackgroundJobStatus
+	76, // 18: lead_scraper_service.v1.PauseWorkflowResponse.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
+	74, // 19: lead_scraper_service.v1.GetWorkspaceAnalyticsRequest.start_time:type_name -> google.protobuf.Timestamp
+	74, // 20: lead_scraper_service.v1.GetWorkspaceAnalyticsRequest.end_time:type_name -> google.protobuf.Timestamp
+	69, // 21: lead_scraper_service.v1.GetWorkspaceAnalyticsResponse.success_rates:type_name -> lead_scraper_service.v1.GetWorkspaceAnalyticsResponse.JobSuccessRate
+	73, // 22: lead_scraper_service.v1.GetWorkspaceResponse.workspace:type_name -> lead_scraper_service.v1.Workspace
+	73, // 23: lead_scraper_service.v1.UpdateWorkspaceResponse.workspace:type_name -> lead_scraper_service.v1.Workspace
+	72, // 24: lead_scraper_service.v1.GetAccountResponse.account:type_name -> lead_scraper_service.v1.Account
+	72, // 25: lead_scraper_service.v1.UpdateAccountResponse.account:type_name -> lead_scraper_service.v1.Account
+	72, // 26: lead_scraper_service.v1.CreateAccountResponse.account:type_name -> lead_scraper_service.v1.Account
+	76, // 27: lead_scraper_service.v1.GetWorkflowResponse.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
+	76, // 28: lead_scraper_service.v1.UpdateWorkflowResponse.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
+	76, // 29: lead_scraper_service.v1.CreateWorkflowResponse.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
+	77, // 30: lead_scraper_service.v1.CreateTenantRequest.tenant:type_name -> lead_scraper_service.v1.Tenant
+	77, // 31: lead_scraper_service.v1.GetTenantResponse.tenant:type_name -> lead_scraper_service.v1.Tenant
+	77, // 32: lead_scraper_service.v1.UpdateTenantRequest.tenant:type_name -> lead_scraper_service.v1.Tenant
+	77, // 33: lead_scraper_service.v1.UpdateTenantResponse.tenant:type_name -> lead_scraper_service.v1.Tenant
+	77, // 34: lead_scraper_service.v1.ListTenantsResponse.tenants:type_name -> lead_scraper_service.v1.Tenant
+	78, // 35: lead_scraper_service.v1.CreateOrganizationRequest.organization:type_name -> lead_scraper_service.v1.Organization
+	78, // 36: lead_scraper_service.v1.CreateOrganizationResponse.organization:type_name -> lead_scraper_service.v1.Organization
+	78, // 37: lead_scraper_service.v1.GetOrganizationResponse.organization:type_name -> lead_scraper_service.v1.Organization
+	78, // 38: lead_scraper_service.v1.UpdateOrganizationRequest.organization:type_name -> lead_scraper_service.v1.Organization
+	78, // 39: lead_scraper_service.v1.UpdateOrganizationResponse.organization:type_name -> lead_scraper_service.v1.Organization
+	78, // 40: lead_scraper_service.v1.ListOrganizationsResponse.organizations:type_name -> lead_scraper_service.v1.Organization
+	41, // [41:41] is the sub-list for method output_type
+	41, // [41:41] is the sub-list for method input_type
+	41, // [41:41] is the sub-list for extension type_name
+	41, // [41:41] is the sub-list for extension extendee
+	0,  // [0:41] is the sub-list for field type_name
 }
 
 func init() { file_lead_scraper_service_v1_request_response_proto_init() }
@@ -3935,7 +5105,247 @@ func file_lead_scraper_service_v1_request_response_proto_init() {
 				return nil
 			}
 		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateTenantRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 		file_lead_scraper_service_v1_request_response_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateTenantResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetTenantRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetTenantResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[52].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateTenantRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[53].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateTenantResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[54].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteTenantRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[55].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteTenantResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[56].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListTenantsRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[57].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListTenantsResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[58].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateOrganizationRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[59].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateOrganizationResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[60].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetOrganizationRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[61].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetOrganizationResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[62].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateOrganizationRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[63].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateOrganizationResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[64].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteOrganizationRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[65].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteOrganizationResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[66].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListOrganizationsRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[67].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListOrganizationsResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[69].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetWorkspaceAnalyticsResponse_JobSuccessRate); i {
 			case 0:
 				return &v.state
@@ -3954,7 +5364,7 @@ func file_lead_scraper_service_v1_request_response_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_lead_scraper_service_v1_request_response_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   50,
+			NumMessages:   70,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

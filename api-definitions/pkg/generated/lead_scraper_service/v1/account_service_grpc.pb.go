@@ -43,6 +43,16 @@ const (
 	LeadScraperService_GetWorkspace_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/GetWorkspace"
 	LeadScraperService_UpdateWorkspace_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/UpdateWorkspace"
 	LeadScraperService_DeleteWorkspace_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/DeleteWorkspace"
+	LeadScraperService_CreateTenant_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/CreateTenant"
+	LeadScraperService_GetTenant_FullMethodName               = "/lead_scraper_service.v1.LeadScraperService/GetTenant"
+	LeadScraperService_UpdateTenant_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/UpdateTenant"
+	LeadScraperService_DeleteTenant_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/DeleteTenant"
+	LeadScraperService_ListTenants_FullMethodName             = "/lead_scraper_service.v1.LeadScraperService/ListTenants"
+	LeadScraperService_CreateOrganization_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/CreateOrganization"
+	LeadScraperService_GetOrganization_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/GetOrganization"
+	LeadScraperService_UpdateOrganization_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/UpdateOrganization"
+	LeadScraperService_DeleteOrganization_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/DeleteOrganization"
+	LeadScraperService_ListOrganizations_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/ListOrganizations"
 )
 
 // LeadScraperServiceClient is the client API for LeadScraperService service.
@@ -423,6 +433,124 @@ type LeadScraperServiceClient interface {
 	// - Resource reclamation
 	// - Audit log finalization
 	DeleteWorkspace(ctx context.Context, in *DeleteWorkspaceRequest, opts ...grpc.CallOption) (*DeleteWorkspaceResponse, error)
+	// CreateTenant establishes a new tenant in the system
+	//
+	// A tenant represents the top-level organizational unit that can contain
+	// multiple organizations. This endpoint sets up the necessary infrastructure
+	// for multi-tenant isolation.
+	//
+	// Features:
+	// - Automatic resource provisioning
+	// - Custom domain support
+	// - Billing configuration
+	// - Security policy initialization
+	//
+	// Required permissions:
+	// - create:tenant (system admin only)
+	CreateTenant(ctx context.Context, in *CreateTenantRequest, opts ...grpc.CallOption) (*CreateTenantResponse, error)
+	// GetTenant retrieves detailed tenant information
+	//
+	// Returns comprehensive information about a tenant including:
+	// - Basic metadata
+	// - Resource utilization
+	// - Organization list
+	// - Configuration settings
+	// - Billing status
+	//
+	// Required permissions:
+	// - read:tenant
+	GetTenant(ctx context.Context, in *GetTenantRequest, opts ...grpc.CallOption) (*GetTenantResponse, error)
+	// UpdateTenant modifies tenant configuration
+	//
+	// Allows updating various tenant settings including:
+	// - Name and description
+	// - Domain configuration
+	// - Security policies
+	// - Resource limits
+	// - Billing settings
+	//
+	// Required permissions:
+	// - update:tenant
+	UpdateTenant(ctx context.Context, in *UpdateTenantRequest, opts ...grpc.CallOption) (*UpdateTenantResponse, error)
+	// DeleteTenant removes a tenant and all associated resources
+	//
+	// This is a destructive operation that:
+	// - Removes all tenant data
+	// - Deletes associated organizations
+	// - Cleans up resources
+	// - Archives audit logs
+	//
+	// Required permissions:
+	// - delete:tenant (system admin only)
+	DeleteTenant(ctx context.Context, in *DeleteTenantRequest, opts ...grpc.CallOption) (*DeleteTenantResponse, error)
+	// ListTenants retrieves all tenants in the system
+	//
+	// Features:
+	// - Pagination support
+	// - Filtering options
+	// - Sorting capabilities
+	// - Field selection
+	//
+	// Required permissions:
+	// - list:tenant (system admin only)
+	ListTenants(ctx context.Context, in *ListTenantsRequest, opts ...grpc.CallOption) (*ListTenantsResponse, error)
+	// CreateOrganization establishes a new organization within a tenant
+	//
+	// Organizations represent business units within a tenant that can:
+	// - Manage their own users
+	// - Have separate billing
+	// - Maintain isolated resources
+	// - Configure custom policies
+	//
+	// Required permissions:
+	// - create:organization
+	CreateOrganization(ctx context.Context, in *CreateOrganizationRequest, opts ...grpc.CallOption) (*CreateOrganizationResponse, error)
+	// GetOrganization retrieves detailed organization information
+	//
+	// Returns comprehensive information including:
+	// - Basic metadata
+	// - Member list
+	// - Resource usage
+	// - Billing status
+	// - Policy configuration
+	//
+	// Required permissions:
+	// - read:organization
+	GetOrganization(ctx context.Context, in *GetOrganizationRequest, opts ...grpc.CallOption) (*GetOrganizationResponse, error)
+	// UpdateOrganization modifies organization configuration
+	//
+	// Allows updating:
+	// - Basic information
+	// - Security policies
+	// - Resource limits
+	// - Member permissions
+	// - Integration settings
+	//
+	// Required permissions:
+	// - update:organization
+	UpdateOrganization(ctx context.Context, in *UpdateOrganizationRequest, opts ...grpc.CallOption) (*UpdateOrganizationResponse, error)
+	// DeleteOrganization removes an organization and its resources
+	//
+	// This operation:
+	// - Removes organization data
+	// - Deletes member associations
+	// - Cleans up resources
+	// - Archives audit logs
+	//
+	// Required permissions:
+	// - delete:organization
+	DeleteOrganization(ctx context.Context, in *DeleteOrganizationRequest, opts ...grpc.CallOption) (*DeleteOrganizationResponse, error)
+	// ListOrganizations retrieves all organizations in a tenant
+	//
+	// Features:
+	// - Pagination support
+	// - Filtering by status
+	// - Sorting options
+	// - Field selection
+	//
+	// Required permissions:
+	// - list:organization
+	ListOrganizations(ctx context.Context, in *ListOrganizationsRequest, opts ...grpc.CallOption) (*ListOrganizationsResponse, error)
 }
 
 type leadScraperServiceClient struct {
@@ -667,6 +795,106 @@ func (c *leadScraperServiceClient) DeleteWorkspace(ctx context.Context, in *Dele
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteWorkspaceResponse)
 	err := c.cc.Invoke(ctx, LeadScraperService_DeleteWorkspace_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) CreateTenant(ctx context.Context, in *CreateTenantRequest, opts ...grpc.CallOption) (*CreateTenantResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateTenantResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_CreateTenant_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) GetTenant(ctx context.Context, in *GetTenantRequest, opts ...grpc.CallOption) (*GetTenantResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTenantResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetTenant_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) UpdateTenant(ctx context.Context, in *UpdateTenantRequest, opts ...grpc.CallOption) (*UpdateTenantResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTenantResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_UpdateTenant_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) DeleteTenant(ctx context.Context, in *DeleteTenantRequest, opts ...grpc.CallOption) (*DeleteTenantResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteTenantResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_DeleteTenant_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) ListTenants(ctx context.Context, in *ListTenantsRequest, opts ...grpc.CallOption) (*ListTenantsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTenantsResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_ListTenants_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) CreateOrganization(ctx context.Context, in *CreateOrganizationRequest, opts ...grpc.CallOption) (*CreateOrganizationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateOrganizationResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_CreateOrganization_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) GetOrganization(ctx context.Context, in *GetOrganizationRequest, opts ...grpc.CallOption) (*GetOrganizationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOrganizationResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetOrganization_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) UpdateOrganization(ctx context.Context, in *UpdateOrganizationRequest, opts ...grpc.CallOption) (*UpdateOrganizationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateOrganizationResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_UpdateOrganization_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) DeleteOrganization(ctx context.Context, in *DeleteOrganizationRequest, opts ...grpc.CallOption) (*DeleteOrganizationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteOrganizationResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_DeleteOrganization_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) ListOrganizations(ctx context.Context, in *ListOrganizationsRequest, opts ...grpc.CallOption) (*ListOrganizationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListOrganizationsResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_ListOrganizations_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1051,6 +1279,124 @@ type LeadScraperServiceServer interface {
 	// - Resource reclamation
 	// - Audit log finalization
 	DeleteWorkspace(context.Context, *DeleteWorkspaceRequest) (*DeleteWorkspaceResponse, error)
+	// CreateTenant establishes a new tenant in the system
+	//
+	// A tenant represents the top-level organizational unit that can contain
+	// multiple organizations. This endpoint sets up the necessary infrastructure
+	// for multi-tenant isolation.
+	//
+	// Features:
+	// - Automatic resource provisioning
+	// - Custom domain support
+	// - Billing configuration
+	// - Security policy initialization
+	//
+	// Required permissions:
+	// - create:tenant (system admin only)
+	CreateTenant(context.Context, *CreateTenantRequest) (*CreateTenantResponse, error)
+	// GetTenant retrieves detailed tenant information
+	//
+	// Returns comprehensive information about a tenant including:
+	// - Basic metadata
+	// - Resource utilization
+	// - Organization list
+	// - Configuration settings
+	// - Billing status
+	//
+	// Required permissions:
+	// - read:tenant
+	GetTenant(context.Context, *GetTenantRequest) (*GetTenantResponse, error)
+	// UpdateTenant modifies tenant configuration
+	//
+	// Allows updating various tenant settings including:
+	// - Name and description
+	// - Domain configuration
+	// - Security policies
+	// - Resource limits
+	// - Billing settings
+	//
+	// Required permissions:
+	// - update:tenant
+	UpdateTenant(context.Context, *UpdateTenantRequest) (*UpdateTenantResponse, error)
+	// DeleteTenant removes a tenant and all associated resources
+	//
+	// This is a destructive operation that:
+	// - Removes all tenant data
+	// - Deletes associated organizations
+	// - Cleans up resources
+	// - Archives audit logs
+	//
+	// Required permissions:
+	// - delete:tenant (system admin only)
+	DeleteTenant(context.Context, *DeleteTenantRequest) (*DeleteTenantResponse, error)
+	// ListTenants retrieves all tenants in the system
+	//
+	// Features:
+	// - Pagination support
+	// - Filtering options
+	// - Sorting capabilities
+	// - Field selection
+	//
+	// Required permissions:
+	// - list:tenant (system admin only)
+	ListTenants(context.Context, *ListTenantsRequest) (*ListTenantsResponse, error)
+	// CreateOrganization establishes a new organization within a tenant
+	//
+	// Organizations represent business units within a tenant that can:
+	// - Manage their own users
+	// - Have separate billing
+	// - Maintain isolated resources
+	// - Configure custom policies
+	//
+	// Required permissions:
+	// - create:organization
+	CreateOrganization(context.Context, *CreateOrganizationRequest) (*CreateOrganizationResponse, error)
+	// GetOrganization retrieves detailed organization information
+	//
+	// Returns comprehensive information including:
+	// - Basic metadata
+	// - Member list
+	// - Resource usage
+	// - Billing status
+	// - Policy configuration
+	//
+	// Required permissions:
+	// - read:organization
+	GetOrganization(context.Context, *GetOrganizationRequest) (*GetOrganizationResponse, error)
+	// UpdateOrganization modifies organization configuration
+	//
+	// Allows updating:
+	// - Basic information
+	// - Security policies
+	// - Resource limits
+	// - Member permissions
+	// - Integration settings
+	//
+	// Required permissions:
+	// - update:organization
+	UpdateOrganization(context.Context, *UpdateOrganizationRequest) (*UpdateOrganizationResponse, error)
+	// DeleteOrganization removes an organization and its resources
+	//
+	// This operation:
+	// - Removes organization data
+	// - Deletes member associations
+	// - Cleans up resources
+	// - Archives audit logs
+	//
+	// Required permissions:
+	// - delete:organization
+	DeleteOrganization(context.Context, *DeleteOrganizationRequest) (*DeleteOrganizationResponse, error)
+	// ListOrganizations retrieves all organizations in a tenant
+	//
+	// Features:
+	// - Pagination support
+	// - Filtering by status
+	// - Sorting options
+	// - Field selection
+	//
+	// Required permissions:
+	// - list:organization
+	ListOrganizations(context.Context, *ListOrganizationsRequest) (*ListOrganizationsResponse, error)
 	mustEmbedUnimplementedLeadScraperServiceServer()
 }
 
@@ -1132,6 +1478,36 @@ func (UnimplementedLeadScraperServiceServer) UpdateWorkspace(context.Context, *U
 }
 func (UnimplementedLeadScraperServiceServer) DeleteWorkspace(context.Context, *DeleteWorkspaceRequest) (*DeleteWorkspaceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteWorkspace not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) CreateTenant(context.Context, *CreateTenantRequest) (*CreateTenantResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTenant not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) GetTenant(context.Context, *GetTenantRequest) (*GetTenantResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTenant not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) UpdateTenant(context.Context, *UpdateTenantRequest) (*UpdateTenantResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTenant not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) DeleteTenant(context.Context, *DeleteTenantRequest) (*DeleteTenantResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTenant not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) ListTenants(context.Context, *ListTenantsRequest) (*ListTenantsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTenants not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) CreateOrganization(context.Context, *CreateOrganizationRequest) (*CreateOrganizationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateOrganization not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) GetOrganization(context.Context, *GetOrganizationRequest) (*GetOrganizationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOrganization not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) UpdateOrganization(context.Context, *UpdateOrganizationRequest) (*UpdateOrganizationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrganization not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) DeleteOrganization(context.Context, *DeleteOrganizationRequest) (*DeleteOrganizationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrganization not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) ListOrganizations(context.Context, *ListOrganizationsRequest) (*ListOrganizationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListOrganizations not implemented")
 }
 func (UnimplementedLeadScraperServiceServer) mustEmbedUnimplementedLeadScraperServiceServer() {}
 func (UnimplementedLeadScraperServiceServer) testEmbeddedByValue()                            {}
@@ -1586,6 +1962,186 @@ func _LeadScraperService_DeleteWorkspace_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LeadScraperService_CreateTenant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTenantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).CreateTenant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_CreateTenant_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).CreateTenant(ctx, req.(*CreateTenantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_GetTenant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTenantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).GetTenant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_GetTenant_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).GetTenant(ctx, req.(*GetTenantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_UpdateTenant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTenantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).UpdateTenant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_UpdateTenant_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).UpdateTenant(ctx, req.(*UpdateTenantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_DeleteTenant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTenantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).DeleteTenant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_DeleteTenant_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).DeleteTenant(ctx, req.(*DeleteTenantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_ListTenants_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTenantsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).ListTenants(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_ListTenants_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).ListTenants(ctx, req.(*ListTenantsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_CreateOrganization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOrganizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).CreateOrganization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_CreateOrganization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).CreateOrganization(ctx, req.(*CreateOrganizationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_GetOrganization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOrganizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).GetOrganization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_GetOrganization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).GetOrganization(ctx, req.(*GetOrganizationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_UpdateOrganization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOrganizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).UpdateOrganization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_UpdateOrganization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).UpdateOrganization(ctx, req.(*UpdateOrganizationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_DeleteOrganization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOrganizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).DeleteOrganization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_DeleteOrganization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).DeleteOrganization(ctx, req.(*DeleteOrganizationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_ListOrganizations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListOrganizationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).ListOrganizations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_ListOrganizations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).ListOrganizations(ctx, req.(*ListOrganizationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // LeadScraperService_ServiceDesc is the grpc.ServiceDesc for LeadScraperService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1688,6 +2244,46 @@ var LeadScraperService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteWorkspace",
 			Handler:    _LeadScraperService_DeleteWorkspace_Handler,
+		},
+		{
+			MethodName: "CreateTenant",
+			Handler:    _LeadScraperService_CreateTenant_Handler,
+		},
+		{
+			MethodName: "GetTenant",
+			Handler:    _LeadScraperService_GetTenant_Handler,
+		},
+		{
+			MethodName: "UpdateTenant",
+			Handler:    _LeadScraperService_UpdateTenant_Handler,
+		},
+		{
+			MethodName: "DeleteTenant",
+			Handler:    _LeadScraperService_DeleteTenant_Handler,
+		},
+		{
+			MethodName: "ListTenants",
+			Handler:    _LeadScraperService_ListTenants_Handler,
+		},
+		{
+			MethodName: "CreateOrganization",
+			Handler:    _LeadScraperService_CreateOrganization_Handler,
+		},
+		{
+			MethodName: "GetOrganization",
+			Handler:    _LeadScraperService_GetOrganization_Handler,
+		},
+		{
+			MethodName: "UpdateOrganization",
+			Handler:    _LeadScraperService_UpdateOrganization_Handler,
+		},
+		{
+			MethodName: "DeleteOrganization",
+			Handler:    _LeadScraperService_DeleteOrganization_Handler,
+		},
+		{
+			MethodName: "ListOrganizations",
+			Handler:    _LeadScraperService_ListOrganizations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

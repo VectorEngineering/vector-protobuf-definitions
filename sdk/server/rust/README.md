@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-03T20:00:16.314039-05:00[America/New_York]
+- Build date: 2025-02-04T01:38:20.870925-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -63,17 +63,23 @@ To run a client, follow one of the following simple steps:
 
 ```
 cargo run --example client DeleteAccount
+cargo run --example client DeleteOrganization
 cargo run --example client DeleteScrapingJob
+cargo run --example client DeleteTenant
 cargo run --example client DeleteWorkspace
 cargo run --example client DownloadScrapingResults
 cargo run --example client GetAccount
 cargo run --example client GetAccountUsage
+cargo run --example client GetOrganization
 cargo run --example client GetScrapingJob
+cargo run --example client GetTenant
 cargo run --example client GetWorkflow
 cargo run --example client GetWorkspace
 cargo run --example client GetWorkspaceAnalytics
 cargo run --example client ListAccounts
+cargo run --example client ListOrganizations
 cargo run --example client ListScrapingJobs
+cargo run --example client ListTenants
 cargo run --example client ListWorkflows
 cargo run --example client ListWorkspaces
 cargo run --example client DeleteAccount1
@@ -120,27 +126,37 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateAccount**](docs/lead_scraper_service_api.md#CreateAccount) | **POST** /lead-scraper-microservice/api/v1/accounts | Create a new account
+[**CreateOrganization**](docs/lead_scraper_service_api.md#CreateOrganization) | **POST** /lead-scraper-microservice/api/v1/organization | Create a new organization
 [**CreateScrapingJob**](docs/lead_scraper_service_api.md#CreateScrapingJob) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task
+[**CreateTenant**](docs/lead_scraper_service_api.md#CreateTenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant
 [**CreateWorkspace**](docs/lead_scraper_service_api.md#CreateWorkspace) | **POST** /lead-scraper-microservice/api/v1/workspaces | Create a new workspace
 [**DeleteAccount**](docs/lead_scraper_service_api.md#DeleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
+[**DeleteOrganization**](docs/lead_scraper_service_api.md#DeleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
 [**DeleteScrapingJob**](docs/lead_scraper_service_api.md#DeleteScrapingJob) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job
+[**DeleteTenant**](docs/lead_scraper_service_api.md#DeleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 [**DeleteWorkspace**](docs/lead_scraper_service_api.md#DeleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
 [**DownloadScrapingResults**](docs/lead_scraper_service_api.md#DownloadScrapingResults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV
 [**GetAccount**](docs/lead_scraper_service_api.md#GetAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details
 [**GetAccountUsage**](docs/lead_scraper_service_api.md#GetAccountUsage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage
+[**GetOrganization**](docs/lead_scraper_service_api.md#GetOrganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details
 [**GetScrapingJob**](docs/lead_scraper_service_api.md#GetScrapingJob) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job
+[**GetTenant**](docs/lead_scraper_service_api.md#GetTenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details
 [**GetWorkflow**](docs/lead_scraper_service_api.md#GetWorkflow) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Get workflow details
 [**GetWorkspace**](docs/lead_scraper_service_api.md#GetWorkspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details
 [**GetWorkspaceAnalytics**](docs/lead_scraper_service_api.md#GetWorkspaceAnalytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics
 [**LeadScraperService_CreateWorkflow**](docs/lead_scraper_service_api.md#LeadScraperService_CreateWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow
 [**ListAccounts**](docs/lead_scraper_service_api.md#ListAccounts) | **GET** /lead-scraper-microservice/api/v1/accounts | List all accounts
+[**ListOrganizations**](docs/lead_scraper_service_api.md#ListOrganizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations
 [**ListScrapingJobs**](docs/lead_scraper_service_api.md#ListScrapingJobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs
+[**ListTenants**](docs/lead_scraper_service_api.md#ListTenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
 [**ListWorkflows**](docs/lead_scraper_service_api.md#ListWorkflows) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | List workflows
 [**ListWorkspaces**](docs/lead_scraper_service_api.md#ListWorkspaces) | **GET** /lead-scraper-microservice/api/v1/workspaces | List workspaces
 [**PauseWorkflow**](docs/lead_scraper_service_api.md#PauseWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution
 [**TriggerWorkflow**](docs/lead_scraper_service_api.md#TriggerWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution
 [**UpdateAccount**](docs/lead_scraper_service_api.md#UpdateAccount) | **PUT** /lead-scraper-microservice/api/v1/accounts | Update account details
 [**UpdateAccountSettings**](docs/lead_scraper_service_api.md#UpdateAccountSettings) | **PUT** /lead-scraper-microservice/api/v1/accounts/settings | Update account settings
+[**UpdateOrganization**](docs/lead_scraper_service_api.md#UpdateOrganization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details
+[**UpdateTenant**](docs/lead_scraper_service_api.md#UpdateTenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details
 [**UpdateWorkflow**](docs/lead_scraper_service_api.md#UpdateWorkflow) | **PUT** /lead-scraper-microservice/api/v1/workspaces/workflow | Update workflow details
 [**UpdateWorkspace**](docs/lead_scraper_service_api.md#UpdateWorkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details
 [**CreateAccount1**](docs/workspace_service_api.md#CreateAccount1) | **POST** /workspace-service/v1/accounts | Create a new account
@@ -188,6 +204,8 @@ Method | HTTP request | Description
  - [AvailabilityInfo](docs/AvailabilityInfo.md)
  - [BackgroundJobStatus](docs/BackgroundJobStatus.md)
  - [BadGatewayErrorMessageResponse](docs/BadGatewayErrorMessageResponse.md)
+ - [BillingMode](docs/BillingMode.md)
+ - [BillingPlan](docs/BillingPlan.md)
  - [BranchMerge](docs/BranchMerge.md)
  - [BranchPolicy](docs/BranchPolicy.md)
  - [BusinessHours](docs/BusinessHours.md)
@@ -206,8 +224,12 @@ Method | HTTP request | Description
  - [CreateAccountRequest1](docs/CreateAccountRequest1.md)
  - [CreateAccountResponse](docs/CreateAccountResponse.md)
  - [CreateAccountResponse1](docs/CreateAccountResponse1.md)
+ - [CreateOrganizationRequest](docs/CreateOrganizationRequest.md)
+ - [CreateOrganizationResponse](docs/CreateOrganizationResponse.md)
  - [CreateScrapingJobRequest](docs/CreateScrapingJobRequest.md)
  - [CreateScrapingJobResponse](docs/CreateScrapingJobResponse.md)
+ - [CreateTenantBody](docs/CreateTenantBody.md)
+ - [CreateTenantResponse](docs/CreateTenantResponse.md)
  - [CreateWorkflowBody](docs/CreateWorkflowBody.md)
  - [CreateWorkflowResponse](docs/CreateWorkflowResponse.md)
  - [CreateWorkspaceRequest](docs/CreateWorkspaceRequest.md)
@@ -217,7 +239,9 @@ Method | HTTP request | Description
  - [DataProfile](docs/DataProfile.md)
  - [DayOfWeek](docs/DayOfWeek.md)
  - [DeleteAccountResponse](docs/DeleteAccountResponse.md)
+ - [DeleteOrganizationResponse](docs/DeleteOrganizationResponse.md)
  - [DeleteScrapingJobResponse](docs/DeleteScrapingJobResponse.md)
+ - [DeleteTenantResponse](docs/DeleteTenantResponse.md)
  - [DeleteWorkspaceResponse](docs/DeleteWorkspaceResponse.md)
  - [Dependency](docs/Dependency.md)
  - [DocumentBranch](docs/DocumentBranch.md)
@@ -242,7 +266,9 @@ Method | HTTP request | Description
  - [GetAccountResponse](docs/GetAccountResponse.md)
  - [GetAccountResponse1](docs/GetAccountResponse1.md)
  - [GetAccountUsageResponse](docs/GetAccountUsageResponse.md)
+ - [GetOrganizationResponse](docs/GetOrganizationResponse.md)
  - [GetScrapingJobResponse](docs/GetScrapingJobResponse.md)
+ - [GetTenantResponse](docs/GetTenantResponse.md)
  - [GetWorkflowResponse](docs/GetWorkflowResponse.md)
  - [GetWorkspaceAnalyticsResponse](docs/GetWorkspaceAnalyticsResponse.md)
  - [GetWorkspaceAnalyticsResponse1](docs/GetWorkspaceAnalyticsResponse1.md)
@@ -253,13 +279,16 @@ Method | HTTP request | Description
  - [IncludedField](docs/IncludedField.md)
  - [InternalErrorCode](docs/InternalErrorCode.md)
  - [InternalErrorMessageResponse](docs/InternalErrorMessageResponse.md)
+ - [Interval](docs/Interval.md)
  - [JobSuccessRate](docs/JobSuccessRate.md)
  - [Language](docs/Language.md)
  - [Lead](docs/Lead.md)
  - [LimitInfo](docs/LimitInfo.md)
  - [ListAccountsResponse](docs/ListAccountsResponse.md)
  - [ListAccountsResponse1](docs/ListAccountsResponse1.md)
+ - [ListOrganizationsResponse](docs/ListOrganizationsResponse.md)
  - [ListScrapingJobsResponse](docs/ListScrapingJobsResponse.md)
+ - [ListTenantsResponse](docs/ListTenantsResponse.md)
  - [ListWorkflowsResponse](docs/ListWorkflowsResponse.md)
  - [ListWorkspaceSharingsResponse](docs/ListWorkspaceSharingsResponse.md)
  - [ListWorkspacesResponse](docs/ListWorkspacesResponse.md)
@@ -275,13 +304,17 @@ Method | HTTP request | Description
  - [NotImplementedErrorMessageResponse](docs/NotImplementedErrorMessageResponse.md)
  - [NullValue](docs/NullValue.md)
  - [OperationDetails](docs/OperationDetails.md)
+ - [Organization](docs/Organization.md)
+ - [OrganizationPeriodStatus](docs/OrganizationPeriodStatus.md)
  - [OutputFormat](docs/OutputFormat.md)
  - [PauseWorkflowBody](docs/PauseWorkflowBody.md)
  - [PauseWorkflowResponse](docs/PauseWorkflowResponse.md)
  - [PayloadFormat](docs/PayloadFormat.md)
  - [PaymentInfo](docs/PaymentInfo.md)
  - [PaymentRequiredErrorMessageResponse](docs/PaymentRequiredErrorMessageResponse.md)
+ - [PaymentStatus](docs/PaymentStatus.md)
  - [Permission](docs/Permission.md)
+ - [PlanTier](docs/PlanTier.md)
  - [PreconditionFailedErrorMessageResponse](docs/PreconditionFailedErrorMessageResponse.md)
  - [PricingModel](docs/PricingModel.md)
  - [QuotaInfo](docs/QuotaInfo.md)
@@ -310,10 +343,14 @@ Method | HTTP request | Description
  - [SignatureWorkflow](docs/SignatureWorkflow.md)
  - [Status](docs/Status.md)
  - [StorageBreakdown](docs/StorageBreakdown.md)
+ - [Subscription](docs/Subscription.md)
  - [Suggestions](docs/Suggestions.md)
  - [TemplateType](docs/TemplateType.md)
  - [TemplateVariable](docs/TemplateVariable.md)
  - [TemplateVersion](docs/TemplateVersion.md)
+ - [Tenant](docs/Tenant.md)
+ - [TenantApiKey](docs/TenantApiKey.md)
+ - [TenantPeriodStatus](docs/TenantPeriodStatus.md)
  - [Timezone](docs/Timezone.md)
  - [TokenInfo](docs/TokenInfo.md)
  - [TooEarlyErrorMessageResponse](docs/TooEarlyErrorMessageResponse.md)
@@ -325,6 +362,10 @@ Method | HTTP request | Description
  - [UpdateAccountResponse](docs/UpdateAccountResponse.md)
  - [UpdateAccountSettingsRequest](docs/UpdateAccountSettingsRequest.md)
  - [UpdateAccountSettingsResponse](docs/UpdateAccountSettingsResponse.md)
+ - [UpdateOrganizationRequest](docs/UpdateOrganizationRequest.md)
+ - [UpdateOrganizationResponse](docs/UpdateOrganizationResponse.md)
+ - [UpdateTenantRequest](docs/UpdateTenantRequest.md)
+ - [UpdateTenantResponse](docs/UpdateTenantResponse.md)
  - [UpdateWorkflowRequest](docs/UpdateWorkflowRequest.md)
  - [UpdateWorkflowResponse](docs/UpdateWorkflowResponse.md)
  - [UpdateWorkspaceRequest](docs/UpdateWorkspaceRequest.md)

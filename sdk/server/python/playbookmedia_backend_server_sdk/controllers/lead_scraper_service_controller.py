@@ -8,26 +8,36 @@ from playbookmedia_backend_server_sdk.models.bad_gateway_error_message_response 
 from playbookmedia_backend_server_sdk.models.conflict_error_message_response import ConflictErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_account_request import CreateAccountRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_account_response import CreateAccountResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.create_organization_request import CreateOrganizationRequest  # noqa: E501
+from playbookmedia_backend_server_sdk.models.create_organization_response import CreateOrganizationResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_scraping_job_request import CreateScrapingJobRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_scraping_job_response import CreateScrapingJobResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.create_tenant_body import CreateTenantBody  # noqa: E501
+from playbookmedia_backend_server_sdk.models.create_tenant_response import CreateTenantResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_workflow_body import CreateWorkflowBody  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_workflow_response import CreateWorkflowResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_workspace_request import CreateWorkspaceRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_workspace_response import CreateWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_account_response import DeleteAccountResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.delete_organization_response import DeleteOrganizationResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_scraping_job_response import DeleteScrapingJobResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.delete_tenant_response import DeleteTenantResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_workspace_response import DeleteWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.download_scraping_results_response import DownloadScrapingResultsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.forbidden_error_message_response import ForbiddenErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.gateway_timeout_error_message_response import GatewayTimeoutErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_account_response import GetAccountResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_account_usage_response import GetAccountUsageResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.get_organization_response import GetOrganizationResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_scraping_job_response import GetScrapingJobResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.get_tenant_response import GetTenantResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_workspace_analytics_response import GetWorkspaceAnalyticsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.gone_error_message_response import GoneErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.internal_error_message_response import InternalErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_accounts_response import ListAccountsResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.list_organizations_response import ListOrganizationsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_scraping_jobs_response import ListScrapingJobsResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.list_tenants_response import ListTenantsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_workflows_response import ListWorkflowsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_workspaces_response import ListWorkspacesResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.method_not_allowed_error_message_response import MethodNotAllowedErrorMessageResponse  # noqa: E501
@@ -49,6 +59,10 @@ from playbookmedia_backend_server_sdk.models.update_account_request import Updat
 from playbookmedia_backend_server_sdk.models.update_account_response import UpdateAccountResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_account_settings_request import UpdateAccountSettingsRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_account_settings_response import UpdateAccountSettingsResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.update_organization_request import UpdateOrganizationRequest  # noqa: E501
+from playbookmedia_backend_server_sdk.models.update_organization_response import UpdateOrganizationResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.update_tenant_request import UpdateTenantRequest  # noqa: E501
+from playbookmedia_backend_server_sdk.models.update_tenant_response import UpdateTenantResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_workflow_request import UpdateWorkflowRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_workspace_request import UpdateWorkspaceRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_workspace_response import UpdateWorkspaceResponse  # noqa: E501
@@ -72,6 +86,21 @@ def create_account(create_account_request):  # noqa: E501
     return 'do some magic!'
 
 
+def create_organization(create_organization_request):  # noqa: E501
+    """Create a new organization
+
+    Creates a new organization within a tenant # noqa: E501
+
+    :param create_organization_request: 
+    :type create_organization_request: dict | bytes
+
+    :rtype: Union[CreateOrganizationResponse, Tuple[CreateOrganizationResponse, int], Tuple[CreateOrganizationResponse, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        create_organization_request = CreateOrganizationRequest.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
 def create_scraping_job(create_scraping_job_request):  # noqa: E501
     """Create a new job scraping task
 
@@ -84,6 +113,23 @@ def create_scraping_job(create_scraping_job_request):  # noqa: E501
     """
     if connexion.request.is_json:
         create_scraping_job_request = CreateScrapingJobRequest.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
+def create_tenant(organization_id, create_tenant_body):  # noqa: E501
+    """Create a new tenant
+
+    Creates a new tenant in the system # noqa: E501
+
+    :param organization_id: 
+    :type organization_id: str
+    :param create_tenant_body: 
+    :type create_tenant_body: dict | bytes
+
+    :rtype: Union[CreateTenantResponse, Tuple[CreateTenantResponse, int], Tuple[CreateTenantResponse, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        create_tenant_body = CreateTenantBody.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
 
 
@@ -115,6 +161,19 @@ def delete_account(id):  # noqa: E501
     return 'do some magic!'
 
 
+def delete_organization(id):  # noqa: E501
+    """Delete an organization
+
+    Permanently deletes an organization and all associated resources # noqa: E501
+
+    :param id: 
+    :type id: str
+
+    :rtype: Union[DeleteOrganizationResponse, Tuple[DeleteOrganizationResponse, int], Tuple[DeleteOrganizationResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
 def delete_scraping_job(job_id, user_id, org_id, tenant_id):  # noqa: E501
     """Delete a specific job
 
@@ -130,6 +189,21 @@ def delete_scraping_job(job_id, user_id, org_id, tenant_id):  # noqa: E501
     :type tenant_id: str
 
     :rtype: Union[DeleteScrapingJobResponse, Tuple[DeleteScrapingJobResponse, int], Tuple[DeleteScrapingJobResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
+def delete_tenant(organization_id, tenant_id):  # noqa: E501
+    """Delete a tenant
+
+    Permanently deletes a tenant and all associated resources # noqa: E501
+
+    :param organization_id: 
+    :type organization_id: str
+    :param tenant_id: 
+    :type tenant_id: str
+
+    :rtype: Union[DeleteTenantResponse, Tuple[DeleteTenantResponse, int], Tuple[DeleteTenantResponse, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -192,6 +266,19 @@ def get_account_usage(id):  # noqa: E501
     return 'do some magic!'
 
 
+def get_organization(id):  # noqa: E501
+    """Get organization details
+
+    Retrieves details of a specific organization # noqa: E501
+
+    :param id: 
+    :type id: str
+
+    :rtype: Union[GetOrganizationResponse, Tuple[GetOrganizationResponse, int], Tuple[GetOrganizationResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
 def get_scraping_job(job_id, user_id, org_id, tenant_id):  # noqa: E501
     """Get a specific job
 
@@ -207,6 +294,21 @@ def get_scraping_job(job_id, user_id, org_id, tenant_id):  # noqa: E501
     :type tenant_id: str
 
     :rtype: Union[GetScrapingJobResponse, Tuple[GetScrapingJobResponse, int], Tuple[GetScrapingJobResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
+def get_tenant(organization_id, tenant_id):  # noqa: E501
+    """Get tenant details
+
+    Retrieves details of a specific tenant # noqa: E501
+
+    :param organization_id: 
+    :type organization_id: str
+    :param tenant_id: 
+    :type tenant_id: str
+
+    :rtype: Union[GetTenantResponse, Tuple[GetTenantResponse, int], Tuple[GetTenantResponse, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -292,6 +394,21 @@ def list_accounts(page_size=None, page_number=None, filter=None):  # noqa: E501
     return 'do some magic!'
 
 
+def list_organizations(page_size=None, page_number=None):  # noqa: E501
+    """List all organizations
+
+    Retrieves a list of all organizations in a tenant # noqa: E501
+
+    :param page_size: 
+    :type page_size: int
+    :param page_number: 
+    :type page_number: int
+
+    :rtype: Union[ListOrganizationsResponse, Tuple[ListOrganizationsResponse, int], Tuple[ListOrganizationsResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
 def list_scraping_jobs(user_id, org_id, tenant_id):  # noqa: E501
     """Get all jobs
 
@@ -305,6 +422,23 @@ def list_scraping_jobs(user_id, org_id, tenant_id):  # noqa: E501
     :type tenant_id: str
 
     :rtype: Union[ListScrapingJobsResponse, Tuple[ListScrapingJobsResponse, int], Tuple[ListScrapingJobsResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
+def list_tenants(organization_id, page_size=None, page_number=None):  # noqa: E501
+    """List all tenants
+
+    Retrieves a list of all tenants in the system # noqa: E501
+
+    :param organization_id: 
+    :type organization_id: str
+    :param page_size: 
+    :type page_size: int
+    :param page_number: 
+    :type page_number: int
+
+    :rtype: Union[ListTenantsResponse, Tuple[ListTenantsResponse, int], Tuple[ListTenantsResponse, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -410,6 +544,36 @@ def update_account_settings(update_account_settings_request):  # noqa: E501
     """
     if connexion.request.is_json:
         update_account_settings_request = UpdateAccountSettingsRequest.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
+def update_organization(update_organization_request):  # noqa: E501
+    """Update organization details
+
+    Updates the configuration of a specific organization # noqa: E501
+
+    :param update_organization_request: 
+    :type update_organization_request: dict | bytes
+
+    :rtype: Union[UpdateOrganizationResponse, Tuple[UpdateOrganizationResponse, int], Tuple[UpdateOrganizationResponse, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        update_organization_request = UpdateOrganizationRequest.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
+def update_tenant(update_tenant_request):  # noqa: E501
+    """Update tenant details
+
+    Updates the configuration of a specific tenant # noqa: E501
+
+    :param update_tenant_request: 
+    :type update_tenant_request: dict | bytes
+
+    :rtype: Union[UpdateTenantResponse, Tuple[UpdateTenantResponse, int], Tuple[UpdateTenantResponse, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        update_tenant_request = UpdateTenantRequest.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
 
 

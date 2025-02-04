@@ -5,23 +5,30 @@ import org.openapitools.model.AccountStatus;
 import org.openapitools.model.AppCategory;
 import org.openapitools.model.AuthErrorCode;
 import org.openapitools.model.BackgroundJobStatus;
+import org.openapitools.model.BillingMode;
+import org.openapitools.model.BillingPlan;
 import org.openapitools.model.ComplianceLevel;
 import org.openapitools.model.DayOfWeek;
 import org.openapitools.model.DocumentStatus;
 import org.openapitools.model.EmployeeBenefit;
 import org.openapitools.model.IncludedField;
 import org.openapitools.model.InternalErrorCode;
+import org.openapitools.model.Interval;
 import org.openapitools.model.Language;
 import org.openapitools.model.NotFoundErrorCode;
 import org.openapitools.model.NullValue;
+import org.openapitools.model.OrganizationStatus;
 import org.openapitools.model.OutputFormat;
 import org.openapitools.model.PayloadFormat;
+import org.openapitools.model.PaymentStatus;
 import org.openapitools.model.Permission;
+import org.openapitools.model.PlanTier;
 import org.openapitools.model.PricingModel;
 import org.openapitools.model.RevenueRange;
 import org.openapitools.model.Role;
 import org.openapitools.model.SignatureStatus;
 import org.openapitools.model.TemplateType;
+import org.openapitools.model.TenantStatus;
 import org.openapitools.model.Timezone;
 import org.openapitools.model.TriggerEvent;
 import org.openapitools.model.ValidationErrorCode;
@@ -79,6 +86,24 @@ public class EnumConverterConfiguration {
             }
         };
     }
+    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.billingModeConverter")
+    Converter<String, BillingMode> billingModeConverter() {
+        return new Converter<String, BillingMode>() {
+            @Override
+            public BillingMode convert(String source) {
+                return BillingMode.fromValue(source);
+            }
+        };
+    }
+    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.billingPlanConverter")
+    Converter<String, BillingPlan> billingPlanConverter() {
+        return new Converter<String, BillingPlan>() {
+            @Override
+            public BillingPlan convert(String source) {
+                return BillingPlan.fromValue(source);
+            }
+        };
+    }
     @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.complianceLevelConverter")
     Converter<String, ComplianceLevel> complianceLevelConverter() {
         return new Converter<String, ComplianceLevel>() {
@@ -133,6 +158,15 @@ public class EnumConverterConfiguration {
             }
         };
     }
+    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.intervalConverter")
+    Converter<String, Interval> intervalConverter() {
+        return new Converter<String, Interval>() {
+            @Override
+            public Interval convert(String source) {
+                return Interval.fromValue(source);
+            }
+        };
+    }
     @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.languageConverter")
     Converter<String, Language> languageConverter() {
         return new Converter<String, Language>() {
@@ -160,6 +194,15 @@ public class EnumConverterConfiguration {
             }
         };
     }
+    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.organizationStatusConverter")
+    Converter<String, OrganizationStatus> organizationStatusConverter() {
+        return new Converter<String, OrganizationStatus>() {
+            @Override
+            public OrganizationStatus convert(String source) {
+                return OrganizationStatus.fromValue(source);
+            }
+        };
+    }
     @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.outputFormatConverter")
     Converter<String, OutputFormat> outputFormatConverter() {
         return new Converter<String, OutputFormat>() {
@@ -178,12 +221,30 @@ public class EnumConverterConfiguration {
             }
         };
     }
+    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.paymentStatusConverter")
+    Converter<String, PaymentStatus> paymentStatusConverter() {
+        return new Converter<String, PaymentStatus>() {
+            @Override
+            public PaymentStatus convert(String source) {
+                return PaymentStatus.fromValue(source);
+            }
+        };
+    }
     @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.permissionConverter")
     Converter<String, Permission> permissionConverter() {
         return new Converter<String, Permission>() {
             @Override
             public Permission convert(String source) {
                 return Permission.fromValue(source);
+            }
+        };
+    }
+    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.planTierConverter")
+    Converter<String, PlanTier> planTierConverter() {
+        return new Converter<String, PlanTier>() {
+            @Override
+            public PlanTier convert(String source) {
+                return PlanTier.fromValue(source);
             }
         };
     }
@@ -229,6 +290,15 @@ public class EnumConverterConfiguration {
             @Override
             public TemplateType convert(String source) {
                 return TemplateType.fromValue(source);
+            }
+        };
+    }
+    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.tenantStatusConverter")
+    Converter<String, TenantStatus> tenantStatusConverter() {
+        return new Converter<String, TenantStatus>() {
+            @Override
+            public TenantStatus convert(String source) {
+                return TenantStatus.fromValue(source);
             }
         };
     }

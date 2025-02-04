@@ -8,27 +8,37 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | Class | Method | HTTP request | Description |
 |------------ | ------------- | ------------- | -------------|
 | *LeadScraperServiceApi* | [**createAccount**](Apis/LeadScraperServiceApi.md#createaccount) | **POST** /lead-scraper-microservice/api/v1/accounts | Create a new account |
+*LeadScraperServiceApi* | [**createOrganization**](Apis/LeadScraperServiceApi.md#createorganization) | **POST** /lead-scraper-microservice/api/v1/organization | Create a new organization |
 *LeadScraperServiceApi* | [**createScrapingJob**](Apis/LeadScraperServiceApi.md#createscrapingjob) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task |
+*LeadScraperServiceApi* | [**createTenant**](Apis/LeadScraperServiceApi.md#createtenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant |
 *LeadScraperServiceApi* | [**createWorkspace**](Apis/LeadScraperServiceApi.md#createworkspace) | **POST** /lead-scraper-microservice/api/v1/workspaces | Create a new workspace |
 *LeadScraperServiceApi* | [**deleteAccount**](Apis/LeadScraperServiceApi.md#deleteaccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account |
+*LeadScraperServiceApi* | [**deleteOrganization**](Apis/LeadScraperServiceApi.md#deleteorganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization |
 *LeadScraperServiceApi* | [**deleteScrapingJob**](Apis/LeadScraperServiceApi.md#deletescrapingjob) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job |
+*LeadScraperServiceApi* | [**deleteTenant**](Apis/LeadScraperServiceApi.md#deletetenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant |
 *LeadScraperServiceApi* | [**deleteWorkspace**](Apis/LeadScraperServiceApi.md#deleteworkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace |
 *LeadScraperServiceApi* | [**downloadScrapingResults**](Apis/LeadScraperServiceApi.md#downloadscrapingresults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV |
 *LeadScraperServiceApi* | [**getAccount**](Apis/LeadScraperServiceApi.md#getaccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details |
 *LeadScraperServiceApi* | [**getAccountUsage**](Apis/LeadScraperServiceApi.md#getaccountusage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage |
+*LeadScraperServiceApi* | [**getOrganization**](Apis/LeadScraperServiceApi.md#getorganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details |
 *LeadScraperServiceApi* | [**getScrapingJob**](Apis/LeadScraperServiceApi.md#getscrapingjob) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job |
+*LeadScraperServiceApi* | [**getTenant**](Apis/LeadScraperServiceApi.md#gettenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details |
 *LeadScraperServiceApi* | [**getWorkflow**](Apis/LeadScraperServiceApi.md#getworkflow) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Get workflow details |
 *LeadScraperServiceApi* | [**getWorkspace**](Apis/LeadScraperServiceApi.md#getworkspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details |
 *LeadScraperServiceApi* | [**getWorkspaceAnalytics**](Apis/LeadScraperServiceApi.md#getworkspaceanalytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics |
 *LeadScraperServiceApi* | [**leadScraperServiceCreateWorkflow**](Apis/LeadScraperServiceApi.md#leadscraperservicecreateworkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow |
 *LeadScraperServiceApi* | [**listAccounts**](Apis/LeadScraperServiceApi.md#listaccounts) | **GET** /lead-scraper-microservice/api/v1/accounts | List all accounts |
+*LeadScraperServiceApi* | [**listOrganizations**](Apis/LeadScraperServiceApi.md#listorganizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations |
 *LeadScraperServiceApi* | [**listScrapingJobs**](Apis/LeadScraperServiceApi.md#listscrapingjobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs |
+*LeadScraperServiceApi* | [**listTenants**](Apis/LeadScraperServiceApi.md#listtenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants |
 *LeadScraperServiceApi* | [**listWorkflows**](Apis/LeadScraperServiceApi.md#listworkflows) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | List workflows |
 *LeadScraperServiceApi* | [**listWorkspaces**](Apis/LeadScraperServiceApi.md#listworkspaces) | **GET** /lead-scraper-microservice/api/v1/workspaces | List workspaces |
 *LeadScraperServiceApi* | [**pauseWorkflow**](Apis/LeadScraperServiceApi.md#pauseworkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution |
 *LeadScraperServiceApi* | [**triggerWorkflow**](Apis/LeadScraperServiceApi.md#triggerworkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution |
 *LeadScraperServiceApi* | [**updateAccount**](Apis/LeadScraperServiceApi.md#updateaccount) | **PUT** /lead-scraper-microservice/api/v1/accounts | Update account details |
 *LeadScraperServiceApi* | [**updateAccountSettings**](Apis/LeadScraperServiceApi.md#updateaccountsettings) | **PUT** /lead-scraper-microservice/api/v1/accounts/settings | Update account settings |
+*LeadScraperServiceApi* | [**updateOrganization**](Apis/LeadScraperServiceApi.md#updateorganization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details |
+*LeadScraperServiceApi* | [**updateTenant**](Apis/LeadScraperServiceApi.md#updatetenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details |
 *LeadScraperServiceApi* | [**updateWorkflow**](Apis/LeadScraperServiceApi.md#updateworkflow) | **PUT** /lead-scraper-microservice/api/v1/workspaces/workflow | Update workflow details |
 *LeadScraperServiceApi* | [**updateWorkspace**](Apis/LeadScraperServiceApi.md#updateworkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details |
 | *WorkspaceServiceApi* | [**createAccount1**](Apis/WorkspaceServiceApi.md#createaccount1) | **POST** /workspace-service/v1/accounts | Create a new account |
@@ -77,6 +87,8 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [AvailabilityInfo](./Models/AvailabilityInfo.md)
  - [BackgroundJobStatus](./Models/BackgroundJobStatus.md)
  - [BadGatewayErrorMessageResponse](./Models/BadGatewayErrorMessageResponse.md)
+ - [BillingMode](./Models/BillingMode.md)
+ - [BillingPlan](./Models/BillingPlan.md)
  - [BranchMerge](./Models/BranchMerge.md)
  - [BranchPolicy](./Models/BranchPolicy.md)
  - [BusinessHours](./Models/BusinessHours.md)
@@ -95,8 +107,12 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [CreateAccountRequest1](./Models/CreateAccountRequest1.md)
  - [CreateAccountResponse](./Models/CreateAccountResponse.md)
  - [CreateAccountResponse1](./Models/CreateAccountResponse1.md)
+ - [CreateOrganizationRequest](./Models/CreateOrganizationRequest.md)
+ - [CreateOrganizationResponse](./Models/CreateOrganizationResponse.md)
  - [CreateScrapingJobRequest](./Models/CreateScrapingJobRequest.md)
  - [CreateScrapingJobResponse](./Models/CreateScrapingJobResponse.md)
+ - [CreateTenantBody](./Models/CreateTenantBody.md)
+ - [CreateTenantResponse](./Models/CreateTenantResponse.md)
  - [CreateWorkflowBody](./Models/CreateWorkflowBody.md)
  - [CreateWorkflowResponse](./Models/CreateWorkflowResponse.md)
  - [CreateWorkspaceRequest](./Models/CreateWorkspaceRequest.md)
@@ -106,7 +122,9 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [DataProfile](./Models/DataProfile.md)
  - [DayOfWeek](./Models/DayOfWeek.md)
  - [DeleteAccountResponse](./Models/DeleteAccountResponse.md)
+ - [DeleteOrganizationResponse](./Models/DeleteOrganizationResponse.md)
  - [DeleteScrapingJobResponse](./Models/DeleteScrapingJobResponse.md)
+ - [DeleteTenantResponse](./Models/DeleteTenantResponse.md)
  - [DeleteWorkspaceResponse](./Models/DeleteWorkspaceResponse.md)
  - [Dependency](./Models/Dependency.md)
  - [DocumentBranch](./Models/DocumentBranch.md)
@@ -131,7 +149,9 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [GetAccountResponse](./Models/GetAccountResponse.md)
  - [GetAccountResponse1](./Models/GetAccountResponse1.md)
  - [GetAccountUsageResponse](./Models/GetAccountUsageResponse.md)
+ - [GetOrganizationResponse](./Models/GetOrganizationResponse.md)
  - [GetScrapingJobResponse](./Models/GetScrapingJobResponse.md)
+ - [GetTenantResponse](./Models/GetTenantResponse.md)
  - [GetWorkflowResponse](./Models/GetWorkflowResponse.md)
  - [GetWorkspaceAnalyticsResponse](./Models/GetWorkspaceAnalyticsResponse.md)
  - [GetWorkspaceAnalyticsResponse1](./Models/GetWorkspaceAnalyticsResponse1.md)
@@ -142,13 +162,16 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [IncludedField](./Models/IncludedField.md)
  - [InternalErrorCode](./Models/InternalErrorCode.md)
  - [InternalErrorMessageResponse](./Models/InternalErrorMessageResponse.md)
+ - [Interval](./Models/Interval.md)
  - [JobSuccessRate](./Models/JobSuccessRate.md)
  - [Language](./Models/Language.md)
  - [Lead](./Models/Lead.md)
  - [LimitInfo](./Models/LimitInfo.md)
  - [ListAccountsResponse](./Models/ListAccountsResponse.md)
  - [ListAccountsResponse1](./Models/ListAccountsResponse1.md)
+ - [ListOrganizationsResponse](./Models/ListOrganizationsResponse.md)
  - [ListScrapingJobsResponse](./Models/ListScrapingJobsResponse.md)
+ - [ListTenantsResponse](./Models/ListTenantsResponse.md)
  - [ListWorkflowsResponse](./Models/ListWorkflowsResponse.md)
  - [ListWorkspaceSharingsResponse](./Models/ListWorkspaceSharingsResponse.md)
  - [ListWorkspacesResponse](./Models/ListWorkspacesResponse.md)
@@ -164,13 +187,17 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [NotImplementedErrorMessageResponse](./Models/NotImplementedErrorMessageResponse.md)
  - [NullValue](./Models/NullValue.md)
  - [OperationDetails](./Models/OperationDetails.md)
+ - [Organization](./Models/Organization.md)
+ - [Organization.Status](./Models/Organization.Status.md)
  - [OutputFormat](./Models/OutputFormat.md)
  - [PauseWorkflowBody](./Models/PauseWorkflowBody.md)
  - [PauseWorkflowResponse](./Models/PauseWorkflowResponse.md)
  - [PayloadFormat](./Models/PayloadFormat.md)
  - [PaymentInfo](./Models/PaymentInfo.md)
  - [PaymentRequiredErrorMessageResponse](./Models/PaymentRequiredErrorMessageResponse.md)
+ - [PaymentStatus](./Models/PaymentStatus.md)
  - [Permission](./Models/Permission.md)
+ - [PlanTier](./Models/PlanTier.md)
  - [PreconditionFailedErrorMessageResponse](./Models/PreconditionFailedErrorMessageResponse.md)
  - [PricingModel](./Models/PricingModel.md)
  - [QuotaInfo](./Models/QuotaInfo.md)
@@ -198,10 +225,14 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [SignatureWorkflow](./Models/SignatureWorkflow.md)
  - [Status](./Models/Status.md)
  - [StorageBreakdown](./Models/StorageBreakdown.md)
+ - [Subscription](./Models/Subscription.md)
  - [Suggestions](./Models/Suggestions.md)
  - [TemplateType](./Models/TemplateType.md)
  - [TemplateVariable](./Models/TemplateVariable.md)
  - [TemplateVersion](./Models/TemplateVersion.md)
+ - [Tenant](./Models/Tenant.md)
+ - [Tenant.Status](./Models/Tenant.Status.md)
+ - [TenantAPIKey](./Models/TenantAPIKey.md)
  - [Timezone](./Models/Timezone.md)
  - [TokenInfo](./Models/TokenInfo.md)
  - [TooEarlyErrorMessageResponse](./Models/TooEarlyErrorMessageResponse.md)
@@ -213,6 +244,10 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [UpdateAccountResponse](./Models/UpdateAccountResponse.md)
  - [UpdateAccountSettingsRequest](./Models/UpdateAccountSettingsRequest.md)
  - [UpdateAccountSettingsResponse](./Models/UpdateAccountSettingsResponse.md)
+ - [UpdateOrganizationRequest](./Models/UpdateOrganizationRequest.md)
+ - [UpdateOrganizationResponse](./Models/UpdateOrganizationResponse.md)
+ - [UpdateTenantRequest](./Models/UpdateTenantRequest.md)
+ - [UpdateTenantResponse](./Models/UpdateTenantResponse.md)
  - [UpdateWorkflowRequest](./Models/UpdateWorkflowRequest.md)
  - [UpdateWorkflowResponse](./Models/UpdateWorkflowResponse.md)
  - [UpdateWorkspaceRequest](./Models/UpdateWorkspaceRequest.md)

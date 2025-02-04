@@ -6,27 +6,37 @@ use futures::{future, Stream, stream};
 #[allow(unused_imports)]
 use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, models,
                       CreateAccountResponse,
+                      CreateOrganizationResponse,
                       CreateScrapingJobResponse,
+                      CreateTenantResponse,
                       CreateWorkspaceResponse,
                       DeleteAccountResponse,
+                      DeleteOrganizationResponse,
                       DeleteScrapingJobResponse,
+                      DeleteTenantResponse,
                       DeleteWorkspaceResponse,
                       DownloadScrapingResultsResponse,
                       GetAccountResponse,
                       GetAccountUsageResponse,
+                      GetOrganizationResponse,
                       GetScrapingJobResponse,
+                      GetTenantResponse,
                       GetWorkflowResponse,
                       GetWorkspaceResponse,
                       GetWorkspaceAnalyticsResponse,
                       LeadScraperServiceCreateWorkflowResponse,
                       ListAccountsResponse,
+                      ListOrganizationsResponse,
                       ListScrapingJobsResponse,
+                      ListTenantsResponse,
                       ListWorkflowsResponse,
                       ListWorkspacesResponse,
                       PauseWorkflowResponse,
                       TriggerWorkflowResponse,
                       UpdateAccountResponse,
                       UpdateAccountSettingsResponse,
+                      UpdateOrganizationResponse,
+                      UpdateTenantResponse,
                       UpdateWorkflowResponse,
                       UpdateWorkspaceResponse,
                       CreateAccount1Response,
@@ -74,17 +84,23 @@ fn main() {
             .help("Sets the operation to run")
             .possible_values(&[
                 "DeleteAccount", 
+                "DeleteOrganization", 
                 "DeleteScrapingJob", 
+                "DeleteTenant", 
                 "DeleteWorkspace", 
                 "DownloadScrapingResults", 
                 "GetAccount", 
                 "GetAccountUsage", 
+                "GetOrganization", 
                 "GetScrapingJob", 
+                "GetTenant", 
                 "GetWorkflow", 
                 "GetWorkspace", 
                 "GetWorkspaceAnalytics", 
                 "ListAccounts", 
+                "ListOrganizations", 
                 "ListScrapingJobs", 
+                "ListTenants", 
                 "ListWorkflows", 
                 "ListWorkspaces", 
                 "DeleteAccount1", 
@@ -175,8 +191,25 @@ fn main() {
         },
         */
         /* Disabled because there's no example.
+        Some("CreateOrganization") => {
+            let result = rt.block_on(client.create_organization(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
         Some("CreateScrapingJob") => {
             let result = rt.block_on(client.create_scraping_job(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("CreateTenant") => {
+            let result = rt.block_on(client.create_tenant(
+                  "organization_id_example".to_string(),
                   ???
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
@@ -196,11 +229,24 @@ fn main() {
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
+        Some("DeleteOrganization") => {
+            let result = rt.block_on(client.delete_organization(
+                  "id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
         Some("DeleteScrapingJob") => {
             let result = rt.block_on(client.delete_scraping_job(
                   "job_id_example".to_string(),
                   "user_id_example".to_string(),
                   "org_id_example".to_string(),
+                  "tenant_id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("DeleteTenant") => {
+            let result = rt.block_on(client.delete_tenant(
+                  "organization_id_example".to_string(),
                   "tenant_id_example".to_string()
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
@@ -232,11 +278,24 @@ fn main() {
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
+        Some("GetOrganization") => {
+            let result = rt.block_on(client.get_organization(
+                  "id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
         Some("GetScrapingJob") => {
             let result = rt.block_on(client.get_scraping_job(
                   "job_id_example".to_string(),
                   "user_id_example".to_string(),
                   "org_id_example".to_string(),
+                  "tenant_id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("GetTenant") => {
+            let result = rt.block_on(client.get_tenant(
+                  "organization_id_example".to_string(),
                   "tenant_id_example".to_string()
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
@@ -279,11 +338,26 @@ fn main() {
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
+        Some("ListOrganizations") => {
+            let result = rt.block_on(client.list_organizations(
+                  Some(56),
+                  Some(56)
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
         Some("ListScrapingJobs") => {
             let result = rt.block_on(client.list_scraping_jobs(
                   "user_id_example".to_string(),
                   "org_id_example".to_string(),
                   "tenant_id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("ListTenants") => {
+            let result = rt.block_on(client.list_tenants(
+                  "organization_id_example".to_string(),
+                  Some(56),
+                  Some(56)
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
@@ -335,6 +409,22 @@ fn main() {
         /* Disabled because there's no example.
         Some("UpdateAccountSettings") => {
             let result = rt.block_on(client.update_account_settings(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("UpdateOrganization") => {
+            let result = rt.block_on(client.update_organization(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("UpdateTenant") => {
+            let result = rt.block_on(client.update_tenant(
                   ???
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());

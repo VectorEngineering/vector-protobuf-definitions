@@ -19,9 +19,21 @@ input CreateAccountInput {
     createAccountRequest: CreateAccountRequestInput
 }
 
+input CreateOrganizationInput {
+    
+    createOrganizationRequest: CreateOrganizationRequestInput
+}
+
 input CreateScrapingJobInput {
     
     createScrapingJobRequest: CreateScrapingJobRequestInput
+}
+
+input CreateTenantInput {
+    
+    organizationId: String!, 
+    
+    createTenantBody: CreateTenantBodyInput
 }
 
 input CreateWorkspaceInput {
@@ -34,6 +46,11 @@ input DeleteAccountInput {
     Id_: String!
 }
 
+input DeleteOrganizationInput {
+    
+    Id_: String!
+}
+
 input DeleteScrapingJobInput {
     
     jobId: String!, 
@@ -41,6 +58,13 @@ input DeleteScrapingJobInput {
     userId: String!, 
     
     orgId: String!, 
+    
+    tenantId: String!
+}
+
+input DeleteTenantInput {
+    
+    organizationId: String!, 
     
     tenantId: String!
 }
@@ -85,6 +109,16 @@ input UpdateAccountSettingsInput {
     updateAccountSettingsRequest: UpdateAccountSettingsRequestInput
 }
 
+input UpdateOrganizationInput {
+    
+    updateOrganizationRequest: UpdateOrganizationRequestInput
+}
+
+input UpdateTenantInput {
+    
+    updateTenantRequest: UpdateTenantRequestInput
+}
+
 input UpdateWorkflowInput {
     
     updateWorkflowRequest: UpdateWorkflowRequestInput
@@ -101,11 +135,22 @@ type Mutation {
   # @param CreateAccountRequest createAccountRequest 
   # @return [CreateAccountResponse]
   CreateAccount(input: CreateAccountInput!): CreateAccountResponse
+  # Create a new organization
+  # Creates a new organization within a tenant
+  # @param CreateOrganizationRequest createOrganizationRequest 
+  # @return [CreateOrganizationResponse]
+  CreateOrganization(input: CreateOrganizationInput!): CreateOrganizationResponse
   # Create a new job scraping task
   # This endpoint creates a new Google Maps scraping job
   # @param CreateScrapingJobRequest createScrapingJobRequest 
   # @return [CreateScrapingJobResponse]
   CreateScrapingJob(input: CreateScrapingJobInput!): CreateScrapingJobResponse
+  # Create a new tenant
+  # Creates a new tenant in the system
+  # @param String! organizationId 
+  # @param CreateTenantBody createTenantBody 
+  # @return [CreateTenantResponse]
+  CreateTenant(input: CreateTenantInput!): CreateTenantResponse
   # Create a new workspace
   # Creates a new workspace for a given account
   # @param CreateWorkspaceRequest createWorkspaceRequest 
@@ -116,6 +161,11 @@ type Mutation {
   # @param String! Id_ 
   # @return [DeleteAccountResponse]
   DeleteAccount(input: DeleteAccountInput!): DeleteAccountResponse
+  # Delete an organization
+  # Permanently deletes an organization and all associated resources
+  # @param String! Id_ 
+  # @return [DeleteOrganizationResponse]
+  DeleteOrganization(input: DeleteOrganizationInput!): DeleteOrganizationResponse
   # Delete a specific job
   # This endpoint deletes a specific Google Maps scraping job
   # @param String! jobId 
@@ -124,6 +174,12 @@ type Mutation {
   # @param String! tenantId 
   # @return [DeleteScrapingJobResponse]
   DeleteScrapingJob(input: DeleteScrapingJobInput!): DeleteScrapingJobResponse
+  # Delete a tenant
+  # Permanently deletes a tenant and all associated resources
+  # @param String! organizationId 
+  # @param String! tenantId 
+  # @return [DeleteTenantResponse]
+  DeleteTenant(input: DeleteTenantInput!): DeleteTenantResponse
   # Delete a workspace
   # Deletes a specific workspace
   # @param String! Id_ 
@@ -159,6 +215,16 @@ type Mutation {
   # @param UpdateAccountSettingsRequest updateAccountSettingsRequest 
   # @return [UpdateAccountSettingsResponse]
   UpdateAccountSettings(input: UpdateAccountSettingsInput!): UpdateAccountSettingsResponse
+  # Update organization details
+  # Updates the configuration of a specific organization
+  # @param UpdateOrganizationRequest updateOrganizationRequest 
+  # @return [UpdateOrganizationResponse]
+  UpdateOrganization(input: UpdateOrganizationInput!): UpdateOrganizationResponse
+  # Update tenant details
+  # Updates the configuration of a specific tenant
+  # @param UpdateTenantRequest updateTenantRequest 
+  # @return [UpdateTenantResponse]
+  UpdateTenant(input: UpdateTenantInput!): UpdateTenantResponse
   # Update workflow details
   # Updates the details of a specific workflow
   # @param UpdateWorkflowRequest updateWorkflowRequest 
@@ -190,6 +256,11 @@ type Query {
   # @param String! Id_ 
   # @return [GetAccountUsageResponse]
   GetAccountUsage(Id_: String!): GetAccountUsageResponse
+  # Get organization details
+  # Retrieves details of a specific organization
+  # @param String! Id_ 
+  # @return [GetOrganizationResponse]
+  GetOrganization(Id_: String!): GetOrganizationResponse
   # Get a specific job
   # This endpoint retrieves a specific Google Maps scraping job
   # @param String! jobId 
@@ -198,6 +269,12 @@ type Query {
   # @param String! tenantId 
   # @return [GetScrapingJobResponse]
   GetScrapingJob(jobId: String!, userId: String!, orgId: String!, tenantId: String!): GetScrapingJobResponse
+  # Get tenant details
+  # Retrieves details of a specific tenant
+  # @param String! organizationId 
+  # @param String! tenantId 
+  # @return [GetTenantResponse]
+  GetTenant(organizationId: String!, tenantId: String!): GetTenantResponse
   # Get workflow details
   # Retrieves details of a specific workflow
   # @param String! workspaceId 
@@ -223,6 +300,12 @@ type Query {
   # @param String! filter 
   # @return [ListAccountsResponse]
   ListAccounts(pageSize: Int!, pageNumber: Int!, filter: String!): ListAccountsResponse
+  # List all organizations
+  # Retrieves a list of all organizations in a tenant
+  # @param Int! pageSize 
+  # @param Int! pageNumber 
+  # @return [ListOrganizationsResponse]
+  ListOrganizations(pageSize: Int!, pageNumber: Int!): ListOrganizationsResponse
   # Get all jobs
   # This endpoint retrieves all Google Maps scraping jobs
   # @param String! userId 
@@ -230,6 +313,13 @@ type Query {
   # @param String! tenantId 
   # @return [ListScrapingJobsResponse]
   ListScrapingJobs(userId: String!, orgId: String!, tenantId: String!): ListScrapingJobsResponse
+  # List all tenants
+  # Retrieves a list of all tenants in the system
+  # @param String! organizationId 
+  # @param Int! pageSize 
+  # @param Int! pageNumber 
+  # @return [ListTenantsResponse]
+  ListTenants(organizationId: String!, pageSize: Int!, pageNumber: Int!): ListTenantsResponse
   # List workflows
   # Retrieves a list of workflows for a given workspace
   # @param String! workspaceId 

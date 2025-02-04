@@ -66,27 +66,37 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *LeadScraperServiceApi* | [**create_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_account) | **POST** /lead-scraper-microservice/api/v1/accounts | Create a new account
+*LeadScraperServiceApi* | [**create_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_organization) | **POST** /lead-scraper-microservice/api/v1/organization | Create a new organization
 *LeadScraperServiceApi* | [**create_scraping_job**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_scraping_job) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task
+*LeadScraperServiceApi* | [**create_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_tenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant
 *LeadScraperServiceApi* | [**create_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_workspace) | **POST** /lead-scraper-microservice/api/v1/workspaces | Create a new workspace
 *LeadScraperServiceApi* | [**delete_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_account) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
+*LeadScraperServiceApi* | [**delete_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_organization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
 *LeadScraperServiceApi* | [**delete_scraping_job**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_scraping_job) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job
+*LeadScraperServiceApi* | [**delete_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_tenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 *LeadScraperServiceApi* | [**delete_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_workspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
 *LeadScraperServiceApi* | [**download_scraping_results**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#download_scraping_results) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV
 *LeadScraperServiceApi* | [**get_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_account) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details
 *LeadScraperServiceApi* | [**get_account_usage**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_account_usage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage
+*LeadScraperServiceApi* | [**get_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_organization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details
 *LeadScraperServiceApi* | [**get_scraping_job**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_scraping_job) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job
+*LeadScraperServiceApi* | [**get_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_tenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details
 *LeadScraperServiceApi* | [**get_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_workflow) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Get workflow details
 *LeadScraperServiceApi* | [**get_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_workspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details
 *LeadScraperServiceApi* | [**get_workspace_analytics**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_workspace_analytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics
 *LeadScraperServiceApi* | [**lead_scraper_service_create_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#lead_scraper_service_create_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow
 *LeadScraperServiceApi* | [**list_accounts**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_accounts) | **GET** /lead-scraper-microservice/api/v1/accounts | List all accounts
+*LeadScraperServiceApi* | [**list_organizations**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_organizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations
 *LeadScraperServiceApi* | [**list_scraping_jobs**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_scraping_jobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs
+*LeadScraperServiceApi* | [**list_tenants**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_tenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
 *LeadScraperServiceApi* | [**list_workflows**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_workflows) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | List workflows
 *LeadScraperServiceApi* | [**list_workspaces**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_workspaces) | **GET** /lead-scraper-microservice/api/v1/workspaces | List workspaces
 *LeadScraperServiceApi* | [**pause_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#pause_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution
 *LeadScraperServiceApi* | [**trigger_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#trigger_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution
 *LeadScraperServiceApi* | [**update_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_account) | **PUT** /lead-scraper-microservice/api/v1/accounts | Update account details
 *LeadScraperServiceApi* | [**update_account_settings**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_account_settings) | **PUT** /lead-scraper-microservice/api/v1/accounts/settings | Update account settings
+*LeadScraperServiceApi* | [**update_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_organization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details
+*LeadScraperServiceApi* | [**update_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_tenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details
 *LeadScraperServiceApi* | [**update_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_workflow) | **PUT** /lead-scraper-microservice/api/v1/workspaces/workflow | Update workflow details
 *LeadScraperServiceApi* | [**update_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_workspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details
 *WorkspaceServiceApi* | [**create_account1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#create_account1) | **POST** /workspace-service/v1/accounts | Create a new account
@@ -134,6 +144,8 @@ Class | Method | HTTP request | Description
  - [AvailabilityInfo](playbookmedia_backend_client_sdk/docs/AvailabilityInfo.md)
  - [BackgroundJobStatus](playbookmedia_backend_client_sdk/docs/BackgroundJobStatus.md)
  - [BadGatewayErrorMessageResponse](playbookmedia_backend_client_sdk/docs/BadGatewayErrorMessageResponse.md)
+ - [BillingMode](playbookmedia_backend_client_sdk/docs/BillingMode.md)
+ - [BillingPlan](playbookmedia_backend_client_sdk/docs/BillingPlan.md)
  - [BranchMerge](playbookmedia_backend_client_sdk/docs/BranchMerge.md)
  - [BranchPolicy](playbookmedia_backend_client_sdk/docs/BranchPolicy.md)
  - [BusinessHours](playbookmedia_backend_client_sdk/docs/BusinessHours.md)
@@ -152,8 +164,12 @@ Class | Method | HTTP request | Description
  - [CreateAccountRequest1](playbookmedia_backend_client_sdk/docs/CreateAccountRequest1.md)
  - [CreateAccountResponse](playbookmedia_backend_client_sdk/docs/CreateAccountResponse.md)
  - [CreateAccountResponse1](playbookmedia_backend_client_sdk/docs/CreateAccountResponse1.md)
+ - [CreateOrganizationRequest](playbookmedia_backend_client_sdk/docs/CreateOrganizationRequest.md)
+ - [CreateOrganizationResponse](playbookmedia_backend_client_sdk/docs/CreateOrganizationResponse.md)
  - [CreateScrapingJobRequest](playbookmedia_backend_client_sdk/docs/CreateScrapingJobRequest.md)
  - [CreateScrapingJobResponse](playbookmedia_backend_client_sdk/docs/CreateScrapingJobResponse.md)
+ - [CreateTenantBody](playbookmedia_backend_client_sdk/docs/CreateTenantBody.md)
+ - [CreateTenantResponse](playbookmedia_backend_client_sdk/docs/CreateTenantResponse.md)
  - [CreateWorkflowBody](playbookmedia_backend_client_sdk/docs/CreateWorkflowBody.md)
  - [CreateWorkflowResponse](playbookmedia_backend_client_sdk/docs/CreateWorkflowResponse.md)
  - [CreateWorkspaceRequest](playbookmedia_backend_client_sdk/docs/CreateWorkspaceRequest.md)
@@ -163,7 +179,9 @@ Class | Method | HTTP request | Description
  - [DataProfile](playbookmedia_backend_client_sdk/docs/DataProfile.md)
  - [DayOfWeek](playbookmedia_backend_client_sdk/docs/DayOfWeek.md)
  - [DeleteAccountResponse](playbookmedia_backend_client_sdk/docs/DeleteAccountResponse.md)
+ - [DeleteOrganizationResponse](playbookmedia_backend_client_sdk/docs/DeleteOrganizationResponse.md)
  - [DeleteScrapingJobResponse](playbookmedia_backend_client_sdk/docs/DeleteScrapingJobResponse.md)
+ - [DeleteTenantResponse](playbookmedia_backend_client_sdk/docs/DeleteTenantResponse.md)
  - [DeleteWorkspaceResponse](playbookmedia_backend_client_sdk/docs/DeleteWorkspaceResponse.md)
  - [Dependency](playbookmedia_backend_client_sdk/docs/Dependency.md)
  - [DocumentBranch](playbookmedia_backend_client_sdk/docs/DocumentBranch.md)
@@ -188,7 +206,9 @@ Class | Method | HTTP request | Description
  - [GetAccountResponse](playbookmedia_backend_client_sdk/docs/GetAccountResponse.md)
  - [GetAccountResponse1](playbookmedia_backend_client_sdk/docs/GetAccountResponse1.md)
  - [GetAccountUsageResponse](playbookmedia_backend_client_sdk/docs/GetAccountUsageResponse.md)
+ - [GetOrganizationResponse](playbookmedia_backend_client_sdk/docs/GetOrganizationResponse.md)
  - [GetScrapingJobResponse](playbookmedia_backend_client_sdk/docs/GetScrapingJobResponse.md)
+ - [GetTenantResponse](playbookmedia_backend_client_sdk/docs/GetTenantResponse.md)
  - [GetWorkflowResponse](playbookmedia_backend_client_sdk/docs/GetWorkflowResponse.md)
  - [GetWorkspaceAnalyticsResponse](playbookmedia_backend_client_sdk/docs/GetWorkspaceAnalyticsResponse.md)
  - [GetWorkspaceAnalyticsResponse1](playbookmedia_backend_client_sdk/docs/GetWorkspaceAnalyticsResponse1.md)
@@ -199,13 +219,16 @@ Class | Method | HTTP request | Description
  - [IncludedField](playbookmedia_backend_client_sdk/docs/IncludedField.md)
  - [InternalErrorCode](playbookmedia_backend_client_sdk/docs/InternalErrorCode.md)
  - [InternalErrorMessageResponse](playbookmedia_backend_client_sdk/docs/InternalErrorMessageResponse.md)
+ - [Interval](playbookmedia_backend_client_sdk/docs/Interval.md)
  - [JobSuccessRate](playbookmedia_backend_client_sdk/docs/JobSuccessRate.md)
  - [Language](playbookmedia_backend_client_sdk/docs/Language.md)
  - [Lead](playbookmedia_backend_client_sdk/docs/Lead.md)
  - [LimitInfo](playbookmedia_backend_client_sdk/docs/LimitInfo.md)
  - [ListAccountsResponse](playbookmedia_backend_client_sdk/docs/ListAccountsResponse.md)
  - [ListAccountsResponse1](playbookmedia_backend_client_sdk/docs/ListAccountsResponse1.md)
+ - [ListOrganizationsResponse](playbookmedia_backend_client_sdk/docs/ListOrganizationsResponse.md)
  - [ListScrapingJobsResponse](playbookmedia_backend_client_sdk/docs/ListScrapingJobsResponse.md)
+ - [ListTenantsResponse](playbookmedia_backend_client_sdk/docs/ListTenantsResponse.md)
  - [ListWorkflowsResponse](playbookmedia_backend_client_sdk/docs/ListWorkflowsResponse.md)
  - [ListWorkspaceSharingsResponse](playbookmedia_backend_client_sdk/docs/ListWorkspaceSharingsResponse.md)
  - [ListWorkspacesResponse](playbookmedia_backend_client_sdk/docs/ListWorkspacesResponse.md)
@@ -221,13 +244,17 @@ Class | Method | HTTP request | Description
  - [NotImplementedErrorMessageResponse](playbookmedia_backend_client_sdk/docs/NotImplementedErrorMessageResponse.md)
  - [NullValue](playbookmedia_backend_client_sdk/docs/NullValue.md)
  - [OperationDetails](playbookmedia_backend_client_sdk/docs/OperationDetails.md)
+ - [Organization](playbookmedia_backend_client_sdk/docs/Organization.md)
+ - [OrganizationStatus](playbookmedia_backend_client_sdk/docs/OrganizationStatus.md)
  - [OutputFormat](playbookmedia_backend_client_sdk/docs/OutputFormat.md)
  - [PauseWorkflowBody](playbookmedia_backend_client_sdk/docs/PauseWorkflowBody.md)
  - [PauseWorkflowResponse](playbookmedia_backend_client_sdk/docs/PauseWorkflowResponse.md)
  - [PayloadFormat](playbookmedia_backend_client_sdk/docs/PayloadFormat.md)
  - [PaymentInfo](playbookmedia_backend_client_sdk/docs/PaymentInfo.md)
  - [PaymentRequiredErrorMessageResponse](playbookmedia_backend_client_sdk/docs/PaymentRequiredErrorMessageResponse.md)
+ - [PaymentStatus](playbookmedia_backend_client_sdk/docs/PaymentStatus.md)
  - [Permission](playbookmedia_backend_client_sdk/docs/Permission.md)
+ - [PlanTier](playbookmedia_backend_client_sdk/docs/PlanTier.md)
  - [PreconditionFailedErrorMessageResponse](playbookmedia_backend_client_sdk/docs/PreconditionFailedErrorMessageResponse.md)
  - [PricingModel](playbookmedia_backend_client_sdk/docs/PricingModel.md)
  - [QuotaInfo](playbookmedia_backend_client_sdk/docs/QuotaInfo.md)
@@ -256,10 +283,14 @@ Class | Method | HTTP request | Description
  - [SignatureWorkflow](playbookmedia_backend_client_sdk/docs/SignatureWorkflow.md)
  - [Status](playbookmedia_backend_client_sdk/docs/Status.md)
  - [StorageBreakdown](playbookmedia_backend_client_sdk/docs/StorageBreakdown.md)
+ - [Subscription](playbookmedia_backend_client_sdk/docs/Subscription.md)
  - [Suggestions](playbookmedia_backend_client_sdk/docs/Suggestions.md)
  - [TemplateType](playbookmedia_backend_client_sdk/docs/TemplateType.md)
  - [TemplateVariable](playbookmedia_backend_client_sdk/docs/TemplateVariable.md)
  - [TemplateVersion](playbookmedia_backend_client_sdk/docs/TemplateVersion.md)
+ - [Tenant](playbookmedia_backend_client_sdk/docs/Tenant.md)
+ - [TenantAPIKey](playbookmedia_backend_client_sdk/docs/TenantAPIKey.md)
+ - [TenantStatus](playbookmedia_backend_client_sdk/docs/TenantStatus.md)
  - [Timezone](playbookmedia_backend_client_sdk/docs/Timezone.md)
  - [TokenInfo](playbookmedia_backend_client_sdk/docs/TokenInfo.md)
  - [TooEarlyErrorMessageResponse](playbookmedia_backend_client_sdk/docs/TooEarlyErrorMessageResponse.md)
@@ -271,6 +302,10 @@ Class | Method | HTTP request | Description
  - [UpdateAccountResponse](playbookmedia_backend_client_sdk/docs/UpdateAccountResponse.md)
  - [UpdateAccountSettingsRequest](playbookmedia_backend_client_sdk/docs/UpdateAccountSettingsRequest.md)
  - [UpdateAccountSettingsResponse](playbookmedia_backend_client_sdk/docs/UpdateAccountSettingsResponse.md)
+ - [UpdateOrganizationRequest](playbookmedia_backend_client_sdk/docs/UpdateOrganizationRequest.md)
+ - [UpdateOrganizationResponse](playbookmedia_backend_client_sdk/docs/UpdateOrganizationResponse.md)
+ - [UpdateTenantRequest](playbookmedia_backend_client_sdk/docs/UpdateTenantRequest.md)
+ - [UpdateTenantResponse](playbookmedia_backend_client_sdk/docs/UpdateTenantResponse.md)
  - [UpdateWorkflowRequest](playbookmedia_backend_client_sdk/docs/UpdateWorkflowRequest.md)
  - [UpdateWorkflowResponse](playbookmedia_backend_client_sdk/docs/UpdateWorkflowResponse.md)
  - [UpdateWorkspaceRequest](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceRequest.md)

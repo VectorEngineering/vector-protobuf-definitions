@@ -32,7 +32,18 @@ router.get("/", async (c) => {
 router.post("/", async (c) => {
   const client = new ApiClient(c.env.API_BASE_URL);
   const data = await c.req.json();
+  {{#if pathItem.post.parameters}}
+  const params = {
+    {{#each pathItem.post.parameters}}
+    {{#if (eq this.in "path")}}
+    {{this.name}}: c.req.param("{{this.name}}") || (() => { throw new HTTPException(400, { message: "Missing required path parameter: {{this.name}}" }) })(),
+    {{/if}}
+    {{/each}}
+  };
+  const response = await client.create{{capitalize (basename path)}}(data, params);
+  {{else}}
   const response = await client.create{{capitalize (basename path)}}(data);
+  {{/if}}
   return c.json(response, 201);
 });
 {{/if}}
@@ -44,15 +55,12 @@ router.put("/", async (c) => {
   {{#if pathItem.put.parameters}}
   const params = {
     {{#each pathItem.put.parameters}}
-    {{#if (eq this.in "query")}}
-    {{this.name}}: c.req.query("{{this.name}}"){{#if this.required}} || ''{{/if}},
-    {{/if}}
     {{#if (eq this.in "path")}}
     {{this.name}}: c.req.param("{{this.name}}") || (() => { throw new HTTPException(400, { message: "Missing required path parameter: {{this.name}}" }) })(),
     {{/if}}
     {{/each}}
   };
-  const response = await client.update{{capitalize (basename path)}}(params, data);
+  const response = await client.update{{capitalize (basename path)}}(data, params);
   {{else}}
   const response = await client.update{{capitalize (basename path)}}(data);
   {{/if}}

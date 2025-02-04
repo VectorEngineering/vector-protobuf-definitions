@@ -360,3 +360,94 @@ message UpdateWorkflowResponse {
 message CreateWorkflowResponse {
     ScrapingWorkflow workflow = 1;
 }
+
+// Tenant Management Messages
+message CreateTenantRequest {
+    Tenant tenant = 1 [(validate.rules).message.required = true];
+    uint64 organization_id = 2 [(validate.rules).uint64.gt = 0];
+}
+
+message CreateTenantResponse {
+    uint64 tenant_id = 1;
+}
+
+message GetTenantRequest {
+    uint64 tenant_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 organization_id = 2 [(validate.rules).uint64.gt = 0];
+}
+
+message GetTenantResponse {
+    Tenant tenant = 1;
+}
+
+message UpdateTenantRequest {
+    Tenant tenant = 1 [(validate.rules).message.required = true];
+}
+
+message UpdateTenantResponse {
+    Tenant tenant = 1;
+}
+
+message DeleteTenantRequest {
+    uint64 tenant_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 organization_id = 2 [(validate.rules).uint64.gt = 0];
+}
+
+message DeleteTenantResponse {
+    bool success = 1;
+}
+
+message ListTenantsRequest {
+    int32 page_size = 1 [(validate.rules).int32 = {gte: 1, lte: 100}];
+    int32 page_number = 2;
+    uint64 organization_id = 3 [(validate.rules).uint64.gt = 0];
+}
+
+message ListTenantsResponse {
+    repeated Tenant tenants = 1;
+    int32 next_page_number = 3;
+}
+
+// Organization Management Messages
+message CreateOrganizationRequest {
+    Organization organization = 1 [(validate.rules).message.required = true];
+}
+
+message CreateOrganizationResponse {
+    Organization organization = 1;
+}
+
+message GetOrganizationRequest {
+    uint64 id = 1 [(validate.rules).uint64.gt = 0];
+}
+
+message GetOrganizationResponse {
+    Organization organization = 1;
+}
+
+message UpdateOrganizationRequest {
+    Organization organization = 1 [(validate.rules).message.required = true];
+}
+
+message UpdateOrganizationResponse {
+    Organization organization = 1;
+}
+
+message DeleteOrganizationRequest {
+    uint64 id = 1 [(validate.rules).uint64.gt = 0];
+}
+
+message DeleteOrganizationResponse {
+    bool success = 1;
+}
+
+message ListOrganizationsRequest {
+    int32 page_size = 1 [(validate.rules).int32 = {gte: 1, lte: 100}];
+    int32 page_number = 2;
+}
+
+message ListOrganizationsResponse {
+    repeated Organization organizations = 1;
+    int32 total_count = 2;
+    int32 next_page_number = 3;
+}

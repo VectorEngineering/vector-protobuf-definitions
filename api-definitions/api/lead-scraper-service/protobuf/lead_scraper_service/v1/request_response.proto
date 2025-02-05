@@ -459,3 +459,73 @@ message ListOrganizationsResponse {
     int32 total_count = 2;
     int32 next_page_number = 3;
 }
+
+// TenantAPIKey related messages
+
+message CreateTenantAPIKeyRequest {
+    uint64 organization_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 2 [(validate.rules).uint64.gt = 0];
+    TenantAPIKey api_key = 3 [(validate.rules).message.required = true];
+}
+
+message CreateTenantAPIKeyResponse {
+    uint64 key_id = 1;
+    string key_value = 2; // The actual API key value - only returned on creation
+}
+
+message GetTenantAPIKeyRequest {
+    uint64 organization_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 key_id = 3 [(validate.rules).uint64.gt = 0];
+}
+
+message GetTenantAPIKeyResponse {
+    TenantAPIKey api_key = 1;
+}
+
+message UpdateTenantAPIKeyRequest {
+    TenantAPIKey api_key = 1 [(validate.rules).message.required = true];
+}
+
+message UpdateTenantAPIKeyResponse {
+    TenantAPIKey api_key = 1;
+}
+
+message DeleteTenantAPIKeyRequest {
+    uint64 organization_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 key_id = 3 [(validate.rules).uint64.gt = 0];
+}
+
+message DeleteTenantAPIKeyResponse {
+    bool success = 1;
+}
+
+message ListTenantAPIKeysRequest {
+    uint64 organization_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 2 [(validate.rules).uint64.gt = 0];
+    int32 page_size = 3 [(validate.rules).int32 = {gte: 1, lte: 100}];
+    int32 page_number = 4;
+    string status = 5;
+}
+
+message ListTenantAPIKeysResponse {
+    repeated TenantAPIKey api_keys = 1;
+    int32 next_page_number = 2;
+    int32 total_count = 3;
+}
+
+message RotateTenantAPIKeyRequest {
+    uint64 organization_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 key_id = 3 [(validate.rules).uint64.gt = 0];
+    google.protobuf.Duration grace_period = 4; // Optional grace period before old key is invalidated
+}
+
+message RotateTenantAPIKeyResponse {
+    TenantAPIKey new_api_key = 1;
+    string new_key_value = 2;
+    google.protobuf.Timestamp old_key_expiry = 3;
+    uint64 tenant_id = 4 [(validate.rules).uint64.gt = 0];
+    uint64 organization_id = 5 [(validate.rules).uint64.gt = 0];
+}

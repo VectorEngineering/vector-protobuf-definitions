@@ -1191,4 +1191,175 @@ service LeadScraperService {
             }
         };
     }
+
+    /**
+     * CreateTenantAPIKey generates a new API key for a tenant
+     * 
+     * Features:
+     * - Secure key generation
+     * - Configurable permissions
+     * - Automatic expiration
+     * - Usage quotas
+     * 
+     * Required validation:
+     * - Valid tenant ID
+     * - Authorization check
+     * - Rate limit verification
+     * 
+     * Required permissions:
+     * - create:tenant_api_key
+     */
+    rpc CreateTenantAPIKey(CreateTenantAPIKeyRequest) returns (CreateTenantAPIKeyResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a new tenant API key"
+            tags: ["lead-scraper-service"]
+            operation_id: "CreateTenantAPIKey"
+            description: "Creates a new API key for a tenant with specified permissions"
+        };
+    }
+
+    /**
+     * GetTenantAPIKey retrieves details of a specific API key
+     * 
+     * Returns:
+     * - Key metadata
+     * - Usage statistics
+     * - Permission details
+     * - Expiration status
+     * 
+     * Security:
+     * - Never returns full key value
+     * - Validates tenant context
+     * 
+     * Required permissions:
+     * - read:tenant_api_key
+     */
+    rpc GetTenantAPIKey(GetTenantAPIKeyRequest) returns (GetTenantAPIKeyResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{key_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get tenant API key details"
+            tags: ["lead-scraper-service"]
+            operation_id: "GetTenantAPIKey"
+            description: "Retrieves details of a specific tenant API key"
+        };
+    }
+
+    /**
+     * UpdateTenantAPIKey modifies an existing API key
+     * 
+     * Modifiable attributes:
+     * - Name and description
+     * - Permissions
+     * - Usage quotas
+     * - Expiration time
+     * 
+     * Security:
+     * - Validates tenant context
+     * - Preserves key value
+     * 
+     * Required permissions:
+     * - update:tenant_api_key
+     */
+    rpc UpdateTenantAPIKey(UpdateTenantAPIKeyRequest) returns (UpdateTenantAPIKeyResponse) {
+        option (google.api.http) = {
+            put: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Update tenant API key"
+            tags: ["lead-scraper-service"]
+            operation_id: "UpdateTenantAPIKey"
+            description: "Updates an existing tenant API key's configuration"
+        };
+    }
+
+    /**
+     * DeleteTenantAPIKey revokes and removes an API key
+     * 
+     * Process:
+     * 1. Immediate key revocation
+     * 2. Usage cleanup
+     * 3. Audit log creation
+     * 
+     * Security:
+     * - Validates tenant context
+     * - Immediate invalidation
+     * 
+     * Required permissions:
+     * - delete:tenant_api_key
+     */
+    rpc DeleteTenantAPIKey(DeleteTenantAPIKeyRequest) returns (DeleteTenantAPIKeyResponse) {
+        option (google.api.http) = {
+            delete: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{key_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete tenant API key"
+            tags: ["lead-scraper-service"]
+            operation_id: "DeleteTenantAPIKey"
+            description: "Permanently deletes a tenant API key"
+        };
+    }
+
+    /**
+     * ListTenantAPIKeys retrieves all API keys for a tenant
+     * 
+     * Features:
+     * - Pagination support
+     * - Filtering options
+     * - Usage statistics
+     * - Status filtering
+     * 
+     * Security:
+     * - Validates tenant context
+     * - Masks key values
+     * 
+     * Required permissions:
+     * - list:tenant_api_key
+     */
+    rpc ListTenantAPIKeys(ListTenantAPIKeysRequest) returns (ListTenantAPIKeysResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "List tenant API keys"
+            tags: ["lead-scraper-service"]
+            operation_id: "ListTenantAPIKeys"
+            description: "Retrieves all API keys for a specific tenant"
+        };
+    }
+
+    /**
+     * RotateTenantAPIKey generates a new key while invalidating the old one
+     * 
+     * Process:
+     * 1. Generate new key
+     * 2. Copy permissions
+     * 3. Invalidate old key
+     * 4. Return new key
+     * 
+     * Security:
+     * - Grace period option
+     * - Audit logging
+     * 
+     * Required permissions:
+     * - rotate:tenant_api_key
+     */
+    rpc RotateTenantAPIKey(RotateTenantAPIKeyRequest) returns (RotateTenantAPIKeyResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{key_id}/rotate"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Rotate tenant API key"
+            tags: ["lead-scraper-service"]
+            operation_id: "RotateTenantAPIKey"
+            description: "Rotates a tenant API key while maintaining its configuration"
+        };
+    }
 }

@@ -87,6 +87,20 @@ enum WorkflowStatus {
     WORKFLOW_STATUS_WARNING = 10;
 }
 
+// Status
+enum Status {
+    STATUS_UNSPECIFIED = 0;
+    STATUS_ACTIVE = 1;
+    STATUS_SUSPENDED = 2;
+    STATUS_PENDING_VERIFICATION = 3;
+    STATUS_REVOKED = 4;
+    STATUS_EXPIRED = 5;
+    STATUS_RATE_LIMITED = 6;
+    STATUS_PENDING_REVIEW = 7;
+    STATUS_DEPRECATED = 8;
+    STATUS_MAINTENANCE = 9;
+}
+
 /**
  * Organization represents a company using the platform
  * 
@@ -161,13 +175,7 @@ message Organization {
     google.protobuf.Timestamp deleted_at = 30;
     string created_by = 31;
     
-    // Status
-    enum Status {
-        STATUS_UNSPECIFIED = 0;
-        STATUS_ACTIVE = 1;
-        STATUS_SUSPENDED = 2;
-        STATUS_PENDING_VERIFICATION = 3;
-    }
+
     Status status = 32;
 }
 
@@ -226,12 +234,6 @@ message Tenant {
     google.protobuf.Timestamp deleted_at = 24;
     
     // Status
-    enum Status {
-        STATUS_UNSPECIFIED = 0;
-        STATUS_ACTIVE = 1;
-        STATUS_SUSPENDED = 2;
-        STATUS_MAINTENANCE = 3;
-    }
     Status status = 25;
 }
 
@@ -1211,16 +1213,6 @@ message APIKey {
     float success_rate = 28;
 
     // Key status and lifecycle
-    enum Status {
-        STATUS_UNSPECIFIED = 0;
-        STATUS_ACTIVE = 1;
-        STATUS_REVOKED = 2;
-        STATUS_EXPIRED = 3;
-        STATUS_RATE_LIMITED = 4;
-        STATUS_SUSPENDED = 5;
-        STATUS_PENDING_REVIEW = 6;
-        STATUS_DEPRECATED = 7;
-    }
     Status status = 29 [(gorm.field).tag = {index: "idx_api_keys_status"}];
 
     // Timestamps
@@ -1288,12 +1280,65 @@ message TenantAPIKey {
     string key_hash = 2;
     string key_prefix = 3 [(gorm.field).tag = {index: "idx_tenant_api_keys_prefix"}];
 
-    string name = 4;
+    string name = 4 [(validate.rules).string.min_len = 1];
     string description = 5;
-    string status = 6;
-    google.protobuf.Timestamp created_at = 7;
-    google.protobuf.Timestamp updated_at = 8;
-    google.protobuf.Timestamp deleted_at = 9;
+    
+    Status status = 6;
+
+    // Scopes and permissions
+    repeated TenantAPIKeyScope scopes = 7;
+    int32 max_uses = 8;
+    repeated string allowed_ips = 9;
+    
+    // Usage tracking
+    int32 use_count = 10;
+    
+    // Expiration and timestamps
+    google.protobuf.Timestamp expires_at = 12;
+    google.protobuf.Timestamp created_at = 13;
+    google.protobuf.Timestamp updated_at = 14;
+    google.protobuf.Timestamp deleted_at = 15;
+}
+
+/**
+ * TenantAPIKeyScope defines the available permission scopes for tenant API keys
+ * These scopes control what operations an API key can perform
+ * 
+ * Usage:
+ * - Multiple scopes can be assigned to a single key
+ * - Scopes follow a hierarchical pattern
+ * - More specific scopes take precedence over general ones
+ */
+enum TenantAPIKeyScope {
+    // Default state, should not be used explicitly
+    TENANT_API_KEY_SCOPE_UNSPECIFIED = 0;
+
+    // Read-only access scopes
+    TENANT_API_KEY_SCOPE_READ_JOBS = 1;          // View scraping jobs
+    TENANT_API_KEY_SCOPE_READ_LEADS = 2;         // View scraped leads
+    TENANT_API_KEY_SCOPE_READ_WORKFLOWS = 3;     // View workflow configurations
+    TENANT_API_KEY_SCOPE_READ_ANALYTICS = 4;     // View analytics and metrics
+    TENANT_API_KEY_SCOPE_READ_SETTINGS = 5;      // View tenant settings
+
+    // Write access scopes
+    TENANT_API_KEY_SCOPE_WRITE_JOBS = 6;         // Create/modify scraping jobs
+    TENANT_API_KEY_SCOPE_WRITE_LEADS = 7;        // Modify lead data
+    TENANT_API_KEY_SCOPE_WRITE_WORKFLOWS = 8;    // Create/modify workflows
+    TENANT_API_KEY_SCOPE_WRITE_SETTINGS = 9;     // Modify tenant settings
+
+    // Delete access scopes
+    TENANT_API_KEY_SCOPE_DELETE_JOBS = 10;       // Delete scraping jobs
+    TENANT_API_KEY_SCOPE_DELETE_LEADS = 11;      // Delete lead data
+    TENANT_API_KEY_SCOPE_DELETE_WORKFLOWS = 12;  // Delete workflows
+
+    // Special access scopes
+    TENANT_API_KEY_SCOPE_EXPORT_DATA = 13;       // Export data in various formats
+    TENANT_API_KEY_SCOPE_MANAGE_KEYS = 14;       // Manage other API keys
+    TENANT_API_KEY_SCOPE_BILLING_READ = 15;      // View billing information
+    TENANT_API_KEY_SCOPE_BILLING_WRITE = 16;     // Modify billing settings
+
+    // Full access scopes
+    TENANT_API_KEY_SCOPE_ADMIN = 17;             // Full administrative access
 }
 
 /**

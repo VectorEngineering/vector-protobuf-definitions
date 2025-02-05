@@ -142,3 +142,27 @@ spec:
       method: POST
       pathRegex: /lead_scraper_service\.v1\.LeadScraperService/ListOrganizations
     name: ListOrganizations
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/CreateTenantAPIKey
+    name: CreateTenantAPIKey
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetTenantAPIKey
+    name: GetTenantAPIKey
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/UpdateTenantAPIKey
+    name: UpdateTenantAPIKey
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/DeleteTenantAPIKey
+    name: DeleteTenantAPIKey
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/ListTenantAPIKeys
+    name: ListTenantAPIKeys
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/RotateTenantAPIKey
+    name: RotateTenantAPIKey

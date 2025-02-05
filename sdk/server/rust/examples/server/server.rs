@@ -119,6 +119,7 @@ use openapi_client::{
     DeleteTenantResponse,
     DeleteTenantApiKeyResponse,
     DeleteWebhookResponse,
+    DeleteWorkflowResponse,
     DeleteWorkspaceResponse,
     DownloadScrapingResultsResponse,
     GetAccountResponse,
@@ -348,6 +349,20 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
+    /// Delete workflow
+    async fn delete_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        org_id: String,
+        tenant_id: String,
+        account_id: Option<String>,
+        context: &C) -> Result<DeleteWorkflowResponse, ApiError>
+    {
+        info!("delete_workflow(\"{}\", \"{}\", \"{}\", \"{}\", {:?}) - X-Span-ID: {:?}", workspace_id, id, org_id, tenant_id, account_id, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
     /// Delete a workspace
     async fn delete_workspace(
         &self,
@@ -549,11 +564,10 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         page_size: Option<i32>,
         page_number: Option<i32>,
         status: Option<String>,
-        sort_desc: Option<bool>,
         search: Option<String>,
         context: &C) -> Result<ListApiKeysResponse, ApiError>
     {
-        info!("list_api_keys({:?}, {:?}, {:?}, {:?}, {:?}, {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", organization_id, tenant_id, account_id, workspace_id, page_size, page_number, status, sort_desc, search, context.get().0.clone());
+        info!("list_api_keys({:?}, {:?}, {:?}, {:?}, {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", organization_id, tenant_id, account_id, workspace_id, page_size, page_number, status, search, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

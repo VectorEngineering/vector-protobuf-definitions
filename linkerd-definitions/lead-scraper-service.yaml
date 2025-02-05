@@ -68,6 +68,10 @@ spec:
     name: CreateWorkflow
   - condition:
       method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/DeleteWorkflow
+    name: DeleteWorkflow
+  - condition:
+      method: POST
       pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetWorkflow
     name: GetWorkflow
   - condition:

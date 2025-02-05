@@ -4970,6 +4970,267 @@ var _ interface {
 	ErrorName() string
 } = PauseWorkflowResponseValidationError{}
 
+// Validate checks the field values on DeleteWorkflowRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteWorkflowRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteWorkflowRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteWorkflowRequestMultiError, or nil if none found.
+func (m *DeleteWorkflowRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteWorkflowRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOrgId() <= 0 {
+		err := DeleteWorkflowRequestValidationError{
+			field:  "OrgId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := DeleteWorkflowRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWorkspaceId() <= 0 {
+		err := DeleteWorkflowRequestValidationError{
+			field:  "WorkspaceId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAccountId() <= 0 {
+		err := DeleteWorkflowRequestValidationError{
+			field:  "AccountId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetId() <= 0 {
+		err := DeleteWorkflowRequestValidationError{
+			field:  "Id",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return DeleteWorkflowRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteWorkflowRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteWorkflowRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteWorkflowRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteWorkflowRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteWorkflowRequestMultiError) AllErrors() []error { return m }
+
+// DeleteWorkflowRequestValidationError is the validation error returned by
+// DeleteWorkflowRequest.Validate if the designated constraints aren't met.
+type DeleteWorkflowRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteWorkflowRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteWorkflowRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteWorkflowRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteWorkflowRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteWorkflowRequestValidationError) ErrorName() string {
+	return "DeleteWorkflowRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteWorkflowRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteWorkflowRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteWorkflowRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteWorkflowRequestValidationError{}
+
+// Validate checks the field values on DeleteWorkflowResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteWorkflowResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteWorkflowResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteWorkflowResponseMultiError, or nil if none found.
+func (m *DeleteWorkflowResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteWorkflowResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Success
+
+	if len(errors) > 0 {
+		return DeleteWorkflowResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteWorkflowResponseMultiError is an error wrapping multiple validation
+// errors returned by DeleteWorkflowResponse.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteWorkflowResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteWorkflowResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteWorkflowResponseMultiError) AllErrors() []error { return m }
+
+// DeleteWorkflowResponseValidationError is the validation error returned by
+// DeleteWorkflowResponse.Validate if the designated constraints aren't met.
+type DeleteWorkflowResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteWorkflowResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteWorkflowResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteWorkflowResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteWorkflowResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteWorkflowResponseValidationError) ErrorName() string {
+	return "DeleteWorkflowResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteWorkflowResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteWorkflowResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteWorkflowResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteWorkflowResponseValidationError{}
+
 // Validate checks the field values on GetWorkspaceAnalyticsRequest with the
 // rules defined in the proto definition for this message. If any rules are
 // violated, the first error encountered is returned, or nil if there are no violations.
@@ -11997,8 +12258,6 @@ func (m *ListAPIKeysRequest) validate(all bool) error {
 	// no validation rules for PageNumber
 
 	// no validation rules for Status
-
-	// no validation rules for SortDesc
 
 	// no validation rules for Search
 

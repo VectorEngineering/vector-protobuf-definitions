@@ -135,7 +135,7 @@ export default {
         },
 
         // @return ListApiKeysResponse
-        ListAPIKeys: ($organizationId, $tenantId, $accountId, $workspaceId, $pageSize, $pageNumber, $status, $sortDesc, $search) => {
+        ListAPIKeys: ($organizationId, $tenantId, $accountId, $workspaceId, $pageSize, $pageNumber, $status, $search) => {
             return {
                 "organizationId": "organizationId_example",
                 "tenantId": "tenantId_example",
@@ -144,7 +144,6 @@ export default {
                 "pageSize": "56",
                 "pageNumber": "56",
                 "status": "status_example",
-                "sortDesc": "true",
                 "search": "search_example"
             };
         },
@@ -363,6 +362,17 @@ export default {
                 "webhookId": "webhookId_example",
                 "organizationId": "organizationId_example",
                 "workspaceId": "workspaceId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example"
+            };
+        },
+
+        // @return DeleteWorkflowResponse
+        DeleteWorkflow: ($workspaceId, $Id_, $orgId, $tenantId, $accountId) => {
+            return {
+                "workspaceId": "workspaceId_example",
+                "Id_": "Id__example",
+                "orgId": "orgId_example",
                 "tenantId": "tenantId_example",
                 "accountId": "accountId_example"
             };

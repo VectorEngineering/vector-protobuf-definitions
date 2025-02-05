@@ -71,6 +71,7 @@ Models/DeleteScrapingJobResponse.md
 Models/DeleteTenantAPIKeyResponse.md
 Models/DeleteTenantResponse.md
 Models/DeleteWebhookResponse.md
+Models/DeleteWorkflowResponse.md
 Models/DeleteWorkspaceResponse.md
 Models/Dependency.md
 Models/DocumentBranch.md

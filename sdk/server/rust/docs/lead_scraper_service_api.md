@@ -19,6 +19,7 @@ Method | HTTP request | Description
 **DeleteTenant**](lead_scraper_service_api.md#DeleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 **DeleteTenantAPIKey**](lead_scraper_service_api.md#DeleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
 **DeleteWebhook**](lead_scraper_service_api.md#DeleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
+**DeleteWorkflow**](lead_scraper_service_api.md#DeleteWorkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 **DeleteWorkspace**](lead_scraper_service_api.md#DeleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
 **DownloadScrapingResults**](lead_scraper_service_api.md#DownloadScrapingResults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV
 **GetAccount**](lead_scraper_service_api.md#GetAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details
@@ -501,6 +502,48 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**models::DeleteWebhookResponse**](DeleteWebhookResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: , application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **DeleteWorkflow**
+> models::DeleteWorkflowResponse DeleteWorkflow(workspace_id, id, org_id, tenant_id, optional)
+Delete workflow
+
+Deletes a specific workflow
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+  **workspace_id** | **String**|  | 
+  **id** | **String**|  | 
+  **org_id** | **String**|  | 
+  **tenant_id** | **String**|  | 
+ **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a map[string]interface{}.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **workspace_id** | **String**|  | 
+ **id** | **String**|  | 
+ **org_id** | **String**|  | 
+ **tenant_id** | **String**|  | 
+ **account_id** | **String**|  | 
+
+### Return type
+
+[**models::DeleteWorkflowResponse**](DeleteWorkflowResponse.md)
 
 ### Authorization
 
@@ -1055,7 +1098,6 @@ Name | Type | Description  | Notes
  **page_size** | **i32**|  | 
  **page_number** | **i32**|  | 
  **status** | **String**|  | 
- **sort_desc** | **bool**|  | 
  **search** | **String**|  | 
 
 ### Return type

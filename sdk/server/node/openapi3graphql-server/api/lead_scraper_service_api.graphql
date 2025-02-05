@@ -123,6 +123,19 @@ input DeleteWebhookInput {
     accountId: String!
 }
 
+input DeleteWorkflowInput {
+    
+    workspaceId: String!, 
+    
+    Id_: String!, 
+    
+    orgId: String!, 
+    
+    tenantId: String!, 
+    
+    accountId: String!
+}
+
 input DeleteWorkspaceInput {
     
     Id_: String!
@@ -301,6 +314,15 @@ type Mutation {
   # @param String! accountId 
   # @return [DeleteWebhookResponse]
   DeleteWebhook(input: DeleteWebhookInput!): DeleteWebhookResponse
+  # Delete workflow
+  # Deletes a specific workflow
+  # @param String! workspaceId 
+  # @param String! Id_ 
+  # @param String! orgId 
+  # @param String! tenantId 
+  # @param String! accountId 
+  # @return [DeleteWorkflowResponse]
+  DeleteWorkflow(input: DeleteWorkflowInput!): DeleteWorkflowResponse
   # Delete a workspace
   # Deletes a specific workspace
   # @param String! Id_ 
@@ -484,10 +506,9 @@ type Query {
   # @param Int! pageSize 
   # @param Int! pageNumber 
   # @param String! status 
-  # @param Boolean! sortDesc 
   # @param String! search 
   # @return [ListApiKeysResponse]
-  ListAPIKeys(organizationId: String!, tenantId: String!, accountId: String!, workspaceId: String!, pageSize: Int!, pageNumber: Int!, status: String!, sortDesc: Boolean!, search: String!): ListApiKeysResponse
+  ListAPIKeys(organizationId: String!, tenantId: String!, accountId: String!, workspaceId: String!, pageSize: Int!, pageNumber: Int!, status: String!, search: String!): ListApiKeysResponse
   # List all accounts
   # Retrieves a list of accounts
   # @param Int! pageSize 

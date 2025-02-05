@@ -1,0 +1,12 @@
+dist/
+node_modules/
+coverage/
+.git/
+*.log
+charts/
+charts/**/*
+# Helm chart files
+*.tpl
+*.yaml.tpl
+values.yaml
+Chart.yaml 

@@ -74,6 +74,7 @@ docs/DeleteScrapingJobResponse.md
 docs/DeleteTenantApiKeyResponse.md
 docs/DeleteTenantResponse.md
 docs/DeleteWebhookResponse.md
+docs/DeleteWorkflowResponse.md
 docs/DeleteWorkspaceResponse.md
 docs/Dependency.md
 docs/DocumentBranch.md

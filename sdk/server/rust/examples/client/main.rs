@@ -20,6 +20,7 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       DeleteTenantResponse,
                       DeleteTenantApiKeyResponse,
                       DeleteWebhookResponse,
+                      DeleteWorkflowResponse,
                       DeleteWorkspaceResponse,
                       DownloadScrapingResultsResponse,
                       GetAccountResponse,
@@ -109,6 +110,7 @@ fn main() {
                 "DeleteTenant", 
                 "DeleteTenantApiKey", 
                 "DeleteWebhook", 
+                "DeleteWorkflow", 
                 "DeleteWorkspace", 
                 "DownloadScrapingResults", 
                 "GetAccount", 
@@ -335,6 +337,16 @@ fn main() {
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
+        Some("DeleteWorkflow") => {
+            let result = rt.block_on(client.delete_workflow(
+                  "workspace_id_example".to_string(),
+                  "id_example".to_string(),
+                  "org_id_example".to_string(),
+                  "tenant_id_example".to_string(),
+                  Some("account_id_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
         Some("DeleteWorkspace") => {
             let result = rt.block_on(client.delete_workspace(
                   "id_example".to_string()
@@ -473,7 +485,6 @@ fn main() {
                   Some(56),
                   Some(56),
                   Some("status_example".to_string()),
-                  Some(true),
                   Some("search_example".to_string())
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());

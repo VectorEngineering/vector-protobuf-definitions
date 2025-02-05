@@ -19,8 +19,10 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from playbookmedia_backend_client_sdk.models.tenant_api_key_scope import TenantAPIKeyScope
+from playbookmedia_backend_client_sdk.models.v1_status import V1Status
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,11 +35,16 @@ class TenantAPIKey(BaseModel):
     key_prefix: Optional[StrictStr] = Field(default=None, alias="keyPrefix")
     name: Optional[StrictStr] = None
     description: Optional[StrictStr] = None
-    status: Optional[StrictStr] = None
+    status: Optional[V1Status] = V1Status.UNSPECIFIED
+    scopes: Optional[List[TenantAPIKeyScope]] = None
+    max_uses: Optional[StrictInt] = Field(default=None, alias="maxUses")
+    allowed_ips: Optional[List[StrictStr]] = Field(default=None, alias="allowedIps")
+    use_count: Optional[StrictInt] = Field(default=None, alias="useCount")
+    expires_at: Optional[datetime] = Field(default=None, alias="expiresAt")
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
     deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
-    __properties: ClassVar[List[str]] = ["id", "keyHash", "keyPrefix", "name", "description", "status", "createdAt", "updatedAt", "deletedAt"]
+    __properties: ClassVar[List[str]] = ["id", "keyHash", "keyPrefix", "name", "description", "status", "scopes", "maxUses", "allowedIps", "useCount", "expiresAt", "createdAt", "updatedAt", "deletedAt"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,7 +102,12 @@ class TenantAPIKey(BaseModel):
             "keyPrefix": obj.get("keyPrefix"),
             "name": obj.get("name"),
             "description": obj.get("description"),
-            "status": obj.get("status"),
+            "status": obj.get("status") if obj.get("status") is not None else V1Status.UNSPECIFIED,
+            "scopes": obj.get("scopes"),
+            "maxUses": obj.get("maxUses"),
+            "allowedIps": obj.get("allowedIps"),
+            "useCount": obj.get("useCount"),
+            "expiresAt": obj.get("expiresAt"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt"),
             "deletedAt": obj.get("deletedAt")

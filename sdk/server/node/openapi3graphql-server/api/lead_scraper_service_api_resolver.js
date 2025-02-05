@@ -27,6 +27,17 @@ export default {
             };
         },
 
+        // @return GetApiKeyResponse
+        GetAPIKey: ($keyId, $organizationId, $tenantId, $accountId, $workspaceId) => {
+            return {
+                "keyId": "keyId_example",
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example",
+                "workspaceId": "workspaceId_example"
+            };
+        },
+
         // @return GetAccountResponse
         GetAccount: ($Id_, $organizationId, $tenantId) => {
             return {
@@ -40,6 +51,17 @@ export default {
         GetAccountUsage: ($Id_) => {
             return {
                 "Id_": "Id__example"
+            };
+        },
+
+        // @return GetLeadResponse
+        GetLead: ($leadId, $organizationId, $workspaceId, $tenantId, $accountId) => {
+            return {
+                "leadId": "leadId_example",
+                "organizationId": "organizationId_example",
+                "workspaceId": "workspaceId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example"
             };
         },
 
@@ -68,7 +90,27 @@ export default {
             };
         },
 
-        // @return ScrapingWorkflow
+        // @return GetTenantApiKeyResponse
+        GetTenantAPIKey: ($keyId, $organizationId, $tenantId) => {
+            return {
+                "keyId": "keyId_example",
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example"
+            };
+        },
+
+        // @return GetWebhookResponse
+        GetWebhook: ($webhookId, $organizationId, $workspaceId, $tenantId, $accountId) => {
+            return {
+                "webhookId": "webhookId_example",
+                "organizationId": "organizationId_example",
+                "workspaceId": "workspaceId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example"
+            };
+        },
+
+        // @return GetWorkflowResponse
         GetWorkflow: ($workspaceId, $Id_) => {
             return {
                 "workspaceId": "workspaceId_example",
@@ -76,7 +118,7 @@ export default {
             };
         },
 
-        // @return Workspace
+        // @return GetWorkspaceResponse
         GetWorkspace: ($Id_) => {
             return {
                 "Id_": "Id__example"
@@ -92,6 +134,21 @@ export default {
             };
         },
 
+        // @return ListApiKeysResponse
+        ListAPIKeys: ($organizationId, $tenantId, $accountId, $workspaceId, $pageSize, $pageNumber, $status, $sortDesc, $search) => {
+            return {
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example",
+                "workspaceId": "workspaceId_example",
+                "pageSize": "56",
+                "pageNumber": "56",
+                "status": "status_example",
+                "sortDesc": "true",
+                "search": "search_example"
+            };
+        },
+
         // @return ListAccountsResponse
         ListAccounts: ($pageSize, $pageNumber, $filter, $organizationId, $tenantId) => {
             return {
@@ -100,6 +157,18 @@ export default {
                 "filter": "filter_example",
                 "organizationId": "organizationId_example",
                 "tenantId": "tenantId_example"
+            };
+        },
+
+        // @return ListLeadsResponse
+        ListLeads: ($organizationId, $workspaceId, $tenantId, $accountId, $pageSize, $pageNumber) => {
+            return {
+                "organizationId": "organizationId_example",
+                "workspaceId": "workspaceId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example",
+                "pageSize": "56",
+                "pageNumber": "56"
             };
         },
 
@@ -120,12 +189,37 @@ export default {
             };
         },
 
+        // @return ListTenantApiKeysResponse
+        ListTenantAPIKeys: ($organizationId, $tenantId, $pageSize, $pageNumber, $status) => {
+            return {
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example",
+                "pageSize": "56",
+                "pageNumber": "56",
+                "status": "status_example"
+            };
+        },
+
         // @return ListTenantsResponse
         ListTenants: ($organizationId, $pageSize, $pageNumber) => {
             return {
                 "organizationId": "organizationId_example",
                 "pageSize": "56",
                 "pageNumber": "56"
+            };
+        },
+
+        // @return ListWebhooksResponse
+        ListWebhooks: ($organizationId, $workspaceId, $tenantId, $accountId, $pageSize, $pageNumber, $status, $search) => {
+            return {
+                "organizationId": "organizationId_example",
+                "workspaceId": "workspaceId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example",
+                "pageSize": "56",
+                "pageNumber": "56",
+                "status": "status_example",
+                "search": "search_example"
             };
         },
 
@@ -151,6 +245,13 @@ export default {
     },
 
     Mutation: {
+
+        // @return CreateApiKeyResponse
+        CreateAPIKey: ($createApiKeyRequest) => {
+            return {
+                "createApiKeyRequest": ""
+            };
+        },
 
         // @return CreateAccountResponse
         CreateAccount: ($createAccountRequest) => {
@@ -181,10 +282,35 @@ export default {
             };
         },
 
+        // @return CreateTenantApiKeyResponse
+        CreateTenantAPIKey: ($createTenantApiKeyRequest) => {
+            return {
+                "createTenantApiKeyRequest": ""
+            };
+        },
+
+        // @return CreateWebhookResponse
+        CreateWebhook: ($createWebhookRequest) => {
+            return {
+                "createWebhookRequest": ""
+            };
+        },
+
         // @return CreateWorkspaceResponse
         CreateWorkspace: ($createWorkspaceRequest) => {
             return {
                 "createWorkspaceRequest": ""
+            };
+        },
+
+        // @return DeleteApiKeyResponse
+        DeleteAPIKey: ($keyId, $organizationId, $workspaceId, $tenantId, $accountId) => {
+            return {
+                "keyId": "keyId_example",
+                "organizationId": "organizationId_example",
+                "workspaceId": "workspaceId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example"
             };
         },
 
@@ -222,6 +348,26 @@ export default {
             };
         },
 
+        // @return DeleteTenantApiKeyResponse
+        DeleteTenantAPIKey: ($keyId, $organizationId, $tenantId) => {
+            return {
+                "keyId": "keyId_example",
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example"
+            };
+        },
+
+        // @return DeleteWebhookResponse
+        DeleteWebhook: ($webhookId, $organizationId, $workspaceId, $tenantId, $accountId) => {
+            return {
+                "webhookId": "webhookId_example",
+                "organizationId": "organizationId_example",
+                "workspaceId": "workspaceId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example"
+            };
+        },
+
         // @return DeleteWorkspaceResponse
         DeleteWorkspace: ($Id_) => {
             return {
@@ -246,12 +392,33 @@ export default {
             };
         },
 
+        // @return RotateApiKeyResponse
+        RotateAPIKey: ($rotateApiKeyRequest) => {
+            return {
+                "rotateApiKeyRequest": ""
+            };
+        },
+
+        // @return RotateTenantApiKeyResponse
+        RotateTenantAPIKey: ($rotateTenantApiKeyRequest) => {
+            return {
+                "rotateTenantApiKeyRequest": ""
+            };
+        },
+
         // @return TriggerWorkflowResponse
         TriggerWorkflow: ($workspaceId, $Id_, $triggerWorkflowBody) => {
             return {
                 "workspaceId": "workspaceId_example",
                 "Id_": "Id__example",
                 "triggerWorkflowBody": ""
+            };
+        },
+
+        // @return UpdateApiKeyResponse
+        UpdateAPIKey: ($updateApiKeyRequest) => {
+            return {
+                "updateApiKeyRequest": ""
             };
         },
 
@@ -283,7 +450,21 @@ export default {
             };
         },
 
-        // @return ScrapingWorkflow
+        // @return UpdateTenantApiKeyResponse
+        UpdateTenantAPIKey: ($updateTenantApiKeyRequest) => {
+            return {
+                "updateTenantApiKeyRequest": ""
+            };
+        },
+
+        // @return UpdateWebhookResponse
+        UpdateWebhook: ($updateWebhookRequest) => {
+            return {
+                "updateWebhookRequest": ""
+            };
+        },
+
+        // @return UpdateWorkflowResponse
         UpdateWorkflow: ($updateWorkflowRequest) => {
             return {
                 "updateWorkflowRequest": ""

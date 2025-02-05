@@ -32,7 +32,7 @@ type Tenant {
   createdAt: String!
   updatedAt: String!
   deletedAt: String!
-  status: TenantStatus
+  status: V1Status
 }
 
 input TenantInput {
@@ -58,6 +58,6 @@ input TenantInput {
     createdAt: String!
     updatedAt: String!
     deletedAt: String!
-    status: TenantStatus
+    status: V1Status
 }
 

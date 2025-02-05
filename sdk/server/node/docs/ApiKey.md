@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 **recentErrors** | **String!** |  | [optional] [default to null]
 **successfulRequestsCount** | **Int!** |  | [optional] [default to null]
 **successRate** | **Float!** |  | [optional] [default to null]
-**status** | [***ApiKeyStatus**](APIKey.Status.md) |  | [optional] [default to null]
+**status** | [***V1Status**](v1.Status.md) |  | [optional] [default to null]
 **createdAt** | **String!** |  | [optional] [default to null]
 **updatedAt** | **String!** |  | [optional] [default to null]
 **expiresAt** | **String!** |  | [optional] [default to null]

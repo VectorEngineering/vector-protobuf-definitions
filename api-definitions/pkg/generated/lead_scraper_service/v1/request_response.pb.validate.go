@@ -9080,6 +9080,5490 @@ var _ interface {
 	ErrorName() string
 } = ListOrganizationsResponseValidationError{}
 
+// Validate checks the field values on CreateTenantAPIKeyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateTenantAPIKeyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateTenantAPIKeyRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateTenantAPIKeyRequestMultiError, or nil if none found.
+func (m *CreateTenantAPIKeyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateTenantAPIKeyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOrganizationId() <= 0 {
+		err := CreateTenantAPIKeyRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := CreateTenantAPIKeyRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetApiKey() == nil {
+		err := CreateTenantAPIKeyRequestValidationError{
+			field:  "ApiKey",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetApiKey()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateTenantAPIKeyRequestValidationError{
+					field:  "ApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateTenantAPIKeyRequestValidationError{
+					field:  "ApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetApiKey()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateTenantAPIKeyRequestValidationError{
+				field:  "ApiKey",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return CreateTenantAPIKeyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateTenantAPIKeyRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateTenantAPIKeyRequest.ValidateAll() if the
+// designated constraints aren't met.
+type CreateTenantAPIKeyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateTenantAPIKeyRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateTenantAPIKeyRequestMultiError) AllErrors() []error { return m }
+
+// CreateTenantAPIKeyRequestValidationError is the validation error returned by
+// CreateTenantAPIKeyRequest.Validate if the designated constraints aren't met.
+type CreateTenantAPIKeyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateTenantAPIKeyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateTenantAPIKeyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateTenantAPIKeyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateTenantAPIKeyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateTenantAPIKeyRequestValidationError) ErrorName() string {
+	return "CreateTenantAPIKeyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateTenantAPIKeyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateTenantAPIKeyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateTenantAPIKeyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateTenantAPIKeyRequestValidationError{}
+
+// Validate checks the field values on CreateTenantAPIKeyResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateTenantAPIKeyResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateTenantAPIKeyResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateTenantAPIKeyResponseMultiError, or nil if none found.
+func (m *CreateTenantAPIKeyResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateTenantAPIKeyResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for KeyId
+
+	// no validation rules for KeyValue
+
+	if len(errors) > 0 {
+		return CreateTenantAPIKeyResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateTenantAPIKeyResponseMultiError is an error wrapping multiple
+// validation errors returned by CreateTenantAPIKeyResponse.ValidateAll() if
+// the designated constraints aren't met.
+type CreateTenantAPIKeyResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateTenantAPIKeyResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateTenantAPIKeyResponseMultiError) AllErrors() []error { return m }
+
+// CreateTenantAPIKeyResponseValidationError is the validation error returned
+// by CreateTenantAPIKeyResponse.Validate if the designated constraints aren't met.
+type CreateTenantAPIKeyResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateTenantAPIKeyResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateTenantAPIKeyResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateTenantAPIKeyResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateTenantAPIKeyResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateTenantAPIKeyResponseValidationError) ErrorName() string {
+	return "CreateTenantAPIKeyResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateTenantAPIKeyResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateTenantAPIKeyResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateTenantAPIKeyResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateTenantAPIKeyResponseValidationError{}
+
+// Validate checks the field values on GetTenantAPIKeyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetTenantAPIKeyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetTenantAPIKeyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetTenantAPIKeyRequestMultiError, or nil if none found.
+func (m *GetTenantAPIKeyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetTenantAPIKeyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOrganizationId() <= 0 {
+		err := GetTenantAPIKeyRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := GetTenantAPIKeyRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetKeyId() <= 0 {
+		err := GetTenantAPIKeyRequestValidationError{
+			field:  "KeyId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return GetTenantAPIKeyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetTenantAPIKeyRequestMultiError is an error wrapping multiple validation
+// errors returned by GetTenantAPIKeyRequest.ValidateAll() if the designated
+// constraints aren't met.
+type GetTenantAPIKeyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetTenantAPIKeyRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetTenantAPIKeyRequestMultiError) AllErrors() []error { return m }
+
+// GetTenantAPIKeyRequestValidationError is the validation error returned by
+// GetTenantAPIKeyRequest.Validate if the designated constraints aren't met.
+type GetTenantAPIKeyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTenantAPIKeyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetTenantAPIKeyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetTenantAPIKeyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetTenantAPIKeyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetTenantAPIKeyRequestValidationError) ErrorName() string {
+	return "GetTenantAPIKeyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetTenantAPIKeyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTenantAPIKeyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTenantAPIKeyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTenantAPIKeyRequestValidationError{}
+
+// Validate checks the field values on GetTenantAPIKeyResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetTenantAPIKeyResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetTenantAPIKeyResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetTenantAPIKeyResponseMultiError, or nil if none found.
+func (m *GetTenantAPIKeyResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetTenantAPIKeyResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetApiKey()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetTenantAPIKeyResponseValidationError{
+					field:  "ApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetTenantAPIKeyResponseValidationError{
+					field:  "ApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetApiKey()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetTenantAPIKeyResponseValidationError{
+				field:  "ApiKey",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetTenantAPIKeyResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetTenantAPIKeyResponseMultiError is an error wrapping multiple validation
+// errors returned by GetTenantAPIKeyResponse.ValidateAll() if the designated
+// constraints aren't met.
+type GetTenantAPIKeyResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetTenantAPIKeyResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetTenantAPIKeyResponseMultiError) AllErrors() []error { return m }
+
+// GetTenantAPIKeyResponseValidationError is the validation error returned by
+// GetTenantAPIKeyResponse.Validate if the designated constraints aren't met.
+type GetTenantAPIKeyResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetTenantAPIKeyResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetTenantAPIKeyResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetTenantAPIKeyResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetTenantAPIKeyResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetTenantAPIKeyResponseValidationError) ErrorName() string {
+	return "GetTenantAPIKeyResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetTenantAPIKeyResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetTenantAPIKeyResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetTenantAPIKeyResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetTenantAPIKeyResponseValidationError{}
+
+// Validate checks the field values on UpdateTenantAPIKeyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateTenantAPIKeyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateTenantAPIKeyRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateTenantAPIKeyRequestMultiError, or nil if none found.
+func (m *UpdateTenantAPIKeyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateTenantAPIKeyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetApiKey() == nil {
+		err := UpdateTenantAPIKeyRequestValidationError{
+			field:  "ApiKey",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetApiKey()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateTenantAPIKeyRequestValidationError{
+					field:  "ApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateTenantAPIKeyRequestValidationError{
+					field:  "ApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetApiKey()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateTenantAPIKeyRequestValidationError{
+				field:  "ApiKey",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return UpdateTenantAPIKeyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateTenantAPIKeyRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateTenantAPIKeyRequest.ValidateAll() if the
+// designated constraints aren't met.
+type UpdateTenantAPIKeyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateTenantAPIKeyRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateTenantAPIKeyRequestMultiError) AllErrors() []error { return m }
+
+// UpdateTenantAPIKeyRequestValidationError is the validation error returned by
+// UpdateTenantAPIKeyRequest.Validate if the designated constraints aren't met.
+type UpdateTenantAPIKeyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateTenantAPIKeyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateTenantAPIKeyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateTenantAPIKeyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateTenantAPIKeyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateTenantAPIKeyRequestValidationError) ErrorName() string {
+	return "UpdateTenantAPIKeyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateTenantAPIKeyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateTenantAPIKeyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateTenantAPIKeyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateTenantAPIKeyRequestValidationError{}
+
+// Validate checks the field values on UpdateTenantAPIKeyResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateTenantAPIKeyResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateTenantAPIKeyResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateTenantAPIKeyResponseMultiError, or nil if none found.
+func (m *UpdateTenantAPIKeyResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateTenantAPIKeyResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetApiKey()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateTenantAPIKeyResponseValidationError{
+					field:  "ApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateTenantAPIKeyResponseValidationError{
+					field:  "ApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetApiKey()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateTenantAPIKeyResponseValidationError{
+				field:  "ApiKey",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return UpdateTenantAPIKeyResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateTenantAPIKeyResponseMultiError is an error wrapping multiple
+// validation errors returned by UpdateTenantAPIKeyResponse.ValidateAll() if
+// the designated constraints aren't met.
+type UpdateTenantAPIKeyResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateTenantAPIKeyResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateTenantAPIKeyResponseMultiError) AllErrors() []error { return m }
+
+// UpdateTenantAPIKeyResponseValidationError is the validation error returned
+// by UpdateTenantAPIKeyResponse.Validate if the designated constraints aren't met.
+type UpdateTenantAPIKeyResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateTenantAPIKeyResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateTenantAPIKeyResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateTenantAPIKeyResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateTenantAPIKeyResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateTenantAPIKeyResponseValidationError) ErrorName() string {
+	return "UpdateTenantAPIKeyResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateTenantAPIKeyResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateTenantAPIKeyResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateTenantAPIKeyResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateTenantAPIKeyResponseValidationError{}
+
+// Validate checks the field values on DeleteTenantAPIKeyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteTenantAPIKeyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteTenantAPIKeyRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteTenantAPIKeyRequestMultiError, or nil if none found.
+func (m *DeleteTenantAPIKeyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteTenantAPIKeyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOrganizationId() <= 0 {
+		err := DeleteTenantAPIKeyRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := DeleteTenantAPIKeyRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetKeyId() <= 0 {
+		err := DeleteTenantAPIKeyRequestValidationError{
+			field:  "KeyId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return DeleteTenantAPIKeyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteTenantAPIKeyRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteTenantAPIKeyRequest.ValidateAll() if the
+// designated constraints aren't met.
+type DeleteTenantAPIKeyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteTenantAPIKeyRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteTenantAPIKeyRequestMultiError) AllErrors() []error { return m }
+
+// DeleteTenantAPIKeyRequestValidationError is the validation error returned by
+// DeleteTenantAPIKeyRequest.Validate if the designated constraints aren't met.
+type DeleteTenantAPIKeyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteTenantAPIKeyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteTenantAPIKeyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteTenantAPIKeyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteTenantAPIKeyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteTenantAPIKeyRequestValidationError) ErrorName() string {
+	return "DeleteTenantAPIKeyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteTenantAPIKeyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteTenantAPIKeyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteTenantAPIKeyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteTenantAPIKeyRequestValidationError{}
+
+// Validate checks the field values on DeleteTenantAPIKeyResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteTenantAPIKeyResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteTenantAPIKeyResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteTenantAPIKeyResponseMultiError, or nil if none found.
+func (m *DeleteTenantAPIKeyResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteTenantAPIKeyResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Success
+
+	if len(errors) > 0 {
+		return DeleteTenantAPIKeyResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteTenantAPIKeyResponseMultiError is an error wrapping multiple
+// validation errors returned by DeleteTenantAPIKeyResponse.ValidateAll() if
+// the designated constraints aren't met.
+type DeleteTenantAPIKeyResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteTenantAPIKeyResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteTenantAPIKeyResponseMultiError) AllErrors() []error { return m }
+
+// DeleteTenantAPIKeyResponseValidationError is the validation error returned
+// by DeleteTenantAPIKeyResponse.Validate if the designated constraints aren't met.
+type DeleteTenantAPIKeyResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteTenantAPIKeyResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteTenantAPIKeyResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteTenantAPIKeyResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteTenantAPIKeyResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteTenantAPIKeyResponseValidationError) ErrorName() string {
+	return "DeleteTenantAPIKeyResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteTenantAPIKeyResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteTenantAPIKeyResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteTenantAPIKeyResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteTenantAPIKeyResponseValidationError{}
+
+// Validate checks the field values on ListTenantAPIKeysRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListTenantAPIKeysRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListTenantAPIKeysRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListTenantAPIKeysRequestMultiError, or nil if none found.
+func (m *ListTenantAPIKeysRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListTenantAPIKeysRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOrganizationId() <= 0 {
+		err := ListTenantAPIKeysRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := ListTenantAPIKeysRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if val := m.GetPageSize(); val < 1 || val > 100 {
+		err := ListTenantAPIKeysRequestValidationError{
+			field:  "PageSize",
+			reason: "value must be inside range [1, 100]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for PageNumber
+
+	// no validation rules for Status
+
+	if len(errors) > 0 {
+		return ListTenantAPIKeysRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListTenantAPIKeysRequestMultiError is an error wrapping multiple validation
+// errors returned by ListTenantAPIKeysRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListTenantAPIKeysRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListTenantAPIKeysRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListTenantAPIKeysRequestMultiError) AllErrors() []error { return m }
+
+// ListTenantAPIKeysRequestValidationError is the validation error returned by
+// ListTenantAPIKeysRequest.Validate if the designated constraints aren't met.
+type ListTenantAPIKeysRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListTenantAPIKeysRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListTenantAPIKeysRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListTenantAPIKeysRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListTenantAPIKeysRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListTenantAPIKeysRequestValidationError) ErrorName() string {
+	return "ListTenantAPIKeysRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListTenantAPIKeysRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListTenantAPIKeysRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListTenantAPIKeysRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListTenantAPIKeysRequestValidationError{}
+
+// Validate checks the field values on ListTenantAPIKeysResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListTenantAPIKeysResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListTenantAPIKeysResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListTenantAPIKeysResponseMultiError, or nil if none found.
+func (m *ListTenantAPIKeysResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListTenantAPIKeysResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetApiKeys() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListTenantAPIKeysResponseValidationError{
+						field:  fmt.Sprintf("ApiKeys[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListTenantAPIKeysResponseValidationError{
+						field:  fmt.Sprintf("ApiKeys[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListTenantAPIKeysResponseValidationError{
+					field:  fmt.Sprintf("ApiKeys[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for NextPageNumber
+
+	// no validation rules for TotalCount
+
+	if len(errors) > 0 {
+		return ListTenantAPIKeysResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListTenantAPIKeysResponseMultiError is an error wrapping multiple validation
+// errors returned by ListTenantAPIKeysResponse.ValidateAll() if the
+// designated constraints aren't met.
+type ListTenantAPIKeysResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListTenantAPIKeysResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListTenantAPIKeysResponseMultiError) AllErrors() []error { return m }
+
+// ListTenantAPIKeysResponseValidationError is the validation error returned by
+// ListTenantAPIKeysResponse.Validate if the designated constraints aren't met.
+type ListTenantAPIKeysResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListTenantAPIKeysResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListTenantAPIKeysResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListTenantAPIKeysResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListTenantAPIKeysResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListTenantAPIKeysResponseValidationError) ErrorName() string {
+	return "ListTenantAPIKeysResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListTenantAPIKeysResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListTenantAPIKeysResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListTenantAPIKeysResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListTenantAPIKeysResponseValidationError{}
+
+// Validate checks the field values on RotateTenantAPIKeyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RotateTenantAPIKeyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RotateTenantAPIKeyRequest with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RotateTenantAPIKeyRequestMultiError, or nil if none found.
+func (m *RotateTenantAPIKeyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RotateTenantAPIKeyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOrganizationId() <= 0 {
+		err := RotateTenantAPIKeyRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := RotateTenantAPIKeyRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetKeyId() <= 0 {
+		err := RotateTenantAPIKeyRequestValidationError{
+			field:  "KeyId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return RotateTenantAPIKeyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// RotateTenantAPIKeyRequestMultiError is an error wrapping multiple validation
+// errors returned by RotateTenantAPIKeyRequest.ValidateAll() if the
+// designated constraints aren't met.
+type RotateTenantAPIKeyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RotateTenantAPIKeyRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RotateTenantAPIKeyRequestMultiError) AllErrors() []error { return m }
+
+// RotateTenantAPIKeyRequestValidationError is the validation error returned by
+// RotateTenantAPIKeyRequest.Validate if the designated constraints aren't met.
+type RotateTenantAPIKeyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RotateTenantAPIKeyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RotateTenantAPIKeyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RotateTenantAPIKeyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RotateTenantAPIKeyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RotateTenantAPIKeyRequestValidationError) ErrorName() string {
+	return "RotateTenantAPIKeyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RotateTenantAPIKeyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRotateTenantAPIKeyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RotateTenantAPIKeyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RotateTenantAPIKeyRequestValidationError{}
+
+// Validate checks the field values on RotateTenantAPIKeyResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RotateTenantAPIKeyResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RotateTenantAPIKeyResponse with the
+// rules defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RotateTenantAPIKeyResponseMultiError, or nil if none found.
+func (m *RotateTenantAPIKeyResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RotateTenantAPIKeyResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetNewApiKey()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RotateTenantAPIKeyResponseValidationError{
+					field:  "NewApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RotateTenantAPIKeyResponseValidationError{
+					field:  "NewApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetNewApiKey()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RotateTenantAPIKeyResponseValidationError{
+				field:  "NewApiKey",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for NewKeyValue
+
+	if all {
+		switch v := interface{}(m.GetOldKeyExpiry()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RotateTenantAPIKeyResponseValidationError{
+					field:  "OldKeyExpiry",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RotateTenantAPIKeyResponseValidationError{
+					field:  "OldKeyExpiry",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOldKeyExpiry()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RotateTenantAPIKeyResponseValidationError{
+				field:  "OldKeyExpiry",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := RotateTenantAPIKeyResponseValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetOrganizationId() <= 0 {
+		err := RotateTenantAPIKeyResponseValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return RotateTenantAPIKeyResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// RotateTenantAPIKeyResponseMultiError is an error wrapping multiple
+// validation errors returned by RotateTenantAPIKeyResponse.ValidateAll() if
+// the designated constraints aren't met.
+type RotateTenantAPIKeyResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RotateTenantAPIKeyResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RotateTenantAPIKeyResponseMultiError) AllErrors() []error { return m }
+
+// RotateTenantAPIKeyResponseValidationError is the validation error returned
+// by RotateTenantAPIKeyResponse.Validate if the designated constraints aren't met.
+type RotateTenantAPIKeyResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RotateTenantAPIKeyResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RotateTenantAPIKeyResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RotateTenantAPIKeyResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RotateTenantAPIKeyResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RotateTenantAPIKeyResponseValidationError) ErrorName() string {
+	return "RotateTenantAPIKeyResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RotateTenantAPIKeyResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRotateTenantAPIKeyResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RotateTenantAPIKeyResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RotateTenantAPIKeyResponseValidationError{}
+
+// Validate checks the field values on CreateAPIKeyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateAPIKeyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateAPIKeyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateAPIKeyRequestMultiError, or nil if none found.
+func (m *CreateAPIKeyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateAPIKeyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOrganizationId() <= 0 {
+		err := CreateAPIKeyRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWorkspaceId() <= 0 {
+		err := CreateAPIKeyRequestValidationError{
+			field:  "WorkspaceId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := CreateAPIKeyRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAccountId() <= 0 {
+		err := CreateAPIKeyRequestValidationError{
+			field:  "AccountId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetName()) < 1 {
+		err := CreateAPIKeyRequestValidationError{
+			field:  "Name",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if utf8.RuneCountInString(m.GetDescription()) < 1 {
+		err := CreateAPIKeyRequestValidationError{
+			field:  "Description",
+			reason: "value length must be at least 1 runes",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(m.GetScopes()) < 1 {
+		err := CreateAPIKeyRequestValidationError{
+			field:  "Scopes",
+			reason: "value must contain at least 1 item(s)",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetExpiresAt()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateAPIKeyRequestValidationError{
+					field:  "ExpiresAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateAPIKeyRequestValidationError{
+					field:  "ExpiresAt",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetExpiresAt()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateAPIKeyRequestValidationError{
+				field:  "ExpiresAt",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if m.GetMaxUses() <= 0 {
+		err := CreateAPIKeyRequestValidationError{
+			field:  "MaxUses",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetRateLimit() <= 0 {
+		err := CreateAPIKeyRequestValidationError{
+			field:  "RateLimit",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for EnforceSigning
+
+	// no validation rules for EnforceMutualTls
+
+	// no validation rules for AlertOnQuotaThreshold
+
+	// no validation rules for QuotaAlertThreshold
+
+	if len(errors) > 0 {
+		return CreateAPIKeyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateAPIKeyRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateAPIKeyRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CreateAPIKeyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateAPIKeyRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateAPIKeyRequestMultiError) AllErrors() []error { return m }
+
+// CreateAPIKeyRequestValidationError is the validation error returned by
+// CreateAPIKeyRequest.Validate if the designated constraints aren't met.
+type CreateAPIKeyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateAPIKeyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateAPIKeyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateAPIKeyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateAPIKeyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateAPIKeyRequestValidationError) ErrorName() string {
+	return "CreateAPIKeyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateAPIKeyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateAPIKeyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateAPIKeyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateAPIKeyRequestValidationError{}
+
+// Validate checks the field values on CreateAPIKeyResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateAPIKeyResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateAPIKeyResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateAPIKeyResponseMultiError, or nil if none found.
+func (m *CreateAPIKeyResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateAPIKeyResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetApiKey()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateAPIKeyResponseValidationError{
+					field:  "ApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateAPIKeyResponseValidationError{
+					field:  "ApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetApiKey()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateAPIKeyResponseValidationError{
+				field:  "ApiKey",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for KeyValue
+
+	if len(errors) > 0 {
+		return CreateAPIKeyResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateAPIKeyResponseMultiError is an error wrapping multiple validation
+// errors returned by CreateAPIKeyResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CreateAPIKeyResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateAPIKeyResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateAPIKeyResponseMultiError) AllErrors() []error { return m }
+
+// CreateAPIKeyResponseValidationError is the validation error returned by
+// CreateAPIKeyResponse.Validate if the designated constraints aren't met.
+type CreateAPIKeyResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateAPIKeyResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateAPIKeyResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateAPIKeyResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateAPIKeyResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateAPIKeyResponseValidationError) ErrorName() string {
+	return "CreateAPIKeyResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateAPIKeyResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateAPIKeyResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateAPIKeyResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateAPIKeyResponseValidationError{}
+
+// Validate checks the field values on GetAPIKeyRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetAPIKeyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAPIKeyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetAPIKeyRequestMultiError, or nil if none found.
+func (m *GetAPIKeyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAPIKeyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOrganizationId() <= 0 {
+		err := GetAPIKeyRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := GetAPIKeyRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAccountId() <= 0 {
+		err := GetAPIKeyRequestValidationError{
+			field:  "AccountId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWorkspaceId() <= 0 {
+		err := GetAPIKeyRequestValidationError{
+			field:  "WorkspaceId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetKeyId() <= 0 {
+		err := GetAPIKeyRequestValidationError{
+			field:  "KeyId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return GetAPIKeyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetAPIKeyRequestMultiError is an error wrapping multiple validation errors
+// returned by GetAPIKeyRequest.ValidateAll() if the designated constraints
+// aren't met.
+type GetAPIKeyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAPIKeyRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAPIKeyRequestMultiError) AllErrors() []error { return m }
+
+// GetAPIKeyRequestValidationError is the validation error returned by
+// GetAPIKeyRequest.Validate if the designated constraints aren't met.
+type GetAPIKeyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAPIKeyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAPIKeyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAPIKeyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAPIKeyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAPIKeyRequestValidationError) ErrorName() string { return "GetAPIKeyRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e GetAPIKeyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAPIKeyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAPIKeyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAPIKeyRequestValidationError{}
+
+// Validate checks the field values on GetAPIKeyResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetAPIKeyResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetAPIKeyResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetAPIKeyResponseMultiError, or nil if none found.
+func (m *GetAPIKeyResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetAPIKeyResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetApiKey()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetAPIKeyResponseValidationError{
+					field:  "ApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetAPIKeyResponseValidationError{
+					field:  "ApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetApiKey()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetAPIKeyResponseValidationError{
+				field:  "ApiKey",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetAPIKeyResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetAPIKeyResponseMultiError is an error wrapping multiple validation errors
+// returned by GetAPIKeyResponse.ValidateAll() if the designated constraints
+// aren't met.
+type GetAPIKeyResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetAPIKeyResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetAPIKeyResponseMultiError) AllErrors() []error { return m }
+
+// GetAPIKeyResponseValidationError is the validation error returned by
+// GetAPIKeyResponse.Validate if the designated constraints aren't met.
+type GetAPIKeyResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetAPIKeyResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetAPIKeyResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetAPIKeyResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetAPIKeyResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetAPIKeyResponseValidationError) ErrorName() string {
+	return "GetAPIKeyResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetAPIKeyResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetAPIKeyResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetAPIKeyResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetAPIKeyResponseValidationError{}
+
+// Validate checks the field values on UpdateAPIKeyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateAPIKeyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateAPIKeyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateAPIKeyRequestMultiError, or nil if none found.
+func (m *UpdateAPIKeyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateAPIKeyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetApiKey() == nil {
+		err := UpdateAPIKeyRequestValidationError{
+			field:  "ApiKey",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetApiKey()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateAPIKeyRequestValidationError{
+					field:  "ApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateAPIKeyRequestValidationError{
+					field:  "ApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetApiKey()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateAPIKeyRequestValidationError{
+				field:  "ApiKey",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return UpdateAPIKeyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateAPIKeyRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateAPIKeyRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateAPIKeyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateAPIKeyRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateAPIKeyRequestMultiError) AllErrors() []error { return m }
+
+// UpdateAPIKeyRequestValidationError is the validation error returned by
+// UpdateAPIKeyRequest.Validate if the designated constraints aren't met.
+type UpdateAPIKeyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateAPIKeyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateAPIKeyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateAPIKeyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateAPIKeyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateAPIKeyRequestValidationError) ErrorName() string {
+	return "UpdateAPIKeyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateAPIKeyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateAPIKeyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateAPIKeyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateAPIKeyRequestValidationError{}
+
+// Validate checks the field values on UpdateAPIKeyResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateAPIKeyResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateAPIKeyResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateAPIKeyResponseMultiError, or nil if none found.
+func (m *UpdateAPIKeyResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateAPIKeyResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetApiKey()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateAPIKeyResponseValidationError{
+					field:  "ApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateAPIKeyResponseValidationError{
+					field:  "ApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetApiKey()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateAPIKeyResponseValidationError{
+				field:  "ApiKey",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return UpdateAPIKeyResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateAPIKeyResponseMultiError is an error wrapping multiple validation
+// errors returned by UpdateAPIKeyResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateAPIKeyResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateAPIKeyResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateAPIKeyResponseMultiError) AllErrors() []error { return m }
+
+// UpdateAPIKeyResponseValidationError is the validation error returned by
+// UpdateAPIKeyResponse.Validate if the designated constraints aren't met.
+type UpdateAPIKeyResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateAPIKeyResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateAPIKeyResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateAPIKeyResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateAPIKeyResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateAPIKeyResponseValidationError) ErrorName() string {
+	return "UpdateAPIKeyResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateAPIKeyResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateAPIKeyResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateAPIKeyResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateAPIKeyResponseValidationError{}
+
+// Validate checks the field values on DeleteAPIKeyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteAPIKeyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteAPIKeyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteAPIKeyRequestMultiError, or nil if none found.
+func (m *DeleteAPIKeyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteAPIKeyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOrganizationId() <= 0 {
+		err := DeleteAPIKeyRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWorkspaceId() <= 0 {
+		err := DeleteAPIKeyRequestValidationError{
+			field:  "WorkspaceId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := DeleteAPIKeyRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAccountId() <= 0 {
+		err := DeleteAPIKeyRequestValidationError{
+			field:  "AccountId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetKeyId() <= 0 {
+		err := DeleteAPIKeyRequestValidationError{
+			field:  "KeyId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return DeleteAPIKeyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteAPIKeyRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteAPIKeyRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteAPIKeyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteAPIKeyRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteAPIKeyRequestMultiError) AllErrors() []error { return m }
+
+// DeleteAPIKeyRequestValidationError is the validation error returned by
+// DeleteAPIKeyRequest.Validate if the designated constraints aren't met.
+type DeleteAPIKeyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteAPIKeyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteAPIKeyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteAPIKeyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteAPIKeyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteAPIKeyRequestValidationError) ErrorName() string {
+	return "DeleteAPIKeyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteAPIKeyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteAPIKeyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteAPIKeyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteAPIKeyRequestValidationError{}
+
+// Validate checks the field values on DeleteAPIKeyResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteAPIKeyResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteAPIKeyResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteAPIKeyResponseMultiError, or nil if none found.
+func (m *DeleteAPIKeyResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteAPIKeyResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Success
+
+	if len(errors) > 0 {
+		return DeleteAPIKeyResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteAPIKeyResponseMultiError is an error wrapping multiple validation
+// errors returned by DeleteAPIKeyResponse.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteAPIKeyResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteAPIKeyResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteAPIKeyResponseMultiError) AllErrors() []error { return m }
+
+// DeleteAPIKeyResponseValidationError is the validation error returned by
+// DeleteAPIKeyResponse.Validate if the designated constraints aren't met.
+type DeleteAPIKeyResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteAPIKeyResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteAPIKeyResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteAPIKeyResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteAPIKeyResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteAPIKeyResponseValidationError) ErrorName() string {
+	return "DeleteAPIKeyResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteAPIKeyResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteAPIKeyResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteAPIKeyResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteAPIKeyResponseValidationError{}
+
+// Validate checks the field values on ListAPIKeysRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListAPIKeysRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListAPIKeysRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListAPIKeysRequestMultiError, or nil if none found.
+func (m *ListAPIKeysRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListAPIKeysRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOrganizationId() <= 0 {
+		err := ListAPIKeysRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := ListAPIKeysRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAccountId() <= 0 {
+		err := ListAPIKeysRequestValidationError{
+			field:  "AccountId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWorkspaceId() <= 0 {
+		err := ListAPIKeysRequestValidationError{
+			field:  "WorkspaceId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if val := m.GetPageSize(); val < 1 || val > 100 {
+		err := ListAPIKeysRequestValidationError{
+			field:  "PageSize",
+			reason: "value must be inside range [1, 100]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for PageNumber
+
+	// no validation rules for Status
+
+	// no validation rules for SortDesc
+
+	// no validation rules for Search
+
+	if len(errors) > 0 {
+		return ListAPIKeysRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListAPIKeysRequestMultiError is an error wrapping multiple validation errors
+// returned by ListAPIKeysRequest.ValidateAll() if the designated constraints
+// aren't met.
+type ListAPIKeysRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListAPIKeysRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListAPIKeysRequestMultiError) AllErrors() []error { return m }
+
+// ListAPIKeysRequestValidationError is the validation error returned by
+// ListAPIKeysRequest.Validate if the designated constraints aren't met.
+type ListAPIKeysRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListAPIKeysRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListAPIKeysRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListAPIKeysRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListAPIKeysRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListAPIKeysRequestValidationError) ErrorName() string {
+	return "ListAPIKeysRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListAPIKeysRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListAPIKeysRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListAPIKeysRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListAPIKeysRequestValidationError{}
+
+// Validate checks the field values on ListAPIKeysResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListAPIKeysResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListAPIKeysResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListAPIKeysResponseMultiError, or nil if none found.
+func (m *ListAPIKeysResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListAPIKeysResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetApiKeys() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListAPIKeysResponseValidationError{
+						field:  fmt.Sprintf("ApiKeys[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListAPIKeysResponseValidationError{
+						field:  fmt.Sprintf("ApiKeys[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListAPIKeysResponseValidationError{
+					field:  fmt.Sprintf("ApiKeys[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for NextPageNumber
+
+	// no validation rules for TotalCount
+
+	if len(errors) > 0 {
+		return ListAPIKeysResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListAPIKeysResponseMultiError is an error wrapping multiple validation
+// errors returned by ListAPIKeysResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListAPIKeysResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListAPIKeysResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListAPIKeysResponseMultiError) AllErrors() []error { return m }
+
+// ListAPIKeysResponseValidationError is the validation error returned by
+// ListAPIKeysResponse.Validate if the designated constraints aren't met.
+type ListAPIKeysResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListAPIKeysResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListAPIKeysResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListAPIKeysResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListAPIKeysResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListAPIKeysResponseValidationError) ErrorName() string {
+	return "ListAPIKeysResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListAPIKeysResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListAPIKeysResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListAPIKeysResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListAPIKeysResponseValidationError{}
+
+// Validate checks the field values on RotateAPIKeyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RotateAPIKeyRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RotateAPIKeyRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RotateAPIKeyRequestMultiError, or nil if none found.
+func (m *RotateAPIKeyRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RotateAPIKeyRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOrganizationId() <= 0 {
+		err := RotateAPIKeyRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := RotateAPIKeyRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAccountId() <= 0 {
+		err := RotateAPIKeyRequestValidationError{
+			field:  "AccountId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWorkspaceId() <= 0 {
+		err := RotateAPIKeyRequestValidationError{
+			field:  "WorkspaceId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetKeyId() <= 0 {
+		err := RotateAPIKeyRequestValidationError{
+			field:  "KeyId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return RotateAPIKeyRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// RotateAPIKeyRequestMultiError is an error wrapping multiple validation
+// errors returned by RotateAPIKeyRequest.ValidateAll() if the designated
+// constraints aren't met.
+type RotateAPIKeyRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RotateAPIKeyRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RotateAPIKeyRequestMultiError) AllErrors() []error { return m }
+
+// RotateAPIKeyRequestValidationError is the validation error returned by
+// RotateAPIKeyRequest.Validate if the designated constraints aren't met.
+type RotateAPIKeyRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RotateAPIKeyRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RotateAPIKeyRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RotateAPIKeyRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RotateAPIKeyRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RotateAPIKeyRequestValidationError) ErrorName() string {
+	return "RotateAPIKeyRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RotateAPIKeyRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRotateAPIKeyRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RotateAPIKeyRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RotateAPIKeyRequestValidationError{}
+
+// Validate checks the field values on RotateAPIKeyResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *RotateAPIKeyResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on RotateAPIKeyResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// RotateAPIKeyResponseMultiError, or nil if none found.
+func (m *RotateAPIKeyResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *RotateAPIKeyResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetNewApiKey()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RotateAPIKeyResponseValidationError{
+					field:  "NewApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RotateAPIKeyResponseValidationError{
+					field:  "NewApiKey",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetNewApiKey()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RotateAPIKeyResponseValidationError{
+				field:  "NewApiKey",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	// no validation rules for NewKeyValue
+
+	if all {
+		switch v := interface{}(m.GetOldKeyExpiry()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, RotateAPIKeyResponseValidationError{
+					field:  "OldKeyExpiry",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, RotateAPIKeyResponseValidationError{
+					field:  "OldKeyExpiry",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetOldKeyExpiry()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return RotateAPIKeyResponseValidationError{
+				field:  "OldKeyExpiry",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return RotateAPIKeyResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// RotateAPIKeyResponseMultiError is an error wrapping multiple validation
+// errors returned by RotateAPIKeyResponse.ValidateAll() if the designated
+// constraints aren't met.
+type RotateAPIKeyResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m RotateAPIKeyResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m RotateAPIKeyResponseMultiError) AllErrors() []error { return m }
+
+// RotateAPIKeyResponseValidationError is the validation error returned by
+// RotateAPIKeyResponse.Validate if the designated constraints aren't met.
+type RotateAPIKeyResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e RotateAPIKeyResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e RotateAPIKeyResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e RotateAPIKeyResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e RotateAPIKeyResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e RotateAPIKeyResponseValidationError) ErrorName() string {
+	return "RotateAPIKeyResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e RotateAPIKeyResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sRotateAPIKeyResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = RotateAPIKeyResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = RotateAPIKeyResponseValidationError{}
+
+// Validate checks the field values on ListLeadsRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ListLeadsRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListLeadsRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListLeadsRequestMultiError, or nil if none found.
+func (m *ListLeadsRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListLeadsRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOrganizationId() <= 0 {
+		err := ListLeadsRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWorkspaceId() <= 0 {
+		err := ListLeadsRequestValidationError{
+			field:  "WorkspaceId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := ListLeadsRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAccountId() <= 0 {
+		err := ListLeadsRequestValidationError{
+			field:  "AccountId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if val := m.GetPageSize(); val < 1 || val > 100 {
+		err := ListLeadsRequestValidationError{
+			field:  "PageSize",
+			reason: "value must be inside range [1, 100]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for PageNumber
+
+	if len(errors) > 0 {
+		return ListLeadsRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListLeadsRequestMultiError is an error wrapping multiple validation errors
+// returned by ListLeadsRequest.ValidateAll() if the designated constraints
+// aren't met.
+type ListLeadsRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListLeadsRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListLeadsRequestMultiError) AllErrors() []error { return m }
+
+// ListLeadsRequestValidationError is the validation error returned by
+// ListLeadsRequest.Validate if the designated constraints aren't met.
+type ListLeadsRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListLeadsRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListLeadsRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListLeadsRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListLeadsRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListLeadsRequestValidationError) ErrorName() string { return "ListLeadsRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e ListLeadsRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListLeadsRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListLeadsRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListLeadsRequestValidationError{}
+
+// Validate checks the field values on ListLeadsResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *ListLeadsResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListLeadsResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListLeadsResponseMultiError, or nil if none found.
+func (m *ListLeadsResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListLeadsResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetLeads() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListLeadsResponseValidationError{
+						field:  fmt.Sprintf("Leads[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListLeadsResponseValidationError{
+						field:  fmt.Sprintf("Leads[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListLeadsResponseValidationError{
+					field:  fmt.Sprintf("Leads[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for TotalCount
+
+	// no validation rules for NextPageNumber
+
+	if len(errors) > 0 {
+		return ListLeadsResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListLeadsResponseMultiError is an error wrapping multiple validation errors
+// returned by ListLeadsResponse.ValidateAll() if the designated constraints
+// aren't met.
+type ListLeadsResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListLeadsResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListLeadsResponseMultiError) AllErrors() []error { return m }
+
+// ListLeadsResponseValidationError is the validation error returned by
+// ListLeadsResponse.Validate if the designated constraints aren't met.
+type ListLeadsResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListLeadsResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListLeadsResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListLeadsResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListLeadsResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListLeadsResponseValidationError) ErrorName() string {
+	return "ListLeadsResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListLeadsResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListLeadsResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListLeadsResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListLeadsResponseValidationError{}
+
+// Validate checks the field values on GetLeadRequest with the rules defined in
+// the proto definition for this message. If any rules are violated, the first
+// error encountered is returned, or nil if there are no violations.
+func (m *GetLeadRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetLeadRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// result is a list of violation errors wrapped in GetLeadRequestMultiError,
+// or nil if none found.
+func (m *GetLeadRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetLeadRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOrganizationId() <= 0 {
+		err := GetLeadRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWorkspaceId() <= 0 {
+		err := GetLeadRequestValidationError{
+			field:  "WorkspaceId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := GetLeadRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAccountId() <= 0 {
+		err := GetLeadRequestValidationError{
+			field:  "AccountId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetLeadId() <= 0 {
+		err := GetLeadRequestValidationError{
+			field:  "LeadId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return GetLeadRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetLeadRequestMultiError is an error wrapping multiple validation errors
+// returned by GetLeadRequest.ValidateAll() if the designated constraints
+// aren't met.
+type GetLeadRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetLeadRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetLeadRequestMultiError) AllErrors() []error { return m }
+
+// GetLeadRequestValidationError is the validation error returned by
+// GetLeadRequest.Validate if the designated constraints aren't met.
+type GetLeadRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetLeadRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetLeadRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetLeadRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetLeadRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetLeadRequestValidationError) ErrorName() string { return "GetLeadRequestValidationError" }
+
+// Error satisfies the builtin error interface
+func (e GetLeadRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetLeadRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetLeadRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetLeadRequestValidationError{}
+
+// Validate checks the field values on GetLeadResponse with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetLeadResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetLeadResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetLeadResponseMultiError, or nil if none found.
+func (m *GetLeadResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetLeadResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetLead()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetLeadResponseValidationError{
+					field:  "Lead",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetLeadResponseValidationError{
+					field:  "Lead",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetLead()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetLeadResponseValidationError{
+				field:  "Lead",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetLeadResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetLeadResponseMultiError is an error wrapping multiple validation errors
+// returned by GetLeadResponse.ValidateAll() if the designated constraints
+// aren't met.
+type GetLeadResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetLeadResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetLeadResponseMultiError) AllErrors() []error { return m }
+
+// GetLeadResponseValidationError is the validation error returned by
+// GetLeadResponse.Validate if the designated constraints aren't met.
+type GetLeadResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetLeadResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetLeadResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetLeadResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetLeadResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetLeadResponseValidationError) ErrorName() string { return "GetLeadResponseValidationError" }
+
+// Error satisfies the builtin error interface
+func (e GetLeadResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetLeadResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetLeadResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetLeadResponseValidationError{}
+
+// Validate checks the field values on CreateWebhookRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateWebhookRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateWebhookRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateWebhookRequestMultiError, or nil if none found.
+func (m *CreateWebhookRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateWebhookRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOrganizationId() <= 0 {
+		err := CreateWebhookRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWorkspaceId() <= 0 {
+		err := CreateWebhookRequestValidationError{
+			field:  "WorkspaceId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := CreateWebhookRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAccountId() <= 0 {
+		err := CreateWebhookRequestValidationError{
+			field:  "AccountId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWebhook() == nil {
+		err := CreateWebhookRequestValidationError{
+			field:  "Webhook",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetWebhook()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateWebhookRequestValidationError{
+					field:  "Webhook",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateWebhookRequestValidationError{
+					field:  "Webhook",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetWebhook()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateWebhookRequestValidationError{
+				field:  "Webhook",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return CreateWebhookRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateWebhookRequestMultiError is an error wrapping multiple validation
+// errors returned by CreateWebhookRequest.ValidateAll() if the designated
+// constraints aren't met.
+type CreateWebhookRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateWebhookRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateWebhookRequestMultiError) AllErrors() []error { return m }
+
+// CreateWebhookRequestValidationError is the validation error returned by
+// CreateWebhookRequest.Validate if the designated constraints aren't met.
+type CreateWebhookRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateWebhookRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateWebhookRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateWebhookRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateWebhookRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateWebhookRequestValidationError) ErrorName() string {
+	return "CreateWebhookRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateWebhookRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateWebhookRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateWebhookRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateWebhookRequestValidationError{}
+
+// Validate checks the field values on CreateWebhookResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *CreateWebhookResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on CreateWebhookResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// CreateWebhookResponseMultiError, or nil if none found.
+func (m *CreateWebhookResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *CreateWebhookResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetWebhook()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, CreateWebhookResponseValidationError{
+					field:  "Webhook",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, CreateWebhookResponseValidationError{
+					field:  "Webhook",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetWebhook()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return CreateWebhookResponseValidationError{
+				field:  "Webhook",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return CreateWebhookResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// CreateWebhookResponseMultiError is an error wrapping multiple validation
+// errors returned by CreateWebhookResponse.ValidateAll() if the designated
+// constraints aren't met.
+type CreateWebhookResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m CreateWebhookResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m CreateWebhookResponseMultiError) AllErrors() []error { return m }
+
+// CreateWebhookResponseValidationError is the validation error returned by
+// CreateWebhookResponse.Validate if the designated constraints aren't met.
+type CreateWebhookResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e CreateWebhookResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e CreateWebhookResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e CreateWebhookResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e CreateWebhookResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e CreateWebhookResponseValidationError) ErrorName() string {
+	return "CreateWebhookResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e CreateWebhookResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sCreateWebhookResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = CreateWebhookResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = CreateWebhookResponseValidationError{}
+
+// Validate checks the field values on GetWebhookRequest with the rules defined
+// in the proto definition for this message. If any rules are violated, the
+// first error encountered is returned, or nil if there are no violations.
+func (m *GetWebhookRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetWebhookRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetWebhookRequestMultiError, or nil if none found.
+func (m *GetWebhookRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetWebhookRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOrganizationId() <= 0 {
+		err := GetWebhookRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWorkspaceId() <= 0 {
+		err := GetWebhookRequestValidationError{
+			field:  "WorkspaceId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := GetWebhookRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAccountId() <= 0 {
+		err := GetWebhookRequestValidationError{
+			field:  "AccountId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWebhookId() <= 0 {
+		err := GetWebhookRequestValidationError{
+			field:  "WebhookId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return GetWebhookRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetWebhookRequestMultiError is an error wrapping multiple validation errors
+// returned by GetWebhookRequest.ValidateAll() if the designated constraints
+// aren't met.
+type GetWebhookRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetWebhookRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetWebhookRequestMultiError) AllErrors() []error { return m }
+
+// GetWebhookRequestValidationError is the validation error returned by
+// GetWebhookRequest.Validate if the designated constraints aren't met.
+type GetWebhookRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetWebhookRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetWebhookRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetWebhookRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetWebhookRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetWebhookRequestValidationError) ErrorName() string {
+	return "GetWebhookRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetWebhookRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetWebhookRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetWebhookRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetWebhookRequestValidationError{}
+
+// Validate checks the field values on GetWebhookResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *GetWebhookResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on GetWebhookResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// GetWebhookResponseMultiError, or nil if none found.
+func (m *GetWebhookResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *GetWebhookResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetWebhook()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, GetWebhookResponseValidationError{
+					field:  "Webhook",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, GetWebhookResponseValidationError{
+					field:  "Webhook",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetWebhook()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return GetWebhookResponseValidationError{
+				field:  "Webhook",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return GetWebhookResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// GetWebhookResponseMultiError is an error wrapping multiple validation errors
+// returned by GetWebhookResponse.ValidateAll() if the designated constraints
+// aren't met.
+type GetWebhookResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m GetWebhookResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m GetWebhookResponseMultiError) AllErrors() []error { return m }
+
+// GetWebhookResponseValidationError is the validation error returned by
+// GetWebhookResponse.Validate if the designated constraints aren't met.
+type GetWebhookResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e GetWebhookResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e GetWebhookResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e GetWebhookResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e GetWebhookResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e GetWebhookResponseValidationError) ErrorName() string {
+	return "GetWebhookResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e GetWebhookResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sGetWebhookResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = GetWebhookResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = GetWebhookResponseValidationError{}
+
+// Validate checks the field values on UpdateWebhookRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateWebhookRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateWebhookRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateWebhookRequestMultiError, or nil if none found.
+func (m *UpdateWebhookRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateWebhookRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetWebhook() == nil {
+		err := UpdateWebhookRequestValidationError{
+			field:  "Webhook",
+			reason: "value is required",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if all {
+		switch v := interface{}(m.GetWebhook()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateWebhookRequestValidationError{
+					field:  "Webhook",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateWebhookRequestValidationError{
+					field:  "Webhook",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetWebhook()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateWebhookRequestValidationError{
+				field:  "Webhook",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return UpdateWebhookRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateWebhookRequestMultiError is an error wrapping multiple validation
+// errors returned by UpdateWebhookRequest.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateWebhookRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateWebhookRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateWebhookRequestMultiError) AllErrors() []error { return m }
+
+// UpdateWebhookRequestValidationError is the validation error returned by
+// UpdateWebhookRequest.Validate if the designated constraints aren't met.
+type UpdateWebhookRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateWebhookRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateWebhookRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateWebhookRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateWebhookRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateWebhookRequestValidationError) ErrorName() string {
+	return "UpdateWebhookRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateWebhookRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateWebhookRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateWebhookRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateWebhookRequestValidationError{}
+
+// Validate checks the field values on UpdateWebhookResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *UpdateWebhookResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on UpdateWebhookResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// UpdateWebhookResponseMultiError, or nil if none found.
+func (m *UpdateWebhookResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *UpdateWebhookResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if all {
+		switch v := interface{}(m.GetWebhook()).(type) {
+		case interface{ ValidateAll() error }:
+			if err := v.ValidateAll(); err != nil {
+				errors = append(errors, UpdateWebhookResponseValidationError{
+					field:  "Webhook",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		case interface{ Validate() error }:
+			if err := v.Validate(); err != nil {
+				errors = append(errors, UpdateWebhookResponseValidationError{
+					field:  "Webhook",
+					reason: "embedded message failed validation",
+					cause:  err,
+				})
+			}
+		}
+	} else if v, ok := interface{}(m.GetWebhook()).(interface{ Validate() error }); ok {
+		if err := v.Validate(); err != nil {
+			return UpdateWebhookResponseValidationError{
+				field:  "Webhook",
+				reason: "embedded message failed validation",
+				cause:  err,
+			}
+		}
+	}
+
+	if len(errors) > 0 {
+		return UpdateWebhookResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// UpdateWebhookResponseMultiError is an error wrapping multiple validation
+// errors returned by UpdateWebhookResponse.ValidateAll() if the designated
+// constraints aren't met.
+type UpdateWebhookResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m UpdateWebhookResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m UpdateWebhookResponseMultiError) AllErrors() []error { return m }
+
+// UpdateWebhookResponseValidationError is the validation error returned by
+// UpdateWebhookResponse.Validate if the designated constraints aren't met.
+type UpdateWebhookResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e UpdateWebhookResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e UpdateWebhookResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e UpdateWebhookResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e UpdateWebhookResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e UpdateWebhookResponseValidationError) ErrorName() string {
+	return "UpdateWebhookResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e UpdateWebhookResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sUpdateWebhookResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = UpdateWebhookResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = UpdateWebhookResponseValidationError{}
+
+// Validate checks the field values on DeleteWebhookRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteWebhookRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteWebhookRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteWebhookRequestMultiError, or nil if none found.
+func (m *DeleteWebhookRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteWebhookRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOrganizationId() <= 0 {
+		err := DeleteWebhookRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWorkspaceId() <= 0 {
+		err := DeleteWebhookRequestValidationError{
+			field:  "WorkspaceId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := DeleteWebhookRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAccountId() <= 0 {
+		err := DeleteWebhookRequestValidationError{
+			field:  "AccountId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWebhookId() <= 0 {
+		err := DeleteWebhookRequestValidationError{
+			field:  "WebhookId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if len(errors) > 0 {
+		return DeleteWebhookRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteWebhookRequestMultiError is an error wrapping multiple validation
+// errors returned by DeleteWebhookRequest.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteWebhookRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteWebhookRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteWebhookRequestMultiError) AllErrors() []error { return m }
+
+// DeleteWebhookRequestValidationError is the validation error returned by
+// DeleteWebhookRequest.Validate if the designated constraints aren't met.
+type DeleteWebhookRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteWebhookRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteWebhookRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteWebhookRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteWebhookRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteWebhookRequestValidationError) ErrorName() string {
+	return "DeleteWebhookRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteWebhookRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteWebhookRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteWebhookRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteWebhookRequestValidationError{}
+
+// Validate checks the field values on DeleteWebhookResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *DeleteWebhookResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on DeleteWebhookResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// DeleteWebhookResponseMultiError, or nil if none found.
+func (m *DeleteWebhookResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *DeleteWebhookResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	// no validation rules for Success
+
+	if len(errors) > 0 {
+		return DeleteWebhookResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// DeleteWebhookResponseMultiError is an error wrapping multiple validation
+// errors returned by DeleteWebhookResponse.ValidateAll() if the designated
+// constraints aren't met.
+type DeleteWebhookResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m DeleteWebhookResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m DeleteWebhookResponseMultiError) AllErrors() []error { return m }
+
+// DeleteWebhookResponseValidationError is the validation error returned by
+// DeleteWebhookResponse.Validate if the designated constraints aren't met.
+type DeleteWebhookResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e DeleteWebhookResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e DeleteWebhookResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e DeleteWebhookResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e DeleteWebhookResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e DeleteWebhookResponseValidationError) ErrorName() string {
+	return "DeleteWebhookResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e DeleteWebhookResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sDeleteWebhookResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = DeleteWebhookResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = DeleteWebhookResponseValidationError{}
+
+// Validate checks the field values on ListWebhooksRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListWebhooksRequest) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListWebhooksRequest with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListWebhooksRequestMultiError, or nil if none found.
+func (m *ListWebhooksRequest) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListWebhooksRequest) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	if m.GetOrganizationId() <= 0 {
+		err := ListWebhooksRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWorkspaceId() <= 0 {
+		err := ListWebhooksRequestValidationError{
+			field:  "WorkspaceId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := ListWebhooksRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAccountId() <= 0 {
+		err := ListWebhooksRequestValidationError{
+			field:  "AccountId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if val := m.GetPageSize(); val < 1 || val > 100 {
+		err := ListWebhooksRequestValidationError{
+			field:  "PageSize",
+			reason: "value must be inside range [1, 100]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for PageNumber
+
+	// no validation rules for Status
+
+	// no validation rules for Search
+
+	if len(errors) > 0 {
+		return ListWebhooksRequestMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListWebhooksRequestMultiError is an error wrapping multiple validation
+// errors returned by ListWebhooksRequest.ValidateAll() if the designated
+// constraints aren't met.
+type ListWebhooksRequestMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListWebhooksRequestMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListWebhooksRequestMultiError) AllErrors() []error { return m }
+
+// ListWebhooksRequestValidationError is the validation error returned by
+// ListWebhooksRequest.Validate if the designated constraints aren't met.
+type ListWebhooksRequestValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListWebhooksRequestValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListWebhooksRequestValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListWebhooksRequestValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListWebhooksRequestValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListWebhooksRequestValidationError) ErrorName() string {
+	return "ListWebhooksRequestValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListWebhooksRequestValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListWebhooksRequest.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListWebhooksRequestValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListWebhooksRequestValidationError{}
+
+// Validate checks the field values on ListWebhooksResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the first error encountered is returned, or nil if there are no violations.
+func (m *ListWebhooksResponse) Validate() error {
+	return m.validate(false)
+}
+
+// ValidateAll checks the field values on ListWebhooksResponse with the rules
+// defined in the proto definition for this message. If any rules are
+// violated, the result is a list of violation errors wrapped in
+// ListWebhooksResponseMultiError, or nil if none found.
+func (m *ListWebhooksResponse) ValidateAll() error {
+	return m.validate(true)
+}
+
+func (m *ListWebhooksResponse) validate(all bool) error {
+	if m == nil {
+		return nil
+	}
+
+	var errors []error
+
+	for idx, item := range m.GetWebhooks() {
+		_, _ = idx, item
+
+		if all {
+			switch v := interface{}(item).(type) {
+			case interface{ ValidateAll() error }:
+				if err := v.ValidateAll(); err != nil {
+					errors = append(errors, ListWebhooksResponseValidationError{
+						field:  fmt.Sprintf("Webhooks[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			case interface{ Validate() error }:
+				if err := v.Validate(); err != nil {
+					errors = append(errors, ListWebhooksResponseValidationError{
+						field:  fmt.Sprintf("Webhooks[%v]", idx),
+						reason: "embedded message failed validation",
+						cause:  err,
+					})
+				}
+			}
+		} else if v, ok := interface{}(item).(interface{ Validate() error }); ok {
+			if err := v.Validate(); err != nil {
+				return ListWebhooksResponseValidationError{
+					field:  fmt.Sprintf("Webhooks[%v]", idx),
+					reason: "embedded message failed validation",
+					cause:  err,
+				}
+			}
+		}
+
+	}
+
+	// no validation rules for NextPageNumber
+
+	// no validation rules for TotalCount
+
+	if len(errors) > 0 {
+		return ListWebhooksResponseMultiError(errors)
+	}
+
+	return nil
+}
+
+// ListWebhooksResponseMultiError is an error wrapping multiple validation
+// errors returned by ListWebhooksResponse.ValidateAll() if the designated
+// constraints aren't met.
+type ListWebhooksResponseMultiError []error
+
+// Error returns a concatenation of all the error messages it wraps.
+func (m ListWebhooksResponseMultiError) Error() string {
+	var msgs []string
+	for _, err := range m {
+		msgs = append(msgs, err.Error())
+	}
+	return strings.Join(msgs, "; ")
+}
+
+// AllErrors returns a list of validation violation errors.
+func (m ListWebhooksResponseMultiError) AllErrors() []error { return m }
+
+// ListWebhooksResponseValidationError is the validation error returned by
+// ListWebhooksResponse.Validate if the designated constraints aren't met.
+type ListWebhooksResponseValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e ListWebhooksResponseValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e ListWebhooksResponseValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e ListWebhooksResponseValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e ListWebhooksResponseValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e ListWebhooksResponseValidationError) ErrorName() string {
+	return "ListWebhooksResponseValidationError"
+}
+
+// Error satisfies the builtin error interface
+func (e ListWebhooksResponseValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sListWebhooksResponse.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = ListWebhooksResponseValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = ListWebhooksResponseValidationError{}
+
 // Validate checks the field values on
 // GetWorkspaceAnalyticsResponse_JobSuccessRate with the rules defined in the
 // proto definition for this message. If any rules are violated, the first

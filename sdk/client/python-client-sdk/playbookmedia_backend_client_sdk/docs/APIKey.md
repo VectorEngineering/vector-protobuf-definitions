@@ -32,7 +32,7 @@ Name | Type | Description | Notes
 **recent_errors** | **bytearray** |  | [optional] 
 **successful_requests_count** | **int** |  | [optional] 
 **success_rate** | **float** |  | [optional] 
-**status** | [**APIKeyStatus**](APIKeyStatus.md) |  | [optional] [default to APIKeyStatus.UNSPECIFIED]
+**status** | [**V1Status**](V1Status.md) |  | [optional] [default to V1Status.UNSPECIFIED]
 **created_at** | **datetime** |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 
 **expires_at** | **datetime** |  | [optional] 

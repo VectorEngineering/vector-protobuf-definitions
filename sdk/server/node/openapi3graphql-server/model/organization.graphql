@@ -42,7 +42,7 @@ type Organization {
   updatedAt: String!
   deletedAt: String!
   createdBy: String!
-  status: OrganizationStatus
+  status: V1Status
 }
 
 input OrganizationInput {
@@ -78,6 +78,6 @@ input OrganizationInput {
     updatedAt: String!
     deletedAt: String!
     createdBy: String!
-    status: OrganizationStatus
+    status: V1Status
 }
 

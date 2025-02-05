@@ -519,7 +519,6 @@ message RotateTenantAPIKeyRequest {
     uint64 organization_id = 1 [(validate.rules).uint64.gt = 0];
     uint64 tenant_id = 2 [(validate.rules).uint64.gt = 0];
     uint64 key_id = 3 [(validate.rules).uint64.gt = 0];
-    google.protobuf.Duration grace_period = 4; // Optional grace period before old key is invalidated
 }
 
 message RotateTenantAPIKeyResponse {
@@ -537,7 +536,6 @@ message CreateAPIKeyRequest {
     uint64 workspace_id = 2 [(validate.rules).uint64.gt = 0];
     uint64 tenant_id = 3 [(validate.rules).uint64.gt = 0];
     uint64 account_id = 4 [(validate.rules).uint64.gt = 0];
-    uint64 workspace_id = 5 [(validate.rules).uint64.gt = 0];
     string name = 6 [(validate.rules).string.min_len = 1];
     string description = 7 [(validate.rules).string.min_len = 1];
     repeated string scopes = 8 [(validate.rules).repeated.min_items = 1];
@@ -614,7 +612,6 @@ message RotateAPIKeyRequest {
     uint64 account_id = 3 [(validate.rules).uint64.gt = 0];
     uint64 workspace_id = 4 [(validate.rules).uint64.gt = 0];
     uint64 key_id = 5 [(validate.rules).uint64.gt = 0];
-    google.protobuf.Duration grace_period = 6; // Optional grace period before old key is invalidated
 }
 
 message RotateAPIKeyResponse {
@@ -652,4 +649,67 @@ message GetLeadRequest {
 
 message GetLeadResponse {
     Lead lead = 1;
+}
+
+// Webhook Management Messages
+
+message CreateWebhookRequest {
+    uint64 organization_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 workspace_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 3 [(validate.rules).uint64.gt = 0];
+    uint64 account_id = 4 [(validate.rules).uint64.gt = 0];
+    WebhookConfig webhook = 5 [(validate.rules).message.required = true];
+}
+
+message CreateWebhookResponse {
+    WebhookConfig webhook = 1;
+}
+
+message GetWebhookRequest {
+    uint64 organization_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 workspace_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 3 [(validate.rules).uint64.gt = 0];
+    uint64 account_id = 4 [(validate.rules).uint64.gt = 0];
+    uint64 webhook_id = 5 [(validate.rules).uint64.gt = 0];
+}
+
+message GetWebhookResponse {
+    WebhookConfig webhook = 1;
+}
+
+message UpdateWebhookRequest {
+    WebhookConfig webhook = 1 [(validate.rules).message.required = true];
+}
+
+message UpdateWebhookResponse {
+    WebhookConfig webhook = 1;
+}
+
+message DeleteWebhookRequest {
+    uint64 organization_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 workspace_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 3 [(validate.rules).uint64.gt = 0];
+    uint64 account_id = 4 [(validate.rules).uint64.gt = 0];
+    uint64 webhook_id = 5 [(validate.rules).uint64.gt = 0];
+}
+
+message DeleteWebhookResponse {
+    bool success = 1;
+}
+
+message ListWebhooksRequest {
+    uint64 organization_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 workspace_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 3 [(validate.rules).uint64.gt = 0];
+    uint64 account_id = 4 [(validate.rules).uint64.gt = 0];
+    int32 page_size = 5 [(validate.rules).int32 = {gte: 1, lte: 100}];
+    int32 page_number = 6;
+    string status = 7;
+    string search = 9;
+}
+
+message ListWebhooksResponse {
+    repeated WebhookConfig webhooks = 1;
+    int32 next_page_number = 2;
+    int32 total_count = 3;
 }

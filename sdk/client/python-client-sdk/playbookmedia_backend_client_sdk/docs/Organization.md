@@ -37,7 +37,7 @@ Name | Type | Description | Notes
 **updated_at** | **datetime** |  | [optional] 
 **deleted_at** | **datetime** |  | [optional] 
 **created_by** | **str** |  | [optional] 
-**status** | [**OrganizationStatus**](OrganizationStatus.md) |  | [optional] [default to OrganizationStatus.UNSPECIFIED]
+**status** | [**V1Status**](V1Status.md) |  | [optional] [default to V1Status.UNSPECIFIED]
 
 ## Example
 

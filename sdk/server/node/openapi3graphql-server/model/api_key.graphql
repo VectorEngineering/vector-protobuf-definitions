@@ -37,7 +37,7 @@ type ApiKey {
   recentErrors: String!
   successfulRequestsCount: Int!
   successRate: Float!
-  status: ApiKeyStatus
+  status: V1Status
   createdAt: String!
   updatedAt: String!
   expiresAt: String!
@@ -109,7 +109,7 @@ input ApiKeyInput {
     recentErrors: String!
     successfulRequestsCount: Int!
     successRate: Float!
-    status: ApiKeyStatus
+    status: V1Status
     createdAt: String!
     updatedAt: String!
     expiresAt: String!

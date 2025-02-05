@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 **recent_errors** | [***swagger::ByteArray**](ByteArray.md) |  | [optional] [default to None]
 **successful_requests_count** | **i32** |  | [optional] [default to None]
 **success_rate** | **f32** |  | [optional] [default to None]
-**status** | [***models::ApiKeyPeriodStatus**](APIKey.Status.md) |  | [optional] [default to None]
+**status** | [***models::V1PeriodStatus**](v1.Status.md) |  | [optional] [default to None]
 **created_at** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]
 **updated_at** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]
 **expires_at** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]

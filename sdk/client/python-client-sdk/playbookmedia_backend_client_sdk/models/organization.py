@@ -22,8 +22,8 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from playbookmedia_backend_client_sdk.models.billing_plan import BillingPlan
-from playbookmedia_backend_client_sdk.models.organization_status import OrganizationStatus
 from playbookmedia_backend_client_sdk.models.subscription import Subscription
+from playbookmedia_backend_client_sdk.models.v1_status import V1Status
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -62,7 +62,7 @@ class Organization(BaseModel):
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
     deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
     created_by: Optional[StrictStr] = Field(default=None, alias="createdBy")
-    status: Optional[OrganizationStatus] = OrganizationStatus.UNSPECIFIED
+    status: Optional[V1Status] = V1Status.UNSPECIFIED
     __properties: ClassVar[List[str]] = ["id", "name", "displayName", "website", "description", "billingEmail", "technicalEmail", "phone", "address", "ssoEnabled", "ssoProvider", "ssoDomain", "allowedDomains", "enforce2fa", "billingPlan", "billingCurrency", "autoBilling", "taxId", "complianceFrameworks", "dataProcessingAgreement", "dataRegion", "maxTenants", "totalStorageLimit", "maxApiKeys", "maxUsers", "tenants", "subscriptions", "createdAt", "updatedAt", "deletedAt", "createdBy", "status"]
 
     model_config = ConfigDict(
@@ -157,7 +157,7 @@ class Organization(BaseModel):
             "updatedAt": obj.get("updatedAt"),
             "deletedAt": obj.get("deletedAt"),
             "createdBy": obj.get("createdBy"),
-            "status": obj.get("status") if obj.get("status") is not None else OrganizationStatus.UNSPECIFIED
+            "status": obj.get("status") if obj.get("status") is not None else V1Status.UNSPECIFIED
         })
         return _obj
 

@@ -9,8 +9,8 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.openapitools.model.APIKeyStatus;
 import org.openapitools.model.Account;
+import org.openapitools.model.V1Status;
 import org.openapitools.model.Workspace;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -28,7 +28,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "APIKey", description = "APIKey represents an authentication token for accessing the API. It includes features for rate limiting, permissions, and usage tracking.  Key features: - Unique key identification - Scope-based access control - Rate limiting - Usage tracking - Expiration management - Multi-tenant support  Database considerations: - Uses GORM for ORM mapping - Includes indexes for efficient querying - Supports soft deletes  Usage example: ```go apiKey := &APIKey{     Name: \"Production API Key\",     Scopes: []string{\"leads:read\", \"leads:write\"},     ExpiresAt: timestamppb.New(time.Now().AddDate(1, 0, 0)), } ```")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T07:29:26.257343-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T07:44:51.137714-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class APIKey {
 
   private String id;
@@ -88,7 +88,7 @@ public class APIKey {
 
   private Float successRate;
 
-  private APIKeyStatus status = APIKeyStatus.UNSPECIFIED;
+  private V1Status status = V1Status.UNSPECIFIED;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime createdAt;
@@ -736,7 +736,7 @@ public class APIKey {
     this.successRate = successRate;
   }
 
-  public APIKey status(APIKeyStatus status) {
+  public APIKey status(V1Status status) {
     this.status = status;
     return this;
   }
@@ -748,11 +748,11 @@ public class APIKey {
   @Valid 
   @Schema(name = "status", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("status")
-  public APIKeyStatus getStatus() {
+  public V1Status getStatus() {
     return status;
   }
 
-  public void setStatus(APIKeyStatus status) {
+  public void setStatus(V1Status status) {
     this.status = status;
   }
 

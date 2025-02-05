@@ -8,7 +8,12 @@
 | **keyPrefix** | **String** |  | [optional] [default to null] |
 | **name** | **String** |  | [optional] [default to null] |
 | **description** | **String** |  | [optional] [default to null] |
-| **status** | **String** |  | [optional] [default to null] |
+| **status** | [**v1.Status**](v1.Status.md) |  | [optional] [default to null] |
+| **scopes** | [**List**](TenantAPIKeyScope.md) |  | [optional] [default to null] |
+| **maxUses** | **Integer** |  | [optional] [default to null] |
+| **allowedIps** | **List** |  | [optional] [default to null] |
+| **useCount** | **Integer** |  | [optional] [default to null] |
+| **expiresAt** | **Date** |  | [optional] [default to null] |
 | **createdAt** | **Date** |  | [optional] [default to null] |
 | **updatedAt** | **Date** |  | [optional] [default to null] |
 | **deletedAt** | **Date** |  | [optional] [default to null] |

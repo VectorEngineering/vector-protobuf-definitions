@@ -20,7 +20,7 @@ import javax.annotation.Generated;
  * TriggerWorkflowResponse
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T07:29:26.257343-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T07:44:51.137714-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class TriggerWorkflowResponse {
 
   private String jobId;

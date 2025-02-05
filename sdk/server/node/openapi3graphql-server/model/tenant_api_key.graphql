@@ -14,7 +14,12 @@ type TenantApiKey {
   keyPrefix: String!
   name: String!
   description: String!
-  status: String!
+  status: V1Status
+  scopes: [TenantApiKeyScope!]
+  maxUses: Int!
+  allowedIps: [String!!]
+  useCount: Int!
+  expiresAt: String!
   createdAt: String!
   updatedAt: String!
   deletedAt: String!
@@ -26,7 +31,12 @@ input TenantApiKeyInput {
     keyPrefix: String!
     name: String!
     description: String!
-    status: String!
+    status: V1Status
+    scopes: [TenantApiKeyScopeInput]
+    maxUses: Int!
+    allowedIps: [String!]
+    useCount: Int!
+    expiresAt: String!
     createdAt: String!
     updatedAt: String!
     deletedAt: String!

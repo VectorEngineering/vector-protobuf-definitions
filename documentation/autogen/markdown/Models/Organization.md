@@ -34,7 +34,7 @@
 | **updatedAt** | **Date** |  | [optional] [default to null] |
 | **deletedAt** | **Date** |  | [optional] [default to null] |
 | **createdBy** | **String** |  | [optional] [default to null] |
-| **status** | [**Organization.Status**](Organization.Status.md) |  | [optional] [default to null] |
+| **status** | [**v1.Status**](v1.Status.md) |  | [optional] [default to null] |
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

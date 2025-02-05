@@ -53,6 +53,25 @@ const (
 	LeadScraperService_UpdateOrganization_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/UpdateOrganization"
 	LeadScraperService_DeleteOrganization_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/DeleteOrganization"
 	LeadScraperService_ListOrganizations_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/ListOrganizations"
+	LeadScraperService_CreateTenantAPIKey_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/CreateTenantAPIKey"
+	LeadScraperService_GetTenantAPIKey_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/GetTenantAPIKey"
+	LeadScraperService_UpdateTenantAPIKey_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/UpdateTenantAPIKey"
+	LeadScraperService_DeleteTenantAPIKey_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/DeleteTenantAPIKey"
+	LeadScraperService_ListTenantAPIKeys_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/ListTenantAPIKeys"
+	LeadScraperService_RotateTenantAPIKey_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/RotateTenantAPIKey"
+	LeadScraperService_CreateAPIKey_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/CreateAPIKey"
+	LeadScraperService_GetAPIKey_FullMethodName               = "/lead_scraper_service.v1.LeadScraperService/GetAPIKey"
+	LeadScraperService_UpdateAPIKey_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/UpdateAPIKey"
+	LeadScraperService_DeleteAPIKey_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/DeleteAPIKey"
+	LeadScraperService_ListAPIKeys_FullMethodName             = "/lead_scraper_service.v1.LeadScraperService/ListAPIKeys"
+	LeadScraperService_RotateAPIKey_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/RotateAPIKey"
+	LeadScraperService_ListLeads_FullMethodName               = "/lead_scraper_service.v1.LeadScraperService/ListLeads"
+	LeadScraperService_GetLead_FullMethodName                 = "/lead_scraper_service.v1.LeadScraperService/GetLead"
+	LeadScraperService_CreateWebhook_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/CreateWebhook"
+	LeadScraperService_GetWebhook_FullMethodName              = "/lead_scraper_service.v1.LeadScraperService/GetWebhook"
+	LeadScraperService_UpdateWebhook_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/UpdateWebhook"
+	LeadScraperService_DeleteWebhook_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/DeleteWebhook"
+	LeadScraperService_ListWebhooks_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/ListWebhooks"
 )
 
 // LeadScraperServiceClient is the client API for LeadScraperService service.
@@ -551,6 +570,270 @@ type LeadScraperServiceClient interface {
 	// Required permissions:
 	// - list:organization
 	ListOrganizations(ctx context.Context, in *ListOrganizationsRequest, opts ...grpc.CallOption) (*ListOrganizationsResponse, error)
+	// CreateTenantAPIKey generates a new API key for a tenant
+	//
+	// Features:
+	// - Secure key generation
+	// - Configurable permissions
+	// - Automatic expiration
+	// - Usage quotas
+	//
+	// Required validation:
+	// - Valid tenant ID
+	// - Authorization check
+	// - Rate limit verification
+	//
+	// Required permissions:
+	// - create:tenant_api_key
+	CreateTenantAPIKey(ctx context.Context, in *CreateTenantAPIKeyRequest, opts ...grpc.CallOption) (*CreateTenantAPIKeyResponse, error)
+	// GetTenantAPIKey retrieves details of a specific API key
+	//
+	// Returns:
+	// - Key metadata
+	// - Usage statistics
+	// - Permission details
+	// - Expiration status
+	//
+	// Security:
+	// - Never returns full key value
+	// - Validates tenant context
+	//
+	// Required permissions:
+	// - read:tenant_api_key
+	GetTenantAPIKey(ctx context.Context, in *GetTenantAPIKeyRequest, opts ...grpc.CallOption) (*GetTenantAPIKeyResponse, error)
+	// UpdateTenantAPIKey modifies an existing API key
+	//
+	// Modifiable attributes:
+	// - Name and description
+	// - Permissions
+	// - Usage quotas
+	// - Expiration time
+	//
+	// Security:
+	// - Validates tenant context
+	// - Preserves key value
+	//
+	// Required permissions:
+	// - update:tenant_api_key
+	UpdateTenantAPIKey(ctx context.Context, in *UpdateTenantAPIKeyRequest, opts ...grpc.CallOption) (*UpdateTenantAPIKeyResponse, error)
+	// DeleteTenantAPIKey revokes and removes an API key
+	//
+	// Process:
+	// 1. Immediate key revocation
+	// 2. Usage cleanup
+	// 3. Audit log creation
+	//
+	// Security:
+	// - Validates tenant context
+	// - Immediate invalidation
+	//
+	// Required permissions:
+	// - delete:tenant_api_key
+	DeleteTenantAPIKey(ctx context.Context, in *DeleteTenantAPIKeyRequest, opts ...grpc.CallOption) (*DeleteTenantAPIKeyResponse, error)
+	// ListTenantAPIKeys retrieves all API keys for a tenant
+	//
+	// Features:
+	// - Pagination support
+	// - Filtering options
+	// - Usage statistics
+	// - Status filtering
+	//
+	// Security:
+	// - Validates tenant context
+	// - Masks key values
+	//
+	// Required permissions:
+	// - list:tenant_api_key
+	ListTenantAPIKeys(ctx context.Context, in *ListTenantAPIKeysRequest, opts ...grpc.CallOption) (*ListTenantAPIKeysResponse, error)
+	// RotateTenantAPIKey generates a new key while invalidating the old one
+	//
+	// Process:
+	// 1. Generate new key
+	// 2. Copy permissions
+	// 3. Invalidate old key
+	// 4. Return new key
+	//
+	// Security:
+	// - Grace period option
+	// - Audit logging
+	//
+	// Required permissions:
+	// - rotate:tenant_api_key
+	RotateTenantAPIKey(ctx context.Context, in *RotateTenantAPIKeyRequest, opts ...grpc.CallOption) (*RotateTenantAPIKeyResponse, error)
+	// CreateAPIKey generates a new API key
+	//
+	// Features:
+	// - Secure key generation
+	// - Configurable permissions and scopes
+	// - Automatic expiration
+	// - Rate limiting and usage quotas
+	//
+	// Security:
+	// - Validates organization and workspace context
+	// - Enforces permission checks
+	// - Audit logging
+	//
+	// Required permissions:
+	// - create:api_key
+	CreateAPIKey(ctx context.Context, in *CreateAPIKeyRequest, opts ...grpc.CallOption) (*CreateAPIKeyResponse, error)
+	// GetAPIKey retrieves details of a specific API key
+	//
+	// Returns:
+	// - Key metadata
+	// - Usage statistics
+	// - Permission details
+	// - Expiration status
+	//
+	// Security:
+	// - Never returns full key value
+	// - Validates access permissions
+	//
+	// Required permissions:
+	// - read:api_key
+	GetAPIKey(ctx context.Context, in *GetAPIKeyRequest, opts ...grpc.CallOption) (*GetAPIKeyResponse, error)
+	// UpdateAPIKey modifies an existing API key
+	//
+	// Modifiable attributes:
+	// - Name and description
+	// - Permissions and scopes
+	// - Usage quotas
+	// - Rate limits
+	// - Expiration time
+	// - IP restrictions
+	//
+	// Security:
+	// - Validates modification permissions
+	// - Preserves key value
+	// - Audit logging
+	//
+	// Required permissions:
+	// - update:api_key
+	UpdateAPIKey(ctx context.Context, in *UpdateAPIKeyRequest, opts ...grpc.CallOption) (*UpdateAPIKeyResponse, error)
+	// DeleteAPIKey revokes and removes an API key
+	//
+	// Process:
+	// 1. Immediate key revocation
+	// 2. Usage cleanup
+	// 3. Audit log creation
+	// 4. Notification to relevant parties
+	//
+	// Security:
+	// - Validates deletion permissions
+	// - Immediate invalidation
+	// - Cannot delete last admin key
+	//
+	// Required permissions:
+	// - delete:api_key
+	DeleteAPIKey(ctx context.Context, in *DeleteAPIKeyRequest, opts ...grpc.CallOption) (*DeleteAPIKeyResponse, error)
+	// ListAPIKeys retrieves all API keys
+	//
+	// Features:
+	// - Pagination support
+	// - Filtering by status, type, and usage
+	// - Sorting options
+	// - Usage statistics
+	//
+	// Security:
+	// - Filters based on permissions
+	// - Masks sensitive data
+	//
+	// Required permissions:
+	// - list:api_key
+	ListAPIKeys(ctx context.Context, in *ListAPIKeysRequest, opts ...grpc.CallOption) (*ListAPIKeysResponse, error)
+	// RotateAPIKey generates a new key while invalidating the old one
+	//
+	// Process:
+	// 1. Generate new key
+	// 2. Copy existing configuration
+	// 3. Set up grace period
+	// 4. Invalidate old key
+	//
+	// Security:
+	// - Validates rotation permissions
+	// - Grace period for transition
+	// - Audit logging
+	//
+	// Required permissions:
+	// - rotate:api_key
+	RotateAPIKey(ctx context.Context, in *RotateAPIKeyRequest, opts ...grpc.CallOption) (*RotateAPIKeyResponse, error)
+	// ListLeads retrieves a paginated list of leads with comprehensive filtering options.
+	//
+	// Key features:
+	// - Pagination support
+	// - Rich filtering options
+	// - Sorting capabilities
+	// - Field selection
+	// - Tenant context validation
+	//
+	// Required permissions:
+	// - read:leads
+	ListLeads(ctx context.Context, in *ListLeadsRequest, opts ...grpc.CallOption) (*ListLeadsResponse, error)
+	// GetLead retrieves detailed information about a specific lead.
+	//
+	// Key features:
+	// - Full lead details
+	// - Associated metadata
+	// - Audit information
+	// - Tenant context validation
+	//
+	// Required permissions:
+	// - read:leads
+	GetLead(ctx context.Context, in *GetLeadRequest, opts ...grpc.CallOption) (*GetLeadResponse, error)
+	// CreateWebhook creates a new webhook configuration.
+	//
+	// Key features:
+	// - Webhook URL validation
+	// - Authentication configuration
+	// - Event trigger selection
+	// - Retry policy configuration
+	// - Payload customization
+	//
+	// Required permissions:
+	// - create:webhook
+	CreateWebhook(ctx context.Context, in *CreateWebhookRequest, opts ...grpc.CallOption) (*CreateWebhookResponse, error)
+	// GetWebhook retrieves a specific webhook configuration.
+	//
+	// Key features:
+	// - Full webhook details
+	// - Authentication settings
+	// - Event subscriptions
+	// - Performance metrics
+	//
+	// Required permissions:
+	// - read:webhook
+	GetWebhook(ctx context.Context, in *GetWebhookRequest, opts ...grpc.CallOption) (*GetWebhookResponse, error)
+	// UpdateWebhook modifies an existing webhook configuration.
+	//
+	// Key features:
+	// - URL updates
+	// - Authentication changes
+	// - Event subscription management
+	// - Retry policy adjustments
+	//
+	// Required permissions:
+	// - update:webhook
+	UpdateWebhook(ctx context.Context, in *UpdateWebhookRequest, opts ...grpc.CallOption) (*UpdateWebhookResponse, error)
+	// DeleteWebhook removes a webhook configuration.
+	//
+	// Key features:
+	// - Graceful shutdown
+	// - Event queue cleanup
+	// - Audit trail
+	//
+	// Required permissions:
+	// - delete:webhook
+	DeleteWebhook(ctx context.Context, in *DeleteWebhookRequest, opts ...grpc.CallOption) (*DeleteWebhookResponse, error)
+	// ListWebhooks retrieves all webhook configurations.
+	//
+	// Key features:
+	// - Pagination support
+	// - Filtering options
+	// - Status tracking
+	// - Performance metrics
+	//
+	// Required permissions:
+	// - list:webhook
+	ListWebhooks(ctx context.Context, in *ListWebhooksRequest, opts ...grpc.CallOption) (*ListWebhooksResponse, error)
 }
 
 type leadScraperServiceClient struct {
@@ -895,6 +1178,196 @@ func (c *leadScraperServiceClient) ListOrganizations(ctx context.Context, in *Li
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListOrganizationsResponse)
 	err := c.cc.Invoke(ctx, LeadScraperService_ListOrganizations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) CreateTenantAPIKey(ctx context.Context, in *CreateTenantAPIKeyRequest, opts ...grpc.CallOption) (*CreateTenantAPIKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateTenantAPIKeyResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_CreateTenantAPIKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) GetTenantAPIKey(ctx context.Context, in *GetTenantAPIKeyRequest, opts ...grpc.CallOption) (*GetTenantAPIKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTenantAPIKeyResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetTenantAPIKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) UpdateTenantAPIKey(ctx context.Context, in *UpdateTenantAPIKeyRequest, opts ...grpc.CallOption) (*UpdateTenantAPIKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateTenantAPIKeyResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_UpdateTenantAPIKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) DeleteTenantAPIKey(ctx context.Context, in *DeleteTenantAPIKeyRequest, opts ...grpc.CallOption) (*DeleteTenantAPIKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteTenantAPIKeyResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_DeleteTenantAPIKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) ListTenantAPIKeys(ctx context.Context, in *ListTenantAPIKeysRequest, opts ...grpc.CallOption) (*ListTenantAPIKeysResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTenantAPIKeysResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_ListTenantAPIKeys_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) RotateTenantAPIKey(ctx context.Context, in *RotateTenantAPIKeyRequest, opts ...grpc.CallOption) (*RotateTenantAPIKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RotateTenantAPIKeyResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_RotateTenantAPIKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) CreateAPIKey(ctx context.Context, in *CreateAPIKeyRequest, opts ...grpc.CallOption) (*CreateAPIKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateAPIKeyResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_CreateAPIKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) GetAPIKey(ctx context.Context, in *GetAPIKeyRequest, opts ...grpc.CallOption) (*GetAPIKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAPIKeyResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetAPIKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) UpdateAPIKey(ctx context.Context, in *UpdateAPIKeyRequest, opts ...grpc.CallOption) (*UpdateAPIKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAPIKeyResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_UpdateAPIKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) DeleteAPIKey(ctx context.Context, in *DeleteAPIKeyRequest, opts ...grpc.CallOption) (*DeleteAPIKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteAPIKeyResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_DeleteAPIKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) ListAPIKeys(ctx context.Context, in *ListAPIKeysRequest, opts ...grpc.CallOption) (*ListAPIKeysResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAPIKeysResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_ListAPIKeys_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) RotateAPIKey(ctx context.Context, in *RotateAPIKeyRequest, opts ...grpc.CallOption) (*RotateAPIKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RotateAPIKeyResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_RotateAPIKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) ListLeads(ctx context.Context, in *ListLeadsRequest, opts ...grpc.CallOption) (*ListLeadsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListLeadsResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_ListLeads_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) GetLead(ctx context.Context, in *GetLeadRequest, opts ...grpc.CallOption) (*GetLeadResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLeadResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetLead_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) CreateWebhook(ctx context.Context, in *CreateWebhookRequest, opts ...grpc.CallOption) (*CreateWebhookResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateWebhookResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_CreateWebhook_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) GetWebhook(ctx context.Context, in *GetWebhookRequest, opts ...grpc.CallOption) (*GetWebhookResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWebhookResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetWebhook_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) UpdateWebhook(ctx context.Context, in *UpdateWebhookRequest, opts ...grpc.CallOption) (*UpdateWebhookResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateWebhookResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_UpdateWebhook_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) DeleteWebhook(ctx context.Context, in *DeleteWebhookRequest, opts ...grpc.CallOption) (*DeleteWebhookResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteWebhookResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_DeleteWebhook_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) ListWebhooks(ctx context.Context, in *ListWebhooksRequest, opts ...grpc.CallOption) (*ListWebhooksResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListWebhooksResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_ListWebhooks_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1397,6 +1870,270 @@ type LeadScraperServiceServer interface {
 	// Required permissions:
 	// - list:organization
 	ListOrganizations(context.Context, *ListOrganizationsRequest) (*ListOrganizationsResponse, error)
+	// CreateTenantAPIKey generates a new API key for a tenant
+	//
+	// Features:
+	// - Secure key generation
+	// - Configurable permissions
+	// - Automatic expiration
+	// - Usage quotas
+	//
+	// Required validation:
+	// - Valid tenant ID
+	// - Authorization check
+	// - Rate limit verification
+	//
+	// Required permissions:
+	// - create:tenant_api_key
+	CreateTenantAPIKey(context.Context, *CreateTenantAPIKeyRequest) (*CreateTenantAPIKeyResponse, error)
+	// GetTenantAPIKey retrieves details of a specific API key
+	//
+	// Returns:
+	// - Key metadata
+	// - Usage statistics
+	// - Permission details
+	// - Expiration status
+	//
+	// Security:
+	// - Never returns full key value
+	// - Validates tenant context
+	//
+	// Required permissions:
+	// - read:tenant_api_key
+	GetTenantAPIKey(context.Context, *GetTenantAPIKeyRequest) (*GetTenantAPIKeyResponse, error)
+	// UpdateTenantAPIKey modifies an existing API key
+	//
+	// Modifiable attributes:
+	// - Name and description
+	// - Permissions
+	// - Usage quotas
+	// - Expiration time
+	//
+	// Security:
+	// - Validates tenant context
+	// - Preserves key value
+	//
+	// Required permissions:
+	// - update:tenant_api_key
+	UpdateTenantAPIKey(context.Context, *UpdateTenantAPIKeyRequest) (*UpdateTenantAPIKeyResponse, error)
+	// DeleteTenantAPIKey revokes and removes an API key
+	//
+	// Process:
+	// 1. Immediate key revocation
+	// 2. Usage cleanup
+	// 3. Audit log creation
+	//
+	// Security:
+	// - Validates tenant context
+	// - Immediate invalidation
+	//
+	// Required permissions:
+	// - delete:tenant_api_key
+	DeleteTenantAPIKey(context.Context, *DeleteTenantAPIKeyRequest) (*DeleteTenantAPIKeyResponse, error)
+	// ListTenantAPIKeys retrieves all API keys for a tenant
+	//
+	// Features:
+	// - Pagination support
+	// - Filtering options
+	// - Usage statistics
+	// - Status filtering
+	//
+	// Security:
+	// - Validates tenant context
+	// - Masks key values
+	//
+	// Required permissions:
+	// - list:tenant_api_key
+	ListTenantAPIKeys(context.Context, *ListTenantAPIKeysRequest) (*ListTenantAPIKeysResponse, error)
+	// RotateTenantAPIKey generates a new key while invalidating the old one
+	//
+	// Process:
+	// 1. Generate new key
+	// 2. Copy permissions
+	// 3. Invalidate old key
+	// 4. Return new key
+	//
+	// Security:
+	// - Grace period option
+	// - Audit logging
+	//
+	// Required permissions:
+	// - rotate:tenant_api_key
+	RotateTenantAPIKey(context.Context, *RotateTenantAPIKeyRequest) (*RotateTenantAPIKeyResponse, error)
+	// CreateAPIKey generates a new API key
+	//
+	// Features:
+	// - Secure key generation
+	// - Configurable permissions and scopes
+	// - Automatic expiration
+	// - Rate limiting and usage quotas
+	//
+	// Security:
+	// - Validates organization and workspace context
+	// - Enforces permission checks
+	// - Audit logging
+	//
+	// Required permissions:
+	// - create:api_key
+	CreateAPIKey(context.Context, *CreateAPIKeyRequest) (*CreateAPIKeyResponse, error)
+	// GetAPIKey retrieves details of a specific API key
+	//
+	// Returns:
+	// - Key metadata
+	// - Usage statistics
+	// - Permission details
+	// - Expiration status
+	//
+	// Security:
+	// - Never returns full key value
+	// - Validates access permissions
+	//
+	// Required permissions:
+	// - read:api_key
+	GetAPIKey(context.Context, *GetAPIKeyRequest) (*GetAPIKeyResponse, error)
+	// UpdateAPIKey modifies an existing API key
+	//
+	// Modifiable attributes:
+	// - Name and description
+	// - Permissions and scopes
+	// - Usage quotas
+	// - Rate limits
+	// - Expiration time
+	// - IP restrictions
+	//
+	// Security:
+	// - Validates modification permissions
+	// - Preserves key value
+	// - Audit logging
+	//
+	// Required permissions:
+	// - update:api_key
+	UpdateAPIKey(context.Context, *UpdateAPIKeyRequest) (*UpdateAPIKeyResponse, error)
+	// DeleteAPIKey revokes and removes an API key
+	//
+	// Process:
+	// 1. Immediate key revocation
+	// 2. Usage cleanup
+	// 3. Audit log creation
+	// 4. Notification to relevant parties
+	//
+	// Security:
+	// - Validates deletion permissions
+	// - Immediate invalidation
+	// - Cannot delete last admin key
+	//
+	// Required permissions:
+	// - delete:api_key
+	DeleteAPIKey(context.Context, *DeleteAPIKeyRequest) (*DeleteAPIKeyResponse, error)
+	// ListAPIKeys retrieves all API keys
+	//
+	// Features:
+	// - Pagination support
+	// - Filtering by status, type, and usage
+	// - Sorting options
+	// - Usage statistics
+	//
+	// Security:
+	// - Filters based on permissions
+	// - Masks sensitive data
+	//
+	// Required permissions:
+	// - list:api_key
+	ListAPIKeys(context.Context, *ListAPIKeysRequest) (*ListAPIKeysResponse, error)
+	// RotateAPIKey generates a new key while invalidating the old one
+	//
+	// Process:
+	// 1. Generate new key
+	// 2. Copy existing configuration
+	// 3. Set up grace period
+	// 4. Invalidate old key
+	//
+	// Security:
+	// - Validates rotation permissions
+	// - Grace period for transition
+	// - Audit logging
+	//
+	// Required permissions:
+	// - rotate:api_key
+	RotateAPIKey(context.Context, *RotateAPIKeyRequest) (*RotateAPIKeyResponse, error)
+	// ListLeads retrieves a paginated list of leads with comprehensive filtering options.
+	//
+	// Key features:
+	// - Pagination support
+	// - Rich filtering options
+	// - Sorting capabilities
+	// - Field selection
+	// - Tenant context validation
+	//
+	// Required permissions:
+	// - read:leads
+	ListLeads(context.Context, *ListLeadsRequest) (*ListLeadsResponse, error)
+	// GetLead retrieves detailed information about a specific lead.
+	//
+	// Key features:
+	// - Full lead details
+	// - Associated metadata
+	// - Audit information
+	// - Tenant context validation
+	//
+	// Required permissions:
+	// - read:leads
+	GetLead(context.Context, *GetLeadRequest) (*GetLeadResponse, error)
+	// CreateWebhook creates a new webhook configuration.
+	//
+	// Key features:
+	// - Webhook URL validation
+	// - Authentication configuration
+	// - Event trigger selection
+	// - Retry policy configuration
+	// - Payload customization
+	//
+	// Required permissions:
+	// - create:webhook
+	CreateWebhook(context.Context, *CreateWebhookRequest) (*CreateWebhookResponse, error)
+	// GetWebhook retrieves a specific webhook configuration.
+	//
+	// Key features:
+	// - Full webhook details
+	// - Authentication settings
+	// - Event subscriptions
+	// - Performance metrics
+	//
+	// Required permissions:
+	// - read:webhook
+	GetWebhook(context.Context, *GetWebhookRequest) (*GetWebhookResponse, error)
+	// UpdateWebhook modifies an existing webhook configuration.
+	//
+	// Key features:
+	// - URL updates
+	// - Authentication changes
+	// - Event subscription management
+	// - Retry policy adjustments
+	//
+	// Required permissions:
+	// - update:webhook
+	UpdateWebhook(context.Context, *UpdateWebhookRequest) (*UpdateWebhookResponse, error)
+	// DeleteWebhook removes a webhook configuration.
+	//
+	// Key features:
+	// - Graceful shutdown
+	// - Event queue cleanup
+	// - Audit trail
+	//
+	// Required permissions:
+	// - delete:webhook
+	DeleteWebhook(context.Context, *DeleteWebhookRequest) (*DeleteWebhookResponse, error)
+	// ListWebhooks retrieves all webhook configurations.
+	//
+	// Key features:
+	// - Pagination support
+	// - Filtering options
+	// - Status tracking
+	// - Performance metrics
+	//
+	// Required permissions:
+	// - list:webhook
+	ListWebhooks(context.Context, *ListWebhooksRequest) (*ListWebhooksResponse, error)
 	mustEmbedUnimplementedLeadScraperServiceServer()
 }
 
@@ -1508,6 +2245,63 @@ func (UnimplementedLeadScraperServiceServer) DeleteOrganization(context.Context,
 }
 func (UnimplementedLeadScraperServiceServer) ListOrganizations(context.Context, *ListOrganizationsRequest) (*ListOrganizationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOrganizations not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) CreateTenantAPIKey(context.Context, *CreateTenantAPIKeyRequest) (*CreateTenantAPIKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTenantAPIKey not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) GetTenantAPIKey(context.Context, *GetTenantAPIKeyRequest) (*GetTenantAPIKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTenantAPIKey not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) UpdateTenantAPIKey(context.Context, *UpdateTenantAPIKeyRequest) (*UpdateTenantAPIKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateTenantAPIKey not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) DeleteTenantAPIKey(context.Context, *DeleteTenantAPIKeyRequest) (*DeleteTenantAPIKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTenantAPIKey not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) ListTenantAPIKeys(context.Context, *ListTenantAPIKeysRequest) (*ListTenantAPIKeysResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTenantAPIKeys not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) RotateTenantAPIKey(context.Context, *RotateTenantAPIKeyRequest) (*RotateTenantAPIKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RotateTenantAPIKey not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) CreateAPIKey(context.Context, *CreateAPIKeyRequest) (*CreateAPIKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAPIKey not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) GetAPIKey(context.Context, *GetAPIKeyRequest) (*GetAPIKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAPIKey not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) UpdateAPIKey(context.Context, *UpdateAPIKeyRequest) (*UpdateAPIKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAPIKey not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) DeleteAPIKey(context.Context, *DeleteAPIKeyRequest) (*DeleteAPIKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAPIKey not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) ListAPIKeys(context.Context, *ListAPIKeysRequest) (*ListAPIKeysResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAPIKeys not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) RotateAPIKey(context.Context, *RotateAPIKeyRequest) (*RotateAPIKeyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RotateAPIKey not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) ListLeads(context.Context, *ListLeadsRequest) (*ListLeadsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListLeads not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) GetLead(context.Context, *GetLeadRequest) (*GetLeadResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLead not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) CreateWebhook(context.Context, *CreateWebhookRequest) (*CreateWebhookResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateWebhook not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) GetWebhook(context.Context, *GetWebhookRequest) (*GetWebhookResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetWebhook not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) UpdateWebhook(context.Context, *UpdateWebhookRequest) (*UpdateWebhookResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWebhook not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) DeleteWebhook(context.Context, *DeleteWebhookRequest) (*DeleteWebhookResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteWebhook not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) ListWebhooks(context.Context, *ListWebhooksRequest) (*ListWebhooksResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListWebhooks not implemented")
 }
 func (UnimplementedLeadScraperServiceServer) mustEmbedUnimplementedLeadScraperServiceServer() {}
 func (UnimplementedLeadScraperServiceServer) testEmbeddedByValue()                            {}
@@ -2142,6 +2936,348 @@ func _LeadScraperService_ListOrganizations_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LeadScraperService_CreateTenantAPIKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTenantAPIKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).CreateTenantAPIKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_CreateTenantAPIKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).CreateTenantAPIKey(ctx, req.(*CreateTenantAPIKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_GetTenantAPIKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTenantAPIKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).GetTenantAPIKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_GetTenantAPIKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).GetTenantAPIKey(ctx, req.(*GetTenantAPIKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_UpdateTenantAPIKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTenantAPIKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).UpdateTenantAPIKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_UpdateTenantAPIKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).UpdateTenantAPIKey(ctx, req.(*UpdateTenantAPIKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_DeleteTenantAPIKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTenantAPIKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).DeleteTenantAPIKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_DeleteTenantAPIKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).DeleteTenantAPIKey(ctx, req.(*DeleteTenantAPIKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_ListTenantAPIKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTenantAPIKeysRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).ListTenantAPIKeys(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_ListTenantAPIKeys_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).ListTenantAPIKeys(ctx, req.(*ListTenantAPIKeysRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_RotateTenantAPIKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RotateTenantAPIKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).RotateTenantAPIKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_RotateTenantAPIKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).RotateTenantAPIKey(ctx, req.(*RotateTenantAPIKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_CreateAPIKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAPIKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).CreateAPIKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_CreateAPIKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).CreateAPIKey(ctx, req.(*CreateAPIKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_GetAPIKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAPIKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).GetAPIKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_GetAPIKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).GetAPIKey(ctx, req.(*GetAPIKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_UpdateAPIKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAPIKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).UpdateAPIKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_UpdateAPIKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).UpdateAPIKey(ctx, req.(*UpdateAPIKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_DeleteAPIKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAPIKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).DeleteAPIKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_DeleteAPIKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).DeleteAPIKey(ctx, req.(*DeleteAPIKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_ListAPIKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAPIKeysRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).ListAPIKeys(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_ListAPIKeys_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).ListAPIKeys(ctx, req.(*ListAPIKeysRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_RotateAPIKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RotateAPIKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).RotateAPIKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_RotateAPIKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).RotateAPIKey(ctx, req.(*RotateAPIKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_ListLeads_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListLeadsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).ListLeads(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_ListLeads_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).ListLeads(ctx, req.(*ListLeadsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_GetLead_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLeadRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).GetLead(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_GetLead_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).GetLead(ctx, req.(*GetLeadRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_CreateWebhook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateWebhookRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).CreateWebhook(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_CreateWebhook_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).CreateWebhook(ctx, req.(*CreateWebhookRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_GetWebhook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWebhookRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).GetWebhook(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_GetWebhook_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).GetWebhook(ctx, req.(*GetWebhookRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_UpdateWebhook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWebhookRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).UpdateWebhook(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_UpdateWebhook_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).UpdateWebhook(ctx, req.(*UpdateWebhookRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_DeleteWebhook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteWebhookRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).DeleteWebhook(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_DeleteWebhook_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).DeleteWebhook(ctx, req.(*DeleteWebhookRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_ListWebhooks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListWebhooksRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).ListWebhooks(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_ListWebhooks_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).ListWebhooks(ctx, req.(*ListWebhooksRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // LeadScraperService_ServiceDesc is the grpc.ServiceDesc for LeadScraperService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2284,6 +3420,82 @@ var LeadScraperService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListOrganizations",
 			Handler:    _LeadScraperService_ListOrganizations_Handler,
+		},
+		{
+			MethodName: "CreateTenantAPIKey",
+			Handler:    _LeadScraperService_CreateTenantAPIKey_Handler,
+		},
+		{
+			MethodName: "GetTenantAPIKey",
+			Handler:    _LeadScraperService_GetTenantAPIKey_Handler,
+		},
+		{
+			MethodName: "UpdateTenantAPIKey",
+			Handler:    _LeadScraperService_UpdateTenantAPIKey_Handler,
+		},
+		{
+			MethodName: "DeleteTenantAPIKey",
+			Handler:    _LeadScraperService_DeleteTenantAPIKey_Handler,
+		},
+		{
+			MethodName: "ListTenantAPIKeys",
+			Handler:    _LeadScraperService_ListTenantAPIKeys_Handler,
+		},
+		{
+			MethodName: "RotateTenantAPIKey",
+			Handler:    _LeadScraperService_RotateTenantAPIKey_Handler,
+		},
+		{
+			MethodName: "CreateAPIKey",
+			Handler:    _LeadScraperService_CreateAPIKey_Handler,
+		},
+		{
+			MethodName: "GetAPIKey",
+			Handler:    _LeadScraperService_GetAPIKey_Handler,
+		},
+		{
+			MethodName: "UpdateAPIKey",
+			Handler:    _LeadScraperService_UpdateAPIKey_Handler,
+		},
+		{
+			MethodName: "DeleteAPIKey",
+			Handler:    _LeadScraperService_DeleteAPIKey_Handler,
+		},
+		{
+			MethodName: "ListAPIKeys",
+			Handler:    _LeadScraperService_ListAPIKeys_Handler,
+		},
+		{
+			MethodName: "RotateAPIKey",
+			Handler:    _LeadScraperService_RotateAPIKey_Handler,
+		},
+		{
+			MethodName: "ListLeads",
+			Handler:    _LeadScraperService_ListLeads_Handler,
+		},
+		{
+			MethodName: "GetLead",
+			Handler:    _LeadScraperService_GetLead_Handler,
+		},
+		{
+			MethodName: "CreateWebhook",
+			Handler:    _LeadScraperService_CreateWebhook_Handler,
+		},
+		{
+			MethodName: "GetWebhook",
+			Handler:    _LeadScraperService_GetWebhook_Handler,
+		},
+		{
+			MethodName: "UpdateWebhook",
+			Handler:    _LeadScraperService_UpdateWebhook_Handler,
+		},
+		{
+			MethodName: "DeleteWebhook",
+			Handler:    _LeadScraperService_DeleteWebhook_Handler,
+		},
+		{
+			MethodName: "ListWebhooks",
+			Handler:    _LeadScraperService_ListWebhooks_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

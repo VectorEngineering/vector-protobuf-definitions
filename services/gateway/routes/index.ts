@@ -27,6 +27,30 @@ router.route(
   leadScraperMicroserviceapiv1accountsidusageRouter,
 );
 
+import { leadScraperMicroserviceapiv1apiKeysRouter } from "./leadScraperMicroserviceapiv1apiKeys";
+router.route(
+  "/lead-scraper-microservice/api/v1/api-keys",
+  leadScraperMicroserviceapiv1apiKeysRouter,
+);
+
+import { leadScraperMicroserviceapiv1apiKeyslistRouter } from "./leadScraperMicroserviceapiv1apiKeyslist";
+router.route(
+  "/lead-scraper-microservice/api/v1/api-keys/list",
+  leadScraperMicroserviceapiv1apiKeyslistRouter,
+);
+
+import { leadScraperMicroserviceapiv1apiKeysrotateRouter } from "./leadScraperMicroserviceapiv1apiKeysrotate";
+router.route(
+  "/lead-scraper-microservice/api/v1/api-keys/rotate",
+  leadScraperMicroserviceapiv1apiKeysrotateRouter,
+);
+
+import { leadScraperMicroserviceapiv1apiKeyskeyidRouter } from "./leadScraperMicroserviceapiv1apiKeyskeyid";
+router.route(
+  "/lead-scraper-microservice/api/v1/api-keys/:keyId",
+  leadScraperMicroserviceapiv1apiKeyskeyidRouter,
+);
+
 import { leadScraperMicroserviceapiv1jobsRouter } from "./leadScraperMicroserviceapiv1jobs";
 router.route(
   "/lead-scraper-microservice/api/v1/jobs",
@@ -43,6 +67,18 @@ import { leadScraperMicroserviceapiv1jobsjobiddownloadRouter } from "./leadScrap
 router.route(
   "/lead-scraper-microservice/api/v1/jobs/:jobId/download",
   leadScraperMicroserviceapiv1jobsjobiddownloadRouter,
+);
+
+import { leadScraperMicroserviceapiv1leadsRouter } from "./leadScraperMicroserviceapiv1leads";
+router.route(
+  "/lead-scraper-microservice/api/v1/leads",
+  leadScraperMicroserviceapiv1leadsRouter,
+);
+
+import { leadScraperMicroserviceapiv1leadsleadidRouter } from "./leadScraperMicroserviceapiv1leadsleadid";
+router.route(
+  "/lead-scraper-microservice/api/v1/leads/:leadId",
+  leadScraperMicroserviceapiv1leadsleadidRouter,
 );
 
 import { leadScraperMicroserviceapiv1organizationRouter } from "./leadScraperMicroserviceapiv1organization";
@@ -75,6 +111,30 @@ router.route(
   leadScraperMicroserviceapiv1organizationstenantsRouter,
 );
 
+import { leadScraperMicroserviceapiv1organizationstenantsapiKeysRouter } from "./leadScraperMicroserviceapiv1organizationstenantsapiKeys";
+router.route(
+  "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys",
+  leadScraperMicroserviceapiv1organizationstenantsapiKeysRouter,
+);
+
+import { leadScraperMicroserviceapiv1organizationstenantsapiKeyslistRouter } from "./leadScraperMicroserviceapiv1organizationstenantsapiKeyslist";
+router.route(
+  "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list",
+  leadScraperMicroserviceapiv1organizationstenantsapiKeyslistRouter,
+);
+
+import { leadScraperMicroserviceapiv1organizationstenantsapiKeysrotateRouter } from "./leadScraperMicroserviceapiv1organizationstenantsapiKeysrotate";
+router.route(
+  "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate",
+  leadScraperMicroserviceapiv1organizationstenantsapiKeysrotateRouter,
+);
+
+import { leadScraperMicroserviceapiv1organizationstenantsapiKeyskeyidRouter } from "./leadScraperMicroserviceapiv1organizationstenantsapiKeyskeyid";
+router.route(
+  "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/:keyId",
+  leadScraperMicroserviceapiv1organizationstenantsapiKeyskeyidRouter,
+);
+
 import { leadScraperMicroserviceapiv1organizationstenantsorganizationidtenantidRouter } from "./leadScraperMicroserviceapiv1organizationstenantsorganizationidtenantid";
 router.route(
   "/lead-scraper-microservice/api/v1/organizations/tenants/:organizationId/:tenantId",
@@ -85,6 +145,18 @@ import { leadScraperMicroserviceapiv1organizationsorganizationidtenantsRouter } 
 router.route(
   "/lead-scraper-microservice/api/v1/organizations/:organizationId/tenants",
   leadScraperMicroserviceapiv1organizationsorganizationidtenantsRouter,
+);
+
+import { leadScraperMicroserviceapiv1webhooksRouter } from "./leadScraperMicroserviceapiv1webhooks";
+router.route(
+  "/lead-scraper-microservice/api/v1/webhooks",
+  leadScraperMicroserviceapiv1webhooksRouter,
+);
+
+import { leadScraperMicroserviceapiv1webhookswebhookidRouter } from "./leadScraperMicroserviceapiv1webhookswebhookid";
+router.route(
+  "/lead-scraper-microservice/api/v1/webhooks/:webhookId",
+  leadScraperMicroserviceapiv1webhookswebhookidRouter,
 );
 
 import { leadScraperMicroserviceapiv1workspaceRouter } from "./leadScraperMicroserviceapiv1workspace";

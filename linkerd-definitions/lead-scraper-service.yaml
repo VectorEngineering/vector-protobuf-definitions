@@ -198,3 +198,23 @@ spec:
       method: POST
       pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetLead
     name: GetLead
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/CreateWebhook
+    name: CreateWebhook
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetWebhook
+    name: GetWebhook
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/UpdateWebhook
+    name: UpdateWebhook
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/DeleteWebhook
+    name: DeleteWebhook
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/ListWebhooks
+    name: ListWebhooks

@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.openapitools.model.BillingPlan;
-import org.openapitools.model.OrganizationStatus;
 import org.openapitools.model.Subscription;
 import org.openapitools.model.Tenant;
+import org.openapitools.model.V1Status;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -29,7 +29,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "Organization", description = "Key features: - Multi-tenant support - Hierarchical structure - Enterprise features - Billing management  Use cases: - Company creates multiple apps/tenants - Enterprise manages business units - Usage tracking across tenants")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T07:29:26.257343-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T07:44:51.137714-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class Organization {
 
   private String id;
@@ -100,7 +100,7 @@ public class Organization {
 
   private String createdBy;
 
-  private OrganizationStatus status = OrganizationStatus.UNSPECIFIED;
+  private V1Status status = V1Status.UNSPECIFIED;
 
   public Organization id(String id) {
     this.id = id;
@@ -746,7 +746,7 @@ public class Organization {
     this.createdBy = createdBy;
   }
 
-  public Organization status(OrganizationStatus status) {
+  public Organization status(V1Status status) {
     this.status = status;
     return this;
   }
@@ -758,11 +758,11 @@ public class Organization {
   @Valid 
   @Schema(name = "status", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("status")
-  public OrganizationStatus getStatus() {
+  public V1Status getStatus() {
     return status;
   }
 
-  public void setStatus(OrganizationStatus status) {
+  public void setStatus(V1Status status) {
     this.status = status;
   }
 

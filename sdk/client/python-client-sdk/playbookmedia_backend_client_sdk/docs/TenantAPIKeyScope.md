@@ -1,0 +1,45 @@
+# TenantAPIKeyScope
+
+Usage: - Multiple scopes can be assigned to a single key - Scopes follow a hierarchical pattern - More specific scopes take precedence over general ones   - TENANT_API_KEY_SCOPE_UNSPECIFIED: Default state, should not be used explicitly  - TENANT_API_KEY_SCOPE_READ_JOBS: Read-only access scopes  View scraping jobs  - TENANT_API_KEY_SCOPE_READ_LEADS: View scraped leads  - TENANT_API_KEY_SCOPE_READ_WORKFLOWS: View workflow configurations  - TENANT_API_KEY_SCOPE_READ_ANALYTICS: View analytics and metrics  - TENANT_API_KEY_SCOPE_READ_SETTINGS: View tenant settings  - TENANT_API_KEY_SCOPE_WRITE_JOBS: Write access scopes  Create/modify scraping jobs  - TENANT_API_KEY_SCOPE_WRITE_LEADS: Modify lead data  - TENANT_API_KEY_SCOPE_WRITE_WORKFLOWS: Create/modify workflows  - TENANT_API_KEY_SCOPE_WRITE_SETTINGS: Modify tenant settings  - TENANT_API_KEY_SCOPE_DELETE_JOBS: Delete access scopes  Delete scraping jobs  - TENANT_API_KEY_SCOPE_DELETE_LEADS: Delete lead data  - TENANT_API_KEY_SCOPE_DELETE_WORKFLOWS: Delete workflows  - TENANT_API_KEY_SCOPE_EXPORT_DATA: Special access scopes  Export data in various formats  - TENANT_API_KEY_SCOPE_MANAGE_KEYS: Manage other API keys  - TENANT_API_KEY_SCOPE_BILLING_READ: View billing information  - TENANT_API_KEY_SCOPE_BILLING_WRITE: Modify billing settings  - TENANT_API_KEY_SCOPE_ADMIN: Full access scopes  Full administrative access
+
+## Enum
+
+* `TENANT_API_KEY_SCOPE_UNSPECIFIED` (value: `'TENANT_API_KEY_SCOPE_UNSPECIFIED'`)
+
+* `TENANT_API_KEY_SCOPE_READ_JOBS` (value: `'TENANT_API_KEY_SCOPE_READ_JOBS'`)
+
+* `TENANT_API_KEY_SCOPE_READ_LEADS` (value: `'TENANT_API_KEY_SCOPE_READ_LEADS'`)
+
+* `TENANT_API_KEY_SCOPE_READ_WORKFLOWS` (value: `'TENANT_API_KEY_SCOPE_READ_WORKFLOWS'`)
+
+* `TENANT_API_KEY_SCOPE_READ_ANALYTICS` (value: `'TENANT_API_KEY_SCOPE_READ_ANALYTICS'`)
+
+* `TENANT_API_KEY_SCOPE_READ_SETTINGS` (value: `'TENANT_API_KEY_SCOPE_READ_SETTINGS'`)
+
+* `TENANT_API_KEY_SCOPE_WRITE_JOBS` (value: `'TENANT_API_KEY_SCOPE_WRITE_JOBS'`)
+
+* `TENANT_API_KEY_SCOPE_WRITE_LEADS` (value: `'TENANT_API_KEY_SCOPE_WRITE_LEADS'`)
+
+* `TENANT_API_KEY_SCOPE_WRITE_WORKFLOWS` (value: `'TENANT_API_KEY_SCOPE_WRITE_WORKFLOWS'`)
+
+* `TENANT_API_KEY_SCOPE_WRITE_SETTINGS` (value: `'TENANT_API_KEY_SCOPE_WRITE_SETTINGS'`)
+
+* `TENANT_API_KEY_SCOPE_DELETE_JOBS` (value: `'TENANT_API_KEY_SCOPE_DELETE_JOBS'`)
+
+* `TENANT_API_KEY_SCOPE_DELETE_LEADS` (value: `'TENANT_API_KEY_SCOPE_DELETE_LEADS'`)
+
+* `TENANT_API_KEY_SCOPE_DELETE_WORKFLOWS` (value: `'TENANT_API_KEY_SCOPE_DELETE_WORKFLOWS'`)
+
+* `TENANT_API_KEY_SCOPE_EXPORT_DATA` (value: `'TENANT_API_KEY_SCOPE_EXPORT_DATA'`)
+
+* `TENANT_API_KEY_SCOPE_MANAGE_KEYS` (value: `'TENANT_API_KEY_SCOPE_MANAGE_KEYS'`)
+
+* `TENANT_API_KEY_SCOPE_BILLING_READ` (value: `'TENANT_API_KEY_SCOPE_BILLING_READ'`)
+
+* `TENANT_API_KEY_SCOPE_BILLING_WRITE` (value: `'TENANT_API_KEY_SCOPE_BILLING_WRITE'`)
+
+* `TENANT_API_KEY_SCOPE_ADMIN` (value: `'TENANT_API_KEY_SCOPE_ADMIN'`)
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

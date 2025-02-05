@@ -30,16 +30,20 @@ func newTenantAPIKeyORM(db *gorm.DB, opts ...gen.DOOption) tenantAPIKeyORM {
 
 	tableName := _tenantAPIKeyORM.tenantAPIKeyORMDo.TableName()
 	_tenantAPIKeyORM.ALL = field.NewAsterisk(tableName)
+	_tenantAPIKeyORM.AllowedIps = field.NewField(tableName, "allowed_ips")
 	_tenantAPIKeyORM.CreatedAt = field.NewTime(tableName, "created_at")
 	_tenantAPIKeyORM.DeletedAt = field.NewTime(tableName, "deleted_at")
 	_tenantAPIKeyORM.Description = field.NewString(tableName, "description")
+	_tenantAPIKeyORM.ExpiresAt = field.NewTime(tableName, "expires_at")
 	_tenantAPIKeyORM.Id = field.NewUint64(tableName, "id")
 	_tenantAPIKeyORM.KeyHash = field.NewString(tableName, "key_hash")
 	_tenantAPIKeyORM.KeyPrefix = field.NewString(tableName, "key_prefix")
+	_tenantAPIKeyORM.MaxUses = field.NewInt32(tableName, "max_uses")
 	_tenantAPIKeyORM.Name = field.NewString(tableName, "name")
 	_tenantAPIKeyORM.Status = field.NewString(tableName, "status")
 	_tenantAPIKeyORM.TenantId = field.NewUint64(tableName, "tenant_id")
 	_tenantAPIKeyORM.UpdatedAt = field.NewTime(tableName, "updated_at")
+	_tenantAPIKeyORM.UseCount = field.NewInt32(tableName, "use_count")
 
 	_tenantAPIKeyORM.fillFieldMap()
 
@@ -50,16 +54,20 @@ type tenantAPIKeyORM struct {
 	tenantAPIKeyORMDo
 
 	ALL         field.Asterisk
+	AllowedIps  field.Field
 	CreatedAt   field.Time
 	DeletedAt   field.Time
 	Description field.String
+	ExpiresAt   field.Time
 	Id          field.Uint64
 	KeyHash     field.String
 	KeyPrefix   field.String
+	MaxUses     field.Int32
 	Name        field.String
 	Status      field.String
 	TenantId    field.Uint64
 	UpdatedAt   field.Time
+	UseCount    field.Int32
 
 	fieldMap map[string]field.Expr
 }
@@ -76,16 +84,20 @@ func (t tenantAPIKeyORM) As(alias string) *tenantAPIKeyORM {
 
 func (t *tenantAPIKeyORM) updateTableName(table string) *tenantAPIKeyORM {
 	t.ALL = field.NewAsterisk(table)
+	t.AllowedIps = field.NewField(table, "allowed_ips")
 	t.CreatedAt = field.NewTime(table, "created_at")
 	t.DeletedAt = field.NewTime(table, "deleted_at")
 	t.Description = field.NewString(table, "description")
+	t.ExpiresAt = field.NewTime(table, "expires_at")
 	t.Id = field.NewUint64(table, "id")
 	t.KeyHash = field.NewString(table, "key_hash")
 	t.KeyPrefix = field.NewString(table, "key_prefix")
+	t.MaxUses = field.NewInt32(table, "max_uses")
 	t.Name = field.NewString(table, "name")
 	t.Status = field.NewString(table, "status")
 	t.TenantId = field.NewUint64(table, "tenant_id")
 	t.UpdatedAt = field.NewTime(table, "updated_at")
+	t.UseCount = field.NewInt32(table, "use_count")
 
 	t.fillFieldMap()
 
@@ -102,17 +114,21 @@ func (t *tenantAPIKeyORM) GetFieldByName(fieldName string) (field.OrderExpr, boo
 }
 
 func (t *tenantAPIKeyORM) fillFieldMap() {
-	t.fieldMap = make(map[string]field.Expr, 10)
+	t.fieldMap = make(map[string]field.Expr, 14)
+	t.fieldMap["allowed_ips"] = t.AllowedIps
 	t.fieldMap["created_at"] = t.CreatedAt
 	t.fieldMap["deleted_at"] = t.DeletedAt
 	t.fieldMap["description"] = t.Description
+	t.fieldMap["expires_at"] = t.ExpiresAt
 	t.fieldMap["id"] = t.Id
 	t.fieldMap["key_hash"] = t.KeyHash
 	t.fieldMap["key_prefix"] = t.KeyPrefix
+	t.fieldMap["max_uses"] = t.MaxUses
 	t.fieldMap["name"] = t.Name
 	t.fieldMap["status"] = t.Status
 	t.fieldMap["tenant_id"] = t.TenantId
 	t.fieldMap["updated_at"] = t.UpdatedAt
+	t.fieldMap["use_count"] = t.UseCount
 }
 
 func (t tenantAPIKeyORM) clone(db *gorm.DB) tenantAPIKeyORM {

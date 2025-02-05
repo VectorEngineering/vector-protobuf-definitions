@@ -34,7 +34,7 @@ Name | Type | Description | Notes
 **updatedAt** | **String!** |  | [optional] [default to null]
 **deletedAt** | **String!** |  | [optional] [default to null]
 **createdBy** | **String!** |  | [optional] [default to null]
-**status** | [***OrganizationStatus**](Organization.Status.md) |  | [optional] [default to null]
+**status** | [***V1Status**](v1.Status.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

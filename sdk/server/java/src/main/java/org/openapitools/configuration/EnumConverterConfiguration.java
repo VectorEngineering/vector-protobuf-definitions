@@ -1,6 +1,5 @@
 package org.openapitools.configuration;
 
-import org.openapitools.model.APIKeyStatus;
 import org.openapitools.model.AccountStatus;
 import org.openapitools.model.AppCategory;
 import org.openapitools.model.AuthErrorCode;
@@ -17,7 +16,6 @@ import org.openapitools.model.Interval;
 import org.openapitools.model.Language;
 import org.openapitools.model.NotFoundErrorCode;
 import org.openapitools.model.NullValue;
-import org.openapitools.model.OrganizationStatus;
 import org.openapitools.model.OutputFormat;
 import org.openapitools.model.PayloadFormat;
 import org.openapitools.model.PaymentStatus;
@@ -28,9 +26,10 @@ import org.openapitools.model.RevenueRange;
 import org.openapitools.model.Role;
 import org.openapitools.model.SignatureStatus;
 import org.openapitools.model.TemplateType;
-import org.openapitools.model.TenantStatus;
+import org.openapitools.model.TenantAPIKeyScope;
 import org.openapitools.model.Timezone;
 import org.openapitools.model.TriggerEvent;
+import org.openapitools.model.V1Status;
 import org.openapitools.model.ValidationErrorCode;
 import org.openapitools.model.WorkflowStatus;
 
@@ -41,15 +40,6 @@ import org.springframework.core.convert.converter.Converter;
 @Configuration
 public class EnumConverterConfiguration {
 
-    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.apIKeyStatusConverter")
-    Converter<String, APIKeyStatus> apIKeyStatusConverter() {
-        return new Converter<String, APIKeyStatus>() {
-            @Override
-            public APIKeyStatus convert(String source) {
-                return APIKeyStatus.fromValue(source);
-            }
-        };
-    }
     @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.accountStatusConverter")
     Converter<String, AccountStatus> accountStatusConverter() {
         return new Converter<String, AccountStatus>() {
@@ -194,15 +184,6 @@ public class EnumConverterConfiguration {
             }
         };
     }
-    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.organizationStatusConverter")
-    Converter<String, OrganizationStatus> organizationStatusConverter() {
-        return new Converter<String, OrganizationStatus>() {
-            @Override
-            public OrganizationStatus convert(String source) {
-                return OrganizationStatus.fromValue(source);
-            }
-        };
-    }
     @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.outputFormatConverter")
     Converter<String, OutputFormat> outputFormatConverter() {
         return new Converter<String, OutputFormat>() {
@@ -293,12 +274,12 @@ public class EnumConverterConfiguration {
             }
         };
     }
-    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.tenantStatusConverter")
-    Converter<String, TenantStatus> tenantStatusConverter() {
-        return new Converter<String, TenantStatus>() {
+    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.tenantAPIKeyScopeConverter")
+    Converter<String, TenantAPIKeyScope> tenantAPIKeyScopeConverter() {
+        return new Converter<String, TenantAPIKeyScope>() {
             @Override
-            public TenantStatus convert(String source) {
-                return TenantStatus.fromValue(source);
+            public TenantAPIKeyScope convert(String source) {
+                return TenantAPIKeyScope.fromValue(source);
             }
         };
     }
@@ -317,6 +298,15 @@ public class EnumConverterConfiguration {
             @Override
             public TriggerEvent convert(String source) {
                 return TriggerEvent.fromValue(source);
+            }
+        };
+    }
+    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.v1StatusConverter")
+    Converter<String, V1Status> v1StatusConverter() {
+        return new Converter<String, V1Status>() {
+            @Override
+            public V1Status convert(String source) {
+                return V1Status.fromValue(source);
             }
         };
     }

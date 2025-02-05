@@ -1388,7 +1388,7 @@ service LeadScraperService {
      */
     rpc RotateTenantAPIKey(RotateTenantAPIKeyRequest) returns (RotateTenantAPIKeyResponse) {
         option (google.api.http) = {
-            post: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{key_id}/rotate"
+            post: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate"
             body: "*"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -1680,6 +1680,163 @@ service LeadScraperService {
                 value: {
                     description: "Lead retrieved successfully"
                     schema: { json_schema: { ref: ".lead_scraper_service.v1.GetLeadResponse" } }
+                }
+            }
+        };
+    }
+
+    /**
+     * CreateWebhook creates a new webhook configuration.
+     * 
+     * Key features:
+     * - Webhook URL validation
+     * - Authentication configuration
+     * - Event trigger selection
+     * - Retry policy configuration
+     * - Payload customization
+     * 
+     * Required permissions:
+     * - create:webhook
+     */
+    rpc CreateWebhook(CreateWebhookRequest) returns (CreateWebhookResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/webhooks"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create webhook"
+            tags: ["lead-scraper-service"]
+            operation_id: "CreateWebhook"
+            description: "Creates a new webhook configuration for event notifications"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Webhook created successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.CreateWebhookResponse" } }
+                }
+            }
+        };
+    }
+
+    /**
+     * GetWebhook retrieves a specific webhook configuration.
+     * 
+     * Key features:
+     * - Full webhook details
+     * - Authentication settings
+     * - Event subscriptions
+     * - Performance metrics
+     * 
+     * Required permissions:
+     * - read:webhook
+     */
+    rpc GetWebhook(GetWebhookRequest) returns (GetWebhookResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/webhooks/{webhook_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get webhook"
+            tags: ["lead-scraper-service"]
+            operation_id: "GetWebhook"
+            description: "Retrieves details of a specific webhook configuration"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Webhook retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.GetWebhookResponse" } }
+                }
+            }
+        };
+    }
+
+    /**
+     * UpdateWebhook modifies an existing webhook configuration.
+     * 
+     * Key features:
+     * - URL updates
+     * - Authentication changes
+     * - Event subscription management
+     * - Retry policy adjustments
+     * 
+     * Required permissions:
+     * - update:webhook
+     */
+    rpc UpdateWebhook(UpdateWebhookRequest) returns (UpdateWebhookResponse) {
+        option (google.api.http) = {
+            put: "/lead-scraper-microservice/api/v1/webhooks"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Update webhook"
+            tags: ["lead-scraper-service"]
+            operation_id: "UpdateWebhook"
+            description: "Updates an existing webhook configuration"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Webhook updated successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.UpdateWebhookResponse" } }
+                }
+            }
+        };
+    }
+
+    /**
+     * DeleteWebhook removes a webhook configuration.
+     * 
+     * Key features:
+     * - Graceful shutdown
+     * - Event queue cleanup
+     * - Audit trail
+     * 
+     * Required permissions:
+     * - delete:webhook
+     */
+    rpc DeleteWebhook(DeleteWebhookRequest) returns (DeleteWebhookResponse) {
+        option (google.api.http) = {
+            delete: "/lead-scraper-microservice/api/v1/webhooks/{webhook_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete webhook"
+            tags: ["lead-scraper-service"]
+            operation_id: "DeleteWebhook"
+            description: "Deletes a webhook configuration"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Webhook deleted successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.DeleteWebhookResponse" } }
+                }
+            }
+        };
+    }
+
+    /**
+     * ListWebhooks retrieves all webhook configurations.
+     * 
+     * Key features:
+     * - Pagination support
+     * - Filtering options
+     * - Status tracking
+     * - Performance metrics
+     * 
+     * Required permissions:
+     * - list:webhook
+     */
+    rpc ListWebhooks(ListWebhooksRequest) returns (ListWebhooksResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/webhooks"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "List webhooks"
+            tags: ["lead-scraper-service"]
+            operation_id: "ListWebhooks"
+            description: "Lists all webhook configurations with pagination"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Webhooks retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.ListWebhooksResponse" } }
                 }
             }
         };

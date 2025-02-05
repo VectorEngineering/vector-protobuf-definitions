@@ -21,7 +21,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictBytes, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
-from playbookmedia_backend_client_sdk.models.api_key_status import APIKeyStatus
+from playbookmedia_backend_client_sdk.models.v1_status import V1Status
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -55,7 +55,7 @@ class APIKey(BaseModel):
     recent_errors: Optional[Union[StrictBytes, StrictStr]] = Field(default=None, alias="recentErrors")
     successful_requests_count: Optional[StrictInt] = Field(default=None, alias="successfulRequestsCount")
     success_rate: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="successRate")
-    status: Optional[APIKeyStatus] = APIKeyStatus.UNSPECIFIED
+    status: Optional[V1Status] = V1Status.UNSPECIFIED
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
     expires_at: Optional[datetime] = Field(default=None, alias="expiresAt")
@@ -181,7 +181,7 @@ class APIKey(BaseModel):
             "recentErrors": obj.get("recentErrors"),
             "successfulRequestsCount": obj.get("successfulRequestsCount"),
             "successRate": obj.get("successRate"),
-            "status": obj.get("status") if obj.get("status") is not None else APIKeyStatus.UNSPECIFIED,
+            "status": obj.get("status") if obj.get("status") is not None else V1Status.UNSPECIFIED,
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt"),
             "expiresAt": obj.get("expiresAt"),

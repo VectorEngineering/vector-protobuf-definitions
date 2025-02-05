@@ -14,7 +14,7 @@ import java.util.Map;
 import org.openapitools.model.Account;
 import org.openapitools.model.Organization;
 import org.openapitools.model.TenantAPIKey;
-import org.openapitools.model.TenantStatus;
+import org.openapitools.model.V1Status;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -31,7 +31,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "Tenant", description = "Key features: - Resource isolation - Independent configuration - Usage tracking - Service subscriptions")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T07:29:26.257343-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T07:44:51.137714-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class Tenant {
 
   private String id;
@@ -85,7 +85,7 @@ public class Tenant {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime deletedAt;
 
-  private TenantStatus status = TenantStatus.UNSPECIFIED;
+  private V1Status status = V1Status.UNSPECIFIED;
 
   public Tenant id(String id) {
     this.id = id;
@@ -559,7 +559,7 @@ public class Tenant {
     this.deletedAt = deletedAt;
   }
 
-  public Tenant status(TenantStatus status) {
+  public Tenant status(V1Status status) {
     this.status = status;
     return this;
   }
@@ -571,11 +571,11 @@ public class Tenant {
   @Valid 
   @Schema(name = "status", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("status")
-  public TenantStatus getStatus() {
+  public V1Status getStatus() {
     return status;
   }
 
-  public void setStatus(TenantStatus status) {
+  public void setStatus(V1Status status) {
     this.status = status;
   }
 

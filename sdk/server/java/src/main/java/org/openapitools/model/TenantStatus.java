@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Gets or Sets Tenant.Status
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T07:29:26.257343-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T07:35:11.192664-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public enum TenantStatus {
   
   UNSPECIFIED("STATUS_UNSPECIFIED"),

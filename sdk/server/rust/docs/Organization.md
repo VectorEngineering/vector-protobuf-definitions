@@ -34,7 +34,7 @@ Name | Type | Description | Notes
 **updated_at** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]
 **deleted_at** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]
 **created_by** | **String** |  | [optional] [default to None]
-**status** | [***models::OrganizationPeriodStatus**](Organization.Status.md) |  | [optional] [default to None]
+**status** | [***models::V1PeriodStatus**](v1.Status.md) |  | [optional] [default to None]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

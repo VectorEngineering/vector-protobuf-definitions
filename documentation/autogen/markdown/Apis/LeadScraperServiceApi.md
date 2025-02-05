@@ -4,41 +4,87 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**createAPIKey**](LeadScraperServiceApi.md#createAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys | Create a new API key |
 | [**createAccount**](LeadScraperServiceApi.md#createAccount) | **POST** /lead-scraper-microservice/api/v1/accounts | Create a new account |
 | [**createOrganization**](LeadScraperServiceApi.md#createOrganization) | **POST** /lead-scraper-microservice/api/v1/organization | Create a new organization |
 | [**createScrapingJob**](LeadScraperServiceApi.md#createScrapingJob) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task |
 | [**createTenant**](LeadScraperServiceApi.md#createTenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant |
+| [**createTenantAPIKey**](LeadScraperServiceApi.md#createTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key |
+| [**createWebhook**](LeadScraperServiceApi.md#createWebhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook |
 | [**createWorkspace**](LeadScraperServiceApi.md#createWorkspace) | **POST** /lead-scraper-microservice/api/v1/workspaces | Create a new workspace |
+| [**deleteAPIKey**](LeadScraperServiceApi.md#deleteAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key |
 | [**deleteAccount**](LeadScraperServiceApi.md#deleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account |
 | [**deleteOrganization**](LeadScraperServiceApi.md#deleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization |
 | [**deleteScrapingJob**](LeadScraperServiceApi.md#deleteScrapingJob) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job |
 | [**deleteTenant**](LeadScraperServiceApi.md#deleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant |
+| [**deleteTenantAPIKey**](LeadScraperServiceApi.md#deleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key |
+| [**deleteWebhook**](LeadScraperServiceApi.md#deleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook |
 | [**deleteWorkspace**](LeadScraperServiceApi.md#deleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace |
 | [**downloadScrapingResults**](LeadScraperServiceApi.md#downloadScrapingResults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV |
+| [**getAPIKey**](LeadScraperServiceApi.md#getAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details |
 | [**getAccount**](LeadScraperServiceApi.md#getAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details |
 | [**getAccountUsage**](LeadScraperServiceApi.md#getAccountUsage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage |
+| [**getLead**](LeadScraperServiceApi.md#getLead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details |
 | [**getOrganization**](LeadScraperServiceApi.md#getOrganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details |
 | [**getScrapingJob**](LeadScraperServiceApi.md#getScrapingJob) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job |
 | [**getTenant**](LeadScraperServiceApi.md#getTenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details |
+| [**getTenantAPIKey**](LeadScraperServiceApi.md#getTenantAPIKey) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details |
+| [**getWebhook**](LeadScraperServiceApi.md#getWebhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook |
 | [**getWorkflow**](LeadScraperServiceApi.md#getWorkflow) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Get workflow details |
 | [**getWorkspace**](LeadScraperServiceApi.md#getWorkspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details |
 | [**getWorkspaceAnalytics**](LeadScraperServiceApi.md#getWorkspaceAnalytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics |
 | [**leadScraperServiceCreateWorkflow**](LeadScraperServiceApi.md#leadScraperServiceCreateWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow |
+| [**listAPIKeys**](LeadScraperServiceApi.md#listAPIKeys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys |
 | [**listAccounts**](LeadScraperServiceApi.md#listAccounts) | **GET** /lead-scraper-microservice/api/v1/accounts | List all accounts |
+| [**listLeads**](LeadScraperServiceApi.md#listLeads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads |
 | [**listOrganizations**](LeadScraperServiceApi.md#listOrganizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations |
 | [**listScrapingJobs**](LeadScraperServiceApi.md#listScrapingJobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs |
+| [**listTenantAPIKeys**](LeadScraperServiceApi.md#listTenantAPIKeys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys |
 | [**listTenants**](LeadScraperServiceApi.md#listTenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants |
+| [**listWebhooks**](LeadScraperServiceApi.md#listWebhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks |
 | [**listWorkflows**](LeadScraperServiceApi.md#listWorkflows) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | List workflows |
 | [**listWorkspaces**](LeadScraperServiceApi.md#listWorkspaces) | **GET** /lead-scraper-microservice/api/v1/workspaces | List workspaces |
 | [**pauseWorkflow**](LeadScraperServiceApi.md#pauseWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution |
+| [**rotateAPIKey**](LeadScraperServiceApi.md#rotateAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key |
+| [**rotateTenantAPIKey**](LeadScraperServiceApi.md#rotateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key |
 | [**triggerWorkflow**](LeadScraperServiceApi.md#triggerWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution |
+| [**updateAPIKey**](LeadScraperServiceApi.md#updateAPIKey) | **PUT** /lead-scraper-microservice/api/v1/api-keys | Update API key |
 | [**updateAccount**](LeadScraperServiceApi.md#updateAccount) | **PUT** /lead-scraper-microservice/api/v1/accounts | Update account details |
 | [**updateAccountSettings**](LeadScraperServiceApi.md#updateAccountSettings) | **PUT** /lead-scraper-microservice/api/v1/accounts/settings | Update account settings |
 | [**updateOrganization**](LeadScraperServiceApi.md#updateOrganization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details |
 | [**updateTenant**](LeadScraperServiceApi.md#updateTenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details |
+| [**updateTenantAPIKey**](LeadScraperServiceApi.md#updateTenantAPIKey) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Update tenant API key |
+| [**updateWebhook**](LeadScraperServiceApi.md#updateWebhook) | **PUT** /lead-scraper-microservice/api/v1/webhooks | Update webhook |
 | [**updateWorkflow**](LeadScraperServiceApi.md#updateWorkflow) | **PUT** /lead-scraper-microservice/api/v1/workspaces/workflow | Update workflow details |
 | [**updateWorkspace**](LeadScraperServiceApi.md#updateWorkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details |
 
+
+<a name="createAPIKey"></a>
+# **createAPIKey**
+> CreateAPIKeyResponse createAPIKey(CreateAPIKeyRequest)
+
+Create a new API key
+
+    Creates a new API key with specified permissions and settings
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **CreateAPIKeyRequest** | [**CreateAPIKeyRequest**](../Models/CreateAPIKeyRequest.md)|  | |
+
+### Return type
+
+[**CreateAPIKeyResponse**](../Models/CreateAPIKeyResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
 
 <a name="createAccount"></a>
 # **createAccount**
@@ -149,6 +195,60 @@ No authorization required
 - **Content-Type**: application/json, application/x-www-form-urlencoded
 - **Accept**: application/json, 
 
+<a name="createTenantAPIKey"></a>
+# **createTenantAPIKey**
+> CreateTenantAPIKeyResponse createTenantAPIKey(CreateTenantAPIKeyRequest)
+
+Create a new tenant API key
+
+    Creates a new API key for a tenant with specified permissions
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **CreateTenantAPIKeyRequest** | [**CreateTenantAPIKeyRequest**](../Models/CreateTenantAPIKeyRequest.md)|  | |
+
+### Return type
+
+[**CreateTenantAPIKeyResponse**](../Models/CreateTenantAPIKeyResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
+<a name="createWebhook"></a>
+# **createWebhook**
+> CreateWebhookResponse createWebhook(CreateWebhookRequest)
+
+Create webhook
+
+    Creates a new webhook configuration for event notifications
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **CreateWebhookRequest** | [**CreateWebhookRequest**](../Models/CreateWebhookRequest.md)|  | |
+
+### Return type
+
+[**CreateWebhookResponse**](../Models/CreateWebhookResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
 <a name="createWorkspace"></a>
 # **createWorkspace**
 > CreateWorkspaceResponse createWorkspace(CreateWorkspaceRequest)
@@ -174,6 +274,37 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
+<a name="deleteAPIKey"></a>
+# **deleteAPIKey**
+> DeleteAPIKeyResponse deleteAPIKey(keyId, organizationId, workspaceId, tenantId, accountId)
+
+Delete API key
+
+    Permanently deletes an API key
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **keyId** | **String**|  | [default to null] |
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **workspaceId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
+| **accountId** | **String**|  | [optional] [default to null] |
+
+### Return type
+
+[**DeleteAPIKeyResponse**](../Models/DeleteAPIKeyResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json, 
 
 <a name="deleteAccount"></a>
@@ -290,6 +421,66 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
+<a name="deleteTenantAPIKey"></a>
+# **deleteTenantAPIKey**
+> DeleteTenantAPIKeyResponse deleteTenantAPIKey(keyId, organizationId, tenantId)
+
+Delete tenant API key
+
+    Permanently deletes a tenant API key
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **keyId** | **String**|  | [default to null] |
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
+
+### Return type
+
+[**DeleteTenantAPIKeyResponse**](../Models/DeleteTenantAPIKeyResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="deleteWebhook"></a>
+# **deleteWebhook**
+> DeleteWebhookResponse deleteWebhook(webhookId, organizationId, workspaceId, tenantId, accountId)
+
+Delete webhook
+
+    Deletes a webhook configuration
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **webhookId** | **String**|  | [default to null] |
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **workspaceId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
+| **accountId** | **String**|  | [optional] [default to null] |
+
+### Return type
+
+[**DeleteWebhookResponse**](../Models/DeleteWebhookResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
 <a name="deleteWorkspace"></a>
 # **deleteWorkspace**
 > DeleteWorkspaceResponse deleteWorkspace(id)
@@ -347,6 +538,37 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
+<a name="getAPIKey"></a>
+# **getAPIKey**
+> GetAPIKeyResponse getAPIKey(keyId, organizationId, tenantId, accountId, workspaceId)
+
+Get API key details
+
+    Retrieves details of a specific API key
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **keyId** | **String**|  | [default to null] |
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
+| **accountId** | **String**|  | [optional] [default to null] |
+| **workspaceId** | **String**|  | [optional] [default to null] |
+
+### Return type
+
+[**GetAPIKeyResponse**](../Models/GetAPIKeyResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
 <a name="getAccount"></a>
 # **getAccount**
 > GetAccountResponse getAccount(id, organizationId, tenantId)
@@ -393,6 +615,37 @@ Get account usage
 ### Return type
 
 [**GetAccountUsageResponse**](../Models/GetAccountUsageResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="getLead"></a>
+# **getLead**
+> GetLeadResponse getLead(leadId, organizationId, workspaceId, tenantId, accountId)
+
+Get lead details
+
+    Retrieves detailed information about a specific lead
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **leadId** | **String**|  | [default to null] |
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **workspaceId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
+| **accountId** | **String**|  | [optional] [default to null] |
+
+### Return type
+
+[**GetLeadResponse**](../Models/GetLeadResponse.md)
 
 ### Authorization
 
@@ -488,9 +741,69 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
+<a name="getTenantAPIKey"></a>
+# **getTenantAPIKey**
+> GetTenantAPIKeyResponse getTenantAPIKey(keyId, organizationId, tenantId)
+
+Get tenant API key details
+
+    Retrieves details of a specific tenant API key
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **keyId** | **String**|  | [default to null] |
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
+
+### Return type
+
+[**GetTenantAPIKeyResponse**](../Models/GetTenantAPIKeyResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="getWebhook"></a>
+# **getWebhook**
+> GetWebhookResponse getWebhook(webhookId, organizationId, workspaceId, tenantId, accountId)
+
+Get webhook
+
+    Retrieves details of a specific webhook configuration
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **webhookId** | **String**|  | [default to null] |
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **workspaceId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
+| **accountId** | **String**|  | [optional] [default to null] |
+
+### Return type
+
+[**GetWebhookResponse**](../Models/GetWebhookResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
 <a name="getWorkflow"></a>
 # **getWorkflow**
-> ScrapingWorkflow getWorkflow(workspaceId, id)
+> GetWorkflowResponse getWorkflow(workspaceId, id)
 
 Get workflow details
 
@@ -505,7 +818,7 @@ Get workflow details
 
 ### Return type
 
-[**ScrapingWorkflow**](../Models/ScrapingWorkflow.md)
+[**GetWorkflowResponse**](../Models/GetWorkflowResponse.md)
 
 ### Authorization
 
@@ -518,7 +831,7 @@ No authorization required
 
 <a name="getWorkspace"></a>
 # **getWorkspace**
-> Workspace getWorkspace(id)
+> GetWorkspaceResponse getWorkspace(id)
 
 Get workspace details
 
@@ -532,7 +845,7 @@ Get workspace details
 
 ### Return type
 
-[**Workspace**](../Models/Workspace.md)
+[**GetWorkspaceResponse**](../Models/GetWorkspaceResponse.md)
 
 ### Authorization
 
@@ -600,6 +913,41 @@ No authorization required
 - **Content-Type**: application/json, application/x-www-form-urlencoded
 - **Accept**: application/json, 
 
+<a name="listAPIKeys"></a>
+# **listAPIKeys**
+> ListAPIKeysResponse listAPIKeys(organizationId, tenantId, accountId, workspaceId, pageSize, pageNumber, status, sortDesc, search)
+
+List API keys
+
+    Retrieves a list of API keys with optional filtering
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
+| **accountId** | **String**|  | [optional] [default to null] |
+| **workspaceId** | **String**|  | [optional] [default to null] |
+| **pageSize** | **Integer**|  | [optional] [default to null] |
+| **pageNumber** | **Integer**|  | [optional] [default to null] |
+| **status** | **String**|  | [optional] [default to null] |
+| **sortDesc** | **Boolean**|  | [optional] [default to null] |
+| **search** | **String**|  | [optional] [default to null] |
+
+### Return type
+
+[**ListAPIKeysResponse**](../Models/ListAPIKeysResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
 <a name="listAccounts"></a>
 # **listAccounts**
 > ListAccountsResponse listAccounts(pageSize, pageNumber, filter, organizationId, tenantId)
@@ -621,6 +969,38 @@ List all accounts
 ### Return type
 
 [**ListAccountsResponse**](../Models/ListAccountsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="listLeads"></a>
+# **listLeads**
+> ListLeadsResponse listLeads(organizationId, workspaceId, tenantId, accountId, pageSize, pageNumber)
+
+List leads
+
+    Retrieves a paginated list of leads with comprehensive filtering options
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | **String**| Context identifiers | [optional] [default to null] |
+| **workspaceId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
+| **accountId** | **String**|  | [optional] [default to null] |
+| **pageSize** | **Integer**| Pagination | [optional] [default to null] |
+| **pageNumber** | **Integer**|  | [optional] [default to null] |
+
+### Return type
+
+[**ListLeadsResponse**](../Models/ListLeadsResponse.md)
 
 ### Authorization
 
@@ -688,6 +1068,37 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
+<a name="listTenantAPIKeys"></a>
+# **listTenantAPIKeys**
+> ListTenantAPIKeysResponse listTenantAPIKeys(organizationId, tenantId, pageSize, pageNumber, status)
+
+List tenant API keys
+
+    Retrieves all API keys for a specific tenant
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
+| **pageSize** | **Integer**|  | [optional] [default to null] |
+| **pageNumber** | **Integer**|  | [optional] [default to null] |
+| **status** | **String**|  | [optional] [default to null] |
+
+### Return type
+
+[**ListTenantAPIKeysResponse**](../Models/ListTenantAPIKeysResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
 <a name="listTenants"></a>
 # **listTenants**
 > ListTenantsResponse listTenants(organizationId, pageSize, pageNumber)
@@ -707,6 +1118,40 @@ List all tenants
 ### Return type
 
 [**ListTenantsResponse**](../Models/ListTenantsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="listWebhooks"></a>
+# **listWebhooks**
+> ListWebhooksResponse listWebhooks(organizationId, workspaceId, tenantId, accountId, pageSize, pageNumber, status, search)
+
+List webhooks
+
+    Lists all webhook configurations with pagination
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **workspaceId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
+| **accountId** | **String**|  | [optional] [default to null] |
+| **pageSize** | **Integer**|  | [optional] [default to null] |
+| **pageNumber** | **Integer**|  | [optional] [default to null] |
+| **status** | **String**|  | [optional] [default to null] |
+| **search** | **String**|  | [optional] [default to null] |
+
+### Return type
+
+[**ListWebhooksResponse**](../Models/ListWebhooksResponse.md)
 
 ### Authorization
 
@@ -805,6 +1250,60 @@ No authorization required
 - **Content-Type**: application/json, application/x-www-form-urlencoded
 - **Accept**: application/json, 
 
+<a name="rotateAPIKey"></a>
+# **rotateAPIKey**
+> RotateAPIKeyResponse rotateAPIKey(RotateAPIKeyRequest)
+
+Rotate API key
+
+    Rotates an API key while maintaining its configuration
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **RotateAPIKeyRequest** | [**RotateAPIKeyRequest**](../Models/RotateAPIKeyRequest.md)|  | |
+
+### Return type
+
+[**RotateAPIKeyResponse**](../Models/RotateAPIKeyResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
+<a name="rotateTenantAPIKey"></a>
+# **rotateTenantAPIKey**
+> RotateTenantAPIKeyResponse rotateTenantAPIKey(RotateTenantAPIKeyRequest)
+
+Rotate tenant API key
+
+    Rotates a tenant API key while maintaining its configuration
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **RotateTenantAPIKeyRequest** | [**RotateTenantAPIKeyRequest**](../Models/RotateTenantAPIKeyRequest.md)|  | |
+
+### Return type
+
+[**RotateTenantAPIKeyResponse**](../Models/RotateTenantAPIKeyResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
 <a name="triggerWorkflow"></a>
 # **triggerWorkflow**
 > TriggerWorkflowResponse triggerWorkflow(workspaceId, id, TriggerWorkflowBody)
@@ -824,6 +1323,33 @@ Trigger workflow execution
 ### Return type
 
 [**TriggerWorkflowResponse**](../Models/TriggerWorkflowResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
+<a name="updateAPIKey"></a>
+# **updateAPIKey**
+> UpdateAPIKeyResponse updateAPIKey(UpdateAPIKeyRequest)
+
+Update API key
+
+    Updates an existing API key&#39;s configuration
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **UpdateAPIKeyRequest** | [**UpdateAPIKeyRequest**](../Models/UpdateAPIKeyRequest.md)|  | |
+
+### Return type
+
+[**UpdateAPIKeyResponse**](../Models/UpdateAPIKeyResponse.md)
 
 ### Authorization
 
@@ -942,9 +1468,63 @@ No authorization required
 - **Content-Type**: application/json, application/x-www-form-urlencoded
 - **Accept**: application/json, 
 
+<a name="updateTenantAPIKey"></a>
+# **updateTenantAPIKey**
+> UpdateTenantAPIKeyResponse updateTenantAPIKey(UpdateTenantAPIKeyRequest)
+
+Update tenant API key
+
+    Updates an existing tenant API key&#39;s configuration
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **UpdateTenantAPIKeyRequest** | [**UpdateTenantAPIKeyRequest**](../Models/UpdateTenantAPIKeyRequest.md)|  | |
+
+### Return type
+
+[**UpdateTenantAPIKeyResponse**](../Models/UpdateTenantAPIKeyResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
+<a name="updateWebhook"></a>
+# **updateWebhook**
+> UpdateWebhookResponse updateWebhook(UpdateWebhookRequest)
+
+Update webhook
+
+    Updates an existing webhook configuration
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **UpdateWebhookRequest** | [**UpdateWebhookRequest**](../Models/UpdateWebhookRequest.md)|  | |
+
+### Return type
+
+[**UpdateWebhookResponse**](../Models/UpdateWebhookResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
 <a name="updateWorkflow"></a>
 # **updateWorkflow**
-> ScrapingWorkflow updateWorkflow(UpdateWorkflowRequest)
+> UpdateWorkflowResponse updateWorkflow(UpdateWorkflowRequest)
 
 Update workflow details
 
@@ -958,7 +1538,7 @@ Update workflow details
 
 ### Return type
 
-[**ScrapingWorkflow**](../Models/ScrapingWorkflow.md)
+[**UpdateWorkflowResponse**](../Models/UpdateWorkflowResponse.md)
 
 ### Authorization
 

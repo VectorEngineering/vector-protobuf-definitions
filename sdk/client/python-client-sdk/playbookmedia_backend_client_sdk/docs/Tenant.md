@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 
 **deleted_at** | **datetime** |  | [optional] 
-**status** | [**TenantStatus**](TenantStatus.md) |  | [optional] [default to TenantStatus.UNSPECIFIED]
+**status** | [**V1Status**](V1Status.md) |  | [optional] [default to V1Status.UNSPECIFIED]
 
 ## Example
 

@@ -29,7 +29,7 @@
 | **recentErrors** | **byte[]** |  | [optional] [default to null] |
 | **successfulRequestsCount** | **Integer** |  | [optional] [default to null] |
 | **successRate** | **Float** |  | [optional] [default to null] |
-| **status** | [**APIKey.Status**](APIKey.Status.md) |  | [optional] [default to null] |
+| **status** | [**v1.Status**](v1.Status.md) |  | [optional] [default to null] |
 | **createdAt** | **Date** |  | [optional] [default to null] |
 | **updatedAt** | **Date** |  | [optional] [default to null] |
 | **expiresAt** | **Date** |  | [optional] [default to null] |

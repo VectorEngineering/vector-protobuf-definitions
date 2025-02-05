@@ -3831,6 +3831,2530 @@ func (x *ListOrganizationsResponse) GetNextPageNumber() int32 {
 	return 0
 }
 
+type CreateTenantAPIKeyRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OrganizationId uint64        `protobuf:"varint,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	TenantId       uint64        `protobuf:"varint,2,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	ApiKey         *TenantAPIKey `protobuf:"bytes,3,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+}
+
+func (x *CreateTenantAPIKeyRequest) Reset() {
+	*x = CreateTenantAPIKeyRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[68]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateTenantAPIKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateTenantAPIKeyRequest) ProtoMessage() {}
+
+func (x *CreateTenantAPIKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[68]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateTenantAPIKeyRequest.ProtoReflect.Descriptor instead.
+func (*CreateTenantAPIKeyRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{68}
+}
+
+func (x *CreateTenantAPIKeyRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+func (x *CreateTenantAPIKeyRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *CreateTenantAPIKeyRequest) GetApiKey() *TenantAPIKey {
+	if x != nil {
+		return x.ApiKey
+	}
+	return nil
+}
+
+type CreateTenantAPIKeyResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	KeyId    uint64 `protobuf:"varint,1,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+	KeyValue string `protobuf:"bytes,2,opt,name=key_value,json=keyValue,proto3" json:"key_value,omitempty"` // The actual API key value - only returned on creation
+}
+
+func (x *CreateTenantAPIKeyResponse) Reset() {
+	*x = CreateTenantAPIKeyResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[69]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateTenantAPIKeyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateTenantAPIKeyResponse) ProtoMessage() {}
+
+func (x *CreateTenantAPIKeyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[69]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateTenantAPIKeyResponse.ProtoReflect.Descriptor instead.
+func (*CreateTenantAPIKeyResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{69}
+}
+
+func (x *CreateTenantAPIKeyResponse) GetKeyId() uint64 {
+	if x != nil {
+		return x.KeyId
+	}
+	return 0
+}
+
+func (x *CreateTenantAPIKeyResponse) GetKeyValue() string {
+	if x != nil {
+		return x.KeyValue
+	}
+	return ""
+}
+
+type GetTenantAPIKeyRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OrganizationId uint64 `protobuf:"varint,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	TenantId       uint64 `protobuf:"varint,2,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	KeyId          uint64 `protobuf:"varint,3,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+}
+
+func (x *GetTenantAPIKeyRequest) Reset() {
+	*x = GetTenantAPIKeyRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[70]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetTenantAPIKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTenantAPIKeyRequest) ProtoMessage() {}
+
+func (x *GetTenantAPIKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[70]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTenantAPIKeyRequest.ProtoReflect.Descriptor instead.
+func (*GetTenantAPIKeyRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{70}
+}
+
+func (x *GetTenantAPIKeyRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+func (x *GetTenantAPIKeyRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *GetTenantAPIKeyRequest) GetKeyId() uint64 {
+	if x != nil {
+		return x.KeyId
+	}
+	return 0
+}
+
+type GetTenantAPIKeyResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ApiKey *TenantAPIKey `protobuf:"bytes,1,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+}
+
+func (x *GetTenantAPIKeyResponse) Reset() {
+	*x = GetTenantAPIKeyResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[71]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetTenantAPIKeyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTenantAPIKeyResponse) ProtoMessage() {}
+
+func (x *GetTenantAPIKeyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[71]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTenantAPIKeyResponse.ProtoReflect.Descriptor instead.
+func (*GetTenantAPIKeyResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{71}
+}
+
+func (x *GetTenantAPIKeyResponse) GetApiKey() *TenantAPIKey {
+	if x != nil {
+		return x.ApiKey
+	}
+	return nil
+}
+
+type UpdateTenantAPIKeyRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ApiKey *TenantAPIKey `protobuf:"bytes,1,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+}
+
+func (x *UpdateTenantAPIKeyRequest) Reset() {
+	*x = UpdateTenantAPIKeyRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[72]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateTenantAPIKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTenantAPIKeyRequest) ProtoMessage() {}
+
+func (x *UpdateTenantAPIKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[72]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTenantAPIKeyRequest.ProtoReflect.Descriptor instead.
+func (*UpdateTenantAPIKeyRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{72}
+}
+
+func (x *UpdateTenantAPIKeyRequest) GetApiKey() *TenantAPIKey {
+	if x != nil {
+		return x.ApiKey
+	}
+	return nil
+}
+
+type UpdateTenantAPIKeyResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ApiKey *TenantAPIKey `protobuf:"bytes,1,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+}
+
+func (x *UpdateTenantAPIKeyResponse) Reset() {
+	*x = UpdateTenantAPIKeyResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[73]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateTenantAPIKeyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTenantAPIKeyResponse) ProtoMessage() {}
+
+func (x *UpdateTenantAPIKeyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[73]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTenantAPIKeyResponse.ProtoReflect.Descriptor instead.
+func (*UpdateTenantAPIKeyResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{73}
+}
+
+func (x *UpdateTenantAPIKeyResponse) GetApiKey() *TenantAPIKey {
+	if x != nil {
+		return x.ApiKey
+	}
+	return nil
+}
+
+type DeleteTenantAPIKeyRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OrganizationId uint64 `protobuf:"varint,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	TenantId       uint64 `protobuf:"varint,2,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	KeyId          uint64 `protobuf:"varint,3,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+}
+
+func (x *DeleteTenantAPIKeyRequest) Reset() {
+	*x = DeleteTenantAPIKeyRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[74]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteTenantAPIKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTenantAPIKeyRequest) ProtoMessage() {}
+
+func (x *DeleteTenantAPIKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[74]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTenantAPIKeyRequest.ProtoReflect.Descriptor instead.
+func (*DeleteTenantAPIKeyRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{74}
+}
+
+func (x *DeleteTenantAPIKeyRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+func (x *DeleteTenantAPIKeyRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *DeleteTenantAPIKeyRequest) GetKeyId() uint64 {
+	if x != nil {
+		return x.KeyId
+	}
+	return 0
+}
+
+type DeleteTenantAPIKeyResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success bool `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+}
+
+func (x *DeleteTenantAPIKeyResponse) Reset() {
+	*x = DeleteTenantAPIKeyResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[75]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteTenantAPIKeyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTenantAPIKeyResponse) ProtoMessage() {}
+
+func (x *DeleteTenantAPIKeyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[75]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTenantAPIKeyResponse.ProtoReflect.Descriptor instead.
+func (*DeleteTenantAPIKeyResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{75}
+}
+
+func (x *DeleteTenantAPIKeyResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+type ListTenantAPIKeysRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OrganizationId uint64 `protobuf:"varint,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	TenantId       uint64 `protobuf:"varint,2,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	PageSize       int32  `protobuf:"varint,3,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageNumber     int32  `protobuf:"varint,4,opt,name=page_number,json=pageNumber,proto3" json:"page_number,omitempty"`
+	Status         string `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+}
+
+func (x *ListTenantAPIKeysRequest) Reset() {
+	*x = ListTenantAPIKeysRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[76]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListTenantAPIKeysRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTenantAPIKeysRequest) ProtoMessage() {}
+
+func (x *ListTenantAPIKeysRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[76]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTenantAPIKeysRequest.ProtoReflect.Descriptor instead.
+func (*ListTenantAPIKeysRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{76}
+}
+
+func (x *ListTenantAPIKeysRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+func (x *ListTenantAPIKeysRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *ListTenantAPIKeysRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListTenantAPIKeysRequest) GetPageNumber() int32 {
+	if x != nil {
+		return x.PageNumber
+	}
+	return 0
+}
+
+func (x *ListTenantAPIKeysRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+type ListTenantAPIKeysResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ApiKeys        []*TenantAPIKey `protobuf:"bytes,1,rep,name=api_keys,json=apiKeys,proto3" json:"api_keys,omitempty"`
+	NextPageNumber int32           `protobuf:"varint,2,opt,name=next_page_number,json=nextPageNumber,proto3" json:"next_page_number,omitempty"`
+	TotalCount     int32           `protobuf:"varint,3,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+}
+
+func (x *ListTenantAPIKeysResponse) Reset() {
+	*x = ListTenantAPIKeysResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[77]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListTenantAPIKeysResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTenantAPIKeysResponse) ProtoMessage() {}
+
+func (x *ListTenantAPIKeysResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[77]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTenantAPIKeysResponse.ProtoReflect.Descriptor instead.
+func (*ListTenantAPIKeysResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{77}
+}
+
+func (x *ListTenantAPIKeysResponse) GetApiKeys() []*TenantAPIKey {
+	if x != nil {
+		return x.ApiKeys
+	}
+	return nil
+}
+
+func (x *ListTenantAPIKeysResponse) GetNextPageNumber() int32 {
+	if x != nil {
+		return x.NextPageNumber
+	}
+	return 0
+}
+
+func (x *ListTenantAPIKeysResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+type RotateTenantAPIKeyRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OrganizationId uint64 `protobuf:"varint,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	TenantId       uint64 `protobuf:"varint,2,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	KeyId          uint64 `protobuf:"varint,3,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+}
+
+func (x *RotateTenantAPIKeyRequest) Reset() {
+	*x = RotateTenantAPIKeyRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[78]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RotateTenantAPIKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RotateTenantAPIKeyRequest) ProtoMessage() {}
+
+func (x *RotateTenantAPIKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[78]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RotateTenantAPIKeyRequest.ProtoReflect.Descriptor instead.
+func (*RotateTenantAPIKeyRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{78}
+}
+
+func (x *RotateTenantAPIKeyRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+func (x *RotateTenantAPIKeyRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *RotateTenantAPIKeyRequest) GetKeyId() uint64 {
+	if x != nil {
+		return x.KeyId
+	}
+	return 0
+}
+
+type RotateTenantAPIKeyResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	NewApiKey      *TenantAPIKey          `protobuf:"bytes,1,opt,name=new_api_key,json=newApiKey,proto3" json:"new_api_key,omitempty"`
+	NewKeyValue    string                 `protobuf:"bytes,2,opt,name=new_key_value,json=newKeyValue,proto3" json:"new_key_value,omitempty"`
+	OldKeyExpiry   *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=old_key_expiry,json=oldKeyExpiry,proto3" json:"old_key_expiry,omitempty"`
+	TenantId       uint64                 `protobuf:"varint,4,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	OrganizationId uint64                 `protobuf:"varint,5,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+}
+
+func (x *RotateTenantAPIKeyResponse) Reset() {
+	*x = RotateTenantAPIKeyResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[79]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RotateTenantAPIKeyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RotateTenantAPIKeyResponse) ProtoMessage() {}
+
+func (x *RotateTenantAPIKeyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[79]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RotateTenantAPIKeyResponse.ProtoReflect.Descriptor instead.
+func (*RotateTenantAPIKeyResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{79}
+}
+
+func (x *RotateTenantAPIKeyResponse) GetNewApiKey() *TenantAPIKey {
+	if x != nil {
+		return x.NewApiKey
+	}
+	return nil
+}
+
+func (x *RotateTenantAPIKeyResponse) GetNewKeyValue() string {
+	if x != nil {
+		return x.NewKeyValue
+	}
+	return ""
+}
+
+func (x *RotateTenantAPIKeyResponse) GetOldKeyExpiry() *timestamppb.Timestamp {
+	if x != nil {
+		return x.OldKeyExpiry
+	}
+	return nil
+}
+
+func (x *RotateTenantAPIKeyResponse) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *RotateTenantAPIKeyResponse) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+type CreateAPIKeyRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OrganizationId             uint64                 `protobuf:"varint,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	WorkspaceId                uint64                 `protobuf:"varint,2,opt,name=workspace_id,json=workspaceId,proto3" json:"workspace_id,omitempty"`
+	TenantId                   uint64                 `protobuf:"varint,3,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	AccountId                  uint64                 `protobuf:"varint,4,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Name                       string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
+	Description                string                 `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
+	Scopes                     []string               `protobuf:"bytes,8,rep,name=scopes,proto3" json:"scopes,omitempty"`
+	ExpiresAt                  *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	MaxUses                    int32                  `protobuf:"varint,10,opt,name=max_uses,json=maxUses,proto3" json:"max_uses,omitempty"`
+	AllowedIps                 []string               `protobuf:"bytes,11,rep,name=allowed_ips,json=allowedIps,proto3" json:"allowed_ips,omitempty"`
+	RateLimit                  int32                  `protobuf:"varint,12,opt,name=rate_limit,json=rateLimit,proto3" json:"rate_limit,omitempty"`
+	EnforceSigning             bool                   `protobuf:"varint,13,opt,name=enforce_signing,json=enforceSigning,proto3" json:"enforce_signing,omitempty"`
+	AllowedSignatureAlgorithms []string               `protobuf:"bytes,14,rep,name=allowed_signature_algorithms,json=allowedSignatureAlgorithms,proto3" json:"allowed_signature_algorithms,omitempty"`
+	EnforceMutualTls           bool                   `protobuf:"varint,15,opt,name=enforce_mutual_tls,json=enforceMutualTls,proto3" json:"enforce_mutual_tls,omitempty"`
+	AlertEmails                []string               `protobuf:"bytes,16,rep,name=alert_emails,json=alertEmails,proto3" json:"alert_emails,omitempty"`
+	AlertOnQuotaThreshold      bool                   `protobuf:"varint,17,opt,name=alert_on_quota_threshold,json=alertOnQuotaThreshold,proto3" json:"alert_on_quota_threshold,omitempty"`
+	QuotaAlertThreshold        float32                `protobuf:"fixed32,18,opt,name=quota_alert_threshold,json=quotaAlertThreshold,proto3" json:"quota_alert_threshold,omitempty"`
+}
+
+func (x *CreateAPIKeyRequest) Reset() {
+	*x = CreateAPIKeyRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[80]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateAPIKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAPIKeyRequest) ProtoMessage() {}
+
+func (x *CreateAPIKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[80]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAPIKeyRequest.ProtoReflect.Descriptor instead.
+func (*CreateAPIKeyRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{80}
+}
+
+func (x *CreateAPIKeyRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+func (x *CreateAPIKeyRequest) GetWorkspaceId() uint64 {
+	if x != nil {
+		return x.WorkspaceId
+	}
+	return 0
+}
+
+func (x *CreateAPIKeyRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *CreateAPIKeyRequest) GetAccountId() uint64 {
+	if x != nil {
+		return x.AccountId
+	}
+	return 0
+}
+
+func (x *CreateAPIKeyRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateAPIKeyRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *CreateAPIKeyRequest) GetScopes() []string {
+	if x != nil {
+		return x.Scopes
+	}
+	return nil
+}
+
+func (x *CreateAPIKeyRequest) GetExpiresAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return nil
+}
+
+func (x *CreateAPIKeyRequest) GetMaxUses() int32 {
+	if x != nil {
+		return x.MaxUses
+	}
+	return 0
+}
+
+func (x *CreateAPIKeyRequest) GetAllowedIps() []string {
+	if x != nil {
+		return x.AllowedIps
+	}
+	return nil
+}
+
+func (x *CreateAPIKeyRequest) GetRateLimit() int32 {
+	if x != nil {
+		return x.RateLimit
+	}
+	return 0
+}
+
+func (x *CreateAPIKeyRequest) GetEnforceSigning() bool {
+	if x != nil {
+		return x.EnforceSigning
+	}
+	return false
+}
+
+func (x *CreateAPIKeyRequest) GetAllowedSignatureAlgorithms() []string {
+	if x != nil {
+		return x.AllowedSignatureAlgorithms
+	}
+	return nil
+}
+
+func (x *CreateAPIKeyRequest) GetEnforceMutualTls() bool {
+	if x != nil {
+		return x.EnforceMutualTls
+	}
+	return false
+}
+
+func (x *CreateAPIKeyRequest) GetAlertEmails() []string {
+	if x != nil {
+		return x.AlertEmails
+	}
+	return nil
+}
+
+func (x *CreateAPIKeyRequest) GetAlertOnQuotaThreshold() bool {
+	if x != nil {
+		return x.AlertOnQuotaThreshold
+	}
+	return false
+}
+
+func (x *CreateAPIKeyRequest) GetQuotaAlertThreshold() float32 {
+	if x != nil {
+		return x.QuotaAlertThreshold
+	}
+	return 0
+}
+
+type CreateAPIKeyResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ApiKey   *APIKey `protobuf:"bytes,1,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+	KeyValue string  `protobuf:"bytes,2,opt,name=key_value,json=keyValue,proto3" json:"key_value,omitempty"` // The actual API key value - only returned on creation
+}
+
+func (x *CreateAPIKeyResponse) Reset() {
+	*x = CreateAPIKeyResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[81]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateAPIKeyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateAPIKeyResponse) ProtoMessage() {}
+
+func (x *CreateAPIKeyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[81]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateAPIKeyResponse.ProtoReflect.Descriptor instead.
+func (*CreateAPIKeyResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{81}
+}
+
+func (x *CreateAPIKeyResponse) GetApiKey() *APIKey {
+	if x != nil {
+		return x.ApiKey
+	}
+	return nil
+}
+
+func (x *CreateAPIKeyResponse) GetKeyValue() string {
+	if x != nil {
+		return x.KeyValue
+	}
+	return ""
+}
+
+type GetAPIKeyRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OrganizationId uint64 `protobuf:"varint,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	TenantId       uint64 `protobuf:"varint,2,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	AccountId      uint64 `protobuf:"varint,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	WorkspaceId    uint64 `protobuf:"varint,4,opt,name=workspace_id,json=workspaceId,proto3" json:"workspace_id,omitempty"`
+	KeyId          uint64 `protobuf:"varint,5,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+}
+
+func (x *GetAPIKeyRequest) Reset() {
+	*x = GetAPIKeyRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[82]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetAPIKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAPIKeyRequest) ProtoMessage() {}
+
+func (x *GetAPIKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[82]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAPIKeyRequest.ProtoReflect.Descriptor instead.
+func (*GetAPIKeyRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{82}
+}
+
+func (x *GetAPIKeyRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+func (x *GetAPIKeyRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *GetAPIKeyRequest) GetAccountId() uint64 {
+	if x != nil {
+		return x.AccountId
+	}
+	return 0
+}
+
+func (x *GetAPIKeyRequest) GetWorkspaceId() uint64 {
+	if x != nil {
+		return x.WorkspaceId
+	}
+	return 0
+}
+
+func (x *GetAPIKeyRequest) GetKeyId() uint64 {
+	if x != nil {
+		return x.KeyId
+	}
+	return 0
+}
+
+type GetAPIKeyResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ApiKey *APIKey `protobuf:"bytes,1,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+}
+
+func (x *GetAPIKeyResponse) Reset() {
+	*x = GetAPIKeyResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[83]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetAPIKeyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAPIKeyResponse) ProtoMessage() {}
+
+func (x *GetAPIKeyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[83]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAPIKeyResponse.ProtoReflect.Descriptor instead.
+func (*GetAPIKeyResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{83}
+}
+
+func (x *GetAPIKeyResponse) GetApiKey() *APIKey {
+	if x != nil {
+		return x.ApiKey
+	}
+	return nil
+}
+
+type UpdateAPIKeyRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ApiKey *APIKey `protobuf:"bytes,1,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+}
+
+func (x *UpdateAPIKeyRequest) Reset() {
+	*x = UpdateAPIKeyRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[84]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateAPIKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAPIKeyRequest) ProtoMessage() {}
+
+func (x *UpdateAPIKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[84]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAPIKeyRequest.ProtoReflect.Descriptor instead.
+func (*UpdateAPIKeyRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{84}
+}
+
+func (x *UpdateAPIKeyRequest) GetApiKey() *APIKey {
+	if x != nil {
+		return x.ApiKey
+	}
+	return nil
+}
+
+type UpdateAPIKeyResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ApiKey *APIKey `protobuf:"bytes,1,opt,name=api_key,json=apiKey,proto3" json:"api_key,omitempty"`
+}
+
+func (x *UpdateAPIKeyResponse) Reset() {
+	*x = UpdateAPIKeyResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[85]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateAPIKeyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateAPIKeyResponse) ProtoMessage() {}
+
+func (x *UpdateAPIKeyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[85]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateAPIKeyResponse.ProtoReflect.Descriptor instead.
+func (*UpdateAPIKeyResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{85}
+}
+
+func (x *UpdateAPIKeyResponse) GetApiKey() *APIKey {
+	if x != nil {
+		return x.ApiKey
+	}
+	return nil
+}
+
+type DeleteAPIKeyRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OrganizationId uint64 `protobuf:"varint,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	WorkspaceId    uint64 `protobuf:"varint,2,opt,name=workspace_id,json=workspaceId,proto3" json:"workspace_id,omitempty"`
+	TenantId       uint64 `protobuf:"varint,3,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	AccountId      uint64 `protobuf:"varint,4,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	KeyId          uint64 `protobuf:"varint,5,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+}
+
+func (x *DeleteAPIKeyRequest) Reset() {
+	*x = DeleteAPIKeyRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[86]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteAPIKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAPIKeyRequest) ProtoMessage() {}
+
+func (x *DeleteAPIKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[86]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAPIKeyRequest.ProtoReflect.Descriptor instead.
+func (*DeleteAPIKeyRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{86}
+}
+
+func (x *DeleteAPIKeyRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+func (x *DeleteAPIKeyRequest) GetWorkspaceId() uint64 {
+	if x != nil {
+		return x.WorkspaceId
+	}
+	return 0
+}
+
+func (x *DeleteAPIKeyRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *DeleteAPIKeyRequest) GetAccountId() uint64 {
+	if x != nil {
+		return x.AccountId
+	}
+	return 0
+}
+
+func (x *DeleteAPIKeyRequest) GetKeyId() uint64 {
+	if x != nil {
+		return x.KeyId
+	}
+	return 0
+}
+
+type DeleteAPIKeyResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success bool `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+}
+
+func (x *DeleteAPIKeyResponse) Reset() {
+	*x = DeleteAPIKeyResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[87]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteAPIKeyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAPIKeyResponse) ProtoMessage() {}
+
+func (x *DeleteAPIKeyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[87]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAPIKeyResponse.ProtoReflect.Descriptor instead.
+func (*DeleteAPIKeyResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{87}
+}
+
+func (x *DeleteAPIKeyResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+type ListAPIKeysRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OrganizationId uint64 `protobuf:"varint,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	TenantId       uint64 `protobuf:"varint,2,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	AccountId      uint64 `protobuf:"varint,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	WorkspaceId    uint64 `protobuf:"varint,4,opt,name=workspace_id,json=workspaceId,proto3" json:"workspace_id,omitempty"`
+	PageSize       int32  `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageNumber     int32  `protobuf:"varint,6,opt,name=page_number,json=pageNumber,proto3" json:"page_number,omitempty"`
+	Status         string `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
+	SortDesc       bool   `protobuf:"varint,9,opt,name=sort_desc,json=sortDesc,proto3" json:"sort_desc,omitempty"`
+	Search         string `protobuf:"bytes,10,opt,name=search,proto3" json:"search,omitempty"`
+}
+
+func (x *ListAPIKeysRequest) Reset() {
+	*x = ListAPIKeysRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[88]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListAPIKeysRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAPIKeysRequest) ProtoMessage() {}
+
+func (x *ListAPIKeysRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[88]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAPIKeysRequest.ProtoReflect.Descriptor instead.
+func (*ListAPIKeysRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{88}
+}
+
+func (x *ListAPIKeysRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+func (x *ListAPIKeysRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *ListAPIKeysRequest) GetAccountId() uint64 {
+	if x != nil {
+		return x.AccountId
+	}
+	return 0
+}
+
+func (x *ListAPIKeysRequest) GetWorkspaceId() uint64 {
+	if x != nil {
+		return x.WorkspaceId
+	}
+	return 0
+}
+
+func (x *ListAPIKeysRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListAPIKeysRequest) GetPageNumber() int32 {
+	if x != nil {
+		return x.PageNumber
+	}
+	return 0
+}
+
+func (x *ListAPIKeysRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ListAPIKeysRequest) GetSortDesc() bool {
+	if x != nil {
+		return x.SortDesc
+	}
+	return false
+}
+
+func (x *ListAPIKeysRequest) GetSearch() string {
+	if x != nil {
+		return x.Search
+	}
+	return ""
+}
+
+type ListAPIKeysResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ApiKeys        []*APIKey `protobuf:"bytes,1,rep,name=api_keys,json=apiKeys,proto3" json:"api_keys,omitempty"`
+	NextPageNumber int32     `protobuf:"varint,2,opt,name=next_page_number,json=nextPageNumber,proto3" json:"next_page_number,omitempty"`
+	TotalCount     int32     `protobuf:"varint,3,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+}
+
+func (x *ListAPIKeysResponse) Reset() {
+	*x = ListAPIKeysResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[89]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListAPIKeysResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAPIKeysResponse) ProtoMessage() {}
+
+func (x *ListAPIKeysResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[89]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAPIKeysResponse.ProtoReflect.Descriptor instead.
+func (*ListAPIKeysResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{89}
+}
+
+func (x *ListAPIKeysResponse) GetApiKeys() []*APIKey {
+	if x != nil {
+		return x.ApiKeys
+	}
+	return nil
+}
+
+func (x *ListAPIKeysResponse) GetNextPageNumber() int32 {
+	if x != nil {
+		return x.NextPageNumber
+	}
+	return 0
+}
+
+func (x *ListAPIKeysResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+type RotateAPIKeyRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OrganizationId uint64 `protobuf:"varint,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	TenantId       uint64 `protobuf:"varint,2,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	AccountId      uint64 `protobuf:"varint,3,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	WorkspaceId    uint64 `protobuf:"varint,4,opt,name=workspace_id,json=workspaceId,proto3" json:"workspace_id,omitempty"`
+	KeyId          uint64 `protobuf:"varint,5,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+}
+
+func (x *RotateAPIKeyRequest) Reset() {
+	*x = RotateAPIKeyRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[90]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RotateAPIKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RotateAPIKeyRequest) ProtoMessage() {}
+
+func (x *RotateAPIKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[90]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RotateAPIKeyRequest.ProtoReflect.Descriptor instead.
+func (*RotateAPIKeyRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{90}
+}
+
+func (x *RotateAPIKeyRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+func (x *RotateAPIKeyRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *RotateAPIKeyRequest) GetAccountId() uint64 {
+	if x != nil {
+		return x.AccountId
+	}
+	return 0
+}
+
+func (x *RotateAPIKeyRequest) GetWorkspaceId() uint64 {
+	if x != nil {
+		return x.WorkspaceId
+	}
+	return 0
+}
+
+func (x *RotateAPIKeyRequest) GetKeyId() uint64 {
+	if x != nil {
+		return x.KeyId
+	}
+	return 0
+}
+
+type RotateAPIKeyResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	NewApiKey    *APIKey                `protobuf:"bytes,1,opt,name=new_api_key,json=newApiKey,proto3" json:"new_api_key,omitempty"`
+	NewKeyValue  string                 `protobuf:"bytes,2,opt,name=new_key_value,json=newKeyValue,proto3" json:"new_key_value,omitempty"`
+	OldKeyExpiry *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=old_key_expiry,json=oldKeyExpiry,proto3" json:"old_key_expiry,omitempty"`
+}
+
+func (x *RotateAPIKeyResponse) Reset() {
+	*x = RotateAPIKeyResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[91]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RotateAPIKeyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RotateAPIKeyResponse) ProtoMessage() {}
+
+func (x *RotateAPIKeyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[91]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RotateAPIKeyResponse.ProtoReflect.Descriptor instead.
+func (*RotateAPIKeyResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{91}
+}
+
+func (x *RotateAPIKeyResponse) GetNewApiKey() *APIKey {
+	if x != nil {
+		return x.NewApiKey
+	}
+	return nil
+}
+
+func (x *RotateAPIKeyResponse) GetNewKeyValue() string {
+	if x != nil {
+		return x.NewKeyValue
+	}
+	return ""
+}
+
+func (x *RotateAPIKeyResponse) GetOldKeyExpiry() *timestamppb.Timestamp {
+	if x != nil {
+		return x.OldKeyExpiry
+	}
+	return nil
+}
+
+type ListLeadsRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Context identifiers
+	OrganizationId uint64 `protobuf:"varint,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	WorkspaceId    uint64 `protobuf:"varint,2,opt,name=workspace_id,json=workspaceId,proto3" json:"workspace_id,omitempty"`
+	TenantId       uint64 `protobuf:"varint,3,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	AccountId      uint64 `protobuf:"varint,4,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	// Pagination
+	PageSize   int32 `protobuf:"varint,6,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageNumber int32 `protobuf:"varint,7,opt,name=page_number,json=pageNumber,proto3" json:"page_number,omitempty"`
+}
+
+func (x *ListLeadsRequest) Reset() {
+	*x = ListLeadsRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[92]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListLeadsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListLeadsRequest) ProtoMessage() {}
+
+func (x *ListLeadsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[92]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListLeadsRequest.ProtoReflect.Descriptor instead.
+func (*ListLeadsRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{92}
+}
+
+func (x *ListLeadsRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+func (x *ListLeadsRequest) GetWorkspaceId() uint64 {
+	if x != nil {
+		return x.WorkspaceId
+	}
+	return 0
+}
+
+func (x *ListLeadsRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *ListLeadsRequest) GetAccountId() uint64 {
+	if x != nil {
+		return x.AccountId
+	}
+	return 0
+}
+
+func (x *ListLeadsRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListLeadsRequest) GetPageNumber() int32 {
+	if x != nil {
+		return x.PageNumber
+	}
+	return 0
+}
+
+type ListLeadsResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Leads          []*Lead `protobuf:"bytes,1,rep,name=leads,proto3" json:"leads,omitempty"`
+	TotalCount     int32   `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+	NextPageNumber int32   `protobuf:"varint,3,opt,name=next_page_number,json=nextPageNumber,proto3" json:"next_page_number,omitempty"`
+}
+
+func (x *ListLeadsResponse) Reset() {
+	*x = ListLeadsResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[93]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListLeadsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListLeadsResponse) ProtoMessage() {}
+
+func (x *ListLeadsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[93]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListLeadsResponse.ProtoReflect.Descriptor instead.
+func (*ListLeadsResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{93}
+}
+
+func (x *ListLeadsResponse) GetLeads() []*Lead {
+	if x != nil {
+		return x.Leads
+	}
+	return nil
+}
+
+func (x *ListLeadsResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
+func (x *ListLeadsResponse) GetNextPageNumber() int32 {
+	if x != nil {
+		return x.NextPageNumber
+	}
+	return 0
+}
+
+type GetLeadRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OrganizationId uint64 `protobuf:"varint,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	WorkspaceId    uint64 `protobuf:"varint,2,opt,name=workspace_id,json=workspaceId,proto3" json:"workspace_id,omitempty"`
+	TenantId       uint64 `protobuf:"varint,3,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	AccountId      uint64 `protobuf:"varint,4,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	LeadId         uint64 `protobuf:"varint,5,opt,name=lead_id,json=leadId,proto3" json:"lead_id,omitempty"`
+}
+
+func (x *GetLeadRequest) Reset() {
+	*x = GetLeadRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[94]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetLeadRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLeadRequest) ProtoMessage() {}
+
+func (x *GetLeadRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[94]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLeadRequest.ProtoReflect.Descriptor instead.
+func (*GetLeadRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{94}
+}
+
+func (x *GetLeadRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+func (x *GetLeadRequest) GetWorkspaceId() uint64 {
+	if x != nil {
+		return x.WorkspaceId
+	}
+	return 0
+}
+
+func (x *GetLeadRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *GetLeadRequest) GetAccountId() uint64 {
+	if x != nil {
+		return x.AccountId
+	}
+	return 0
+}
+
+func (x *GetLeadRequest) GetLeadId() uint64 {
+	if x != nil {
+		return x.LeadId
+	}
+	return 0
+}
+
+type GetLeadResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Lead *Lead `protobuf:"bytes,1,opt,name=lead,proto3" json:"lead,omitempty"`
+}
+
+func (x *GetLeadResponse) Reset() {
+	*x = GetLeadResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[95]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetLeadResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLeadResponse) ProtoMessage() {}
+
+func (x *GetLeadResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[95]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLeadResponse.ProtoReflect.Descriptor instead.
+func (*GetLeadResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{95}
+}
+
+func (x *GetLeadResponse) GetLead() *Lead {
+	if x != nil {
+		return x.Lead
+	}
+	return nil
+}
+
+type CreateWebhookRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OrganizationId uint64         `protobuf:"varint,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	WorkspaceId    uint64         `protobuf:"varint,2,opt,name=workspace_id,json=workspaceId,proto3" json:"workspace_id,omitempty"`
+	TenantId       uint64         `protobuf:"varint,3,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	AccountId      uint64         `protobuf:"varint,4,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	Webhook        *WebhookConfig `protobuf:"bytes,5,opt,name=webhook,proto3" json:"webhook,omitempty"`
+}
+
+func (x *CreateWebhookRequest) Reset() {
+	*x = CreateWebhookRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[96]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateWebhookRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateWebhookRequest) ProtoMessage() {}
+
+func (x *CreateWebhookRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[96]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateWebhookRequest.ProtoReflect.Descriptor instead.
+func (*CreateWebhookRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{96}
+}
+
+func (x *CreateWebhookRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+func (x *CreateWebhookRequest) GetWorkspaceId() uint64 {
+	if x != nil {
+		return x.WorkspaceId
+	}
+	return 0
+}
+
+func (x *CreateWebhookRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *CreateWebhookRequest) GetAccountId() uint64 {
+	if x != nil {
+		return x.AccountId
+	}
+	return 0
+}
+
+func (x *CreateWebhookRequest) GetWebhook() *WebhookConfig {
+	if x != nil {
+		return x.Webhook
+	}
+	return nil
+}
+
+type CreateWebhookResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Webhook *WebhookConfig `protobuf:"bytes,1,opt,name=webhook,proto3" json:"webhook,omitempty"`
+}
+
+func (x *CreateWebhookResponse) Reset() {
+	*x = CreateWebhookResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[97]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateWebhookResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateWebhookResponse) ProtoMessage() {}
+
+func (x *CreateWebhookResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[97]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateWebhookResponse.ProtoReflect.Descriptor instead.
+func (*CreateWebhookResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{97}
+}
+
+func (x *CreateWebhookResponse) GetWebhook() *WebhookConfig {
+	if x != nil {
+		return x.Webhook
+	}
+	return nil
+}
+
+type GetWebhookRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OrganizationId uint64 `protobuf:"varint,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	WorkspaceId    uint64 `protobuf:"varint,2,opt,name=workspace_id,json=workspaceId,proto3" json:"workspace_id,omitempty"`
+	TenantId       uint64 `protobuf:"varint,3,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	AccountId      uint64 `protobuf:"varint,4,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	WebhookId      uint64 `protobuf:"varint,5,opt,name=webhook_id,json=webhookId,proto3" json:"webhook_id,omitempty"`
+}
+
+func (x *GetWebhookRequest) Reset() {
+	*x = GetWebhookRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[98]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetWebhookRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetWebhookRequest) ProtoMessage() {}
+
+func (x *GetWebhookRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[98]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetWebhookRequest.ProtoReflect.Descriptor instead.
+func (*GetWebhookRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{98}
+}
+
+func (x *GetWebhookRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+func (x *GetWebhookRequest) GetWorkspaceId() uint64 {
+	if x != nil {
+		return x.WorkspaceId
+	}
+	return 0
+}
+
+func (x *GetWebhookRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *GetWebhookRequest) GetAccountId() uint64 {
+	if x != nil {
+		return x.AccountId
+	}
+	return 0
+}
+
+func (x *GetWebhookRequest) GetWebhookId() uint64 {
+	if x != nil {
+		return x.WebhookId
+	}
+	return 0
+}
+
+type GetWebhookResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Webhook *WebhookConfig `protobuf:"bytes,1,opt,name=webhook,proto3" json:"webhook,omitempty"`
+}
+
+func (x *GetWebhookResponse) Reset() {
+	*x = GetWebhookResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[99]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetWebhookResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetWebhookResponse) ProtoMessage() {}
+
+func (x *GetWebhookResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[99]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetWebhookResponse.ProtoReflect.Descriptor instead.
+func (*GetWebhookResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{99}
+}
+
+func (x *GetWebhookResponse) GetWebhook() *WebhookConfig {
+	if x != nil {
+		return x.Webhook
+	}
+	return nil
+}
+
+type UpdateWebhookRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Webhook *WebhookConfig `protobuf:"bytes,1,opt,name=webhook,proto3" json:"webhook,omitempty"`
+}
+
+func (x *UpdateWebhookRequest) Reset() {
+	*x = UpdateWebhookRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[100]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateWebhookRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateWebhookRequest) ProtoMessage() {}
+
+func (x *UpdateWebhookRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[100]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateWebhookRequest.ProtoReflect.Descriptor instead.
+func (*UpdateWebhookRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{100}
+}
+
+func (x *UpdateWebhookRequest) GetWebhook() *WebhookConfig {
+	if x != nil {
+		return x.Webhook
+	}
+	return nil
+}
+
+type UpdateWebhookResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Webhook *WebhookConfig `protobuf:"bytes,1,opt,name=webhook,proto3" json:"webhook,omitempty"`
+}
+
+func (x *UpdateWebhookResponse) Reset() {
+	*x = UpdateWebhookResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[101]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateWebhookResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateWebhookResponse) ProtoMessage() {}
+
+func (x *UpdateWebhookResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[101]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateWebhookResponse.ProtoReflect.Descriptor instead.
+func (*UpdateWebhookResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{101}
+}
+
+func (x *UpdateWebhookResponse) GetWebhook() *WebhookConfig {
+	if x != nil {
+		return x.Webhook
+	}
+	return nil
+}
+
+type DeleteWebhookRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OrganizationId uint64 `protobuf:"varint,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	WorkspaceId    uint64 `protobuf:"varint,2,opt,name=workspace_id,json=workspaceId,proto3" json:"workspace_id,omitempty"`
+	TenantId       uint64 `protobuf:"varint,3,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	AccountId      uint64 `protobuf:"varint,4,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	WebhookId      uint64 `protobuf:"varint,5,opt,name=webhook_id,json=webhookId,proto3" json:"webhook_id,omitempty"`
+}
+
+func (x *DeleteWebhookRequest) Reset() {
+	*x = DeleteWebhookRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[102]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteWebhookRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteWebhookRequest) ProtoMessage() {}
+
+func (x *DeleteWebhookRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[102]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteWebhookRequest.ProtoReflect.Descriptor instead.
+func (*DeleteWebhookRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{102}
+}
+
+func (x *DeleteWebhookRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+func (x *DeleteWebhookRequest) GetWorkspaceId() uint64 {
+	if x != nil {
+		return x.WorkspaceId
+	}
+	return 0
+}
+
+func (x *DeleteWebhookRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *DeleteWebhookRequest) GetAccountId() uint64 {
+	if x != nil {
+		return x.AccountId
+	}
+	return 0
+}
+
+func (x *DeleteWebhookRequest) GetWebhookId() uint64 {
+	if x != nil {
+		return x.WebhookId
+	}
+	return 0
+}
+
+type DeleteWebhookResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success bool `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+}
+
+func (x *DeleteWebhookResponse) Reset() {
+	*x = DeleteWebhookResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[103]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteWebhookResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteWebhookResponse) ProtoMessage() {}
+
+func (x *DeleteWebhookResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[103]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteWebhookResponse.ProtoReflect.Descriptor instead.
+func (*DeleteWebhookResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{103}
+}
+
+func (x *DeleteWebhookResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+type ListWebhooksRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	OrganizationId uint64 `protobuf:"varint,1,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
+	WorkspaceId    uint64 `protobuf:"varint,2,opt,name=workspace_id,json=workspaceId,proto3" json:"workspace_id,omitempty"`
+	TenantId       uint64 `protobuf:"varint,3,opt,name=tenant_id,json=tenantId,proto3" json:"tenant_id,omitempty"`
+	AccountId      uint64 `protobuf:"varint,4,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
+	PageSize       int32  `protobuf:"varint,5,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageNumber     int32  `protobuf:"varint,6,opt,name=page_number,json=pageNumber,proto3" json:"page_number,omitempty"`
+	Status         string `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
+	Search         string `protobuf:"bytes,9,opt,name=search,proto3" json:"search,omitempty"`
+}
+
+func (x *ListWebhooksRequest) Reset() {
+	*x = ListWebhooksRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[104]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListWebhooksRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListWebhooksRequest) ProtoMessage() {}
+
+func (x *ListWebhooksRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[104]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListWebhooksRequest.ProtoReflect.Descriptor instead.
+func (*ListWebhooksRequest) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{104}
+}
+
+func (x *ListWebhooksRequest) GetOrganizationId() uint64 {
+	if x != nil {
+		return x.OrganizationId
+	}
+	return 0
+}
+
+func (x *ListWebhooksRequest) GetWorkspaceId() uint64 {
+	if x != nil {
+		return x.WorkspaceId
+	}
+	return 0
+}
+
+func (x *ListWebhooksRequest) GetTenantId() uint64 {
+	if x != nil {
+		return x.TenantId
+	}
+	return 0
+}
+
+func (x *ListWebhooksRequest) GetAccountId() uint64 {
+	if x != nil {
+		return x.AccountId
+	}
+	return 0
+}
+
+func (x *ListWebhooksRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListWebhooksRequest) GetPageNumber() int32 {
+	if x != nil {
+		return x.PageNumber
+	}
+	return 0
+}
+
+func (x *ListWebhooksRequest) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *ListWebhooksRequest) GetSearch() string {
+	if x != nil {
+		return x.Search
+	}
+	return ""
+}
+
+type ListWebhooksResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Webhooks       []*WebhookConfig `protobuf:"bytes,1,rep,name=webhooks,proto3" json:"webhooks,omitempty"`
+	NextPageNumber int32            `protobuf:"varint,2,opt,name=next_page_number,json=nextPageNumber,proto3" json:"next_page_number,omitempty"`
+	TotalCount     int32            `protobuf:"varint,3,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
+}
+
+func (x *ListWebhooksResponse) Reset() {
+	*x = ListWebhooksResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[105]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListWebhooksResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListWebhooksResponse) ProtoMessage() {}
+
+func (x *ListWebhooksResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[105]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListWebhooksResponse.ProtoReflect.Descriptor instead.
+func (*ListWebhooksResponse) Descriptor() ([]byte, []int) {
+	return file_lead_scraper_service_v1_request_response_proto_rawDescGZIP(), []int{105}
+}
+
+func (x *ListWebhooksResponse) GetWebhooks() []*WebhookConfig {
+	if x != nil {
+		return x.Webhooks
+	}
+	return nil
+}
+
+func (x *ListWebhooksResponse) GetNextPageNumber() int32 {
+	if x != nil {
+		return x.NextPageNumber
+	}
+	return 0
+}
+
+func (x *ListWebhooksResponse) GetTotalCount() int32 {
+	if x != nil {
+		return x.TotalCount
+	}
+	return 0
+}
+
 type GetWorkspaceAnalyticsResponse_JobSuccessRate struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3844,7 +6368,7 @@ type GetWorkspaceAnalyticsResponse_JobSuccessRate struct {
 func (x *GetWorkspaceAnalyticsResponse_JobSuccessRate) Reset() {
 	*x = GetWorkspaceAnalyticsResponse_JobSuccessRate{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[69]
+		mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[107]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3857,7 +6381,7 @@ func (x *GetWorkspaceAnalyticsResponse_JobSuccessRate) String() string {
 func (*GetWorkspaceAnalyticsResponse_JobSuccessRate) ProtoMessage() {}
 
 func (x *GetWorkspaceAnalyticsResponse_JobSuccessRate) ProtoReflect() protoreflect.Message {
-	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[69]
+	mi := &file_lead_scraper_service_v1_request_response_proto_msgTypes[107]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4444,28 +6968,445 @@ var file_lead_scraper_service_v1_request_response_proto_rawDesc = []byte{
 	0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x43, 0x6f, 0x75, 0x6e, 0x74,
 	0x12, 0x28, 0x0a, 0x10, 0x6e, 0x65, 0x78, 0x74, 0x5f, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x6e, 0x75,
 	0x6d, 0x62, 0x65, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0e, 0x6e, 0x65, 0x78, 0x74,
-	0x50, 0x61, 0x67, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x42, 0xc8, 0x02, 0x0a, 0x1b, 0x63,
-	0x6f, 0x6d, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f,
-	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x42, 0x14, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f,
-	0x50, 0x01, 0x5a, 0x9d, 0x01, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f,
-	0x56, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x45, 0x6e, 0x67, 0x69, 0x6e, 0x65, 0x65, 0x72, 0x69, 0x6e,
-	0x67, 0x2f, 0x76, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75,
-	0x66, 0x2d, 0x64, 0x65, 0x66, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2f, 0x61, 0x70,
-	0x69, 0x2d, 0x64, 0x65, 0x66, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2f, 0x70, 0x6b,
-	0x67, 0x2f, 0x67, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x64, 0x2f, 0x6c, 0x65, 0x61, 0x64,
-	0x2d, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x2d, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
-	0x2f, 0x76, 0x31, 0x2f, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72,
-	0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x76, 0x31, 0x3b, 0x6c, 0x65, 0x61, 0x64,
+	0x50, 0x61, 0x67, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x22, 0xbd, 0x01, 0x0a, 0x19, 0x43,
+	0x72, 0x65, 0x61, 0x74, 0x65, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x41, 0x50, 0x49, 0x4b, 0x65,
+	0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x30, 0x0a, 0x0f, 0x6f, 0x72, 0x67, 0x61,
+	0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0e, 0x6f, 0x72, 0x67, 0x61,
+	0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x24, 0x0a, 0x09, 0x74, 0x65,
+	0x6e, 0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa,
+	0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x08, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x49, 0x64,
+	0x12, 0x48, 0x0a, 0x07, 0x61, 0x70, 0x69, 0x5f, 0x6b, 0x65, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x25, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72,
+	0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x65, 0x6e, 0x61,
+	0x6e, 0x74, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x42, 0x08, 0xfa, 0x42, 0x05, 0x8a, 0x01, 0x02,
+	0x10, 0x01, 0x52, 0x06, 0x61, 0x70, 0x69, 0x4b, 0x65, 0x79, 0x22, 0x50, 0x0a, 0x1a, 0x43, 0x72,
+	0x65, 0x61, 0x74, 0x65, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x15, 0x0a, 0x06, 0x6b, 0x65, 0x79, 0x5f,
+	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05, 0x6b, 0x65, 0x79, 0x49, 0x64, 0x12,
+	0x1b, 0x0a, 0x09, 0x6b, 0x65, 0x79, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x08, 0x6b, 0x65, 0x79, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x90, 0x01, 0x0a,
+	0x16, 0x47, 0x65, 0x74, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x30, 0x0a, 0x0f, 0x6f, 0x72, 0x67, 0x61, 0x6e,
+	0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04,
+	0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0e, 0x6f, 0x72, 0x67, 0x61, 0x6e,
+	0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x24, 0x0a, 0x09, 0x74, 0x65, 0x6e,
+	0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42,
+	0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x08, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x12,
+	0x1e, 0x0a, 0x06, 0x6b, 0x65, 0x79, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x42,
+	0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x05, 0x6b, 0x65, 0x79, 0x49, 0x64, 0x22,
+	0x59, 0x0a, 0x17, 0x47, 0x65, 0x74, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x41, 0x50, 0x49, 0x4b,
+	0x65, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3e, 0x0a, 0x07, 0x61, 0x70,
+	0x69, 0x5f, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x25, 0x2e, 0x6c, 0x65,
+	0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69,
+	0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x41, 0x50, 0x49, 0x4b,
+	0x65, 0x79, 0x52, 0x06, 0x61, 0x70, 0x69, 0x4b, 0x65, 0x79, 0x22, 0x65, 0x0a, 0x19, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x48, 0x0a, 0x07, 0x61, 0x70, 0x69, 0x5f, 0x6b,
+	0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x25, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f,
+	0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e,
+	0x76, 0x31, 0x2e, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x42,
+	0x08, 0xfa, 0x42, 0x05, 0x8a, 0x01, 0x02, 0x10, 0x01, 0x52, 0x06, 0x61, 0x70, 0x69, 0x4b, 0x65,
+	0x79, 0x22, 0x5c, 0x0a, 0x1a, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x65, 0x6e, 0x61, 0x6e,
+	0x74, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x3e, 0x0a, 0x07, 0x61, 0x70, 0x69, 0x5f, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x25, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f,
+	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x65, 0x6e, 0x61, 0x6e,
+	0x74, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x52, 0x06, 0x61, 0x70, 0x69, 0x4b, 0x65, 0x79, 0x22,
+	0x93, 0x01, 0x0a, 0x19, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74,
+	0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x30, 0x0a,
+	0x0f, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52,
+	0x0e, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12,
+	0x24, 0x0a, 0x09, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x08, 0x74, 0x65, 0x6e,
+	0x61, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x1e, 0x0a, 0x06, 0x6b, 0x65, 0x79, 0x5f, 0x69, 0x64, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x05,
+	0x6b, 0x65, 0x79, 0x49, 0x64, 0x22, 0x36, 0x0a, 0x1a, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x54,
+	0x65, 0x6e, 0x61, 0x6e, 0x74, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x22, 0xd3, 0x01,
+	0x0a, 0x18, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x41, 0x50, 0x49, 0x4b,
+	0x65, 0x79, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x30, 0x0a, 0x0f, 0x6f, 0x72,
+	0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0e, 0x6f, 0x72,
+	0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x24, 0x0a, 0x09,
+	0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x42,
+	0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x08, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74,
+	0x49, 0x64, 0x12, 0x26, 0x0a, 0x09, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x73, 0x69, 0x7a, 0x65, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x05, 0x42, 0x09, 0xfa, 0x42, 0x06, 0x1a, 0x04, 0x18, 0x64, 0x28, 0x01,
+	0x52, 0x08, 0x70, 0x61, 0x67, 0x65, 0x53, 0x69, 0x7a, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x70, 0x61,
+	0x67, 0x65, 0x5f, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x0a, 0x70, 0x61, 0x67, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x16, 0x0a, 0x06, 0x73,
+	0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61,
+	0x74, 0x75, 0x73, 0x22, 0xa8, 0x01, 0x0a, 0x19, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x65, 0x6e, 0x61,
+	0x6e, 0x74, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x12, 0x40, 0x0a, 0x08, 0x61, 0x70, 0x69, 0x5f, 0x6b, 0x65, 0x79, 0x73, 0x18, 0x01, 0x20,
+	0x03, 0x28, 0x0b, 0x32, 0x25, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70,
+	0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x65,
+	0x6e, 0x61, 0x6e, 0x74, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x52, 0x07, 0x61, 0x70, 0x69, 0x4b,
+	0x65, 0x79, 0x73, 0x12, 0x28, 0x0a, 0x10, 0x6e, 0x65, 0x78, 0x74, 0x5f, 0x70, 0x61, 0x67, 0x65,
+	0x5f, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0e, 0x6e,
+	0x65, 0x78, 0x74, 0x50, 0x61, 0x67, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x1f, 0x0a,
+	0x0b, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x05, 0x52, 0x0a, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x93,
+	0x01, 0x0a, 0x19, 0x52, 0x6f, 0x74, 0x61, 0x74, 0x65, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x41,
+	0x50, 0x49, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x30, 0x0a, 0x0f,
+	0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0e,
+	0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x24,
+	0x0a, 0x09, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x08, 0x74, 0x65, 0x6e, 0x61,
+	0x6e, 0x74, 0x49, 0x64, 0x12, 0x1e, 0x0a, 0x06, 0x6b, 0x65, 0x79, 0x5f, 0x69, 0x64, 0x18, 0x03,
+	0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x05, 0x6b,
+	0x65, 0x79, 0x49, 0x64, 0x22, 0xa1, 0x02, 0x0a, 0x1a, 0x52, 0x6f, 0x74, 0x61, 0x74, 0x65, 0x54,
+	0x65, 0x6e, 0x61, 0x6e, 0x74, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x45, 0x0a, 0x0b, 0x6e, 0x65, 0x77, 0x5f, 0x61, 0x70, 0x69, 0x5f, 0x6b,
+	0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x25, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f,
+	0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e,
+	0x76, 0x31, 0x2e, 0x54, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x52,
+	0x09, 0x6e, 0x65, 0x77, 0x41, 0x70, 0x69, 0x4b, 0x65, 0x79, 0x12, 0x22, 0x0a, 0x0d, 0x6e, 0x65,
+	0x77, 0x5f, 0x6b, 0x65, 0x79, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x0b, 0x6e, 0x65, 0x77, 0x4b, 0x65, 0x79, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x40,
+	0x0a, 0x0e, 0x6f, 0x6c, 0x64, 0x5f, 0x6b, 0x65, 0x79, 0x5f, 0x65, 0x78, 0x70, 0x69, 0x72, 0x79,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61,
+	0x6d, 0x70, 0x52, 0x0c, 0x6f, 0x6c, 0x64, 0x4b, 0x65, 0x79, 0x45, 0x78, 0x70, 0x69, 0x72, 0x79,
+	0x12, 0x24, 0x0a, 0x09, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20,
+	0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x08, 0x74, 0x65,
+	0x6e, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x30, 0x0a, 0x0f, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69,
+	0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x42,
+	0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0e, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69,
+	0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x22, 0xfc, 0x05, 0x0a, 0x13, 0x43, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x30, 0x0a, 0x0f, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02,
+	0x20, 0x00, 0x52, 0x0e, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x49, 0x64, 0x12, 0x2a, 0x0a, 0x0c, 0x77, 0x6f, 0x72, 0x6b, 0x73, 0x70, 0x61, 0x63, 0x65, 0x5f,
+	0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20,
+	0x00, 0x52, 0x0b, 0x77, 0x6f, 0x72, 0x6b, 0x73, 0x70, 0x61, 0x63, 0x65, 0x49, 0x64, 0x12, 0x24,
+	0x0a, 0x09, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x08, 0x74, 0x65, 0x6e, 0x61,
+	0x6e, 0x74, 0x49, 0x64, 0x12, 0x26, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f,
+	0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20,
+	0x00, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x04,
+	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x72,
+	0x02, 0x10, 0x01, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x29, 0x0a, 0x0b, 0x64, 0x65, 0x73,
+	0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x42, 0x07,
+	0xfa, 0x42, 0x04, 0x72, 0x02, 0x10, 0x01, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70,
+	0x74, 0x69, 0x6f, 0x6e, 0x12, 0x20, 0x0a, 0x06, 0x73, 0x63, 0x6f, 0x70, 0x65, 0x73, 0x18, 0x08,
+	0x20, 0x03, 0x28, 0x09, 0x42, 0x08, 0xfa, 0x42, 0x05, 0x92, 0x01, 0x02, 0x08, 0x01, 0x52, 0x06,
+	0x73, 0x63, 0x6f, 0x70, 0x65, 0x73, 0x12, 0x39, 0x0a, 0x0a, 0x65, 0x78, 0x70, 0x69, 0x72, 0x65,
+	0x73, 0x5f, 0x61, 0x74, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f,
+	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d,
+	0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x65, 0x78, 0x70, 0x69, 0x72, 0x65, 0x73, 0x41,
+	0x74, 0x12, 0x22, 0x0a, 0x08, 0x6d, 0x61, 0x78, 0x5f, 0x75, 0x73, 0x65, 0x73, 0x18, 0x0a, 0x20,
+	0x01, 0x28, 0x05, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x1a, 0x02, 0x20, 0x00, 0x52, 0x07, 0x6d, 0x61,
+	0x78, 0x55, 0x73, 0x65, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x61, 0x6c, 0x6c, 0x6f, 0x77, 0x65, 0x64,
+	0x5f, 0x69, 0x70, 0x73, 0x18, 0x0b, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0a, 0x61, 0x6c, 0x6c, 0x6f,
+	0x77, 0x65, 0x64, 0x49, 0x70, 0x73, 0x12, 0x26, 0x0a, 0x0a, 0x72, 0x61, 0x74, 0x65, 0x5f, 0x6c,
+	0x69, 0x6d, 0x69, 0x74, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x05, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x1a,
+	0x02, 0x20, 0x00, 0x52, 0x09, 0x72, 0x61, 0x74, 0x65, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x12, 0x27,
+	0x0a, 0x0f, 0x65, 0x6e, 0x66, 0x6f, 0x72, 0x63, 0x65, 0x5f, 0x73, 0x69, 0x67, 0x6e, 0x69, 0x6e,
+	0x67, 0x18, 0x0d, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0e, 0x65, 0x6e, 0x66, 0x6f, 0x72, 0x63, 0x65,
+	0x53, 0x69, 0x67, 0x6e, 0x69, 0x6e, 0x67, 0x12, 0x40, 0x0a, 0x1c, 0x61, 0x6c, 0x6c, 0x6f, 0x77,
+	0x65, 0x64, 0x5f, 0x73, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x5f, 0x61, 0x6c, 0x67,
+	0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x73, 0x18, 0x0e, 0x20, 0x03, 0x28, 0x09, 0x52, 0x1a, 0x61,
+	0x6c, 0x6c, 0x6f, 0x77, 0x65, 0x64, 0x53, 0x69, 0x67, 0x6e, 0x61, 0x74, 0x75, 0x72, 0x65, 0x41,
+	0x6c, 0x67, 0x6f, 0x72, 0x69, 0x74, 0x68, 0x6d, 0x73, 0x12, 0x2c, 0x0a, 0x12, 0x65, 0x6e, 0x66,
+	0x6f, 0x72, 0x63, 0x65, 0x5f, 0x6d, 0x75, 0x74, 0x75, 0x61, 0x6c, 0x5f, 0x74, 0x6c, 0x73, 0x18,
+	0x0f, 0x20, 0x01, 0x28, 0x08, 0x52, 0x10, 0x65, 0x6e, 0x66, 0x6f, 0x72, 0x63, 0x65, 0x4d, 0x75,
+	0x74, 0x75, 0x61, 0x6c, 0x54, 0x6c, 0x73, 0x12, 0x21, 0x0a, 0x0c, 0x61, 0x6c, 0x65, 0x72, 0x74,
+	0x5f, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x73, 0x18, 0x10, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0b, 0x61,
+	0x6c, 0x65, 0x72, 0x74, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x73, 0x12, 0x37, 0x0a, 0x18, 0x61, 0x6c,
+	0x65, 0x72, 0x74, 0x5f, 0x6f, 0x6e, 0x5f, 0x71, 0x75, 0x6f, 0x74, 0x61, 0x5f, 0x74, 0x68, 0x72,
+	0x65, 0x73, 0x68, 0x6f, 0x6c, 0x64, 0x18, 0x11, 0x20, 0x01, 0x28, 0x08, 0x52, 0x15, 0x61, 0x6c,
+	0x65, 0x72, 0x74, 0x4f, 0x6e, 0x51, 0x75, 0x6f, 0x74, 0x61, 0x54, 0x68, 0x72, 0x65, 0x73, 0x68,
+	0x6f, 0x6c, 0x64, 0x12, 0x32, 0x0a, 0x15, 0x71, 0x75, 0x6f, 0x74, 0x61, 0x5f, 0x61, 0x6c, 0x65,
+	0x72, 0x74, 0x5f, 0x74, 0x68, 0x72, 0x65, 0x73, 0x68, 0x6f, 0x6c, 0x64, 0x18, 0x12, 0x20, 0x01,
+	0x28, 0x02, 0x52, 0x13, 0x71, 0x75, 0x6f, 0x74, 0x61, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x54, 0x68,
+	0x72, 0x65, 0x73, 0x68, 0x6f, 0x6c, 0x64, 0x22, 0x6d, 0x0a, 0x14, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x38, 0x0a, 0x07, 0x61, 0x70, 0x69, 0x5f, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x1f, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f,
+	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x50, 0x49, 0x4b, 0x65,
+	0x79, 0x52, 0x06, 0x61, 0x70, 0x69, 0x4b, 0x65, 0x79, 0x12, 0x1b, 0x0a, 0x09, 0x6b, 0x65, 0x79,
+	0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6b, 0x65,
+	0x79, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x22, 0xde, 0x01, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x41, 0x50,
+	0x49, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x30, 0x0a, 0x0f, 0x6f,
+	0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0e, 0x6f,
+	0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x24, 0x0a,
+	0x09, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04,
+	0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x08, 0x74, 0x65, 0x6e, 0x61, 0x6e,
+	0x74, 0x49, 0x64, 0x12, 0x26, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69,
+	0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00,
+	0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x2a, 0x0a, 0x0c, 0x77,
+	0x6f, 0x72, 0x6b, 0x73, 0x70, 0x61, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0b, 0x77, 0x6f, 0x72, 0x6b,
+	0x73, 0x70, 0x61, 0x63, 0x65, 0x49, 0x64, 0x12, 0x1e, 0x0a, 0x06, 0x6b, 0x65, 0x79, 0x5f, 0x69,
+	0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00,
+	0x52, 0x05, 0x6b, 0x65, 0x79, 0x49, 0x64, 0x22, 0x4d, 0x0a, 0x11, 0x47, 0x65, 0x74, 0x41, 0x50,
+	0x49, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x38, 0x0a, 0x07,
+	0x61, 0x70, 0x69, 0x5f, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e,
+	0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72,
+	0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x52, 0x06,
+	0x61, 0x70, 0x69, 0x4b, 0x65, 0x79, 0x22, 0x59, 0x0a, 0x13, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
+	0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x42, 0x0a,
+	0x07, 0x61, 0x70, 0x69, 0x5f, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f,
+	0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65,
+	0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x42,
+	0x08, 0xfa, 0x42, 0x05, 0x8a, 0x01, 0x02, 0x10, 0x01, 0x52, 0x06, 0x61, 0x70, 0x69, 0x4b, 0x65,
+	0x79, 0x22, 0x50, 0x0a, 0x14, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x41, 0x50, 0x49, 0x4b, 0x65,
+	0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x38, 0x0a, 0x07, 0x61, 0x70, 0x69,
+	0x5f, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x6c, 0x65, 0x61,
+	0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x52, 0x06, 0x61, 0x70, 0x69,
+	0x4b, 0x65, 0x79, 0x22, 0xe1, 0x01, 0x0a, 0x13, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x50,
+	0x49, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x30, 0x0a, 0x0f, 0x6f,
+	0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0e, 0x6f,
+	0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x2a, 0x0a,
+	0x0c, 0x77, 0x6f, 0x72, 0x6b, 0x73, 0x70, 0x61, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0b, 0x77, 0x6f,
+	0x72, 0x6b, 0x73, 0x70, 0x61, 0x63, 0x65, 0x49, 0x64, 0x12, 0x24, 0x0a, 0x09, 0x74, 0x65, 0x6e,
+	0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42,
+	0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x08, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x12,
+	0x26, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20,
+	0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x09, 0x61, 0x63,
+	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x1e, 0x0a, 0x06, 0x6b, 0x65, 0x79, 0x5f, 0x69,
+	0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00,
+	0x52, 0x05, 0x6b, 0x65, 0x79, 0x49, 0x64, 0x22, 0x30, 0x0a, 0x14, 0x44, 0x65, 0x6c, 0x65, 0x74,
+	0x65, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08,
+	0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x22, 0xd6, 0x02, 0x0a, 0x12, 0x4c, 0x69,
+	0x73, 0x74, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x30, 0x0a, 0x0f, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02,
+	0x20, 0x00, 0x52, 0x0e, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x49, 0x64, 0x12, 0x24, 0x0a, 0x09, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x08,
+	0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x26, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42,
+	0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64,
+	0x12, 0x2a, 0x0a, 0x0c, 0x77, 0x6f, 0x72, 0x6b, 0x73, 0x70, 0x61, 0x63, 0x65, 0x5f, 0x69, 0x64,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52,
+	0x0b, 0x77, 0x6f, 0x72, 0x6b, 0x73, 0x70, 0x61, 0x63, 0x65, 0x49, 0x64, 0x12, 0x26, 0x0a, 0x09,
+	0x70, 0x61, 0x67, 0x65, 0x5f, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05, 0x42,
+	0x09, 0xfa, 0x42, 0x06, 0x1a, 0x04, 0x18, 0x64, 0x28, 0x01, 0x52, 0x08, 0x70, 0x61, 0x67, 0x65,
+	0x53, 0x69, 0x7a, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x6e, 0x75, 0x6d,
+	0x62, 0x65, 0x72, 0x18, 0x06, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x65, 0x4e,
+	0x75, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18,
+	0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x1b, 0x0a,
+	0x09, 0x73, 0x6f, 0x72, 0x74, 0x5f, 0x64, 0x65, 0x73, 0x63, 0x18, 0x09, 0x20, 0x01, 0x28, 0x08,
+	0x52, 0x08, 0x73, 0x6f, 0x72, 0x74, 0x44, 0x65, 0x73, 0x63, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x65,
+	0x61, 0x72, 0x63, 0x68, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x65, 0x61, 0x72,
+	0x63, 0x68, 0x22, 0x9c, 0x01, 0x0a, 0x13, 0x4c, 0x69, 0x73, 0x74, 0x41, 0x50, 0x49, 0x4b, 0x65,
+	0x79, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3a, 0x0a, 0x08, 0x61, 0x70,
+	0x69, 0x5f, 0x6b, 0x65, 0x79, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x6c,
+	0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76,
+	0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x52, 0x07, 0x61,
+	0x70, 0x69, 0x4b, 0x65, 0x79, 0x73, 0x12, 0x28, 0x0a, 0x10, 0x6e, 0x65, 0x78, 0x74, 0x5f, 0x70,
+	0x61, 0x67, 0x65, 0x5f, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05,
+	0x52, 0x0e, 0x6e, 0x65, 0x78, 0x74, 0x50, 0x61, 0x67, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72,
+	0x12, 0x1f, 0x0a, 0x0b, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x43, 0x6f, 0x75, 0x6e,
+	0x74, 0x22, 0xe1, 0x01, 0x0a, 0x13, 0x52, 0x6f, 0x74, 0x61, 0x74, 0x65, 0x41, 0x50, 0x49, 0x4b,
+	0x65, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x30, 0x0a, 0x0f, 0x6f, 0x72, 0x67,
+	0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0e, 0x6f, 0x72, 0x67,
+	0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x24, 0x0a, 0x09, 0x74,
+	0x65, 0x6e, 0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07,
+	0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x08, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x49,
+	0x64, 0x12, 0x26, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x09,
+	0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x2a, 0x0a, 0x0c, 0x77, 0x6f, 0x72,
+	0x6b, 0x73, 0x70, 0x61, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x42,
+	0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0b, 0x77, 0x6f, 0x72, 0x6b, 0x73, 0x70,
+	0x61, 0x63, 0x65, 0x49, 0x64, 0x12, 0x1e, 0x0a, 0x06, 0x6b, 0x65, 0x79, 0x5f, 0x69, 0x64, 0x18,
+	0x05, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x05,
+	0x6b, 0x65, 0x79, 0x49, 0x64, 0x22, 0xbd, 0x01, 0x0a, 0x14, 0x52, 0x6f, 0x74, 0x61, 0x74, 0x65,
+	0x41, 0x50, 0x49, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3f,
+	0x0a, 0x0b, 0x6e, 0x65, 0x77, 0x5f, 0x61, 0x70, 0x69, 0x5f, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70,
+	0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x50,
+	0x49, 0x4b, 0x65, 0x79, 0x52, 0x09, 0x6e, 0x65, 0x77, 0x41, 0x70, 0x69, 0x4b, 0x65, 0x79, 0x12,
+	0x22, 0x0a, 0x0d, 0x6e, 0x65, 0x77, 0x5f, 0x6b, 0x65, 0x79, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x6e, 0x65, 0x77, 0x4b, 0x65, 0x79, 0x56, 0x61,
+	0x6c, 0x75, 0x65, 0x12, 0x40, 0x0a, 0x0e, 0x6f, 0x6c, 0x64, 0x5f, 0x6b, 0x65, 0x79, 0x5f, 0x65,
+	0x78, 0x70, 0x69, 0x72, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f,
+	0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69,
+	0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x0c, 0x6f, 0x6c, 0x64, 0x4b, 0x65, 0x79, 0x45,
+	0x78, 0x70, 0x69, 0x72, 0x79, 0x22, 0x87, 0x02, 0x0a, 0x10, 0x4c, 0x69, 0x73, 0x74, 0x4c, 0x65,
+	0x61, 0x64, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x30, 0x0a, 0x0f, 0x6f, 0x72,
+	0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0e, 0x6f, 0x72,
+	0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x2a, 0x0a, 0x0c,
+	0x77, 0x6f, 0x72, 0x6b, 0x73, 0x70, 0x61, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0b, 0x77, 0x6f, 0x72,
+	0x6b, 0x73, 0x70, 0x61, 0x63, 0x65, 0x49, 0x64, 0x12, 0x24, 0x0a, 0x09, 0x74, 0x65, 0x6e, 0x61,
+	0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04,
+	0x32, 0x02, 0x20, 0x00, 0x52, 0x08, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x26,
+	0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01,
+	0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x09, 0x61, 0x63, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x26, 0x0a, 0x09, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x73,
+	0x69, 0x7a, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x05, 0x42, 0x09, 0xfa, 0x42, 0x06, 0x1a, 0x04,
+	0x18, 0x64, 0x28, 0x01, 0x52, 0x08, 0x70, 0x61, 0x67, 0x65, 0x53, 0x69, 0x7a, 0x65, 0x12, 0x1f,
+	0x0a, 0x0b, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x07, 0x20,
+	0x01, 0x28, 0x05, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x22,
+	0x93, 0x01, 0x0a, 0x11, 0x4c, 0x69, 0x73, 0x74, 0x4c, 0x65, 0x61, 0x64, 0x73, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x33, 0x0a, 0x05, 0x6c, 0x65, 0x61, 0x64, 0x73, 0x18, 0x01,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61,
+	0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x4c,
+	0x65, 0x61, 0x64, 0x52, 0x05, 0x6c, 0x65, 0x61, 0x64, 0x73, 0x12, 0x1f, 0x0a, 0x0b, 0x74, 0x6f,
+	0x74, 0x61, 0x6c, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52,
+	0x0a, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x28, 0x0a, 0x10, 0x6e,
+	0x65, 0x78, 0x74, 0x5f, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0e, 0x6e, 0x65, 0x78, 0x74, 0x50, 0x61, 0x67, 0x65, 0x4e,
+	0x75, 0x6d, 0x62, 0x65, 0x72, 0x22, 0xde, 0x01, 0x0a, 0x0e, 0x47, 0x65, 0x74, 0x4c, 0x65, 0x61,
+	0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x30, 0x0a, 0x0f, 0x6f, 0x72, 0x67, 0x61,
+	0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0e, 0x6f, 0x72, 0x67, 0x61,
+	0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x2a, 0x0a, 0x0c, 0x77, 0x6f,
+	0x72, 0x6b, 0x73, 0x70, 0x61, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04,
+	0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0b, 0x77, 0x6f, 0x72, 0x6b, 0x73,
+	0x70, 0x61, 0x63, 0x65, 0x49, 0x64, 0x12, 0x24, 0x0a, 0x09, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74,
+	0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02,
+	0x20, 0x00, 0x52, 0x08, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x26, 0x0a, 0x0a,
+	0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04,
+	0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75,
+	0x6e, 0x74, 0x49, 0x64, 0x12, 0x20, 0x0a, 0x07, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x69, 0x64, 0x18,
+	0x05, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x06,
+	0x6c, 0x65, 0x61, 0x64, 0x49, 0x64, 0x22, 0x44, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x4c, 0x65, 0x61,
+	0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x31, 0x0a, 0x04, 0x6c, 0x65, 0x61,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73,
+	0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76,
+	0x31, 0x2e, 0x4c, 0x65, 0x61, 0x64, 0x52, 0x04, 0x6c, 0x65, 0x61, 0x64, 0x22, 0x8e, 0x02, 0x0a,
+	0x14, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x57, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x30, 0x0a, 0x0f, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07,
+	0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0e, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x2a, 0x0a, 0x0c, 0x77, 0x6f, 0x72, 0x6b, 0x73,
+	0x70, 0x61, 0x63, 0x65, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa,
+	0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x0b, 0x77, 0x6f, 0x72, 0x6b, 0x73, 0x70, 0x61, 0x63,
+	0x65, 0x49, 0x64, 0x12, 0x24, 0x0a, 0x09, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52,
+	0x08, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x26, 0x0a, 0x0a, 0x61, 0x63, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa,
+	0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49,
+	0x64, 0x12, 0x4a, 0x0a, 0x07, 0x77, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x18, 0x05, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x26, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65,
+	0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x57, 0x65, 0x62,
+	0x68, 0x6f, 0x6f, 0x6b, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x42, 0x08, 0xfa, 0x42, 0x05, 0x8a,
+	0x01, 0x02, 0x10, 0x01, 0x52, 0x07, 0x77, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x22, 0x59, 0x0a,
+	0x15, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x57, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x40, 0x0a, 0x07, 0x77, 0x65, 0x62, 0x68, 0x6f, 0x6f,
+	0x6b, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73,
+	0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76,
+	0x31, 0x2e, 0x57, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52,
+	0x07, 0x77, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x22, 0xe7, 0x01, 0x0a, 0x11, 0x47, 0x65, 0x74,
+	0x57, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x30,
+	0x0a, 0x0f, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x5f, 0x69,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00,
+	0x52, 0x0e, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64,
+	0x12, 0x2a, 0x0a, 0x0c, 0x77, 0x6f, 0x72, 0x6b, 0x73, 0x70, 0x61, 0x63, 0x65, 0x5f, 0x69, 0x64,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52,
+	0x0b, 0x77, 0x6f, 0x72, 0x6b, 0x73, 0x70, 0x61, 0x63, 0x65, 0x49, 0x64, 0x12, 0x24, 0x0a, 0x09,
+	0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x04, 0x42,
+	0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x08, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74,
+	0x49, 0x64, 0x12, 0x26, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64,
+	0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52,
+	0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x26, 0x0a, 0x0a, 0x77, 0x65,
+	0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07,
+	0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x09, 0x77, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b,
+	0x49, 0x64, 0x22, 0x56, 0x0a, 0x12, 0x47, 0x65, 0x74, 0x57, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x40, 0x0a, 0x07, 0x77, 0x65, 0x62, 0x68,
+	0x6f, 0x6f, 0x6b, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x6c, 0x65, 0x61, 0x64,
 	0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
-	0x76, 0x31, 0xa2, 0x02, 0x03, 0x4c, 0x58, 0x58, 0xaa, 0x02, 0x15, 0x4c, 0x65, 0x61, 0x64, 0x53,
-	0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x56, 0x31,
-	0xca, 0x02, 0x15, 0x4c, 0x65, 0x61, 0x64, 0x53, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x53, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x21, 0x4c, 0x65, 0x61, 0x64, 0x53,
-	0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5c, 0x56, 0x31,
-	0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x16, 0x4c,
+	0x2e, 0x76, 0x31, 0x2e, 0x57, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x43, 0x6f, 0x6e, 0x66, 0x69,
+	0x67, 0x52, 0x07, 0x77, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x22, 0x62, 0x0a, 0x14, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x57, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x4a, 0x0a, 0x07, 0x77, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70,
+	0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x57, 0x65,
+	0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x42, 0x08, 0xfa, 0x42, 0x05,
+	0x8a, 0x01, 0x02, 0x10, 0x01, 0x52, 0x07, 0x77, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x22, 0x59,
+	0x0a, 0x15, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x57, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x40, 0x0a, 0x07, 0x77, 0x65, 0x62, 0x68, 0x6f,
+	0x6f, 0x6b, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f,
+	0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e,
+	0x76, 0x31, 0x2e, 0x57, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67,
+	0x52, 0x07, 0x77, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x22, 0xea, 0x01, 0x0a, 0x14, 0x44, 0x65,
+	0x6c, 0x65, 0x74, 0x65, 0x57, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x30, 0x0a, 0x0f, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04,
+	0x32, 0x02, 0x20, 0x00, 0x52, 0x0e, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x49, 0x64, 0x12, 0x2a, 0x0a, 0x0c, 0x77, 0x6f, 0x72, 0x6b, 0x73, 0x70, 0x61, 0x63,
+	0x65, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32,
+	0x02, 0x20, 0x00, 0x52, 0x0b, 0x77, 0x6f, 0x72, 0x6b, 0x73, 0x70, 0x61, 0x63, 0x65, 0x49, 0x64,
+	0x12, 0x24, 0x0a, 0x09, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x08, 0x74, 0x65,
+	0x6e, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x26, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
+	0x74, 0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32,
+	0x02, 0x20, 0x00, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x26,
+	0x0a, 0x0a, 0x77, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x5f, 0x69, 0x64, 0x18, 0x05, 0x20, 0x01,
+	0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x09, 0x77, 0x65, 0x62,
+	0x68, 0x6f, 0x6f, 0x6b, 0x49, 0x64, 0x22, 0x31, 0x0a, 0x15, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65,
+	0x57, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08,
+	0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x22, 0xba, 0x02, 0x0a, 0x13, 0x4c, 0x69,
+	0x73, 0x74, 0x57, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x30, 0x0a, 0x0f, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32,
+	0x02, 0x20, 0x00, 0x52, 0x0e, 0x6f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x49, 0x64, 0x12, 0x2a, 0x0a, 0x0c, 0x77, 0x6f, 0x72, 0x6b, 0x73, 0x70, 0x61, 0x63, 0x65,
+	0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02,
+	0x20, 0x00, 0x52, 0x0b, 0x77, 0x6f, 0x72, 0x6b, 0x73, 0x70, 0x61, 0x63, 0x65, 0x49, 0x64, 0x12,
+	0x24, 0x0a, 0x09, 0x74, 0x65, 0x6e, 0x61, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02, 0x20, 0x00, 0x52, 0x08, 0x74, 0x65, 0x6e,
+	0x61, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x26, 0x0a, 0x0a, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
+	0x5f, 0x69, 0x64, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x42, 0x07, 0xfa, 0x42, 0x04, 0x32, 0x02,
+	0x20, 0x00, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x26, 0x0a,
+	0x09, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x73, 0x69, 0x7a, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x05,
+	0x42, 0x09, 0xfa, 0x42, 0x06, 0x1a, 0x04, 0x18, 0x64, 0x28, 0x01, 0x52, 0x08, 0x70, 0x61, 0x67,
+	0x65, 0x53, 0x69, 0x7a, 0x65, 0x12, 0x1f, 0x0a, 0x0b, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x6e, 0x75,
+	0x6d, 0x62, 0x65, 0x72, 0x18, 0x06, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x65,
+	0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x16,
+	0x0a, 0x06, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
+	0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x22, 0xa5, 0x01, 0x0a, 0x14, 0x4c, 0x69, 0x73, 0x74, 0x57,
+	0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x42, 0x0a, 0x08, 0x77, 0x65, 0x62, 0x68, 0x6f, 0x6f, 0x6b, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x26, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72,
+	0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x57, 0x65, 0x62, 0x68,
+	0x6f, 0x6f, 0x6b, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x08, 0x77, 0x65, 0x62, 0x68, 0x6f,
+	0x6f, 0x6b, 0x73, 0x12, 0x28, 0x0a, 0x10, 0x6e, 0x65, 0x78, 0x74, 0x5f, 0x70, 0x61, 0x67, 0x65,
+	0x5f, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0e, 0x6e,
+	0x65, 0x78, 0x74, 0x50, 0x61, 0x67, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x1f, 0x0a,
+	0x0b, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x5f, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x05, 0x52, 0x0a, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x42, 0xc8,
+	0x02, 0x0a, 0x1b, 0x63, 0x6f, 0x6d, 0x2e, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61,
+	0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2e, 0x76, 0x31, 0x42, 0x14,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x50,
+	0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x9d, 0x01, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
+	0x63, 0x6f, 0x6d, 0x2f, 0x56, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x45, 0x6e, 0x67, 0x69, 0x6e, 0x65,
+	0x65, 0x72, 0x69, 0x6e, 0x67, 0x2f, 0x76, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x2d, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2d, 0x64, 0x65, 0x66, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x6f, 0x6e,
+	0x73, 0x2f, 0x61, 0x70, 0x69, 0x2d, 0x64, 0x65, 0x66, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x6f, 0x6e,
+	0x73, 0x2f, 0x70, 0x6b, 0x67, 0x2f, 0x67, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x64, 0x2f,
+	0x6c, 0x65, 0x61, 0x64, 0x2d, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x2d, 0x73, 0x65, 0x72,
+	0x76, 0x69, 0x63, 0x65, 0x2f, 0x76, 0x31, 0x2f, 0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72,
+	0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2f, 0x76, 0x31, 0x3b,
+	0x6c, 0x65, 0x61, 0x64, 0x5f, 0x73, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x5f, 0x73, 0x65, 0x72,
+	0x76, 0x69, 0x63, 0x65, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x4c, 0x58, 0x58, 0xaa, 0x02, 0x15, 0x4c,
 	0x65, 0x61, 0x64, 0x53, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
-	0x65, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x15, 0x4c, 0x65, 0x61, 0x64, 0x53, 0x63, 0x72, 0x61, 0x70,
+	0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x21, 0x4c,
+	0x65, 0x61, 0x64, 0x53, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61,
+	0xea, 0x02, 0x16, 0x4c, 0x65, 0x61, 0x64, 0x53, 0x63, 0x72, 0x61, 0x70, 0x65, 0x72, 0x53, 0x65,
+	0x72, 0x76, 0x69, 0x63, 0x65, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
@@ -4480,7 +7421,7 @@ func file_lead_scraper_service_v1_request_response_proto_rawDescGZIP() []byte {
 	return file_lead_scraper_service_v1_request_response_proto_rawDescData
 }
 
-var file_lead_scraper_service_v1_request_response_proto_msgTypes = make([]protoimpl.MessageInfo, 70)
+var file_lead_scraper_service_v1_request_response_proto_msgTypes = make([]protoimpl.MessageInfo, 108)
 var file_lead_scraper_service_v1_request_response_proto_goTypes = []interface{}{
 	(*CreateScrapingJobRequest)(nil),                     // 0: lead_scraper_service.v1.CreateScrapingJobRequest
 	(*CreateScrapingJobResponse)(nil),                    // 1: lead_scraper_service.v1.CreateScrapingJobResponse
@@ -4550,65 +7491,130 @@ var file_lead_scraper_service_v1_request_response_proto_goTypes = []interface{}{
 	(*DeleteOrganizationResponse)(nil),                   // 65: lead_scraper_service.v1.DeleteOrganizationResponse
 	(*ListOrganizationsRequest)(nil),                     // 66: lead_scraper_service.v1.ListOrganizationsRequest
 	(*ListOrganizationsResponse)(nil),                    // 67: lead_scraper_service.v1.ListOrganizationsResponse
-	nil,                                                  // 68: lead_scraper_service.v1.TriggerWorkflowRequest.ParametersEntry
-	(*GetWorkspaceAnalyticsResponse_JobSuccessRate)(nil), // 69: lead_scraper_service.v1.GetWorkspaceAnalyticsResponse.JobSuccessRate
-	(BackgroundJobStatus)(0),                             // 70: lead_scraper_service.v1.BackgroundJobStatus
-	(*ScrapingJob)(nil),                                  // 71: lead_scraper_service.v1.ScrapingJob
-	(*Account)(nil),                                      // 72: lead_scraper_service.v1.Account
-	(*Workspace)(nil),                                    // 73: lead_scraper_service.v1.Workspace
-	(*timestamppb.Timestamp)(nil),                        // 74: google.protobuf.Timestamp
-	(*AccountSettings)(nil),                              // 75: lead_scraper_service.v1.AccountSettings
-	(*ScrapingWorkflow)(nil),                             // 76: lead_scraper_service.v1.ScrapingWorkflow
-	(*Tenant)(nil),                                       // 77: lead_scraper_service.v1.Tenant
-	(*Organization)(nil),                                 // 78: lead_scraper_service.v1.Organization
+	(*CreateTenantAPIKeyRequest)(nil),                    // 68: lead_scraper_service.v1.CreateTenantAPIKeyRequest
+	(*CreateTenantAPIKeyResponse)(nil),                   // 69: lead_scraper_service.v1.CreateTenantAPIKeyResponse
+	(*GetTenantAPIKeyRequest)(nil),                       // 70: lead_scraper_service.v1.GetTenantAPIKeyRequest
+	(*GetTenantAPIKeyResponse)(nil),                      // 71: lead_scraper_service.v1.GetTenantAPIKeyResponse
+	(*UpdateTenantAPIKeyRequest)(nil),                    // 72: lead_scraper_service.v1.UpdateTenantAPIKeyRequest
+	(*UpdateTenantAPIKeyResponse)(nil),                   // 73: lead_scraper_service.v1.UpdateTenantAPIKeyResponse
+	(*DeleteTenantAPIKeyRequest)(nil),                    // 74: lead_scraper_service.v1.DeleteTenantAPIKeyRequest
+	(*DeleteTenantAPIKeyResponse)(nil),                   // 75: lead_scraper_service.v1.DeleteTenantAPIKeyResponse
+	(*ListTenantAPIKeysRequest)(nil),                     // 76: lead_scraper_service.v1.ListTenantAPIKeysRequest
+	(*ListTenantAPIKeysResponse)(nil),                    // 77: lead_scraper_service.v1.ListTenantAPIKeysResponse
+	(*RotateTenantAPIKeyRequest)(nil),                    // 78: lead_scraper_service.v1.RotateTenantAPIKeyRequest
+	(*RotateTenantAPIKeyResponse)(nil),                   // 79: lead_scraper_service.v1.RotateTenantAPIKeyResponse
+	(*CreateAPIKeyRequest)(nil),                          // 80: lead_scraper_service.v1.CreateAPIKeyRequest
+	(*CreateAPIKeyResponse)(nil),                         // 81: lead_scraper_service.v1.CreateAPIKeyResponse
+	(*GetAPIKeyRequest)(nil),                             // 82: lead_scraper_service.v1.GetAPIKeyRequest
+	(*GetAPIKeyResponse)(nil),                            // 83: lead_scraper_service.v1.GetAPIKeyResponse
+	(*UpdateAPIKeyRequest)(nil),                          // 84: lead_scraper_service.v1.UpdateAPIKeyRequest
+	(*UpdateAPIKeyResponse)(nil),                         // 85: lead_scraper_service.v1.UpdateAPIKeyResponse
+	(*DeleteAPIKeyRequest)(nil),                          // 86: lead_scraper_service.v1.DeleteAPIKeyRequest
+	(*DeleteAPIKeyResponse)(nil),                         // 87: lead_scraper_service.v1.DeleteAPIKeyResponse
+	(*ListAPIKeysRequest)(nil),                           // 88: lead_scraper_service.v1.ListAPIKeysRequest
+	(*ListAPIKeysResponse)(nil),                          // 89: lead_scraper_service.v1.ListAPIKeysResponse
+	(*RotateAPIKeyRequest)(nil),                          // 90: lead_scraper_service.v1.RotateAPIKeyRequest
+	(*RotateAPIKeyResponse)(nil),                         // 91: lead_scraper_service.v1.RotateAPIKeyResponse
+	(*ListLeadsRequest)(nil),                             // 92: lead_scraper_service.v1.ListLeadsRequest
+	(*ListLeadsResponse)(nil),                            // 93: lead_scraper_service.v1.ListLeadsResponse
+	(*GetLeadRequest)(nil),                               // 94: lead_scraper_service.v1.GetLeadRequest
+	(*GetLeadResponse)(nil),                              // 95: lead_scraper_service.v1.GetLeadResponse
+	(*CreateWebhookRequest)(nil),                         // 96: lead_scraper_service.v1.CreateWebhookRequest
+	(*CreateWebhookResponse)(nil),                        // 97: lead_scraper_service.v1.CreateWebhookResponse
+	(*GetWebhookRequest)(nil),                            // 98: lead_scraper_service.v1.GetWebhookRequest
+	(*GetWebhookResponse)(nil),                           // 99: lead_scraper_service.v1.GetWebhookResponse
+	(*UpdateWebhookRequest)(nil),                         // 100: lead_scraper_service.v1.UpdateWebhookRequest
+	(*UpdateWebhookResponse)(nil),                        // 101: lead_scraper_service.v1.UpdateWebhookResponse
+	(*DeleteWebhookRequest)(nil),                         // 102: lead_scraper_service.v1.DeleteWebhookRequest
+	(*DeleteWebhookResponse)(nil),                        // 103: lead_scraper_service.v1.DeleteWebhookResponse
+	(*ListWebhooksRequest)(nil),                          // 104: lead_scraper_service.v1.ListWebhooksRequest
+	(*ListWebhooksResponse)(nil),                         // 105: lead_scraper_service.v1.ListWebhooksResponse
+	nil,                                                  // 106: lead_scraper_service.v1.TriggerWorkflowRequest.ParametersEntry
+	(*GetWorkspaceAnalyticsResponse_JobSuccessRate)(nil), // 107: lead_scraper_service.v1.GetWorkspaceAnalyticsResponse.JobSuccessRate
+	(BackgroundJobStatus)(0),                             // 108: lead_scraper_service.v1.BackgroundJobStatus
+	(*ScrapingJob)(nil),                                  // 109: lead_scraper_service.v1.ScrapingJob
+	(*Account)(nil),                                      // 110: lead_scraper_service.v1.Account
+	(*Workspace)(nil),                                    // 111: lead_scraper_service.v1.Workspace
+	(*timestamppb.Timestamp)(nil),                        // 112: google.protobuf.Timestamp
+	(*AccountSettings)(nil),                              // 113: lead_scraper_service.v1.AccountSettings
+	(*ScrapingWorkflow)(nil),                             // 114: lead_scraper_service.v1.ScrapingWorkflow
+	(*Tenant)(nil),                                       // 115: lead_scraper_service.v1.Tenant
+	(*Organization)(nil),                                 // 116: lead_scraper_service.v1.Organization
+	(*TenantAPIKey)(nil),                                 // 117: lead_scraper_service.v1.TenantAPIKey
+	(*APIKey)(nil),                                       // 118: lead_scraper_service.v1.APIKey
+	(*Lead)(nil),                                         // 119: lead_scraper_service.v1.Lead
+	(*WebhookConfig)(nil),                                // 120: lead_scraper_service.v1.WebhookConfig
 }
 var file_lead_scraper_service_v1_request_response_proto_depIdxs = []int32{
-	70, // 0: lead_scraper_service.v1.CreateScrapingJobResponse.status:type_name -> lead_scraper_service.v1.BackgroundJobStatus
-	71, // 1: lead_scraper_service.v1.GetScrapingJobResponse.job:type_name -> lead_scraper_service.v1.ScrapingJob
-	71, // 2: lead_scraper_service.v1.ListScrapingJobsResponse.jobs:type_name -> lead_scraper_service.v1.ScrapingJob
-	72, // 3: lead_scraper_service.v1.CreateAccountRequest.account:type_name -> lead_scraper_service.v1.Account
-	72, // 4: lead_scraper_service.v1.UpdateAccountRequest.account:type_name -> lead_scraper_service.v1.Account
-	72, // 5: lead_scraper_service.v1.ListAccountsResponse.accounts:type_name -> lead_scraper_service.v1.Account
-	73, // 6: lead_scraper_service.v1.CreateWorkspaceRequest.workspace:type_name -> lead_scraper_service.v1.Workspace
-	73, // 7: lead_scraper_service.v1.CreateWorkspaceResponse.workspace:type_name -> lead_scraper_service.v1.Workspace
-	73, // 8: lead_scraper_service.v1.UpdateWorkspaceRequest.workspace:type_name -> lead_scraper_service.v1.Workspace
-	73, // 9: lead_scraper_service.v1.ListWorkspacesResponse.workspaces:type_name -> lead_scraper_service.v1.Workspace
-	74, // 10: lead_scraper_service.v1.GetAccountUsageResponse.reset_time:type_name -> google.protobuf.Timestamp
-	75, // 11: lead_scraper_service.v1.UpdateAccountSettingsRequest.settings:type_name -> lead_scraper_service.v1.AccountSettings
-	75, // 12: lead_scraper_service.v1.UpdateAccountSettingsResponse.settings:type_name -> lead_scraper_service.v1.AccountSettings
-	76, // 13: lead_scraper_service.v1.CreateWorkflowRequest.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
-	76, // 14: lead_scraper_service.v1.UpdateWorkflowRequest.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
-	76, // 15: lead_scraper_service.v1.ListWorkflowsResponse.workflows:type_name -> lead_scraper_service.v1.ScrapingWorkflow
-	68, // 16: lead_scraper_service.v1.TriggerWorkflowRequest.parameters:type_name -> lead_scraper_service.v1.TriggerWorkflowRequest.ParametersEntry
-	70, // 17: lead_scraper_service.v1.TriggerWorkflowResponse.status:type_name -> lead_scraper_service.v1.BackgroundJobStatus
-	76, // 18: lead_scraper_service.v1.PauseWorkflowResponse.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
-	74, // 19: lead_scraper_service.v1.GetWorkspaceAnalyticsRequest.start_time:type_name -> google.protobuf.Timestamp
-	74, // 20: lead_scraper_service.v1.GetWorkspaceAnalyticsRequest.end_time:type_name -> google.protobuf.Timestamp
-	69, // 21: lead_scraper_service.v1.GetWorkspaceAnalyticsResponse.success_rates:type_name -> lead_scraper_service.v1.GetWorkspaceAnalyticsResponse.JobSuccessRate
-	73, // 22: lead_scraper_service.v1.GetWorkspaceResponse.workspace:type_name -> lead_scraper_service.v1.Workspace
-	73, // 23: lead_scraper_service.v1.UpdateWorkspaceResponse.workspace:type_name -> lead_scraper_service.v1.Workspace
-	72, // 24: lead_scraper_service.v1.GetAccountResponse.account:type_name -> lead_scraper_service.v1.Account
-	72, // 25: lead_scraper_service.v1.UpdateAccountResponse.account:type_name -> lead_scraper_service.v1.Account
-	72, // 26: lead_scraper_service.v1.CreateAccountResponse.account:type_name -> lead_scraper_service.v1.Account
-	76, // 27: lead_scraper_service.v1.GetWorkflowResponse.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
-	76, // 28: lead_scraper_service.v1.UpdateWorkflowResponse.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
-	76, // 29: lead_scraper_service.v1.CreateWorkflowResponse.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
-	77, // 30: lead_scraper_service.v1.CreateTenantRequest.tenant:type_name -> lead_scraper_service.v1.Tenant
-	77, // 31: lead_scraper_service.v1.GetTenantResponse.tenant:type_name -> lead_scraper_service.v1.Tenant
-	77, // 32: lead_scraper_service.v1.UpdateTenantRequest.tenant:type_name -> lead_scraper_service.v1.Tenant
-	77, // 33: lead_scraper_service.v1.UpdateTenantResponse.tenant:type_name -> lead_scraper_service.v1.Tenant
-	77, // 34: lead_scraper_service.v1.ListTenantsResponse.tenants:type_name -> lead_scraper_service.v1.Tenant
-	78, // 35: lead_scraper_service.v1.CreateOrganizationRequest.organization:type_name -> lead_scraper_service.v1.Organization
-	78, // 36: lead_scraper_service.v1.CreateOrganizationResponse.organization:type_name -> lead_scraper_service.v1.Organization
-	78, // 37: lead_scraper_service.v1.GetOrganizationResponse.organization:type_name -> lead_scraper_service.v1.Organization
-	78, // 38: lead_scraper_service.v1.UpdateOrganizationRequest.organization:type_name -> lead_scraper_service.v1.Organization
-	78, // 39: lead_scraper_service.v1.UpdateOrganizationResponse.organization:type_name -> lead_scraper_service.v1.Organization
-	78, // 40: lead_scraper_service.v1.ListOrganizationsResponse.organizations:type_name -> lead_scraper_service.v1.Organization
-	41, // [41:41] is the sub-list for method output_type
-	41, // [41:41] is the sub-list for method input_type
-	41, // [41:41] is the sub-list for extension type_name
-	41, // [41:41] is the sub-list for extension extendee
-	0,  // [0:41] is the sub-list for field type_name
+	108, // 0: lead_scraper_service.v1.CreateScrapingJobResponse.status:type_name -> lead_scraper_service.v1.BackgroundJobStatus
+	109, // 1: lead_scraper_service.v1.GetScrapingJobResponse.job:type_name -> lead_scraper_service.v1.ScrapingJob
+	109, // 2: lead_scraper_service.v1.ListScrapingJobsResponse.jobs:type_name -> lead_scraper_service.v1.ScrapingJob
+	110, // 3: lead_scraper_service.v1.CreateAccountRequest.account:type_name -> lead_scraper_service.v1.Account
+	110, // 4: lead_scraper_service.v1.UpdateAccountRequest.account:type_name -> lead_scraper_service.v1.Account
+	110, // 5: lead_scraper_service.v1.ListAccountsResponse.accounts:type_name -> lead_scraper_service.v1.Account
+	111, // 6: lead_scraper_service.v1.CreateWorkspaceRequest.workspace:type_name -> lead_scraper_service.v1.Workspace
+	111, // 7: lead_scraper_service.v1.CreateWorkspaceResponse.workspace:type_name -> lead_scraper_service.v1.Workspace
+	111, // 8: lead_scraper_service.v1.UpdateWorkspaceRequest.workspace:type_name -> lead_scraper_service.v1.Workspace
+	111, // 9: lead_scraper_service.v1.ListWorkspacesResponse.workspaces:type_name -> lead_scraper_service.v1.Workspace
+	112, // 10: lead_scraper_service.v1.GetAccountUsageResponse.reset_time:type_name -> google.protobuf.Timestamp
+	113, // 11: lead_scraper_service.v1.UpdateAccountSettingsRequest.settings:type_name -> lead_scraper_service.v1.AccountSettings
+	113, // 12: lead_scraper_service.v1.UpdateAccountSettingsResponse.settings:type_name -> lead_scraper_service.v1.AccountSettings
+	114, // 13: lead_scraper_service.v1.CreateWorkflowRequest.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
+	114, // 14: lead_scraper_service.v1.UpdateWorkflowRequest.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
+	114, // 15: lead_scraper_service.v1.ListWorkflowsResponse.workflows:type_name -> lead_scraper_service.v1.ScrapingWorkflow
+	106, // 16: lead_scraper_service.v1.TriggerWorkflowRequest.parameters:type_name -> lead_scraper_service.v1.TriggerWorkflowRequest.ParametersEntry
+	108, // 17: lead_scraper_service.v1.TriggerWorkflowResponse.status:type_name -> lead_scraper_service.v1.BackgroundJobStatus
+	114, // 18: lead_scraper_service.v1.PauseWorkflowResponse.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
+	112, // 19: lead_scraper_service.v1.GetWorkspaceAnalyticsRequest.start_time:type_name -> google.protobuf.Timestamp
+	112, // 20: lead_scraper_service.v1.GetWorkspaceAnalyticsRequest.end_time:type_name -> google.protobuf.Timestamp
+	107, // 21: lead_scraper_service.v1.GetWorkspaceAnalyticsResponse.success_rates:type_name -> lead_scraper_service.v1.GetWorkspaceAnalyticsResponse.JobSuccessRate
+	111, // 22: lead_scraper_service.v1.GetWorkspaceResponse.workspace:type_name -> lead_scraper_service.v1.Workspace
+	111, // 23: lead_scraper_service.v1.UpdateWorkspaceResponse.workspace:type_name -> lead_scraper_service.v1.Workspace
+	110, // 24: lead_scraper_service.v1.GetAccountResponse.account:type_name -> lead_scraper_service.v1.Account
+	110, // 25: lead_scraper_service.v1.UpdateAccountResponse.account:type_name -> lead_scraper_service.v1.Account
+	110, // 26: lead_scraper_service.v1.CreateAccountResponse.account:type_name -> lead_scraper_service.v1.Account
+	114, // 27: lead_scraper_service.v1.GetWorkflowResponse.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
+	114, // 28: lead_scraper_service.v1.UpdateWorkflowResponse.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
+	114, // 29: lead_scraper_service.v1.CreateWorkflowResponse.workflow:type_name -> lead_scraper_service.v1.ScrapingWorkflow
+	115, // 30: lead_scraper_service.v1.CreateTenantRequest.tenant:type_name -> lead_scraper_service.v1.Tenant
+	115, // 31: lead_scraper_service.v1.GetTenantResponse.tenant:type_name -> lead_scraper_service.v1.Tenant
+	115, // 32: lead_scraper_service.v1.UpdateTenantRequest.tenant:type_name -> lead_scraper_service.v1.Tenant
+	115, // 33: lead_scraper_service.v1.UpdateTenantResponse.tenant:type_name -> lead_scraper_service.v1.Tenant
+	115, // 34: lead_scraper_service.v1.ListTenantsResponse.tenants:type_name -> lead_scraper_service.v1.Tenant
+	116, // 35: lead_scraper_service.v1.CreateOrganizationRequest.organization:type_name -> lead_scraper_service.v1.Organization
+	116, // 36: lead_scraper_service.v1.CreateOrganizationResponse.organization:type_name -> lead_scraper_service.v1.Organization
+	116, // 37: lead_scraper_service.v1.GetOrganizationResponse.organization:type_name -> lead_scraper_service.v1.Organization
+	116, // 38: lead_scraper_service.v1.UpdateOrganizationRequest.organization:type_name -> lead_scraper_service.v1.Organization
+	116, // 39: lead_scraper_service.v1.UpdateOrganizationResponse.organization:type_name -> lead_scraper_service.v1.Organization
+	116, // 40: lead_scraper_service.v1.ListOrganizationsResponse.organizations:type_name -> lead_scraper_service.v1.Organization
+	117, // 41: lead_scraper_service.v1.CreateTenantAPIKeyRequest.api_key:type_name -> lead_scraper_service.v1.TenantAPIKey
+	117, // 42: lead_scraper_service.v1.GetTenantAPIKeyResponse.api_key:type_name -> lead_scraper_service.v1.TenantAPIKey
+	117, // 43: lead_scraper_service.v1.UpdateTenantAPIKeyRequest.api_key:type_name -> lead_scraper_service.v1.TenantAPIKey
+	117, // 44: lead_scraper_service.v1.UpdateTenantAPIKeyResponse.api_key:type_name -> lead_scraper_service.v1.TenantAPIKey
+	117, // 45: lead_scraper_service.v1.ListTenantAPIKeysResponse.api_keys:type_name -> lead_scraper_service.v1.TenantAPIKey
+	117, // 46: lead_scraper_service.v1.RotateTenantAPIKeyResponse.new_api_key:type_name -> lead_scraper_service.v1.TenantAPIKey
+	112, // 47: lead_scraper_service.v1.RotateTenantAPIKeyResponse.old_key_expiry:type_name -> google.protobuf.Timestamp
+	112, // 48: lead_scraper_service.v1.CreateAPIKeyRequest.expires_at:type_name -> google.protobuf.Timestamp
+	118, // 49: lead_scraper_service.v1.CreateAPIKeyResponse.api_key:type_name -> lead_scraper_service.v1.APIKey
+	118, // 50: lead_scraper_service.v1.GetAPIKeyResponse.api_key:type_name -> lead_scraper_service.v1.APIKey
+	118, // 51: lead_scraper_service.v1.UpdateAPIKeyRequest.api_key:type_name -> lead_scraper_service.v1.APIKey
+	118, // 52: lead_scraper_service.v1.UpdateAPIKeyResponse.api_key:type_name -> lead_scraper_service.v1.APIKey
+	118, // 53: lead_scraper_service.v1.ListAPIKeysResponse.api_keys:type_name -> lead_scraper_service.v1.APIKey
+	118, // 54: lead_scraper_service.v1.RotateAPIKeyResponse.new_api_key:type_name -> lead_scraper_service.v1.APIKey
+	112, // 55: lead_scraper_service.v1.RotateAPIKeyResponse.old_key_expiry:type_name -> google.protobuf.Timestamp
+	119, // 56: lead_scraper_service.v1.ListLeadsResponse.leads:type_name -> lead_scraper_service.v1.Lead
+	119, // 57: lead_scraper_service.v1.GetLeadResponse.lead:type_name -> lead_scraper_service.v1.Lead
+	120, // 58: lead_scraper_service.v1.CreateWebhookRequest.webhook:type_name -> lead_scraper_service.v1.WebhookConfig
+	120, // 59: lead_scraper_service.v1.CreateWebhookResponse.webhook:type_name -> lead_scraper_service.v1.WebhookConfig
+	120, // 60: lead_scraper_service.v1.GetWebhookResponse.webhook:type_name -> lead_scraper_service.v1.WebhookConfig
+	120, // 61: lead_scraper_service.v1.UpdateWebhookRequest.webhook:type_name -> lead_scraper_service.v1.WebhookConfig
+	120, // 62: lead_scraper_service.v1.UpdateWebhookResponse.webhook:type_name -> lead_scraper_service.v1.WebhookConfig
+	120, // 63: lead_scraper_service.v1.ListWebhooksResponse.webhooks:type_name -> lead_scraper_service.v1.WebhookConfig
+	64,  // [64:64] is the sub-list for method output_type
+	64,  // [64:64] is the sub-list for method input_type
+	64,  // [64:64] is the sub-list for extension type_name
+	64,  // [64:64] is the sub-list for extension extendee
+	0,   // [0:64] is the sub-list for field type_name
 }
 
 func init() { file_lead_scraper_service_v1_request_response_proto_init() }
@@ -5434,7 +8440,463 @@ func file_lead_scraper_service_v1_request_response_proto_init() {
 				return nil
 			}
 		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[68].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateTenantAPIKeyRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 		file_lead_scraper_service_v1_request_response_proto_msgTypes[69].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateTenantAPIKeyResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[70].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetTenantAPIKeyRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[71].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetTenantAPIKeyResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[72].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateTenantAPIKeyRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[73].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateTenantAPIKeyResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[74].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteTenantAPIKeyRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[75].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteTenantAPIKeyResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[76].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListTenantAPIKeysRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[77].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListTenantAPIKeysResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[78].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RotateTenantAPIKeyRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[79].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RotateTenantAPIKeyResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[80].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateAPIKeyRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[81].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateAPIKeyResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[82].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetAPIKeyRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[83].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetAPIKeyResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[84].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateAPIKeyRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[85].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateAPIKeyResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[86].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteAPIKeyRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[87].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteAPIKeyResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[88].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListAPIKeysRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[89].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListAPIKeysResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[90].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RotateAPIKeyRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[91].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RotateAPIKeyResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[92].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListLeadsRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[93].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListLeadsResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[94].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetLeadRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[95].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetLeadResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[96].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateWebhookRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[97].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateWebhookResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[98].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetWebhookRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[99].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetWebhookResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[100].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateWebhookRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[101].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateWebhookResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[102].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteWebhookRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[103].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteWebhookResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[104].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListWebhooksRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[105].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListWebhooksResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_lead_scraper_service_v1_request_response_proto_msgTypes[107].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetWorkspaceAnalyticsResponse_JobSuccessRate); i {
 			case 0:
 				return &v.state
@@ -5453,7 +8915,7 @@ func file_lead_scraper_service_v1_request_response_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_lead_scraper_service_v1_request_response_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   70,
+			NumMessages:   108,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

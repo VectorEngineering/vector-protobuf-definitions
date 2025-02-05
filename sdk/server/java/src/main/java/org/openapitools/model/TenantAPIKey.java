@@ -4,7 +4,13 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.openapitools.model.TenantAPIKeyScope;
+import org.openapitools.model.V1Status;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -20,7 +26,7 @@ import javax.annotation.Generated;
  * TenantAPIKey
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T07:29:26.257343-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T07:44:51.137714-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class TenantAPIKey {
 
   private String id;
@@ -33,7 +39,20 @@ public class TenantAPIKey {
 
   private String description;
 
-  private String status;
+  private V1Status status = V1Status.UNSPECIFIED;
+
+  @Valid
+  private List<TenantAPIKeyScope> scopes = new ArrayList<>();
+
+  private Integer maxUses;
+
+  @Valid
+  private List<String> allowedIps = new ArrayList<>();
+
+  private Integer useCount;
+
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private OffsetDateTime expiresAt;
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime createdAt;
@@ -144,7 +163,7 @@ public class TenantAPIKey {
     this.description = description;
   }
 
-  public TenantAPIKey status(String status) {
+  public TenantAPIKey status(V1Status status) {
     this.status = status;
     return this;
   }
@@ -153,15 +172,131 @@ public class TenantAPIKey {
    * Get status
    * @return status
    */
-  
+  @Valid 
   @Schema(name = "status", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("status")
-  public String getStatus() {
+  public V1Status getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(V1Status status) {
     this.status = status;
+  }
+
+  public TenantAPIKey scopes(List<TenantAPIKeyScope> scopes) {
+    this.scopes = scopes;
+    return this;
+  }
+
+  public TenantAPIKey addScopesItem(TenantAPIKeyScope scopesItem) {
+    if (this.scopes == null) {
+      this.scopes = new ArrayList<>();
+    }
+    this.scopes.add(scopesItem);
+    return this;
+  }
+
+  /**
+   * Get scopes
+   * @return scopes
+   */
+  @Valid 
+  @Schema(name = "scopes", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("scopes")
+  public List<TenantAPIKeyScope> getScopes() {
+    return scopes;
+  }
+
+  public void setScopes(List<TenantAPIKeyScope> scopes) {
+    this.scopes = scopes;
+  }
+
+  public TenantAPIKey maxUses(Integer maxUses) {
+    this.maxUses = maxUses;
+    return this;
+  }
+
+  /**
+   * Get maxUses
+   * @return maxUses
+   */
+  
+  @Schema(name = "maxUses", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("maxUses")
+  public Integer getMaxUses() {
+    return maxUses;
+  }
+
+  public void setMaxUses(Integer maxUses) {
+    this.maxUses = maxUses;
+  }
+
+  public TenantAPIKey allowedIps(List<String> allowedIps) {
+    this.allowedIps = allowedIps;
+    return this;
+  }
+
+  public TenantAPIKey addAllowedIpsItem(String allowedIpsItem) {
+    if (this.allowedIps == null) {
+      this.allowedIps = new ArrayList<>();
+    }
+    this.allowedIps.add(allowedIpsItem);
+    return this;
+  }
+
+  /**
+   * Get allowedIps
+   * @return allowedIps
+   */
+  
+  @Schema(name = "allowedIps", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("allowedIps")
+  public List<String> getAllowedIps() {
+    return allowedIps;
+  }
+
+  public void setAllowedIps(List<String> allowedIps) {
+    this.allowedIps = allowedIps;
+  }
+
+  public TenantAPIKey useCount(Integer useCount) {
+    this.useCount = useCount;
+    return this;
+  }
+
+  /**
+   * Get useCount
+   * @return useCount
+   */
+  
+  @Schema(name = "useCount", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("useCount")
+  public Integer getUseCount() {
+    return useCount;
+  }
+
+  public void setUseCount(Integer useCount) {
+    this.useCount = useCount;
+  }
+
+  public TenantAPIKey expiresAt(OffsetDateTime expiresAt) {
+    this.expiresAt = expiresAt;
+    return this;
+  }
+
+  /**
+   * Get expiresAt
+   * @return expiresAt
+   */
+  @Valid 
+  @Schema(name = "expiresAt", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("expiresAt")
+  public OffsetDateTime getExpiresAt() {
+    return expiresAt;
+  }
+
+  public void setExpiresAt(OffsetDateTime expiresAt) {
+    this.expiresAt = expiresAt;
   }
 
   public TenantAPIKey createdAt(OffsetDateTime createdAt) {
@@ -239,6 +374,11 @@ public class TenantAPIKey {
         Objects.equals(this.name, tenantAPIKey.name) &&
         Objects.equals(this.description, tenantAPIKey.description) &&
         Objects.equals(this.status, tenantAPIKey.status) &&
+        Objects.equals(this.scopes, tenantAPIKey.scopes) &&
+        Objects.equals(this.maxUses, tenantAPIKey.maxUses) &&
+        Objects.equals(this.allowedIps, tenantAPIKey.allowedIps) &&
+        Objects.equals(this.useCount, tenantAPIKey.useCount) &&
+        Objects.equals(this.expiresAt, tenantAPIKey.expiresAt) &&
         Objects.equals(this.createdAt, tenantAPIKey.createdAt) &&
         Objects.equals(this.updatedAt, tenantAPIKey.updatedAt) &&
         Objects.equals(this.deletedAt, tenantAPIKey.deletedAt);
@@ -246,7 +386,7 @@ public class TenantAPIKey {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, keyHash, keyPrefix, name, description, status, createdAt, updatedAt, deletedAt);
+    return Objects.hash(id, keyHash, keyPrefix, name, description, status, scopes, maxUses, allowedIps, useCount, expiresAt, createdAt, updatedAt, deletedAt);
   }
 
   @Override
@@ -259,6 +399,11 @@ public class TenantAPIKey {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    scopes: ").append(toIndentedString(scopes)).append("\n");
+    sb.append("    maxUses: ").append(toIndentedString(maxUses)).append("\n");
+    sb.append("    allowedIps: ").append(toIndentedString(allowedIps)).append("\n");
+    sb.append("    useCount: ").append(toIndentedString(useCount)).append("\n");
+    sb.append("    expiresAt: ").append(toIndentedString(expiresAt)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
     sb.append("    deletedAt: ").append(toIndentedString(deletedAt)).append("\n");

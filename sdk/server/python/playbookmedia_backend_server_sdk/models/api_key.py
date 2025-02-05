@@ -3,13 +3,13 @@ from datetime import date, datetime  # noqa: F401
 from typing import List, Dict  # noqa: F401
 
 from playbookmedia_backend_server_sdk.models.base_model import Model
-from playbookmedia_backend_server_sdk.models.api_key_status import APIKeyStatus
 from playbookmedia_backend_server_sdk.models.account import Account
+from playbookmedia_backend_server_sdk.models.v1_status import V1Status
 from playbookmedia_backend_server_sdk.models.workspace import Workspace
 from playbookmedia_backend_server_sdk import util
 
 from playbookmedia_backend_server_sdk.models.account import Account  # noqa: E501
-from playbookmedia_backend_server_sdk.models.api_key_status import APIKeyStatus  # noqa: E501
+from playbookmedia_backend_server_sdk.models.v1_status import V1Status  # noqa: E501
 from playbookmedia_backend_server_sdk.models.workspace import Workspace  # noqa: E501
 
 class APIKey(Model):
@@ -18,7 +18,7 @@ class APIKey(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, name=None, key_hash=None, key_prefix=None, org_id=None, tenant_id=None, scopes=None, allowed_ips=None, allowed_domains=None, allowed_environments=None, is_test_key=None, requests_per_second=None, requests_per_day=None, concurrent_requests=None, monthly_request_quota=None, cost_per_request=None, billing_tier=None, total_requests=None, total_errors=None, last_used_at=None, average_response_time=None, endpoint_usage_json=None, error_rates_json=None, recent_errors=None, successful_requests_count=None, success_rate=None, status=APIKeyStatus.UNSPECIFIED, created_at=None, updated_at=None, expires_at=None, deleted_at=None, last_rotated_at=None, last_security_review_at=None, requires_client_secret=None, client_secret_hash=None, enforce_https=None, enforce_signing=None, allowed_signature_algorithms=None, enforce_mutual_tls=None, client_certificate_hash=None, require_request_signing=None, description=None, metadata_json=None, tags=None, api_version=None, supported_features=None, documentation_url=None, support_contact=None, account=None, workspace=None, log_all_requests=None, last_rotation_reason=None, last_rotation_date=None, rotation_frequency_days=None, compliance_standards=None, requires_audit_logging=None, data_residency=None, approved_integrations=None, alert_emails=None, webhook_url=None, alert_on_quota_threshold=None, quota_alert_threshold=None, alert_on_error_spike=None, error_alert_threshold=None, monitoring_integrations=None, encrypted=None, data_classification=None):  # noqa: E501
+    def __init__(self, id=None, name=None, key_hash=None, key_prefix=None, org_id=None, tenant_id=None, scopes=None, allowed_ips=None, allowed_domains=None, allowed_environments=None, is_test_key=None, requests_per_second=None, requests_per_day=None, concurrent_requests=None, monthly_request_quota=None, cost_per_request=None, billing_tier=None, total_requests=None, total_errors=None, last_used_at=None, average_response_time=None, endpoint_usage_json=None, error_rates_json=None, recent_errors=None, successful_requests_count=None, success_rate=None, status=V1Status.UNSPECIFIED, created_at=None, updated_at=None, expires_at=None, deleted_at=None, last_rotated_at=None, last_security_review_at=None, requires_client_secret=None, client_secret_hash=None, enforce_https=None, enforce_signing=None, allowed_signature_algorithms=None, enforce_mutual_tls=None, client_certificate_hash=None, require_request_signing=None, description=None, metadata_json=None, tags=None, api_version=None, supported_features=None, documentation_url=None, support_contact=None, account=None, workspace=None, log_all_requests=None, last_rotation_reason=None, last_rotation_date=None, rotation_frequency_days=None, compliance_standards=None, requires_audit_logging=None, data_residency=None, approved_integrations=None, alert_emails=None, webhook_url=None, alert_on_quota_threshold=None, quota_alert_threshold=None, alert_on_error_spike=None, error_alert_threshold=None, monitoring_integrations=None, encrypted=None, data_classification=None):  # noqa: E501
         """APIKey - a model defined in OpenAPI
 
         :param id: The id of this APIKey.  # noqa: E501
@@ -74,7 +74,7 @@ class APIKey(Model):
         :param success_rate: The success_rate of this APIKey.  # noqa: E501
         :type success_rate: float
         :param status: The status of this APIKey.  # noqa: E501
-        :type status: APIKeyStatus
+        :type status: V1Status
         :param created_at: The created_at of this APIKey.  # noqa: E501
         :type created_at: datetime
         :param updated_at: The updated_at of this APIKey.  # noqa: E501
@@ -183,7 +183,7 @@ class APIKey(Model):
             'recent_errors': str,
             'successful_requests_count': int,
             'success_rate': float,
-            'status': APIKeyStatus,
+            'status': V1Status,
             'created_at': datetime,
             'updated_at': datetime,
             'expires_at': datetime,
@@ -924,22 +924,22 @@ class APIKey(Model):
         self._success_rate = success_rate
 
     @property
-    def status(self) -> APIKeyStatus:
+    def status(self) -> V1Status:
         """Gets the status of this APIKey.
 
 
         :return: The status of this APIKey.
-        :rtype: APIKeyStatus
+        :rtype: V1Status
         """
         return self._status
 
     @status.setter
-    def status(self, status: APIKeyStatus):
+    def status(self, status: V1Status):
         """Sets the status of this APIKey.
 
 
         :param status: The status of this APIKey.
-        :type status: APIKeyStatus
+        :type status: V1Status
         """
 
         self._status = status

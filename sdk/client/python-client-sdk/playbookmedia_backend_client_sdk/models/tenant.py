@@ -23,7 +23,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, Stri
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from playbookmedia_backend_client_sdk.models.account import Account
 from playbookmedia_backend_client_sdk.models.tenant_api_key import TenantAPIKey
-from playbookmedia_backend_client_sdk.models.tenant_status import TenantStatus
+from playbookmedia_backend_client_sdk.models.v1_status import V1Status
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -53,7 +53,7 @@ class Tenant(BaseModel):
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
     deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
-    status: Optional[TenantStatus] = TenantStatus.UNSPECIFIED
+    status: Optional[V1Status] = V1Status.UNSPECIFIED
     __properties: ClassVar[List[str]] = ["id", "name", "displayName", "description", "organization", "apiBaseUrl", "environmentVariables", "allowedOrigins", "storageQuota", "monthlyRequestLimit", "maxConcurrentJobs", "enableCaching", "enableRateLimiting", "enableRequestLogging", "accounts", "apiKeys", "totalRequests", "totalStorageUsed", "averageResponseTime", "createdAt", "updatedAt", "deletedAt", "status"]
 
     model_config = ConfigDict(
@@ -146,7 +146,7 @@ class Tenant(BaseModel):
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt"),
             "deletedAt": obj.get("deletedAt"),
-            "status": obj.get("status") if obj.get("status") is not None else TenantStatus.UNSPECIFIED
+            "status": obj.get("status") if obj.get("status") is not None else V1Status.UNSPECIFIED
         })
         return _obj
 

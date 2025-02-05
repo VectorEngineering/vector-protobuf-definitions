@@ -309,6 +309,23 @@ message PauseWorkflowResponse {
     ScrapingWorkflow workflow = 2;
 }
 
+message DeleteWorkflowRequest {
+    uint64 org_id = 1 [
+        (validate.rules).uint64.gt = 0,
+        (google.api.field_behavior) = REQUIRED
+    ];
+    uint64 tenant_id = 2 [
+        (validate.rules).uint64.gt = 0,
+        (google.api.field_behavior) = REQUIRED
+    ];  
+    uint64 workspace_id = 3 [(validate.rules).uint64.gt = 0];
+    uint64 account_id = 4 [(validate.rules).uint64.gt = 0];
+    uint64 id = 5 [(validate.rules).uint64.gt = 0];
+}
+
+message DeleteWorkflowResponse {
+    bool success = 1;
+}
 message GetWorkspaceAnalyticsRequest {
     uint64 workspace_id = 1 [(validate.rules).uint64.gt = 0];
     google.protobuf.Timestamp start_time = 2;
@@ -596,8 +613,7 @@ message ListAPIKeysRequest {
     int32 page_size = 5 [(validate.rules).int32 = {gte: 1, lte: 100}];
     int32 page_number = 6;
     string status = 7;
-    bool sort_desc = 9;
-    string search = 10;
+    string search = 8;
 }
 
 message ListAPIKeysResponse {

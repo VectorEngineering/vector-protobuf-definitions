@@ -69,6 +69,7 @@ docs/DeleteScrapingJobResponse.md
 docs/DeleteTenantApiKeyResponse.md
 docs/DeleteTenantResponse.md
 docs/DeleteWebhookResponse.md
+docs/DeleteWorkflowResponse.md
 docs/DeleteWorkspaceResponse.md
 docs/Dependency.md
 docs/DocumentBranch.md
@@ -306,6 +307,7 @@ openapi3graphql-server/model/delete_scraping_job_response.graphql
 openapi3graphql-server/model/delete_tenant_api_key_response.graphql
 openapi3graphql-server/model/delete_tenant_response.graphql
 openapi3graphql-server/model/delete_webhook_response.graphql
+openapi3graphql-server/model/delete_workflow_response.graphql
 openapi3graphql-server/model/delete_workspace_response.graphql
 openapi3graphql-server/model/dependency.graphql
 openapi3graphql-server/model/document_branch.graphql

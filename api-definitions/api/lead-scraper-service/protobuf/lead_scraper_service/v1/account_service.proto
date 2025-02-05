@@ -517,6 +517,39 @@ service LeadScraperService {
     }
 
     /**
+     * DeleteWorkflow removes a workflow configuration
+     * 
+     * This endpoint permanently deletes a workflow from a workspace
+     *
+     * Required parameters:
+     * - workspace_id: Parent workspace ID
+     * - id: Workflow ID
+     * 
+     * Example:
+     * ```curl
+     * DELETE /lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}
+     * ```
+     */
+    rpc DeleteWorkflow(DeleteWorkflowRequest) returns (DeleteWorkflowResponse) {
+        option (google.api.http) = {
+            delete: "/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete workflow"
+            tags: ["lead-scraper-service"],
+            operation_id: "DeleteWorkflow",
+            description: "Deletes a specific workflow",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workflow deleted successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.DeleteWorkflowResponse" } }
+                }
+            }
+        };
+    }
+
+    /**
      * GetWorkflow retrieves detailed information about a specific workflow
      * 
      * This endpoint provides comprehensive details about a workflow, including:

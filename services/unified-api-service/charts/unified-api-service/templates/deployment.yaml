@@ -1,0 +1,508 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "unified-api-service.fullname" . }}
+  labels:
+    {{- include "unified-api-service.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "unified-api-service.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "unified-api-service.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "unified-api-service.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            # Core settings
+            - name: NODE_ENV
+              value: {{ .Values.env.NODE_ENV | quote }}
+            - name: PORT
+              value: {{ .Values.env.PORT | quote }}
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: JWT_SECRET
+            
+            # Database settings
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: DATABASE_URL
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              value: {{ .Values.env.POSTGRES_DB | quote }}
+            - name: POSTGRES_HOST
+              value: {{ .Values.env.POSTGRES_HOST | quote }}
+            - name: POSTGRES_PORT
+              value: {{ .Values.env.POSTGRES_PORT | quote }}
+            
+            # Redis settings
+            - name: REDIS_HOST
+              value: {{ .Values.env.REDIS_HOST | quote }}
+            - name: REDIS_PORT
+              value: {{ .Values.env.REDIS_PORT | quote }}
+            - name: REDIS_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: REDIS_PASS
+            
+            # Monitoring settings
+            - name: SENTRY_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: SENTRY_DSN
+            - name: POSTHOG_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: POSTHOG_KEY
+            - name: POSTHOG_HOST
+              value: {{ .Values.env.POSTHOG_HOST | quote }}
+            
+            # Application settings
+            - name: ENCRYPT_CRYPTO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: ENCRYPT_CRYPTO_SECRET_KEY
+            - name: APP_NAME
+              value: {{ .Values.env.APP_NAME | quote }}
+            - name: APP_URL
+              value: {{ .Values.env.APP_URL | quote }}
+            
+            # Email settings
+            - name: SMTP_HOST
+              value: {{ .Values.env.SMTP_HOST | quote }}
+            - name: SMTP_PORT
+              value: {{ .Values.env.SMTP_PORT | quote }}
+            - name: SMTP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: SMTP_USER
+            - name: SMTP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: SMTP_PASSWORD
+            
+            # AWS settings
+            - name: AWS_REGION
+              value: {{ .Values.env.AWS_REGION | quote }}
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: AWS_ACCESS_KEY_ID
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: AWS_S3_BUCKET
+              value: {{ .Values.env.AWS_S3_BUCKET | quote }}
+            
+            # AI/ML settings
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: OPENAI_API_KEY
+            - name: JINA_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: JINA_API_KEY
+            - name: COHERE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: COHERE_API_KEY
+            
+            # Vector database settings
+            - name: PINECONE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: PINECONE_API_KEY
+            - name: PINECONE_ENVIRONMENT
+              value: {{ .Values.env.PINECONE_ENVIRONMENT | quote }}
+            - name: QDRANT_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: QDRANT_API_KEY
+            - name: QDRANT_URL
+              value: {{ .Values.env.QDRANT_URL | quote }}
+            
+            # Logging settings
+            - name: AXIOM_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: AXIOM_TOKEN
+            - name: AXIOM_ORG_ID
+              value: {{ .Values.env.AXIOM_ORG_ID | quote }}
+            - name: AXIOM_DATASET
+              value: {{ .Values.env.AXIOM_DATASET | quote }}
+
+            # CRM Cloud Client Secrets
+            - name: HUBSPOT_CRM_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: HUBSPOT_CRM_CLOUD_CLIENT_SECRET
+            - name: ATTIO_CRM_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: ATTIO_CRM_CLOUD_CLIENT_SECRET
+            - name: ZOHO_CRM_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: ZOHO_CRM_CLOUD_CLIENT_SECRET
+            - name: PIPEDRIVE_CRM_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: PIPEDRIVE_CRM_CLOUD_CLIENT_SECRET
+            - name: ZENDESK_CRM_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: ZENDESK_CRM_CLOUD_CLIENT_SECRET
+            - name: SALESFORCE_CRM_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: SALESFORCE_CRM_CLOUD_CLIENT_SECRET
+            - name: MICROSOFTDYNAMICSSALES_CRM_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: MICROSOFTDYNAMICSSALES_CRM_CLOUD_CLIENT_SECRET
+            - name: ACCELO_CRM_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: ACCELO_CRM_CLOUD_CLIENT_SECRET
+            - name: CAPSULE_CRM_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: CAPSULE_CRM_CLOUD_CLIENT_SECRET
+            - name: CLOSE_CRM_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: CLOSE_CRM_CLOUD_CLIENT_SECRET
+            - name: COPPER_CRM_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: COPPER_CRM_CLOUD_CLIENT_SECRET
+            - name: KEAP_CRM_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: KEAP_CRM_CLOUD_CLIENT_SECRET
+            - name: TEAMLEADER_CRM_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: TEAMLEADER_CRM_CLOUD_CLIENT_SECRET
+            - name: TEAMWORK_CRM_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: TEAMWORK_CRM_CLOUD_CLIENT_SECRET
+
+            # Ticketing Cloud Client Secrets
+            - name: ZENDESK_TICKETING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: ZENDESK_TICKETING_CLOUD_CLIENT_SECRET
+            - name: FRONT_TICKETING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: FRONT_TICKETING_CLOUD_CLIENT_SECRET
+            - name: CLICKUP_TICKETING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: CLICKUP_TICKETING_CLOUD_CLIENT_SECRET
+            - name: GITHUB_TICKETING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: GITHUB_TICKETING_CLOUD_CLIENT_SECRET
+            - name: GITLAB_TICKETING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: GITLAB_TICKETING_CLOUD_CLIENT_SECRET
+            - name: GORGIAS_TICKETING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: GORGIAS_TICKETING_CLOUD_CLIENT_SECRET
+            - name: JIRA_TICKETING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: JIRA_TICKETING_CLOUD_CLIENT_SECRET
+            - name: JIRA_SERVICEMGMT_TICKETING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: JIRA_SERVICEMGMT_TICKETING_CLOUD_CLIENT_SECRET
+            - name: LINEAR_TICKETING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: LINEAR_TICKETING_CLOUD_CLIENT_SECRET
+            - name: AHA_TICKETING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: AHA_TICKETING_CLOUD_CLIENT_SECRET
+            - name: WRIKE_TICKETING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: WRIKE_TICKETING_CLOUD_CLIENT_SECRET
+            - name: ASANA_TICKETING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: ASANA_TICKETING_CLOUD_CLIENT_SECRET
+            - name: KLAVIYO_TICKETING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: KLAVIYO_TICKETING_CLOUD_CLIENT_SECRET
+            - name: HELPSCOUT_TICKETING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: HELPSCOUT_TICKETING_CLOUD_CLIENT_SECRET
+            - name: IRONCLAD_TICKETING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: IRONCLAD_TICKETING_CLOUD_CLIENT_SECRET
+
+            # Accounting Cloud Client Secrets
+            - name: PENNYLANE_ACCOUNTING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: PENNYLANE_ACCOUNTING_CLOUD_CLIENT_SECRET
+            - name: FRESHBOOKS_ACCOUNTING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: FRESHBOOKS_ACCOUNTING_CLOUD_CLIENT_SECRET
+            - name: FREEAGENT_ACCOUNTING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: FREEAGENT_ACCOUNTING_CLOUD_CLIENT_SECRET
+            - name: SAGE_ACCOUNTING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: SAGE_ACCOUNTING_CLOUD_CLIENT_SECRET
+            - name: MONEYBIRD_ACCOUNTING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: MONEYBIRD_ACCOUNTING_CLOUD_CLIENT_SECRET
+            - name: QUICKBOOKS_ACCOUNTING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: QUICKBOOKS_ACCOUNTING_CLOUD_CLIENT_SECRET
+            - name: WAVE_FINANCIAL_ACCOUNTING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: WAVE_FINANCIAL_ACCOUNTING_CLOUD_CLIENT_SECRET
+            - name: XERO_ACCOUNTING_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: XERO_ACCOUNTING_CLOUD_CLIENT_SECRET
+
+            # Marketing Automation Cloud Client Secrets
+            - name: GETRESPONSE_MARKETINGAUTOMATION_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: GETRESPONSE_MARKETINGAUTOMATION_CLOUD_CLIENT_SECRET
+            - name: MAILCHIMP_MARKETINGAUTOMATION_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: MAILCHIMP_MARKETINGAUTOMATION_CLOUD_CLIENT_SECRET
+            - name: PODIUM_MARKETINGAUTOMATION_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: PODIUM_MARKETINGAUTOMATION_CLOUD_CLIENT_SECRET
+            - name: KEAP_MARKETINGAUTOMATION_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: KEAP_MARKETINGAUTOMATION_CLOUD_CLIENT_SECRET
+
+            # File Storage Cloud Client Secrets
+            - name: GOOGLEDRIVE_FILESTORAGE_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: GOOGLEDRIVE_FILESTORAGE_CLOUD_CLIENT_SECRET
+            - name: ONEDRIVE_FILESTORAGE_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: ONEDRIVE_FILESTORAGE_CLOUD_CLIENT_SECRET
+            - name: SHAREPOINT_FILESTORAGE_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: SHAREPOINT_FILESTORAGE_CLOUD_CLIENT_SECRET
+            - name: DROPBOX_FILESTORAGE_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: DROPBOX_FILESTORAGE_CLOUD_CLIENT_SECRET
+            - name: BOX_FILESTORAGE_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: BOX_FILESTORAGE_CLOUD_CLIENT_SECRET
+
+            # Productivity Cloud Client Secrets
+            - name: NOTION_PRODUCTIVITY_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: NOTION_PRODUCTIVITY_CLOUD_CLIENT_SECRET
+            - name: SLACK_PRODUCTIVITY_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: SLACK_PRODUCTIVITY_CLOUD_CLIENT_SECRET
+
+            # E-commerce Cloud Client Secrets
+            - name: SHOPIFY_ECOMMERCE_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: SHOPIFY_ECOMMERCE_CLOUD_CLIENT_SECRET
+            - name: SQUARESPACE_ECOMMERCE_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: SQUARESPACE_ECOMMERCE_CLOUD_CLIENT_SECRET
+            - name: EBAY_ECOMMERCE_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: EBAY_ECOMMERCE_CLOUD_CLIENT_SECRET
+            - name: FAIRE_ECOMMERCE_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: FAIRE_ECOMMERCE_CLOUD_CLIENT_SECRET
+            - name: WEBFLOW_ECOMMERCE_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: WEBFLOW_ECOMMERCE_CLOUD_CLIENT_SECRET
+            - name: AMAZON_ECOMMERCE_CLOUD_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: AMAZON_ECOMMERCE_CLOUD_CLIENT_SECRET
+
+            # Additional Missing Secrets
+            - name: UNSTRUCTURED_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: UNSTRUCTURED_API_KEY
+            - name: WEAVIATE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: WEAVIATE_API_KEY
+            - name: TURBOPUFFER_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "unified-api-service.fullname" . }}-secrets
+                  key: TURBOPUFFER_API_KEY
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.livenessProbe.path }}
+              port: http
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.readinessProbe.path }}
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

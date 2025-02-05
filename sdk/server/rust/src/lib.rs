@@ -1242,6 +1242,86 @@ pub enum DeleteWebhookResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum DeleteWorkflowResponse {
+    /// Workflow deleted successfully
+    WorkflowDeletedSuccessfully
+    (models::DeleteWorkflowResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum DeleteWorkspaceResponse {
     /// Workspace deleted successfully
     WorkspaceDeletedSuccessfully
@@ -5047,6 +5127,16 @@ pub trait Api<C: Send + Sync> {
         account_id: Option<String>,
         context: &C) -> Result<DeleteWebhookResponse, ApiError>;
 
+    /// Delete workflow
+    async fn delete_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        org_id: String,
+        tenant_id: String,
+        account_id: Option<String>,
+        context: &C) -> Result<DeleteWorkflowResponse, ApiError>;
+
     /// Delete a workspace
     async fn delete_workspace(
         &self,
@@ -5184,7 +5274,6 @@ pub trait Api<C: Send + Sync> {
         page_size: Option<i32>,
         page_number: Option<i32>,
         status: Option<String>,
-        sort_desc: Option<bool>,
         search: Option<String>,
         context: &C) -> Result<ListApiKeysResponse, ApiError>;
 
@@ -5567,6 +5656,16 @@ pub trait ApiNoContext<C: Send + Sync> {
         account_id: Option<String>,
         ) -> Result<DeleteWebhookResponse, ApiError>;
 
+    /// Delete workflow
+    async fn delete_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        org_id: String,
+        tenant_id: String,
+        account_id: Option<String>,
+        ) -> Result<DeleteWorkflowResponse, ApiError>;
+
     /// Delete a workspace
     async fn delete_workspace(
         &self,
@@ -5704,7 +5803,6 @@ pub trait ApiNoContext<C: Send + Sync> {
         page_size: Option<i32>,
         page_number: Option<i32>,
         status: Option<String>,
-        sort_desc: Option<bool>,
         search: Option<String>,
         ) -> Result<ListApiKeysResponse, ApiError>;
 
@@ -6161,6 +6259,20 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         self.api().delete_webhook(webhook_id, organization_id, workspace_id, tenant_id, account_id, &context).await
     }
 
+    /// Delete workflow
+    async fn delete_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        org_id: String,
+        tenant_id: String,
+        account_id: Option<String>,
+        ) -> Result<DeleteWorkflowResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().delete_workflow(workspace_id, id, org_id, tenant_id, account_id, &context).await
+    }
+
     /// Delete a workspace
     async fn delete_workspace(
         &self,
@@ -6362,12 +6474,11 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         page_size: Option<i32>,
         page_number: Option<i32>,
         status: Option<String>,
-        sort_desc: Option<bool>,
         search: Option<String>,
         ) -> Result<ListApiKeysResponse, ApiError>
     {
         let context = self.context().clone();
-        self.api().list_api_keys(organization_id, tenant_id, account_id, workspace_id, page_size, page_number, status, sort_desc, search, &context).await
+        self.api().list_api_keys(organization_id, tenant_id, account_id, workspace_id, page_size, page_number, status, search, &context).await
     }
 
     /// List leads

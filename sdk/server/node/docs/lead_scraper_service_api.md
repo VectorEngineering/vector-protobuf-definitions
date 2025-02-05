@@ -19,6 +19,7 @@ Method | HTTP request | Description
 [**DeleteTenant**](lead_scraper_service_api.md#DeleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 [**DeleteTenantAPIKey**](lead_scraper_service_api.md#DeleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
 [**DeleteWebhook**](lead_scraper_service_api.md#DeleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
+[**DeleteWorkflow**](lead_scraper_service_api.md#DeleteWorkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 [**DeleteWorkspace**](lead_scraper_service_api.md#DeleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
 [**DownloadScrapingResults**](lead_scraper_service_api.md#DownloadScrapingResults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV
 [**GetAPIKey**](lead_scraper_service_api.md#GetAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
@@ -164,6 +165,13 @@ Permanently deletes a tenant API key
 Delete webhook
 
 Deletes a webhook configuration
+<a name="DeleteWorkflow"></a>
+# **DeleteWorkflow**
+> DeleteWorkflowResponse DeleteWorkflow(workspaceId, Id_, orgId, tenantId, accountId)
+
+Delete workflow
+
+Deletes a specific workflow
 <a name="DeleteWorkspace"></a>
 # **DeleteWorkspace**
 > DeleteWorkspaceResponse DeleteWorkspace(Id_)
@@ -271,7 +279,7 @@ Create a new workflow
 This endpoint creates a new workflow configuration for a specific workspace  Required parameters: - workspace_id: Parent workspace ID - name: Human-readable workflow name - description: Optional workflow description - parameters: Job parameters for the workflow  Example: &#x60;&#x60;&#x60;json
 <a name="ListAPIKeys"></a>
 # **ListAPIKeys**
-> ListApiKeysResponse ListAPIKeys(organizationId, tenantId, accountId, workspaceId, pageSize, pageNumber, status, sortDesc, search)
+> ListApiKeysResponse ListAPIKeys(organizationId, tenantId, accountId, workspaceId, pageSize, pageNumber, status, search)
 
 List API keys
 

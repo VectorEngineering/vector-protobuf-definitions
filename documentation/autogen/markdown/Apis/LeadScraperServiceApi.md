@@ -19,6 +19,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**deleteTenant**](LeadScraperServiceApi.md#deleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant |
 | [**deleteTenantAPIKey**](LeadScraperServiceApi.md#deleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key |
 | [**deleteWebhook**](LeadScraperServiceApi.md#deleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook |
+| [**deleteWorkflow**](LeadScraperServiceApi.md#deleteWorkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow |
 | [**deleteWorkspace**](LeadScraperServiceApi.md#deleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace |
 | [**downloadScrapingResults**](LeadScraperServiceApi.md#downloadScrapingResults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV |
 | [**getAPIKey**](LeadScraperServiceApi.md#getAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details |
@@ -481,6 +482,37 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
+<a name="deleteWorkflow"></a>
+# **deleteWorkflow**
+> DeleteWorkflowResponse deleteWorkflow(workspaceId, id, orgId, tenantId, accountId)
+
+Delete workflow
+
+    Deletes a specific workflow
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **workspaceId** | **String**|  | [default to null] |
+| **id** | **String**|  | [default to null] |
+| **orgId** | **String**|  | [default to null] |
+| **tenantId** | **String**|  | [default to null] |
+| **accountId** | **String**|  | [optional] [default to null] |
+
+### Return type
+
+[**DeleteWorkflowResponse**](../Models/DeleteWorkflowResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
 <a name="deleteWorkspace"></a>
 # **deleteWorkspace**
 > DeleteWorkspaceResponse deleteWorkspace(id)
@@ -915,7 +947,7 @@ No authorization required
 
 <a name="listAPIKeys"></a>
 # **listAPIKeys**
-> ListAPIKeysResponse listAPIKeys(organizationId, tenantId, accountId, workspaceId, pageSize, pageNumber, status, sortDesc, search)
+> ListAPIKeysResponse listAPIKeys(organizationId, tenantId, accountId, workspaceId, pageSize, pageNumber, status, search)
 
 List API keys
 
@@ -932,7 +964,6 @@ List API keys
 | **pageSize** | **Integer**|  | [optional] [default to null] |
 | **pageNumber** | **Integer**|  | [optional] [default to null] |
 | **status** | **String**|  | [optional] [default to null] |
-| **sortDesc** | **Boolean**|  | [optional] [default to null] |
 | **search** | **String**|  | [optional] [default to null] |
 
 ### Return type

@@ -1,0 +1,22 @@
+################################################
+# Build the image : docker build -t validate_connectors -f Dockerfile.validate-connectors .
+# Run with: docker run -v $(pwd):/app/ -e VERTICAL=vertical -e OBJECT_TYPE=object validate_connectors
+# note: use lowercase for object and vertical values
+################################################
+
+FROM node:20-alpine3.21
+
+# Install dependencies
+RUN apk add --no-cache libc6-compat netcat-openbsd curl openssl git
+RUN apk update
+
+# Install pnpm
+RUN npm install -g pnpm@8.15.1
+
+WORKDIR /app
+
+# Set environment variables
+ENV VERTICAL="$VERTICAL"
+ENV OBJECT_TYPE="$OBJECT_TYPE"
+
+CMD pnpm install && pnpm run validate-connectors --vertical="${VERTICAL}" --objectType="${OBJECT_TYPE}"

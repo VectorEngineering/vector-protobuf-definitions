@@ -1,0 +1,340 @@
+# Default values for unified-api-service.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
+replicaCount: 1
+
+# This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
+image:
+  repository: vector-unified-api
+  # This sets the pull policy for images.
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: latest
+
+# This is for the secretes for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+imagePullSecrets: []
+# This is to override the chart name.
+nameOverride: ""
+fullnameOverride: ""
+
+# This section builds out the service account more information can be found here: https://kubernetes.io/docs/concepts/security/service-accounts/
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Automatically mount a ServiceAccount's API credentials?
+  automount: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# This is for setting Kubernetes Annotations to a Pod.
+# For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+podAnnotations: {}
+# This is for setting Kubernetes Labels to a Pod.
+# For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+podLabels: {}
+
+podSecurityContext:
+  {}
+  # fsGroup: 2000
+
+securityContext:
+  {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+# This is for setting up a service more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/
+service:
+  # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+  type: ClusterIP
+  # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
+  port: 3000
+
+# This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1024Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+
+# This is to setup the liveness and readiness probes more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+livenessProbe:
+  httpGet:
+    path: /health
+    port: http
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /health
+    port: http
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+# This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+# Additional volumes on the output Deployment definition.
+volumes:
+  - name: redis-data
+    persistentVolumeClaim:
+      claimName: redis-data-pvc
+  - name: postgres-data
+    persistentVolumeClaim:
+      claimName: postgres-data-pvc
+
+# Additional volumeMounts on the output Deployment definition.
+volumeMounts:
+  - name: redis-data
+    mountPath: /data
+  - name: postgres-data
+    mountPath: /var/lib/postgresql/data
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Environment variables
+env:
+  # Core settings
+  NODE_ENV: production
+  PORT: "3000"
+  ENV: development
+  DISTRIBUTION: development
+  WEBHOOK_INGRESS: ""
+  REDIRECT_TUNNEL_INGRESS: "https://panora-contributors-redirect.rachid-7e5.workers.dev/http://localhost:3000"
+  JWT_SECRET: ""
+  
+  # Database settings
+  DATABASE_URL: "postgresql://my_user:my_password@postgres:5432/panora_db?ssl=false"
+  POSTGRES_USER: my_user
+  POSTGRES_PASSWORD: my_password
+  POSTGRES_DB: panora_db
+  POSTGRES_HOST: postgres
+  POSTGRES_PORT: "5432"
+  
+  # Redis settings
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"
+  REDIS_USER: default
+  REDIS_PASS: A3vniod98Zbuvn9u5
+  REDIS_DB: "0"
+  
+  # Monitoring settings
+  SENTRY_ENABLED: "false"
+  SENTRY_DSN: ""
+  POSTHOG_HOST: "https://us.i.posthog.com"
+  POSTHOG_KEY: "phc_WhWJfNPOHAuWVdyTacGxrPa9JW54scnofA9KVEjFcFw"
+  PH_TELEMETRY: "TRUE"
+  
+  # Application settings
+  WEBAPP_URL: ""
+  APP_NAME: "Vector Unified API"
+  APP_URL: ""
+  ENCRYPT_CRYPTO_SECRET_KEY: ""
+  PANORA_BASE_API_URL: ""
+  
+  # Email settings
+  EMAIL_SENDING_ADDRESS: ""
+  SMTP_HOST: ""
+  SMTP_PORT: ""
+  SMTP_USER: ""
+  SMTP_PASSWORD: ""
+
+  # AWS settings
+  AWS_S3_REGION: ""
+  AWS_ACCESS_KEY_ID: ""
+  AWS_SECRET_ACCESS_KEY: ""
+  AWS_S3_BUCKET: ""
+
+  # AI/ML settings
+  OPENAI_API_KEY: ""
+  JINA_API_KEY: ""
+  COHERE_API_KEY: ""
+  UNSTRUCTURED_API_KEY: ""
+  UNSTRUCTURED_API_URL: ""
+  
+  # Vector databases
+  PINECONE_API_KEY: ""
+  PINECONE_INDEX_NAME: ""
+  PINECONE_ENVIRONMENT: ""
+  QDRANT_BASE_URL: ""
+  QDRANT_API_KEY: ""
+  QDRANT_COLLECTION_NAME: ""
+  CHROMADB_URL: ""
+  CHROMADB_COLLECTION_NAME: ""
+  WEAVIATE_URL: ""
+  WEAVIATE_API_KEY: ""
+  WEAVIATE_CLASS_NAME: ""
+  TURBOPUFFER_API_KEY: ""
+  MILVUS_ADDRESS: ""
+  MILVUS_COLLECTION_NAME: ""
+  
+  # Logging
+  AXIOM_DATASET: ""
+  AXIOM_TOKEN: ""
+  AXIOM_ORG_ID: ""
+
+  # CRM Cloud Client IDs and Secrets
+  HUBSPOT_CRM_CLOUD_CLIENT_ID: "ca8ef3b9-201d-4472-84c3-1246f83d0b03"
+  HUBSPOT_CRM_CLOUD_CLIENT_SECRET: "16b75410-8884-4c4a-a6b7-ca50b61eb289"
+  ATTIO_CRM_CLOUD_CLIENT_ID: ""
+  ATTIO_CRM_CLOUD_CLIENT_SECRET: ""
+  ZOHO_CRM_CLOUD_CLIENT_ID: ""
+  ZOHO_CRM_CLOUD_CLIENT_SECRET: ""
+  PIPEDRIVE_CRM_CLOUD_CLIENT_ID: ""
+  PIPEDRIVE_CRM_CLOUD_CLIENT_SECRET: ""
+  ZENDESK_CRM_CLOUD_CLIENT_ID: ""
+  ZENDESK_CRM_CLOUD_CLIENT_SECRET: ""
+  SALESFORCE_CRM_CLOUD_CLIENT_ID: ""
+  SALESFORCE_CRM_CLOUD_CLIENT_SECRET: ""
+  MICROSOFTDYNAMICSSALES_CRM_CLOUD_CLIENT_ID: ""
+  MICROSOFTDYNAMICSSALES_CRM_CLOUD_CLIENT_SECRET: ""
+  ACCELO_CRM_CLOUD_CLIENT_ID: ""
+  ACCELO_CRM_CLOUD_CLIENT_SECRET: ""
+  ACCELO_CRM_CLOUD_SUBDOMAIN: ""
+  CAPSULE_CRM_CLOUD_CLIENT_ID: ""
+  CAPSULE_CRM_CLOUD_CLIENT_SECRET: ""
+  CLOSE_CRM_CLOUD_CLIENT_ID: ""
+  CLOSE_CRM_CLOUD_CLIENT_SECRET: ""
+  COPPER_CRM_CLOUD_CLIENT_ID: ""
+  COPPER_CRM_CLOUD_CLIENT_SECRET: ""
+  KEAP_CRM_CLOUD_CLIENT_ID: ""
+  KEAP_CRM_CLOUD_CLIENT_SECRET: ""
+  TEAMLEADER_CRM_CLOUD_CLIENT_ID: ""
+  TEAMLEADER_CRM_CLOUD_CLIENT_SECRET: ""
+  TEAMWORK_CRM_CLOUD_CLIENT_ID: ""
+  TEAMWORK_CRM_CLOUD_CLIENT_SECRET: ""
+
+  # Ticketing Cloud Client IDs and Secrets
+  ZENDESK_TICKETING_CLOUD_CLIENT_ID: ""
+  ZENDESK_TICKETING_CLOUD_CLIENT_SECRET: ""
+  ZENDESK_TICKETING_CLOUD_SUBDOMAIN: ""
+  FRONT_TICKETING_CLOUD_CLIENT_ID: ""
+  FRONT_TICKETING_CLOUD_CLIENT_SECRET: ""
+  CLICKUP_TICKETING_CLOUD_CLIENT_ID: ""
+  CLICKUP_TICKETING_CLOUD_CLIENT_SECRET: ""
+  GITHUB_TICKETING_CLOUD_CLIENT_ID: ""
+  GITHUB_TICKETING_CLOUD_CLIENT_SECRET: ""
+  GITLAB_TICKETING_CLOUD_CLIENT_ID: ""
+  GITLAB_TICKETING_CLOUD_CLIENT_SECRET: ""
+  GORGIAS_TICKETING_CLOUD_CLIENT_ID: ""
+  GORGIAS_TICKETING_CLOUD_CLIENT_SECRET: ""
+  GORGIAS_TICKETING_CLOUD_SUBDOMAIN: ""
+  JIRA_TICKETING_CLOUD_CLIENT_ID: ""
+  JIRA_TICKETING_CLOUD_CLIENT_SECRET: ""
+  JIRA_SERVICEMGMT_TICKETING_CLOUD_CLIENT_ID: ""
+  JIRA_SERVICEMGMT_TICKETING_CLOUD_CLIENT_SECRET: ""
+  LINEAR_TICKETING_CLOUD_CLIENT_ID: ""
+  LINEAR_TICKETING_CLOUD_CLIENT_SECRET: ""
+  AHA_TICKETING_CLOUD_CLIENT_ID: ""
+  AHA_TICKETING_CLOUD_CLIENT_SECRET: ""
+  AHA_TICKETING_CLOUD_SUBDOMAIN: ""
+  WRIKE_TICKETING_CLOUD_CLIENT_ID: ""
+  WRIKE_TICKETING_CLOUD_CLIENT_SECRET: ""
+  ASANA_TICKETING_CLOUD_CLIENT_ID: ""
+  ASANA_TICKETING_CLOUD_CLIENT_SECRET: ""
+  KLAVIYO_TICKETING_CLOUD_CLIENT_ID: ""
+  KLAVIYO_TICKETING_CLOUD_CLIENT_SECRET: ""
+  HELPSCOUT_TICKETING_CLOUD_CLIENT_ID: ""
+  HELPSCOUT_TICKETING_CLOUD_CLIENT_SECRET: ""
+  IRONCLAD_TICKETING_CLOUD_CLIENT_ID: ""
+  IRONCLAD_TICKETING_CLOUD_CLIENT_SECRET: ""
+
+  # Accounting Cloud Client IDs and Secrets
+  PENNYLANE_ACCOUNTING_CLOUD_CLIENT_ID: ""
+  PENNYLANE_ACCOUNTING_CLOUD_CLIENT_SECRET: ""
+  FRESHBOOKS_ACCOUNTING_CLOUD_CLIENT_ID: ""
+  FRESHBOOKS_ACCOUNTING_CLOUD_CLIENT_SECRET: ""
+  FREEAGENT_ACCOUNTING_CLOUD_CLIENT_ID: ""
+  FREEAGENT_ACCOUNTING_CLOUD_CLIENT_SECRET: ""
+  SAGE_ACCOUNTING_CLOUD_CLIENT_ID: ""
+  SAGE_ACCOUNTING_CLOUD_CLIENT_SECRET: ""
+  MONEYBIRD_ACCOUNTING_CLOUD_CLIENT_ID: ""
+  MONEYBIRD_ACCOUNTING_CLOUD_CLIENT_SECRET: ""
+  QUICKBOOKS_ACCOUNTING_CLOUD_CLIENT_ID: ""
+  QUICKBOOKS_ACCOUNTING_CLOUD_CLIENT_SECRET: ""
+  WAVE_FINANCIAL_ACCOUNTING_CLOUD_CLIENT_ID: ""
+  WAVE_FINANCIAL_ACCOUNTING_CLOUD_CLIENT_SECRET: ""
+  XERO_ACCOUNTING_CLOUD_CLIENT_ID: ""
+  XERO_ACCOUNTING_CLOUD_CLIENT_SECRET: ""
+
+  # Marketing Automation Cloud Client IDs and Secrets
+  GETRESPONSE_MARKETINGAUTOMATION_CLOUD_CLIENT_ID: ""
+  GETRESPONSE_MARKETINGAUTOMATION_CLOUD_CLIENT_SECRET: ""
+  MAILCHIMP_MARKETINGAUTOMATION_CLOUD_CLIENT_ID: ""
+  MAILCHIMP_MARKETINGAUTOMATION_CLOUD_CLIENT_SECRET: ""
+  PODIUM_MARKETINGAUTOMATION_CLOUD_CLIENT_ID: ""
+  PODIUM_MARKETINGAUTOMATION_CLOUD_CLIENT_SECRET: ""
+  KEAP_MARKETINGAUTOMATION_CLOUD_CLIENT_ID: ""
+  KEAP_MARKETINGAUTOMATION_CLOUD_CLIENT_SECRET: ""
+
+  # File Storage Cloud Client IDs and Secrets
+  GOOGLEDRIVE_FILESTORAGE_CLOUD_CLIENT_ID: ""
+  GOOGLEDRIVE_FILESTORAGE_CLOUD_CLIENT_SECRET: ""
+  ONEDRIVE_FILESTORAGE_CLOUD_CLIENT_ID: ""
+  ONEDRIVE_FILESTORAGE_CLOUD_CLIENT_SECRET: ""
+  SHAREPOINT_FILESTORAGE_CLOUD_CLIENT_ID: ""
+  SHAREPOINT_FILESTORAGE_CLOUD_CLIENT_SECRET: ""
+  DROPBOX_FILESTORAGE_CLOUD_CLIENT_ID: ""
+  DROPBOX_FILESTORAGE_CLOUD_CLIENT_SECRET: ""
+  BOX_FILESTORAGE_CLOUD_CLIENT_ID: ""
+  BOX_FILESTORAGE_CLOUD_CLIENT_SECRET: ""
+
+  # Productivity Cloud Client IDs and Secrets
+  NOTION_PRODUCTIVITY_CLOUD_CLIENT_ID: ""
+  NOTION_PRODUCTIVITY_CLOUD_CLIENT_SECRET: ""
+  SLACK_PRODUCTIVITY_CLOUD_CLIENT_ID: ""
+  SLACK_PRODUCTIVITY_CLOUD_CLIENT_SECRET: ""
+
+  # E-commerce Cloud Client IDs and Secrets
+  SHOPIFY_ECOMMERCE_CLOUD_CLIENT_ID: ""
+  SHOPIFY_ECOMMERCE_CLOUD_CLIENT_SECRET: ""
+  SQUARESPACE_ECOMMERCE_CLOUD_CLIENT_ID: ""
+  SQUARESPACE_ECOMMERCE_CLOUD_CLIENT_SECRET: ""
+  EBAY_ECOMMERCE_CLOUD_CLIENT_ID: ""
+  EBAY_ECOMMERCE_CLOUD_CLIENT_SECRET: ""
+  EBAY_ECOMMERCE_CLOUD_RUVALUE: ""
+  FAIRE_ECOMMERCE_CLOUD_CLIENT_ID: ""
+  FAIRE_ECOMMERCE_CLOUD_CLIENT_SECRET: ""
+  WEBFLOW_ECOMMERCE_CLOUD_CLIENT_ID: ""
+  WEBFLOW_ECOMMERCE_CLOUD_CLIENT_SECRET: ""
+  AMAZON_ECOMMERCE_CLOUD_CLIENT_ID: ""
+  AMAZON_ECOMMERCE_CLOUD_CLIENT_SECRET: ""
+  AMAZON_ECOMMERCE_CLOUD_APPLICATION_ID: ""

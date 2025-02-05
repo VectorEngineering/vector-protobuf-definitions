@@ -1,0 +1,17 @@
+################################################
+# Build the image : docker build -t package_builder -f Dockerfile.pnpm-build .
+# Run with: docker run -v $(pwd):/app/ package_builder
+################################################
+
+FROM node:20-alpine3.21
+
+# Install dependencies
+RUN apk add --no-cache libc6-compat netcat-openbsd curl openssl git
+RUN apk update
+
+# Install pnpm
+RUN npm install -g pnpm@8.15.1
+
+WORKDIR /app
+
+CMD pnpm install && pnpm run build

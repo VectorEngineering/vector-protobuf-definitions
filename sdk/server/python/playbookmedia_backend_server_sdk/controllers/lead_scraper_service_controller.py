@@ -31,6 +31,7 @@ from playbookmedia_backend_server_sdk.models.delete_scraping_job_response import
 from playbookmedia_backend_server_sdk.models.delete_tenant_api_key_response import DeleteTenantAPIKeyResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_tenant_response import DeleteTenantResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_webhook_response import DeleteWebhookResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.delete_workflow_response import DeleteWorkflowResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_workspace_response import DeleteWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.download_scraping_results_response import DownloadScrapingResultsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.forbidden_error_message_response import ForbiddenErrorMessageResponse  # noqa: E501
@@ -344,6 +345,27 @@ def delete_webhook(webhook_id, organization_id=None, workspace_id=None, tenant_i
     return 'do some magic!'
 
 
+def delete_workflow(workspace_id, id, org_id, tenant_id, account_id=None):  # noqa: E501
+    """Delete workflow
+
+    Deletes a specific workflow # noqa: E501
+
+    :param workspace_id: 
+    :type workspace_id: str
+    :param id: 
+    :type id: str
+    :param org_id: 
+    :type org_id: str
+    :param tenant_id: 
+    :type tenant_id: str
+    :param account_id: 
+    :type account_id: str
+
+    :rtype: Union[DeleteWorkflowResponse, Tuple[DeleteWorkflowResponse, int], Tuple[DeleteWorkflowResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
 def delete_workspace(id):  # noqa: E501
     """Delete a workspace
 
@@ -618,7 +640,7 @@ def list_accounts(page_size=None, page_number=None, filter=None, organization_id
     return 'do some magic!'
 
 
-def list_api_keys(organization_id=None, tenant_id=None, account_id=None, workspace_id=None, page_size=None, page_number=None, status=None, sort_desc=None, search=None):  # noqa: E501
+def list_api_keys(organization_id=None, tenant_id=None, account_id=None, workspace_id=None, page_size=None, page_number=None, status=None, search=None):  # noqa: E501
     """List API keys
 
     Retrieves a list of API keys with optional filtering # noqa: E501
@@ -637,8 +659,6 @@ def list_api_keys(organization_id=None, tenant_id=None, account_id=None, workspa
     :type page_number: int
     :param status: 
     :type status: str
-    :param sort_desc: 
-    :type sort_desc: bool
     :param search: 
     :type search: str
 

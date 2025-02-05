@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-05T07:44:53.721727-05:00[America/New_York]
+- Build date: 2025-02-05T09:09:08.202574-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -69,6 +69,7 @@ cargo run --example client DeleteScrapingJob
 cargo run --example client DeleteTenant
 cargo run --example client DeleteTenantApiKey
 cargo run --example client DeleteWebhook
+cargo run --example client DeleteWorkflow
 cargo run --example client DeleteWorkspace
 cargo run --example client DownloadScrapingResults
 cargo run --example client GetAccount
@@ -151,6 +152,7 @@ Method | HTTP request | Description
 [**DeleteTenant**](docs/lead_scraper_service_api.md#DeleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 [**DeleteTenantAPIKey**](docs/lead_scraper_service_api.md#DeleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
 [**DeleteWebhook**](docs/lead_scraper_service_api.md#DeleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
+[**DeleteWorkflow**](docs/lead_scraper_service_api.md#DeleteWorkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 [**DeleteWorkspace**](docs/lead_scraper_service_api.md#DeleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
 [**DownloadScrapingResults**](docs/lead_scraper_service_api.md#DownloadScrapingResults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV
 [**GetAccount**](docs/lead_scraper_service_api.md#GetAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details
@@ -280,6 +282,7 @@ Method | HTTP request | Description
  - [DeleteTenantApiKeyResponse](docs/DeleteTenantApiKeyResponse.md)
  - [DeleteTenantResponse](docs/DeleteTenantResponse.md)
  - [DeleteWebhookResponse](docs/DeleteWebhookResponse.md)
+ - [DeleteWorkflowResponse](docs/DeleteWorkflowResponse.md)
  - [DeleteWorkspaceResponse](docs/DeleteWorkspaceResponse.md)
  - [Dependency](docs/Dependency.md)
  - [DocumentBranch](docs/DocumentBranch.md)

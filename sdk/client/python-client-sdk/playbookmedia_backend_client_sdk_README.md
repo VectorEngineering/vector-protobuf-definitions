@@ -80,6 +80,7 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**delete_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_tenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 *LeadScraperServiceApi* | [**delete_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_tenant_api_key) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
 *LeadScraperServiceApi* | [**delete_webhook**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_webhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
+*LeadScraperServiceApi* | [**delete_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_workflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 *LeadScraperServiceApi* | [**delete_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_workspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
 *LeadScraperServiceApi* | [**download_scraping_results**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#download_scraping_results) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV
 *LeadScraperServiceApi* | [**get_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_account) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details
@@ -209,6 +210,7 @@ Class | Method | HTTP request | Description
  - [DeleteTenantAPIKeyResponse](playbookmedia_backend_client_sdk/docs/DeleteTenantAPIKeyResponse.md)
  - [DeleteTenantResponse](playbookmedia_backend_client_sdk/docs/DeleteTenantResponse.md)
  - [DeleteWebhookResponse](playbookmedia_backend_client_sdk/docs/DeleteWebhookResponse.md)
+ - [DeleteWorkflowResponse](playbookmedia_backend_client_sdk/docs/DeleteWorkflowResponse.md)
  - [DeleteWorkspaceResponse](playbookmedia_backend_client_sdk/docs/DeleteWorkspaceResponse.md)
  - [Dependency](playbookmedia_backend_client_sdk/docs/Dependency.md)
  - [DocumentBranch](playbookmedia_backend_client_sdk/docs/DocumentBranch.md)

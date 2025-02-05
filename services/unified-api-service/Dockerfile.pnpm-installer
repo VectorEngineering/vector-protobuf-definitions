@@ -1,0 +1,21 @@
+################################################
+# Build the image : docker build -t package_installer -f Dockerfile.pnpm-installer .
+# Run with: docker run -v $(pwd):/app/ -e PACKAGE_NAME=PACKAGE_NAME package_installer
+# example: docker run -v $(pwd):/app/ -e PACKAGE_NAME=@stripe/stripe-js package_installer
+################################################
+
+FROM node:20-alpine3.21
+
+# Install dependencies
+RUN apk add --no-cache libc6-compat netcat-openbsd curl openssl git
+RUN apk update
+
+# Install pnpm
+RUN npm install -g pnpm@8.15.1
+
+WORKDIR /app
+
+# Set environment variable
+ENV PACKAGE_NAME="$PACKAGE_NAME"
+
+CMD pnpm add "${PACKAGE_NAME}"

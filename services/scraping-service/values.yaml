@@ -1,0 +1,37 @@
+replicaCount: 1
+
+image:
+  repository: your-registry/scraper-api
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 3003
+
+environment:
+  PORT: "3003"
+  BLOCK_MEDIA: "False"
+  # Proxy configuration - these should be overridden in a secrets manager
+  PROXY_SERVER: ""
+  PROXY_USERNAME: ""
+  PROXY_PASSWORD: ""
+
+# For production, you should use a secret manager
+# and reference secrets rather than putting values here
+secrets:
+  proxyCredentials:
+    create: true
+    name: proxy-credentials
+    data:
+      PROXY_SERVER: ""
+      PROXY_USERNAME: ""
+      PROXY_PASSWORD: ""
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1024Mi
+  requests:
+    cpu: 500m
+    memory: 512Mi 

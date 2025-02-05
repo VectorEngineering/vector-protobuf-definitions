@@ -20,7 +20,6 @@ router.get("/", async (c) => {
       ? Number(c.req.query("pageNumber"))
       : undefined,
     status: c.req.query("status"),
-    sortDesc: c.req.query("sortDesc"),
     search: c.req.query("search"),
   };
   const response =

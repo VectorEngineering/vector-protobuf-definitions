@@ -1,3 +1,4 @@
+version: '3'
 services:
   scraping-service:
     build:
@@ -5,12 +6,16 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3003:3003"
+    volumes:
+      - .:/app
+      - /app/node_modules
     environment:
       - PORT=3003
       - BLOCK_MEDIA=false
       - PROXY_SERVER=${PROXY_SERVER}
       - PROXY_USERNAME=${PROXY_USERNAME}
       - PROXY_PASSWORD=${PROXY_PASSWORD}
+      - NODE_ENV=development
     env_file:
       - .env
     healthcheck:
@@ -18,5 +23,4 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-    volumes:
-      - /app/node_modules 
+    command: nodemon dist/api.js --watch dist

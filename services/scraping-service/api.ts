@@ -49,8 +49,18 @@ interface ScrapeRequest extends Request {
     body: UrlModel;
 }
 
+interface ScrapeOptions {
+    waitAfterLoad?: number;
+    timeout?: number;
+    headers?: { [key: string]: string };
+    checkSelector?: string;
+}
+
 let browser: Browser;
 let context: BrowserContext;
+
+const DEFAULT_TIMEOUT = 30000; // 30 seconds instead of 30ms
+const DEFAULT_WAIT_AFTER_LOAD = 1000; // 1 second wait after load
 
 const initializeBrowser = async () => {
     try {
@@ -140,34 +150,57 @@ const isValidUrl = (urlString: string): boolean => {
     }
 };
 
-const scrapePage = async (
-    page: any,
-    url: string,
-    waitUntil: 'load' | 'networkidle',
-    waitAfterLoad: number,
-    timeout: number,
-    checkSelector: string | undefined
-) => {
-    console.log(`Navigating to ${url} with waitUntil: ${waitUntil} and timeout: ${timeout}ms`);
-    const response = await page.goto(url, { waitUntil, timeout });
+async function scrapePage(url: string, options: ScrapeOptions = {}) {
+    const browser = await chromium.launch({
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+    });
 
-    if (waitAfterLoad > 0) {
-        await page.waitForTimeout(waitAfterLoad);
-    }
+    try {
+        const context = await browser.newContext();
+        const page = await context.newPage();
 
-    if (checkSelector) {
-        try {
-            await page.waitForSelector(checkSelector, { timeout });
-        } catch (error) {
-            throw new Error('Required selector not found');
+        // Set headers if provided
+        if (options.headers) {
+            await context.setExtraHTTPHeaders(options.headers);
         }
-    }
 
-    return {
-        content: await page.content(),
-        status: response ? response.status() : null,
-    };
-};
+        // Configure timeout
+        const timeout = options.timeout || DEFAULT_TIMEOUT;
+        page.setDefaultTimeout(timeout);
+
+        // Navigate with better error handling
+        try {
+            await page.goto(url, {
+                waitUntil: 'networkidle',
+                timeout: timeout
+            });
+
+            // Wait additional time if specified
+            const waitAfterLoad = options.waitAfterLoad || DEFAULT_WAIT_AFTER_LOAD;
+            if (waitAfterLoad > 0) {
+                await page.waitForTimeout(waitAfterLoad);
+            }
+
+            // If a selector is specified, wait for it
+            if (options.checkSelector) {
+                await page.waitForSelector(options.checkSelector, { timeout });
+            }
+
+            const content = await page.content();
+            await browser.close();
+            return content;
+
+        } catch (navigationError) {
+            console.error('Navigation failed:', navigationError);
+            throw new Error(`Failed to load page: ${navigationError instanceof Error ? navigationError.message : 'Unknown error'}`);
+        }
+
+    } catch (error) {
+        await browser.close();
+        console.error('Scraping error:', error);
+        throw new Error(`An error occurred while scraping: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+}
 
 /**
  * @openapi
@@ -230,7 +263,7 @@ const scrapePage = async (
  *         description: Server error
  */
 app.post('/scrape', async (req: ScrapeRequest, res: Response) => {
-    const { url, wait_after_load = 0, timeout = 15000, headers, check_selector } = req.body;
+    const { url, wait_after_load = 0, timeout = 30000, headers, check_selector } = req.body;
 
     console.log(`================= Scrape Request =================`);
     console.log(`URL: ${url}`);
@@ -268,23 +301,24 @@ app.post('/scrape', async (req: ScrapeRequest, res: Response) => {
     try {
         // Strategy 1: Normal
         console.log('Attempting strategy 1: Normal load');
-        const result = await scrapePage(page, url, 'load', wait_after_load, timeout, check_selector);
-        pageContent = result.content;
-        pageStatusCode = result.status;
+        const result = await scrapePage(url, {
+            waitAfterLoad: wait_after_load,
+            timeout: timeout,
+            checkSelector: check_selector
+        });
+        pageContent = result;
+        pageStatusCode = 200;
     } catch (error) {
         console.log('Strategy 1 failed, attempting strategy 2: Wait until networkidle');
         try {
             // Strategy 2: Wait until networkidle
-            const result = await scrapePage(
-                page,
-                url,
-                'networkidle',
-                wait_after_load,
-                timeout,
-                check_selector
-            );
-            pageContent = result.content;
-            pageStatusCode = result.status;
+            const result = await scrapePage(url, {
+                waitAfterLoad: wait_after_load,
+                timeout: timeout,
+                checkSelector: check_selector
+            });
+            pageContent = result;
+            pageStatusCode = 200;
         } catch (finalError) {
             await page.close();
             return res.status(500).json({ error: 'An error occurred while fetching the page.' });

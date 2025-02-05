@@ -13,6 +13,9 @@ RUN mkdir -p /app/node_modules && chown -R node:node /app
 # Install pnpm
 RUN npm install -g pnpm
 
+# Install nodemon globally
+RUN npm install -g nodemon
+
 # Switch to non-root user
 USER node
 
@@ -36,4 +39,4 @@ ENV NODE_OPTIONS="--no-warnings"
 
 EXPOSE 3003
 
-CMD ["pnpm", "start"]
+CMD ["nodemon", "dist/api.js"]

@@ -14,7 +14,7 @@ RUN mkdir -p /app/node_modules && chown -R node:node /app
 RUN npm install -g pnpm
 
 # Install nodemon globally
-RUN npm install -g nodemon
+RUN npm install -g nodemon ts-node
 
 # Switch to non-root user
 USER node
@@ -39,4 +39,5 @@ ENV NODE_OPTIONS="--no-warnings"
 
 EXPOSE 3003
 
-CMD ["nodemon", "dist/api.js"]
+# Use nodemon in development mode
+CMD ["sh", "-c", "if [ \"$NODE_ENV\" = \"development\" ]; then nodemon; else node dist/api.js; fi"]

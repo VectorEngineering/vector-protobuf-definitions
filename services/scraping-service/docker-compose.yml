@@ -12,15 +12,12 @@ services:
     environment:
       - PORT=3003
       - BLOCK_MEDIA=false
-      - PROXY_SERVER=${PROXY_SERVER}
-      - PROXY_USERNAME=${PROXY_USERNAME}
-      - PROXY_PASSWORD=${PROXY_PASSWORD}
       - NODE_ENV=development
     env_file:
-      - .env
+      - .env.local
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3003/api-docs"]
       interval: 30s
       timeout: 10s
       retries: 3
-    command: nodemon dist/api.js --watch dist
+    command: nodemon

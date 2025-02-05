@@ -134,9 +134,48 @@ http://localhost:3003/api-docs
 |----------|-------------|---------|
 | PORT | Server port | 3003 |
 | BLOCK_MEDIA | Block media resources | false |
-| PROXY_SERVER | Proxy server URL | |
-| PROXY_USERNAME | Proxy username | |
+| PROXY_SERVER | Proxy server URL (e.g., brd.superproxy.io:33335) | |
+| PROXY_USERNAME | Proxy username (format: brd-customer-[customer-id]-zone-[zone-name]-ip-[ip-address]) | |
 | PROXY_PASSWORD | Proxy password | |
+
+## Proxy Configuration
+
+### Setting Up Proxies
+
+The service supports proxy configuration for web scraping. To use proxies:
+
+1. Create a `.env.local` file for development:
+```env
+PORT=3003
+BLOCK_MEDIA=false
+PROXY_SERVER=brd.superproxy.io:33335
+PROXY_USERNAME=brd-customer-[customer-id]-zone-[zone-name]-ip-[ip-address]
+PROXY_PASSWORD=your-password
+```
+
+2. Format for proxy configuration:
+   - `PROXY_SERVER`: The proxy server address (e.g., brd.superproxy.io:33335)
+   - `PROXY_USERNAME`: Format: brd-customer-[customer-id]-zone-[zone-name]-ip-[ip-address]
+   - `PROXY_PASSWORD`: Your proxy authentication password
+
+### Testing Proxy Connection
+
+The service includes a proxy testing utility:
+
+```bash
+npx ts-node src/test-proxy.ts
+```
+
+This will:
+- Test the proxy connection using your configured credentials
+- Attempt to access a test URL
+- Display the connection status and response headers
+
+If you encounter issues:
+1. Verify your proxy credentials are correct
+2. Ensure the IP is allocated to your account
+3. Check if your proxy zone is properly configured
+4. Verify your proxy subscription status
 
 ## Docker Configuration
 

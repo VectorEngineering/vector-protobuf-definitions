@@ -201,9 +201,6 @@ message Tenant {
     string display_name = 3;
     string description = 4;
     
-    // Organization Context
-    Organization organization = 6 [(gorm.field).belongs_to = {}];
-    
     // Configuration
     string api_base_url = 7;
     map<string, string> environment_variables = 8;
@@ -515,22 +512,13 @@ message Workspace {
 
     // Associated scraping jobs for this workspace
     repeated ScrapingJob scraping_jobs = 22 [(gorm.field).has_many = {
-        disable_association_autocreate: false
-        disable_association_autoupdate: false
-        preload: true
     }];
 
     repeated APIKey api_keys = 23 [(gorm.field).has_many = {
-        disable_association_autocreate: false
-        disable_association_autoupdate: false
-        preload: true
     }];
 
     // embedded webhook config with relationship
     repeated WebhookConfig webhooks = 24 [(gorm.field).has_many = {
-        disable_association_autocreate: false
-        disable_association_autoupdate: false
-        preload: true
     }];
 }
 
@@ -678,7 +666,6 @@ message ScrapingWorkflow {
 
     // Relationships
     repeated ScrapingJob jobs = 15 [(gorm.field).has_many = {}];
-    Workspace workspace = 16 [(gorm.field).belongs_to = {}];
 
     // Advanced scraping configuration
     float geo_fencing_radius = 18 [(validate.rules).float = {gte: 0, lte: 100000}];
@@ -913,10 +900,6 @@ message Lead {
     google.protobuf.Timestamp created_at = 18 [(gorm.field).tag = {index: "idx_leads_created_at"}];
     google.protobuf.Timestamp updated_at = 19;
     google.protobuf.Timestamp deleted_at = 20;
-    
-    // Relationships
-    ScrapingJob job = 21 [(gorm.field).belongs_to = {}];
-    Workspace workspace = 22 [(gorm.field).belongs_to = {}];
 
     // Detailed Google Maps metadata
     string place_id = 23 [
@@ -1241,10 +1224,6 @@ message APIKey {
     repeated string supported_features = 48 [(gorm.field).tag = {type: "text[]"}];
     string documentation_url = 49;
     string support_contact = 50;
-
-    // Relationships
-    Account account = 51 [(gorm.field).belongs_to = {}];
-    Workspace workspace = 52 [(gorm.field).belongs_to = {}];
 
     // Compliance and auditing
     bool log_all_requests = 53;

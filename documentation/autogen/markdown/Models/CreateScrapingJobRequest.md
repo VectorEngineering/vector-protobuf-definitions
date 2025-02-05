@@ -3,7 +3,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **userId** | **String** |  | [default to null] |
+| **authPlatformUserId** | **String** |  | [default to null] |
 | **orgId** | **String** |  | [default to null] |
 | **tenantId** | **String** |  | [default to null] |
 | **name** | **String** |  | [optional] [default to null] |

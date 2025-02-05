@@ -9,7 +9,7 @@ import { z } from "zod";
  * Schema for HTML content request
  */
 const htmlRequestSchema = z.object({
-    html: z.string().min(1),
+  html: z.string().min(1),
 });
 
 /**
@@ -49,16 +49,16 @@ const metadata = new Hono<{ Bindings: Env }>();
  *                   description: Extracted metadata
  */
 metadata.post("/", validateRequest(htmlRequestSchema), async (c) => {
-    try {
-        const { html: rawHtml } = await c.req.json();
-        const metadataResult = extractMetadata(rawHtml);
-        return c.json({ metadata: metadataResult });
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+  try {
+    const { html: rawHtml } = await c.req.json();
+    const metadataResult = extractMetadata(rawHtml);
+    return c.json({ metadata: metadataResult });
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new HTTPException(500, { message: error.message });
     }
+    throw new HTTPException(500, { message: "Unknown error occurred" });
+  }
 });
 
-export default metadata; 
+export default metadata;

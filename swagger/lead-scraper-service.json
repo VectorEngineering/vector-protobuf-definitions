@@ -242,6 +242,20 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "organizationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "tenantId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -989,7 +1003,22 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "organizationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "tenantId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -1172,7 +1201,22 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "organizationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "tenantId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -1357,7 +1401,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -1539,7 +1584,7 @@
         },
         "parameters": [
           {
-            "name": "userId",
+            "name": "authPlatformUserId",
             "in": "query",
             "required": true,
             "type": "string"
@@ -1548,13 +1593,15 @@
             "name": "orgId",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           },
           {
             "name": "tenantId",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -1930,7 +1977,8 @@
             "name": "jobId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           },
           {
             "name": "userId",
@@ -1942,13 +1990,15 @@
             "name": "orgId",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           },
           {
             "name": "tenantId",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -2131,7 +2181,8 @@
             "name": "jobId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           },
           {
             "name": "userId",
@@ -2143,13 +2194,15 @@
             "name": "orgId",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           },
           {
             "name": "tenantId",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -2334,7 +2387,8 @@
             "name": "jobId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           },
           {
             "name": "userId",
@@ -2346,13 +2400,15 @@
             "name": "orgId",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           },
           {
             "name": "tenantId",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -4636,7 +4692,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -4819,7 +4876,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -5004,7 +5062,8 @@
             "name": "accountId",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           },
           {
             "name": "pageSize",
@@ -5581,7 +5640,8 @@
             "name": "workspaceId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           },
           {
             "name": "startTime",
@@ -5780,7 +5840,8 @@
             "name": "workspaceId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           },
           {
             "name": "pageSize",
@@ -5989,7 +6050,8 @@
             "name": "workspaceId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           },
           {
             "name": "body",
@@ -6182,13 +6244,15 @@
             "name": "workspaceId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           },
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -6373,13 +6437,15 @@
             "name": "workspaceId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           },
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           },
           {
             "name": "body",
@@ -6572,13 +6638,15 @@
             "name": "workspaceId",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           },
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uint64"
           },
           {
             "name": "body",
@@ -7371,6 +7439,14 @@
         },
         "initialWorkspaceName": {
           "type": "string"
+        },
+        "organizationId": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uint64"
         }
       },
       "title": "Account Management Messages"
@@ -7406,15 +7482,17 @@
     "CreateScrapingJobRequest": {
       "type": "object",
       "properties": {
-        "userId": {
+        "authPlatformUserId": {
           "type": "string",
           "title": "User and context identification"
         },
         "orgId": {
-          "type": "string"
+          "type": "string",
+          "format": "uint64"
         },
         "tenantId": {
-          "type": "string"
+          "type": "string",
+          "format": "uint64"
         },
         "name": {
           "type": "string",
@@ -7467,7 +7545,7 @@
       },
       "title": "CreateScrapingJobRequest represents a request to create a new Google Maps scraping job",
       "required": [
-        "userId",
+        "authPlatformUserId",
         "orgId",
         "tenantId"
       ]
@@ -7476,7 +7554,8 @@
       "type": "object",
       "properties": {
         "jobId": {
-          "type": "string"
+          "type": "string",
+          "format": "uint64"
         },
         "status": {
           "$ref": "#/definitions/BackgroundJobStatus"

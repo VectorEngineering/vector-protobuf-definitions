@@ -217,9 +217,11 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
     async fn delete_account(
         &self,
         id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
         context: &C) -> Result<DeleteAccountResponse, ApiError>
     {
-        info!("delete_account(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
+        info!("delete_account(\"{}\", {:?}, {:?}) - X-Span-ID: {:?}", id, organization_id, tenant_id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -284,9 +286,11 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
     async fn get_account(
         &self,
         id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
         context: &C) -> Result<GetAccountResponse, ApiError>
     {
-        info!("get_account(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
+        info!("get_account(\"{}\", {:?}, {:?}) - X-Span-ID: {:?}", id, organization_id, tenant_id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -384,9 +388,11 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         page_size: Option<i32>,
         page_number: Option<i32>,
         filter: Option<String>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
         context: &C) -> Result<ListAccountsResponse, ApiError>
     {
-        info!("list_accounts({:?}, {:?}, {:?}) - X-Span-ID: {:?}", page_size, page_number, filter, context.get().0.clone());
+        info!("list_accounts({:?}, {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", page_size, page_number, filter, organization_id, tenant_id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -404,12 +410,12 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
     /// Get all jobs
     async fn list_scraping_jobs(
         &self,
-        user_id: String,
+        auth_platform_user_id: String,
         org_id: String,
         tenant_id: String,
         context: &C) -> Result<ListScrapingJobsResponse, ApiError>
     {
-        info!("list_scraping_jobs(\"{}\", \"{}\", \"{}\") - X-Span-ID: {:?}", user_id, org_id, tenant_id, context.get().0.clone());
+        info!("list_scraping_jobs(\"{}\", \"{}\", \"{}\") - X-Span-ID: {:?}", auth_platform_user_id, org_id, tenant_id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

@@ -2195,6 +2195,8 @@ impl<S, C> Api<C> for Client<S, C> where
     async fn delete_account(
         &self,
         param_id: String,
+        param_organization_id: Option<String>,
+        param_tenant_id: Option<String>,
         context: &C) -> Result<DeleteAccountResponse, ApiError>
     {
         let mut client_service = self.client_service.clone();
@@ -2207,6 +2209,14 @@ impl<S, C> Api<C> for Client<S, C> where
         // Query parameters
         let query_string = {
             let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_organization_id) = param_organization_id {
+                query_string.append_pair("organizationId",
+                    &param_organization_id);
+            }
+            if let Some(param_tenant_id) = param_tenant_id {
+                query_string.append_pair("tenantId",
+                    &param_tenant_id);
+            }
             query_string.finish()
         };
         if !query_string.is_empty() {
@@ -4201,6 +4211,8 @@ impl<S, C> Api<C> for Client<S, C> where
     async fn get_account(
         &self,
         param_id: String,
+        param_organization_id: Option<String>,
+        param_tenant_id: Option<String>,
         context: &C) -> Result<GetAccountResponse, ApiError>
     {
         let mut client_service = self.client_service.clone();
@@ -4213,6 +4225,14 @@ impl<S, C> Api<C> for Client<S, C> where
         // Query parameters
         let query_string = {
             let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_organization_id) = param_organization_id {
+                query_string.append_pair("organizationId",
+                    &param_organization_id);
+            }
+            if let Some(param_tenant_id) = param_tenant_id {
+                query_string.append_pair("tenantId",
+                    &param_tenant_id);
+            }
             query_string.finish()
         };
         if !query_string.is_empty() {
@@ -7228,6 +7248,8 @@ impl<S, C> Api<C> for Client<S, C> where
         param_page_size: Option<i32>,
         param_page_number: Option<i32>,
         param_filter: Option<String>,
+        param_organization_id: Option<String>,
+        param_tenant_id: Option<String>,
         context: &C) -> Result<ListAccountsResponse, ApiError>
     {
         let mut client_service = self.client_service.clone();
@@ -7250,6 +7272,14 @@ impl<S, C> Api<C> for Client<S, C> where
             if let Some(param_filter) = param_filter {
                 query_string.append_pair("filter",
                     &param_filter);
+            }
+            if let Some(param_organization_id) = param_organization_id {
+                query_string.append_pair("organizationId",
+                    &param_organization_id);
+            }
+            if let Some(param_tenant_id) = param_tenant_id {
+                query_string.append_pair("tenantId",
+                    &param_tenant_id);
             }
             query_string.finish()
         };
@@ -7908,7 +7938,7 @@ impl<S, C> Api<C> for Client<S, C> where
 
     async fn list_scraping_jobs(
         &self,
-        param_user_id: String,
+        param_auth_platform_user_id: String,
         param_org_id: String,
         param_tenant_id: String,
         context: &C) -> Result<ListScrapingJobsResponse, ApiError>
@@ -7922,8 +7952,8 @@ impl<S, C> Api<C> for Client<S, C> where
         // Query parameters
         let query_string = {
             let mut query_string = form_urlencoded::Serializer::new("".to_owned());
-                query_string.append_pair("userId",
-                    &param_user_id);
+                query_string.append_pair("authPlatformUserId",
+                    &param_auth_platform_user_id);
                 query_string.append_pair("orgId",
                     &param_org_id);
                 query_string.append_pair("tenantId",

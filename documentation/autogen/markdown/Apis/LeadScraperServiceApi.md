@@ -178,7 +178,7 @@ No authorization required
 
 <a name="deleteAccount"></a>
 # **deleteAccount**
-> DeleteAccountResponse deleteAccount(id)
+> DeleteAccountResponse deleteAccount(id, organizationId, tenantId)
 
 Delete account
 
@@ -189,6 +189,8 @@ Delete account
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **id** | **String**|  | [default to null] |
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
 
 ### Return type
 
@@ -347,7 +349,7 @@ No authorization required
 
 <a name="getAccount"></a>
 # **getAccount**
-> GetAccountResponse getAccount(id)
+> GetAccountResponse getAccount(id, organizationId, tenantId)
 
 Get account details
 
@@ -358,6 +360,8 @@ Get account details
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **id** | **String**|  | [default to null] |
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
 
 ### Return type
 
@@ -598,7 +602,7 @@ No authorization required
 
 <a name="listAccounts"></a>
 # **listAccounts**
-> ListAccountsResponse listAccounts(pageSize, pageNumber, filter)
+> ListAccountsResponse listAccounts(pageSize, pageNumber, filter, organizationId, tenantId)
 
 List all accounts
 
@@ -611,6 +615,8 @@ List all accounts
 | **pageSize** | **Integer**|  | [optional] [default to null] |
 | **pageNumber** | **Integer**|  | [optional] [default to null] |
 | **filter** | **String**|  | [optional] [default to null] |
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
 
 ### Return type
 
@@ -655,7 +661,7 @@ No authorization required
 
 <a name="listScrapingJobs"></a>
 # **listScrapingJobs**
-> ListScrapingJobsResponse listScrapingJobs(userId, orgId, tenantId)
+> ListScrapingJobsResponse listScrapingJobs(authPlatformUserId, orgId, tenantId)
 
 Get all jobs
 
@@ -665,7 +671,7 @@ Get all jobs
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **userId** | **String**|  | [default to null] |
+| **authPlatformUserId** | **String**|  | [default to null] |
 | **orgId** | **String**|  | [default to null] |
 | **tenantId** | **String**|  | [default to null] |
 

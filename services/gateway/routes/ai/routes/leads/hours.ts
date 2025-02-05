@@ -11,7 +11,7 @@ import { z } from "zod";
  * Schema for business data request
  */
 const businessDataSchema = z.object({
-    data: z.any()
+  data: z.any(),
 });
 
 /**
@@ -47,15 +47,15 @@ const hours = new Hono<{ Bindings: Env }>();
  *               $ref: '#/components/schemas/BusinessHoursAnalysisSchema'
  */
 hours.post("/", validateRequest(businessDataSchema), async (c) => {
-    try {
-        const result = await businessHoursHandler(c, await c.req.json());
-        return c.json(result);
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+  try {
+    const result = await businessHoursHandler(c, await c.req.json());
+    return c.json(result);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new HTTPException(500, { message: error.message });
     }
+    throw new HTTPException(500, { message: "Unknown error occurred" });
+  }
 });
 
 /**
@@ -81,14 +81,18 @@ hours.post("/", validateRequest(businessDataSchema), async (c) => {
  *               $ref: '#/components/schemas/BatchResponseSchema'
  */
 hours.post("/batch", validateRequest(BatchBusinessDataSchema), async (c) => {
-    try {
-        return c.json(await handleBatchRequest(c, (ctx, data) => businessHoursHandler(ctx, { prompt: JSON.stringify(data) })));
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+  try {
+    return c.json(
+      await handleBatchRequest(c, (ctx, data) =>
+        businessHoursHandler(ctx, { prompt: JSON.stringify(data) }),
+      ),
+    );
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new HTTPException(500, { message: error.message });
     }
+    throw new HTTPException(500, { message: "Unknown error occurred" });
+  }
 });
 
-export default hours; 
+export default hours;

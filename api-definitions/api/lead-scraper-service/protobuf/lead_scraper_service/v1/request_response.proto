@@ -14,16 +14,16 @@ option go_package = "github.com/VectorEngineering/vector-protobuf-definitions/ap
 // CreateScrapingJobRequest represents a request to create a new Google Maps scraping job
 message CreateScrapingJobRequest {
     // User and context identification
-    string user_id = 1 [
+    string auth_platform_user_id = 1 [
         (validate.rules).string.min_len = 1,
         (google.api.field_behavior) = REQUIRED
     ];
-    string org_id = 2 [
-        (validate.rules).string.min_len = 1,
+    uint64 org_id = 2 [
+        (validate.rules).uint64.gt = 0,
         (google.api.field_behavior) = REQUIRED
     ];
-    string tenant_id = 3 [
-        (validate.rules).string.min_len = 1,
+    uint64 tenant_id = 3 [
+        (validate.rules).uint64.gt = 0,
         (google.api.field_behavior) = REQUIRED
     ];
 
@@ -50,7 +50,7 @@ message CreateScrapingJobRequest {
 
 // CreateScrapingJobResponse represents the response after creating a scraping job
 message CreateScrapingJobResponse {
-    string job_id = 1;
+    uint64 job_id = 1;
     BackgroundJobStatus status = 2 [
         (validate.rules).enum = {defined_only: true}
     ];
@@ -62,16 +62,16 @@ message GetScrapingJobRequest {
         (validate.rules).string.min_len = 1,
         (google.api.field_behavior) = REQUIRED
     ];
-    string job_id = 2 [
-        (validate.rules).string.min_len = 1,
+    uint64 job_id = 2 [
+        (validate.rules).uint64.gt = 0,
         (google.api.field_behavior) = REQUIRED
     ];
-    string org_id = 3 [
-        (validate.rules).string.min_len = 1,
+    uint64 org_id = 3 [
+        (validate.rules).uint64.gt = 0,
         (google.api.field_behavior) = REQUIRED
     ];
-    string tenant_id = 4 [
-        (validate.rules).string.min_len = 1,
+    uint64 tenant_id = 4 [
+        (validate.rules).uint64.gt = 0,
         (google.api.field_behavior) = REQUIRED
     ];
 }
@@ -83,16 +83,16 @@ message GetScrapingJobResponse {
 
 // ListScrapingJobsRequest represents a request to list all scraping jobs
 message ListScrapingJobsRequest {
-    string user_id = 1 [
+    string auth_platform_user_id = 1 [
         (validate.rules).string.min_len = 1,
         (google.api.field_behavior) = REQUIRED
     ];
-    string org_id = 2 [
-        (validate.rules).string.min_len = 1,
+    uint64 org_id = 2 [
+        (validate.rules).uint64.gt = 0,
         (google.api.field_behavior) = REQUIRED
     ];
-    string tenant_id = 3 [
-        (validate.rules).string.min_len = 1,
+    uint64 tenant_id = 3 [
+        (validate.rules).uint64.gt = 0,
         (google.api.field_behavior) = REQUIRED
     ];
 }
@@ -110,16 +110,16 @@ message DeleteScrapingJobRequest {
         (validate.rules).string.min_len = 1,
         (google.api.field_behavior) = REQUIRED
     ];
-    string job_id = 2 [
-        (validate.rules).string.min_len = 1,
+    uint64 job_id = 2 [
+        (validate.rules).uint64.gt = 0,
         (google.api.field_behavior) = REQUIRED
     ];
-    string org_id = 3 [
-        (validate.rules).string.min_len = 1,
+    uint64 org_id = 3 [
+        (validate.rules).uint64.gt = 0,
         (google.api.field_behavior) = REQUIRED
     ];
-    string tenant_id = 4 [
-        (validate.rules).string.min_len = 1,
+    uint64 tenant_id = 4 [
+        (validate.rules).uint64.gt = 0,
         (google.api.field_behavior) = REQUIRED
     ];
 }
@@ -135,16 +135,16 @@ message DownloadScrapingResultsRequest {
         (validate.rules).string.min_len = 1,
         (google.api.field_behavior) = REQUIRED
     ];
-    string job_id = 2 [
-        (validate.rules).string.min_len = 1,
+    uint64 job_id = 2 [
+        (validate.rules).uint64.gt = 0,
         (google.api.field_behavior) = REQUIRED
     ];
-    string org_id = 3 [
-        (validate.rules).string.min_len = 1,
+    uint64 org_id = 3 [
+        (validate.rules).uint64.gt = 0,
         (google.api.field_behavior) = REQUIRED
     ];
-    string tenant_id = 4 [
-        (validate.rules).string.min_len = 1,
+    uint64 tenant_id = 4 [
+        (validate.rules).uint64.gt = 0,
         (google.api.field_behavior) = REQUIRED
     ];
 }
@@ -164,10 +164,14 @@ message CreateAccountRequest {
     string initial_workspace_name = 2 [
         (validate.rules).string.min_len = 1
     ];
+    uint64 organization_id = 3 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 4 [(validate.rules).uint64.gt = 0];
 }
 
 message GetAccountRequest {
-    string id = 1 [(validate.rules).string.min_len = 1];
+    uint64 id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 organization_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 3 [(validate.rules).uint64.gt = 0];
 }
 
 message UpdateAccountRequest {
@@ -175,13 +179,17 @@ message UpdateAccountRequest {
 }
 
 message DeleteAccountRequest {
-    string id = 1 [(validate.rules).string.min_len = 1];
+    uint64 id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 organization_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 3 [(validate.rules).uint64.gt = 0];
 }
 
 message ListAccountsRequest {
     int32 page_size = 1 [(validate.rules).int32 = {gte: 1, lte: 100}];
     int32 page_number = 2;
     string filter = 3;
+    uint64 organization_id = 4 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 5 [(validate.rules).uint64.gt = 0];
 }
 
 message ListAccountsResponse {
@@ -200,7 +208,7 @@ message CreateWorkspaceResponse {
 }
 
 message GetWorkspaceRequest {
-    string id = 1 [(validate.rules).string.min_len = 1];
+    uint64 id = 1 [(validate.rules).uint64.gt = 0];
 }
 
 message UpdateWorkspaceRequest {
@@ -208,11 +216,11 @@ message UpdateWorkspaceRequest {
 }
 
 message DeleteWorkspaceRequest {
-    string id = 1 [(validate.rules).string.min_len = 1];
+    uint64 id = 1 [(validate.rules).uint64.gt = 0];
 }
 
 message ListWorkspacesRequest {
-    string account_id = 1 [(validate.rules).string.min_len = 1];
+    uint64 account_id = 1 [(validate.rules).uint64.gt = 0];
     int32 page_size = 2 [(validate.rules).int32 = {gte: 1, lte: 100}];
     int32 page_number = 3;
 }
@@ -224,7 +232,7 @@ message ListWorkspacesResponse {
 
 // GetAccountUsageRequest represents a request to get account usage details
 message GetAccountUsageRequest {
-    string id = 1 [(validate.rules).string.min_len = 1];
+    uint64 id = 1 [(validate.rules).uint64.gt = 0];
 }
 
 // AccountUsage represents the usage details of an account
@@ -248,13 +256,13 @@ message UpdateAccountSettingsResponse {
 
 // Workflow Management Messages
 message CreateWorkflowRequest {
-    string workspace_id = 1 [(validate.rules).string.min_len = 1];
+    uint64 workspace_id = 1 [(validate.rules).uint64.gt = 0];
     ScrapingWorkflow workflow = 2 [(validate.rules).message.required = true];
 }
 
 message GetWorkflowRequest {
-    string workspace_id = 1 [(validate.rules).string.min_len = 1];
-    string id = 2 [(validate.rules).string.min_len = 1];
+    uint64 workspace_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 id = 2 [(validate.rules).uint64.gt = 0];
 }
 
 message UpdateWorkflowRequest {
@@ -262,7 +270,7 @@ message UpdateWorkflowRequest {
 }
 
 message ListWorkflowsRequest {
-    string workspace_id = 1 [(validate.rules).string.min_len = 1];
+    uint64 workspace_id = 1 [(validate.rules).uint64.gt = 0];
     int32 page_size = 2 [(validate.rules).int32 = {gte: 1, lte: 100}];
     int32 page_number = 3;
     string filter = 4;
@@ -274,8 +282,8 @@ message ListWorkflowsResponse {
 }
 
 message TriggerWorkflowRequest {
-    string workspace_id = 1 [(validate.rules).string.min_len = 1];
-    string id = 2 [(validate.rules).string.min_len = 1];
+    uint64 workspace_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 id = 2 [(validate.rules).uint64.gt = 0];
     map<string, string> parameters = 3 [
         (validate.rules).map = {
             max_pairs: 20,
@@ -291,8 +299,8 @@ message TriggerWorkflowResponse {
 }
 
 message PauseWorkflowRequest {
-    string workspace_id = 1 [(validate.rules).string.min_len = 1];
-    string id = 2 [(validate.rules).string.min_len = 1];
+    uint64 workspace_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 id = 2 [(validate.rules).uint64.gt = 0];
     bool pause = 3;
 }
 
@@ -302,7 +310,7 @@ message PauseWorkflowResponse {
 }
 
 message GetWorkspaceAnalyticsRequest {
-    string workspace_id = 1 [(validate.rules).string.min_len = 1];
+    uint64 workspace_id = 1 [(validate.rules).uint64.gt = 0];
     google.protobuf.Timestamp start_time = 2;
     google.protobuf.Timestamp end_time = 3;
 }

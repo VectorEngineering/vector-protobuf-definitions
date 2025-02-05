@@ -177,7 +177,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteAccount**
-> models::DeleteAccountResponse DeleteAccount(id)
+> models::DeleteAccountResponse DeleteAccount(id, optional)
 Delete account
 
 Permanently deletes an account and associated resources
@@ -187,6 +187,16 @@ Permanently deletes an account and associated resources
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
   **id** | **String**|  | 
+ **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a map[string]interface{}.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **String**|  | 
+ **organization_id** | **String**|  | 
+ **tenant_id** | **String**|  | 
 
 ### Return type
 
@@ -346,7 +356,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetAccount**
-> models::GetAccountResponse GetAccount(id)
+> models::GetAccountResponse GetAccount(id, optional)
 Get account details
 
 Retrieves details of a specific account
@@ -356,6 +366,16 @@ Retrieves details of a specific account
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
   **id** | **String**|  | 
+ **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a map[string]interface{}.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **String**|  | 
+ **organization_id** | **String**|  | 
+ **tenant_id** | **String**|  | 
 
 ### Return type
 
@@ -624,6 +644,8 @@ Name | Type | Description  | Notes
  **page_size** | **i32**|  | 
  **page_number** | **i32**|  | 
  **filter** | **String**|  | 
+ **organization_id** | **String**|  | 
+ **tenant_id** | **String**|  | 
 
 ### Return type
 
@@ -676,7 +698,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListScrapingJobs**
-> models::ListScrapingJobsResponse ListScrapingJobs(user_id, org_id, tenant_id)
+> models::ListScrapingJobsResponse ListScrapingJobs(auth_platform_user_id, org_id, tenant_id)
 Get all jobs
 
 This endpoint retrieves all Google Maps scraping jobs
@@ -685,7 +707,7 @@ This endpoint retrieves all Google Maps scraping jobs
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-  **user_id** | **String**|  | 
+  **auth_platform_user_id** | **String**|  | 
   **org_id** | **String**|  | 
   **tenant_id** | **String**|  | 
 

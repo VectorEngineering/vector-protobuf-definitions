@@ -304,6 +304,18 @@ paths:
           required: false
           schema:
             type: string
+        - name: organizationId
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uint64
+        - name: tenantId
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uint64
       tags:
         - lead-scraper-service
     post:
@@ -1269,6 +1281,19 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
+        - name: organizationId
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uint64
+        - name: tenantId
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uint64
       tags:
         - lead-scraper-service
     delete:
@@ -1506,6 +1531,19 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
+        - name: organizationId
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uint64
+        - name: tenantId
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uint64
       tags:
         - lead-scraper-service
   '/lead-scraper-microservice/api/v1/accounts/{id}/usage':
@@ -1744,6 +1782,7 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
       tags:
         - lead-scraper-service
   /lead-scraper-microservice/api/v1/jobs:
@@ -1977,7 +2016,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/rpc.Status'
       parameters:
-        - name: userId
+        - name: authPlatformUserId
           in: query
           required: true
           schema:
@@ -1987,11 +2026,13 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
         - name: tenantId
           in: query
           required: true
           schema:
             type: string
+            format: uint64
       tags:
         - lead-scraper-service
     post:
@@ -2476,6 +2517,7 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
         - name: userId
           in: query
           required: true
@@ -2486,11 +2528,13 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
         - name: tenantId
           in: query
           required: true
           schema:
             type: string
+            format: uint64
       tags:
         - lead-scraper-service
     delete:
@@ -2728,6 +2772,7 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
         - name: userId
           in: query
           required: true
@@ -2738,11 +2783,13 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
         - name: tenantId
           in: query
           required: true
           schema:
             type: string
+            format: uint64
       tags:
         - lead-scraper-service
   '/lead-scraper-microservice/api/v1/jobs/{jobId}/download':
@@ -2981,6 +3028,7 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
         - name: userId
           in: query
           required: true
@@ -2991,11 +3039,13 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
         - name: tenantId
           in: query
           required: true
           schema:
             type: string
+            format: uint64
       tags:
         - lead-scraper-service
   /lead-scraper-microservice/api/v1/organization:
@@ -5919,6 +5969,7 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
       tags:
         - lead-scraper-service
     delete:
@@ -6156,6 +6207,7 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
       tags:
         - lead-scraper-service
   /lead-scraper-microservice/api/v1/workspaces:
@@ -6394,6 +6446,7 @@ paths:
           required: false
           schema:
             type: string
+            format: uint64
         - name: pageSize
           in: query
           required: false
@@ -7131,6 +7184,7 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
         - name: startTime
           in: query
           required: false
@@ -7381,6 +7435,7 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
         - name: pageSize
           in: query
           required: false
@@ -7659,6 +7714,7 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
       requestBody:
         content:
           application/json:
@@ -7906,11 +7962,13 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
         - name: id
           in: path
           required: true
           schema:
             type: string
+            format: uint64
       tags:
         - lead-scraper-service
   '/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause':
@@ -8149,11 +8207,13 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
         - name: id
           in: path
           required: true
           schema:
             type: string
+            format: uint64
       requestBody:
         content:
           application/json:
@@ -8401,11 +8461,13 @@ paths:
           required: true
           schema:
             type: string
+            format: uint64
         - name: id
           in: path
           required: true
           schema:
             type: string
+            format: uint64
       requestBody:
         content:
           application/json:
@@ -11224,6 +11286,12 @@ components:
           $ref: '#/components/schemas/Account'
         initialWorkspaceName:
           type: string
+        organizationId:
+          type: string
+          format: uint64
+        tenantId:
+          type: string
+          format: uint64
       title: Account Management Messages
     CreateAccountResponse:
       type: object
@@ -11246,13 +11314,15 @@ components:
     CreateScrapingJobRequest:
       type: object
       properties:
-        userId:
+        authPlatformUserId:
           type: string
           title: User and context identification
         orgId:
           type: string
+          format: uint64
         tenantId:
           type: string
+          format: uint64
         name:
           type: string
           title: Job configuration
@@ -11291,7 +11361,7 @@ components:
         CreateScrapingJobRequest represents a request to create a new Google
         Maps scraping job
       required:
-        - userId
+        - authPlatformUserId
         - orgId
         - tenantId
     CreateScrapingJobResponse:
@@ -11299,6 +11369,7 @@ components:
       properties:
         jobId:
           type: string
+          format: uint64
         status:
           $ref: '#/components/schemas/BackgroundJobStatus'
       title: >-

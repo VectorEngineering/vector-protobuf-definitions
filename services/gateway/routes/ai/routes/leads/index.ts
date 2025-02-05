@@ -15,4 +15,4 @@ leadsRouter.route("/hours", hours);
 leadsRouter.route("/intelligence", intelligence);
 leadsRouter.route("/qualify", qualify);
 
-export default leadsRouter; 
+export default leadsRouter;

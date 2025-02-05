@@ -16,6 +16,8 @@ router.get("/", async (c) => {
       ? Number(c.req.query("pageNumber"))
       : undefined,
     filter: c.req.query("filter"),
+    organizationId: c.req.query("organizationId"),
+    tenantId: c.req.query("tenantId"),
   };
   const response = await client.getLeadScraperMicroserviceApiV1Accounts(params);
   return c.json(response);

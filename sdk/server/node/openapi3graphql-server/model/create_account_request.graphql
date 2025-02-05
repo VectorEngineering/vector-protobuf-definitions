@@ -11,10 +11,14 @@
 type CreateAccountRequest {
   account: Account
   initialWorkspaceName: String!
+  organizationId: String!
+  tenantId: String!
 }
 
 input CreateAccountRequestInput {
     account: AccountInput
     initialWorkspaceName: String!
+    organizationId: String!
+    tenantId: String!
 }
 

@@ -11,7 +11,7 @@ import { z } from "zod";
  * Schema for business data request
  */
 const businessDataSchema = z.object({
-    data: z.any()
+  data: z.any(),
 });
 
 /**
@@ -47,15 +47,15 @@ const intelligence = new Hono<{ Bindings: Env }>();
  *               $ref: '#/components/schemas/BusinessIntelligenceSchema'
  */
 intelligence.post("/", validateRequest(businessDataSchema), async (c) => {
-    try {
-        const result = await businessIntelligenceHandler(c, await c.req.json());
-        return c.json(result);
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+  try {
+    const result = await businessIntelligenceHandler(c, await c.req.json());
+    return c.json(result);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new HTTPException(500, { message: error.message });
     }
+    throw new HTTPException(500, { message: "Unknown error occurred" });
+  }
 });
 
 /**
@@ -80,15 +80,23 @@ intelligence.post("/", validateRequest(businessDataSchema), async (c) => {
  *             schema:
  *               $ref: '#/components/schemas/BatchResponseSchema'
  */
-intelligence.post("/batch", validateRequest(BatchBusinessDataSchema), async (c) => {
+intelligence.post(
+  "/batch",
+  validateRequest(BatchBusinessDataSchema),
+  async (c) => {
     try {
-        return c.json(await handleBatchRequest(c, (ctx, data) => businessIntelligenceHandler(ctx, { prompt: JSON.stringify(data) })));
+      return c.json(
+        await handleBatchRequest(c, (ctx, data) =>
+          businessIntelligenceHandler(ctx, { prompt: JSON.stringify(data) }),
+        ),
+      );
     } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+      if (error instanceof Error) {
+        throw new HTTPException(500, { message: error.message });
+      }
+      throw new HTTPException(500, { message: "Unknown error occurred" });
     }
-});
+  },
+);
 
-export default intelligence; 
+export default intelligence;

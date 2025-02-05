@@ -1695,7 +1695,12 @@ const rpc_Status = z
   .partial()
   .passthrough();
 const CreateAccountRequest = z
-  .object({ account: Account, initialWorkspaceName: z.string() })
+  .object({
+    account: Account,
+    initialWorkspaceName: z.string(),
+    organizationId: z.string(),
+    tenantId: z.string(),
+  })
   .partial()
   .passthrough();
 const CreateAccountResponse = z
@@ -2444,7 +2449,7 @@ const ListScrapingJobsResponse = z
   .passthrough();
 const CreateScrapingJobRequest = z
   .object({
-    userId: z.string(),
+    authPlatformUserId: z.string(),
     orgId: z.string(),
     tenantId: z.string(),
     name: z.string().optional(),
@@ -3193,6 +3198,16 @@ const endpoints = makeApi([
         type: "Query",
         schema: z.string().optional(),
       },
+      {
+        name: "organizationId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+      {
+        name: "tenantId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
     ],
     response: ListAccountsResponse,
     errors: [
@@ -3514,6 +3529,16 @@ const endpoints = makeApi([
         type: "Path",
         schema: z.string(),
       },
+      {
+        name: "organizationId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+      {
+        name: "tenantId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
     ],
     response: GetAccountResponse,
     errors: [
@@ -3620,6 +3645,16 @@ const endpoints = makeApi([
         name: "id",
         type: "Path",
         schema: z.string(),
+      },
+      {
+        name: "organizationId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+      {
+        name: "tenantId",
+        type: "Query",
+        schema: z.string().optional(),
       },
     ],
     response: z.object({ success: z.boolean() }).partial().passthrough(),
@@ -3938,7 +3973,7 @@ const endpoints = makeApi([
     requestFormat: "json",
     parameters: [
       {
-        name: "userId",
+        name: "authPlatformUserId",
         type: "Query",
         schema: z.string(),
       },
@@ -7939,6 +7974,8 @@ export class ApiClient {
     pageSize: number | undefined;
     pageNumber: number | undefined;
     filter: string | undefined;
+    organizationId: string | undefined;
+    tenantId: string | undefined;
   }) {
     return this.client.get("/lead-scraper-microservice/api/v1/accounts", {
       params: {},
@@ -7946,6 +7983,8 @@ export class ApiClient {
         pageSize: params.pageSize ? Number(params.pageSize) : undefined,
         pageNumber: params.pageNumber ? Number(params.pageNumber) : undefined,
         filter: params.filter,
+        organizationId: params.organizationId,
+        tenantId: params.tenantId,
       },
     });
   }
@@ -7980,21 +8019,37 @@ export class ApiClient {
     );
   }
 
-  async getLeadScraperMicroserviceApiV1AccountsId(params: { id: string }) {
+  async getLeadScraperMicroserviceApiV1AccountsId(params: {
+    id: string;
+    organizationId: string | undefined;
+    tenantId: string | undefined;
+  }) {
     return this.client.get("/lead-scraper-microservice/api/v1/accounts/:id", {
       params: {
         id: params.id,
       },
+      queries: {
+        organizationId: params.organizationId,
+        tenantId: params.tenantId,
+      },
     });
   }
 
-  async deleteLeadScraperMicroserviceApiV1AccountsId(params: { id: string }) {
+  async deleteLeadScraperMicroserviceApiV1AccountsId(params: {
+    id: string;
+    organizationId: string | undefined;
+    tenantId: string | undefined;
+  }) {
     return this.client.delete(
       "/lead-scraper-microservice/api/v1/accounts/:id",
       undefined,
       {
         params: {
           id: params.id,
+        },
+        queries: {
+          organizationId: params.organizationId,
+          tenantId: params.tenantId,
         },
       },
     );
@@ -8011,14 +8066,14 @@ export class ApiClient {
   }
 
   async getLeadScraperMicroserviceApiV1Jobs(params: {
-    userId: string;
+    authPlatformUserId: string;
     orgId: string;
     tenantId: string;
   }) {
     return this.client.get("/lead-scraper-microservice/api/v1/jobs", {
       params: {},
       queries: {
-        userId: params.userId,
+        authPlatformUserId: params.authPlatformUserId,
         orgId: params.orgId,
         tenantId: params.tenantId,
       },

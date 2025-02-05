@@ -9,7 +9,7 @@ const router = new Hono<{ Bindings: Env }>();
 router.get("/", async (c) => {
   const client = new ApiClient(c.env.API_BASE_URL);
   const params = {
-    userId: c.req.query("userId") || "",
+    authPlatformUserId: c.req.query("authPlatformUserId") || "",
     orgId: c.req.query("orgId") || "",
     tenantId: c.req.query("tenantId") || "",
   };

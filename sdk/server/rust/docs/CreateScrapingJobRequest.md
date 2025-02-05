@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_id** | **String** |  | 
+**auth_platform_user_id** | **String** |  | 
 **org_id** | **String** |  | 
 **tenant_id** | **String** |  | 
 **name** | **String** |  | [optional] [default to None]

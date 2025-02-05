@@ -1,11 +1,16 @@
 import {
-    analyzeStructure,
-    cleanHtml,
-    extractMetadata,
-    extractText,
-    sanitizeHtml
+  analyzeStructure,
+  cleanHtml,
+  extractMetadata,
+  extractText,
+  sanitizeHtml,
 } from "../lib/html";
-import { convertHandler, enrichHandler, structureHandler, summaryHandler } from "../lib/handlers";
+import {
+  convertHandler,
+  enrichHandler,
+  structureHandler,
+  summaryHandler,
+} from "../lib/handlers";
 
 import { Env } from "../../../types";
 import { HTTPException } from "hono/http-exception";
@@ -17,8 +22,8 @@ import { z } from "zod";
  * Schema for HTML content request
  */
 const htmlRequestSchema = z.object({
-    html: z.string().min(1),
-    stream: z.boolean().optional().default(false),
+  html: z.string().min(1),
+  stream: z.boolean().optional().default(false),
 });
 
 /**
@@ -62,14 +67,14 @@ const html = new Hono<{ Bindings: Env }>();
  *                   description: Converted markdown content
  */
 html.post("/convert", validateRequest(htmlRequestSchema), async (c) => {
-    try {
-        return await convertHandler(c, await c.req.json());
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+  try {
+    return await convertHandler(c, await c.req.json());
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new HTTPException(500, { message: error.message });
     }
+    throw new HTTPException(500, { message: "Unknown error occurred" });
+  }
 });
 
 /**
@@ -108,14 +113,14 @@ html.post("/convert", validateRequest(htmlRequestSchema), async (c) => {
  *                   description: Enriched markdown content
  */
 html.post("/enrich", validateRequest(htmlRequestSchema), async (c) => {
-    try {
-        return await enrichHandler(c, await c.req.json());
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+  try {
+    return await enrichHandler(c, await c.req.json());
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new HTTPException(500, { message: error.message });
     }
+    throw new HTTPException(500, { message: "Unknown error occurred" });
+  }
 });
 
 /**
@@ -154,14 +159,14 @@ html.post("/enrich", validateRequest(htmlRequestSchema), async (c) => {
  *                   description: Generated summary in markdown format
  */
 html.post("/summary", validateRequest(htmlRequestSchema), async (c) => {
-    try {
-        return await summaryHandler(c, await c.req.json());
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+  try {
+    return await summaryHandler(c, await c.req.json());
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new HTTPException(500, { message: error.message });
     }
+    throw new HTTPException(500, { message: "Unknown error occurred" });
+  }
 });
 
 /**
@@ -196,16 +201,16 @@ html.post("/summary", validateRequest(htmlRequestSchema), async (c) => {
  *                   description: Sanitized HTML content
  */
 html.post("/sanitize", validateRequest(htmlRequestSchema), async (c) => {
-    try {
-        const { html: rawHtml } = await c.req.json();
-        const sanitized = sanitizeHtml(rawHtml);
-        return c.json({ html: sanitized });
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+  try {
+    const { html: rawHtml } = await c.req.json();
+    const sanitized = sanitizeHtml(rawHtml);
+    return c.json({ html: sanitized });
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new HTTPException(500, { message: error.message });
     }
+    throw new HTTPException(500, { message: "Unknown error occurred" });
+  }
 });
 
 /**
@@ -240,16 +245,16 @@ html.post("/sanitize", validateRequest(htmlRequestSchema), async (c) => {
  *                   description: Extracted plain text content
  */
 html.post("/extract-text", validateRequest(htmlRequestSchema), async (c) => {
-    try {
-        const { html: rawHtml } = await c.req.json();
-        const text = extractText(rawHtml);
-        return c.json({ text });
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+  try {
+    const { html: rawHtml } = await c.req.json();
+    const text = extractText(rawHtml);
+    return c.json({ text });
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new HTTPException(500, { message: error.message });
     }
+    throw new HTTPException(500, { message: "Unknown error occurred" });
+  }
 });
 
 /**
@@ -284,16 +289,16 @@ html.post("/extract-text", validateRequest(htmlRequestSchema), async (c) => {
  *                   description: Extracted metadata
  */
 html.post("/metadata", validateRequest(htmlRequestSchema), async (c) => {
-    try {
-        const { html: rawHtml } = await c.req.json();
-        const metadata = extractMetadata(rawHtml);
-        return c.json({ metadata });
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+  try {
+    const { html: rawHtml } = await c.req.json();
+    const metadata = extractMetadata(rawHtml);
+    return c.json({ metadata });
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new HTTPException(500, { message: error.message });
     }
+    throw new HTTPException(500, { message: "Unknown error occurred" });
+  }
 });
 
 /**
@@ -332,14 +337,14 @@ html.post("/metadata", validateRequest(htmlRequestSchema), async (c) => {
  *                   description: Structure analysis in markdown format
  */
 html.post("/structure", validateRequest(htmlRequestSchema), async (c) => {
-    try {
-        return await structureHandler(c, await c.req.json());
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+  try {
+    return await structureHandler(c, await c.req.json());
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new HTTPException(500, { message: error.message });
     }
+    throw new HTTPException(500, { message: "Unknown error occurred" });
+  }
 });
 
-export default html; 
+export default html;

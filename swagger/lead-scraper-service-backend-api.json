@@ -379,6 +379,24 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "organizationId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uint64"
+                        }
+                    },
+                    {
+                        "name": "tenantId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uint64"
+                        }
                     }
                 ],
                 "tags": [
@@ -1722,7 +1740,26 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
+                        }
+                    },
+                    {
+                        "name": "organizationId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uint64"
+                        }
+                    },
+                    {
+                        "name": "tenantId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uint64"
                         }
                     }
                 ],
@@ -2051,7 +2088,26 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
+                        }
+                    },
+                    {
+                        "name": "organizationId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uint64"
+                        }
+                    },
+                    {
+                        "name": "tenantId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uint64"
                         }
                     }
                 ],
@@ -2382,7 +2438,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     }
                 ],
@@ -2709,7 +2766,7 @@
                 },
                 "parameters": [
                     {
-                        "name": "userId",
+                        "name": "authPlatformUserId",
                         "in": "query",
                         "required": true,
                         "schema": {
@@ -2721,7 +2778,8 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     },
                     {
@@ -2729,7 +2787,8 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     }
                 ],
@@ -3404,7 +3463,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     },
                     {
@@ -3420,7 +3480,8 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     },
                     {
@@ -3428,7 +3489,8 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     }
                 ],
@@ -3757,7 +3819,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     },
                     {
@@ -3773,7 +3836,8 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     },
                     {
@@ -3781,7 +3845,8 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     }
                 ],
@@ -4112,7 +4177,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     },
                     {
@@ -4128,7 +4194,8 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     },
                     {
@@ -4136,7 +4203,8 @@
                         "in": "query",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     }
                 ],
@@ -8209,7 +8277,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     }
                 ],
@@ -8538,7 +8607,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     }
                 ],
@@ -8869,7 +8939,8 @@
                         "in": "query",
                         "required": false,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     },
                     {
@@ -9898,7 +9969,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     },
                     {
@@ -10247,7 +10319,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     },
                     {
@@ -10612,7 +10685,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     }
                 ],
@@ -10958,7 +11032,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     },
                     {
@@ -10966,7 +11041,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     }
                 ],
@@ -11297,7 +11373,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     },
                     {
@@ -11305,7 +11382,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     }
                 ],
@@ -11651,7 +11729,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     },
                     {
@@ -11659,7 +11738,8 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uint64"
                         }
                     }
                 ],
@@ -12481,6 +12561,14 @@
                     },
                     "initialWorkspaceName": {
                         "type": "string"
+                    },
+                    "organizationId": {
+                        "type": "string",
+                        "format": "uint64"
+                    },
+                    "tenantId": {
+                        "type": "string",
+                        "format": "uint64"
                     }
                 },
                 "title": "Account Management Messages"
@@ -12516,15 +12604,17 @@
             "CreateScrapingJobRequest": {
                 "type": "object",
                 "properties": {
-                    "userId": {
+                    "authPlatformUserId": {
                         "type": "string",
                         "title": "User and context identification"
                     },
                     "orgId": {
-                        "type": "string"
+                        "type": "string",
+                        "format": "uint64"
                     },
                     "tenantId": {
-                        "type": "string"
+                        "type": "string",
+                        "format": "uint64"
                     },
                     "name": {
                         "type": "string",
@@ -12577,7 +12667,7 @@
                 },
                 "title": "CreateScrapingJobRequest represents a request to create a new Google Maps scraping job",
                 "required": [
-                    "userId",
+                    "authPlatformUserId",
                     "orgId",
                     "tenantId"
                 ]
@@ -12586,7 +12676,8 @@
                 "type": "object",
                 "properties": {
                     "jobId": {
-                        "type": "string"
+                        "type": "string",
+                        "format": "uint64"
                     },
                     "status": {
                         "$ref": "#/components/schemas/BackgroundJobStatus"

@@ -10,30 +10,30 @@ import { z } from "zod";
  * Schema for contact information
  */
 export const ContactSchema = z.object({
-    emails: z.array(z.string().email()),
-    phoneNumbers: z.array(z.string()),
-    socialMedia: z.object({
-        linkedin: z.array(z.string().url()).optional(),
-        twitter: z.array(z.string().url()).optional(),
-        facebook: z.array(z.string().url()).optional(),
-        instagram: z.array(z.string().url()).optional(),
-    }),
-    addresses: z.array(z.string()),
-    websites: z.array(z.string().url()),
+  emails: z.array(z.string().email()),
+  phoneNumbers: z.array(z.string()),
+  socialMedia: z.object({
+    linkedin: z.array(z.string().url()).optional(),
+    twitter: z.array(z.string().url()).optional(),
+    facebook: z.array(z.string().url()).optional(),
+    instagram: z.array(z.string().url()).optional(),
+  }),
+  addresses: z.array(z.string()),
+  websites: z.array(z.string().url()),
 });
 
 /**
  * Schema for HTML content request
  */
 const htmlRequestSchema = z.object({
-    html: z.string().min(1),
+  html: z.string().min(1),
 });
 
 /**
  * Contact extraction handler
  */
 const contactHandler = createCompletionHandler({
-    systemPrompt: `You are an expert at extracting contact information from web content. Extract all contact details and format them according to these rules:
+  systemPrompt: `You are an expert at extracting contact information from web content. Extract all contact details and format them according to these rules:
 1. Identify all email addresses
 2. Extract phone numbers in standardized format
 3. Find social media profile URLs
@@ -41,24 +41,24 @@ const contactHandler = createCompletionHandler({
 5. Extract website URLs
 6. Ensure all extracted information is valid and properly formatted
 7. Return only factual information, no guessing or inference`,
-    defaultModel: "@cf/mistral/7b-instruct-v0.2",
-    inputTransformer: (html) => {
-        const text = extractText(html);
-        return `Extract all contact information from this content and format as JSON:\n\n${text}`;
-    },
-    outputTransformer: (output) => {
-        try {
-            const parsed = JSON.parse(output);
-            const validated = ContactSchema.parse(parsed);
-            return JSON.stringify(validated);
-        } catch (error) {
-            throw new Error("Invalid contact information format");
-        }
-    },
-    defaultParams: {
-        temperature: 0.1,
-        maxTokens: 1000,
-    },
+  defaultModel: "@cf/mistral/7b-instruct-v0.2",
+  inputTransformer: (html) => {
+    const text = extractText(html);
+    return `Extract all contact information from this content and format as JSON:\n\n${text}`;
+  },
+  outputTransformer: (output) => {
+    try {
+      const parsed = JSON.parse(output);
+      const validated = ContactSchema.parse(parsed);
+      return JSON.stringify(validated);
+    } catch (error) {
+      throw new Error("Invalid contact information format");
+    }
+  },
+  defaultParams: {
+    temperature: 0.1,
+    maxTokens: 1000,
+  },
 });
 
 /**
@@ -94,15 +94,15 @@ const extractContacts = new Hono<{ Bindings: Env }>();
  *               $ref: '#/components/schemas/ContactSchema'
  */
 extractContacts.post("/", validateRequest(htmlRequestSchema), async (c) => {
-    try {
-        const result = await contactHandler(c, await c.req.json());
-        return c.json(result);
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+  try {
+    const result = await contactHandler(c, await c.req.json());
+    return c.json(result);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new HTTPException(500, { message: error.message });
     }
+    throw new HTTPException(500, { message: "Unknown error occurred" });
+  }
 });
 
-export default extractContacts; 
+export default extractContacts;

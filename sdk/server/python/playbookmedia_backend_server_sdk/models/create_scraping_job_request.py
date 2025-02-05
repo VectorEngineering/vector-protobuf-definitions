@@ -12,11 +12,11 @@ class CreateScrapingJobRequest(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, user_id=None, org_id=None, tenant_id=None, name=None, keywords=None, lang=None, zoom=None, lat=None, lon=None, fast_mode=None, radius=None, depth=None, email=None, max_time=None, proxies=None):  # noqa: E501
+    def __init__(self, auth_platform_user_id=None, org_id=None, tenant_id=None, name=None, keywords=None, lang=None, zoom=None, lat=None, lon=None, fast_mode=None, radius=None, depth=None, email=None, max_time=None, proxies=None):  # noqa: E501
         """CreateScrapingJobRequest - a model defined in OpenAPI
 
-        :param user_id: The user_id of this CreateScrapingJobRequest.  # noqa: E501
-        :type user_id: str
+        :param auth_platform_user_id: The auth_platform_user_id of this CreateScrapingJobRequest.  # noqa: E501
+        :type auth_platform_user_id: str
         :param org_id: The org_id of this CreateScrapingJobRequest.  # noqa: E501
         :type org_id: str
         :param tenant_id: The tenant_id of this CreateScrapingJobRequest.  # noqa: E501
@@ -47,7 +47,7 @@ class CreateScrapingJobRequest(Model):
         :type proxies: List[str]
         """
         self.openapi_types = {
-            'user_id': str,
+            'auth_platform_user_id': str,
             'org_id': str,
             'tenant_id': str,
             'name': str,
@@ -65,7 +65,7 @@ class CreateScrapingJobRequest(Model):
         }
 
         self.attribute_map = {
-            'user_id': 'userId',
+            'auth_platform_user_id': 'authPlatformUserId',
             'org_id': 'orgId',
             'tenant_id': 'tenantId',
             'name': 'name',
@@ -82,7 +82,7 @@ class CreateScrapingJobRequest(Model):
             'proxies': 'proxies'
         }
 
-        self._user_id = user_id
+        self._auth_platform_user_id = auth_platform_user_id
         self._org_id = org_id
         self._tenant_id = tenant_id
         self._name = name
@@ -110,27 +110,27 @@ class CreateScrapingJobRequest(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
-    def user_id(self) -> str:
-        """Gets the user_id of this CreateScrapingJobRequest.
+    def auth_platform_user_id(self) -> str:
+        """Gets the auth_platform_user_id of this CreateScrapingJobRequest.
 
 
-        :return: The user_id of this CreateScrapingJobRequest.
+        :return: The auth_platform_user_id of this CreateScrapingJobRequest.
         :rtype: str
         """
-        return self._user_id
+        return self._auth_platform_user_id
 
-    @user_id.setter
-    def user_id(self, user_id: str):
-        """Sets the user_id of this CreateScrapingJobRequest.
+    @auth_platform_user_id.setter
+    def auth_platform_user_id(self, auth_platform_user_id: str):
+        """Sets the auth_platform_user_id of this CreateScrapingJobRequest.
 
 
-        :param user_id: The user_id of this CreateScrapingJobRequest.
-        :type user_id: str
+        :param auth_platform_user_id: The auth_platform_user_id of this CreateScrapingJobRequest.
+        :type auth_platform_user_id: str
         """
-        if user_id is None:
-            raise ValueError("Invalid value for `user_id`, must not be `None`")  # noqa: E501
+        if auth_platform_user_id is None:
+            raise ValueError("Invalid value for `auth_platform_user_id`, must not be `None`")  # noqa: E501
 
-        self._user_id = user_id
+        self._auth_platform_user_id = auth_platform_user_id
 
     @property
     def org_id(self) -> str:

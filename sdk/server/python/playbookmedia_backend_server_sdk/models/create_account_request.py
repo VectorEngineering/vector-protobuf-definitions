@@ -14,26 +14,36 @@ class CreateAccountRequest(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, account=None, initial_workspace_name=None):  # noqa: E501
+    def __init__(self, account=None, initial_workspace_name=None, organization_id=None, tenant_id=None):  # noqa: E501
         """CreateAccountRequest - a model defined in OpenAPI
 
         :param account: The account of this CreateAccountRequest.  # noqa: E501
         :type account: Account
         :param initial_workspace_name: The initial_workspace_name of this CreateAccountRequest.  # noqa: E501
         :type initial_workspace_name: str
+        :param organization_id: The organization_id of this CreateAccountRequest.  # noqa: E501
+        :type organization_id: str
+        :param tenant_id: The tenant_id of this CreateAccountRequest.  # noqa: E501
+        :type tenant_id: str
         """
         self.openapi_types = {
             'account': Account,
-            'initial_workspace_name': str
+            'initial_workspace_name': str,
+            'organization_id': str,
+            'tenant_id': str
         }
 
         self.attribute_map = {
             'account': 'account',
-            'initial_workspace_name': 'initialWorkspaceName'
+            'initial_workspace_name': 'initialWorkspaceName',
+            'organization_id': 'organizationId',
+            'tenant_id': 'tenantId'
         }
 
         self._account = account
         self._initial_workspace_name = initial_workspace_name
+        self._organization_id = organization_id
+        self._tenant_id = tenant_id
 
     @classmethod
     def from_dict(cls, dikt) -> 'CreateAccountRequest':
@@ -87,3 +97,45 @@ class CreateAccountRequest(Model):
         """
 
         self._initial_workspace_name = initial_workspace_name
+
+    @property
+    def organization_id(self) -> str:
+        """Gets the organization_id of this CreateAccountRequest.
+
+
+        :return: The organization_id of this CreateAccountRequest.
+        :rtype: str
+        """
+        return self._organization_id
+
+    @organization_id.setter
+    def organization_id(self, organization_id: str):
+        """Sets the organization_id of this CreateAccountRequest.
+
+
+        :param organization_id: The organization_id of this CreateAccountRequest.
+        :type organization_id: str
+        """
+
+        self._organization_id = organization_id
+
+    @property
+    def tenant_id(self) -> str:
+        """Gets the tenant_id of this CreateAccountRequest.
+
+
+        :return: The tenant_id of this CreateAccountRequest.
+        :rtype: str
+        """
+        return self._tenant_id
+
+    @tenant_id.setter
+    def tenant_id(self, tenant_id: str):
+        """Sets the tenant_id of this CreateAccountRequest.
+
+
+        :param tenant_id: The tenant_id of this CreateAccountRequest.
+        :type tenant_id: str
+        """
+
+        self._tenant_id = tenant_id

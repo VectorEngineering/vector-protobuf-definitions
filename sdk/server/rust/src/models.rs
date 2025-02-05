@@ -8659,6 +8659,14 @@ pub struct CreateAccountRequest {
     #[serde(skip_serializing_if="Option::is_none")]
     pub initial_workspace_name: Option<String>,
 
+    #[serde(rename = "organizationId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub organization_id: Option<String>,
+
+    #[serde(rename = "tenantId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub tenant_id: Option<String>,
+
 }
 
 
@@ -8668,6 +8676,8 @@ impl CreateAccountRequest {
         CreateAccountRequest {
             account: None,
             initial_workspace_name: None,
+            organization_id: None,
+            tenant_id: None,
         }
     }
 }
@@ -8685,6 +8695,22 @@ impl std::string::ToString for CreateAccountRequest {
                 [
                     "initialWorkspaceName".to_string(),
                     initial_workspace_name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.organization_id.as_ref().map(|organization_id| {
+                [
+                    "organizationId".to_string(),
+                    organization_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.tenant_id.as_ref().map(|tenant_id| {
+                [
+                    "tenantId".to_string(),
+                    tenant_id.to_string(),
                 ].join(",")
             }),
 
@@ -8707,6 +8733,8 @@ impl std::str::FromStr for CreateAccountRequest {
         struct IntermediateRep {
             pub account: Vec<models::Account>,
             pub initial_workspace_name: Vec<String>,
+            pub organization_id: Vec<String>,
+            pub tenant_id: Vec<String>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -8728,6 +8756,10 @@ impl std::str::FromStr for CreateAccountRequest {
                     "account" => intermediate_rep.account.push(<models::Account as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "initialWorkspaceName" => intermediate_rep.initial_workspace_name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "organizationId" => intermediate_rep.organization_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing CreateAccountRequest".to_string())
                 }
             }
@@ -8740,6 +8772,8 @@ impl std::str::FromStr for CreateAccountRequest {
         std::result::Result::Ok(CreateAccountRequest {
             account: intermediate_rep.account.into_iter().next(),
             initial_workspace_name: intermediate_rep.initial_workspace_name.into_iter().next(),
+            organization_id: intermediate_rep.organization_id.into_iter().next(),
+            tenant_id: intermediate_rep.tenant_id.into_iter().next(),
         })
     }
 }
@@ -9561,8 +9595,8 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct CreateScrapingJobRequest {
-    #[serde(rename = "userId")]
-    pub user_id: String,
+    #[serde(rename = "authPlatformUserId")]
+    pub auth_platform_user_id: String,
 
     #[serde(rename = "orgId")]
     pub org_id: String,
@@ -9623,9 +9657,9 @@ pub struct CreateScrapingJobRequest {
 
 impl CreateScrapingJobRequest {
     #[allow(clippy::new_without_default)]
-    pub fn new(user_id: String, org_id: String, tenant_id: String, ) -> CreateScrapingJobRequest {
+    pub fn new(auth_platform_user_id: String, org_id: String, tenant_id: String, ) -> CreateScrapingJobRequest {
         CreateScrapingJobRequest {
-            user_id,
+            auth_platform_user_id,
             org_id,
             tenant_id,
             name: None,
@@ -9651,8 +9685,8 @@ impl std::string::ToString for CreateScrapingJobRequest {
     fn to_string(&self) -> String {
         let params: Vec<Option<String>> = vec![
 
-            Some("userId".to_string()),
-            Some(self.user_id.to_string()),
+            Some("authPlatformUserId".to_string()),
+            Some(self.auth_platform_user_id.to_string()),
 
 
             Some("orgId".to_string()),
@@ -9775,7 +9809,7 @@ impl std::str::FromStr for CreateScrapingJobRequest {
         #[derive(Default)]
         #[allow(dead_code)]
         struct IntermediateRep {
-            pub user_id: Vec<String>,
+            pub auth_platform_user_id: Vec<String>,
             pub org_id: Vec<String>,
             pub tenant_id: Vec<String>,
             pub name: Vec<String>,
@@ -9808,7 +9842,7 @@ impl std::str::FromStr for CreateScrapingJobRequest {
                 #[allow(clippy::match_single_binding)]
                 match key {
                     #[allow(clippy::redundant_clone)]
-                    "userId" => intermediate_rep.user_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "authPlatformUserId" => intermediate_rep.auth_platform_user_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "orgId" => intermediate_rep.org_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
@@ -9845,7 +9879,7 @@ impl std::str::FromStr for CreateScrapingJobRequest {
 
         // Use the intermediate representation to return the struct
         std::result::Result::Ok(CreateScrapingJobRequest {
-            user_id: intermediate_rep.user_id.into_iter().next().ok_or_else(|| "userId missing in CreateScrapingJobRequest".to_string())?,
+            auth_platform_user_id: intermediate_rep.auth_platform_user_id.into_iter().next().ok_or_else(|| "authPlatformUserId missing in CreateScrapingJobRequest".to_string())?,
             org_id: intermediate_rep.org_id.into_iter().next().ok_or_else(|| "orgId missing in CreateScrapingJobRequest".to_string())?,
             tenant_id: intermediate_rep.tenant_id.into_iter().next().ok_or_else(|| "tenantId missing in CreateScrapingJobRequest".to_string())?,
             name: intermediate_rep.name.into_iter().next(),

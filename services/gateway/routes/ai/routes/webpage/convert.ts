@@ -9,8 +9,8 @@ import { z } from "zod";
  * Schema for HTML content request
  */
 const htmlRequestSchema = z.object({
-    html: z.string().min(1),
-    stream: z.boolean().optional().default(false),
+  html: z.string().min(1),
+  stream: z.boolean().optional().default(false),
 });
 
 /**
@@ -54,14 +54,14 @@ const convert = new Hono<{ Bindings: Env }>();
  *                   description: Converted markdown content
  */
 convert.post("/", validateRequest(htmlRequestSchema), async (c) => {
-    try {
-        return await convertHandler(c, await c.req.json());
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+  try {
+    return await convertHandler(c, await c.req.json());
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new HTTPException(500, { message: error.message });
     }
+    throw new HTTPException(500, { message: "Unknown error occurred" });
+  }
 });
 
-export default convert; 
+export default convert;

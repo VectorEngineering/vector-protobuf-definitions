@@ -45,15 +45,15 @@ const leadgen = new Hono<{ Bindings: Env }>();
  *         description: Processing error
  */
 leadgen.post("/", validateRequest(htmlRequestSchema), async (c) => {
-    try {
-        const result = await leadgenHandler(c, await c.req.json());
-        return c.json(result);
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+  try {
+    const result = await leadgenHandler(c, await c.req.json());
+    return c.json(result);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new HTTPException(500, { message: error.message });
     }
+    throw new HTTPException(500, { message: "Unknown error occurred" });
+  }
 });
 
-export default leadgen; 
+export default leadgen;

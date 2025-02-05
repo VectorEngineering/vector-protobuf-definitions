@@ -19,12 +19,16 @@ import javax.annotation.Generated;
  * CreateAccountRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-04T01:38:18.342811-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T06:54:24.429429-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class CreateAccountRequest {
 
   private Account account;
 
   private String initialWorkspaceName;
+
+  private String organizationId;
+
+  private String tenantId;
 
   public CreateAccountRequest account(Account account) {
     this.account = account;
@@ -66,6 +70,46 @@ public class CreateAccountRequest {
     this.initialWorkspaceName = initialWorkspaceName;
   }
 
+  public CreateAccountRequest organizationId(String organizationId) {
+    this.organizationId = organizationId;
+    return this;
+  }
+
+  /**
+   * Get organizationId
+   * @return organizationId
+   */
+  
+  @Schema(name = "organizationId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("organizationId")
+  public String getOrganizationId() {
+    return organizationId;
+  }
+
+  public void setOrganizationId(String organizationId) {
+    this.organizationId = organizationId;
+  }
+
+  public CreateAccountRequest tenantId(String tenantId) {
+    this.tenantId = tenantId;
+    return this;
+  }
+
+  /**
+   * Get tenantId
+   * @return tenantId
+   */
+  
+  @Schema(name = "tenantId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("tenantId")
+  public String getTenantId() {
+    return tenantId;
+  }
+
+  public void setTenantId(String tenantId) {
+    this.tenantId = tenantId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -76,12 +120,14 @@ public class CreateAccountRequest {
     }
     CreateAccountRequest createAccountRequest = (CreateAccountRequest) o;
     return Objects.equals(this.account, createAccountRequest.account) &&
-        Objects.equals(this.initialWorkspaceName, createAccountRequest.initialWorkspaceName);
+        Objects.equals(this.initialWorkspaceName, createAccountRequest.initialWorkspaceName) &&
+        Objects.equals(this.organizationId, createAccountRequest.organizationId) &&
+        Objects.equals(this.tenantId, createAccountRequest.tenantId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(account, initialWorkspaceName);
+    return Objects.hash(account, initialWorkspaceName, organizationId, tenantId);
   }
 
   @Override
@@ -90,6 +136,8 @@ public class CreateAccountRequest {
     sb.append("class CreateAccountRequest {\n");
     sb.append("    account: ").append(toIndentedString(account)).append("\n");
     sb.append("    initialWorkspaceName: ").append(toIndentedString(initialWorkspaceName)).append("\n");
+    sb.append("    organizationId: ").append(toIndentedString(organizationId)).append("\n");
+    sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

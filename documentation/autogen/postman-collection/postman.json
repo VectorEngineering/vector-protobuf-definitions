@@ -917,7 +917,7 @@
                                     ],
                                     "body": {
                                         "mode": "raw",
-                                        "raw": "{\n \"account\": \"<string>\",\n \"initialWorkspaceName\": \"<string>\"\n}",
+                                        "raw": "{\n \"account\": \"<string>\",\n \"initialWorkspaceName\": \"<string>\",\n \"organizationId\": \"<string>\",\n \"tenantId\": \"<string>\"\n}",
                                         "options": {
                                             "raw": {
                                                 "language": "json"
@@ -999,6 +999,18 @@
                                             {
                                                 "key": "filter",
                                                 "value": "filter_example",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "organizationId",
+                                                "value": "organizationId_example",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "tenantId",
+                                                "value": "tenantId_example",
                                                 "description": "",
                                                 "disabled": true
                                             }
@@ -1106,6 +1118,18 @@
                                             }
                                         ],
                                         "query": [
+                                            {
+                                                "key": "organizationId",
+                                                "value": "organizationId_example",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "tenantId",
+                                                "value": "tenantId_example",
+                                                "description": "",
+                                                "disabled": true
+                                            }
                                         ]
                                     },
                                     "description": "Permanently deletes an account and associated resources"
@@ -1158,6 +1182,18 @@
                                             }
                                         ],
                                         "query": [
+                                            {
+                                                "key": "organizationId",
+                                                "value": "organizationId_example",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "tenantId",
+                                                "value": "tenantId_example",
+                                                "description": "",
+                                                "disabled": true
+                                            }
                                         ]
                                     },
                                     "description": "Retrieves details of a specific account"
@@ -1295,7 +1331,7 @@
                                     ],
                                     "body": {
                                         "mode": "raw",
-                                        "raw": "{\n \"userId\": \"<string>\",\n \"orgId\": \"<string>\",\n \"tenantId\": \"<string>\",\n \"name\": \"<string>\",\n \"keywords\": \"<string>\",\n \"lang\": \"<string>\",\n \"zoom\": \"<number>\",\n \"lat\": \"<string>\",\n \"lon\": \"<string>\",\n \"fastMode\": \"<string>\",\n \"radius\": \"<number>\",\n \"depth\": \"<number>\",\n \"email\": \"<string>\",\n \"maxTime\": \"<number>\",\n \"proxies\": \"<string>\"\n}",
+                                        "raw": "{\n \"authPlatformUserId\": \"<string>\",\n \"orgId\": \"<string>\",\n \"tenantId\": \"<string>\",\n \"name\": \"<string>\",\n \"keywords\": \"<string>\",\n \"lang\": \"<string>\",\n \"zoom\": \"<number>\",\n \"lat\": \"<string>\",\n \"lon\": \"<string>\",\n \"fastMode\": \"<string>\",\n \"radius\": \"<number>\",\n \"depth\": \"<number>\",\n \"email\": \"<string>\",\n \"maxTime\": \"<number>\",\n \"proxies\": \"<string>\"\n}",
                                         "options": {
                                             "raw": {
                                                 "language": "json"
@@ -1363,8 +1399,8 @@
                                         ],
                                         "query": [
                                             {
-                                                "key": "userId",
-                                                "value": "userId_example",
+                                                "key": "authPlatformUserId",
+                                                "value": "authPlatformUserId_example",
                                                 "description": "",
                                                 "disabled": false
                                             },

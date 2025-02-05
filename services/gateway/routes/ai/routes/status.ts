@@ -6,7 +6,7 @@ import { aiStatusResponseSchema } from "../schema";
 /**
  * AI status route handler
  * Returns current status of AI service and available models
- * 
+ *
  * @openapi
  * /ai/status:
  *   get:
@@ -40,32 +40,32 @@ import { aiStatusResponseSchema } from "../schema";
 const status = new Hono<{ Bindings: Env }>();
 
 status.get("/", async (c) => {
-    try {
-        const models = await c.env.AI.listModels();
-        const status: typeof aiStatusResponseSchema._type = {
-            status: "healthy",
-            models: models.map(model => ({
-                id: model.id,
-                available: model.available,
-                latency: model.latency,
-                capabilities: {
-                    streaming: model.capabilities.streaming,
-                    functionCalling: model.capabilities.functionCalling,
-                    lora: model.capabilities.lora,
-                },
-            })),
-            lastChecked: new Date().toISOString(),
-        };
+  try {
+    const models = await c.env.AI.listModels();
+    const status: typeof aiStatusResponseSchema._type = {
+      status: "healthy",
+      models: models.map((model) => ({
+        id: model.id,
+        available: model.available,
+        latency: model.latency,
+        capabilities: {
+          streaming: model.capabilities.streaming,
+          functionCalling: model.capabilities.functionCalling,
+          lora: model.capabilities.lora,
+        },
+      })),
+      lastChecked: new Date().toISOString(),
+    };
 
-        // Set cache headers for status endpoint
-        c.header("Cache-Control", "public, max-age=60"); // Cache for 1 minute
-        return c.json(status);
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+    // Set cache headers for status endpoint
+    c.header("Cache-Control", "public, max-age=60"); // Cache for 1 minute
+    return c.json(status);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new HTTPException(500, { message: error.message });
     }
+    throw new HTTPException(500, { message: "Unknown error occurred" });
+  }
 });
 
-export default status; 
+export default status;

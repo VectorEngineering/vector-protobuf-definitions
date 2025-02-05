@@ -9,7 +9,7 @@ import { z } from "zod";
  * Schema for HTML content request
  */
 const htmlRequestSchema = z.object({
-    html: z.string().min(1),
+  html: z.string().min(1),
 });
 
 /**
@@ -49,16 +49,16 @@ const sanitize = new Hono<{ Bindings: Env }>();
  *                   description: Sanitized HTML content
  */
 sanitize.post("/", validateRequest(htmlRequestSchema), async (c) => {
-    try {
-        const { html: rawHtml } = await c.req.json();
-        const sanitized = sanitizeHtml(rawHtml);
-        return c.json({ html: sanitized });
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+  try {
+    const { html: rawHtml } = await c.req.json();
+    const sanitized = sanitizeHtml(rawHtml);
+    return c.json({ html: sanitized });
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new HTTPException(500, { message: error.message });
     }
+    throw new HTTPException(500, { message: "Unknown error occurred" });
+  }
 });
 
-export default sanitize; 
+export default sanitize;

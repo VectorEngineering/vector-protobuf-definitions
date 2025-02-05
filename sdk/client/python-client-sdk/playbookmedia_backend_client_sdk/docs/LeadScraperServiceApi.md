@@ -483,7 +483,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_account**
-> DeleteAccountResponse delete_account(id)
+> DeleteAccountResponse delete_account(id, organization_id=organization_id, tenant_id=tenant_id)
 
 Delete account
 
@@ -510,10 +510,12 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
     # Create an instance of the API class
     api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
     id = 'id_example' # str | 
+    organization_id = 'organization_id_example' # str |  (optional)
+    tenant_id = 'tenant_id_example' # str |  (optional)
 
     try:
         # Delete account
-        api_response = await api_instance.delete_account(id)
+        api_response = await api_instance.delete_account(id, organization_id=organization_id, tenant_id=tenant_id)
         print("The response of LeadScraperServiceApi->delete_account:\n")
         pprint(api_response)
     except Exception as e:
@@ -528,6 +530,8 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**|  | 
+ **organization_id** | **str**|  | [optional] 
+ **tenant_id** | **str**|  | [optional] 
 
 ### Return type
 
@@ -1013,7 +1017,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_account**
-> GetAccountResponse get_account(id)
+> GetAccountResponse get_account(id, organization_id=organization_id, tenant_id=tenant_id)
 
 Get account details
 
@@ -1040,10 +1044,12 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
     # Create an instance of the API class
     api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
     id = 'id_example' # str | 
+    organization_id = 'organization_id_example' # str |  (optional)
+    tenant_id = 'tenant_id_example' # str |  (optional)
 
     try:
         # Get account details
-        api_response = await api_instance.get_account(id)
+        api_response = await api_instance.get_account(id, organization_id=organization_id, tenant_id=tenant_id)
         print("The response of LeadScraperServiceApi->get_account:\n")
         pprint(api_response)
     except Exception as e:
@@ -1058,6 +1064,8 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**|  | 
+ **organization_id** | **str**|  | [optional] 
+ **tenant_id** | **str**|  | [optional] 
 
 ### Return type
 
@@ -1805,7 +1813,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_accounts**
-> ListAccountsResponse list_accounts(page_size=page_size, page_number=page_number, filter=filter)
+> ListAccountsResponse list_accounts(page_size=page_size, page_number=page_number, filter=filter, organization_id=organization_id, tenant_id=tenant_id)
 
 List all accounts
 
@@ -1834,10 +1842,12 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
     page_size = 56 # int |  (optional)
     page_number = 56 # int |  (optional)
     filter = 'filter_example' # str |  (optional)
+    organization_id = 'organization_id_example' # str |  (optional)
+    tenant_id = 'tenant_id_example' # str |  (optional)
 
     try:
         # List all accounts
-        api_response = await api_instance.list_accounts(page_size=page_size, page_number=page_number, filter=filter)
+        api_response = await api_instance.list_accounts(page_size=page_size, page_number=page_number, filter=filter, organization_id=organization_id, tenant_id=tenant_id)
         print("The response of LeadScraperServiceApi->list_accounts:\n")
         pprint(api_response)
     except Exception as e:
@@ -1854,6 +1864,8 @@ Name | Type | Description  | Notes
  **page_size** | **int**|  | [optional] 
  **page_number** | **int**|  | [optional] 
  **filter** | **str**|  | [optional] 
+ **organization_id** | **str**|  | [optional] 
+ **tenant_id** | **str**|  | [optional] 
 
 ### Return type
 
@@ -1983,7 +1995,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_scraping_jobs**
-> ListScrapingJobsResponse list_scraping_jobs(user_id, org_id, tenant_id)
+> ListScrapingJobsResponse list_scraping_jobs(auth_platform_user_id, org_id, tenant_id)
 
 Get all jobs
 
@@ -2009,13 +2021,13 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
-    user_id = 'user_id_example' # str | 
+    auth_platform_user_id = 'auth_platform_user_id_example' # str | 
     org_id = 'org_id_example' # str | 
     tenant_id = 'tenant_id_example' # str | 
 
     try:
         # Get all jobs
-        api_response = await api_instance.list_scraping_jobs(user_id, org_id, tenant_id)
+        api_response = await api_instance.list_scraping_jobs(auth_platform_user_id, org_id, tenant_id)
         print("The response of LeadScraperServiceApi->list_scraping_jobs:\n")
         pprint(api_response)
     except Exception as e:
@@ -2029,7 +2041,7 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user_id** | **str**|  | 
+ **auth_platform_user_id** | **str**|  | 
  **org_id** | **str**|  | 
  **tenant_id** | **str**|  | 
 

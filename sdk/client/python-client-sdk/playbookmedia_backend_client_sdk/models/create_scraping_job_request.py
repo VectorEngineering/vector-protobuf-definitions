@@ -27,7 +27,7 @@ class CreateScrapingJobRequest(BaseModel):
     """
     CreateScrapingJobRequest
     """ # noqa: E501
-    user_id: StrictStr = Field(alias="userId")
+    auth_platform_user_id: StrictStr = Field(alias="authPlatformUserId")
     org_id: StrictStr = Field(alias="orgId")
     tenant_id: StrictStr = Field(alias="tenantId")
     name: Optional[StrictStr] = None
@@ -42,7 +42,7 @@ class CreateScrapingJobRequest(BaseModel):
     email: Optional[StrictBool] = None
     max_time: Optional[StrictInt] = Field(default=None, alias="maxTime")
     proxies: Optional[List[StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["userId", "orgId", "tenantId", "name", "keywords", "lang", "zoom", "lat", "lon", "fastMode", "radius", "depth", "email", "maxTime", "proxies"]
+    __properties: ClassVar[List[str]] = ["authPlatformUserId", "orgId", "tenantId", "name", "keywords", "lang", "zoom", "lat", "lon", "fastMode", "radius", "depth", "email", "maxTime", "proxies"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,7 +95,7 @@ class CreateScrapingJobRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "userId": obj.get("userId"),
+            "authPlatformUserId": obj.get("authPlatformUserId"),
             "orgId": obj.get("orgId"),
             "tenantId": obj.get("tenantId"),
             "name": obj.get("name"),

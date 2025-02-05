@@ -30,7 +30,9 @@ class CreateAccountRequest(BaseModel):
     """ # noqa: E501
     account: Optional[Account] = None
     initial_workspace_name: Optional[StrictStr] = Field(default=None, alias="initialWorkspaceName")
-    __properties: ClassVar[List[str]] = ["account", "initialWorkspaceName"]
+    organization_id: Optional[StrictStr] = Field(default=None, alias="organizationId")
+    tenant_id: Optional[StrictStr] = Field(default=None, alias="tenantId")
+    __properties: ClassVar[List[str]] = ["account", "initialWorkspaceName", "organizationId", "tenantId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,7 +89,9 @@ class CreateAccountRequest(BaseModel):
 
         _obj = cls.model_validate({
             "account": Account.from_dict(obj["account"]) if obj.get("account") is not None else None,
-            "initialWorkspaceName": obj.get("initialWorkspaceName")
+            "initialWorkspaceName": obj.get("initialWorkspaceName"),
+            "organizationId": obj.get("organizationId"),
+            "tenantId": obj.get("tenantId")
         })
         return _obj
 

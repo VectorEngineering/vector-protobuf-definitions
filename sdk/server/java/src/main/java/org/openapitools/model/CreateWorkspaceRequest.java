@@ -19,7 +19,7 @@ import javax.annotation.Generated;
  * CreateWorkspaceRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-04T01:38:18.342811-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T06:54:24.429429-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class CreateWorkspaceRequest {
 
   private Workspace workspace;

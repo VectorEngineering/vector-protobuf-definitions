@@ -225,7 +225,9 @@ fn main() {
         */
         Some("DeleteAccount") => {
             let result = rt.block_on(client.delete_account(
-                  "id_example".to_string()
+                  "id_example".to_string(),
+                  Some("organization_id_example".to_string()),
+                  Some("tenant_id_example".to_string())
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
@@ -268,7 +270,9 @@ fn main() {
         },
         Some("GetAccount") => {
             let result = rt.block_on(client.get_account(
-                  "id_example".to_string()
+                  "id_example".to_string(),
+                  Some("organization_id_example".to_string()),
+                  Some("tenant_id_example".to_string())
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
@@ -334,7 +338,9 @@ fn main() {
             let result = rt.block_on(client.list_accounts(
                   Some(56),
                   Some(56),
-                  Some("filter_example".to_string())
+                  Some("filter_example".to_string()),
+                  Some("organization_id_example".to_string()),
+                  Some("tenant_id_example".to_string())
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
@@ -347,7 +353,7 @@ fn main() {
         },
         Some("ListScrapingJobs") => {
             let result = rt.block_on(client.list_scraping_jobs(
-                  "user_id_example".to_string(),
+                  "auth_platform_user_id_example".to_string(),
                   "org_id_example".to_string(),
                   "tenant_id_example".to_string()
             ));

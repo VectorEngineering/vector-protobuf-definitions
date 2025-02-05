@@ -16,6 +16,8 @@ router.get("/", async (c) => {
           message: "Missing required path parameter: id",
         });
       })(),
+    organizationId: c.req.query("organizationId"),
+    tenantId: c.req.query("tenantId"),
   };
   const response =
     await client.getLeadScraperMicroserviceApiV1AccountsId(params);
@@ -32,6 +34,8 @@ router.delete("/", async (c) => {
           message: "Missing required path parameter: id",
         });
       })(),
+    organizationId: c.req.query("organizationId"),
+    tenantId: c.req.query("tenantId"),
   };
   const response =
     await client.deleteLeadScraperMicroserviceApiV1AccountsId(params);

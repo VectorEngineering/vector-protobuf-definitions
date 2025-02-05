@@ -4,112 +4,123 @@
  * @returns Markdown string
  */
 export function htmlToMarkdown(html: string): string {
-    let markdown = html;
+  let markdown = html;
 
-    // Replace headers with proper level
-    for (let i = 6; i >= 1; i--) {
-        const headerPattern = new RegExp(`<h${i}[^>]*>(.*?)<\/h${i}>`, 'gi');
-        markdown = markdown.replace(headerPattern, (_, content) =>
-            `\n${'#'.repeat(i)} ${content.trim()}\n`
-        );
-    }
-
-    // Replace emphasis and strong
-    markdown = markdown
-        .replace(/<strong[^>]*>(.*?)<\/strong>/gi, '**$1**')
-        .replace(/<b[^>]*>(.*?)<\/b>/gi, '**$1**')
-        .replace(/<em[^>]*>(.*?)<\/em>/gi, '*$1*')
-        .replace(/<i[^>]*>(.*?)<\/i>/gi, '*$1*');
-
-    // Replace links with titles
+  // Replace headers with proper level
+  for (let i = 6; i >= 1; i--) {
+    const headerPattern = new RegExp(`<h${i}[^>]*>(.*?)<\/h${i}>`, "gi");
     markdown = markdown.replace(
-        /<a[^>]*href="([^"]*)"[^>]*(?:title="([^"]*)")?[^>]*>(.*?)<\/a>/gi,
-        (_, url, title, text) => `[${text.trim()}](${url})${title ? ` "${title}"` : ''}`
+      headerPattern,
+      (_, content) => `\n${"#".repeat(i)} ${content.trim()}\n`,
     );
+  }
 
-    // Replace images with alt text and titles
-    markdown = markdown.replace(
-        /<img[^>]*src="([^"]*)"[^>]*(?:alt="([^"]*)")?[^>]*(?:title="([^"]*)")?[^>]*>/gi,
-        (_, src, alt, title) => `![${alt || ''}](${src})${title ? ` "${title}"` : ''}`
-    );
+  // Replace emphasis and strong
+  markdown = markdown
+    .replace(/<strong[^>]*>(.*?)<\/strong>/gi, "**$1**")
+    .replace(/<b[^>]*>(.*?)<\/b>/gi, "**$1**")
+    .replace(/<em[^>]*>(.*?)<\/em>/gi, "*$1*")
+    .replace(/<i[^>]*>(.*?)<\/i>/gi, "*$1*");
 
-    // Replace lists
-    markdown = markdown
-        .replace(/<ul[^>]*>([\s\S]*?)<\/ul>/gi, (_, content) =>
-            `\n${content.trim()}\n`
-        )
-        .replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gi, (_, content) => {
-            let counter = 1;
-            return `\n${content.replace(/<li[^>]*>(.*?)<\/li>/gi, (_: string, item: string) =>
-                `${counter++}. ${item.trim()}\n`
-            )}\n`;
-        })
-        .replace(/<li[^>]*>(.*?)<\/li>/gi, (_, content) =>
-            `- ${content.trim()}\n`
-        );
+  // Replace links with titles
+  markdown = markdown.replace(
+    /<a[^>]*href="([^"]*)"[^>]*(?:title="([^"]*)")?[^>]*>(.*?)<\/a>/gi,
+    (_, url, title, text) =>
+      `[${text.trim()}](${url})${title ? ` "${title}"` : ""}`,
+  );
 
-    // Replace blockquotes
-    markdown = markdown.replace(
-        /<blockquote[^>]*>([\s\S]*?)<\/blockquote>/gi,
-        (_, content) => `\n> ${content.trim().replace(/\n/g, '\n> ')}\n`
-    );
+  // Replace images with alt text and titles
+  markdown = markdown.replace(
+    /<img[^>]*src="([^"]*)"[^>]*(?:alt="([^"]*)")?[^>]*(?:title="([^"]*)")?[^>]*>/gi,
+    (_, src, alt, title) =>
+      `![${alt || ""}](${src})${title ? ` "${title}"` : ""}`,
+  );
 
-    // Replace code blocks
-    markdown = markdown
-        .replace(/<pre[^>]*><code[^>]*>([\s\S]*?)<\/code><\/pre>/gi, (_, content) =>
-            `\n\`\`\`\n${content.trim()}\n\`\`\`\n`
-        )
-        .replace(/<code[^>]*>(.*?)<\/code>/gi, '`$1`');
+  // Replace lists
+  markdown = markdown
+    .replace(
+      /<ul[^>]*>([\s\S]*?)<\/ul>/gi,
+      (_, content) => `\n${content.trim()}\n`,
+    )
+    .replace(/<ol[^>]*>([\s\S]*?)<\/ol>/gi, (_, content) => {
+      let counter = 1;
+      return `\n${content.replace(
+        /<li[^>]*>(.*?)<\/li>/gi,
+        (_: string, item: string) => `${counter++}. ${item.trim()}\n`,
+      )}\n`;
+    })
+    .replace(/<li[^>]*>(.*?)<\/li>/gi, (_, content) => `- ${content.trim()}\n`);
 
-    // Replace horizontal rules
-    markdown = markdown.replace(/<hr[^>]*>/gi, '\n---\n');
+  // Replace blockquotes
+  markdown = markdown.replace(
+    /<blockquote[^>]*>([\s\S]*?)<\/blockquote>/gi,
+    (_, content) => `\n> ${content.trim().replace(/\n/g, "\n> ")}\n`,
+  );
 
-    // Replace paragraphs
-    markdown = markdown.replace(/<p[^>]*>(.*?)<\/p>/gi, (_, content) =>
-        `\n${content.trim()}\n`
-    );
+  // Replace code blocks
+  markdown = markdown
+    .replace(
+      /<pre[^>]*><code[^>]*>([\s\S]*?)<\/code><\/pre>/gi,
+      (_, content) => `\n\`\`\`\n${content.trim()}\n\`\`\`\n`,
+    )
+    .replace(/<code[^>]*>(.*?)<\/code>/gi, "`$1`");
 
-    // Replace tables
-    markdown = markdown.replace(
-        /<table[^>]*>([\s\S]*?)<\/table>/gi,
-        (_, tableContent) => {
-            let result = '\n';
+  // Replace horizontal rules
+  markdown = markdown.replace(/<hr[^>]*>/gi, "\n---\n");
 
-            // Process headers
-            const headerMatch = tableContent.match(/<th[^>]*>([\s\S]*?)<\/th>/gi);
-            if (headerMatch) {
-                result += '| ' + headerMatch.map((header: string) =>
-                    header.replace(/<[^>]+>/g, '').trim()
-                ).join(' | ') + ' |\n';
-                result += '|' + headerMatch.map(() => '---').join('|') + '|\n';
-            }
+  // Replace paragraphs
+  markdown = markdown.replace(
+    /<p[^>]*>(.*?)<\/p>/gi,
+    (_, content) => `\n${content.trim()}\n`,
+  );
 
-            // Process rows
-            const rowPattern = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
-            let rowMatch;
-            while ((rowMatch = rowPattern.exec(tableContent)) !== null) {
-                const cells = rowMatch[1].match(/<td[^>]*>([\s\S]*?)<\/td>/gi) || [];
-                if (cells.length > 0) {
-                    result += '| ' + cells.map(cell =>
-                        cell.replace(/<[^>]+>/g, '').trim()
-                    ).join(' | ') + ' |\n';
-                }
-            }
+  // Replace tables
+  markdown = markdown.replace(
+    /<table[^>]*>([\s\S]*?)<\/table>/gi,
+    (_, tableContent) => {
+      let result = "\n";
 
-            return result;
+      // Process headers
+      const headerMatch = tableContent.match(/<th[^>]*>([\s\S]*?)<\/th>/gi);
+      if (headerMatch) {
+        result +=
+          "| " +
+          headerMatch
+            .map((header: string) => header.replace(/<[^>]+>/g, "").trim())
+            .join(" | ") +
+          " |\n";
+        result += "|" + headerMatch.map(() => "---").join("|") + "|\n";
+      }
+
+      // Process rows
+      const rowPattern = /<tr[^>]*>([\s\S]*?)<\/tr>/gi;
+      let rowMatch;
+      while ((rowMatch = rowPattern.exec(tableContent)) !== null) {
+        const cells = rowMatch[1].match(/<td[^>]*>([\s\S]*?)<\/td>/gi) || [];
+        if (cells.length > 0) {
+          result +=
+            "| " +
+            cells
+              .map((cell) => cell.replace(/<[^>]+>/g, "").trim())
+              .join(" | ") +
+            " |\n";
         }
-    );
+      }
 
-    // Remove remaining HTML tags
-    markdown = markdown.replace(/<[^>]+>/g, '');
+      return result;
+    },
+  );
 
-    // Clean up whitespace
-    markdown = markdown
-        .replace(/\n\s*\n/g, '\n\n')
-        .replace(/^\s+|\s+$/g, '')
-        .replace(/\n{3,}/g, '\n\n');
+  // Remove remaining HTML tags
+  markdown = markdown.replace(/<[^>]+>/g, "");
 
-    return markdown;
+  // Clean up whitespace
+  markdown = markdown
+    .replace(/\n\s*\n/g, "\n\n")
+    .replace(/^\s+|\s+$/g, "")
+    .replace(/\n{3,}/g, "\n\n");
+
+  return markdown;
 }
 
 /**
@@ -117,17 +128,20 @@ export function htmlToMarkdown(html: string): string {
  * @param table - Table data object
  * @returns Markdown table string
  */
-export function tableToMarkdown(table: { headers: string[]; rows: string[][] }): string {
-    if (!table.headers.length) return '';
+export function tableToMarkdown(table: {
+  headers: string[];
+  rows: string[][];
+}): string {
+  if (!table.headers.length) return "";
 
-    let markdown = '\n| ' + table.headers.join(' | ') + ' |\n';
-    markdown += '|' + table.headers.map(() => '---').join('|') + '|\n';
+  let markdown = "\n| " + table.headers.join(" | ") + " |\n";
+  markdown += "|" + table.headers.map(() => "---").join("|") + "|\n";
 
-    table.rows.forEach(row => {
-        markdown += '| ' + row.join(' | ') + ' |\n';
-    });
+  table.rows.forEach((row) => {
+    markdown += "| " + row.join(" | ") + " |\n";
+  });
 
-    return markdown;
+  return markdown;
 }
 
 /**
@@ -137,7 +151,7 @@ export function tableToMarkdown(table: { headers: string[]; rows: string[][] }):
  * @returns Markdown list string
  */
 export function listToMarkdown(items: string[], ordered = false): string {
-    return items.map((item, index) =>
-        ordered ? `${index + 1}. ${item}` : `- ${item}`
-    ).join('\n');
-} 
+  return items
+    .map((item, index) => (ordered ? `${index + 1}. ${item}` : `- ${item}`))
+    .join("\n");
+}

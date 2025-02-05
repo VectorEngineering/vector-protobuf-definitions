@@ -3455,6 +3455,8 @@ pub trait Api<C: Send + Sync> {
     async fn delete_account(
         &self,
         id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
         context: &C) -> Result<DeleteAccountResponse, ApiError>;
 
     /// Delete an organization
@@ -3498,6 +3500,8 @@ pub trait Api<C: Send + Sync> {
     async fn get_account(
         &self,
         id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
         context: &C) -> Result<GetAccountResponse, ApiError>;
 
     /// Get account usage
@@ -3562,6 +3566,8 @@ pub trait Api<C: Send + Sync> {
         page_size: Option<i32>,
         page_number: Option<i32>,
         filter: Option<String>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
         context: &C) -> Result<ListAccountsResponse, ApiError>;
 
     /// List all organizations
@@ -3574,7 +3580,7 @@ pub trait Api<C: Send + Sync> {
     /// Get all jobs
     async fn list_scraping_jobs(
         &self,
-        user_id: String,
+        auth_platform_user_id: String,
         org_id: String,
         tenant_id: String,
         context: &C) -> Result<ListScrapingJobsResponse, ApiError>;
@@ -3807,6 +3813,8 @@ pub trait ApiNoContext<C: Send + Sync> {
     async fn delete_account(
         &self,
         id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
         ) -> Result<DeleteAccountResponse, ApiError>;
 
     /// Delete an organization
@@ -3850,6 +3858,8 @@ pub trait ApiNoContext<C: Send + Sync> {
     async fn get_account(
         &self,
         id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
         ) -> Result<GetAccountResponse, ApiError>;
 
     /// Get account usage
@@ -3914,6 +3924,8 @@ pub trait ApiNoContext<C: Send + Sync> {
         page_size: Option<i32>,
         page_number: Option<i32>,
         filter: Option<String>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
         ) -> Result<ListAccountsResponse, ApiError>;
 
     /// List all organizations
@@ -3926,7 +3938,7 @@ pub trait ApiNoContext<C: Send + Sync> {
     /// Get all jobs
     async fn list_scraping_jobs(
         &self,
-        user_id: String,
+        auth_platform_user_id: String,
         org_id: String,
         tenant_id: String,
         ) -> Result<ListScrapingJobsResponse, ApiError>;
@@ -4193,10 +4205,12 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     async fn delete_account(
         &self,
         id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
         ) -> Result<DeleteAccountResponse, ApiError>
     {
         let context = self.context().clone();
-        self.api().delete_account(id, &context).await
+        self.api().delete_account(id, organization_id, tenant_id, &context).await
     }
 
     /// Delete an organization
@@ -4260,10 +4274,12 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     async fn get_account(
         &self,
         id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
         ) -> Result<GetAccountResponse, ApiError>
     {
         let context = self.context().clone();
-        self.api().get_account(id, &context).await
+        self.api().get_account(id, organization_id, tenant_id, &context).await
     }
 
     /// Get account usage
@@ -4360,10 +4376,12 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         page_size: Option<i32>,
         page_number: Option<i32>,
         filter: Option<String>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
         ) -> Result<ListAccountsResponse, ApiError>
     {
         let context = self.context().clone();
-        self.api().list_accounts(page_size, page_number, filter, &context).await
+        self.api().list_accounts(page_size, page_number, filter, organization_id, tenant_id, &context).await
     }
 
     /// List all organizations
@@ -4380,13 +4398,13 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     /// Get all jobs
     async fn list_scraping_jobs(
         &self,
-        user_id: String,
+        auth_platform_user_id: String,
         org_id: String,
         tenant_id: String,
         ) -> Result<ListScrapingJobsResponse, ApiError>
     {
         let context = self.context().clone();
-        self.api().list_scraping_jobs(user_id, org_id, tenant_id, &context).await
+        self.api().list_scraping_jobs(auth_platform_user_id, org_id, tenant_id, &context).await
     }
 
     /// List all tenants

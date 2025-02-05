@@ -54,7 +54,7 @@ aiRouter.route("/leads", leadsRouter);
  * Error handler for unsupported methods
  */
 aiRouter.all("*", (c) => {
-    throw new HTTPException(405, { message: "Method not allowed" });
+  throw new HTTPException(405, { message: "Method not allowed" });
 });
 
-export default aiRouter; 
+export default aiRouter;

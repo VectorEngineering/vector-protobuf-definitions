@@ -1740,6 +1740,8 @@ class LeadScraperServiceApi:
     async def delete_account(
         self,
         id: StrictStr,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1759,6 +1761,10 @@ class LeadScraperServiceApi:
 
         :param id: (required)
         :type id: str
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1783,6 +1789,8 @@ class LeadScraperServiceApi:
 
         _param = self._delete_account_serialize(
             id=id,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1824,6 +1832,8 @@ class LeadScraperServiceApi:
     async def delete_account_with_http_info(
         self,
         id: StrictStr,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1843,6 +1853,10 @@ class LeadScraperServiceApi:
 
         :param id: (required)
         :type id: str
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1867,6 +1881,8 @@ class LeadScraperServiceApi:
 
         _param = self._delete_account_serialize(
             id=id,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1908,6 +1924,8 @@ class LeadScraperServiceApi:
     async def delete_account_without_preload_content(
         self,
         id: StrictStr,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1927,6 +1945,10 @@ class LeadScraperServiceApi:
 
         :param id: (required)
         :type id: str
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -1951,6 +1973,8 @@ class LeadScraperServiceApi:
 
         _param = self._delete_account_serialize(
             id=id,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1987,6 +2011,8 @@ class LeadScraperServiceApi:
     def _delete_account_serialize(
         self,
         id,
+        organization_id,
+        tenant_id,
         _request_auth,
         _content_type,
         _headers,
@@ -2009,6 +2035,14 @@ class LeadScraperServiceApi:
         if id is not None:
             _path_params['id'] = id
         # process the query parameters
+        if organization_id is not None:
+            
+            _query_params.append(('organizationId', organization_id))
+            
+        if tenant_id is not None:
+            
+            _query_params.append(('tenantId', tenant_id))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -3717,6 +3751,8 @@ class LeadScraperServiceApi:
     async def get_account(
         self,
         id: StrictStr,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3736,6 +3772,10 @@ class LeadScraperServiceApi:
 
         :param id: (required)
         :type id: str
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3760,6 +3800,8 @@ class LeadScraperServiceApi:
 
         _param = self._get_account_serialize(
             id=id,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3801,6 +3843,8 @@ class LeadScraperServiceApi:
     async def get_account_with_http_info(
         self,
         id: StrictStr,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3820,6 +3864,10 @@ class LeadScraperServiceApi:
 
         :param id: (required)
         :type id: str
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3844,6 +3892,8 @@ class LeadScraperServiceApi:
 
         _param = self._get_account_serialize(
             id=id,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3885,6 +3935,8 @@ class LeadScraperServiceApi:
     async def get_account_without_preload_content(
         self,
         id: StrictStr,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3904,6 +3956,10 @@ class LeadScraperServiceApi:
 
         :param id: (required)
         :type id: str
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3928,6 +3984,8 @@ class LeadScraperServiceApi:
 
         _param = self._get_account_serialize(
             id=id,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3964,6 +4022,8 @@ class LeadScraperServiceApi:
     def _get_account_serialize(
         self,
         id,
+        organization_id,
+        tenant_id,
         _request_auth,
         _content_type,
         _headers,
@@ -3986,6 +4046,14 @@ class LeadScraperServiceApi:
         if id is not None:
             _path_params['id'] = id
         # process the query parameters
+        if organization_id is not None:
+            
+            _query_params.append(('organizationId', organization_id))
+            
+        if tenant_id is not None:
+            
+            _query_params.append(('tenantId', tenant_id))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -6674,6 +6742,8 @@ class LeadScraperServiceApi:
         page_size: Optional[StrictInt] = None,
         page_number: Optional[StrictInt] = None,
         filter: Optional[StrictStr] = None,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6697,6 +6767,10 @@ class LeadScraperServiceApi:
         :type page_number: int
         :param filter:
         :type filter: str
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6723,6 +6797,8 @@ class LeadScraperServiceApi:
             page_size=page_size,
             page_number=page_number,
             filter=filter,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6766,6 +6842,8 @@ class LeadScraperServiceApi:
         page_size: Optional[StrictInt] = None,
         page_number: Optional[StrictInt] = None,
         filter: Optional[StrictStr] = None,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6789,6 +6867,10 @@ class LeadScraperServiceApi:
         :type page_number: int
         :param filter:
         :type filter: str
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6815,6 +6897,8 @@ class LeadScraperServiceApi:
             page_size=page_size,
             page_number=page_number,
             filter=filter,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6858,6 +6942,8 @@ class LeadScraperServiceApi:
         page_size: Optional[StrictInt] = None,
         page_number: Optional[StrictInt] = None,
         filter: Optional[StrictStr] = None,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6881,6 +6967,10 @@ class LeadScraperServiceApi:
         :type page_number: int
         :param filter:
         :type filter: str
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -6907,6 +6997,8 @@ class LeadScraperServiceApi:
             page_size=page_size,
             page_number=page_number,
             filter=filter,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6945,6 +7037,8 @@ class LeadScraperServiceApi:
         page_size,
         page_number,
         filter,
+        organization_id,
+        tenant_id,
         _request_auth,
         _content_type,
         _headers,
@@ -6976,6 +7070,14 @@ class LeadScraperServiceApi:
         if filter is not None:
             
             _query_params.append(('filter', filter))
+            
+        if organization_id is not None:
+            
+            _query_params.append(('organizationId', organization_id))
+            
+        if tenant_id is not None:
+            
+            _query_params.append(('tenantId', tenant_id))
             
         # process the header parameters
         # process the form parameters
@@ -7346,7 +7448,7 @@ class LeadScraperServiceApi:
     @validate_call
     async def list_scraping_jobs(
         self,
-        user_id: StrictStr,
+        auth_platform_user_id: StrictStr,
         org_id: StrictStr,
         tenant_id: StrictStr,
         _request_timeout: Union[
@@ -7366,8 +7468,8 @@ class LeadScraperServiceApi:
 
         This endpoint retrieves all Google Maps scraping jobs
 
-        :param user_id: (required)
-        :type user_id: str
+        :param auth_platform_user_id: (required)
+        :type auth_platform_user_id: str
         :param org_id: (required)
         :type org_id: str
         :param tenant_id: (required)
@@ -7395,7 +7497,7 @@ class LeadScraperServiceApi:
         """ # noqa: E501
 
         _param = self._list_scraping_jobs_serialize(
-            user_id=user_id,
+            auth_platform_user_id=auth_platform_user_id,
             org_id=org_id,
             tenant_id=tenant_id,
             _request_auth=_request_auth,
@@ -7438,7 +7540,7 @@ class LeadScraperServiceApi:
     @validate_call
     async def list_scraping_jobs_with_http_info(
         self,
-        user_id: StrictStr,
+        auth_platform_user_id: StrictStr,
         org_id: StrictStr,
         tenant_id: StrictStr,
         _request_timeout: Union[
@@ -7458,8 +7560,8 @@ class LeadScraperServiceApi:
 
         This endpoint retrieves all Google Maps scraping jobs
 
-        :param user_id: (required)
-        :type user_id: str
+        :param auth_platform_user_id: (required)
+        :type auth_platform_user_id: str
         :param org_id: (required)
         :type org_id: str
         :param tenant_id: (required)
@@ -7487,7 +7589,7 @@ class LeadScraperServiceApi:
         """ # noqa: E501
 
         _param = self._list_scraping_jobs_serialize(
-            user_id=user_id,
+            auth_platform_user_id=auth_platform_user_id,
             org_id=org_id,
             tenant_id=tenant_id,
             _request_auth=_request_auth,
@@ -7530,7 +7632,7 @@ class LeadScraperServiceApi:
     @validate_call
     async def list_scraping_jobs_without_preload_content(
         self,
-        user_id: StrictStr,
+        auth_platform_user_id: StrictStr,
         org_id: StrictStr,
         tenant_id: StrictStr,
         _request_timeout: Union[
@@ -7550,8 +7652,8 @@ class LeadScraperServiceApi:
 
         This endpoint retrieves all Google Maps scraping jobs
 
-        :param user_id: (required)
-        :type user_id: str
+        :param auth_platform_user_id: (required)
+        :type auth_platform_user_id: str
         :param org_id: (required)
         :type org_id: str
         :param tenant_id: (required)
@@ -7579,7 +7681,7 @@ class LeadScraperServiceApi:
         """ # noqa: E501
 
         _param = self._list_scraping_jobs_serialize(
-            user_id=user_id,
+            auth_platform_user_id=auth_platform_user_id,
             org_id=org_id,
             tenant_id=tenant_id,
             _request_auth=_request_auth,
@@ -7617,7 +7719,7 @@ class LeadScraperServiceApi:
 
     def _list_scraping_jobs_serialize(
         self,
-        user_id,
+        auth_platform_user_id,
         org_id,
         tenant_id,
         _request_auth,
@@ -7640,9 +7742,9 @@ class LeadScraperServiceApi:
 
         # process the path parameters
         # process the query parameters
-        if user_id is not None:
+        if auth_platform_user_id is not None:
             
-            _query_params.append(('userId', user_id))
+            _query_params.append(('authPlatformUserId', auth_platform_user_id))
             
         if org_id is not None:
             

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user_id** | **str** |  | 
+**auth_platform_user_id** | **str** |  | 
 **org_id** | **str** |  | 
 **tenant_id** | **str** |  | 
 **name** | **str** |  | [optional] 

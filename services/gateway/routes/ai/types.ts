@@ -67,4 +67,4 @@ export interface AiService {
     complete(prompt: string, options: AiOptions): Promise<string>;
   }>;
   listModels(): Promise<AiModel[]>;
-} 
+}

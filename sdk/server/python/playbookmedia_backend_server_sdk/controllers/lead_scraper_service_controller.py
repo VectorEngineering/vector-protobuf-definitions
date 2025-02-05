@@ -148,13 +148,17 @@ def create_workspace(create_workspace_request):  # noqa: E501
     return 'do some magic!'
 
 
-def delete_account(id):  # noqa: E501
+def delete_account(id, organization_id=None, tenant_id=None):  # noqa: E501
     """Delete account
 
     Permanently deletes an account and associated resources # noqa: E501
 
     :param id: 
     :type id: str
+    :param organization_id: 
+    :type organization_id: str
+    :param tenant_id: 
+    :type tenant_id: str
 
     :rtype: Union[DeleteAccountResponse, Tuple[DeleteAccountResponse, int], Tuple[DeleteAccountResponse, int, Dict[str, str]]
     """
@@ -240,13 +244,17 @@ def download_scraping_results(job_id, user_id, org_id, tenant_id):  # noqa: E501
     return 'do some magic!'
 
 
-def get_account(id):  # noqa: E501
+def get_account(id, organization_id=None, tenant_id=None):  # noqa: E501
     """Get account details
 
     Retrieves details of a specific account # noqa: E501
 
     :param id: 
     :type id: str
+    :param organization_id: 
+    :type organization_id: str
+    :param tenant_id: 
+    :type tenant_id: str
 
     :rtype: Union[GetAccountResponse, Tuple[GetAccountResponse, int], Tuple[GetAccountResponse, int, Dict[str, str]]
     """
@@ -377,7 +385,7 @@ def lead_scraper_service_create_workflow(workspace_id, create_workflow_body):  #
     return 'do some magic!'
 
 
-def list_accounts(page_size=None, page_number=None, filter=None):  # noqa: E501
+def list_accounts(page_size=None, page_number=None, filter=None, organization_id=None, tenant_id=None):  # noqa: E501
     """List all accounts
 
     Retrieves a list of accounts # noqa: E501
@@ -388,6 +396,10 @@ def list_accounts(page_size=None, page_number=None, filter=None):  # noqa: E501
     :type page_number: int
     :param filter: 
     :type filter: str
+    :param organization_id: 
+    :type organization_id: str
+    :param tenant_id: 
+    :type tenant_id: str
 
     :rtype: Union[ListAccountsResponse, Tuple[ListAccountsResponse, int], Tuple[ListAccountsResponse, int, Dict[str, str]]
     """
@@ -409,13 +421,13 @@ def list_organizations(page_size=None, page_number=None):  # noqa: E501
     return 'do some magic!'
 
 
-def list_scraping_jobs(user_id, org_id, tenant_id):  # noqa: E501
+def list_scraping_jobs(auth_platform_user_id, org_id, tenant_id):  # noqa: E501
     """Get all jobs
 
     This endpoint retrieves all Google Maps scraping jobs # noqa: E501
 
-    :param user_id: 
-    :type user_id: str
+    :param auth_platform_user_id: 
+    :type auth_platform_user_id: str
     :param org_id: 
     :type org_id: str
     :param tenant_id: 

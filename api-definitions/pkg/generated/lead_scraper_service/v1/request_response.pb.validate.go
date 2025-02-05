@@ -57,9 +57,9 @@ func (m *CreateScrapingJobRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetUserId()) < 1 {
+	if utf8.RuneCountInString(m.GetAuthPlatformUserId()) < 1 {
 		err := CreateScrapingJobRequestValidationError{
-			field:  "UserId",
+			field:  "AuthPlatformUserId",
 			reason: "value length must be at least 1 runes",
 		}
 		if !all {
@@ -68,10 +68,10 @@ func (m *CreateScrapingJobRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetOrgId()) < 1 {
+	if m.GetOrgId() <= 0 {
 		err := CreateScrapingJobRequestValidationError{
 			field:  "OrgId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -79,10 +79,10 @@ func (m *CreateScrapingJobRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetTenantId()) < 1 {
+	if m.GetTenantId() <= 0 {
 		err := CreateScrapingJobRequestValidationError{
 			field:  "TenantId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -411,10 +411,10 @@ func (m *GetScrapingJobRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetJobId()) < 1 {
+	if m.GetJobId() <= 0 {
 		err := GetScrapingJobRequestValidationError{
 			field:  "JobId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -422,10 +422,10 @@ func (m *GetScrapingJobRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetOrgId()) < 1 {
+	if m.GetOrgId() <= 0 {
 		err := GetScrapingJobRequestValidationError{
 			field:  "OrgId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -433,10 +433,10 @@ func (m *GetScrapingJobRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetTenantId()) < 1 {
+	if m.GetTenantId() <= 0 {
 		err := GetScrapingJobRequestValidationError{
 			field:  "TenantId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -677,9 +677,9 @@ func (m *ListScrapingJobsRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetUserId()) < 1 {
+	if utf8.RuneCountInString(m.GetAuthPlatformUserId()) < 1 {
 		err := ListScrapingJobsRequestValidationError{
-			field:  "UserId",
+			field:  "AuthPlatformUserId",
 			reason: "value length must be at least 1 runes",
 		}
 		if !all {
@@ -688,10 +688,10 @@ func (m *ListScrapingJobsRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetOrgId()) < 1 {
+	if m.GetOrgId() <= 0 {
 		err := ListScrapingJobsRequestValidationError{
 			field:  "OrgId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -699,10 +699,10 @@ func (m *ListScrapingJobsRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetTenantId()) < 1 {
+	if m.GetTenantId() <= 0 {
 		err := ListScrapingJobsRequestValidationError{
 			field:  "TenantId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -970,10 +970,10 @@ func (m *DeleteScrapingJobRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetJobId()) < 1 {
+	if m.GetJobId() <= 0 {
 		err := DeleteScrapingJobRequestValidationError{
 			field:  "JobId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -981,10 +981,10 @@ func (m *DeleteScrapingJobRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetOrgId()) < 1 {
+	if m.GetOrgId() <= 0 {
 		err := DeleteScrapingJobRequestValidationError{
 			field:  "OrgId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -992,10 +992,10 @@ func (m *DeleteScrapingJobRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetTenantId()) < 1 {
+	if m.GetTenantId() <= 0 {
 		err := DeleteScrapingJobRequestValidationError{
 			field:  "TenantId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -1220,10 +1220,10 @@ func (m *DownloadScrapingResultsRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetJobId()) < 1 {
+	if m.GetJobId() <= 0 {
 		err := DownloadScrapingResultsRequestValidationError{
 			field:  "JobId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -1231,10 +1231,10 @@ func (m *DownloadScrapingResultsRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetOrgId()) < 1 {
+	if m.GetOrgId() <= 0 {
 		err := DownloadScrapingResultsRequestValidationError{
 			field:  "OrgId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -1242,10 +1242,10 @@ func (m *DownloadScrapingResultsRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetTenantId()) < 1 {
+	if m.GetTenantId() <= 0 {
 		err := DownloadScrapingResultsRequestValidationError{
 			field:  "TenantId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -1516,6 +1516,28 @@ func (m *CreateAccountRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if m.GetOrganizationId() <= 0 {
+		err := CreateAccountRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := CreateAccountRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return CreateAccountRequestMultiError(errors)
 	}
@@ -1618,10 +1640,32 @@ func (m *GetAccountRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetId()) < 1 {
+	if m.GetId() <= 0 {
 		err := GetAccountRequestValidationError{
 			field:  "Id",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetOrganizationId() <= 0 {
+		err := GetAccountRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := GetAccountRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -1873,10 +1917,32 @@ func (m *DeleteAccountRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetId()) < 1 {
+	if m.GetId() <= 0 {
 		err := DeleteAccountRequestValidationError{
 			field:  "Id",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetOrganizationId() <= 0 {
+		err := DeleteAccountRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := DeleteAccountRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -2000,6 +2066,28 @@ func (m *ListAccountsRequest) validate(all bool) error {
 	// no validation rules for PageNumber
 
 	// no validation rules for Filter
+
+	if m.GetOrganizationId() <= 0 {
+		err := ListAccountsRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := ListAccountsRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return ListAccountsRequestMultiError(errors)
@@ -2525,10 +2613,10 @@ func (m *GetWorkspaceRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetId()) < 1 {
+	if m.GetId() <= 0 {
 		err := GetWorkspaceRequestValidationError{
 			field:  "Id",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -2780,10 +2868,10 @@ func (m *DeleteWorkspaceRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetId()) < 1 {
+	if m.GetId() <= 0 {
 		err := DeleteWorkspaceRequestValidationError{
 			field:  "Id",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -2893,10 +2981,10 @@ func (m *ListWorkspacesRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetAccountId()) < 1 {
+	if m.GetAccountId() <= 0 {
 		err := ListWorkspacesRequestValidationError{
 			field:  "AccountId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -3157,10 +3245,10 @@ func (m *GetAccountUsageRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetId()) < 1 {
+	if m.GetId() <= 0 {
 		err := GetAccountUsageRequestValidationError{
 			field:  "Id",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -3682,10 +3770,10 @@ func (m *CreateWorkflowRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetWorkspaceId()) < 1 {
+	if m.GetWorkspaceId() <= 0 {
 		err := CreateWorkflowRequestValidationError{
 			field:  "WorkspaceId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -3835,10 +3923,10 @@ func (m *GetWorkflowRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetWorkspaceId()) < 1 {
+	if m.GetWorkspaceId() <= 0 {
 		err := GetWorkflowRequestValidationError{
 			field:  "WorkspaceId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -3846,10 +3934,10 @@ func (m *GetWorkflowRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetId()) < 1 {
+	if m.GetId() <= 0 {
 		err := GetWorkflowRequestValidationError{
 			field:  "Id",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -4101,10 +4189,10 @@ func (m *ListWorkflowsRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetWorkspaceId()) < 1 {
+	if m.GetWorkspaceId() <= 0 {
 		err := ListWorkflowsRequestValidationError{
 			field:  "WorkspaceId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -4367,10 +4455,10 @@ func (m *TriggerWorkflowRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetWorkspaceId()) < 1 {
+	if m.GetWorkspaceId() <= 0 {
 		err := TriggerWorkflowRequestValidationError{
 			field:  "WorkspaceId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -4378,10 +4466,10 @@ func (m *TriggerWorkflowRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetId()) < 1 {
+	if m.GetId() <= 0 {
 		err := TriggerWorkflowRequestValidationError{
 			field:  "Id",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -4645,10 +4733,10 @@ func (m *PauseWorkflowRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetWorkspaceId()) < 1 {
+	if m.GetWorkspaceId() <= 0 {
 		err := PauseWorkflowRequestValidationError{
 			field:  "WorkspaceId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -4656,10 +4744,10 @@ func (m *PauseWorkflowRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetId()) < 1 {
+	if m.GetId() <= 0 {
 		err := PauseWorkflowRequestValidationError{
 			field:  "Id",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err
@@ -4904,10 +4992,10 @@ func (m *GetWorkspaceAnalyticsRequest) validate(all bool) error {
 
 	var errors []error
 
-	if utf8.RuneCountInString(m.GetWorkspaceId()) < 1 {
+	if m.GetWorkspaceId() <= 0 {
 		err := GetWorkspaceAnalyticsRequestValidationError{
 			field:  "WorkspaceId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err

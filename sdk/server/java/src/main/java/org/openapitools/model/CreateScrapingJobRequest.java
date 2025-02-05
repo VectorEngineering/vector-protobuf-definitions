@@ -21,10 +21,10 @@ import javax.annotation.Generated;
  * CreateScrapingJobRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-04T01:38:18.342811-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T06:54:24.429429-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class CreateScrapingJobRequest {
 
-  private String userId;
+  private String authPlatformUserId;
 
   private String orgId;
 
@@ -63,30 +63,30 @@ public class CreateScrapingJobRequest {
   /**
    * Constructor with only required parameters
    */
-  public CreateScrapingJobRequest(String userId, String orgId, String tenantId) {
-    this.userId = userId;
+  public CreateScrapingJobRequest(String authPlatformUserId, String orgId, String tenantId) {
+    this.authPlatformUserId = authPlatformUserId;
     this.orgId = orgId;
     this.tenantId = tenantId;
   }
 
-  public CreateScrapingJobRequest userId(String userId) {
-    this.userId = userId;
+  public CreateScrapingJobRequest authPlatformUserId(String authPlatformUserId) {
+    this.authPlatformUserId = authPlatformUserId;
     return this;
   }
 
   /**
-   * Get userId
-   * @return userId
+   * Get authPlatformUserId
+   * @return authPlatformUserId
    */
   @NotNull 
-  @Schema(name = "userId", requiredMode = Schema.RequiredMode.REQUIRED)
-  @JsonProperty("userId")
-  public String getUserId() {
-    return userId;
+  @Schema(name = "authPlatformUserId", requiredMode = Schema.RequiredMode.REQUIRED)
+  @JsonProperty("authPlatformUserId")
+  public String getAuthPlatformUserId() {
+    return authPlatformUserId;
   }
 
-  public void setUserId(String userId) {
-    this.userId = userId;
+  public void setAuthPlatformUserId(String authPlatformUserId) {
+    this.authPlatformUserId = authPlatformUserId;
   }
 
   public CreateScrapingJobRequest orgId(String orgId) {
@@ -394,7 +394,7 @@ public class CreateScrapingJobRequest {
       return false;
     }
     CreateScrapingJobRequest createScrapingJobRequest = (CreateScrapingJobRequest) o;
-    return Objects.equals(this.userId, createScrapingJobRequest.userId) &&
+    return Objects.equals(this.authPlatformUserId, createScrapingJobRequest.authPlatformUserId) &&
         Objects.equals(this.orgId, createScrapingJobRequest.orgId) &&
         Objects.equals(this.tenantId, createScrapingJobRequest.tenantId) &&
         Objects.equals(this.name, createScrapingJobRequest.name) &&
@@ -413,14 +413,14 @@ public class CreateScrapingJobRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, orgId, tenantId, name, keywords, lang, zoom, lat, lon, fastMode, radius, depth, email, maxTime, proxies);
+    return Objects.hash(authPlatformUserId, orgId, tenantId, name, keywords, lang, zoom, lat, lon, fastMode, radius, depth, email, maxTime, proxies);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class CreateScrapingJobRequest {\n");
-    sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+    sb.append("    authPlatformUserId: ").append(toIndentedString(authPlatformUserId)).append("\n");
     sb.append("    orgId: ").append(toIndentedString(orgId)).append("\n");
     sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");

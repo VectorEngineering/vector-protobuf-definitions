@@ -77,7 +77,7 @@ Create a new workspace
 Creates a new workspace for a given account
 <a name="DeleteAccount"></a>
 # **DeleteAccount**
-> DeleteAccountResponse DeleteAccount(Id_)
+> DeleteAccountResponse DeleteAccount(Id_, organizationId, tenantId)
 
 Delete account
 
@@ -119,7 +119,7 @@ Download job results as CSV
 This endpoint downloads the results of a Google Maps scraping job as CSV
 <a name="GetAccount"></a>
 # **GetAccount**
-> GetAccountResponse GetAccount(Id_)
+> GetAccountResponse GetAccount(Id_, organizationId, tenantId)
 
 Get account details
 
@@ -182,7 +182,7 @@ Create a new workflow
 This endpoint creates a new workflow configuration for a specific workspace  Required parameters: - workspace_id: Parent workspace ID - name: Human-readable workflow name - description: Optional workflow description - parameters: Job parameters for the workflow  Example: &#x60;&#x60;&#x60;json
 <a name="ListAccounts"></a>
 # **ListAccounts**
-> ListAccountsResponse ListAccounts(pageSize, pageNumber, filter)
+> ListAccountsResponse ListAccounts(pageSize, pageNumber, filter, organizationId, tenantId)
 
 List all accounts
 
@@ -196,7 +196,7 @@ List all organizations
 Retrieves a list of all organizations in a tenant
 <a name="ListScrapingJobs"></a>
 # **ListScrapingJobs**
-> ListScrapingJobsResponse ListScrapingJobs(userId, orgId, tenantId)
+> ListScrapingJobsResponse ListScrapingJobs(authPlatformUserId, orgId, tenantId)
 
 Get all jobs
 

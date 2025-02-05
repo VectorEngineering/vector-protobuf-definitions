@@ -8,7 +8,7 @@ import { validateRequest } from "../../../middleware/core";
 /**
  * AI completion route handler
  * Handles text generation requests with both streaming and non-streaming responses
- * 
+ *
  * @openapi
  * /ai:
  *   post:
@@ -50,14 +50,14 @@ const completion = new Hono<{ Bindings: Env }>();
 const defaultHandler = createCompletionHandler();
 
 completion.post("/", validateRequest(aiCompletionRequestSchema), async (c) => {
-    try {
-        return await defaultHandler(c, await c.req.json());
-    } catch (error) {
-        if (error instanceof Error) {
-            throw new HTTPException(500, { message: error.message });
-        }
-        throw new HTTPException(500, { message: "Unknown error occurred" });
+  try {
+    return await defaultHandler(c, await c.req.json());
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new HTTPException(500, { message: error.message });
     }
+    throw new HTTPException(500, { message: "Unknown error occurred" });
+  }
 });
 
-export default completion; 
+export default completion;

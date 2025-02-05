@@ -43,7 +43,11 @@ input CreateWorkspaceInput {
 
 input DeleteAccountInput {
     
-    Id_: String!
+    Id_: String!, 
+    
+    organizationId: String!, 
+    
+    tenantId: String!
 }
 
 input DeleteOrganizationInput {
@@ -159,6 +163,8 @@ type Mutation {
   # Delete account
   # Permanently deletes an account and associated resources
   # @param String! Id_ 
+  # @param String! organizationId 
+  # @param String! tenantId 
   # @return [DeleteAccountResponse]
   DeleteAccount(input: DeleteAccountInput!): DeleteAccountResponse
   # Delete an organization
@@ -249,8 +255,10 @@ type Query {
   # Get account details
   # Retrieves details of a specific account
   # @param String! Id_ 
+  # @param String! organizationId 
+  # @param String! tenantId 
   # @return [GetAccountResponse]
-  GetAccount(Id_: String!): GetAccountResponse
+  GetAccount(Id_: String!, organizationId: String!, tenantId: String!): GetAccountResponse
   # Get account usage
   # Retrieves usage details for a given account
   # @param String! Id_ 
@@ -298,8 +306,10 @@ type Query {
   # @param Int! pageSize 
   # @param Int! pageNumber 
   # @param String! filter 
+  # @param String! organizationId 
+  # @param String! tenantId 
   # @return [ListAccountsResponse]
-  ListAccounts(pageSize: Int!, pageNumber: Int!, filter: String!): ListAccountsResponse
+  ListAccounts(pageSize: Int!, pageNumber: Int!, filter: String!, organizationId: String!, tenantId: String!): ListAccountsResponse
   # List all organizations
   # Retrieves a list of all organizations in a tenant
   # @param Int! pageSize 
@@ -308,11 +318,11 @@ type Query {
   ListOrganizations(pageSize: Int!, pageNumber: Int!): ListOrganizationsResponse
   # Get all jobs
   # This endpoint retrieves all Google Maps scraping jobs
-  # @param String! userId 
+  # @param String! authPlatformUserId 
   # @param String! orgId 
   # @param String! tenantId 
   # @return [ListScrapingJobsResponse]
-  ListScrapingJobs(userId: String!, orgId: String!, tenantId: String!): ListScrapingJobsResponse
+  ListScrapingJobs(authPlatformUserId: String!, orgId: String!, tenantId: String!): ListScrapingJobsResponse
   # List all tenants
   # Retrieves a list of all tenants in the system
   # @param String! organizationId 

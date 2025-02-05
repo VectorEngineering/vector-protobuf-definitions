@@ -28,9 +28,11 @@ export default {
         },
 
         // @return GetAccountResponse
-        GetAccount: ($Id_) => {
+        GetAccount: ($Id_, $organizationId, $tenantId) => {
             return {
-                "Id_": "Id__example"
+                "Id_": "Id__example",
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example"
             };
         },
 
@@ -91,11 +93,13 @@ export default {
         },
 
         // @return ListAccountsResponse
-        ListAccounts: ($pageSize, $pageNumber, $filter) => {
+        ListAccounts: ($pageSize, $pageNumber, $filter, $organizationId, $tenantId) => {
             return {
                 "pageSize": "56",
                 "pageNumber": "56",
-                "filter": "filter_example"
+                "filter": "filter_example",
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example"
             };
         },
 
@@ -108,9 +112,9 @@ export default {
         },
 
         // @return ListScrapingJobsResponse
-        ListScrapingJobs: ($userId, $orgId, $tenantId) => {
+        ListScrapingJobs: ($authPlatformUserId, $orgId, $tenantId) => {
             return {
-                "userId": "userId_example",
+                "authPlatformUserId": "authPlatformUserId_example",
                 "orgId": "orgId_example",
                 "tenantId": "tenantId_example"
             };
@@ -185,9 +189,11 @@ export default {
         },
 
         // @return DeleteAccountResponse
-        DeleteAccount: ($Id_) => {
+        DeleteAccount: ($Id_, $organizationId, $tenantId) => {
             return {
-                "Id_": "Id__example"
+                "Id_": "Id__example",
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example"
             };
         },
 

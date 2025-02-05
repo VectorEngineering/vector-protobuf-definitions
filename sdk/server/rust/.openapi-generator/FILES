@@ -203,6 +203,8 @@ docs/TriggerWorkflowBody.md
 docs/TriggerWorkflowResponse.md
 docs/UnprocessableEntityErrorMessageResponse.md
 docs/UpdateAccountRequest.md
+docs/UpdateAccountRequest1.md
+docs/UpdateAccountRequestPayload.md
 docs/UpdateAccountResponse.md
 docs/UpdateAccountSettingsRequest.md
 docs/UpdateAccountSettingsResponse.md

@@ -1045,7 +1045,7 @@
                                     ],
                                     "body": {
                                         "mode": "raw",
-                                        "raw": "{\n \"account\": \"<string>\"\n}",
+                                        "raw": "{\n \"payload\": \"<string>\"\n}",
                                         "options": {
                                             "raw": {
                                                 "language": "json"

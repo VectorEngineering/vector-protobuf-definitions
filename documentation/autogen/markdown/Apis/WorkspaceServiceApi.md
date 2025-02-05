@@ -360,7 +360,7 @@ No authorization required
 
 <a name="updateAccount1"></a>
 # **updateAccount1**
-> UpdateAccountResponse updateAccount1(UpdateAccountRequest)
+> UpdateAccountResponse updateAccount1(UpdateAccountRequest1)
 
 Update account details
 
@@ -368,7 +368,7 @@ Update account details
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **UpdateAccountRequest** | [**UpdateAccountRequest**](../Models/UpdateAccountRequest.md)|  | |
+| **UpdateAccountRequest1** | [**UpdateAccountRequest1**](../Models/UpdateAccountRequest1.md)|  | |
 
 ### Return type
 

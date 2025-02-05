@@ -14688,8 +14688,24 @@
     "UpdateAccountRequest": {
       "type": "object",
       "properties": {
+        "payload": {
+          "$ref": "#/definitions/UpdateAccountRequestPayload"
+        }
+      }
+    },
+    "UpdateAccountRequestPayload": {
+      "type": "object",
+      "properties": {
         "account": {
           "$ref": "#/definitions/Account"
+        },
+        "organizationId": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "tenantId": {
+          "type": "string",
+          "format": "uint64"
         }
       }
     },

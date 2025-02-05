@@ -91,7 +91,7 @@ Remove workspace sharing
 Share workspace
 <a name="UpdateAccount1"></a>
 # **UpdateAccount1**
-> UpdateAccountResponse UpdateAccount1(updateAccountRequest)
+> UpdateAccountResponse UpdateAccount1(updateAccountRequest1)
 
 Update account details
 <a name="UpdateWorkspace1"></a>

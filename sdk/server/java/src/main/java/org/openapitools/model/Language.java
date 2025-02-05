@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * - LANGUAGE_ENGLISH: en  - LANGUAGE_SPANISH: es  - LANGUAGE_FRENCH: fr  - LANGUAGE_GERMAN: de  - LANGUAGE_ITALIAN: it  - LANGUAGE_PORTUGUESE: pt  - LANGUAGE_DUTCH: nl  - LANGUAGE_RUSSIAN: ru  - LANGUAGE_CHINESE: zh  - LANGUAGE_JAPANESE: ja  - LANGUAGE_KOREAN: ko  - LANGUAGE_ARABIC: ar  - LANGUAGE_HINDI: hi  - LANGUAGE_GREEK: el  - LANGUAGE_TURKISH: tr
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T09:09:05.453051-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T14:03:51.683325-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public enum Language {
   
   UNSPECIFIED("LANGUAGE_UNSPECIFIED"),

@@ -174,8 +174,14 @@ message GetAccountRequest {
     uint64 tenant_id = 3 [(validate.rules).uint64.gt = 0];
 }
 
-message UpdateAccountRequest {
+message UpdateAccountRequestPayload {
     Account account = 1 [(validate.rules).message.required = true];
+    uint64 organization_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 3 [(validate.rules).uint64.gt = 0];
+}
+
+message UpdateAccountRequest {
+    UpdateAccountRequestPayload payload = 1 [(validate.rules).message.required = true];
 }
 
 message DeleteAccountRequest {

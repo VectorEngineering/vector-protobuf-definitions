@@ -26,7 +26,7 @@ from playbookmedia_backend_server_sdk.models.remove_workspace_sharing_response i
 from playbookmedia_backend_server_sdk.models.share_workspace_body import ShareWorkspaceBody  # noqa: E501
 from playbookmedia_backend_server_sdk.models.share_workspace_response import ShareWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.status import Status  # noqa: E501
-from playbookmedia_backend_server_sdk.models.update_account_request import UpdateAccountRequest  # noqa: E501
+from playbookmedia_backend_server_sdk.models.update_account_request1 import UpdateAccountRequest1  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_account_response import UpdateAccountResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_workspace_request import UpdateWorkspaceRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_workspace_response import UpdateWorkspaceResponse  # noqa: E501
@@ -231,18 +231,18 @@ def share_workspace(workspace_id, share_workspace_body):  # noqa: E501
     return 'do some magic!'
 
 
-def update_account1(update_account_request):  # noqa: E501
+def update_account1(update_account_request1):  # noqa: E501
     """Update account details
 
      # noqa: E501
 
-    :param update_account_request: 
-    :type update_account_request: dict | bytes
+    :param update_account_request1: 
+    :type update_account_request1: dict | bytes
 
     :rtype: Union[UpdateAccountResponse, Tuple[UpdateAccountResponse, int], Tuple[UpdateAccountResponse, int, Dict[str, str]]
     """
     if connexion.request.is_json:
-        update_account_request = UpdateAccountRequest.from_dict(connexion.request.get_json())  # noqa: E501
+        update_account_request1 = UpdateAccountRequest1.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
 
 

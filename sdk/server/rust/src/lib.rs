@@ -5523,7 +5523,7 @@ pub trait Api<C: Send + Sync> {
     /// Update account details
     async fn update_account1(
         &self,
-        update_account_request: models::UpdateAccountRequest,
+        update_account_request1: models::UpdateAccountRequest1,
         context: &C) -> Result<UpdateAccount1Response, ApiError>;
 
     /// Update workspace
@@ -6052,7 +6052,7 @@ pub trait ApiNoContext<C: Send + Sync> {
     /// Update account details
     async fn update_account1(
         &self,
-        update_account_request: models::UpdateAccountRequest,
+        update_account_request1: models::UpdateAccountRequest1,
         ) -> Result<UpdateAccount1Response, ApiError>;
 
     /// Update workspace
@@ -6863,11 +6863,11 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     /// Update account details
     async fn update_account1(
         &self,
-        update_account_request: models::UpdateAccountRequest,
+        update_account_request1: models::UpdateAccountRequest1,
         ) -> Result<UpdateAccount1Response, ApiError>
     {
         let context = self.context().clone();
-        self.api().update_account1(update_account_request, &context).await
+        self.api().update_account1(update_account_request1, &context).await
     }
 
     /// Update workspace

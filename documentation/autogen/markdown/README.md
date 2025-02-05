@@ -283,6 +283,8 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [UpdateAPIKeyRequest](./Models/UpdateAPIKeyRequest.md)
  - [UpdateAPIKeyResponse](./Models/UpdateAPIKeyResponse.md)
  - [UpdateAccountRequest](./Models/UpdateAccountRequest.md)
+ - [UpdateAccountRequest1](./Models/UpdateAccountRequest1.md)
+ - [UpdateAccountRequestPayload](./Models/UpdateAccountRequestPayload.md)
  - [UpdateAccountResponse](./Models/UpdateAccountResponse.md)
  - [UpdateAccountSettingsRequest](./Models/UpdateAccountSettingsRequest.md)
  - [UpdateAccountSettingsResponse](./Models/UpdateAccountSettingsResponse.md)

@@ -201,6 +201,8 @@ Models/UnprocessableEntityErrorMessageResponse.md
 Models/UpdateAPIKeyRequest.md
 Models/UpdateAPIKeyResponse.md
 Models/UpdateAccountRequest.md
+Models/UpdateAccountRequest1.md
+Models/UpdateAccountRequestPayload.md
 Models/UpdateAccountResponse.md
 Models/UpdateAccountSettingsRequest.md
 Models/UpdateAccountSettingsResponse.md

@@ -15851,8 +15851,19 @@ components:
     UpdateAccountRequest:
       type: object
       properties:
+        payload:
+          $ref: "#/components/schemas/UpdateAccountRequestPayload"
+    UpdateAccountRequestPayload:
+      type: object
+      properties:
         account:
           $ref: "#/components/schemas/Account"
+        organizationId:
+          type: string
+          format: uint64
+        tenantId:
+          type: string
+          format: uint64
     UpdateAccountResponse:
       type: object
       properties:

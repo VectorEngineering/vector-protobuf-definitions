@@ -1010,7 +1010,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_account1**
-> UpdateAccountResponse update_account1(update_account_request)
+> UpdateAccountResponse update_account1(update_account_request1)
 
 Update account details
 
@@ -1019,7 +1019,7 @@ Update account details
 
 ```python
 import playbookmedia_backend_client_sdk
-from playbookmedia_backend_client_sdk.models.update_account_request import UpdateAccountRequest
+from playbookmedia_backend_client_sdk.models.update_account_request1 import UpdateAccountRequest1
 from playbookmedia_backend_client_sdk.models.update_account_response import UpdateAccountResponse
 from playbookmedia_backend_client_sdk.rest import ApiException
 from pprint import pprint
@@ -1035,11 +1035,11 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = playbookmedia_backend_client_sdk.WorkspaceServiceApi(api_client)
-    update_account_request = playbookmedia_backend_client_sdk.UpdateAccountRequest() # UpdateAccountRequest | 
+    update_account_request1 = playbookmedia_backend_client_sdk.UpdateAccountRequest1() # UpdateAccountRequest1 | 
 
     try:
         # Update account details
-        api_response = await api_instance.update_account1(update_account_request)
+        api_response = await api_instance.update_account1(update_account_request1)
         print("The response of WorkspaceServiceApi->update_account1:\n")
         pprint(api_response)
     except Exception as e:
@@ -1053,7 +1053,7 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **update_account_request** | [**UpdateAccountRequest**](UpdateAccountRequest.md)|  | 
+ **update_account_request1** | [**UpdateAccountRequest1**](UpdateAccountRequest1.md)|  | 
 
 ### Return type
 

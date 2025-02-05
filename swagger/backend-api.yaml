@@ -13812,10 +13812,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateAccountRequest'
+              $ref: '#/components/schemas/UpdateAccountRequest1'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/UpdateAccountRequest'
+              $ref: '#/components/schemas/UpdateAccountRequest1'
         required: true
       tags:
         - workspace-service
@@ -18842,8 +18842,19 @@ components:
     UpdateAccountRequest:
       type: object
       properties:
+        payload:
+          $ref: '#/components/schemas/UpdateAccountRequestPayload'
+    UpdateAccountRequestPayload:
+      type: object
+      properties:
         account:
-          $ref: '#/components/schemas/Account1'
+          $ref: '#/components/schemas/Account'
+        organizationId:
+          type: string
+          format: uint64
+        tenantId:
+          type: string
+          format: uint64
     UpdateAccountResponse:
       type: object
       properties:
@@ -20961,6 +20972,11 @@ components:
         createdAt:
           type: string
           format: date-time
+    UpdateAccountRequest1:
+      type: object
+      properties:
+        account:
+          $ref: '#/components/schemas/Account1'
     UpdateWorkspaceSharingRequest:
       type: object
       properties:

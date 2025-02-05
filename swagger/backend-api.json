@@ -19270,12 +19270,12 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/UpdateAccountRequest"
+                                "$ref": "#/components/schemas/UpdateAccountRequest1"
                             }
                         },
                         "application/x-www-form-urlencoded": {
                             "schema": {
-                                "$ref": "#/components/schemas/UpdateAccountRequest"
+                                "$ref": "#/components/schemas/UpdateAccountRequest1"
                             }
                         }
                     },
@@ -25649,8 +25649,24 @@
             "UpdateAccountRequest": {
                 "type": "object",
                 "properties": {
+                    "payload": {
+                        "$ref": "#/components/schemas/UpdateAccountRequestPayload"
+                    }
+                }
+            },
+            "UpdateAccountRequestPayload": {
+                "type": "object",
+                "properties": {
                     "account": {
-                        "$ref": "#/components/schemas/Account1"
+                        "$ref": "#/components/schemas/Account"
+                    },
+                    "organizationId": {
+                        "type": "string",
+                        "format": "uint64"
+                    },
+                    "tenantId": {
+                        "type": "string",
+                        "format": "uint64"
                     }
                 }
             },
@@ -28532,6 +28548,14 @@
                     "createdAt": {
                         "type": "string",
                         "format": "date-time"
+                    }
+                }
+            },
+            "UpdateAccountRequest1": {
+                "type": "object",
+                "properties": {
+                    "account": {
+                        "$ref": "#/components/schemas/Account1"
                     }
                 }
             },

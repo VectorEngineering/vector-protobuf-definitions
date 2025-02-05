@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-05T09:09:08.202574-05:00[America/New_York]
+- Build date: 2025-02-05T14:03:54.253160-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -411,6 +411,8 @@ Method | HTTP request | Description
  - [TriggerWorkflowResponse](docs/TriggerWorkflowResponse.md)
  - [UnprocessableEntityErrorMessageResponse](docs/UnprocessableEntityErrorMessageResponse.md)
  - [UpdateAccountRequest](docs/UpdateAccountRequest.md)
+ - [UpdateAccountRequest1](docs/UpdateAccountRequest1.md)
+ - [UpdateAccountRequestPayload](docs/UpdateAccountRequestPayload.md)
  - [UpdateAccountResponse](docs/UpdateAccountResponse.md)
  - [UpdateAccountSettingsRequest](docs/UpdateAccountSettingsRequest.md)
  - [UpdateAccountSettingsResponse](docs/UpdateAccountSettingsResponse.md)

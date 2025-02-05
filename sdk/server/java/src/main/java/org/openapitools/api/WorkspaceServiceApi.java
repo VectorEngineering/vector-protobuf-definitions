@@ -30,7 +30,7 @@ import org.openapitools.model.RemoveWorkspaceSharingResponse;
 import org.openapitools.model.ShareWorkspaceBody;
 import org.openapitools.model.ShareWorkspaceResponse;
 import org.openapitools.model.Status;
-import org.openapitools.model.UpdateAccountRequest;
+import org.openapitools.model.UpdateAccountRequest1;
 import org.openapitools.model.UpdateAccountResponse;
 import org.openapitools.model.UpdateWorkspaceRequest;
 import org.openapitools.model.UpdateWorkspaceResponse;
@@ -63,7 +63,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T09:09:05.453051-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T14:03:51.683325-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 @Validated
 @Tag(name = "workspace-service", description = "the workspace-service API")
 public interface WorkspaceServiceApi {
@@ -2198,7 +2198,7 @@ public interface WorkspaceServiceApi {
     /**
      * PUT /workspace-service/v1/accounts : Update account details
      *
-     * @param updateAccountRequest  (required)
+     * @param updateAccountRequest1  (required)
      * @return Account updated successfully (status code 200)
      *         or Bad Request - Invalid input parameters (status code 400)
      *         or Unauthorized - Authentication required (status code 401)
@@ -2260,7 +2260,7 @@ public interface WorkspaceServiceApi {
     )
     
     default ResponseEntity<UpdateAccountResponse> updateAccount1(
-        @Parameter(name = "UpdateAccountRequest", description = "", required = true) @Valid @RequestBody UpdateAccountRequest updateAccountRequest
+        @Parameter(name = "UpdateAccountRequest1", description = "", required = true) @Valid @RequestBody UpdateAccountRequest1 updateAccountRequest1
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {

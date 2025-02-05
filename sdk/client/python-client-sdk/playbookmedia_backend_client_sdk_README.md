@@ -341,6 +341,8 @@ Class | Method | HTTP request | Description
  - [UpdateAPIKeyRequest](playbookmedia_backend_client_sdk/docs/UpdateAPIKeyRequest.md)
  - [UpdateAPIKeyResponse](playbookmedia_backend_client_sdk/docs/UpdateAPIKeyResponse.md)
  - [UpdateAccountRequest](playbookmedia_backend_client_sdk/docs/UpdateAccountRequest.md)
+ - [UpdateAccountRequest1](playbookmedia_backend_client_sdk/docs/UpdateAccountRequest1.md)
+ - [UpdateAccountRequestPayload](playbookmedia_backend_client_sdk/docs/UpdateAccountRequestPayload.md)
  - [UpdateAccountResponse](playbookmedia_backend_client_sdk/docs/UpdateAccountResponse.md)
  - [UpdateAccountSettingsRequest](playbookmedia_backend_client_sdk/docs/UpdateAccountSettingsRequest.md)
  - [UpdateAccountSettingsResponse](playbookmedia_backend_client_sdk/docs/UpdateAccountSettingsResponse.md)

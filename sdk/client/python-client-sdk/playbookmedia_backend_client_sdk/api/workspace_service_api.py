@@ -36,7 +36,7 @@ from playbookmedia_backend_client_sdk.models.list_workspaces_response1 import Li
 from playbookmedia_backend_client_sdk.models.remove_workspace_sharing_response import RemoveWorkspaceSharingResponse
 from playbookmedia_backend_client_sdk.models.share_workspace_body import ShareWorkspaceBody
 from playbookmedia_backend_client_sdk.models.share_workspace_response import ShareWorkspaceResponse
-from playbookmedia_backend_client_sdk.models.update_account_request import UpdateAccountRequest
+from playbookmedia_backend_client_sdk.models.update_account_request1 import UpdateAccountRequest1
 from playbookmedia_backend_client_sdk.models.update_account_response import UpdateAccountResponse
 from playbookmedia_backend_client_sdk.models.update_workspace_request import UpdateWorkspaceRequest
 from playbookmedia_backend_client_sdk.models.update_workspace_response import UpdateWorkspaceResponse
@@ -3887,7 +3887,7 @@ class WorkspaceServiceApi:
     @validate_call
     async def update_account1(
         self,
-        update_account_request: UpdateAccountRequest,
+        update_account_request1: UpdateAccountRequest1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3904,8 +3904,8 @@ class WorkspaceServiceApi:
         """Update account details
 
 
-        :param update_account_request: (required)
-        :type update_account_request: UpdateAccountRequest
+        :param update_account_request1: (required)
+        :type update_account_request1: UpdateAccountRequest1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3929,7 +3929,7 @@ class WorkspaceServiceApi:
         """ # noqa: E501
 
         _param = self._update_account1_serialize(
-            update_account_request=update_account_request,
+            update_account_request1=update_account_request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3960,7 +3960,7 @@ class WorkspaceServiceApi:
     @validate_call
     async def update_account1_with_http_info(
         self,
-        update_account_request: UpdateAccountRequest,
+        update_account_request1: UpdateAccountRequest1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3977,8 +3977,8 @@ class WorkspaceServiceApi:
         """Update account details
 
 
-        :param update_account_request: (required)
-        :type update_account_request: UpdateAccountRequest
+        :param update_account_request1: (required)
+        :type update_account_request1: UpdateAccountRequest1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4002,7 +4002,7 @@ class WorkspaceServiceApi:
         """ # noqa: E501
 
         _param = self._update_account1_serialize(
-            update_account_request=update_account_request,
+            update_account_request1=update_account_request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4033,7 +4033,7 @@ class WorkspaceServiceApi:
     @validate_call
     async def update_account1_without_preload_content(
         self,
-        update_account_request: UpdateAccountRequest,
+        update_account_request1: UpdateAccountRequest1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4050,8 +4050,8 @@ class WorkspaceServiceApi:
         """Update account details
 
 
-        :param update_account_request: (required)
-        :type update_account_request: UpdateAccountRequest
+        :param update_account_request1: (required)
+        :type update_account_request1: UpdateAccountRequest1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4075,7 +4075,7 @@ class WorkspaceServiceApi:
         """ # noqa: E501
 
         _param = self._update_account1_serialize(
-            update_account_request=update_account_request,
+            update_account_request1=update_account_request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4101,7 +4101,7 @@ class WorkspaceServiceApi:
 
     def _update_account1_serialize(
         self,
-        update_account_request,
+        update_account_request1,
         _request_auth,
         _content_type,
         _headers,
@@ -4125,8 +4125,8 @@ class WorkspaceServiceApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if update_account_request is not None:
-            _body_params = update_account_request
+        if update_account_request1 is not None:
+            _body_params = update_account_request1
 
 
         # set the HTTP header `Accept`

@@ -1725,6 +1725,18 @@ const CreateAccountResponse = z
   .object({ account: Account, initialWorkspaceId: z.string() })
   .partial()
   .passthrough();
+const UpdateAccountRequestPayload = z
+  .object({
+    account: Account,
+    organizationId: z.string(),
+    tenantId: z.string(),
+  })
+  .partial()
+  .passthrough();
+const UpdateAccountRequest = z
+  .object({ payload: UpdateAccountRequestPayload })
+  .partial()
+  .passthrough();
 const ComplianceLevel = z.enum([
   "COMPLIANCE_LEVEL_UNSPECIFIED",
   "COMPLIANCE_LEVEL_NONE",
@@ -2428,10 +2440,6 @@ const Account1 = z
   })
   .partial()
   .passthrough();
-const UpdateAccountRequest = z
-  .object({ account: Account1 })
-  .partial()
-  .passthrough();
 const UpdateAccountResponse = z
   .object({ account: Account1 })
   .partial()
@@ -3034,6 +3042,10 @@ const AuthenticationErrorMessageResponse1 = z
   })
   .partial()
   .passthrough();
+const UpdateAccountRequest1 = z
+  .object({ account: Account1 })
+  .partial()
+  .passthrough();
 const GetAccountResponse1 = z
   .object({ account: Account1 })
   .partial()
@@ -3257,6 +3269,8 @@ export const schemas = {
   rpc_Status,
   CreateAccountRequest,
   CreateAccountResponse,
+  UpdateAccountRequestPayload,
+  UpdateAccountRequest,
   ComplianceLevel,
   FileEmbeddings,
   FileVersion,
@@ -3305,7 +3319,6 @@ export const schemas = {
   Workspace1,
   DataProfile,
   Account1,
-  UpdateAccountRequest,
   UpdateAccountResponse,
   UpdateAccountSettingsRequest,
   UpdateAccountSettingsResponse,
@@ -3392,6 +3405,7 @@ export const schemas = {
   CreateAccountRequest1,
   CreateAccountResponse1,
   AuthenticationErrorMessageResponse1,
+  UpdateAccountRequest1,
   GetAccountResponse1,
   UpdateWorkspaceSharingRequest,
   UpdateWorkspaceSharingResponse,
@@ -9712,7 +9726,7 @@ Example:
       {
         name: "body",
         type: "Body",
-        schema: UpdateAccountRequest,
+        schema: UpdateAccountRequest1,
       },
     ],
     response: UpdateAccountResponse,
@@ -11442,7 +11456,7 @@ export class ApiClient {
   }
 
   async updateWorkspaceServiceV1Accounts(
-    data: z.infer<typeof schemas.UpdateAccountRequest>,
+    data: z.infer<typeof schemas.UpdateAccountRequest1>,
   ) {
     return this.client.put("/workspace-service/v1/accounts", data, {});
   }

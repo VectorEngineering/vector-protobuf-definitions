@@ -122,9 +122,9 @@ export default {
         },
 
         // @return UpdateAccountResponse
-        UpdateAccount1: ($updateAccountRequest) => {
+        UpdateAccount1: ($updateAccountRequest1) => {
             return {
-                "updateAccountRequest": ""
+                "updateAccountRequest1": ""
             };
         },
 

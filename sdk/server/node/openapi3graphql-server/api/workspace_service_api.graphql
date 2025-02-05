@@ -48,7 +48,7 @@ input ShareWorkspaceInput {
 
 input UpdateAccount1Input {
     
-    updateAccountRequest: UpdateAccountRequestInput
+    updateAccountRequest1: UpdateAccountRequest1Input
 }
 
 input UpdateWorkspace1Input {
@@ -89,7 +89,7 @@ type Mutation {
   # @return [ShareWorkspaceResponse]
   ShareWorkspace(input: ShareWorkspaceInput!): ShareWorkspaceResponse
   # Update account details
-  # @param UpdateAccountRequest updateAccountRequest 
+  # @param UpdateAccountRequest1 updateAccountRequest1 
   # @return [UpdateAccountResponse]
   UpdateAccount1(input: UpdateAccount1Input!): UpdateAccountResponse
   # Update workspace

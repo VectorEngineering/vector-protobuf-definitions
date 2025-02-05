@@ -20,7 +20,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "GoneErrorMessageResponse", description = "Indicates that the resource requested is no longer available and will not be available again")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T09:09:05.453051-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T14:03:51.683325-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class GoneErrorMessageResponse {
 
   private Integer code;

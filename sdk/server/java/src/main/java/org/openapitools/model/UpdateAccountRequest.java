@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import org.openapitools.model.Account1;
+import org.openapitools.model.UpdateAccountRequestPayload;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -19,29 +19,29 @@ import javax.annotation.Generated;
  * UpdateAccountRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T09:09:05.453051-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T14:03:51.683325-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class UpdateAccountRequest {
 
-  private Account1 account;
+  private UpdateAccountRequestPayload payload;
 
-  public UpdateAccountRequest account(Account1 account) {
-    this.account = account;
+  public UpdateAccountRequest payload(UpdateAccountRequestPayload payload) {
+    this.payload = payload;
     return this;
   }
 
   /**
-   * Get account
-   * @return account
+   * Get payload
+   * @return payload
    */
   @Valid 
-  @Schema(name = "account", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("account")
-  public Account1 getAccount() {
-    return account;
+  @Schema(name = "payload", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("payload")
+  public UpdateAccountRequestPayload getPayload() {
+    return payload;
   }
 
-  public void setAccount(Account1 account) {
-    this.account = account;
+  public void setPayload(UpdateAccountRequestPayload payload) {
+    this.payload = payload;
   }
 
   @Override
@@ -53,19 +53,19 @@ public class UpdateAccountRequest {
       return false;
     }
     UpdateAccountRequest updateAccountRequest = (UpdateAccountRequest) o;
-    return Objects.equals(this.account, updateAccountRequest.account);
+    return Objects.equals(this.payload, updateAccountRequest.payload);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(account);
+    return Objects.hash(payload);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class UpdateAccountRequest {\n");
-    sb.append("    account: ").append(toIndentedString(account)).append("\n");
+    sb.append("    payload: ").append(toIndentedString(payload)).append("\n");
     sb.append("}");
     return sb.toString();
   }

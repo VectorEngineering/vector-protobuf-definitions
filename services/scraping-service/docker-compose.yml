@@ -1,0 +1,22 @@
+services:
+  scraping-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3003"
+    environment:
+      - PORT=3003
+      - BLOCK_MEDIA=false
+      - PROXY_SERVER=${PROXY_SERVER}
+      - PROXY_USERNAME=${PROXY_USERNAME}
+      - PROXY_PASSWORD=${PROXY_PASSWORD}
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3003/api-docs"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    volumes:
+      - /app/node_modules 

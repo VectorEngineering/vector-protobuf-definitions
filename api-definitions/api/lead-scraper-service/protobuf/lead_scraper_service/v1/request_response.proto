@@ -529,3 +529,127 @@ message RotateTenantAPIKeyResponse {
     uint64 tenant_id = 4 [(validate.rules).uint64.gt = 0];
     uint64 organization_id = 5 [(validate.rules).uint64.gt = 0];
 }
+
+// APIKey related messages
+
+message CreateAPIKeyRequest {
+    uint64 organization_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 workspace_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 3 [(validate.rules).uint64.gt = 0];
+    uint64 account_id = 4 [(validate.rules).uint64.gt = 0];
+    uint64 workspace_id = 5 [(validate.rules).uint64.gt = 0];
+    string name = 6 [(validate.rules).string.min_len = 1];
+    string description = 7 [(validate.rules).string.min_len = 1];
+    repeated string scopes = 8 [(validate.rules).repeated.min_items = 1];
+    google.protobuf.Timestamp expires_at = 9;
+    int32 max_uses = 10 [(validate.rules).int32.gt = 0];
+    repeated string allowed_ips = 11;
+    int32 rate_limit = 12 [(validate.rules).int32.gt = 0];
+    bool enforce_signing = 13;
+    repeated string allowed_signature_algorithms = 14;
+    bool enforce_mutual_tls = 15;
+    repeated string alert_emails = 16;
+    bool alert_on_quota_threshold = 17;
+    float quota_alert_threshold = 18;
+}
+
+message CreateAPIKeyResponse {
+    APIKey api_key = 1;
+    string key_value = 2; // The actual API key value - only returned on creation
+}
+
+message GetAPIKeyRequest {
+    uint64 organization_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 account_id = 3 [(validate.rules).uint64.gt = 0];
+    uint64 workspace_id = 4 [(validate.rules).uint64.gt = 0];
+    uint64 key_id = 5 [(validate.rules).uint64.gt = 0];
+}
+
+message GetAPIKeyResponse {
+    APIKey api_key = 1;
+}
+
+message UpdateAPIKeyRequest {
+    APIKey api_key = 1 [(validate.rules).message.required = true];
+}
+
+message UpdateAPIKeyResponse {
+    APIKey api_key = 1;
+}
+
+message DeleteAPIKeyRequest {
+    uint64 organization_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 workspace_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 3 [(validate.rules).uint64.gt = 0];
+    uint64 account_id = 4 [(validate.rules).uint64.gt = 0];
+    uint64 key_id = 5 [(validate.rules).uint64.gt = 0];
+}
+
+message DeleteAPIKeyResponse {
+    bool success = 1;
+}
+
+message ListAPIKeysRequest {
+    uint64 organization_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 account_id = 3 [(validate.rules).uint64.gt = 0];
+    uint64 workspace_id = 4 [(validate.rules).uint64.gt = 0];
+    int32 page_size = 5 [(validate.rules).int32 = {gte: 1, lte: 100}];
+    int32 page_number = 6;
+    string status = 7;
+    bool sort_desc = 9;
+    string search = 10;
+}
+
+message ListAPIKeysResponse {
+    repeated APIKey api_keys = 1;
+    int32 next_page_number = 2;
+    int32 total_count = 3;
+}
+
+message RotateAPIKeyRequest {
+    uint64 organization_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 account_id = 3 [(validate.rules).uint64.gt = 0];
+    uint64 workspace_id = 4 [(validate.rules).uint64.gt = 0];
+    uint64 key_id = 5 [(validate.rules).uint64.gt = 0];
+    google.protobuf.Duration grace_period = 6; // Optional grace period before old key is invalidated
+}
+
+message RotateAPIKeyResponse {
+    APIKey new_api_key = 1;
+    string new_key_value = 2;
+    google.protobuf.Timestamp old_key_expiry = 3;
+}
+
+
+message ListLeadsRequest {
+    // Context identifiers
+    uint64 organization_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 workspace_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 3 [(validate.rules).uint64.gt = 0];
+    uint64 account_id = 4 [(validate.rules).uint64.gt = 0];
+    
+    // Pagination
+    int32 page_size = 6 [(validate.rules).int32 = {gte: 1, lte: 100}];
+    int32 page_number = 7;
+}
+
+message ListLeadsResponse {
+    repeated Lead leads = 1;
+    int32 total_count = 2;
+    int32 next_page_number = 3;
+}
+
+message GetLeadRequest {
+    uint64 organization_id = 1 [(validate.rules).uint64.gt = 0];
+    uint64 workspace_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 3 [(validate.rules).uint64.gt = 0];
+    uint64 account_id = 4 [(validate.rules).uint64.gt = 0];
+    uint64 lead_id = 5 [(validate.rules).uint64.gt = 0];
+}
+
+message GetLeadResponse {
+    Lead lead = 1;
+}

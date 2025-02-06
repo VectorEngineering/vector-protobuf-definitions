@@ -23,6 +23,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 from typing import Any, ClassVar, Dict, List, Optional
 from playbookmedia_backend_client_sdk.models.billing_plan import BillingPlan
 from playbookmedia_backend_client_sdk.models.subscription import Subscription
+from playbookmedia_backend_client_sdk.models.tenant import Tenant
 from playbookmedia_backend_client_sdk.models.v1_status import V1Status
 from typing import Optional, Set
 from typing_extensions import Self
@@ -161,7 +162,4 @@ class Organization(BaseModel):
         })
         return _obj
 
-from playbookmedia_backend_client_sdk.models.tenant import Tenant
-# TODO: Rewrite to not use raise_errors
-Organization.model_rebuild(raise_errors=False)
 

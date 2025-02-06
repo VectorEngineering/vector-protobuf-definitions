@@ -51,8 +51,6 @@ Name | Type | Description | Notes
 **supportedFeatures** | **String!** |  | [optional] [default to null]
 **documentationUrl** | **String!** |  | [optional] [default to null]
 **supportContact** | **String!** |  | [optional] [default to null]
-**account** | [***Account**](Account.md) |  | [optional] [default to null]
-**workspace** | [***Workspace**](Workspace.md) |  | [optional] [default to null]
 **logAllRequests** | **Boolean!** |  | [optional] [default to null]
 **lastRotationReason** | **String!** |  | [optional] [default to null]
 **lastRotationDate** | **String!** |  | [optional] [default to null]

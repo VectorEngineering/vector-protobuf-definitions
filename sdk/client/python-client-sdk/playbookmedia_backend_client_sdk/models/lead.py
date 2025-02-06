@@ -47,13 +47,9 @@ class Lead(BaseModel):
     industry: Optional[StrictStr] = None
     employee_count: Optional[StrictInt] = Field(default=None, alias="employeeCount")
     estimated_revenue: Optional[StrictStr] = Field(default=None, alias="estimatedRevenue")
-    org_id: Optional[StrictStr] = Field(default=None, alias="orgId")
-    tenant_id: Optional[StrictStr] = Field(default=None, alias="tenantId")
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
     deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
-    job: Optional[ScrapingJob] = None
-    workspace: Optional[Workspace] = None
     place_id: Optional[StrictStr] = Field(default=None, alias="placeId")
     google_maps_url: Optional[StrictStr] = Field(default=None, alias="googleMapsUrl")
     business_status: Optional[StrictStr] = Field(default=None, alias="businessStatus")
@@ -112,7 +108,7 @@ class Lead(BaseModel):
     last_product_launch: Optional[datetime] = Field(default=None, alias="lastProductLaunch")
     has_litigation_history: Optional[StrictBool] = Field(default=None, alias="hasLitigationHistory")
     export_control_status: Optional[StrictStr] = Field(default=None, alias="exportControlStatus")
-    __properties: ClassVar[List[str]] = ["id", "name", "website", "phone", "address", "city", "state", "country", "latitude", "longitude", "googleRating", "reviewCount", "industry", "employeeCount", "estimatedRevenue", "orgId", "tenantId", "createdAt", "updatedAt", "deletedAt", "job", "workspace", "placeId", "googleMapsUrl", "businessStatus", "regularHours", "specialHours", "photoReferences", "mainPhotoUrl", "reviews", "types", "amenities", "servesVegetarianFood", "outdoorSeating", "paymentMethods", "wheelchairAccessible", "parkingAvailable", "socialMedia", "ratingCategory", "rating", "count", "lastUpdated", "dataSourceVersion", "scrapingSessionId", "alternatePhones", "contactPersonName", "contactPersonTitle", "contactEmail", "foundedYear", "businessType", "certifications", "licenseNumber", "revenueRange", "fundingStage", "isPublicCompany", "websiteLoadSpeed", "hasSslCertificate", "cmsUsed", "ecommercePlatforms", "timezone", "neighborhood", "nearbyLandmarks", "transportationAccess", "employeeBenefits", "parentCompany", "subsidiaries", "isFranchise", "seoKeywords", "usesGoogleAds", "googleMyBusinessCategory", "naicsCode", "sicCode", "unspscCode", "isGreenCertified", "energySources", "sustainabilityRating", "recentAnnouncements", "lastProductLaunch", "hasLitigationHistory", "exportControlStatus"]
+    __properties: ClassVar[List[str]] = ["id", "name", "website", "phone", "address", "city", "state", "country", "latitude", "longitude", "googleRating", "reviewCount", "industry", "employeeCount", "estimatedRevenue", "createdAt", "updatedAt", "deletedAt", "placeId", "googleMapsUrl", "businessStatus", "regularHours", "specialHours", "photoReferences", "mainPhotoUrl", "reviews", "types", "amenities", "servesVegetarianFood", "outdoorSeating", "paymentMethods", "wheelchairAccessible", "parkingAvailable", "socialMedia", "ratingCategory", "rating", "count", "lastUpdated", "dataSourceVersion", "scrapingSessionId", "alternatePhones", "contactPersonName", "contactPersonTitle", "contactEmail", "foundedYear", "businessType", "certifications", "licenseNumber", "revenueRange", "fundingStage", "isPublicCompany", "websiteLoadSpeed", "hasSslCertificate", "cmsUsed", "ecommercePlatforms", "timezone", "neighborhood", "nearbyLandmarks", "transportationAccess", "employeeBenefits", "parentCompany", "subsidiaries", "isFranchise", "seoKeywords", "usesGoogleAds", "googleMyBusinessCategory", "naicsCode", "sicCode", "unspscCode", "isGreenCertified", "energySources", "sustainabilityRating", "recentAnnouncements", "lastProductLaunch", "hasLitigationHistory", "exportControlStatus"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -153,12 +149,6 @@ class Lead(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of job
-        if self.job:
-            _dict['job'] = self.job.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of workspace
-        if self.workspace:
-            _dict['workspace'] = self.workspace.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in regular_hours (list)
         _items = []
         if self.regular_hours:
@@ -207,13 +197,9 @@ class Lead(BaseModel):
             "industry": obj.get("industry"),
             "employeeCount": obj.get("employeeCount"),
             "estimatedRevenue": obj.get("estimatedRevenue"),
-            "orgId": obj.get("orgId"),
-            "tenantId": obj.get("tenantId"),
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt"),
             "deletedAt": obj.get("deletedAt"),
-            "job": ScrapingJob.from_dict(obj["job"]) if obj.get("job") is not None else None,
-            "workspace": Workspace.from_dict(obj["workspace"]) if obj.get("workspace") is not None else None,
             "placeId": obj.get("placeId"),
             "googleMapsUrl": obj.get("googleMapsUrl"),
             "businessStatus": obj.get("businessStatus"),
@@ -275,8 +261,4 @@ class Lead(BaseModel):
         })
         return _obj
 
-from playbookmedia_backend_client_sdk.models.scraping_job import ScrapingJob
-from playbookmedia_backend_client_sdk.models.workspace import Workspace
-# TODO: Rewrite to not use raise_errors
-Lead.model_rebuild(raise_errors=False)
 

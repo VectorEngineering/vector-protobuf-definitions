@@ -51,8 +51,6 @@ Name | Type | Description | Notes
 **supported_features** | **Vec<String>** |  | [optional] [default to None]
 **documentation_url** | **String** |  | [optional] [default to None]
 **support_contact** | **String** |  | [optional] [default to None]
-**account** | [***models::Account**](Account.md) |  | [optional] [default to None]
-**workspace** | [***models::Workspace**](Workspace.md) |  | [optional] [default to None]
 **log_all_requests** | **bool** |  | [optional] [default to None]
 **last_rotation_reason** | **String** |  | [optional] [default to None]
 **last_rotation_date** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]

@@ -53,209 +53,41 @@ func newWorkspaceORM(db *gorm.DB, opts ...gen.DOOption) workspaceORM {
 		db: db.Session(&gorm.Session{}),
 
 		RelationField: field.NewRelation("ApiKeys", "lead_scraper_servicev1.APIKeyORM"),
-		Account: struct {
-			field.RelationField
-			Settings struct {
-				field.RelationField
-			}
-			Workspaces struct {
-				field.RelationField
-				ApiKeys struct {
-					field.RelationField
-				}
-				ScrapingJobs struct {
-					field.RelationField
-					Leads struct {
-						field.RelationField
-						Job struct {
-							field.RelationField
-						}
-						Workspace struct {
-							field.RelationField
-						}
-						RegularHours struct {
-							field.RelationField
-						}
-						Reviews struct {
-							field.RelationField
-						}
-						SpecialHours struct {
-							field.RelationField
-						}
-					}
-				}
-				Webhooks struct {
-					field.RelationField
-				}
-				Workflows struct {
-					field.RelationField
-					Workspace struct {
-						field.RelationField
-					}
-					Jobs struct {
-						field.RelationField
-					}
-				}
-			}
-		}{
-			RelationField: field.NewRelation("ApiKeys.Account", "lead_scraper_servicev1.AccountORM"),
-			Settings: struct {
-				field.RelationField
-			}{
-				RelationField: field.NewRelation("ApiKeys.Account.Settings", "lead_scraper_servicev1.AccountSettingsORM"),
-			},
-			Workspaces: struct {
-				field.RelationField
-				ApiKeys struct {
-					field.RelationField
-				}
-				ScrapingJobs struct {
-					field.RelationField
-					Leads struct {
-						field.RelationField
-						Job struct {
-							field.RelationField
-						}
-						Workspace struct {
-							field.RelationField
-						}
-						RegularHours struct {
-							field.RelationField
-						}
-						Reviews struct {
-							field.RelationField
-						}
-						SpecialHours struct {
-							field.RelationField
-						}
-					}
-				}
-				Webhooks struct {
-					field.RelationField
-				}
-				Workflows struct {
-					field.RelationField
-					Workspace struct {
-						field.RelationField
-					}
-					Jobs struct {
-						field.RelationField
-					}
-				}
-			}{
-				RelationField: field.NewRelation("ApiKeys.Account.Workspaces", "lead_scraper_servicev1.WorkspaceORM"),
-				ApiKeys: struct {
-					field.RelationField
-				}{
-					RelationField: field.NewRelation("ApiKeys.Account.Workspaces.ApiKeys", "lead_scraper_servicev1.APIKeyORM"),
-				},
-				ScrapingJobs: struct {
-					field.RelationField
-					Leads struct {
-						field.RelationField
-						Job struct {
-							field.RelationField
-						}
-						Workspace struct {
-							field.RelationField
-						}
-						RegularHours struct {
-							field.RelationField
-						}
-						Reviews struct {
-							field.RelationField
-						}
-						SpecialHours struct {
-							field.RelationField
-						}
-					}
-				}{
-					RelationField: field.NewRelation("ApiKeys.Account.Workspaces.ScrapingJobs", "lead_scraper_servicev1.ScrapingJobORM"),
-					Leads: struct {
-						field.RelationField
-						Job struct {
-							field.RelationField
-						}
-						Workspace struct {
-							field.RelationField
-						}
-						RegularHours struct {
-							field.RelationField
-						}
-						Reviews struct {
-							field.RelationField
-						}
-						SpecialHours struct {
-							field.RelationField
-						}
-					}{
-						RelationField: field.NewRelation("ApiKeys.Account.Workspaces.ScrapingJobs.Leads", "lead_scraper_servicev1.LeadORM"),
-						Job: struct {
-							field.RelationField
-						}{
-							RelationField: field.NewRelation("ApiKeys.Account.Workspaces.ScrapingJobs.Leads.Job", "lead_scraper_servicev1.ScrapingJobORM"),
-						},
-						Workspace: struct {
-							field.RelationField
-						}{
-							RelationField: field.NewRelation("ApiKeys.Account.Workspaces.ScrapingJobs.Leads.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-						},
-						RegularHours: struct {
-							field.RelationField
-						}{
-							RelationField: field.NewRelation("ApiKeys.Account.Workspaces.ScrapingJobs.Leads.RegularHours", "lead_scraper_servicev1.BusinessHoursORM"),
-						},
-						Reviews: struct {
-							field.RelationField
-						}{
-							RelationField: field.NewRelation("ApiKeys.Account.Workspaces.ScrapingJobs.Leads.Reviews", "lead_scraper_servicev1.ReviewORM"),
-						},
-						SpecialHours: struct {
-							field.RelationField
-						}{
-							RelationField: field.NewRelation("ApiKeys.Account.Workspaces.ScrapingJobs.Leads.SpecialHours", "lead_scraper_servicev1.BusinessHoursORM"),
-						},
-					},
-				},
-				Webhooks: struct {
-					field.RelationField
-				}{
-					RelationField: field.NewRelation("ApiKeys.Account.Workspaces.Webhooks", "lead_scraper_servicev1.WebhookConfigORM"),
-				},
-				Workflows: struct {
-					field.RelationField
-					Workspace struct {
-						field.RelationField
-					}
-					Jobs struct {
-						field.RelationField
-					}
-				}{
-					RelationField: field.NewRelation("ApiKeys.Account.Workspaces.Workflows", "lead_scraper_servicev1.ScrapingWorkflowORM"),
-					Workspace: struct {
-						field.RelationField
-					}{
-						RelationField: field.NewRelation("ApiKeys.Account.Workspaces.Workflows.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-					},
-					Jobs: struct {
-						field.RelationField
-					}{
-						RelationField: field.NewRelation("ApiKeys.Account.Workspaces.Workflows.Jobs", "lead_scraper_servicev1.ScrapingJobORM"),
-					},
-				},
-			},
-		},
-		Workspace: struct {
-			field.RelationField
-		}{
-			RelationField: field.NewRelation("ApiKeys.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-		},
 	}
 
 	_workspaceORM.ScrapingJobs = workspaceORMHasManyScrapingJobs{
 		db: db.Session(&gorm.Session{}),
 
 		RelationField: field.NewRelation("ScrapingJobs", "lead_scraper_servicev1.ScrapingJobORM"),
+		Leads: struct {
+			field.RelationField
+			RegularHours struct {
+				field.RelationField
+			}
+			Reviews struct {
+				field.RelationField
+			}
+			SpecialHours struct {
+				field.RelationField
+			}
+		}{
+			RelationField: field.NewRelation("ScrapingJobs.Leads", "lead_scraper_servicev1.LeadORM"),
+			RegularHours: struct {
+				field.RelationField
+			}{
+				RelationField: field.NewRelation("ScrapingJobs.Leads.RegularHours", "lead_scraper_servicev1.BusinessHoursORM"),
+			},
+			Reviews: struct {
+				field.RelationField
+			}{
+				RelationField: field.NewRelation("ScrapingJobs.Leads.Reviews", "lead_scraper_servicev1.ReviewORM"),
+			},
+			SpecialHours: struct {
+				field.RelationField
+			}{
+				RelationField: field.NewRelation("ScrapingJobs.Leads.SpecialHours", "lead_scraper_servicev1.BusinessHoursORM"),
+			},
+		},
 	}
 
 	_workspaceORM.Webhooks = workspaceORMHasManyWebhooks{
@@ -268,6 +100,11 @@ func newWorkspaceORM(db *gorm.DB, opts ...gen.DOOption) workspaceORM {
 		db: db.Session(&gorm.Session{}),
 
 		RelationField: field.NewRelation("Workflows", "lead_scraper_servicev1.ScrapingWorkflowORM"),
+		Jobs: struct {
+			field.RelationField
+		}{
+			RelationField: field.NewRelation("Workflows.Jobs", "lead_scraper_servicev1.ScrapingJobORM"),
+		},
 	}
 
 	_workspaceORM.fillFieldMap()
@@ -393,55 +230,6 @@ type workspaceORMHasManyApiKeys struct {
 	db *gorm.DB
 
 	field.RelationField
-
-	Account struct {
-		field.RelationField
-		Settings struct {
-			field.RelationField
-		}
-		Workspaces struct {
-			field.RelationField
-			ApiKeys struct {
-				field.RelationField
-			}
-			ScrapingJobs struct {
-				field.RelationField
-				Leads struct {
-					field.RelationField
-					Job struct {
-						field.RelationField
-					}
-					Workspace struct {
-						field.RelationField
-					}
-					RegularHours struct {
-						field.RelationField
-					}
-					Reviews struct {
-						field.RelationField
-					}
-					SpecialHours struct {
-						field.RelationField
-					}
-				}
-			}
-			Webhooks struct {
-				field.RelationField
-			}
-			Workflows struct {
-				field.RelationField
-				Workspace struct {
-					field.RelationField
-				}
-				Jobs struct {
-					field.RelationField
-				}
-			}
-		}
-	}
-	Workspace struct {
-		field.RelationField
-	}
 }
 
 func (a workspaceORMHasManyApiKeys) Where(conds ...field.Expr) *workspaceORMHasManyApiKeys {
@@ -513,6 +301,19 @@ type workspaceORMHasManyScrapingJobs struct {
 	db *gorm.DB
 
 	field.RelationField
+
+	Leads struct {
+		field.RelationField
+		RegularHours struct {
+			field.RelationField
+		}
+		Reviews struct {
+			field.RelationField
+		}
+		SpecialHours struct {
+			field.RelationField
+		}
+	}
 }
 
 func (a workspaceORMHasManyScrapingJobs) Where(conds ...field.Expr) *workspaceORMHasManyScrapingJobs {
@@ -655,6 +456,10 @@ type workspaceORMHasManyWorkflows struct {
 	db *gorm.DB
 
 	field.RelationField
+
+	Jobs struct {
+		field.RelationField
+	}
 }
 
 func (a workspaceORMHasManyWorkflows) Where(conds ...field.Expr) *workspaceORMHasManyWorkflows {

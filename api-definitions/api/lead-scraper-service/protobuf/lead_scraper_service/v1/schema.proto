@@ -861,7 +861,7 @@ message Lead {
         table: "leads"
     };
 
-    uint64 id = 1 [(gorm.field).tag = {primary_key: true, index: "idx_leads_id"}];
+    uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
     
     // Business details
     string name = 2 [
@@ -885,16 +885,6 @@ message Lead {
     string industry = 13;
     int32 employee_count = 14 [(validate.rules).int32 = {gte: 0}];
     int64 estimated_revenue = 15 [(validate.rules).int64 = {gte: 0}];
-    
-    // Org context
-    string org_id = 16 [
-        (validate.rules).string.min_len = 1,
-        (gorm.field).tag = {index: "idx_leads_org_id"}
-    ];
-    string tenant_id = 17 [
-        (validate.rules).string.min_len = 1,
-        (gorm.field).tag = {index: "idx_leads_tenant_id"}
-    ];
     
     // Audit fields
     google.protobuf.Timestamp created_at = 18 [(gorm.field).tag = {index: "idx_leads_created_at"}];

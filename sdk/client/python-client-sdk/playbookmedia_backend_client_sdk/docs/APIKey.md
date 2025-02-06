@@ -54,8 +54,6 @@ Name | Type | Description | Notes
 **supported_features** | **List[str]** |  | [optional] 
 **documentation_url** | **str** |  | [optional] 
 **support_contact** | **str** |  | [optional] 
-**account** | [**Account**](Account.md) |  | [optional] 
-**workspace** | [**Workspace**](Workspace.md) |  | [optional] 
 **log_all_requests** | **bool** |  | [optional] 
 **last_rotation_reason** | **str** |  | [optional] 
 **last_rotation_date** | **datetime** |  | [optional] 

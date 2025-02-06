@@ -63,23 +63,11 @@ func newTenantORM(db *gorm.DB, opts ...gen.DOOption) tenantORM {
 			field.RelationField
 			ApiKeys struct {
 				field.RelationField
-				Account struct {
-					field.RelationField
-				}
-				Workspace struct {
-					field.RelationField
-				}
 			}
 			ScrapingJobs struct {
 				field.RelationField
 				Leads struct {
 					field.RelationField
-					Job struct {
-						field.RelationField
-					}
-					Workspace struct {
-						field.RelationField
-					}
 					RegularHours struct {
 						field.RelationField
 					}
@@ -96,9 +84,6 @@ func newTenantORM(db *gorm.DB, opts ...gen.DOOption) tenantORM {
 			}
 			Workflows struct {
 				field.RelationField
-				Workspace struct {
-					field.RelationField
-				}
 				Jobs struct {
 					field.RelationField
 				}
@@ -107,35 +92,13 @@ func newTenantORM(db *gorm.DB, opts ...gen.DOOption) tenantORM {
 			RelationField: field.NewRelation("Accounts.Workspaces", "lead_scraper_servicev1.WorkspaceORM"),
 			ApiKeys: struct {
 				field.RelationField
-				Account struct {
-					field.RelationField
-				}
-				Workspace struct {
-					field.RelationField
-				}
 			}{
 				RelationField: field.NewRelation("Accounts.Workspaces.ApiKeys", "lead_scraper_servicev1.APIKeyORM"),
-				Account: struct {
-					field.RelationField
-				}{
-					RelationField: field.NewRelation("Accounts.Workspaces.ApiKeys.Account", "lead_scraper_servicev1.AccountORM"),
-				},
-				Workspace: struct {
-					field.RelationField
-				}{
-					RelationField: field.NewRelation("Accounts.Workspaces.ApiKeys.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-				},
 			},
 			ScrapingJobs: struct {
 				field.RelationField
 				Leads struct {
 					field.RelationField
-					Job struct {
-						field.RelationField
-					}
-					Workspace struct {
-						field.RelationField
-					}
 					RegularHours struct {
 						field.RelationField
 					}
@@ -150,12 +113,6 @@ func newTenantORM(db *gorm.DB, opts ...gen.DOOption) tenantORM {
 				RelationField: field.NewRelation("Accounts.Workspaces.ScrapingJobs", "lead_scraper_servicev1.ScrapingJobORM"),
 				Leads: struct {
 					field.RelationField
-					Job struct {
-						field.RelationField
-					}
-					Workspace struct {
-						field.RelationField
-					}
 					RegularHours struct {
 						field.RelationField
 					}
@@ -167,16 +124,6 @@ func newTenantORM(db *gorm.DB, opts ...gen.DOOption) tenantORM {
 					}
 				}{
 					RelationField: field.NewRelation("Accounts.Workspaces.ScrapingJobs.Leads", "lead_scraper_servicev1.LeadORM"),
-					Job: struct {
-						field.RelationField
-					}{
-						RelationField: field.NewRelation("Accounts.Workspaces.ScrapingJobs.Leads.Job", "lead_scraper_servicev1.ScrapingJobORM"),
-					},
-					Workspace: struct {
-						field.RelationField
-					}{
-						RelationField: field.NewRelation("Accounts.Workspaces.ScrapingJobs.Leads.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-					},
 					RegularHours: struct {
 						field.RelationField
 					}{
@@ -201,19 +148,11 @@ func newTenantORM(db *gorm.DB, opts ...gen.DOOption) tenantORM {
 			},
 			Workflows: struct {
 				field.RelationField
-				Workspace struct {
-					field.RelationField
-				}
 				Jobs struct {
 					field.RelationField
 				}
 			}{
 				RelationField: field.NewRelation("Accounts.Workspaces.Workflows", "lead_scraper_servicev1.ScrapingWorkflowORM"),
-				Workspace: struct {
-					field.RelationField
-				}{
-					RelationField: field.NewRelation("Accounts.Workspaces.Workflows.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-				},
 				Jobs: struct {
 					field.RelationField
 				}{
@@ -227,46 +166,6 @@ func newTenantORM(db *gorm.DB, opts ...gen.DOOption) tenantORM {
 		db: db.Session(&gorm.Session{}),
 
 		RelationField: field.NewRelation("ApiKeys", "lead_scraper_servicev1.TenantAPIKeyORM"),
-	}
-
-	_tenantORM.Organization = tenantORMBelongsToOrganization{
-		db: db.Session(&gorm.Session{}),
-
-		RelationField: field.NewRelation("Organization", "lead_scraper_servicev1.OrganizationORM"),
-		Subscriptions: struct {
-			field.RelationField
-		}{
-			RelationField: field.NewRelation("Organization.Subscriptions", "lead_scraper_servicev1.SubscriptionORM"),
-		},
-		Tenants: struct {
-			field.RelationField
-			Organization struct {
-				field.RelationField
-			}
-			Accounts struct {
-				field.RelationField
-			}
-			ApiKeys struct {
-				field.RelationField
-			}
-		}{
-			RelationField: field.NewRelation("Organization.Tenants", "lead_scraper_servicev1.TenantORM"),
-			Organization: struct {
-				field.RelationField
-			}{
-				RelationField: field.NewRelation("Organization.Tenants.Organization", "lead_scraper_servicev1.OrganizationORM"),
-			},
-			Accounts: struct {
-				field.RelationField
-			}{
-				RelationField: field.NewRelation("Organization.Tenants.Accounts", "lead_scraper_servicev1.AccountORM"),
-			},
-			ApiKeys: struct {
-				field.RelationField
-			}{
-				RelationField: field.NewRelation("Organization.Tenants.ApiKeys", "lead_scraper_servicev1.TenantAPIKeyORM"),
-			},
-		},
 	}
 
 	_tenantORM.fillFieldMap()
@@ -301,8 +200,6 @@ type tenantORM struct {
 	Accounts             tenantORMHasManyAccounts
 
 	ApiKeys tenantORMHasManyApiKeys
-
-	Organization tenantORMBelongsToOrganization
 
 	fieldMap map[string]field.Expr
 }
@@ -355,7 +252,7 @@ func (t *tenantORM) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (t *tenantORM) fillFieldMap() {
-	t.fieldMap = make(map[string]field.Expr, 23)
+	t.fieldMap = make(map[string]field.Expr, 22)
 	t.fieldMap["allowed_origins"] = t.AllowedOrigins
 	t.fieldMap["api_base_url"] = t.ApiBaseUrl
 	t.fieldMap["average_response_time"] = t.AverageResponseTime
@@ -401,23 +298,11 @@ type tenantORMHasManyAccounts struct {
 		field.RelationField
 		ApiKeys struct {
 			field.RelationField
-			Account struct {
-				field.RelationField
-			}
-			Workspace struct {
-				field.RelationField
-			}
 		}
 		ScrapingJobs struct {
 			field.RelationField
 			Leads struct {
 				field.RelationField
-				Job struct {
-					field.RelationField
-				}
-				Workspace struct {
-					field.RelationField
-				}
 				RegularHours struct {
 					field.RelationField
 				}
@@ -434,9 +319,6 @@ type tenantORMHasManyAccounts struct {
 		}
 		Workflows struct {
 			field.RelationField
-			Workspace struct {
-				field.RelationField
-			}
 			Jobs struct {
 				field.RelationField
 			}
@@ -577,93 +459,6 @@ func (a tenantORMHasManyApiKeysTx) Clear() error {
 }
 
 func (a tenantORMHasManyApiKeysTx) Count() int64 {
-	return a.tx.Count()
-}
-
-type tenantORMBelongsToOrganization struct {
-	db *gorm.DB
-
-	field.RelationField
-
-	Subscriptions struct {
-		field.RelationField
-	}
-	Tenants struct {
-		field.RelationField
-		Organization struct {
-			field.RelationField
-		}
-		Accounts struct {
-			field.RelationField
-		}
-		ApiKeys struct {
-			field.RelationField
-		}
-	}
-}
-
-func (a tenantORMBelongsToOrganization) Where(conds ...field.Expr) *tenantORMBelongsToOrganization {
-	if len(conds) == 0 {
-		return &a
-	}
-
-	exprs := make([]clause.Expression, 0, len(conds))
-	for _, cond := range conds {
-		exprs = append(exprs, cond.BeCond().(clause.Expression))
-	}
-	a.db = a.db.Clauses(clause.Where{Exprs: exprs})
-	return &a
-}
-
-func (a tenantORMBelongsToOrganization) WithContext(ctx context.Context) *tenantORMBelongsToOrganization {
-	a.db = a.db.WithContext(ctx)
-	return &a
-}
-
-func (a tenantORMBelongsToOrganization) Session(session *gorm.Session) *tenantORMBelongsToOrganization {
-	a.db = a.db.Session(session)
-	return &a
-}
-
-func (a tenantORMBelongsToOrganization) Model(m *lead_scraper_servicev1.TenantORM) *tenantORMBelongsToOrganizationTx {
-	return &tenantORMBelongsToOrganizationTx{a.db.Model(m).Association(a.Name())}
-}
-
-type tenantORMBelongsToOrganizationTx struct{ tx *gorm.Association }
-
-func (a tenantORMBelongsToOrganizationTx) Find() (result *lead_scraper_servicev1.OrganizationORM, err error) {
-	return result, a.tx.Find(&result)
-}
-
-func (a tenantORMBelongsToOrganizationTx) Append(values ...*lead_scraper_servicev1.OrganizationORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Append(targetValues...)
-}
-
-func (a tenantORMBelongsToOrganizationTx) Replace(values ...*lead_scraper_servicev1.OrganizationORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Replace(targetValues...)
-}
-
-func (a tenantORMBelongsToOrganizationTx) Delete(values ...*lead_scraper_servicev1.OrganizationORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Delete(targetValues...)
-}
-
-func (a tenantORMBelongsToOrganizationTx) Clear() error {
-	return a.tx.Clear()
-}
-
-func (a tenantORMBelongsToOrganizationTx) Count() int64 {
 	return a.tx.Count()
 }
 

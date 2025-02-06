@@ -12758,10 +12758,6 @@ components:
           type: string
         supportContact:
           type: string
-        account:
-          $ref: "#/components/schemas/Account"
-        workspace:
-          $ref: "#/components/schemas/Workspace"
         logAllRequests:
           type: boolean
           title: Compliance and auditing
@@ -14114,11 +14110,6 @@ components:
         estimatedRevenue:
           type: string
           format: int64
-        orgId:
-          type: string
-          title: Org context
-        tenantId:
-          type: string
         createdAt:
           type: string
           format: date-time
@@ -14129,10 +14120,6 @@ components:
         deletedAt:
           type: string
           format: date-time
-        job:
-          $ref: "#/components/schemas/ScrapingJob"
-        workspace:
-          $ref: "#/components/schemas/Workspace"
         placeId:
           type: string
           title: Detailed Google Maps metadata
@@ -15261,8 +15248,6 @@ components:
           items:
             $ref: "#/components/schemas/ScrapingJob"
           title: Relationships
-        workspace:
-          $ref: "#/components/schemas/Workspace"
         geoFencingRadius:
           type: number
           format: float
@@ -15551,8 +15536,6 @@ components:
           type: string
         description:
           type: string
-        organization:
-          $ref: "#/components/schemas/Organization"
         apiBaseUrl:
           type: string
           title: Configuration

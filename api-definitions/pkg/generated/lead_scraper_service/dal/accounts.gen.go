@@ -55,57 +55,13 @@ func newAccountORM(db *gorm.DB, opts ...gen.DOOption) accountORM {
 		RelationField: field.NewRelation("Workspaces", "lead_scraper_servicev1.WorkspaceORM"),
 		ApiKeys: struct {
 			field.RelationField
-			Account struct {
-				field.RelationField
-				Settings struct {
-					field.RelationField
-				}
-				Workspaces struct {
-					field.RelationField
-				}
-			}
-			Workspace struct {
-				field.RelationField
-			}
 		}{
 			RelationField: field.NewRelation("Workspaces.ApiKeys", "lead_scraper_servicev1.APIKeyORM"),
-			Account: struct {
-				field.RelationField
-				Settings struct {
-					field.RelationField
-				}
-				Workspaces struct {
-					field.RelationField
-				}
-			}{
-				RelationField: field.NewRelation("Workspaces.ApiKeys.Account", "lead_scraper_servicev1.AccountORM"),
-				Settings: struct {
-					field.RelationField
-				}{
-					RelationField: field.NewRelation("Workspaces.ApiKeys.Account.Settings", "lead_scraper_servicev1.AccountSettingsORM"),
-				},
-				Workspaces: struct {
-					field.RelationField
-				}{
-					RelationField: field.NewRelation("Workspaces.ApiKeys.Account.Workspaces", "lead_scraper_servicev1.WorkspaceORM"),
-				},
-			},
-			Workspace: struct {
-				field.RelationField
-			}{
-				RelationField: field.NewRelation("Workspaces.ApiKeys.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-			},
 		},
 		ScrapingJobs: struct {
 			field.RelationField
 			Leads struct {
 				field.RelationField
-				Job struct {
-					field.RelationField
-				}
-				Workspace struct {
-					field.RelationField
-				}
 				RegularHours struct {
 					field.RelationField
 				}
@@ -120,12 +76,6 @@ func newAccountORM(db *gorm.DB, opts ...gen.DOOption) accountORM {
 			RelationField: field.NewRelation("Workspaces.ScrapingJobs", "lead_scraper_servicev1.ScrapingJobORM"),
 			Leads: struct {
 				field.RelationField
-				Job struct {
-					field.RelationField
-				}
-				Workspace struct {
-					field.RelationField
-				}
 				RegularHours struct {
 					field.RelationField
 				}
@@ -137,16 +87,6 @@ func newAccountORM(db *gorm.DB, opts ...gen.DOOption) accountORM {
 				}
 			}{
 				RelationField: field.NewRelation("Workspaces.ScrapingJobs.Leads", "lead_scraper_servicev1.LeadORM"),
-				Job: struct {
-					field.RelationField
-				}{
-					RelationField: field.NewRelation("Workspaces.ScrapingJobs.Leads.Job", "lead_scraper_servicev1.ScrapingJobORM"),
-				},
-				Workspace: struct {
-					field.RelationField
-				}{
-					RelationField: field.NewRelation("Workspaces.ScrapingJobs.Leads.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-				},
 				RegularHours: struct {
 					field.RelationField
 				}{
@@ -171,19 +111,11 @@ func newAccountORM(db *gorm.DB, opts ...gen.DOOption) accountORM {
 		},
 		Workflows: struct {
 			field.RelationField
-			Workspace struct {
-				field.RelationField
-			}
 			Jobs struct {
 				field.RelationField
 			}
 		}{
 			RelationField: field.NewRelation("Workspaces.Workflows", "lead_scraper_servicev1.ScrapingWorkflowORM"),
-			Workspace: struct {
-				field.RelationField
-			}{
-				RelationField: field.NewRelation("Workspaces.Workflows.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-			},
 			Jobs: struct {
 				field.RelationField
 			}{
@@ -367,29 +299,11 @@ type accountORMHasManyWorkspaces struct {
 
 	ApiKeys struct {
 		field.RelationField
-		Account struct {
-			field.RelationField
-			Settings struct {
-				field.RelationField
-			}
-			Workspaces struct {
-				field.RelationField
-			}
-		}
-		Workspace struct {
-			field.RelationField
-		}
 	}
 	ScrapingJobs struct {
 		field.RelationField
 		Leads struct {
 			field.RelationField
-			Job struct {
-				field.RelationField
-			}
-			Workspace struct {
-				field.RelationField
-			}
 			RegularHours struct {
 				field.RelationField
 			}
@@ -406,9 +320,6 @@ type accountORMHasManyWorkspaces struct {
 	}
 	Workflows struct {
 		field.RelationField
-		Workspace struct {
-			field.RelationField
-		}
 		Jobs struct {
 			field.RelationField
 		}

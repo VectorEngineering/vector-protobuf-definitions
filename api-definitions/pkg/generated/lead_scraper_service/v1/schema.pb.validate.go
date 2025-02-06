@@ -470,35 +470,6 @@ func (m *Tenant) validate(all bool) error {
 
 	// no validation rules for Description
 
-	if all {
-		switch v := interface{}(m.GetOrganization()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, TenantValidationError{
-					field:  "Organization",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, TenantValidationError{
-					field:  "Organization",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetOrganization()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return TenantValidationError{
-				field:  "Organization",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	// no validation rules for ApiBaseUrl
 
 	// no validation rules for EnvironmentVariables
@@ -2415,35 +2386,6 @@ func (m *ScrapingWorkflow) validate(all bool) error {
 
 	}
 
-	if all {
-		switch v := interface{}(m.GetWorkspace()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, ScrapingWorkflowValidationError{
-					field:  "Workspace",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, ScrapingWorkflowValidationError{
-					field:  "Workspace",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetWorkspace()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return ScrapingWorkflowValidationError{
-				field:  "Workspace",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	if val := m.GetGeoFencingRadius(); val < 0 || val > 100000 {
 		err := ScrapingWorkflowValidationError{
 			field:  "GeoFencingRadius",
@@ -3192,28 +3134,6 @@ func (m *Lead) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetOrgId()) < 1 {
-		err := LeadValidationError{
-			field:  "OrgId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if utf8.RuneCountInString(m.GetTenantId()) < 1 {
-		err := LeadValidationError{
-			field:  "TenantId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
 	if all {
 		switch v := interface{}(m.GetCreatedAt()).(type) {
 		case interface{ ValidateAll() error }:
@@ -3295,64 +3215,6 @@ func (m *Lead) validate(all bool) error {
 		if err := v.Validate(); err != nil {
 			return LeadValidationError{
 				field:  "DeletedAt",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if all {
-		switch v := interface{}(m.GetJob()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, LeadValidationError{
-					field:  "Job",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, LeadValidationError{
-					field:  "Job",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetJob()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return LeadValidationError{
-				field:  "Job",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if all {
-		switch v := interface{}(m.GetWorkspace()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, LeadValidationError{
-					field:  "Workspace",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, LeadValidationError{
-					field:  "Workspace",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetWorkspace()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return LeadValidationError{
-				field:  "Workspace",
 				reason: "embedded message failed validation",
 				cause:  err,
 			}
@@ -4862,64 +4724,6 @@ func (m *APIKey) validate(all bool) error {
 	// no validation rules for DocumentationUrl
 
 	// no validation rules for SupportContact
-
-	if all {
-		switch v := interface{}(m.GetAccount()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, APIKeyValidationError{
-					field:  "Account",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, APIKeyValidationError{
-					field:  "Account",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetAccount()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return APIKeyValidationError{
-				field:  "Account",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
-	if all {
-		switch v := interface{}(m.GetWorkspace()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, APIKeyValidationError{
-					field:  "Workspace",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, APIKeyValidationError{
-					field:  "Workspace",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetWorkspace()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return APIKeyValidationError{
-				field:  "Workspace",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
 	// no validation rules for LogAllRequests
 

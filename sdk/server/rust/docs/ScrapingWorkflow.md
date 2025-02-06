@@ -16,7 +16,6 @@ Name | Type | Description | Notes
 **updated_at** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]
 **deleted_at** | [**chrono::DateTime::<chrono::Utc>**](DateTime.md) |  | [optional] [default to None]
 **jobs** | [**Vec<models::ScrapingJob>**](ScrapingJob.md) |  | [optional] [default to None]
-**workspace** | [***models::Workspace**](Workspace.md) |  | [optional] [default to None]
 **geo_fencing_radius** | **f32** |  | [optional] [default to None]
 **geo_fencing_lat** | **f64** |  | [optional] [default to None]
 **geo_fencing_lon** | **f64** |  | [optional] [default to None]

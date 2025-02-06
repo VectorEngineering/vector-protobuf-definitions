@@ -60,8 +60,6 @@ type ApiKey {
   supportedFeatures: [String!!]
   documentationUrl: String!
   supportContact: String!
-  account: Account
-  workspace: Workspace
   logAllRequests: Boolean!
   lastRotationReason: String!
   lastRotationDate: String!
@@ -132,8 +130,6 @@ input ApiKeyInput {
     supportedFeatures: [String!]
     documentationUrl: String!
     supportContact: String!
-    account: AccountInput
-    workspace: WorkspaceInput
     logAllRequests: Boolean!
     lastRotationReason: String!
     lastRotationDate: String!

@@ -78,42 +78,6 @@ func newScrapingWorkflowORM(db *gorm.DB, opts ...gen.DOOption) scrapingWorkflowO
 		RelationField: field.NewRelation("Jobs", "lead_scraper_servicev1.ScrapingJobORM"),
 		Leads: struct {
 			field.RelationField
-			Job struct {
-				field.RelationField
-			}
-			Workspace struct {
-				field.RelationField
-				ApiKeys struct {
-					field.RelationField
-					Account struct {
-						field.RelationField
-						Settings struct {
-							field.RelationField
-						}
-						Workspaces struct {
-							field.RelationField
-						}
-					}
-					Workspace struct {
-						field.RelationField
-					}
-				}
-				ScrapingJobs struct {
-					field.RelationField
-				}
-				Webhooks struct {
-					field.RelationField
-				}
-				Workflows struct {
-					field.RelationField
-					Workspace struct {
-						field.RelationField
-					}
-					Jobs struct {
-						field.RelationField
-					}
-				}
-			}
 			RegularHours struct {
 				field.RelationField
 			}
@@ -125,120 +89,6 @@ func newScrapingWorkflowORM(db *gorm.DB, opts ...gen.DOOption) scrapingWorkflowO
 			}
 		}{
 			RelationField: field.NewRelation("Jobs.Leads", "lead_scraper_servicev1.LeadORM"),
-			Job: struct {
-				field.RelationField
-			}{
-				RelationField: field.NewRelation("Jobs.Leads.Job", "lead_scraper_servicev1.ScrapingJobORM"),
-			},
-			Workspace: struct {
-				field.RelationField
-				ApiKeys struct {
-					field.RelationField
-					Account struct {
-						field.RelationField
-						Settings struct {
-							field.RelationField
-						}
-						Workspaces struct {
-							field.RelationField
-						}
-					}
-					Workspace struct {
-						field.RelationField
-					}
-				}
-				ScrapingJobs struct {
-					field.RelationField
-				}
-				Webhooks struct {
-					field.RelationField
-				}
-				Workflows struct {
-					field.RelationField
-					Workspace struct {
-						field.RelationField
-					}
-					Jobs struct {
-						field.RelationField
-					}
-				}
-			}{
-				RelationField: field.NewRelation("Jobs.Leads.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-				ApiKeys: struct {
-					field.RelationField
-					Account struct {
-						field.RelationField
-						Settings struct {
-							field.RelationField
-						}
-						Workspaces struct {
-							field.RelationField
-						}
-					}
-					Workspace struct {
-						field.RelationField
-					}
-				}{
-					RelationField: field.NewRelation("Jobs.Leads.Workspace.ApiKeys", "lead_scraper_servicev1.APIKeyORM"),
-					Account: struct {
-						field.RelationField
-						Settings struct {
-							field.RelationField
-						}
-						Workspaces struct {
-							field.RelationField
-						}
-					}{
-						RelationField: field.NewRelation("Jobs.Leads.Workspace.ApiKeys.Account", "lead_scraper_servicev1.AccountORM"),
-						Settings: struct {
-							field.RelationField
-						}{
-							RelationField: field.NewRelation("Jobs.Leads.Workspace.ApiKeys.Account.Settings", "lead_scraper_servicev1.AccountSettingsORM"),
-						},
-						Workspaces: struct {
-							field.RelationField
-						}{
-							RelationField: field.NewRelation("Jobs.Leads.Workspace.ApiKeys.Account.Workspaces", "lead_scraper_servicev1.WorkspaceORM"),
-						},
-					},
-					Workspace: struct {
-						field.RelationField
-					}{
-						RelationField: field.NewRelation("Jobs.Leads.Workspace.ApiKeys.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-					},
-				},
-				ScrapingJobs: struct {
-					field.RelationField
-				}{
-					RelationField: field.NewRelation("Jobs.Leads.Workspace.ScrapingJobs", "lead_scraper_servicev1.ScrapingJobORM"),
-				},
-				Webhooks: struct {
-					field.RelationField
-				}{
-					RelationField: field.NewRelation("Jobs.Leads.Workspace.Webhooks", "lead_scraper_servicev1.WebhookConfigORM"),
-				},
-				Workflows: struct {
-					field.RelationField
-					Workspace struct {
-						field.RelationField
-					}
-					Jobs struct {
-						field.RelationField
-					}
-				}{
-					RelationField: field.NewRelation("Jobs.Leads.Workspace.Workflows", "lead_scraper_servicev1.ScrapingWorkflowORM"),
-					Workspace: struct {
-						field.RelationField
-					}{
-						RelationField: field.NewRelation("Jobs.Leads.Workspace.Workflows.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-					},
-					Jobs: struct {
-						field.RelationField
-					}{
-						RelationField: field.NewRelation("Jobs.Leads.Workspace.Workflows.Jobs", "lead_scraper_servicev1.ScrapingJobORM"),
-					},
-				},
-			},
 			RegularHours: struct {
 				field.RelationField
 			}{
@@ -255,12 +105,6 @@ func newScrapingWorkflowORM(db *gorm.DB, opts ...gen.DOOption) scrapingWorkflowO
 				RelationField: field.NewRelation("Jobs.Leads.SpecialHours", "lead_scraper_servicev1.BusinessHoursORM"),
 			},
 		},
-	}
-
-	_scrapingWorkflowORM.Workspace = scrapingWorkflowORMBelongsToWorkspace{
-		db: db.Session(&gorm.Session{}),
-
-		RelationField: field.NewRelation("Workspace", "lead_scraper_servicev1.WorkspaceORM"),
 	}
 
 	_scrapingWorkflowORM.fillFieldMap()
@@ -315,8 +159,6 @@ type scrapingWorkflowORM struct {
 	UserAgent                     field.String
 	WorkspaceId                   field.Uint64
 	Jobs                          scrapingWorkflowORMHasManyJobs
-
-	Workspace scrapingWorkflowORMBelongsToWorkspace
 
 	fieldMap map[string]field.Expr
 }
@@ -391,7 +233,7 @@ func (s *scrapingWorkflowORM) GetFieldByName(fieldName string) (field.OrderExpr,
 }
 
 func (s *scrapingWorkflowORM) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 44)
+	s.fieldMap = make(map[string]field.Expr, 43)
 	s.fieldMap["accept_terms_of_service"] = s.AcceptTermsOfService
 	s.fieldMap["alert_emails"] = s.AlertEmails
 	s.fieldMap["anonymize_pii"] = s.AnonymizePii
@@ -454,42 +296,6 @@ type scrapingWorkflowORMHasManyJobs struct {
 
 	Leads struct {
 		field.RelationField
-		Job struct {
-			field.RelationField
-		}
-		Workspace struct {
-			field.RelationField
-			ApiKeys struct {
-				field.RelationField
-				Account struct {
-					field.RelationField
-					Settings struct {
-						field.RelationField
-					}
-					Workspaces struct {
-						field.RelationField
-					}
-				}
-				Workspace struct {
-					field.RelationField
-				}
-			}
-			ScrapingJobs struct {
-				field.RelationField
-			}
-			Webhooks struct {
-				field.RelationField
-			}
-			Workflows struct {
-				field.RelationField
-				Workspace struct {
-					field.RelationField
-				}
-				Jobs struct {
-					field.RelationField
-				}
-			}
-		}
 		RegularHours struct {
 			field.RelationField
 		}
@@ -564,77 +370,6 @@ func (a scrapingWorkflowORMHasManyJobsTx) Clear() error {
 }
 
 func (a scrapingWorkflowORMHasManyJobsTx) Count() int64 {
-	return a.tx.Count()
-}
-
-type scrapingWorkflowORMBelongsToWorkspace struct {
-	db *gorm.DB
-
-	field.RelationField
-}
-
-func (a scrapingWorkflowORMBelongsToWorkspace) Where(conds ...field.Expr) *scrapingWorkflowORMBelongsToWorkspace {
-	if len(conds) == 0 {
-		return &a
-	}
-
-	exprs := make([]clause.Expression, 0, len(conds))
-	for _, cond := range conds {
-		exprs = append(exprs, cond.BeCond().(clause.Expression))
-	}
-	a.db = a.db.Clauses(clause.Where{Exprs: exprs})
-	return &a
-}
-
-func (a scrapingWorkflowORMBelongsToWorkspace) WithContext(ctx context.Context) *scrapingWorkflowORMBelongsToWorkspace {
-	a.db = a.db.WithContext(ctx)
-	return &a
-}
-
-func (a scrapingWorkflowORMBelongsToWorkspace) Session(session *gorm.Session) *scrapingWorkflowORMBelongsToWorkspace {
-	a.db = a.db.Session(session)
-	return &a
-}
-
-func (a scrapingWorkflowORMBelongsToWorkspace) Model(m *lead_scraper_servicev1.ScrapingWorkflowORM) *scrapingWorkflowORMBelongsToWorkspaceTx {
-	return &scrapingWorkflowORMBelongsToWorkspaceTx{a.db.Model(m).Association(a.Name())}
-}
-
-type scrapingWorkflowORMBelongsToWorkspaceTx struct{ tx *gorm.Association }
-
-func (a scrapingWorkflowORMBelongsToWorkspaceTx) Find() (result *lead_scraper_servicev1.WorkspaceORM, err error) {
-	return result, a.tx.Find(&result)
-}
-
-func (a scrapingWorkflowORMBelongsToWorkspaceTx) Append(values ...*lead_scraper_servicev1.WorkspaceORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Append(targetValues...)
-}
-
-func (a scrapingWorkflowORMBelongsToWorkspaceTx) Replace(values ...*lead_scraper_servicev1.WorkspaceORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Replace(targetValues...)
-}
-
-func (a scrapingWorkflowORMBelongsToWorkspaceTx) Delete(values ...*lead_scraper_servicev1.WorkspaceORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Delete(targetValues...)
-}
-
-func (a scrapingWorkflowORMBelongsToWorkspaceTx) Clear() error {
-	return a.tx.Clear()
-}
-
-func (a scrapingWorkflowORMBelongsToWorkspaceTx) Count() int64 {
 	return a.tx.Count()
 }
 

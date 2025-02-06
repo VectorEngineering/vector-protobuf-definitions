@@ -23,6 +23,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictBytes, Stri
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from playbookmedia_backend_client_sdk.models.background_job_status import BackgroundJobStatus
 from playbookmedia_backend_client_sdk.models.language import Language
+from playbookmedia_backend_client_sdk.models.lead import Lead
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -135,7 +136,4 @@ class ScrapingJob(BaseModel):
         })
         return _obj
 
-from playbookmedia_backend_client_sdk.models.lead import Lead
-# TODO: Rewrite to not use raise_errors
-ScrapingJob.model_rebuild(raise_errors=False)
 

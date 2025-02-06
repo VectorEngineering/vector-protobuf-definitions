@@ -73,7 +73,6 @@ func newLeadORM(db *gorm.DB, opts ...gen.DOOption) leadORM {
 	_leadORM.Name = field.NewString(tableName, "name")
 	_leadORM.NearbyLandmarks = field.NewField(tableName, "nearby_landmarks")
 	_leadORM.Neighborhood = field.NewString(tableName, "neighborhood")
-	_leadORM.OrgId = field.NewString(tableName, "org_id")
 	_leadORM.OutdoorSeating = field.NewBool(tableName, "outdoor_seating")
 	_leadORM.ParentCompany = field.NewString(tableName, "parent_company")
 	_leadORM.ParkingAvailable = field.NewBool(tableName, "parking_available")
@@ -94,7 +93,6 @@ func newLeadORM(db *gorm.DB, opts ...gen.DOOption) leadORM {
 	_leadORM.State = field.NewString(tableName, "state")
 	_leadORM.Subsidiaries = field.NewField(tableName, "subsidiaries")
 	_leadORM.SustainabilityRating = field.NewString(tableName, "sustainability_rating")
-	_leadORM.TenantId = field.NewString(tableName, "tenant_id")
 	_leadORM.Timezone = field.NewString(tableName, "timezone")
 	_leadORM.TransportationAccess = field.NewString(tableName, "transportation_access")
 	_leadORM.Types = field.NewField(tableName, "types")
@@ -104,7 +102,6 @@ func newLeadORM(db *gorm.DB, opts ...gen.DOOption) leadORM {
 	_leadORM.Website = field.NewString(tableName, "website")
 	_leadORM.WebsiteLoadSpeed = field.NewFloat32(tableName, "website_load_speed")
 	_leadORM.WheelchairAccessible = field.NewBool(tableName, "wheelchair_accessible")
-	_leadORM.WorkspaceId = field.NewUint64(tableName, "workspace_id")
 	_leadORM.RegularHours = leadORMHasManyRegularHours{
 		db: db.Session(&gorm.Session{}),
 
@@ -121,197 +118,6 @@ func newLeadORM(db *gorm.DB, opts ...gen.DOOption) leadORM {
 		db: db.Session(&gorm.Session{}),
 
 		RelationField: field.NewRelation("SpecialHours", "lead_scraper_servicev1.BusinessHoursORM"),
-	}
-
-	_leadORM.Job = leadORMBelongsToJob{
-		db: db.Session(&gorm.Session{}),
-
-		RelationField: field.NewRelation("Job", "lead_scraper_servicev1.ScrapingJobORM"),
-		Leads: struct {
-			field.RelationField
-			Job struct {
-				field.RelationField
-			}
-			Workspace struct {
-				field.RelationField
-				ApiKeys struct {
-					field.RelationField
-					Account struct {
-						field.RelationField
-						Settings struct {
-							field.RelationField
-						}
-						Workspaces struct {
-							field.RelationField
-						}
-					}
-					Workspace struct {
-						field.RelationField
-					}
-				}
-				ScrapingJobs struct {
-					field.RelationField
-				}
-				Webhooks struct {
-					field.RelationField
-				}
-				Workflows struct {
-					field.RelationField
-					Workspace struct {
-						field.RelationField
-					}
-					Jobs struct {
-						field.RelationField
-					}
-				}
-			}
-			RegularHours struct {
-				field.RelationField
-			}
-			Reviews struct {
-				field.RelationField
-			}
-			SpecialHours struct {
-				field.RelationField
-			}
-		}{
-			RelationField: field.NewRelation("Job.Leads", "lead_scraper_servicev1.LeadORM"),
-			Job: struct {
-				field.RelationField
-			}{
-				RelationField: field.NewRelation("Job.Leads.Job", "lead_scraper_servicev1.ScrapingJobORM"),
-			},
-			Workspace: struct {
-				field.RelationField
-				ApiKeys struct {
-					field.RelationField
-					Account struct {
-						field.RelationField
-						Settings struct {
-							field.RelationField
-						}
-						Workspaces struct {
-							field.RelationField
-						}
-					}
-					Workspace struct {
-						field.RelationField
-					}
-				}
-				ScrapingJobs struct {
-					field.RelationField
-				}
-				Webhooks struct {
-					field.RelationField
-				}
-				Workflows struct {
-					field.RelationField
-					Workspace struct {
-						field.RelationField
-					}
-					Jobs struct {
-						field.RelationField
-					}
-				}
-			}{
-				RelationField: field.NewRelation("Job.Leads.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-				ApiKeys: struct {
-					field.RelationField
-					Account struct {
-						field.RelationField
-						Settings struct {
-							field.RelationField
-						}
-						Workspaces struct {
-							field.RelationField
-						}
-					}
-					Workspace struct {
-						field.RelationField
-					}
-				}{
-					RelationField: field.NewRelation("Job.Leads.Workspace.ApiKeys", "lead_scraper_servicev1.APIKeyORM"),
-					Account: struct {
-						field.RelationField
-						Settings struct {
-							field.RelationField
-						}
-						Workspaces struct {
-							field.RelationField
-						}
-					}{
-						RelationField: field.NewRelation("Job.Leads.Workspace.ApiKeys.Account", "lead_scraper_servicev1.AccountORM"),
-						Settings: struct {
-							field.RelationField
-						}{
-							RelationField: field.NewRelation("Job.Leads.Workspace.ApiKeys.Account.Settings", "lead_scraper_servicev1.AccountSettingsORM"),
-						},
-						Workspaces: struct {
-							field.RelationField
-						}{
-							RelationField: field.NewRelation("Job.Leads.Workspace.ApiKeys.Account.Workspaces", "lead_scraper_servicev1.WorkspaceORM"),
-						},
-					},
-					Workspace: struct {
-						field.RelationField
-					}{
-						RelationField: field.NewRelation("Job.Leads.Workspace.ApiKeys.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-					},
-				},
-				ScrapingJobs: struct {
-					field.RelationField
-				}{
-					RelationField: field.NewRelation("Job.Leads.Workspace.ScrapingJobs", "lead_scraper_servicev1.ScrapingJobORM"),
-				},
-				Webhooks: struct {
-					field.RelationField
-				}{
-					RelationField: field.NewRelation("Job.Leads.Workspace.Webhooks", "lead_scraper_servicev1.WebhookConfigORM"),
-				},
-				Workflows: struct {
-					field.RelationField
-					Workspace struct {
-						field.RelationField
-					}
-					Jobs struct {
-						field.RelationField
-					}
-				}{
-					RelationField: field.NewRelation("Job.Leads.Workspace.Workflows", "lead_scraper_servicev1.ScrapingWorkflowORM"),
-					Workspace: struct {
-						field.RelationField
-					}{
-						RelationField: field.NewRelation("Job.Leads.Workspace.Workflows.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-					},
-					Jobs: struct {
-						field.RelationField
-					}{
-						RelationField: field.NewRelation("Job.Leads.Workspace.Workflows.Jobs", "lead_scraper_servicev1.ScrapingJobORM"),
-					},
-				},
-			},
-			RegularHours: struct {
-				field.RelationField
-			}{
-				RelationField: field.NewRelation("Job.Leads.RegularHours", "lead_scraper_servicev1.BusinessHoursORM"),
-			},
-			Reviews: struct {
-				field.RelationField
-			}{
-				RelationField: field.NewRelation("Job.Leads.Reviews", "lead_scraper_servicev1.ReviewORM"),
-			},
-			SpecialHours: struct {
-				field.RelationField
-			}{
-				RelationField: field.NewRelation("Job.Leads.SpecialHours", "lead_scraper_servicev1.BusinessHoursORM"),
-			},
-		},
-	}
-
-	_leadORM.Workspace = leadORMBelongsToWorkspace{
-		db: db.Session(&gorm.Session{}),
-
-		RelationField: field.NewRelation("Workspace", "lead_scraper_servicev1.WorkspaceORM"),
 	}
 
 	_leadORM.fillFieldMap()
@@ -366,7 +172,6 @@ type leadORM struct {
 	Name                     field.String
 	NearbyLandmarks          field.Field
 	Neighborhood             field.String
-	OrgId                    field.String
 	OutdoorSeating           field.Bool
 	ParentCompany            field.String
 	ParkingAvailable         field.Bool
@@ -387,7 +192,6 @@ type leadORM struct {
 	State                    field.String
 	Subsidiaries             field.Field
 	SustainabilityRating     field.String
-	TenantId                 field.String
 	Timezone                 field.String
 	TransportationAccess     field.String
 	Types                    field.Field
@@ -397,16 +201,11 @@ type leadORM struct {
 	Website                  field.String
 	WebsiteLoadSpeed         field.Float32
 	WheelchairAccessible     field.Bool
-	WorkspaceId              field.Uint64
 	RegularHours             leadORMHasManyRegularHours
 
 	Reviews leadORMHasManyReviews
 
 	SpecialHours leadORMHasManySpecialHours
-
-	Job leadORMBelongsToJob
-
-	Workspace leadORMBelongsToWorkspace
 
 	fieldMap map[string]field.Expr
 }
@@ -466,7 +265,6 @@ func (l *leadORM) updateTableName(table string) *leadORM {
 	l.Name = field.NewString(table, "name")
 	l.NearbyLandmarks = field.NewField(table, "nearby_landmarks")
 	l.Neighborhood = field.NewString(table, "neighborhood")
-	l.OrgId = field.NewString(table, "org_id")
 	l.OutdoorSeating = field.NewBool(table, "outdoor_seating")
 	l.ParentCompany = field.NewString(table, "parent_company")
 	l.ParkingAvailable = field.NewBool(table, "parking_available")
@@ -487,7 +285,6 @@ func (l *leadORM) updateTableName(table string) *leadORM {
 	l.State = field.NewString(table, "state")
 	l.Subsidiaries = field.NewField(table, "subsidiaries")
 	l.SustainabilityRating = field.NewString(table, "sustainability_rating")
-	l.TenantId = field.NewString(table, "tenant_id")
 	l.Timezone = field.NewString(table, "timezone")
 	l.TransportationAccess = field.NewString(table, "transportation_access")
 	l.Types = field.NewField(table, "types")
@@ -497,7 +294,6 @@ func (l *leadORM) updateTableName(table string) *leadORM {
 	l.Website = field.NewString(table, "website")
 	l.WebsiteLoadSpeed = field.NewFloat32(table, "website_load_speed")
 	l.WheelchairAccessible = field.NewBool(table, "wheelchair_accessible")
-	l.WorkspaceId = field.NewUint64(table, "workspace_id")
 
 	l.fillFieldMap()
 
@@ -514,7 +310,7 @@ func (l *leadORM) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (l *leadORM) fillFieldMap() {
-	l.fieldMap = make(map[string]field.Expr, 80)
+	l.fieldMap = make(map[string]field.Expr, 75)
 	l.fieldMap["address"] = l.Address
 	l.fieldMap["alternate_phones"] = l.AlternatePhones
 	l.fieldMap["amenities"] = l.Amenities
@@ -558,7 +354,6 @@ func (l *leadORM) fillFieldMap() {
 	l.fieldMap["name"] = l.Name
 	l.fieldMap["nearby_landmarks"] = l.NearbyLandmarks
 	l.fieldMap["neighborhood"] = l.Neighborhood
-	l.fieldMap["org_id"] = l.OrgId
 	l.fieldMap["outdoor_seating"] = l.OutdoorSeating
 	l.fieldMap["parent_company"] = l.ParentCompany
 	l.fieldMap["parking_available"] = l.ParkingAvailable
@@ -579,7 +374,6 @@ func (l *leadORM) fillFieldMap() {
 	l.fieldMap["state"] = l.State
 	l.fieldMap["subsidiaries"] = l.Subsidiaries
 	l.fieldMap["sustainability_rating"] = l.SustainabilityRating
-	l.fieldMap["tenant_id"] = l.TenantId
 	l.fieldMap["timezone"] = l.Timezone
 	l.fieldMap["transportation_access"] = l.TransportationAccess
 	l.fieldMap["types"] = l.Types
@@ -589,7 +383,6 @@ func (l *leadORM) fillFieldMap() {
 	l.fieldMap["website"] = l.Website
 	l.fieldMap["website_load_speed"] = l.WebsiteLoadSpeed
 	l.fieldMap["wheelchair_accessible"] = l.WheelchairAccessible
-	l.fieldMap["workspace_id"] = l.WorkspaceId
 
 }
 
@@ -813,197 +606,6 @@ func (a leadORMHasManySpecialHoursTx) Clear() error {
 }
 
 func (a leadORMHasManySpecialHoursTx) Count() int64 {
-	return a.tx.Count()
-}
-
-type leadORMBelongsToJob struct {
-	db *gorm.DB
-
-	field.RelationField
-
-	Leads struct {
-		field.RelationField
-		Job struct {
-			field.RelationField
-		}
-		Workspace struct {
-			field.RelationField
-			ApiKeys struct {
-				field.RelationField
-				Account struct {
-					field.RelationField
-					Settings struct {
-						field.RelationField
-					}
-					Workspaces struct {
-						field.RelationField
-					}
-				}
-				Workspace struct {
-					field.RelationField
-				}
-			}
-			ScrapingJobs struct {
-				field.RelationField
-			}
-			Webhooks struct {
-				field.RelationField
-			}
-			Workflows struct {
-				field.RelationField
-				Workspace struct {
-					field.RelationField
-				}
-				Jobs struct {
-					field.RelationField
-				}
-			}
-		}
-		RegularHours struct {
-			field.RelationField
-		}
-		Reviews struct {
-			field.RelationField
-		}
-		SpecialHours struct {
-			field.RelationField
-		}
-	}
-}
-
-func (a leadORMBelongsToJob) Where(conds ...field.Expr) *leadORMBelongsToJob {
-	if len(conds) == 0 {
-		return &a
-	}
-
-	exprs := make([]clause.Expression, 0, len(conds))
-	for _, cond := range conds {
-		exprs = append(exprs, cond.BeCond().(clause.Expression))
-	}
-	a.db = a.db.Clauses(clause.Where{Exprs: exprs})
-	return &a
-}
-
-func (a leadORMBelongsToJob) WithContext(ctx context.Context) *leadORMBelongsToJob {
-	a.db = a.db.WithContext(ctx)
-	return &a
-}
-
-func (a leadORMBelongsToJob) Session(session *gorm.Session) *leadORMBelongsToJob {
-	a.db = a.db.Session(session)
-	return &a
-}
-
-func (a leadORMBelongsToJob) Model(m *lead_scraper_servicev1.LeadORM) *leadORMBelongsToJobTx {
-	return &leadORMBelongsToJobTx{a.db.Model(m).Association(a.Name())}
-}
-
-type leadORMBelongsToJobTx struct{ tx *gorm.Association }
-
-func (a leadORMBelongsToJobTx) Find() (result *lead_scraper_servicev1.ScrapingJobORM, err error) {
-	return result, a.tx.Find(&result)
-}
-
-func (a leadORMBelongsToJobTx) Append(values ...*lead_scraper_servicev1.ScrapingJobORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Append(targetValues...)
-}
-
-func (a leadORMBelongsToJobTx) Replace(values ...*lead_scraper_servicev1.ScrapingJobORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Replace(targetValues...)
-}
-
-func (a leadORMBelongsToJobTx) Delete(values ...*lead_scraper_servicev1.ScrapingJobORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Delete(targetValues...)
-}
-
-func (a leadORMBelongsToJobTx) Clear() error {
-	return a.tx.Clear()
-}
-
-func (a leadORMBelongsToJobTx) Count() int64 {
-	return a.tx.Count()
-}
-
-type leadORMBelongsToWorkspace struct {
-	db *gorm.DB
-
-	field.RelationField
-}
-
-func (a leadORMBelongsToWorkspace) Where(conds ...field.Expr) *leadORMBelongsToWorkspace {
-	if len(conds) == 0 {
-		return &a
-	}
-
-	exprs := make([]clause.Expression, 0, len(conds))
-	for _, cond := range conds {
-		exprs = append(exprs, cond.BeCond().(clause.Expression))
-	}
-	a.db = a.db.Clauses(clause.Where{Exprs: exprs})
-	return &a
-}
-
-func (a leadORMBelongsToWorkspace) WithContext(ctx context.Context) *leadORMBelongsToWorkspace {
-	a.db = a.db.WithContext(ctx)
-	return &a
-}
-
-func (a leadORMBelongsToWorkspace) Session(session *gorm.Session) *leadORMBelongsToWorkspace {
-	a.db = a.db.Session(session)
-	return &a
-}
-
-func (a leadORMBelongsToWorkspace) Model(m *lead_scraper_servicev1.LeadORM) *leadORMBelongsToWorkspaceTx {
-	return &leadORMBelongsToWorkspaceTx{a.db.Model(m).Association(a.Name())}
-}
-
-type leadORMBelongsToWorkspaceTx struct{ tx *gorm.Association }
-
-func (a leadORMBelongsToWorkspaceTx) Find() (result *lead_scraper_servicev1.WorkspaceORM, err error) {
-	return result, a.tx.Find(&result)
-}
-
-func (a leadORMBelongsToWorkspaceTx) Append(values ...*lead_scraper_servicev1.WorkspaceORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Append(targetValues...)
-}
-
-func (a leadORMBelongsToWorkspaceTx) Replace(values ...*lead_scraper_servicev1.WorkspaceORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Replace(targetValues...)
-}
-
-func (a leadORMBelongsToWorkspaceTx) Delete(values ...*lead_scraper_servicev1.WorkspaceORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Delete(targetValues...)
-}
-
-func (a leadORMBelongsToWorkspaceTx) Clear() error {
-	return a.tx.Clear()
-}
-
-func (a leadORMBelongsToWorkspaceTx) Count() int64 {
 	return a.tx.Count()
 }
 

@@ -18,7 +18,6 @@ Name | Type | Description | Notes
 **updated_at** | **datetime** |  | [optional] 
 **deleted_at** | **datetime** |  | [optional] 
 **jobs** | [**List[ScrapingJob]**](ScrapingJob.md) |  | [optional] 
-**workspace** | [**Workspace**](Workspace.md) |  | [optional] 
 **geo_fencing_radius** | **float** |  | [optional] 
 **geo_fencing_lat** | **float** |  | [optional] 
 **geo_fencing_lon** | **float** |  | [optional] 

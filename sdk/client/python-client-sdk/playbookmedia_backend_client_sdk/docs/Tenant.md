@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **name** | **str** |  | [optional] 
 **display_name** | **str** |  | [optional] 
 **description** | **str** |  | [optional] 
-**organization** | [**Organization**](Organization.md) |  | [optional] 
 **api_base_url** | **str** |  | [optional] 
 **environment_variables** | **Dict[str, str]** |  | [optional] 
 **allowed_origins** | **List[str]** |  | [optional] 

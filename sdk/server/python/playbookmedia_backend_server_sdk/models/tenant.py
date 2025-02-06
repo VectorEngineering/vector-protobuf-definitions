@@ -4,13 +4,11 @@ from typing import List, Dict  # noqa: F401
 
 from playbookmedia_backend_server_sdk.models.base_model import Model
 from playbookmedia_backend_server_sdk.models.account import Account
-from playbookmedia_backend_server_sdk.models.organization import Organization
 from playbookmedia_backend_server_sdk.models.tenant_api_key import TenantAPIKey
 from playbookmedia_backend_server_sdk.models.v1_status import V1Status
 from playbookmedia_backend_server_sdk import util
 
 from playbookmedia_backend_server_sdk.models.account import Account  # noqa: E501
-from playbookmedia_backend_server_sdk.models.organization import Organization  # noqa: E501
 from playbookmedia_backend_server_sdk.models.tenant_api_key import TenantAPIKey  # noqa: E501
 from playbookmedia_backend_server_sdk.models.v1_status import V1Status  # noqa: E501
 
@@ -20,7 +18,7 @@ class Tenant(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, name=None, display_name=None, description=None, organization=None, api_base_url=None, environment_variables=None, allowed_origins=None, storage_quota=None, monthly_request_limit=None, max_concurrent_jobs=None, enable_caching=None, enable_rate_limiting=None, enable_request_logging=None, accounts=None, api_keys=None, total_requests=None, total_storage_used=None, average_response_time=None, created_at=None, updated_at=None, deleted_at=None, status=V1Status.UNSPECIFIED):  # noqa: E501
+    def __init__(self, id=None, name=None, display_name=None, description=None, api_base_url=None, environment_variables=None, allowed_origins=None, storage_quota=None, monthly_request_limit=None, max_concurrent_jobs=None, enable_caching=None, enable_rate_limiting=None, enable_request_logging=None, accounts=None, api_keys=None, total_requests=None, total_storage_used=None, average_response_time=None, created_at=None, updated_at=None, deleted_at=None, status=V1Status.UNSPECIFIED):  # noqa: E501
         """Tenant - a model defined in OpenAPI
 
         :param id: The id of this Tenant.  # noqa: E501
@@ -31,8 +29,6 @@ class Tenant(Model):
         :type display_name: str
         :param description: The description of this Tenant.  # noqa: E501
         :type description: str
-        :param organization: The organization of this Tenant.  # noqa: E501
-        :type organization: Organization
         :param api_base_url: The api_base_url of this Tenant.  # noqa: E501
         :type api_base_url: str
         :param environment_variables: The environment_variables of this Tenant.  # noqa: E501
@@ -75,7 +71,6 @@ class Tenant(Model):
             'name': str,
             'display_name': str,
             'description': str,
-            'organization': Organization,
             'api_base_url': str,
             'environment_variables': Dict[str, str],
             'allowed_origins': List[str],
@@ -101,7 +96,6 @@ class Tenant(Model):
             'name': 'name',
             'display_name': 'displayName',
             'description': 'description',
-            'organization': 'organization',
             'api_base_url': 'apiBaseUrl',
             'environment_variables': 'environmentVariables',
             'allowed_origins': 'allowedOrigins',
@@ -126,7 +120,6 @@ class Tenant(Model):
         self._name = name
         self._display_name = display_name
         self._description = description
-        self._organization = organization
         self._api_base_url = api_base_url
         self._environment_variables = environment_variables
         self._allowed_origins = allowed_origins
@@ -240,27 +233,6 @@ class Tenant(Model):
         """
 
         self._description = description
-
-    @property
-    def organization(self) -> Organization:
-        """Gets the organization of this Tenant.
-
-
-        :return: The organization of this Tenant.
-        :rtype: Organization
-        """
-        return self._organization
-
-    @organization.setter
-    def organization(self, organization: Organization):
-        """Sets the organization of this Tenant.
-
-
-        :param organization: The organization of this Tenant.
-        :type organization: Organization
-        """
-
-        self._organization = organization
 
     @property
     def api_base_url(self) -> str:

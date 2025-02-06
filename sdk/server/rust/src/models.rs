@@ -1910,14 +1910,6 @@ pub struct ApiKey {
     #[serde(skip_serializing_if="Option::is_none")]
     pub support_contact: Option<String>,
 
-    #[serde(rename = "account")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub account: Option<models::Account>,
-
-    #[serde(rename = "workspace")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub workspace: Option<models::Workspace>,
-
     #[serde(rename = "logAllRequests")]
     #[serde(skip_serializing_if="Option::is_none")]
     pub log_all_requests: Option<bool>,
@@ -2041,8 +2033,6 @@ impl ApiKey {
             supported_features: None,
             documentation_url: None,
             support_contact: None,
-            account: None,
-            workspace: None,
             log_all_requests: None,
             last_rotation_reason: None,
             last_rotation_date: None,
@@ -2386,10 +2376,6 @@ impl std::string::ToString for ApiKey {
                 ].join(",")
             }),
 
-            // Skipping account in query parameter serialization
-
-            // Skipping workspace in query parameter serialization
-
 
             self.log_all_requests.as_ref().map(|log_all_requests| {
                 [
@@ -2585,8 +2571,6 @@ impl std::str::FromStr for ApiKey {
             pub supported_features: Vec<Vec<String>>,
             pub documentation_url: Vec<String>,
             pub support_contact: Vec<String>,
-            pub account: Vec<models::Account>,
-            pub workspace: Vec<models::Workspace>,
             pub log_all_requests: Vec<bool>,
             pub last_rotation_reason: Vec<String>,
             pub last_rotation_date: Vec<chrono::DateTime::<chrono::Utc>>,
@@ -2707,10 +2691,6 @@ impl std::str::FromStr for ApiKey {
                     #[allow(clippy::redundant_clone)]
                     "supportContact" => intermediate_rep.support_contact.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
-                    "account" => intermediate_rep.account.push(<models::Account as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "workspace" => intermediate_rep.workspace.push(<models::Workspace as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
                     "logAllRequests" => intermediate_rep.log_all_requests.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "lastRotationReason" => intermediate_rep.last_rotation_reason.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
@@ -2798,8 +2778,6 @@ impl std::str::FromStr for ApiKey {
             supported_features: intermediate_rep.supported_features.into_iter().next(),
             documentation_url: intermediate_rep.documentation_url.into_iter().next(),
             support_contact: intermediate_rep.support_contact.into_iter().next(),
-            account: intermediate_rep.account.into_iter().next(),
-            workspace: intermediate_rep.workspace.into_iter().next(),
             log_all_requests: intermediate_rep.log_all_requests.into_iter().next(),
             last_rotation_reason: intermediate_rep.last_rotation_reason.into_iter().next(),
             last_rotation_date: intermediate_rep.last_rotation_date.into_iter().next(),
@@ -21016,14 +20994,6 @@ pub struct Lead {
     #[serde(skip_serializing_if="Option::is_none")]
     pub estimated_revenue: Option<String>,
 
-    #[serde(rename = "orgId")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub org_id: Option<String>,
-
-    #[serde(rename = "tenantId")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub tenant_id: Option<String>,
-
     #[serde(rename = "createdAt")]
     #[serde(skip_serializing_if="Option::is_none")]
     pub created_at: Option<chrono::DateTime::<chrono::Utc>>,
@@ -21035,14 +21005,6 @@ pub struct Lead {
     #[serde(rename = "deletedAt")]
     #[serde(skip_serializing_if="Option::is_none")]
     pub deleted_at: Option<chrono::DateTime::<chrono::Utc>>,
-
-    #[serde(rename = "job")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub job: Option<models::ScrapingJob>,
-
-    #[serde(rename = "workspace")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub workspace: Option<models::Workspace>,
 
     #[serde(rename = "placeId")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -21303,13 +21265,9 @@ impl Lead {
             industry: None,
             employee_count: None,
             estimated_revenue: None,
-            org_id: None,
-            tenant_id: None,
             created_at: None,
             updated_at: None,
             deleted_at: None,
-            job: None,
-            workspace: None,
             place_id: None,
             google_maps_url: None,
             business_status: None,
@@ -21498,31 +21456,11 @@ impl std::string::ToString for Lead {
                 ].join(",")
             }),
 
-
-            self.org_id.as_ref().map(|org_id| {
-                [
-                    "orgId".to_string(),
-                    org_id.to_string(),
-                ].join(",")
-            }),
-
-
-            self.tenant_id.as_ref().map(|tenant_id| {
-                [
-                    "tenantId".to_string(),
-                    tenant_id.to_string(),
-                ].join(",")
-            }),
-
             // Skipping createdAt in query parameter serialization
 
             // Skipping updatedAt in query parameter serialization
 
             // Skipping deletedAt in query parameter serialization
-
-            // Skipping job in query parameter serialization
-
-            // Skipping workspace in query parameter serialization
 
 
             self.place_id.as_ref().map(|place_id| {
@@ -21972,13 +21910,9 @@ impl std::str::FromStr for Lead {
             pub industry: Vec<String>,
             pub employee_count: Vec<i32>,
             pub estimated_revenue: Vec<String>,
-            pub org_id: Vec<String>,
-            pub tenant_id: Vec<String>,
             pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
             pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
             pub deleted_at: Vec<chrono::DateTime::<chrono::Utc>>,
-            pub job: Vec<models::ScrapingJob>,
-            pub workspace: Vec<models::Workspace>,
             pub place_id: Vec<String>,
             pub google_maps_url: Vec<String>,
             pub business_status: Vec<String>,
@@ -22085,19 +22019,11 @@ impl std::str::FromStr for Lead {
                     #[allow(clippy::redundant_clone)]
                     "estimatedRevenue" => intermediate_rep.estimated_revenue.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
-                    "orgId" => intermediate_rep.org_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
                     "createdAt" => intermediate_rep.created_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "deletedAt" => intermediate_rep.deleted_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "job" => intermediate_rep.job.push(<models::ScrapingJob as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "workspace" => intermediate_rep.workspace.push(<models::Workspace as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "placeId" => intermediate_rep.place_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
@@ -22222,13 +22148,9 @@ impl std::str::FromStr for Lead {
             industry: intermediate_rep.industry.into_iter().next(),
             employee_count: intermediate_rep.employee_count.into_iter().next(),
             estimated_revenue: intermediate_rep.estimated_revenue.into_iter().next(),
-            org_id: intermediate_rep.org_id.into_iter().next(),
-            tenant_id: intermediate_rep.tenant_id.into_iter().next(),
             created_at: intermediate_rep.created_at.into_iter().next(),
             updated_at: intermediate_rep.updated_at.into_iter().next(),
             deleted_at: intermediate_rep.deleted_at.into_iter().next(),
-            job: intermediate_rep.job.into_iter().next(),
-            workspace: intermediate_rep.workspace.into_iter().next(),
             place_id: intermediate_rep.place_id.into_iter().next(),
             google_maps_url: intermediate_rep.google_maps_url.into_iter().next(),
             business_status: intermediate_rep.business_status.into_iter().next(),
@@ -31436,10 +31358,6 @@ pub struct ScrapingWorkflow {
     #[serde(skip_serializing_if="Option::is_none")]
     pub jobs: Option<Vec<models::ScrapingJob>>,
 
-    #[serde(rename = "workspace")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub workspace: Option<models::Workspace>,
-
     #[serde(rename = "geoFencingRadius")]
     #[serde(skip_serializing_if="Option::is_none")]
     pub geo_fencing_radius: Option<f32>,
@@ -31576,7 +31494,6 @@ impl ScrapingWorkflow {
             updated_at: None,
             deleted_at: None,
             jobs: None,
-            workspace: None,
             geo_fencing_radius: None,
             geo_fencing_lat: None,
             geo_fencing_lon: None,
@@ -31677,8 +31594,6 @@ impl std::string::ToString for ScrapingWorkflow {
             // Skipping deletedAt in query parameter serialization
 
             // Skipping jobs in query parameter serialization
-
-            // Skipping workspace in query parameter serialization
 
 
             self.geo_fencing_radius.as_ref().map(|geo_fencing_radius| {
@@ -31936,7 +31851,6 @@ impl std::str::FromStr for ScrapingWorkflow {
             pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
             pub deleted_at: Vec<chrono::DateTime::<chrono::Utc>>,
             pub jobs: Vec<Vec<models::ScrapingJob>>,
-            pub workspace: Vec<models::Workspace>,
             pub geo_fencing_radius: Vec<f32>,
             pub geo_fencing_lat: Vec<f64>,
             pub geo_fencing_lon: Vec<f64>,
@@ -32008,8 +31922,6 @@ impl std::str::FromStr for ScrapingWorkflow {
                     #[allow(clippy::redundant_clone)]
                     "deletedAt" => intermediate_rep.deleted_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     "jobs" => return std::result::Result::Err("Parsing a container in this style is not supported in ScrapingWorkflow".to_string()),
-                    #[allow(clippy::redundant_clone)]
-                    "workspace" => intermediate_rep.workspace.push(<models::Workspace as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "geoFencingRadius" => intermediate_rep.geo_fencing_radius.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
@@ -32089,7 +32001,6 @@ impl std::str::FromStr for ScrapingWorkflow {
             updated_at: intermediate_rep.updated_at.into_iter().next(),
             deleted_at: intermediate_rep.deleted_at.into_iter().next(),
             jobs: intermediate_rep.jobs.into_iter().next(),
-            workspace: intermediate_rep.workspace.into_iter().next(),
             geo_fencing_radius: intermediate_rep.geo_fencing_radius.into_iter().next(),
             geo_fencing_lat: intermediate_rep.geo_fencing_lat.into_iter().next(),
             geo_fencing_lon: intermediate_rep.geo_fencing_lon.into_iter().next(),
@@ -35521,10 +35432,6 @@ pub struct Tenant {
     #[serde(skip_serializing_if="Option::is_none")]
     pub description: Option<String>,
 
-    #[serde(rename = "organization")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub organization: Option<models::Organization>,
-
     #[serde(rename = "apiBaseUrl")]
     #[serde(skip_serializing_if="Option::is_none")]
     pub api_base_url: Option<String>,
@@ -35608,7 +35515,6 @@ impl Tenant {
             name: None,
             display_name: None,
             description: None,
-            organization: None,
             api_base_url: None,
             environment_variables: None,
             allowed_origins: None,
@@ -35668,8 +35574,6 @@ impl std::string::ToString for Tenant {
                     description.to_string(),
                 ].join(",")
             }),
-
-            // Skipping organization in query parameter serialization
 
 
             self.api_base_url.as_ref().map(|api_base_url| {
@@ -35794,7 +35698,6 @@ impl std::str::FromStr for Tenant {
             pub name: Vec<String>,
             pub display_name: Vec<String>,
             pub description: Vec<String>,
-            pub organization: Vec<models::Organization>,
             pub api_base_url: Vec<String>,
             pub environment_variables: Vec<std::collections::HashMap<String, String>>,
             pub allowed_origins: Vec<Vec<String>>,
@@ -35838,8 +35741,6 @@ impl std::str::FromStr for Tenant {
                     "displayName" => intermediate_rep.display_name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "organization" => intermediate_rep.organization.push(<models::Organization as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "apiBaseUrl" => intermediate_rep.api_base_url.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     "environmentVariables" => return std::result::Result::Err("Parsing a container in this style is not supported in Tenant".to_string()),
@@ -35886,7 +35787,6 @@ impl std::str::FromStr for Tenant {
             name: intermediate_rep.name.into_iter().next(),
             display_name: intermediate_rep.display_name.into_iter().next(),
             description: intermediate_rep.description.into_iter().next(),
-            organization: intermediate_rep.organization.into_iter().next(),
             api_base_url: intermediate_rep.api_base_url.into_iter().next(),
             environment_variables: intermediate_rep.environment_variables.into_iter().next(),
             allowed_origins: intermediate_rep.allowed_origins.into_iter().next(),

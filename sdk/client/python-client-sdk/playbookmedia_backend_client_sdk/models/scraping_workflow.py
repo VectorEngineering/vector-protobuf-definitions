@@ -22,6 +22,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from playbookmedia_backend_client_sdk.models.output_format import OutputFormat
+from playbookmedia_backend_client_sdk.models.scraping_job import ScrapingJob
 from playbookmedia_backend_client_sdk.models.workflow_status import WorkflowStatus
 from typing import Optional, Set
 from typing_extensions import Self
@@ -43,7 +44,6 @@ class ScrapingWorkflow(BaseModel):
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
     deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
     jobs: Optional[List[ScrapingJob]] = None
-    workspace: Optional[Workspace] = None
     geo_fencing_radius: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="geoFencingRadius")
     geo_fencing_lat: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="geoFencingLat")
     geo_fencing_lon: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="geoFencingLon")
@@ -73,7 +73,7 @@ class ScrapingWorkflow(BaseModel):
     respect_robots_txt: Optional[StrictBool] = Field(default=None, alias="respectRobotsTxt")
     accept_terms_of_service: Optional[StrictBool] = Field(default=None, alias="acceptTermsOfService")
     user_agent: Optional[StrictStr] = Field(default=None, alias="userAgent")
-    __properties: ClassVar[List[str]] = ["id", "name", "cronExpression", "nextRunTime", "lastRunTime", "status", "retryCount", "maxRetries", "alertEmails", "createdAt", "updatedAt", "deletedAt", "jobs", "workspace", "geoFencingRadius", "geoFencingLat", "geoFencingLon", "geoFencingZoomMin", "geoFencingZoomMax", "includeReviews", "includePhotos", "includeBusinessHours", "maxReviewsPerBusiness", "outputFormat", "outputDestination", "dataRetention", "anonymizePii", "notificationSlackChannel", "notificationEmailGroup", "notificationNotifyOnStart", "notificationNotifyOnComplete", "notificationNotifyOnFailure", "contentFilterAllowedCountries", "contentFilterExcludedTypes", "contentFilterMinimumRating", "contentFilterMinimumReviews", "qosMaxConcurrentRequests", "qosMaxRetries", "qosRequestTimeout", "qosEnableJavascript", "respectRobotsTxt", "acceptTermsOfService", "userAgent"]
+    __properties: ClassVar[List[str]] = ["id", "name", "cronExpression", "nextRunTime", "lastRunTime", "status", "retryCount", "maxRetries", "alertEmails", "createdAt", "updatedAt", "deletedAt", "jobs", "geoFencingRadius", "geoFencingLat", "geoFencingLon", "geoFencingZoomMin", "geoFencingZoomMax", "includeReviews", "includePhotos", "includeBusinessHours", "maxReviewsPerBusiness", "outputFormat", "outputDestination", "dataRetention", "anonymizePii", "notificationSlackChannel", "notificationEmailGroup", "notificationNotifyOnStart", "notificationNotifyOnComplete", "notificationNotifyOnFailure", "contentFilterAllowedCountries", "contentFilterExcludedTypes", "contentFilterMinimumRating", "contentFilterMinimumReviews", "qosMaxConcurrentRequests", "qosMaxRetries", "qosRequestTimeout", "qosEnableJavascript", "respectRobotsTxt", "acceptTermsOfService", "userAgent"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -121,9 +121,6 @@ class ScrapingWorkflow(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['jobs'] = _items
-        # override the default output from pydantic by calling `to_dict()` of workspace
-        if self.workspace:
-            _dict['workspace'] = self.workspace.to_dict()
         return _dict
 
     @classmethod
@@ -149,7 +146,6 @@ class ScrapingWorkflow(BaseModel):
             "updatedAt": obj.get("updatedAt"),
             "deletedAt": obj.get("deletedAt"),
             "jobs": [ScrapingJob.from_dict(_item) for _item in obj["jobs"]] if obj.get("jobs") is not None else None,
-            "workspace": Workspace.from_dict(obj["workspace"]) if obj.get("workspace") is not None else None,
             "geoFencingRadius": obj.get("geoFencingRadius"),
             "geoFencingLat": obj.get("geoFencingLat"),
             "geoFencingLon": obj.get("geoFencingLon"),
@@ -182,8 +178,4 @@ class ScrapingWorkflow(BaseModel):
         })
         return _obj
 
-from playbookmedia_backend_client_sdk.models.scraping_job import ScrapingJob
-from playbookmedia_backend_client_sdk.models.workspace import Workspace
-# TODO: Rewrite to not use raise_errors
-ScrapingWorkflow.model_rebuild(raise_errors=False)
 

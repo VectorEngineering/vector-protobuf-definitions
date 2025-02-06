@@ -35,7 +35,6 @@ class Tenant(BaseModel):
     name: Optional[StrictStr] = None
     display_name: Optional[StrictStr] = Field(default=None, alias="displayName")
     description: Optional[StrictStr] = None
-    organization: Optional[Organization] = None
     api_base_url: Optional[StrictStr] = Field(default=None, alias="apiBaseUrl")
     environment_variables: Optional[Dict[str, StrictStr]] = Field(default=None, alias="environmentVariables")
     allowed_origins: Optional[List[StrictStr]] = Field(default=None, alias="allowedOrigins")
@@ -54,7 +53,7 @@ class Tenant(BaseModel):
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
     deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
     status: Optional[V1Status] = V1Status.UNSPECIFIED
-    __properties: ClassVar[List[str]] = ["id", "name", "displayName", "description", "organization", "apiBaseUrl", "environmentVariables", "allowedOrigins", "storageQuota", "monthlyRequestLimit", "maxConcurrentJobs", "enableCaching", "enableRateLimiting", "enableRequestLogging", "accounts", "apiKeys", "totalRequests", "totalStorageUsed", "averageResponseTime", "createdAt", "updatedAt", "deletedAt", "status"]
+    __properties: ClassVar[List[str]] = ["id", "name", "displayName", "description", "apiBaseUrl", "environmentVariables", "allowedOrigins", "storageQuota", "monthlyRequestLimit", "maxConcurrentJobs", "enableCaching", "enableRateLimiting", "enableRequestLogging", "accounts", "apiKeys", "totalRequests", "totalStorageUsed", "averageResponseTime", "createdAt", "updatedAt", "deletedAt", "status"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,9 +94,6 @@ class Tenant(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of organization
-        if self.organization:
-            _dict['organization'] = self.organization.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in accounts (list)
         _items = []
         if self.accounts:
@@ -128,7 +124,6 @@ class Tenant(BaseModel):
             "name": obj.get("name"),
             "displayName": obj.get("displayName"),
             "description": obj.get("description"),
-            "organization": Organization.from_dict(obj["organization"]) if obj.get("organization") is not None else None,
             "apiBaseUrl": obj.get("apiBaseUrl"),
             "environmentVariables": obj.get("environmentVariables"),
             "allowedOrigins": obj.get("allowedOrigins"),
@@ -150,7 +145,4 @@ class Tenant(BaseModel):
         })
         return _obj
 
-from playbookmedia_backend_client_sdk.models.organization import Organization
-# TODO: Rewrite to not use raise_errors
-Tenant.model_rebuild(raise_errors=False)
 

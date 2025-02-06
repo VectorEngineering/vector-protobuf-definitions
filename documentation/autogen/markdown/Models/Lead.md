@@ -18,13 +18,9 @@
 | **industry** | **String** |  | [optional] [default to null] |
 | **employeeCount** | **Integer** |  | [optional] [default to null] |
 | **estimatedRevenue** | **String** |  | [optional] [default to null] |
-| **orgId** | **String** |  | [optional] [default to null] |
-| **tenantId** | **String** |  | [optional] [default to null] |
 | **createdAt** | **Date** |  | [optional] [default to null] |
 | **updatedAt** | **Date** |  | [optional] [default to null] |
 | **deletedAt** | **Date** |  | [optional] [default to null] |
-| **job** | [**ScrapingJob**](ScrapingJob.md) |  | [optional] [default to null] |
-| **workspace** | [**Workspace**](Workspace.md) |  | [optional] [default to null] |
 | **placeId** | **String** |  | [optional] [default to null] |
 | **googleMapsUrl** | **String** |  | [optional] [default to null] |
 | **businessStatus** | **String** |  | [optional] [default to null] |

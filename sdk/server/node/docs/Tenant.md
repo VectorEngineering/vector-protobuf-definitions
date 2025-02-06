@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **name** | **String!** |  | [optional] [default to null]
 **displayName** | **String!** |  | [optional] [default to null]
 **description** | **String!** |  | [optional] [default to null]
-**organization** | [***Organization**](Organization.md) |  | [optional] [default to null]
 **apiBaseUrl** | **String!** |  | [optional] [default to null]
 **environmentVariables** | **String!** |  | [optional] [default to null]
 **allowedOrigins** | **String!** |  | [optional] [default to null]

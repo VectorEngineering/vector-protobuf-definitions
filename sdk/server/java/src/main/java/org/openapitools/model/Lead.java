@@ -15,8 +15,6 @@ import org.openapitools.model.BusinessHours;
 import org.openapitools.model.EmployeeBenefit;
 import org.openapitools.model.RevenueRange;
 import org.openapitools.model.Review;
-import org.openapitools.model.ScrapingJob;
-import org.openapitools.model.Workspace;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -32,7 +30,7 @@ import javax.annotation.Generated;
  * Lead
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T14:06:38.155571-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-06T17:12:08.548747-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class Lead {
 
   private String id;
@@ -65,10 +63,6 @@ public class Lead {
 
   private String estimatedRevenue;
 
-  private String orgId;
-
-  private String tenantId;
-
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime createdAt;
 
@@ -77,10 +71,6 @@ public class Lead {
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime deletedAt;
-
-  private ScrapingJob job;
-
-  private Workspace workspace;
 
   private String placeId;
 
@@ -517,46 +507,6 @@ public class Lead {
     this.estimatedRevenue = estimatedRevenue;
   }
 
-  public Lead orgId(String orgId) {
-    this.orgId = orgId;
-    return this;
-  }
-
-  /**
-   * Get orgId
-   * @return orgId
-   */
-  
-  @Schema(name = "orgId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("orgId")
-  public String getOrgId() {
-    return orgId;
-  }
-
-  public void setOrgId(String orgId) {
-    this.orgId = orgId;
-  }
-
-  public Lead tenantId(String tenantId) {
-    this.tenantId = tenantId;
-    return this;
-  }
-
-  /**
-   * Get tenantId
-   * @return tenantId
-   */
-  
-  @Schema(name = "tenantId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("tenantId")
-  public String getTenantId() {
-    return tenantId;
-  }
-
-  public void setTenantId(String tenantId) {
-    this.tenantId = tenantId;
-  }
-
   public Lead createdAt(OffsetDateTime createdAt) {
     this.createdAt = createdAt;
     return this;
@@ -615,46 +565,6 @@ public class Lead {
 
   public void setDeletedAt(OffsetDateTime deletedAt) {
     this.deletedAt = deletedAt;
-  }
-
-  public Lead job(ScrapingJob job) {
-    this.job = job;
-    return this;
-  }
-
-  /**
-   * Get job
-   * @return job
-   */
-  @Valid 
-  @Schema(name = "job", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("job")
-  public ScrapingJob getJob() {
-    return job;
-  }
-
-  public void setJob(ScrapingJob job) {
-    this.job = job;
-  }
-
-  public Lead workspace(Workspace workspace) {
-    this.workspace = workspace;
-    return this;
-  }
-
-  /**
-   * Get workspace
-   * @return workspace
-   */
-  @Valid 
-  @Schema(name = "workspace", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("workspace")
-  public Workspace getWorkspace() {
-    return workspace;
-  }
-
-  public void setWorkspace(Workspace workspace) {
-    this.workspace = workspace;
   }
 
   public Lead placeId(String placeId) {
@@ -1977,13 +1887,9 @@ public class Lead {
         Objects.equals(this.industry, lead.industry) &&
         Objects.equals(this.employeeCount, lead.employeeCount) &&
         Objects.equals(this.estimatedRevenue, lead.estimatedRevenue) &&
-        Objects.equals(this.orgId, lead.orgId) &&
-        Objects.equals(this.tenantId, lead.tenantId) &&
         Objects.equals(this.createdAt, lead.createdAt) &&
         Objects.equals(this.updatedAt, lead.updatedAt) &&
         Objects.equals(this.deletedAt, lead.deletedAt) &&
-        Objects.equals(this.job, lead.job) &&
-        Objects.equals(this.workspace, lead.workspace) &&
         Objects.equals(this.placeId, lead.placeId) &&
         Objects.equals(this.googleMapsUrl, lead.googleMapsUrl) &&
         Objects.equals(this.businessStatus, lead.businessStatus) &&
@@ -2046,7 +1952,7 @@ public class Lead {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, website, phone, address, city, state, country, latitude, longitude, googleRating, reviewCount, industry, employeeCount, estimatedRevenue, orgId, tenantId, createdAt, updatedAt, deletedAt, job, workspace, placeId, googleMapsUrl, businessStatus, regularHours, specialHours, photoReferences, mainPhotoUrl, reviews, types, amenities, servesVegetarianFood, outdoorSeating, paymentMethods, wheelchairAccessible, parkingAvailable, socialMedia, ratingCategory, rating, count, lastUpdated, dataSourceVersion, scrapingSessionId, alternatePhones, contactPersonName, contactPersonTitle, contactEmail, foundedYear, businessType, certifications, licenseNumber, revenueRange, fundingStage, isPublicCompany, websiteLoadSpeed, hasSslCertificate, cmsUsed, ecommercePlatforms, timezone, neighborhood, nearbyLandmarks, transportationAccess, employeeBenefits, parentCompany, subsidiaries, isFranchise, seoKeywords, usesGoogleAds, googleMyBusinessCategory, naicsCode, sicCode, unspscCode, isGreenCertified, energySources, sustainabilityRating, recentAnnouncements, lastProductLaunch, hasLitigationHistory, exportControlStatus);
+    return Objects.hash(id, name, website, phone, address, city, state, country, latitude, longitude, googleRating, reviewCount, industry, employeeCount, estimatedRevenue, createdAt, updatedAt, deletedAt, placeId, googleMapsUrl, businessStatus, regularHours, specialHours, photoReferences, mainPhotoUrl, reviews, types, amenities, servesVegetarianFood, outdoorSeating, paymentMethods, wheelchairAccessible, parkingAvailable, socialMedia, ratingCategory, rating, count, lastUpdated, dataSourceVersion, scrapingSessionId, alternatePhones, contactPersonName, contactPersonTitle, contactEmail, foundedYear, businessType, certifications, licenseNumber, revenueRange, fundingStage, isPublicCompany, websiteLoadSpeed, hasSslCertificate, cmsUsed, ecommercePlatforms, timezone, neighborhood, nearbyLandmarks, transportationAccess, employeeBenefits, parentCompany, subsidiaries, isFranchise, seoKeywords, usesGoogleAds, googleMyBusinessCategory, naicsCode, sicCode, unspscCode, isGreenCertified, energySources, sustainabilityRating, recentAnnouncements, lastProductLaunch, hasLitigationHistory, exportControlStatus);
   }
 
   @Override
@@ -2068,13 +1974,9 @@ public class Lead {
     sb.append("    industry: ").append(toIndentedString(industry)).append("\n");
     sb.append("    employeeCount: ").append(toIndentedString(employeeCount)).append("\n");
     sb.append("    estimatedRevenue: ").append(toIndentedString(estimatedRevenue)).append("\n");
-    sb.append("    orgId: ").append(toIndentedString(orgId)).append("\n");
-    sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
     sb.append("    deletedAt: ").append(toIndentedString(deletedAt)).append("\n");
-    sb.append("    job: ").append(toIndentedString(job)).append("\n");
-    sb.append("    workspace: ").append(toIndentedString(workspace)).append("\n");
     sb.append("    placeId: ").append(toIndentedString(placeId)).append("\n");
     sb.append("    googleMapsUrl: ").append(toIndentedString(googleMapsUrl)).append("\n");
     sb.append("    businessStatus: ").append(toIndentedString(businessStatus)).append("\n");

@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.openapitools.model.Account;
-import org.openapitools.model.Organization;
 import org.openapitools.model.TenantAPIKey;
 import org.openapitools.model.V1Status;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -31,7 +30,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "Tenant", description = "Key features: - Resource isolation - Independent configuration - Usage tracking - Service subscriptions")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T14:06:38.155571-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-06T17:12:08.548747-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class Tenant {
 
   private String id;
@@ -41,8 +40,6 @@ public class Tenant {
   private String displayName;
 
   private String description;
-
-  private Organization organization;
 
   private String apiBaseUrl;
 
@@ -165,26 +162,6 @@ public class Tenant {
 
   public void setDescription(String description) {
     this.description = description;
-  }
-
-  public Tenant organization(Organization organization) {
-    this.organization = organization;
-    return this;
-  }
-
-  /**
-   * Get organization
-   * @return organization
-   */
-  @Valid 
-  @Schema(name = "organization", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("organization")
-  public Organization getOrganization() {
-    return organization;
-  }
-
-  public void setOrganization(Organization organization) {
-    this.organization = organization;
   }
 
   public Tenant apiBaseUrl(String apiBaseUrl) {
@@ -592,7 +569,6 @@ public class Tenant {
         Objects.equals(this.name, tenant.name) &&
         Objects.equals(this.displayName, tenant.displayName) &&
         Objects.equals(this.description, tenant.description) &&
-        Objects.equals(this.organization, tenant.organization) &&
         Objects.equals(this.apiBaseUrl, tenant.apiBaseUrl) &&
         Objects.equals(this.environmentVariables, tenant.environmentVariables) &&
         Objects.equals(this.allowedOrigins, tenant.allowedOrigins) &&
@@ -615,7 +591,7 @@ public class Tenant {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, displayName, description, organization, apiBaseUrl, environmentVariables, allowedOrigins, storageQuota, monthlyRequestLimit, maxConcurrentJobs, enableCaching, enableRateLimiting, enableRequestLogging, accounts, apiKeys, totalRequests, totalStorageUsed, averageResponseTime, createdAt, updatedAt, deletedAt, status);
+    return Objects.hash(id, name, displayName, description, apiBaseUrl, environmentVariables, allowedOrigins, storageQuota, monthlyRequestLimit, maxConcurrentJobs, enableCaching, enableRateLimiting, enableRequestLogging, accounts, apiKeys, totalRequests, totalStorageUsed, averageResponseTime, createdAt, updatedAt, deletedAt, status);
   }
 
   @Override
@@ -626,7 +602,6 @@ public class Tenant {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    displayName: ").append(toIndentedString(displayName)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
-    sb.append("    organization: ").append(toIndentedString(organization)).append("\n");
     sb.append("    apiBaseUrl: ").append(toIndentedString(apiBaseUrl)).append("\n");
     sb.append("    environmentVariables: ").append(toIndentedString(environmentVariables)).append("\n");
     sb.append("    allowedOrigins: ").append(toIndentedString(allowedOrigins)).append("\n");

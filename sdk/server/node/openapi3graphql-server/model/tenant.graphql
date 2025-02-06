@@ -14,7 +14,6 @@ type Tenant {
   name: String!
   displayName: String!
   description: String!
-  organization: Organization
   apiBaseUrl: String!
   environmentVariables: String!
   allowedOrigins: [String!!]
@@ -40,7 +39,6 @@ input TenantInput {
     name: String!
     displayName: String!
     description: String!
-    organization: OrganizationInput
     apiBaseUrl: String!
     environmentVariables: [String!]
     allowedOrigins: [String!]

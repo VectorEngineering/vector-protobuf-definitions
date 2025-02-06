@@ -16,7 +16,6 @@
 | **updatedAt** | **Date** |  | [optional] [default to null] |
 | **deletedAt** | **Date** |  | [optional] [default to null] |
 | **jobs** | [**List**](ScrapingJob.md) |  | [optional] [default to null] |
-| **workspace** | [**Workspace**](Workspace.md) |  | [optional] [default to null] |
 | **geoFencingRadius** | **Float** |  | [optional] [default to null] |
 | **geoFencingLat** | **Double** |  | [optional] [default to null] |
 | **geoFencingLon** | **Double** |  | [optional] [default to null] |

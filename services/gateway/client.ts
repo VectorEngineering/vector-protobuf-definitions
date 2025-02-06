@@ -5,639 +5,6 @@ import type { ZodiosInstance } from "@zodios/core";
 import { makeApi, Zodios, type ZodiosOptions } from "@zodios/core";
 import { z } from "zod";
 
-type APIKey = Partial<{
-  id: string;
-  name: string;
-  keyHash: string;
-  keyPrefix: string;
-  orgId: string;
-  tenantId: string;
-  scopes: Array<string>;
-  allowedIps: Array<string>;
-  allowedDomains: Array<string>;
-  allowedEnvironments: Array<string>;
-  isTestKey: boolean;
-  requestsPerSecond: number;
-  requestsPerDay: number;
-  concurrentRequests: number;
-  monthlyRequestQuota: string;
-  costPerRequest: number;
-  billingTier: string;
-  totalRequests: string;
-  totalErrors: string;
-  lastUsedAt: string;
-  averageResponseTime: number;
-  endpointUsageJson: string;
-  errorRatesJson: string;
-  recentErrors: string;
-  successfulRequestsCount: number;
-  successRate: number;
-  status: v1_Status;
-  createdAt: string;
-  updatedAt: string;
-  expiresAt: string;
-  deletedAt: string;
-  lastRotatedAt: string;
-  lastSecurityReviewAt: string;
-  requiresClientSecret: boolean;
-  clientSecretHash: string;
-  enforceHttps: boolean;
-  enforceSigning: boolean;
-  allowedSignatureAlgorithms: Array<string>;
-  enforceMutualTls: boolean;
-  clientCertificateHash: string;
-  requireRequestSigning: boolean;
-  description: string;
-  metadataJson: string;
-  tags: Array<string>;
-  apiVersion: string;
-  supportedFeatures: Array<string>;
-  documentationUrl: string;
-  supportContact: string;
-  account: Account;
-  workspace: Workspace;
-  logAllRequests: boolean;
-  lastRotationReason: string;
-  lastRotationDate: string;
-  rotationFrequencyDays: number;
-  complianceStandards: Array<string>;
-  requiresAuditLogging: boolean;
-  dataResidency: string;
-  approvedIntegrations: Array<string>;
-  alertEmails: Array<string>;
-  webhookUrl: string;
-  alertOnQuotaThreshold: boolean;
-  quotaAlertThreshold: number;
-  alertOnErrorSpike: boolean;
-  errorAlertThreshold: number;
-  monitoringIntegrations: Array<string>;
-  encrypted: boolean;
-  dataClassification: string;
-}>;
-type v1_Status =
-  | "STATUS_UNSPECIFIED"
-  | "STATUS_ACTIVE"
-  | "STATUS_SUSPENDED"
-  | "STATUS_PENDING_VERIFICATION"
-  | "STATUS_REVOKED"
-  | "STATUS_EXPIRED"
-  | "STATUS_RATE_LIMITED"
-  | "STATUS_PENDING_REVIEW"
-  | "STATUS_DEPRECATED"
-  | "STATUS_MAINTENANCE";
-type AccountStatus =
-  | "ACCOUNT_STATUS_UNSPECIFIED"
-  | "ACCOUNT_STATUS_ACTIVE"
-  | "ACCOUNT_STATUS_SUSPENDED"
-  | "ACCOUNT_STATUS_PENDING_VERIFICATION";
-type Role =
-  | "ROLE_UNSPECIFIED"
-  | "ROLE_ADMIN"
-  | "ROLE_USER"
-  | "ROLE_VIEWER"
-  | "ROLE_MANAGER";
-type Permission =
-  | "PERMISSION_UNSPECIFIED"
-  | "PERMISSION_READ"
-  | "PERMISSION_WRITE"
-  | "PERMISSION_DELETE"
-  | "PERMISSION_MANAGE_USERS"
-  | "PERMISSION_MANAGE_BILLING"
-  | "PERMISSION_VIEW_ANALYTICS"
-  | "PERMISSION_MANAGE_WORKFLOWS";
-type Timezone =
-  | "TIMEZONE_UNSPECIFIED"
-  | "TIMEZONE_UTC"
-  | "TIMEZONE_EST"
-  | "TIMEZONE_CST"
-  | "TIMEZONE_MST"
-  | "TIMEZONE_PST"
-  | "TIMEZONE_GMT"
-  | "TIMEZONE_CET"
-  | "TIMEZONE_IST"
-  | "TIMEZONE_JST"
-  | "TIMEZONE_AEST";
-type WorkflowStatus =
-  | "WORKFLOW_STATUS_UNSPECIFIED"
-  | "WORKFLOW_STATUS_DRAFT"
-  | "WORKFLOW_STATUS_ACTIVE"
-  | "WORKFLOW_STATUS_PAUSED"
-  | "WORKFLOW_STATUS_FAILED"
-  | "WORKFLOW_STATUS_COMPLETED"
-  | "WORKFLOW_STATUS_ARCHIVED"
-  | "WORKFLOW_STATUS_PENDING_APPROVAL"
-  | "WORKFLOW_STATUS_VALIDATING"
-  | "WORKFLOW_STATUS_QUOTA_EXCEEDED"
-  | "WORKFLOW_STATUS_WARNING";
-type BackgroundJobStatus =
-  | "BACKGROUND_JOB_STATUS_UNSPECIFIED"
-  | "BACKGROUND_JOB_STATUS_QUEUED"
-  | "BACKGROUND_JOB_STATUS_IN_PROGRESS"
-  | "BACKGROUND_JOB_STATUS_COMPLETED"
-  | "BACKGROUND_JOB_STATUS_FAILED"
-  | "BACKGROUND_JOB_STATUS_CANCELLED"
-  | "BACKGROUND_JOB_STATUS_TIMED_OUT";
-type Language =
-  | "LANGUAGE_UNSPECIFIED"
-  | "LANGUAGE_ENGLISH"
-  | "LANGUAGE_SPANISH"
-  | "LANGUAGE_FRENCH"
-  | "LANGUAGE_GERMAN"
-  | "LANGUAGE_ITALIAN"
-  | "LANGUAGE_PORTUGUESE"
-  | "LANGUAGE_DUTCH"
-  | "LANGUAGE_RUSSIAN"
-  | "LANGUAGE_CHINESE"
-  | "LANGUAGE_JAPANESE"
-  | "LANGUAGE_KOREAN"
-  | "LANGUAGE_ARABIC"
-  | "LANGUAGE_HINDI"
-  | "LANGUAGE_GREEK"
-  | "LANGUAGE_TURKISH";
-type BusinessHours = Partial<{
-  id: string;
-  day: DayOfWeek;
-  openTime: string;
-  closeTime: string;
-  closed: boolean;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
-}>;
-type DayOfWeek =
-  | "DAY_OF_WEEK_UNSPECIFIED"
-  | "DAY_OF_WEEK_MONDAY"
-  | "DAY_OF_WEEK_TUESDAY"
-  | "DAY_OF_WEEK_WEDNESDAY"
-  | "DAY_OF_WEEK_THURSDAY"
-  | "DAY_OF_WEEK_FRIDAY"
-  | "DAY_OF_WEEK_SATURDAY"
-  | "DAY_OF_WEEK_SUNDAY";
-type Review = Partial<{
-  id: string;
-  author: string;
-  rating: number;
-  text: string;
-  time: string;
-  language: string;
-  profilePhotoUrl: string;
-  reviewCount: number;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
-}>;
-type RevenueRange =
-  | "REVENUE_RANGE_UNSPECIFIED"
-  | "REVENUE_RANGE_UNDER_100K"
-  | "REVENUE_RANGE_100K_TO_1M"
-  | "REVENUE_RANGE_1M_TO_10M"
-  | "REVENUE_RANGE_10M_TO_50M"
-  | "REVENUE_RANGE_OVER_50M";
-type EmployeeBenefit =
-  | "EMPLOYEE_BENEFIT_UNSPECIFIED"
-  | "EMPLOYEE_BENEFIT_HEALTH_INSURANCE"
-  | "EMPLOYEE_BENEFIT_RETIREMENT_PLAN"
-  | "EMPLOYEE_BENEFIT_PAID_TIME_OFF"
-  | "EMPLOYEE_BENEFIT_REMOTE_WORK";
-type OutputFormat =
-  | "OUTPUT_FORMAT_UNSPECIFIED"
-  | "OUTPUT_FORMAT_JSON"
-  | "OUTPUT_FORMAT_CSV"
-  | "OUTPUT_FORMAT_BIGQUERY"
-  | "OUTPUT_FORMAT_POSTGRES";
-type WebhookConfig = Partial<{
-  id: string;
-  url: string;
-  authType: string;
-  authToken: string;
-  customHeaders: {};
-  maxRetries: number;
-  retryInterval: string;
-  triggerEvents: Array<TriggerEvent>;
-  includedFields: Array<IncludedField>;
-  includeFullResults: boolean;
-  payloadFormat: PayloadFormat;
-  verifySsl: boolean;
-  signingSecret: string;
-  rateLimit: number;
-  rateLimitInterval: string;
-  createdAt: string;
-  updatedAt: string;
-  lastTriggeredAt: string;
-  successfulCalls: number;
-  failedCalls: number;
-  metadata: {};
-  webhookName: string;
-}>;
-type TriggerEvent =
-  | "TRIGGER_EVENT_UNSPECIFIED"
-  | "TRIGGER_EVENT_JOB_STARTED"
-  | "TRIGGER_EVENT_JOB_COMPLETED"
-  | "TRIGGER_EVENT_JOB_FAILED"
-  | "TRIGGER_EVENT_LEAD_FOUND"
-  | "TRIGGER_EVENT_QUOTA_EXCEEDED"
-  | "TRIGGER_EVENT_ERROR_THRESHOLD_REACHED"
-  | "TRIGGER_EVENT_RATE_LIMIT_REACHED"
-  | "TRIGGER_EVENT_DATA_VALIDATION_FAILED"
-  | "TRIGGER_EVENT_NEW_PROXY_NEEDED"
-  | "TRIGGER_EVENT_SCHEDULED_MAINTENANCE";
-type IncludedField =
-  | "INCLUDED_FIELD_UNSPECIFIED"
-  | "INCLUDED_FIELD_NAME"
-  | "INCLUDED_FIELD_WEBSITE"
-  | "INCLUDED_FIELD_PHONE"
-  | "INCLUDED_FIELD_ADDRESS"
-  | "INCLUDED_FIELD_LOCATION"
-  | "INCLUDED_FIELD_COORDINATES"
-  | "INCLUDED_FIELD_GOOGLE_RATING"
-  | "INCLUDED_FIELD_REVIEW_COUNT"
-  | "INCLUDED_FIELD_REVIEWS"
-  | "INCLUDED_FIELD_BUSINESS_HOURS"
-  | "INCLUDED_FIELD_BUSINESS_STATUS"
-  | "INCLUDED_FIELD_PLACE_ID"
-  | "INCLUDED_FIELD_GOOGLE_MAPS_URL"
-  | "INCLUDED_FIELD_PHOTOS"
-  | "INCLUDED_FIELD_MAIN_PHOTO"
-  | "INCLUDED_FIELD_BUSINESS_TYPES"
-  | "INCLUDED_FIELD_AMENITIES"
-  | "INCLUDED_FIELD_PAYMENT_METHODS"
-  | "INCLUDED_FIELD_SOCIAL_PROFILES"
-  | "INCLUDED_FIELD_EMPLOYEE_COUNT"
-  | "INCLUDED_FIELD_REVENUE_INFO"
-  | "INCLUDED_FIELD_FOUNDED_YEAR"
-  | "INCLUDED_FIELD_CERTIFICATIONS"
-  | "INCLUDED_FIELD_NAICS_CODE"
-  | "INCLUDED_FIELD_SIC_CODE"
-  | "INCLUDED_FIELD_SCRAPING_METADATA"
-  | "INCLUDED_FIELD_COMPLIANCE_INFO"
-  | "INCLUDED_FIELD_ALTERNATE_PHONES"
-  | "INCLUDED_FIELD_CONTACT_PERSON"
-  | "INCLUDED_FIELD_CONTACT_EMAIL";
-type PayloadFormat =
-  | "PAYLOAD_FORMAT_UNSPECIFIED"
-  | "PAYLOAD_FORMAT_JSON"
-  | "PAYLOAD_FORMAT_XML"
-  | "PAYLOAD_FORMAT_FORM_DATA"
-  | "PAYLOAD_FORMAT_PROTOBUF"
-  | "PAYLOAD_FORMAT_YAML";
-type AccountSettings = Partial<{
-  id: string;
-  emailNotifications: boolean;
-  slackNotifications: boolean;
-  defaultDataRetention: string;
-  autoPurgeEnabled: boolean;
-  require2fa: boolean;
-  sessionTimeout: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
-}>;
-type Account = Partial<{
-  id: string;
-  authPlatformUserId: string;
-  email: string;
-  deletedAt: string;
-  createdAt: string;
-  accountStatus: AccountStatus;
-  roles: Array<Role>;
-  permissions: Array<Permission>;
-  mfaEnabled: boolean;
-  lastLoginAt: string;
-  timezone: Timezone;
-  totalJobsRun: number;
-  monthlyJobLimit: number;
-  concurrentJobLimit: number;
-  workspaces: Array<Workspace>;
-  settings: AccountSettings;
-}>;
-type Lead = Partial<{
-  id: string;
-  name: string;
-  website: string;
-  phone: string;
-  address: string;
-  city: string;
-  state: string;
-  country: string;
-  latitude: number;
-  longitude: number;
-  googleRating: number;
-  reviewCount: number;
-  industry: string;
-  employeeCount: number;
-  estimatedRevenue: string;
-  orgId: string;
-  tenantId: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
-  job: ScrapingJob;
-  workspace: Workspace;
-  placeId: string;
-  googleMapsUrl: string;
-  businessStatus: string;
-  regularHours: Array<BusinessHours>;
-  specialHours: Array<BusinessHours>;
-  photoReferences: Array<string>;
-  mainPhotoUrl: string;
-  reviews: Array<Review>;
-  types: Array<string>;
-  amenities: Array<string>;
-  servesVegetarianFood: boolean;
-  outdoorSeating: boolean;
-  paymentMethods: Array<string>;
-  wheelchairAccessible: boolean;
-  parkingAvailable: boolean;
-  socialMedia: {};
-  ratingCategory: string;
-  rating: number;
-  count: number;
-  lastUpdated: string;
-  dataSourceVersion: string;
-  scrapingSessionId: string;
-  alternatePhones: Array<string>;
-  contactPersonName: string;
-  contactPersonTitle: string;
-  contactEmail: string;
-  foundedYear: number;
-  businessType: string;
-  certifications: Array<string>;
-  licenseNumber: string;
-  revenueRange: RevenueRange;
-  fundingStage: string;
-  isPublicCompany: boolean;
-  websiteLoadSpeed: number;
-  hasSslCertificate: boolean;
-  cmsUsed: string;
-  ecommercePlatforms: Array<string>;
-  timezone: string;
-  neighborhood: string;
-  nearbyLandmarks: Array<string>;
-  transportationAccess: string;
-  employeeBenefits: Array<EmployeeBenefit>;
-  parentCompany: string;
-  subsidiaries: Array<string>;
-  isFranchise: boolean;
-  seoKeywords: Array<string>;
-  usesGoogleAds: boolean;
-  googleMyBusinessCategory: string;
-  naicsCode: string;
-  sicCode: string;
-  unspscCode: string;
-  isGreenCertified: boolean;
-  energySources: Array<string>;
-  sustainabilityRating: string;
-  recentAnnouncements: Array<string>;
-  lastProductLaunch: string;
-  hasLitigationHistory: boolean;
-  exportControlStatus: string;
-}>;
-type Organization = Partial<{
-  id: string;
-  name: string;
-  displayName: string;
-  website: string;
-  description: string;
-  billingEmail: string;
-  technicalEmail: string;
-  phone: string;
-  address: string;
-  ssoEnabled: boolean;
-  ssoProvider: string;
-  ssoDomain: string;
-  allowedDomains: Array<string>;
-  enforce2fa: boolean;
-  billingPlan: BillingPlan;
-  billingCurrency: string;
-  autoBilling: boolean;
-  taxId: string;
-  complianceFrameworks: Array<string>;
-  dataProcessingAgreement: boolean;
-  dataRegion: string;
-  maxTenants: number;
-  totalStorageLimit: string;
-  maxApiKeys: number;
-  maxUsers: number;
-  tenants: Array<Tenant>;
-  subscriptions: Subscription;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
-  createdBy: string;
-  status: v1_Status;
-}>;
-type BillingPlan =
-  | "BILLING_PLAN_UNSPECIFIED"
-  | "BILLING_PLAN_STARTUP"
-  | "BILLING_PLAN_BUSINESS"
-  | "BILLING_PLAN_ENTERPRISE";
-type TenantAPIKey = Partial<{
-  id: string;
-  keyHash: string;
-  keyPrefix: string;
-  name: string;
-  description: string;
-  status: v1_Status;
-  scopes: Array<TenantAPIKeyScope>;
-  maxUses: number;
-  allowedIps: Array<string>;
-  useCount: number;
-  expiresAt: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
-}>;
-type TenantAPIKeyScope =
-  | "TENANT_API_KEY_SCOPE_UNSPECIFIED"
-  | "TENANT_API_KEY_SCOPE_READ_JOBS"
-  | "TENANT_API_KEY_SCOPE_READ_LEADS"
-  | "TENANT_API_KEY_SCOPE_READ_WORKFLOWS"
-  | "TENANT_API_KEY_SCOPE_READ_ANALYTICS"
-  | "TENANT_API_KEY_SCOPE_READ_SETTINGS"
-  | "TENANT_API_KEY_SCOPE_WRITE_JOBS"
-  | "TENANT_API_KEY_SCOPE_WRITE_LEADS"
-  | "TENANT_API_KEY_SCOPE_WRITE_WORKFLOWS"
-  | "TENANT_API_KEY_SCOPE_WRITE_SETTINGS"
-  | "TENANT_API_KEY_SCOPE_DELETE_JOBS"
-  | "TENANT_API_KEY_SCOPE_DELETE_LEADS"
-  | "TENANT_API_KEY_SCOPE_DELETE_WORKFLOWS"
-  | "TENANT_API_KEY_SCOPE_EXPORT_DATA"
-  | "TENANT_API_KEY_SCOPE_MANAGE_KEYS"
-  | "TENANT_API_KEY_SCOPE_BILLING_READ"
-  | "TENANT_API_KEY_SCOPE_BILLING_WRITE"
-  | "TENANT_API_KEY_SCOPE_ADMIN";
-type Subscription = Partial<{
-  id: string;
-  stripeCustomerId: string;
-  stripeSubscriptionId: string;
-  stripePriceId: string;
-  stripeProductId: string;
-  planTier: PlanTier;
-  billingMode: BillingMode;
-  includedJobs: number;
-  perJobRate: number;
-  maxConcurrentJobs: number;
-  includedStorage: string;
-  perGbRate: number;
-  advancedFilteringEnabled: boolean;
-  prioritySupportEnabled: boolean;
-  customExportsEnabled: boolean;
-  apiAccessEnabled: boolean;
-  customProxiesEnabled: boolean;
-  advancedAnalyticsEnabled: boolean;
-  retentionDays: number;
-  maxResultsPerJob: number;
-  currentPeriodStart: string;
-  currentPeriodEnd: string;
-  currentPeriodUsage: number;
-  currency: string;
-  basePrice: number;
-  billingInterval: Interval;
-  autoRenew: boolean;
-  paymentStatus: PaymentStatus;
-  isTrial: boolean;
-  trialStart: string;
-  trialEnd: string;
-  createdAt: string;
-  updatedAt: string;
-  canceledAt: string;
-  endedAt: string;
-}>;
-type PlanTier =
-  | "PLAN_TIER_UNSPECIFIED"
-  | "PLAN_TIER_FREE"
-  | "PLAN_TIER_STARTER"
-  | "PLAN_TIER_PROFESSIONAL"
-  | "PLAN_TIER_ENTERPRISE";
-type BillingMode =
-  | "BILLING_MODE_UNSPECIFIED"
-  | "BILLING_MODE_LICENSED"
-  | "BILLING_MODE_METERED"
-  | "BILLING_MODE_HYBRID";
-type Interval = "INTERVAL_UNSPECIFIED" | "INTERVAL_MONTHLY" | "INTERVAL_YEARLY";
-type PaymentStatus =
-  | "PAYMENT_STATUS_UNSPECIFIED"
-  | "PAYMENT_STATUS_PAID"
-  | "PAYMENT_STATUS_PAST_DUE"
-  | "PAYMENT_STATUS_FAILED"
-  | "PAYMENT_STATUS_CANCELED";
-type ScrapingJob = Partial<{
-  id: string;
-  priority: number;
-  payloadType: string;
-  payload: string;
-  createdAt: string;
-  status: BackgroundJobStatus;
-  name: string;
-  keywords: Array<string>;
-  lang: Language;
-  zoom: number;
-  lat: string;
-  lon: string;
-  fastMode: boolean;
-  radius: number;
-  depth: number;
-  email: boolean;
-  maxTime: number;
-  proxies: Array<string>;
-  updatedAt: string;
-  deletedAt: string;
-  leads: Array<Lead>;
-}>;
-type ScrapingWorkflow = Partial<{
-  id: string;
-  name: string;
-  cronExpression: string;
-  nextRunTime: string;
-  lastRunTime: string;
-  status: WorkflowStatus;
-  retryCount: number;
-  maxRetries: number;
-  alertEmails: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
-  jobs: Array<ScrapingJob>;
-  workspace: Workspace;
-  geoFencingRadius: number;
-  geoFencingLat: number;
-  geoFencingLon: number;
-  geoFencingZoomMin: number;
-  geoFencingZoomMax: number;
-  includeReviews: boolean;
-  includePhotos: boolean;
-  includeBusinessHours: boolean;
-  maxReviewsPerBusiness: number;
-  outputFormat: OutputFormat;
-  outputDestination: string;
-  dataRetention: string;
-  anonymizePii: boolean;
-  notificationSlackChannel: string;
-  notificationEmailGroup: string;
-  notificationNotifyOnStart: boolean;
-  notificationNotifyOnComplete: boolean;
-  notificationNotifyOnFailure: boolean;
-  contentFilterAllowedCountries: Array<string>;
-  contentFilterExcludedTypes: Array<string>;
-  contentFilterMinimumRating: number;
-  contentFilterMinimumReviews: number;
-  qosMaxConcurrentRequests: number;
-  qosMaxRetries: number;
-  qosRequestTimeout: string;
-  qosEnableJavascript: boolean;
-  respectRobotsTxt: boolean;
-  acceptTermsOfService: boolean;
-  userAgent: string;
-}>;
-type Tenant = Partial<{
-  id: string;
-  name: string;
-  displayName: string;
-  description: string;
-  organization: Organization;
-  apiBaseUrl: string;
-  environmentVariables: {};
-  allowedOrigins: Array<string>;
-  storageQuota: string;
-  monthlyRequestLimit: string;
-  maxConcurrentJobs: number;
-  enableCaching: boolean;
-  enableRateLimiting: boolean;
-  enableRequestLogging: boolean;
-  accounts: Array<Account>;
-  apiKeys: Array<TenantAPIKey>;
-  totalRequests: string;
-  totalStorageUsed: string;
-  averageResponseTime: number;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
-  status: v1_Status;
-}>;
-type Workspace = Partial<{
-  id: string;
-  name: string;
-  industry: string;
-  domain: string;
-  gdprCompliant: boolean;
-  hipaaCompliant: boolean;
-  soc2Compliant: boolean;
-  storageQuota: string;
-  usedStorage: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
-  workflows: Array<ScrapingWorkflow>;
-  jobsRunThisMonth: number;
-  workspaceJobLimit: number;
-  dailyJobQuota: number;
-  activeScrapers: number;
-  totalLeadsCollected: number;
-  lastJobRun: string;
-  scrapingJobs: Array<ScrapingJob>;
-  apiKeys: Array<APIKey>;
-  webhooks: Array<WebhookConfig>;
-}>;
 type FolderMetadata = Partial<{
   id: string;
   name: string;
@@ -843,121 +210,113 @@ const EmployeeBenefit = z.enum([
   "EMPLOYEE_BENEFIT_PAID_TIME_OFF",
   "EMPLOYEE_BENEFIT_REMOTE_WORK",
 ]);
-const Lead: z.ZodType<Lead> = z.lazy(() =>
-  z
-    .object({
-      id: z.string(),
-      name: z.string(),
-      website: z.string(),
-      phone: z.string(),
-      address: z.string(),
-      city: z.string(),
-      state: z.string(),
-      country: z.string(),
-      latitude: z.number(),
-      longitude: z.number(),
-      googleRating: z.number(),
-      reviewCount: z.number().int(),
-      industry: z.string(),
-      employeeCount: z.number().int(),
-      estimatedRevenue: z.string(),
-      orgId: z.string(),
-      tenantId: z.string(),
-      createdAt: z.string().datetime({ offset: true }),
-      updatedAt: z.string().datetime({ offset: true }),
-      deletedAt: z.string().datetime({ offset: true }),
-      job: ScrapingJob,
-      workspace: Workspace,
-      placeId: z.string(),
-      googleMapsUrl: z.string(),
-      businessStatus: z.string(),
-      regularHours: z.array(BusinessHours),
-      specialHours: z.array(BusinessHours),
-      photoReferences: z.array(z.string()),
-      mainPhotoUrl: z.string(),
-      reviews: z.array(Review),
-      types: z.array(z.string()),
-      amenities: z.array(z.string()),
-      servesVegetarianFood: z.boolean(),
-      outdoorSeating: z.boolean(),
-      paymentMethods: z.array(z.string()),
-      wheelchairAccessible: z.boolean(),
-      parkingAvailable: z.boolean(),
-      socialMedia: z.record(z.string()),
-      ratingCategory: z.string(),
-      rating: z.number(),
-      count: z.number().int(),
-      lastUpdated: z.string().datetime({ offset: true }),
-      dataSourceVersion: z.string(),
-      scrapingSessionId: z.string(),
-      alternatePhones: z.array(z.string()),
-      contactPersonName: z.string(),
-      contactPersonTitle: z.string(),
-      contactEmail: z.string(),
-      foundedYear: z.number().int(),
-      businessType: z.string(),
-      certifications: z.array(z.string()),
-      licenseNumber: z.string(),
-      revenueRange: RevenueRange.default("REVENUE_RANGE_UNSPECIFIED"),
-      fundingStage: z.string(),
-      isPublicCompany: z.boolean(),
-      websiteLoadSpeed: z.number(),
-      hasSslCertificate: z.boolean(),
-      cmsUsed: z.string(),
-      ecommercePlatforms: z.array(z.string()),
-      timezone: z.string(),
-      neighborhood: z.string(),
-      nearbyLandmarks: z.array(z.string()),
-      transportationAccess: z.string(),
-      employeeBenefits: z.array(EmployeeBenefit),
-      parentCompany: z.string(),
-      subsidiaries: z.array(z.string()),
-      isFranchise: z.boolean(),
-      seoKeywords: z.array(z.string()),
-      usesGoogleAds: z.boolean(),
-      googleMyBusinessCategory: z.string(),
-      naicsCode: z.string(),
-      sicCode: z.string(),
-      unspscCode: z.string(),
-      isGreenCertified: z.boolean(),
-      energySources: z.array(z.string()),
-      sustainabilityRating: z.string(),
-      recentAnnouncements: z.array(z.string()),
-      lastProductLaunch: z.string().datetime({ offset: true }),
-      hasLitigationHistory: z.boolean(),
-      exportControlStatus: z.string(),
-    })
-    .partial()
-    .passthrough(),
-);
-const ScrapingJob: z.ZodType<ScrapingJob> = z.lazy(() =>
-  z
-    .object({
-      id: z.string(),
-      priority: z.number().int(),
-      payloadType: z.string(),
-      payload: z.string(),
-      createdAt: z.string().datetime({ offset: true }),
-      status: BackgroundJobStatus.default("BACKGROUND_JOB_STATUS_UNSPECIFIED"),
-      name: z.string(),
-      keywords: z.array(z.string()),
-      lang: Language.default("LANGUAGE_UNSPECIFIED"),
-      zoom: z.number().int(),
-      lat: z.string(),
-      lon: z.string(),
-      fastMode: z.boolean(),
-      radius: z.number().int(),
-      depth: z.number().int(),
-      email: z.boolean(),
-      maxTime: z.number().int(),
-      proxies: z.array(z.string()),
-      updatedAt: z.string().datetime({ offset: true }),
-      deletedAt: z.string().datetime({ offset: true }),
-      leads: z.array(Lead),
-    })
-    .partial()
-    .passthrough(),
-);
+const Lead = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    website: z.string(),
+    phone: z.string(),
+    address: z.string(),
+    city: z.string(),
+    state: z.string(),
+    country: z.string(),
+    latitude: z.number(),
+    longitude: z.number(),
+    googleRating: z.number(),
+    reviewCount: z.number().int(),
+    industry: z.string(),
+    employeeCount: z.number().int(),
+    estimatedRevenue: z.string(),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+    placeId: z.string(),
+    googleMapsUrl: z.string(),
+    businessStatus: z.string(),
+    regularHours: z.array(BusinessHours),
+    specialHours: z.array(BusinessHours),
+    photoReferences: z.array(z.string()),
+    mainPhotoUrl: z.string(),
+    reviews: z.array(Review),
+    types: z.array(z.string()),
+    amenities: z.array(z.string()),
+    servesVegetarianFood: z.boolean(),
+    outdoorSeating: z.boolean(),
+    paymentMethods: z.array(z.string()),
+    wheelchairAccessible: z.boolean(),
+    parkingAvailable: z.boolean(),
+    socialMedia: z.record(z.string()),
+    ratingCategory: z.string(),
+    rating: z.number(),
+    count: z.number().int(),
+    lastUpdated: z.string().datetime({ offset: true }),
+    dataSourceVersion: z.string(),
+    scrapingSessionId: z.string(),
+    alternatePhones: z.array(z.string()),
+    contactPersonName: z.string(),
+    contactPersonTitle: z.string(),
+    contactEmail: z.string(),
+    foundedYear: z.number().int(),
+    businessType: z.string(),
+    certifications: z.array(z.string()),
+    licenseNumber: z.string(),
+    revenueRange: RevenueRange.default("REVENUE_RANGE_UNSPECIFIED"),
+    fundingStage: z.string(),
+    isPublicCompany: z.boolean(),
+    websiteLoadSpeed: z.number(),
+    hasSslCertificate: z.boolean(),
+    cmsUsed: z.string(),
+    ecommercePlatforms: z.array(z.string()),
+    timezone: z.string(),
+    neighborhood: z.string(),
+    nearbyLandmarks: z.array(z.string()),
+    transportationAccess: z.string(),
+    employeeBenefits: z.array(EmployeeBenefit),
+    parentCompany: z.string(),
+    subsidiaries: z.array(z.string()),
+    isFranchise: z.boolean(),
+    seoKeywords: z.array(z.string()),
+    usesGoogleAds: z.boolean(),
+    googleMyBusinessCategory: z.string(),
+    naicsCode: z.string(),
+    sicCode: z.string(),
+    unspscCode: z.string(),
+    isGreenCertified: z.boolean(),
+    energySources: z.array(z.string()),
+    sustainabilityRating: z.string(),
+    recentAnnouncements: z.array(z.string()),
+    lastProductLaunch: z.string().datetime({ offset: true }),
+    hasLitigationHistory: z.boolean(),
+    exportControlStatus: z.string(),
+  })
+  .partial()
+  .passthrough();
+const ScrapingJob = z
+  .object({
+    id: z.string(),
+    priority: z.number().int(),
+    payloadType: z.string(),
+    payload: z.string(),
+    createdAt: z.string().datetime({ offset: true }),
+    status: BackgroundJobStatus.default("BACKGROUND_JOB_STATUS_UNSPECIFIED"),
+    name: z.string(),
+    keywords: z.array(z.string()),
+    lang: Language.default("LANGUAGE_UNSPECIFIED"),
+    zoom: z.number().int(),
+    lat: z.string(),
+    lon: z.string(),
+    fastMode: z.boolean(),
+    radius: z.number().int(),
+    depth: z.number().int(),
+    email: z.boolean(),
+    maxTime: z.number().int(),
+    proxies: z.array(z.string()),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+    leads: z.array(Lead),
+  })
+  .partial()
+  .passthrough();
 const OutputFormat = z.enum([
   "OUTPUT_FORMAT_UNSPECIFIED",
   "OUTPUT_FORMAT_JSON",
@@ -965,56 +324,53 @@ const OutputFormat = z.enum([
   "OUTPUT_FORMAT_BIGQUERY",
   "OUTPUT_FORMAT_POSTGRES",
 ]);
-const ScrapingWorkflow: z.ZodType<ScrapingWorkflow> = z.lazy(() =>
-  z
-    .object({
-      id: z.string(),
-      name: z.string(),
-      cronExpression: z.string(),
-      nextRunTime: z.string().datetime({ offset: true }),
-      lastRunTime: z.string().datetime({ offset: true }),
-      status: WorkflowStatus.default("WORKFLOW_STATUS_UNSPECIFIED"),
-      retryCount: z.number().int(),
-      maxRetries: z.number().int(),
-      alertEmails: z.string(),
-      createdAt: z.string().datetime({ offset: true }),
-      updatedAt: z.string().datetime({ offset: true }),
-      deletedAt: z.string().datetime({ offset: true }),
-      jobs: z.array(ScrapingJob),
-      workspace: Workspace,
-      geoFencingRadius: z.number(),
-      geoFencingLat: z.number(),
-      geoFencingLon: z.number(),
-      geoFencingZoomMin: z.number().int(),
-      geoFencingZoomMax: z.number().int(),
-      includeReviews: z.boolean(),
-      includePhotos: z.boolean(),
-      includeBusinessHours: z.boolean(),
-      maxReviewsPerBusiness: z.number().int(),
-      outputFormat: OutputFormat.default("OUTPUT_FORMAT_UNSPECIFIED"),
-      outputDestination: z.string(),
-      dataRetention: z.string(),
-      anonymizePii: z.boolean(),
-      notificationSlackChannel: z.string(),
-      notificationEmailGroup: z.string(),
-      notificationNotifyOnStart: z.boolean(),
-      notificationNotifyOnComplete: z.boolean(),
-      notificationNotifyOnFailure: z.boolean(),
-      contentFilterAllowedCountries: z.array(z.string()),
-      contentFilterExcludedTypes: z.array(z.string()),
-      contentFilterMinimumRating: z.number(),
-      contentFilterMinimumReviews: z.number().int(),
-      qosMaxConcurrentRequests: z.number().int(),
-      qosMaxRetries: z.number().int(),
-      qosRequestTimeout: z.string(),
-      qosEnableJavascript: z.boolean(),
-      respectRobotsTxt: z.boolean(),
-      acceptTermsOfService: z.boolean(),
-      userAgent: z.string(),
-    })
-    .partial()
-    .passthrough(),
-);
+const ScrapingWorkflow = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    cronExpression: z.string(),
+    nextRunTime: z.string().datetime({ offset: true }),
+    lastRunTime: z.string().datetime({ offset: true }),
+    status: WorkflowStatus.default("WORKFLOW_STATUS_UNSPECIFIED"),
+    retryCount: z.number().int(),
+    maxRetries: z.number().int(),
+    alertEmails: z.string(),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+    jobs: z.array(ScrapingJob),
+    geoFencingRadius: z.number(),
+    geoFencingLat: z.number(),
+    geoFencingLon: z.number(),
+    geoFencingZoomMin: z.number().int(),
+    geoFencingZoomMax: z.number().int(),
+    includeReviews: z.boolean(),
+    includePhotos: z.boolean(),
+    includeBusinessHours: z.boolean(),
+    maxReviewsPerBusiness: z.number().int(),
+    outputFormat: OutputFormat.default("OUTPUT_FORMAT_UNSPECIFIED"),
+    outputDestination: z.string(),
+    dataRetention: z.string(),
+    anonymizePii: z.boolean(),
+    notificationSlackChannel: z.string(),
+    notificationEmailGroup: z.string(),
+    notificationNotifyOnStart: z.boolean(),
+    notificationNotifyOnComplete: z.boolean(),
+    notificationNotifyOnFailure: z.boolean(),
+    contentFilterAllowedCountries: z.array(z.string()),
+    contentFilterExcludedTypes: z.array(z.string()),
+    contentFilterMinimumRating: z.number(),
+    contentFilterMinimumReviews: z.number().int(),
+    qosMaxConcurrentRequests: z.number().int(),
+    qosMaxRetries: z.number().int(),
+    qosRequestTimeout: z.string(),
+    qosEnableJavascript: z.boolean(),
+    respectRobotsTxt: z.boolean(),
+    acceptTermsOfService: z.boolean(),
+    userAgent: z.string(),
+  })
+  .partial()
+  .passthrough();
 const v1_Status = z.enum([
   "STATUS_UNSPECIFIED",
   "STATUS_ACTIVE",
@@ -1027,80 +383,76 @@ const v1_Status = z.enum([
   "STATUS_DEPRECATED",
   "STATUS_MAINTENANCE",
 ]);
-const APIKey: z.ZodType<APIKey> = z.lazy(() =>
-  z
-    .object({
-      id: z.string(),
-      name: z.string(),
-      keyHash: z.string(),
-      keyPrefix: z.string(),
-      orgId: z.string(),
-      tenantId: z.string(),
-      scopes: z.array(z.string()),
-      allowedIps: z.array(z.string()),
-      allowedDomains: z.array(z.string()),
-      allowedEnvironments: z.array(z.string()),
-      isTestKey: z.boolean(),
-      requestsPerSecond: z.number().int(),
-      requestsPerDay: z.number().int(),
-      concurrentRequests: z.number().int(),
-      monthlyRequestQuota: z.string(),
-      costPerRequest: z.number(),
-      billingTier: z.string(),
-      totalRequests: z.string(),
-      totalErrors: z.string(),
-      lastUsedAt: z.string().datetime({ offset: true }),
-      averageResponseTime: z.number(),
-      endpointUsageJson: z.string(),
-      errorRatesJson: z.string(),
-      recentErrors: z.string(),
-      successfulRequestsCount: z.number().int(),
-      successRate: z.number(),
-      status: v1_Status.default("STATUS_UNSPECIFIED"),
-      createdAt: z.string().datetime({ offset: true }),
-      updatedAt: z.string().datetime({ offset: true }),
-      expiresAt: z.string().datetime({ offset: true }),
-      deletedAt: z.string().datetime({ offset: true }),
-      lastRotatedAt: z.string().datetime({ offset: true }),
-      lastSecurityReviewAt: z.string().datetime({ offset: true }),
-      requiresClientSecret: z.boolean(),
-      clientSecretHash: z.string(),
-      enforceHttps: z.boolean(),
-      enforceSigning: z.boolean(),
-      allowedSignatureAlgorithms: z.array(z.string()),
-      enforceMutualTls: z.boolean(),
-      clientCertificateHash: z.string(),
-      requireRequestSigning: z.boolean(),
-      description: z.string(),
-      metadataJson: z.string(),
-      tags: z.array(z.string()),
-      apiVersion: z.string(),
-      supportedFeatures: z.array(z.string()),
-      documentationUrl: z.string(),
-      supportContact: z.string(),
-      account: Account,
-      workspace: Workspace,
-      logAllRequests: z.boolean(),
-      lastRotationReason: z.string(),
-      lastRotationDate: z.string().datetime({ offset: true }),
-      rotationFrequencyDays: z.number().int(),
-      complianceStandards: z.array(z.string()),
-      requiresAuditLogging: z.boolean(),
-      dataResidency: z.string(),
-      approvedIntegrations: z.array(z.string()),
-      alertEmails: z.array(z.string()),
-      webhookUrl: z.string(),
-      alertOnQuotaThreshold: z.boolean(),
-      quotaAlertThreshold: z.number(),
-      alertOnErrorSpike: z.boolean(),
-      errorAlertThreshold: z.number(),
-      monitoringIntegrations: z.array(z.string()),
-      encrypted: z.boolean(),
-      dataClassification: z.string(),
-    })
-    .partial()
-    .passthrough(),
-);
+const APIKey = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    keyHash: z.string(),
+    keyPrefix: z.string(),
+    orgId: z.string(),
+    tenantId: z.string(),
+    scopes: z.array(z.string()),
+    allowedIps: z.array(z.string()),
+    allowedDomains: z.array(z.string()),
+    allowedEnvironments: z.array(z.string()),
+    isTestKey: z.boolean(),
+    requestsPerSecond: z.number().int(),
+    requestsPerDay: z.number().int(),
+    concurrentRequests: z.number().int(),
+    monthlyRequestQuota: z.string(),
+    costPerRequest: z.number(),
+    billingTier: z.string(),
+    totalRequests: z.string(),
+    totalErrors: z.string(),
+    lastUsedAt: z.string().datetime({ offset: true }),
+    averageResponseTime: z.number(),
+    endpointUsageJson: z.string(),
+    errorRatesJson: z.string(),
+    recentErrors: z.string(),
+    successfulRequestsCount: z.number().int(),
+    successRate: z.number(),
+    status: v1_Status.default("STATUS_UNSPECIFIED"),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    expiresAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+    lastRotatedAt: z.string().datetime({ offset: true }),
+    lastSecurityReviewAt: z.string().datetime({ offset: true }),
+    requiresClientSecret: z.boolean(),
+    clientSecretHash: z.string(),
+    enforceHttps: z.boolean(),
+    enforceSigning: z.boolean(),
+    allowedSignatureAlgorithms: z.array(z.string()),
+    enforceMutualTls: z.boolean(),
+    clientCertificateHash: z.string(),
+    requireRequestSigning: z.boolean(),
+    description: z.string(),
+    metadataJson: z.string(),
+    tags: z.array(z.string()),
+    apiVersion: z.string(),
+    supportedFeatures: z.array(z.string()),
+    documentationUrl: z.string(),
+    supportContact: z.string(),
+    logAllRequests: z.boolean(),
+    lastRotationReason: z.string(),
+    lastRotationDate: z.string().datetime({ offset: true }),
+    rotationFrequencyDays: z.number().int(),
+    complianceStandards: z.array(z.string()),
+    requiresAuditLogging: z.boolean(),
+    dataResidency: z.string(),
+    approvedIntegrations: z.array(z.string()),
+    alertEmails: z.array(z.string()),
+    webhookUrl: z.string(),
+    alertOnQuotaThreshold: z.boolean(),
+    quotaAlertThreshold: z.number(),
+    alertOnErrorSpike: z.boolean(),
+    errorAlertThreshold: z.number(),
+    monitoringIntegrations: z.array(z.string()),
+    encrypted: z.boolean(),
+    dataClassification: z.string(),
+  })
+  .partial()
+  .passthrough();
 const TriggerEvent = z.enum([
   "TRIGGER_EVENT_UNSPECIFIED",
   "TRIGGER_EVENT_JOB_STARTED",
@@ -1182,35 +534,33 @@ const WebhookConfig = z
   })
   .partial()
   .passthrough();
-const Workspace: z.ZodType<Workspace> = z.lazy(() =>
-  z
-    .object({
-      id: z.string(),
-      name: z.string(),
-      industry: z.string(),
-      domain: z.string(),
-      gdprCompliant: z.boolean(),
-      hipaaCompliant: z.boolean(),
-      soc2Compliant: z.boolean(),
-      storageQuota: z.string(),
-      usedStorage: z.string(),
-      createdAt: z.string().datetime({ offset: true }),
-      updatedAt: z.string().datetime({ offset: true }),
-      deletedAt: z.string().datetime({ offset: true }),
-      workflows: z.array(ScrapingWorkflow),
-      jobsRunThisMonth: z.number().int(),
-      workspaceJobLimit: z.number().int(),
-      dailyJobQuota: z.number().int(),
-      activeScrapers: z.number().int(),
-      totalLeadsCollected: z.number().int(),
-      lastJobRun: z.string().datetime({ offset: true }),
-      scrapingJobs: z.array(ScrapingJob),
-      apiKeys: z.array(APIKey),
-      webhooks: z.array(WebhookConfig),
-    })
-    .partial()
-    .passthrough(),
-);
+const Workspace = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    industry: z.string(),
+    domain: z.string(),
+    gdprCompliant: z.boolean(),
+    hipaaCompliant: z.boolean(),
+    soc2Compliant: z.boolean(),
+    storageQuota: z.string(),
+    usedStorage: z.string(),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+    workflows: z.array(ScrapingWorkflow),
+    jobsRunThisMonth: z.number().int(),
+    workspaceJobLimit: z.number().int(),
+    dailyJobQuota: z.number().int(),
+    activeScrapers: z.number().int(),
+    totalLeadsCollected: z.number().int(),
+    lastJobRun: z.string().datetime({ offset: true }),
+    scrapingJobs: z.array(ScrapingJob),
+    apiKeys: z.array(APIKey),
+    webhooks: z.array(WebhookConfig),
+  })
+  .partial()
+  .passthrough();
 const AccountSettings = z
   .object({
     id: z.string(),
@@ -1226,29 +576,27 @@ const AccountSettings = z
   })
   .partial()
   .passthrough();
-const Account: z.ZodType<Account> = z.lazy(() =>
-  z
-    .object({
-      id: z.string(),
-      authPlatformUserId: z.string(),
-      email: z.string(),
-      deletedAt: z.string().datetime({ offset: true }),
-      createdAt: z.string().datetime({ offset: true }),
-      accountStatus: AccountStatus.default("ACCOUNT_STATUS_UNSPECIFIED"),
-      roles: z.array(Role),
-      permissions: z.array(Permission),
-      mfaEnabled: z.boolean(),
-      lastLoginAt: z.string().datetime({ offset: true }),
-      timezone: Timezone.default("TIMEZONE_UNSPECIFIED"),
-      totalJobsRun: z.number().int(),
-      monthlyJobLimit: z.number().int(),
-      concurrentJobLimit: z.number().int(),
-      workspaces: z.array(Workspace),
-      settings: AccountSettings,
-    })
-    .partial()
-    .passthrough(),
-);
+const Account = z
+  .object({
+    id: z.string(),
+    authPlatformUserId: z.string(),
+    email: z.string(),
+    deletedAt: z.string().datetime({ offset: true }),
+    createdAt: z.string().datetime({ offset: true }),
+    accountStatus: AccountStatus.default("ACCOUNT_STATUS_UNSPECIFIED"),
+    roles: z.array(Role),
+    permissions: z.array(Permission),
+    mfaEnabled: z.boolean(),
+    lastLoginAt: z.string().datetime({ offset: true }),
+    timezone: Timezone.default("TIMEZONE_UNSPECIFIED"),
+    totalJobsRun: z.number().int(),
+    monthlyJobLimit: z.number().int(),
+    concurrentJobLimit: z.number().int(),
+    workspaces: z.array(Workspace),
+    settings: AccountSettings,
+  })
+  .partial()
+  .passthrough();
 const ListAccountsResponse = z
   .object({ accounts: z.array(Account), nextPageNumber: z.number().int() })
   .partial()
@@ -2634,36 +1982,33 @@ const TenantAPIKey = z
   })
   .partial()
   .passthrough();
-const Tenant: z.ZodType<Tenant> = z.lazy(() =>
-  z
-    .object({
-      id: z.string(),
-      name: z.string(),
-      displayName: z.string(),
-      description: z.string(),
-      organization: Organization,
-      apiBaseUrl: z.string(),
-      environmentVariables: z.record(z.string()),
-      allowedOrigins: z.array(z.string()),
-      storageQuota: z.string(),
-      monthlyRequestLimit: z.string(),
-      maxConcurrentJobs: z.number().int(),
-      enableCaching: z.boolean(),
-      enableRateLimiting: z.boolean(),
-      enableRequestLogging: z.boolean(),
-      accounts: z.array(Account),
-      apiKeys: z.array(TenantAPIKey),
-      totalRequests: z.string(),
-      totalStorageUsed: z.string(),
-      averageResponseTime: z.number(),
-      createdAt: z.string().datetime({ offset: true }),
-      updatedAt: z.string().datetime({ offset: true }),
-      deletedAt: z.string().datetime({ offset: true }),
-      status: v1_Status.default("STATUS_UNSPECIFIED"),
-    })
-    .partial()
-    .passthrough(),
-);
+const Tenant = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    displayName: z.string(),
+    description: z.string(),
+    apiBaseUrl: z.string(),
+    environmentVariables: z.record(z.string()),
+    allowedOrigins: z.array(z.string()),
+    storageQuota: z.string(),
+    monthlyRequestLimit: z.string(),
+    maxConcurrentJobs: z.number().int(),
+    enableCaching: z.boolean(),
+    enableRateLimiting: z.boolean(),
+    enableRequestLogging: z.boolean(),
+    accounts: z.array(Account),
+    apiKeys: z.array(TenantAPIKey),
+    totalRequests: z.string(),
+    totalStorageUsed: z.string(),
+    averageResponseTime: z.number(),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+    status: v1_Status.default("STATUS_UNSPECIFIED"),
+  })
+  .partial()
+  .passthrough();
 const PlanTier = z.enum([
   "PLAN_TIER_UNSPECIFIED",
   "PLAN_TIER_FREE",
@@ -2729,45 +2074,43 @@ const Subscription = z
   })
   .partial()
   .passthrough();
-const Organization: z.ZodType<Organization> = z.lazy(() =>
-  z
-    .object({
-      id: z.string(),
-      name: z.string(),
-      displayName: z.string(),
-      website: z.string(),
-      description: z.string(),
-      billingEmail: z.string(),
-      technicalEmail: z.string(),
-      phone: z.string(),
-      address: z.string(),
-      ssoEnabled: z.boolean(),
-      ssoProvider: z.string(),
-      ssoDomain: z.string(),
-      allowedDomains: z.array(z.string()),
-      enforce2fa: z.boolean(),
-      billingPlan: BillingPlan.default("BILLING_PLAN_UNSPECIFIED"),
-      billingCurrency: z.string(),
-      autoBilling: z.boolean(),
-      taxId: z.string(),
-      complianceFrameworks: z.array(z.string()),
-      dataProcessingAgreement: z.boolean(),
-      dataRegion: z.string(),
-      maxTenants: z.number().int(),
-      totalStorageLimit: z.string(),
-      maxApiKeys: z.number().int(),
-      maxUsers: z.number().int(),
-      tenants: z.array(Tenant),
-      subscriptions: Subscription,
-      createdAt: z.string().datetime({ offset: true }),
-      updatedAt: z.string().datetime({ offset: true }),
-      deletedAt: z.string().datetime({ offset: true }),
-      createdBy: z.string(),
-      status: v1_Status.default("STATUS_UNSPECIFIED"),
-    })
-    .partial()
-    .passthrough(),
-);
+const Organization = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    displayName: z.string(),
+    website: z.string(),
+    description: z.string(),
+    billingEmail: z.string(),
+    technicalEmail: z.string(),
+    phone: z.string(),
+    address: z.string(),
+    ssoEnabled: z.boolean(),
+    ssoProvider: z.string(),
+    ssoDomain: z.string(),
+    allowedDomains: z.array(z.string()),
+    enforce2fa: z.boolean(),
+    billingPlan: BillingPlan.default("BILLING_PLAN_UNSPECIFIED"),
+    billingCurrency: z.string(),
+    autoBilling: z.boolean(),
+    taxId: z.string(),
+    complianceFrameworks: z.array(z.string()),
+    dataProcessingAgreement: z.boolean(),
+    dataRegion: z.string(),
+    maxTenants: z.number().int(),
+    totalStorageLimit: z.string(),
+    maxApiKeys: z.number().int(),
+    maxUsers: z.number().int(),
+    tenants: z.array(Tenant),
+    subscriptions: Subscription,
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+    createdBy: z.string(),
+    status: v1_Status.default("STATUS_UNSPECIFIED"),
+  })
+  .partial()
+  .passthrough();
 const ListOrganizationsResponse = z
   .object({
     organizations: z.array(Organization),

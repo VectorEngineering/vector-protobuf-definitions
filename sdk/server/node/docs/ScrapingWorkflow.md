@@ -16,7 +16,6 @@ Name | Type | Description | Notes
 **updatedAt** | **String!** |  | [optional] [default to null]
 **deletedAt** | **String!** |  | [optional] [default to null]
 **jobs** | [**ScrapingJob**](ScrapingJob.md) |  | [optional] [default to null]
-**workspace** | [***Workspace**](Workspace.md) |  | [optional] [default to null]
 **geoFencingRadius** | **Float!** |  | [optional] [default to null]
 **geoFencingLat** | **Float!** |  | [optional] [default to null]
 **geoFencingLon** | **Float!** |  | [optional] [default to null]

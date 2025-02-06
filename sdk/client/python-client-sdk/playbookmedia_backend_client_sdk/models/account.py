@@ -26,6 +26,7 @@ from playbookmedia_backend_client_sdk.models.account_status import AccountStatus
 from playbookmedia_backend_client_sdk.models.permission import Permission
 from playbookmedia_backend_client_sdk.models.role import Role
 from playbookmedia_backend_client_sdk.models.timezone import Timezone
+from playbookmedia_backend_client_sdk.models.workspace import Workspace
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -131,7 +132,4 @@ class Account(BaseModel):
         })
         return _obj
 
-from playbookmedia_backend_client_sdk.models.workspace import Workspace
-# TODO: Rewrite to not use raise_errors
-Account.model_rebuild(raise_errors=False)
 

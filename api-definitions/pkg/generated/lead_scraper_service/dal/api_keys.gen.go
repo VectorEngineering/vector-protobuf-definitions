@@ -30,7 +30,6 @@ func newAPIKeyORM(db *gorm.DB, opts ...gen.DOOption) aPIKeyORM {
 
 	tableName := _aPIKeyORM.aPIKeyORMDo.TableName()
 	_aPIKeyORM.ALL = field.NewAsterisk(tableName)
-	_aPIKeyORM.AccountId = field.NewUint64(tableName, "account_id")
 	_aPIKeyORM.AlertEmails = field.NewField(tableName, "alert_emails")
 	_aPIKeyORM.AlertOnErrorSpike = field.NewBool(tableName, "alert_on_error_spike")
 	_aPIKeyORM.AlertOnQuotaThreshold = field.NewBool(tableName, "alert_on_quota_threshold")
@@ -97,184 +96,6 @@ func newAPIKeyORM(db *gorm.DB, opts ...gen.DOOption) aPIKeyORM {
 	_aPIKeyORM.UpdatedAt = field.NewTime(tableName, "updated_at")
 	_aPIKeyORM.WebhookUrl = field.NewString(tableName, "webhook_url")
 	_aPIKeyORM.WorkspaceId = field.NewUint64(tableName, "workspace_id")
-	_aPIKeyORM.Account = aPIKeyORMBelongsToAccount{
-		db: db.Session(&gorm.Session{}),
-
-		RelationField: field.NewRelation("Account", "lead_scraper_servicev1.AccountORM"),
-		Settings: struct {
-			field.RelationField
-		}{
-			RelationField: field.NewRelation("Account.Settings", "lead_scraper_servicev1.AccountSettingsORM"),
-		},
-		Workspaces: struct {
-			field.RelationField
-			ApiKeys struct {
-				field.RelationField
-				Account struct {
-					field.RelationField
-				}
-				Workspace struct {
-					field.RelationField
-				}
-			}
-			ScrapingJobs struct {
-				field.RelationField
-				Leads struct {
-					field.RelationField
-					Job struct {
-						field.RelationField
-					}
-					Workspace struct {
-						field.RelationField
-					}
-					RegularHours struct {
-						field.RelationField
-					}
-					Reviews struct {
-						field.RelationField
-					}
-					SpecialHours struct {
-						field.RelationField
-					}
-				}
-			}
-			Webhooks struct {
-				field.RelationField
-			}
-			Workflows struct {
-				field.RelationField
-				Workspace struct {
-					field.RelationField
-				}
-				Jobs struct {
-					field.RelationField
-				}
-			}
-		}{
-			RelationField: field.NewRelation("Account.Workspaces", "lead_scraper_servicev1.WorkspaceORM"),
-			ApiKeys: struct {
-				field.RelationField
-				Account struct {
-					field.RelationField
-				}
-				Workspace struct {
-					field.RelationField
-				}
-			}{
-				RelationField: field.NewRelation("Account.Workspaces.ApiKeys", "lead_scraper_servicev1.APIKeyORM"),
-				Account: struct {
-					field.RelationField
-				}{
-					RelationField: field.NewRelation("Account.Workspaces.ApiKeys.Account", "lead_scraper_servicev1.AccountORM"),
-				},
-				Workspace: struct {
-					field.RelationField
-				}{
-					RelationField: field.NewRelation("Account.Workspaces.ApiKeys.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-				},
-			},
-			ScrapingJobs: struct {
-				field.RelationField
-				Leads struct {
-					field.RelationField
-					Job struct {
-						field.RelationField
-					}
-					Workspace struct {
-						field.RelationField
-					}
-					RegularHours struct {
-						field.RelationField
-					}
-					Reviews struct {
-						field.RelationField
-					}
-					SpecialHours struct {
-						field.RelationField
-					}
-				}
-			}{
-				RelationField: field.NewRelation("Account.Workspaces.ScrapingJobs", "lead_scraper_servicev1.ScrapingJobORM"),
-				Leads: struct {
-					field.RelationField
-					Job struct {
-						field.RelationField
-					}
-					Workspace struct {
-						field.RelationField
-					}
-					RegularHours struct {
-						field.RelationField
-					}
-					Reviews struct {
-						field.RelationField
-					}
-					SpecialHours struct {
-						field.RelationField
-					}
-				}{
-					RelationField: field.NewRelation("Account.Workspaces.ScrapingJobs.Leads", "lead_scraper_servicev1.LeadORM"),
-					Job: struct {
-						field.RelationField
-					}{
-						RelationField: field.NewRelation("Account.Workspaces.ScrapingJobs.Leads.Job", "lead_scraper_servicev1.ScrapingJobORM"),
-					},
-					Workspace: struct {
-						field.RelationField
-					}{
-						RelationField: field.NewRelation("Account.Workspaces.ScrapingJobs.Leads.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-					},
-					RegularHours: struct {
-						field.RelationField
-					}{
-						RelationField: field.NewRelation("Account.Workspaces.ScrapingJobs.Leads.RegularHours", "lead_scraper_servicev1.BusinessHoursORM"),
-					},
-					Reviews: struct {
-						field.RelationField
-					}{
-						RelationField: field.NewRelation("Account.Workspaces.ScrapingJobs.Leads.Reviews", "lead_scraper_servicev1.ReviewORM"),
-					},
-					SpecialHours: struct {
-						field.RelationField
-					}{
-						RelationField: field.NewRelation("Account.Workspaces.ScrapingJobs.Leads.SpecialHours", "lead_scraper_servicev1.BusinessHoursORM"),
-					},
-				},
-			},
-			Webhooks: struct {
-				field.RelationField
-			}{
-				RelationField: field.NewRelation("Account.Workspaces.Webhooks", "lead_scraper_servicev1.WebhookConfigORM"),
-			},
-			Workflows: struct {
-				field.RelationField
-				Workspace struct {
-					field.RelationField
-				}
-				Jobs struct {
-					field.RelationField
-				}
-			}{
-				RelationField: field.NewRelation("Account.Workspaces.Workflows", "lead_scraper_servicev1.ScrapingWorkflowORM"),
-				Workspace: struct {
-					field.RelationField
-				}{
-					RelationField: field.NewRelation("Account.Workspaces.Workflows.Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-				},
-				Jobs: struct {
-					field.RelationField
-				}{
-					RelationField: field.NewRelation("Account.Workspaces.Workflows.Jobs", "lead_scraper_servicev1.ScrapingJobORM"),
-				},
-			},
-		},
-	}
-
-	_aPIKeyORM.Workspace = aPIKeyORMBelongsToWorkspace{
-		db: db.Session(&gorm.Session{}),
-
-		RelationField: field.NewRelation("Workspace", "lead_scraper_servicev1.WorkspaceORM"),
-	}
 
 	_aPIKeyORM.fillFieldMap()
 
@@ -285,7 +106,6 @@ type aPIKeyORM struct {
 	aPIKeyORMDo
 
 	ALL                        field.Asterisk
-	AccountId                  field.Uint64
 	AlertEmails                field.Field
 	AlertOnErrorSpike          field.Bool
 	AlertOnQuotaThreshold      field.Bool
@@ -352,9 +172,6 @@ type aPIKeyORM struct {
 	UpdatedAt                  field.Time
 	WebhookUrl                 field.String
 	WorkspaceId                field.Uint64
-	Account                    aPIKeyORMBelongsToAccount
-
-	Workspace aPIKeyORMBelongsToWorkspace
 
 	fieldMap map[string]field.Expr
 }
@@ -371,7 +188,6 @@ func (a aPIKeyORM) As(alias string) *aPIKeyORM {
 
 func (a *aPIKeyORM) updateTableName(table string) *aPIKeyORM {
 	a.ALL = field.NewAsterisk(table)
-	a.AccountId = field.NewUint64(table, "account_id")
 	a.AlertEmails = field.NewField(table, "alert_emails")
 	a.AlertOnErrorSpike = field.NewBool(table, "alert_on_error_spike")
 	a.AlertOnQuotaThreshold = field.NewBool(table, "alert_on_quota_threshold")
@@ -454,8 +270,7 @@ func (a *aPIKeyORM) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (a *aPIKeyORM) fillFieldMap() {
-	a.fieldMap = make(map[string]field.Expr, 69)
-	a.fieldMap["account_id"] = a.AccountId
+	a.fieldMap = make(map[string]field.Expr, 66)
 	a.fieldMap["alert_emails"] = a.AlertEmails
 	a.fieldMap["alert_on_error_spike"] = a.AlertOnErrorSpike
 	a.fieldMap["alert_on_quota_threshold"] = a.AlertOnQuotaThreshold
@@ -522,7 +337,6 @@ func (a *aPIKeyORM) fillFieldMap() {
 	a.fieldMap["updated_at"] = a.UpdatedAt
 	a.fieldMap["webhook_url"] = a.WebhookUrl
 	a.fieldMap["workspace_id"] = a.WorkspaceId
-
 }
 
 func (a aPIKeyORM) clone(db *gorm.DB) aPIKeyORM {
@@ -533,197 +347,6 @@ func (a aPIKeyORM) clone(db *gorm.DB) aPIKeyORM {
 func (a aPIKeyORM) replaceDB(db *gorm.DB) aPIKeyORM {
 	a.aPIKeyORMDo.ReplaceDB(db)
 	return a
-}
-
-type aPIKeyORMBelongsToAccount struct {
-	db *gorm.DB
-
-	field.RelationField
-
-	Settings struct {
-		field.RelationField
-	}
-	Workspaces struct {
-		field.RelationField
-		ApiKeys struct {
-			field.RelationField
-			Account struct {
-				field.RelationField
-			}
-			Workspace struct {
-				field.RelationField
-			}
-		}
-		ScrapingJobs struct {
-			field.RelationField
-			Leads struct {
-				field.RelationField
-				Job struct {
-					field.RelationField
-				}
-				Workspace struct {
-					field.RelationField
-				}
-				RegularHours struct {
-					field.RelationField
-				}
-				Reviews struct {
-					field.RelationField
-				}
-				SpecialHours struct {
-					field.RelationField
-				}
-			}
-		}
-		Webhooks struct {
-			field.RelationField
-		}
-		Workflows struct {
-			field.RelationField
-			Workspace struct {
-				field.RelationField
-			}
-			Jobs struct {
-				field.RelationField
-			}
-		}
-	}
-}
-
-func (a aPIKeyORMBelongsToAccount) Where(conds ...field.Expr) *aPIKeyORMBelongsToAccount {
-	if len(conds) == 0 {
-		return &a
-	}
-
-	exprs := make([]clause.Expression, 0, len(conds))
-	for _, cond := range conds {
-		exprs = append(exprs, cond.BeCond().(clause.Expression))
-	}
-	a.db = a.db.Clauses(clause.Where{Exprs: exprs})
-	return &a
-}
-
-func (a aPIKeyORMBelongsToAccount) WithContext(ctx context.Context) *aPIKeyORMBelongsToAccount {
-	a.db = a.db.WithContext(ctx)
-	return &a
-}
-
-func (a aPIKeyORMBelongsToAccount) Session(session *gorm.Session) *aPIKeyORMBelongsToAccount {
-	a.db = a.db.Session(session)
-	return &a
-}
-
-func (a aPIKeyORMBelongsToAccount) Model(m *lead_scraper_servicev1.APIKeyORM) *aPIKeyORMBelongsToAccountTx {
-	return &aPIKeyORMBelongsToAccountTx{a.db.Model(m).Association(a.Name())}
-}
-
-type aPIKeyORMBelongsToAccountTx struct{ tx *gorm.Association }
-
-func (a aPIKeyORMBelongsToAccountTx) Find() (result *lead_scraper_servicev1.AccountORM, err error) {
-	return result, a.tx.Find(&result)
-}
-
-func (a aPIKeyORMBelongsToAccountTx) Append(values ...*lead_scraper_servicev1.AccountORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Append(targetValues...)
-}
-
-func (a aPIKeyORMBelongsToAccountTx) Replace(values ...*lead_scraper_servicev1.AccountORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Replace(targetValues...)
-}
-
-func (a aPIKeyORMBelongsToAccountTx) Delete(values ...*lead_scraper_servicev1.AccountORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Delete(targetValues...)
-}
-
-func (a aPIKeyORMBelongsToAccountTx) Clear() error {
-	return a.tx.Clear()
-}
-
-func (a aPIKeyORMBelongsToAccountTx) Count() int64 {
-	return a.tx.Count()
-}
-
-type aPIKeyORMBelongsToWorkspace struct {
-	db *gorm.DB
-
-	field.RelationField
-}
-
-func (a aPIKeyORMBelongsToWorkspace) Where(conds ...field.Expr) *aPIKeyORMBelongsToWorkspace {
-	if len(conds) == 0 {
-		return &a
-	}
-
-	exprs := make([]clause.Expression, 0, len(conds))
-	for _, cond := range conds {
-		exprs = append(exprs, cond.BeCond().(clause.Expression))
-	}
-	a.db = a.db.Clauses(clause.Where{Exprs: exprs})
-	return &a
-}
-
-func (a aPIKeyORMBelongsToWorkspace) WithContext(ctx context.Context) *aPIKeyORMBelongsToWorkspace {
-	a.db = a.db.WithContext(ctx)
-	return &a
-}
-
-func (a aPIKeyORMBelongsToWorkspace) Session(session *gorm.Session) *aPIKeyORMBelongsToWorkspace {
-	a.db = a.db.Session(session)
-	return &a
-}
-
-func (a aPIKeyORMBelongsToWorkspace) Model(m *lead_scraper_servicev1.APIKeyORM) *aPIKeyORMBelongsToWorkspaceTx {
-	return &aPIKeyORMBelongsToWorkspaceTx{a.db.Model(m).Association(a.Name())}
-}
-
-type aPIKeyORMBelongsToWorkspaceTx struct{ tx *gorm.Association }
-
-func (a aPIKeyORMBelongsToWorkspaceTx) Find() (result *lead_scraper_servicev1.WorkspaceORM, err error) {
-	return result, a.tx.Find(&result)
-}
-
-func (a aPIKeyORMBelongsToWorkspaceTx) Append(values ...*lead_scraper_servicev1.WorkspaceORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Append(targetValues...)
-}
-
-func (a aPIKeyORMBelongsToWorkspaceTx) Replace(values ...*lead_scraper_servicev1.WorkspaceORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Replace(targetValues...)
-}
-
-func (a aPIKeyORMBelongsToWorkspaceTx) Delete(values ...*lead_scraper_servicev1.WorkspaceORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Delete(targetValues...)
-}
-
-func (a aPIKeyORMBelongsToWorkspaceTx) Clear() error {
-	return a.tx.Clear()
-}
-
-func (a aPIKeyORMBelongsToWorkspaceTx) Count() int64 {
-	return a.tx.Count()
 }
 
 type aPIKeyORMDo struct{ gen.DO }

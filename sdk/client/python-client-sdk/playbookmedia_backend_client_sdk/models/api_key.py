@@ -77,8 +77,6 @@ class APIKey(BaseModel):
     supported_features: Optional[List[StrictStr]] = Field(default=None, alias="supportedFeatures")
     documentation_url: Optional[StrictStr] = Field(default=None, alias="documentationUrl")
     support_contact: Optional[StrictStr] = Field(default=None, alias="supportContact")
-    account: Optional[Account] = None
-    workspace: Optional[Workspace] = None
     log_all_requests: Optional[StrictBool] = Field(default=None, alias="logAllRequests")
     last_rotation_reason: Optional[StrictStr] = Field(default=None, alias="lastRotationReason")
     last_rotation_date: Optional[datetime] = Field(default=None, alias="lastRotationDate")
@@ -96,7 +94,7 @@ class APIKey(BaseModel):
     monitoring_integrations: Optional[List[StrictStr]] = Field(default=None, alias="monitoringIntegrations")
     encrypted: Optional[StrictBool] = None
     data_classification: Optional[StrictStr] = Field(default=None, alias="dataClassification")
-    __properties: ClassVar[List[str]] = ["id", "name", "keyHash", "keyPrefix", "orgId", "tenantId", "scopes", "allowedIps", "allowedDomains", "allowedEnvironments", "isTestKey", "requestsPerSecond", "requestsPerDay", "concurrentRequests", "monthlyRequestQuota", "costPerRequest", "billingTier", "totalRequests", "totalErrors", "lastUsedAt", "averageResponseTime", "endpointUsageJson", "errorRatesJson", "recentErrors", "successfulRequestsCount", "successRate", "status", "createdAt", "updatedAt", "expiresAt", "deletedAt", "lastRotatedAt", "lastSecurityReviewAt", "requiresClientSecret", "clientSecretHash", "enforceHttps", "enforceSigning", "allowedSignatureAlgorithms", "enforceMutualTls", "clientCertificateHash", "requireRequestSigning", "description", "metadataJson", "tags", "apiVersion", "supportedFeatures", "documentationUrl", "supportContact", "account", "workspace", "logAllRequests", "lastRotationReason", "lastRotationDate", "rotationFrequencyDays", "complianceStandards", "requiresAuditLogging", "dataResidency", "approvedIntegrations", "alertEmails", "webhookUrl", "alertOnQuotaThreshold", "quotaAlertThreshold", "alertOnErrorSpike", "errorAlertThreshold", "monitoringIntegrations", "encrypted", "dataClassification"]
+    __properties: ClassVar[List[str]] = ["id", "name", "keyHash", "keyPrefix", "orgId", "tenantId", "scopes", "allowedIps", "allowedDomains", "allowedEnvironments", "isTestKey", "requestsPerSecond", "requestsPerDay", "concurrentRequests", "monthlyRequestQuota", "costPerRequest", "billingTier", "totalRequests", "totalErrors", "lastUsedAt", "averageResponseTime", "endpointUsageJson", "errorRatesJson", "recentErrors", "successfulRequestsCount", "successRate", "status", "createdAt", "updatedAt", "expiresAt", "deletedAt", "lastRotatedAt", "lastSecurityReviewAt", "requiresClientSecret", "clientSecretHash", "enforceHttps", "enforceSigning", "allowedSignatureAlgorithms", "enforceMutualTls", "clientCertificateHash", "requireRequestSigning", "description", "metadataJson", "tags", "apiVersion", "supportedFeatures", "documentationUrl", "supportContact", "logAllRequests", "lastRotationReason", "lastRotationDate", "rotationFrequencyDays", "complianceStandards", "requiresAuditLogging", "dataResidency", "approvedIntegrations", "alertEmails", "webhookUrl", "alertOnQuotaThreshold", "quotaAlertThreshold", "alertOnErrorSpike", "errorAlertThreshold", "monitoringIntegrations", "encrypted", "dataClassification"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -137,12 +135,6 @@ class APIKey(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of account
-        if self.account:
-            _dict['account'] = self.account.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of workspace
-        if self.workspace:
-            _dict['workspace'] = self.workspace.to_dict()
         return _dict
 
     @classmethod
@@ -203,8 +195,6 @@ class APIKey(BaseModel):
             "supportedFeatures": obj.get("supportedFeatures"),
             "documentationUrl": obj.get("documentationUrl"),
             "supportContact": obj.get("supportContact"),
-            "account": Account.from_dict(obj["account"]) if obj.get("account") is not None else None,
-            "workspace": Workspace.from_dict(obj["workspace"]) if obj.get("workspace") is not None else None,
             "logAllRequests": obj.get("logAllRequests"),
             "lastRotationReason": obj.get("lastRotationReason"),
             "lastRotationDate": obj.get("lastRotationDate"),
@@ -225,8 +215,4 @@ class APIKey(BaseModel):
         })
         return _obj
 
-from playbookmedia_backend_client_sdk.models.account import Account
-from playbookmedia_backend_client_sdk.models.workspace import Workspace
-# TODO: Rewrite to not use raise_errors
-APIKey.model_rebuild(raise_errors=False)
 

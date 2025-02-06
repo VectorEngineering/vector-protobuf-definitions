@@ -10968,13 +10968,6 @@
         "supportContact": {
           "type": "string"
         },
-        "account": {
-          "$ref": "#/definitions/Account",
-          "title": "Relationships"
-        },
-        "workspace": {
-          "$ref": "#/definitions/Workspace"
-        },
         "logAllRequests": {
           "type": "boolean",
           "title": "Compliance and auditing"
@@ -12448,13 +12441,6 @@
           "type": "string",
           "format": "int64"
         },
-        "orgId": {
-          "type": "string",
-          "title": "Org context"
-        },
-        "tenantId": {
-          "type": "string"
-        },
         "createdAt": {
           "type": "string",
           "format": "date-time",
@@ -12467,13 +12453,6 @@
         "deletedAt": {
           "type": "string",
           "format": "date-time"
-        },
-        "job": {
-          "$ref": "#/definitions/ScrapingJob",
-          "title": "Relationships"
-        },
-        "workspace": {
-          "$ref": "#/definitions/Workspace"
         },
         "placeId": {
           "type": "string",
@@ -13951,9 +13930,6 @@
           },
           "title": "Relationships"
         },
-        "workspace": {
-          "$ref": "#/definitions/Workspace"
-        },
         "geoFencingRadius": {
           "type": "number",
           "format": "float",
@@ -14339,10 +14315,6 @@
         },
         "description": {
           "type": "string"
-        },
-        "organization": {
-          "$ref": "#/definitions/Organization",
-          "title": "Organization Context"
         },
         "apiBaseUrl": {
           "type": "string",

@@ -12,7 +12,6 @@ import java.util.List;
 import org.openapitools.model.OutputFormat;
 import org.openapitools.model.ScrapingJob;
 import org.openapitools.model.WorkflowStatus;
-import org.openapitools.model.Workspace;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -28,7 +27,7 @@ import javax.annotation.Generated;
  * ScrapingWorkflow
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T14:06:38.155571-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-06T17:12:08.548747-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ScrapingWorkflow {
 
   private String id;
@@ -62,8 +61,6 @@ public class ScrapingWorkflow {
 
   @Valid
   private List<@Valid ScrapingJob> jobs = new ArrayList<>();
-
-  private Workspace workspace;
 
   private Float geoFencingRadius;
 
@@ -391,26 +388,6 @@ public class ScrapingWorkflow {
 
   public void setJobs(List<@Valid ScrapingJob> jobs) {
     this.jobs = jobs;
-  }
-
-  public ScrapingWorkflow workspace(Workspace workspace) {
-    this.workspace = workspace;
-    return this;
-  }
-
-  /**
-   * Get workspace
-   * @return workspace
-   */
-  @Valid 
-  @Schema(name = "workspace", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("workspace")
-  public Workspace getWorkspace() {
-    return workspace;
-  }
-
-  public void setWorkspace(Workspace workspace) {
-    this.workspace = workspace;
   }
 
   public ScrapingWorkflow geoFencingRadius(Float geoFencingRadius) {
@@ -1031,7 +1008,6 @@ public class ScrapingWorkflow {
         Objects.equals(this.updatedAt, scrapingWorkflow.updatedAt) &&
         Objects.equals(this.deletedAt, scrapingWorkflow.deletedAt) &&
         Objects.equals(this.jobs, scrapingWorkflow.jobs) &&
-        Objects.equals(this.workspace, scrapingWorkflow.workspace) &&
         Objects.equals(this.geoFencingRadius, scrapingWorkflow.geoFencingRadius) &&
         Objects.equals(this.geoFencingLat, scrapingWorkflow.geoFencingLat) &&
         Objects.equals(this.geoFencingLon, scrapingWorkflow.geoFencingLon) &&
@@ -1065,7 +1041,7 @@ public class ScrapingWorkflow {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, cronExpression, nextRunTime, lastRunTime, status, retryCount, maxRetries, alertEmails, createdAt, updatedAt, deletedAt, jobs, workspace, geoFencingRadius, geoFencingLat, geoFencingLon, geoFencingZoomMin, geoFencingZoomMax, includeReviews, includePhotos, includeBusinessHours, maxReviewsPerBusiness, outputFormat, outputDestination, dataRetention, anonymizePii, notificationSlackChannel, notificationEmailGroup, notificationNotifyOnStart, notificationNotifyOnComplete, notificationNotifyOnFailure, contentFilterAllowedCountries, contentFilterExcludedTypes, contentFilterMinimumRating, contentFilterMinimumReviews, qosMaxConcurrentRequests, qosMaxRetries, qosRequestTimeout, qosEnableJavascript, respectRobotsTxt, acceptTermsOfService, userAgent);
+    return Objects.hash(id, name, cronExpression, nextRunTime, lastRunTime, status, retryCount, maxRetries, alertEmails, createdAt, updatedAt, deletedAt, jobs, geoFencingRadius, geoFencingLat, geoFencingLon, geoFencingZoomMin, geoFencingZoomMax, includeReviews, includePhotos, includeBusinessHours, maxReviewsPerBusiness, outputFormat, outputDestination, dataRetention, anonymizePii, notificationSlackChannel, notificationEmailGroup, notificationNotifyOnStart, notificationNotifyOnComplete, notificationNotifyOnFailure, contentFilterAllowedCountries, contentFilterExcludedTypes, contentFilterMinimumRating, contentFilterMinimumReviews, qosMaxConcurrentRequests, qosMaxRetries, qosRequestTimeout, qosEnableJavascript, respectRobotsTxt, acceptTermsOfService, userAgent);
   }
 
   @Override
@@ -1085,7 +1061,6 @@ public class ScrapingWorkflow {
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
     sb.append("    deletedAt: ").append(toIndentedString(deletedAt)).append("\n");
     sb.append("    jobs: ").append(toIndentedString(jobs)).append("\n");
-    sb.append("    workspace: ").append(toIndentedString(workspace)).append("\n");
     sb.append("    geoFencingRadius: ").append(toIndentedString(geoFencingRadius)).append("\n");
     sb.append("    geoFencingLat: ").append(toIndentedString(geoFencingLat)).append("\n");
     sb.append("    geoFencingLon: ").append(toIndentedString(geoFencingLon)).append("\n");

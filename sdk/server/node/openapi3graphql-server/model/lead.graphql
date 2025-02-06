@@ -24,13 +24,9 @@ type Lead {
   industry: String!
   employeeCount: Int!
   estimatedRevenue: String!
-  orgId: String!
-  tenantId: String!
   createdAt: String!
   updatedAt: String!
   deletedAt: String!
-  job: ScrapingJob
-  workspace: Workspace
   placeId: String!
   googleMapsUrl: String!
   businessStatus: String!
@@ -112,13 +108,9 @@ input LeadInput {
     industry: String!
     employeeCount: Int!
     estimatedRevenue: String!
-    orgId: String!
-    tenantId: String!
     createdAt: String!
     updatedAt: String!
     deletedAt: String!
-    job: ScrapingJobInput
-    workspace: WorkspaceInput
     placeId: String!
     googleMapsUrl: String!
     businessStatus: String!

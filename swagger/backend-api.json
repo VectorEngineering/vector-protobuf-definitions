@@ -21977,12 +21977,6 @@
                     "supportContact": {
                         "type": "string"
                     },
-                    "account": {
-                        "$ref": "#/components/schemas/Account"
-                    },
-                    "workspace": {
-                        "$ref": "#/components/schemas/Workspace"
-                    },
                     "logAllRequests": {
                         "type": "boolean",
                         "title": "Compliance and auditing"
@@ -23444,13 +23438,6 @@
                         "type": "string",
                         "format": "int64"
                     },
-                    "orgId": {
-                        "type": "string",
-                        "title": "Org context"
-                    },
-                    "tenantId": {
-                        "type": "string"
-                    },
                     "createdAt": {
                         "type": "string",
                         "format": "date-time",
@@ -23463,12 +23450,6 @@
                     "deletedAt": {
                         "type": "string",
                         "format": "date-time"
-                    },
-                    "job": {
-                        "$ref": "#/components/schemas/ScrapingJob"
-                    },
-                    "workspace": {
-                        "$ref": "#/components/schemas/Workspace"
                     },
                     "placeId": {
                         "type": "string",
@@ -24922,9 +24903,6 @@
                         },
                         "title": "Relationships"
                     },
-                    "workspace": {
-                        "$ref": "#/components/schemas/Workspace"
-                    },
                     "geoFencingRadius": {
                         "type": "number",
                         "format": "float",
@@ -25307,9 +25285,6 @@
                     },
                     "description": {
                         "type": "string"
-                    },
-                    "organization": {
-                        "$ref": "#/components/schemas/Organization"
                     },
                     "apiBaseUrl": {
                         "type": "string",

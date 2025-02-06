@@ -21,6 +21,9 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from playbookmedia_backend_client_sdk.models.api_key import APIKey
+from playbookmedia_backend_client_sdk.models.scraping_job import ScrapingJob
+from playbookmedia_backend_client_sdk.models.scraping_workflow import ScrapingWorkflow
 from playbookmedia_backend_client_sdk.models.webhook_config import WebhookConfig
 from typing import Optional, Set
 from typing_extensions import Self
@@ -157,9 +160,4 @@ class Workspace(BaseModel):
         })
         return _obj
 
-from playbookmedia_backend_client_sdk.models.api_key import APIKey
-from playbookmedia_backend_client_sdk.models.scraping_job import ScrapingJob
-from playbookmedia_backend_client_sdk.models.scraping_workflow import ScrapingWorkflow
-# TODO: Rewrite to not use raise_errors
-Workspace.model_rebuild(raise_errors=False)
 

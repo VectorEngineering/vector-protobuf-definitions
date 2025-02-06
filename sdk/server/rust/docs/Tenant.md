@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **name** | **String** |  | [optional] [default to None]
 **display_name** | **String** |  | [optional] [default to None]
 **description** | **String** |  | [optional] [default to None]
-**organization** | [***models::Organization**](Organization.md) |  | [optional] [default to None]
 **api_base_url** | **String** |  | [optional] [default to None]
 **environment_variables** | **std::collections::HashMap<String, String>** |  | [optional] [default to None]
 **allowed_origins** | **Vec<String>** |  | [optional] [default to None]

@@ -22,7 +22,6 @@ type ScrapingWorkflow {
   updatedAt: String!
   deletedAt: String!
   jobs: [ScrapingJob!]
-  workspace: Workspace
   geoFencingRadius: Float!
   geoFencingLat: Float!
   geoFencingLon: Float!
@@ -68,7 +67,6 @@ input ScrapingWorkflowInput {
     updatedAt: String!
     deletedAt: String!
     jobs: [ScrapingJobInput]
-    workspace: WorkspaceInput
     geoFencingRadius: Float!
     geoFencingLat: Float!
     geoFencingLon: Float!

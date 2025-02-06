@@ -9,9 +9,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.openapitools.model.Account;
 import org.openapitools.model.V1Status;
-import org.openapitools.model.Workspace;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -28,7 +26,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "APIKey", description = "APIKey represents an authentication token for accessing the API. It includes features for rate limiting, permissions, and usage tracking.  Key features: - Unique key identification - Scope-based access control - Rate limiting - Usage tracking - Expiration management - Multi-tenant support  Database considerations: - Uses GORM for ORM mapping - Includes indexes for efficient querying - Supports soft deletes  Usage example: ```go apiKey := &APIKey{     Name: \"Production API Key\",     Scopes: []string{\"leads:read\", \"leads:write\"},     ExpiresAt: timestamppb.New(time.Now().AddDate(1, 0, 0)), } ```")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-05T14:06:38.155571-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-06T17:12:08.548747-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class APIKey {
 
   private String id;
@@ -140,10 +138,6 @@ public class APIKey {
   private String documentationUrl;
 
   private String supportContact;
-
-  private Account account;
-
-  private Workspace workspace;
 
   private Boolean logAllRequests;
 
@@ -1200,46 +1194,6 @@ public class APIKey {
     this.supportContact = supportContact;
   }
 
-  public APIKey account(Account account) {
-    this.account = account;
-    return this;
-  }
-
-  /**
-   * Get account
-   * @return account
-   */
-  @Valid 
-  @Schema(name = "account", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("account")
-  public Account getAccount() {
-    return account;
-  }
-
-  public void setAccount(Account account) {
-    this.account = account;
-  }
-
-  public APIKey workspace(Workspace workspace) {
-    this.workspace = workspace;
-    return this;
-  }
-
-  /**
-   * Get workspace
-   * @return workspace
-   */
-  @Valid 
-  @Schema(name = "workspace", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("workspace")
-  public Workspace getWorkspace() {
-    return workspace;
-  }
-
-  public void setWorkspace(Workspace workspace) {
-    this.workspace = workspace;
-  }
-
   public APIKey logAllRequests(Boolean logAllRequests) {
     this.logAllRequests = logAllRequests;
     return this;
@@ -1669,8 +1623,6 @@ public class APIKey {
         Objects.equals(this.supportedFeatures, apIKey.supportedFeatures) &&
         Objects.equals(this.documentationUrl, apIKey.documentationUrl) &&
         Objects.equals(this.supportContact, apIKey.supportContact) &&
-        Objects.equals(this.account, apIKey.account) &&
-        Objects.equals(this.workspace, apIKey.workspace) &&
         Objects.equals(this.logAllRequests, apIKey.logAllRequests) &&
         Objects.equals(this.lastRotationReason, apIKey.lastRotationReason) &&
         Objects.equals(this.lastRotationDate, apIKey.lastRotationDate) &&
@@ -1692,7 +1644,7 @@ public class APIKey {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, keyHash, keyPrefix, orgId, tenantId, scopes, allowedIps, allowedDomains, allowedEnvironments, isTestKey, requestsPerSecond, requestsPerDay, concurrentRequests, monthlyRequestQuota, costPerRequest, billingTier, totalRequests, totalErrors, lastUsedAt, averageResponseTime, Arrays.hashCode(endpointUsageJson), Arrays.hashCode(errorRatesJson), Arrays.hashCode(recentErrors), successfulRequestsCount, successRate, status, createdAt, updatedAt, expiresAt, deletedAt, lastRotatedAt, lastSecurityReviewAt, requiresClientSecret, clientSecretHash, enforceHttps, enforceSigning, allowedSignatureAlgorithms, enforceMutualTls, clientCertificateHash, requireRequestSigning, description, Arrays.hashCode(metadataJson), tags, apiVersion, supportedFeatures, documentationUrl, supportContact, account, workspace, logAllRequests, lastRotationReason, lastRotationDate, rotationFrequencyDays, complianceStandards, requiresAuditLogging, dataResidency, approvedIntegrations, alertEmails, webhookUrl, alertOnQuotaThreshold, quotaAlertThreshold, alertOnErrorSpike, errorAlertThreshold, monitoringIntegrations, encrypted, dataClassification);
+    return Objects.hash(id, name, keyHash, keyPrefix, orgId, tenantId, scopes, allowedIps, allowedDomains, allowedEnvironments, isTestKey, requestsPerSecond, requestsPerDay, concurrentRequests, monthlyRequestQuota, costPerRequest, billingTier, totalRequests, totalErrors, lastUsedAt, averageResponseTime, Arrays.hashCode(endpointUsageJson), Arrays.hashCode(errorRatesJson), Arrays.hashCode(recentErrors), successfulRequestsCount, successRate, status, createdAt, updatedAt, expiresAt, deletedAt, lastRotatedAt, lastSecurityReviewAt, requiresClientSecret, clientSecretHash, enforceHttps, enforceSigning, allowedSignatureAlgorithms, enforceMutualTls, clientCertificateHash, requireRequestSigning, description, Arrays.hashCode(metadataJson), tags, apiVersion, supportedFeatures, documentationUrl, supportContact, logAllRequests, lastRotationReason, lastRotationDate, rotationFrequencyDays, complianceStandards, requiresAuditLogging, dataResidency, approvedIntegrations, alertEmails, webhookUrl, alertOnQuotaThreshold, quotaAlertThreshold, alertOnErrorSpike, errorAlertThreshold, monitoringIntegrations, encrypted, dataClassification);
   }
 
   @Override
@@ -1747,8 +1699,6 @@ public class APIKey {
     sb.append("    supportedFeatures: ").append(toIndentedString(supportedFeatures)).append("\n");
     sb.append("    documentationUrl: ").append(toIndentedString(documentationUrl)).append("\n");
     sb.append("    supportContact: ").append(toIndentedString(supportContact)).append("\n");
-    sb.append("    account: ").append(toIndentedString(account)).append("\n");
-    sb.append("    workspace: ").append(toIndentedString(workspace)).append("\n");
     sb.append("    logAllRequests: ").append(toIndentedString(logAllRequests)).append("\n");
     sb.append("    lastRotationReason: ").append(toIndentedString(lastRotationReason)).append("\n");
     sb.append("    lastRotationDate: ").append(toIndentedString(lastRotationDate)).append("\n");

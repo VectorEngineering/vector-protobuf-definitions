@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.openapitools.model.Account;
+import org.openapitools.model.Account1;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -22,20 +22,22 @@ import javax.annotation.Generated;
  * ListAccountsResponse
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T17:07:07.052157-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T17:53:20.308969-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ListAccountsResponse {
 
   @Valid
-  private List<@Valid Account> accounts = new ArrayList<>();
+  private List<@Valid Account1> accounts = new ArrayList<>();
 
-  private Integer nextPageNumber;
+  private String nextPageToken;
 
-  public ListAccountsResponse accounts(List<@Valid Account> accounts) {
+  private Integer totalSize;
+
+  public ListAccountsResponse accounts(List<@Valid Account1> accounts) {
     this.accounts = accounts;
     return this;
   }
 
-  public ListAccountsResponse addAccountsItem(Account accountsItem) {
+  public ListAccountsResponse addAccountsItem(Account1 accountsItem) {
     if (this.accounts == null) {
       this.accounts = new ArrayList<>();
     }
@@ -50,32 +52,52 @@ public class ListAccountsResponse {
   @Valid 
   @Schema(name = "accounts", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("accounts")
-  public List<@Valid Account> getAccounts() {
+  public List<@Valid Account1> getAccounts() {
     return accounts;
   }
 
-  public void setAccounts(List<@Valid Account> accounts) {
+  public void setAccounts(List<@Valid Account1> accounts) {
     this.accounts = accounts;
   }
 
-  public ListAccountsResponse nextPageNumber(Integer nextPageNumber) {
-    this.nextPageNumber = nextPageNumber;
+  public ListAccountsResponse nextPageToken(String nextPageToken) {
+    this.nextPageToken = nextPageToken;
     return this;
   }
 
   /**
-   * Get nextPageNumber
-   * @return nextPageNumber
+   * Get nextPageToken
+   * @return nextPageToken
    */
   
-  @Schema(name = "nextPageNumber", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("nextPageNumber")
-  public Integer getNextPageNumber() {
-    return nextPageNumber;
+  @Schema(name = "nextPageToken", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("nextPageToken")
+  public String getNextPageToken() {
+    return nextPageToken;
   }
 
-  public void setNextPageNumber(Integer nextPageNumber) {
-    this.nextPageNumber = nextPageNumber;
+  public void setNextPageToken(String nextPageToken) {
+    this.nextPageToken = nextPageToken;
+  }
+
+  public ListAccountsResponse totalSize(Integer totalSize) {
+    this.totalSize = totalSize;
+    return this;
+  }
+
+  /**
+   * Get totalSize
+   * @return totalSize
+   */
+  
+  @Schema(name = "totalSize", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("totalSize")
+  public Integer getTotalSize() {
+    return totalSize;
+  }
+
+  public void setTotalSize(Integer totalSize) {
+    this.totalSize = totalSize;
   }
 
   @Override
@@ -88,12 +110,13 @@ public class ListAccountsResponse {
     }
     ListAccountsResponse listAccountsResponse = (ListAccountsResponse) o;
     return Objects.equals(this.accounts, listAccountsResponse.accounts) &&
-        Objects.equals(this.nextPageNumber, listAccountsResponse.nextPageNumber);
+        Objects.equals(this.nextPageToken, listAccountsResponse.nextPageToken) &&
+        Objects.equals(this.totalSize, listAccountsResponse.totalSize);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(accounts, nextPageNumber);
+    return Objects.hash(accounts, nextPageToken, totalSize);
   }
 
   @Override
@@ -101,7 +124,8 @@ public class ListAccountsResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class ListAccountsResponse {\n");
     sb.append("    accounts: ").append(toIndentedString(accounts)).append("\n");
-    sb.append("    nextPageNumber: ").append(toIndentedString(nextPageNumber)).append("\n");
+    sb.append("    nextPageToken: ").append(toIndentedString(nextPageToken)).append("\n");
+    sb.append("    totalSize: ").append(toIndentedString(totalSize)).append("\n");
     sb.append("}");
     return sb.toString();
   }

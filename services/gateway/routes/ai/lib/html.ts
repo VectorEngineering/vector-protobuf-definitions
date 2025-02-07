@@ -85,7 +85,9 @@ export function sanitizeHtml(html: string): string {
     const attrs =
       match.slice(prefix.length, -1).match(/([a-z-]+)(?:="[^"]*")?/gi) || [];
     const cleanAttrs = attrs
-      .filter((attr) => allowedAttrs.includes(attr.split("=")[0].toLowerCase()))
+      .filter((attr) =>
+        allowedAttrs.includes((attr as string).split("=")[0].toLowerCase()),
+      )
       .join(" ");
     return prefix + (cleanAttrs ? " " + cleanAttrs : "") + ">";
   });

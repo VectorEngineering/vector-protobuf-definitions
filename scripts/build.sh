@@ -99,7 +99,7 @@ update_typescript_client() {
             precompileModel=true, \
             packageName=@${ORG_NAME}/client, \
             npmVersion=${TS_VERSION}, \
-            npmAuthor="Playbook Media Team"
+            npmAuthor="PlaybookMediaTeam"
 
     openapi-generator-cli generate \
         -i ./swagger/backend-api.yaml \
@@ -199,7 +199,7 @@ update_docs() {
             enablePostProcessFile=true, \
             docExtension=md, \
             infoEmail=api@playbookmedia.com, \
-            infoDescription="Playbook Media API Documentation", \
+            infoDescription="PlaybookMediaAPIDocumentation", \
             infoLicenseName=MIT, \
             infoLicenseUrl=https://opensource.org/licenses/MIT, \
             tagsOrder=Authentication,Scraping,Account
@@ -224,7 +224,7 @@ update_docs() {
         -i ./swagger/backend-api.yaml \
         -g postman-collection -o ./documentation/autogen/postman-collection \
         --additional-properties= \
-            postmanName="Playbook Media API", \
+            postmanName="PlaybookMediaAPI", \
             postmanSchema="https://schema.getpostman.com/json/collection/v2.1.0/collection.json", \
             postmanUid=${ORG_NAME}-api, \
             postmanVersion=1.0.0, \
@@ -312,7 +312,7 @@ gen_cloudflare_worker() {
         -t ./templates)
     
     # Format the generated code
-    (cd services/gateway && pnpm format)
+    (cd services/gateway && pnpm format && pnpm build)
     
     echo -e "${GREEN}✓ Generated and formatted Cloudflare Worker Gateway${NC}"
     echo -e "  Location: services/gateway"

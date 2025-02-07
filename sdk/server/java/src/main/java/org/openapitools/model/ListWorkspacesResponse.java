@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.openapitools.model.Workspace;
+import org.openapitools.model.Workspace1;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -22,20 +22,22 @@ import javax.annotation.Generated;
  * ListWorkspacesResponse
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T17:07:07.052157-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T17:53:20.308969-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ListWorkspacesResponse {
 
   @Valid
-  private List<@Valid Workspace> workspaces = new ArrayList<>();
+  private List<@Valid Workspace1> workspaces = new ArrayList<>();
 
-  private Integer nextPageNumber;
+  private String nextPageToken;
 
-  public ListWorkspacesResponse workspaces(List<@Valid Workspace> workspaces) {
+  private Integer totalSize;
+
+  public ListWorkspacesResponse workspaces(List<@Valid Workspace1> workspaces) {
     this.workspaces = workspaces;
     return this;
   }
 
-  public ListWorkspacesResponse addWorkspacesItem(Workspace workspacesItem) {
+  public ListWorkspacesResponse addWorkspacesItem(Workspace1 workspacesItem) {
     if (this.workspaces == null) {
       this.workspaces = new ArrayList<>();
     }
@@ -50,32 +52,52 @@ public class ListWorkspacesResponse {
   @Valid 
   @Schema(name = "workspaces", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("workspaces")
-  public List<@Valid Workspace> getWorkspaces() {
+  public List<@Valid Workspace1> getWorkspaces() {
     return workspaces;
   }
 
-  public void setWorkspaces(List<@Valid Workspace> workspaces) {
+  public void setWorkspaces(List<@Valid Workspace1> workspaces) {
     this.workspaces = workspaces;
   }
 
-  public ListWorkspacesResponse nextPageNumber(Integer nextPageNumber) {
-    this.nextPageNumber = nextPageNumber;
+  public ListWorkspacesResponse nextPageToken(String nextPageToken) {
+    this.nextPageToken = nextPageToken;
     return this;
   }
 
   /**
-   * Get nextPageNumber
-   * @return nextPageNumber
+   * Get nextPageToken
+   * @return nextPageToken
    */
   
-  @Schema(name = "nextPageNumber", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("nextPageNumber")
-  public Integer getNextPageNumber() {
-    return nextPageNumber;
+  @Schema(name = "nextPageToken", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("nextPageToken")
+  public String getNextPageToken() {
+    return nextPageToken;
   }
 
-  public void setNextPageNumber(Integer nextPageNumber) {
-    this.nextPageNumber = nextPageNumber;
+  public void setNextPageToken(String nextPageToken) {
+    this.nextPageToken = nextPageToken;
+  }
+
+  public ListWorkspacesResponse totalSize(Integer totalSize) {
+    this.totalSize = totalSize;
+    return this;
+  }
+
+  /**
+   * Get totalSize
+   * @return totalSize
+   */
+  
+  @Schema(name = "totalSize", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("totalSize")
+  public Integer getTotalSize() {
+    return totalSize;
+  }
+
+  public void setTotalSize(Integer totalSize) {
+    this.totalSize = totalSize;
   }
 
   @Override
@@ -88,12 +110,13 @@ public class ListWorkspacesResponse {
     }
     ListWorkspacesResponse listWorkspacesResponse = (ListWorkspacesResponse) o;
     return Objects.equals(this.workspaces, listWorkspacesResponse.workspaces) &&
-        Objects.equals(this.nextPageNumber, listWorkspacesResponse.nextPageNumber);
+        Objects.equals(this.nextPageToken, listWorkspacesResponse.nextPageToken) &&
+        Objects.equals(this.totalSize, listWorkspacesResponse.totalSize);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(workspaces, nextPageNumber);
+    return Objects.hash(workspaces, nextPageToken, totalSize);
   }
 
   @Override
@@ -101,7 +124,8 @@ public class ListWorkspacesResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class ListWorkspacesResponse {\n");
     sb.append("    workspaces: ").append(toIndentedString(workspaces)).append("\n");
-    sb.append("    nextPageNumber: ").append(toIndentedString(nextPageNumber)).append("\n");
+    sb.append("    nextPageToken: ").append(toIndentedString(nextPageToken)).append("\n");
+    sb.append("    totalSize: ").append(toIndentedString(totalSize)).append("\n");
     sb.append("}");
     return sb.toString();
   }

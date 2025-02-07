@@ -18,9 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from playbookmedia_backend_client_sdk.models.workspace import Workspace
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,11 +27,14 @@ class CreateWorkspaceRequest(BaseModel):
     """
     CreateWorkspaceRequest
     """ # noqa: E501
-    workspace: Optional[Workspace] = None
     account_id: Optional[StrictStr] = Field(default=None, alias="accountId")
-    organization_id: Optional[StrictStr] = Field(default=None, alias="organizationId")
-    tenant_id: Optional[StrictStr] = Field(default=None, alias="tenantId")
-    __properties: ClassVar[List[str]] = ["workspace", "accountId", "organizationId", "tenantId"]
+    name: StrictStr
+    storage_quota: Optional[StrictStr] = Field(default=None, alias="storageQuota")
+    allow_public_sharing: Optional[StrictBool] = Field(default=None, alias="allowPublicSharing")
+    require_approval: Optional[StrictBool] = Field(default=None, alias="requireApproval")
+    gdpr_compliant: Optional[StrictBool] = Field(default=None, alias="gdprCompliant")
+    hipaa_compliant: Optional[StrictBool] = Field(default=None, alias="hipaaCompliant")
+    __properties: ClassVar[List[str]] = ["accountId", "name", "storageQuota", "allowPublicSharing", "requireApproval", "gdprCompliant", "hipaaCompliant"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,9 +75,6 @@ class CreateWorkspaceRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of workspace
-        if self.workspace:
-            _dict['workspace'] = self.workspace.to_dict()
         return _dict
 
     @classmethod
@@ -88,10 +87,13 @@ class CreateWorkspaceRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "workspace": Workspace.from_dict(obj["workspace"]) if obj.get("workspace") is not None else None,
             "accountId": obj.get("accountId"),
-            "organizationId": obj.get("organizationId"),
-            "tenantId": obj.get("tenantId")
+            "name": obj.get("name"),
+            "storageQuota": obj.get("storageQuota"),
+            "allowPublicSharing": obj.get("allowPublicSharing"),
+            "requireApproval": obj.get("requireApproval"),
+            "gdprCompliant": obj.get("gdprCompliant"),
+            "hipaaCompliant": obj.get("hipaaCompliant")
         })
         return _obj
 

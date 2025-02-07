@@ -16,7 +16,7 @@ import { timing } from "hono/timing";
 const app = new OpenAPIHono<Env>({
   defaultHook: (result, c) => {
     if (!result.success) {
-      return c.json({ success: false, errors: result.error.errors }, 422);
+      return c.json({ success: false, errors: result.target }, 422);
     }
   },
 });

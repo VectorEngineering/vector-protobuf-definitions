@@ -4,26 +4,26 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-**CreateAccount1**](workspace_service_api.md#CreateAccount1) | **POST** /workspace-service/v1/accounts | Create a new account
-**CreateWorkspace1**](workspace_service_api.md#CreateWorkspace1) | **POST** /workspace-service/v1/workspaces | Create workspace
-**DeleteAccount1**](workspace_service_api.md#DeleteAccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
-**DeleteWorkspace1**](workspace_service_api.md#DeleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
-**GetAccount1**](workspace_service_api.md#GetAccount1) | **GET** /workspace-service/v1/accounts/{id} | Get account details
-**GetWorkspace1**](workspace_service_api.md#GetWorkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
-**GetWorkspaceAnalytics1**](workspace_service_api.md#GetWorkspaceAnalytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
+**CreateAccount**](workspace_service_api.md#CreateAccount) | **POST** /workspace-service/v1/accounts | Create a new account
+**CreateWorkspace**](workspace_service_api.md#CreateWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace
+**DeleteAccount**](workspace_service_api.md#DeleteAccount) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
+**DeleteWorkspace**](workspace_service_api.md#DeleteWorkspace) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
+**GetAccount**](workspace_service_api.md#GetAccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details
+**GetWorkspace**](workspace_service_api.md#GetWorkspace) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
+**GetWorkspaceAnalytics**](workspace_service_api.md#GetWorkspaceAnalytics) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
 **GetWorkspaceComplianceReport**](workspace_service_api.md#GetWorkspaceComplianceReport) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report
 **GetWorkspaceStorageStats**](workspace_service_api.md#GetWorkspaceStorageStats) | **GET** /workspace-service/v1/workspaces/storage-stats/{workspaceId} | Get storage statistics
 **ListWorkspaceSharings**](workspace_service_api.md#ListWorkspaceSharings) | **GET** /workspace-service/v1/workspaces/sharings/{workspaceId} | List workspace sharings
-**ListWorkspaces1**](workspace_service_api.md#ListWorkspaces1) | **GET** /workspace-service/v1/workspaces/list | List workspaces
+**ListWorkspaces**](workspace_service_api.md#ListWorkspaces) | **GET** /workspace-service/v1/workspaces/list | List workspaces
 **RemoveWorkspaceSharing**](workspace_service_api.md#RemoveWorkspaceSharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing
 **ShareWorkspace**](workspace_service_api.md#ShareWorkspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace
-**UpdateAccount1**](workspace_service_api.md#UpdateAccount1) | **PUT** /workspace-service/v1/accounts | Update account details
-**UpdateWorkspace1**](workspace_service_api.md#UpdateWorkspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace
+**UpdateAccount**](workspace_service_api.md#UpdateAccount) | **PUT** /workspace-service/v1/accounts | Update account details
+**UpdateWorkspace**](workspace_service_api.md#UpdateWorkspace) | **PUT** /workspace-service/v1/workspaces | Update workspace
 **UpdateWorkspaceSharing**](workspace_service_api.md#UpdateWorkspaceSharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing
 
 
-# **CreateAccount1**
-> models::CreateAccountResponse1 CreateAccount1(create_account_request1)
+# **CreateAccount**
+> models::CreateAccountResponse CreateAccount(create_account_request)
 Create a new account
 
 Creates a new user account with initial workspace
@@ -32,11 +32,11 @@ Creates a new user account with initial workspace
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-  **create_account_request1** | [**CreateAccountRequest1**](CreateAccountRequest1.md)|  | 
+  **create_account_request** | [**CreateAccountRequest**](CreateAccountRequest.md)|  | 
 
 ### Return type
 
-[**models::CreateAccountResponse1**](CreateAccountResponse1.md)
+[**models::CreateAccountResponse**](CreateAccountResponse.md)
 
 ### Authorization
 
@@ -49,19 +49,19 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **CreateWorkspace1**
-> models::CreateWorkspaceResponse1 CreateWorkspace1(create_workspace_request1)
+# **CreateWorkspace**
+> models::CreateWorkspaceResponse CreateWorkspace(create_workspace_request)
 Create workspace
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-  **create_workspace_request1** | [**CreateWorkspaceRequest1**](CreateWorkspaceRequest1.md)|  | 
+  **create_workspace_request** | [**CreateWorkspaceRequest**](CreateWorkspaceRequest.md)|  | 
 
 ### Return type
 
-[**models::CreateWorkspaceResponse1**](CreateWorkspaceResponse1.md)
+[**models::CreateWorkspaceResponse**](CreateWorkspaceResponse.md)
 
 ### Authorization
 
@@ -74,8 +74,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **DeleteAccount1**
-> models::DeleteAccountResponse DeleteAccount1(id)
+# **DeleteAccount**
+> models::DeleteAccountResponse DeleteAccount(id)
 Delete account
 
 ### Required Parameters
@@ -99,8 +99,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **DeleteWorkspace1**
-> models::DeleteWorkspaceResponse DeleteWorkspace1(id)
+# **DeleteWorkspace**
+> models::DeleteWorkspaceResponse DeleteWorkspace(id)
 Delete workspace
 
 ### Required Parameters
@@ -124,8 +124,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **GetAccount1**
-> models::GetAccountResponse1 GetAccount1(id)
+# **GetAccount**
+> models::GetAccountResponse GetAccount(id)
 Get account details
 
 ### Required Parameters
@@ -136,7 +136,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**models::GetAccountResponse1**](GetAccountResponse1.md)
+[**models::GetAccountResponse**](GetAccountResponse.md)
 
 ### Authorization
 
@@ -149,8 +149,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **GetWorkspace1**
-> models::GetWorkspaceResponse GetWorkspace1(id)
+# **GetWorkspace**
+> models::GetWorkspaceResponse GetWorkspace(id)
 Get workspace details
 
 ### Required Parameters
@@ -174,8 +174,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **GetWorkspaceAnalytics1**
-> models::GetWorkspaceAnalyticsResponse1 GetWorkspaceAnalytics1(workspace_id, optional)
+# **GetWorkspaceAnalytics**
+> models::GetWorkspaceAnalyticsResponse GetWorkspaceAnalytics(workspace_id, optional)
 Get workspace analytics
 
 ### Required Parameters
@@ -196,7 +196,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**models::GetWorkspaceAnalyticsResponse1**](GetWorkspaceAnalyticsResponse1.md)
+[**models::GetWorkspaceAnalyticsResponse**](GetWorkspaceAnalyticsResponse.md)
 
 ### Authorization
 
@@ -303,8 +303,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **ListWorkspaces1**
-> models::ListWorkspacesResponse1 ListWorkspaces1(optional)
+# **ListWorkspaces**
+> models::ListWorkspacesResponse ListWorkspaces(optional)
 List workspaces
 
 ### Required Parameters
@@ -325,7 +325,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**models::ListWorkspacesResponse1**](ListWorkspacesResponse1.md)
+[**models::ListWorkspacesResponse**](ListWorkspacesResponse.md)
 
 ### Authorization
 
@@ -389,15 +389,15 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **UpdateAccount1**
-> models::UpdateAccountResponse UpdateAccount1(update_account_request1)
+# **UpdateAccount**
+> models::UpdateAccountResponse UpdateAccount(update_account_request)
 Update account details
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-  **update_account_request1** | [**UpdateAccountRequest1**](UpdateAccountRequest1.md)|  | 
+  **update_account_request** | [**UpdateAccountRequest**](UpdateAccountRequest.md)|  | 
 
 ### Return type
 
@@ -414,8 +414,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **UpdateWorkspace1**
-> models::UpdateWorkspaceResponse UpdateWorkspace1(update_workspace_request)
+# **UpdateWorkspace**
+> models::UpdateWorkspaceResponse UpdateWorkspace(update_workspace_request)
 Update workspace
 
 ### Required Parameters

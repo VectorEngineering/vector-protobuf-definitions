@@ -7,22 +7,22 @@ package org.openapitools.api;
 
 import org.openapitools.model.AuthenticationErrorMessageResponse1;
 import org.openapitools.model.ConflictErrorMessageResponse;
-import org.openapitools.model.CreateAccountRequest1;
-import org.openapitools.model.CreateAccountResponse1;
-import org.openapitools.model.CreateWorkspaceRequest1;
-import org.openapitools.model.CreateWorkspaceResponse1;
+import org.openapitools.model.CreateAccountRequest;
+import org.openapitools.model.CreateAccountResponse;
+import org.openapitools.model.CreateWorkspaceRequest;
+import org.openapitools.model.CreateWorkspaceResponse;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.model.DeleteAccountResponse;
 import org.openapitools.model.DeleteWorkspaceResponse;
 import org.openapitools.model.ForbiddenErrorMessageResponse;
-import org.openapitools.model.GetAccountResponse1;
-import org.openapitools.model.GetWorkspaceAnalyticsResponse1;
+import org.openapitools.model.GetAccountResponse;
+import org.openapitools.model.GetWorkspaceAnalyticsResponse;
 import org.openapitools.model.GetWorkspaceComplianceReportResponse;
 import org.openapitools.model.GetWorkspaceResponse;
 import org.openapitools.model.GetWorkspaceStorageStatsResponse;
 import org.openapitools.model.InternalErrorMessageResponse;
 import org.openapitools.model.ListWorkspaceSharingsResponse;
-import org.openapitools.model.ListWorkspacesResponse1;
+import org.openapitools.model.ListWorkspacesResponse;
 import org.openapitools.model.NotFoundErrorMessageResponse;
 import java.time.OffsetDateTime;
 import org.openapitools.model.RateLimitErrorMessageResponse;
@@ -30,7 +30,7 @@ import org.openapitools.model.RemoveWorkspaceSharingResponse;
 import org.openapitools.model.ShareWorkspaceBody;
 import org.openapitools.model.ShareWorkspaceResponse;
 import org.openapitools.model.Status;
-import org.openapitools.model.UpdateAccountRequest1;
+import org.openapitools.model.UpdateAccountRequest;
 import org.openapitools.model.UpdateAccountResponse;
 import org.openapitools.model.UpdateWorkspaceRequest;
 import org.openapitools.model.UpdateWorkspaceResponse;
@@ -63,7 +63,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T17:07:07.052157-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T17:53:20.308969-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 @Validated
 @Tag(name = "workspace-service", description = "the workspace-service API")
 public interface WorkspaceServiceApi {
@@ -76,7 +76,7 @@ public interface WorkspaceServiceApi {
      * POST /workspace-service/v1/accounts : Create a new account
      * Creates a new user account with initial workspace
      *
-     * @param createAccountRequest1  (required)
+     * @param createAccountRequest  (required)
      * @return A successful response. (status code 200)
      *         or Account created successfully (status code 201)
      *         or Bad Request - Invalid input parameters (status code 400)
@@ -89,18 +89,18 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "createAccount1",
+        operationId = "createAccount",
         summary = "Create a new account",
         description = "Creates a new user account with initial workspace",
         tags = { "workspace-service" },
         responses = {
             @ApiResponse(responseCode = "200", description = "A successful response.", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateAccountResponse1.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = CreateAccountResponse1.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateAccountResponse.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = CreateAccountResponse.class))
             }),
             @ApiResponse(responseCode = "201", description = "Account created successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateAccountResponse1.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = CreateAccountResponse1.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateAccountResponse.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = CreateAccountResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input parameters", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorMessageResponse.class)),
@@ -143,8 +143,8 @@ public interface WorkspaceServiceApi {
         consumes = { "application/json", "application/x-www-form-urlencoded" }
     )
     
-    default ResponseEntity<CreateAccountResponse1> createAccount1(
-        @Parameter(name = "CreateAccountRequest1", description = "", required = true) @Valid @RequestBody CreateAccountRequest1 createAccountRequest1
+    default ResponseEntity<CreateAccountResponse> createAccount(
+        @Parameter(name = "CreateAccountRequest", description = "", required = true) @Valid @RequestBody CreateAccountRequest createAccountRequest
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -234,7 +234,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -248,7 +248,7 @@ public interface WorkspaceServiceApi {
     /**
      * POST /workspace-service/v1/workspaces : Create workspace
      *
-     * @param createWorkspaceRequest1  (required)
+     * @param createWorkspaceRequest  (required)
      * @return A successful response. (status code 200)
      *         or Workspace created successfully (status code 201)
      *         or Bad Request - Invalid input parameters (status code 400)
@@ -261,17 +261,17 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "createWorkspace1",
+        operationId = "createWorkspace",
         summary = "Create workspace",
         tags = { "workspace-service" },
         responses = {
             @ApiResponse(responseCode = "200", description = "A successful response.", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateWorkspaceResponse1.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = CreateWorkspaceResponse1.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateWorkspaceResponse.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = CreateWorkspaceResponse.class))
             }),
             @ApiResponse(responseCode = "201", description = "Workspace created successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateWorkspaceResponse1.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = CreateWorkspaceResponse1.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateWorkspaceResponse.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = CreateWorkspaceResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input parameters", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorMessageResponse.class)),
@@ -314,8 +314,8 @@ public interface WorkspaceServiceApi {
         consumes = { "application/json", "application/x-www-form-urlencoded" }
     )
     
-    default ResponseEntity<CreateWorkspaceResponse1> createWorkspace1(
-        @Parameter(name = "CreateWorkspaceRequest1", description = "", required = true) @Valid @RequestBody CreateWorkspaceRequest1 createWorkspaceRequest1
+    default ResponseEntity<CreateWorkspaceResponse> createWorkspace(
+        @Parameter(name = "CreateWorkspaceRequest", description = "", required = true) @Valid @RequestBody CreateWorkspaceRequest createWorkspaceRequest
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -405,7 +405,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -431,7 +431,7 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "deleteAccount1",
+        operationId = "deleteAccount",
         summary = "Delete account",
         tags = { "workspace-service" },
         responses = {
@@ -479,7 +479,7 @@ public interface WorkspaceServiceApi {
         produces = { "application/json", "" }
     )
     
-    default ResponseEntity<DeleteAccountResponse> deleteAccount1(
+    default ResponseEntity<DeleteAccountResponse> deleteAccount(
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
     ) {
         getRequest().ifPresent(request -> {
@@ -565,7 +565,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -591,7 +591,7 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "deleteWorkspace1",
+        operationId = "deleteWorkspace",
         summary = "Delete workspace",
         tags = { "workspace-service" },
         responses = {
@@ -639,7 +639,7 @@ public interface WorkspaceServiceApi {
         produces = { "application/json", "" }
     )
     
-    default ResponseEntity<DeleteWorkspaceResponse> deleteWorkspace1(
+    default ResponseEntity<DeleteWorkspaceResponse> deleteWorkspace(
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
     ) {
         getRequest().ifPresent(request -> {
@@ -725,7 +725,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -751,13 +751,13 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "getAccount1",
+        operationId = "getAccount",
         summary = "Get account details",
         tags = { "workspace-service" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Account details retrieved successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = GetAccountResponse1.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = GetAccountResponse1.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = GetAccountResponse.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = GetAccountResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input parameters", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorMessageResponse.class)),
@@ -799,7 +799,7 @@ public interface WorkspaceServiceApi {
         produces = { "application/json", "" }
     )
     
-    default ResponseEntity<GetAccountResponse1> getAccount1(
+    default ResponseEntity<GetAccountResponse> getAccount(
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
     ) {
         getRequest().ifPresent(request -> {
@@ -885,7 +885,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -911,7 +911,7 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "getWorkspace1",
+        operationId = "getWorkspace",
         summary = "Get workspace details",
         tags = { "workspace-service" },
         responses = {
@@ -959,7 +959,7 @@ public interface WorkspaceServiceApi {
         produces = { "application/json", "" }
     )
     
-    default ResponseEntity<GetWorkspaceResponse> getWorkspace1(
+    default ResponseEntity<GetWorkspaceResponse> getWorkspace(
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
     ) {
         getRequest().ifPresent(request -> {
@@ -1045,7 +1045,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1073,13 +1073,13 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "getWorkspaceAnalytics1",
+        operationId = "getWorkspaceAnalytics",
         summary = "Get workspace analytics",
         tags = { "workspace-service" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Analytics data retrieved successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = GetWorkspaceAnalyticsResponse1.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = GetWorkspaceAnalyticsResponse1.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = GetWorkspaceAnalyticsResponse.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = GetWorkspaceAnalyticsResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input parameters", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorMessageResponse.class)),
@@ -1121,7 +1121,7 @@ public interface WorkspaceServiceApi {
         produces = { "application/json", "" }
     )
     
-    default ResponseEntity<GetWorkspaceAnalyticsResponse1> getWorkspaceAnalytics1(
+    default ResponseEntity<GetWorkspaceAnalyticsResponse> getWorkspaceAnalytics(
         @Parameter(name = "workspaceId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("workspaceId") String workspaceId,
         @Parameter(name = "startTime", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "startTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime startTime,
         @Parameter(name = "endTime", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime endTime
@@ -1209,7 +1209,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1371,7 +1371,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1531,7 +1531,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1695,7 +1695,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1724,13 +1724,13 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "listWorkspaces1",
+        operationId = "listWorkspaces",
         summary = "List workspaces",
         tags = { "workspace-service" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Workspaces retrieved successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ListWorkspacesResponse1.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = ListWorkspacesResponse1.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ListWorkspacesResponse.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = ListWorkspacesResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input parameters", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorMessageResponse.class)),
@@ -1772,7 +1772,7 @@ public interface WorkspaceServiceApi {
         produces = { "application/json", "" }
     )
     
-    default ResponseEntity<ListWorkspacesResponse1> listWorkspaces1(
+    default ResponseEntity<ListWorkspacesResponse> listWorkspaces(
         @Parameter(name = "accountId", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "accountId", required = false) String accountId,
         @Parameter(name = "pageSize", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,
         @Parameter(name = "pageToken", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "pageToken", required = false) String pageToken,
@@ -1861,7 +1861,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -2021,7 +2021,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -2184,7 +2184,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -2198,7 +2198,7 @@ public interface WorkspaceServiceApi {
     /**
      * PUT /workspace-service/v1/accounts : Update account details
      *
-     * @param updateAccountRequest1  (required)
+     * @param updateAccountRequest  (required)
      * @return Account updated successfully (status code 200)
      *         or Bad Request - Invalid input parameters (status code 400)
      *         or Unauthorized - Authentication required (status code 401)
@@ -2210,7 +2210,7 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "updateAccount1",
+        operationId = "updateAccount",
         summary = "Update account details",
         tags = { "workspace-service" },
         responses = {
@@ -2259,8 +2259,8 @@ public interface WorkspaceServiceApi {
         consumes = { "application/json", "application/x-www-form-urlencoded" }
     )
     
-    default ResponseEntity<UpdateAccountResponse> updateAccount1(
-        @Parameter(name = "UpdateAccountRequest1", description = "", required = true) @Valid @RequestBody UpdateAccountRequest1 updateAccountRequest1
+    default ResponseEntity<UpdateAccountResponse> updateAccount(
+        @Parameter(name = "UpdateAccountRequest", description = "", required = true) @Valid @RequestBody UpdateAccountRequest updateAccountRequest
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -2345,7 +2345,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -2371,7 +2371,7 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "updateWorkspace1",
+        operationId = "updateWorkspace",
         summary = "Update workspace",
         tags = { "workspace-service" },
         responses = {
@@ -2420,7 +2420,7 @@ public interface WorkspaceServiceApi {
         consumes = { "application/json", "application/x-www-form-urlencoded" }
     )
     
-    default ResponseEntity<UpdateWorkspaceResponse> updateWorkspace1(
+    default ResponseEntity<UpdateWorkspaceResponse> updateWorkspace(
         @Parameter(name = "UpdateWorkspaceRequest", description = "", required = true) @Valid @RequestBody UpdateWorkspaceRequest updateWorkspaceRequest
     ) {
         getRequest().ifPresent(request -> {
@@ -2506,7 +2506,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -2667,7 +2667,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

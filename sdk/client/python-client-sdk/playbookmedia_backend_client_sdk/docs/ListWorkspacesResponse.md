@@ -5,8 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**workspaces** | [**List[Workspace]**](Workspace.md) |  | [optional] 
-**next_page_number** | **int** |  | [optional] 
+**workspaces** | [**List[Workspace1]**](Workspace1.md) |  | [optional] 
+**next_page_token** | **str** |  | [optional] 
+**total_size** | **int** |  | [optional] 
 
 ## Example
 

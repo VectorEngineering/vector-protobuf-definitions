@@ -4,27 +4,27 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createAccount1**](WorkspaceServiceApi.md#createAccount1) | **POST** /workspace-service/v1/accounts | Create a new account |
-| [**createWorkspace1**](WorkspaceServiceApi.md#createWorkspace1) | **POST** /workspace-service/v1/workspaces | Create workspace |
-| [**deleteAccount1**](WorkspaceServiceApi.md#deleteAccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account |
-| [**deleteWorkspace1**](WorkspaceServiceApi.md#deleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace |
-| [**getAccount1**](WorkspaceServiceApi.md#getAccount1) | **GET** /workspace-service/v1/accounts/{id} | Get account details |
-| [**getWorkspace1**](WorkspaceServiceApi.md#getWorkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details |
-| [**getWorkspaceAnalytics1**](WorkspaceServiceApi.md#getWorkspaceAnalytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics |
+| [**createAccount**](WorkspaceServiceApi.md#createAccount) | **POST** /workspace-service/v1/accounts | Create a new account |
+| [**createWorkspace**](WorkspaceServiceApi.md#createWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace |
+| [**deleteAccount**](WorkspaceServiceApi.md#deleteAccount) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account |
+| [**deleteWorkspace**](WorkspaceServiceApi.md#deleteWorkspace) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace |
+| [**getAccount**](WorkspaceServiceApi.md#getAccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details |
+| [**getWorkspace**](WorkspaceServiceApi.md#getWorkspace) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details |
+| [**getWorkspaceAnalytics**](WorkspaceServiceApi.md#getWorkspaceAnalytics) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics |
 | [**getWorkspaceComplianceReport**](WorkspaceServiceApi.md#getWorkspaceComplianceReport) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report |
 | [**getWorkspaceStorageStats**](WorkspaceServiceApi.md#getWorkspaceStorageStats) | **GET** /workspace-service/v1/workspaces/storage-stats/{workspaceId} | Get storage statistics |
 | [**listWorkspaceSharings**](WorkspaceServiceApi.md#listWorkspaceSharings) | **GET** /workspace-service/v1/workspaces/sharings/{workspaceId} | List workspace sharings |
-| [**listWorkspaces1**](WorkspaceServiceApi.md#listWorkspaces1) | **GET** /workspace-service/v1/workspaces/list | List workspaces |
+| [**listWorkspaces**](WorkspaceServiceApi.md#listWorkspaces) | **GET** /workspace-service/v1/workspaces/list | List workspaces |
 | [**removeWorkspaceSharing**](WorkspaceServiceApi.md#removeWorkspaceSharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing |
 | [**shareWorkspace**](WorkspaceServiceApi.md#shareWorkspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace |
-| [**updateAccount1**](WorkspaceServiceApi.md#updateAccount1) | **PUT** /workspace-service/v1/accounts | Update account details |
-| [**updateWorkspace1**](WorkspaceServiceApi.md#updateWorkspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace |
+| [**updateAccount**](WorkspaceServiceApi.md#updateAccount) | **PUT** /workspace-service/v1/accounts | Update account details |
+| [**updateWorkspace**](WorkspaceServiceApi.md#updateWorkspace) | **PUT** /workspace-service/v1/workspaces | Update workspace |
 | [**updateWorkspaceSharing**](WorkspaceServiceApi.md#updateWorkspaceSharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing |
 
 
-<a name="createAccount1"></a>
-# **createAccount1**
-> CreateAccountResponse1 createAccount1(CreateAccountRequest1)
+<a name="createAccount"></a>
+# **createAccount**
+> CreateAccountResponse createAccount(CreateAccountRequest)
 
 Create a new account
 
@@ -34,11 +34,11 @@ Create a new account
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **CreateAccountRequest1** | [**CreateAccountRequest1**](../Models/CreateAccountRequest1.md)|  | |
+| **CreateAccountRequest** | [**CreateAccountRequest**](../Models/CreateAccountRequest.md)|  | |
 
 ### Return type
 
-[**CreateAccountResponse1**](../Models/CreateAccountResponse1.md)
+[**CreateAccountResponse**](../Models/CreateAccountResponse.md)
 
 ### Authorization
 
@@ -49,9 +49,9 @@ No authorization required
 - **Content-Type**: application/json, application/x-www-form-urlencoded
 - **Accept**: application/json, 
 
-<a name="createWorkspace1"></a>
-# **createWorkspace1**
-> CreateWorkspaceResponse1 createWorkspace1(CreateWorkspaceRequest1)
+<a name="createWorkspace"></a>
+# **createWorkspace**
+> CreateWorkspaceResponse createWorkspace(CreateWorkspaceRequest)
 
 Create workspace
 
@@ -59,11 +59,11 @@ Create workspace
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **CreateWorkspaceRequest1** | [**CreateWorkspaceRequest1**](../Models/CreateWorkspaceRequest1.md)|  | |
+| **CreateWorkspaceRequest** | [**CreateWorkspaceRequest**](../Models/CreateWorkspaceRequest.md)|  | |
 
 ### Return type
 
-[**CreateWorkspaceResponse1**](../Models/CreateWorkspaceResponse1.md)
+[**CreateWorkspaceResponse**](../Models/CreateWorkspaceResponse.md)
 
 ### Authorization
 
@@ -74,9 +74,9 @@ No authorization required
 - **Content-Type**: application/json, application/x-www-form-urlencoded
 - **Accept**: application/json, 
 
-<a name="deleteAccount1"></a>
-# **deleteAccount1**
-> DeleteAccountResponse deleteAccount1(id)
+<a name="deleteAccount"></a>
+# **deleteAccount**
+> DeleteAccountResponse deleteAccount(id)
 
 Delete account
 
@@ -99,9 +99,9 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
-<a name="deleteWorkspace1"></a>
-# **deleteWorkspace1**
-> DeleteWorkspaceResponse deleteWorkspace1(id)
+<a name="deleteWorkspace"></a>
+# **deleteWorkspace**
+> DeleteWorkspaceResponse deleteWorkspace(id)
 
 Delete workspace
 
@@ -124,9 +124,9 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
-<a name="getAccount1"></a>
-# **getAccount1**
-> GetAccountResponse1 getAccount1(id)
+<a name="getAccount"></a>
+# **getAccount**
+> GetAccountResponse getAccount(id)
 
 Get account details
 
@@ -138,7 +138,7 @@ Get account details
 
 ### Return type
 
-[**GetAccountResponse1**](../Models/GetAccountResponse1.md)
+[**GetAccountResponse**](../Models/GetAccountResponse.md)
 
 ### Authorization
 
@@ -149,9 +149,9 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
-<a name="getWorkspace1"></a>
-# **getWorkspace1**
-> GetWorkspaceResponse getWorkspace1(id)
+<a name="getWorkspace"></a>
+# **getWorkspace**
+> GetWorkspaceResponse getWorkspace(id)
 
 Get workspace details
 
@@ -174,9 +174,9 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
-<a name="getWorkspaceAnalytics1"></a>
-# **getWorkspaceAnalytics1**
-> GetWorkspaceAnalyticsResponse1 getWorkspaceAnalytics1(workspaceId, startTime, endTime)
+<a name="getWorkspaceAnalytics"></a>
+# **getWorkspaceAnalytics**
+> GetWorkspaceAnalyticsResponse getWorkspaceAnalytics(workspaceId, startTime, endTime)
 
 Get workspace analytics
 
@@ -190,7 +190,7 @@ Get workspace analytics
 
 ### Return type
 
-[**GetWorkspaceAnalyticsResponse1**](../Models/GetWorkspaceAnalyticsResponse1.md)
+[**GetWorkspaceAnalyticsResponse**](../Models/GetWorkspaceAnalyticsResponse.md)
 
 ### Authorization
 
@@ -279,9 +279,9 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
-<a name="listWorkspaces1"></a>
-# **listWorkspaces1**
-> ListWorkspacesResponse1 listWorkspaces1(accountId, pageSize, pageToken, filter)
+<a name="listWorkspaces"></a>
+# **listWorkspaces**
+> ListWorkspacesResponse listWorkspaces(accountId, pageSize, pageToken, filter)
 
 List workspaces
 
@@ -296,7 +296,7 @@ List workspaces
 
 ### Return type
 
-[**ListWorkspacesResponse1**](../Models/ListWorkspacesResponse1.md)
+[**ListWorkspacesResponse**](../Models/ListWorkspacesResponse.md)
 
 ### Authorization
 
@@ -358,9 +358,9 @@ No authorization required
 - **Content-Type**: application/json, application/x-www-form-urlencoded
 - **Accept**: application/json, 
 
-<a name="updateAccount1"></a>
-# **updateAccount1**
-> UpdateAccountResponse updateAccount1(UpdateAccountRequest1)
+<a name="updateAccount"></a>
+# **updateAccount**
+> UpdateAccountResponse updateAccount(UpdateAccountRequest)
 
 Update account details
 
@@ -368,7 +368,7 @@ Update account details
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **UpdateAccountRequest1** | [**UpdateAccountRequest1**](../Models/UpdateAccountRequest1.md)|  | |
+| **UpdateAccountRequest** | [**UpdateAccountRequest**](../Models/UpdateAccountRequest.md)|  | |
 
 ### Return type
 
@@ -383,9 +383,9 @@ No authorization required
 - **Content-Type**: application/json, application/x-www-form-urlencoded
 - **Accept**: application/json, 
 
-<a name="updateWorkspace1"></a>
-# **updateWorkspace1**
-> UpdateWorkspaceResponse updateWorkspace1(UpdateWorkspaceRequest)
+<a name="updateWorkspace"></a>
+# **updateWorkspace**
+> UpdateWorkspaceResponse updateWorkspace(UpdateWorkspaceRequest)
 
 Update workspace
 

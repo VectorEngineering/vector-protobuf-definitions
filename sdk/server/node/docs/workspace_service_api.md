@@ -4,59 +4,59 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateAccount1**](workspace_service_api.md#CreateAccount1) | **POST** /workspace-service/v1/accounts | Create a new account
-[**CreateWorkspace1**](workspace_service_api.md#CreateWorkspace1) | **POST** /workspace-service/v1/workspaces | Create workspace
-[**DeleteAccount1**](workspace_service_api.md#DeleteAccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
-[**DeleteWorkspace1**](workspace_service_api.md#DeleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
-[**GetAccount1**](workspace_service_api.md#GetAccount1) | **GET** /workspace-service/v1/accounts/{id} | Get account details
-[**GetWorkspace1**](workspace_service_api.md#GetWorkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
-[**GetWorkspaceAnalytics1**](workspace_service_api.md#GetWorkspaceAnalytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
+[**CreateAccount**](workspace_service_api.md#CreateAccount) | **POST** /workspace-service/v1/accounts | Create a new account
+[**CreateWorkspace**](workspace_service_api.md#CreateWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace
+[**DeleteAccount**](workspace_service_api.md#DeleteAccount) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
+[**DeleteWorkspace**](workspace_service_api.md#DeleteWorkspace) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
+[**GetAccount**](workspace_service_api.md#GetAccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details
+[**GetWorkspace**](workspace_service_api.md#GetWorkspace) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
+[**GetWorkspaceAnalytics**](workspace_service_api.md#GetWorkspaceAnalytics) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
 [**GetWorkspaceComplianceReport**](workspace_service_api.md#GetWorkspaceComplianceReport) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report
 [**GetWorkspaceStorageStats**](workspace_service_api.md#GetWorkspaceStorageStats) | **GET** /workspace-service/v1/workspaces/storage-stats/{workspaceId} | Get storage statistics
 [**ListWorkspaceSharings**](workspace_service_api.md#ListWorkspaceSharings) | **GET** /workspace-service/v1/workspaces/sharings/{workspaceId} | List workspace sharings
-[**ListWorkspaces1**](workspace_service_api.md#ListWorkspaces1) | **GET** /workspace-service/v1/workspaces/list | List workspaces
+[**ListWorkspaces**](workspace_service_api.md#ListWorkspaces) | **GET** /workspace-service/v1/workspaces/list | List workspaces
 [**RemoveWorkspaceSharing**](workspace_service_api.md#RemoveWorkspaceSharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing
 [**ShareWorkspace**](workspace_service_api.md#ShareWorkspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace
-[**UpdateAccount1**](workspace_service_api.md#UpdateAccount1) | **PUT** /workspace-service/v1/accounts | Update account details
-[**UpdateWorkspace1**](workspace_service_api.md#UpdateWorkspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace
+[**UpdateAccount**](workspace_service_api.md#UpdateAccount) | **PUT** /workspace-service/v1/accounts | Update account details
+[**UpdateWorkspace**](workspace_service_api.md#UpdateWorkspace) | **PUT** /workspace-service/v1/workspaces | Update workspace
 [**UpdateWorkspaceSharing**](workspace_service_api.md#UpdateWorkspaceSharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing
 
 
-<a name="CreateAccount1"></a>
-# **CreateAccount1**
-> CreateAccountResponse1 CreateAccount1(createAccountRequest1)
+<a name="CreateAccount"></a>
+# **CreateAccount**
+> CreateAccountResponse CreateAccount(createAccountRequest)
 
 Create a new account
 
 Creates a new user account with initial workspace
-<a name="CreateWorkspace1"></a>
-# **CreateWorkspace1**
-> CreateWorkspaceResponse1 CreateWorkspace1(createWorkspaceRequest1)
+<a name="CreateWorkspace"></a>
+# **CreateWorkspace**
+> CreateWorkspaceResponse CreateWorkspace(createWorkspaceRequest)
 
 Create workspace
-<a name="DeleteAccount1"></a>
-# **DeleteAccount1**
-> DeleteAccountResponse DeleteAccount1(Id_)
+<a name="DeleteAccount"></a>
+# **DeleteAccount**
+> DeleteAccountResponse DeleteAccount(Id_)
 
 Delete account
-<a name="DeleteWorkspace1"></a>
-# **DeleteWorkspace1**
-> DeleteWorkspaceResponse DeleteWorkspace1(Id_)
+<a name="DeleteWorkspace"></a>
+# **DeleteWorkspace**
+> DeleteWorkspaceResponse DeleteWorkspace(Id_)
 
 Delete workspace
-<a name="GetAccount1"></a>
-# **GetAccount1**
-> GetAccountResponse1 GetAccount1(Id_)
+<a name="GetAccount"></a>
+# **GetAccount**
+> GetAccountResponse GetAccount(Id_)
 
 Get account details
-<a name="GetWorkspace1"></a>
-# **GetWorkspace1**
-> GetWorkspaceResponse GetWorkspace1(Id_)
+<a name="GetWorkspace"></a>
+# **GetWorkspace**
+> GetWorkspaceResponse GetWorkspace(Id_)
 
 Get workspace details
-<a name="GetWorkspaceAnalytics1"></a>
-# **GetWorkspaceAnalytics1**
-> GetWorkspaceAnalyticsResponse1 GetWorkspaceAnalytics1(workspaceId, startTime, endTime)
+<a name="GetWorkspaceAnalytics"></a>
+# **GetWorkspaceAnalytics**
+> GetWorkspaceAnalyticsResponse GetWorkspaceAnalytics(workspaceId, startTime, endTime)
 
 Get workspace analytics
 <a name="GetWorkspaceComplianceReport"></a>
@@ -74,9 +74,9 @@ Get storage statistics
 > ListWorkspaceSharingsResponse ListWorkspaceSharings(workspaceId, pageSize, pageToken)
 
 List workspace sharings
-<a name="ListWorkspaces1"></a>
-# **ListWorkspaces1**
-> ListWorkspacesResponse1 ListWorkspaces1(accountId, pageSize, pageToken, filter)
+<a name="ListWorkspaces"></a>
+# **ListWorkspaces**
+> ListWorkspacesResponse ListWorkspaces(accountId, pageSize, pageToken, filter)
 
 List workspaces
 <a name="RemoveWorkspaceSharing"></a>
@@ -89,14 +89,14 @@ Remove workspace sharing
 > ShareWorkspaceResponse ShareWorkspace(workspaceId, shareWorkspaceBody)
 
 Share workspace
-<a name="UpdateAccount1"></a>
-# **UpdateAccount1**
-> UpdateAccountResponse UpdateAccount1(updateAccountRequest1)
+<a name="UpdateAccount"></a>
+# **UpdateAccount**
+> UpdateAccountResponse UpdateAccount(updateAccountRequest)
 
 Update account details
-<a name="UpdateWorkspace1"></a>
-# **UpdateWorkspace1**
-> UpdateWorkspaceResponse UpdateWorkspace1(updateWorkspaceRequest)
+<a name="UpdateWorkspace"></a>
+# **UpdateWorkspace**
+> UpdateWorkspaceResponse UpdateWorkspace(updateWorkspaceRequest)
 
 Update workspace
 <a name="UpdateWorkspaceSharing"></a>

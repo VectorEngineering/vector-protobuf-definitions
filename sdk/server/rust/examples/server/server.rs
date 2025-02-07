@@ -104,75 +104,31 @@ use crate::server_auth;
 
 use openapi_client::{
     Api,
-    CreateAccountResponse,
-    CreateApiKeyResponse,
     CreateOrganizationResponse,
-    CreateScrapingJobResponse,
     CreateTenantResponse,
-    CreateTenantApiKeyResponse,
-    CreateWebhookResponse,
-    CreateWorkspaceResponse,
-    DeleteAccountResponse,
-    DeleteApiKeyResponse,
     DeleteOrganizationResponse,
-    DeleteScrapingJobResponse,
     DeleteTenantResponse,
-    DeleteTenantApiKeyResponse,
-    DeleteWebhookResponse,
-    DeleteWorkflowResponse,
-    DeleteWorkspaceResponse,
-    DownloadScrapingResultsResponse,
-    GetAccountResponse,
-    GetAccountUsageResponse,
-    GetApiKeyResponse,
-    GetLeadResponse,
     GetOrganizationResponse,
-    GetScrapingJobResponse,
     GetTenantResponse,
-    GetTenantApiKeyResponse,
-    GetWebhookResponse,
-    GetWorkflowResponse,
-    GetWorkspaceResponse,
-    GetWorkspaceAnalyticsResponse,
-    LeadScraperServiceCreateWorkflowResponse,
-    ListAccountsResponse,
-    ListApiKeysResponse,
-    ListLeadsResponse,
     ListOrganizationsResponse,
-    ListScrapingJobsResponse,
-    ListTenantApiKeysResponse,
     ListTenantsResponse,
-    ListWebhooksResponse,
-    ListWorkflowsResponse,
-    ListWorkspacesResponse,
-    PauseWorkflowResponse,
-    RotateApiKeyResponse,
-    RotateTenantApiKeyResponse,
-    TriggerWorkflowResponse,
-    UpdateAccountResponse,
-    UpdateAccountSettingsResponse,
-    UpdateApiKeyResponse,
     UpdateOrganizationResponse,
     UpdateTenantResponse,
-    UpdateTenantApiKeyResponse,
-    UpdateWebhookResponse,
-    UpdateWorkflowResponse,
-    UpdateWorkspaceResponse,
-    CreateAccount1Response,
-    CreateWorkspace1Response,
-    DeleteAccount1Response,
-    DeleteWorkspace1Response,
-    GetAccount1Response,
-    GetWorkspace1Response,
-    GetWorkspaceAnalytics1Response,
+    CreateAccountResponse,
+    CreateWorkspaceResponse,
+    DeleteAccountResponse,
+    DeleteWorkspaceResponse,
+    GetAccountResponse,
+    GetWorkspaceResponse,
+    GetWorkspaceAnalyticsResponse,
     GetWorkspaceComplianceReportResponse,
     GetWorkspaceStorageStatsResponse,
     ListWorkspaceSharingsResponse,
-    ListWorkspaces1Response,
+    ListWorkspacesResponse,
     RemoveWorkspaceSharingResponse,
     ShareWorkspaceResponse,
-    UpdateAccount1Response,
-    UpdateWorkspace1Response,
+    UpdateAccountResponse,
+    UpdateWorkspaceResponse,
     UpdateWorkspaceSharingResponse,
 };
 use openapi_client::server::MakeService;
@@ -182,26 +138,6 @@ use swagger::ApiError;
 #[async_trait]
 impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
 {
-    /// Create a new account
-    async fn create_account(
-        &self,
-        create_account_request: models::CreateAccountRequest,
-        context: &C) -> Result<CreateAccountResponse, ApiError>
-    {
-        info!("create_account({:?}) - X-Span-ID: {:?}", create_account_request, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Create a new API key
-    async fn create_api_key(
-        &self,
-        create_api_key_request: models::CreateApiKeyRequest,
-        context: &C) -> Result<CreateApiKeyResponse, ApiError>
-    {
-        info!("create_api_key({:?}) - X-Span-ID: {:?}", create_api_key_request, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
     /// Create a new organization
     async fn create_organization(
         &self,
@@ -209,16 +145,6 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<CreateOrganizationResponse, ApiError>
     {
         info!("create_organization({:?}) - X-Span-ID: {:?}", create_organization_request, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Create a new job scraping task
-    async fn create_scraping_job(
-        &self,
-        create_scraping_job_request: models::CreateScrapingJobRequest,
-        context: &C) -> Result<CreateScrapingJobResponse, ApiError>
-    {
-        info!("create_scraping_job({:?}) - X-Span-ID: {:?}", create_scraping_job_request, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -233,62 +159,6 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
-    /// Create a new tenant API key
-    async fn create_tenant_api_key(
-        &self,
-        create_tenant_api_key_request: models::CreateTenantApiKeyRequest,
-        context: &C) -> Result<CreateTenantApiKeyResponse, ApiError>
-    {
-        info!("create_tenant_api_key({:?}) - X-Span-ID: {:?}", create_tenant_api_key_request, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Create webhook
-    async fn create_webhook(
-        &self,
-        create_webhook_request: models::CreateWebhookRequest,
-        context: &C) -> Result<CreateWebhookResponse, ApiError>
-    {
-        info!("create_webhook({:?}) - X-Span-ID: {:?}", create_webhook_request, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Create a new workspace
-    async fn create_workspace(
-        &self,
-        create_workspace_request: models::CreateWorkspaceRequest,
-        context: &C) -> Result<CreateWorkspaceResponse, ApiError>
-    {
-        info!("create_workspace({:?}) - X-Span-ID: {:?}", create_workspace_request, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Delete account
-    async fn delete_account(
-        &self,
-        id: String,
-        organization_id: Option<String>,
-        tenant_id: Option<String>,
-        context: &C) -> Result<DeleteAccountResponse, ApiError>
-    {
-        info!("delete_account(\"{}\", {:?}, {:?}) - X-Span-ID: {:?}", id, organization_id, tenant_id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Delete API key
-    async fn delete_api_key(
-        &self,
-        key_id: String,
-        organization_id: Option<String>,
-        workspace_id: Option<String>,
-        tenant_id: Option<String>,
-        account_id: Option<String>,
-        context: &C) -> Result<DeleteApiKeyResponse, ApiError>
-    {
-        info!("delete_api_key(\"{}\", {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", key_id, organization_id, workspace_id, tenant_id, account_id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
     /// Delete an organization
     async fn delete_organization(
         &self,
@@ -296,19 +166,6 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<DeleteOrganizationResponse, ApiError>
     {
         info!("delete_organization(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Delete a specific job
-    async fn delete_scraping_job(
-        &self,
-        job_id: String,
-        user_id: String,
-        org_id: String,
-        tenant_id: String,
-        context: &C) -> Result<DeleteScrapingJobResponse, ApiError>
-    {
-        info!("delete_scraping_job(\"{}\", \"{}\", \"{}\", \"{}\") - X-Span-ID: {:?}", job_id, user_id, org_id, tenant_id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -323,119 +180,6 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
-    /// Delete tenant API key
-    async fn delete_tenant_api_key(
-        &self,
-        key_id: String,
-        organization_id: Option<String>,
-        tenant_id: Option<String>,
-        context: &C) -> Result<DeleteTenantApiKeyResponse, ApiError>
-    {
-        info!("delete_tenant_api_key(\"{}\", {:?}, {:?}) - X-Span-ID: {:?}", key_id, organization_id, tenant_id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Delete webhook
-    async fn delete_webhook(
-        &self,
-        webhook_id: String,
-        organization_id: Option<String>,
-        workspace_id: Option<String>,
-        tenant_id: Option<String>,
-        account_id: Option<String>,
-        context: &C) -> Result<DeleteWebhookResponse, ApiError>
-    {
-        info!("delete_webhook(\"{}\", {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", webhook_id, organization_id, workspace_id, tenant_id, account_id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Delete workflow
-    async fn delete_workflow(
-        &self,
-        workspace_id: String,
-        id: String,
-        org_id: String,
-        tenant_id: String,
-        account_id: Option<String>,
-        context: &C) -> Result<DeleteWorkflowResponse, ApiError>
-    {
-        info!("delete_workflow(\"{}\", \"{}\", \"{}\", \"{}\", {:?}) - X-Span-ID: {:?}", workspace_id, id, org_id, tenant_id, account_id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Delete a workspace
-    async fn delete_workspace(
-        &self,
-        id: String,
-        context: &C) -> Result<DeleteWorkspaceResponse, ApiError>
-    {
-        info!("delete_workspace(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Download job results as CSV
-    async fn download_scraping_results(
-        &self,
-        job_id: String,
-        user_id: String,
-        org_id: String,
-        tenant_id: String,
-        context: &C) -> Result<DownloadScrapingResultsResponse, ApiError>
-    {
-        info!("download_scraping_results(\"{}\", \"{}\", \"{}\", \"{}\") - X-Span-ID: {:?}", job_id, user_id, org_id, tenant_id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Get account details
-    async fn get_account(
-        &self,
-        id: String,
-        organization_id: Option<String>,
-        tenant_id: Option<String>,
-        context: &C) -> Result<GetAccountResponse, ApiError>
-    {
-        info!("get_account(\"{}\", {:?}, {:?}) - X-Span-ID: {:?}", id, organization_id, tenant_id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Get account usage
-    async fn get_account_usage(
-        &self,
-        id: String,
-        context: &C) -> Result<GetAccountUsageResponse, ApiError>
-    {
-        info!("get_account_usage(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Get API key details
-    async fn get_api_key(
-        &self,
-        key_id: String,
-        organization_id: Option<String>,
-        tenant_id: Option<String>,
-        account_id: Option<String>,
-        workspace_id: Option<String>,
-        context: &C) -> Result<GetApiKeyResponse, ApiError>
-    {
-        info!("get_api_key(\"{}\", {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", key_id, organization_id, tenant_id, account_id, workspace_id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Get lead details
-    async fn get_lead(
-        &self,
-        lead_id: String,
-        organization_id: Option<String>,
-        workspace_id: Option<String>,
-        tenant_id: Option<String>,
-        account_id: Option<String>,
-        context: &C) -> Result<GetLeadResponse, ApiError>
-    {
-        info!("get_lead(\"{}\", {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", lead_id, organization_id, workspace_id, tenant_id, account_id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
     /// Get organization details
     async fn get_organization(
         &self,
@@ -443,19 +187,6 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<GetOrganizationResponse, ApiError>
     {
         info!("get_organization(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Get a specific job
-    async fn get_scraping_job(
-        &self,
-        job_id: String,
-        user_id: String,
-        org_id: String,
-        tenant_id: String,
-        context: &C) -> Result<GetScrapingJobResponse, ApiError>
-    {
-        info!("get_scraping_job(\"{}\", \"{}\", \"{}\", \"{}\") - X-Span-ID: {:?}", job_id, user_id, org_id, tenant_id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -470,125 +201,6 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
-    /// Get tenant API key details
-    async fn get_tenant_api_key(
-        &self,
-        key_id: String,
-        organization_id: Option<String>,
-        tenant_id: Option<String>,
-        context: &C) -> Result<GetTenantApiKeyResponse, ApiError>
-    {
-        info!("get_tenant_api_key(\"{}\", {:?}, {:?}) - X-Span-ID: {:?}", key_id, organization_id, tenant_id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Get webhook
-    async fn get_webhook(
-        &self,
-        webhook_id: String,
-        organization_id: Option<String>,
-        workspace_id: Option<String>,
-        tenant_id: Option<String>,
-        account_id: Option<String>,
-        context: &C) -> Result<GetWebhookResponse, ApiError>
-    {
-        info!("get_webhook(\"{}\", {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", webhook_id, organization_id, workspace_id, tenant_id, account_id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Get workflow details
-    async fn get_workflow(
-        &self,
-        workspace_id: String,
-        id: String,
-        context: &C) -> Result<GetWorkflowResponse, ApiError>
-    {
-        info!("get_workflow(\"{}\", \"{}\") - X-Span-ID: {:?}", workspace_id, id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Get workspace details
-    async fn get_workspace(
-        &self,
-        id: String,
-        organization_id: Option<String>,
-        tenant_id: Option<String>,
-        account_id: Option<String>,
-        context: &C) -> Result<GetWorkspaceResponse, ApiError>
-    {
-        info!("get_workspace(\"{}\", {:?}, {:?}, {:?}) - X-Span-ID: {:?}", id, organization_id, tenant_id, account_id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Get workspace analytics
-    async fn get_workspace_analytics(
-        &self,
-        workspace_id: String,
-        start_time: Option<chrono::DateTime::<chrono::Utc>>,
-        end_time: Option<chrono::DateTime::<chrono::Utc>>,
-        context: &C) -> Result<GetWorkspaceAnalyticsResponse, ApiError>
-    {
-        info!("get_workspace_analytics(\"{}\", {:?}, {:?}) - X-Span-ID: {:?}", workspace_id, start_time, end_time, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Create a new workflow
-    async fn lead_scraper_service_create_workflow(
-        &self,
-        workspace_id: String,
-        create_workflow_body: models::CreateWorkflowBody,
-        context: &C) -> Result<LeadScraperServiceCreateWorkflowResponse, ApiError>
-    {
-        info!("lead_scraper_service_create_workflow(\"{}\", {:?}) - X-Span-ID: {:?}", workspace_id, create_workflow_body, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// List all accounts
-    async fn list_accounts(
-        &self,
-        page_size: Option<i32>,
-        page_number: Option<i32>,
-        filter: Option<String>,
-        organization_id: Option<String>,
-        tenant_id: Option<String>,
-        context: &C) -> Result<ListAccountsResponse, ApiError>
-    {
-        info!("list_accounts({:?}, {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", page_size, page_number, filter, organization_id, tenant_id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// List API keys
-    async fn list_api_keys(
-        &self,
-        organization_id: Option<String>,
-        tenant_id: Option<String>,
-        account_id: Option<String>,
-        workspace_id: Option<String>,
-        page_size: Option<i32>,
-        page_number: Option<i32>,
-        status: Option<String>,
-        search: Option<String>,
-        context: &C) -> Result<ListApiKeysResponse, ApiError>
-    {
-        info!("list_api_keys({:?}, {:?}, {:?}, {:?}, {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", organization_id, tenant_id, account_id, workspace_id, page_size, page_number, status, search, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// List leads
-    async fn list_leads(
-        &self,
-        organization_id: Option<String>,
-        workspace_id: Option<String>,
-        tenant_id: Option<String>,
-        account_id: Option<String>,
-        page_size: Option<i32>,
-        page_number: Option<i32>,
-        context: &C) -> Result<ListLeadsResponse, ApiError>
-    {
-        info!("list_leads({:?}, {:?}, {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", organization_id, workspace_id, tenant_id, account_id, page_size, page_number, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
     /// List all organizations
     async fn list_organizations(
         &self,
@@ -597,32 +209,6 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<ListOrganizationsResponse, ApiError>
     {
         info!("list_organizations({:?}, {:?}) - X-Span-ID: {:?}", page_size, page_number, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Get all jobs
-    async fn list_scraping_jobs(
-        &self,
-        auth_platform_user_id: String,
-        org_id: String,
-        tenant_id: String,
-        context: &C) -> Result<ListScrapingJobsResponse, ApiError>
-    {
-        info!("list_scraping_jobs(\"{}\", \"{}\", \"{}\") - X-Span-ID: {:?}", auth_platform_user_id, org_id, tenant_id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// List tenant API keys
-    async fn list_tenant_api_keys(
-        &self,
-        organization_id: Option<String>,
-        tenant_id: Option<String>,
-        page_size: Option<i32>,
-        page_number: Option<i32>,
-        status: Option<String>,
-        context: &C) -> Result<ListTenantApiKeysResponse, ApiError>
-    {
-        info!("list_tenant_api_keys({:?}, {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", organization_id, tenant_id, page_size, page_number, status, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -635,127 +221,6 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<ListTenantsResponse, ApiError>
     {
         info!("list_tenants(\"{}\", {:?}, {:?}) - X-Span-ID: {:?}", organization_id, page_size, page_number, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// List webhooks
-    async fn list_webhooks(
-        &self,
-        organization_id: Option<String>,
-        workspace_id: Option<String>,
-        tenant_id: Option<String>,
-        account_id: Option<String>,
-        page_size: Option<i32>,
-        page_number: Option<i32>,
-        status: Option<String>,
-        search: Option<String>,
-        context: &C) -> Result<ListWebhooksResponse, ApiError>
-    {
-        info!("list_webhooks({:?}, {:?}, {:?}, {:?}, {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", organization_id, workspace_id, tenant_id, account_id, page_size, page_number, status, search, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// List workflows
-    async fn list_workflows(
-        &self,
-        workspace_id: String,
-        page_size: Option<i32>,
-        page_number: Option<i32>,
-        filter: Option<String>,
-        organization_id: Option<String>,
-        tenant_id: Option<String>,
-        account_id: Option<String>,
-        context: &C) -> Result<ListWorkflowsResponse, ApiError>
-    {
-        info!("list_workflows(\"{}\", {:?}, {:?}, {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", workspace_id, page_size, page_number, filter, organization_id, tenant_id, account_id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// List workspaces
-    async fn list_workspaces(
-        &self,
-        account_id: Option<String>,
-        page_size: Option<i32>,
-        page_number: Option<i32>,
-        organization_id: Option<String>,
-        tenant_id: Option<String>,
-        context: &C) -> Result<ListWorkspacesResponse, ApiError>
-    {
-        info!("list_workspaces({:?}, {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", account_id, page_size, page_number, organization_id, tenant_id, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Pause workflow execution
-    async fn pause_workflow(
-        &self,
-        workspace_id: String,
-        id: String,
-        pause_workflow_body: models::PauseWorkflowBody,
-        context: &C) -> Result<PauseWorkflowResponse, ApiError>
-    {
-        info!("pause_workflow(\"{}\", \"{}\", {:?}) - X-Span-ID: {:?}", workspace_id, id, pause_workflow_body, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Rotate API key
-    async fn rotate_api_key(
-        &self,
-        rotate_api_key_request: models::RotateApiKeyRequest,
-        context: &C) -> Result<RotateApiKeyResponse, ApiError>
-    {
-        info!("rotate_api_key({:?}) - X-Span-ID: {:?}", rotate_api_key_request, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Rotate tenant API key
-    async fn rotate_tenant_api_key(
-        &self,
-        rotate_tenant_api_key_request: models::RotateTenantApiKeyRequest,
-        context: &C) -> Result<RotateTenantApiKeyResponse, ApiError>
-    {
-        info!("rotate_tenant_api_key({:?}) - X-Span-ID: {:?}", rotate_tenant_api_key_request, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Trigger workflow execution
-    async fn trigger_workflow(
-        &self,
-        workspace_id: String,
-        id: String,
-        trigger_workflow_body: models::TriggerWorkflowBody,
-        context: &C) -> Result<TriggerWorkflowResponse, ApiError>
-    {
-        info!("trigger_workflow(\"{}\", \"{}\", {:?}) - X-Span-ID: {:?}", workspace_id, id, trigger_workflow_body, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Update account details
-    async fn update_account(
-        &self,
-        update_account_request: models::UpdateAccountRequest,
-        context: &C) -> Result<UpdateAccountResponse, ApiError>
-    {
-        info!("update_account({:?}) - X-Span-ID: {:?}", update_account_request, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Update account settings
-    async fn update_account_settings(
-        &self,
-        update_account_settings_request: models::UpdateAccountSettingsRequest,
-        context: &C) -> Result<UpdateAccountSettingsResponse, ApiError>
-    {
-        info!("update_account_settings({:?}) - X-Span-ID: {:?}", update_account_settings_request, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Update API key
-    async fn update_api_key(
-        &self,
-        update_api_key_request: models::UpdateApiKeyRequest,
-        context: &C) -> Result<UpdateApiKeyResponse, ApiError>
-    {
-        info!("update_api_key({:?}) - X-Span-ID: {:?}", update_api_key_request, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -779,115 +244,75 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
-    /// Update tenant API key
-    async fn update_tenant_api_key(
-        &self,
-        update_tenant_api_key_request: models::UpdateTenantApiKeyRequest,
-        context: &C) -> Result<UpdateTenantApiKeyResponse, ApiError>
-    {
-        info!("update_tenant_api_key({:?}) - X-Span-ID: {:?}", update_tenant_api_key_request, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Update webhook
-    async fn update_webhook(
-        &self,
-        update_webhook_request: models::UpdateWebhookRequest,
-        context: &C) -> Result<UpdateWebhookResponse, ApiError>
-    {
-        info!("update_webhook({:?}) - X-Span-ID: {:?}", update_webhook_request, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Update workflow details
-    async fn update_workflow(
-        &self,
-        update_workflow_request: models::UpdateWorkflowRequest,
-        context: &C) -> Result<UpdateWorkflowResponse, ApiError>
-    {
-        info!("update_workflow({:?}) - X-Span-ID: {:?}", update_workflow_request, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
-    /// Update workspace details
-    async fn update_workspace(
-        &self,
-        update_workspace_request: models::UpdateWorkspaceRequest,
-        context: &C) -> Result<UpdateWorkspaceResponse, ApiError>
-    {
-        info!("update_workspace({:?}) - X-Span-ID: {:?}", update_workspace_request, context.get().0.clone());
-        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
-    }
-
     /// Create a new account
-    async fn create_account1(
+    async fn create_account(
         &self,
-        create_account_request1: models::CreateAccountRequest1,
-        context: &C) -> Result<CreateAccount1Response, ApiError>
+        create_account_request: models::CreateAccountRequest,
+        context: &C) -> Result<CreateAccountResponse, ApiError>
     {
-        info!("create_account1({:?}) - X-Span-ID: {:?}", create_account_request1, context.get().0.clone());
+        info!("create_account({:?}) - X-Span-ID: {:?}", create_account_request, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
     /// Create workspace
-    async fn create_workspace1(
+    async fn create_workspace(
         &self,
-        create_workspace_request1: models::CreateWorkspaceRequest1,
-        context: &C) -> Result<CreateWorkspace1Response, ApiError>
+        create_workspace_request: models::CreateWorkspaceRequest,
+        context: &C) -> Result<CreateWorkspaceResponse, ApiError>
     {
-        info!("create_workspace1({:?}) - X-Span-ID: {:?}", create_workspace_request1, context.get().0.clone());
+        info!("create_workspace({:?}) - X-Span-ID: {:?}", create_workspace_request, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
     /// Delete account
-    async fn delete_account1(
+    async fn delete_account(
         &self,
         id: String,
-        context: &C) -> Result<DeleteAccount1Response, ApiError>
+        context: &C) -> Result<DeleteAccountResponse, ApiError>
     {
-        info!("delete_account1(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
+        info!("delete_account(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
     /// Delete workspace
-    async fn delete_workspace1(
+    async fn delete_workspace(
         &self,
         id: String,
-        context: &C) -> Result<DeleteWorkspace1Response, ApiError>
+        context: &C) -> Result<DeleteWorkspaceResponse, ApiError>
     {
-        info!("delete_workspace1(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
+        info!("delete_workspace(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
     /// Get account details
-    async fn get_account1(
+    async fn get_account(
         &self,
         id: String,
-        context: &C) -> Result<GetAccount1Response, ApiError>
+        context: &C) -> Result<GetAccountResponse, ApiError>
     {
-        info!("get_account1(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
+        info!("get_account(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
     /// Get workspace details
-    async fn get_workspace1(
+    async fn get_workspace(
         &self,
         id: String,
-        context: &C) -> Result<GetWorkspace1Response, ApiError>
+        context: &C) -> Result<GetWorkspaceResponse, ApiError>
     {
-        info!("get_workspace1(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
+        info!("get_workspace(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
     /// Get workspace analytics
-    async fn get_workspace_analytics1(
+    async fn get_workspace_analytics(
         &self,
         workspace_id: String,
         start_time: Option<chrono::DateTime::<chrono::Utc>>,
         end_time: Option<chrono::DateTime::<chrono::Utc>>,
-        context: &C) -> Result<GetWorkspaceAnalytics1Response, ApiError>
+        context: &C) -> Result<GetWorkspaceAnalyticsResponse, ApiError>
     {
-        info!("get_workspace_analytics1(\"{}\", {:?}, {:?}) - X-Span-ID: {:?}", workspace_id, start_time, end_time, context.get().0.clone());
+        info!("get_workspace_analytics(\"{}\", {:?}, {:?}) - X-Span-ID: {:?}", workspace_id, start_time, end_time, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -925,15 +350,15 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
     }
 
     /// List workspaces
-    async fn list_workspaces1(
+    async fn list_workspaces(
         &self,
         account_id: Option<String>,
         page_size: Option<i32>,
         page_token: Option<String>,
         filter: Option<String>,
-        context: &C) -> Result<ListWorkspaces1Response, ApiError>
+        context: &C) -> Result<ListWorkspacesResponse, ApiError>
     {
-        info!("list_workspaces1({:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", account_id, page_size, page_token, filter, context.get().0.clone());
+        info!("list_workspaces({:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", account_id, page_size, page_token, filter, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -959,22 +384,22 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
     }
 
     /// Update account details
-    async fn update_account1(
+    async fn update_account(
         &self,
-        update_account_request1: models::UpdateAccountRequest1,
-        context: &C) -> Result<UpdateAccount1Response, ApiError>
+        update_account_request: models::UpdateAccountRequest,
+        context: &C) -> Result<UpdateAccountResponse, ApiError>
     {
-        info!("update_account1({:?}) - X-Span-ID: {:?}", update_account_request1, context.get().0.clone());
+        info!("update_account({:?}) - X-Span-ID: {:?}", update_account_request, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
     /// Update workspace
-    async fn update_workspace1(
+    async fn update_workspace(
         &self,
         update_workspace_request: models::UpdateWorkspaceRequest,
-        context: &C) -> Result<UpdateWorkspace1Response, ApiError>
+        context: &C) -> Result<UpdateWorkspaceResponse, ApiError>
     {
-        info!("update_workspace1({:?}) - X-Span-ID: {:?}", update_workspace_request, context.get().0.clone());
+        info!("update_workspace({:?}) - X-Span-ID: {:?}", update_workspace_request, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

@@ -5,10 +5,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**account** | [**Account**](Account.md) |  | [optional] 
-**initial_workspace_name** | **str** |  | [optional] 
-**organization_id** | **str** |  | [optional] 
+**auth0_user_id** | **str** |  | 
+**email** | **str** |  | 
+**base_directory** | **str** |  | [optional] 
+**region** | **str** |  | [optional] 
+**org_id** | **str** |  | [optional] 
 **tenant_id** | **str** |  | [optional] 
+**roles** | **List[str]** |  | [optional] 
+**permissions** | **List[str]** |  | [optional] 
+**mfa_enabled** | **bool** |  | [optional] 
+**compliance_level** | [**ComplianceLevel**](ComplianceLevel.md) |  | [optional] [default to ComplianceLevel.UNSPECIFIED]
+**preferences** | **Dict[str, str]** |  | [optional] 
 
 ## Example
 

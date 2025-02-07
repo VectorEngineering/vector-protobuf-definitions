@@ -20,7 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from playbookmedia_backend_client_sdk.models.account import Account
+from playbookmedia_backend_client_sdk.models.account1 import Account1
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,9 +28,9 @@ class CreateAccountResponse(BaseModel):
     """
     CreateAccountResponse
     """ # noqa: E501
-    account: Optional[Account] = None
-    initial_workspace_id: Optional[StrictStr] = Field(default=None, alias="initialWorkspaceId")
-    __properties: ClassVar[List[str]] = ["account", "initialWorkspaceId"]
+    account: Optional[Account1] = None
+    initial_workspace_name: Optional[StrictStr] = Field(default=None, alias="initialWorkspaceName")
+    __properties: ClassVar[List[str]] = ["account", "initialWorkspaceName"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -86,8 +86,8 @@ class CreateAccountResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "account": Account.from_dict(obj["account"]) if obj.get("account") is not None else None,
-            "initialWorkspaceId": obj.get("initialWorkspaceId")
+            "account": Account1.from_dict(obj["account"]) if obj.get("account") is not None else None,
+            "initialWorkspaceName": obj.get("initialWorkspaceName")
         })
         return _obj
 

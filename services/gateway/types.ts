@@ -8,6 +8,10 @@ export interface Env extends HonoEnv {
   API_KEY: string;
   // KV namespace for rate limiting
   KV?: KVNamespace;
+  // add ai capabilities
+  AI: Ai;
+  // add r2 bucket
+  R2: R2Bucket;
 }
 
 // Export generated types

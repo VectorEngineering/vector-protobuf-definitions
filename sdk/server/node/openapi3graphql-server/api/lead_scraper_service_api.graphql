@@ -14,24 +14,9 @@
 
 
 
-input CreateAPIKeyInput {
-    
-    createApiKeyRequest: CreateApiKeyRequestInput
-}
-
-input CreateAccountInput {
-    
-    createAccountRequest: CreateAccountRequestInput
-}
-
 input CreateOrganizationInput {
     
     createOrganizationRequest: CreateOrganizationRequestInput
-}
-
-input CreateScrapingJobInput {
-    
-    createScrapingJobRequest: CreateScrapingJobRequestInput
 }
 
 input CreateTenantInput {
@@ -41,57 +26,9 @@ input CreateTenantInput {
     createTenantBody: CreateTenantBodyInput
 }
 
-input CreateTenantAPIKeyInput {
-    
-    createTenantApiKeyRequest: CreateTenantApiKeyRequestInput
-}
-
-input CreateWebhookInput {
-    
-    createWebhookRequest: CreateWebhookRequestInput
-}
-
-input CreateWorkspaceInput {
-    
-    createWorkspaceRequest: CreateWorkspaceRequestInput
-}
-
-input DeleteAPIKeyInput {
-    
-    keyId: String!, 
-    
-    organizationId: String!, 
-    
-    workspaceId: String!, 
-    
-    tenantId: String!, 
-    
-    accountId: String!
-}
-
-input DeleteAccountInput {
-    
-    Id_: String!, 
-    
-    organizationId: String!, 
-    
-    tenantId: String!
-}
-
 input DeleteOrganizationInput {
     
     Id_: String!
-}
-
-input DeleteScrapingJobInput {
-    
-    jobId: String!, 
-    
-    userId: String!, 
-    
-    orgId: String!, 
-    
-    tenantId: String!
 }
 
 input DeleteTenantInput {
@@ -99,96 +36,6 @@ input DeleteTenantInput {
     organizationId: String!, 
     
     tenantId: String!
-}
-
-input DeleteTenantAPIKeyInput {
-    
-    keyId: String!, 
-    
-    organizationId: String!, 
-    
-    tenantId: String!
-}
-
-input DeleteWebhookInput {
-    
-    webhookId: String!, 
-    
-    organizationId: String!, 
-    
-    workspaceId: String!, 
-    
-    tenantId: String!, 
-    
-    accountId: String!
-}
-
-input DeleteWorkflowInput {
-    
-    workspaceId: String!, 
-    
-    Id_: String!, 
-    
-    orgId: String!, 
-    
-    tenantId: String!, 
-    
-    accountId: String!
-}
-
-input DeleteWorkspaceInput {
-    
-    Id_: String!
-}
-
-input LeadScraperServiceCreateWorkflowInput {
-    
-    workspaceId: String!, 
-    
-    createWorkflowBody: CreateWorkflowBodyInput
-}
-
-input PauseWorkflowInput {
-    
-    workspaceId: String!, 
-    
-    Id_: String!, 
-    
-    pauseWorkflowBody: PauseWorkflowBodyInput
-}
-
-input RotateAPIKeyInput {
-    
-    rotateApiKeyRequest: RotateApiKeyRequestInput
-}
-
-input RotateTenantAPIKeyInput {
-    
-    rotateTenantApiKeyRequest: RotateTenantApiKeyRequestInput
-}
-
-input TriggerWorkflowInput {
-    
-    workspaceId: String!, 
-    
-    Id_: String!, 
-    
-    triggerWorkflowBody: TriggerWorkflowBodyInput
-}
-
-input UpdateAPIKeyInput {
-    
-    updateApiKeyRequest: UpdateApiKeyRequestInput
-}
-
-input UpdateAccountInput {
-    
-    updateAccountRequest: UpdateAccountRequestInput
-}
-
-input UpdateAccountSettingsInput {
-    
-    updateAccountSettingsRequest: UpdateAccountSettingsRequestInput
 }
 
 input UpdateOrganizationInput {
@@ -201,178 +48,29 @@ input UpdateTenantInput {
     updateTenantRequest: UpdateTenantRequestInput
 }
 
-input UpdateTenantAPIKeyInput {
-    
-    updateTenantApiKeyRequest: UpdateTenantApiKeyRequestInput
-}
-
-input UpdateWebhookInput {
-    
-    updateWebhookRequest: UpdateWebhookRequestInput
-}
-
-input UpdateWorkflowInput {
-    
-    updateWorkflowRequest: UpdateWorkflowRequestInput
-}
-
-input UpdateWorkspaceInput {
-    
-    updateWorkspaceRequest: UpdateWorkspaceRequestInput
-}
-
 type Mutation {
-  # Create a new API key
-  # Creates a new API key with specified permissions and settings
-  # @param CreateApiKeyRequest createApiKeyRequest 
-  # @return [CreateApiKeyResponse]
-  CreateAPIKey(input: CreateAPIKeyInput!): CreateApiKeyResponse
-  # Create a new account
-  # Creates a new user account in the workspace service
-  # @param CreateAccountRequest createAccountRequest 
-  # @return [CreateAccountResponse]
-  CreateAccount(input: CreateAccountInput!): CreateAccountResponse
   # Create a new organization
   # Creates a new organization within a tenant
   # @param CreateOrganizationRequest createOrganizationRequest 
   # @return [CreateOrganizationResponse]
   CreateOrganization(input: CreateOrganizationInput!): CreateOrganizationResponse
-  # Create a new job scraping task
-  # This endpoint creates a new Google Maps scraping job
-  # @param CreateScrapingJobRequest createScrapingJobRequest 
-  # @return [CreateScrapingJobResponse]
-  CreateScrapingJob(input: CreateScrapingJobInput!): CreateScrapingJobResponse
   # Create a new tenant
   # Creates a new tenant in the system
   # @param String! organizationId 
   # @param CreateTenantBody createTenantBody 
   # @return [CreateTenantResponse]
   CreateTenant(input: CreateTenantInput!): CreateTenantResponse
-  # Create a new tenant API key
-  # Creates a new API key for a tenant with specified permissions
-  # @param CreateTenantApiKeyRequest createTenantApiKeyRequest 
-  # @return [CreateTenantApiKeyResponse]
-  CreateTenantAPIKey(input: CreateTenantAPIKeyInput!): CreateTenantApiKeyResponse
-  # Create webhook
-  # Creates a new webhook configuration for event notifications
-  # @param CreateWebhookRequest createWebhookRequest 
-  # @return [CreateWebhookResponse]
-  CreateWebhook(input: CreateWebhookInput!): CreateWebhookResponse
-  # Create a new workspace
-  # Creates a new workspace for a given account
-  # @param CreateWorkspaceRequest createWorkspaceRequest 
-  # @return [CreateWorkspaceResponse]
-  CreateWorkspace(input: CreateWorkspaceInput!): CreateWorkspaceResponse
-  # Delete API key
-  # Permanently deletes an API key
-  # @param String! keyId 
-  # @param String! organizationId 
-  # @param String! workspaceId 
-  # @param String! tenantId 
-  # @param String! accountId 
-  # @return [DeleteApiKeyResponse]
-  DeleteAPIKey(input: DeleteAPIKeyInput!): DeleteApiKeyResponse
-  # Delete account
-  # Permanently deletes an account and associated resources
-  # @param String! Id_ 
-  # @param String! organizationId 
-  # @param String! tenantId 
-  # @return [DeleteAccountResponse]
-  DeleteAccount(input: DeleteAccountInput!): DeleteAccountResponse
   # Delete an organization
   # Permanently deletes an organization and all associated resources
   # @param String! Id_ 
   # @return [DeleteOrganizationResponse]
   DeleteOrganization(input: DeleteOrganizationInput!): DeleteOrganizationResponse
-  # Delete a specific job
-  # This endpoint deletes a specific Google Maps scraping job
-  # @param String! jobId 
-  # @param String! userId 
-  # @param String! orgId 
-  # @param String! tenantId 
-  # @return [DeleteScrapingJobResponse]
-  DeleteScrapingJob(input: DeleteScrapingJobInput!): DeleteScrapingJobResponse
   # Delete a tenant
   # Permanently deletes a tenant and all associated resources
   # @param String! organizationId 
   # @param String! tenantId 
   # @return [DeleteTenantResponse]
   DeleteTenant(input: DeleteTenantInput!): DeleteTenantResponse
-  # Delete tenant API key
-  # Permanently deletes a tenant API key
-  # @param String! keyId 
-  # @param String! organizationId 
-  # @param String! tenantId 
-  # @return [DeleteTenantApiKeyResponse]
-  DeleteTenantAPIKey(input: DeleteTenantAPIKeyInput!): DeleteTenantApiKeyResponse
-  # Delete webhook
-  # Deletes a webhook configuration
-  # @param String! webhookId 
-  # @param String! organizationId 
-  # @param String! workspaceId 
-  # @param String! tenantId 
-  # @param String! accountId 
-  # @return [DeleteWebhookResponse]
-  DeleteWebhook(input: DeleteWebhookInput!): DeleteWebhookResponse
-  # Delete workflow
-  # Deletes a specific workflow
-  # @param String! workspaceId 
-  # @param String! Id_ 
-  # @param String! orgId 
-  # @param String! tenantId 
-  # @param String! accountId 
-  # @return [DeleteWorkflowResponse]
-  DeleteWorkflow(input: DeleteWorkflowInput!): DeleteWorkflowResponse
-  # Delete a workspace
-  # Deletes a specific workspace
-  # @param String! Id_ 
-  # @return [DeleteWorkspaceResponse]
-  DeleteWorkspace(input: DeleteWorkspaceInput!): DeleteWorkspaceResponse
-  # Create a new workflow
-  # This endpoint creates a new workflow configuration for a specific workspace  Required parameters: - workspace_id: Parent workspace ID - name: Human-readable workflow name - description: Optional workflow description - parameters: Job parameters for the workflow  Example: &#x60;&#x60;&#x60;json
-  # @param String! workspaceId 
-  # @param CreateWorkflowBody createWorkflowBody 
-  # @return [CreateWorkflowResponse]
-  LeadScraperServiceCreateWorkflow(input: LeadScraperServiceCreateWorkflowInput!): CreateWorkflowResponse
-  # Pause workflow execution
-  # Pauses the execution of a specific workflow
-  # @param String! workspaceId 
-  # @param String! Id_ 
-  # @param PauseWorkflowBody pauseWorkflowBody 
-  # @return [PauseWorkflowResponse]
-  PauseWorkflow(input: PauseWorkflowInput!): PauseWorkflowResponse
-  # Rotate API key
-  # Rotates an API key while maintaining its configuration
-  # @param RotateApiKeyRequest rotateApiKeyRequest 
-  # @return [RotateApiKeyResponse]
-  RotateAPIKey(input: RotateAPIKeyInput!): RotateApiKeyResponse
-  # Rotate tenant API key
-  # Rotates a tenant API key while maintaining its configuration
-  # @param RotateTenantApiKeyRequest rotateTenantApiKeyRequest 
-  # @return [RotateTenantApiKeyResponse]
-  RotateTenantAPIKey(input: RotateTenantAPIKeyInput!): RotateTenantApiKeyResponse
-  # Trigger workflow execution
-  # Triggers the execution of a specific workflow
-  # @param String! workspaceId 
-  # @param String! Id_ 
-  # @param TriggerWorkflowBody triggerWorkflowBody 
-  # @return [TriggerWorkflowResponse]
-  TriggerWorkflow(input: TriggerWorkflowInput!): TriggerWorkflowResponse
-  # Update API key
-  # Updates an existing API key&#39;s configuration
-  # @param UpdateApiKeyRequest updateApiKeyRequest 
-  # @return [UpdateApiKeyResponse]
-  UpdateAPIKey(input: UpdateAPIKeyInput!): UpdateApiKeyResponse
-  # Update account details
-  # Updates specified fields of an existing account
-  # @param UpdateAccountRequest updateAccountRequest 
-  # @return [UpdateAccountResponse]
-  UpdateAccount(input: UpdateAccountInput!): UpdateAccountResponse
-  # Update account settings
-  # Updates the settings for a given account
-  # @param UpdateAccountSettingsRequest updateAccountSettingsRequest 
-  # @return [UpdateAccountSettingsResponse]
-  UpdateAccountSettings(input: UpdateAccountSettingsInput!): UpdateAccountSettingsResponse
   # Update organization details
   # Updates the configuration of a specific organization
   # @param UpdateOrganizationRequest updateOrganizationRequest 
@@ -383,176 +81,26 @@ type Mutation {
   # @param UpdateTenantRequest updateTenantRequest 
   # @return [UpdateTenantResponse]
   UpdateTenant(input: UpdateTenantInput!): UpdateTenantResponse
-  # Update tenant API key
-  # Updates an existing tenant API key&#39;s configuration
-  # @param UpdateTenantApiKeyRequest updateTenantApiKeyRequest 
-  # @return [UpdateTenantApiKeyResponse]
-  UpdateTenantAPIKey(input: UpdateTenantAPIKeyInput!): UpdateTenantApiKeyResponse
-  # Update webhook
-  # Updates an existing webhook configuration
-  # @param UpdateWebhookRequest updateWebhookRequest 
-  # @return [UpdateWebhookResponse]
-  UpdateWebhook(input: UpdateWebhookInput!): UpdateWebhookResponse
-  # Update workflow details
-  # Updates the details of a specific workflow
-  # @param UpdateWorkflowRequest updateWorkflowRequest 
-  # @return [UpdateWorkflowResponse]
-  UpdateWorkflow(input: UpdateWorkflowInput!): UpdateWorkflowResponse
-  # Update workspace details
-  # Updates the details of a specific workspace
-  # @param UpdateWorkspaceRequest updateWorkspaceRequest 
-  # @return [UpdateWorkspaceResponse]
-  UpdateWorkspace(input: UpdateWorkspaceInput!): UpdateWorkspaceResponse
 }
 
 type Query {
-  # Download job results as CSV
-  # This endpoint downloads the results of a Google Maps scraping job as CSV
-  # @param String! jobId 
-  # @param String! userId 
-  # @param String! orgId 
-  # @param String! tenantId 
-  # @return [DownloadScrapingResultsResponse]
-  DownloadScrapingResults(jobId: String!, userId: String!, orgId: String!, tenantId: String!): DownloadScrapingResultsResponse
-  # Get API key details
-  # Retrieves details of a specific API key
-  # @param String! keyId 
-  # @param String! organizationId 
-  # @param String! tenantId 
-  # @param String! accountId 
-  # @param String! workspaceId 
-  # @return [GetApiKeyResponse]
-  GetAPIKey(keyId: String!, organizationId: String!, tenantId: String!, accountId: String!, workspaceId: String!): GetApiKeyResponse
-  # Get account details
-  # Retrieves details of a specific account
-  # @param String! Id_ 
-  # @param String! organizationId 
-  # @param String! tenantId 
-  # @return [GetAccountResponse]
-  GetAccount(Id_: String!, organizationId: String!, tenantId: String!): GetAccountResponse
-  # Get account usage
-  # Retrieves usage details for a given account
-  # @param String! Id_ 
-  # @return [GetAccountUsageResponse]
-  GetAccountUsage(Id_: String!): GetAccountUsageResponse
-  # Get lead details
-  # Retrieves detailed information about a specific lead
-  # @param String! leadId 
-  # @param String! organizationId 
-  # @param String! workspaceId 
-  # @param String! tenantId 
-  # @param String! accountId 
-  # @return [GetLeadResponse]
-  GetLead(leadId: String!, organizationId: String!, workspaceId: String!, tenantId: String!, accountId: String!): GetLeadResponse
   # Get organization details
   # Retrieves details of a specific organization
   # @param String! Id_ 
   # @return [GetOrganizationResponse]
   GetOrganization(Id_: String!): GetOrganizationResponse
-  # Get a specific job
-  # This endpoint retrieves a specific Google Maps scraping job
-  # @param String! jobId 
-  # @param String! userId 
-  # @param String! orgId 
-  # @param String! tenantId 
-  # @return [GetScrapingJobResponse]
-  GetScrapingJob(jobId: String!, userId: String!, orgId: String!, tenantId: String!): GetScrapingJobResponse
   # Get tenant details
   # Retrieves details of a specific tenant
   # @param String! organizationId 
   # @param String! tenantId 
   # @return [GetTenantResponse]
   GetTenant(organizationId: String!, tenantId: String!): GetTenantResponse
-  # Get tenant API key details
-  # Retrieves details of a specific tenant API key
-  # @param String! keyId 
-  # @param String! organizationId 
-  # @param String! tenantId 
-  # @return [GetTenantApiKeyResponse]
-  GetTenantAPIKey(keyId: String!, organizationId: String!, tenantId: String!): GetTenantApiKeyResponse
-  # Get webhook
-  # Retrieves details of a specific webhook configuration
-  # @param String! webhookId 
-  # @param String! organizationId 
-  # @param String! workspaceId 
-  # @param String! tenantId 
-  # @param String! accountId 
-  # @return [GetWebhookResponse]
-  GetWebhook(webhookId: String!, organizationId: String!, workspaceId: String!, tenantId: String!, accountId: String!): GetWebhookResponse
-  # Get workflow details
-  # Retrieves details of a specific workflow
-  # @param String! workspaceId 
-  # @param String! Id_ 
-  # @return [GetWorkflowResponse]
-  GetWorkflow(workspaceId: String!, Id_: String!): GetWorkflowResponse
-  # Get workspace details
-  # Retrieves details of a specific workspace
-  # @param String! Id_ 
-  # @param String! organizationId 
-  # @param String! tenantId 
-  # @param String! accountId 
-  # @return [GetWorkspaceResponse]
-  GetWorkspace(Id_: String!, organizationId: String!, tenantId: String!, accountId: String!): GetWorkspaceResponse
-  # Get workspace analytics
-  # Retrieves analytics data for a specific workspace
-  # @param String! workspaceId 
-  # @param String! startTime 
-  # @param String! endTime 
-  # @return [GetWorkspaceAnalyticsResponse]
-  GetWorkspaceAnalytics(workspaceId: String!, startTime: String!, endTime: String!): GetWorkspaceAnalyticsResponse
-  # List API keys
-  # Retrieves a list of API keys with optional filtering
-  # @param String! organizationId 
-  # @param String! tenantId 
-  # @param String! accountId 
-  # @param String! workspaceId 
-  # @param Int! pageSize 
-  # @param Int! pageNumber 
-  # @param String! status 
-  # @param String! search 
-  # @return [ListApiKeysResponse]
-  ListAPIKeys(organizationId: String!, tenantId: String!, accountId: String!, workspaceId: String!, pageSize: Int!, pageNumber: Int!, status: String!, search: String!): ListApiKeysResponse
-  # List all accounts
-  # Retrieves a list of accounts
-  # @param Int! pageSize 
-  # @param Int! pageNumber 
-  # @param String! filter 
-  # @param String! organizationId 
-  # @param String! tenantId 
-  # @return [ListAccountsResponse]
-  ListAccounts(pageSize: Int!, pageNumber: Int!, filter: String!, organizationId: String!, tenantId: String!): ListAccountsResponse
-  # List leads
-  # Retrieves a paginated list of leads with comprehensive filtering options
-  # @param String! organizationId Context identifiers
-  # @param String! workspaceId 
-  # @param String! tenantId 
-  # @param String! accountId 
-  # @param Int! pageSize Pagination
-  # @param Int! pageNumber 
-  # @return [ListLeadsResponse]
-  ListLeads(organizationId: String!, workspaceId: String!, tenantId: String!, accountId: String!, pageSize: Int!, pageNumber: Int!): ListLeadsResponse
   # List all organizations
   # Retrieves a list of all organizations in a tenant
   # @param Int! pageSize 
   # @param Int! pageNumber 
   # @return [ListOrganizationsResponse]
   ListOrganizations(pageSize: Int!, pageNumber: Int!): ListOrganizationsResponse
-  # Get all jobs
-  # This endpoint retrieves all Google Maps scraping jobs
-  # @param String! authPlatformUserId 
-  # @param String! orgId 
-  # @param String! tenantId 
-  # @return [ListScrapingJobsResponse]
-  ListScrapingJobs(authPlatformUserId: String!, orgId: String!, tenantId: String!): ListScrapingJobsResponse
-  # List tenant API keys
-  # Retrieves all API keys for a specific tenant
-  # @param String! organizationId 
-  # @param String! tenantId 
-  # @param Int! pageSize 
-  # @param Int! pageNumber 
-  # @param String! status 
-  # @return [ListTenantApiKeysResponse]
-  ListTenantAPIKeys(organizationId: String!, tenantId: String!, pageSize: Int!, pageNumber: Int!, status: String!): ListTenantApiKeysResponse
   # List all tenants
   # Retrieves a list of all tenants in the system
   # @param String! organizationId 
@@ -560,37 +108,5 @@ type Query {
   # @param Int! pageNumber 
   # @return [ListTenantsResponse]
   ListTenants(organizationId: String!, pageSize: Int!, pageNumber: Int!): ListTenantsResponse
-  # List webhooks
-  # Lists all webhook configurations with pagination
-  # @param String! organizationId 
-  # @param String! workspaceId 
-  # @param String! tenantId 
-  # @param String! accountId 
-  # @param Int! pageSize 
-  # @param Int! pageNumber 
-  # @param String! status 
-  # @param String! search 
-  # @return [ListWebhooksResponse]
-  ListWebhooks(organizationId: String!, workspaceId: String!, tenantId: String!, accountId: String!, pageSize: Int!, pageNumber: Int!, status: String!, search: String!): ListWebhooksResponse
-  # List workflows
-  # Retrieves a list of workflows for a given workspace
-  # @param String! workspaceId 
-  # @param Int! pageSize 
-  # @param Int! pageNumber 
-  # @param String! filter 
-  # @param String! organizationId 
-  # @param String! tenantId 
-  # @param String! accountId 
-  # @return [ListWorkflowsResponse]
-  ListWorkflows(workspaceId: String!, pageSize: Int!, pageNumber: Int!, filter: String!, organizationId: String!, tenantId: String!, accountId: String!): ListWorkflowsResponse
-  # List workspaces
-  # Retrieves a list of workspaces for a given account
-  # @param String! accountId 
-  # @param Int! pageSize 
-  # @param Int! pageNumber 
-  # @param String! organizationId 
-  # @param String! tenantId 
-  # @return [ListWorkspacesResponse]
-  ListWorkspaces(accountId: String!, pageSize: Int!, pageNumber: Int!, organizationId: String!, tenantId: String!): ListWorkspacesResponse
 }
 

@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payload** | [***models::UpdateAccountRequestPayload**](UpdateAccountRequestPayload.md) |  | [optional] [default to None]
+**account** | [***models::Account1**](Account1.md) |  | [optional] [default to None]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

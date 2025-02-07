@@ -17,22 +17,22 @@
 export default {
     Query: {
 
-        // @return GetAccountResponse1
-        GetAccount1: ($Id_) => {
+        // @return GetAccountResponse
+        GetAccount: ($Id_) => {
             return {
                 "Id_": "Id__example"
             };
         },
 
         // @return GetWorkspaceResponse
-        GetWorkspace1: ($Id_) => {
+        GetWorkspace: ($Id_) => {
             return {
                 "Id_": "Id__example"
             };
         },
 
-        // @return GetWorkspaceAnalyticsResponse1
-        GetWorkspaceAnalytics1: ($workspaceId, $startTime, $endTime) => {
+        // @return GetWorkspaceAnalyticsResponse
+        GetWorkspaceAnalytics: ($workspaceId, $startTime, $endTime) => {
             return {
                 "workspaceId": "workspaceId_example",
                 "startTime": "2013-10-20T19:20:30+01:00",
@@ -64,8 +64,8 @@ export default {
             };
         },
 
-        // @return ListWorkspacesResponse1
-        ListWorkspaces1: ($accountId, $pageSize, $pageToken, $filter) => {
+        // @return ListWorkspacesResponse
+        ListWorkspaces: ($accountId, $pageSize, $pageToken, $filter) => {
             return {
                 "accountId": "accountId_example",
                 "pageSize": "56",
@@ -78,29 +78,29 @@ export default {
 
     Mutation: {
 
-        // @return CreateAccountResponse1
-        CreateAccount1: ($createAccountRequest1) => {
+        // @return CreateAccountResponse
+        CreateAccount: ($createAccountRequest) => {
             return {
-                "createAccountRequest1": ""
+                "createAccountRequest": ""
             };
         },
 
-        // @return CreateWorkspaceResponse1
-        CreateWorkspace1: ($createWorkspaceRequest1) => {
+        // @return CreateWorkspaceResponse
+        CreateWorkspace: ($createWorkspaceRequest) => {
             return {
-                "createWorkspaceRequest1": ""
+                "createWorkspaceRequest": ""
             };
         },
 
         // @return DeleteAccountResponse
-        DeleteAccount1: ($Id_) => {
+        DeleteAccount: ($Id_) => {
             return {
                 "Id_": "Id__example"
             };
         },
 
         // @return DeleteWorkspaceResponse
-        DeleteWorkspace1: ($Id_) => {
+        DeleteWorkspace: ($Id_) => {
             return {
                 "Id_": "Id__example"
             };
@@ -122,14 +122,14 @@ export default {
         },
 
         // @return UpdateAccountResponse
-        UpdateAccount1: ($updateAccountRequest1) => {
+        UpdateAccount: ($updateAccountRequest) => {
             return {
-                "updateAccountRequest1": ""
+                "updateAccountRequest": ""
             };
         },
 
         // @return UpdateWorkspaceResponse
-        UpdateWorkspace1: ($updateWorkspaceRequest) => {
+        UpdateWorkspace: ($updateWorkspaceRequest) => {
             return {
                 "updateWorkspaceRequest": ""
             };

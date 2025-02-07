@@ -20,7 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
-from playbookmedia_backend_client_sdk.models.account import Account
+from playbookmedia_backend_client_sdk.models.account1 import Account1
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +28,7 @@ class GetAccountResponse(BaseModel):
     """
     GetAccountResponse
     """ # noqa: E501
-    account: Optional[Account] = None
+    account: Optional[Account1] = None
     __properties: ClassVar[List[str]] = ["account"]
 
     model_config = ConfigDict(
@@ -85,7 +85,7 @@ class GetAccountResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "account": Account.from_dict(obj["account"]) if obj.get("account") is not None else None
+            "account": Account1.from_dict(obj["account"]) if obj.get("account") is not None else None
         })
         return _obj
 

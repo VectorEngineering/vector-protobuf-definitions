@@ -18,9 +18,12 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
-from playbookmedia_backend_client_sdk.models.job_success_rate import JobSuccessRate
+from playbookmedia_backend_client_sdk.models.activity_metrics import ActivityMetrics
+from playbookmedia_backend_client_sdk.models.compliance_metrics import ComplianceMetrics
+from playbookmedia_backend_client_sdk.models.user_activity import UserActivity
+from playbookmedia_backend_client_sdk.models.workspace_activity import WorkspaceActivity
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,11 +31,11 @@ class GetWorkspaceAnalyticsResponse(BaseModel):
     """
     GetWorkspaceAnalyticsResponse
     """ # noqa: E501
-    total_leads: Optional[StrictInt] = Field(default=None, alias="totalLeads")
-    active_workflows: Optional[StrictInt] = Field(default=None, alias="activeWorkflows")
-    jobs_last30_days: Optional[StrictInt] = Field(default=None, alias="jobsLast30Days")
-    success_rates: Optional[List[JobSuccessRate]] = Field(default=None, alias="successRates")
-    __properties: ClassVar[List[str]] = ["totalLeads", "activeWorkflows", "jobsLast30Days", "successRates"]
+    activity: Optional[ActivityMetrics] = None
+    user_activities: Optional[List[UserActivity]] = Field(default=None, alias="userActivities")
+    compliance: Optional[ComplianceMetrics] = None
+    recent_activities: Optional[List[WorkspaceActivity]] = Field(default=None, alias="recentActivities")
+    __properties: ClassVar[List[str]] = ["activity", "userActivities", "compliance", "recentActivities"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -73,13 +76,26 @@ class GetWorkspaceAnalyticsResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in success_rates (list)
+        # override the default output from pydantic by calling `to_dict()` of activity
+        if self.activity:
+            _dict['activity'] = self.activity.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in user_activities (list)
         _items = []
-        if self.success_rates:
-            for _item in self.success_rates:
+        if self.user_activities:
+            for _item in self.user_activities:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['successRates'] = _items
+            _dict['userActivities'] = _items
+        # override the default output from pydantic by calling `to_dict()` of compliance
+        if self.compliance:
+            _dict['compliance'] = self.compliance.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in recent_activities (list)
+        _items = []
+        if self.recent_activities:
+            for _item in self.recent_activities:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['recentActivities'] = _items
         return _dict
 
     @classmethod
@@ -92,10 +108,10 @@ class GetWorkspaceAnalyticsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "totalLeads": obj.get("totalLeads"),
-            "activeWorkflows": obj.get("activeWorkflows"),
-            "jobsLast30Days": obj.get("jobsLast30Days"),
-            "successRates": [JobSuccessRate.from_dict(_item) for _item in obj["successRates"]] if obj.get("successRates") is not None else None
+            "activity": ActivityMetrics.from_dict(obj["activity"]) if obj.get("activity") is not None else None,
+            "userActivities": [UserActivity.from_dict(_item) for _item in obj["userActivities"]] if obj.get("userActivities") is not None else None,
+            "compliance": ComplianceMetrics.from_dict(obj["compliance"]) if obj.get("compliance") is not None else None,
+            "recentActivities": [WorkspaceActivity.from_dict(_item) for _item in obj["recentActivities"]] if obj.get("recentActivities") is not None else None
         })
         return _obj
 

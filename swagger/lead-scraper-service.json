@@ -14115,6 +14115,10 @@
             "type": "string"
           },
           "title": "Search terms"
+        },
+        "scheduledEntryId": {
+          "type": "string",
+          "title": "Scheduled entry ID"
         }
       },
       "title": "ScrapingWorkflow defines recurring scraping configurations"

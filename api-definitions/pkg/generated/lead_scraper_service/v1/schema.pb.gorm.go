@@ -1237,6 +1237,7 @@ type ScrapingWorkflowORM struct {
 	QosRequestTimeout             *time.Duration
 	RespectRobotsTxt              bool
 	RetryCount                    int32
+	ScheduledEntryId              string
 	SearchTerms                   pq.StringArray `gorm:"type:text[]"`
 	Status                        string
 	UpdatedAt                     *time.Time
@@ -1342,6 +1343,7 @@ func (m *ScrapingWorkflow) ToORM(ctx context.Context) (ScrapingWorkflowORM, erro
 		to.SearchTerms = make(pq.StringArray, len(m.SearchTerms))
 		copy(to.SearchTerms, m.SearchTerms)
 	}
+	to.ScheduledEntryId = m.ScheduledEntryId
 	if posthook, ok := interface{}(m).(ScrapingWorkflowWithAfterToORM); ok {
 		err = posthook.AfterToORM(ctx, &to)
 	}
@@ -1434,6 +1436,7 @@ func (m *ScrapingWorkflowORM) ToPB(ctx context.Context) (ScrapingWorkflow, error
 		to.SearchTerms = make(pq.StringArray, len(m.SearchTerms))
 		copy(to.SearchTerms, m.SearchTerms)
 	}
+	to.ScheduledEntryId = m.ScheduledEntryId
 	if posthook, ok := interface{}(m).(ScrapingWorkflowWithAfterToPB); ok {
 		err = posthook.AfterToPB(ctx, &to)
 	}
@@ -2978,7 +2981,7 @@ func DefaultCreateOrganization(ctx context.Context, in *Organization, db *gorm.D
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Settings").Preload("Workspaces").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(OrganizationORMWithAfterCreate_); ok {
@@ -3535,7 +3538,7 @@ func DefaultCreateTenant(ctx context.Context, in *Tenant, db *gorm.DB) (*Tenant,
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Settings").Preload("Workspaces").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(TenantORMWithAfterCreate_); ok {
@@ -3708,7 +3711,7 @@ func DefaultStrictUpdateTenant(ctx context.Context, in *Tenant, db *gorm.DB) (*T
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(TenantORMWithAfterStrictUpdateSave); ok {
@@ -6769,6 +6772,10 @@ func DefaultApplyFieldMaskScrapingWorkflow(ctx context.Context, patchee *Scrapin
 		}
 		if f == prefix+"SearchTerms" {
 			patchee.SearchTerms = patcher.SearchTerms
+			continue
+		}
+		if f == prefix+"ScheduledEntryId" {
+			patchee.ScheduledEntryId = patcher.ScheduledEntryId
 			continue
 		}
 	}

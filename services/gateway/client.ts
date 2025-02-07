@@ -369,6 +369,8 @@ const ScrapingWorkflow = z
     respectRobotsTxt: z.boolean(),
     acceptTermsOfService: z.boolean(),
     userAgent: z.string(),
+    searchTerms: z.array(z.string()),
+    scheduledEntryId: z.string(),
   })
   .partial()
   .passthrough();

@@ -18,7 +18,7 @@ class ScrapingWorkflow(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, name=None, cron_expression=None, next_run_time=None, last_run_time=None, status=WorkflowStatus.UNSPECIFIED, retry_count=None, max_retries=None, alert_emails=None, created_at=None, updated_at=None, deleted_at=None, jobs=None, geo_fencing_radius=None, geo_fencing_lat=None, geo_fencing_lon=None, geo_fencing_zoom_min=None, geo_fencing_zoom_max=None, include_reviews=None, include_photos=None, include_business_hours=None, max_reviews_per_business=None, output_format=OutputFormat.UNSPECIFIED, output_destination=None, data_retention=None, anonymize_pii=None, notification_slack_channel=None, notification_email_group=None, notification_notify_on_start=None, notification_notify_on_complete=None, notification_notify_on_failure=None, content_filter_allowed_countries=None, content_filter_excluded_types=None, content_filter_minimum_rating=None, content_filter_minimum_reviews=None, qos_max_concurrent_requests=None, qos_max_retries=None, qos_request_timeout=None, qos_enable_javascript=None, respect_robots_txt=None, accept_terms_of_service=None, user_agent=None):  # noqa: E501
+    def __init__(self, id=None, name=None, cron_expression=None, next_run_time=None, last_run_time=None, status=WorkflowStatus.UNSPECIFIED, retry_count=None, max_retries=None, alert_emails=None, created_at=None, updated_at=None, deleted_at=None, jobs=None, geo_fencing_radius=None, geo_fencing_lat=None, geo_fencing_lon=None, geo_fencing_zoom_min=None, geo_fencing_zoom_max=None, include_reviews=None, include_photos=None, include_business_hours=None, max_reviews_per_business=None, output_format=OutputFormat.UNSPECIFIED, output_destination=None, data_retention=None, anonymize_pii=None, notification_slack_channel=None, notification_email_group=None, notification_notify_on_start=None, notification_notify_on_complete=None, notification_notify_on_failure=None, content_filter_allowed_countries=None, content_filter_excluded_types=None, content_filter_minimum_rating=None, content_filter_minimum_reviews=None, qos_max_concurrent_requests=None, qos_max_retries=None, qos_request_timeout=None, qos_enable_javascript=None, respect_robots_txt=None, accept_terms_of_service=None, user_agent=None, search_terms=None, scheduled_entry_id=None):  # noqa: E501
         """ScrapingWorkflow - a model defined in OpenAPI
 
         :param id: The id of this ScrapingWorkflow.  # noqa: E501
@@ -105,6 +105,10 @@ class ScrapingWorkflow(Model):
         :type accept_terms_of_service: bool
         :param user_agent: The user_agent of this ScrapingWorkflow.  # noqa: E501
         :type user_agent: str
+        :param search_terms: The search_terms of this ScrapingWorkflow.  # noqa: E501
+        :type search_terms: List[str]
+        :param scheduled_entry_id: The scheduled_entry_id of this ScrapingWorkflow.  # noqa: E501
+        :type scheduled_entry_id: str
         """
         self.openapi_types = {
             'id': str,
@@ -148,7 +152,9 @@ class ScrapingWorkflow(Model):
             'qos_enable_javascript': bool,
             'respect_robots_txt': bool,
             'accept_terms_of_service': bool,
-            'user_agent': str
+            'user_agent': str,
+            'search_terms': List[str],
+            'scheduled_entry_id': str
         }
 
         self.attribute_map = {
@@ -193,7 +199,9 @@ class ScrapingWorkflow(Model):
             'qos_enable_javascript': 'qosEnableJavascript',
             'respect_robots_txt': 'respectRobotsTxt',
             'accept_terms_of_service': 'acceptTermsOfService',
-            'user_agent': 'userAgent'
+            'user_agent': 'userAgent',
+            'search_terms': 'searchTerms',
+            'scheduled_entry_id': 'scheduledEntryId'
         }
 
         self._id = id
@@ -238,6 +246,8 @@ class ScrapingWorkflow(Model):
         self._respect_robots_txt = respect_robots_txt
         self._accept_terms_of_service = accept_terms_of_service
         self._user_agent = user_agent
+        self._search_terms = search_terms
+        self._scheduled_entry_id = scheduled_entry_id
 
     @classmethod
     def from_dict(cls, dikt) -> 'ScrapingWorkflow':
@@ -1131,3 +1141,45 @@ class ScrapingWorkflow(Model):
         """
 
         self._user_agent = user_agent
+
+    @property
+    def search_terms(self) -> List[str]:
+        """Gets the search_terms of this ScrapingWorkflow.
+
+
+        :return: The search_terms of this ScrapingWorkflow.
+        :rtype: List[str]
+        """
+        return self._search_terms
+
+    @search_terms.setter
+    def search_terms(self, search_terms: List[str]):
+        """Sets the search_terms of this ScrapingWorkflow.
+
+
+        :param search_terms: The search_terms of this ScrapingWorkflow.
+        :type search_terms: List[str]
+        """
+
+        self._search_terms = search_terms
+
+    @property
+    def scheduled_entry_id(self) -> str:
+        """Gets the scheduled_entry_id of this ScrapingWorkflow.
+
+
+        :return: The scheduled_entry_id of this ScrapingWorkflow.
+        :rtype: str
+        """
+        return self._scheduled_entry_id
+
+    @scheduled_entry_id.setter
+    def scheduled_entry_id(self, scheduled_entry_id: str):
+        """Sets the scheduled_entry_id of this ScrapingWorkflow.
+
+
+        :param scheduled_entry_id: The scheduled_entry_id of this ScrapingWorkflow.
+        :type scheduled_entry_id: str
+        """
+
+        self._scheduled_entry_id = scheduled_entry_id

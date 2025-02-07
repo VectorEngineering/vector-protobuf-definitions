@@ -51,6 +51,8 @@ type ScrapingWorkflow {
   respectRobotsTxt: Boolean!
   acceptTermsOfService: Boolean!
   userAgent: String!
+  searchTerms: [String!!]
+  scheduledEntryId: String!
 }
 
 input ScrapingWorkflowInput {
@@ -96,5 +98,7 @@ input ScrapingWorkflowInput {
     respectRobotsTxt: Boolean!
     acceptTermsOfService: Boolean!
     userAgent: String!
+    searchTerms: [String!]
+    scheduledEntryId: String!
 }
 

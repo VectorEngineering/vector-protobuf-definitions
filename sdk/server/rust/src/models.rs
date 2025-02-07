@@ -31525,6 +31525,14 @@ pub struct ScrapingWorkflow {
     #[serde(skip_serializing_if="Option::is_none")]
     pub user_agent: Option<String>,
 
+    #[serde(rename = "searchTerms")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub search_terms: Option<Vec<String>>,
+
+    #[serde(rename = "scheduledEntryId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub scheduled_entry_id: Option<String>,
+
 }
 
 
@@ -31574,6 +31582,8 @@ impl ScrapingWorkflow {
             respect_robots_txt: None,
             accept_terms_of_service: None,
             user_agent: None,
+            search_terms: None,
+            scheduled_entry_id: None,
         }
     }
 }
@@ -31872,6 +31882,22 @@ impl std::string::ToString for ScrapingWorkflow {
                 ].join(",")
             }),
 
+
+            self.search_terms.as_ref().map(|search_terms| {
+                [
+                    "searchTerms".to_string(),
+                    search_terms.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.scheduled_entry_id.as_ref().map(|scheduled_entry_id| {
+                [
+                    "scheduledEntryId".to_string(),
+                    scheduled_entry_id.to_string(),
+                ].join(",")
+            }),
+
         ];
 
         params.into_iter().flatten().collect::<Vec<_>>().join(",")
@@ -31931,6 +31957,8 @@ impl std::str::FromStr for ScrapingWorkflow {
             pub respect_robots_txt: Vec<bool>,
             pub accept_terms_of_service: Vec<bool>,
             pub user_agent: Vec<String>,
+            pub search_terms: Vec<Vec<String>>,
+            pub scheduled_entry_id: Vec<String>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -32029,6 +32057,9 @@ impl std::str::FromStr for ScrapingWorkflow {
                     "acceptTermsOfService" => intermediate_rep.accept_terms_of_service.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "userAgent" => intermediate_rep.user_agent.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "searchTerms" => return std::result::Result::Err("Parsing a container in this style is not supported in ScrapingWorkflow".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "scheduledEntryId" => intermediate_rep.scheduled_entry_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing ScrapingWorkflow".to_string())
                 }
             }
@@ -32081,6 +32112,8 @@ impl std::str::FromStr for ScrapingWorkflow {
             respect_robots_txt: intermediate_rep.respect_robots_txt.into_iter().next(),
             accept_terms_of_service: intermediate_rep.accept_terms_of_service.into_iter().next(),
             user_agent: intermediate_rep.user_agent.into_iter().next(),
+            search_terms: intermediate_rep.search_terms.into_iter().next(),
+            scheduled_entry_id: intermediate_rep.scheduled_entry_id.into_iter().next(),
         })
     }
 }

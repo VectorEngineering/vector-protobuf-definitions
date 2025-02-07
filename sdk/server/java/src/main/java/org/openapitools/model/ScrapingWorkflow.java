@@ -27,7 +27,7 @@ import javax.annotation.Generated;
  * ScrapingWorkflow
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T14:45:24.186734-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T15:17:20.852245-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ScrapingWorkflow {
 
   private String id;
@@ -121,6 +121,11 @@ public class ScrapingWorkflow {
   private Boolean acceptTermsOfService;
 
   private String userAgent;
+
+  @Valid
+  private List<String> searchTerms = new ArrayList<>();
+
+  private String scheduledEntryId;
 
   public ScrapingWorkflow id(String id) {
     this.id = id;
@@ -986,6 +991,54 @@ public class ScrapingWorkflow {
     this.userAgent = userAgent;
   }
 
+  public ScrapingWorkflow searchTerms(List<String> searchTerms) {
+    this.searchTerms = searchTerms;
+    return this;
+  }
+
+  public ScrapingWorkflow addSearchTermsItem(String searchTermsItem) {
+    if (this.searchTerms == null) {
+      this.searchTerms = new ArrayList<>();
+    }
+    this.searchTerms.add(searchTermsItem);
+    return this;
+  }
+
+  /**
+   * Get searchTerms
+   * @return searchTerms
+   */
+  
+  @Schema(name = "searchTerms", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("searchTerms")
+  public List<String> getSearchTerms() {
+    return searchTerms;
+  }
+
+  public void setSearchTerms(List<String> searchTerms) {
+    this.searchTerms = searchTerms;
+  }
+
+  public ScrapingWorkflow scheduledEntryId(String scheduledEntryId) {
+    this.scheduledEntryId = scheduledEntryId;
+    return this;
+  }
+
+  /**
+   * Get scheduledEntryId
+   * @return scheduledEntryId
+   */
+  
+  @Schema(name = "scheduledEntryId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("scheduledEntryId")
+  public String getScheduledEntryId() {
+    return scheduledEntryId;
+  }
+
+  public void setScheduledEntryId(String scheduledEntryId) {
+    this.scheduledEntryId = scheduledEntryId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -1036,12 +1089,14 @@ public class ScrapingWorkflow {
         Objects.equals(this.qosEnableJavascript, scrapingWorkflow.qosEnableJavascript) &&
         Objects.equals(this.respectRobotsTxt, scrapingWorkflow.respectRobotsTxt) &&
         Objects.equals(this.acceptTermsOfService, scrapingWorkflow.acceptTermsOfService) &&
-        Objects.equals(this.userAgent, scrapingWorkflow.userAgent);
+        Objects.equals(this.userAgent, scrapingWorkflow.userAgent) &&
+        Objects.equals(this.searchTerms, scrapingWorkflow.searchTerms) &&
+        Objects.equals(this.scheduledEntryId, scrapingWorkflow.scheduledEntryId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, cronExpression, nextRunTime, lastRunTime, status, retryCount, maxRetries, alertEmails, createdAt, updatedAt, deletedAt, jobs, geoFencingRadius, geoFencingLat, geoFencingLon, geoFencingZoomMin, geoFencingZoomMax, includeReviews, includePhotos, includeBusinessHours, maxReviewsPerBusiness, outputFormat, outputDestination, dataRetention, anonymizePii, notificationSlackChannel, notificationEmailGroup, notificationNotifyOnStart, notificationNotifyOnComplete, notificationNotifyOnFailure, contentFilterAllowedCountries, contentFilterExcludedTypes, contentFilterMinimumRating, contentFilterMinimumReviews, qosMaxConcurrentRequests, qosMaxRetries, qosRequestTimeout, qosEnableJavascript, respectRobotsTxt, acceptTermsOfService, userAgent);
+    return Objects.hash(id, name, cronExpression, nextRunTime, lastRunTime, status, retryCount, maxRetries, alertEmails, createdAt, updatedAt, deletedAt, jobs, geoFencingRadius, geoFencingLat, geoFencingLon, geoFencingZoomMin, geoFencingZoomMax, includeReviews, includePhotos, includeBusinessHours, maxReviewsPerBusiness, outputFormat, outputDestination, dataRetention, anonymizePii, notificationSlackChannel, notificationEmailGroup, notificationNotifyOnStart, notificationNotifyOnComplete, notificationNotifyOnFailure, contentFilterAllowedCountries, contentFilterExcludedTypes, contentFilterMinimumRating, contentFilterMinimumReviews, qosMaxConcurrentRequests, qosMaxRetries, qosRequestTimeout, qosEnableJavascript, respectRobotsTxt, acceptTermsOfService, userAgent, searchTerms, scheduledEntryId);
   }
 
   @Override
@@ -1090,6 +1145,8 @@ public class ScrapingWorkflow {
     sb.append("    respectRobotsTxt: ").append(toIndentedString(respectRobotsTxt)).append("\n");
     sb.append("    acceptTermsOfService: ").append(toIndentedString(acceptTermsOfService)).append("\n");
     sb.append("    userAgent: ").append(toIndentedString(userAgent)).append("\n");
+    sb.append("    searchTerms: ").append(toIndentedString(searchTerms)).append("\n");
+    sb.append("    scheduledEntryId: ").append(toIndentedString(scheduledEntryId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

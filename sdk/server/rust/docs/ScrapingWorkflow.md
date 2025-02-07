@@ -45,6 +45,8 @@ Name | Type | Description | Notes
 **respect_robots_txt** | **bool** |  | [optional] [default to None]
 **accept_terms_of_service** | **bool** |  | [optional] [default to None]
 **user_agent** | **String** |  | [optional] [default to None]
+**search_terms** | **Vec<String>** |  | [optional] [default to None]
+**scheduled_entry_id** | **String** |  | [optional] [default to None]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

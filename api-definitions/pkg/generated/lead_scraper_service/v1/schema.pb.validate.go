@@ -2605,6 +2605,8 @@ func (m *ScrapingWorkflow) validate(all bool) error {
 
 	// no validation rules for UserAgent
 
+	// no validation rules for ScheduledEntryId
+
 	if len(errors) > 0 {
 		return ScrapingWorkflowMultiError(errors)
 	}

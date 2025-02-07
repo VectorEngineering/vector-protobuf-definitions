@@ -18,7 +18,7 @@ import javax.annotation.Generated;
  * DeleteWorkspaceResponse
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T14:45:24.186734-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T15:17:20.852245-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class DeleteWorkspaceResponse {
 
   private Boolean success;

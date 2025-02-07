@@ -73,7 +73,9 @@ class ScrapingWorkflow(BaseModel):
     respect_robots_txt: Optional[StrictBool] = Field(default=None, alias="respectRobotsTxt")
     accept_terms_of_service: Optional[StrictBool] = Field(default=None, alias="acceptTermsOfService")
     user_agent: Optional[StrictStr] = Field(default=None, alias="userAgent")
-    __properties: ClassVar[List[str]] = ["id", "name", "cronExpression", "nextRunTime", "lastRunTime", "status", "retryCount", "maxRetries", "alertEmails", "createdAt", "updatedAt", "deletedAt", "jobs", "geoFencingRadius", "geoFencingLat", "geoFencingLon", "geoFencingZoomMin", "geoFencingZoomMax", "includeReviews", "includePhotos", "includeBusinessHours", "maxReviewsPerBusiness", "outputFormat", "outputDestination", "dataRetention", "anonymizePii", "notificationSlackChannel", "notificationEmailGroup", "notificationNotifyOnStart", "notificationNotifyOnComplete", "notificationNotifyOnFailure", "contentFilterAllowedCountries", "contentFilterExcludedTypes", "contentFilterMinimumRating", "contentFilterMinimumReviews", "qosMaxConcurrentRequests", "qosMaxRetries", "qosRequestTimeout", "qosEnableJavascript", "respectRobotsTxt", "acceptTermsOfService", "userAgent"]
+    search_terms: Optional[List[StrictStr]] = Field(default=None, alias="searchTerms")
+    scheduled_entry_id: Optional[StrictStr] = Field(default=None, alias="scheduledEntryId")
+    __properties: ClassVar[List[str]] = ["id", "name", "cronExpression", "nextRunTime", "lastRunTime", "status", "retryCount", "maxRetries", "alertEmails", "createdAt", "updatedAt", "deletedAt", "jobs", "geoFencingRadius", "geoFencingLat", "geoFencingLon", "geoFencingZoomMin", "geoFencingZoomMax", "includeReviews", "includePhotos", "includeBusinessHours", "maxReviewsPerBusiness", "outputFormat", "outputDestination", "dataRetention", "anonymizePii", "notificationSlackChannel", "notificationEmailGroup", "notificationNotifyOnStart", "notificationNotifyOnComplete", "notificationNotifyOnFailure", "contentFilterAllowedCountries", "contentFilterExcludedTypes", "contentFilterMinimumRating", "contentFilterMinimumReviews", "qosMaxConcurrentRequests", "qosMaxRetries", "qosRequestTimeout", "qosEnableJavascript", "respectRobotsTxt", "acceptTermsOfService", "userAgent", "searchTerms", "scheduledEntryId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -174,7 +176,9 @@ class ScrapingWorkflow(BaseModel):
             "qosEnableJavascript": obj.get("qosEnableJavascript"),
             "respectRobotsTxt": obj.get("respectRobotsTxt"),
             "acceptTermsOfService": obj.get("acceptTermsOfService"),
-            "userAgent": obj.get("userAgent")
+            "userAgent": obj.get("userAgent"),
+            "searchTerms": obj.get("searchTerms"),
+            "scheduledEntryId": obj.get("scheduledEntryId")
         })
         return _obj
 

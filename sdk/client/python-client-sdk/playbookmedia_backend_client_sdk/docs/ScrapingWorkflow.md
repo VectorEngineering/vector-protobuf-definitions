@@ -47,6 +47,8 @@ Name | Type | Description | Notes
 **respect_robots_txt** | **bool** |  | [optional] 
 **accept_terms_of_service** | **bool** |  | [optional] 
 **user_agent** | **str** |  | [optional] 
+**search_terms** | **List[str]** |  | [optional] 
+**scheduled_entry_id** | **str** |  | [optional] 
 
 ## Example
 

@@ -722,6 +722,9 @@ message ScrapingWorkflow {
     
     // Search terms
     repeated string search_terms = 48;
+
+    // Scheduled entry ID
+    string scheduled_entry_id = 49;
 }
 
 /**

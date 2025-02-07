@@ -68,6 +68,7 @@ func newScrapingWorkflowORM(db *gorm.DB, opts ...gen.DOOption) scrapingWorkflowO
 	_scrapingWorkflowORM.QosRequestTimeout = field.NewInt64(tableName, "qos_request_timeout")
 	_scrapingWorkflowORM.RespectRobotsTxt = field.NewBool(tableName, "respect_robots_txt")
 	_scrapingWorkflowORM.RetryCount = field.NewInt32(tableName, "retry_count")
+	_scrapingWorkflowORM.ScheduledEntryId = field.NewString(tableName, "scheduled_entry_id")
 	_scrapingWorkflowORM.SearchTerms = field.NewField(tableName, "search_terms")
 	_scrapingWorkflowORM.Status = field.NewString(tableName, "status")
 	_scrapingWorkflowORM.UpdatedAt = field.NewTime(tableName, "updated_at")
@@ -155,6 +156,7 @@ type scrapingWorkflowORM struct {
 	QosRequestTimeout             field.Int64
 	RespectRobotsTxt              field.Bool
 	RetryCount                    field.Int32
+	ScheduledEntryId              field.String
 	SearchTerms                   field.Field
 	Status                        field.String
 	UpdatedAt                     field.Time
@@ -215,6 +217,7 @@ func (s *scrapingWorkflowORM) updateTableName(table string) *scrapingWorkflowORM
 	s.QosRequestTimeout = field.NewInt64(table, "qos_request_timeout")
 	s.RespectRobotsTxt = field.NewBool(table, "respect_robots_txt")
 	s.RetryCount = field.NewInt32(table, "retry_count")
+	s.ScheduledEntryId = field.NewString(table, "scheduled_entry_id")
 	s.SearchTerms = field.NewField(table, "search_terms")
 	s.Status = field.NewString(table, "status")
 	s.UpdatedAt = field.NewTime(table, "updated_at")
@@ -236,7 +239,7 @@ func (s *scrapingWorkflowORM) GetFieldByName(fieldName string) (field.OrderExpr,
 }
 
 func (s *scrapingWorkflowORM) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 44)
+	s.fieldMap = make(map[string]field.Expr, 45)
 	s.fieldMap["accept_terms_of_service"] = s.AcceptTermsOfService
 	s.fieldMap["alert_emails"] = s.AlertEmails
 	s.fieldMap["anonymize_pii"] = s.AnonymizePii
@@ -275,6 +278,7 @@ func (s *scrapingWorkflowORM) fillFieldMap() {
 	s.fieldMap["qos_request_timeout"] = s.QosRequestTimeout
 	s.fieldMap["respect_robots_txt"] = s.RespectRobotsTxt
 	s.fieldMap["retry_count"] = s.RetryCount
+	s.fieldMap["scheduled_entry_id"] = s.ScheduledEntryId
 	s.fieldMap["search_terms"] = s.SearchTerms
 	s.fieldMap["status"] = s.Status
 	s.fieldMap["updated_at"] = s.UpdatedAt

@@ -5,9 +5,12 @@ compatibility_date = "2024-01-01"
 # Enable the AI binding
 ai = { binding = true }
 
-# Configure KV namespace for caching
+# Configure KV namespaces
 kv_namespaces = [
-  { binding = "CACHE", id = "xxxx", preview_id = "xxxx" }
+  { binding = "CACHE", id = "xxxx", preview_id = "xxxx" },
+  { binding = "AUTH_STORE", id = "", preview_id = "example_id_1" },
+  { binding = "ENRICH_KV", id = "", preview_id = "example_id_2" },
+  { binding = "KV", id = "", preview_id = "example_id_3" }
 ]
 
 # Configure environment variables
@@ -51,22 +54,6 @@ crons = []
 binding = "USERS_DATABASE"
 database_name = "users"
 database_id = ""  # Add your D1 database ID from Cloudflare Dashboard
-
-# KV Namespace bindings
-[[kv_namespaces]]
-binding = "AUTH_STORE"
-preview_id = "example_id_1"  # Add preview ID for local development
-id = ""  # Add production ID from Cloudflare Dashboard
-
-[[kv_namespaces]]
-binding = "ENRICH_KV"
-preview_id = "example_id_2"  # Add preview ID for local development
-id = ""  # Add production ID from Cloudflare Dashboard
-
-[[kv_namespaces]]
-binding = "KV"
-preview_id = "example_id_3"  # Add preview ID for local development
-id = ""  # Add production ID from Cloudflare Dashboard
 
 # R2 Bucket binding
 [[r2_buckets]]

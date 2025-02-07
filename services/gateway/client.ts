@@ -314,6 +314,7 @@ const ScrapingJob = z
     updatedAt: z.string().datetime({ offset: true }),
     deletedAt: z.string().datetime({ offset: true }),
     leads: z.array(Lead),
+    url: z.string(),
   })
   .partial()
   .passthrough();

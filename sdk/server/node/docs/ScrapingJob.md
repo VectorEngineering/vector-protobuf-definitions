@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **updatedAt** | **String!** |  | [optional] [default to null]
 **deletedAt** | **String!** |  | [optional] [default to null]
 **leads** | [**Lead**](Lead.md) |  | [optional] [default to null]
+**url** | **String!** |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -50,6 +50,7 @@ func newScrapingJobORM(db *gorm.DB, opts ...gen.DOOption) scrapingJobORM {
 	_scrapingJobORM.ScrapingWorkflowId = field.NewUint64(tableName, "scraping_workflow_id")
 	_scrapingJobORM.Status = field.NewString(tableName, "status")
 	_scrapingJobORM.UpdatedAt = field.NewTime(tableName, "updated_at")
+	_scrapingJobORM.Url = field.NewString(tableName, "url")
 	_scrapingJobORM.WorkspaceId = field.NewUint64(tableName, "workspace_id")
 	_scrapingJobORM.Zoom = field.NewInt32(tableName, "zoom")
 	_scrapingJobORM.Leads = scrapingJobORMHasManyLeads{
@@ -102,6 +103,7 @@ type scrapingJobORM struct {
 	ScrapingWorkflowId field.Uint64
 	Status             field.String
 	UpdatedAt          field.Time
+	Url                field.String
 	WorkspaceId        field.Uint64
 	Zoom               field.Int32
 	Leads              scrapingJobORMHasManyLeads
@@ -141,6 +143,7 @@ func (s *scrapingJobORM) updateTableName(table string) *scrapingJobORM {
 	s.ScrapingWorkflowId = field.NewUint64(table, "scraping_workflow_id")
 	s.Status = field.NewString(table, "status")
 	s.UpdatedAt = field.NewTime(table, "updated_at")
+	s.Url = field.NewString(table, "url")
 	s.WorkspaceId = field.NewUint64(table, "workspace_id")
 	s.Zoom = field.NewInt32(table, "zoom")
 
@@ -159,7 +162,7 @@ func (s *scrapingJobORM) GetFieldByName(fieldName string) (field.OrderExpr, bool
 }
 
 func (s *scrapingJobORM) fillFieldMap() {
-	s.fieldMap = make(map[string]field.Expr, 23)
+	s.fieldMap = make(map[string]field.Expr, 24)
 	s.fieldMap["created_at"] = s.CreatedAt
 	s.fieldMap["deleted_at"] = s.DeletedAt
 	s.fieldMap["depth"] = s.Depth
@@ -180,6 +183,7 @@ func (s *scrapingJobORM) fillFieldMap() {
 	s.fieldMap["scraping_workflow_id"] = s.ScrapingWorkflowId
 	s.fieldMap["status"] = s.Status
 	s.fieldMap["updated_at"] = s.UpdatedAt
+	s.fieldMap["url"] = s.Url
 	s.fieldMap["workspace_id"] = s.WorkspaceId
 	s.fieldMap["zoom"] = s.Zoom
 

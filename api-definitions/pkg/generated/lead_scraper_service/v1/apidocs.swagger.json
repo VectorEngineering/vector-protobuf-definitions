@@ -13867,6 +13867,10 @@
             "$ref": "#/definitions/Lead"
           },
           "title": "Lead tracking"
+        },
+        "url": {
+          "type": "string",
+          "title": "URL of the Google Maps page"
         }
       },
       "description": "ScrapingJob represents a Google Maps scraping task.\nThis message defines both the configuration and current state of a scraping operation.\n\nKey components:\n- Basic metadata (id, name, timestamps)\n- Job status tracking\n- Search configuration parameters\n- Geographic settings\n- Performance options\n- Multi-tenant context\n\nDatabase considerations:\n- Stored in \"gmaps_jobs\" table\n- Uses GORM for ORM mapping\n- Includes foreign key to Account\n- Supports soft deletes\n\nUsage example:\n```go\njob := \u0026ScrapingJob{\n    Name: \"Athens Cafes\",\n    Status: BackgroundJobStatus_BACKGROUND_JOB_STATUS_QUEUED,\n    Keywords: []string{\"cafe\", \"coffee\"},\n    Lang: \"el\",\n    Zoom: 15,\n    FastMode: true,\n    MaxTime: 3600,\n}\n```"

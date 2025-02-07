@@ -31,6 +31,7 @@ type ScrapingJob {
   updatedAt: String!
   deletedAt: String!
   leads: [Lead!]
+  url: String!
 }
 
 input ScrapingJobInput {
@@ -55,5 +56,6 @@ input ScrapingJobInput {
     updatedAt: String!
     deletedAt: String!
     leads: [LeadInput]
+    url: String!
 }
 

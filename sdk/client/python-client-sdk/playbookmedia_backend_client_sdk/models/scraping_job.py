@@ -52,7 +52,8 @@ class ScrapingJob(BaseModel):
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
     deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
     leads: Optional[List[Lead]] = None
-    __properties: ClassVar[List[str]] = ["id", "priority", "payloadType", "payload", "createdAt", "status", "name", "keywords", "lang", "zoom", "lat", "lon", "fastMode", "radius", "depth", "email", "maxTime", "proxies", "updatedAt", "deletedAt", "leads"]
+    url: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["id", "priority", "payloadType", "payload", "createdAt", "status", "name", "keywords", "lang", "zoom", "lat", "lon", "fastMode", "radius", "depth", "email", "maxTime", "proxies", "updatedAt", "deletedAt", "leads", "url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -132,7 +133,8 @@ class ScrapingJob(BaseModel):
             "proxies": obj.get("proxies"),
             "updatedAt": obj.get("updatedAt"),
             "deletedAt": obj.get("deletedAt"),
-            "leads": [Lead.from_dict(_item) for _item in obj["leads"]] if obj.get("leads") is not None else None
+            "leads": [Lead.from_dict(_item) for _item in obj["leads"]] if obj.get("leads") is not None else None,
+            "url": obj.get("url")
         })
         return _obj
 

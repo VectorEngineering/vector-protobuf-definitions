@@ -18,7 +18,7 @@ class ScrapingJob(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, priority=None, payload_type=None, payload=None, created_at=None, status=BackgroundJobStatus.UNSPECIFIED, name=None, keywords=None, lang=Language.UNSPECIFIED, zoom=None, lat=None, lon=None, fast_mode=None, radius=None, depth=None, email=None, max_time=None, proxies=None, updated_at=None, deleted_at=None, leads=None):  # noqa: E501
+    def __init__(self, id=None, priority=None, payload_type=None, payload=None, created_at=None, status=BackgroundJobStatus.UNSPECIFIED, name=None, keywords=None, lang=Language.UNSPECIFIED, zoom=None, lat=None, lon=None, fast_mode=None, radius=None, depth=None, email=None, max_time=None, proxies=None, updated_at=None, deleted_at=None, leads=None, url=None):  # noqa: E501
         """ScrapingJob - a model defined in OpenAPI
 
         :param id: The id of this ScrapingJob.  # noqa: E501
@@ -63,6 +63,8 @@ class ScrapingJob(Model):
         :type deleted_at: datetime
         :param leads: The leads of this ScrapingJob.  # noqa: E501
         :type leads: List[Lead]
+        :param url: The url of this ScrapingJob.  # noqa: E501
+        :type url: str
         """
         self.openapi_types = {
             'id': str,
@@ -85,7 +87,8 @@ class ScrapingJob(Model):
             'proxies': List[str],
             'updated_at': datetime,
             'deleted_at': datetime,
-            'leads': List[Lead]
+            'leads': List[Lead],
+            'url': str
         }
 
         self.attribute_map = {
@@ -109,7 +112,8 @@ class ScrapingJob(Model):
             'proxies': 'proxies',
             'updated_at': 'updatedAt',
             'deleted_at': 'deletedAt',
-            'leads': 'leads'
+            'leads': 'leads',
+            'url': 'url'
         }
 
         self._id = id
@@ -133,6 +137,7 @@ class ScrapingJob(Model):
         self._updated_at = updated_at
         self._deleted_at = deleted_at
         self._leads = leads
+        self._url = url
 
     @classmethod
     def from_dict(cls, dikt) -> 'ScrapingJob':
@@ -585,3 +590,24 @@ class ScrapingJob(Model):
         """
 
         self._leads = leads
+
+    @property
+    def url(self) -> str:
+        """Gets the url of this ScrapingJob.
+
+
+        :return: The url of this ScrapingJob.
+        :rtype: str
+        """
+        return self._url
+
+    @url.setter
+    def url(self, url: str):
+        """Sets the url of this ScrapingJob.
+
+
+        :param url: The url of this ScrapingJob.
+        :type url: str
+        """
+
+        self._url = url

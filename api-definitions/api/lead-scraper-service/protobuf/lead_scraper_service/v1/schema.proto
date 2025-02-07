@@ -633,6 +633,9 @@ message ScrapingJob {
 
     // Lead tracking
     repeated Lead leads = 21 [(gorm.field).has_many = {}];
+
+    // URL of the Google Maps page
+    string url = 22 [(validate.rules).string.uri = true];
 }
 
 /**

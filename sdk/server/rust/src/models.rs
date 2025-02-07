@@ -30971,6 +30971,10 @@ pub struct ScrapingJob {
     #[serde(skip_serializing_if="Option::is_none")]
     pub leads: Option<Vec<models::Lead>>,
 
+    #[serde(rename = "url")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub url: Option<String>,
+
 }
 
 
@@ -30999,6 +31003,7 @@ impl ScrapingJob {
             updated_at: None,
             deleted_at: None,
             leads: None,
+            url: None,
         }
     }
 }
@@ -31136,6 +31141,14 @@ impl std::string::ToString for ScrapingJob {
 
             // Skipping leads in query parameter serialization
 
+
+            self.url.as_ref().map(|url| {
+                [
+                    "url".to_string(),
+                    url.to_string(),
+                ].join(",")
+            }),
+
         ];
 
         params.into_iter().flatten().collect::<Vec<_>>().join(",")
@@ -31174,6 +31187,7 @@ impl std::str::FromStr for ScrapingJob {
             pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
             pub deleted_at: Vec<chrono::DateTime::<chrono::Utc>>,
             pub leads: Vec<Vec<models::Lead>>,
+            pub url: Vec<String>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -31229,6 +31243,8 @@ impl std::str::FromStr for ScrapingJob {
                     #[allow(clippy::redundant_clone)]
                     "deletedAt" => intermediate_rep.deleted_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     "leads" => return std::result::Result::Err("Parsing a container in this style is not supported in ScrapingJob".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "url" => intermediate_rep.url.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing ScrapingJob".to_string())
                 }
             }
@@ -31260,6 +31276,7 @@ impl std::str::FromStr for ScrapingJob {
             updated_at: intermediate_rep.updated_at.into_iter().next(),
             deleted_at: intermediate_rep.deleted_at.into_iter().next(),
             leads: intermediate_rep.leads.into_iter().next(),
+            url: intermediate_rep.url.into_iter().next(),
         })
     }
 }

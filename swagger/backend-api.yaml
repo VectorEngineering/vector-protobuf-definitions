@@ -18147,6 +18147,9 @@ components:
           items:
             $ref: '#/components/schemas/Lead'
           title: Lead tracking
+        url:
+          type: string
+          title: URL of the Google Maps page
       description: >-
         ScrapingJob represents a Google Maps scraping task.
 

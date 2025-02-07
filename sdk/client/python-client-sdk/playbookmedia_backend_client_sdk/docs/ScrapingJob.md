@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **updated_at** | **datetime** |  | [optional] 
 **deleted_at** | **datetime** |  | [optional] 
 **leads** | [**List[Lead]**](Lead.md) |  | [optional] 
+**url** | **str** |  | [optional] 
 
 ## Example
 

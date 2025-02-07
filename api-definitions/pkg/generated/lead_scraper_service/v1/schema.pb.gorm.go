@@ -1041,6 +1041,7 @@ type ScrapingJobORM struct {
 	ScrapingWorkflowId *uint64
 	Status             string
 	UpdatedAt          *time.Time
+	Url                string
 	WorkspaceId        *uint64
 	Zoom               int32
 }
@@ -1106,6 +1107,7 @@ func (m *ScrapingJob) ToORM(ctx context.Context) (ScrapingJobORM, error) {
 			to.Leads = append(to.Leads, nil)
 		}
 	}
+	to.Url = m.Url
 	if posthook, ok := interface{}(m).(ScrapingJobWithAfterToORM); ok {
 		err = posthook.AfterToORM(ctx, &to)
 	}
@@ -1165,6 +1167,7 @@ func (m *ScrapingJobORM) ToPB(ctx context.Context) (ScrapingJob, error) {
 			to.Leads = append(to.Leads, nil)
 		}
 	}
+	to.Url = m.Url
 	if posthook, ok := interface{}(m).(ScrapingJobWithAfterToPB); ok {
 		err = posthook.AfterToPB(ctx, &to)
 	}
@@ -4828,7 +4831,7 @@ func DefaultStrictUpdateAccount(ctx context.Context, in *Account, db *gorm.DB) (
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(AccountORMWithAfterStrictUpdateSave); ok {
@@ -6099,6 +6102,10 @@ func DefaultApplyFieldMaskScrapingJob(ctx context.Context, patchee *ScrapingJob,
 		}
 		if f == prefix+"Leads" {
 			patchee.Leads = patcher.Leads
+			continue
+		}
+		if f == prefix+"Url" {
+			patchee.Url = patcher.Url
 			continue
 		}
 	}

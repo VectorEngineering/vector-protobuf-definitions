@@ -34,11 +34,18 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: ${{ inputs.worker_dir }}/package-lock.json
+          cache-dependency-path: |
+            ${{ inputs.worker_dir }}/package-lock.json
+            ${{ inputs.worker_dir }}/package.json
 
       - name: Install dependencies
         working-directory: ${{ inputs.worker_dir }}
-        run: npm ci
+        run: |
+          if [ ! -f "package-lock.json" ]; then
+            npm install
+          else
+            npm ci
+          fi
 
       - name: Build worker
         working-directory: ${{ inputs.worker_dir }}

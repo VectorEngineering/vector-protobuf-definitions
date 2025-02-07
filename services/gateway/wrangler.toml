@@ -58,11 +58,14 @@ tail_sampling_rate = 0.05
 [env.production]
 vars = { ENVIRONMENT = "production" }
 # Add your production specific configuration here
+route = { pattern = "gateway-production.getvector.app/*", zone_name = "getvector.app" }
 
 [env.staging]
 vars = { ENVIRONMENT = "staging" }
 # Add your staging specific configuration here
+route = { pattern = "gateway-staging.getvector.app/*", zone_name = "getvector.app" }
 
 [env.development]
 vars = { ENVIRONMENT = "development" }
 # Add your development specific configuration here 
+route = { pattern = "gateway-development.getvector.app/*", zone_name = "getvector.app" }

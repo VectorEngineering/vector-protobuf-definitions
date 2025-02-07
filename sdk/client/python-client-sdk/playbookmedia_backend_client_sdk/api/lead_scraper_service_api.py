@@ -427,7 +427,7 @@ class LeadScraperServiceApi:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/lead-scraper-microservice/api/v1/accounts',
+            resource_path='/lead-scraper-microservice/api/v1/accounts/create',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11107,7 +11107,7 @@ class LeadScraperServiceApi:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/lead-scraper-microservice/api/v1/accounts',
+            resource_path='/lead-scraper-microservice/api/v1/accounts/list',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -16237,7 +16237,7 @@ class LeadScraperServiceApi:
 
         return self.api_client.param_serialize(
             method='PUT',
-            resource_path='/lead-scraper-microservice/api/v1/accounts',
+            resource_path='/lead-scraper-microservice/api/v1/accounts/update',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

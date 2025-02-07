@@ -5,7 +5,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createAPIKey**](LeadScraperServiceApi.md#createAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys | Create a new API key |
-| [**createAccount**](LeadScraperServiceApi.md#createAccount) | **POST** /lead-scraper-microservice/api/v1/accounts | Create a new account |
+| [**createAccount**](LeadScraperServiceApi.md#createAccount) | **POST** /lead-scraper-microservice/api/v1/accounts/create | Create a new account |
 | [**createOrganization**](LeadScraperServiceApi.md#createOrganization) | **POST** /lead-scraper-microservice/api/v1/organization | Create a new organization |
 | [**createScrapingJob**](LeadScraperServiceApi.md#createScrapingJob) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task |
 | [**createTenant**](LeadScraperServiceApi.md#createTenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant |
@@ -36,7 +36,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**getWorkspaceAnalytics**](LeadScraperServiceApi.md#getWorkspaceAnalytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics |
 | [**leadScraperServiceCreateWorkflow**](LeadScraperServiceApi.md#leadScraperServiceCreateWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow |
 | [**listAPIKeys**](LeadScraperServiceApi.md#listAPIKeys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys |
-| [**listAccounts**](LeadScraperServiceApi.md#listAccounts) | **GET** /lead-scraper-microservice/api/v1/accounts | List all accounts |
+| [**listAccounts**](LeadScraperServiceApi.md#listAccounts) | **GET** /lead-scraper-microservice/api/v1/accounts/list | List all accounts |
 | [**listLeads**](LeadScraperServiceApi.md#listLeads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads |
 | [**listOrganizations**](LeadScraperServiceApi.md#listOrganizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations |
 | [**listScrapingJobs**](LeadScraperServiceApi.md#listScrapingJobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs |
@@ -50,7 +50,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**rotateTenantAPIKey**](LeadScraperServiceApi.md#rotateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key |
 | [**triggerWorkflow**](LeadScraperServiceApi.md#triggerWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution |
 | [**updateAPIKey**](LeadScraperServiceApi.md#updateAPIKey) | **PUT** /lead-scraper-microservice/api/v1/api-keys | Update API key |
-| [**updateAccount**](LeadScraperServiceApi.md#updateAccount) | **PUT** /lead-scraper-microservice/api/v1/accounts | Update account details |
+| [**updateAccount**](LeadScraperServiceApi.md#updateAccount) | **PUT** /lead-scraper-microservice/api/v1/accounts/update | Update account details |
 | [**updateAccountSettings**](LeadScraperServiceApi.md#updateAccountSettings) | **PUT** /lead-scraper-microservice/api/v1/accounts/settings | Update account settings |
 | [**updateOrganization**](LeadScraperServiceApi.md#updateOrganization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details |
 | [**updateTenant**](LeadScraperServiceApi.md#updateTenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details |

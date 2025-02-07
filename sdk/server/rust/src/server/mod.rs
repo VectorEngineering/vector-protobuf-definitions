@@ -100,8 +100,10 @@ mod paths {
 
     lazy_static! {
         pub static ref GLOBAL_REGEX_SET: regex::RegexSet = regex::RegexSet::new(vec![
-            r"^/lead-scraper-microservice/api/v1/accounts$",
+            r"^/lead-scraper-microservice/api/v1/accounts/create$",
+            r"^/lead-scraper-microservice/api/v1/accounts/list$",
             r"^/lead-scraper-microservice/api/v1/accounts/settings$",
+            r"^/lead-scraper-microservice/api/v1/accounts/update$",
             r"^/lead-scraper-microservice/api/v1/accounts/(?P<id>[^/?#]*)$",
             r"^/lead-scraper-microservice/api/v1/accounts/(?P<id>[^/?#]*)/usage$",
             r"^/lead-scraper-microservice/api/v1/api-keys$",
@@ -150,209 +152,211 @@ mod paths {
         ])
         .expect("Unable to create global regex set");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS: usize = 0;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_SETTINGS: usize = 1;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID: usize = 2;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_CREATE: usize = 0;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_LIST: usize = 1;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_SETTINGS: usize = 2;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_UPDATE: usize = 3;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID: usize = 4;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/accounts/(?P<id>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID_USAGE: usize = 3;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID_USAGE: usize = 5;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID_USAGE: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/accounts/(?P<id>[^/?#]*)/usage$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID_USAGE");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS: usize = 4;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_LIST: usize = 5;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_ROTATE: usize = 6;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_KEYID: usize = 7;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS: usize = 6;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_LIST: usize = 7;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_ROTATE: usize = 8;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_KEYID: usize = 9;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_KEYID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/api-keys/(?P<keyId>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_KEYID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS: usize = 8;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID: usize = 9;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS: usize = 10;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID: usize = 11;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/jobs/(?P<jobId>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID_DOWNLOAD: usize = 10;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID_DOWNLOAD: usize = 12;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID_DOWNLOAD: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/jobs/(?P<jobId>[^/?#]*)/download$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID_DOWNLOAD");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_LEADS: usize = 11;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_LEADS_LEADID: usize = 12;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_LEADS: usize = 13;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_LEADS_LEADID: usize = 14;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_LEADS_LEADID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/leads/(?P<leadId>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_LEADS_LEADID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION: usize = 13;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID: usize = 14;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION: usize = 15;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID: usize = 16;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/organization/tenants/(?P<organizationId>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID_TENANTID: usize = 15;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID_TENANTID: usize = 17;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID_TENANTID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/organization/tenants/(?P<organizationId>[^/?#]*)/(?P<tenantId>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID_TENANTID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_ID: usize = 16;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_ID: usize = 18;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_ID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/organization/(?P<id>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_ID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS: usize = 17;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS: usize = 18;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_LIST: usize = 19;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_ROTATE: usize = 20;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_KEYID: usize = 21;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS: usize = 19;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS: usize = 20;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_LIST: usize = 21;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_ROTATE: usize = 22;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_KEYID: usize = 23;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_KEYID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/(?P<keyId>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_KEYID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_ORGANIZATIONID_TENANTID: usize = 22;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_ORGANIZATIONID_TENANTID: usize = 24;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_ORGANIZATIONID_TENANTID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/organizations/tenants/(?P<organizationId>[^/?#]*)/(?P<tenantId>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_ORGANIZATIONID_TENANTID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_ORGANIZATIONID_TENANTS: usize = 23;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_ORGANIZATIONID_TENANTS: usize = 25;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_ORGANIZATIONID_TENANTS: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/organizations/(?P<organizationId>[^/?#]*)/tenants$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_ORGANIZATIONID_TENANTS");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS: usize = 24;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS_WEBHOOKID: usize = 25;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS: usize = 26;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS_WEBHOOKID: usize = 27;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS_WEBHOOKID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/webhooks/(?P<webhookId>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS_WEBHOOKID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACE: usize = 26;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACE_ID: usize = 27;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACE: usize = 28;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACE_ID: usize = 29;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACE_ID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/workspace/(?P<id>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACE_ID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES: usize = 28;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKFLOW: usize = 29;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_ANALYTICS: usize = 30;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES: usize = 30;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKFLOW: usize = 31;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_ANALYTICS: usize = 32;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_ANALYTICS: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/workspaces/(?P<workspaceId>[^/?#]*)/analytics$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_ANALYTICS");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS: usize = 31;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS: usize = 33;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/workspaces/(?P<workspaceId>[^/?#]*)/workflows$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID: usize = 32;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID: usize = 34;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/workspaces/(?P<workspaceId>[^/?#]*)/workflows/(?P<id>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_PAUSE: usize = 33;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_PAUSE: usize = 35;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_PAUSE: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/workspaces/(?P<workspaceId>[^/?#]*)/workflows/(?P<id>[^/?#]*)/pause$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_PAUSE");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_TRIGGER: usize = 34;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_TRIGGER: usize = 36;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_TRIGGER: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/workspaces/(?P<workspaceId>[^/?#]*)/workflows/(?P<id>[^/?#]*)/trigger$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_TRIGGER");
     }
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_ACCOUNTS: usize = 35;
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_ACCOUNTS_ID: usize = 36;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_ACCOUNTS: usize = 37;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_ACCOUNTS_ID: usize = 38;
     lazy_static! {
         pub static ref REGEX_WORKSPACE_SERVICE_V1_ACCOUNTS_ID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/workspace-service/v1/accounts/(?P<id>[^/?#]*)$")
                 .expect("Unable to create regex for WORKSPACE_SERVICE_V1_ACCOUNTS_ID");
     }
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACE_SHARINGS: usize = 37;
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACE_SHARINGS_SHARINGID: usize = 38;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACE_SHARINGS: usize = 39;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACE_SHARINGS_SHARINGID: usize = 40;
     lazy_static! {
         pub static ref REGEX_WORKSPACE_SERVICE_V1_WORKSPACE_SHARINGS_SHARINGID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/workspace-service/v1/workspace-sharings/(?P<sharingId>[^/?#]*)$")
                 .expect("Unable to create regex for WORKSPACE_SERVICE_V1_WORKSPACE_SHARINGS_SHARINGID");
     }
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES: usize = 39;
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_ANALYTICS_WORKSPACEID: usize = 40;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES: usize = 41;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_ANALYTICS_WORKSPACEID: usize = 42;
     lazy_static! {
         pub static ref REGEX_WORKSPACE_SERVICE_V1_WORKSPACES_ANALYTICS_WORKSPACEID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/workspace-service/v1/workspaces/analytics/(?P<workspaceId>[^/?#]*)$")
                 .expect("Unable to create regex for WORKSPACE_SERVICE_V1_WORKSPACES_ANALYTICS_WORKSPACEID");
     }
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_COMPLIANCE_REPORT_WORKSPACEID: usize = 41;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_COMPLIANCE_REPORT_WORKSPACEID: usize = 43;
     lazy_static! {
         pub static ref REGEX_WORKSPACE_SERVICE_V1_WORKSPACES_COMPLIANCE_REPORT_WORKSPACEID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/workspace-service/v1/workspaces/compliance-report/(?P<workspaceId>[^/?#]*)$")
                 .expect("Unable to create regex for WORKSPACE_SERVICE_V1_WORKSPACES_COMPLIANCE_REPORT_WORKSPACEID");
     }
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_LIST: usize = 42;
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_SHARINGS_WORKSPACEID: usize = 43;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_LIST: usize = 44;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_SHARINGS_WORKSPACEID: usize = 45;
     lazy_static! {
         pub static ref REGEX_WORKSPACE_SERVICE_V1_WORKSPACES_SHARINGS_WORKSPACEID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/workspace-service/v1/workspaces/sharings/(?P<workspaceId>[^/?#]*)$")
                 .expect("Unable to create regex for WORKSPACE_SERVICE_V1_WORKSPACES_SHARINGS_WORKSPACEID");
     }
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_STORAGE_STATS_WORKSPACEID: usize = 44;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_STORAGE_STATS_WORKSPACEID: usize = 46;
     lazy_static! {
         pub static ref REGEX_WORKSPACE_SERVICE_V1_WORKSPACES_STORAGE_STATS_WORKSPACEID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/workspace-service/v1/workspaces/storage-stats/(?P<workspaceId>[^/?#]*)$")
                 .expect("Unable to create regex for WORKSPACE_SERVICE_V1_WORKSPACES_STORAGE_STATS_WORKSPACEID");
     }
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_ID: usize = 45;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_ID: usize = 47;
     lazy_static! {
         pub static ref REGEX_WORKSPACE_SERVICE_V1_WORKSPACES_ID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/workspace-service/v1/workspaces/(?P<id>[^/?#]*)$")
                 .expect("Unable to create regex for WORKSPACE_SERVICE_V1_WORKSPACES_ID");
     }
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_WORKSPACEID_SHARE: usize = 46;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_WORKSPACEID_SHARE: usize = 48;
     lazy_static! {
         pub static ref REGEX_WORKSPACE_SERVICE_V1_WORKSPACES_WORKSPACEID_SHARE: regex::Regex =
             #[allow(clippy::invalid_regex)]
@@ -465,8 +469,8 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
         match method {
 
-            // CreateAccount - POST /lead-scraper-microservice/api/v1/accounts
-            hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => {
+            // CreateAccount - POST /lead-scraper-microservice/api/v1/accounts/create
+            hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_CREATE) => {
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -9749,8 +9753,8 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                         }
             },
 
-            // ListAccounts - GET /lead-scraper-microservice/api/v1/accounts
-            hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => {
+            // ListAccounts - GET /lead-scraper-microservice/api/v1/accounts/list
+            hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_LIST) => {
                 // Query parameters (note that non-required or collection query parameters will ignore garbage values, rather than causing a 400 response)
                 let query_params = form_urlencoded::parse(uri.query().unwrap_or_default().as_bytes()).collect::<Vec<_>>();
                 let param_page_size = query_params.iter().filter(|e| e.0 == "pageSize").map(|e| e.1.clone())
@@ -14278,8 +14282,8 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                         }
             },
 
-            // UpdateAccount - PUT /lead-scraper-microservice/api/v1/accounts
-            hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => {
+            // UpdateAccount - PUT /lead-scraper-microservice/api/v1/accounts/update
+            hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_UPDATE) => {
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -19464,8 +19468,10 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                         }
             },
 
-            _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => method_not_allowed(),
+            _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_CREATE) => method_not_allowed(),
+            _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_LIST) => method_not_allowed(),
             _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_SETTINGS) => method_not_allowed(),
+            _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_UPDATE) => method_not_allowed(),
             _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID) => method_not_allowed(),
             _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID_USAGE) => method_not_allowed(),
             _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS) => method_not_allowed(),
@@ -19524,8 +19530,8 @@ impl<T> RequestParser<T> for ApiRequestParser {
     fn parse_operation_id(request: &Request<T>) -> Option<&'static str> {
         let path = paths::GLOBAL_REGEX_SET.matches(request.uri().path());
         match *request.method() {
-            // CreateAccount - POST /lead-scraper-microservice/api/v1/accounts
-            hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => Some("CreateAccount"),
+            // CreateAccount - POST /lead-scraper-microservice/api/v1/accounts/create
+            hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_CREATE) => Some("CreateAccount"),
             // CreateApiKey - POST /lead-scraper-microservice/api/v1/api-keys
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS) => Some("CreateApiKey"),
             // CreateOrganization - POST /lead-scraper-microservice/api/v1/organization
@@ -19586,8 +19592,8 @@ impl<T> RequestParser<T> for ApiRequestParser {
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_ANALYTICS) => Some("GetWorkspaceAnalytics"),
             // LeadScraperServiceCreateWorkflow - POST /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS) => Some("LeadScraperServiceCreateWorkflow"),
-            // ListAccounts - GET /lead-scraper-microservice/api/v1/accounts
-            hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => Some("ListAccounts"),
+            // ListAccounts - GET /lead-scraper-microservice/api/v1/accounts/list
+            hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_LIST) => Some("ListAccounts"),
             // ListApiKeys - GET /lead-scraper-microservice/api/v1/api-keys/list
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_LIST) => Some("ListApiKeys"),
             // ListLeads - GET /lead-scraper-microservice/api/v1/leads
@@ -19614,8 +19620,8 @@ impl<T> RequestParser<T> for ApiRequestParser {
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_ROTATE) => Some("RotateTenantApiKey"),
             // TriggerWorkflow - POST /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_TRIGGER) => Some("TriggerWorkflow"),
-            // UpdateAccount - PUT /lead-scraper-microservice/api/v1/accounts
-            hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => Some("UpdateAccount"),
+            // UpdateAccount - PUT /lead-scraper-microservice/api/v1/accounts/update
+            hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_UPDATE) => Some("UpdateAccount"),
             // UpdateAccountSettings - PUT /lead-scraper-microservice/api/v1/accounts/settings
             hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_SETTINGS) => Some("UpdateAccountSettings"),
             // UpdateApiKey - PUT /lead-scraper-microservice/api/v1/api-keys

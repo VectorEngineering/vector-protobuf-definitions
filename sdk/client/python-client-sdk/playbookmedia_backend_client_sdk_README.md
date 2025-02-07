@@ -65,7 +65,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*LeadScraperServiceApi* | [**create_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_account) | **POST** /lead-scraper-microservice/api/v1/accounts | Create a new account
+*LeadScraperServiceApi* | [**create_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_account) | **POST** /lead-scraper-microservice/api/v1/accounts/create | Create a new account
 *LeadScraperServiceApi* | [**create_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_api_key) | **POST** /lead-scraper-microservice/api/v1/api-keys | Create a new API key
 *LeadScraperServiceApi* | [**create_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_organization) | **POST** /lead-scraper-microservice/api/v1/organization | Create a new organization
 *LeadScraperServiceApi* | [**create_scraping_job**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_scraping_job) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task
@@ -96,7 +96,7 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**get_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_workspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details
 *LeadScraperServiceApi* | [**get_workspace_analytics**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_workspace_analytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics
 *LeadScraperServiceApi* | [**lead_scraper_service_create_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#lead_scraper_service_create_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow
-*LeadScraperServiceApi* | [**list_accounts**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_accounts) | **GET** /lead-scraper-microservice/api/v1/accounts | List all accounts
+*LeadScraperServiceApi* | [**list_accounts**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_accounts) | **GET** /lead-scraper-microservice/api/v1/accounts/list | List all accounts
 *LeadScraperServiceApi* | [**list_api_keys**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_api_keys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys
 *LeadScraperServiceApi* | [**list_leads**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_leads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads
 *LeadScraperServiceApi* | [**list_organizations**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_organizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations
@@ -110,7 +110,7 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**rotate_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#rotate_api_key) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key
 *LeadScraperServiceApi* | [**rotate_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#rotate_tenant_api_key) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key
 *LeadScraperServiceApi* | [**trigger_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#trigger_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution
-*LeadScraperServiceApi* | [**update_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_account) | **PUT** /lead-scraper-microservice/api/v1/accounts | Update account details
+*LeadScraperServiceApi* | [**update_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_account) | **PUT** /lead-scraper-microservice/api/v1/accounts/update | Update account details
 *LeadScraperServiceApi* | [**update_account_settings**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_account_settings) | **PUT** /lead-scraper-microservice/api/v1/accounts/settings | Update account settings
 *LeadScraperServiceApi* | [**update_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_api_key) | **PUT** /lead-scraper-microservice/api/v1/api-keys | Update API key
 *LeadScraperServiceApi* | [**update_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_organization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details

@@ -99,12 +99,21 @@ export function createCompletionHandler(config: CompletionConfig = {}) {
         : inputTransformer(prompt);
 
       // Initialize AI instance
-      const ai = await c.env.AI.init(model);
+      const ai = await c.env.AI.run(model as keyof AiModels, {
+        messages: [{ role: "user", content: fullPrompt }],
+        ...completionParams,
+        stream: true,
+      });
 
       if (stream) {
         // Handle streaming response
-        const stream = await ai.stream(fullPrompt, completionParams);
-        return new Response(stream, {
+        const stream = await c.env.AI.run(model as keyof AiModels, {
+          messages: [{ role: "user", content: fullPrompt }],
+          ...completionParams,
+          stream: true,
+        });
+
+        return new Response(stream.toString(), {
           headers: {
             "Content-Type": "text/event-stream",
             "Cache-Control": "no-cache",
@@ -114,9 +123,16 @@ export function createCompletionHandler(config: CompletionConfig = {}) {
       }
 
       // Handle non-streaming response
-      const completion = await ai.complete(fullPrompt, completionParams);
+      const completion = await await c.env.AI.run(model as keyof AiModels, {
+        messages: [{ role: "user", content: fullPrompt }],
+        ...completionParams,
+        stream: false,
+      });
+
       return new Response(
-        JSON.stringify({ completion: outputTransformer(completion) }),
+        JSON.stringify({
+          completion: outputTransformer(completion.toString()),
+        }),
         {
           headers: {
             "Content-Type": "application/json",

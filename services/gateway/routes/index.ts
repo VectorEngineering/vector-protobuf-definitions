@@ -3,16 +3,28 @@ import type { Env } from "../types";
 
 const router = new Hono<{ Bindings: Env }>();
 
-import { leadScraperMicroserviceapiv1accountsRouter } from "./leadScraperMicroserviceapiv1accounts";
+import { leadScraperMicroserviceapiv1accountscreateRouter } from "./leadScraperMicroserviceapiv1accountscreate";
 router.route(
-  "/lead-scraper-microservice/api/v1/accounts",
-  leadScraperMicroserviceapiv1accountsRouter,
+  "/lead-scraper-microservice/api/v1/accounts/create",
+  leadScraperMicroserviceapiv1accountscreateRouter,
+);
+
+import { leadScraperMicroserviceapiv1accountslistRouter } from "./leadScraperMicroserviceapiv1accountslist";
+router.route(
+  "/lead-scraper-microservice/api/v1/accounts/list",
+  leadScraperMicroserviceapiv1accountslistRouter,
 );
 
 import { leadScraperMicroserviceapiv1accountssettingsRouter } from "./leadScraperMicroserviceapiv1accountssettings";
 router.route(
   "/lead-scraper-microservice/api/v1/accounts/settings",
   leadScraperMicroserviceapiv1accountssettingsRouter,
+);
+
+import { leadScraperMicroserviceapiv1accountsupdateRouter } from "./leadScraperMicroserviceapiv1accountsupdate";
+router.route(
+  "/lead-scraper-microservice/api/v1/accounts/update",
+  leadScraperMicroserviceapiv1accountsupdateRouter,
 );
 
 import { leadScraperMicroserviceapiv1accountsidRouter } from "./leadScraperMicroserviceapiv1accountsid";

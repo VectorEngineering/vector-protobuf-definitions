@@ -894,186 +894,6 @@
 	            "name": "lead-scraper-service",
 	            "item": [
 	                        {
-    "name": "/lead-scraper-microservice/api/v1/accounts",
-                "description": "Creates a new user account in the workspace service",
-                 "item": [
-                            {
-                                "name": "Create a new account",
-                                "request": {
-                                    "method": "POST",
-                                    "header": [
-                                        {
-                                            "key": "Content-Type",
-                                            "value": "application/json",
-                                            "description": "",
-                                            "disabled": false
-                                        },
-                                        {
-                                            "key": "Accept",
-                                            "value": "application/json",
-                                            "description": "",
-                                            "disabled": false
-                                        }
-                                    ],
-                                    "body": {
-                                        "mode": "raw",
-                                        "raw": "{\n \"account\": \"<string>\",\n \"initialWorkspaceName\": \"<string>\",\n \"organizationId\": \"<string>\",\n \"tenantId\": \"<string>\"\n}",
-                                        "options": {
-                                            "raw": {
-                                                "language": "json"
-                                            }
-                                        }
-                                    },
-                                    "url": {
-                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts",
-                                        "host": [
-                                            "{{baseUrl}}"
-                                        ],
-                                        "path": [
-                                            "lead-scraper-microservice",
-                                            "api",
-                                            "v1",
-                                            "accounts"
-                                        ],
-                                        "variable": [
-                                        ],
-                                        "query": [
-                                        ]
-                                    },
-                                    "description": "Creates a new user account in the workspace service"
-                                }
-                            }
-                            ]
-                        },
-	                        {
-    "name": "/lead-scraper-microservice/api/v1/accounts",
-                "description": "Retrieves a list of accounts",
-                 "item": [
-                            {
-                                "name": "List all accounts",
-                                "request": {
-                                    "method": "GET",
-                                    "header": [
-                                        {
-                                            "key": "Accept",
-                                            "value": "application/json",
-                                            "description": "",
-                                            "disabled": false
-                                        }
-                                    ],
-                                    "body": {
-                                        "mode": "raw",
-                                        "raw": "",
-                                        "options": {
-                                            "raw": {
-                                                "language": "json"
-                                            }
-                                        }
-                                    },
-                                    "url": {
-                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts",
-                                        "host": [
-                                            "{{baseUrl}}"
-                                        ],
-                                        "path": [
-                                            "lead-scraper-microservice",
-                                            "api",
-                                            "v1",
-                                            "accounts"
-                                        ],
-                                        "variable": [
-                                        ],
-                                        "query": [
-                                            {
-                                                "key": "pageSize",
-                                                "value": "56",
-                                                "description": "",
-                                                "disabled": true
-                                            },
-                                            {
-                                                "key": "pageNumber",
-                                                "value": "56",
-                                                "description": "",
-                                                "disabled": true
-                                            },
-                                            {
-                                                "key": "filter",
-                                                "value": "filter_example",
-                                                "description": "",
-                                                "disabled": true
-                                            },
-                                            {
-                                                "key": "organizationId",
-                                                "value": "organizationId_example",
-                                                "description": "",
-                                                "disabled": true
-                                            },
-                                            {
-                                                "key": "tenantId",
-                                                "value": "tenantId_example",
-                                                "description": "",
-                                                "disabled": true
-                                            }
-                                        ]
-                                    },
-                                    "description": "Retrieves a list of accounts"
-                                }
-                            }
-                            ]
-                        },
-	                        {
-    "name": "/lead-scraper-microservice/api/v1/accounts",
-                "description": "Updates specified fields of an existing account",
-                 "item": [
-                            {
-                                "name": "Update account details",
-                                "request": {
-                                    "method": "PUT",
-                                    "header": [
-                                        {
-                                            "key": "Content-Type",
-                                            "value": "application/json",
-                                            "description": "",
-                                            "disabled": false
-                                        },
-                                        {
-                                            "key": "Accept",
-                                            "value": "application/json",
-                                            "description": "",
-                                            "disabled": false
-                                        }
-                                    ],
-                                    "body": {
-                                        "mode": "raw",
-                                        "raw": "{\n \"payload\": \"<string>\"\n}",
-                                        "options": {
-                                            "raw": {
-                                                "language": "json"
-                                            }
-                                        }
-                                    },
-                                    "url": {
-                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts",
-                                        "host": [
-                                            "{{baseUrl}}"
-                                        ],
-                                        "path": [
-                                            "lead-scraper-microservice",
-                                            "api",
-                                            "v1",
-                                            "accounts"
-                                        ],
-                                        "variable": [
-                                        ],
-                                        "query": [
-                                        ]
-                                    },
-                                    "description": "Updates specified fields of an existing account"
-                                }
-                            }
-                            ]
-                        },
-	                        {
     "name": "/lead-scraper-microservice/api/v1/accounts/:id",
                 "description": "Permanently deletes an account and associated resources",
                  "item": [
@@ -1255,6 +1075,136 @@
                             ]
                         },
 	                        {
+    "name": "/lead-scraper-microservice/api/v1/accounts/create",
+                "description": "Creates a new user account in the workspace service",
+                 "item": [
+                            {
+                                "name": "Create a new account",
+                                "request": {
+                                    "method": "POST",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"account\": \"<string>\",\n \"initialWorkspaceName\": \"<string>\",\n \"organizationId\": \"<string>\",\n \"tenantId\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts/create",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "accounts",
+                                            "create"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Creates a new user account in the workspace service"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/accounts/list",
+                "description": "Retrieves a list of accounts",
+                 "item": [
+                            {
+                                "name": "List all accounts",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts/list",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "accounts",
+                                            "list"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                            {
+                                                "key": "pageSize",
+                                                "value": "56",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "pageNumber",
+                                                "value": "56",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "filter",
+                                                "value": "filter_example",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "organizationId",
+                                                "value": "organizationId_example",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "tenantId",
+                                                "value": "tenantId_example",
+                                                "description": "",
+                                                "disabled": true
+                                            }
+                                        ]
+                                    },
+                                    "description": "Retrieves a list of accounts"
+                                }
+                            }
+                            ]
+                        },
+	                        {
     "name": "/lead-scraper-microservice/api/v1/accounts/settings",
                 "description": "Updates the settings for a given account",
                  "item": [
@@ -1303,6 +1253,59 @@
                                         ]
                                     },
                                     "description": "Updates the settings for a given account"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/accounts/update",
+                "description": "Updates specified fields of an existing account",
+                 "item": [
+                            {
+                                "name": "Update account details",
+                                "request": {
+                                    "method": "PUT",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"payload\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts/update",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "accounts",
+                                            "update"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Updates specified fields of an existing account"
                                 }
                             }
                             ]

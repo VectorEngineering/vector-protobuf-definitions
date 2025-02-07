@@ -192,7 +192,7 @@ service LeadScraperService {
     // - create:account
     rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {
         option (google.api.http) = {
-            post: "/lead-scraper-microservice/api/v1/accounts"
+            post: "/lead-scraper-microservice/api/v1/accounts/create"
             body: "*"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -249,7 +249,7 @@ service LeadScraperService {
     // - update:account
     rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse) {
         option (google.api.http) = {
-            put: "/lead-scraper-microservice/api/v1/accounts"
+            put: "/lead-scraper-microservice/api/v1/accounts/update"
             body: "*"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -466,7 +466,7 @@ service LeadScraperService {
      */
     rpc ListAccounts(ListAccountsRequest) returns (ListAccountsResponse) {
         option (google.api.http) = {
-            get: "/lead-scraper-microservice/api/v1/accounts"
+            get: "/lead-scraper-microservice/api/v1/accounts/list"
         };
         option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
             summary: "List all accounts"

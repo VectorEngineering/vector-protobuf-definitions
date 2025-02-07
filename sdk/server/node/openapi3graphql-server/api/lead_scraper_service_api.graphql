@@ -488,8 +488,11 @@ type Query {
   # Get workspace details
   # Retrieves details of a specific workspace
   # @param String! Id_ 
+  # @param String! organizationId 
+  # @param String! tenantId 
+  # @param String! accountId 
   # @return [GetWorkspaceResponse]
-  GetWorkspace(Id_: String!): GetWorkspaceResponse
+  GetWorkspace(Id_: String!, organizationId: String!, tenantId: String!, accountId: String!): GetWorkspaceResponse
   # Get workspace analytics
   # Retrieves analytics data for a specific workspace
   # @param String! workspaceId 
@@ -582,7 +585,9 @@ type Query {
   # @param String! accountId 
   # @param Int! pageSize 
   # @param Int! pageNumber 
+  # @param String! organizationId 
+  # @param String! tenantId 
   # @return [ListWorkspacesResponse]
-  ListWorkspaces(accountId: String!, pageSize: Int!, pageNumber: Int!): ListWorkspacesResponse
+  ListWorkspaces(accountId: String!, pageSize: Int!, pageNumber: Int!, organizationId: String!, tenantId: String!): ListWorkspacesResponse
 }
 

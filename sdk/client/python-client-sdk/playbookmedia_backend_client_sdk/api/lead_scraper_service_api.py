@@ -9682,6 +9682,9 @@ class LeadScraperServiceApi:
     async def get_workspace(
         self,
         id: StrictStr,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
+        account_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9701,6 +9704,12 @@ class LeadScraperServiceApi:
 
         :param id: (required)
         :type id: str
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
+        :param account_id:
+        :type account_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9725,6 +9734,9 @@ class LeadScraperServiceApi:
 
         _param = self._get_workspace_serialize(
             id=id,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
+            account_id=account_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9766,6 +9778,9 @@ class LeadScraperServiceApi:
     async def get_workspace_with_http_info(
         self,
         id: StrictStr,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
+        account_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9785,6 +9800,12 @@ class LeadScraperServiceApi:
 
         :param id: (required)
         :type id: str
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
+        :param account_id:
+        :type account_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9809,6 +9830,9 @@ class LeadScraperServiceApi:
 
         _param = self._get_workspace_serialize(
             id=id,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
+            account_id=account_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9850,6 +9874,9 @@ class LeadScraperServiceApi:
     async def get_workspace_without_preload_content(
         self,
         id: StrictStr,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
+        account_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9869,6 +9896,12 @@ class LeadScraperServiceApi:
 
         :param id: (required)
         :type id: str
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
+        :param account_id:
+        :type account_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -9893,6 +9926,9 @@ class LeadScraperServiceApi:
 
         _param = self._get_workspace_serialize(
             id=id,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
+            account_id=account_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9929,6 +9965,9 @@ class LeadScraperServiceApi:
     def _get_workspace_serialize(
         self,
         id,
+        organization_id,
+        tenant_id,
+        account_id,
         _request_auth,
         _content_type,
         _headers,
@@ -9951,6 +9990,18 @@ class LeadScraperServiceApi:
         if id is not None:
             _path_params['id'] = id
         # process the query parameters
+        if organization_id is not None:
+            
+            _query_params.append(('organizationId', organization_id))
+            
+        if tenant_id is not None:
+            
+            _query_params.append(('tenantId', tenant_id))
+            
+        if account_id is not None:
+            
+            _query_params.append(('accountId', account_id))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
@@ -14097,6 +14148,8 @@ class LeadScraperServiceApi:
         account_id: Optional[StrictStr] = None,
         page_size: Optional[StrictInt] = None,
         page_number: Optional[StrictInt] = None,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14120,6 +14173,10 @@ class LeadScraperServiceApi:
         :type page_size: int
         :param page_number:
         :type page_number: int
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -14146,6 +14203,8 @@ class LeadScraperServiceApi:
             account_id=account_id,
             page_size=page_size,
             page_number=page_number,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -14189,6 +14248,8 @@ class LeadScraperServiceApi:
         account_id: Optional[StrictStr] = None,
         page_size: Optional[StrictInt] = None,
         page_number: Optional[StrictInt] = None,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14212,6 +14273,10 @@ class LeadScraperServiceApi:
         :type page_size: int
         :param page_number:
         :type page_number: int
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -14238,6 +14303,8 @@ class LeadScraperServiceApi:
             account_id=account_id,
             page_size=page_size,
             page_number=page_number,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -14281,6 +14348,8 @@ class LeadScraperServiceApi:
         account_id: Optional[StrictStr] = None,
         page_size: Optional[StrictInt] = None,
         page_number: Optional[StrictInt] = None,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -14304,6 +14373,10 @@ class LeadScraperServiceApi:
         :type page_size: int
         :param page_number:
         :type page_number: int
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -14330,6 +14403,8 @@ class LeadScraperServiceApi:
             account_id=account_id,
             page_size=page_size,
             page_number=page_number,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -14368,6 +14443,8 @@ class LeadScraperServiceApi:
         account_id,
         page_size,
         page_number,
+        organization_id,
+        tenant_id,
         _request_auth,
         _content_type,
         _headers,
@@ -14399,6 +14476,14 @@ class LeadScraperServiceApi:
         if page_number is not None:
             
             _query_params.append(('pageNumber', page_number))
+            
+        if organization_id is not None:
+            
+            _query_params.append(('organizationId', organization_id))
+            
+        if tenant_id is not None:
+            
+            _query_params.append(('tenantId', tenant_id))
             
         # process the header parameters
         # process the form parameters

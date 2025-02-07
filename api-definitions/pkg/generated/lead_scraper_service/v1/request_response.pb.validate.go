@@ -2811,6 +2811,39 @@ func (m *GetWorkspaceRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if m.GetOrganizationId() <= 0 {
+		err := GetWorkspaceRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := GetWorkspaceRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAccountId() <= 0 {
+		err := GetWorkspaceRequestValidationError{
+			field:  "AccountId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return GetWorkspaceRequestMultiError(errors)
 	}
@@ -3191,6 +3224,28 @@ func (m *ListWorkspacesRequest) validate(all bool) error {
 	}
 
 	// no validation rules for PageNumber
+
+	if m.GetOrganizationId() <= 0 {
+		err := ListWorkspacesRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := ListWorkspacesRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
 
 	if len(errors) > 0 {
 		return ListWorkspacesRequestMultiError(errors)

@@ -2572,7 +2572,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_workspace**
-> GetWorkspaceResponse get_workspace(id)
+> GetWorkspaceResponse get_workspace(id, organization_id=organization_id, tenant_id=tenant_id, account_id=account_id)
 
 Get workspace details
 
@@ -2599,10 +2599,13 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
     # Create an instance of the API class
     api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
     id = 'id_example' # str | 
+    organization_id = 'organization_id_example' # str |  (optional)
+    tenant_id = 'tenant_id_example' # str |  (optional)
+    account_id = 'account_id_example' # str |  (optional)
 
     try:
         # Get workspace details
-        api_response = await api_instance.get_workspace(id)
+        api_response = await api_instance.get_workspace(id, organization_id=organization_id, tenant_id=tenant_id, account_id=account_id)
         print("The response of LeadScraperServiceApi->get_workspace:\n")
         pprint(api_response)
     except Exception as e:
@@ -2617,6 +2620,9 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **str**|  | 
+ **organization_id** | **str**|  | [optional] 
+ **tenant_id** | **str**|  | [optional] 
+ **account_id** | **str**|  | [optional] 
 
 ### Return type
 
@@ -3682,7 +3688,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_workspaces**
-> ListWorkspacesResponse list_workspaces(account_id=account_id, page_size=page_size, page_number=page_number)
+> ListWorkspacesResponse list_workspaces(account_id=account_id, page_size=page_size, page_number=page_number, organization_id=organization_id, tenant_id=tenant_id)
 
 List workspaces
 
@@ -3711,10 +3717,12 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
     account_id = 'account_id_example' # str |  (optional)
     page_size = 56 # int |  (optional)
     page_number = 56 # int |  (optional)
+    organization_id = 'organization_id_example' # str |  (optional)
+    tenant_id = 'tenant_id_example' # str |  (optional)
 
     try:
         # List workspaces
-        api_response = await api_instance.list_workspaces(account_id=account_id, page_size=page_size, page_number=page_number)
+        api_response = await api_instance.list_workspaces(account_id=account_id, page_size=page_size, page_number=page_number, organization_id=organization_id, tenant_id=tenant_id)
         print("The response of LeadScraperServiceApi->list_workspaces:\n")
         pprint(api_response)
     except Exception as e:
@@ -3731,6 +3739,8 @@ Name | Type | Description  | Notes
  **account_id** | **str**|  | [optional] 
  **page_size** | **int**|  | [optional] 
  **page_number** | **int**|  | [optional] 
+ **organization_id** | **str**|  | [optional] 
+ **tenant_id** | **str**|  | [optional] 
 
 ### Return type
 

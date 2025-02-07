@@ -445,7 +445,10 @@ fn main() {
         },
         Some("GetWorkspace") => {
             let result = rt.block_on(client.get_workspace(
-                  "id_example".to_string()
+                  "id_example".to_string(),
+                  Some("organization_id_example".to_string()),
+                  Some("tenant_id_example".to_string()),
+                  Some("account_id_example".to_string())
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
@@ -559,7 +562,9 @@ fn main() {
             let result = rt.block_on(client.list_workspaces(
                   Some("account_id_example".to_string()),
                   Some(56),
-                  Some(56)
+                  Some(56),
+                  Some("organization_id_example".to_string()),
+                  Some("tenant_id_example".to_string())
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },

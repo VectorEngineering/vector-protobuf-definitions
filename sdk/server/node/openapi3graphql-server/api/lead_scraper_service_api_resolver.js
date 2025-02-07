@@ -119,9 +119,12 @@ export default {
         },
 
         // @return GetWorkspaceResponse
-        GetWorkspace: ($Id_) => {
+        GetWorkspace: ($Id_, $organizationId, $tenantId, $accountId) => {
             return {
-                "Id_": "Id__example"
+                "Id_": "Id__example",
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example"
             };
         },
 
@@ -233,11 +236,13 @@ export default {
         },
 
         // @return ListWorkspacesResponse
-        ListWorkspaces: ($accountId, $pageSize, $pageNumber) => {
+        ListWorkspaces: ($accountId, $pageSize, $pageNumber, $organizationId, $tenantId) => {
             return {
                 "accountId": "accountId_example",
                 "pageSize": "56",
-                "pageNumber": "56"
+                "pageNumber": "56",
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example"
             };
         },
 

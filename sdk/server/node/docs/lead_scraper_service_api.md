@@ -258,7 +258,7 @@ Get workflow details
 Retrieves details of a specific workflow
 <a name="GetWorkspace"></a>
 # **GetWorkspace**
-> GetWorkspaceResponse GetWorkspace(Id_)
+> GetWorkspaceResponse GetWorkspace(Id_, organizationId, tenantId, accountId)
 
 Get workspace details
 
@@ -342,7 +342,7 @@ List workflows
 Retrieves a list of workflows for a given workspace
 <a name="ListWorkspaces"></a>
 # **ListWorkspaces**
-> ListWorkspacesResponse ListWorkspaces(accountId, pageSize, pageNumber)
+> ListWorkspacesResponse ListWorkspaces(accountId, pageSize, pageNumber, organizationId, tenantId)
 
 List workspaces
 

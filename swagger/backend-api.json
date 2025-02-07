@@ -15084,6 +15084,33 @@
                             "type": "string",
                             "format": "uint64"
                         }
+                    },
+                    {
+                        "name": "organizationId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uint64"
+                        }
+                    },
+                    {
+                        "name": "tenantId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uint64"
+                        }
+                    },
+                    {
+                        "name": "accountId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uint64"
+                        }
                     }
                 ],
                 "tags": [
@@ -15763,6 +15790,24 @@
                         "schema": {
                             "type": "integer",
                             "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "organizationId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uint64"
+                        }
+                    },
+                    {
+                        "name": "tenantId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uint64"
                         }
                     }
                 ],

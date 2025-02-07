@@ -945,7 +945,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetWorkspace**
-> models::GetWorkspaceResponse GetWorkspace(id)
+> models::GetWorkspaceResponse GetWorkspace(id, optional)
 Get workspace details
 
 Retrieves details of a specific workspace
@@ -955,6 +955,17 @@ Retrieves details of a specific workspace
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
   **id** | **String**|  | 
+ **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a map[string]interface{}.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **String**|  | 
+ **organization_id** | **String**|  | 
+ **tenant_id** | **String**|  | 
+ **account_id** | **String**|  | 
 
 ### Return type
 
@@ -1392,6 +1403,8 @@ Name | Type | Description  | Notes
  **account_id** | **String**|  | 
  **page_size** | **i32**|  | 
  **page_number** | **i32**|  | 
+ **organization_id** | **String**|  | 
+ **tenant_id** | **String**|  | 
 
 ### Return type
 

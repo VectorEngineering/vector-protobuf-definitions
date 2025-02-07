@@ -5237,6 +5237,9 @@ pub trait Api<C: Send + Sync> {
     async fn get_workspace(
         &self,
         id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
         context: &C) -> Result<GetWorkspaceResponse, ApiError>;
 
     /// Get workspace analytics
@@ -5349,6 +5352,8 @@ pub trait Api<C: Send + Sync> {
         account_id: Option<String>,
         page_size: Option<i32>,
         page_number: Option<i32>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
         context: &C) -> Result<ListWorkspacesResponse, ApiError>;
 
     /// Pause workflow execution
@@ -5766,6 +5771,9 @@ pub trait ApiNoContext<C: Send + Sync> {
     async fn get_workspace(
         &self,
         id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
         ) -> Result<GetWorkspaceResponse, ApiError>;
 
     /// Get workspace analytics
@@ -5878,6 +5886,8 @@ pub trait ApiNoContext<C: Send + Sync> {
         account_id: Option<String>,
         page_size: Option<i32>,
         page_number: Option<i32>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
         ) -> Result<ListWorkspacesResponse, ApiError>;
 
     /// Pause workflow execution
@@ -6421,10 +6431,13 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     async fn get_workspace(
         &self,
         id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
         ) -> Result<GetWorkspaceResponse, ApiError>
     {
         let context = self.context().clone();
-        self.api().get_workspace(id, &context).await
+        self.api().get_workspace(id, organization_id, tenant_id, account_id, &context).await
     }
 
     /// Get workspace analytics
@@ -6581,10 +6594,12 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         account_id: Option<String>,
         page_size: Option<i32>,
         page_number: Option<i32>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
         ) -> Result<ListWorkspacesResponse, ApiError>
     {
         let context = self.context().clone();
-        self.api().list_workspaces(account_id, page_size, page_number, &context).await
+        self.api().list_workspaces(account_id, page_size, page_number, organization_id, tenant_id, &context).await
     }
 
     /// Pause workflow execution

@@ -570,13 +570,19 @@ def get_workflow(workspace_id, id):  # noqa: E501
     return 'do some magic!'
 
 
-def get_workspace(id):  # noqa: E501
+def get_workspace(id, organization_id=None, tenant_id=None, account_id=None):  # noqa: E501
     """Get workspace details
 
     Retrieves details of a specific workspace # noqa: E501
 
     :param id: 
     :type id: str
+    :param organization_id: 
+    :type organization_id: str
+    :param tenant_id: 
+    :type tenant_id: str
+    :param account_id: 
+    :type account_id: str
 
     :rtype: Union[GetWorkspaceResponse, Tuple[GetWorkspaceResponse, int], Tuple[GetWorkspaceResponse, int, Dict[str, str]]
     """
@@ -806,7 +812,7 @@ def list_workflows(workspace_id, page_size=None, page_number=None, filter=None):
     return 'do some magic!'
 
 
-def list_workspaces(account_id=None, page_size=None, page_number=None):  # noqa: E501
+def list_workspaces(account_id=None, page_size=None, page_number=None, organization_id=None, tenant_id=None):  # noqa: E501
     """List workspaces
 
     Retrieves a list of workspaces for a given account # noqa: E501
@@ -817,6 +823,10 @@ def list_workspaces(account_id=None, page_size=None, page_number=None):  # noqa:
     :type page_size: int
     :param page_number: 
     :type page_number: int
+    :param organization_id: 
+    :type organization_id: str
+    :param tenant_id: 
+    :type tenant_id: str
 
     :rtype: Union[ListWorkspacesResponse, Tuple[ListWorkspacesResponse, int], Tuple[ListWorkspacesResponse, int, Dict[str, str]]
     """

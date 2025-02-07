@@ -7643,6 +7643,21 @@ const endpoints = makeApi([
         type: "Path",
         schema: z.string(),
       },
+      {
+        name: "organizationId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+      {
+        name: "tenantId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+      {
+        name: "accountId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
     ],
     response: GetWorkspaceResponse,
     errors: [
@@ -7866,6 +7881,16 @@ const endpoints = makeApi([
         name: "pageNumber",
         type: "Query",
         schema: z.number().int().optional(),
+      },
+      {
+        name: "organizationId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+      {
+        name: "tenantId",
+        type: "Query",
+        schema: z.string().optional(),
       },
     ],
     response: ListWorkspacesResponse,
@@ -10610,10 +10635,20 @@ export class ApiClient {
     );
   }
 
-  async getLeadScraperMicroserviceApiV1WorkspaceId(params: { id: string }) {
+  async getLeadScraperMicroserviceApiV1WorkspaceId(params: {
+    id: string;
+    organizationId: string | undefined;
+    tenantId: string | undefined;
+    accountId: string | undefined;
+  }) {
     return this.client.get("/lead-scraper-microservice/api/v1/workspace/:id", {
       params: {
         id: params.id,
+      },
+      queries: {
+        organizationId: params.organizationId,
+        tenantId: params.tenantId,
+        accountId: params.accountId,
       },
     });
   }
@@ -10633,6 +10668,8 @@ export class ApiClient {
     accountId: string | undefined;
     pageSize: number | undefined;
     pageNumber: number | undefined;
+    organizationId: string | undefined;
+    tenantId: string | undefined;
   }) {
     return this.client.get("/lead-scraper-microservice/api/v1/workspaces", {
       params: {},
@@ -10640,6 +10677,8 @@ export class ApiClient {
         accountId: params.accountId,
         pageSize: params.pageSize ? Number(params.pageSize) : undefined,
         pageNumber: params.pageNumber ? Number(params.pageNumber) : undefined,
+        organizationId: params.organizationId,
+        tenantId: params.tenantId,
       },
     });
   }

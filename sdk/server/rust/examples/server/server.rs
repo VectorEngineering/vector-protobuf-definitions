@@ -511,9 +511,12 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
     async fn get_workspace(
         &self,
         id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
         context: &C) -> Result<GetWorkspaceResponse, ApiError>
     {
-        info!("get_workspace(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
+        info!("get_workspace(\"{}\", {:?}, {:?}, {:?}) - X-Span-ID: {:?}", id, organization_id, tenant_id, account_id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -671,9 +674,11 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         account_id: Option<String>,
         page_size: Option<i32>,
         page_number: Option<i32>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
         context: &C) -> Result<ListWorkspacesResponse, ApiError>
     {
-        info!("list_workspaces({:?}, {:?}, {:?}) - X-Span-ID: {:?}", account_id, page_size, page_number, context.get().0.clone());
+        info!("list_workspaces({:?}, {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", account_id, page_size, page_number, organization_id, tenant_id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

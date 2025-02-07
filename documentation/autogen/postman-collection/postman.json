@@ -3630,6 +3630,24 @@
                                             }
                                         ],
                                         "query": [
+                                            {
+                                                "key": "organizationId",
+                                                "value": "organizationId_example",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "tenantId",
+                                                "value": "tenantId_example",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "accountId",
+                                                "value": "accountId_example",
+                                                "description": "",
+                                                "disabled": true
+                                            }
                                         ]
                                     },
                                     "description": "Retrieves details of a specific workspace"
@@ -3743,6 +3761,18 @@
                                             {
                                                 "key": "pageNumber",
                                                 "value": "56",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "organizationId",
+                                                "value": "organizationId_example",
+                                                "description": "",
+                                                "disabled": true
+                                            },
+                                            {
+                                                "key": "tenantId",
+                                                "value": "tenantId_example",
                                                 "description": "",
                                                 "disabled": true
                                             }

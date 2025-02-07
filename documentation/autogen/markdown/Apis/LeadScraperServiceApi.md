@@ -863,7 +863,7 @@ No authorization required
 
 <a name="getWorkspace"></a>
 # **getWorkspace**
-> GetWorkspaceResponse getWorkspace(id)
+> GetWorkspaceResponse getWorkspace(id, organizationId, tenantId, accountId)
 
 Get workspace details
 
@@ -874,6 +874,9 @@ Get workspace details
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **id** | **String**|  | [default to null] |
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
+| **accountId** | **String**|  | [optional] [default to null] |
 
 ### Return type
 
@@ -1225,7 +1228,7 @@ No authorization required
 
 <a name="listWorkspaces"></a>
 # **listWorkspaces**
-> ListWorkspacesResponse listWorkspaces(accountId, pageSize, pageNumber)
+> ListWorkspacesResponse listWorkspaces(accountId, pageSize, pageNumber, organizationId, tenantId)
 
 List workspaces
 
@@ -1238,6 +1241,8 @@ List workspaces
 | **accountId** | **String**|  | [optional] [default to null] |
 | **pageSize** | **Integer**|  | [optional] [default to null] |
 | **pageNumber** | **Integer**|  | [optional] [default to null] |
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
 
 ### Return type
 

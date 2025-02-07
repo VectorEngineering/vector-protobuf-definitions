@@ -10035,6 +10035,9 @@ impl<S, C> Api<C> for Client<S, C> where
     async fn get_workspace(
         &self,
         param_id: String,
+        param_organization_id: Option<String>,
+        param_tenant_id: Option<String>,
+        param_account_id: Option<String>,
         context: &C) -> Result<GetWorkspaceResponse, ApiError>
     {
         let mut client_service = self.client_service.clone();
@@ -10047,6 +10050,18 @@ impl<S, C> Api<C> for Client<S, C> where
         // Query parameters
         let query_string = {
             let mut query_string = form_urlencoded::Serializer::new("".to_owned());
+            if let Some(param_organization_id) = param_organization_id {
+                query_string.append_pair("organizationId",
+                    &param_organization_id);
+            }
+            if let Some(param_tenant_id) = param_tenant_id {
+                query_string.append_pair("tenantId",
+                    &param_tenant_id);
+            }
+            if let Some(param_account_id) = param_account_id {
+                query_string.append_pair("accountId",
+                    &param_account_id);
+            }
             query_string.finish()
         };
         if !query_string.is_empty() {
@@ -14232,6 +14247,8 @@ impl<S, C> Api<C> for Client<S, C> where
         param_account_id: Option<String>,
         param_page_size: Option<i32>,
         param_page_number: Option<i32>,
+        param_organization_id: Option<String>,
+        param_tenant_id: Option<String>,
         context: &C) -> Result<ListWorkspacesResponse, ApiError>
     {
         let mut client_service = self.client_service.clone();
@@ -14254,6 +14271,14 @@ impl<S, C> Api<C> for Client<S, C> where
             if let Some(param_page_number) = param_page_number {
                 query_string.append_pair("pageNumber",
                     &param_page_number.to_string());
+            }
+            if let Some(param_organization_id) = param_organization_id {
+                query_string.append_pair("organizationId",
+                    &param_organization_id);
+            }
+            if let Some(param_tenant_id) = param_tenant_id {
+                query_string.append_pair("tenantId",
+                    &param_tenant_id);
             }
             query_string.finish()
         };

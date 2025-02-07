@@ -8849,8 +8849,65 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                                         .expect("Unable to create Bad Request response for invalid percent decode"))
                 };
 
+                // Query parameters (note that non-required or collection query parameters will ignore garbage values, rather than causing a 400 response)
+                let query_params = form_urlencoded::parse(uri.query().unwrap_or_default().as_bytes()).collect::<Vec<_>>();
+                let param_organization_id = query_params.iter().filter(|e| e.0 == "organizationId").map(|e| e.1.clone())
+                    .next();
+                let param_organization_id = match param_organization_id {
+                    Some(param_organization_id) => {
+                        let param_organization_id =
+                            <String as std::str::FromStr>::from_str
+                                (&param_organization_id);
+                        match param_organization_id {
+                            Ok(param_organization_id) => Some(param_organization_id),
+                            Err(e) => return Ok(Response::builder()
+                                .status(StatusCode::BAD_REQUEST)
+                                .body(Body::from(format!("Couldn't parse query parameter organizationId - doesn't match schema: {}", e)))
+                                .expect("Unable to create Bad Request response for invalid query parameter organizationId")),
+                        }
+                    },
+                    None => None,
+                };
+                let param_tenant_id = query_params.iter().filter(|e| e.0 == "tenantId").map(|e| e.1.clone())
+                    .next();
+                let param_tenant_id = match param_tenant_id {
+                    Some(param_tenant_id) => {
+                        let param_tenant_id =
+                            <String as std::str::FromStr>::from_str
+                                (&param_tenant_id);
+                        match param_tenant_id {
+                            Ok(param_tenant_id) => Some(param_tenant_id),
+                            Err(e) => return Ok(Response::builder()
+                                .status(StatusCode::BAD_REQUEST)
+                                .body(Body::from(format!("Couldn't parse query parameter tenantId - doesn't match schema: {}", e)))
+                                .expect("Unable to create Bad Request response for invalid query parameter tenantId")),
+                        }
+                    },
+                    None => None,
+                };
+                let param_account_id = query_params.iter().filter(|e| e.0 == "accountId").map(|e| e.1.clone())
+                    .next();
+                let param_account_id = match param_account_id {
+                    Some(param_account_id) => {
+                        let param_account_id =
+                            <String as std::str::FromStr>::from_str
+                                (&param_account_id);
+                        match param_account_id {
+                            Ok(param_account_id) => Some(param_account_id),
+                            Err(e) => return Ok(Response::builder()
+                                .status(StatusCode::BAD_REQUEST)
+                                .body(Body::from(format!("Couldn't parse query parameter accountId - doesn't match schema: {}", e)))
+                                .expect("Unable to create Bad Request response for invalid query parameter accountId")),
+                        }
+                    },
+                    None => None,
+                };
+
                                 let result = api_impl.get_workspace(
                                             param_id,
+                                            param_organization_id,
+                                            param_tenant_id,
+                                            param_account_id,
                                         &context
                                     ).await;
                                 let mut response = Response::new(Body::empty());
@@ -12705,11 +12762,47 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                     },
                     None => None,
                 };
+                let param_organization_id = query_params.iter().filter(|e| e.0 == "organizationId").map(|e| e.1.clone())
+                    .next();
+                let param_organization_id = match param_organization_id {
+                    Some(param_organization_id) => {
+                        let param_organization_id =
+                            <String as std::str::FromStr>::from_str
+                                (&param_organization_id);
+                        match param_organization_id {
+                            Ok(param_organization_id) => Some(param_organization_id),
+                            Err(e) => return Ok(Response::builder()
+                                .status(StatusCode::BAD_REQUEST)
+                                .body(Body::from(format!("Couldn't parse query parameter organizationId - doesn't match schema: {}", e)))
+                                .expect("Unable to create Bad Request response for invalid query parameter organizationId")),
+                        }
+                    },
+                    None => None,
+                };
+                let param_tenant_id = query_params.iter().filter(|e| e.0 == "tenantId").map(|e| e.1.clone())
+                    .next();
+                let param_tenant_id = match param_tenant_id {
+                    Some(param_tenant_id) => {
+                        let param_tenant_id =
+                            <String as std::str::FromStr>::from_str
+                                (&param_tenant_id);
+                        match param_tenant_id {
+                            Ok(param_tenant_id) => Some(param_tenant_id),
+                            Err(e) => return Ok(Response::builder()
+                                .status(StatusCode::BAD_REQUEST)
+                                .body(Body::from(format!("Couldn't parse query parameter tenantId - doesn't match schema: {}", e)))
+                                .expect("Unable to create Bad Request response for invalid query parameter tenantId")),
+                        }
+                    },
+                    None => None,
+                };
 
                                 let result = api_impl.list_workspaces(
                                             param_account_id,
                                             param_page_size,
                                             param_page_number,
+                                            param_organization_id,
+                                            param_tenant_id,
                                         &context
                                     ).await;
                                 let mut response = Response::new(Body::empty());

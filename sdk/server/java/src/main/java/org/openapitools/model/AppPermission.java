@@ -25,7 +25,7 @@ import javax.annotation.Generated;
  * AppPermission
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T17:53:20.308969-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T17:56:14.620528-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class AppPermission {
 
   private String id;

@@ -22,7 +22,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
     }
     extensions: {
       key: "x-api-version"
-      value: {string_value: "v2"}
+      value: {string_value: "v1"}
     }
   }
 

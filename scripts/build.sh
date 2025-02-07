@@ -312,7 +312,7 @@ gen_cloudflare_worker() {
         -t ./templates)
     
     # Format the generated code
-    (cd services/gateway && pnpm format && pnpm build)
+    (cd services/gateway && pnpm run format && pnpm run build)
     
     echo -e "${GREEN}✓ Generated and formatted Cloudflare Worker Gateway${NC}"
     echo -e "  Location: services/gateway"

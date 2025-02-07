@@ -20,6 +20,7 @@ API_SECRET_KEY = "PLATFORM_DEFAULT_API_KEY"  # Replace with actual secret key
 API_KEY = ""  # Add your API key here
 SECRET = ""   # Add your secret here
 ENVIRONMENT = "production"
+API_BASE_URL = ""
 
 # Configure routes
 route = { pattern = "gateway.getvector.app/*", zone_name = "getvector.app" }

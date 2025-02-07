@@ -1,6 +1,6 @@
 name = "gateway"
 main = "index.ts"
-compatibility_date = "2024-01-01"
+compatibility_date = "2024-11-11"
 
 # Enable the AI binding
 ai = { binding = "AI" }
@@ -22,9 +22,7 @@ SECRET = ""   # Add your secret here
 ENVIRONMENT = "development"
 
 # Configure routes
-routes = [
-  { pattern = "api.example.com/ai*", zone_id = "xxxx" }
-]
+route = { pattern = "gateway.getvector.app/*", zone_name = "getvector.app" }
 
 # Configure dev settings
 [dev]
@@ -51,10 +49,11 @@ database_id = "f088aa64-c1ce-472f-9166-e411f059809f"
 binding = "STORAGE"
 bucket_name = "gateway-storage"  # Replace with your actual bucket name
 
-# Service binding for TELLER_CERT
-# [[services]]
-# binding = "TELLER_CERT"
-# service = "teller-service"  # Replace with your actual service name
+# wrangler.toml (wrangler v3.88.0^)
+[observability.logs]
+enabled = true
+head_sampling_rate = 0.05
+tail_sampling_rate = 0.05
 
 [env.production]
 vars = { ENVIRONMENT = "production" }

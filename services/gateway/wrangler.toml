@@ -3,7 +3,7 @@ main = "index.ts"
 compatibility_date = "2024-01-01"
 
 # Enable the AI binding
-ai = { binding = true }
+ai = { binding = "AI" }
 
 # Configure KV namespaces - Comment out the ones without IDs for now
 kv_namespaces = [
@@ -30,11 +30,6 @@ routes = [
 [dev]
 port = 8787
 local_protocol = "http"
-
-# Configure miniflare for local development
-[miniflare]
-kv_persist = true
-cache_persist = true
 
 # Configure build settings
 [build]

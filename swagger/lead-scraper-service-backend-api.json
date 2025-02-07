@@ -22262,6 +22262,13 @@
                     },
                     "userAgent": {
                         "type": "string"
+                    },
+                    "searchTerms": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "title": "Search terms"
                     }
                 },
                 "title": "ScrapingWorkflow defines recurring scraping configurations"

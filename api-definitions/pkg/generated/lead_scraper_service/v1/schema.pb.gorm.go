@@ -1237,6 +1237,7 @@ type ScrapingWorkflowORM struct {
 	QosRequestTimeout             *time.Duration
 	RespectRobotsTxt              bool
 	RetryCount                    int32
+	SearchTerms                   pq.StringArray `gorm:"type:text[]"`
 	Status                        string
 	UpdatedAt                     *time.Time
 	UserAgent                     string
@@ -1337,6 +1338,10 @@ func (m *ScrapingWorkflow) ToORM(ctx context.Context) (ScrapingWorkflowORM, erro
 	to.RespectRobotsTxt = m.RespectRobotsTxt
 	to.AcceptTermsOfService = m.AcceptTermsOfService
 	to.UserAgent = m.UserAgent
+	if m.SearchTerms != nil {
+		to.SearchTerms = make(pq.StringArray, len(m.SearchTerms))
+		copy(to.SearchTerms, m.SearchTerms)
+	}
 	if posthook, ok := interface{}(m).(ScrapingWorkflowWithAfterToORM); ok {
 		err = posthook.AfterToORM(ctx, &to)
 	}
@@ -1425,6 +1430,10 @@ func (m *ScrapingWorkflowORM) ToPB(ctx context.Context) (ScrapingWorkflow, error
 	to.RespectRobotsTxt = m.RespectRobotsTxt
 	to.AcceptTermsOfService = m.AcceptTermsOfService
 	to.UserAgent = m.UserAgent
+	if m.SearchTerms != nil {
+		to.SearchTerms = make(pq.StringArray, len(m.SearchTerms))
+		copy(to.SearchTerms, m.SearchTerms)
+	}
 	if posthook, ok := interface{}(m).(ScrapingWorkflowWithAfterToPB); ok {
 		err = posthook.AfterToPB(ctx, &to)
 	}
@@ -2969,7 +2978,7 @@ func DefaultCreateOrganization(ctx context.Context, in *Organization, db *gorm.D
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("Workspaces").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(OrganizationORMWithAfterCreate_); ok {
@@ -3142,7 +3151,7 @@ func DefaultStrictUpdateOrganization(ctx context.Context, in *Organization, db *
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(OrganizationORMWithAfterStrictUpdateSave); ok {
@@ -3699,7 +3708,7 @@ func DefaultStrictUpdateTenant(ctx context.Context, in *Tenant, db *gorm.DB) (*T
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(TenantORMWithAfterStrictUpdateSave); ok {
@@ -4831,7 +4840,7 @@ func DefaultStrictUpdateAccount(ctx context.Context, in *Account, db *gorm.DB) (
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(AccountORMWithAfterStrictUpdateSave); ok {
@@ -6756,6 +6765,10 @@ func DefaultApplyFieldMaskScrapingWorkflow(ctx context.Context, patchee *Scrapin
 		}
 		if f == prefix+"UserAgent" {
 			patchee.UserAgent = patcher.UserAgent
+			continue
+		}
+		if f == prefix+"SearchTerms" {
+			patchee.SearchTerms = patcher.SearchTerms
 			continue
 		}
 	}

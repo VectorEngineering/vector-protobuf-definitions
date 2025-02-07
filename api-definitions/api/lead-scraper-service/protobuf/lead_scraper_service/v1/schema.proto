@@ -719,6 +719,9 @@ message ScrapingWorkflow {
     bool respect_robots_txt = 45;
     bool accept_terms_of_service = 46;
     string user_agent = 47;
+    
+    // Search terms
+    repeated string search_terms = 48;
 }
 
 /**

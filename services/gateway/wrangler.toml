@@ -22,9 +22,6 @@ SECRET = ""   # Add your secret here
 ENVIRONMENT = "production"
 API_BASE_URL = ""
 
-# Configure routes
-route = { pattern = "gateway.getvector.app/*", zone_name = "getvector.app" }
-
 # Configure dev settings
 [dev]
 port = 8787

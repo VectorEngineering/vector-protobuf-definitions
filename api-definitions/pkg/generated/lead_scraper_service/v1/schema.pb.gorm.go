@@ -796,14 +796,14 @@ type WorkspaceORM struct {
 	CreatedAt           *time.Time
 	DailyJobQuota       int32
 	DeletedAt           *time.Time
-	Domain              string `gorm:"index:idx_workspaces_domain"`
+	Domain              string `gorm:"index:idx_workspace_domain"`
 	GdprCompliant       bool
 	HipaaCompliant      bool
 	Id                  uint64 `gorm:"primaryKey"`
 	Industry            string
 	JobsRunThisMonth    int32
 	LastJobRun          *time.Time
-	Name                string            `gorm:"index:idx_workspaces_name"`
+	Name                string            `gorm:"index:idx_workspace_name"`
 	ScrapingJobs        []*ScrapingJobORM `gorm:"foreignKey:WorkspaceId;references:Id"`
 	Soc2Compliant       bool
 	StorageQuota        int64
@@ -2969,7 +2969,7 @@ func DefaultCreateOrganization(ctx context.Context, in *Organization, db *gorm.D
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Settings").Preload("Workspaces").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(OrganizationORMWithAfterCreate_); ok {
@@ -3142,7 +3142,7 @@ func DefaultStrictUpdateOrganization(ctx context.Context, in *Organization, db *
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(OrganizationORMWithAfterStrictUpdateSave); ok {
@@ -3526,7 +3526,7 @@ func DefaultCreateTenant(ctx context.Context, in *Tenant, db *gorm.DB) (*Tenant,
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("Workspaces").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(TenantORMWithAfterCreate_); ok {
@@ -3699,7 +3699,7 @@ func DefaultStrictUpdateTenant(ctx context.Context, in *Tenant, db *gorm.DB) (*T
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(TenantORMWithAfterStrictUpdateSave); ok {
@@ -4831,7 +4831,7 @@ func DefaultStrictUpdateAccount(ctx context.Context, in *Account, db *gorm.DB) (
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(AccountORMWithAfterStrictUpdateSave); ok {

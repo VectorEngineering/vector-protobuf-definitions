@@ -465,13 +465,12 @@ message Account {
 message Workspace {
     option (gorm.opts) = {
         ormable: true,
-        table: "workspaces"
     };
 
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
     string name = 2 [
         (validate.rules).string.min_len = 1,
-        (gorm.field).tag = {index: "idx_workspaces_name"}
+        (gorm.field).tag = {index: "idx_workspace_name"}
     ];
     string industry = 3;
     string domain = 4 [
@@ -479,7 +478,7 @@ message Workspace {
             email: true,
             max_len: 253  // Max DNS label length
         },
-        (gorm.field).tag = {index: "idx_workspaces_domain"}
+        (gorm.field).tag = {index: "idx_workspace_domain"}
     ];
     
     // Compliance settings

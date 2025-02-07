@@ -25,7 +25,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "InternalErrorMessageResponse", description = "Represents internal server and system-level errors")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T15:17:20.852245-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T15:22:25.234549-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class InternalErrorMessageResponse {
 
   private InternalErrorCode code = InternalErrorCode.NO_INTERNAL_ERROR;

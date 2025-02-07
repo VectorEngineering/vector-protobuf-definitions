@@ -1,0 +1,39 @@
+name: Deploy Cloudflare Workers
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'services/public-api-gateway/**'
+      - 'services/gateway/**'
+  workflow_dispatch:
+    inputs:
+      worker:
+        description: 'Specific worker to deploy (leave empty to deploy all)'
+        required: false
+        type: choice
+        options:
+          - all
+          - public-api-gateway
+          - gateway
+
+jobs:
+  deploy-public-api-gateway:
+    if: github.event_name == 'push' && contains(github.event.paths, 'services/public-api-gateway/') || github.event.inputs.worker == 'all' || github.event.inputs.worker == 'public-api-gateway'
+    uses: ./.github/workflows/cloudflare-worker-deploy.yml
+    with:
+      worker_dir: services/public-api-gateway
+      environment: production
+    secrets:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+  deploy-gateway:
+    if: github.event_name == 'push' && contains(github.event.paths, 'services/gateway/') || github.event.inputs.worker == 'all' || github.event.inputs.worker == 'gateway'
+    uses: ./.github/workflows/cloudflare-worker-deploy.yml
+    with:
+      worker_dir: services/gateway
+      environment: production
+    secrets:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }} 

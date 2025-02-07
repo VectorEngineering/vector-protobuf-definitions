@@ -1,10 +1,11 @@
 import {
+  Ai,
   D1Database,
+  Fetcher,
   KVNamespace,
   R2Bucket,
-  Fetcher,
-  Ai,
 } from "@cloudflare/workers-types";
+
 import { TokenPrivilege } from "./middleware/auth";
 
 interface Env {
@@ -20,7 +21,7 @@ interface Env {
   // Add any other environment variables your worker needs
   ENRICH_KV: KVNamespace;
   STORAGE: R2Bucket;
-  TELLER_CERT: Fetcher;
+  // TELLER_CERT: Fetcher;
   AI: Ai;
 }
 

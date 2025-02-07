@@ -52,9 +52,9 @@ binding = "STORAGE"
 bucket_name = "gateway-storage"  # Replace with your actual bucket name
 
 # Service binding for TELLER_CERT
-[[services]]
-binding = "TELLER_CERT"
-service = "teller-service"  # Replace with your actual service name
+# [[services]]
+# binding = "TELLER_CERT"
+# service = "teller-service"  # Replace with your actual service name
 
 [env.production]
 vars = { ENVIRONMENT = "production" }

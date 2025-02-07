@@ -206,7 +206,9 @@ message ListAccountsResponse {
 // Workspace Management Messages
 message CreateWorkspaceRequest {
     Workspace workspace = 1 [(validate.rules).message.required = true];
-    string account_id = 2 [(validate.rules).string.min_len = 1];
+    uint64 account_id = 2 [(validate.rules).uint64.gt = 0];
+    uint64 organization_id = 3 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 4 [(validate.rules).uint64.gt = 0];
 }
 
 message CreateWorkspaceResponse {

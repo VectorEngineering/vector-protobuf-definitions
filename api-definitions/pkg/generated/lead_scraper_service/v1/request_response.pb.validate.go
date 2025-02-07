@@ -2534,10 +2534,32 @@ func (m *CreateWorkspaceRequest) validate(all bool) error {
 		}
 	}
 
-	if utf8.RuneCountInString(m.GetAccountId()) < 1 {
+	if m.GetAccountId() <= 0 {
 		err := CreateWorkspaceRequestValidationError{
 			field:  "AccountId",
-			reason: "value length must be at least 1 runes",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetOrganizationId() <= 0 {
+		err := CreateWorkspaceRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := CreateWorkspaceRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
 		}
 		if !all {
 			return err

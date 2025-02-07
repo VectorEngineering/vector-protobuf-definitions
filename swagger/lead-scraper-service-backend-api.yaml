@@ -13599,6 +13599,13 @@ components:
           $ref: "#/components/schemas/Workspace"
         accountId:
           type: string
+          format: uint64
+        organizationId:
+          type: string
+          format: uint64
+        tenantId:
+          type: string
+          format: uint64
       title: Workspace Management Messages
     CreateWorkspaceResponse:
       type: object

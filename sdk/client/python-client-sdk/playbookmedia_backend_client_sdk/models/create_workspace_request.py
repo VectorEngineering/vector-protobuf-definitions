@@ -30,7 +30,9 @@ class CreateWorkspaceRequest(BaseModel):
     """ # noqa: E501
     workspace: Optional[Workspace] = None
     account_id: Optional[StrictStr] = Field(default=None, alias="accountId")
-    __properties: ClassVar[List[str]] = ["workspace", "accountId"]
+    organization_id: Optional[StrictStr] = Field(default=None, alias="organizationId")
+    tenant_id: Optional[StrictStr] = Field(default=None, alias="tenantId")
+    __properties: ClassVar[List[str]] = ["workspace", "accountId", "organizationId", "tenantId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,7 +89,9 @@ class CreateWorkspaceRequest(BaseModel):
 
         _obj = cls.model_validate({
             "workspace": Workspace.from_dict(obj["workspace"]) if obj.get("workspace") is not None else None,
-            "accountId": obj.get("accountId")
+            "accountId": obj.get("accountId"),
+            "organizationId": obj.get("organizationId"),
+            "tenantId": obj.get("tenantId")
         })
         return _obj
 

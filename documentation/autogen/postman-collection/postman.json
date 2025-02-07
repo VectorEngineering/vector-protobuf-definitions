@@ -3661,7 +3661,7 @@
                                     ],
                                     "body": {
                                         "mode": "raw",
-                                        "raw": "{\n \"workspace\": \"<string>\",\n \"accountId\": \"<string>\"\n}",
+                                        "raw": "{\n \"workspace\": \"<string>\",\n \"accountId\": \"<string>\",\n \"organizationId\": \"<string>\",\n \"tenantId\": \"<string>\"\n}",
                                         "options": {
                                             "raw": {
                                                 "language": "json"

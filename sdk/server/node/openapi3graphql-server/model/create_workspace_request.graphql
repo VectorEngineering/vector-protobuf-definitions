@@ -11,10 +11,14 @@
 type CreateWorkspaceRequest {
   workspace: Workspace
   accountId: String!
+  organizationId: String!
+  tenantId: String!
 }
 
 input CreateWorkspaceRequestInput {
     workspace: WorkspaceInput
     accountId: String!
+    organizationId: String!
+    tenantId: String!
 }
 

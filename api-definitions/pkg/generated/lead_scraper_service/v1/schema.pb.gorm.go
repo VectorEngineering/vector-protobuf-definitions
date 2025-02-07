@@ -4658,7 +4658,7 @@ func DefaultCreateAccount(ctx context.Context, in *Account, db *gorm.DB) (*Accou
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("Workspaces").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(AccountORMWithAfterCreate_); ok {
@@ -4831,7 +4831,7 @@ func DefaultStrictUpdateAccount(ctx context.Context, in *Account, db *gorm.DB) (
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(AccountORMWithAfterStrictUpdateSave); ok {

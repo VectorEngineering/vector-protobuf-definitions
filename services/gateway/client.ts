@@ -2279,7 +2279,12 @@ const ListWorkspacesResponse = z
   .partial()
   .passthrough();
 const CreateWorkspaceRequest = z
-  .object({ workspace: Workspace, accountId: z.string() })
+  .object({
+    workspace: Workspace,
+    accountId: z.string(),
+    organizationId: z.string(),
+    tenantId: z.string(),
+  })
   .partial()
   .passthrough();
 const CreateWorkspaceResponse = z

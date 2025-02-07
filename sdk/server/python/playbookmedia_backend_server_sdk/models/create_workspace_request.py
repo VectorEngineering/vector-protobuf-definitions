@@ -14,26 +14,36 @@ class CreateWorkspaceRequest(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, workspace=None, account_id=None):  # noqa: E501
+    def __init__(self, workspace=None, account_id=None, organization_id=None, tenant_id=None):  # noqa: E501
         """CreateWorkspaceRequest - a model defined in OpenAPI
 
         :param workspace: The workspace of this CreateWorkspaceRequest.  # noqa: E501
         :type workspace: Workspace
         :param account_id: The account_id of this CreateWorkspaceRequest.  # noqa: E501
         :type account_id: str
+        :param organization_id: The organization_id of this CreateWorkspaceRequest.  # noqa: E501
+        :type organization_id: str
+        :param tenant_id: The tenant_id of this CreateWorkspaceRequest.  # noqa: E501
+        :type tenant_id: str
         """
         self.openapi_types = {
             'workspace': Workspace,
-            'account_id': str
+            'account_id': str,
+            'organization_id': str,
+            'tenant_id': str
         }
 
         self.attribute_map = {
             'workspace': 'workspace',
-            'account_id': 'accountId'
+            'account_id': 'accountId',
+            'organization_id': 'organizationId',
+            'tenant_id': 'tenantId'
         }
 
         self._workspace = workspace
         self._account_id = account_id
+        self._organization_id = organization_id
+        self._tenant_id = tenant_id
 
     @classmethod
     def from_dict(cls, dikt) -> 'CreateWorkspaceRequest':
@@ -87,3 +97,45 @@ class CreateWorkspaceRequest(Model):
         """
 
         self._account_id = account_id
+
+    @property
+    def organization_id(self) -> str:
+        """Gets the organization_id of this CreateWorkspaceRequest.
+
+
+        :return: The organization_id of this CreateWorkspaceRequest.
+        :rtype: str
+        """
+        return self._organization_id
+
+    @organization_id.setter
+    def organization_id(self, organization_id: str):
+        """Sets the organization_id of this CreateWorkspaceRequest.
+
+
+        :param organization_id: The organization_id of this CreateWorkspaceRequest.
+        :type organization_id: str
+        """
+
+        self._organization_id = organization_id
+
+    @property
+    def tenant_id(self) -> str:
+        """Gets the tenant_id of this CreateWorkspaceRequest.
+
+
+        :return: The tenant_id of this CreateWorkspaceRequest.
+        :rtype: str
+        """
+        return self._tenant_id
+
+    @tenant_id.setter
+    def tenant_id(self, tenant_id: str):
+        """Sets the tenant_id of this CreateWorkspaceRequest.
+
+
+        :param tenant_id: The tenant_id of this CreateWorkspaceRequest.
+        :type tenant_id: str
+        """
+
+        self._tenant_id = tenant_id

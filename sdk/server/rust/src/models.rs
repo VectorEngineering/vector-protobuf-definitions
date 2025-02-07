@@ -11598,6 +11598,14 @@ pub struct CreateWorkspaceRequest {
     #[serde(skip_serializing_if="Option::is_none")]
     pub account_id: Option<String>,
 
+    #[serde(rename = "organizationId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub organization_id: Option<String>,
+
+    #[serde(rename = "tenantId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub tenant_id: Option<String>,
+
 }
 
 
@@ -11607,6 +11615,8 @@ impl CreateWorkspaceRequest {
         CreateWorkspaceRequest {
             workspace: None,
             account_id: None,
+            organization_id: None,
+            tenant_id: None,
         }
     }
 }
@@ -11624,6 +11634,22 @@ impl std::string::ToString for CreateWorkspaceRequest {
                 [
                     "accountId".to_string(),
                     account_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.organization_id.as_ref().map(|organization_id| {
+                [
+                    "organizationId".to_string(),
+                    organization_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.tenant_id.as_ref().map(|tenant_id| {
+                [
+                    "tenantId".to_string(),
+                    tenant_id.to_string(),
                 ].join(",")
             }),
 
@@ -11646,6 +11672,8 @@ impl std::str::FromStr for CreateWorkspaceRequest {
         struct IntermediateRep {
             pub workspace: Vec<models::Workspace>,
             pub account_id: Vec<String>,
+            pub organization_id: Vec<String>,
+            pub tenant_id: Vec<String>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -11667,6 +11695,10 @@ impl std::str::FromStr for CreateWorkspaceRequest {
                     "workspace" => intermediate_rep.workspace.push(<models::Workspace as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "accountId" => intermediate_rep.account_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "organizationId" => intermediate_rep.organization_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing CreateWorkspaceRequest".to_string())
                 }
             }
@@ -11679,6 +11711,8 @@ impl std::str::FromStr for CreateWorkspaceRequest {
         std::result::Result::Ok(CreateWorkspaceRequest {
             workspace: intermediate_rep.workspace.into_iter().next(),
             account_id: intermediate_rep.account_id.into_iter().next(),
+            organization_id: intermediate_rep.organization_id.into_iter().next(),
+            tenant_id: intermediate_rep.tenant_id.into_iter().next(),
         })
     }
 }

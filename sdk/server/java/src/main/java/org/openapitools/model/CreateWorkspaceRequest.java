@@ -19,12 +19,16 @@ import javax.annotation.Generated;
  * CreateWorkspaceRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T12:21:38.405762-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T14:01:34.824389-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class CreateWorkspaceRequest {
 
   private Workspace workspace;
 
   private String accountId;
+
+  private String organizationId;
+
+  private String tenantId;
 
   public CreateWorkspaceRequest workspace(Workspace workspace) {
     this.workspace = workspace;
@@ -66,6 +70,46 @@ public class CreateWorkspaceRequest {
     this.accountId = accountId;
   }
 
+  public CreateWorkspaceRequest organizationId(String organizationId) {
+    this.organizationId = organizationId;
+    return this;
+  }
+
+  /**
+   * Get organizationId
+   * @return organizationId
+   */
+  
+  @Schema(name = "organizationId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("organizationId")
+  public String getOrganizationId() {
+    return organizationId;
+  }
+
+  public void setOrganizationId(String organizationId) {
+    this.organizationId = organizationId;
+  }
+
+  public CreateWorkspaceRequest tenantId(String tenantId) {
+    this.tenantId = tenantId;
+    return this;
+  }
+
+  /**
+   * Get tenantId
+   * @return tenantId
+   */
+  
+  @Schema(name = "tenantId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("tenantId")
+  public String getTenantId() {
+    return tenantId;
+  }
+
+  public void setTenantId(String tenantId) {
+    this.tenantId = tenantId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -76,12 +120,14 @@ public class CreateWorkspaceRequest {
     }
     CreateWorkspaceRequest createWorkspaceRequest = (CreateWorkspaceRequest) o;
     return Objects.equals(this.workspace, createWorkspaceRequest.workspace) &&
-        Objects.equals(this.accountId, createWorkspaceRequest.accountId);
+        Objects.equals(this.accountId, createWorkspaceRequest.accountId) &&
+        Objects.equals(this.organizationId, createWorkspaceRequest.organizationId) &&
+        Objects.equals(this.tenantId, createWorkspaceRequest.tenantId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(workspace, accountId);
+    return Objects.hash(workspace, accountId, organizationId, tenantId);
   }
 
   @Override
@@ -90,6 +136,8 @@ public class CreateWorkspaceRequest {
     sb.append("class CreateWorkspaceRequest {\n");
     sb.append("    workspace: ").append(toIndentedString(workspace)).append("\n");
     sb.append("    accountId: ").append(toIndentedString(accountId)).append("\n");
+    sb.append("    organizationId: ").append(toIndentedString(organizationId)).append("\n");
+    sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

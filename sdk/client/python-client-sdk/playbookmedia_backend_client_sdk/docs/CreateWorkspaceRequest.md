@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **workspace** | [**Workspace**](Workspace.md) |  | [optional] 
 **account_id** | **str** |  | [optional] 
+**organization_id** | **str** |  | [optional] 
+**tenant_id** | **str** |  | [optional] 
 
 ## Example
 

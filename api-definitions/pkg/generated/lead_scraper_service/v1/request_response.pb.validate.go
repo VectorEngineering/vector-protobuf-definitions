@@ -4457,6 +4457,39 @@ func (m *ListWorkflowsRequest) validate(all bool) error {
 
 	// no validation rules for Filter
 
+	if m.GetOrganizationId() <= 0 {
+		err := ListWorkflowsRequestValidationError{
+			field:  "OrganizationId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetTenantId() <= 0 {
+		err := ListWorkflowsRequestValidationError{
+			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetAccountId() <= 0 {
+		err := ListWorkflowsRequestValidationError{
+			field:  "AccountId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return ListWorkflowsRequestMultiError(errors)
 	}

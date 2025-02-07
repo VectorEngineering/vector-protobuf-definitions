@@ -793,7 +793,7 @@ def list_webhooks(organization_id=None, workspace_id=None, tenant_id=None, accou
     return 'do some magic!'
 
 
-def list_workflows(workspace_id, page_size=None, page_number=None, filter=None):  # noqa: E501
+def list_workflows(workspace_id, page_size=None, page_number=None, filter=None, organization_id=None, tenant_id=None, account_id=None):  # noqa: E501
     """List workflows
 
     Retrieves a list of workflows for a given workspace # noqa: E501
@@ -806,6 +806,12 @@ def list_workflows(workspace_id, page_size=None, page_number=None, filter=None):
     :type page_number: int
     :param filter: 
     :type filter: str
+    :param organization_id: 
+    :type organization_id: str
+    :param tenant_id: 
+    :type tenant_id: str
+    :param account_id: 
+    :type account_id: str
 
     :rtype: Union[ListWorkflowsResponse, Tuple[ListWorkflowsResponse, int], Tuple[ListWorkflowsResponse, int, Dict[str, str]]
     """

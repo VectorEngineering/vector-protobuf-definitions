@@ -554,7 +554,10 @@ fn main() {
                   "workspace_id_example".to_string(),
                   Some(56),
                   Some(56),
-                  Some("filter_example".to_string())
+                  Some("filter_example".to_string()),
+                  Some("organization_id_example".to_string()),
+                  Some("tenant_id_example".to_string()),
+                  Some("account_id_example".to_string())
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },

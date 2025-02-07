@@ -578,8 +578,11 @@ type Query {
   # @param Int! pageSize 
   # @param Int! pageNumber 
   # @param String! filter 
+  # @param String! organizationId 
+  # @param String! tenantId 
+  # @param String! accountId 
   # @return [ListWorkflowsResponse]
-  ListWorkflows(workspaceId: String!, pageSize: Int!, pageNumber: Int!, filter: String!): ListWorkflowsResponse
+  ListWorkflows(workspaceId: String!, pageSize: Int!, pageNumber: Int!, filter: String!, organizationId: String!, tenantId: String!, accountId: String!): ListWorkflowsResponse
   # List workspaces
   # Retrieves a list of workspaces for a given account
   # @param String! accountId 

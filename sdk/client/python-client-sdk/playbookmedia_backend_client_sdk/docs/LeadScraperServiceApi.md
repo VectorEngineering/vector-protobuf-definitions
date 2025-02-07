@@ -3596,7 +3596,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_workflows**
-> ListWorkflowsResponse list_workflows(workspace_id, page_size=page_size, page_number=page_number, filter=filter)
+> ListWorkflowsResponse list_workflows(workspace_id, page_size=page_size, page_number=page_number, filter=filter, organization_id=organization_id, tenant_id=tenant_id, account_id=account_id)
 
 List workflows
 
@@ -3626,10 +3626,13 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
     page_size = 56 # int |  (optional)
     page_number = 56 # int |  (optional)
     filter = 'filter_example' # str |  (optional)
+    organization_id = 'organization_id_example' # str |  (optional)
+    tenant_id = 'tenant_id_example' # str |  (optional)
+    account_id = 'account_id_example' # str |  (optional)
 
     try:
         # List workflows
-        api_response = await api_instance.list_workflows(workspace_id, page_size=page_size, page_number=page_number, filter=filter)
+        api_response = await api_instance.list_workflows(workspace_id, page_size=page_size, page_number=page_number, filter=filter, organization_id=organization_id, tenant_id=tenant_id, account_id=account_id)
         print("The response of LeadScraperServiceApi->list_workflows:\n")
         pprint(api_response)
     except Exception as e:
@@ -3647,6 +3650,9 @@ Name | Type | Description  | Notes
  **page_size** | **int**|  | [optional] 
  **page_number** | **int**|  | [optional] 
  **filter** | **str**|  | [optional] 
+ **organization_id** | **str**|  | [optional] 
+ **tenant_id** | **str**|  | [optional] 
+ **account_id** | **str**|  | [optional] 
 
 ### Return type
 

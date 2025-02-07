@@ -5344,6 +5344,9 @@ pub trait Api<C: Send + Sync> {
         page_size: Option<i32>,
         page_number: Option<i32>,
         filter: Option<String>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
         context: &C) -> Result<ListWorkflowsResponse, ApiError>;
 
     /// List workspaces
@@ -5878,6 +5881,9 @@ pub trait ApiNoContext<C: Send + Sync> {
         page_size: Option<i32>,
         page_number: Option<i32>,
         filter: Option<String>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
         ) -> Result<ListWorkflowsResponse, ApiError>;
 
     /// List workspaces
@@ -6582,10 +6588,13 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         page_size: Option<i32>,
         page_number: Option<i32>,
         filter: Option<String>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
         ) -> Result<ListWorkflowsResponse, ApiError>
     {
         let context = self.context().clone();
-        self.api().list_workflows(workspace_id, page_size, page_number, filter, &context).await
+        self.api().list_workflows(workspace_id, page_size, page_number, filter, organization_id, tenant_id, account_id, &context).await
     }
 
     /// List workspaces

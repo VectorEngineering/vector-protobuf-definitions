@@ -1367,6 +1367,9 @@ Name | Type | Description  | Notes
  **page_size** | **i32**|  | 
  **page_number** | **i32**|  | 
  **filter** | **String**|  | 
+ **organization_id** | **String**|  | 
+ **tenant_id** | **String**|  | 
+ **account_id** | **String**|  | 
 
 ### Return type
 

@@ -13902,6 +13902,9 @@ impl<S, C> Api<C> for Client<S, C> where
         param_page_size: Option<i32>,
         param_page_number: Option<i32>,
         param_filter: Option<String>,
+        param_organization_id: Option<String>,
+        param_tenant_id: Option<String>,
+        param_account_id: Option<String>,
         context: &C) -> Result<ListWorkflowsResponse, ApiError>
     {
         let mut client_service = self.client_service.clone();
@@ -13925,6 +13928,18 @@ impl<S, C> Api<C> for Client<S, C> where
             if let Some(param_filter) = param_filter {
                 query_string.append_pair("filter",
                     &param_filter);
+            }
+            if let Some(param_organization_id) = param_organization_id {
+                query_string.append_pair("organizationId",
+                    &param_organization_id);
+            }
+            if let Some(param_tenant_id) = param_tenant_id {
+                query_string.append_pair("tenantId",
+                    &param_tenant_id);
+            }
+            if let Some(param_account_id) = param_account_id {
+                query_string.append_pair("accountId",
+                    &param_account_id);
             }
             query_string.finish()
         };

@@ -8238,6 +8238,21 @@ const endpoints = makeApi([
         type: "Query",
         schema: z.string().optional(),
       },
+      {
+        name: "organizationId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+      {
+        name: "tenantId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+      {
+        name: "accountId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
     ],
     response: ListWorkflowsResponse,
     errors: [
@@ -10727,6 +10742,9 @@ export class ApiClient {
     pageSize: number | undefined;
     pageNumber: number | undefined;
     filter: string | undefined;
+    organizationId: string | undefined;
+    tenantId: string | undefined;
+    accountId: string | undefined;
   }) {
     return this.client.get(
       "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows",
@@ -10738,6 +10756,9 @@ export class ApiClient {
           pageSize: params.pageSize ? Number(params.pageSize) : undefined,
           pageNumber: params.pageNumber ? Number(params.pageNumber) : undefined,
           filter: params.filter,
+          organizationId: params.organizationId,
+          tenantId: params.tenantId,
+          accountId: params.accountId,
         },
       },
     );

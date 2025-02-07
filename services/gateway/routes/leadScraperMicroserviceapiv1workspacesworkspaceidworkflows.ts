@@ -23,6 +23,9 @@ router.get("/", async (c) => {
       ? Number(c.req.query("pageNumber"))
       : undefined,
     filter: c.req.query("filter"),
+    organizationId: c.req.query("organizationId"),
+    tenantId: c.req.query("tenantId"),
+    accountId: c.req.query("accountId"),
   };
   const response =
     await client.getLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdWorkflows(

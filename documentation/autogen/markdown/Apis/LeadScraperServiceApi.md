@@ -1198,7 +1198,7 @@ No authorization required
 
 <a name="listWorkflows"></a>
 # **listWorkflows**
-> ListWorkflowsResponse listWorkflows(workspaceId, pageSize, pageNumber, filter)
+> ListWorkflowsResponse listWorkflows(workspaceId, pageSize, pageNumber, filter, organizationId, tenantId, accountId)
 
 List workflows
 
@@ -1212,6 +1212,9 @@ List workflows
 | **pageSize** | **Integer**|  | [optional] [default to null] |
 | **pageNumber** | **Integer**|  | [optional] [default to null] |
 | **filter** | **String**|  | [optional] [default to null] |
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
+| **accountId** | **String**|  | [optional] [default to null] |
 
 ### Return type
 

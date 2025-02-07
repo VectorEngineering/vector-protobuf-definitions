@@ -18,7 +18,7 @@ import javax.annotation.Generated;
  * DeleteScrapingJobResponse
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T14:39:19.806517-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T14:45:24.186734-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class DeleteScrapingJobResponse {
 
   private Boolean success;

@@ -287,6 +287,9 @@ message ListWorkflowsRequest {
     int32 page_size = 2 [(validate.rules).int32 = {gte: 1, lte: 100}];
     int32 page_number = 3;
     string filter = 4;
+    uint64 organization_id = 5 [(validate.rules).uint64.gt = 0];
+    uint64 tenant_id = 6 [(validate.rules).uint64.gt = 0];
+    uint64 account_id = 7 [(validate.rules).uint64.gt = 0];
 }
 
 message ListWorkflowsResponse {

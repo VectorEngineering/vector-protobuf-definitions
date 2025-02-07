@@ -335,7 +335,7 @@ List webhooks
 Lists all webhook configurations with pagination
 <a name="ListWorkflows"></a>
 # **ListWorkflows**
-> ListWorkflowsResponse ListWorkflows(workspaceId, pageSize, pageNumber, filter)
+> ListWorkflowsResponse ListWorkflows(workspaceId, pageSize, pageNumber, filter, organizationId, tenantId, accountId)
 
 List workflows
 

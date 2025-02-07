@@ -12312,6 +12312,24 @@ paths:
           required: false
           schema:
             type: string
+        - name: organizationId
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uint64
+        - name: tenantId
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uint64
+        - name: accountId
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uint64
       tags:
         - lead-scraper-service
     post:

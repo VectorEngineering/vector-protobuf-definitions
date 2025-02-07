@@ -226,12 +226,15 @@ export default {
         },
 
         // @return ListWorkflowsResponse
-        ListWorkflows: ($workspaceId, $pageSize, $pageNumber, $filter) => {
+        ListWorkflows: ($workspaceId, $pageSize, $pageNumber, $filter, $organizationId, $tenantId, $accountId) => {
             return {
                 "workspaceId": "workspaceId_example",
                 "pageSize": "56",
                 "pageNumber": "56",
-                "filter": "filter_example"
+                "filter": "filter_example",
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example"
             };
         },
 

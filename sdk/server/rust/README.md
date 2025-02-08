@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-08T10:26:53.673905-05:00[America/New_York]
+- Build date: 2025-02-08T10:28:33.024795-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -70,6 +70,7 @@ cargo run --example client DeleteTenantApiKey
 cargo run --example client DeleteWebhook
 cargo run --example client DeleteWorkflow
 cargo run --example client DeleteWorkspace
+cargo run --example client GetAccount
 cargo run --example client GetAccountUsage
 cargo run --example client GetApiKey
 cargo run --example client GetLead
@@ -91,7 +92,7 @@ cargo run --example client ListWorkflows
 cargo run --example client ListWorkspaces
 cargo run --example client DeleteAccount1
 cargo run --example client DeleteWorkspace1
-cargo run --example client GetAccount
+cargo run --example client GetAccount1
 cargo run --example client GetWorkspace1
 cargo run --example client GetWorkspaceAnalytics1
 cargo run --example client GetWorkspaceComplianceReport
@@ -146,6 +147,7 @@ Method | HTTP request | Description
 [**DeleteWebhook**](docs/lead_scraper_service_api.md#DeleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
 [**DeleteWorkflow**](docs/lead_scraper_service_api.md#DeleteWorkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 [**DeleteWorkspace**](docs/lead_scraper_service_api.md#DeleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
+[**GetAccount**](docs/lead_scraper_service_api.md#GetAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details
 [**GetAccountUsage**](docs/lead_scraper_service_api.md#GetAccountUsage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage
 [**GetAPIKey**](docs/lead_scraper_service_api.md#GetAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
 [**GetLead**](docs/lead_scraper_service_api.md#GetLead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
@@ -182,7 +184,7 @@ Method | HTTP request | Description
 [**CreateWorkspace**](docs/workspace_service_api.md#CreateWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace
 [**DeleteAccount1**](docs/workspace_service_api.md#DeleteAccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 [**DeleteWorkspace1**](docs/workspace_service_api.md#DeleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
-[**GetAccount**](docs/workspace_service_api.md#GetAccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details
+[**GetAccount1**](docs/workspace_service_api.md#GetAccount1) | **GET** /workspace-service/v1/accounts/{id} | Get account details
 [**GetWorkspace1**](docs/workspace_service_api.md#GetWorkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
 [**GetWorkspaceAnalytics1**](docs/workspace_service_api.md#GetWorkspaceAnalytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
 [**GetWorkspaceComplianceReport**](docs/workspace_service_api.md#GetWorkspaceComplianceReport) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report
@@ -284,6 +286,7 @@ Method | HTTP request | Description
  - [ForbiddenErrorMessageResponse](docs/ForbiddenErrorMessageResponse.md)
  - [GatewayTimeoutErrorMessageResponse](docs/GatewayTimeoutErrorMessageResponse.md)
  - [GetAccountResponse](docs/GetAccountResponse.md)
+ - [GetAccountResponse1](docs/GetAccountResponse1.md)
  - [GetAccountUsageResponse](docs/GetAccountUsageResponse.md)
  - [GetApiKeyResponse](docs/GetApiKeyResponse.md)
  - [GetLeadResponse](docs/GetLeadResponse.md)
@@ -391,7 +394,6 @@ Method | HTTP request | Description
  - [UpdateAccountRequest1](docs/UpdateAccountRequest1.md)
  - [UpdateAccountRequestPayload](docs/UpdateAccountRequestPayload.md)
  - [UpdateAccountResponse](docs/UpdateAccountResponse.md)
- - [UpdateAccountResponse1](docs/UpdateAccountResponse1.md)
  - [UpdateAccountSettingsRequest](docs/UpdateAccountSettingsRequest.md)
  - [UpdateAccountSettingsResponse](docs/UpdateAccountSettingsResponse.md)
  - [UpdateApiKeyRequest](docs/UpdateApiKeyRequest.md)

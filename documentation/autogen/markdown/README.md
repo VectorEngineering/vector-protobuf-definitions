@@ -22,6 +22,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *LeadScraperServiceApi* | [**deleteWorkflow**](Apis/LeadScraperServiceApi.md#deleteworkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow |
 *LeadScraperServiceApi* | [**deleteWorkspace**](Apis/LeadScraperServiceApi.md#deleteworkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace |
 *LeadScraperServiceApi* | [**getAPIKey**](Apis/LeadScraperServiceApi.md#getapikey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details |
+*LeadScraperServiceApi* | [**getAccount**](Apis/LeadScraperServiceApi.md#getaccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details |
 *LeadScraperServiceApi* | [**getAccountUsage**](Apis/LeadScraperServiceApi.md#getaccountusage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage |
 *LeadScraperServiceApi* | [**getLead**](Apis/LeadScraperServiceApi.md#getlead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details |
 *LeadScraperServiceApi* | [**getOrganization**](Apis/LeadScraperServiceApi.md#getorganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details |
@@ -57,7 +58,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *WorkspaceServiceApi* | [**createWorkspace**](Apis/WorkspaceServiceApi.md#createworkspace) | **POST** /workspace-service/v1/workspaces | Create workspace |
 *WorkspaceServiceApi* | [**deleteAccount1**](Apis/WorkspaceServiceApi.md#deleteaccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account |
 *WorkspaceServiceApi* | [**deleteWorkspace1**](Apis/WorkspaceServiceApi.md#deleteworkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace |
-*WorkspaceServiceApi* | [**getAccount**](Apis/WorkspaceServiceApi.md#getaccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details |
+*WorkspaceServiceApi* | [**getAccount1**](Apis/WorkspaceServiceApi.md#getaccount1) | **GET** /workspace-service/v1/accounts/{id} | Get account details |
 *WorkspaceServiceApi* | [**getWorkspace1**](Apis/WorkspaceServiceApi.md#getworkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details |
 *WorkspaceServiceApi* | [**getWorkspaceAnalytics1**](Apis/WorkspaceServiceApi.md#getworkspaceanalytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics |
 *WorkspaceServiceApi* | [**getWorkspaceComplianceReport**](Apis/WorkspaceServiceApi.md#getworkspacecompliancereport) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report |
@@ -161,6 +162,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [GatewayTimeoutErrorMessageResponse](./Models/GatewayTimeoutErrorMessageResponse.md)
  - [GetAPIKeyResponse](./Models/GetAPIKeyResponse.md)
  - [GetAccountResponse](./Models/GetAccountResponse.md)
+ - [GetAccountResponse1](./Models/GetAccountResponse1.md)
  - [GetAccountUsageResponse](./Models/GetAccountUsageResponse.md)
  - [GetLeadResponse](./Models/GetLeadResponse.md)
  - [GetOrganizationResponse](./Models/GetOrganizationResponse.md)
@@ -268,7 +270,6 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [UpdateAccountRequest1](./Models/UpdateAccountRequest1.md)
  - [UpdateAccountRequestPayload](./Models/UpdateAccountRequestPayload.md)
  - [UpdateAccountResponse](./Models/UpdateAccountResponse.md)
- - [UpdateAccountResponse1](./Models/UpdateAccountResponse1.md)
  - [UpdateAccountSettingsRequest](./Models/UpdateAccountSettingsRequest.md)
  - [UpdateAccountSettingsResponse](./Models/UpdateAccountSettingsResponse.md)
  - [UpdateOrganizationRequest](./Models/UpdateOrganizationRequest.md)

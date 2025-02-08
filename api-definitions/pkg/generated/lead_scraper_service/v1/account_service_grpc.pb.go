@@ -19,6 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	LeadScraperService_GetAccount_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/GetAccount"
 	LeadScraperService_UpdateAccount_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/UpdateAccount"
 	LeadScraperService_DeleteAccount_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/DeleteAccount"
 	LeadScraperService_ListWorkspaces_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/ListWorkspaces"
@@ -93,6 +94,14 @@ const (
 //
 // ```
 type LeadScraperServiceClient interface {
+	// Get account details
+	//
+	// Retrieves detailed information about a specific account, including
+	// associated scraping jobs and account settings.
+	//
+	// Required permissions:
+	// - read:account
+	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error)
 	// Update account
 	//
 	// Updates the specified fields of an existing account. Only provided
@@ -754,6 +763,16 @@ func NewLeadScraperServiceClient(cc grpc.ClientConnInterface) LeadScraperService
 	return &leadScraperServiceClient{cc}
 }
 
+func (c *leadScraperServiceClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAccountResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *leadScraperServiceClient) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*UpdateAccountResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateAccountResponse)
@@ -1240,6 +1259,14 @@ func (c *leadScraperServiceClient) ListWebhooks(ctx context.Context, in *ListWeb
 //
 // ```
 type LeadScraperServiceServer interface {
+	// Get account details
+	//
+	// Retrieves detailed information about a specific account, including
+	// associated scraping jobs and account settings.
+	//
+	// Required permissions:
+	// - read:account
+	GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error)
 	// Update account
 	//
 	// Updates the specified fields of an existing account. Only provided
@@ -1901,6 +1928,9 @@ type LeadScraperServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedLeadScraperServiceServer struct{}
 
+func (UnimplementedLeadScraperServiceServer) GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccount not implemented")
+}
 func (UnimplementedLeadScraperServiceServer) UpdateAccount(context.Context, *UpdateAccountRequest) (*UpdateAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccount not implemented")
 }
@@ -2058,6 +2088,24 @@ func RegisterLeadScraperServiceServer(s grpc.ServiceRegistrar, srv LeadScraperSe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&LeadScraperService_ServiceDesc, srv)
+}
+
+func _LeadScraperService_GetAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).GetAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_GetAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).GetAccount(ctx, req.(*GetAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _LeadScraperService_UpdateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2895,6 +2943,10 @@ var LeadScraperService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "lead_scraper_service.v1.LeadScraperService",
 	HandlerType: (*LeadScraperServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetAccount",
+			Handler:    _LeadScraperService_GetAccount_Handler,
+		},
 		{
 			MethodName: "UpdateAccount",
 			Handler:    _LeadScraperService_UpdateAccount_Handler,

@@ -8,7 +8,7 @@ Method | HTTP request | Description
 **CreateWorkspace**](workspace_service_api.md#CreateWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace
 **DeleteAccount1**](workspace_service_api.md#DeleteAccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 **DeleteWorkspace1**](workspace_service_api.md#DeleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
-**GetAccount**](workspace_service_api.md#GetAccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details
+**GetAccount1**](workspace_service_api.md#GetAccount1) | **GET** /workspace-service/v1/accounts/{id} | Get account details
 **GetWorkspace1**](workspace_service_api.md#GetWorkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
 **GetWorkspaceAnalytics1**](workspace_service_api.md#GetWorkspaceAnalytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
 **GetWorkspaceComplianceReport**](workspace_service_api.md#GetWorkspaceComplianceReport) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report
@@ -124,8 +124,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **GetAccount**
-> models::GetAccountResponse GetAccount(id)
+# **GetAccount1**
+> models::GetAccountResponse1 GetAccount1(id)
 Get account details
 
 ### Required Parameters
@@ -136,7 +136,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**models::GetAccountResponse**](GetAccountResponse.md)
+[**models::GetAccountResponse1**](GetAccountResponse1.md)
 
 ### Authorization
 
@@ -390,7 +390,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateAccount1**
-> models::UpdateAccountResponse1 UpdateAccount1(update_account_request1)
+> models::UpdateAccountResponse UpdateAccount1(update_account_request1)
 Update account details
 
 ### Required Parameters
@@ -401,7 +401,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**models::UpdateAccountResponse1**](UpdateAccountResponse1.md)
+[**models::UpdateAccountResponse**](UpdateAccountResponse.md)
 
 ### Authorization
 

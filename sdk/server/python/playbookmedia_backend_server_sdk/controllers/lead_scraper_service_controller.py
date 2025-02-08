@@ -29,6 +29,7 @@ from playbookmedia_backend_server_sdk.models.delete_workspace_response import De
 from playbookmedia_backend_server_sdk.models.forbidden_error_message_response import ForbiddenErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.gateway_timeout_error_message_response import GatewayTimeoutErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_api_key_response import GetAPIKeyResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.get_account_response import GetAccountResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_account_usage_response import GetAccountUsageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_lead_response import GetLeadResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_organization_response import GetOrganizationResponse  # noqa: E501
@@ -317,6 +318,23 @@ def delete_workspace(id):  # noqa: E501
     :type id: str
 
     :rtype: Union[DeleteWorkspaceResponse, Tuple[DeleteWorkspaceResponse, int], Tuple[DeleteWorkspaceResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
+def get_account(id, organization_id=None, tenant_id=None):  # noqa: E501
+    """Get account details
+
+    Retrieves details of a specific account # noqa: E501
+
+    :param id: 
+    :type id: str
+    :param organization_id: 
+    :type organization_id: str
+    :param tenant_id: 
+    :type tenant_id: str
+
+    :rtype: Union[GetAccountResponse, Tuple[GetAccountResponse, int], Tuple[GetAccountResponse, int, Dict[str, str]]
     """
     return 'do some magic!'
 

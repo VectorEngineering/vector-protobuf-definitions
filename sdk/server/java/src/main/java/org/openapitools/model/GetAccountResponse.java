@@ -4,7 +4,7 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import org.openapitools.model.Account1;
+import org.openapitools.model.Account;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
@@ -19,12 +19,12 @@ import javax.annotation.Generated;
  * GetAccountResponse
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:26:51.224811-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:28:30.535712-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class GetAccountResponse {
 
-  private Account1 account;
+  private Account account;
 
-  public GetAccountResponse account(Account1 account) {
+  public GetAccountResponse account(Account account) {
     this.account = account;
     return this;
   }
@@ -36,11 +36,11 @@ public class GetAccountResponse {
   @Valid 
   @Schema(name = "account", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("account")
-  public Account1 getAccount() {
+  public Account getAccount() {
     return account;
   }
 
-  public void setAccount(Account1 account) {
+  public void setAccount(Account account) {
     this.account = account;
   }
 

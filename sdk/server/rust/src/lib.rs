@@ -1154,6 +1154,86 @@ pub enum DeleteWorkspaceResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum GetAccountResponse {
+    /// Account details retrieved successfully
+    AccountDetailsRetrievedSuccessfully
+    (models::GetAccountResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum GetAccountUsageResponse {
     /// Usage details retrieved successfully
     UsageDetailsRetrievedSuccessfully
@@ -3882,10 +3962,10 @@ pub enum DeleteWorkspace1Response {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
-pub enum GetAccountResponse {
+pub enum GetAccount1Response {
     /// Account details retrieved successfully
     AccountDetailsRetrievedSuccessfully
-    (models::GetAccountResponse)
+    (models::GetAccountResponse1)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -4245,7 +4325,7 @@ pub enum ShareWorkspaceResponse {
 pub enum UpdateAccount1Response {
     /// Account updated successfully
     AccountUpdatedSuccessfully
-    (models::UpdateAccountResponse1)
+    (models::UpdateAccountResponse)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -4470,6 +4550,14 @@ pub trait Api<C: Send + Sync> {
         &self,
         id: String,
         context: &C) -> Result<DeleteWorkspaceResponse, ApiError>;
+
+    /// Get account details
+    async fn get_account(
+        &self,
+        id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        context: &C) -> Result<GetAccountResponse, ApiError>;
 
     /// Get account usage
     async fn get_account_usage(
@@ -4753,10 +4841,10 @@ pub trait Api<C: Send + Sync> {
         context: &C) -> Result<DeleteWorkspace1Response, ApiError>;
 
     /// Get account details
-    async fn get_account(
+    async fn get_account1(
         &self,
         id: String,
-        context: &C) -> Result<GetAccountResponse, ApiError>;
+        context: &C) -> Result<GetAccount1Response, ApiError>;
 
     /// Get workspace details
     async fn get_workspace1(
@@ -4946,6 +5034,14 @@ pub trait ApiNoContext<C: Send + Sync> {
         &self,
         id: String,
         ) -> Result<DeleteWorkspaceResponse, ApiError>;
+
+    /// Get account details
+    async fn get_account(
+        &self,
+        id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        ) -> Result<GetAccountResponse, ApiError>;
 
     /// Get account usage
     async fn get_account_usage(
@@ -5229,10 +5325,10 @@ pub trait ApiNoContext<C: Send + Sync> {
         ) -> Result<DeleteWorkspace1Response, ApiError>;
 
     /// Get account details
-    async fn get_account(
+    async fn get_account1(
         &self,
         id: String,
-        ) -> Result<GetAccountResponse, ApiError>;
+        ) -> Result<GetAccount1Response, ApiError>;
 
     /// Get workspace details
     async fn get_workspace1(
@@ -5491,6 +5587,18 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().delete_workspace(id, &context).await
+    }
+
+    /// Get account details
+    async fn get_account(
+        &self,
+        id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        ) -> Result<GetAccountResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_account(id, organization_id, tenant_id, &context).await
     }
 
     /// Get account usage
@@ -5919,13 +6027,13 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     }
 
     /// Get account details
-    async fn get_account(
+    async fn get_account1(
         &self,
         id: String,
-        ) -> Result<GetAccountResponse, ApiError>
+        ) -> Result<GetAccount1Response, ApiError>
     {
         let context = self.context().clone();
-        self.api().get_account(id, &context).await
+        self.api().get_account1(id, &context).await
     }
 
     /// Get workspace details

@@ -366,6 +366,13 @@ type Query {
   # @param String! workspaceId 
   # @return [GetApiKeyResponse]
   GetAPIKey(keyId: String!, organizationId: String!, tenantId: String!, accountId: String!, workspaceId: String!): GetApiKeyResponse
+  # Get account details
+  # Retrieves details of a specific account
+  # @param String! Id_ 
+  # @param String! organizationId 
+  # @param String! tenantId 
+  # @return [GetAccountResponse]
+  GetAccount(Id_: String!, organizationId: String!, tenantId: String!): GetAccountResponse
   # Get account usage
   # Retrieves usage details for a given account
   # @param String! Id_ 

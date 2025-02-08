@@ -26,7 +26,7 @@ from playbookmedia_backend_client_sdk.models.create_workspace_request import Cre
 from playbookmedia_backend_client_sdk.models.create_workspace_response import CreateWorkspaceResponse
 from playbookmedia_backend_client_sdk.models.delete_account_response import DeleteAccountResponse
 from playbookmedia_backend_client_sdk.models.delete_workspace_response import DeleteWorkspaceResponse
-from playbookmedia_backend_client_sdk.models.get_account_response import GetAccountResponse
+from playbookmedia_backend_client_sdk.models.get_account_response1 import GetAccountResponse1
 from playbookmedia_backend_client_sdk.models.get_workspace_analytics_response1 import GetWorkspaceAnalyticsResponse1
 from playbookmedia_backend_client_sdk.models.get_workspace_compliance_report_response import GetWorkspaceComplianceReportResponse
 from playbookmedia_backend_client_sdk.models.get_workspace_response1 import GetWorkspaceResponse1
@@ -37,7 +37,7 @@ from playbookmedia_backend_client_sdk.models.remove_workspace_sharing_response i
 from playbookmedia_backend_client_sdk.models.share_workspace_body import ShareWorkspaceBody
 from playbookmedia_backend_client_sdk.models.share_workspace_response import ShareWorkspaceResponse
 from playbookmedia_backend_client_sdk.models.update_account_request1 import UpdateAccountRequest1
-from playbookmedia_backend_client_sdk.models.update_account_response1 import UpdateAccountResponse1
+from playbookmedia_backend_client_sdk.models.update_account_response import UpdateAccountResponse
 from playbookmedia_backend_client_sdk.models.update_workspace_request import UpdateWorkspaceRequest
 from playbookmedia_backend_client_sdk.models.update_workspace_response import UpdateWorkspaceResponse
 from playbookmedia_backend_client_sdk.models.update_workspace_sharing_request import UpdateWorkspaceSharingRequest
@@ -1207,7 +1207,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def get_account(
+    async def get_account1(
         self,
         id: StrictStr,
         _request_timeout: Union[
@@ -1222,7 +1222,7 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetAccountResponse:
+    ) -> GetAccountResponse1:
         """Get account details
 
 
@@ -1250,7 +1250,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_account_serialize(
+        _param = self._get_account1_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1259,7 +1259,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetAccountResponse",
+            '200': "GetAccountResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -1280,7 +1280,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def get_account_with_http_info(
+    async def get_account1_with_http_info(
         self,
         id: StrictStr,
         _request_timeout: Union[
@@ -1295,7 +1295,7 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetAccountResponse]:
+    ) -> ApiResponse[GetAccountResponse1]:
         """Get account details
 
 
@@ -1323,7 +1323,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_account_serialize(
+        _param = self._get_account1_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1332,7 +1332,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetAccountResponse",
+            '200': "GetAccountResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -1353,7 +1353,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def get_account_without_preload_content(
+    async def get_account1_without_preload_content(
         self,
         id: StrictStr,
         _request_timeout: Union[
@@ -1396,7 +1396,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_account_serialize(
+        _param = self._get_account1_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1405,7 +1405,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetAccountResponse",
+            '200': "GetAccountResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -1421,7 +1421,7 @@ class WorkspaceServiceApi:
         return response_data.response
 
 
-    def _get_account_serialize(
+    def _get_account1_serialize(
         self,
         id,
         _request_auth,
@@ -3900,7 +3900,7 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UpdateAccountResponse1:
+    ) -> UpdateAccountResponse:
         """Update account details
 
 
@@ -3937,7 +3937,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateAccountResponse1",
+            '200': "UpdateAccountResponse",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -3973,7 +3973,7 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[UpdateAccountResponse1]:
+    ) -> ApiResponse[UpdateAccountResponse]:
         """Update account details
 
 
@@ -4010,7 +4010,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateAccountResponse1",
+            '200': "UpdateAccountResponse",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -4083,7 +4083,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateAccountResponse1",
+            '200': "UpdateAccountResponse",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",

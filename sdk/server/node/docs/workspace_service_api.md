@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**CreateWorkspace**](workspace_service_api.md#CreateWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace
 [**DeleteAccount1**](workspace_service_api.md#DeleteAccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 [**DeleteWorkspace1**](workspace_service_api.md#DeleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
-[**GetAccount**](workspace_service_api.md#GetAccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details
+[**GetAccount1**](workspace_service_api.md#GetAccount1) | **GET** /workspace-service/v1/accounts/{id} | Get account details
 [**GetWorkspace1**](workspace_service_api.md#GetWorkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
 [**GetWorkspaceAnalytics1**](workspace_service_api.md#GetWorkspaceAnalytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
 [**GetWorkspaceComplianceReport**](workspace_service_api.md#GetWorkspaceComplianceReport) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report
@@ -44,9 +44,9 @@ Delete account
 > DeleteWorkspaceResponse DeleteWorkspace1(Id_)
 
 Delete workspace
-<a name="GetAccount"></a>
-# **GetAccount**
-> GetAccountResponse GetAccount(Id_)
+<a name="GetAccount1"></a>
+# **GetAccount1**
+> GetAccountResponse1 GetAccount1(Id_)
 
 Get account details
 <a name="GetWorkspace1"></a>
@@ -91,7 +91,7 @@ Remove workspace sharing
 Share workspace
 <a name="UpdateAccount1"></a>
 # **UpdateAccount1**
-> UpdateAccountResponse1 UpdateAccount1(updateAccountRequest1)
+> UpdateAccountResponse UpdateAccount1(updateAccountRequest1)
 
 Update account details
 <a name="UpdateWorkspace1"></a>

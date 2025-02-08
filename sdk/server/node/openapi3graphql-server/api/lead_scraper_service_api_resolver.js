@@ -28,6 +28,15 @@ export default {
             };
         },
 
+        // @return GetAccountResponse
+        GetAccount: ($Id_, $organizationId, $tenantId) => {
+            return {
+                "Id_": "Id__example",
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example"
+            };
+        },
+
         // @return GetAccountUsageResponse
         GetAccountUsage: ($Id_) => {
             return {

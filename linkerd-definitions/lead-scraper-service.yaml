@@ -8,6 +8,10 @@ spec:
   routes:
   - condition:
       method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetAccount
+    name: GetAccount
+  - condition:
+      method: POST
       pathRegex: /lead_scraper_service\.v1\.LeadScraperService/UpdateAccount
     name: UpdateAccount
   - condition:

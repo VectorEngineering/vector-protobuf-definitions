@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**create_workspace**](WorkspaceServiceApi.md#create_workspace) | **POST** /workspace-service/v1/workspaces | Create workspace
 [**delete_account1**](WorkspaceServiceApi.md#delete_account1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 [**delete_workspace1**](WorkspaceServiceApi.md#delete_workspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
-[**get_account**](WorkspaceServiceApi.md#get_account) | **GET** /workspace-service/v1/accounts/{id} | Get account details
+[**get_account1**](WorkspaceServiceApi.md#get_account1) | **GET** /workspace-service/v1/accounts/{id} | Get account details
 [**get_workspace1**](WorkspaceServiceApi.md#get_workspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
 [**get_workspace_analytics1**](WorkspaceServiceApi.md#get_workspace_analytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
 [**get_workspace_compliance_report**](WorkspaceServiceApi.md#get_workspace_compliance_report) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report
@@ -324,8 +324,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_account**
-> GetAccountResponse get_account(id)
+# **get_account1**
+> GetAccountResponse1 get_account1(id)
 
 Get account details
 
@@ -334,7 +334,7 @@ Get account details
 
 ```python
 import playbookmedia_backend_client_sdk
-from playbookmedia_backend_client_sdk.models.get_account_response import GetAccountResponse
+from playbookmedia_backend_client_sdk.models.get_account_response1 import GetAccountResponse1
 from playbookmedia_backend_client_sdk.rest import ApiException
 from pprint import pprint
 
@@ -353,11 +353,11 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
 
     try:
         # Get account details
-        api_response = await api_instance.get_account(id)
-        print("The response of WorkspaceServiceApi->get_account:\n")
+        api_response = await api_instance.get_account1(id)
+        print("The response of WorkspaceServiceApi->get_account1:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WorkspaceServiceApi->get_account: %s\n" % e)
+        print("Exception when calling WorkspaceServiceApi->get_account1: %s\n" % e)
 ```
 
 
@@ -371,7 +371,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetAccountResponse**](GetAccountResponse.md)
+[**GetAccountResponse1**](GetAccountResponse1.md)
 
 ### Authorization
 
@@ -1010,7 +1010,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_account1**
-> UpdateAccountResponse1 update_account1(update_account_request1)
+> UpdateAccountResponse update_account1(update_account_request1)
 
 Update account details
 
@@ -1020,7 +1020,7 @@ Update account details
 ```python
 import playbookmedia_backend_client_sdk
 from playbookmedia_backend_client_sdk.models.update_account_request1 import UpdateAccountRequest1
-from playbookmedia_backend_client_sdk.models.update_account_response1 import UpdateAccountResponse1
+from playbookmedia_backend_client_sdk.models.update_account_response import UpdateAccountResponse
 from playbookmedia_backend_client_sdk.rest import ApiException
 from pprint import pprint
 
@@ -1057,7 +1057,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UpdateAccountResponse1**](UpdateAccountResponse1.md)
+[**UpdateAccountResponse**](UpdateAccountResponse.md)
 
 ### Authorization
 

@@ -45,8 +45,8 @@ const getRoute = createRoute({
           schema: z
             .object({
               data: wrapSchema(
-                schemas.GetAccountResponse,
-                "GetAccountResponse",
+                schemas.GetAccountResponse1,
+                "GetAccountResponse1",
               ),
             })
             .openapi({

@@ -1083,417 +1083,13 @@ const UpdateAccountRequest = z
   .object({ payload: UpdateAccountRequestPayload })
   .partial()
   .passthrough();
-const UpdateAccountResponse = z
-  .object({ account: Account })
-  .partial()
-  .passthrough();
-const DeleteAccountResponse = z
-  .object({ success: z.boolean() })
-  .partial()
-  .passthrough();
-const GetAccountUsageResponse = z
-  .object({
-    totalJobsRun: z.number().int(),
-    monthlyJobLimit: z.number().int(),
-    remainingJobs: z.number().int(),
-    resetTime: z.string().datetime({ offset: true }),
-  })
-  .partial()
-  .passthrough();
-const CreateAPIKeyRequest = z
-  .object({
-    organizationId: z.string(),
-    workspaceId: z.string(),
-    tenantId: z.string(),
-    accountId: z.string(),
-    name: z.string(),
-    description: z.string(),
-    scopes: z.array(z.string()),
-    expiresAt: z.string().datetime({ offset: true }),
-    maxUses: z.number().int(),
-    allowedIps: z.array(z.string()),
-    rateLimit: z.number().int(),
-    enforceSigning: z.boolean(),
-    allowedSignatureAlgorithms: z.array(z.string()),
-    enforceMutualTls: z.boolean(),
-    alertEmails: z.array(z.string()),
-    alertOnQuotaThreshold: z.boolean(),
-    quotaAlertThreshold: z.number(),
-  })
-  .partial()
-  .passthrough();
-const CreateAPIKeyResponse = z
-  .object({ apiKey: APIKey, keyValue: z.string() })
-  .partial()
-  .passthrough();
-const UpdateAPIKeyRequest = z
-  .object({ apiKey: APIKey })
-  .partial()
-  .passthrough();
-const UpdateAPIKeyResponse = z
-  .object({ apiKey: APIKey })
-  .partial()
-  .passthrough();
-const ListAPIKeysResponse = z
-  .object({
-    apiKeys: z.array(APIKey),
-    nextPageNumber: z.number().int(),
-    totalCount: z.number().int(),
-  })
-  .partial()
-  .passthrough();
-const RotateAPIKeyRequest = z
-  .object({
-    organizationId: z.string(),
-    tenantId: z.string(),
-    accountId: z.string(),
-    workspaceId: z.string(),
-    keyId: z.string(),
-  })
-  .partial()
-  .passthrough();
-const RotateAPIKeyResponse = z
-  .object({
-    newApiKey: APIKey,
-    newKeyValue: z.string(),
-    oldKeyExpiry: z.string().datetime({ offset: true }),
-  })
-  .partial()
-  .passthrough();
-const GetAPIKeyResponse = z.object({ apiKey: APIKey }).partial().passthrough();
-const DeleteAPIKeyResponse = z
-  .object({ success: z.boolean() })
-  .partial()
-  .passthrough();
-const ListLeadsResponse = z
-  .object({
-    leads: z.array(Lead),
-    totalCount: z.number().int(),
-    nextPageNumber: z.number().int(),
-  })
-  .partial()
-  .passthrough();
-const GetLeadResponse = z.object({ lead: Lead }).partial().passthrough();
-const BillingPlan = z.enum([
-  "BILLING_PLAN_UNSPECIFIED",
-  "BILLING_PLAN_STARTUP",
-  "BILLING_PLAN_BUSINESS",
-  "BILLING_PLAN_ENTERPRISE",
+const ComplianceLevel = z.enum([
+  "COMPLIANCE_LEVEL_UNSPECIFIED",
+  "COMPLIANCE_LEVEL_NONE",
+  "COMPLIANCE_LEVEL_BASIC",
+  "COMPLIANCE_LEVEL_ADVANCED",
+  "COMPLIANCE_LEVEL_ENTERPRISE",
 ]);
-const TenantAPIKeyScope = z.enum([
-  "TENANT_API_KEY_SCOPE_UNSPECIFIED",
-  "TENANT_API_KEY_SCOPE_READ_JOBS",
-  "TENANT_API_KEY_SCOPE_READ_LEADS",
-  "TENANT_API_KEY_SCOPE_READ_WORKFLOWS",
-  "TENANT_API_KEY_SCOPE_READ_ANALYTICS",
-  "TENANT_API_KEY_SCOPE_READ_SETTINGS",
-  "TENANT_API_KEY_SCOPE_WRITE_JOBS",
-  "TENANT_API_KEY_SCOPE_WRITE_LEADS",
-  "TENANT_API_KEY_SCOPE_WRITE_WORKFLOWS",
-  "TENANT_API_KEY_SCOPE_WRITE_SETTINGS",
-  "TENANT_API_KEY_SCOPE_DELETE_JOBS",
-  "TENANT_API_KEY_SCOPE_DELETE_LEADS",
-  "TENANT_API_KEY_SCOPE_DELETE_WORKFLOWS",
-  "TENANT_API_KEY_SCOPE_EXPORT_DATA",
-  "TENANT_API_KEY_SCOPE_MANAGE_KEYS",
-  "TENANT_API_KEY_SCOPE_BILLING_READ",
-  "TENANT_API_KEY_SCOPE_BILLING_WRITE",
-  "TENANT_API_KEY_SCOPE_ADMIN",
-]);
-const TenantAPIKey = z
-  .object({
-    id: z.string(),
-    keyHash: z.string(),
-    keyPrefix: z.string(),
-    name: z.string(),
-    description: z.string(),
-    status: v1_Status.default("STATUS_UNSPECIFIED"),
-    scopes: z.array(TenantAPIKeyScope),
-    maxUses: z.number().int(),
-    allowedIps: z.array(z.string()),
-    useCount: z.number().int(),
-    expiresAt: z.string().datetime({ offset: true }),
-    createdAt: z.string().datetime({ offset: true }),
-    updatedAt: z.string().datetime({ offset: true }),
-    deletedAt: z.string().datetime({ offset: true }),
-  })
-  .partial()
-  .passthrough();
-const Tenant = z
-  .object({
-    id: z.string(),
-    name: z.string(),
-    displayName: z.string(),
-    description: z.string(),
-    apiBaseUrl: z.string(),
-    environmentVariables: z.record(z.string()),
-    allowedOrigins: z.array(z.string()),
-    storageQuota: z.string(),
-    monthlyRequestLimit: z.string(),
-    maxConcurrentJobs: z.number().int(),
-    enableCaching: z.boolean(),
-    enableRateLimiting: z.boolean(),
-    enableRequestLogging: z.boolean(),
-    accounts: z.array(Account),
-    apiKeys: z.array(TenantAPIKey),
-    totalRequests: z.string(),
-    totalStorageUsed: z.string(),
-    averageResponseTime: z.number(),
-    createdAt: z.string().datetime({ offset: true }),
-    updatedAt: z.string().datetime({ offset: true }),
-    deletedAt: z.string().datetime({ offset: true }),
-    status: v1_Status.default("STATUS_UNSPECIFIED"),
-  })
-  .partial()
-  .passthrough();
-const PlanTier = z.enum([
-  "PLAN_TIER_UNSPECIFIED",
-  "PLAN_TIER_FREE",
-  "PLAN_TIER_STARTER",
-  "PLAN_TIER_PROFESSIONAL",
-  "PLAN_TIER_ENTERPRISE",
-]);
-const BillingMode = z.enum([
-  "BILLING_MODE_UNSPECIFIED",
-  "BILLING_MODE_LICENSED",
-  "BILLING_MODE_METERED",
-  "BILLING_MODE_HYBRID",
-]);
-const Interval = z.enum([
-  "INTERVAL_UNSPECIFIED",
-  "INTERVAL_MONTHLY",
-  "INTERVAL_YEARLY",
-]);
-const PaymentStatus = z.enum([
-  "PAYMENT_STATUS_UNSPECIFIED",
-  "PAYMENT_STATUS_PAID",
-  "PAYMENT_STATUS_PAST_DUE",
-  "PAYMENT_STATUS_FAILED",
-  "PAYMENT_STATUS_CANCELED",
-]);
-const Subscription = z
-  .object({
-    id: z.string(),
-    stripeCustomerId: z.string(),
-    stripeSubscriptionId: z.string(),
-    stripePriceId: z.string(),
-    stripeProductId: z.string(),
-    planTier: PlanTier.default("PLAN_TIER_UNSPECIFIED"),
-    billingMode: BillingMode.default("BILLING_MODE_UNSPECIFIED"),
-    includedJobs: z.number().int(),
-    perJobRate: z.number(),
-    maxConcurrentJobs: z.number().int(),
-    includedStorage: z.string(),
-    perGbRate: z.number(),
-    advancedFilteringEnabled: z.boolean(),
-    prioritySupportEnabled: z.boolean(),
-    customExportsEnabled: z.boolean(),
-    apiAccessEnabled: z.boolean(),
-    customProxiesEnabled: z.boolean(),
-    advancedAnalyticsEnabled: z.boolean(),
-    retentionDays: z.number().int(),
-    maxResultsPerJob: z.number().int(),
-    currentPeriodStart: z.string().datetime({ offset: true }),
-    currentPeriodEnd: z.string().datetime({ offset: true }),
-    currentPeriodUsage: z.number(),
-    currency: z.string(),
-    basePrice: z.number(),
-    billingInterval: Interval.default("INTERVAL_UNSPECIFIED"),
-    autoRenew: z.boolean(),
-    paymentStatus: PaymentStatus.default("PAYMENT_STATUS_UNSPECIFIED"),
-    isTrial: z.boolean(),
-    trialStart: z.string().datetime({ offset: true }),
-    trialEnd: z.string().datetime({ offset: true }),
-    createdAt: z.string().datetime({ offset: true }),
-    updatedAt: z.string().datetime({ offset: true }),
-    canceledAt: z.string().datetime({ offset: true }),
-    endedAt: z.string().datetime({ offset: true }),
-  })
-  .partial()
-  .passthrough();
-const Organization = z
-  .object({
-    id: z.string(),
-    name: z.string(),
-    displayName: z.string(),
-    website: z.string(),
-    description: z.string(),
-    billingEmail: z.string(),
-    technicalEmail: z.string(),
-    phone: z.string(),
-    address: z.string(),
-    ssoEnabled: z.boolean(),
-    ssoProvider: z.string(),
-    ssoDomain: z.string(),
-    allowedDomains: z.array(z.string()),
-    enforce2fa: z.boolean(),
-    billingPlan: BillingPlan.default("BILLING_PLAN_UNSPECIFIED"),
-    billingCurrency: z.string(),
-    autoBilling: z.boolean(),
-    taxId: z.string(),
-    complianceFrameworks: z.array(z.string()),
-    dataProcessingAgreement: z.boolean(),
-    dataRegion: z.string(),
-    maxTenants: z.number().int(),
-    totalStorageLimit: z.string(),
-    maxApiKeys: z.number().int(),
-    maxUsers: z.number().int(),
-    tenants: z.array(Tenant),
-    subscriptions: Subscription,
-    createdAt: z.string().datetime({ offset: true }),
-    updatedAt: z.string().datetime({ offset: true }),
-    deletedAt: z.string().datetime({ offset: true }),
-    createdBy: z.string(),
-    status: v1_Status.default("STATUS_UNSPECIFIED"),
-  })
-  .partial()
-  .passthrough();
-const ListOrganizationsResponse = z
-  .object({
-    organizations: z.array(Organization),
-    totalCount: z.number().int(),
-    nextPageNumber: z.number().int(),
-  })
-  .partial()
-  .passthrough();
-const CreateOrganizationRequest = z
-  .object({ organization: Organization })
-  .partial()
-  .passthrough();
-const CreateOrganizationResponse = z
-  .object({ organization: Organization })
-  .partial()
-  .passthrough();
-const UpdateOrganizationRequest = z
-  .object({ organization: Organization })
-  .partial()
-  .passthrough();
-const UpdateOrganizationResponse = z
-  .object({ organization: Organization })
-  .partial()
-  .passthrough();
-const ListTenantsResponse = z
-  .object({ tenants: z.array(Tenant), nextPageNumber: z.number().int() })
-  .partial()
-  .passthrough();
-const DeleteTenantResponse = z
-  .object({ success: z.boolean() })
-  .partial()
-  .passthrough();
-const GetOrganizationResponse = z
-  .object({ organization: Organization })
-  .partial()
-  .passthrough();
-const DeleteOrganizationResponse = z
-  .object({ success: z.boolean() })
-  .partial()
-  .passthrough();
-const UpdateTenantRequest = z
-  .object({ tenant: Tenant })
-  .partial()
-  .passthrough();
-const UpdateTenantResponse = z
-  .object({ tenant: Tenant })
-  .partial()
-  .passthrough();
-const CreateTenantAPIKeyRequest = z
-  .object({
-    organizationId: z.string(),
-    tenantId: z.string(),
-    apiKey: TenantAPIKey,
-  })
-  .partial()
-  .passthrough();
-const CreateTenantAPIKeyResponse = z
-  .object({ keyId: z.string(), keyValue: z.string() })
-  .partial()
-  .passthrough();
-const UpdateTenantAPIKeyRequest = z
-  .object({ apiKey: TenantAPIKey })
-  .partial()
-  .passthrough();
-const UpdateTenantAPIKeyResponse = z
-  .object({ apiKey: TenantAPIKey })
-  .partial()
-  .passthrough();
-const ListTenantAPIKeysResponse = z
-  .object({
-    apiKeys: z.array(TenantAPIKey),
-    nextPageNumber: z.number().int(),
-    totalCount: z.number().int(),
-  })
-  .partial()
-  .passthrough();
-const RotateTenantAPIKeyRequest = z
-  .object({
-    organizationId: z.string(),
-    tenantId: z.string(),
-    keyId: z.string(),
-  })
-  .partial()
-  .passthrough();
-const RotateTenantAPIKeyResponse = z
-  .object({
-    newApiKey: TenantAPIKey,
-    newKeyValue: z.string(),
-    oldKeyExpiry: z.string().datetime({ offset: true }),
-    tenantId: z.string(),
-    organizationId: z.string(),
-  })
-  .partial()
-  .passthrough();
-const GetTenantAPIKeyResponse = z
-  .object({ apiKey: TenantAPIKey })
-  .partial()
-  .passthrough();
-const DeleteTenantAPIKeyResponse = z
-  .object({ success: z.boolean() })
-  .partial()
-  .passthrough();
-const GetTenantResponse = z.object({ tenant: Tenant }).partial().passthrough();
-const CreateTenantBody = z.object({ tenant: Tenant }).partial().passthrough();
-const CreateTenantResponse = z
-  .object({ tenantId: z.string() })
-  .partial()
-  .passthrough();
-const ListWebhooksResponse = z
-  .object({
-    webhooks: z.array(WebhookConfig),
-    nextPageNumber: z.number().int(),
-    totalCount: z.number().int(),
-  })
-  .partial()
-  .passthrough();
-const CreateWebhookRequest = z
-  .object({
-    organizationId: z.string(),
-    workspaceId: z.string(),
-    tenantId: z.string(),
-    accountId: z.string(),
-    webhook: WebhookConfig,
-  })
-  .partial()
-  .passthrough();
-const CreateWebhookResponse = z
-  .object({ webhook: WebhookConfig })
-  .partial()
-  .passthrough();
-const UpdateWebhookRequest = z
-  .object({ webhook: WebhookConfig })
-  .partial()
-  .passthrough();
-const UpdateWebhookResponse = z
-  .object({ webhook: WebhookConfig })
-  .partial()
-  .passthrough();
-const GetWebhookResponse = z
-  .object({ webhook: WebhookConfig })
-  .partial()
-  .passthrough();
-const DeleteWebhookResponse = z
-  .object({ success: z.boolean() })
-  .partial()
-  .passthrough();
 const FileEmbeddings = z
   .object({
     id: z.string(),
@@ -2154,6 +1750,457 @@ const Workspace1 = z
   })
   .partial()
   .passthrough();
+const DataProfile = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    profileType: z.string(),
+    dataFields: z.record(z.string()),
+    isDefault: z.boolean(),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+  })
+  .partial()
+  .passthrough();
+const Account1 = z
+  .object({
+    id: z.string(),
+    auth0UserId: z.string(),
+    email: z.string(),
+    baseDirectory: z.string(),
+    bucketName: z.string(),
+    region: z.string(),
+    orgId: z.string(),
+    tenantId: z.string(),
+    roles: z.array(z.string()),
+    permissions: z.array(z.string()),
+    mfaEnabled: z.boolean(),
+    complianceLevel: ComplianceLevel.default("COMPLIANCE_LEVEL_UNSPECIFIED"),
+    preferences: z.record(z.string()),
+    apiKeys: z.array(z.string()),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+    workspaces: z.array(Workspace1),
+    dataProfiles: z.array(DataProfile),
+  })
+  .partial()
+  .passthrough();
+const UpdateAccountResponse = z
+  .object({ account: Account1 })
+  .partial()
+  .passthrough();
+const GetAccountResponse = z
+  .object({ account: Account })
+  .partial()
+  .passthrough();
+const DeleteAccountResponse = z
+  .object({ success: z.boolean() })
+  .partial()
+  .passthrough();
+const GetAccountUsageResponse = z
+  .object({
+    totalJobsRun: z.number().int(),
+    monthlyJobLimit: z.number().int(),
+    remainingJobs: z.number().int(),
+    resetTime: z.string().datetime({ offset: true }),
+  })
+  .partial()
+  .passthrough();
+const CreateAPIKeyRequest = z
+  .object({
+    organizationId: z.string(),
+    workspaceId: z.string(),
+    tenantId: z.string(),
+    accountId: z.string(),
+    name: z.string(),
+    description: z.string(),
+    scopes: z.array(z.string()),
+    expiresAt: z.string().datetime({ offset: true }),
+    maxUses: z.number().int(),
+    allowedIps: z.array(z.string()),
+    rateLimit: z.number().int(),
+    enforceSigning: z.boolean(),
+    allowedSignatureAlgorithms: z.array(z.string()),
+    enforceMutualTls: z.boolean(),
+    alertEmails: z.array(z.string()),
+    alertOnQuotaThreshold: z.boolean(),
+    quotaAlertThreshold: z.number(),
+  })
+  .partial()
+  .passthrough();
+const CreateAPIKeyResponse = z
+  .object({ apiKey: APIKey, keyValue: z.string() })
+  .partial()
+  .passthrough();
+const UpdateAPIKeyRequest = z
+  .object({ apiKey: APIKey })
+  .partial()
+  .passthrough();
+const UpdateAPIKeyResponse = z
+  .object({ apiKey: APIKey })
+  .partial()
+  .passthrough();
+const ListAPIKeysResponse = z
+  .object({
+    apiKeys: z.array(APIKey),
+    nextPageNumber: z.number().int(),
+    totalCount: z.number().int(),
+  })
+  .partial()
+  .passthrough();
+const RotateAPIKeyRequest = z
+  .object({
+    organizationId: z.string(),
+    tenantId: z.string(),
+    accountId: z.string(),
+    workspaceId: z.string(),
+    keyId: z.string(),
+  })
+  .partial()
+  .passthrough();
+const RotateAPIKeyResponse = z
+  .object({
+    newApiKey: APIKey,
+    newKeyValue: z.string(),
+    oldKeyExpiry: z.string().datetime({ offset: true }),
+  })
+  .partial()
+  .passthrough();
+const GetAPIKeyResponse = z.object({ apiKey: APIKey }).partial().passthrough();
+const DeleteAPIKeyResponse = z
+  .object({ success: z.boolean() })
+  .partial()
+  .passthrough();
+const ListLeadsResponse = z
+  .object({
+    leads: z.array(Lead),
+    totalCount: z.number().int(),
+    nextPageNumber: z.number().int(),
+  })
+  .partial()
+  .passthrough();
+const GetLeadResponse = z.object({ lead: Lead }).partial().passthrough();
+const BillingPlan = z.enum([
+  "BILLING_PLAN_UNSPECIFIED",
+  "BILLING_PLAN_STARTUP",
+  "BILLING_PLAN_BUSINESS",
+  "BILLING_PLAN_ENTERPRISE",
+]);
+const TenantAPIKeyScope = z.enum([
+  "TENANT_API_KEY_SCOPE_UNSPECIFIED",
+  "TENANT_API_KEY_SCOPE_READ_JOBS",
+  "TENANT_API_KEY_SCOPE_READ_LEADS",
+  "TENANT_API_KEY_SCOPE_READ_WORKFLOWS",
+  "TENANT_API_KEY_SCOPE_READ_ANALYTICS",
+  "TENANT_API_KEY_SCOPE_READ_SETTINGS",
+  "TENANT_API_KEY_SCOPE_WRITE_JOBS",
+  "TENANT_API_KEY_SCOPE_WRITE_LEADS",
+  "TENANT_API_KEY_SCOPE_WRITE_WORKFLOWS",
+  "TENANT_API_KEY_SCOPE_WRITE_SETTINGS",
+  "TENANT_API_KEY_SCOPE_DELETE_JOBS",
+  "TENANT_API_KEY_SCOPE_DELETE_LEADS",
+  "TENANT_API_KEY_SCOPE_DELETE_WORKFLOWS",
+  "TENANT_API_KEY_SCOPE_EXPORT_DATA",
+  "TENANT_API_KEY_SCOPE_MANAGE_KEYS",
+  "TENANT_API_KEY_SCOPE_BILLING_READ",
+  "TENANT_API_KEY_SCOPE_BILLING_WRITE",
+  "TENANT_API_KEY_SCOPE_ADMIN",
+]);
+const TenantAPIKey = z
+  .object({
+    id: z.string(),
+    keyHash: z.string(),
+    keyPrefix: z.string(),
+    name: z.string(),
+    description: z.string(),
+    status: v1_Status.default("STATUS_UNSPECIFIED"),
+    scopes: z.array(TenantAPIKeyScope),
+    maxUses: z.number().int(),
+    allowedIps: z.array(z.string()),
+    useCount: z.number().int(),
+    expiresAt: z.string().datetime({ offset: true }),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+  })
+  .partial()
+  .passthrough();
+const Tenant = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    displayName: z.string(),
+    description: z.string(),
+    apiBaseUrl: z.string(),
+    environmentVariables: z.record(z.string()),
+    allowedOrigins: z.array(z.string()),
+    storageQuota: z.string(),
+    monthlyRequestLimit: z.string(),
+    maxConcurrentJobs: z.number().int(),
+    enableCaching: z.boolean(),
+    enableRateLimiting: z.boolean(),
+    enableRequestLogging: z.boolean(),
+    accounts: z.array(Account),
+    apiKeys: z.array(TenantAPIKey),
+    totalRequests: z.string(),
+    totalStorageUsed: z.string(),
+    averageResponseTime: z.number(),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+    status: v1_Status.default("STATUS_UNSPECIFIED"),
+  })
+  .partial()
+  .passthrough();
+const PlanTier = z.enum([
+  "PLAN_TIER_UNSPECIFIED",
+  "PLAN_TIER_FREE",
+  "PLAN_TIER_STARTER",
+  "PLAN_TIER_PROFESSIONAL",
+  "PLAN_TIER_ENTERPRISE",
+]);
+const BillingMode = z.enum([
+  "BILLING_MODE_UNSPECIFIED",
+  "BILLING_MODE_LICENSED",
+  "BILLING_MODE_METERED",
+  "BILLING_MODE_HYBRID",
+]);
+const Interval = z.enum([
+  "INTERVAL_UNSPECIFIED",
+  "INTERVAL_MONTHLY",
+  "INTERVAL_YEARLY",
+]);
+const PaymentStatus = z.enum([
+  "PAYMENT_STATUS_UNSPECIFIED",
+  "PAYMENT_STATUS_PAID",
+  "PAYMENT_STATUS_PAST_DUE",
+  "PAYMENT_STATUS_FAILED",
+  "PAYMENT_STATUS_CANCELED",
+]);
+const Subscription = z
+  .object({
+    id: z.string(),
+    stripeCustomerId: z.string(),
+    stripeSubscriptionId: z.string(),
+    stripePriceId: z.string(),
+    stripeProductId: z.string(),
+    planTier: PlanTier.default("PLAN_TIER_UNSPECIFIED"),
+    billingMode: BillingMode.default("BILLING_MODE_UNSPECIFIED"),
+    includedJobs: z.number().int(),
+    perJobRate: z.number(),
+    maxConcurrentJobs: z.number().int(),
+    includedStorage: z.string(),
+    perGbRate: z.number(),
+    advancedFilteringEnabled: z.boolean(),
+    prioritySupportEnabled: z.boolean(),
+    customExportsEnabled: z.boolean(),
+    apiAccessEnabled: z.boolean(),
+    customProxiesEnabled: z.boolean(),
+    advancedAnalyticsEnabled: z.boolean(),
+    retentionDays: z.number().int(),
+    maxResultsPerJob: z.number().int(),
+    currentPeriodStart: z.string().datetime({ offset: true }),
+    currentPeriodEnd: z.string().datetime({ offset: true }),
+    currentPeriodUsage: z.number(),
+    currency: z.string(),
+    basePrice: z.number(),
+    billingInterval: Interval.default("INTERVAL_UNSPECIFIED"),
+    autoRenew: z.boolean(),
+    paymentStatus: PaymentStatus.default("PAYMENT_STATUS_UNSPECIFIED"),
+    isTrial: z.boolean(),
+    trialStart: z.string().datetime({ offset: true }),
+    trialEnd: z.string().datetime({ offset: true }),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    canceledAt: z.string().datetime({ offset: true }),
+    endedAt: z.string().datetime({ offset: true }),
+  })
+  .partial()
+  .passthrough();
+const Organization = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    displayName: z.string(),
+    website: z.string(),
+    description: z.string(),
+    billingEmail: z.string(),
+    technicalEmail: z.string(),
+    phone: z.string(),
+    address: z.string(),
+    ssoEnabled: z.boolean(),
+    ssoProvider: z.string(),
+    ssoDomain: z.string(),
+    allowedDomains: z.array(z.string()),
+    enforce2fa: z.boolean(),
+    billingPlan: BillingPlan.default("BILLING_PLAN_UNSPECIFIED"),
+    billingCurrency: z.string(),
+    autoBilling: z.boolean(),
+    taxId: z.string(),
+    complianceFrameworks: z.array(z.string()),
+    dataProcessingAgreement: z.boolean(),
+    dataRegion: z.string(),
+    maxTenants: z.number().int(),
+    totalStorageLimit: z.string(),
+    maxApiKeys: z.number().int(),
+    maxUsers: z.number().int(),
+    tenants: z.array(Tenant),
+    subscriptions: Subscription,
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+    createdBy: z.string(),
+    status: v1_Status.default("STATUS_UNSPECIFIED"),
+  })
+  .partial()
+  .passthrough();
+const ListOrganizationsResponse = z
+  .object({
+    organizations: z.array(Organization),
+    totalCount: z.number().int(),
+    nextPageNumber: z.number().int(),
+  })
+  .partial()
+  .passthrough();
+const CreateOrganizationRequest = z
+  .object({ organization: Organization })
+  .partial()
+  .passthrough();
+const CreateOrganizationResponse = z
+  .object({ organization: Organization })
+  .partial()
+  .passthrough();
+const UpdateOrganizationRequest = z
+  .object({ organization: Organization })
+  .partial()
+  .passthrough();
+const UpdateOrganizationResponse = z
+  .object({ organization: Organization })
+  .partial()
+  .passthrough();
+const ListTenantsResponse = z
+  .object({ tenants: z.array(Tenant), nextPageNumber: z.number().int() })
+  .partial()
+  .passthrough();
+const DeleteTenantResponse = z
+  .object({ success: z.boolean() })
+  .partial()
+  .passthrough();
+const GetOrganizationResponse = z
+  .object({ organization: Organization })
+  .partial()
+  .passthrough();
+const DeleteOrganizationResponse = z
+  .object({ success: z.boolean() })
+  .partial()
+  .passthrough();
+const UpdateTenantRequest = z
+  .object({ tenant: Tenant })
+  .partial()
+  .passthrough();
+const UpdateTenantResponse = z
+  .object({ tenant: Tenant })
+  .partial()
+  .passthrough();
+const CreateTenantAPIKeyRequest = z
+  .object({
+    organizationId: z.string(),
+    tenantId: z.string(),
+    apiKey: TenantAPIKey,
+  })
+  .partial()
+  .passthrough();
+const CreateTenantAPIKeyResponse = z
+  .object({ keyId: z.string(), keyValue: z.string() })
+  .partial()
+  .passthrough();
+const UpdateTenantAPIKeyRequest = z
+  .object({ apiKey: TenantAPIKey })
+  .partial()
+  .passthrough();
+const UpdateTenantAPIKeyResponse = z
+  .object({ apiKey: TenantAPIKey })
+  .partial()
+  .passthrough();
+const ListTenantAPIKeysResponse = z
+  .object({
+    apiKeys: z.array(TenantAPIKey),
+    nextPageNumber: z.number().int(),
+    totalCount: z.number().int(),
+  })
+  .partial()
+  .passthrough();
+const RotateTenantAPIKeyRequest = z
+  .object({
+    organizationId: z.string(),
+    tenantId: z.string(),
+    keyId: z.string(),
+  })
+  .partial()
+  .passthrough();
+const RotateTenantAPIKeyResponse = z
+  .object({
+    newApiKey: TenantAPIKey,
+    newKeyValue: z.string(),
+    oldKeyExpiry: z.string().datetime({ offset: true }),
+    tenantId: z.string(),
+    organizationId: z.string(),
+  })
+  .partial()
+  .passthrough();
+const GetTenantAPIKeyResponse = z
+  .object({ apiKey: TenantAPIKey })
+  .partial()
+  .passthrough();
+const DeleteTenantAPIKeyResponse = z
+  .object({ success: z.boolean() })
+  .partial()
+  .passthrough();
+const GetTenantResponse = z.object({ tenant: Tenant }).partial().passthrough();
+const CreateTenantBody = z.object({ tenant: Tenant }).partial().passthrough();
+const CreateTenantResponse = z
+  .object({ tenantId: z.string() })
+  .partial()
+  .passthrough();
+const ListWebhooksResponse = z
+  .object({
+    webhooks: z.array(WebhookConfig),
+    nextPageNumber: z.number().int(),
+    totalCount: z.number().int(),
+  })
+  .partial()
+  .passthrough();
+const CreateWebhookRequest = z
+  .object({
+    organizationId: z.string(),
+    workspaceId: z.string(),
+    tenantId: z.string(),
+    accountId: z.string(),
+    webhook: WebhookConfig,
+  })
+  .partial()
+  .passthrough();
+const CreateWebhookResponse = z
+  .object({ webhook: WebhookConfig })
+  .partial()
+  .passthrough();
+const UpdateWebhookRequest = z
+  .object({ webhook: WebhookConfig })
+  .partial()
+  .passthrough();
+const UpdateWebhookResponse = z
+  .object({ webhook: WebhookConfig })
+  .partial()
+  .passthrough();
+const GetWebhookResponse = z
+  .object({ webhook: WebhookConfig })
+  .partial()
+  .passthrough();
+const DeleteWebhookResponse = z
+  .object({ success: z.boolean() })
+  .partial()
+  .passthrough();
 const UpdateWorkspaceRequest = z
   .object({ workspace: Workspace1 })
   .partial()
@@ -2241,13 +2288,6 @@ const TriggerWorkflowResponse = z
   })
   .partial()
   .passthrough();
-const ComplianceLevel = z.enum([
-  "COMPLIANCE_LEVEL_UNSPECIFIED",
-  "COMPLIANCE_LEVEL_NONE",
-  "COMPLIANCE_LEVEL_BASIC",
-  "COMPLIANCE_LEVEL_ADVANCED",
-  "COMPLIANCE_LEVEL_ENTERPRISE",
-]);
 const CreateAccountRequest = z
   .object({
     auth0UserId: z.string(),
@@ -2264,42 +2304,6 @@ const CreateAccountRequest = z
     ),
     preferences: z.record(z.string()).optional(),
   })
-  .passthrough();
-const DataProfile = z
-  .object({
-    id: z.string(),
-    name: z.string(),
-    profileType: z.string(),
-    dataFields: z.record(z.string()),
-    isDefault: z.boolean(),
-    createdAt: z.string().datetime({ offset: true }),
-    updatedAt: z.string().datetime({ offset: true }),
-  })
-  .partial()
-  .passthrough();
-const Account1 = z
-  .object({
-    id: z.string(),
-    auth0UserId: z.string(),
-    email: z.string(),
-    baseDirectory: z.string(),
-    bucketName: z.string(),
-    region: z.string(),
-    orgId: z.string(),
-    tenantId: z.string(),
-    roles: z.array(z.string()),
-    permissions: z.array(z.string()),
-    mfaEnabled: z.boolean(),
-    complianceLevel: ComplianceLevel.default("COMPLIANCE_LEVEL_UNSPECIFIED"),
-    preferences: z.record(z.string()),
-    apiKeys: z.array(z.string()),
-    createdAt: z.string().datetime({ offset: true }),
-    updatedAt: z.string().datetime({ offset: true }),
-    deletedAt: z.string().datetime({ offset: true }),
-    workspaces: z.array(Workspace1),
-    dataProfiles: z.array(DataProfile),
-  })
-  .partial()
   .passthrough();
 const CreateAccountResponse = z
   .object({ account: Account1, initialWorkspaceName: z.string() })
@@ -2321,11 +2325,7 @@ const UpdateAccountRequest1 = z
   .object({ account: Account1 })
   .partial()
   .passthrough();
-const UpdateAccountResponse1 = z
-  .object({ account: Account1 })
-  .partial()
-  .passthrough();
-const GetAccountResponse = z
+const GetAccountResponse1 = z
   .object({ account: Account1 })
   .partial()
   .passthrough();
@@ -2554,7 +2554,56 @@ export const schemas = {
   UpdateAccountSettingsResponse,
   UpdateAccountRequestPayload,
   UpdateAccountRequest,
+  ComplianceLevel,
+  FileEmbeddings,
+  FileVersion,
+  CommentThread,
+  FileSharing,
+  DocumentSnapshot,
+  FileMetadata,
+  FolderMetadata,
+  TemplateType,
+  TemplateVersion,
+  TemplateVariable,
+  DocumentStatus,
+  SignatureStatus,
+  SignatureBlock,
+  SignatureWorkflow,
+  SignatureRequest,
+  AIAssistanceLog,
+  NegotiationRound,
+  NegotiationHistory,
+  BranchMerge,
+  BranchPolicy,
+  MergeRequest,
+  DocumentBranch,
+  ChangeSet,
+  ContextualSummary,
+  DocumentVersion,
+  DocumentInstance,
+  ExplanationBlock,
+  RiskAssessment,
+  ComplianceCheck,
+  ContractIntelligence,
+  DocumentTemplate,
+  WorkspaceSharing,
+  WorkspaceActivity,
+  WorkspaceCompliance,
+  AppCategory,
+  PricingModel,
+  AppVersion,
+  AppInstallation,
+  AppAnalytics,
+  AppReview,
+  AppDevelopmentInfo,
+  AppWebhook,
+  AppPermission,
+  MarketplaceApp,
+  Workspace1,
+  DataProfile,
+  Account1,
   UpdateAccountResponse,
+  GetAccountResponse,
   DeleteAccountResponse,
   GetAccountUsageResponse,
   CreateAPIKeyRequest,
@@ -2608,51 +2657,6 @@ export const schemas = {
   UpdateWebhookResponse,
   GetWebhookResponse,
   DeleteWebhookResponse,
-  FileEmbeddings,
-  FileVersion,
-  CommentThread,
-  FileSharing,
-  DocumentSnapshot,
-  FileMetadata,
-  FolderMetadata,
-  TemplateType,
-  TemplateVersion,
-  TemplateVariable,
-  DocumentStatus,
-  SignatureStatus,
-  SignatureBlock,
-  SignatureWorkflow,
-  SignatureRequest,
-  AIAssistanceLog,
-  NegotiationRound,
-  NegotiationHistory,
-  BranchMerge,
-  BranchPolicy,
-  MergeRequest,
-  DocumentBranch,
-  ChangeSet,
-  ContextualSummary,
-  DocumentVersion,
-  DocumentInstance,
-  ExplanationBlock,
-  RiskAssessment,
-  ComplianceCheck,
-  ContractIntelligence,
-  DocumentTemplate,
-  WorkspaceSharing,
-  WorkspaceActivity,
-  WorkspaceCompliance,
-  AppCategory,
-  PricingModel,
-  AppVersion,
-  AppInstallation,
-  AppAnalytics,
-  AppReview,
-  AppDevelopmentInfo,
-  AppWebhook,
-  AppPermission,
-  MarketplaceApp,
-  Workspace1,
   UpdateWorkspaceRequest,
   UpdateWorkspaceResponse,
   GetWorkspaceResponse,
@@ -2671,15 +2675,11 @@ export const schemas = {
   PauseWorkflowResponse,
   TriggerWorkflowBody,
   TriggerWorkflowResponse,
-  ComplianceLevel,
   CreateAccountRequest,
-  DataProfile,
-  Account1,
   CreateAccountResponse,
   AuthenticationErrorMessageResponse1,
   UpdateAccountRequest1,
-  UpdateAccountResponse1,
-  GetAccountResponse,
+  GetAccountResponse1,
   UpdateWorkspaceSharingRequest,
   UpdateWorkspaceSharingResponse,
   RemoveWorkspaceSharingResponse,
@@ -2702,6 +2702,123 @@ export const schemas = {
 };
 
 const endpoints = makeApi([
+  {
+    method: "get",
+    path: "/lead-scraper-microservice/api/v1/accounts/:id",
+    alias: "GetAccount",
+    description: `Retrieves details of a specific account`,
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "id",
+        type: "Path",
+        schema: z.string(),
+      },
+      {
+        name: "organizationId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+      {
+        name: "tenantId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+    ],
+    response: GetAccountResponse,
+    errors: [
+      {
+        status: 400,
+        description: `Bad Request - Invalid input parameters`,
+        schema: ValidationErrorMessageResponse,
+      },
+      {
+        status: 401,
+        description: `Unauthorized - Authentication required`,
+        schema: AuthenticationErrorMessageResponse,
+      },
+      {
+        status: 402,
+        description: `Payment Required - Payment is necessary to proceed`,
+        schema: PaymentRequiredErrorMessageResponse,
+      },
+      {
+        status: 403,
+        description: `Forbidden - Access denied`,
+        schema: ForbiddenErrorMessageResponse,
+      },
+      {
+        status: 404,
+        description: `Not Found - Resource not found`,
+        schema: NotFoundErrorMessageResponse,
+      },
+      {
+        status: 405,
+        description: `Method Not Allowed - HTTP method not supported`,
+        schema: MethodNotAllowedErrorMessageResponse,
+      },
+      {
+        status: 409,
+        description: `Conflict - Resource already exists`,
+        schema: ConflictErrorMessageResponse,
+      },
+      {
+        status: 410,
+        description: `Gone - Resource is no longer available`,
+        schema: GoneErrorMessageResponse,
+      },
+      {
+        status: 412,
+        description: `Precondition Failed - Preconditions in headers did not match`,
+        schema: PreconditionFailedErrorMessageResponse,
+      },
+      {
+        status: 422,
+        description: `Unprocessable Entity - Semantic errors in the request`,
+        schema: UnprocessableEntityErrorMessageResponse,
+      },
+      {
+        status: 425,
+        description: `Too Early - Request is being replayed`,
+        schema: TooEarlyErrorMessageResponse,
+      },
+      {
+        status: 429,
+        description: `Too Many Requests - Rate limit exceeded`,
+        schema: RateLimitErrorMessageResponse,
+      },
+      {
+        status: 500,
+        description: `Internal Server Error`,
+        schema: InternalErrorMessageResponse,
+      },
+      {
+        status: 501,
+        description: `Not Implemented - Functionality not supported`,
+        schema: NotImplementedErrorMessageResponse,
+      },
+      {
+        status: 502,
+        description: `Bad Gateway - Invalid response from upstream server`,
+        schema: BadGatewayErrorMessageResponse,
+      },
+      {
+        status: 503,
+        description: `Service Unavailable - Try again later`,
+        schema: ServiceUnavailableErrorMessageResponse,
+      },
+      {
+        status: 504,
+        description: `Gateway Timeout - Upstream server timed out`,
+        schema: GatewayTimeoutErrorMessageResponse,
+      },
+      {
+        status: "default",
+        description: `An unexpected error response.`,
+        schema: rpc_Status,
+      },
+    ],
+  },
   {
     method: "delete",
     path: "/lead-scraper-microservice/api/v1/accounts/:id",
@@ -8113,7 +8230,7 @@ const endpoints = makeApi([
         schema: UpdateAccountRequest1,
       },
     ],
-    response: UpdateAccountResponse1,
+    response: UpdateAccountResponse,
     errors: [
       {
         status: 400,
@@ -8160,7 +8277,7 @@ const endpoints = makeApi([
   {
     method: "get",
     path: "/workspace-service/v1/accounts/:id",
-    alias: "GetAccount",
+    alias: "GetAccount1",
     requestFormat: "json",
     parameters: [
       {
@@ -8169,7 +8286,7 @@ const endpoints = makeApi([
         schema: z.string(),
       },
     ],
-    response: GetAccountResponse,
+    response: GetAccountResponse1,
     errors: [
       {
         status: 400,
@@ -9038,6 +9155,22 @@ export class ApiClient {
       data,
       {},
     );
+  }
+
+  async getLeadScraperMicroserviceApiV1AccountsId(params: {
+    id: string;
+    organizationId: string | undefined;
+    tenantId: string | undefined;
+  }) {
+    return this.client.get("/lead-scraper-microservice/api/v1/accounts/:id", {
+      params: {
+        id: params.id,
+      },
+      queries: {
+        organizationId: params.organizationId,
+        tenantId: params.tenantId,
+      },
+    });
   }
 
   async deleteLeadScraperMicroserviceApiV1AccountsId(params: {

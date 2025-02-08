@@ -17,8 +17,8 @@
 export default {
     Query: {
 
-        // @return GetAccountResponse
-        GetAccount: ($Id_) => {
+        // @return GetAccountResponse1
+        GetAccount1: ($Id_) => {
             return {
                 "Id_": "Id__example"
             };
@@ -121,7 +121,7 @@ export default {
             };
         },
 
-        // @return UpdateAccountResponse1
+        // @return UpdateAccountResponse
         UpdateAccount1: ($updateAccountRequest1) => {
             return {
                 "updateAccountRequest1": ""

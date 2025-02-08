@@ -95,6 +95,7 @@ src/main/java/org/openapitools/model/ForbiddenErrorMessageResponse.java
 src/main/java/org/openapitools/model/GatewayTimeoutErrorMessageResponse.java
 src/main/java/org/openapitools/model/GetAPIKeyResponse.java
 src/main/java/org/openapitools/model/GetAccountResponse.java
+src/main/java/org/openapitools/model/GetAccountResponse1.java
 src/main/java/org/openapitools/model/GetAccountUsageResponse.java
 src/main/java/org/openapitools/model/GetLeadResponse.java
 src/main/java/org/openapitools/model/GetOrganizationResponse.java
@@ -203,7 +204,6 @@ src/main/java/org/openapitools/model/UpdateAccountRequest.java
 src/main/java/org/openapitools/model/UpdateAccountRequest1.java
 src/main/java/org/openapitools/model/UpdateAccountRequestPayload.java
 src/main/java/org/openapitools/model/UpdateAccountResponse.java
-src/main/java/org/openapitools/model/UpdateAccountResponse1.java
 src/main/java/org/openapitools/model/UpdateAccountSettingsRequest.java
 src/main/java/org/openapitools/model/UpdateAccountSettingsResponse.java
 src/main/java/org/openapitools/model/UpdateOrganizationRequest.java

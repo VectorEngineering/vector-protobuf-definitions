@@ -84,6 +84,7 @@ docs/FolderMetadata.md
 docs/ForbiddenErrorMessageResponse.md
 docs/GatewayTimeoutErrorMessageResponse.md
 docs/GetAccountResponse.md
+docs/GetAccountResponse1.md
 docs/GetAccountUsageResponse.md
 docs/GetApiKeyResponse.md
 docs/GetLeadResponse.md
@@ -191,7 +192,6 @@ docs/UpdateAccountRequest.md
 docs/UpdateAccountRequest1.md
 docs/UpdateAccountRequestPayload.md
 docs/UpdateAccountResponse.md
-docs/UpdateAccountResponse1.md
 docs/UpdateAccountSettingsRequest.md
 docs/UpdateAccountSettingsResponse.md
 docs/UpdateApiKeyRequest.md
@@ -315,6 +315,7 @@ openapi3graphql-server/model/folder_metadata.graphql
 openapi3graphql-server/model/forbidden_error_message_response.graphql
 openapi3graphql-server/model/gateway_timeout_error_message_response.graphql
 openapi3graphql-server/model/get_account_response.graphql
+openapi3graphql-server/model/get_account_response1.graphql
 openapi3graphql-server/model/get_account_usage_response.graphql
 openapi3graphql-server/model/get_api_key_response.graphql
 openapi3graphql-server/model/get_lead_response.graphql
@@ -422,7 +423,6 @@ openapi3graphql-server/model/update_account_request.graphql
 openapi3graphql-server/model/update_account_request1.graphql
 openapi3graphql-server/model/update_account_request_payload.graphql
 openapi3graphql-server/model/update_account_response.graphql
-openapi3graphql-server/model/update_account_response1.graphql
 openapi3graphql-server/model/update_account_settings_request.graphql
 openapi3graphql-server/model/update_account_settings_response.graphql
 openapi3graphql-server/model/update_api_key_request.graphql

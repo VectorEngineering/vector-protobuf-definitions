@@ -8,7 +8,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**createWorkspace**](WorkspaceServiceApi.md#createWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace |
 | [**deleteAccount1**](WorkspaceServiceApi.md#deleteAccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account |
 | [**deleteWorkspace1**](WorkspaceServiceApi.md#deleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace |
-| [**getAccount**](WorkspaceServiceApi.md#getAccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details |
+| [**getAccount1**](WorkspaceServiceApi.md#getAccount1) | **GET** /workspace-service/v1/accounts/{id} | Get account details |
 | [**getWorkspace1**](WorkspaceServiceApi.md#getWorkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details |
 | [**getWorkspaceAnalytics1**](WorkspaceServiceApi.md#getWorkspaceAnalytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics |
 | [**getWorkspaceComplianceReport**](WorkspaceServiceApi.md#getWorkspaceComplianceReport) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report |
@@ -124,9 +124,9 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
-<a name="getAccount"></a>
-# **getAccount**
-> GetAccountResponse getAccount(id)
+<a name="getAccount1"></a>
+# **getAccount1**
+> GetAccountResponse1 getAccount1(id)
 
 Get account details
 
@@ -138,7 +138,7 @@ Get account details
 
 ### Return type
 
-[**GetAccountResponse**](../Models/GetAccountResponse.md)
+[**GetAccountResponse1**](../Models/GetAccountResponse1.md)
 
 ### Authorization
 
@@ -360,7 +360,7 @@ No authorization required
 
 <a name="updateAccount1"></a>
 # **updateAccount1**
-> UpdateAccountResponse1 updateAccount1(UpdateAccountRequest1)
+> UpdateAccountResponse updateAccount1(UpdateAccountRequest1)
 
 Update account details
 
@@ -372,7 +372,7 @@ Update account details
 
 ### Return type
 
-[**UpdateAccountResponse1**](../Models/UpdateAccountResponse1.md)
+[**UpdateAccountResponse**](../Models/UpdateAccountResponse.md)
 
 ### Authorization
 

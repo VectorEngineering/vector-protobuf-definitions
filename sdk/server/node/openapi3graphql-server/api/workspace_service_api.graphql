@@ -90,8 +90,8 @@ type Mutation {
   ShareWorkspace(input: ShareWorkspaceInput!): ShareWorkspaceResponse
   # Update account details
   # @param UpdateAccountRequest1 updateAccountRequest1 
-  # @return [UpdateAccountResponse1]
-  UpdateAccount1(input: UpdateAccount1Input!): UpdateAccountResponse1
+  # @return [UpdateAccountResponse]
+  UpdateAccount1(input: UpdateAccount1Input!): UpdateAccountResponse
   # Update workspace
   # @param UpdateWorkspaceRequest updateWorkspaceRequest 
   # @return [UpdateWorkspaceResponse]
@@ -105,8 +105,8 @@ type Mutation {
 type Query {
   # Get account details
   # @param String! Id_ 
-  # @return [GetAccountResponse]
-  GetAccount(Id_: String!): GetAccountResponse
+  # @return [GetAccountResponse1]
+  GetAccount1(Id_: String!): GetAccountResponse1
   # Get workspace details
   # @param String! Id_ 
   # @return [GetWorkspaceResponse1]

@@ -12,7 +12,7 @@ from playbookmedia_backend_server_sdk.models.create_workspace_response import Cr
 from playbookmedia_backend_server_sdk.models.delete_account_response import DeleteAccountResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_workspace_response import DeleteWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.forbidden_error_message_response import ForbiddenErrorMessageResponse  # noqa: E501
-from playbookmedia_backend_server_sdk.models.get_account_response import GetAccountResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.get_account_response1 import GetAccountResponse1  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_workspace_analytics_response1 import GetWorkspaceAnalyticsResponse1  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_workspace_compliance_report_response import GetWorkspaceComplianceReportResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_workspace_response1 import GetWorkspaceResponse1  # noqa: E501
@@ -27,7 +27,7 @@ from playbookmedia_backend_server_sdk.models.share_workspace_body import ShareWo
 from playbookmedia_backend_server_sdk.models.share_workspace_response import ShareWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.status import Status  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_account_request1 import UpdateAccountRequest1  # noqa: E501
-from playbookmedia_backend_server_sdk.models.update_account_response1 import UpdateAccountResponse1  # noqa: E501
+from playbookmedia_backend_server_sdk.models.update_account_response import UpdateAccountResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_workspace_request import UpdateWorkspaceRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_workspace_response import UpdateWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_workspace_sharing_request import UpdateWorkspaceSharingRequest  # noqa: E501
@@ -92,7 +92,7 @@ def delete_workspace1(id):  # noqa: E501
     return 'do some magic!'
 
 
-def get_account(id):  # noqa: E501
+def get_account1(id):  # noqa: E501
     """Get account details
 
      # noqa: E501
@@ -100,7 +100,7 @@ def get_account(id):  # noqa: E501
     :param id: 
     :type id: str
 
-    :rtype: Union[GetAccountResponse, Tuple[GetAccountResponse, int], Tuple[GetAccountResponse, int, Dict[str, str]]
+    :rtype: Union[GetAccountResponse1, Tuple[GetAccountResponse1, int], Tuple[GetAccountResponse1, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -239,7 +239,7 @@ def update_account1(update_account_request1):  # noqa: E501
     :param update_account_request1: 
     :type update_account_request1: dict | bytes
 
-    :rtype: Union[UpdateAccountResponse1, Tuple[UpdateAccountResponse1, int], Tuple[UpdateAccountResponse1, int, Dict[str, str]]
+    :rtype: Union[UpdateAccountResponse, Tuple[UpdateAccountResponse, int], Tuple[UpdateAccountResponse, int, Dict[str, str]]
     """
     if connexion.request.is_json:
         update_account_request1 = UpdateAccountRequest1.from_dict(connexion.request.get_json())  # noqa: E501

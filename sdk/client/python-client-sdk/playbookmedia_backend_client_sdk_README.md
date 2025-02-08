@@ -79,6 +79,7 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**delete_webhook**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_webhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
 *LeadScraperServiceApi* | [**delete_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_workflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 *LeadScraperServiceApi* | [**delete_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_workspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
+*LeadScraperServiceApi* | [**get_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_account) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details
 *LeadScraperServiceApi* | [**get_account_usage**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_account_usage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage
 *LeadScraperServiceApi* | [**get_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_api_key) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
 *LeadScraperServiceApi* | [**get_lead**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_lead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
@@ -115,7 +116,7 @@ Class | Method | HTTP request | Description
 *WorkspaceServiceApi* | [**create_workspace**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#create_workspace) | **POST** /workspace-service/v1/workspaces | Create workspace
 *WorkspaceServiceApi* | [**delete_account1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#delete_account1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 *WorkspaceServiceApi* | [**delete_workspace1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#delete_workspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
-*WorkspaceServiceApi* | [**get_account**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_account) | **GET** /workspace-service/v1/accounts/{id} | Get account details
+*WorkspaceServiceApi* | [**get_account1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_account1) | **GET** /workspace-service/v1/accounts/{id} | Get account details
 *WorkspaceServiceApi* | [**get_workspace1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
 *WorkspaceServiceApi* | [**get_workspace_analytics1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace_analytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
 *WorkspaceServiceApi* | [**get_workspace_compliance_report**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace_compliance_report) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report
@@ -218,6 +219,7 @@ Class | Method | HTTP request | Description
  - [GatewayTimeoutErrorMessageResponse](playbookmedia_backend_client_sdk/docs/GatewayTimeoutErrorMessageResponse.md)
  - [GetAPIKeyResponse](playbookmedia_backend_client_sdk/docs/GetAPIKeyResponse.md)
  - [GetAccountResponse](playbookmedia_backend_client_sdk/docs/GetAccountResponse.md)
+ - [GetAccountResponse1](playbookmedia_backend_client_sdk/docs/GetAccountResponse1.md)
  - [GetAccountUsageResponse](playbookmedia_backend_client_sdk/docs/GetAccountUsageResponse.md)
  - [GetLeadResponse](playbookmedia_backend_client_sdk/docs/GetLeadResponse.md)
  - [GetOrganizationResponse](playbookmedia_backend_client_sdk/docs/GetOrganizationResponse.md)
@@ -326,7 +328,6 @@ Class | Method | HTTP request | Description
  - [UpdateAccountRequest1](playbookmedia_backend_client_sdk/docs/UpdateAccountRequest1.md)
  - [UpdateAccountRequestPayload](playbookmedia_backend_client_sdk/docs/UpdateAccountRequestPayload.md)
  - [UpdateAccountResponse](playbookmedia_backend_client_sdk/docs/UpdateAccountResponse.md)
- - [UpdateAccountResponse1](playbookmedia_backend_client_sdk/docs/UpdateAccountResponse1.md)
  - [UpdateAccountSettingsRequest](playbookmedia_backend_client_sdk/docs/UpdateAccountSettingsRequest.md)
  - [UpdateAccountSettingsResponse](playbookmedia_backend_client_sdk/docs/UpdateAccountSettingsResponse.md)
  - [UpdateOrganizationRequest](playbookmedia_backend_client_sdk/docs/UpdateOrganizationRequest.md)

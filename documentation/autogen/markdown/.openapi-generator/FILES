@@ -87,6 +87,7 @@ Models/ForbiddenErrorMessageResponse.md
 Models/GatewayTimeoutErrorMessageResponse.md
 Models/GetAPIKeyResponse.md
 Models/GetAccountResponse.md
+Models/GetAccountResponse1.md
 Models/GetAccountUsageResponse.md
 Models/GetLeadResponse.md
 Models/GetOrganizationResponse.md
@@ -194,7 +195,6 @@ Models/UpdateAccountRequest.md
 Models/UpdateAccountRequest1.md
 Models/UpdateAccountRequestPayload.md
 Models/UpdateAccountResponse.md
-Models/UpdateAccountResponse1.md
 Models/UpdateAccountSettingsRequest.md
 Models/UpdateAccountSettingsResponse.md
 Models/UpdateOrganizationRequest.md

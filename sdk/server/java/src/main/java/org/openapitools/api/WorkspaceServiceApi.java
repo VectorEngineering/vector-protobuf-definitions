@@ -15,7 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.model.DeleteAccountResponse;
 import org.openapitools.model.DeleteWorkspaceResponse;
 import org.openapitools.model.ForbiddenErrorMessageResponse;
-import org.openapitools.model.GetAccountResponse;
+import org.openapitools.model.GetAccountResponse1;
 import org.openapitools.model.GetWorkspaceAnalyticsResponse1;
 import org.openapitools.model.GetWorkspaceComplianceReportResponse;
 import org.openapitools.model.GetWorkspaceResponse1;
@@ -31,7 +31,7 @@ import org.openapitools.model.ShareWorkspaceBody;
 import org.openapitools.model.ShareWorkspaceResponse;
 import org.openapitools.model.Status;
 import org.openapitools.model.UpdateAccountRequest1;
-import org.openapitools.model.UpdateAccountResponse1;
+import org.openapitools.model.UpdateAccountResponse;
 import org.openapitools.model.UpdateWorkspaceRequest;
 import org.openapitools.model.UpdateWorkspaceResponse;
 import org.openapitools.model.UpdateWorkspaceSharingRequest;
@@ -63,7 +63,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:26:51.224811-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:28:30.535712-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 @Validated
 @Tag(name = "workspace-service", description = "the workspace-service API")
 public interface WorkspaceServiceApi {
@@ -751,13 +751,13 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "getAccount",
+        operationId = "getAccount1",
         summary = "Get account details",
         tags = { "workspace-service" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Account details retrieved successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = GetAccountResponse.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = GetAccountResponse.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = GetAccountResponse1.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = GetAccountResponse1.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input parameters", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorMessageResponse.class)),
@@ -799,7 +799,7 @@ public interface WorkspaceServiceApi {
         produces = { "application/json", "" }
     )
     
-    default ResponseEntity<GetAccountResponse> getAccount(
+    default ResponseEntity<GetAccountResponse1> getAccount1(
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
     ) {
         getRequest().ifPresent(request -> {
@@ -2215,8 +2215,8 @@ public interface WorkspaceServiceApi {
         tags = { "workspace-service" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Account updated successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = UpdateAccountResponse1.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = UpdateAccountResponse1.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = UpdateAccountResponse.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = UpdateAccountResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input parameters", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorMessageResponse.class)),
@@ -2259,7 +2259,7 @@ public interface WorkspaceServiceApi {
         consumes = { "application/json", "application/x-www-form-urlencoded" }
     )
     
-    default ResponseEntity<UpdateAccountResponse1> updateAccount1(
+    default ResponseEntity<UpdateAccountResponse> updateAccount1(
         @Parameter(name = "UpdateAccountRequest1", description = "", required = true) @Valid @RequestBody UpdateAccountRequest1 updateAccountRequest1
     ) {
         getRequest().ifPresent(request -> {

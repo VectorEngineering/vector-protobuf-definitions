@@ -84,6 +84,7 @@ docs/FolderMetadata.md
 docs/ForbiddenErrorMessageResponse.md
 docs/GatewayTimeoutErrorMessageResponse.md
 docs/GetAccountResponse.md
+docs/GetAccountUsageResponse.md
 docs/GetApiKeyResponse.md
 docs/GetLeadResponse.md
 docs/GetOrganizationResponse.md
@@ -117,6 +118,7 @@ docs/ListWebhooksResponse.md
 docs/ListWorkflowsResponse.md
 docs/ListWorkspaceSharingsResponse.md
 docs/ListWorkspacesResponse.md
+docs/ListWorkspacesResponse1.md
 docs/MarketplaceApp.md
 docs/MergeRequest.md
 docs/MethodNotAllowedErrorMessageResponse.md
@@ -310,6 +312,7 @@ openapi3graphql-server/model/folder_metadata.graphql
 openapi3graphql-server/model/forbidden_error_message_response.graphql
 openapi3graphql-server/model/gateway_timeout_error_message_response.graphql
 openapi3graphql-server/model/get_account_response.graphql
+openapi3graphql-server/model/get_account_usage_response.graphql
 openapi3graphql-server/model/get_api_key_response.graphql
 openapi3graphql-server/model/get_lead_response.graphql
 openapi3graphql-server/model/get_organization_response.graphql
@@ -343,6 +346,7 @@ openapi3graphql-server/model/list_webhooks_response.graphql
 openapi3graphql-server/model/list_workflows_response.graphql
 openapi3graphql-server/model/list_workspace_sharings_response.graphql
 openapi3graphql-server/model/list_workspaces_response.graphql
+openapi3graphql-server/model/list_workspaces_response1.graphql
 openapi3graphql-server/model/marketplace_app.graphql
 openapi3graphql-server/model/merge_request.graphql
 openapi3graphql-server/model/method_not_allowed_error_message_response.graphql

@@ -18,6 +18,7 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       DeleteWebhookResponse,
                       DeleteWorkflowResponse,
                       DeleteWorkspaceResponse,
+                      GetAccountUsageResponse,
                       GetApiKeyResponse,
                       GetLeadResponse,
                       GetOrganizationResponse,
@@ -35,6 +36,7 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       ListTenantsResponse,
                       ListWebhooksResponse,
                       ListWorkflowsResponse,
+                      ListWorkspacesResponse,
                       PauseWorkflowResponse,
                       RotateApiKeyResponse,
                       RotateTenantApiKeyResponse,
@@ -57,7 +59,7 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       GetWorkspaceComplianceReportResponse,
                       GetWorkspaceStorageStatsResponse,
                       ListWorkspaceSharingsResponse,
-                      ListWorkspacesResponse,
+                      ListWorkspaces1Response,
                       RemoveWorkspaceSharingResponse,
                       ShareWorkspaceResponse,
                       UpdateAccountResponse,
@@ -98,6 +100,7 @@ fn main() {
                 "DeleteWebhook", 
                 "DeleteWorkflow", 
                 "DeleteWorkspace", 
+                "GetAccountUsage", 
                 "GetApiKey", 
                 "GetLead", 
                 "GetOrganization", 
@@ -115,6 +118,7 @@ fn main() {
                 "ListTenants", 
                 "ListWebhooks", 
                 "ListWorkflows", 
+                "ListWorkspaces", 
                 "DeleteAccount", 
                 "DeleteWorkspace1", 
                 "GetAccount", 
@@ -123,7 +127,7 @@ fn main() {
                 "GetWorkspaceComplianceReport", 
                 "GetWorkspaceStorageStats", 
                 "ListWorkspaceSharings", 
-                "ListWorkspaces", 
+                "ListWorkspaces1", 
                 "RemoveWorkspaceSharing", 
             ])
             .required(true)
@@ -301,6 +305,12 @@ fn main() {
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
+        Some("GetAccountUsage") => {
+            let result = rt.block_on(client.get_account_usage(
+                  "id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
         Some("GetApiKey") => {
             let result = rt.block_on(client.get_api_key(
                   "key_id_example".to_string(),
@@ -457,6 +467,16 @@ fn main() {
                   Some("organization_id_example".to_string()),
                   Some("tenant_id_example".to_string()),
                   Some("account_id_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("ListWorkspaces") => {
+            let result = rt.block_on(client.list_workspaces(
+                  Some("account_id_example".to_string()),
+                  Some(56),
+                  Some(56),
+                  Some("organization_id_example".to_string()),
+                  Some("tenant_id_example".to_string())
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
@@ -629,8 +649,8 @@ fn main() {
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
-        Some("ListWorkspaces") => {
-            let result = rt.block_on(client.list_workspaces(
+        Some("ListWorkspaces1") => {
+            let result = rt.block_on(client.list_workspaces1(
                   Some("account_id_example".to_string()),
                   Some(56),
                   Some("page_token_example".to_string()),

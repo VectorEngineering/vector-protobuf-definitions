@@ -89,6 +89,7 @@ docs/FolderMetadata.md
 docs/ForbiddenErrorMessageResponse.md
 docs/GatewayTimeoutErrorMessageResponse.md
 docs/GetAccountResponse.md
+docs/GetAccountUsageResponse.md
 docs/GetApiKeyResponse.md
 docs/GetLeadResponse.md
 docs/GetOrganizationResponse.md
@@ -122,6 +123,7 @@ docs/ListWebhooksResponse.md
 docs/ListWorkflowsResponse.md
 docs/ListWorkspaceSharingsResponse.md
 docs/ListWorkspacesResponse.md
+docs/ListWorkspacesResponse1.md
 docs/MarketplaceApp.md
 docs/MergeRequest.md
 docs/MethodNotAllowedErrorMessageResponse.md

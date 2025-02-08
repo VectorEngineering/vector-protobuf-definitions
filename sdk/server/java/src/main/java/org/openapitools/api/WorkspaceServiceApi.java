@@ -22,7 +22,7 @@ import org.openapitools.model.GetWorkspaceResponse1;
 import org.openapitools.model.GetWorkspaceStorageStatsResponse;
 import org.openapitools.model.InternalErrorMessageResponse;
 import org.openapitools.model.ListWorkspaceSharingsResponse;
-import org.openapitools.model.ListWorkspacesResponse;
+import org.openapitools.model.ListWorkspacesResponse1;
 import org.openapitools.model.NotFoundErrorMessageResponse;
 import java.time.OffsetDateTime;
 import org.openapitools.model.RateLimitErrorMessageResponse;
@@ -63,7 +63,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:13:54.615102-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:15:33.789499-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 @Validated
 @Tag(name = "workspace-service", description = "the workspace-service API")
 public interface WorkspaceServiceApi {
@@ -1724,13 +1724,13 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "listWorkspaces",
+        operationId = "listWorkspaces1",
         summary = "List workspaces",
         tags = { "workspace-service" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Workspaces retrieved successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = ListWorkspacesResponse.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = ListWorkspacesResponse.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = ListWorkspacesResponse1.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = ListWorkspacesResponse1.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input parameters", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorMessageResponse.class)),
@@ -1772,7 +1772,7 @@ public interface WorkspaceServiceApi {
         produces = { "application/json", "" }
     )
     
-    default ResponseEntity<ListWorkspacesResponse> listWorkspaces(
+    default ResponseEntity<ListWorkspacesResponse1> listWorkspaces1(
         @Parameter(name = "accountId", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "accountId", required = false) String accountId,
         @Parameter(name = "pageSize", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "pageSize", required = false) Integer pageSize,
         @Parameter(name = "pageToken", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "pageToken", required = false) String pageToken,

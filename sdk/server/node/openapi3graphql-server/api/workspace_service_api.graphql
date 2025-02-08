@@ -137,7 +137,7 @@ type Query {
   # @param Int! pageSize 
   # @param String! pageToken 
   # @param String! filter 
-  # @return [ListWorkspacesResponse]
-  ListWorkspaces(accountId: String!, pageSize: Int!, pageToken: String!, filter: String!): ListWorkspacesResponse
+  # @return [ListWorkspacesResponse1]
+  ListWorkspaces1(accountId: String!, pageSize: Int!, pageToken: String!, filter: String!): ListWorkspacesResponse1
 }
 

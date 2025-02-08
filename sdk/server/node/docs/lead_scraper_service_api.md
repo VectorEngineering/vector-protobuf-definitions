@@ -18,6 +18,7 @@ Method | HTTP request | Description
 [**DeleteWorkflow**](lead_scraper_service_api.md#DeleteWorkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 [**DeleteWorkspace**](lead_scraper_service_api.md#DeleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
 [**GetAPIKey**](lead_scraper_service_api.md#GetAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
+[**GetAccountUsage**](lead_scraper_service_api.md#GetAccountUsage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage
 [**GetLead**](lead_scraper_service_api.md#GetLead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
 [**GetOrganization**](lead_scraper_service_api.md#GetOrganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details
 [**GetTenant**](lead_scraper_service_api.md#GetTenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details
@@ -34,6 +35,7 @@ Method | HTTP request | Description
 [**ListTenants**](lead_scraper_service_api.md#ListTenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
 [**ListWebhooks**](lead_scraper_service_api.md#ListWebhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks
 [**ListWorkflows**](lead_scraper_service_api.md#ListWorkflows) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | List workflows
+[**ListWorkspaces**](lead_scraper_service_api.md#ListWorkspaces) | **GET** /lead-scraper-microservice/api/v1/workspaces | List workspaces
 [**PauseWorkflow**](lead_scraper_service_api.md#PauseWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution
 [**RotateAPIKey**](lead_scraper_service_api.md#RotateAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key
 [**RotateTenantAPIKey**](lead_scraper_service_api.md#RotateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key
@@ -146,6 +148,13 @@ Deletes a specific workspace
 Get API key details
 
 Retrieves details of a specific API key
+<a name="GetAccountUsage"></a>
+# **GetAccountUsage**
+> GetAccountUsageResponse GetAccountUsage(Id_)
+
+Get account usage
+
+Retrieves usage details for a given account
 <a name="GetLead"></a>
 # **GetLead**
 > GetLeadResponse GetLead(leadId, organizationId, workspaceId, tenantId, accountId)
@@ -258,6 +267,13 @@ Lists all webhook configurations with pagination
 List workflows
 
 Retrieves a list of workflows for a given workspace
+<a name="ListWorkspaces"></a>
+# **ListWorkspaces**
+> ListWorkspacesResponse ListWorkspaces(accountId, pageSize, pageNumber, organizationId, tenantId)
+
+List workspaces
+
+Retrieves a list of workspaces for a given account
 <a name="PauseWorkflow"></a>
 # **PauseWorkflow**
 > PauseWorkflowResponse PauseWorkflow(workspaceId, Id_, pauseWorkflowBody)

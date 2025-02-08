@@ -28,6 +28,7 @@ from playbookmedia_backend_server_sdk.models.delete_workspace_response import De
 from playbookmedia_backend_server_sdk.models.forbidden_error_message_response import ForbiddenErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.gateway_timeout_error_message_response import GatewayTimeoutErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_api_key_response import GetAPIKeyResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.get_account_usage_response import GetAccountUsageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_lead_response import GetLeadResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_organization_response import GetOrganizationResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_tenant_api_key_response import GetTenantAPIKeyResponse  # noqa: E501
@@ -46,6 +47,7 @@ from playbookmedia_backend_server_sdk.models.list_tenant_api_keys_response impor
 from playbookmedia_backend_server_sdk.models.list_tenants_response import ListTenantsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_webhooks_response import ListWebhooksResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_workflows_response import ListWorkflowsResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.list_workspaces_response import ListWorkspacesResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.method_not_allowed_error_message_response import MethodNotAllowedErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.not_found_error_message_response import NotFoundErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.not_implemented_error_message_response import NotImplementedErrorMessageResponse  # noqa: E501
@@ -295,6 +297,19 @@ def delete_workspace(id):  # noqa: E501
     :type id: str
 
     :rtype: Union[DeleteWorkspaceResponse, Tuple[DeleteWorkspaceResponse, int], Tuple[DeleteWorkspaceResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
+def get_account_usage(id):  # noqa: E501
+    """Get account usage
+
+    Retrieves usage details for a given account # noqa: E501
+
+    :param id: 
+    :type id: str
+
+    :rtype: Union[GetAccountUsageResponse, Tuple[GetAccountUsageResponse, int], Tuple[GetAccountUsageResponse, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -632,6 +647,27 @@ def list_workflows(workspace_id, page_size=None, page_number=None, filter=None, 
     :type account_id: str
 
     :rtype: Union[ListWorkflowsResponse, Tuple[ListWorkflowsResponse, int], Tuple[ListWorkflowsResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
+def list_workspaces(account_id=None, page_size=None, page_number=None, organization_id=None, tenant_id=None):  # noqa: E501
+    """List workspaces
+
+    Retrieves a list of workspaces for a given account # noqa: E501
+
+    :param account_id: 
+    :type account_id: str
+    :param page_size: 
+    :type page_size: int
+    :param page_number: 
+    :type page_number: int
+    :param organization_id: 
+    :type organization_id: str
+    :param tenant_id: 
+    :type tenant_id: str
+
+    :rtype: Union[ListWorkspacesResponse, Tuple[ListWorkspacesResponse, int], Tuple[ListWorkspacesResponse, int, Dict[str, str]]
     """
     return 'do some magic!'
 

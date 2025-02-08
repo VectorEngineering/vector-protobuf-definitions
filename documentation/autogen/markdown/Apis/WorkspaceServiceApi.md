@@ -14,7 +14,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**getWorkspaceComplianceReport**](WorkspaceServiceApi.md#getWorkspaceComplianceReport) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report |
 | [**getWorkspaceStorageStats**](WorkspaceServiceApi.md#getWorkspaceStorageStats) | **GET** /workspace-service/v1/workspaces/storage-stats/{workspaceId} | Get storage statistics |
 | [**listWorkspaceSharings**](WorkspaceServiceApi.md#listWorkspaceSharings) | **GET** /workspace-service/v1/workspaces/sharings/{workspaceId} | List workspace sharings |
-| [**listWorkspaces**](WorkspaceServiceApi.md#listWorkspaces) | **GET** /workspace-service/v1/workspaces/list | List workspaces |
+| [**listWorkspaces1**](WorkspaceServiceApi.md#listWorkspaces1) | **GET** /workspace-service/v1/workspaces/list | List workspaces |
 | [**removeWorkspaceSharing**](WorkspaceServiceApi.md#removeWorkspaceSharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing |
 | [**shareWorkspace**](WorkspaceServiceApi.md#shareWorkspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace |
 | [**updateAccount**](WorkspaceServiceApi.md#updateAccount) | **PUT** /workspace-service/v1/accounts | Update account details |
@@ -279,9 +279,9 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
-<a name="listWorkspaces"></a>
-# **listWorkspaces**
-> ListWorkspacesResponse listWorkspaces(accountId, pageSize, pageToken, filter)
+<a name="listWorkspaces1"></a>
+# **listWorkspaces1**
+> ListWorkspacesResponse1 listWorkspaces1(accountId, pageSize, pageToken, filter)
 
 List workspaces
 
@@ -296,7 +296,7 @@ List workspaces
 
 ### Return type
 
-[**ListWorkspacesResponse**](../Models/ListWorkspacesResponse.md)
+[**ListWorkspacesResponse1**](../Models/ListWorkspacesResponse1.md)
 
 ### Authorization
 

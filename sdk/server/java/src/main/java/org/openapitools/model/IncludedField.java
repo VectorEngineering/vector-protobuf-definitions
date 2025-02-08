@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * - INCLUDED_FIELD_NAME: Core business information  - INCLUDED_FIELD_LOCATION: city, state, country  - INCLUDED_FIELD_COORDINATES: Geographic data  latitude, longitude  - INCLUDED_FIELD_GOOGLE_RATING: Ratings and reviews  - INCLUDED_FIELD_BUSINESS_HOURS: Business details  - INCLUDED_FIELD_PHOTOS: Rich media  - INCLUDED_FIELD_BUSINESS_TYPES: Categories and attributes  - INCLUDED_FIELD_SOCIAL_PROFILES: Social media  - INCLUDED_FIELD_EMPLOYEE_COUNT: Enhanced business data  - INCLUDED_FIELD_NAICS_CODE: Industry classification  - INCLUDED_FIELD_SCRAPING_METADATA: Metadata  timestamps, session info  - INCLUDED_FIELD_COMPLIANCE_INFO: sustainability, certifications  - INCLUDED_FIELD_ALTERNATE_PHONES: Contact information
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:13:54.615102-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:15:33.789499-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public enum IncludedField {
   
   UNSPECIFIED("INCLUDED_FIELD_UNSPECIFIED"),

@@ -19,7 +19,7 @@ from playbookmedia_backend_server_sdk.models.get_workspace_response1 import GetW
 from playbookmedia_backend_server_sdk.models.get_workspace_storage_stats_response import GetWorkspaceStorageStatsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.internal_error_message_response import InternalErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_workspace_sharings_response import ListWorkspaceSharingsResponse  # noqa: E501
-from playbookmedia_backend_server_sdk.models.list_workspaces_response import ListWorkspacesResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.list_workspaces_response1 import ListWorkspacesResponse1  # noqa: E501
 from playbookmedia_backend_server_sdk.models.not_found_error_message_response import NotFoundErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.rate_limit_error_message_response import RateLimitErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.remove_workspace_sharing_response import RemoveWorkspaceSharingResponse  # noqa: E501
@@ -182,7 +182,7 @@ def list_workspace_sharings(workspace_id, page_size=None, page_token=None):  # n
     return 'do some magic!'
 
 
-def list_workspaces(account_id=None, page_size=None, page_token=None, filter=None):  # noqa: E501
+def list_workspaces1(account_id=None, page_size=None, page_token=None, filter=None):  # noqa: E501
     """List workspaces
 
      # noqa: E501
@@ -196,7 +196,7 @@ def list_workspaces(account_id=None, page_size=None, page_token=None, filter=Non
     :param filter: 
     :type filter: str
 
-    :rtype: Union[ListWorkspacesResponse, Tuple[ListWorkspacesResponse, int], Tuple[ListWorkspacesResponse, int, Dict[str, str]]
+    :rtype: Union[ListWorkspacesResponse1, Tuple[ListWorkspacesResponse1, int], Tuple[ListWorkspacesResponse1, int, Dict[str, str]]
     """
     return 'do some magic!'
 

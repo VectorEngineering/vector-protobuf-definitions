@@ -16636,6 +16636,175 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct GetAccountUsageResponse {
+    #[serde(rename = "totalJobsRun")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_jobs_run: Option<i32>,
+
+    #[serde(rename = "monthlyJobLimit")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub monthly_job_limit: Option<i32>,
+
+    #[serde(rename = "remainingJobs")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub remaining_jobs: Option<i32>,
+
+    #[serde(rename = "resetTime")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub reset_time: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl GetAccountUsageResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> GetAccountUsageResponse {
+        GetAccountUsageResponse {
+            total_jobs_run: None,
+            monthly_job_limit: None,
+            remaining_jobs: None,
+            reset_time: None,
+        }
+    }
+}
+
+/// Converts the GetAccountUsageResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for GetAccountUsageResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.total_jobs_run.as_ref().map(|total_jobs_run| {
+                [
+                    "totalJobsRun".to_string(),
+                    total_jobs_run.to_string(),
+                ].join(",")
+            }),
+
+
+            self.monthly_job_limit.as_ref().map(|monthly_job_limit| {
+                [
+                    "monthlyJobLimit".to_string(),
+                    monthly_job_limit.to_string(),
+                ].join(",")
+            }),
+
+
+            self.remaining_jobs.as_ref().map(|remaining_jobs| {
+                [
+                    "remainingJobs".to_string(),
+                    remaining_jobs.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping resetTime in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a GetAccountUsageResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for GetAccountUsageResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub total_jobs_run: Vec<i32>,
+            pub monthly_job_limit: Vec<i32>,
+            pub remaining_jobs: Vec<i32>,
+            pub reset_time: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing GetAccountUsageResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "totalJobsRun" => intermediate_rep.total_jobs_run.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "monthlyJobLimit" => intermediate_rep.monthly_job_limit.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "remainingJobs" => intermediate_rep.remaining_jobs.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "resetTime" => intermediate_rep.reset_time.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing GetAccountUsageResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(GetAccountUsageResponse {
+            total_jobs_run: intermediate_rep.total_jobs_run.into_iter().next(),
+            monthly_job_limit: intermediate_rep.monthly_job_limit.into_iter().next(),
+            remaining_jobs: intermediate_rep.remaining_jobs.into_iter().next(),
+            reset_time: intermediate_rep.reset_time.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<GetAccountUsageResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<GetAccountUsageResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<GetAccountUsageResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for GetAccountUsageResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<GetAccountUsageResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <GetAccountUsageResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into GetAccountUsageResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct GetApiKeyResponse {
     #[serde(rename = "apiKey")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -22285,15 +22454,11 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 pub struct ListWorkspacesResponse {
     #[serde(rename = "workspaces")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub workspaces: Option<Vec<models::Workspace1>>,
+    pub workspaces: Option<Vec<models::Workspace>>,
 
-    #[serde(rename = "nextPageToken")]
+    #[serde(rename = "nextPageNumber")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub next_page_token: Option<String>,
-
-    #[serde(rename = "totalSize")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub total_size: Option<i32>,
+    pub next_page_number: Option<i32>,
 
 }
 
@@ -22303,8 +22468,7 @@ impl ListWorkspacesResponse {
     pub fn new() -> ListWorkspacesResponse {
         ListWorkspacesResponse {
             workspaces: None,
-            next_page_token: None,
-            total_size: None,
+            next_page_number: None,
         }
     }
 }
@@ -22318,18 +22482,10 @@ impl std::string::ToString for ListWorkspacesResponse {
             // Skipping workspaces in query parameter serialization
 
 
-            self.next_page_token.as_ref().map(|next_page_token| {
+            self.next_page_number.as_ref().map(|next_page_number| {
                 [
-                    "nextPageToken".to_string(),
-                    next_page_token.to_string(),
-                ].join(",")
-            }),
-
-
-            self.total_size.as_ref().map(|total_size| {
-                [
-                    "totalSize".to_string(),
-                    total_size.to_string(),
+                    "nextPageNumber".to_string(),
+                    next_page_number.to_string(),
                 ].join(",")
             }),
 
@@ -22350,9 +22506,8 @@ impl std::str::FromStr for ListWorkspacesResponse {
         #[derive(Default)]
         #[allow(dead_code)]
         struct IntermediateRep {
-            pub workspaces: Vec<Vec<models::Workspace1>>,
-            pub next_page_token: Vec<String>,
-            pub total_size: Vec<i32>,
+            pub workspaces: Vec<Vec<models::Workspace>>,
+            pub next_page_number: Vec<i32>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -22372,9 +22527,7 @@ impl std::str::FromStr for ListWorkspacesResponse {
                 match key {
                     "workspaces" => return std::result::Result::Err("Parsing a container in this style is not supported in ListWorkspacesResponse".to_string()),
                     #[allow(clippy::redundant_clone)]
-                    "nextPageToken" => intermediate_rep.next_page_token.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "totalSize" => intermediate_rep.total_size.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "nextPageNumber" => intermediate_rep.next_page_number.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing ListWorkspacesResponse".to_string())
                 }
             }
@@ -22386,8 +22539,7 @@ impl std::str::FromStr for ListWorkspacesResponse {
         // Use the intermediate representation to return the struct
         std::result::Result::Ok(ListWorkspacesResponse {
             workspaces: intermediate_rep.workspaces.into_iter().next(),
-            next_page_token: intermediate_rep.next_page_token.into_iter().next(),
-            total_size: intermediate_rep.total_size.into_iter().next(),
+            next_page_number: intermediate_rep.next_page_number.into_iter().next(),
         })
     }
 }
@@ -22420,6 +22572,157 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into ListWorkspacesResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ListWorkspacesResponse1 {
+    #[serde(rename = "workspaces")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub workspaces: Option<Vec<models::Workspace1>>,
+
+    #[serde(rename = "nextPageToken")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub next_page_token: Option<String>,
+
+    #[serde(rename = "totalSize")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_size: Option<i32>,
+
+}
+
+
+impl ListWorkspacesResponse1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ListWorkspacesResponse1 {
+        ListWorkspacesResponse1 {
+            workspaces: None,
+            next_page_token: None,
+            total_size: None,
+        }
+    }
+}
+
+/// Converts the ListWorkspacesResponse1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ListWorkspacesResponse1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping workspaces in query parameter serialization
+
+
+            self.next_page_token.as_ref().map(|next_page_token| {
+                [
+                    "nextPageToken".to_string(),
+                    next_page_token.to_string(),
+                ].join(",")
+            }),
+
+
+            self.total_size.as_ref().map(|total_size| {
+                [
+                    "totalSize".to_string(),
+                    total_size.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ListWorkspacesResponse1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ListWorkspacesResponse1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub workspaces: Vec<Vec<models::Workspace1>>,
+            pub next_page_token: Vec<String>,
+            pub total_size: Vec<i32>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ListWorkspacesResponse1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    "workspaces" => return std::result::Result::Err("Parsing a container in this style is not supported in ListWorkspacesResponse1".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "nextPageToken" => intermediate_rep.next_page_token.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "totalSize" => intermediate_rep.total_size.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ListWorkspacesResponse1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ListWorkspacesResponse1 {
+            workspaces: intermediate_rep.workspaces.into_iter().next(),
+            next_page_token: intermediate_rep.next_page_token.into_iter().next(),
+            total_size: intermediate_rep.total_size.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ListWorkspacesResponse1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ListWorkspacesResponse1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ListWorkspacesResponse1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ListWorkspacesResponse1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ListWorkspacesResponse1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ListWorkspacesResponse1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ListWorkspacesResponse1 - {}",
                                 value, err))
                     }
              },

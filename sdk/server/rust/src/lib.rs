@@ -1074,6 +1074,86 @@ pub enum DeleteWorkspaceResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum GetAccountUsageResponse {
+    /// Usage details retrieved successfully
+    UsageDetailsRetrievedSuccessfully
+    (models::GetAccountUsageResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum GetApiKeyResponse {
     /// API key retrieved successfully
     APIKeyRetrievedSuccessfully
@@ -2358,6 +2438,86 @@ pub enum ListWorkflowsResponse {
     /// Workflows retrieved successfully
     WorkflowsRetrievedSuccessfully
     (models::ListWorkflowsResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum ListWorkspacesResponse {
+    /// Workspaces retrieved successfully
+    WorkspacesRetrievedSuccessfully
+    (models::ListWorkspacesResponse)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -3802,10 +3962,10 @@ pub enum ListWorkspaceSharingsResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
-pub enum ListWorkspacesResponse {
+pub enum ListWorkspaces1Response {
     /// Workspaces retrieved successfully
     WorkspacesRetrievedSuccessfully
-    (models::ListWorkspacesResponse)
+    (models::ListWorkspacesResponse1)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -4143,6 +4303,12 @@ pub trait Api<C: Send + Sync> {
         id: String,
         context: &C) -> Result<DeleteWorkspaceResponse, ApiError>;
 
+    /// Get account usage
+    async fn get_account_usage(
+        &self,
+        id: String,
+        context: &C) -> Result<GetAccountUsageResponse, ApiError>;
+
     /// Get API key details
     async fn get_api_key(
         &self,
@@ -4302,6 +4468,16 @@ pub trait Api<C: Send + Sync> {
         account_id: Option<String>,
         context: &C) -> Result<ListWorkflowsResponse, ApiError>;
 
+    /// List workspaces
+    async fn list_workspaces(
+        &self,
+        account_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        context: &C) -> Result<ListWorkspacesResponse, ApiError>;
+
     /// Pause workflow execution
     async fn pause_workflow(
         &self,
@@ -4444,13 +4620,13 @@ pub trait Api<C: Send + Sync> {
         context: &C) -> Result<ListWorkspaceSharingsResponse, ApiError>;
 
     /// List workspaces
-    async fn list_workspaces(
+    async fn list_workspaces1(
         &self,
         account_id: Option<String>,
         page_size: Option<i32>,
         page_token: Option<String>,
         filter: Option<String>,
-        context: &C) -> Result<ListWorkspacesResponse, ApiError>;
+        context: &C) -> Result<ListWorkspaces1Response, ApiError>;
 
     /// Remove workspace sharing
     async fn remove_workspace_sharing(
@@ -4588,6 +4764,12 @@ pub trait ApiNoContext<C: Send + Sync> {
         &self,
         id: String,
         ) -> Result<DeleteWorkspaceResponse, ApiError>;
+
+    /// Get account usage
+    async fn get_account_usage(
+        &self,
+        id: String,
+        ) -> Result<GetAccountUsageResponse, ApiError>;
 
     /// Get API key details
     async fn get_api_key(
@@ -4748,6 +4930,16 @@ pub trait ApiNoContext<C: Send + Sync> {
         account_id: Option<String>,
         ) -> Result<ListWorkflowsResponse, ApiError>;
 
+    /// List workspaces
+    async fn list_workspaces(
+        &self,
+        account_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        ) -> Result<ListWorkspacesResponse, ApiError>;
+
     /// Pause workflow execution
     async fn pause_workflow(
         &self,
@@ -4890,13 +5082,13 @@ pub trait ApiNoContext<C: Send + Sync> {
         ) -> Result<ListWorkspaceSharingsResponse, ApiError>;
 
     /// List workspaces
-    async fn list_workspaces(
+    async fn list_workspaces1(
         &self,
         account_id: Option<String>,
         page_size: Option<i32>,
         page_token: Option<String>,
         filter: Option<String>,
-        ) -> Result<ListWorkspacesResponse, ApiError>;
+        ) -> Result<ListWorkspaces1Response, ApiError>;
 
     /// Remove workspace sharing
     async fn remove_workspace_sharing(
@@ -5099,6 +5291,16 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().delete_workspace(id, &context).await
+    }
+
+    /// Get account usage
+    async fn get_account_usage(
+        &self,
+        id: String,
+        ) -> Result<GetAccountUsageResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_account_usage(id, &context).await
     }
 
     /// Get API key details
@@ -5326,6 +5528,20 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().list_workflows(workspace_id, page_size, page_number, filter, organization_id, tenant_id, account_id, &context).await
+    }
+
+    /// List workspaces
+    async fn list_workspaces(
+        &self,
+        account_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        ) -> Result<ListWorkspacesResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().list_workspaces(account_id, page_size, page_number, organization_id, tenant_id, &context).await
     }
 
     /// Pause workflow execution
@@ -5558,16 +5774,16 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     }
 
     /// List workspaces
-    async fn list_workspaces(
+    async fn list_workspaces1(
         &self,
         account_id: Option<String>,
         page_size: Option<i32>,
         page_token: Option<String>,
         filter: Option<String>,
-        ) -> Result<ListWorkspacesResponse, ApiError>
+        ) -> Result<ListWorkspaces1Response, ApiError>
     {
         let context = self.context().clone();
-        self.api().list_workspaces(account_id, page_size, page_token, filter, &context).await
+        self.api().list_workspaces1(account_id, page_size, page_token, filter, &context).await
     }
 
     /// Remove workspace sharing

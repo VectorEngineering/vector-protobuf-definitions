@@ -78,6 +78,7 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**delete_webhook**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_webhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
 *LeadScraperServiceApi* | [**delete_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_workflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 *LeadScraperServiceApi* | [**delete_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_workspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
+*LeadScraperServiceApi* | [**get_account_usage**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_account_usage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage
 *LeadScraperServiceApi* | [**get_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_api_key) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
 *LeadScraperServiceApi* | [**get_lead**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_lead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
 *LeadScraperServiceApi* | [**get_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_organization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details
@@ -95,6 +96,7 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**list_tenants**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_tenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
 *LeadScraperServiceApi* | [**list_webhooks**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_webhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks
 *LeadScraperServiceApi* | [**list_workflows**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_workflows) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | List workflows
+*LeadScraperServiceApi* | [**list_workspaces**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_workspaces) | **GET** /lead-scraper-microservice/api/v1/workspaces | List workspaces
 *LeadScraperServiceApi* | [**pause_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#pause_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution
 *LeadScraperServiceApi* | [**rotate_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#rotate_api_key) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key
 *LeadScraperServiceApi* | [**rotate_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#rotate_tenant_api_key) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key
@@ -117,7 +119,7 @@ Class | Method | HTTP request | Description
 *WorkspaceServiceApi* | [**get_workspace_compliance_report**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace_compliance_report) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report
 *WorkspaceServiceApi* | [**get_workspace_storage_stats**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace_storage_stats) | **GET** /workspace-service/v1/workspaces/storage-stats/{workspaceId} | Get storage statistics
 *WorkspaceServiceApi* | [**list_workspace_sharings**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#list_workspace_sharings) | **GET** /workspace-service/v1/workspaces/sharings/{workspaceId} | List workspace sharings
-*WorkspaceServiceApi* | [**list_workspaces**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#list_workspaces) | **GET** /workspace-service/v1/workspaces/list | List workspaces
+*WorkspaceServiceApi* | [**list_workspaces1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#list_workspaces1) | **GET** /workspace-service/v1/workspaces/list | List workspaces
 *WorkspaceServiceApi* | [**remove_workspace_sharing**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#remove_workspace_sharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing
 *WorkspaceServiceApi* | [**share_workspace**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#share_workspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace
 *WorkspaceServiceApi* | [**update_account**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#update_account) | **PUT** /workspace-service/v1/accounts | Update account details
@@ -214,6 +216,7 @@ Class | Method | HTTP request | Description
  - [GatewayTimeoutErrorMessageResponse](playbookmedia_backend_client_sdk/docs/GatewayTimeoutErrorMessageResponse.md)
  - [GetAPIKeyResponse](playbookmedia_backend_client_sdk/docs/GetAPIKeyResponse.md)
  - [GetAccountResponse](playbookmedia_backend_client_sdk/docs/GetAccountResponse.md)
+ - [GetAccountUsageResponse](playbookmedia_backend_client_sdk/docs/GetAccountUsageResponse.md)
  - [GetLeadResponse](playbookmedia_backend_client_sdk/docs/GetLeadResponse.md)
  - [GetOrganizationResponse](playbookmedia_backend_client_sdk/docs/GetOrganizationResponse.md)
  - [GetTenantAPIKeyResponse](playbookmedia_backend_client_sdk/docs/GetTenantAPIKeyResponse.md)
@@ -246,6 +249,7 @@ Class | Method | HTTP request | Description
  - [ListWorkflowsResponse](playbookmedia_backend_client_sdk/docs/ListWorkflowsResponse.md)
  - [ListWorkspaceSharingsResponse](playbookmedia_backend_client_sdk/docs/ListWorkspaceSharingsResponse.md)
  - [ListWorkspacesResponse](playbookmedia_backend_client_sdk/docs/ListWorkspacesResponse.md)
+ - [ListWorkspacesResponse1](playbookmedia_backend_client_sdk/docs/ListWorkspacesResponse1.md)
  - [MFAInfo](playbookmedia_backend_client_sdk/docs/MFAInfo.md)
  - [MarketplaceApp](playbookmedia_backend_client_sdk/docs/MarketplaceApp.md)
  - [MergeRequest](playbookmedia_backend_client_sdk/docs/MergeRequest.md)

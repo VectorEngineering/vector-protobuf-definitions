@@ -87,6 +87,7 @@ Models/ForbiddenErrorMessageResponse.md
 Models/GatewayTimeoutErrorMessageResponse.md
 Models/GetAPIKeyResponse.md
 Models/GetAccountResponse.md
+Models/GetAccountUsageResponse.md
 Models/GetLeadResponse.md
 Models/GetOrganizationResponse.md
 Models/GetTenantAPIKeyResponse.md
@@ -119,6 +120,7 @@ Models/ListWebhooksResponse.md
 Models/ListWorkflowsResponse.md
 Models/ListWorkspaceSharingsResponse.md
 Models/ListWorkspacesResponse.md
+Models/ListWorkspacesResponse1.md
 Models/MFAInfo.md
 Models/MarketplaceApp.md
 Models/MergeRequest.md

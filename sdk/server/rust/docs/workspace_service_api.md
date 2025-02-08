@@ -14,7 +14,7 @@ Method | HTTP request | Description
 **GetWorkspaceComplianceReport**](workspace_service_api.md#GetWorkspaceComplianceReport) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report
 **GetWorkspaceStorageStats**](workspace_service_api.md#GetWorkspaceStorageStats) | **GET** /workspace-service/v1/workspaces/storage-stats/{workspaceId} | Get storage statistics
 **ListWorkspaceSharings**](workspace_service_api.md#ListWorkspaceSharings) | **GET** /workspace-service/v1/workspaces/sharings/{workspaceId} | List workspace sharings
-**ListWorkspaces**](workspace_service_api.md#ListWorkspaces) | **GET** /workspace-service/v1/workspaces/list | List workspaces
+**ListWorkspaces1**](workspace_service_api.md#ListWorkspaces1) | **GET** /workspace-service/v1/workspaces/list | List workspaces
 **RemoveWorkspaceSharing**](workspace_service_api.md#RemoveWorkspaceSharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing
 **ShareWorkspace**](workspace_service_api.md#ShareWorkspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace
 **UpdateAccount**](workspace_service_api.md#UpdateAccount) | **PUT** /workspace-service/v1/accounts | Update account details
@@ -303,8 +303,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **ListWorkspaces**
-> models::ListWorkspacesResponse ListWorkspaces(optional)
+# **ListWorkspaces1**
+> models::ListWorkspacesResponse1 ListWorkspaces1(optional)
 List workspaces
 
 ### Required Parameters
@@ -325,7 +325,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**models::ListWorkspacesResponse**](ListWorkspacesResponse.md)
+[**models::ListWorkspacesResponse1**](ListWorkspacesResponse1.md)
 
 ### Authorization
 

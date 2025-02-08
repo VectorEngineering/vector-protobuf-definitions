@@ -64,8 +64,8 @@ export default {
             };
         },
 
-        // @return ListWorkspacesResponse
-        ListWorkspaces: ($accountId, $pageSize, $pageToken, $filter) => {
+        // @return ListWorkspacesResponse1
+        ListWorkspaces1: ($accountId, $pageSize, $pageToken, $filter) => {
             return {
                 "accountId": "accountId_example",
                 "pageSize": "56",

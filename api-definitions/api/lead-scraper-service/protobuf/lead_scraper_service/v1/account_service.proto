@@ -345,71 +345,71 @@ service LeadScraperService {
 
     // }
 
-    // /**
-    //  * ListWorkspaces retrieves all workspaces associated with an account
-    //  * 
-    //  * Features:
-    //  * - Pagination support via limit/offset parameters
-    //  * - Filtering by creation date, region, and status
-    //  * - Summary statistics for quick overview
-    //  * 
-    //  * Response includes:
-    //  * - Basic workspace metadata
-    //  * - Job execution statistics
-    //  * - Resource utilization metrics
-    //  */
-    // rpc ListWorkspaces(ListWorkspacesRequest) returns (ListWorkspacesResponse) {
-    //     option (google.api.http) = {
-    //         get: "/lead-scraper-microservice/api/v1/workspaces"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "List workspaces"
-    //         tags: ["lead-scraper-service"],
-    //         operation_id: "ListWorkspaces",
-    //         description: "Retrieves a list of workspaces for a given account",
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Workspaces retrieved successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.ListWorkspacesResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * ListWorkspaces retrieves all workspaces associated with an account
+     * 
+     * Features:
+     * - Pagination support via limit/offset parameters
+     * - Filtering by creation date, region, and status
+     * - Summary statistics for quick overview
+     * 
+     * Response includes:
+     * - Basic workspace metadata
+     * - Job execution statistics
+     * - Resource utilization metrics
+     */
+    rpc ListWorkspaces(ListWorkspacesRequest) returns (ListWorkspacesResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/workspaces"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "List workspaces"
+            tags: ["lead-scraper-service"],
+            operation_id: "ListWorkspaces",
+            description: "Retrieves a list of workspaces for a given account",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workspaces retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.ListWorkspacesResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * GetAccountUsage provides detailed usage metrics for an account
-    //  * 
-    //  * Metrics include:
-    //  * - Active scraping jobs
-    //  * - API call statistics
-    //  * - Storage utilization
-    //  * - Data processing throughput
-    //  * - Historical usage trends
-    //  * 
-    //  * Usage scenarios:
-    //  * - Billing and invoicing
-    //  * - Resource planning
-    //  * - Usage quota enforcement
-    //  */
-    // rpc GetAccountUsage(GetAccountUsageRequest) returns (GetAccountUsageResponse) {
-    //     option (google.api.http) = {
-    //         get: "/lead-scraper-microservice/api/v1/accounts/{id}/usage"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Get account usage"
-    //         tags: ["lead-scraper-service"],
-    //         operation_id: "GetAccountUsage",
-    //         description: "Retrieves usage details for a given account",
-    //         responses: {    
-    //             key: "200"
-    //             value: {
-    //                 description: "Usage details retrieved successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.GetAccountUsageResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * GetAccountUsage provides detailed usage metrics for an account
+     * 
+     * Metrics include:
+     * - Active scraping jobs
+     * - API call statistics
+     * - Storage utilization
+     * - Data processing throughput
+     * - Historical usage trends
+     * 
+     * Usage scenarios:
+     * - Billing and invoicing
+     * - Resource planning
+     * - Usage quota enforcement
+     */
+    rpc GetAccountUsage(GetAccountUsageRequest) returns (GetAccountUsageResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/accounts/{id}/usage"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get account usage"
+            tags: ["lead-scraper-service"],
+            operation_id: "GetAccountUsage",
+            description: "Retrieves usage details for a given account",
+            responses: {    
+                key: "200"
+                value: {
+                    description: "Usage details retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.GetAccountUsageResponse" } }
+                }
+            }
+        };
+    }
 
     /**
      * UpdateAccountSettings modifies configurable account parameters

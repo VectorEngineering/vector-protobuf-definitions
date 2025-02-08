@@ -5,6 +5,7 @@ import type { Env } from "../types";
 // Import all route handlers
 import { leadScraperMicroserviceapiv1accountslistRouter } from "./leadScraperMicroserviceapiv1accountslist";
 import { leadScraperMicroserviceapiv1accountssettingsRouter } from "./leadScraperMicroserviceapiv1accountssettings";
+import { leadScraperMicroserviceapiv1accountsidusageRouter } from "./leadScraperMicroserviceapiv1accountsidusage";
 import { leadScraperMicroserviceapiv1apiKeysRouter } from "./leadScraperMicroserviceapiv1apiKeys";
 import { leadScraperMicroserviceapiv1apiKeyslistRouter } from "./leadScraperMicroserviceapiv1apiKeyslist";
 import { leadScraperMicroserviceapiv1apiKeysrotateRouter } from "./leadScraperMicroserviceapiv1apiKeysrotate";
@@ -26,6 +27,7 @@ import { leadScraperMicroserviceapiv1webhooksRouter } from "./leadScraperMicrose
 import { leadScraperMicroserviceapiv1webhookswebhookidRouter } from "./leadScraperMicroserviceapiv1webhookswebhookid";
 import { leadScraperMicroserviceapiv1workspaceRouter } from "./leadScraperMicroserviceapiv1workspace";
 import { leadScraperMicroserviceapiv1workspaceidRouter } from "./leadScraperMicroserviceapiv1workspaceid";
+import { leadScraperMicroserviceapiv1workspacesRouter } from "./leadScraperMicroserviceapiv1workspaces";
 import { leadScraperMicroserviceapiv1workspacesworkflowRouter } from "./leadScraperMicroserviceapiv1workspacesworkflow";
 import { leadScraperMicroserviceapiv1workspacesworkspaceidanalyticsRouter } from "./leadScraperMicroserviceapiv1workspacesworkspaceidanalytics";
 import { leadScraperMicroserviceapiv1workspacesworkspaceidworkflowsRouter } from "./leadScraperMicroserviceapiv1workspacesworkspaceidworkflows";
@@ -55,6 +57,10 @@ router.route(
 router.route(
   "/lead-scraper-microservice/api/v1/accounts/settings",
   leadScraperMicroserviceapiv1accountssettingsRouter,
+);
+router.route(
+  "/lead-scraper-microservice/api/v1/accounts/{id}/usage",
+  leadScraperMicroserviceapiv1accountsidusageRouter,
 );
 router.route(
   "/lead-scraper-microservice/api/v1/api-keys",
@@ -139,6 +145,10 @@ router.route(
 router.route(
   "/lead-scraper-microservice/api/v1/workspace/{id}",
   leadScraperMicroserviceapiv1workspaceidRouter,
+);
+router.route(
+  "/lead-scraper-microservice/api/v1/workspaces",
+  leadScraperMicroserviceapiv1workspacesRouter,
 );
 router.route(
   "/lead-scraper-microservice/api/v1/workspaces/workflow",

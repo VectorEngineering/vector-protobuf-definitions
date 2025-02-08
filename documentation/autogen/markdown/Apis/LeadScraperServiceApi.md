@@ -18,6 +18,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**deleteWorkflow**](LeadScraperServiceApi.md#deleteWorkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow |
 | [**deleteWorkspace**](LeadScraperServiceApi.md#deleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace |
 | [**getAPIKey**](LeadScraperServiceApi.md#getAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details |
+| [**getAccountUsage**](LeadScraperServiceApi.md#getAccountUsage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage |
 | [**getLead**](LeadScraperServiceApi.md#getLead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details |
 | [**getOrganization**](LeadScraperServiceApi.md#getOrganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details |
 | [**getTenant**](LeadScraperServiceApi.md#getTenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details |
@@ -34,6 +35,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**listTenants**](LeadScraperServiceApi.md#listTenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants |
 | [**listWebhooks**](LeadScraperServiceApi.md#listWebhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks |
 | [**listWorkflows**](LeadScraperServiceApi.md#listWorkflows) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | List workflows |
+| [**listWorkspaces**](LeadScraperServiceApi.md#listWorkspaces) | **GET** /lead-scraper-microservice/api/v1/workspaces | List workspaces |
 | [**pauseWorkflow**](LeadScraperServiceApi.md#pauseWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution |
 | [**rotateAPIKey**](LeadScraperServiceApi.md#rotateAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key |
 | [**rotateTenantAPIKey**](LeadScraperServiceApi.md#rotateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key |
@@ -437,6 +439,33 @@ Get API key details
 ### Return type
 
 [**GetAPIKeyResponse**](../Models/GetAPIKeyResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="getAccountUsage"></a>
+# **getAccountUsage**
+> GetAccountUsageResponse getAccountUsage(id)
+
+Get account usage
+
+    Retrieves usage details for a given account
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **String**|  | [default to null] |
+
+### Return type
+
+[**GetAccountUsageResponse**](../Models/GetAccountUsageResponse.md)
 
 ### Authorization
 
@@ -922,6 +951,37 @@ List workflows
 ### Return type
 
 [**ListWorkflowsResponse**](../Models/ListWorkflowsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="listWorkspaces"></a>
+# **listWorkspaces**
+> ListWorkspacesResponse listWorkspaces(accountId, pageSize, pageNumber, organizationId, tenantId)
+
+List workspaces
+
+    Retrieves a list of workspaces for a given account
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **accountId** | **String**|  | [optional] [default to null] |
+| **pageSize** | **Integer**|  | [optional] [default to null] |
+| **pageNumber** | **Integer**|  | [optional] [default to null] |
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
+
+### Return type
+
+[**ListWorkspacesResponse**](../Models/ListWorkspacesResponse.md)
 
 ### Authorization
 

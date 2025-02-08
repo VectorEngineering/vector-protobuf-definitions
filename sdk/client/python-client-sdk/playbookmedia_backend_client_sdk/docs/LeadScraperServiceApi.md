@@ -17,6 +17,7 @@ Method | HTTP request | Description
 [**delete_webhook**](LeadScraperServiceApi.md#delete_webhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
 [**delete_workflow**](LeadScraperServiceApi.md#delete_workflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 [**delete_workspace**](LeadScraperServiceApi.md#delete_workspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
+[**get_account_usage**](LeadScraperServiceApi.md#get_account_usage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage
 [**get_api_key**](LeadScraperServiceApi.md#get_api_key) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
 [**get_lead**](LeadScraperServiceApi.md#get_lead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
 [**get_organization**](LeadScraperServiceApi.md#get_organization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details
@@ -34,6 +35,7 @@ Method | HTTP request | Description
 [**list_tenants**](LeadScraperServiceApi.md#list_tenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
 [**list_webhooks**](LeadScraperServiceApi.md#list_webhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks
 [**list_workflows**](LeadScraperServiceApi.md#list_workflows) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | List workflows
+[**list_workspaces**](LeadScraperServiceApi.md#list_workspaces) | **GET** /lead-scraper-microservice/api/v1/workspaces | List workspaces
 [**pause_workflow**](LeadScraperServiceApi.md#pause_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution
 [**rotate_api_key**](LeadScraperServiceApi.md#rotate_api_key) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key
 [**rotate_tenant_api_key**](LeadScraperServiceApi.md#rotate_tenant_api_key) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key
@@ -1188,6 +1190,92 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Workspace deleted successfully |  -  |
+**400** | Bad Request - Invalid input parameters |  -  |
+**401** | Unauthorized - Authentication required |  -  |
+**402** | Payment Required - Payment is necessary to proceed |  -  |
+**403** | Forbidden - Access denied |  -  |
+**404** | Not Found - Resource not found |  -  |
+**405** | Method Not Allowed - HTTP method not supported |  -  |
+**409** | Conflict - Resource already exists |  -  |
+**410** | Gone - Resource is no longer available |  -  |
+**412** | Precondition Failed - Preconditions in headers did not match |  -  |
+**422** | Unprocessable Entity - Semantic errors in the request |  -  |
+**425** | Too Early - Request is being replayed |  -  |
+**429** | Too Many Requests - Rate limit exceeded |  -  |
+**500** | Internal Server Error |  -  |
+**501** | Not Implemented - Functionality not supported |  -  |
+**502** | Bad Gateway - Invalid response from upstream server |  -  |
+**503** | Service Unavailable - Try again later |  -  |
+**504** | Gateway Timeout - Upstream server timed out |  -  |
+**0** | An unexpected error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_account_usage**
+> GetAccountUsageResponse get_account_usage(id)
+
+Get account usage
+
+Retrieves usage details for a given account
+
+### Example
+
+
+```python
+import playbookmedia_backend_client_sdk
+from playbookmedia_backend_client_sdk.models.get_account_usage_response import GetAccountUsageResponse
+from playbookmedia_backend_client_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://lead-scraping-microservice.vector.svc.cluster.local:9896
+# See configuration.py for a list of all supported configuration parameters.
+configuration = playbookmedia_backend_client_sdk.Configuration(
+    host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+)
+
+
+# Enter a context with an instance of the API client
+async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
+    id = 'id_example' # str | 
+
+    try:
+        # Get account usage
+        api_response = await api_instance.get_account_usage(id)
+        print("The response of LeadScraperServiceApi->get_account_usage:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling LeadScraperServiceApi->get_account_usage: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**|  | 
+
+### Return type
+
+[**GetAccountUsageResponse**](GetAccountUsageResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Usage details retrieved successfully |  -  |
 **400** | Bad Request - Invalid input parameters |  -  |
 **401** | Unauthorized - Authentication required |  -  |
 **402** | Payment Required - Payment is necessary to proceed |  -  |
@@ -2764,6 +2852,100 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Workflows retrieved successfully |  -  |
+**400** | Bad Request - Invalid input parameters |  -  |
+**401** | Unauthorized - Authentication required |  -  |
+**402** | Payment Required - Payment is necessary to proceed |  -  |
+**403** | Forbidden - Access denied |  -  |
+**404** | Not Found - Resource not found |  -  |
+**405** | Method Not Allowed - HTTP method not supported |  -  |
+**409** | Conflict - Resource already exists |  -  |
+**410** | Gone - Resource is no longer available |  -  |
+**412** | Precondition Failed - Preconditions in headers did not match |  -  |
+**422** | Unprocessable Entity - Semantic errors in the request |  -  |
+**425** | Too Early - Request is being replayed |  -  |
+**429** | Too Many Requests - Rate limit exceeded |  -  |
+**500** | Internal Server Error |  -  |
+**501** | Not Implemented - Functionality not supported |  -  |
+**502** | Bad Gateway - Invalid response from upstream server |  -  |
+**503** | Service Unavailable - Try again later |  -  |
+**504** | Gateway Timeout - Upstream server timed out |  -  |
+**0** | An unexpected error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_workspaces**
+> ListWorkspacesResponse list_workspaces(account_id=account_id, page_size=page_size, page_number=page_number, organization_id=organization_id, tenant_id=tenant_id)
+
+List workspaces
+
+Retrieves a list of workspaces for a given account
+
+### Example
+
+
+```python
+import playbookmedia_backend_client_sdk
+from playbookmedia_backend_client_sdk.models.list_workspaces_response import ListWorkspacesResponse
+from playbookmedia_backend_client_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://lead-scraping-microservice.vector.svc.cluster.local:9896
+# See configuration.py for a list of all supported configuration parameters.
+configuration = playbookmedia_backend_client_sdk.Configuration(
+    host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+)
+
+
+# Enter a context with an instance of the API client
+async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
+    account_id = 'account_id_example' # str |  (optional)
+    page_size = 56 # int |  (optional)
+    page_number = 56 # int |  (optional)
+    organization_id = 'organization_id_example' # str |  (optional)
+    tenant_id = 'tenant_id_example' # str |  (optional)
+
+    try:
+        # List workspaces
+        api_response = await api_instance.list_workspaces(account_id=account_id, page_size=page_size, page_number=page_number, organization_id=organization_id, tenant_id=tenant_id)
+        print("The response of LeadScraperServiceApi->list_workspaces:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling LeadScraperServiceApi->list_workspaces: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **account_id** | **str**|  | [optional] 
+ **page_size** | **int**|  | [optional] 
+ **page_number** | **int**|  | [optional] 
+ **organization_id** | **str**|  | [optional] 
+ **tenant_id** | **str**|  | [optional] 
+
+### Return type
+
+[**ListWorkspacesResponse**](ListWorkspacesResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Workspaces retrieved successfully |  -  |
 **400** | Bad Request - Invalid input parameters |  -  |
 **401** | Unauthorized - Authentication required |  -  |
 **402** | Payment Required - Payment is necessary to proceed |  -  |

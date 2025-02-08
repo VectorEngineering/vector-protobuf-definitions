@@ -19,6 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	LeadScraperService_ListWorkspaces_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/ListWorkspaces"
+	LeadScraperService_GetAccountUsage_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/GetAccountUsage"
 	LeadScraperService_UpdateAccountSettings_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/UpdateAccountSettings"
 	LeadScraperService_ListAccounts_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/ListAccounts"
 	LeadScraperService_CreateWorkflow_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/CreateWorkflow"
@@ -89,6 +91,32 @@ const (
 //
 // ```
 type LeadScraperServiceClient interface {
+	// ListWorkspaces retrieves all workspaces associated with an account
+	//
+	// Features:
+	// - Pagination support via limit/offset parameters
+	// - Filtering by creation date, region, and status
+	// - Summary statistics for quick overview
+	//
+	// Response includes:
+	// - Basic workspace metadata
+	// - Job execution statistics
+	// - Resource utilization metrics
+	ListWorkspaces(ctx context.Context, in *ListWorkspacesRequest, opts ...grpc.CallOption) (*ListWorkspacesResponse, error)
+	// GetAccountUsage provides detailed usage metrics for an account
+	//
+	// Metrics include:
+	// - Active scraping jobs
+	// - API call statistics
+	// - Storage utilization
+	// - Data processing throughput
+	// - Historical usage trends
+	//
+	// Usage scenarios:
+	// - Billing and invoicing
+	// - Resource planning
+	// - Usage quota enforcement
+	GetAccountUsage(ctx context.Context, in *GetAccountUsageRequest, opts ...grpc.CallOption) (*GetAccountUsageResponse, error)
 	// UpdateAccountSettings modifies configurable account parameters
 	//
 	// Configurable settings:
@@ -708,6 +736,26 @@ func NewLeadScraperServiceClient(cc grpc.ClientConnInterface) LeadScraperService
 	return &leadScraperServiceClient{cc}
 }
 
+func (c *leadScraperServiceClient) ListWorkspaces(ctx context.Context, in *ListWorkspacesRequest, opts ...grpc.CallOption) (*ListWorkspacesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListWorkspacesResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_ListWorkspaces_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) GetAccountUsage(ctx context.Context, in *GetAccountUsageRequest, opts ...grpc.CallOption) (*GetAccountUsageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAccountUsageResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetAccountUsage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *leadScraperServiceClient) UpdateAccountSettings(ctx context.Context, in *UpdateAccountSettingsRequest, opts ...grpc.CallOption) (*UpdateAccountSettingsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateAccountSettingsResponse)
@@ -1154,6 +1202,32 @@ func (c *leadScraperServiceClient) ListWebhooks(ctx context.Context, in *ListWeb
 //
 // ```
 type LeadScraperServiceServer interface {
+	// ListWorkspaces retrieves all workspaces associated with an account
+	//
+	// Features:
+	// - Pagination support via limit/offset parameters
+	// - Filtering by creation date, region, and status
+	// - Summary statistics for quick overview
+	//
+	// Response includes:
+	// - Basic workspace metadata
+	// - Job execution statistics
+	// - Resource utilization metrics
+	ListWorkspaces(context.Context, *ListWorkspacesRequest) (*ListWorkspacesResponse, error)
+	// GetAccountUsage provides detailed usage metrics for an account
+	//
+	// Metrics include:
+	// - Active scraping jobs
+	// - API call statistics
+	// - Storage utilization
+	// - Data processing throughput
+	// - Historical usage trends
+	//
+	// Usage scenarios:
+	// - Billing and invoicing
+	// - Resource planning
+	// - Usage quota enforcement
+	GetAccountUsage(context.Context, *GetAccountUsageRequest) (*GetAccountUsageResponse, error)
 	// UpdateAccountSettings modifies configurable account parameters
 	//
 	// Configurable settings:
@@ -1773,6 +1847,12 @@ type LeadScraperServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedLeadScraperServiceServer struct{}
 
+func (UnimplementedLeadScraperServiceServer) ListWorkspaces(context.Context, *ListWorkspacesRequest) (*ListWorkspacesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListWorkspaces not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) GetAccountUsage(context.Context, *GetAccountUsageRequest) (*GetAccountUsageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountUsage not implemented")
+}
 func (UnimplementedLeadScraperServiceServer) UpdateAccountSettings(context.Context, *UpdateAccountSettingsRequest) (*UpdateAccountSettingsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccountSettings not implemented")
 }
@@ -1918,6 +1998,42 @@ func RegisterLeadScraperServiceServer(s grpc.ServiceRegistrar, srv LeadScraperSe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&LeadScraperService_ServiceDesc, srv)
+}
+
+func _LeadScraperService_ListWorkspaces_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListWorkspacesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).ListWorkspaces(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_ListWorkspaces_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).ListWorkspaces(ctx, req.(*ListWorkspacesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_GetAccountUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountUsageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).GetAccountUsage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_GetAccountUsage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).GetAccountUsage(ctx, req.(*GetAccountUsageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _LeadScraperService_UpdateAccountSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2683,6 +2799,14 @@ var LeadScraperService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "lead_scraper_service.v1.LeadScraperService",
 	HandlerType: (*LeadScraperServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListWorkspaces",
+			Handler:    _LeadScraperService_ListWorkspaces_Handler,
+		},
+		{
+			MethodName: "GetAccountUsage",
+			Handler:    _LeadScraperService_GetAccountUsage_Handler,
+		},
 		{
 			MethodName: "UpdateAccountSettings",
 			Handler:    _LeadScraperService_UpdateAccountSettings_Handler,

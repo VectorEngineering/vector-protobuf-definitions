@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-08T10:13:57.140386-05:00[America/New_York]
+- Build date: 2025-02-08T10:15:36.299269-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -69,6 +69,7 @@ cargo run --example client DeleteTenantApiKey
 cargo run --example client DeleteWebhook
 cargo run --example client DeleteWorkflow
 cargo run --example client DeleteWorkspace
+cargo run --example client GetAccountUsage
 cargo run --example client GetApiKey
 cargo run --example client GetLead
 cargo run --example client GetOrganization
@@ -86,6 +87,7 @@ cargo run --example client ListTenantApiKeys
 cargo run --example client ListTenants
 cargo run --example client ListWebhooks
 cargo run --example client ListWorkflows
+cargo run --example client ListWorkspaces
 cargo run --example client DeleteAccount
 cargo run --example client DeleteWorkspace1
 cargo run --example client GetAccount
@@ -94,7 +96,7 @@ cargo run --example client GetWorkspaceAnalytics1
 cargo run --example client GetWorkspaceComplianceReport
 cargo run --example client GetWorkspaceStorageStats
 cargo run --example client ListWorkspaceSharings
-cargo run --example client ListWorkspaces
+cargo run --example client ListWorkspaces1
 cargo run --example client RemoveWorkspaceSharing
 ```
 
@@ -142,6 +144,7 @@ Method | HTTP request | Description
 [**DeleteWebhook**](docs/lead_scraper_service_api.md#DeleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
 [**DeleteWorkflow**](docs/lead_scraper_service_api.md#DeleteWorkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 [**DeleteWorkspace**](docs/lead_scraper_service_api.md#DeleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
+[**GetAccountUsage**](docs/lead_scraper_service_api.md#GetAccountUsage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage
 [**GetAPIKey**](docs/lead_scraper_service_api.md#GetAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
 [**GetLead**](docs/lead_scraper_service_api.md#GetLead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
 [**GetOrganization**](docs/lead_scraper_service_api.md#GetOrganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details
@@ -159,6 +162,7 @@ Method | HTTP request | Description
 [**ListTenants**](docs/lead_scraper_service_api.md#ListTenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
 [**ListWebhooks**](docs/lead_scraper_service_api.md#ListWebhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks
 [**ListWorkflows**](docs/lead_scraper_service_api.md#ListWorkflows) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | List workflows
+[**ListWorkspaces**](docs/lead_scraper_service_api.md#ListWorkspaces) | **GET** /lead-scraper-microservice/api/v1/workspaces | List workspaces
 [**PauseWorkflow**](docs/lead_scraper_service_api.md#PauseWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution
 [**RotateAPIKey**](docs/lead_scraper_service_api.md#RotateAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key
 [**RotateTenantAPIKey**](docs/lead_scraper_service_api.md#RotateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key
@@ -181,7 +185,7 @@ Method | HTTP request | Description
 [**GetWorkspaceComplianceReport**](docs/workspace_service_api.md#GetWorkspaceComplianceReport) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report
 [**GetWorkspaceStorageStats**](docs/workspace_service_api.md#GetWorkspaceStorageStats) | **GET** /workspace-service/v1/workspaces/storage-stats/{workspaceId} | Get storage statistics
 [**ListWorkspaceSharings**](docs/workspace_service_api.md#ListWorkspaceSharings) | **GET** /workspace-service/v1/workspaces/sharings/{workspaceId} | List workspace sharings
-[**ListWorkspaces**](docs/workspace_service_api.md#ListWorkspaces) | **GET** /workspace-service/v1/workspaces/list | List workspaces
+[**ListWorkspaces1**](docs/workspace_service_api.md#ListWorkspaces1) | **GET** /workspace-service/v1/workspaces/list | List workspaces
 [**RemoveWorkspaceSharing**](docs/workspace_service_api.md#RemoveWorkspaceSharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing
 [**ShareWorkspace**](docs/workspace_service_api.md#ShareWorkspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace
 [**UpdateAccount**](docs/workspace_service_api.md#UpdateAccount) | **PUT** /workspace-service/v1/accounts | Update account details
@@ -277,6 +281,7 @@ Method | HTTP request | Description
  - [ForbiddenErrorMessageResponse](docs/ForbiddenErrorMessageResponse.md)
  - [GatewayTimeoutErrorMessageResponse](docs/GatewayTimeoutErrorMessageResponse.md)
  - [GetAccountResponse](docs/GetAccountResponse.md)
+ - [GetAccountUsageResponse](docs/GetAccountUsageResponse.md)
  - [GetApiKeyResponse](docs/GetApiKeyResponse.md)
  - [GetLeadResponse](docs/GetLeadResponse.md)
  - [GetOrganizationResponse](docs/GetOrganizationResponse.md)
@@ -310,6 +315,7 @@ Method | HTTP request | Description
  - [ListWorkflowsResponse](docs/ListWorkflowsResponse.md)
  - [ListWorkspaceSharingsResponse](docs/ListWorkspaceSharingsResponse.md)
  - [ListWorkspacesResponse](docs/ListWorkspacesResponse.md)
+ - [ListWorkspacesResponse1](docs/ListWorkspacesResponse1.md)
  - [MarketplaceApp](docs/MarketplaceApp.md)
  - [MergeRequest](docs/MergeRequest.md)
  - [MethodNotAllowedErrorMessageResponse](docs/MethodNotAllowedErrorMessageResponse.md)

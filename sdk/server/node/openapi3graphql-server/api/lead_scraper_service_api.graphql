@@ -340,6 +340,11 @@ type Query {
   # @param String! workspaceId 
   # @return [GetApiKeyResponse]
   GetAPIKey(keyId: String!, organizationId: String!, tenantId: String!, accountId: String!, workspaceId: String!): GetApiKeyResponse
+  # Get account usage
+  # Retrieves usage details for a given account
+  # @param String! Id_ 
+  # @return [GetAccountUsageResponse]
+  GetAccountUsage(Id_: String!): GetAccountUsageResponse
   # Get lead details
   # Retrieves detailed information about a specific lead
   # @param String! leadId 
@@ -473,5 +478,14 @@ type Query {
   # @param String! accountId 
   # @return [ListWorkflowsResponse]
   ListWorkflows(workspaceId: String!, pageSize: Int!, pageNumber: Int!, filter: String!, organizationId: String!, tenantId: String!, accountId: String!): ListWorkflowsResponse
+  # List workspaces
+  # Retrieves a list of workspaces for a given account
+  # @param String! accountId 
+  # @param Int! pageSize 
+  # @param Int! pageNumber 
+  # @param String! organizationId 
+  # @param String! tenantId 
+  # @return [ListWorkspacesResponse]
+  ListWorkspaces(accountId: String!, pageSize: Int!, pageNumber: Int!, organizationId: String!, tenantId: String!): ListWorkspacesResponse
 }
 

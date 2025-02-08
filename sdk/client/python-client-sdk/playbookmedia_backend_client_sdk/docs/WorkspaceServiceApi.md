@@ -14,7 +14,7 @@ Method | HTTP request | Description
 [**get_workspace_compliance_report**](WorkspaceServiceApi.md#get_workspace_compliance_report) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report
 [**get_workspace_storage_stats**](WorkspaceServiceApi.md#get_workspace_storage_stats) | **GET** /workspace-service/v1/workspaces/storage-stats/{workspaceId} | Get storage statistics
 [**list_workspace_sharings**](WorkspaceServiceApi.md#list_workspace_sharings) | **GET** /workspace-service/v1/workspaces/sharings/{workspaceId} | List workspace sharings
-[**list_workspaces**](WorkspaceServiceApi.md#list_workspaces) | **GET** /workspace-service/v1/workspaces/list | List workspaces
+[**list_workspaces1**](WorkspaceServiceApi.md#list_workspaces1) | **GET** /workspace-service/v1/workspaces/list | List workspaces
 [**remove_workspace_sharing**](WorkspaceServiceApi.md#remove_workspace_sharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing
 [**share_workspace**](WorkspaceServiceApi.md#share_workspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace
 [**update_account**](WorkspaceServiceApi.md#update_account) | **PUT** /workspace-service/v1/accounts | Update account details
@@ -778,8 +778,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **list_workspaces**
-> ListWorkspacesResponse list_workspaces(account_id=account_id, page_size=page_size, page_token=page_token, filter=filter)
+# **list_workspaces1**
+> ListWorkspacesResponse1 list_workspaces1(account_id=account_id, page_size=page_size, page_token=page_token, filter=filter)
 
 List workspaces
 
@@ -788,7 +788,7 @@ List workspaces
 
 ```python
 import playbookmedia_backend_client_sdk
-from playbookmedia_backend_client_sdk.models.list_workspaces_response import ListWorkspacesResponse
+from playbookmedia_backend_client_sdk.models.list_workspaces_response1 import ListWorkspacesResponse1
 from playbookmedia_backend_client_sdk.rest import ApiException
 from pprint import pprint
 
@@ -810,11 +810,11 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
 
     try:
         # List workspaces
-        api_response = await api_instance.list_workspaces(account_id=account_id, page_size=page_size, page_token=page_token, filter=filter)
-        print("The response of WorkspaceServiceApi->list_workspaces:\n")
+        api_response = await api_instance.list_workspaces1(account_id=account_id, page_size=page_size, page_token=page_token, filter=filter)
+        print("The response of WorkspaceServiceApi->list_workspaces1:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WorkspaceServiceApi->list_workspaces: %s\n" % e)
+        print("Exception when calling WorkspaceServiceApi->list_workspaces1: %s\n" % e)
 ```
 
 
@@ -831,7 +831,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ListWorkspacesResponse**](ListWorkspacesResponse.md)
+[**ListWorkspacesResponse1**](ListWorkspacesResponse1.md)
 
 ### Authorization
 

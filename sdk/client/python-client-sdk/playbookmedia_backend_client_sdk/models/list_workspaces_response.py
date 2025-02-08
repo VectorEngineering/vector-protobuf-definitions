@@ -18,9 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
 from typing import Any, ClassVar, Dict, List, Optional
-from playbookmedia_backend_client_sdk.models.workspace1 import Workspace1
+from playbookmedia_backend_client_sdk.models.workspace import Workspace
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,10 +28,9 @@ class ListWorkspacesResponse(BaseModel):
     """
     ListWorkspacesResponse
     """ # noqa: E501
-    workspaces: Optional[List[Workspace1]] = None
-    next_page_token: Optional[StrictStr] = Field(default=None, alias="nextPageToken")
-    total_size: Optional[StrictInt] = Field(default=None, alias="totalSize")
-    __properties: ClassVar[List[str]] = ["workspaces", "nextPageToken", "totalSize"]
+    workspaces: Optional[List[Workspace]] = None
+    next_page_number: Optional[StrictInt] = Field(default=None, alias="nextPageNumber")
+    __properties: ClassVar[List[str]] = ["workspaces", "nextPageNumber"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,9 +90,8 @@ class ListWorkspacesResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "workspaces": [Workspace1.from_dict(_item) for _item in obj["workspaces"]] if obj.get("workspaces") is not None else None,
-            "nextPageToken": obj.get("nextPageToken"),
-            "totalSize": obj.get("totalSize")
+            "workspaces": [Workspace.from_dict(_item) for _item in obj["workspaces"]] if obj.get("workspaces") is not None else None,
+            "nextPageNumber": obj.get("nextPageNumber")
         })
         return _obj
 

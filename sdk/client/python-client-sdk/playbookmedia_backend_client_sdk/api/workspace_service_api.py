@@ -32,7 +32,7 @@ from playbookmedia_backend_client_sdk.models.get_workspace_compliance_report_res
 from playbookmedia_backend_client_sdk.models.get_workspace_response1 import GetWorkspaceResponse1
 from playbookmedia_backend_client_sdk.models.get_workspace_storage_stats_response import GetWorkspaceStorageStatsResponse
 from playbookmedia_backend_client_sdk.models.list_workspace_sharings_response import ListWorkspaceSharingsResponse
-from playbookmedia_backend_client_sdk.models.list_workspaces_response import ListWorkspacesResponse
+from playbookmedia_backend_client_sdk.models.list_workspaces_response1 import ListWorkspacesResponse1
 from playbookmedia_backend_client_sdk.models.remove_workspace_sharing_response import RemoveWorkspaceSharingResponse
 from playbookmedia_backend_client_sdk.models.share_workspace_body import ShareWorkspaceBody
 from playbookmedia_backend_client_sdk.models.share_workspace_response import ShareWorkspaceResponse
@@ -2972,7 +2972,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def list_workspaces(
+    async def list_workspaces1(
         self,
         account_id: Optional[StrictStr] = None,
         page_size: Optional[StrictInt] = None,
@@ -2990,7 +2990,7 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ListWorkspacesResponse:
+    ) -> ListWorkspacesResponse1:
         """List workspaces
 
 
@@ -3024,7 +3024,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_workspaces_serialize(
+        _param = self._list_workspaces1_serialize(
             account_id=account_id,
             page_size=page_size,
             page_token=page_token,
@@ -3036,7 +3036,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListWorkspacesResponse",
+            '200': "ListWorkspacesResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -3057,7 +3057,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def list_workspaces_with_http_info(
+    async def list_workspaces1_with_http_info(
         self,
         account_id: Optional[StrictStr] = None,
         page_size: Optional[StrictInt] = None,
@@ -3075,7 +3075,7 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ListWorkspacesResponse]:
+    ) -> ApiResponse[ListWorkspacesResponse1]:
         """List workspaces
 
 
@@ -3109,7 +3109,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_workspaces_serialize(
+        _param = self._list_workspaces1_serialize(
             account_id=account_id,
             page_size=page_size,
             page_token=page_token,
@@ -3121,7 +3121,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListWorkspacesResponse",
+            '200': "ListWorkspacesResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -3142,7 +3142,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def list_workspaces_without_preload_content(
+    async def list_workspaces1_without_preload_content(
         self,
         account_id: Optional[StrictStr] = None,
         page_size: Optional[StrictInt] = None,
@@ -3194,7 +3194,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_workspaces_serialize(
+        _param = self._list_workspaces1_serialize(
             account_id=account_id,
             page_size=page_size,
             page_token=page_token,
@@ -3206,7 +3206,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ListWorkspacesResponse",
+            '200': "ListWorkspacesResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -3222,7 +3222,7 @@ class WorkspaceServiceApi:
         return response_data.response
 
 
-    def _list_workspaces_serialize(
+    def _list_workspaces1_serialize(
         self,
         account_id,
         page_size,

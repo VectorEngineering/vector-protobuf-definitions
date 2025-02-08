@@ -200,7 +200,10 @@ src/main/java/org/openapitools/model/UnprocessableEntityErrorMessageResponse.jav
 src/main/java/org/openapitools/model/UpdateAPIKeyRequest.java
 src/main/java/org/openapitools/model/UpdateAPIKeyResponse.java
 src/main/java/org/openapitools/model/UpdateAccountRequest.java
+src/main/java/org/openapitools/model/UpdateAccountRequest1.java
+src/main/java/org/openapitools/model/UpdateAccountRequestPayload.java
 src/main/java/org/openapitools/model/UpdateAccountResponse.java
+src/main/java/org/openapitools/model/UpdateAccountResponse1.java
 src/main/java/org/openapitools/model/UpdateAccountSettingsRequest.java
 src/main/java/org/openapitools/model/UpdateAccountSettingsResponse.java
 src/main/java/org/openapitools/model/UpdateOrganizationRequest.java

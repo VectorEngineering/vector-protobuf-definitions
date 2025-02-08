@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-08T10:25:15.333536-05:00[America/New_York]
+- Build date: 2025-02-08T10:26:53.673905-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -169,6 +169,7 @@ Method | HTTP request | Description
 [**RotateAPIKey**](docs/lead_scraper_service_api.md#RotateAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key
 [**RotateTenantAPIKey**](docs/lead_scraper_service_api.md#RotateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key
 [**TriggerWorkflow**](docs/lead_scraper_service_api.md#TriggerWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution
+[**UpdateAccount**](docs/lead_scraper_service_api.md#UpdateAccount) | **PUT** /lead-scraper-microservice/api/v1/accounts/update | Update account details
 [**UpdateAccountSettings**](docs/lead_scraper_service_api.md#UpdateAccountSettings) | **PUT** /lead-scraper-microservice/api/v1/accounts/settings | Update account settings
 [**UpdateAPIKey**](docs/lead_scraper_service_api.md#UpdateAPIKey) | **PUT** /lead-scraper-microservice/api/v1/api-keys | Update API key
 [**UpdateOrganization**](docs/lead_scraper_service_api.md#UpdateOrganization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details
@@ -190,7 +191,7 @@ Method | HTTP request | Description
 [**ListWorkspaces1**](docs/workspace_service_api.md#ListWorkspaces1) | **GET** /workspace-service/v1/workspaces/list | List workspaces
 [**RemoveWorkspaceSharing**](docs/workspace_service_api.md#RemoveWorkspaceSharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing
 [**ShareWorkspace**](docs/workspace_service_api.md#ShareWorkspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace
-[**UpdateAccount**](docs/workspace_service_api.md#UpdateAccount) | **PUT** /workspace-service/v1/accounts | Update account details
+[**UpdateAccount1**](docs/workspace_service_api.md#UpdateAccount1) | **PUT** /workspace-service/v1/accounts | Update account details
 [**UpdateWorkspace1**](docs/workspace_service_api.md#UpdateWorkspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace
 [**UpdateWorkspaceSharing**](docs/workspace_service_api.md#UpdateWorkspaceSharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing
 
@@ -387,7 +388,10 @@ Method | HTTP request | Description
  - [TriggerWorkflowResponse](docs/TriggerWorkflowResponse.md)
  - [UnprocessableEntityErrorMessageResponse](docs/UnprocessableEntityErrorMessageResponse.md)
  - [UpdateAccountRequest](docs/UpdateAccountRequest.md)
+ - [UpdateAccountRequest1](docs/UpdateAccountRequest1.md)
+ - [UpdateAccountRequestPayload](docs/UpdateAccountRequestPayload.md)
  - [UpdateAccountResponse](docs/UpdateAccountResponse.md)
+ - [UpdateAccountResponse1](docs/UpdateAccountResponse1.md)
  - [UpdateAccountSettingsRequest](docs/UpdateAccountSettingsRequest.md)
  - [UpdateAccountSettingsResponse](docs/UpdateAccountSettingsResponse.md)
  - [UpdateApiKeyRequest](docs/UpdateApiKeyRequest.md)

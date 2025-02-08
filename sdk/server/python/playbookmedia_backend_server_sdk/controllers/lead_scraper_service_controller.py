@@ -69,6 +69,8 @@ from playbookmedia_backend_server_sdk.models.trigger_workflow_response import Tr
 from playbookmedia_backend_server_sdk.models.unprocessable_entity_error_message_response import UnprocessableEntityErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_api_key_request import UpdateAPIKeyRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_api_key_response import UpdateAPIKeyResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.update_account_request import UpdateAccountRequest  # noqa: E501
+from playbookmedia_backend_server_sdk.models.update_account_response import UpdateAccountResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_account_settings_request import UpdateAccountSettingsRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_account_settings_response import UpdateAccountSettingsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_organization_request import UpdateOrganizationRequest  # noqa: E501
@@ -755,6 +757,21 @@ def trigger_workflow(workspace_id, id, trigger_workflow_body):  # noqa: E501
     """
     if connexion.request.is_json:
         trigger_workflow_body = TriggerWorkflowBody.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
+def update_account(update_account_request):  # noqa: E501
+    """Update account details
+
+    Updates specified fields of an existing account # noqa: E501
+
+    :param update_account_request: 
+    :type update_account_request: dict | bytes
+
+    :rtype: Union[UpdateAccountResponse, Tuple[UpdateAccountResponse, int], Tuple[UpdateAccountResponse, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        update_account_request = UpdateAccountRequest.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
 
 

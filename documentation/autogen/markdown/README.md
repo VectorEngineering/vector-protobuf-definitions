@@ -45,6 +45,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *LeadScraperServiceApi* | [**rotateTenantAPIKey**](Apis/LeadScraperServiceApi.md#rotatetenantapikey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key |
 *LeadScraperServiceApi* | [**triggerWorkflow**](Apis/LeadScraperServiceApi.md#triggerworkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution |
 *LeadScraperServiceApi* | [**updateAPIKey**](Apis/LeadScraperServiceApi.md#updateapikey) | **PUT** /lead-scraper-microservice/api/v1/api-keys | Update API key |
+*LeadScraperServiceApi* | [**updateAccount**](Apis/LeadScraperServiceApi.md#updateaccount) | **PUT** /lead-scraper-microservice/api/v1/accounts/update | Update account details |
 *LeadScraperServiceApi* | [**updateAccountSettings**](Apis/LeadScraperServiceApi.md#updateaccountsettings) | **PUT** /lead-scraper-microservice/api/v1/accounts/settings | Update account settings |
 *LeadScraperServiceApi* | [**updateOrganization**](Apis/LeadScraperServiceApi.md#updateorganization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details |
 *LeadScraperServiceApi* | [**updateTenant**](Apis/LeadScraperServiceApi.md#updatetenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details |
@@ -65,7 +66,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *WorkspaceServiceApi* | [**listWorkspaces1**](Apis/WorkspaceServiceApi.md#listworkspaces1) | **GET** /workspace-service/v1/workspaces/list | List workspaces |
 *WorkspaceServiceApi* | [**removeWorkspaceSharing**](Apis/WorkspaceServiceApi.md#removeworkspacesharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing |
 *WorkspaceServiceApi* | [**shareWorkspace**](Apis/WorkspaceServiceApi.md#shareworkspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace |
-*WorkspaceServiceApi* | [**updateAccount**](Apis/WorkspaceServiceApi.md#updateaccount) | **PUT** /workspace-service/v1/accounts | Update account details |
+*WorkspaceServiceApi* | [**updateAccount1**](Apis/WorkspaceServiceApi.md#updateaccount1) | **PUT** /workspace-service/v1/accounts | Update account details |
 *WorkspaceServiceApi* | [**updateWorkspace1**](Apis/WorkspaceServiceApi.md#updateworkspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace |
 *WorkspaceServiceApi* | [**updateWorkspaceSharing**](Apis/WorkspaceServiceApi.md#updateworkspacesharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing |
 
@@ -264,7 +265,10 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [UpdateAPIKeyRequest](./Models/UpdateAPIKeyRequest.md)
  - [UpdateAPIKeyResponse](./Models/UpdateAPIKeyResponse.md)
  - [UpdateAccountRequest](./Models/UpdateAccountRequest.md)
+ - [UpdateAccountRequest1](./Models/UpdateAccountRequest1.md)
+ - [UpdateAccountRequestPayload](./Models/UpdateAccountRequestPayload.md)
  - [UpdateAccountResponse](./Models/UpdateAccountResponse.md)
+ - [UpdateAccountResponse1](./Models/UpdateAccountResponse1.md)
  - [UpdateAccountSettingsRequest](./Models/UpdateAccountSettingsRequest.md)
  - [UpdateAccountSettingsResponse](./Models/UpdateAccountSettingsResponse.md)
  - [UpdateOrganizationRequest](./Models/UpdateOrganizationRequest.md)

@@ -1071,6 +1071,22 @@ const UpdateAccountSettingsResponse = z
   .object({ settings: AccountSettings })
   .partial()
   .passthrough();
+const UpdateAccountRequestPayload = z
+  .object({
+    account: Account,
+    organizationId: z.string(),
+    tenantId: z.string(),
+  })
+  .partial()
+  .passthrough();
+const UpdateAccountRequest = z
+  .object({ payload: UpdateAccountRequestPayload })
+  .partial()
+  .passthrough();
+const UpdateAccountResponse = z
+  .object({ account: Account })
+  .partial()
+  .passthrough();
 const DeleteAccountResponse = z
   .object({ success: z.boolean() })
   .partial()
@@ -2301,11 +2317,11 @@ const AuthenticationErrorMessageResponse1 = z
   })
   .partial()
   .passthrough();
-const UpdateAccountRequest = z
+const UpdateAccountRequest1 = z
   .object({ account: Account1 })
   .partial()
   .passthrough();
-const UpdateAccountResponse = z
+const UpdateAccountResponse1 = z
   .object({ account: Account1 })
   .partial()
   .passthrough();
@@ -2536,6 +2552,9 @@ export const schemas = {
   rpc_Status,
   UpdateAccountSettingsRequest,
   UpdateAccountSettingsResponse,
+  UpdateAccountRequestPayload,
+  UpdateAccountRequest,
+  UpdateAccountResponse,
   DeleteAccountResponse,
   GetAccountUsageResponse,
   CreateAPIKeyRequest,
@@ -2658,8 +2677,8 @@ export const schemas = {
   Account1,
   CreateAccountResponse,
   AuthenticationErrorMessageResponse1,
-  UpdateAccountRequest,
-  UpdateAccountResponse,
+  UpdateAccountRequest1,
+  UpdateAccountResponse1,
   GetAccountResponse,
   UpdateWorkspaceSharingRequest,
   UpdateWorkspaceSharingResponse,
@@ -3048,6 +3067,113 @@ const endpoints = makeApi([
       },
     ],
     response: UpdateAccountSettingsResponse,
+    errors: [
+      {
+        status: 400,
+        description: `Bad Request - Invalid input parameters`,
+        schema: ValidationErrorMessageResponse,
+      },
+      {
+        status: 401,
+        description: `Unauthorized - Authentication required`,
+        schema: AuthenticationErrorMessageResponse,
+      },
+      {
+        status: 402,
+        description: `Payment Required - Payment is necessary to proceed`,
+        schema: PaymentRequiredErrorMessageResponse,
+      },
+      {
+        status: 403,
+        description: `Forbidden - Access denied`,
+        schema: ForbiddenErrorMessageResponse,
+      },
+      {
+        status: 404,
+        description: `Not Found - Resource not found`,
+        schema: NotFoundErrorMessageResponse,
+      },
+      {
+        status: 405,
+        description: `Method Not Allowed - HTTP method not supported`,
+        schema: MethodNotAllowedErrorMessageResponse,
+      },
+      {
+        status: 409,
+        description: `Conflict - Resource already exists`,
+        schema: ConflictErrorMessageResponse,
+      },
+      {
+        status: 410,
+        description: `Gone - Resource is no longer available`,
+        schema: GoneErrorMessageResponse,
+      },
+      {
+        status: 412,
+        description: `Precondition Failed - Preconditions in headers did not match`,
+        schema: PreconditionFailedErrorMessageResponse,
+      },
+      {
+        status: 422,
+        description: `Unprocessable Entity - Semantic errors in the request`,
+        schema: UnprocessableEntityErrorMessageResponse,
+      },
+      {
+        status: 425,
+        description: `Too Early - Request is being replayed`,
+        schema: TooEarlyErrorMessageResponse,
+      },
+      {
+        status: 429,
+        description: `Too Many Requests - Rate limit exceeded`,
+        schema: RateLimitErrorMessageResponse,
+      },
+      {
+        status: 500,
+        description: `Internal Server Error`,
+        schema: InternalErrorMessageResponse,
+      },
+      {
+        status: 501,
+        description: `Not Implemented - Functionality not supported`,
+        schema: NotImplementedErrorMessageResponse,
+      },
+      {
+        status: 502,
+        description: `Bad Gateway - Invalid response from upstream server`,
+        schema: BadGatewayErrorMessageResponse,
+      },
+      {
+        status: 503,
+        description: `Service Unavailable - Try again later`,
+        schema: ServiceUnavailableErrorMessageResponse,
+      },
+      {
+        status: 504,
+        description: `Gateway Timeout - Upstream server timed out`,
+        schema: GatewayTimeoutErrorMessageResponse,
+      },
+      {
+        status: "default",
+        description: `An unexpected error response.`,
+        schema: rpc_Status,
+      },
+    ],
+  },
+  {
+    method: "put",
+    path: "/lead-scraper-microservice/api/v1/accounts/update",
+    alias: "UpdateAccount",
+    description: `Updates specified fields of an existing account`,
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "body",
+        type: "Body",
+        schema: UpdateAccountRequest,
+      },
+    ],
+    response: UpdateAccountResponse,
     errors: [
       {
         status: 400,
@@ -7978,16 +8104,16 @@ const endpoints = makeApi([
   {
     method: "put",
     path: "/workspace-service/v1/accounts",
-    alias: "UpdateAccount",
+    alias: "UpdateAccount1",
     requestFormat: "json",
     parameters: [
       {
         name: "body",
         type: "Body",
-        schema: UpdateAccountRequest,
+        schema: UpdateAccountRequest1,
       },
     ],
-    response: UpdateAccountResponse,
+    response: UpdateAccountResponse1,
     errors: [
       {
         status: 400,
@@ -8904,6 +9030,16 @@ export class ApiClient {
     );
   }
 
+  async updateLeadScraperMicroserviceApiV1AccountsUpdate(
+    data: z.infer<typeof schemas.UpdateAccountRequest>,
+  ) {
+    return this.client.put(
+      "/lead-scraper-microservice/api/v1/accounts/update",
+      data,
+      {},
+    );
+  }
+
   async deleteLeadScraperMicroserviceApiV1AccountsId(params: {
     id: string;
     organizationId: string | undefined;
@@ -9607,7 +9743,7 @@ export class ApiClient {
   }
 
   async updateWorkspaceServiceV1Accounts(
-    data: z.infer<typeof schemas.UpdateAccountRequest>,
+    data: z.infer<typeof schemas.UpdateAccountRequest1>,
   ) {
     return this.client.put("/workspace-service/v1/accounts", data, {});
   }

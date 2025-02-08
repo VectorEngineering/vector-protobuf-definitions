@@ -42,6 +42,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**rotateTenantAPIKey**](LeadScraperServiceApi.md#rotateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key |
 | [**triggerWorkflow**](LeadScraperServiceApi.md#triggerWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution |
 | [**updateAPIKey**](LeadScraperServiceApi.md#updateAPIKey) | **PUT** /lead-scraper-microservice/api/v1/api-keys | Update API key |
+| [**updateAccount**](LeadScraperServiceApi.md#updateAccount) | **PUT** /lead-scraper-microservice/api/v1/accounts/update | Update account details |
 | [**updateAccountSettings**](LeadScraperServiceApi.md#updateAccountSettings) | **PUT** /lead-scraper-microservice/api/v1/accounts/settings | Update account settings |
 | [**updateOrganization**](LeadScraperServiceApi.md#updateOrganization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details |
 | [**updateTenant**](LeadScraperServiceApi.md#updateTenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details |
@@ -1151,6 +1152,33 @@ Update API key
 ### Return type
 
 [**UpdateAPIKeyResponse**](../Models/UpdateAPIKeyResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
+<a name="updateAccount"></a>
+# **updateAccount**
+> UpdateAccountResponse updateAccount(UpdateAccountRequest)
+
+Update account details
+
+    Updates specified fields of an existing account
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **UpdateAccountRequest** | [**UpdateAccountRequest**](../Models/UpdateAccountRequest.md)|  | |
+
+### Return type
+
+[**UpdateAccountResponse**](../Models/UpdateAccountResponse.md)
 
 ### Authorization
 

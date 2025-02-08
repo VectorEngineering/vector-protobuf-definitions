@@ -371,6 +371,13 @@ export default {
             };
         },
 
+        // @return UpdateAccountResponse
+        UpdateAccount: ($updateAccountRequest) => {
+            return {
+                "updateAccountRequest": ""
+            };
+        },
+
         // @return UpdateAccountSettingsResponse
         UpdateAccountSettings: ($updateAccountSettingsRequest) => {
             return {

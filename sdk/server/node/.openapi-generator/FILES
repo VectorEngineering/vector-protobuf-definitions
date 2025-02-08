@@ -188,7 +188,10 @@ docs/TriggerWorkflowBody.md
 docs/TriggerWorkflowResponse.md
 docs/UnprocessableEntityErrorMessageResponse.md
 docs/UpdateAccountRequest.md
+docs/UpdateAccountRequest1.md
+docs/UpdateAccountRequestPayload.md
 docs/UpdateAccountResponse.md
+docs/UpdateAccountResponse1.md
 docs/UpdateAccountSettingsRequest.md
 docs/UpdateAccountSettingsResponse.md
 docs/UpdateApiKeyRequest.md
@@ -416,7 +419,10 @@ openapi3graphql-server/model/trigger_workflow_body.graphql
 openapi3graphql-server/model/trigger_workflow_response.graphql
 openapi3graphql-server/model/unprocessable_entity_error_message_response.graphql
 openapi3graphql-server/model/update_account_request.graphql
+openapi3graphql-server/model/update_account_request1.graphql
+openapi3graphql-server/model/update_account_request_payload.graphql
 openapi3graphql-server/model/update_account_response.graphql
+openapi3graphql-server/model/update_account_response1.graphql
 openapi3graphql-server/model/update_account_settings_request.graphql
 openapi3graphql-server/model/update_account_settings_response.graphql
 openapi3graphql-server/model/update_api_key_request.graphql

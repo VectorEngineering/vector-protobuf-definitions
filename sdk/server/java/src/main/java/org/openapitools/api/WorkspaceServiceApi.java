@@ -30,8 +30,8 @@ import org.openapitools.model.RemoveWorkspaceSharingResponse;
 import org.openapitools.model.ShareWorkspaceBody;
 import org.openapitools.model.ShareWorkspaceResponse;
 import org.openapitools.model.Status;
-import org.openapitools.model.UpdateAccountRequest;
-import org.openapitools.model.UpdateAccountResponse;
+import org.openapitools.model.UpdateAccountRequest1;
+import org.openapitools.model.UpdateAccountResponse1;
 import org.openapitools.model.UpdateWorkspaceRequest;
 import org.openapitools.model.UpdateWorkspaceResponse;
 import org.openapitools.model.UpdateWorkspaceSharingRequest;
@@ -63,7 +63,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:25:12.747579-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:26:51.224811-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 @Validated
 @Tag(name = "workspace-service", description = "the workspace-service API")
 public interface WorkspaceServiceApi {
@@ -2198,7 +2198,7 @@ public interface WorkspaceServiceApi {
     /**
      * PUT /workspace-service/v1/accounts : Update account details
      *
-     * @param updateAccountRequest  (required)
+     * @param updateAccountRequest1  (required)
      * @return Account updated successfully (status code 200)
      *         or Bad Request - Invalid input parameters (status code 400)
      *         or Unauthorized - Authentication required (status code 401)
@@ -2210,13 +2210,13 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "updateAccount",
+        operationId = "updateAccount1",
         summary = "Update account details",
         tags = { "workspace-service" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Account updated successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = UpdateAccountResponse.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = UpdateAccountResponse.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = UpdateAccountResponse1.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = UpdateAccountResponse1.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input parameters", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorMessageResponse.class)),
@@ -2259,8 +2259,8 @@ public interface WorkspaceServiceApi {
         consumes = { "application/json", "application/x-www-form-urlencoded" }
     )
     
-    default ResponseEntity<UpdateAccountResponse> updateAccount(
-        @Parameter(name = "UpdateAccountRequest", description = "", required = true) @Valid @RequestBody UpdateAccountRequest updateAccountRequest
+    default ResponseEntity<UpdateAccountResponse1> updateAccount1(
+        @Parameter(name = "UpdateAccountRequest1", description = "", required = true) @Valid @RequestBody UpdateAccountRequest1 updateAccountRequest1
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {

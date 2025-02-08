@@ -17,7 +17,7 @@ Method | HTTP request | Description
 [**list_workspaces1**](WorkspaceServiceApi.md#list_workspaces1) | **GET** /workspace-service/v1/workspaces/list | List workspaces
 [**remove_workspace_sharing**](WorkspaceServiceApi.md#remove_workspace_sharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing
 [**share_workspace**](WorkspaceServiceApi.md#share_workspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace
-[**update_account**](WorkspaceServiceApi.md#update_account) | **PUT** /workspace-service/v1/accounts | Update account details
+[**update_account1**](WorkspaceServiceApi.md#update_account1) | **PUT** /workspace-service/v1/accounts | Update account details
 [**update_workspace1**](WorkspaceServiceApi.md#update_workspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace
 [**update_workspace_sharing**](WorkspaceServiceApi.md#update_workspace_sharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing
 
@@ -1009,8 +1009,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **update_account**
-> UpdateAccountResponse update_account(update_account_request)
+# **update_account1**
+> UpdateAccountResponse1 update_account1(update_account_request1)
 
 Update account details
 
@@ -1019,8 +1019,8 @@ Update account details
 
 ```python
 import playbookmedia_backend_client_sdk
-from playbookmedia_backend_client_sdk.models.update_account_request import UpdateAccountRequest
-from playbookmedia_backend_client_sdk.models.update_account_response import UpdateAccountResponse
+from playbookmedia_backend_client_sdk.models.update_account_request1 import UpdateAccountRequest1
+from playbookmedia_backend_client_sdk.models.update_account_response1 import UpdateAccountResponse1
 from playbookmedia_backend_client_sdk.rest import ApiException
 from pprint import pprint
 
@@ -1035,15 +1035,15 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = playbookmedia_backend_client_sdk.WorkspaceServiceApi(api_client)
-    update_account_request = playbookmedia_backend_client_sdk.UpdateAccountRequest() # UpdateAccountRequest | 
+    update_account_request1 = playbookmedia_backend_client_sdk.UpdateAccountRequest1() # UpdateAccountRequest1 | 
 
     try:
         # Update account details
-        api_response = await api_instance.update_account(update_account_request)
-        print("The response of WorkspaceServiceApi->update_account:\n")
+        api_response = await api_instance.update_account1(update_account_request1)
+        print("The response of WorkspaceServiceApi->update_account1:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WorkspaceServiceApi->update_account: %s\n" % e)
+        print("Exception when calling WorkspaceServiceApi->update_account1: %s\n" % e)
 ```
 
 
@@ -1053,11 +1053,11 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **update_account_request** | [**UpdateAccountRequest**](UpdateAccountRequest.md)|  | 
+ **update_account_request1** | [**UpdateAccountRequest1**](UpdateAccountRequest1.md)|  | 
 
 ### Return type
 
-[**UpdateAccountResponse**](UpdateAccountResponse.md)
+[**UpdateAccountResponse1**](UpdateAccountResponse1.md)
 
 ### Authorization
 

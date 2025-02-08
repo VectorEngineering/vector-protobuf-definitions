@@ -17,7 +17,7 @@ Method | HTTP request | Description
 [**ListWorkspaces1**](workspace_service_api.md#ListWorkspaces1) | **GET** /workspace-service/v1/workspaces/list | List workspaces
 [**RemoveWorkspaceSharing**](workspace_service_api.md#RemoveWorkspaceSharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing
 [**ShareWorkspace**](workspace_service_api.md#ShareWorkspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace
-[**UpdateAccount**](workspace_service_api.md#UpdateAccount) | **PUT** /workspace-service/v1/accounts | Update account details
+[**UpdateAccount1**](workspace_service_api.md#UpdateAccount1) | **PUT** /workspace-service/v1/accounts | Update account details
 [**UpdateWorkspace1**](workspace_service_api.md#UpdateWorkspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace
 [**UpdateWorkspaceSharing**](workspace_service_api.md#UpdateWorkspaceSharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing
 
@@ -89,9 +89,9 @@ Remove workspace sharing
 > ShareWorkspaceResponse ShareWorkspace(workspaceId, shareWorkspaceBody)
 
 Share workspace
-<a name="UpdateAccount"></a>
-# **UpdateAccount**
-> UpdateAccountResponse UpdateAccount(updateAccountRequest)
+<a name="UpdateAccount1"></a>
+# **UpdateAccount1**
+> UpdateAccountResponse1 UpdateAccount1(updateAccountRequest1)
 
 Update account details
 <a name="UpdateWorkspace1"></a>

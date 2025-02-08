@@ -17,7 +17,7 @@ Method | HTTP request | Description
 **ListWorkspaces1**](workspace_service_api.md#ListWorkspaces1) | **GET** /workspace-service/v1/workspaces/list | List workspaces
 **RemoveWorkspaceSharing**](workspace_service_api.md#RemoveWorkspaceSharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing
 **ShareWorkspace**](workspace_service_api.md#ShareWorkspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace
-**UpdateAccount**](workspace_service_api.md#UpdateAccount) | **PUT** /workspace-service/v1/accounts | Update account details
+**UpdateAccount1**](workspace_service_api.md#UpdateAccount1) | **PUT** /workspace-service/v1/accounts | Update account details
 **UpdateWorkspace1**](workspace_service_api.md#UpdateWorkspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace
 **UpdateWorkspaceSharing**](workspace_service_api.md#UpdateWorkspaceSharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing
 
@@ -389,19 +389,19 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **UpdateAccount**
-> models::UpdateAccountResponse UpdateAccount(update_account_request)
+# **UpdateAccount1**
+> models::UpdateAccountResponse1 UpdateAccount1(update_account_request1)
 Update account details
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-  **update_account_request** | [**UpdateAccountRequest**](UpdateAccountRequest.md)|  | 
+  **update_account_request1** | [**UpdateAccountRequest1**](UpdateAccountRequest1.md)|  | 
 
 ### Return type
 
-[**models::UpdateAccountResponse**](UpdateAccountResponse.md)
+[**models::UpdateAccountResponse1**](UpdateAccountResponse1.md)
 
 ### Authorization
 

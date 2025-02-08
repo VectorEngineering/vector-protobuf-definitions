@@ -240,34 +240,34 @@ service LeadScraperService {
     //     };
     // }
 
-    // // Update account
-    // //
-    // // Updates the specified fields of an existing account. Only provided
-    // // fields will be modified.
-    // //
-    // // Required permissions:
-    // // - update:account
-    // rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse) {
-    //     option (google.api.http) = {
-    //         put: "/lead-scraper-microservice/api/v1/accounts/update"
-    //         body: "*"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Update account details"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "UpdateAccount"
-    //         description: "Updates specified fields of an existing account"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Account updated successfully"
-    //                 schema: {
-    //                     json_schema: { ref: ".lead_scraper_service.v1.UpdateAccountResponse" }
-    //                 }
-    //             }
-    //         }
-    //     };
-    // }
+    // Update account
+    //
+    // Updates the specified fields of an existing account. Only provided
+    // fields will be modified.
+    //
+    // Required permissions:
+    // - update:account
+    rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse) {
+        option (google.api.http) = {
+            put: "/lead-scraper-microservice/api/v1/accounts/update"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Update account details"
+            tags: ["lead-scraper-service"]
+            operation_id: "UpdateAccount"
+            description: "Updates specified fields of an existing account"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Account updated successfully"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.UpdateAccountResponse" }
+                    }
+                }
+            }
+        };
+    }
 
     // Delete account
     //

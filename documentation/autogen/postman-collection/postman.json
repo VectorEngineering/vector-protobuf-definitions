@@ -1141,6 +1141,59 @@
                             ]
                         },
 	                        {
+    "name": "/lead-scraper-microservice/api/v1/accounts/update",
+                "description": "Updates specified fields of an existing account",
+                 "item": [
+                            {
+                                "name": "Update account details",
+                                "request": {
+                                    "method": "PUT",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"payload\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts/update",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "accounts",
+                                            "update"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Updates specified fields of an existing account"
+                                }
+                            }
+                            ]
+                        },
+	                        {
     "name": "/lead-scraper-microservice/api/v1/api-keys",
                 "description": "Creates a new API key with specified permissions and settings",
                  "item": [

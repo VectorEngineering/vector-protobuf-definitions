@@ -36,8 +36,8 @@ from playbookmedia_backend_client_sdk.models.list_workspaces_response1 import Li
 from playbookmedia_backend_client_sdk.models.remove_workspace_sharing_response import RemoveWorkspaceSharingResponse
 from playbookmedia_backend_client_sdk.models.share_workspace_body import ShareWorkspaceBody
 from playbookmedia_backend_client_sdk.models.share_workspace_response import ShareWorkspaceResponse
-from playbookmedia_backend_client_sdk.models.update_account_request import UpdateAccountRequest
-from playbookmedia_backend_client_sdk.models.update_account_response import UpdateAccountResponse
+from playbookmedia_backend_client_sdk.models.update_account_request1 import UpdateAccountRequest1
+from playbookmedia_backend_client_sdk.models.update_account_response1 import UpdateAccountResponse1
 from playbookmedia_backend_client_sdk.models.update_workspace_request import UpdateWorkspaceRequest
 from playbookmedia_backend_client_sdk.models.update_workspace_response import UpdateWorkspaceResponse
 from playbookmedia_backend_client_sdk.models.update_workspace_sharing_request import UpdateWorkspaceSharingRequest
@@ -3885,9 +3885,9 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def update_account(
+    async def update_account1(
         self,
-        update_account_request: UpdateAccountRequest,
+        update_account_request1: UpdateAccountRequest1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3900,12 +3900,12 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> UpdateAccountResponse:
+    ) -> UpdateAccountResponse1:
         """Update account details
 
 
-        :param update_account_request: (required)
-        :type update_account_request: UpdateAccountRequest
+        :param update_account_request1: (required)
+        :type update_account_request1: UpdateAccountRequest1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -3928,8 +3928,8 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_account_serialize(
-            update_account_request=update_account_request,
+        _param = self._update_account1_serialize(
+            update_account_request1=update_account_request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3937,7 +3937,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateAccountResponse",
+            '200': "UpdateAccountResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -3958,9 +3958,9 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def update_account_with_http_info(
+    async def update_account1_with_http_info(
         self,
-        update_account_request: UpdateAccountRequest,
+        update_account_request1: UpdateAccountRequest1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3973,12 +3973,12 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[UpdateAccountResponse]:
+    ) -> ApiResponse[UpdateAccountResponse1]:
         """Update account details
 
 
-        :param update_account_request: (required)
-        :type update_account_request: UpdateAccountRequest
+        :param update_account_request1: (required)
+        :type update_account_request1: UpdateAccountRequest1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4001,8 +4001,8 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_account_serialize(
-            update_account_request=update_account_request,
+        _param = self._update_account1_serialize(
+            update_account_request1=update_account_request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4010,7 +4010,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateAccountResponse",
+            '200': "UpdateAccountResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -4031,9 +4031,9 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def update_account_without_preload_content(
+    async def update_account1_without_preload_content(
         self,
-        update_account_request: UpdateAccountRequest,
+        update_account_request1: UpdateAccountRequest1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4050,8 +4050,8 @@ class WorkspaceServiceApi:
         """Update account details
 
 
-        :param update_account_request: (required)
-        :type update_account_request: UpdateAccountRequest
+        :param update_account_request1: (required)
+        :type update_account_request1: UpdateAccountRequest1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4074,8 +4074,8 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_account_serialize(
-            update_account_request=update_account_request,
+        _param = self._update_account1_serialize(
+            update_account_request1=update_account_request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4083,7 +4083,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateAccountResponse",
+            '200': "UpdateAccountResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -4099,9 +4099,9 @@ class WorkspaceServiceApi:
         return response_data.response
 
 
-    def _update_account_serialize(
+    def _update_account1_serialize(
         self,
-        update_account_request,
+        update_account_request1,
         _request_auth,
         _content_type,
         _headers,
@@ -4125,8 +4125,8 @@ class WorkspaceServiceApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if update_account_request is not None:
-            _body_params = update_account_request
+        if update_account_request1 is not None:
+            _body_params = update_account_request1
 
 
         # set the HTTP header `Accept`

@@ -17,7 +17,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**listWorkspaces1**](WorkspaceServiceApi.md#listWorkspaces1) | **GET** /workspace-service/v1/workspaces/list | List workspaces |
 | [**removeWorkspaceSharing**](WorkspaceServiceApi.md#removeWorkspaceSharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing |
 | [**shareWorkspace**](WorkspaceServiceApi.md#shareWorkspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace |
-| [**updateAccount**](WorkspaceServiceApi.md#updateAccount) | **PUT** /workspace-service/v1/accounts | Update account details |
+| [**updateAccount1**](WorkspaceServiceApi.md#updateAccount1) | **PUT** /workspace-service/v1/accounts | Update account details |
 | [**updateWorkspace1**](WorkspaceServiceApi.md#updateWorkspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace |
 | [**updateWorkspaceSharing**](WorkspaceServiceApi.md#updateWorkspaceSharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing |
 
@@ -358,9 +358,9 @@ No authorization required
 - **Content-Type**: application/json, application/x-www-form-urlencoded
 - **Accept**: application/json, 
 
-<a name="updateAccount"></a>
-# **updateAccount**
-> UpdateAccountResponse updateAccount(UpdateAccountRequest)
+<a name="updateAccount1"></a>
+# **updateAccount1**
+> UpdateAccountResponse1 updateAccount1(UpdateAccountRequest1)
 
 Update account details
 
@@ -368,11 +368,11 @@ Update account details
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **UpdateAccountRequest** | [**UpdateAccountRequest**](../Models/UpdateAccountRequest.md)|  | |
+| **UpdateAccountRequest1** | [**UpdateAccountRequest1**](../Models/UpdateAccountRequest1.md)|  | |
 
 ### Return type
 
-[**UpdateAccountResponse**](../Models/UpdateAccountResponse.md)
+[**UpdateAccountResponse1**](../Models/UpdateAccountResponse1.md)
 
 ### Authorization
 

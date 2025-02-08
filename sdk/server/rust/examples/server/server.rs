@@ -141,6 +141,7 @@ use openapi_client::{
     RotateApiKeyResponse,
     RotateTenantApiKeyResponse,
     TriggerWorkflowResponse,
+    UpdateAccountResponse,
     UpdateAccountSettingsResponse,
     UpdateApiKeyResponse,
     UpdateOrganizationResponse,
@@ -162,7 +163,7 @@ use openapi_client::{
     ListWorkspaces1Response,
     RemoveWorkspaceSharingResponse,
     ShareWorkspaceResponse,
-    UpdateAccountResponse,
+    UpdateAccount1Response,
     UpdateWorkspace1Response,
     UpdateWorkspaceSharingResponse,
 };
@@ -627,6 +628,16 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
+    /// Update account details
+    async fn update_account(
+        &self,
+        update_account_request: models::UpdateAccountRequest,
+        context: &C) -> Result<UpdateAccountResponse, ApiError>
+    {
+        info!("update_account({:?}) - X-Span-ID: {:?}", update_account_request, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
     /// Update account settings
     async fn update_account_settings(
         &self,
@@ -847,12 +858,12 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
     }
 
     /// Update account details
-    async fn update_account(
+    async fn update_account1(
         &self,
-        update_account_request: models::UpdateAccountRequest,
-        context: &C) -> Result<UpdateAccountResponse, ApiError>
+        update_account_request1: models::UpdateAccountRequest1,
+        context: &C) -> Result<UpdateAccount1Response, ApiError>
     {
-        info!("update_account({:?}) - X-Span-ID: {:?}", update_account_request, context.get().0.clone());
+        info!("update_account1({:?}) - X-Span-ID: {:?}", update_account_request1, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

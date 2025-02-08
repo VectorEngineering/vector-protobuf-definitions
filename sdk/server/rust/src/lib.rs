@@ -2994,6 +2994,86 @@ pub enum TriggerWorkflowResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum UpdateAccountResponse {
+    /// Account updated successfully
+    AccountUpdatedSuccessfully
+    (models::UpdateAccountResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum UpdateAccountSettingsResponse {
     /// Settings updated successfully
     SettingsUpdatedSuccessfully
@@ -4162,10 +4242,10 @@ pub enum ShareWorkspaceResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
-pub enum UpdateAccountResponse {
+pub enum UpdateAccount1Response {
     /// Account updated successfully
     AccountUpdatedSuccessfully
-    (models::UpdateAccountResponse)
+    (models::UpdateAccountResponse1)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -4594,6 +4674,12 @@ pub trait Api<C: Send + Sync> {
         trigger_workflow_body: models::TriggerWorkflowBody,
         context: &C) -> Result<TriggerWorkflowResponse, ApiError>;
 
+    /// Update account details
+    async fn update_account(
+        &self,
+        update_account_request: models::UpdateAccountRequest,
+        context: &C) -> Result<UpdateAccountResponse, ApiError>;
+
     /// Update account settings
     async fn update_account_settings(
         &self,
@@ -4730,10 +4816,10 @@ pub trait Api<C: Send + Sync> {
         context: &C) -> Result<ShareWorkspaceResponse, ApiError>;
 
     /// Update account details
-    async fn update_account(
+    async fn update_account1(
         &self,
-        update_account_request: models::UpdateAccountRequest,
-        context: &C) -> Result<UpdateAccountResponse, ApiError>;
+        update_account_request1: models::UpdateAccountRequest1,
+        context: &C) -> Result<UpdateAccount1Response, ApiError>;
 
     /// Update workspace
     async fn update_workspace1(
@@ -5064,6 +5150,12 @@ pub trait ApiNoContext<C: Send + Sync> {
         trigger_workflow_body: models::TriggerWorkflowBody,
         ) -> Result<TriggerWorkflowResponse, ApiError>;
 
+    /// Update account details
+    async fn update_account(
+        &self,
+        update_account_request: models::UpdateAccountRequest,
+        ) -> Result<UpdateAccountResponse, ApiError>;
+
     /// Update account settings
     async fn update_account_settings(
         &self,
@@ -5200,10 +5292,10 @@ pub trait ApiNoContext<C: Send + Sync> {
         ) -> Result<ShareWorkspaceResponse, ApiError>;
 
     /// Update account details
-    async fn update_account(
+    async fn update_account1(
         &self,
-        update_account_request: models::UpdateAccountRequest,
-        ) -> Result<UpdateAccountResponse, ApiError>;
+        update_account_request1: models::UpdateAccountRequest1,
+        ) -> Result<UpdateAccount1Response, ApiError>;
 
     /// Update workspace
     async fn update_workspace1(
@@ -5696,6 +5788,16 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         self.api().trigger_workflow(workspace_id, id, trigger_workflow_body, &context).await
     }
 
+    /// Update account details
+    async fn update_account(
+        &self,
+        update_account_request: models::UpdateAccountRequest,
+        ) -> Result<UpdateAccountResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().update_account(update_account_request, &context).await
+    }
+
     /// Update account settings
     async fn update_account_settings(
         &self,
@@ -5916,13 +6018,13 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     }
 
     /// Update account details
-    async fn update_account(
+    async fn update_account1(
         &self,
-        update_account_request: models::UpdateAccountRequest,
-        ) -> Result<UpdateAccountResponse, ApiError>
+        update_account_request1: models::UpdateAccountRequest1,
+        ) -> Result<UpdateAccount1Response, ApiError>
     {
         let context = self.context().clone();
-        self.api().update_account(update_account_request, &context).await
+        self.api().update_account1(update_account_request1, &context).await
     }
 
     /// Update workspace

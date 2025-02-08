@@ -102,6 +102,7 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**rotate_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#rotate_api_key) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key
 *LeadScraperServiceApi* | [**rotate_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#rotate_tenant_api_key) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key
 *LeadScraperServiceApi* | [**trigger_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#trigger_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution
+*LeadScraperServiceApi* | [**update_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_account) | **PUT** /lead-scraper-microservice/api/v1/accounts/update | Update account details
 *LeadScraperServiceApi* | [**update_account_settings**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_account_settings) | **PUT** /lead-scraper-microservice/api/v1/accounts/settings | Update account settings
 *LeadScraperServiceApi* | [**update_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_api_key) | **PUT** /lead-scraper-microservice/api/v1/api-keys | Update API key
 *LeadScraperServiceApi* | [**update_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_organization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details
@@ -123,7 +124,7 @@ Class | Method | HTTP request | Description
 *WorkspaceServiceApi* | [**list_workspaces1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#list_workspaces1) | **GET** /workspace-service/v1/workspaces/list | List workspaces
 *WorkspaceServiceApi* | [**remove_workspace_sharing**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#remove_workspace_sharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing
 *WorkspaceServiceApi* | [**share_workspace**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#share_workspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace
-*WorkspaceServiceApi* | [**update_account**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#update_account) | **PUT** /workspace-service/v1/accounts | Update account details
+*WorkspaceServiceApi* | [**update_account1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#update_account1) | **PUT** /workspace-service/v1/accounts | Update account details
 *WorkspaceServiceApi* | [**update_workspace1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#update_workspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace
 *WorkspaceServiceApi* | [**update_workspace_sharing**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#update_workspace_sharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing
 
@@ -322,7 +323,10 @@ Class | Method | HTTP request | Description
  - [UpdateAPIKeyRequest](playbookmedia_backend_client_sdk/docs/UpdateAPIKeyRequest.md)
  - [UpdateAPIKeyResponse](playbookmedia_backend_client_sdk/docs/UpdateAPIKeyResponse.md)
  - [UpdateAccountRequest](playbookmedia_backend_client_sdk/docs/UpdateAccountRequest.md)
+ - [UpdateAccountRequest1](playbookmedia_backend_client_sdk/docs/UpdateAccountRequest1.md)
+ - [UpdateAccountRequestPayload](playbookmedia_backend_client_sdk/docs/UpdateAccountRequestPayload.md)
  - [UpdateAccountResponse](playbookmedia_backend_client_sdk/docs/UpdateAccountResponse.md)
+ - [UpdateAccountResponse1](playbookmedia_backend_client_sdk/docs/UpdateAccountResponse1.md)
  - [UpdateAccountSettingsRequest](playbookmedia_backend_client_sdk/docs/UpdateAccountSettingsRequest.md)
  - [UpdateAccountSettingsResponse](playbookmedia_backend_client_sdk/docs/UpdateAccountSettingsResponse.md)
  - [UpdateOrganizationRequest](playbookmedia_backend_client_sdk/docs/UpdateOrganizationRequest.md)

@@ -110,8 +110,8 @@ const putRoute = createRoute({
       content: {
         "application/json": {
           schema: wrapSchema(
-            schemas.UpdateAccountRequest,
-            "UpdateAccountRequest",
+            schemas.UpdateAccountRequest1,
+            "UpdateAccountRequest1",
           ),
         },
       },
@@ -124,8 +124,8 @@ const putRoute = createRoute({
           schema: z
             .object({
               data: wrapSchema(
-                schemas.UpdateAccountResponse,
-                "UpdateAccountResponse",
+                schemas.UpdateAccountResponse1,
+                "UpdateAccountResponse1",
               ),
             })
             .openapi({

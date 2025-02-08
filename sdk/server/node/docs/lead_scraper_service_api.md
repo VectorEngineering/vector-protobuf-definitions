@@ -42,6 +42,7 @@ Method | HTTP request | Description
 [**RotateTenantAPIKey**](lead_scraper_service_api.md#RotateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key
 [**TriggerWorkflow**](lead_scraper_service_api.md#TriggerWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution
 [**UpdateAPIKey**](lead_scraper_service_api.md#UpdateAPIKey) | **PUT** /lead-scraper-microservice/api/v1/api-keys | Update API key
+[**UpdateAccount**](lead_scraper_service_api.md#UpdateAccount) | **PUT** /lead-scraper-microservice/api/v1/accounts/update | Update account details
 [**UpdateAccountSettings**](lead_scraper_service_api.md#UpdateAccountSettings) | **PUT** /lead-scraper-microservice/api/v1/accounts/settings | Update account settings
 [**UpdateOrganization**](lead_scraper_service_api.md#UpdateOrganization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details
 [**UpdateTenant**](lead_scraper_service_api.md#UpdateTenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details
@@ -317,6 +318,13 @@ Triggers the execution of a specific workflow
 Update API key
 
 Updates an existing API key&#39;s configuration
+<a name="UpdateAccount"></a>
+# **UpdateAccount**
+> UpdateAccountResponse UpdateAccount(updateAccountRequest)
+
+Update account details
+
+Updates specified fields of an existing account
 <a name="UpdateAccountSettings"></a>
 # **UpdateAccountSettings**
 > UpdateAccountSettingsResponse UpdateAccountSettings(updateAccountSettingsRequest)

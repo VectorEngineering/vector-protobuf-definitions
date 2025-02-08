@@ -42,6 +42,7 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       RotateApiKeyResponse,
                       RotateTenantApiKeyResponse,
                       TriggerWorkflowResponse,
+                      UpdateAccountResponse,
                       UpdateAccountSettingsResponse,
                       UpdateApiKeyResponse,
                       UpdateOrganizationResponse,
@@ -63,7 +64,7 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       ListWorkspaces1Response,
                       RemoveWorkspaceSharingResponse,
                       ShareWorkspaceResponse,
-                      UpdateAccountResponse,
+                      UpdateAccount1Response,
                       UpdateWorkspace1Response,
                       UpdateWorkspaceSharingResponse,
                      };
@@ -527,6 +528,14 @@ fn main() {
         },
         */
         /* Disabled because there's no example.
+        Some("UpdateAccount") => {
+            let result = rt.block_on(client.update_account(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
         Some("UpdateAccountSettings") => {
             let result = rt.block_on(client.update_account_settings(
                   ???
@@ -684,8 +693,8 @@ fn main() {
         },
         */
         /* Disabled because there's no example.
-        Some("UpdateAccount") => {
-            let result = rt.block_on(client.update_account(
+        Some("UpdateAccount1") => {
+            let result = rt.block_on(client.update_account1(
                   ???
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());

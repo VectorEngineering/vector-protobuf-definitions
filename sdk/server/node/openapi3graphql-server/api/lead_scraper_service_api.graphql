@@ -93,6 +93,15 @@ input DeleteWorkspaceInput {
     Id_: String!
 }
 
+input PauseWorkflowInput {
+    
+    workspaceId: String!, 
+    
+    Id_: String!, 
+    
+    pauseWorkflowBody: PauseWorkflowBodyInput
+}
+
 input RotateAPIKeyInput {
     
     rotateApiKeyRequest: RotateApiKeyRequestInput
@@ -101,6 +110,15 @@ input RotateAPIKeyInput {
 input RotateTenantAPIKeyInput {
     
     rotateTenantApiKeyRequest: RotateTenantApiKeyRequestInput
+}
+
+input TriggerWorkflowInput {
+    
+    workspaceId: String!, 
+    
+    Id_: String!, 
+    
+    triggerWorkflowBody: TriggerWorkflowBodyInput
 }
 
 input UpdateAPIKeyInput {
@@ -201,6 +219,13 @@ type Mutation {
   # @param String! Id_ 
   # @return [DeleteWorkspaceResponse]
   DeleteWorkspace(input: DeleteWorkspaceInput!): DeleteWorkspaceResponse
+  # Pause workflow execution
+  # Pauses the execution of a specific workflow
+  # @param String! workspaceId 
+  # @param String! Id_ 
+  # @param PauseWorkflowBody pauseWorkflowBody 
+  # @return [PauseWorkflowResponse]
+  PauseWorkflow(input: PauseWorkflowInput!): PauseWorkflowResponse
   # Rotate API key
   # Rotates an API key while maintaining its configuration
   # @param RotateApiKeyRequest rotateApiKeyRequest 
@@ -211,6 +236,13 @@ type Mutation {
   # @param RotateTenantApiKeyRequest rotateTenantApiKeyRequest 
   # @return [RotateTenantApiKeyResponse]
   RotateTenantAPIKey(input: RotateTenantAPIKeyInput!): RotateTenantApiKeyResponse
+  # Trigger workflow execution
+  # Triggers the execution of a specific workflow
+  # @param String! workspaceId 
+  # @param String! Id_ 
+  # @param TriggerWorkflowBody triggerWorkflowBody 
+  # @return [TriggerWorkflowResponse]
+  TriggerWorkflow(input: TriggerWorkflowInput!): TriggerWorkflowResponse
   # Update API key
   # Updates an existing API key&#39;s configuration
   # @param UpdateApiKeyRequest updateApiKeyRequest 

@@ -19,6 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	LeadScraperService_TriggerWorkflow_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/TriggerWorkflow"
+	LeadScraperService_PauseWorkflow_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/PauseWorkflow"
 	LeadScraperService_GetWorkspaceAnalytics_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/GetWorkspaceAnalytics"
 	LeadScraperService_GetWorkspace_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/GetWorkspace"
 	LeadScraperService_UpdateWorkspace_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/UpdateWorkspace"
@@ -80,6 +82,46 @@ const (
 //
 // ```
 type LeadScraperServiceClient interface {
+	// TriggerWorkflow initiates workflow execution with specified parameters
+	//
+	// Features:
+	// - Immediate or scheduled execution
+	// - Custom parameter overrides
+	// - Dependency chain validation
+	// - Resource availability check
+	//
+	// Execution process:
+	// 1. Validates workflow configuration
+	// 2. Checks resource availability
+	// 3. Initializes execution environment
+	// 4. Starts job processing
+	// 5. Monitors progress and updates status
+	//
+	// Error handling:
+	// - Automatic retry for transient failures
+	// - Configurable timeout settings
+	// - Detailed error reporting
+	TriggerWorkflow(ctx context.Context, in *TriggerWorkflowRequest, opts ...grpc.CallOption) (*TriggerWorkflowResponse, error)
+	// PauseWorkflow safely suspends workflow execution
+	//
+	// Behavior:
+	// - Gracefully stops job processing
+	// - Maintains workflow state
+	// - Preserves partial results
+	// - Allows resume from last checkpoint
+	//
+	// Safety measures:
+	// - Completes in-progress tasks
+	// - Saves checkpoint data
+	// - Updates workflow status
+	// - Notifies dependent systems
+	//
+	// Use cases:
+	// - System maintenance
+	// - Resource reallocation
+	// - Error investigation
+	// - Configuration updates
+	PauseWorkflow(ctx context.Context, in *PauseWorkflowRequest, opts ...grpc.CallOption) (*PauseWorkflowResponse, error)
 	// GetWorkspaceAnalytics provides comprehensive workspace metrics
 	//
 	// Metrics categories:
@@ -559,6 +601,26 @@ func NewLeadScraperServiceClient(cc grpc.ClientConnInterface) LeadScraperService
 	return &leadScraperServiceClient{cc}
 }
 
+func (c *leadScraperServiceClient) TriggerWorkflow(ctx context.Context, in *TriggerWorkflowRequest, opts ...grpc.CallOption) (*TriggerWorkflowResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TriggerWorkflowResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_TriggerWorkflow_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) PauseWorkflow(ctx context.Context, in *PauseWorkflowRequest, opts ...grpc.CallOption) (*PauseWorkflowResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PauseWorkflowResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_PauseWorkflow_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *leadScraperServiceClient) GetWorkspaceAnalytics(ctx context.Context, in *GetWorkspaceAnalyticsRequest, opts ...grpc.CallOption) (*GetWorkspaceAnalyticsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetWorkspaceAnalyticsResponse)
@@ -915,6 +977,46 @@ func (c *leadScraperServiceClient) ListWebhooks(ctx context.Context, in *ListWeb
 //
 // ```
 type LeadScraperServiceServer interface {
+	// TriggerWorkflow initiates workflow execution with specified parameters
+	//
+	// Features:
+	// - Immediate or scheduled execution
+	// - Custom parameter overrides
+	// - Dependency chain validation
+	// - Resource availability check
+	//
+	// Execution process:
+	// 1. Validates workflow configuration
+	// 2. Checks resource availability
+	// 3. Initializes execution environment
+	// 4. Starts job processing
+	// 5. Monitors progress and updates status
+	//
+	// Error handling:
+	// - Automatic retry for transient failures
+	// - Configurable timeout settings
+	// - Detailed error reporting
+	TriggerWorkflow(context.Context, *TriggerWorkflowRequest) (*TriggerWorkflowResponse, error)
+	// PauseWorkflow safely suspends workflow execution
+	//
+	// Behavior:
+	// - Gracefully stops job processing
+	// - Maintains workflow state
+	// - Preserves partial results
+	// - Allows resume from last checkpoint
+	//
+	// Safety measures:
+	// - Completes in-progress tasks
+	// - Saves checkpoint data
+	// - Updates workflow status
+	// - Notifies dependent systems
+	//
+	// Use cases:
+	// - System maintenance
+	// - Resource reallocation
+	// - Error investigation
+	// - Configuration updates
+	PauseWorkflow(context.Context, *PauseWorkflowRequest) (*PauseWorkflowResponse, error)
 	// GetWorkspaceAnalytics provides comprehensive workspace metrics
 	//
 	// Metrics categories:
@@ -1394,6 +1496,12 @@ type LeadScraperServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedLeadScraperServiceServer struct{}
 
+func (UnimplementedLeadScraperServiceServer) TriggerWorkflow(context.Context, *TriggerWorkflowRequest) (*TriggerWorkflowResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TriggerWorkflow not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) PauseWorkflow(context.Context, *PauseWorkflowRequest) (*PauseWorkflowResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PauseWorkflow not implemented")
+}
 func (UnimplementedLeadScraperServiceServer) GetWorkspaceAnalytics(context.Context, *GetWorkspaceAnalyticsRequest) (*GetWorkspaceAnalyticsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetWorkspaceAnalytics not implemented")
 }
@@ -1512,6 +1620,42 @@ func RegisterLeadScraperServiceServer(s grpc.ServiceRegistrar, srv LeadScraperSe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&LeadScraperService_ServiceDesc, srv)
+}
+
+func _LeadScraperService_TriggerWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TriggerWorkflowRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).TriggerWorkflow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_TriggerWorkflow_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).TriggerWorkflow(ctx, req.(*TriggerWorkflowRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_PauseWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PauseWorkflowRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).PauseWorkflow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_PauseWorkflow_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).PauseWorkflow(ctx, req.(*PauseWorkflowRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _LeadScraperService_GetWorkspaceAnalytics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2115,6 +2259,14 @@ var LeadScraperService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "lead_scraper_service.v1.LeadScraperService",
 	HandlerType: (*LeadScraperServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "TriggerWorkflow",
+			Handler:    _LeadScraperService_TriggerWorkflow_Handler,
+		},
+		{
+			MethodName: "PauseWorkflow",
+			Handler:    _LeadScraperService_PauseWorkflow_Handler,
+		},
 		{
 			MethodName: "GetWorkspaceAnalytics",
 			Handler:    _LeadScraperService_GetWorkspaceAnalytics_Handler,

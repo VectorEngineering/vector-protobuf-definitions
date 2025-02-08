@@ -126,6 +126,8 @@ Models/NullValue.md
 Models/OperationDetails.md
 Models/Organization.md
 Models/OutputFormat.md
+Models/PauseWorkflowBody.md
+Models/PauseWorkflowResponse.md
 Models/PayloadFormat.md
 Models/PaymentInfo.md
 Models/PaymentRequiredErrorMessageResponse.md
@@ -175,6 +177,8 @@ Models/Timezone.md
 Models/TokenInfo.md
 Models/TooEarlyErrorMessageResponse.md
 Models/TriggerEvent.md
+Models/TriggerWorkflowBody.md
+Models/TriggerWorkflowResponse.md
 Models/UnprocessableEntityErrorMessageResponse.md
 Models/UpdateAPIKeyRequest.md
 Models/UpdateAPIKeyResponse.md

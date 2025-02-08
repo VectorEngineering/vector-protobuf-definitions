@@ -129,6 +129,8 @@ docs/NullValue.md
 docs/OperationDetails.md
 docs/Organization.md
 docs/OutputFormat.md
+docs/PauseWorkflowBody.md
+docs/PauseWorkflowResponse.md
 docs/PayloadFormat.md
 docs/PaymentInfo.md
 docs/PaymentRequiredErrorMessageResponse.md
@@ -179,6 +181,8 @@ docs/Timezone.md
 docs/TokenInfo.md
 docs/TooEarlyErrorMessageResponse.md
 docs/TriggerEvent.md
+docs/TriggerWorkflowBody.md
+docs/TriggerWorkflowResponse.md
 docs/UnprocessableEntityErrorMessageResponse.md
 docs/UpdateAccountRequest.md
 docs/UpdateAccountResponse.md

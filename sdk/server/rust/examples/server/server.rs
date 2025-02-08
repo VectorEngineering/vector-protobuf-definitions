@@ -129,8 +129,10 @@ use openapi_client::{
     ListTenantApiKeysResponse,
     ListTenantsResponse,
     ListWebhooksResponse,
+    PauseWorkflowResponse,
     RotateApiKeyResponse,
     RotateTenantApiKeyResponse,
+    TriggerWorkflowResponse,
     UpdateApiKeyResponse,
     UpdateOrganizationResponse,
     UpdateTenantResponse,
@@ -469,6 +471,18 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
+    /// Pause workflow execution
+    async fn pause_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        pause_workflow_body: models::PauseWorkflowBody,
+        context: &C) -> Result<PauseWorkflowResponse, ApiError>
+    {
+        info!("pause_workflow(\"{}\", \"{}\", {:?}) - X-Span-ID: {:?}", workspace_id, id, pause_workflow_body, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
     /// Rotate API key
     async fn rotate_api_key(
         &self,
@@ -486,6 +500,18 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<RotateTenantApiKeyResponse, ApiError>
     {
         info!("rotate_tenant_api_key({:?}) - X-Span-ID: {:?}", rotate_tenant_api_key_request, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Trigger workflow execution
+    async fn trigger_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        trigger_workflow_body: models::TriggerWorkflowBody,
+        context: &C) -> Result<TriggerWorkflowResponse, ApiError>
+    {
+        info!("trigger_workflow(\"{}\", \"{}\", {:?}) - X-Span-ID: {:?}", workspace_id, id, trigger_workflow_body, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

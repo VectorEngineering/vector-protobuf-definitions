@@ -29,8 +29,10 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**listTenantAPIKeys**](LeadScraperServiceApi.md#listTenantAPIKeys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys |
 | [**listTenants**](LeadScraperServiceApi.md#listTenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants |
 | [**listWebhooks**](LeadScraperServiceApi.md#listWebhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks |
+| [**pauseWorkflow**](LeadScraperServiceApi.md#pauseWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution |
 | [**rotateAPIKey**](LeadScraperServiceApi.md#rotateAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key |
 | [**rotateTenantAPIKey**](LeadScraperServiceApi.md#rotateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key |
+| [**triggerWorkflow**](LeadScraperServiceApi.md#triggerWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution |
 | [**updateAPIKey**](LeadScraperServiceApi.md#updateAPIKey) | **PUT** /lead-scraper-microservice/api/v1/api-keys | Update API key |
 | [**updateOrganization**](LeadScraperServiceApi.md#updateOrganization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details |
 | [**updateTenant**](LeadScraperServiceApi.md#updateTenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details |
@@ -772,6 +774,35 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
+<a name="pauseWorkflow"></a>
+# **pauseWorkflow**
+> PauseWorkflowResponse pauseWorkflow(workspaceId, id, PauseWorkflowBody)
+
+Pause workflow execution
+
+    Pauses the execution of a specific workflow
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **workspaceId** | **String**|  | [default to null] |
+| **id** | **String**|  | [default to null] |
+| **PauseWorkflowBody** | [**PauseWorkflowBody**](../Models/PauseWorkflowBody.md)|  | |
+
+### Return type
+
+[**PauseWorkflowResponse**](../Models/PauseWorkflowResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
 <a name="rotateAPIKey"></a>
 # **rotateAPIKey**
 > RotateAPIKeyResponse rotateAPIKey(RotateAPIKeyRequest)
@@ -816,6 +847,35 @@ Rotate tenant API key
 ### Return type
 
 [**RotateTenantAPIKeyResponse**](../Models/RotateTenantAPIKeyResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
+<a name="triggerWorkflow"></a>
+# **triggerWorkflow**
+> TriggerWorkflowResponse triggerWorkflow(workspaceId, id, TriggerWorkflowBody)
+
+Trigger workflow execution
+
+    Triggers the execution of a specific workflow
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **workspaceId** | **String**|  | [default to null] |
+| **id** | **String**|  | [default to null] |
+| **TriggerWorkflowBody** | [**TriggerWorkflowBody**](../Models/TriggerWorkflowBody.md)|  | |
+
+### Return type
+
+[**TriggerWorkflowResponse**](../Models/TriggerWorkflowResponse.md)
 
 ### Authorization
 

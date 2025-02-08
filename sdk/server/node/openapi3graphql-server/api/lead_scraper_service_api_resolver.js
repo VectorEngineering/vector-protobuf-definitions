@@ -254,6 +254,15 @@ export default {
             };
         },
 
+        // @return PauseWorkflowResponse
+        PauseWorkflow: ($workspaceId, $Id_, $pauseWorkflowBody) => {
+            return {
+                "workspaceId": "workspaceId_example",
+                "Id_": "Id__example",
+                "pauseWorkflowBody": ""
+            };
+        },
+
         // @return RotateApiKeyResponse
         RotateAPIKey: ($rotateApiKeyRequest) => {
             return {
@@ -265,6 +274,15 @@ export default {
         RotateTenantAPIKey: ($rotateTenantApiKeyRequest) => {
             return {
                 "rotateTenantApiKeyRequest": ""
+            };
+        },
+
+        // @return TriggerWorkflowResponse
+        TriggerWorkflow: ($workspaceId, $Id_, $triggerWorkflowBody) => {
+            return {
+                "workspaceId": "workspaceId_example",
+                "Id_": "Id__example",
+                "triggerWorkflowBody": ""
             };
         },
 

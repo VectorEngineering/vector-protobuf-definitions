@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-08T09:23:53.687759-05:00[America/New_York]
+- Build date: 2025-02-08T09:25:22.009853-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -150,8 +150,10 @@ Method | HTTP request | Description
 [**ListTenantAPIKeys**](docs/lead_scraper_service_api.md#ListTenantAPIKeys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys
 [**ListTenants**](docs/lead_scraper_service_api.md#ListTenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
 [**ListWebhooks**](docs/lead_scraper_service_api.md#ListWebhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks
+[**PauseWorkflow**](docs/lead_scraper_service_api.md#PauseWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution
 [**RotateAPIKey**](docs/lead_scraper_service_api.md#RotateAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key
 [**RotateTenantAPIKey**](docs/lead_scraper_service_api.md#RotateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key
+[**TriggerWorkflow**](docs/lead_scraper_service_api.md#TriggerWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution
 [**UpdateAPIKey**](docs/lead_scraper_service_api.md#UpdateAPIKey) | **PUT** /lead-scraper-microservice/api/v1/api-keys | Update API key
 [**UpdateOrganization**](docs/lead_scraper_service_api.md#UpdateOrganization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details
 [**UpdateTenant**](docs/lead_scraper_service_api.md#UpdateTenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details
@@ -304,6 +306,8 @@ Method | HTTP request | Description
  - [OperationDetails](docs/OperationDetails.md)
  - [Organization](docs/Organization.md)
  - [OutputFormat](docs/OutputFormat.md)
+ - [PauseWorkflowBody](docs/PauseWorkflowBody.md)
+ - [PauseWorkflowResponse](docs/PauseWorkflowResponse.md)
  - [PayloadFormat](docs/PayloadFormat.md)
  - [PaymentInfo](docs/PaymentInfo.md)
  - [PaymentRequiredErrorMessageResponse](docs/PaymentRequiredErrorMessageResponse.md)
@@ -354,6 +358,8 @@ Method | HTTP request | Description
  - [TokenInfo](docs/TokenInfo.md)
  - [TooEarlyErrorMessageResponse](docs/TooEarlyErrorMessageResponse.md)
  - [TriggerEvent](docs/TriggerEvent.md)
+ - [TriggerWorkflowBody](docs/TriggerWorkflowBody.md)
+ - [TriggerWorkflowResponse](docs/TriggerWorkflowResponse.md)
  - [UnprocessableEntityErrorMessageResponse](docs/UnprocessableEntityErrorMessageResponse.md)
  - [UpdateAccountRequest](docs/UpdateAccountRequest.md)
  - [UpdateAccountResponse](docs/UpdateAccountResponse.md)

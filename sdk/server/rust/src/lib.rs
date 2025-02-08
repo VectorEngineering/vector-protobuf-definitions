@@ -2030,6 +2030,86 @@ pub enum ListWebhooksResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum PauseWorkflowResponse {
+    /// Workflow paused successfully
+    WorkflowPausedSuccessfully
+    (models::PauseWorkflowResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum RotateApiKeyResponse {
     /// API key rotated successfully
     APIKeyRotatedSuccessfully
@@ -2114,6 +2194,86 @@ pub enum RotateTenantApiKeyResponse {
     /// Tenant API key rotated successfully
     TenantAPIKeyRotatedSuccessfully
     (models::RotateTenantApiKeyResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum TriggerWorkflowResponse {
+    /// Workflow triggered successfully
+    WorkflowTriggeredSuccessfully
+    (models::TriggerWorkflowResponse)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -3532,6 +3692,14 @@ pub trait Api<C: Send + Sync> {
         search: Option<String>,
         context: &C) -> Result<ListWebhooksResponse, ApiError>;
 
+    /// Pause workflow execution
+    async fn pause_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        pause_workflow_body: models::PauseWorkflowBody,
+        context: &C) -> Result<PauseWorkflowResponse, ApiError>;
+
     /// Rotate API key
     async fn rotate_api_key(
         &self,
@@ -3543,6 +3711,14 @@ pub trait Api<C: Send + Sync> {
         &self,
         rotate_tenant_api_key_request: models::RotateTenantApiKeyRequest,
         context: &C) -> Result<RotateTenantApiKeyResponse, ApiError>;
+
+    /// Trigger workflow execution
+    async fn trigger_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        trigger_workflow_body: models::TriggerWorkflowBody,
+        context: &C) -> Result<TriggerWorkflowResponse, ApiError>;
 
     /// Update API key
     async fn update_api_key(
@@ -3904,6 +4080,14 @@ pub trait ApiNoContext<C: Send + Sync> {
         search: Option<String>,
         ) -> Result<ListWebhooksResponse, ApiError>;
 
+    /// Pause workflow execution
+    async fn pause_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        pause_workflow_body: models::PauseWorkflowBody,
+        ) -> Result<PauseWorkflowResponse, ApiError>;
+
     /// Rotate API key
     async fn rotate_api_key(
         &self,
@@ -3915,6 +4099,14 @@ pub trait ApiNoContext<C: Send + Sync> {
         &self,
         rotate_tenant_api_key_request: models::RotateTenantApiKeyRequest,
         ) -> Result<RotateTenantApiKeyResponse, ApiError>;
+
+    /// Trigger workflow execution
+    async fn trigger_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        trigger_workflow_body: models::TriggerWorkflowBody,
+        ) -> Result<TriggerWorkflowResponse, ApiError>;
 
     /// Update API key
     async fn update_api_key(
@@ -4390,6 +4582,18 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         self.api().list_webhooks(organization_id, workspace_id, tenant_id, account_id, page_size, page_number, status, search, &context).await
     }
 
+    /// Pause workflow execution
+    async fn pause_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        pause_workflow_body: models::PauseWorkflowBody,
+        ) -> Result<PauseWorkflowResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().pause_workflow(workspace_id, id, pause_workflow_body, &context).await
+    }
+
     /// Rotate API key
     async fn rotate_api_key(
         &self,
@@ -4408,6 +4612,18 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().rotate_tenant_api_key(rotate_tenant_api_key_request, &context).await
+    }
+
+    /// Trigger workflow execution
+    async fn trigger_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        trigger_workflow_body: models::TriggerWorkflowBody,
+        ) -> Result<TriggerWorkflowResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().trigger_workflow(workspace_id, id, trigger_workflow_body, &context).await
     }
 
     /// Update API key

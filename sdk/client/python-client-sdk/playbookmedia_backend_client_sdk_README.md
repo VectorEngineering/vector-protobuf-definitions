@@ -90,8 +90,10 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**list_tenant_api_keys**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_tenant_api_keys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys
 *LeadScraperServiceApi* | [**list_tenants**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_tenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
 *LeadScraperServiceApi* | [**list_webhooks**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_webhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks
+*LeadScraperServiceApi* | [**pause_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#pause_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution
 *LeadScraperServiceApi* | [**rotate_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#rotate_api_key) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key
 *LeadScraperServiceApi* | [**rotate_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#rotate_tenant_api_key) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key
+*LeadScraperServiceApi* | [**trigger_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#trigger_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution
 *LeadScraperServiceApi* | [**update_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_api_key) | **PUT** /lead-scraper-microservice/api/v1/api-keys | Update API key
 *LeadScraperServiceApi* | [**update_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_organization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details
 *LeadScraperServiceApi* | [**update_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_tenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details
@@ -244,6 +246,8 @@ Class | Method | HTTP request | Description
  - [OperationDetails](playbookmedia_backend_client_sdk/docs/OperationDetails.md)
  - [Organization](playbookmedia_backend_client_sdk/docs/Organization.md)
  - [OutputFormat](playbookmedia_backend_client_sdk/docs/OutputFormat.md)
+ - [PauseWorkflowBody](playbookmedia_backend_client_sdk/docs/PauseWorkflowBody.md)
+ - [PauseWorkflowResponse](playbookmedia_backend_client_sdk/docs/PauseWorkflowResponse.md)
  - [PayloadFormat](playbookmedia_backend_client_sdk/docs/PayloadFormat.md)
  - [PaymentInfo](playbookmedia_backend_client_sdk/docs/PaymentInfo.md)
  - [PaymentRequiredErrorMessageResponse](playbookmedia_backend_client_sdk/docs/PaymentRequiredErrorMessageResponse.md)
@@ -294,6 +298,8 @@ Class | Method | HTTP request | Description
  - [TokenInfo](playbookmedia_backend_client_sdk/docs/TokenInfo.md)
  - [TooEarlyErrorMessageResponse](playbookmedia_backend_client_sdk/docs/TooEarlyErrorMessageResponse.md)
  - [TriggerEvent](playbookmedia_backend_client_sdk/docs/TriggerEvent.md)
+ - [TriggerWorkflowBody](playbookmedia_backend_client_sdk/docs/TriggerWorkflowBody.md)
+ - [TriggerWorkflowResponse](playbookmedia_backend_client_sdk/docs/TriggerWorkflowResponse.md)
  - [UnprocessableEntityErrorMessageResponse](playbookmedia_backend_client_sdk/docs/UnprocessableEntityErrorMessageResponse.md)
  - [UpdateAPIKeyRequest](playbookmedia_backend_client_sdk/docs/UpdateAPIKeyRequest.md)
  - [UpdateAPIKeyResponse](playbookmedia_backend_client_sdk/docs/UpdateAPIKeyResponse.md)

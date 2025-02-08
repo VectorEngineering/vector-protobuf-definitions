@@ -30,8 +30,10 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       ListTenantApiKeysResponse,
                       ListTenantsResponse,
                       ListWebhooksResponse,
+                      PauseWorkflowResponse,
                       RotateApiKeyResponse,
                       RotateTenantApiKeyResponse,
+                      TriggerWorkflowResponse,
                       UpdateApiKeyResponse,
                       UpdateOrganizationResponse,
                       UpdateTenantResponse,
@@ -400,6 +402,16 @@ fn main() {
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
         /* Disabled because there's no example.
+        Some("PauseWorkflow") => {
+            let result = rt.block_on(client.pause_workflow(
+                  "workspace_id_example".to_string(),
+                  "id_example".to_string(),
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
         Some("RotateApiKey") => {
             let result = rt.block_on(client.rotate_api_key(
                   ???
@@ -410,6 +422,16 @@ fn main() {
         /* Disabled because there's no example.
         Some("RotateTenantApiKey") => {
             let result = rt.block_on(client.rotate_tenant_api_key(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("TriggerWorkflow") => {
+            let result = rt.block_on(client.trigger_workflow(
+                  "workspace_id_example".to_string(),
+                  "id_example".to_string(),
                   ???
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());

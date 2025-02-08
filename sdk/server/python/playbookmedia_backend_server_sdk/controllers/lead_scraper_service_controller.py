@@ -43,6 +43,8 @@ from playbookmedia_backend_server_sdk.models.list_webhooks_response import ListW
 from playbookmedia_backend_server_sdk.models.method_not_allowed_error_message_response import MethodNotAllowedErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.not_found_error_message_response import NotFoundErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.not_implemented_error_message_response import NotImplementedErrorMessageResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.pause_workflow_body import PauseWorkflowBody  # noqa: E501
+from playbookmedia_backend_server_sdk.models.pause_workflow_response import PauseWorkflowResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.payment_required_error_message_response import PaymentRequiredErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.precondition_failed_error_message_response import PreconditionFailedErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.rate_limit_error_message_response import RateLimitErrorMessageResponse  # noqa: E501
@@ -53,6 +55,8 @@ from playbookmedia_backend_server_sdk.models.rotate_tenant_api_key_response impo
 from playbookmedia_backend_server_sdk.models.rpc_status import RpcStatus  # noqa: E501
 from playbookmedia_backend_server_sdk.models.service_unavailable_error_message_response import ServiceUnavailableErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.too_early_error_message_response import TooEarlyErrorMessageResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.trigger_workflow_body import TriggerWorkflowBody  # noqa: E501
+from playbookmedia_backend_server_sdk.models.trigger_workflow_response import TriggerWorkflowResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.unprocessable_entity_error_message_response import UnprocessableEntityErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_api_key_request import UpdateAPIKeyRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_api_key_response import UpdateAPIKeyResponse  # noqa: E501
@@ -523,6 +527,25 @@ def list_webhooks(organization_id=None, workspace_id=None, tenant_id=None, accou
     return 'do some magic!'
 
 
+def pause_workflow(workspace_id, id, pause_workflow_body):  # noqa: E501
+    """Pause workflow execution
+
+    Pauses the execution of a specific workflow # noqa: E501
+
+    :param workspace_id: 
+    :type workspace_id: str
+    :param id: 
+    :type id: str
+    :param pause_workflow_body: 
+    :type pause_workflow_body: dict | bytes
+
+    :rtype: Union[PauseWorkflowResponse, Tuple[PauseWorkflowResponse, int], Tuple[PauseWorkflowResponse, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        pause_workflow_body = PauseWorkflowBody.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
 def rotate_api_key(rotate_api_key_request):  # noqa: E501
     """Rotate API key
 
@@ -550,6 +573,25 @@ def rotate_tenant_api_key(rotate_tenant_api_key_request):  # noqa: E501
     """
     if connexion.request.is_json:
         rotate_tenant_api_key_request = RotateTenantAPIKeyRequest.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
+def trigger_workflow(workspace_id, id, trigger_workflow_body):  # noqa: E501
+    """Trigger workflow execution
+
+    Triggers the execution of a specific workflow # noqa: E501
+
+    :param workspace_id: 
+    :type workspace_id: str
+    :param id: 
+    :type id: str
+    :param trigger_workflow_body: 
+    :type trigger_workflow_body: dict | bytes
+
+    :rtype: Union[TriggerWorkflowResponse, Tuple[TriggerWorkflowResponse, int], Tuple[TriggerWorkflowResponse, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        trigger_workflow_body = TriggerWorkflowBody.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
 
 

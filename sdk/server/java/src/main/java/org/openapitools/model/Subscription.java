@@ -26,7 +26,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "Subscription", description = "Key features: - Stripe integration - Usage-based billing - Metered pricing - Feature flags  Database considerations: - Syncs with Stripe webhooks - Tracks usage for metered billing - Maintains subscription lifecycle")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T09:23:51.243070-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T09:25:19.557300-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class Subscription {
 
   private String id;

@@ -23,7 +23,7 @@ import javax.annotation.Generated;
  * MergeRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T09:23:51.243070-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T09:25:19.557300-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class MergeRequest {
 
   private String id;

@@ -124,6 +124,8 @@ docs/NullValue.md
 docs/OperationDetails.md
 docs/Organization.md
 docs/OutputFormat.md
+docs/PauseWorkflowBody.md
+docs/PauseWorkflowResponse.md
 docs/PayloadFormat.md
 docs/PaymentInfo.md
 docs/PaymentRequiredErrorMessageResponse.md
@@ -174,6 +176,8 @@ docs/Timezone.md
 docs/TokenInfo.md
 docs/TooEarlyErrorMessageResponse.md
 docs/TriggerEvent.md
+docs/TriggerWorkflowBody.md
+docs/TriggerWorkflowResponse.md
 docs/UnprocessableEntityErrorMessageResponse.md
 docs/UpdateAccountRequest.md
 docs/UpdateAccountResponse.md
@@ -336,6 +340,8 @@ openapi3graphql-server/model/null_value.graphql
 openapi3graphql-server/model/operation_details.graphql
 openapi3graphql-server/model/organization.graphql
 openapi3graphql-server/model/output_format.graphql
+openapi3graphql-server/model/pause_workflow_body.graphql
+openapi3graphql-server/model/pause_workflow_response.graphql
 openapi3graphql-server/model/payload_format.graphql
 openapi3graphql-server/model/payment_info.graphql
 openapi3graphql-server/model/payment_required_error_message_response.graphql
@@ -386,6 +392,8 @@ openapi3graphql-server/model/timezone.graphql
 openapi3graphql-server/model/token_info.graphql
 openapi3graphql-server/model/too_early_error_message_response.graphql
 openapi3graphql-server/model/trigger_event.graphql
+openapi3graphql-server/model/trigger_workflow_body.graphql
+openapi3graphql-server/model/trigger_workflow_response.graphql
 openapi3graphql-server/model/unprocessable_entity_error_message_response.graphql
 openapi3graphql-server/model/update_account_request.graphql
 openapi3graphql-server/model/update_account_response.graphql

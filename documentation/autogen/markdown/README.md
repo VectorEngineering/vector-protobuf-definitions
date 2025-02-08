@@ -32,8 +32,10 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *LeadScraperServiceApi* | [**listTenantAPIKeys**](Apis/LeadScraperServiceApi.md#listtenantapikeys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys |
 *LeadScraperServiceApi* | [**listTenants**](Apis/LeadScraperServiceApi.md#listtenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants |
 *LeadScraperServiceApi* | [**listWebhooks**](Apis/LeadScraperServiceApi.md#listwebhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks |
+*LeadScraperServiceApi* | [**pauseWorkflow**](Apis/LeadScraperServiceApi.md#pauseworkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution |
 *LeadScraperServiceApi* | [**rotateAPIKey**](Apis/LeadScraperServiceApi.md#rotateapikey) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key |
 *LeadScraperServiceApi* | [**rotateTenantAPIKey**](Apis/LeadScraperServiceApi.md#rotatetenantapikey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key |
+*LeadScraperServiceApi* | [**triggerWorkflow**](Apis/LeadScraperServiceApi.md#triggerworkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution |
 *LeadScraperServiceApi* | [**updateAPIKey**](Apis/LeadScraperServiceApi.md#updateapikey) | **PUT** /lead-scraper-microservice/api/v1/api-keys | Update API key |
 *LeadScraperServiceApi* | [**updateOrganization**](Apis/LeadScraperServiceApi.md#updateorganization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details |
 *LeadScraperServiceApi* | [**updateTenant**](Apis/LeadScraperServiceApi.md#updatetenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details |
@@ -187,6 +189,8 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [OperationDetails](./Models/OperationDetails.md)
  - [Organization](./Models/Organization.md)
  - [OutputFormat](./Models/OutputFormat.md)
+ - [PauseWorkflowBody](./Models/PauseWorkflowBody.md)
+ - [PauseWorkflowResponse](./Models/PauseWorkflowResponse.md)
  - [PayloadFormat](./Models/PayloadFormat.md)
  - [PaymentInfo](./Models/PaymentInfo.md)
  - [PaymentRequiredErrorMessageResponse](./Models/PaymentRequiredErrorMessageResponse.md)
@@ -236,6 +240,8 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [TokenInfo](./Models/TokenInfo.md)
  - [TooEarlyErrorMessageResponse](./Models/TooEarlyErrorMessageResponse.md)
  - [TriggerEvent](./Models/TriggerEvent.md)
+ - [TriggerWorkflowBody](./Models/TriggerWorkflowBody.md)
+ - [TriggerWorkflowResponse](./Models/TriggerWorkflowResponse.md)
  - [UnprocessableEntityErrorMessageResponse](./Models/UnprocessableEntityErrorMessageResponse.md)
  - [UpdateAPIKeyRequest](./Models/UpdateAPIKeyRequest.md)
  - [UpdateAPIKeyResponse](./Models/UpdateAPIKeyResponse.md)

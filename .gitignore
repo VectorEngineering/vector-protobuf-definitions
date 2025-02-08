@@ -39,4 +39,4 @@ coverage/
 # Generated files
 generated/
 cli/generated/
-**/*.wrangler/**
+**/*.wrangler

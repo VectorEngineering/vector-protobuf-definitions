@@ -21,6 +21,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**getTenant**](LeadScraperServiceApi.md#getTenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details |
 | [**getTenantAPIKey**](LeadScraperServiceApi.md#getTenantAPIKey) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details |
 | [**getWebhook**](LeadScraperServiceApi.md#getWebhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook |
+| [**getWorkflow**](LeadScraperServiceApi.md#getWorkflow) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Get workflow details |
 | [**getWorkspace**](LeadScraperServiceApi.md#getWorkspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details |
 | [**getWorkspaceAnalytics**](LeadScraperServiceApi.md#getWorkspaceAnalytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics |
 | [**listAPIKeys**](LeadScraperServiceApi.md#listAPIKeys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys |
@@ -519,6 +520,34 @@ Get webhook
 ### Return type
 
 [**GetWebhookResponse**](../Models/GetWebhookResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="getWorkflow"></a>
+# **getWorkflow**
+> GetWorkflowResponse getWorkflow(workspaceId, id)
+
+Get workflow details
+
+    Retrieves details of a specific workflow
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **workspaceId** | **String**|  | [default to null] |
+| **id** | **String**|  | [default to null] |
+
+### Return type
+
+[**GetWorkflowResponse**](../Models/GetWorkflowResponse.md)
 
 ### Authorization
 

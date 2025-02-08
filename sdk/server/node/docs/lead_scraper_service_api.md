@@ -21,6 +21,7 @@ Method | HTTP request | Description
 [**GetTenant**](lead_scraper_service_api.md#GetTenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details
 [**GetTenantAPIKey**](lead_scraper_service_api.md#GetTenantAPIKey) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details
 [**GetWebhook**](lead_scraper_service_api.md#GetWebhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook
+[**GetWorkflow**](lead_scraper_service_api.md#GetWorkflow) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Get workflow details
 [**GetWorkspace**](lead_scraper_service_api.md#GetWorkspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details
 [**GetWorkspaceAnalytics**](lead_scraper_service_api.md#GetWorkspaceAnalytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics
 [**ListAPIKeys**](lead_scraper_service_api.md#ListAPIKeys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys
@@ -162,6 +163,13 @@ Retrieves details of a specific tenant API key
 Get webhook
 
 Retrieves details of a specific webhook configuration
+<a name="GetWorkflow"></a>
+# **GetWorkflow**
+> GetWorkflowResponse GetWorkflow(workspaceId, Id_)
+
+Get workflow details
+
+Retrieves details of a specific workflow
 <a name="GetWorkspace"></a>
 # **GetWorkspace**
 > GetWorkspaceResponse GetWorkspace(Id_, organizationId, tenantId, accountId)

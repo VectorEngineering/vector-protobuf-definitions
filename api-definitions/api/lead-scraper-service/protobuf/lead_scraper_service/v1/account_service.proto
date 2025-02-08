@@ -549,32 +549,32 @@ service LeadScraperService {
     //     };
     // }
 
-    // /**
-    //  * GetWorkflow retrieves detailed information about a specific workflow
-    //  * 
-    //  * This endpoint provides comprehensive details about a workflow, including:
-    //  * - Workflow configuration
-    //  * - Job execution history
-    //  * - Associated workspaces
-    //  */
-    // rpc GetWorkflow(GetWorkflowRequest) returns (GetWorkflowResponse) {
-    //     option (google.api.http) = {
-    //         get: "/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Get workflow details"
-    //         tags: ["lead-scraper-service"],
-    //         operation_id: "GetWorkflow",
-    //         description: "Retrieves details of a specific workflow",
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Workflow retrieved successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.GetWorkflowResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * GetWorkflow retrieves detailed information about a specific workflow
+     * 
+     * This endpoint provides comprehensive details about a workflow, including:
+     * - Workflow configuration
+     * - Job execution history
+     * - Associated workspaces
+     */
+    rpc GetWorkflow(GetWorkflowRequest) returns (GetWorkflowResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get workflow details"
+            tags: ["lead-scraper-service"],
+            operation_id: "GetWorkflow",
+            description: "Retrieves details of a specific workflow",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workflow retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.GetWorkflowResponse" } }
+                }
+            }
+        };
+    }
 
     /**
      * UpdateWorkflow modifies the configuration of a specific workflow

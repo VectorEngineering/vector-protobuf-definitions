@@ -30,6 +30,7 @@ from playbookmedia_backend_server_sdk.models.get_organization_response import Ge
 from playbookmedia_backend_server_sdk.models.get_tenant_api_key_response import GetTenantAPIKeyResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_tenant_response import GetTenantResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_webhook_response import GetWebhookResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.get_workflow_response import GetWorkflowResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_workspace_analytics_response import GetWorkspaceAnalyticsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_workspace_response import GetWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.gone_error_message_response import GoneErrorMessageResponse  # noqa: E501
@@ -358,6 +359,21 @@ def get_webhook(webhook_id, organization_id=None, workspace_id=None, tenant_id=N
     :type account_id: str
 
     :rtype: Union[GetWebhookResponse, Tuple[GetWebhookResponse, int], Tuple[GetWebhookResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
+def get_workflow(workspace_id, id):  # noqa: E501
+    """Get workflow details
+
+    Retrieves details of a specific workflow # noqa: E501
+
+    :param workspace_id: 
+    :type workspace_id: str
+    :param id: 
+    :type id: str
+
+    :rtype: Union[GetWorkflowResponse, Tuple[GetWorkflowResponse, int], Tuple[GetWorkflowResponse, int, Dict[str, str]]
     """
     return 'do some magic!'
 

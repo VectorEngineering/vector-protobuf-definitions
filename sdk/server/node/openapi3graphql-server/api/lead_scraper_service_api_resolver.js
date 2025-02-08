@@ -74,6 +74,14 @@ export default {
             };
         },
 
+        // @return GetWorkflowResponse
+        GetWorkflow: ($workspaceId, $Id_) => {
+            return {
+                "workspaceId": "workspaceId_example",
+                "Id_": "Id__example"
+            };
+        },
+
         // @return GetWorkspaceResponse
         GetWorkspace: ($Id_, $organizationId, $tenantId, $accountId) => {
             return {

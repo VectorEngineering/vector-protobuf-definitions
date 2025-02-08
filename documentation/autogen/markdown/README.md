@@ -24,6 +24,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *LeadScraperServiceApi* | [**getTenant**](Apis/LeadScraperServiceApi.md#gettenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details |
 *LeadScraperServiceApi* | [**getTenantAPIKey**](Apis/LeadScraperServiceApi.md#gettenantapikey) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details |
 *LeadScraperServiceApi* | [**getWebhook**](Apis/LeadScraperServiceApi.md#getwebhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook |
+*LeadScraperServiceApi* | [**getWorkflow**](Apis/LeadScraperServiceApi.md#getworkflow) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Get workflow details |
 *LeadScraperServiceApi* | [**getWorkspace**](Apis/LeadScraperServiceApi.md#getworkspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details |
 *LeadScraperServiceApi* | [**getWorkspaceAnalytics**](Apis/LeadScraperServiceApi.md#getworkspaceanalytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics |
 *LeadScraperServiceApi* | [**listAPIKeys**](Apis/LeadScraperServiceApi.md#listapikeys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys |
@@ -154,6 +155,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [GetTenantAPIKeyResponse](./Models/GetTenantAPIKeyResponse.md)
  - [GetTenantResponse](./Models/GetTenantResponse.md)
  - [GetWebhookResponse](./Models/GetWebhookResponse.md)
+ - [GetWorkflowResponse](./Models/GetWorkflowResponse.md)
  - [GetWorkspaceAnalyticsResponse](./Models/GetWorkspaceAnalyticsResponse.md)
  - [GetWorkspaceAnalyticsResponse1](./Models/GetWorkspaceAnalyticsResponse1.md)
  - [GetWorkspaceComplianceReportResponse](./Models/GetWorkspaceComplianceReportResponse.md)

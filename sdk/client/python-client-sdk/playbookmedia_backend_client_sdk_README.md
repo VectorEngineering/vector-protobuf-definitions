@@ -82,6 +82,7 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**get_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_tenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details
 *LeadScraperServiceApi* | [**get_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_tenant_api_key) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details
 *LeadScraperServiceApi* | [**get_webhook**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_webhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook
+*LeadScraperServiceApi* | [**get_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_workflow) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Get workflow details
 *LeadScraperServiceApi* | [**get_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_workspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details
 *LeadScraperServiceApi* | [**get_workspace_analytics**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_workspace_analytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics
 *LeadScraperServiceApi* | [**list_api_keys**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_api_keys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys
@@ -211,6 +212,7 @@ Class | Method | HTTP request | Description
  - [GetTenantAPIKeyResponse](playbookmedia_backend_client_sdk/docs/GetTenantAPIKeyResponse.md)
  - [GetTenantResponse](playbookmedia_backend_client_sdk/docs/GetTenantResponse.md)
  - [GetWebhookResponse](playbookmedia_backend_client_sdk/docs/GetWebhookResponse.md)
+ - [GetWorkflowResponse](playbookmedia_backend_client_sdk/docs/GetWorkflowResponse.md)
  - [GetWorkspaceAnalyticsResponse](playbookmedia_backend_client_sdk/docs/GetWorkspaceAnalyticsResponse.md)
  - [GetWorkspaceAnalyticsResponse1](playbookmedia_backend_client_sdk/docs/GetWorkspaceAnalyticsResponse1.md)
  - [GetWorkspaceComplianceReportResponse](playbookmedia_backend_client_sdk/docs/GetWorkspaceComplianceReportResponse.md)

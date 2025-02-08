@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-08T09:37:40.559965-05:00[America/New_York]
+- Build date: 2025-02-08T09:39:50.864134-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -74,6 +74,7 @@ cargo run --example client GetOrganization
 cargo run --example client GetTenant
 cargo run --example client GetTenantApiKey
 cargo run --example client GetWebhook
+cargo run --example client GetWorkflow
 cargo run --example client GetWorkspace
 cargo run --example client GetWorkspaceAnalytics
 cargo run --example client ListApiKeys
@@ -143,6 +144,7 @@ Method | HTTP request | Description
 [**GetTenant**](docs/lead_scraper_service_api.md#GetTenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details
 [**GetTenantAPIKey**](docs/lead_scraper_service_api.md#GetTenantAPIKey) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details
 [**GetWebhook**](docs/lead_scraper_service_api.md#GetWebhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook
+[**GetWorkflow**](docs/lead_scraper_service_api.md#GetWorkflow) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Get workflow details
 [**GetWorkspace**](docs/lead_scraper_service_api.md#GetWorkspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details
 [**GetWorkspaceAnalytics**](docs/lead_scraper_service_api.md#GetWorkspaceAnalytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics
 [**ListAPIKeys**](docs/lead_scraper_service_api.md#ListAPIKeys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys
@@ -272,6 +274,7 @@ Method | HTTP request | Description
  - [GetTenantApiKeyResponse](docs/GetTenantApiKeyResponse.md)
  - [GetTenantResponse](docs/GetTenantResponse.md)
  - [GetWebhookResponse](docs/GetWebhookResponse.md)
+ - [GetWorkflowResponse](docs/GetWorkflowResponse.md)
  - [GetWorkspaceAnalyticsResponse](docs/GetWorkspaceAnalyticsResponse.md)
  - [GetWorkspaceAnalyticsResponse1](docs/GetWorkspaceAnalyticsResponse1.md)
  - [GetWorkspaceComplianceReportResponse](docs/GetWorkspaceComplianceReportResponse.md)

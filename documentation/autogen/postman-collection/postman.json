@@ -3069,6 +3069,65 @@
                             ]
                         },
 	                        {
+    "name": "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id",
+                "description": "Retrieves details of a specific workflow",
+                 "item": [
+                            {
+                                "name": "Get workflow details",
+                                "request": {
+                                    "method": "GET",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "workspaces",
+                                            ":workspaceId",
+                                            "workflows",
+                                            ":id"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "workspaceId",
+                                                "value": "",
+                                                "description": ""
+                                            },
+                                            {
+                                                "key": "id",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Retrieves details of a specific workflow"
+                                }
+                            }
+                            ]
+                        },
+	                        {
     "name": "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id/pause",
                 "description": "Pauses the execution of a specific workflow",
                  "item": [

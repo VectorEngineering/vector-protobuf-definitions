@@ -1390,6 +1390,86 @@ pub enum GetWebhookResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum GetWorkflowResponse {
+    /// Workflow retrieved successfully
+    WorkflowRetrievedSuccessfully
+    (models::GetWorkflowResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum GetWorkspaceResponse {
     /// Workspace retrieved successfully
     WorkspaceRetrievedSuccessfully
@@ -3773,6 +3853,13 @@ pub trait Api<C: Send + Sync> {
         account_id: Option<String>,
         context: &C) -> Result<GetWebhookResponse, ApiError>;
 
+    /// Get workflow details
+    async fn get_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        context: &C) -> Result<GetWorkflowResponse, ApiError>;
+
     /// Get workspace details
     async fn get_workspace(
         &self,
@@ -4178,6 +4265,13 @@ pub trait ApiNoContext<C: Send + Sync> {
         tenant_id: Option<String>,
         account_id: Option<String>,
         ) -> Result<GetWebhookResponse, ApiError>;
+
+    /// Get workflow details
+    async fn get_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        ) -> Result<GetWorkflowResponse, ApiError>;
 
     /// Get workspace details
     async fn get_workspace(
@@ -4665,6 +4759,17 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().get_webhook(webhook_id, organization_id, workspace_id, tenant_id, account_id, &context).await
+    }
+
+    /// Get workflow details
+    async fn get_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        ) -> Result<GetWorkflowResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_workflow(workspace_id, id, &context).await
     }
 
     /// Get workspace details

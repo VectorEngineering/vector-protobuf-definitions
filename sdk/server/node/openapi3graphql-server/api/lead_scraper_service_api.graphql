@@ -331,6 +331,12 @@ type Query {
   # @param String! accountId 
   # @return [GetWebhookResponse]
   GetWebhook(webhookId: String!, organizationId: String!, workspaceId: String!, tenantId: String!, accountId: String!): GetWebhookResponse
+  # Get workflow details
+  # Retrieves details of a specific workflow
+  # @param String! workspaceId 
+  # @param String! Id_ 
+  # @return [GetWorkflowResponse]
+  GetWorkflow(workspaceId: String!, Id_: String!): GetWorkflowResponse
   # Get workspace details
   # Retrieves details of a specific workspace
   # @param String! Id_ 

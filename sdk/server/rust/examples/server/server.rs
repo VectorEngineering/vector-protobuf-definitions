@@ -121,6 +121,7 @@ use openapi_client::{
     GetTenantResponse,
     GetTenantApiKeyResponse,
     GetWebhookResponse,
+    GetWorkflowResponse,
     GetWorkspaceResponse,
     GetWorkspaceAnalyticsResponse,
     ListApiKeysResponse,
@@ -359,6 +360,17 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<GetWebhookResponse, ApiError>
     {
         info!("get_webhook(\"{}\", {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", webhook_id, organization_id, workspace_id, tenant_id, account_id, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Get workflow details
+    async fn get_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        context: &C) -> Result<GetWorkflowResponse, ApiError>
+    {
+        info!("get_workflow(\"{}\", \"{}\") - X-Span-ID: {:?}", workspace_id, id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

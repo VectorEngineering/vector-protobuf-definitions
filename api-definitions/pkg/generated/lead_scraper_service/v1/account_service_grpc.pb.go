@@ -19,6 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	LeadScraperService_GetWorkflow_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/GetWorkflow"
 	LeadScraperService_UpdateWorkflow_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/UpdateWorkflow"
 	LeadScraperService_ListWorkflows_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/ListWorkflows"
 	LeadScraperService_TriggerWorkflow_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/TriggerWorkflow"
@@ -84,6 +85,13 @@ const (
 //
 // ```
 type LeadScraperServiceClient interface {
+	// GetWorkflow retrieves detailed information about a specific workflow
+	//
+	// This endpoint provides comprehensive details about a workflow, including:
+	// - Workflow configuration
+	// - Job execution history
+	// - Associated workspaces
+	GetWorkflow(ctx context.Context, in *GetWorkflowRequest, opts ...grpc.CallOption) (*GetWorkflowResponse, error)
 	// UpdateWorkflow modifies the configuration of a specific workflow
 	//
 	// This endpoint allows updating the details of a workflow, including:
@@ -637,6 +645,16 @@ func NewLeadScraperServiceClient(cc grpc.ClientConnInterface) LeadScraperService
 	return &leadScraperServiceClient{cc}
 }
 
+func (c *leadScraperServiceClient) GetWorkflow(ctx context.Context, in *GetWorkflowRequest, opts ...grpc.CallOption) (*GetWorkflowResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWorkflowResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetWorkflow_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *leadScraperServiceClient) UpdateWorkflow(ctx context.Context, in *UpdateWorkflowRequest, opts ...grpc.CallOption) (*UpdateWorkflowResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateWorkflowResponse)
@@ -1033,6 +1051,13 @@ func (c *leadScraperServiceClient) ListWebhooks(ctx context.Context, in *ListWeb
 //
 // ```
 type LeadScraperServiceServer interface {
+	// GetWorkflow retrieves detailed information about a specific workflow
+	//
+	// This endpoint provides comprehensive details about a workflow, including:
+	// - Workflow configuration
+	// - Job execution history
+	// - Associated workspaces
+	GetWorkflow(context.Context, *GetWorkflowRequest) (*GetWorkflowResponse, error)
 	// UpdateWorkflow modifies the configuration of a specific workflow
 	//
 	// This endpoint allows updating the details of a workflow, including:
@@ -1586,6 +1611,9 @@ type LeadScraperServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedLeadScraperServiceServer struct{}
 
+func (UnimplementedLeadScraperServiceServer) GetWorkflow(context.Context, *GetWorkflowRequest) (*GetWorkflowResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetWorkflow not implemented")
+}
 func (UnimplementedLeadScraperServiceServer) UpdateWorkflow(context.Context, *UpdateWorkflowRequest) (*UpdateWorkflowResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateWorkflow not implemented")
 }
@@ -1716,6 +1744,24 @@ func RegisterLeadScraperServiceServer(s grpc.ServiceRegistrar, srv LeadScraperSe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&LeadScraperService_ServiceDesc, srv)
+}
+
+func _LeadScraperService_GetWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWorkflowRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).GetWorkflow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_GetWorkflow_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).GetWorkflow(ctx, req.(*GetWorkflowRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _LeadScraperService_UpdateWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2391,6 +2437,10 @@ var LeadScraperService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "lead_scraper_service.v1.LeadScraperService",
 	HandlerType: (*LeadScraperServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetWorkflow",
+			Handler:    _LeadScraperService_GetWorkflow_Handler,
+		},
 		{
 			MethodName: "UpdateWorkflow",
 			Handler:    _LeadScraperService_UpdateWorkflow_Handler,

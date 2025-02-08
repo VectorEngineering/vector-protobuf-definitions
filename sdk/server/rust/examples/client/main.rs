@@ -22,6 +22,7 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       GetTenantResponse,
                       GetTenantApiKeyResponse,
                       GetWebhookResponse,
+                      GetWorkflowResponse,
                       GetWorkspaceResponse,
                       GetWorkspaceAnalyticsResponse,
                       ListApiKeysResponse,
@@ -98,6 +99,7 @@ fn main() {
                 "GetTenant", 
                 "GetTenantApiKey", 
                 "GetWebhook", 
+                "GetWorkflow", 
                 "GetWorkspace", 
                 "GetWorkspaceAnalytics", 
                 "ListApiKeys", 
@@ -322,6 +324,13 @@ fn main() {
                   Some("workspace_id_example".to_string()),
                   Some("tenant_id_example".to_string()),
                   Some("account_id_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("GetWorkflow") => {
+            let result = rt.block_on(client.get_workflow(
+                  "workspace_id_example".to_string(),
+                  "id_example".to_string()
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },

@@ -97,6 +97,7 @@ src/main/java/org/openapitools/model/GetOrganizationResponse.java
 src/main/java/org/openapitools/model/GetTenantAPIKeyResponse.java
 src/main/java/org/openapitools/model/GetTenantResponse.java
 src/main/java/org/openapitools/model/GetWebhookResponse.java
+src/main/java/org/openapitools/model/GetWorkflowResponse.java
 src/main/java/org/openapitools/model/GetWorkspaceAnalyticsResponse.java
 src/main/java/org/openapitools/model/GetWorkspaceAnalyticsResponse1.java
 src/main/java/org/openapitools/model/GetWorkspaceComplianceReportResponse.java

@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "public-api-gateway",
+  "name": "usage-based-api-gateway",
   "main": "src/index.tsx",
   "compatibility_date": "2025-01-21",
   "compatibility_flags": ["nodejs_compat"],

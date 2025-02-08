@@ -1,5 +1,5 @@
 {
-  "name": "backend-api-kit",
+  "name": "usage-based-api-gateway",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",

@@ -22,8 +22,8 @@ While buildling [supermemory](https://api.supermemory.ai), [markdowner](https://
 
 1. Clone & set up the repo
 ```bash
-git clone https://github.com/dhravya/backend-api-kit.git
-cd backend-api-kit
+git clone https://github.com/dhravya/usage-based-api-gateway.git
+cd usage-based-api-gateway
 npm i -g bun
 bun install
 ```
@@ -66,8 +66,8 @@ Congrats! You're all set for shipping your backend API!
 
 1. Clone & set up the repo
 ```bash
-git clone https://github.com/dhravya/backend-api-kit.git
-cd backend-api-kit
+git clone https://github.com/dhravya/usage-based-api-gateway.git
+cd usage-based-api-gateway
 npm i -g bun
 bun install
 ```

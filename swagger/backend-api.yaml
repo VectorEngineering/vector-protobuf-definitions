@@ -10,7 +10,7 @@ info:
   license:
     name: Apache 2.0 License
     url: 'https://github.com/SolomonAIEngineering/backend-monorepo/blob/main/LICENSE'
-  x-api-version: v2
+  x-api-version: v1
 servers:
   - url: 'http://lead-scraping-microservice.vector.svc.cluster.local:9896'
   - url: 'https://lead-scraping-microservice.vector.svc.cluster.local:9896'

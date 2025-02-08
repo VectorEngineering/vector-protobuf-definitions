@@ -1,119 +1,107 @@
-import { Hono } from "hono";
+// Generated index file
+import { OpenAPIHono as Hono } from "@hono/zod-openapi";
 import type { Env } from "../types";
+
+// Import all route handlers
+import { leadScraperMicroserviceapiv1organizationRouter } from "./leadScraperMicroserviceapiv1organization";
+import { leadScraperMicroserviceapiv1organizationtenantsorganizationidRouter } from "./leadScraperMicroserviceapiv1organizationtenantsorganizationid";
+import { leadScraperMicroserviceapiv1organizationtenantsorganizationidtenantidRouter } from "./leadScraperMicroserviceapiv1organizationtenantsorganizationidtenantid";
+import { leadScraperMicroserviceapiv1organizationidRouter } from "./leadScraperMicroserviceapiv1organizationid";
+import { leadScraperMicroserviceapiv1organizationstenantsRouter } from "./leadScraperMicroserviceapiv1organizationstenants";
+import { leadScraperMicroserviceapiv1organizationstenantsorganizationidtenantidRouter } from "./leadScraperMicroserviceapiv1organizationstenantsorganizationidtenantid";
+import { leadScraperMicroserviceapiv1organizationsorganizationidtenantsRouter } from "./leadScraperMicroserviceapiv1organizationsorganizationidtenants";
+import { workspaceServicev1accountsRouter } from "./workspaceServicev1accounts";
+import { workspaceServicev1accountsidRouter } from "./workspaceServicev1accountsid";
+import { workspaceServicev1workspaceSharingsRouter } from "./workspaceServicev1workspaceSharings";
+import { workspaceServicev1workspaceSharingssharingidRouter } from "./workspaceServicev1workspaceSharingssharingid";
+import { workspaceServicev1workspacesRouter } from "./workspaceServicev1workspaces";
+import { workspaceServicev1workspacesanalyticsworkspaceidRouter } from "./workspaceServicev1workspacesanalyticsworkspaceid";
+import { workspaceServicev1workspacescomplianceReportworkspaceidRouter } from "./workspaceServicev1workspacescomplianceReportworkspaceid";
+import { workspaceServicev1workspaceslistRouter } from "./workspaceServicev1workspaceslist";
+import { workspaceServicev1workspacessharingsworkspaceidRouter } from "./workspaceServicev1workspacessharingsworkspaceid";
+import { workspaceServicev1workspacesstorageStatsworkspaceidRouter } from "./workspaceServicev1workspacesstorageStatsworkspaceid";
+import { workspaceServicev1workspacesidRouter } from "./workspaceServicev1workspacesid";
+import { workspaceServicev1workspacesworkspaceidshareRouter } from "./workspaceServicev1workspacesworkspaceidshare";
 
 const router = new Hono<{ Bindings: Env }>();
 
-import { leadScraperMicroserviceapiv1organizationRouter } from "./leadScraperMicroserviceapiv1organization";
+// Lead Scraper Microservice Routes
 router.route(
   "/lead-scraper-microservice/api/v1/organization",
   leadScraperMicroserviceapiv1organizationRouter,
 );
-
-import { leadScraperMicroserviceapiv1organizationtenantsorganizationidRouter } from "./leadScraperMicroserviceapiv1organizationtenantsorganizationid";
 router.route(
-  "/lead-scraper-microservice/api/v1/organization/tenants/:organizationId",
+  "/lead-scraper-microservice/api/v1/organization/tenants/{organizationId}",
   leadScraperMicroserviceapiv1organizationtenantsorganizationidRouter,
 );
-
-import { leadScraperMicroserviceapiv1organizationtenantsorganizationidtenantidRouter } from "./leadScraperMicroserviceapiv1organizationtenantsorganizationidtenantid";
 router.route(
-  "/lead-scraper-microservice/api/v1/organization/tenants/:organizationId/:tenantId",
+  "/lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId}",
   leadScraperMicroserviceapiv1organizationtenantsorganizationidtenantidRouter,
 );
-
-import { leadScraperMicroserviceapiv1organizationidRouter } from "./leadScraperMicroserviceapiv1organizationid";
 router.route(
-  "/lead-scraper-microservice/api/v1/organization/:id",
+  "/lead-scraper-microservice/api/v1/organization/{id}",
   leadScraperMicroserviceapiv1organizationidRouter,
 );
-
-import { leadScraperMicroserviceapiv1organizationstenantsRouter } from "./leadScraperMicroserviceapiv1organizationstenants";
 router.route(
   "/lead-scraper-microservice/api/v1/organizations/tenants",
   leadScraperMicroserviceapiv1organizationstenantsRouter,
 );
-
-import { leadScraperMicroserviceapiv1organizationstenantsorganizationidtenantidRouter } from "./leadScraperMicroserviceapiv1organizationstenantsorganizationidtenantid";
 router.route(
-  "/lead-scraper-microservice/api/v1/organizations/tenants/:organizationId/:tenantId",
+  "/lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId}",
   leadScraperMicroserviceapiv1organizationstenantsorganizationidtenantidRouter,
 );
-
-import { leadScraperMicroserviceapiv1organizationsorganizationidtenantsRouter } from "./leadScraperMicroserviceapiv1organizationsorganizationidtenants";
 router.route(
-  "/lead-scraper-microservice/api/v1/organizations/:organizationId/tenants",
+  "/lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants",
   leadScraperMicroserviceapiv1organizationsorganizationidtenantsRouter,
 );
 
-import { workspaceServicev1accountsRouter } from "./workspaceServicev1accounts";
+// Workspace Service Routes
 router.route(
   "/workspace-service/v1/accounts",
   workspaceServicev1accountsRouter,
 );
-
-import { workspaceServicev1accountsidRouter } from "./workspaceServicev1accountsid";
 router.route(
-  "/workspace-service/v1/accounts/:id",
+  "/workspace-service/v1/accounts/{id}",
   workspaceServicev1accountsidRouter,
 );
-
-import { workspaceServicev1workspaceSharingsRouter } from "./workspaceServicev1workspaceSharings";
 router.route(
   "/workspace-service/v1/workspace-sharings",
   workspaceServicev1workspaceSharingsRouter,
 );
-
-import { workspaceServicev1workspaceSharingssharingidRouter } from "./workspaceServicev1workspaceSharingssharingid";
 router.route(
-  "/workspace-service/v1/workspace-sharings/:sharingId",
+  "/workspace-service/v1/workspace-sharings/{sharingId}",
   workspaceServicev1workspaceSharingssharingidRouter,
 );
-
-import { workspaceServicev1workspacesRouter } from "./workspaceServicev1workspaces";
 router.route(
   "/workspace-service/v1/workspaces",
   workspaceServicev1workspacesRouter,
 );
-
-import { workspaceServicev1workspacesanalyticsworkspaceidRouter } from "./workspaceServicev1workspacesanalyticsworkspaceid";
 router.route(
-  "/workspace-service/v1/workspaces/analytics/:workspaceId",
+  "/workspace-service/v1/workspaces/analytics/{workspaceId}",
   workspaceServicev1workspacesanalyticsworkspaceidRouter,
 );
-
-import { workspaceServicev1workspacescomplianceReportworkspaceidRouter } from "./workspaceServicev1workspacescomplianceReportworkspaceid";
 router.route(
-  "/workspace-service/v1/workspaces/compliance-report/:workspaceId",
+  "/workspace-service/v1/workspaces/compliance-report/{workspaceId}",
   workspaceServicev1workspacescomplianceReportworkspaceidRouter,
 );
-
-import { workspaceServicev1workspaceslistRouter } from "./workspaceServicev1workspaceslist";
 router.route(
   "/workspace-service/v1/workspaces/list",
   workspaceServicev1workspaceslistRouter,
 );
-
-import { workspaceServicev1workspacessharingsworkspaceidRouter } from "./workspaceServicev1workspacessharingsworkspaceid";
 router.route(
-  "/workspace-service/v1/workspaces/sharings/:workspaceId",
+  "/workspace-service/v1/workspaces/sharings/{workspaceId}",
   workspaceServicev1workspacessharingsworkspaceidRouter,
 );
-
-import { workspaceServicev1workspacesstorageStatsworkspaceidRouter } from "./workspaceServicev1workspacesstorageStatsworkspaceid";
 router.route(
-  "/workspace-service/v1/workspaces/storage-stats/:workspaceId",
+  "/workspace-service/v1/workspaces/storage-stats/{workspaceId}",
   workspaceServicev1workspacesstorageStatsworkspaceidRouter,
 );
-
-import { workspaceServicev1workspacesidRouter } from "./workspaceServicev1workspacesid";
 router.route(
-  "/workspace-service/v1/workspaces/:id",
+  "/workspace-service/v1/workspaces/{id}",
   workspaceServicev1workspacesidRouter,
 );
-
-import { workspaceServicev1workspacesworkspaceidshareRouter } from "./workspaceServicev1workspacesworkspaceidshare";
 router.route(
-  "/workspace-service/v1/workspaces/:workspaceId/share",
+  "/workspace-service/v1/workspaces/{workspaceId}/share",
   workspaceServicev1workspacesworkspaceidshareRouter,
 );
 

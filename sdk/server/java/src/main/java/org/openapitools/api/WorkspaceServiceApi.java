@@ -63,7 +63,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T17:56:14.620528-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T21:14:09.107639-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 @Validated
 @Tag(name = "workspace-service", description = "the workspace-service API")
 public interface WorkspaceServiceApi {

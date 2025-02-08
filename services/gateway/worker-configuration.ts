@@ -1,11 +1,10 @@
 import {
-  Ai,
   D1Database,
-  Fetcher,
   KVNamespace,
   R2Bucket,
+  Fetcher,
+  Ai,
 } from "@cloudflare/workers-types";
-
 import { TokenPrivilege } from "./middleware/auth";
 
 interface Env {

@@ -19,6 +19,14 @@ Handlebars.registerHelper(
 Handlebars.registerHelper('or', function () {
   return Array.prototype.slice.call(arguments, 0, -1).some(Boolean);
 });
+Handlebars.registerHelper('includes', (str: string, search: string) => {
+  if (!str || typeof str !== 'string') return false;
+  return str.includes(search);
+});
+Handlebars.registerHelper('toOpenAPIPath', (path: string) => {
+  if (!path || typeof path !== 'string') return '';
+  return path.replace(/:([^/]+)/g, '{$1}');
+});
 Handlebars.registerHelper('capitalize', (str: string) => {
   if (!str) return '';
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -109,6 +117,12 @@ export async function generate(options: GenerateOptions) {
       },
     });
 
+    // Replace zod import with @hono/zod-openapi
+    const modifiedZodClientResult = zodClientResult.replace(
+      'import { z } from "zod";',
+      'import { z } from "@hono/zod-openapi";'
+    );
+
     // Load templates
     const templateDir = options.template || join(process.cwd(), 'templates');
     const templateFiles = await glob('**/*.hbs', { cwd: templateDir });
@@ -157,26 +171,32 @@ export async function generate(options: GenerateOptions) {
             path,
             pathItem,
             openApiSpec,
-            zodSchemas: zodClientResult,
+            zodSchemas: modifiedZodClientResult,
           });
 
-          await writeFile(routeFilePath, routeContent);
+          // Replace Hono import with OpenAPIHono
+          const modifiedRouteContent = routeContent.replace(
+            'import { Hono } from "hono";',
+            'import { OpenAPIHono as Hono } from "@hono/zod-openapi";'
+          );
+
+          await writeFile(routeFilePath, modifiedRouteContent);
         }
 
         // Generate routes index file
-        const indexContent = `import { Hono } from 'hono';
+        const indexContent = `import { OpenAPIHono as Hono } from "@hono/zod-openapi";
 import type { Env } from '../types';
 
 const router = new Hono<{ Bindings: Env }>();
 
 ${Object.entries(openApiSpec.paths || {})
-  .map(([path, _]) => {
-    const routeName = Handlebars.helpers.routeFilename(path);
-    const routePath = Handlebars.helpers.routePath(path);
-    return `import { ${routeName}Router } from './${routeName}';
+            .map(([path, _]) => {
+              const routeName = Handlebars.helpers.routeFilename(path);
+              const routePath = Handlebars.helpers.routePath(path);
+              return `import { ${routeName}Router } from './${routeName}';
 router.route('${routePath}', ${routeName}Router);`;
-  })
-  .join('\n\n')}
+            })
+            .join('\n\n')}
 
 export const ${Handlebars.helpers.basename(openApiSpec.info.title)}Router = router;
 `;
@@ -191,7 +211,7 @@ export const ${Handlebars.helpers.basename(openApiSpec.info.title)}Router = rout
         }
 
         const rendered = template({
-          zodSchemas: zodClientResult,
+          zodSchemas: modifiedZodClientResult,
           openApiSpec,
         });
 

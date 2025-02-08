@@ -1,92 +1,341 @@
 import { ApiClient } from '../client';
 import type { Env } from '../types';
 import { HTTPException } from 'hono/http-exception';
-import { Hono } from "hono";
+import { z } from "@hono/zod-openapi";
+import { OpenAPIHono as Hono, createRoute } from "@hono/zod-openapi";
+import { env } from "hono/adapter";
+import { schemas } from '../client';
+
+// Error response schema
+const ErrorResponseSchema = z.object({
+  error: z.string(),
+  code: z.string().optional(),
+  details: z.any().optional()
+}).openapi({
+  title: "Error Response",
+  description: "Standard error response object"
+});
+
+// Wrap imported schemas with OpenAPI metadata
+const wrapSchema = (schema: any, title: string) => {
+  return z.lazy(() => schema).openapi({
+    type: "object",
+    title: title
+  });
+};
 
 // Route handler for {{path}}
 const router = new Hono<{ Bindings: Env }>();
 
 {{#if pathItem.get}}
-router.get("/", async (c) => {
-  const client = new ApiClient(c.env.API_BASE_URL);
+const getRoute = createRoute({
+  method: "get",
+  path: "/",
+  tags: ["{{@key}}"],
+  summary: "{{pathItem.get.summary}}",
+  description: "{{pathItem.get.description}}",
   {{#if pathItem.get.parameters}}
-  const params = {
-    {{#each pathItem.get.parameters}}
-    {{#if (eq this.in "query")}}
-    {{this.name}}: {{#if (eq this.schema.type "integer")}}c.req.query("{{this.name}}") ? Number(c.req.query("{{this.name}}")) : undefined{{else}}c.req.query("{{this.name}}"){{/if}}{{#if this.required}} || ''{{/if}},
+  request: {
+    {{#if (hasQueryParams pathItem.get.parameters)}}
+    query: z.object({
+      {{#each pathItem.get.parameters}}
+      {{#if (eq this.in "query")}}
+      {{this.name}}: {{#if (eq this.schema.type "integer")}}z.number(){{else}}z.string(){{/if}}{{#unless this.required}}.optional(){{/unless}}.openapi({
+        param: {
+          name: "{{this.name}}",
+          in: "query",
+          required: {{#if this.required}}true{{else}}false{{/if}},
+          description: "{{this.description}}"
+        }
+      }),
+      {{/if}}
+      {{/each}}
+    }).openapi({
+      title: "Query Parameters",
+      description: "Query parameters for the request"
+    }),
     {{/if}}
-    {{#if (eq this.in "path")}}
-    {{this.name}}: c.req.param("{{this.name}}") || (() => { throw new HTTPException(400, { message: "Missing required path parameter: {{this.name}}" }) })(),
-    {{/if}}
-    {{/each}}
-  };
-  const response = await client.get{{capitalize (basename path)}}(params);
-  {{else}}
-  const response = await client.get{{capitalize (basename path)}}();
+  },
   {{/if}}
-  return c.json(response);
+  responses: {
+    200: {
+      content: {
+        "application/json": {
+          schema: z.object({
+            data: {{#if pathItem.get.responses.[200].content.[application/json].schema.$ref}}wrapSchema(schemas.{{lookup pathItem.get.responses.[200].content.[application/json].schema.$ref "#/components/schemas/"}}, "{{lookup pathItem.get.responses.[200].content.[application/json].schema.$ref "#/components/schemas/"}}"){{else}}z.any().openapi({ type: "object" }){{/if}}
+          }).openapi({
+            title: "Success Response",
+            description: "{{pathItem.get.responses.[200].description}}"
+          }),
+        },
+      },
+      description: "{{pathItem.get.description}}",
+    },
+    400: {
+      content: {
+        "application/json": {
+          schema: ErrorResponseSchema,
+        },
+      },
+      description: "Returns an error",
+    },
+  },
+});
+
+router.openapi(getRoute, async (c) => {
+  const client = new ApiClient(c.env.API_BASE_URL);
+  try {
+    {{#if pathItem.get.parameters}}
+    const params = {
+      {{#each pathItem.get.parameters}}
+      {{#if (eq this.in "query")}}
+      {{this.name}}: c.req.valid("query").{{this.name}},
+      {{/if}}
+      {{#if (eq this.in "path")}}
+      {{this.name}}: c.req.param("{{this.name}}") || (() => { throw new HTTPException(400, { message: "Missing required path parameter: {{this.name}}" }) })(),
+      {{/if}}
+      {{/each}}
+    };
+    const response = await client.get{{capitalize (basename path)}}(params);
+    {{else}}
+    const response = await client.get{{capitalize (basename path)}}();
+    {{/if}}
+    return c.json({ data: response }, 200);
+  } catch (error) {
+    if (error instanceof HTTPException) {
+      throw error;
+    }
+    return c.json({ 
+      error: error.message || "Internal Server Error",
+      code: "INTERNAL_ERROR"
+    }, 400);
+  }
 });
 {{/if}}
 
 {{#if pathItem.post}}
-router.post("/", async (c) => {
+const postRoute = createRoute({
+  method: "post",
+  path: "/",
+  tags: ["{{@key}}"],
+  summary: "{{pathItem.post.summary}}",
+  description: "{{pathItem.post.description}}",
+  request: {
+    body: {
+      content: {
+        "application/json": {
+          schema: {{#if pathItem.post.requestBody.content.[application/json].schema.$ref}}wrapSchema(schemas.{{lookup pathItem.post.requestBody.content.[application/json].schema.$ref "#/components/schemas/"}}, "{{lookup pathItem.post.requestBody.content.[application/json].schema.$ref "#/components/schemas/"}}"){{else}}z.any().openapi({ type: "object" }){{/if}}
+        }
+      }
+    }
+  },
+  responses: {
+    201: {
+      content: {
+        "application/json": {
+          schema: z.object({
+            data: {{#if pathItem.post.responses.[201].content.[application/json].schema.$ref}}wrapSchema(schemas.{{lookup pathItem.post.responses.[201].content.[application/json].schema.$ref "#/components/schemas/"}}, "{{lookup pathItem.post.responses.[201].content.[application/json].schema.$ref "#/components/schemas/"}}"){{else}}z.any().openapi({ type: "object" }){{/if}}
+          }).openapi({
+            title: "Success Response",
+            description: "{{pathItem.post.responses.[201].description}}"
+          }),
+        },
+      },
+      description: "{{pathItem.post.description}}",
+    },
+    400: {
+      content: {
+        "application/json": {
+          schema: ErrorResponseSchema,
+        },
+      },
+      description: "Returns an error",
+    },
+  },
+});
+
+router.openapi(postRoute, async (c) => {
   const client = new ApiClient(c.env.API_BASE_URL);
-  const data = await c.req.json();
-  {{#if pathItem.post.parameters}}
-  const params = {
-    {{#each pathItem.post.parameters}}
-    {{#if (eq this.in "path")}}
-    {{this.name}}: c.req.param("{{this.name}}") || (() => { throw new HTTPException(400, { message: "Missing required path parameter: {{this.name}}" }) })(),
+  try {
+    const data = await c.req.json();
+    {{#if pathItem.post.parameters}}
+    const params = {
+      {{#each pathItem.post.parameters}}
+      {{#if (eq this.in "path")}}
+      {{this.name}}: c.req.param("{{this.name}}") || (() => { throw new HTTPException(400, { message: "Missing required path parameter: {{this.name}}" }) })(),
+      {{/if}}
+      {{/each}}
+    };
+    const response = await client.create{{capitalize (basename path)}}(data, params);
+    {{else}}
+    const response = await client.create{{capitalize (basename path)}}(data);
     {{/if}}
-    {{/each}}
-  };
-  const response = await client.create{{capitalize (basename path)}}(data, params);
-  {{else}}
-  const response = await client.create{{capitalize (basename path)}}(data);
-  {{/if}}
-  return c.json(response, 201);
+    return c.json({ data: response }, 201);
+  } catch (error) {
+    if (error instanceof HTTPException) {
+      throw error;
+    }
+    return c.json({ 
+      error: error.message || "Internal Server Error",
+      code: "INTERNAL_ERROR"
+    }, 400);
+  }
 });
 {{/if}}
 
 {{#if pathItem.put}}
-router.put("/", async (c) => {
+const putRoute = createRoute({
+  method: "put",
+  path: "/",
+  tags: ["{{@key}}"],
+  summary: "{{pathItem.put.summary}}",
+  description: "{{pathItem.put.description}}",
+  request: {
+    body: {
+      content: {
+        "application/json": {
+          schema: {{#if pathItem.put.requestBody.content.[application/json].schema.$ref}}wrapSchema(schemas.{{lookup pathItem.put.requestBody.content.[application/json].schema.$ref "#/components/schemas/"}}, "{{lookup pathItem.put.requestBody.content.[application/json].schema.$ref "#/components/schemas/"}}"){{else}}z.any().openapi({ type: "object" }){{/if}}
+        }
+      }
+    }
+  },
+  responses: {
+    200: {
+      content: {
+        "application/json": {
+          schema: z.object({
+            data: {{#if pathItem.put.responses.[200].content.[application/json].schema.$ref}}wrapSchema(schemas.{{lookup pathItem.put.responses.[200].content.[application/json].schema.$ref "#/components/schemas/"}}, "{{lookup pathItem.put.responses.[200].content.[application/json].schema.$ref "#/components/schemas/"}}"){{else}}z.any().openapi({ type: "object" }){{/if}}
+          }).openapi({
+            title: "Success Response",
+            description: "{{pathItem.put.responses.[200].description}}"
+          }),
+        },
+      },
+      description: "{{pathItem.put.description}}",
+    },
+    400: {
+      content: {
+        "application/json": {
+          schema: ErrorResponseSchema,
+        },
+      },
+      description: "Returns an error",
+    },
+  },
+});
+
+router.openapi(putRoute, async (c) => {
   const client = new ApiClient(c.env.API_BASE_URL);
-  const data = await c.req.json();
-  {{#if pathItem.put.parameters}}
-  const params = {
-    {{#each pathItem.put.parameters}}
-    {{#if (eq this.in "path")}}
-    {{this.name}}: c.req.param("{{this.name}}") || (() => { throw new HTTPException(400, { message: "Missing required path parameter: {{this.name}}" }) })(),
+  try {
+    const data = await c.req.json();
+    {{#if pathItem.put.parameters}}
+    const params = {
+      {{#each pathItem.put.parameters}}
+      {{#if (eq this.in "path")}}
+      {{this.name}}: c.req.param("{{this.name}}") || (() => { throw new HTTPException(400, { message: "Missing required path parameter: {{this.name}}" }) })(),
+      {{/if}}
+      {{/each}}
+    };
+    const response = await client.update{{capitalize (basename path)}}(data, params);
+    {{else}}
+    const response = await client.update{{capitalize (basename path)}}(data);
     {{/if}}
-    {{/each}}
-  };
-  const response = await client.update{{capitalize (basename path)}}(data, params);
-  {{else}}
-  const response = await client.update{{capitalize (basename path)}}(data);
-  {{/if}}
-  return c.json(response);
+    return c.json({ data: response }, 200);
+  } catch (error) {
+    if (error instanceof HTTPException) {
+      throw error;
+    }
+    return c.json({ 
+      error: error.message || "Internal Server Error",
+      code: "INTERNAL_ERROR"
+    }, 400);
+  }
 });
 {{/if}}
 
 {{#if pathItem.delete}}
-router.delete("/", async (c) => {
-  const client = new ApiClient(c.env.API_BASE_URL);
+const deleteRoute = createRoute({
+  method: "delete",
+  path: "/",
+  tags: ["{{@key}}"],
+  summary: "{{pathItem.delete.summary}}",
+  description: "{{pathItem.delete.description}}",
   {{#if pathItem.delete.parameters}}
-  const params = {
-    {{#each pathItem.delete.parameters}}
-    {{#if (eq this.in "query")}}
-    {{this.name}}: c.req.query("{{this.name}}"){{#if this.required}} || ''{{/if}},
+  request: {
+    {{#if (hasQueryParams pathItem.delete.parameters)}}
+    query: z.object({
+      {{#each pathItem.delete.parameters}}
+      {{#if (eq this.in "query")}}
+      {{this.name}}: {{#if (eq this.schema.type "integer")}}z.number(){{else}}z.string(){{/if}}{{#unless this.required}}.optional(){{/unless}}.openapi({
+        param: {
+          name: "{{this.name}}",
+          in: "query",
+          required: {{#if this.required}}true{{else}}false{{/if}},
+          description: "{{this.description}}"
+        }
+      }),
+      {{/if}}
+      {{/each}}
+    }).openapi({
+      title: "Query Parameters",
+      description: "Query parameters for the request"
+    }),
     {{/if}}
-    {{#if (eq this.in "path")}}
-    {{this.name}}: c.req.param("{{this.name}}") || (() => { throw new HTTPException(400, { message: "Missing required path parameter: {{this.name}}" }) })(),
-    {{/if}}
-    {{/each}}
-  };
-  const response = await client.delete{{capitalize (basename path)}}(params);
-  {{else}}
-  const response = await client.delete{{capitalize (basename path)}}();
+  },
   {{/if}}
-  return c.json(response);
+  responses: {
+    200: {
+      content: {
+        "application/json": {
+          schema: z.object({
+            success: z.boolean()
+          }).openapi({
+            title: "Success Response",
+            description: "{{pathItem.delete.responses.[200].description}}"
+          }),
+        },
+      },
+      description: "{{pathItem.delete.description}}",
+    },
+    400: {
+      content: {
+        "application/json": {
+          schema: ErrorResponseSchema,
+        },
+      },
+      description: "Returns an error",
+    },
+  },
+});
+
+router.openapi(deleteRoute, async (c) => {
+  const client = new ApiClient(c.env.API_BASE_URL);
+  try {
+    {{#if pathItem.delete.parameters}}
+    const params = {
+      {{#each pathItem.delete.parameters}}
+      {{#if (eq this.in "query")}}
+      {{this.name}}: c.req.valid("query").{{this.name}},
+      {{/if}}
+      {{#if (eq this.in "path")}}
+      {{this.name}}: c.req.param("{{this.name}}") || (() => { throw new HTTPException(400, { message: "Missing required path parameter: {{this.name}}" }) })(),
+      {{/if}}
+      {{/each}}
+    };
+    const response = await client.delete{{capitalize (basename path)}}(params);
+    {{else}}
+    const response = await client.delete{{capitalize (basename path)}}();
+    {{/if}}
+    return c.json({ success: true }, 200);
+  } catch (error) {
+    if (error instanceof HTTPException) {
+      throw error;
+    }
+    return c.json({ 
+      error: error.message || "Internal Server Error",
+      code: "INTERNAL_ERROR"
+    }, 400);
+  }
 });
 {{/if}}
 

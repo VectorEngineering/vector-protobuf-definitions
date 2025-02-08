@@ -1,49 +1,36 @@
 name = "gateway"
 main = "index.ts"
-compatibility_date = "2024-01-01"
+compatibility_date = "2024-11-11"
 
 # Enable the AI binding
-ai = { binding = true }
+ai = { binding = "AI" }
 
-# Configure KV namespaces
+# Configure KV namespaces - Comment out the ones without IDs for now
 kv_namespaces = [
-  { binding = "CACHE", id = "xxxx", preview_id = "xxxx" },
-  { binding = "AUTH_STORE", id = "", preview_id = "example_id_1" },
-  { binding = "ENRICH_KV", id = "", preview_id = "example_id_2" },
-  { binding = "KV", id = "", preview_id = "example_id_3" }
+  { binding = "CACHE", id = "988d5a641cb74c1fa28407140f62c499", preview_id = "xxxx" }
+  # Uncomment and add proper IDs when available:
+  # { binding = "AUTH_STORE", id = "60a495d6cb47412bbc1e64395e4aa304", preview_id = "example_id_1" },
+  # { binding = "ENRICH_KV", id = "2524ba2486a74a0bbd21f4d4dba64275", preview_id = "example_id_2" },
+  # { binding = "KV", id = "f6df5ea307b04254bc76567aabbaf4e5", preview_id = "example_id_3" }
 ]
 
 # Configure environment variables
 [vars]
-API_SECRET_KEY = "xxxx"  # Replace with actual secret key
+API_SECRET_KEY = "PLATFORM_DEFAULT_API_KEY"  # Replace with actual secret key
 API_KEY = ""  # Add your API key here
 SECRET = ""   # Add your secret here
-ENVIRONMENT = "development"
-
-# Configure routes
-routes = [
-  { pattern = "api.example.com/ai*", zone_id = "xxxx" }
-]
+ENVIRONMENT = "production"
+API_BASE_URL = ""
 
 # Configure dev settings
 [dev]
 port = 8787
 local_protocol = "http"
 
-# Configure miniflare for local development
-[miniflare]
-kv_persist = true
-cache_persist = true
-
 # Configure build settings
 [build]
 command = "npm run build"
 watch_dir = "src"
-
-[build.upload]
-format = "modules"
-main = "./index.mjs"
-dir = "dist"
 
 # Configure triggers
 [triggers]
@@ -52,27 +39,34 @@ crons = []
 # D1 Database binding
 [[d1_databases]]
 binding = "USERS_DATABASE"
-database_name = "users"
-database_id = ""  # Add your D1 database ID from Cloudflare Dashboard
+database_name = "gateway-database"
+database_id = "f088aa64-c1ce-472f-9166-e411f059809f"
 
 # R2 Bucket binding
 [[r2_buckets]]
 binding = "STORAGE"
 bucket_name = "gateway-storage"  # Replace with your actual bucket name
 
-# Service binding for TELLER_CERT
-[[services]]
-binding = "TELLER_CERT"
-service = "teller-service"  # Replace with your actual service name
+# wrangler.toml (wrangler v3.88.0^)
+[observability.logs]
+enabled = true
+head_sampling_rate = 0.05
+tail_sampling_rate = 0.05
 
 [env.production]
 vars = { ENVIRONMENT = "production" }
 # Add your production specific configuration here
+route = { pattern = "gateway-production.getvector.app/*", zone_name = "getvector.app" }
+tail_consumers = [{service = "gateway-tail-worker"}]
 
 [env.staging]
 vars = { ENVIRONMENT = "staging" }
 # Add your staging specific configuration here
+route = { pattern = "gateway-staging.getvector.app/*", zone_name = "getvector.app" }
+tail_consumers = [{service = "gateway-tail-worker"}]
 
 [env.development]
 vars = { ENVIRONMENT = "development" }
 # Add your development specific configuration here 
+route = { pattern = "gateway-development.getvector.app/*", zone_name = "getvector.app" }
+tail_consumers = [{service = "gateway-tail-worker"}]

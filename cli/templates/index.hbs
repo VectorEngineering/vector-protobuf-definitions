@@ -4,7 +4,7 @@ import * as middleware from "./middleware";
 import type { Env } from "./types";
 import { LeadScrapingServiceAPIRouter } from "./routes";
 import type { MiddlewareHandler } from "hono";
-import { OpenAPIHono } from "@hono/zod-openapi";
+import { OpenAPIHono as Hono } from "@hono/zod-openapi";
 import { compress } from "hono/compress";
 import { cors } from "hono/cors";
 import { csrf } from "hono/csrf";
@@ -13,7 +13,7 @@ import { secureHeaders } from "hono/secure-headers";
 import { swaggerUI } from "@hono/swagger-ui";
 import { timing } from "hono/timing";
 
-const app = new OpenAPIHono<Env>({
+const app = new Hono<{ Bindings: Env }>({
   defaultHook: (result, c) => {
     if (!result.success) {
       return c.json({ success: false, errors: result.target }, 422);
@@ -55,9 +55,6 @@ app.use("*", prettyJSON());
 
 // CSRF middleware
 app.use("*", csrf());
-
-// Compress middleware
-app.use("*", compress());
 
 // Apply user-defined middleware
 Object.values(middleware).forEach((mw) => {

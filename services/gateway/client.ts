@@ -3,7 +3,7 @@ import type { ZodiosInstance } from "@zodios/core";
 
 // Generated schemas
 import { makeApi, Zodios, type ZodiosOptions } from "@zodios/core";
-import { z } from "zod";
+import { z } from "@hono/zod-openapi";
 
 type FolderMetadata = Partial<{
   id: string;

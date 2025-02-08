@@ -5,16 +5,35 @@
 use futures::{future, Stream, stream};
 #[allow(unused_imports)]
 use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, models,
+                      CreateApiKeyResponse,
                       CreateOrganizationResponse,
                       CreateTenantResponse,
+                      CreateTenantApiKeyResponse,
+                      CreateWebhookResponse,
+                      DeleteApiKeyResponse,
                       DeleteOrganizationResponse,
                       DeleteTenantResponse,
+                      DeleteTenantApiKeyResponse,
+                      DeleteWebhookResponse,
+                      GetApiKeyResponse,
+                      GetLeadResponse,
                       GetOrganizationResponse,
                       GetTenantResponse,
+                      GetTenantApiKeyResponse,
+                      GetWebhookResponse,
+                      ListApiKeysResponse,
+                      ListLeadsResponse,
                       ListOrganizationsResponse,
+                      ListTenantApiKeysResponse,
                       ListTenantsResponse,
+                      ListWebhooksResponse,
+                      RotateApiKeyResponse,
+                      RotateTenantApiKeyResponse,
+                      UpdateApiKeyResponse,
                       UpdateOrganizationResponse,
                       UpdateTenantResponse,
+                      UpdateTenantApiKeyResponse,
+                      UpdateWebhookResponse,
                       CreateAccountResponse,
                       CreateWorkspaceResponse,
                       DeleteAccountResponse,
@@ -59,12 +78,23 @@ fn main() {
         .arg(Arg::with_name("operation")
             .help("Sets the operation to run")
             .possible_values(&[
+                "DeleteApiKey", 
                 "DeleteOrganization", 
                 "DeleteTenant", 
+                "DeleteTenantApiKey", 
+                "DeleteWebhook", 
+                "GetApiKey", 
+                "GetLead", 
                 "GetOrganization", 
                 "GetTenant", 
+                "GetTenantApiKey", 
+                "GetWebhook", 
+                "ListApiKeys", 
+                "ListLeads", 
                 "ListOrganizations", 
+                "ListTenantApiKeys", 
                 "ListTenants", 
+                "ListWebhooks", 
                 "DeleteAccount", 
                 "DeleteWorkspace", 
                 "GetAccount", 
@@ -145,6 +175,14 @@ fn main() {
 
     match matches.value_of("operation") {
         /* Disabled because there's no example.
+        Some("CreateApiKey") => {
+            let result = rt.block_on(client.create_api_key(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
         Some("CreateOrganization") => {
             let result = rt.block_on(client.create_organization(
                   ???
@@ -161,6 +199,32 @@ fn main() {
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
         */
+        /* Disabled because there's no example.
+        Some("CreateTenantApiKey") => {
+            let result = rt.block_on(client.create_tenant_api_key(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("CreateWebhook") => {
+            let result = rt.block_on(client.create_webhook(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        Some("DeleteApiKey") => {
+            let result = rt.block_on(client.delete_api_key(
+                  "key_id_example".to_string(),
+                  Some("organization_id_example".to_string()),
+                  Some("workspace_id_example".to_string()),
+                  Some("tenant_id_example".to_string()),
+                  Some("account_id_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
         Some("DeleteOrganization") => {
             let result = rt.block_on(client.delete_organization(
                   "id_example".to_string()
@@ -171,6 +235,44 @@ fn main() {
             let result = rt.block_on(client.delete_tenant(
                   "organization_id_example".to_string(),
                   "tenant_id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("DeleteTenantApiKey") => {
+            let result = rt.block_on(client.delete_tenant_api_key(
+                  "key_id_example".to_string(),
+                  Some("organization_id_example".to_string()),
+                  Some("tenant_id_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("DeleteWebhook") => {
+            let result = rt.block_on(client.delete_webhook(
+                  "webhook_id_example".to_string(),
+                  Some("organization_id_example".to_string()),
+                  Some("workspace_id_example".to_string()),
+                  Some("tenant_id_example".to_string()),
+                  Some("account_id_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("GetApiKey") => {
+            let result = rt.block_on(client.get_api_key(
+                  "key_id_example".to_string(),
+                  Some("organization_id_example".to_string()),
+                  Some("tenant_id_example".to_string()),
+                  Some("account_id_example".to_string()),
+                  Some("workspace_id_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("GetLead") => {
+            let result = rt.block_on(client.get_lead(
+                  "lead_id_example".to_string(),
+                  Some("organization_id_example".to_string()),
+                  Some("workspace_id_example".to_string()),
+                  Some("tenant_id_example".to_string()),
+                  Some("account_id_example".to_string())
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
@@ -187,10 +289,62 @@ fn main() {
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
+        Some("GetTenantApiKey") => {
+            let result = rt.block_on(client.get_tenant_api_key(
+                  "key_id_example".to_string(),
+                  Some("organization_id_example".to_string()),
+                  Some("tenant_id_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("GetWebhook") => {
+            let result = rt.block_on(client.get_webhook(
+                  "webhook_id_example".to_string(),
+                  Some("organization_id_example".to_string()),
+                  Some("workspace_id_example".to_string()),
+                  Some("tenant_id_example".to_string()),
+                  Some("account_id_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("ListApiKeys") => {
+            let result = rt.block_on(client.list_api_keys(
+                  Some("organization_id_example".to_string()),
+                  Some("tenant_id_example".to_string()),
+                  Some("account_id_example".to_string()),
+                  Some("workspace_id_example".to_string()),
+                  Some(56),
+                  Some(56),
+                  Some("status_example".to_string()),
+                  Some("search_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("ListLeads") => {
+            let result = rt.block_on(client.list_leads(
+                  Some("organization_id_example".to_string()),
+                  Some("workspace_id_example".to_string()),
+                  Some("tenant_id_example".to_string()),
+                  Some("account_id_example".to_string()),
+                  Some(56),
+                  Some(56)
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
         Some("ListOrganizations") => {
             let result = rt.block_on(client.list_organizations(
                   Some(56),
                   Some(56)
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("ListTenantApiKeys") => {
+            let result = rt.block_on(client.list_tenant_api_keys(
+                  Some("organization_id_example".to_string()),
+                  Some("tenant_id_example".to_string()),
+                  Some(56),
+                  Some(56),
+                  Some("status_example".to_string())
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
@@ -202,6 +356,43 @@ fn main() {
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
+        Some("ListWebhooks") => {
+            let result = rt.block_on(client.list_webhooks(
+                  Some("organization_id_example".to_string()),
+                  Some("workspace_id_example".to_string()),
+                  Some("tenant_id_example".to_string()),
+                  Some("account_id_example".to_string()),
+                  Some(56),
+                  Some(56),
+                  Some("status_example".to_string()),
+                  Some("search_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        /* Disabled because there's no example.
+        Some("RotateApiKey") => {
+            let result = rt.block_on(client.rotate_api_key(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("RotateTenantApiKey") => {
+            let result = rt.block_on(client.rotate_tenant_api_key(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("UpdateApiKey") => {
+            let result = rt.block_on(client.update_api_key(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
         /* Disabled because there's no example.
         Some("UpdateOrganization") => {
             let result = rt.block_on(client.update_organization(
@@ -213,6 +404,22 @@ fn main() {
         /* Disabled because there's no example.
         Some("UpdateTenant") => {
             let result = rt.block_on(client.update_tenant(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("UpdateTenantApiKey") => {
+            let result = rt.block_on(client.update_tenant_api_key(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("UpdateWebhook") => {
+            let result = rt.block_on(client.update_webhook(
                   ???
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());

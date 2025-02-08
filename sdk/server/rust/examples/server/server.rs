@@ -104,16 +104,35 @@ use crate::server_auth;
 
 use openapi_client::{
     Api,
+    CreateApiKeyResponse,
     CreateOrganizationResponse,
     CreateTenantResponse,
+    CreateTenantApiKeyResponse,
+    CreateWebhookResponse,
+    DeleteApiKeyResponse,
     DeleteOrganizationResponse,
     DeleteTenantResponse,
+    DeleteTenantApiKeyResponse,
+    DeleteWebhookResponse,
+    GetApiKeyResponse,
+    GetLeadResponse,
     GetOrganizationResponse,
     GetTenantResponse,
+    GetTenantApiKeyResponse,
+    GetWebhookResponse,
+    ListApiKeysResponse,
+    ListLeadsResponse,
     ListOrganizationsResponse,
+    ListTenantApiKeysResponse,
     ListTenantsResponse,
+    ListWebhooksResponse,
+    RotateApiKeyResponse,
+    RotateTenantApiKeyResponse,
+    UpdateApiKeyResponse,
     UpdateOrganizationResponse,
     UpdateTenantResponse,
+    UpdateTenantApiKeyResponse,
+    UpdateWebhookResponse,
     CreateAccountResponse,
     CreateWorkspaceResponse,
     DeleteAccountResponse,
@@ -138,6 +157,16 @@ use swagger::ApiError;
 #[async_trait]
 impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
 {
+    /// Create a new API key
+    async fn create_api_key(
+        &self,
+        create_api_key_request: models::CreateApiKeyRequest,
+        context: &C) -> Result<CreateApiKeyResponse, ApiError>
+    {
+        info!("create_api_key({:?}) - X-Span-ID: {:?}", create_api_key_request, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
     /// Create a new organization
     async fn create_organization(
         &self,
@@ -156,6 +185,40 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<CreateTenantResponse, ApiError>
     {
         info!("create_tenant(\"{}\", {:?}) - X-Span-ID: {:?}", organization_id, create_tenant_body, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Create a new tenant API key
+    async fn create_tenant_api_key(
+        &self,
+        create_tenant_api_key_request: models::CreateTenantApiKeyRequest,
+        context: &C) -> Result<CreateTenantApiKeyResponse, ApiError>
+    {
+        info!("create_tenant_api_key({:?}) - X-Span-ID: {:?}", create_tenant_api_key_request, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Create webhook
+    async fn create_webhook(
+        &self,
+        create_webhook_request: models::CreateWebhookRequest,
+        context: &C) -> Result<CreateWebhookResponse, ApiError>
+    {
+        info!("create_webhook({:?}) - X-Span-ID: {:?}", create_webhook_request, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Delete API key
+    async fn delete_api_key(
+        &self,
+        key_id: String,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        context: &C) -> Result<DeleteApiKeyResponse, ApiError>
+    {
+        info!("delete_api_key(\"{}\", {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", key_id, organization_id, workspace_id, tenant_id, account_id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -180,6 +243,60 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
+    /// Delete tenant API key
+    async fn delete_tenant_api_key(
+        &self,
+        key_id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        context: &C) -> Result<DeleteTenantApiKeyResponse, ApiError>
+    {
+        info!("delete_tenant_api_key(\"{}\", {:?}, {:?}) - X-Span-ID: {:?}", key_id, organization_id, tenant_id, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Delete webhook
+    async fn delete_webhook(
+        &self,
+        webhook_id: String,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        context: &C) -> Result<DeleteWebhookResponse, ApiError>
+    {
+        info!("delete_webhook(\"{}\", {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", webhook_id, organization_id, workspace_id, tenant_id, account_id, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Get API key details
+    async fn get_api_key(
+        &self,
+        key_id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        workspace_id: Option<String>,
+        context: &C) -> Result<GetApiKeyResponse, ApiError>
+    {
+        info!("get_api_key(\"{}\", {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", key_id, organization_id, tenant_id, account_id, workspace_id, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Get lead details
+    async fn get_lead(
+        &self,
+        lead_id: String,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        context: &C) -> Result<GetLeadResponse, ApiError>
+    {
+        info!("get_lead(\"{}\", {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", lead_id, organization_id, workspace_id, tenant_id, account_id, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
     /// Get organization details
     async fn get_organization(
         &self,
@@ -201,6 +318,64 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
+    /// Get tenant API key details
+    async fn get_tenant_api_key(
+        &self,
+        key_id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        context: &C) -> Result<GetTenantApiKeyResponse, ApiError>
+    {
+        info!("get_tenant_api_key(\"{}\", {:?}, {:?}) - X-Span-ID: {:?}", key_id, organization_id, tenant_id, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Get webhook
+    async fn get_webhook(
+        &self,
+        webhook_id: String,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        context: &C) -> Result<GetWebhookResponse, ApiError>
+    {
+        info!("get_webhook(\"{}\", {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", webhook_id, organization_id, workspace_id, tenant_id, account_id, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// List API keys
+    async fn list_api_keys(
+        &self,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        workspace_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        status: Option<String>,
+        search: Option<String>,
+        context: &C) -> Result<ListApiKeysResponse, ApiError>
+    {
+        info!("list_api_keys({:?}, {:?}, {:?}, {:?}, {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", organization_id, tenant_id, account_id, workspace_id, page_size, page_number, status, search, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// List leads
+    async fn list_leads(
+        &self,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        context: &C) -> Result<ListLeadsResponse, ApiError>
+    {
+        info!("list_leads({:?}, {:?}, {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", organization_id, workspace_id, tenant_id, account_id, page_size, page_number, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
     /// List all organizations
     async fn list_organizations(
         &self,
@@ -209,6 +384,20 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<ListOrganizationsResponse, ApiError>
     {
         info!("list_organizations({:?}, {:?}) - X-Span-ID: {:?}", page_size, page_number, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// List tenant API keys
+    async fn list_tenant_api_keys(
+        &self,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        status: Option<String>,
+        context: &C) -> Result<ListTenantApiKeysResponse, ApiError>
+    {
+        info!("list_tenant_api_keys({:?}, {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", organization_id, tenant_id, page_size, page_number, status, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -221,6 +410,53 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<ListTenantsResponse, ApiError>
     {
         info!("list_tenants(\"{}\", {:?}, {:?}) - X-Span-ID: {:?}", organization_id, page_size, page_number, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// List webhooks
+    async fn list_webhooks(
+        &self,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        status: Option<String>,
+        search: Option<String>,
+        context: &C) -> Result<ListWebhooksResponse, ApiError>
+    {
+        info!("list_webhooks({:?}, {:?}, {:?}, {:?}, {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", organization_id, workspace_id, tenant_id, account_id, page_size, page_number, status, search, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Rotate API key
+    async fn rotate_api_key(
+        &self,
+        rotate_api_key_request: models::RotateApiKeyRequest,
+        context: &C) -> Result<RotateApiKeyResponse, ApiError>
+    {
+        info!("rotate_api_key({:?}) - X-Span-ID: {:?}", rotate_api_key_request, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Rotate tenant API key
+    async fn rotate_tenant_api_key(
+        &self,
+        rotate_tenant_api_key_request: models::RotateTenantApiKeyRequest,
+        context: &C) -> Result<RotateTenantApiKeyResponse, ApiError>
+    {
+        info!("rotate_tenant_api_key({:?}) - X-Span-ID: {:?}", rotate_tenant_api_key_request, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Update API key
+    async fn update_api_key(
+        &self,
+        update_api_key_request: models::UpdateApiKeyRequest,
+        context: &C) -> Result<UpdateApiKeyResponse, ApiError>
+    {
+        info!("update_api_key({:?}) - X-Span-ID: {:?}", update_api_key_request, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -241,6 +477,26 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<UpdateTenantResponse, ApiError>
     {
         info!("update_tenant({:?}) - X-Span-ID: {:?}", update_tenant_request, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Update tenant API key
+    async fn update_tenant_api_key(
+        &self,
+        update_tenant_api_key_request: models::UpdateTenantApiKeyRequest,
+        context: &C) -> Result<UpdateTenantApiKeyResponse, ApiError>
+    {
+        info!("update_tenant_api_key({:?}) - X-Span-ID: {:?}", update_tenant_api_key_request, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Update webhook
+    async fn update_webhook(
+        &self,
+        update_webhook_request: models::UpdateWebhookRequest,
+        context: &C) -> Result<UpdateWebhookResponse, ApiError>
+    {
+        info!("update_webhook({:?}) - X-Span-ID: {:?}", update_webhook_request, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

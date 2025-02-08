@@ -17,6 +17,28 @@
 export default {
     Query: {
 
+        // @return GetApiKeyResponse
+        GetAPIKey: ($keyId, $organizationId, $tenantId, $accountId, $workspaceId) => {
+            return {
+                "keyId": "keyId_example",
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example",
+                "workspaceId": "workspaceId_example"
+            };
+        },
+
+        // @return GetLeadResponse
+        GetLead: ($leadId, $organizationId, $workspaceId, $tenantId, $accountId) => {
+            return {
+                "leadId": "leadId_example",
+                "organizationId": "organizationId_example",
+                "workspaceId": "workspaceId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example"
+            };
+        },
+
         // @return GetOrganizationResponse
         GetOrganization: ($Id_) => {
             return {
@@ -32,11 +54,68 @@ export default {
             };
         },
 
+        // @return GetTenantApiKeyResponse
+        GetTenantAPIKey: ($keyId, $organizationId, $tenantId) => {
+            return {
+                "keyId": "keyId_example",
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example"
+            };
+        },
+
+        // @return GetWebhookResponse
+        GetWebhook: ($webhookId, $organizationId, $workspaceId, $tenantId, $accountId) => {
+            return {
+                "webhookId": "webhookId_example",
+                "organizationId": "organizationId_example",
+                "workspaceId": "workspaceId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example"
+            };
+        },
+
+        // @return ListApiKeysResponse
+        ListAPIKeys: ($organizationId, $tenantId, $accountId, $workspaceId, $pageSize, $pageNumber, $status, $search) => {
+            return {
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example",
+                "workspaceId": "workspaceId_example",
+                "pageSize": "56",
+                "pageNumber": "56",
+                "status": "status_example",
+                "search": "search_example"
+            };
+        },
+
+        // @return ListLeadsResponse
+        ListLeads: ($organizationId, $workspaceId, $tenantId, $accountId, $pageSize, $pageNumber) => {
+            return {
+                "organizationId": "organizationId_example",
+                "workspaceId": "workspaceId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example",
+                "pageSize": "56",
+                "pageNumber": "56"
+            };
+        },
+
         // @return ListOrganizationsResponse
         ListOrganizations: ($pageSize, $pageNumber) => {
             return {
                 "pageSize": "56",
                 "pageNumber": "56"
+            };
+        },
+
+        // @return ListTenantApiKeysResponse
+        ListTenantAPIKeys: ($organizationId, $tenantId, $pageSize, $pageNumber, $status) => {
+            return {
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example",
+                "pageSize": "56",
+                "pageNumber": "56",
+                "status": "status_example"
             };
         },
 
@@ -49,9 +128,30 @@ export default {
             };
         },
 
+        // @return ListWebhooksResponse
+        ListWebhooks: ($organizationId, $workspaceId, $tenantId, $accountId, $pageSize, $pageNumber, $status, $search) => {
+            return {
+                "organizationId": "organizationId_example",
+                "workspaceId": "workspaceId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example",
+                "pageSize": "56",
+                "pageNumber": "56",
+                "status": "status_example",
+                "search": "search_example"
+            };
+        },
+
     },
 
     Mutation: {
+
+        // @return CreateApiKeyResponse
+        CreateAPIKey: ($createApiKeyRequest) => {
+            return {
+                "createApiKeyRequest": ""
+            };
+        },
 
         // @return CreateOrganizationResponse
         CreateOrganization: ($createOrganizationRequest) => {
@@ -65,6 +165,31 @@ export default {
             return {
                 "organizationId": "organizationId_example",
                 "createTenantBody": ""
+            };
+        },
+
+        // @return CreateTenantApiKeyResponse
+        CreateTenantAPIKey: ($createTenantApiKeyRequest) => {
+            return {
+                "createTenantApiKeyRequest": ""
+            };
+        },
+
+        // @return CreateWebhookResponse
+        CreateWebhook: ($createWebhookRequest) => {
+            return {
+                "createWebhookRequest": ""
+            };
+        },
+
+        // @return DeleteApiKeyResponse
+        DeleteAPIKey: ($keyId, $organizationId, $workspaceId, $tenantId, $accountId) => {
+            return {
+                "keyId": "keyId_example",
+                "organizationId": "organizationId_example",
+                "workspaceId": "workspaceId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example"
             };
         },
 
@@ -83,6 +208,47 @@ export default {
             };
         },
 
+        // @return DeleteTenantApiKeyResponse
+        DeleteTenantAPIKey: ($keyId, $organizationId, $tenantId) => {
+            return {
+                "keyId": "keyId_example",
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example"
+            };
+        },
+
+        // @return DeleteWebhookResponse
+        DeleteWebhook: ($webhookId, $organizationId, $workspaceId, $tenantId, $accountId) => {
+            return {
+                "webhookId": "webhookId_example",
+                "organizationId": "organizationId_example",
+                "workspaceId": "workspaceId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example"
+            };
+        },
+
+        // @return RotateApiKeyResponse
+        RotateAPIKey: ($rotateApiKeyRequest) => {
+            return {
+                "rotateApiKeyRequest": ""
+            };
+        },
+
+        // @return RotateTenantApiKeyResponse
+        RotateTenantAPIKey: ($rotateTenantApiKeyRequest) => {
+            return {
+                "rotateTenantApiKeyRequest": ""
+            };
+        },
+
+        // @return UpdateApiKeyResponse
+        UpdateAPIKey: ($updateApiKeyRequest) => {
+            return {
+                "updateApiKeyRequest": ""
+            };
+        },
+
         // @return UpdateOrganizationResponse
         UpdateOrganization: ($updateOrganizationRequest) => {
             return {
@@ -94,6 +260,20 @@ export default {
         UpdateTenant: ($updateTenantRequest) => {
             return {
                 "updateTenantRequest": ""
+            };
+        },
+
+        // @return UpdateTenantApiKeyResponse
+        UpdateTenantAPIKey: ($updateTenantApiKeyRequest) => {
+            return {
+                "updateTenantApiKeyRequest": ""
+            };
+        },
+
+        // @return UpdateWebhookResponse
+        UpdateWebhook: ($updateWebhookRequest) => {
+            return {
+                "updateWebhookRequest": ""
             };
         },
 

@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-07T21:14:11.497759-05:00[America/New_York]
+- Build date: 2025-02-07T22:05:36.948504-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -62,12 +62,23 @@ cargo run --example server
 To run a client, follow one of the following simple steps:
 
 ```
+cargo run --example client DeleteApiKey
 cargo run --example client DeleteOrganization
 cargo run --example client DeleteTenant
+cargo run --example client DeleteTenantApiKey
+cargo run --example client DeleteWebhook
+cargo run --example client GetApiKey
+cargo run --example client GetLead
 cargo run --example client GetOrganization
 cargo run --example client GetTenant
+cargo run --example client GetTenantApiKey
+cargo run --example client GetWebhook
+cargo run --example client ListApiKeys
+cargo run --example client ListLeads
 cargo run --example client ListOrganizations
+cargo run --example client ListTenantApiKeys
 cargo run --example client ListTenants
+cargo run --example client ListWebhooks
 cargo run --example client DeleteAccount
 cargo run --example client DeleteWorkspace
 cargo run --example client GetAccount
@@ -111,16 +122,35 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreateAPIKey**](docs/lead_scraper_service_api.md#CreateAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys | Create a new API key
 [**CreateOrganization**](docs/lead_scraper_service_api.md#CreateOrganization) | **POST** /lead-scraper-microservice/api/v1/organization | Create a new organization
 [**CreateTenant**](docs/lead_scraper_service_api.md#CreateTenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant
+[**CreateTenantAPIKey**](docs/lead_scraper_service_api.md#CreateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key
+[**CreateWebhook**](docs/lead_scraper_service_api.md#CreateWebhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook
+[**DeleteAPIKey**](docs/lead_scraper_service_api.md#DeleteAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 [**DeleteOrganization**](docs/lead_scraper_service_api.md#DeleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
 [**DeleteTenant**](docs/lead_scraper_service_api.md#DeleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
+[**DeleteTenantAPIKey**](docs/lead_scraper_service_api.md#DeleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
+[**DeleteWebhook**](docs/lead_scraper_service_api.md#DeleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
+[**GetAPIKey**](docs/lead_scraper_service_api.md#GetAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
+[**GetLead**](docs/lead_scraper_service_api.md#GetLead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
 [**GetOrganization**](docs/lead_scraper_service_api.md#GetOrganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details
 [**GetTenant**](docs/lead_scraper_service_api.md#GetTenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details
+[**GetTenantAPIKey**](docs/lead_scraper_service_api.md#GetTenantAPIKey) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details
+[**GetWebhook**](docs/lead_scraper_service_api.md#GetWebhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook
+[**ListAPIKeys**](docs/lead_scraper_service_api.md#ListAPIKeys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys
+[**ListLeads**](docs/lead_scraper_service_api.md#ListLeads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads
 [**ListOrganizations**](docs/lead_scraper_service_api.md#ListOrganizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations
+[**ListTenantAPIKeys**](docs/lead_scraper_service_api.md#ListTenantAPIKeys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys
 [**ListTenants**](docs/lead_scraper_service_api.md#ListTenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
+[**ListWebhooks**](docs/lead_scraper_service_api.md#ListWebhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks
+[**RotateAPIKey**](docs/lead_scraper_service_api.md#RotateAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key
+[**RotateTenantAPIKey**](docs/lead_scraper_service_api.md#RotateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key
+[**UpdateAPIKey**](docs/lead_scraper_service_api.md#UpdateAPIKey) | **PUT** /lead-scraper-microservice/api/v1/api-keys | Update API key
 [**UpdateOrganization**](docs/lead_scraper_service_api.md#UpdateOrganization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details
 [**UpdateTenant**](docs/lead_scraper_service_api.md#UpdateTenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details
+[**UpdateTenantAPIKey**](docs/lead_scraper_service_api.md#UpdateTenantAPIKey) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Update tenant API key
+[**UpdateWebhook**](docs/lead_scraper_service_api.md#UpdateWebhook) | **PUT** /lead-scraper-microservice/api/v1/webhooks | Update webhook
 [**CreateAccount**](docs/workspace_service_api.md#CreateAccount) | **POST** /workspace-service/v1/accounts | Create a new account
 [**CreateWorkspace**](docs/workspace_service_api.md#CreateWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace
 [**DeleteAccount**](docs/workspace_service_api.md#DeleteAccount) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
@@ -183,17 +213,26 @@ Method | HTTP request | Description
  - [ContractIntelligence](docs/ContractIntelligence.md)
  - [CreateAccountRequest](docs/CreateAccountRequest.md)
  - [CreateAccountResponse](docs/CreateAccountResponse.md)
+ - [CreateApiKeyRequest](docs/CreateApiKeyRequest.md)
+ - [CreateApiKeyResponse](docs/CreateApiKeyResponse.md)
  - [CreateOrganizationRequest](docs/CreateOrganizationRequest.md)
  - [CreateOrganizationResponse](docs/CreateOrganizationResponse.md)
+ - [CreateTenantApiKeyRequest](docs/CreateTenantApiKeyRequest.md)
+ - [CreateTenantApiKeyResponse](docs/CreateTenantApiKeyResponse.md)
  - [CreateTenantBody](docs/CreateTenantBody.md)
  - [CreateTenantResponse](docs/CreateTenantResponse.md)
+ - [CreateWebhookRequest](docs/CreateWebhookRequest.md)
+ - [CreateWebhookResponse](docs/CreateWebhookResponse.md)
  - [CreateWorkspaceRequest](docs/CreateWorkspaceRequest.md)
  - [CreateWorkspaceResponse](docs/CreateWorkspaceResponse.md)
  - [DataProfile](docs/DataProfile.md)
  - [DayOfWeek](docs/DayOfWeek.md)
  - [DeleteAccountResponse](docs/DeleteAccountResponse.md)
+ - [DeleteApiKeyResponse](docs/DeleteApiKeyResponse.md)
  - [DeleteOrganizationResponse](docs/DeleteOrganizationResponse.md)
+ - [DeleteTenantApiKeyResponse](docs/DeleteTenantApiKeyResponse.md)
  - [DeleteTenantResponse](docs/DeleteTenantResponse.md)
+ - [DeleteWebhookResponse](docs/DeleteWebhookResponse.md)
  - [DeleteWorkspaceResponse](docs/DeleteWorkspaceResponse.md)
  - [Dependency](docs/Dependency.md)
  - [DocumentBranch](docs/DocumentBranch.md)
@@ -215,8 +254,12 @@ Method | HTTP request | Description
  - [ForbiddenErrorMessageResponse](docs/ForbiddenErrorMessageResponse.md)
  - [GatewayTimeoutErrorMessageResponse](docs/GatewayTimeoutErrorMessageResponse.md)
  - [GetAccountResponse](docs/GetAccountResponse.md)
+ - [GetApiKeyResponse](docs/GetApiKeyResponse.md)
+ - [GetLeadResponse](docs/GetLeadResponse.md)
  - [GetOrganizationResponse](docs/GetOrganizationResponse.md)
+ - [GetTenantApiKeyResponse](docs/GetTenantApiKeyResponse.md)
  - [GetTenantResponse](docs/GetTenantResponse.md)
+ - [GetWebhookResponse](docs/GetWebhookResponse.md)
  - [GetWorkspaceAnalyticsResponse](docs/GetWorkspaceAnalyticsResponse.md)
  - [GetWorkspaceComplianceReportResponse](docs/GetWorkspaceComplianceReportResponse.md)
  - [GetWorkspaceResponse](docs/GetWorkspaceResponse.md)
@@ -230,8 +273,12 @@ Method | HTTP request | Description
  - [Lead](docs/Lead.md)
  - [LimitInfo](docs/LimitInfo.md)
  - [ListAccountsResponse](docs/ListAccountsResponse.md)
+ - [ListApiKeysResponse](docs/ListApiKeysResponse.md)
+ - [ListLeadsResponse](docs/ListLeadsResponse.md)
  - [ListOrganizationsResponse](docs/ListOrganizationsResponse.md)
+ - [ListTenantApiKeysResponse](docs/ListTenantApiKeysResponse.md)
  - [ListTenantsResponse](docs/ListTenantsResponse.md)
+ - [ListWebhooksResponse](docs/ListWebhooksResponse.md)
  - [ListWorkspaceSharingsResponse](docs/ListWorkspaceSharingsResponse.md)
  - [ListWorkspacesResponse](docs/ListWorkspacesResponse.md)
  - [MarketplaceApp](docs/MarketplaceApp.md)
@@ -266,6 +313,10 @@ Method | HTTP request | Description
  - [Review](docs/Review.md)
  - [RiskAssessment](docs/RiskAssessment.md)
  - [Role](docs/Role.md)
+ - [RotateApiKeyRequest](docs/RotateApiKeyRequest.md)
+ - [RotateApiKeyResponse](docs/RotateApiKeyResponse.md)
+ - [RotateTenantApiKeyRequest](docs/RotateTenantApiKeyRequest.md)
+ - [RotateTenantApiKeyResponse](docs/RotateTenantApiKeyResponse.md)
  - [RpcPeriodStatus](docs/RpcPeriodStatus.md)
  - [SchemaValidation](docs/SchemaValidation.md)
  - [ScrapingJob](docs/ScrapingJob.md)
@@ -296,10 +347,16 @@ Method | HTTP request | Description
  - [UnprocessableEntityErrorMessageResponse](docs/UnprocessableEntityErrorMessageResponse.md)
  - [UpdateAccountRequest](docs/UpdateAccountRequest.md)
  - [UpdateAccountResponse](docs/UpdateAccountResponse.md)
+ - [UpdateApiKeyRequest](docs/UpdateApiKeyRequest.md)
+ - [UpdateApiKeyResponse](docs/UpdateApiKeyResponse.md)
  - [UpdateOrganizationRequest](docs/UpdateOrganizationRequest.md)
  - [UpdateOrganizationResponse](docs/UpdateOrganizationResponse.md)
+ - [UpdateTenantApiKeyRequest](docs/UpdateTenantApiKeyRequest.md)
+ - [UpdateTenantApiKeyResponse](docs/UpdateTenantApiKeyResponse.md)
  - [UpdateTenantRequest](docs/UpdateTenantRequest.md)
  - [UpdateTenantResponse](docs/UpdateTenantResponse.md)
+ - [UpdateWebhookRequest](docs/UpdateWebhookRequest.md)
+ - [UpdateWebhookResponse](docs/UpdateWebhookResponse.md)
  - [UpdateWorkspaceRequest](docs/UpdateWorkspaceRequest.md)
  - [UpdateWorkspaceResponse](docs/UpdateWorkspaceResponse.md)
  - [UpdateWorkspaceSharingRequest](docs/UpdateWorkspaceSharingRequest.md)

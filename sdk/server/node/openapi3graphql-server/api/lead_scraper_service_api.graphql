@@ -14,6 +14,11 @@
 
 
 
+input CreateAPIKeyInput {
+    
+    createApiKeyRequest: CreateApiKeyRequestInput
+}
+
 input CreateOrganizationInput {
     
     createOrganizationRequest: CreateOrganizationRequestInput
@@ -24,6 +29,29 @@ input CreateTenantInput {
     organizationId: String!, 
     
     createTenantBody: CreateTenantBodyInput
+}
+
+input CreateTenantAPIKeyInput {
+    
+    createTenantApiKeyRequest: CreateTenantApiKeyRequestInput
+}
+
+input CreateWebhookInput {
+    
+    createWebhookRequest: CreateWebhookRequestInput
+}
+
+input DeleteAPIKeyInput {
+    
+    keyId: String!, 
+    
+    organizationId: String!, 
+    
+    workspaceId: String!, 
+    
+    tenantId: String!, 
+    
+    accountId: String!
 }
 
 input DeleteOrganizationInput {
@@ -38,6 +66,43 @@ input DeleteTenantInput {
     tenantId: String!
 }
 
+input DeleteTenantAPIKeyInput {
+    
+    keyId: String!, 
+    
+    organizationId: String!, 
+    
+    tenantId: String!
+}
+
+input DeleteWebhookInput {
+    
+    webhookId: String!, 
+    
+    organizationId: String!, 
+    
+    workspaceId: String!, 
+    
+    tenantId: String!, 
+    
+    accountId: String!
+}
+
+input RotateAPIKeyInput {
+    
+    rotateApiKeyRequest: RotateApiKeyRequestInput
+}
+
+input RotateTenantAPIKeyInput {
+    
+    rotateTenantApiKeyRequest: RotateTenantApiKeyRequestInput
+}
+
+input UpdateAPIKeyInput {
+    
+    updateApiKeyRequest: UpdateApiKeyRequestInput
+}
+
 input UpdateOrganizationInput {
     
     updateOrganizationRequest: UpdateOrganizationRequestInput
@@ -48,7 +113,22 @@ input UpdateTenantInput {
     updateTenantRequest: UpdateTenantRequestInput
 }
 
+input UpdateTenantAPIKeyInput {
+    
+    updateTenantApiKeyRequest: UpdateTenantApiKeyRequestInput
+}
+
+input UpdateWebhookInput {
+    
+    updateWebhookRequest: UpdateWebhookRequestInput
+}
+
 type Mutation {
+  # Create a new API key
+  # Creates a new API key with specified permissions and settings
+  # @param CreateApiKeyRequest createApiKeyRequest 
+  # @return [CreateApiKeyResponse]
+  CreateAPIKey(input: CreateAPIKeyInput!): CreateApiKeyResponse
   # Create a new organization
   # Creates a new organization within a tenant
   # @param CreateOrganizationRequest createOrganizationRequest 
@@ -60,6 +140,25 @@ type Mutation {
   # @param CreateTenantBody createTenantBody 
   # @return [CreateTenantResponse]
   CreateTenant(input: CreateTenantInput!): CreateTenantResponse
+  # Create a new tenant API key
+  # Creates a new API key for a tenant with specified permissions
+  # @param CreateTenantApiKeyRequest createTenantApiKeyRequest 
+  # @return [CreateTenantApiKeyResponse]
+  CreateTenantAPIKey(input: CreateTenantAPIKeyInput!): CreateTenantApiKeyResponse
+  # Create webhook
+  # Creates a new webhook configuration for event notifications
+  # @param CreateWebhookRequest createWebhookRequest 
+  # @return [CreateWebhookResponse]
+  CreateWebhook(input: CreateWebhookInput!): CreateWebhookResponse
+  # Delete API key
+  # Permanently deletes an API key
+  # @param String! keyId 
+  # @param String! organizationId 
+  # @param String! workspaceId 
+  # @param String! tenantId 
+  # @param String! accountId 
+  # @return [DeleteApiKeyResponse]
+  DeleteAPIKey(input: DeleteAPIKeyInput!): DeleteApiKeyResponse
   # Delete an organization
   # Permanently deletes an organization and all associated resources
   # @param String! Id_ 
@@ -71,6 +170,37 @@ type Mutation {
   # @param String! tenantId 
   # @return [DeleteTenantResponse]
   DeleteTenant(input: DeleteTenantInput!): DeleteTenantResponse
+  # Delete tenant API key
+  # Permanently deletes a tenant API key
+  # @param String! keyId 
+  # @param String! organizationId 
+  # @param String! tenantId 
+  # @return [DeleteTenantApiKeyResponse]
+  DeleteTenantAPIKey(input: DeleteTenantAPIKeyInput!): DeleteTenantApiKeyResponse
+  # Delete webhook
+  # Deletes a webhook configuration
+  # @param String! webhookId 
+  # @param String! organizationId 
+  # @param String! workspaceId 
+  # @param String! tenantId 
+  # @param String! accountId 
+  # @return [DeleteWebhookResponse]
+  DeleteWebhook(input: DeleteWebhookInput!): DeleteWebhookResponse
+  # Rotate API key
+  # Rotates an API key while maintaining its configuration
+  # @param RotateApiKeyRequest rotateApiKeyRequest 
+  # @return [RotateApiKeyResponse]
+  RotateAPIKey(input: RotateAPIKeyInput!): RotateApiKeyResponse
+  # Rotate tenant API key
+  # Rotates a tenant API key while maintaining its configuration
+  # @param RotateTenantApiKeyRequest rotateTenantApiKeyRequest 
+  # @return [RotateTenantApiKeyResponse]
+  RotateTenantAPIKey(input: RotateTenantAPIKeyInput!): RotateTenantApiKeyResponse
+  # Update API key
+  # Updates an existing API key&#39;s configuration
+  # @param UpdateApiKeyRequest updateApiKeyRequest 
+  # @return [UpdateApiKeyResponse]
+  UpdateAPIKey(input: UpdateAPIKeyInput!): UpdateApiKeyResponse
   # Update organization details
   # Updates the configuration of a specific organization
   # @param UpdateOrganizationRequest updateOrganizationRequest 
@@ -81,9 +211,37 @@ type Mutation {
   # @param UpdateTenantRequest updateTenantRequest 
   # @return [UpdateTenantResponse]
   UpdateTenant(input: UpdateTenantInput!): UpdateTenantResponse
+  # Update tenant API key
+  # Updates an existing tenant API key&#39;s configuration
+  # @param UpdateTenantApiKeyRequest updateTenantApiKeyRequest 
+  # @return [UpdateTenantApiKeyResponse]
+  UpdateTenantAPIKey(input: UpdateTenantAPIKeyInput!): UpdateTenantApiKeyResponse
+  # Update webhook
+  # Updates an existing webhook configuration
+  # @param UpdateWebhookRequest updateWebhookRequest 
+  # @return [UpdateWebhookResponse]
+  UpdateWebhook(input: UpdateWebhookInput!): UpdateWebhookResponse
 }
 
 type Query {
+  # Get API key details
+  # Retrieves details of a specific API key
+  # @param String! keyId 
+  # @param String! organizationId 
+  # @param String! tenantId 
+  # @param String! accountId 
+  # @param String! workspaceId 
+  # @return [GetApiKeyResponse]
+  GetAPIKey(keyId: String!, organizationId: String!, tenantId: String!, accountId: String!, workspaceId: String!): GetApiKeyResponse
+  # Get lead details
+  # Retrieves detailed information about a specific lead
+  # @param String! leadId 
+  # @param String! organizationId 
+  # @param String! workspaceId 
+  # @param String! tenantId 
+  # @param String! accountId 
+  # @return [GetLeadResponse]
+  GetLead(leadId: String!, organizationId: String!, workspaceId: String!, tenantId: String!, accountId: String!): GetLeadResponse
   # Get organization details
   # Retrieves details of a specific organization
   # @param String! Id_ 
@@ -95,12 +253,59 @@ type Query {
   # @param String! tenantId 
   # @return [GetTenantResponse]
   GetTenant(organizationId: String!, tenantId: String!): GetTenantResponse
+  # Get tenant API key details
+  # Retrieves details of a specific tenant API key
+  # @param String! keyId 
+  # @param String! organizationId 
+  # @param String! tenantId 
+  # @return [GetTenantApiKeyResponse]
+  GetTenantAPIKey(keyId: String!, organizationId: String!, tenantId: String!): GetTenantApiKeyResponse
+  # Get webhook
+  # Retrieves details of a specific webhook configuration
+  # @param String! webhookId 
+  # @param String! organizationId 
+  # @param String! workspaceId 
+  # @param String! tenantId 
+  # @param String! accountId 
+  # @return [GetWebhookResponse]
+  GetWebhook(webhookId: String!, organizationId: String!, workspaceId: String!, tenantId: String!, accountId: String!): GetWebhookResponse
+  # List API keys
+  # Retrieves a list of API keys with optional filtering
+  # @param String! organizationId 
+  # @param String! tenantId 
+  # @param String! accountId 
+  # @param String! workspaceId 
+  # @param Int! pageSize 
+  # @param Int! pageNumber 
+  # @param String! status 
+  # @param String! search 
+  # @return [ListApiKeysResponse]
+  ListAPIKeys(organizationId: String!, tenantId: String!, accountId: String!, workspaceId: String!, pageSize: Int!, pageNumber: Int!, status: String!, search: String!): ListApiKeysResponse
+  # List leads
+  # Retrieves a paginated list of leads with comprehensive filtering options
+  # @param String! organizationId Context identifiers
+  # @param String! workspaceId 
+  # @param String! tenantId 
+  # @param String! accountId 
+  # @param Int! pageSize Pagination
+  # @param Int! pageNumber 
+  # @return [ListLeadsResponse]
+  ListLeads(organizationId: String!, workspaceId: String!, tenantId: String!, accountId: String!, pageSize: Int!, pageNumber: Int!): ListLeadsResponse
   # List all organizations
   # Retrieves a list of all organizations in a tenant
   # @param Int! pageSize 
   # @param Int! pageNumber 
   # @return [ListOrganizationsResponse]
   ListOrganizations(pageSize: Int!, pageNumber: Int!): ListOrganizationsResponse
+  # List tenant API keys
+  # Retrieves all API keys for a specific tenant
+  # @param String! organizationId 
+  # @param String! tenantId 
+  # @param Int! pageSize 
+  # @param Int! pageNumber 
+  # @param String! status 
+  # @return [ListTenantApiKeysResponse]
+  ListTenantAPIKeys(organizationId: String!, tenantId: String!, pageSize: Int!, pageNumber: Int!, status: String!): ListTenantApiKeysResponse
   # List all tenants
   # Retrieves a list of all tenants in the system
   # @param String! organizationId 
@@ -108,5 +313,17 @@ type Query {
   # @param Int! pageNumber 
   # @return [ListTenantsResponse]
   ListTenants(organizationId: String!, pageSize: Int!, pageNumber: Int!): ListTenantsResponse
+  # List webhooks
+  # Lists all webhook configurations with pagination
+  # @param String! organizationId 
+  # @param String! workspaceId 
+  # @param String! tenantId 
+  # @param String! accountId 
+  # @param Int! pageSize 
+  # @param Int! pageNumber 
+  # @param String! status 
+  # @param String! search 
+  # @return [ListWebhooksResponse]
+  ListWebhooks(organizationId: String!, workspaceId: String!, tenantId: String!, accountId: String!, pageSize: Int!, pageNumber: Int!, status: String!, search: String!): ListWebhooksResponse
 }
 

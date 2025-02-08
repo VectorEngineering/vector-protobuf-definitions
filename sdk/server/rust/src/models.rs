@@ -8973,6 +8973,527 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct CreateApiKeyRequest {
+    #[serde(rename = "organizationId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub organization_id: Option<String>,
+
+    #[serde(rename = "workspaceId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub workspace_id: Option<String>,
+
+    #[serde(rename = "tenantId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub tenant_id: Option<String>,
+
+    #[serde(rename = "accountId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub account_id: Option<String>,
+
+    #[serde(rename = "name")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub name: Option<String>,
+
+    #[serde(rename = "description")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub description: Option<String>,
+
+    #[serde(rename = "scopes")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub scopes: Option<Vec<String>>,
+
+    #[serde(rename = "expiresAt")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub expires_at: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "maxUses")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub max_uses: Option<i32>,
+
+    #[serde(rename = "allowedIps")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub allowed_ips: Option<Vec<String>>,
+
+    #[serde(rename = "rateLimit")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub rate_limit: Option<i32>,
+
+    #[serde(rename = "enforceSigning")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub enforce_signing: Option<bool>,
+
+    #[serde(rename = "allowedSignatureAlgorithms")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub allowed_signature_algorithms: Option<Vec<String>>,
+
+    #[serde(rename = "enforceMutualTls")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub enforce_mutual_tls: Option<bool>,
+
+    #[serde(rename = "alertEmails")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub alert_emails: Option<Vec<String>>,
+
+    #[serde(rename = "alertOnQuotaThreshold")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub alert_on_quota_threshold: Option<bool>,
+
+    #[serde(rename = "quotaAlertThreshold")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub quota_alert_threshold: Option<f32>,
+
+}
+
+
+impl CreateApiKeyRequest {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> CreateApiKeyRequest {
+        CreateApiKeyRequest {
+            organization_id: None,
+            workspace_id: None,
+            tenant_id: None,
+            account_id: None,
+            name: None,
+            description: None,
+            scopes: None,
+            expires_at: None,
+            max_uses: None,
+            allowed_ips: None,
+            rate_limit: None,
+            enforce_signing: None,
+            allowed_signature_algorithms: None,
+            enforce_mutual_tls: None,
+            alert_emails: None,
+            alert_on_quota_threshold: None,
+            quota_alert_threshold: None,
+        }
+    }
+}
+
+/// Converts the CreateApiKeyRequest value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for CreateApiKeyRequest {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.organization_id.as_ref().map(|organization_id| {
+                [
+                    "organizationId".to_string(),
+                    organization_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.workspace_id.as_ref().map(|workspace_id| {
+                [
+                    "workspaceId".to_string(),
+                    workspace_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.tenant_id.as_ref().map(|tenant_id| {
+                [
+                    "tenantId".to_string(),
+                    tenant_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.account_id.as_ref().map(|account_id| {
+                [
+                    "accountId".to_string(),
+                    account_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.name.as_ref().map(|name| {
+                [
+                    "name".to_string(),
+                    name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.description.as_ref().map(|description| {
+                [
+                    "description".to_string(),
+                    description.to_string(),
+                ].join(",")
+            }),
+
+
+            self.scopes.as_ref().map(|scopes| {
+                [
+                    "scopes".to_string(),
+                    scopes.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping expiresAt in query parameter serialization
+
+
+            self.max_uses.as_ref().map(|max_uses| {
+                [
+                    "maxUses".to_string(),
+                    max_uses.to_string(),
+                ].join(",")
+            }),
+
+
+            self.allowed_ips.as_ref().map(|allowed_ips| {
+                [
+                    "allowedIps".to_string(),
+                    allowed_ips.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.rate_limit.as_ref().map(|rate_limit| {
+                [
+                    "rateLimit".to_string(),
+                    rate_limit.to_string(),
+                ].join(",")
+            }),
+
+
+            self.enforce_signing.as_ref().map(|enforce_signing| {
+                [
+                    "enforceSigning".to_string(),
+                    enforce_signing.to_string(),
+                ].join(",")
+            }),
+
+
+            self.allowed_signature_algorithms.as_ref().map(|allowed_signature_algorithms| {
+                [
+                    "allowedSignatureAlgorithms".to_string(),
+                    allowed_signature_algorithms.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.enforce_mutual_tls.as_ref().map(|enforce_mutual_tls| {
+                [
+                    "enforceMutualTls".to_string(),
+                    enforce_mutual_tls.to_string(),
+                ].join(",")
+            }),
+
+
+            self.alert_emails.as_ref().map(|alert_emails| {
+                [
+                    "alertEmails".to_string(),
+                    alert_emails.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.alert_on_quota_threshold.as_ref().map(|alert_on_quota_threshold| {
+                [
+                    "alertOnQuotaThreshold".to_string(),
+                    alert_on_quota_threshold.to_string(),
+                ].join(",")
+            }),
+
+
+            self.quota_alert_threshold.as_ref().map(|quota_alert_threshold| {
+                [
+                    "quotaAlertThreshold".to_string(),
+                    quota_alert_threshold.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateApiKeyRequest value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for CreateApiKeyRequest {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub organization_id: Vec<String>,
+            pub workspace_id: Vec<String>,
+            pub tenant_id: Vec<String>,
+            pub account_id: Vec<String>,
+            pub name: Vec<String>,
+            pub description: Vec<String>,
+            pub scopes: Vec<Vec<String>>,
+            pub expires_at: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub max_uses: Vec<i32>,
+            pub allowed_ips: Vec<Vec<String>>,
+            pub rate_limit: Vec<i32>,
+            pub enforce_signing: Vec<bool>,
+            pub allowed_signature_algorithms: Vec<Vec<String>>,
+            pub enforce_mutual_tls: Vec<bool>,
+            pub alert_emails: Vec<Vec<String>>,
+            pub alert_on_quota_threshold: Vec<bool>,
+            pub quota_alert_threshold: Vec<f32>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing CreateApiKeyRequest".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "organizationId" => intermediate_rep.organization_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "workspaceId" => intermediate_rep.workspace_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "accountId" => intermediate_rep.account_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "scopes" => return std::result::Result::Err("Parsing a container in this style is not supported in CreateApiKeyRequest".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "expiresAt" => intermediate_rep.expires_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "maxUses" => intermediate_rep.max_uses.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "allowedIps" => return std::result::Result::Err("Parsing a container in this style is not supported in CreateApiKeyRequest".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "rateLimit" => intermediate_rep.rate_limit.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "enforceSigning" => intermediate_rep.enforce_signing.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "allowedSignatureAlgorithms" => return std::result::Result::Err("Parsing a container in this style is not supported in CreateApiKeyRequest".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "enforceMutualTls" => intermediate_rep.enforce_mutual_tls.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "alertEmails" => return std::result::Result::Err("Parsing a container in this style is not supported in CreateApiKeyRequest".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "alertOnQuotaThreshold" => intermediate_rep.alert_on_quota_threshold.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "quotaAlertThreshold" => intermediate_rep.quota_alert_threshold.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateApiKeyRequest".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(CreateApiKeyRequest {
+            organization_id: intermediate_rep.organization_id.into_iter().next(),
+            workspace_id: intermediate_rep.workspace_id.into_iter().next(),
+            tenant_id: intermediate_rep.tenant_id.into_iter().next(),
+            account_id: intermediate_rep.account_id.into_iter().next(),
+            name: intermediate_rep.name.into_iter().next(),
+            description: intermediate_rep.description.into_iter().next(),
+            scopes: intermediate_rep.scopes.into_iter().next(),
+            expires_at: intermediate_rep.expires_at.into_iter().next(),
+            max_uses: intermediate_rep.max_uses.into_iter().next(),
+            allowed_ips: intermediate_rep.allowed_ips.into_iter().next(),
+            rate_limit: intermediate_rep.rate_limit.into_iter().next(),
+            enforce_signing: intermediate_rep.enforce_signing.into_iter().next(),
+            allowed_signature_algorithms: intermediate_rep.allowed_signature_algorithms.into_iter().next(),
+            enforce_mutual_tls: intermediate_rep.enforce_mutual_tls.into_iter().next(),
+            alert_emails: intermediate_rep.alert_emails.into_iter().next(),
+            alert_on_quota_threshold: intermediate_rep.alert_on_quota_threshold.into_iter().next(),
+            quota_alert_threshold: intermediate_rep.quota_alert_threshold.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<CreateApiKeyRequest> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateApiKeyRequest>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateApiKeyRequest>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for CreateApiKeyRequest - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateApiKeyRequest> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <CreateApiKeyRequest as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into CreateApiKeyRequest - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct CreateApiKeyResponse {
+    #[serde(rename = "apiKey")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub api_key: Option<models::ApiKey>,
+
+    #[serde(rename = "keyValue")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub key_value: Option<String>,
+
+}
+
+
+impl CreateApiKeyResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> CreateApiKeyResponse {
+        CreateApiKeyResponse {
+            api_key: None,
+            key_value: None,
+        }
+    }
+}
+
+/// Converts the CreateApiKeyResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for CreateApiKeyResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping apiKey in query parameter serialization
+
+
+            self.key_value.as_ref().map(|key_value| {
+                [
+                    "keyValue".to_string(),
+                    key_value.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateApiKeyResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for CreateApiKeyResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub api_key: Vec<models::ApiKey>,
+            pub key_value: Vec<String>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing CreateApiKeyResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "apiKey" => intermediate_rep.api_key.push(<models::ApiKey as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "keyValue" => intermediate_rep.key_value.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateApiKeyResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(CreateApiKeyResponse {
+            api_key: intermediate_rep.api_key.into_iter().next(),
+            key_value: intermediate_rep.key_value.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<CreateApiKeyResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateApiKeyResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateApiKeyResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for CreateApiKeyResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateApiKeyResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <CreateApiKeyResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into CreateApiKeyResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct CreateOrganizationRequest {
     #[serde(rename = "organization")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -9196,6 +9717,299 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into CreateOrganizationResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct CreateTenantApiKeyRequest {
+    #[serde(rename = "organizationId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub organization_id: Option<String>,
+
+    #[serde(rename = "tenantId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub tenant_id: Option<String>,
+
+    #[serde(rename = "apiKey")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub api_key: Option<models::TenantApiKey>,
+
+}
+
+
+impl CreateTenantApiKeyRequest {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> CreateTenantApiKeyRequest {
+        CreateTenantApiKeyRequest {
+            organization_id: None,
+            tenant_id: None,
+            api_key: None,
+        }
+    }
+}
+
+/// Converts the CreateTenantApiKeyRequest value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for CreateTenantApiKeyRequest {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.organization_id.as_ref().map(|organization_id| {
+                [
+                    "organizationId".to_string(),
+                    organization_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.tenant_id.as_ref().map(|tenant_id| {
+                [
+                    "tenantId".to_string(),
+                    tenant_id.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping apiKey in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateTenantApiKeyRequest value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for CreateTenantApiKeyRequest {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub organization_id: Vec<String>,
+            pub tenant_id: Vec<String>,
+            pub api_key: Vec<models::TenantApiKey>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing CreateTenantApiKeyRequest".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "organizationId" => intermediate_rep.organization_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "apiKey" => intermediate_rep.api_key.push(<models::TenantApiKey as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateTenantApiKeyRequest".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(CreateTenantApiKeyRequest {
+            organization_id: intermediate_rep.organization_id.into_iter().next(),
+            tenant_id: intermediate_rep.tenant_id.into_iter().next(),
+            api_key: intermediate_rep.api_key.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<CreateTenantApiKeyRequest> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateTenantApiKeyRequest>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateTenantApiKeyRequest>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for CreateTenantApiKeyRequest - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateTenantApiKeyRequest> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <CreateTenantApiKeyRequest as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into CreateTenantApiKeyRequest - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct CreateTenantApiKeyResponse {
+    #[serde(rename = "keyId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub key_id: Option<String>,
+
+    #[serde(rename = "keyValue")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub key_value: Option<String>,
+
+}
+
+
+impl CreateTenantApiKeyResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> CreateTenantApiKeyResponse {
+        CreateTenantApiKeyResponse {
+            key_id: None,
+            key_value: None,
+        }
+    }
+}
+
+/// Converts the CreateTenantApiKeyResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for CreateTenantApiKeyResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.key_id.as_ref().map(|key_id| {
+                [
+                    "keyId".to_string(),
+                    key_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.key_value.as_ref().map(|key_value| {
+                [
+                    "keyValue".to_string(),
+                    key_value.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateTenantApiKeyResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for CreateTenantApiKeyResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub key_id: Vec<String>,
+            pub key_value: Vec<String>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing CreateTenantApiKeyResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "keyId" => intermediate_rep.key_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "keyValue" => intermediate_rep.key_value.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateTenantApiKeyResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(CreateTenantApiKeyResponse {
+            key_id: intermediate_rep.key_id.into_iter().next(),
+            key_value: intermediate_rep.key_value.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<CreateTenantApiKeyResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateTenantApiKeyResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateTenantApiKeyResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for CreateTenantApiKeyResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateTenantApiKeyResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <CreateTenantApiKeyResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into CreateTenantApiKeyResponse - {}",
                                 value, err))
                     }
              },
@@ -9438,6 +10252,310 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into CreateTenantResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct CreateWebhookRequest {
+    #[serde(rename = "organizationId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub organization_id: Option<String>,
+
+    #[serde(rename = "workspaceId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub workspace_id: Option<String>,
+
+    #[serde(rename = "tenantId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub tenant_id: Option<String>,
+
+    #[serde(rename = "accountId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub account_id: Option<String>,
+
+    #[serde(rename = "webhook")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub webhook: Option<models::WebhookConfig>,
+
+}
+
+
+impl CreateWebhookRequest {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> CreateWebhookRequest {
+        CreateWebhookRequest {
+            organization_id: None,
+            workspace_id: None,
+            tenant_id: None,
+            account_id: None,
+            webhook: None,
+        }
+    }
+}
+
+/// Converts the CreateWebhookRequest value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for CreateWebhookRequest {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.organization_id.as_ref().map(|organization_id| {
+                [
+                    "organizationId".to_string(),
+                    organization_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.workspace_id.as_ref().map(|workspace_id| {
+                [
+                    "workspaceId".to_string(),
+                    workspace_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.tenant_id.as_ref().map(|tenant_id| {
+                [
+                    "tenantId".to_string(),
+                    tenant_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.account_id.as_ref().map(|account_id| {
+                [
+                    "accountId".to_string(),
+                    account_id.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping webhook in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateWebhookRequest value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for CreateWebhookRequest {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub organization_id: Vec<String>,
+            pub workspace_id: Vec<String>,
+            pub tenant_id: Vec<String>,
+            pub account_id: Vec<String>,
+            pub webhook: Vec<models::WebhookConfig>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing CreateWebhookRequest".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "organizationId" => intermediate_rep.organization_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "workspaceId" => intermediate_rep.workspace_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "accountId" => intermediate_rep.account_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "webhook" => intermediate_rep.webhook.push(<models::WebhookConfig as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateWebhookRequest".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(CreateWebhookRequest {
+            organization_id: intermediate_rep.organization_id.into_iter().next(),
+            workspace_id: intermediate_rep.workspace_id.into_iter().next(),
+            tenant_id: intermediate_rep.tenant_id.into_iter().next(),
+            account_id: intermediate_rep.account_id.into_iter().next(),
+            webhook: intermediate_rep.webhook.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<CreateWebhookRequest> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateWebhookRequest>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateWebhookRequest>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for CreateWebhookRequest - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateWebhookRequest> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <CreateWebhookRequest as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into CreateWebhookRequest - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct CreateWebhookResponse {
+    #[serde(rename = "webhook")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub webhook: Option<models::WebhookConfig>,
+
+}
+
+
+impl CreateWebhookResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> CreateWebhookResponse {
+        CreateWebhookResponse {
+            webhook: None,
+        }
+    }
+}
+
+/// Converts the CreateWebhookResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for CreateWebhookResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping webhook in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateWebhookResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for CreateWebhookResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub webhook: Vec<models::WebhookConfig>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing CreateWebhookResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "webhook" => intermediate_rep.webhook.push(<models::WebhookConfig as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateWebhookResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(CreateWebhookResponse {
+            webhook: intermediate_rep.webhook.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<CreateWebhookResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateWebhookResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateWebhookResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for CreateWebhookResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateWebhookResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <CreateWebhookResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into CreateWebhookResponse - {}",
                                 value, err))
                     }
              },
@@ -10180,6 +11298,130 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct DeleteApiKeyResponse {
+    #[serde(rename = "success")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub success: Option<bool>,
+
+}
+
+
+impl DeleteApiKeyResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> DeleteApiKeyResponse {
+        DeleteApiKeyResponse {
+            success: None,
+        }
+    }
+}
+
+/// Converts the DeleteApiKeyResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for DeleteApiKeyResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.success.as_ref().map(|success| {
+                [
+                    "success".to_string(),
+                    success.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a DeleteApiKeyResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for DeleteApiKeyResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub success: Vec<bool>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing DeleteApiKeyResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "success" => intermediate_rep.success.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing DeleteApiKeyResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(DeleteApiKeyResponse {
+            success: intermediate_rep.success.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<DeleteApiKeyResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<DeleteApiKeyResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<DeleteApiKeyResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for DeleteApiKeyResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<DeleteApiKeyResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <DeleteApiKeyResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into DeleteApiKeyResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct DeleteOrganizationResponse {
     #[serde(rename = "success")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -10304,6 +11546,130 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct DeleteTenantApiKeyResponse {
+    #[serde(rename = "success")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub success: Option<bool>,
+
+}
+
+
+impl DeleteTenantApiKeyResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> DeleteTenantApiKeyResponse {
+        DeleteTenantApiKeyResponse {
+            success: None,
+        }
+    }
+}
+
+/// Converts the DeleteTenantApiKeyResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for DeleteTenantApiKeyResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.success.as_ref().map(|success| {
+                [
+                    "success".to_string(),
+                    success.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a DeleteTenantApiKeyResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for DeleteTenantApiKeyResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub success: Vec<bool>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing DeleteTenantApiKeyResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "success" => intermediate_rep.success.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing DeleteTenantApiKeyResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(DeleteTenantApiKeyResponse {
+            success: intermediate_rep.success.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<DeleteTenantApiKeyResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<DeleteTenantApiKeyResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<DeleteTenantApiKeyResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for DeleteTenantApiKeyResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<DeleteTenantApiKeyResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <DeleteTenantApiKeyResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into DeleteTenantApiKeyResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct DeleteTenantResponse {
     #[serde(rename = "success")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -10415,6 +11781,130 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into DeleteTenantResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct DeleteWebhookResponse {
+    #[serde(rename = "success")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub success: Option<bool>,
+
+}
+
+
+impl DeleteWebhookResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> DeleteWebhookResponse {
+        DeleteWebhookResponse {
+            success: None,
+        }
+    }
+}
+
+/// Converts the DeleteWebhookResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for DeleteWebhookResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.success.as_ref().map(|success| {
+                [
+                    "success".to_string(),
+                    success.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a DeleteWebhookResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for DeleteWebhookResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub success: Vec<bool>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing DeleteWebhookResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "success" => intermediate_rep.success.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing DeleteWebhookResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(DeleteWebhookResponse {
+            success: intermediate_rep.success.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<DeleteWebhookResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<DeleteWebhookResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<DeleteWebhookResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for DeleteWebhookResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<DeleteWebhookResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <DeleteWebhookResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into DeleteWebhookResponse - {}",
                                 value, err))
                     }
              },
@@ -14786,6 +16276,242 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct GetApiKeyResponse {
+    #[serde(rename = "apiKey")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub api_key: Option<models::ApiKey>,
+
+}
+
+
+impl GetApiKeyResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> GetApiKeyResponse {
+        GetApiKeyResponse {
+            api_key: None,
+        }
+    }
+}
+
+/// Converts the GetApiKeyResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for GetApiKeyResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping apiKey in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a GetApiKeyResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for GetApiKeyResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub api_key: Vec<models::ApiKey>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing GetApiKeyResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "apiKey" => intermediate_rep.api_key.push(<models::ApiKey as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing GetApiKeyResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(GetApiKeyResponse {
+            api_key: intermediate_rep.api_key.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<GetApiKeyResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<GetApiKeyResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<GetApiKeyResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for GetApiKeyResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<GetApiKeyResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <GetApiKeyResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into GetApiKeyResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct GetLeadResponse {
+    #[serde(rename = "lead")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub lead: Option<models::Lead>,
+
+}
+
+
+impl GetLeadResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> GetLeadResponse {
+        GetLeadResponse {
+            lead: None,
+        }
+    }
+}
+
+/// Converts the GetLeadResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for GetLeadResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping lead in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a GetLeadResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for GetLeadResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub lead: Vec<models::Lead>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing GetLeadResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "lead" => intermediate_rep.lead.push(<models::Lead as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing GetLeadResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(GetLeadResponse {
+            lead: intermediate_rep.lead.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<GetLeadResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<GetLeadResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<GetLeadResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for GetLeadResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<GetLeadResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <GetLeadResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into GetLeadResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct GetOrganizationResponse {
     #[serde(rename = "organization")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -14904,6 +16630,124 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct GetTenantApiKeyResponse {
+    #[serde(rename = "apiKey")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub api_key: Option<models::TenantApiKey>,
+
+}
+
+
+impl GetTenantApiKeyResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> GetTenantApiKeyResponse {
+        GetTenantApiKeyResponse {
+            api_key: None,
+        }
+    }
+}
+
+/// Converts the GetTenantApiKeyResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for GetTenantApiKeyResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping apiKey in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a GetTenantApiKeyResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for GetTenantApiKeyResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub api_key: Vec<models::TenantApiKey>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing GetTenantApiKeyResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "apiKey" => intermediate_rep.api_key.push(<models::TenantApiKey as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing GetTenantApiKeyResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(GetTenantApiKeyResponse {
+            api_key: intermediate_rep.api_key.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<GetTenantApiKeyResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<GetTenantApiKeyResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<GetTenantApiKeyResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for GetTenantApiKeyResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<GetTenantApiKeyResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <GetTenantApiKeyResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into GetTenantApiKeyResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct GetTenantResponse {
     #[serde(rename = "tenant")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -15009,6 +16853,124 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into GetTenantResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct GetWebhookResponse {
+    #[serde(rename = "webhook")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub webhook: Option<models::WebhookConfig>,
+
+}
+
+
+impl GetWebhookResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> GetWebhookResponse {
+        GetWebhookResponse {
+            webhook: None,
+        }
+    }
+}
+
+/// Converts the GetWebhookResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for GetWebhookResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping webhook in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a GetWebhookResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for GetWebhookResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub webhook: Vec<models::WebhookConfig>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing GetWebhookResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "webhook" => intermediate_rep.webhook.push(<models::WebhookConfig as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing GetWebhookResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(GetWebhookResponse {
+            webhook: intermediate_rep.webhook.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<GetWebhookResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<GetWebhookResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<GetWebhookResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for GetWebhookResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<GetWebhookResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <GetWebhookResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into GetWebhookResponse - {}",
                                 value, err))
                     }
              },
@@ -18090,6 +20052,308 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ListApiKeysResponse {
+    #[serde(rename = "apiKeys")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub api_keys: Option<Vec<models::ApiKey>>,
+
+    #[serde(rename = "nextPageNumber")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub next_page_number: Option<i32>,
+
+    #[serde(rename = "totalCount")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_count: Option<i32>,
+
+}
+
+
+impl ListApiKeysResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ListApiKeysResponse {
+        ListApiKeysResponse {
+            api_keys: None,
+            next_page_number: None,
+            total_count: None,
+        }
+    }
+}
+
+/// Converts the ListApiKeysResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ListApiKeysResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping apiKeys in query parameter serialization
+
+
+            self.next_page_number.as_ref().map(|next_page_number| {
+                [
+                    "nextPageNumber".to_string(),
+                    next_page_number.to_string(),
+                ].join(",")
+            }),
+
+
+            self.total_count.as_ref().map(|total_count| {
+                [
+                    "totalCount".to_string(),
+                    total_count.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ListApiKeysResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ListApiKeysResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub api_keys: Vec<Vec<models::ApiKey>>,
+            pub next_page_number: Vec<i32>,
+            pub total_count: Vec<i32>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ListApiKeysResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    "apiKeys" => return std::result::Result::Err("Parsing a container in this style is not supported in ListApiKeysResponse".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "nextPageNumber" => intermediate_rep.next_page_number.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "totalCount" => intermediate_rep.total_count.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ListApiKeysResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ListApiKeysResponse {
+            api_keys: intermediate_rep.api_keys.into_iter().next(),
+            next_page_number: intermediate_rep.next_page_number.into_iter().next(),
+            total_count: intermediate_rep.total_count.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ListApiKeysResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ListApiKeysResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ListApiKeysResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ListApiKeysResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ListApiKeysResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ListApiKeysResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ListApiKeysResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ListLeadsResponse {
+    #[serde(rename = "leads")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub leads: Option<Vec<models::Lead>>,
+
+    #[serde(rename = "totalCount")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_count: Option<i32>,
+
+    #[serde(rename = "nextPageNumber")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub next_page_number: Option<i32>,
+
+}
+
+
+impl ListLeadsResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ListLeadsResponse {
+        ListLeadsResponse {
+            leads: None,
+            total_count: None,
+            next_page_number: None,
+        }
+    }
+}
+
+/// Converts the ListLeadsResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ListLeadsResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping leads in query parameter serialization
+
+
+            self.total_count.as_ref().map(|total_count| {
+                [
+                    "totalCount".to_string(),
+                    total_count.to_string(),
+                ].join(",")
+            }),
+
+
+            self.next_page_number.as_ref().map(|next_page_number| {
+                [
+                    "nextPageNumber".to_string(),
+                    next_page_number.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ListLeadsResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ListLeadsResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub leads: Vec<Vec<models::Lead>>,
+            pub total_count: Vec<i32>,
+            pub next_page_number: Vec<i32>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ListLeadsResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    "leads" => return std::result::Result::Err("Parsing a container in this style is not supported in ListLeadsResponse".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "totalCount" => intermediate_rep.total_count.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "nextPageNumber" => intermediate_rep.next_page_number.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ListLeadsResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ListLeadsResponse {
+            leads: intermediate_rep.leads.into_iter().next(),
+            total_count: intermediate_rep.total_count.into_iter().next(),
+            next_page_number: intermediate_rep.next_page_number.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ListLeadsResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ListLeadsResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ListLeadsResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ListLeadsResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ListLeadsResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ListLeadsResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ListLeadsResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct ListOrganizationsResponse {
     #[serde(rename = "organizations")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -18241,6 +20505,157 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ListTenantApiKeysResponse {
+    #[serde(rename = "apiKeys")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub api_keys: Option<Vec<models::TenantApiKey>>,
+
+    #[serde(rename = "nextPageNumber")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub next_page_number: Option<i32>,
+
+    #[serde(rename = "totalCount")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_count: Option<i32>,
+
+}
+
+
+impl ListTenantApiKeysResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ListTenantApiKeysResponse {
+        ListTenantApiKeysResponse {
+            api_keys: None,
+            next_page_number: None,
+            total_count: None,
+        }
+    }
+}
+
+/// Converts the ListTenantApiKeysResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ListTenantApiKeysResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping apiKeys in query parameter serialization
+
+
+            self.next_page_number.as_ref().map(|next_page_number| {
+                [
+                    "nextPageNumber".to_string(),
+                    next_page_number.to_string(),
+                ].join(",")
+            }),
+
+
+            self.total_count.as_ref().map(|total_count| {
+                [
+                    "totalCount".to_string(),
+                    total_count.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ListTenantApiKeysResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ListTenantApiKeysResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub api_keys: Vec<Vec<models::TenantApiKey>>,
+            pub next_page_number: Vec<i32>,
+            pub total_count: Vec<i32>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ListTenantApiKeysResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    "apiKeys" => return std::result::Result::Err("Parsing a container in this style is not supported in ListTenantApiKeysResponse".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "nextPageNumber" => intermediate_rep.next_page_number.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "totalCount" => intermediate_rep.total_count.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ListTenantApiKeysResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ListTenantApiKeysResponse {
+            api_keys: intermediate_rep.api_keys.into_iter().next(),
+            next_page_number: intermediate_rep.next_page_number.into_iter().next(),
+            total_count: intermediate_rep.total_count.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ListTenantApiKeysResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ListTenantApiKeysResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ListTenantApiKeysResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ListTenantApiKeysResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ListTenantApiKeysResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ListTenantApiKeysResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ListTenantApiKeysResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct ListTenantsResponse {
     #[serde(rename = "tenants")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -18362,6 +20777,157 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into ListTenantsResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ListWebhooksResponse {
+    #[serde(rename = "webhooks")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub webhooks: Option<Vec<models::WebhookConfig>>,
+
+    #[serde(rename = "nextPageNumber")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub next_page_number: Option<i32>,
+
+    #[serde(rename = "totalCount")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_count: Option<i32>,
+
+}
+
+
+impl ListWebhooksResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ListWebhooksResponse {
+        ListWebhooksResponse {
+            webhooks: None,
+            next_page_number: None,
+            total_count: None,
+        }
+    }
+}
+
+/// Converts the ListWebhooksResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ListWebhooksResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping webhooks in query parameter serialization
+
+
+            self.next_page_number.as_ref().map(|next_page_number| {
+                [
+                    "nextPageNumber".to_string(),
+                    next_page_number.to_string(),
+                ].join(",")
+            }),
+
+
+            self.total_count.as_ref().map(|total_count| {
+                [
+                    "totalCount".to_string(),
+                    total_count.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ListWebhooksResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ListWebhooksResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub webhooks: Vec<Vec<models::WebhookConfig>>,
+            pub next_page_number: Vec<i32>,
+            pub total_count: Vec<i32>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ListWebhooksResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    "webhooks" => return std::result::Result::Err("Parsing a container in this style is not supported in ListWebhooksResponse".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "nextPageNumber" => intermediate_rep.next_page_number.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "totalCount" => intermediate_rep.total_count.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ListWebhooksResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ListWebhooksResponse {
+            webhooks: intermediate_rep.webhooks.into_iter().next(),
+            next_page_number: intermediate_rep.next_page_number.into_iter().next(),
+            total_count: intermediate_rep.total_count.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ListWebhooksResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ListWebhooksResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ListWebhooksResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ListWebhooksResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ListWebhooksResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ListWebhooksResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ListWebhooksResponse - {}",
                                 value, err))
                     }
              },
@@ -24029,6 +26595,682 @@ impl std::str::FromStr for Role {
         }
     }
 }
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct RotateApiKeyRequest {
+    #[serde(rename = "organizationId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub organization_id: Option<String>,
+
+    #[serde(rename = "tenantId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub tenant_id: Option<String>,
+
+    #[serde(rename = "accountId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub account_id: Option<String>,
+
+    #[serde(rename = "workspaceId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub workspace_id: Option<String>,
+
+    #[serde(rename = "keyId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub key_id: Option<String>,
+
+}
+
+
+impl RotateApiKeyRequest {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> RotateApiKeyRequest {
+        RotateApiKeyRequest {
+            organization_id: None,
+            tenant_id: None,
+            account_id: None,
+            workspace_id: None,
+            key_id: None,
+        }
+    }
+}
+
+/// Converts the RotateApiKeyRequest value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for RotateApiKeyRequest {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.organization_id.as_ref().map(|organization_id| {
+                [
+                    "organizationId".to_string(),
+                    organization_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.tenant_id.as_ref().map(|tenant_id| {
+                [
+                    "tenantId".to_string(),
+                    tenant_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.account_id.as_ref().map(|account_id| {
+                [
+                    "accountId".to_string(),
+                    account_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.workspace_id.as_ref().map(|workspace_id| {
+                [
+                    "workspaceId".to_string(),
+                    workspace_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.key_id.as_ref().map(|key_id| {
+                [
+                    "keyId".to_string(),
+                    key_id.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a RotateApiKeyRequest value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for RotateApiKeyRequest {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub organization_id: Vec<String>,
+            pub tenant_id: Vec<String>,
+            pub account_id: Vec<String>,
+            pub workspace_id: Vec<String>,
+            pub key_id: Vec<String>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing RotateApiKeyRequest".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "organizationId" => intermediate_rep.organization_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "accountId" => intermediate_rep.account_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "workspaceId" => intermediate_rep.workspace_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "keyId" => intermediate_rep.key_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing RotateApiKeyRequest".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(RotateApiKeyRequest {
+            organization_id: intermediate_rep.organization_id.into_iter().next(),
+            tenant_id: intermediate_rep.tenant_id.into_iter().next(),
+            account_id: intermediate_rep.account_id.into_iter().next(),
+            workspace_id: intermediate_rep.workspace_id.into_iter().next(),
+            key_id: intermediate_rep.key_id.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<RotateApiKeyRequest> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<RotateApiKeyRequest>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<RotateApiKeyRequest>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for RotateApiKeyRequest - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<RotateApiKeyRequest> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <RotateApiKeyRequest as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into RotateApiKeyRequest - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct RotateApiKeyResponse {
+    #[serde(rename = "newApiKey")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub new_api_key: Option<models::ApiKey>,
+
+    #[serde(rename = "newKeyValue")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub new_key_value: Option<String>,
+
+    #[serde(rename = "oldKeyExpiry")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub old_key_expiry: Option<chrono::DateTime::<chrono::Utc>>,
+
+}
+
+
+impl RotateApiKeyResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> RotateApiKeyResponse {
+        RotateApiKeyResponse {
+            new_api_key: None,
+            new_key_value: None,
+            old_key_expiry: None,
+        }
+    }
+}
+
+/// Converts the RotateApiKeyResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for RotateApiKeyResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping newApiKey in query parameter serialization
+
+
+            self.new_key_value.as_ref().map(|new_key_value| {
+                [
+                    "newKeyValue".to_string(),
+                    new_key_value.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping oldKeyExpiry in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a RotateApiKeyResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for RotateApiKeyResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub new_api_key: Vec<models::ApiKey>,
+            pub new_key_value: Vec<String>,
+            pub old_key_expiry: Vec<chrono::DateTime::<chrono::Utc>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing RotateApiKeyResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "newApiKey" => intermediate_rep.new_api_key.push(<models::ApiKey as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "newKeyValue" => intermediate_rep.new_key_value.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "oldKeyExpiry" => intermediate_rep.old_key_expiry.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing RotateApiKeyResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(RotateApiKeyResponse {
+            new_api_key: intermediate_rep.new_api_key.into_iter().next(),
+            new_key_value: intermediate_rep.new_key_value.into_iter().next(),
+            old_key_expiry: intermediate_rep.old_key_expiry.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<RotateApiKeyResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<RotateApiKeyResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<RotateApiKeyResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for RotateApiKeyResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<RotateApiKeyResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <RotateApiKeyResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into RotateApiKeyResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct RotateTenantApiKeyRequest {
+    #[serde(rename = "organizationId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub organization_id: Option<String>,
+
+    #[serde(rename = "tenantId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub tenant_id: Option<String>,
+
+    #[serde(rename = "keyId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub key_id: Option<String>,
+
+}
+
+
+impl RotateTenantApiKeyRequest {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> RotateTenantApiKeyRequest {
+        RotateTenantApiKeyRequest {
+            organization_id: None,
+            tenant_id: None,
+            key_id: None,
+        }
+    }
+}
+
+/// Converts the RotateTenantApiKeyRequest value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for RotateTenantApiKeyRequest {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.organization_id.as_ref().map(|organization_id| {
+                [
+                    "organizationId".to_string(),
+                    organization_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.tenant_id.as_ref().map(|tenant_id| {
+                [
+                    "tenantId".to_string(),
+                    tenant_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.key_id.as_ref().map(|key_id| {
+                [
+                    "keyId".to_string(),
+                    key_id.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a RotateTenantApiKeyRequest value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for RotateTenantApiKeyRequest {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub organization_id: Vec<String>,
+            pub tenant_id: Vec<String>,
+            pub key_id: Vec<String>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing RotateTenantApiKeyRequest".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "organizationId" => intermediate_rep.organization_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "keyId" => intermediate_rep.key_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing RotateTenantApiKeyRequest".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(RotateTenantApiKeyRequest {
+            organization_id: intermediate_rep.organization_id.into_iter().next(),
+            tenant_id: intermediate_rep.tenant_id.into_iter().next(),
+            key_id: intermediate_rep.key_id.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<RotateTenantApiKeyRequest> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<RotateTenantApiKeyRequest>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<RotateTenantApiKeyRequest>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for RotateTenantApiKeyRequest - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<RotateTenantApiKeyRequest> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <RotateTenantApiKeyRequest as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into RotateTenantApiKeyRequest - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct RotateTenantApiKeyResponse {
+    #[serde(rename = "newApiKey")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub new_api_key: Option<models::TenantApiKey>,
+
+    #[serde(rename = "newKeyValue")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub new_key_value: Option<String>,
+
+    #[serde(rename = "oldKeyExpiry")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub old_key_expiry: Option<chrono::DateTime::<chrono::Utc>>,
+
+    #[serde(rename = "tenantId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub tenant_id: Option<String>,
+
+    #[serde(rename = "organizationId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub organization_id: Option<String>,
+
+}
+
+
+impl RotateTenantApiKeyResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> RotateTenantApiKeyResponse {
+        RotateTenantApiKeyResponse {
+            new_api_key: None,
+            new_key_value: None,
+            old_key_expiry: None,
+            tenant_id: None,
+            organization_id: None,
+        }
+    }
+}
+
+/// Converts the RotateTenantApiKeyResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for RotateTenantApiKeyResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping newApiKey in query parameter serialization
+
+
+            self.new_key_value.as_ref().map(|new_key_value| {
+                [
+                    "newKeyValue".to_string(),
+                    new_key_value.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping oldKeyExpiry in query parameter serialization
+
+
+            self.tenant_id.as_ref().map(|tenant_id| {
+                [
+                    "tenantId".to_string(),
+                    tenant_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.organization_id.as_ref().map(|organization_id| {
+                [
+                    "organizationId".to_string(),
+                    organization_id.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a RotateTenantApiKeyResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for RotateTenantApiKeyResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub new_api_key: Vec<models::TenantApiKey>,
+            pub new_key_value: Vec<String>,
+            pub old_key_expiry: Vec<chrono::DateTime::<chrono::Utc>>,
+            pub tenant_id: Vec<String>,
+            pub organization_id: Vec<String>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing RotateTenantApiKeyResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "newApiKey" => intermediate_rep.new_api_key.push(<models::TenantApiKey as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "newKeyValue" => intermediate_rep.new_key_value.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "oldKeyExpiry" => intermediate_rep.old_key_expiry.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "organizationId" => intermediate_rep.organization_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing RotateTenantApiKeyResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(RotateTenantApiKeyResponse {
+            new_api_key: intermediate_rep.new_api_key.into_iter().next(),
+            new_key_value: intermediate_rep.new_key_value.into_iter().next(),
+            old_key_expiry: intermediate_rep.old_key_expiry.into_iter().next(),
+            tenant_id: intermediate_rep.tenant_id.into_iter().next(),
+            organization_id: intermediate_rep.organization_id.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<RotateTenantApiKeyResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<RotateTenantApiKeyResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<RotateTenantApiKeyResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for RotateTenantApiKeyResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<RotateTenantApiKeyResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <RotateTenantApiKeyResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into RotateTenantApiKeyResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
 
 /// The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
@@ -30644,6 +33886,242 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct UpdateApiKeyRequest {
+    #[serde(rename = "apiKey")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub api_key: Option<models::ApiKey>,
+
+}
+
+
+impl UpdateApiKeyRequest {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> UpdateApiKeyRequest {
+        UpdateApiKeyRequest {
+            api_key: None,
+        }
+    }
+}
+
+/// Converts the UpdateApiKeyRequest value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for UpdateApiKeyRequest {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping apiKey in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a UpdateApiKeyRequest value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for UpdateApiKeyRequest {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub api_key: Vec<models::ApiKey>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing UpdateApiKeyRequest".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "apiKey" => intermediate_rep.api_key.push(<models::ApiKey as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing UpdateApiKeyRequest".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(UpdateApiKeyRequest {
+            api_key: intermediate_rep.api_key.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<UpdateApiKeyRequest> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<UpdateApiKeyRequest>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<UpdateApiKeyRequest>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for UpdateApiKeyRequest - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<UpdateApiKeyRequest> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <UpdateApiKeyRequest as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into UpdateApiKeyRequest - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct UpdateApiKeyResponse {
+    #[serde(rename = "apiKey")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub api_key: Option<models::ApiKey>,
+
+}
+
+
+impl UpdateApiKeyResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> UpdateApiKeyResponse {
+        UpdateApiKeyResponse {
+            api_key: None,
+        }
+    }
+}
+
+/// Converts the UpdateApiKeyResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for UpdateApiKeyResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping apiKey in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a UpdateApiKeyResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for UpdateApiKeyResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub api_key: Vec<models::ApiKey>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing UpdateApiKeyResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "apiKey" => intermediate_rep.api_key.push(<models::ApiKey as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing UpdateApiKeyResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(UpdateApiKeyResponse {
+            api_key: intermediate_rep.api_key.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<UpdateApiKeyResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<UpdateApiKeyResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<UpdateApiKeyResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for UpdateApiKeyResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<UpdateApiKeyResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <UpdateApiKeyResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into UpdateApiKeyResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct UpdateOrganizationRequest {
     #[serde(rename = "organization")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -30880,6 +34358,242 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct UpdateTenantApiKeyRequest {
+    #[serde(rename = "apiKey")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub api_key: Option<models::TenantApiKey>,
+
+}
+
+
+impl UpdateTenantApiKeyRequest {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> UpdateTenantApiKeyRequest {
+        UpdateTenantApiKeyRequest {
+            api_key: None,
+        }
+    }
+}
+
+/// Converts the UpdateTenantApiKeyRequest value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for UpdateTenantApiKeyRequest {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping apiKey in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a UpdateTenantApiKeyRequest value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for UpdateTenantApiKeyRequest {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub api_key: Vec<models::TenantApiKey>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing UpdateTenantApiKeyRequest".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "apiKey" => intermediate_rep.api_key.push(<models::TenantApiKey as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing UpdateTenantApiKeyRequest".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(UpdateTenantApiKeyRequest {
+            api_key: intermediate_rep.api_key.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<UpdateTenantApiKeyRequest> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<UpdateTenantApiKeyRequest>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<UpdateTenantApiKeyRequest>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for UpdateTenantApiKeyRequest - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<UpdateTenantApiKeyRequest> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <UpdateTenantApiKeyRequest as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into UpdateTenantApiKeyRequest - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct UpdateTenantApiKeyResponse {
+    #[serde(rename = "apiKey")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub api_key: Option<models::TenantApiKey>,
+
+}
+
+
+impl UpdateTenantApiKeyResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> UpdateTenantApiKeyResponse {
+        UpdateTenantApiKeyResponse {
+            api_key: None,
+        }
+    }
+}
+
+/// Converts the UpdateTenantApiKeyResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for UpdateTenantApiKeyResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping apiKey in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a UpdateTenantApiKeyResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for UpdateTenantApiKeyResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub api_key: Vec<models::TenantApiKey>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing UpdateTenantApiKeyResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "apiKey" => intermediate_rep.api_key.push(<models::TenantApiKey as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing UpdateTenantApiKeyResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(UpdateTenantApiKeyResponse {
+            api_key: intermediate_rep.api_key.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<UpdateTenantApiKeyResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<UpdateTenantApiKeyResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<UpdateTenantApiKeyResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for UpdateTenantApiKeyResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<UpdateTenantApiKeyResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <UpdateTenantApiKeyResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into UpdateTenantApiKeyResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct UpdateTenantRequest {
     #[serde(rename = "tenant")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -31103,6 +34817,242 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into UpdateTenantResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct UpdateWebhookRequest {
+    #[serde(rename = "webhook")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub webhook: Option<models::WebhookConfig>,
+
+}
+
+
+impl UpdateWebhookRequest {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> UpdateWebhookRequest {
+        UpdateWebhookRequest {
+            webhook: None,
+        }
+    }
+}
+
+/// Converts the UpdateWebhookRequest value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for UpdateWebhookRequest {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping webhook in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a UpdateWebhookRequest value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for UpdateWebhookRequest {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub webhook: Vec<models::WebhookConfig>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing UpdateWebhookRequest".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "webhook" => intermediate_rep.webhook.push(<models::WebhookConfig as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing UpdateWebhookRequest".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(UpdateWebhookRequest {
+            webhook: intermediate_rep.webhook.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<UpdateWebhookRequest> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<UpdateWebhookRequest>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<UpdateWebhookRequest>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for UpdateWebhookRequest - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<UpdateWebhookRequest> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <UpdateWebhookRequest as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into UpdateWebhookRequest - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct UpdateWebhookResponse {
+    #[serde(rename = "webhook")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub webhook: Option<models::WebhookConfig>,
+
+}
+
+
+impl UpdateWebhookResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> UpdateWebhookResponse {
+        UpdateWebhookResponse {
+            webhook: None,
+        }
+    }
+}
+
+/// Converts the UpdateWebhookResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for UpdateWebhookResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping webhook in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a UpdateWebhookResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for UpdateWebhookResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub webhook: Vec<models::WebhookConfig>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing UpdateWebhookResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "webhook" => intermediate_rep.webhook.push(<models::WebhookConfig as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing UpdateWebhookResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(UpdateWebhookResponse {
+            webhook: intermediate_rep.webhook.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<UpdateWebhookResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<UpdateWebhookResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<UpdateWebhookResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for UpdateWebhookResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<UpdateWebhookResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <UpdateWebhookResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into UpdateWebhookResponse - {}",
                                 value, err))
                     }
              },

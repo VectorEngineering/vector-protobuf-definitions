@@ -1225,653 +1225,653 @@ service LeadScraperService {
         };
     }
 
-    // /**
-    //  * CreateTenantAPIKey generates a new API key for a tenant
-    //  * 
-    //  * Features:
-    //  * - Secure key generation
-    //  * - Configurable permissions
-    //  * - Automatic expiration
-    //  * - Usage quotas
-    //  * 
-    //  * Required validation:
-    //  * - Valid tenant ID
-    //  * - Authorization check
-    //  * - Rate limit verification
-    //  * 
-    //  * Required permissions:
-    //  * - create:tenant_api_key
-    //  */
-    // rpc CreateTenantAPIKey(CreateTenantAPIKeyRequest) returns (CreateTenantAPIKeyResponse) {
-    //     option (google.api.http) = {
-    //         post: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys"
-    //         body: "*"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Create a new tenant API key"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "CreateTenantAPIKey"
-    //         description: "Creates a new API key for a tenant with specified permissions"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Organizations retrieved successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.CreateTenantAPIKeyResponse" } }
-    //             }
-    //         }
-    //     };
+    /**
+     * CreateTenantAPIKey generates a new API key for a tenant
+     * 
+     * Features:
+     * - Secure key generation
+     * - Configurable permissions
+     * - Automatic expiration
+     * - Usage quotas
+     * 
+     * Required validation:
+     * - Valid tenant ID
+     * - Authorization check
+     * - Rate limit verification
+     * 
+     * Required permissions:
+     * - create:tenant_api_key
+     */
+    rpc CreateTenantAPIKey(CreateTenantAPIKeyRequest) returns (CreateTenantAPIKeyResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a new tenant API key"
+            tags: ["lead-scraper-service"]
+            operation_id: "CreateTenantAPIKey"
+            description: "Creates a new API key for a tenant with specified permissions"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Organizations retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.CreateTenantAPIKeyResponse" } }
+                }
+            }
+        };
         
-    // }
+    }
 
-    // /**
-    //  * GetTenantAPIKey retrieves details of a specific API key
-    //  * 
-    //  * Returns:
-    //  * - Key metadata
-    //  * - Usage statistics
-    //  * - Permission details
-    //  * - Expiration status
-    //  * 
-    //  * Security:
-    //  * - Never returns full key value
-    //  * - Validates tenant context
-    //  * 
-    //  * Required permissions:
-    //  * - read:tenant_api_key
-    //  */
-    // rpc GetTenantAPIKey(GetTenantAPIKeyRequest) returns (GetTenantAPIKeyResponse) {
-    //     option (google.api.http) = {
-    //         get: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{key_id}"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Get tenant API key details"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "GetTenantAPIKey"
-    //         description: "Retrieves details of a specific tenant API key"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Tenant API key retrieved successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.GetTenantAPIKeyResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * GetTenantAPIKey retrieves details of a specific API key
+     * 
+     * Returns:
+     * - Key metadata
+     * - Usage statistics
+     * - Permission details
+     * - Expiration status
+     * 
+     * Security:
+     * - Never returns full key value
+     * - Validates tenant context
+     * 
+     * Required permissions:
+     * - read:tenant_api_key
+     */
+    rpc GetTenantAPIKey(GetTenantAPIKeyRequest) returns (GetTenantAPIKeyResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{key_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get tenant API key details"
+            tags: ["lead-scraper-service"]
+            operation_id: "GetTenantAPIKey"
+            description: "Retrieves details of a specific tenant API key"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Tenant API key retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.GetTenantAPIKeyResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * UpdateTenantAPIKey modifies an existing API key
-    //  * 
-    //  * Modifiable attributes:
-    //  * - Name and description
-    //  * - Permissions
-    //  * - Usage quotas
-    //  * - Expiration time
-    //  * 
-    //  * Security:
-    //  * - Validates tenant context
-    //  * - Preserves key value
-    //  * 
-    //  * Required permissions:
-    //  * - update:tenant_api_key
-    //  */
-    // rpc UpdateTenantAPIKey(UpdateTenantAPIKeyRequest) returns (UpdateTenantAPIKeyResponse) {
-    //     option (google.api.http) = {
-    //         put: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys"
-    //         body: "*"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Update tenant API key"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "UpdateTenantAPIKey"
-    //         description: "Updates an existing tenant API key's configuration"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Tenant API key updated successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.UpdateTenantAPIKeyResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * UpdateTenantAPIKey modifies an existing API key
+     * 
+     * Modifiable attributes:
+     * - Name and description
+     * - Permissions
+     * - Usage quotas
+     * - Expiration time
+     * 
+     * Security:
+     * - Validates tenant context
+     * - Preserves key value
+     * 
+     * Required permissions:
+     * - update:tenant_api_key
+     */
+    rpc UpdateTenantAPIKey(UpdateTenantAPIKeyRequest) returns (UpdateTenantAPIKeyResponse) {
+        option (google.api.http) = {
+            put: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Update tenant API key"
+            tags: ["lead-scraper-service"]
+            operation_id: "UpdateTenantAPIKey"
+            description: "Updates an existing tenant API key's configuration"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Tenant API key updated successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.UpdateTenantAPIKeyResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * DeleteTenantAPIKey revokes and removes an API key
-    //  * 
-    //  * Process:
-    //  * 1. Immediate key revocation
-    //  * 2. Usage cleanup
-    //  * 3. Audit log creation
-    //  * 
-    //  * Security:
-    //  * - Validates tenant context
-    //  * - Immediate invalidation
-    //  * 
-    //  * Required permissions:
-    //  * - delete:tenant_api_key
-    //  */
-    // rpc DeleteTenantAPIKey(DeleteTenantAPIKeyRequest) returns (DeleteTenantAPIKeyResponse) {
-    //     option (google.api.http) = {
-    //         delete: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{key_id}"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Delete tenant API key"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "DeleteTenantAPIKey"
-    //         description: "Permanently deletes a tenant API key"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Tenant API key deleted successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.DeleteTenantAPIKeyResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * DeleteTenantAPIKey revokes and removes an API key
+     * 
+     * Process:
+     * 1. Immediate key revocation
+     * 2. Usage cleanup
+     * 3. Audit log creation
+     * 
+     * Security:
+     * - Validates tenant context
+     * - Immediate invalidation
+     * 
+     * Required permissions:
+     * - delete:tenant_api_key
+     */
+    rpc DeleteTenantAPIKey(DeleteTenantAPIKeyRequest) returns (DeleteTenantAPIKeyResponse) {
+        option (google.api.http) = {
+            delete: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{key_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete tenant API key"
+            tags: ["lead-scraper-service"]
+            operation_id: "DeleteTenantAPIKey"
+            description: "Permanently deletes a tenant API key"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Tenant API key deleted successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.DeleteTenantAPIKeyResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * ListTenantAPIKeys retrieves all API keys for a tenant
-    //  * 
-    //  * Features:
-    //  * - Pagination support
-    //  * - Filtering options
-    //  * - Usage statistics
-    //  * - Status filtering
-    //  * 
-    //  * Security:
-    //  * - Validates tenant context
-    //  * - Masks key values
-    //  * 
-    //  * Required permissions:
-    //  * - list:tenant_api_key
-    //  */
-    // rpc ListTenantAPIKeys(ListTenantAPIKeysRequest) returns (ListTenantAPIKeysResponse) {
-    //     option (google.api.http) = {
-    //         get: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "List tenant API keys"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "ListTenantAPIKeys"
-    //         description: "Retrieves all API keys for a specific tenant"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Tenant API keys retrieved successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.ListTenantAPIKeysResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * ListTenantAPIKeys retrieves all API keys for a tenant
+     * 
+     * Features:
+     * - Pagination support
+     * - Filtering options
+     * - Usage statistics
+     * - Status filtering
+     * 
+     * Security:
+     * - Validates tenant context
+     * - Masks key values
+     * 
+     * Required permissions:
+     * - list:tenant_api_key
+     */
+    rpc ListTenantAPIKeys(ListTenantAPIKeysRequest) returns (ListTenantAPIKeysResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "List tenant API keys"
+            tags: ["lead-scraper-service"]
+            operation_id: "ListTenantAPIKeys"
+            description: "Retrieves all API keys for a specific tenant"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Tenant API keys retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.ListTenantAPIKeysResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * RotateTenantAPIKey generates a new key while invalidating the old one
-    //  * 
-    //  * Process:
-    //  * 1. Generate new key
-    //  * 2. Copy permissions
-    //  * 3. Invalidate old key
-    //  * 4. Return new key
-    //  * 
-    //  * Security:
-    //  * - Grace period option
-    //  * - Audit logging
-    //  * 
-    //  * Required permissions:
-    //  * - rotate:tenant_api_key
-    //  */
-    // rpc RotateTenantAPIKey(RotateTenantAPIKeyRequest) returns (RotateTenantAPIKeyResponse) {
-    //     option (google.api.http) = {
-    //         post: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate"
-    //         body: "*"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Rotate tenant API key"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "RotateTenantAPIKey"
-    //         description: "Rotates a tenant API key while maintaining its configuration"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Tenant API key rotated successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.RotateTenantAPIKeyResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
-    // /**
-    //  * CreateAPIKey generates a new API key
-    //  * 
-    //  * Features:
-    //  * - Secure key generation
-    //  * - Configurable permissions and scopes
-    //  * - Automatic expiration
-    //  * - Rate limiting and usage quotas
-    //  * 
-    //  * Security:
-    //  * - Validates organization and workspace context
-    //  * - Enforces permission checks
-    //  * - Audit logging
-    //  * 
-    //  * Required permissions:
-    //  * - create:api_key
-    //  */
-    // rpc CreateAPIKey(CreateAPIKeyRequest) returns (CreateAPIKeyResponse) {
-    //     option (google.api.http) = {
-    //         post: "/lead-scraper-microservice/api/v1/api-keys"
-    //         body: "*"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Create a new API key"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "CreateAPIKey"
-    //         description: "Creates a new API key with specified permissions and settings"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "API key created successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.CreateAPIKeyResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * RotateTenantAPIKey generates a new key while invalidating the old one
+     * 
+     * Process:
+     * 1. Generate new key
+     * 2. Copy permissions
+     * 3. Invalidate old key
+     * 4. Return new key
+     * 
+     * Security:
+     * - Grace period option
+     * - Audit logging
+     * 
+     * Required permissions:
+     * - rotate:tenant_api_key
+     */
+    rpc RotateTenantAPIKey(RotateTenantAPIKeyRequest) returns (RotateTenantAPIKeyResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Rotate tenant API key"
+            tags: ["lead-scraper-service"]
+            operation_id: "RotateTenantAPIKey"
+            description: "Rotates a tenant API key while maintaining its configuration"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Tenant API key rotated successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.RotateTenantAPIKeyResponse" } }
+                }
+            }
+        };
+    }
+    /**
+     * CreateAPIKey generates a new API key
+     * 
+     * Features:
+     * - Secure key generation
+     * - Configurable permissions and scopes
+     * - Automatic expiration
+     * - Rate limiting and usage quotas
+     * 
+     * Security:
+     * - Validates organization and workspace context
+     * - Enforces permission checks
+     * - Audit logging
+     * 
+     * Required permissions:
+     * - create:api_key
+     */
+    rpc CreateAPIKey(CreateAPIKeyRequest) returns (CreateAPIKeyResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/api-keys"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a new API key"
+            tags: ["lead-scraper-service"]
+            operation_id: "CreateAPIKey"
+            description: "Creates a new API key with specified permissions and settings"
+            responses: {
+                key: "200"
+                value: {
+                    description: "API key created successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.CreateAPIKeyResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * GetAPIKey retrieves details of a specific API key
-    //  * 
-    //  * Returns:
-    //  * - Key metadata
-    //  * - Usage statistics
-    //  * - Permission details
-    //  * - Expiration status
-    //  * 
-    //  * Security:
-    //  * - Never returns full key value
-    //  * - Validates access permissions
-    //  * 
-    //  * Required permissions:
-    //  * - read:api_key
-    //  */
-    // rpc GetAPIKey(GetAPIKeyRequest) returns (GetAPIKeyResponse) {
-    //     option (google.api.http) = {
-    //         get: "/lead-scraper-microservice/api/v1/api-keys/{key_id}"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Get API key details"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "GetAPIKey"
-    //         description: "Retrieves details of a specific API key"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "API key retrieved successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.GetAPIKeyResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
-    // /**
-    //  * UpdateAPIKey modifies an existing API key
-    //  * 
-    //  * Modifiable attributes:
-    //  * - Name and description
-    //  * - Permissions and scopes
-    //  * - Usage quotas
-    //  * - Rate limits
-    //  * - Expiration time
-    //  * - IP restrictions
-    //  * 
-    //  * Security:
-    //  * - Validates modification permissions
-    //  * - Preserves key value
-    //  * - Audit logging
-    //  * 
-    //  * Required permissions:
-    //  * - update:api_key
-    //  */
-    // rpc UpdateAPIKey(UpdateAPIKeyRequest) returns (UpdateAPIKeyResponse) {
-    //     option (google.api.http) = {
-    //         put: "/lead-scraper-microservice/api/v1/api-keys"
-    //         body: "*"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Update API key"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "UpdateAPIKey"
-    //         description: "Updates an existing API key's configuration"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "API key updated successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.UpdateAPIKeyResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * GetAPIKey retrieves details of a specific API key
+     * 
+     * Returns:
+     * - Key metadata
+     * - Usage statistics
+     * - Permission details
+     * - Expiration status
+     * 
+     * Security:
+     * - Never returns full key value
+     * - Validates access permissions
+     * 
+     * Required permissions:
+     * - read:api_key
+     */
+    rpc GetAPIKey(GetAPIKeyRequest) returns (GetAPIKeyResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/api-keys/{key_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get API key details"
+            tags: ["lead-scraper-service"]
+            operation_id: "GetAPIKey"
+            description: "Retrieves details of a specific API key"
+            responses: {
+                key: "200"
+                value: {
+                    description: "API key retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.GetAPIKeyResponse" } }
+                }
+            }
+        };
+    }
+    /**
+     * UpdateAPIKey modifies an existing API key
+     * 
+     * Modifiable attributes:
+     * - Name and description
+     * - Permissions and scopes
+     * - Usage quotas
+     * - Rate limits
+     * - Expiration time
+     * - IP restrictions
+     * 
+     * Security:
+     * - Validates modification permissions
+     * - Preserves key value
+     * - Audit logging
+     * 
+     * Required permissions:
+     * - update:api_key
+     */
+    rpc UpdateAPIKey(UpdateAPIKeyRequest) returns (UpdateAPIKeyResponse) {
+        option (google.api.http) = {
+            put: "/lead-scraper-microservice/api/v1/api-keys"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Update API key"
+            tags: ["lead-scraper-service"]
+            operation_id: "UpdateAPIKey"
+            description: "Updates an existing API key's configuration"
+            responses: {
+                key: "200"
+                value: {
+                    description: "API key updated successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.UpdateAPIKeyResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * DeleteAPIKey revokes and removes an API key
-    //  * 
-    //  * Process:
-    //  * 1. Immediate key revocation
-    //  * 2. Usage cleanup
-    //  * 3. Audit log creation
-    //  * 4. Notification to relevant parties
-    //  * 
-    //  * Security:
-    //  * - Validates deletion permissions
-    //  * - Immediate invalidation
-    //  * - Cannot delete last admin key
-    //  * 
-    //  * Required permissions:
-    //  * - delete:api_key
-    //  */
-    // rpc DeleteAPIKey(DeleteAPIKeyRequest) returns (DeleteAPIKeyResponse) {
-    //     option (google.api.http) = {
-    //         delete: "/lead-scraper-microservice/api/v1/api-keys/{key_id}"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Delete API key"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "DeleteAPIKey"
-    //         description: "Permanently deletes an API key"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "API key deleted successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.DeleteAPIKeyResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * DeleteAPIKey revokes and removes an API key
+     * 
+     * Process:
+     * 1. Immediate key revocation
+     * 2. Usage cleanup
+     * 3. Audit log creation
+     * 4. Notification to relevant parties
+     * 
+     * Security:
+     * - Validates deletion permissions
+     * - Immediate invalidation
+     * - Cannot delete last admin key
+     * 
+     * Required permissions:
+     * - delete:api_key
+     */
+    rpc DeleteAPIKey(DeleteAPIKeyRequest) returns (DeleteAPIKeyResponse) {
+        option (google.api.http) = {
+            delete: "/lead-scraper-microservice/api/v1/api-keys/{key_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete API key"
+            tags: ["lead-scraper-service"]
+            operation_id: "DeleteAPIKey"
+            description: "Permanently deletes an API key"
+            responses: {
+                key: "200"
+                value: {
+                    description: "API key deleted successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.DeleteAPIKeyResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * ListAPIKeys retrieves all API keys
-    //  * 
-    //  * Features:
-    //  * - Pagination support
-    //  * - Filtering by status, type, and usage
-    //  * - Sorting options
-    //  * - Usage statistics
-    //  * 
-    //  * Security:
-    //  * - Filters based on permissions
-    //  * - Masks sensitive data
-    //  * 
-    //  * Required permissions:
-    //  * - list:api_key
-    //  */
-    // rpc ListAPIKeys(ListAPIKeysRequest) returns (ListAPIKeysResponse) {
-    //     option (google.api.http) = {
-    //         get: "/lead-scraper-microservice/api/v1/api-keys/list"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "List API keys"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "ListAPIKeys"
-    //         description: "Retrieves a list of API keys with optional filtering"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "API keys retrieved successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.ListAPIKeysResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * ListAPIKeys retrieves all API keys
+     * 
+     * Features:
+     * - Pagination support
+     * - Filtering by status, type, and usage
+     * - Sorting options
+     * - Usage statistics
+     * 
+     * Security:
+     * - Filters based on permissions
+     * - Masks sensitive data
+     * 
+     * Required permissions:
+     * - list:api_key
+     */
+    rpc ListAPIKeys(ListAPIKeysRequest) returns (ListAPIKeysResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/api-keys/list"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "List API keys"
+            tags: ["lead-scraper-service"]
+            operation_id: "ListAPIKeys"
+            description: "Retrieves a list of API keys with optional filtering"
+            responses: {
+                key: "200"
+                value: {
+                    description: "API keys retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.ListAPIKeysResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * RotateAPIKey generates a new key while invalidating the old one
-    //  * 
-    //  * Process:
-    //  * 1. Generate new key
-    //  * 2. Copy existing configuration
-    //  * 3. Set up grace period
-    //  * 4. Invalidate old key
-    //  * 
-    //  * Security:
-    //  * - Validates rotation permissions
-    //  * - Grace period for transition
-    //  * - Audit logging
-    //  * 
-    //  * Required permissions:
-    //  * - rotate:api_key
-    //  */
-    // rpc RotateAPIKey(RotateAPIKeyRequest) returns (RotateAPIKeyResponse) {
-    //     option (google.api.http) = {
-    //         post: "/lead-scraper-microservice/api/v1/api-keys/rotate"
-    //         body: "*"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Rotate API key"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "RotateAPIKey"
-    //         description: "Rotates an API key while maintaining its configuration"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "API key rotated successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.RotateAPIKeyResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * RotateAPIKey generates a new key while invalidating the old one
+     * 
+     * Process:
+     * 1. Generate new key
+     * 2. Copy existing configuration
+     * 3. Set up grace period
+     * 4. Invalidate old key
+     * 
+     * Security:
+     * - Validates rotation permissions
+     * - Grace period for transition
+     * - Audit logging
+     * 
+     * Required permissions:
+     * - rotate:api_key
+     */
+    rpc RotateAPIKey(RotateAPIKeyRequest) returns (RotateAPIKeyResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/api-keys/rotate"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Rotate API key"
+            tags: ["lead-scraper-service"]
+            operation_id: "RotateAPIKey"
+            description: "Rotates an API key while maintaining its configuration"
+            responses: {
+                key: "200"
+                value: {
+                    description: "API key rotated successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.RotateAPIKeyResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * ListLeads retrieves a paginated list of leads with comprehensive filtering options.
-    //  * 
-    //  * Key features:
-    //  * - Pagination support
-    //  * - Rich filtering options
-    //  * - Sorting capabilities
-    //  * - Field selection
-    //  * - Tenant context validation
-    //  * 
-    //  * Required permissions:
-    //  * - read:leads
-    //  */
-    // rpc ListLeads(ListLeadsRequest) returns (ListLeadsResponse) {
-    //     option (google.api.http) = {
-    //         get: "/lead-scraper-microservice/api/v1/leads"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "List leads"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "ListLeads"
-    //         description: "Retrieves a paginated list of leads with comprehensive filtering options"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Leads retrieved successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.ListLeadsResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
-    // /**
-    //  * GetLead retrieves detailed information about a specific lead.
-    //  * 
-    //  * Key features:
-    //  * - Full lead details
-    //  * - Associated metadata
-    //  * - Audit information
-    //  * - Tenant context validation
-    //  * 
-    //  * Required permissions:
-    //  * - read:leads
-    //  */
-    // rpc GetLead(GetLeadRequest) returns (GetLeadResponse) {
-    //     option (google.api.http) = {
-    //         get: "/lead-scraper-microservice/api/v1/leads/{lead_id}"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Get lead details"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "GetLead"
-    //         description: "Retrieves detailed information about a specific lead"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Lead retrieved successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.GetLeadResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * ListLeads retrieves a paginated list of leads with comprehensive filtering options.
+     * 
+     * Key features:
+     * - Pagination support
+     * - Rich filtering options
+     * - Sorting capabilities
+     * - Field selection
+     * - Tenant context validation
+     * 
+     * Required permissions:
+     * - read:leads
+     */
+    rpc ListLeads(ListLeadsRequest) returns (ListLeadsResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/leads"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "List leads"
+            tags: ["lead-scraper-service"]
+            operation_id: "ListLeads"
+            description: "Retrieves a paginated list of leads with comprehensive filtering options"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Leads retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.ListLeadsResponse" } }
+                }
+            }
+        };
+    }
+    /**
+     * GetLead retrieves detailed information about a specific lead.
+     * 
+     * Key features:
+     * - Full lead details
+     * - Associated metadata
+     * - Audit information
+     * - Tenant context validation
+     * 
+     * Required permissions:
+     * - read:leads
+     */
+    rpc GetLead(GetLeadRequest) returns (GetLeadResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/leads/{lead_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get lead details"
+            tags: ["lead-scraper-service"]
+            operation_id: "GetLead"
+            description: "Retrieves detailed information about a specific lead"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Lead retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.GetLeadResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * CreateWebhook creates a new webhook configuration.
-    //  * 
-    //  * Key features:
-    //  * - Webhook URL validation
-    //  * - Authentication configuration
-    //  * - Event trigger selection
-    //  * - Retry policy configuration
-    //  * - Payload customization
-    //  * 
-    //  * Required permissions:
-    //  * - create:webhook
-    //  */
-    // rpc CreateWebhook(CreateWebhookRequest) returns (CreateWebhookResponse) {
-    //     option (google.api.http) = {
-    //         post: "/lead-scraper-microservice/api/v1/webhooks"
-    //         body: "*"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Create webhook"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "CreateWebhook"
-    //         description: "Creates a new webhook configuration for event notifications"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Webhook created successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.CreateWebhookResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * CreateWebhook creates a new webhook configuration.
+     * 
+     * Key features:
+     * - Webhook URL validation
+     * - Authentication configuration
+     * - Event trigger selection
+     * - Retry policy configuration
+     * - Payload customization
+     * 
+     * Required permissions:
+     * - create:webhook
+     */
+    rpc CreateWebhook(CreateWebhookRequest) returns (CreateWebhookResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/webhooks"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create webhook"
+            tags: ["lead-scraper-service"]
+            operation_id: "CreateWebhook"
+            description: "Creates a new webhook configuration for event notifications"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Webhook created successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.CreateWebhookResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * GetWebhook retrieves a specific webhook configuration.
-    //  * 
-    //  * Key features:
-    //  * - Full webhook details
-    //  * - Authentication settings
-    //  * - Event subscriptions
-    //  * - Performance metrics
-    //  * 
-    //  * Required permissions:
-    //  * - read:webhook
-    //  */
-    // rpc GetWebhook(GetWebhookRequest) returns (GetWebhookResponse) {
-    //     option (google.api.http) = {
-    //         get: "/lead-scraper-microservice/api/v1/webhooks/{webhook_id}"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Get webhook"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "GetWebhook"
-    //         description: "Retrieves details of a specific webhook configuration"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Webhook retrieved successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.GetWebhookResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * GetWebhook retrieves a specific webhook configuration.
+     * 
+     * Key features:
+     * - Full webhook details
+     * - Authentication settings
+     * - Event subscriptions
+     * - Performance metrics
+     * 
+     * Required permissions:
+     * - read:webhook
+     */
+    rpc GetWebhook(GetWebhookRequest) returns (GetWebhookResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/webhooks/{webhook_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get webhook"
+            tags: ["lead-scraper-service"]
+            operation_id: "GetWebhook"
+            description: "Retrieves details of a specific webhook configuration"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Webhook retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.GetWebhookResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * UpdateWebhook modifies an existing webhook configuration.
-    //  * 
-    //  * Key features:
-    //  * - URL updates
-    //  * - Authentication changes
-    //  * - Event subscription management
-    //  * - Retry policy adjustments
-    //  * 
-    //  * Required permissions:
-    //  * - update:webhook
-    //  */
-    // rpc UpdateWebhook(UpdateWebhookRequest) returns (UpdateWebhookResponse) {
-    //     option (google.api.http) = {
-    //         put: "/lead-scraper-microservice/api/v1/webhooks"
-    //         body: "*"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Update webhook"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "UpdateWebhook"
-    //         description: "Updates an existing webhook configuration"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Webhook updated successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.UpdateWebhookResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * UpdateWebhook modifies an existing webhook configuration.
+     * 
+     * Key features:
+     * - URL updates
+     * - Authentication changes
+     * - Event subscription management
+     * - Retry policy adjustments
+     * 
+     * Required permissions:
+     * - update:webhook
+     */
+    rpc UpdateWebhook(UpdateWebhookRequest) returns (UpdateWebhookResponse) {
+        option (google.api.http) = {
+            put: "/lead-scraper-microservice/api/v1/webhooks"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Update webhook"
+            tags: ["lead-scraper-service"]
+            operation_id: "UpdateWebhook"
+            description: "Updates an existing webhook configuration"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Webhook updated successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.UpdateWebhookResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * DeleteWebhook removes a webhook configuration.
-    //  * 
-    //  * Key features:
-    //  * - Graceful shutdown
-    //  * - Event queue cleanup
-    //  * - Audit trail
-    //  * 
-    //  * Required permissions:
-    //  * - delete:webhook
-    //  */
-    // rpc DeleteWebhook(DeleteWebhookRequest) returns (DeleteWebhookResponse) {
-    //     option (google.api.http) = {
-    //         delete: "/lead-scraper-microservice/api/v1/webhooks/{webhook_id}"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Delete webhook"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "DeleteWebhook"
-    //         description: "Deletes a webhook configuration"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Webhook deleted successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.DeleteWebhookResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * DeleteWebhook removes a webhook configuration.
+     * 
+     * Key features:
+     * - Graceful shutdown
+     * - Event queue cleanup
+     * - Audit trail
+     * 
+     * Required permissions:
+     * - delete:webhook
+     */
+    rpc DeleteWebhook(DeleteWebhookRequest) returns (DeleteWebhookResponse) {
+        option (google.api.http) = {
+            delete: "/lead-scraper-microservice/api/v1/webhooks/{webhook_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete webhook"
+            tags: ["lead-scraper-service"]
+            operation_id: "DeleteWebhook"
+            description: "Deletes a webhook configuration"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Webhook deleted successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.DeleteWebhookResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * ListWebhooks retrieves all webhook configurations.
-    //  * 
-    //  * Key features:
-    //  * - Pagination support
-    //  * - Filtering options
-    //  * - Status tracking
-    //  * - Performance metrics
-    //  * 
-    //  * Required permissions:
-    //  * - list:webhook
-    //  */
-    // rpc ListWebhooks(ListWebhooksRequest) returns (ListWebhooksResponse) {
-    //     option (google.api.http) = {
-    //         get: "/lead-scraper-microservice/api/v1/webhooks"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "List webhooks"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "ListWebhooks"
-    //         description: "Lists all webhook configurations with pagination"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Webhooks retrieved successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.ListWebhooksResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * ListWebhooks retrieves all webhook configurations.
+     * 
+     * Key features:
+     * - Pagination support
+     * - Filtering options
+     * - Status tracking
+     * - Performance metrics
+     * 
+     * Required permissions:
+     * - list:webhook
+     */
+    rpc ListWebhooks(ListWebhooksRequest) returns (ListWebhooksResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/webhooks"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "List webhooks"
+            tags: ["lead-scraper-service"]
+            operation_id: "ListWebhooks"
+            description: "Lists all webhook configurations with pagination"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Webhooks retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.ListWebhooksResponse" } }
+                }
+            }
+        };
+    }
 }

@@ -19,7 +19,7 @@ import javax.annotation.Generated;
  * UpdateAPIKeyRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T17:32:19.472034-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T22:05:34.423190-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class UpdateAPIKeyRequest {
 
   private APIKey apiKey;

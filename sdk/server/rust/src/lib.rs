@@ -22,6 +22,86 @@ pub use auth::{AuthenticationApi, Claims};
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum CreateApiKeyResponse {
+    /// API key created successfully
+    APIKeyCreatedSuccessfully
+    (models::CreateApiKeyResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum CreateOrganizationResponse {
     /// A successful response.
     ASuccessfulResponse
@@ -114,6 +194,246 @@ pub enum CreateTenantResponse {
     /// Tenant created successfully
     TenantCreatedSuccessfully
     (models::CreateTenantResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum CreateTenantApiKeyResponse {
+    /// Organizations retrieved successfully
+    OrganizationsRetrievedSuccessfully
+    (models::CreateTenantApiKeyResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum CreateWebhookResponse {
+    /// Webhook created successfully
+    WebhookCreatedSuccessfully
+    (models::CreateWebhookResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum DeleteApiKeyResponse {
+    /// API key deleted successfully
+    APIKeyDeletedSuccessfully
+    (models::DeleteApiKeyResponse)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -350,6 +670,326 @@ pub enum DeleteTenantResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum DeleteTenantApiKeyResponse {
+    /// Tenant API key deleted successfully
+    TenantAPIKeyDeletedSuccessfully
+    (models::DeleteTenantApiKeyResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum DeleteWebhookResponse {
+    /// Webhook deleted successfully
+    WebhookDeletedSuccessfully
+    (models::DeleteWebhookResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum GetApiKeyResponse {
+    /// API key retrieved successfully
+    APIKeyRetrievedSuccessfully
+    (models::GetApiKeyResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum GetLeadResponse {
+    /// Lead retrieved successfully
+    LeadRetrievedSuccessfully
+    (models::GetLeadResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum GetOrganizationResponse {
     /// Organization retrieved successfully
     OrganizationRetrievedSuccessfully
@@ -510,6 +1150,326 @@ pub enum GetTenantResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum GetTenantApiKeyResponse {
+    /// Tenant API key retrieved successfully
+    TenantAPIKeyRetrievedSuccessfully
+    (models::GetTenantApiKeyResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum GetWebhookResponse {
+    /// Webhook retrieved successfully
+    WebhookRetrievedSuccessfully
+    (models::GetWebhookResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum ListApiKeysResponse {
+    /// API keys retrieved successfully
+    APIKeysRetrievedSuccessfully
+    (models::ListApiKeysResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum ListLeadsResponse {
+    /// Leads retrieved successfully
+    LeadsRetrievedSuccessfully
+    (models::ListLeadsResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum ListOrganizationsResponse {
     /// Organizations retrieved successfully
     OrganizationsRetrievedSuccessfully
@@ -590,10 +1550,410 @@ pub enum ListOrganizationsResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum ListTenantApiKeysResponse {
+    /// Tenant API keys retrieved successfully
+    TenantAPIKeysRetrievedSuccessfully
+    (models::ListTenantApiKeysResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum ListTenantsResponse {
     /// Tenants retrieved successfully
     TenantsRetrievedSuccessfully
     (models::ListTenantsResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum ListWebhooksResponse {
+    /// Webhooks retrieved successfully
+    WebhooksRetrievedSuccessfully
+    (models::ListWebhooksResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum RotateApiKeyResponse {
+    /// API key rotated successfully
+    APIKeyRotatedSuccessfully
+    (models::RotateApiKeyResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum RotateTenantApiKeyResponse {
+    /// Tenant API key rotated successfully
+    TenantAPIKeyRotatedSuccessfully
+    (models::RotateTenantApiKeyResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum UpdateApiKeyResponse {
+    /// API key updated successfully
+    APIKeyUpdatedSuccessfully
+    (models::UpdateApiKeyResponse)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -754,6 +2114,166 @@ pub enum UpdateTenantResponse {
     /// Tenant updated successfully
     TenantUpdatedSuccessfully
     (models::UpdateTenantResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum UpdateTenantApiKeyResponse {
+    /// Tenant API key updated successfully
+    TenantAPIKeyUpdatedSuccessfully
+    (models::UpdateTenantApiKeyResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum UpdateWebhookResponse {
+    /// Webhook updated successfully
+    WebhookUpdatedSuccessfully
+    (models::UpdateWebhookResponse)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -1484,6 +3004,12 @@ pub trait Api<C: Send + Sync> {
         Poll::Ready(Ok(()))
     }
 
+    /// Create a new API key
+    async fn create_api_key(
+        &self,
+        create_api_key_request: models::CreateApiKeyRequest,
+        context: &C) -> Result<CreateApiKeyResponse, ApiError>;
+
     /// Create a new organization
     async fn create_organization(
         &self,
@@ -1496,6 +3022,28 @@ pub trait Api<C: Send + Sync> {
         organization_id: String,
         create_tenant_body: models::CreateTenantBody,
         context: &C) -> Result<CreateTenantResponse, ApiError>;
+
+    /// Create a new tenant API key
+    async fn create_tenant_api_key(
+        &self,
+        create_tenant_api_key_request: models::CreateTenantApiKeyRequest,
+        context: &C) -> Result<CreateTenantApiKeyResponse, ApiError>;
+
+    /// Create webhook
+    async fn create_webhook(
+        &self,
+        create_webhook_request: models::CreateWebhookRequest,
+        context: &C) -> Result<CreateWebhookResponse, ApiError>;
+
+    /// Delete API key
+    async fn delete_api_key(
+        &self,
+        key_id: String,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        context: &C) -> Result<DeleteApiKeyResponse, ApiError>;
 
     /// Delete an organization
     async fn delete_organization(
@@ -1510,6 +3058,44 @@ pub trait Api<C: Send + Sync> {
         tenant_id: String,
         context: &C) -> Result<DeleteTenantResponse, ApiError>;
 
+    /// Delete tenant API key
+    async fn delete_tenant_api_key(
+        &self,
+        key_id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        context: &C) -> Result<DeleteTenantApiKeyResponse, ApiError>;
+
+    /// Delete webhook
+    async fn delete_webhook(
+        &self,
+        webhook_id: String,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        context: &C) -> Result<DeleteWebhookResponse, ApiError>;
+
+    /// Get API key details
+    async fn get_api_key(
+        &self,
+        key_id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        workspace_id: Option<String>,
+        context: &C) -> Result<GetApiKeyResponse, ApiError>;
+
+    /// Get lead details
+    async fn get_lead(
+        &self,
+        lead_id: String,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        context: &C) -> Result<GetLeadResponse, ApiError>;
+
     /// Get organization details
     async fn get_organization(
         &self,
@@ -1523,12 +3109,64 @@ pub trait Api<C: Send + Sync> {
         tenant_id: String,
         context: &C) -> Result<GetTenantResponse, ApiError>;
 
+    /// Get tenant API key details
+    async fn get_tenant_api_key(
+        &self,
+        key_id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        context: &C) -> Result<GetTenantApiKeyResponse, ApiError>;
+
+    /// Get webhook
+    async fn get_webhook(
+        &self,
+        webhook_id: String,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        context: &C) -> Result<GetWebhookResponse, ApiError>;
+
+    /// List API keys
+    async fn list_api_keys(
+        &self,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        workspace_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        status: Option<String>,
+        search: Option<String>,
+        context: &C) -> Result<ListApiKeysResponse, ApiError>;
+
+    /// List leads
+    async fn list_leads(
+        &self,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        context: &C) -> Result<ListLeadsResponse, ApiError>;
+
     /// List all organizations
     async fn list_organizations(
         &self,
         page_size: Option<i32>,
         page_number: Option<i32>,
         context: &C) -> Result<ListOrganizationsResponse, ApiError>;
+
+    /// List tenant API keys
+    async fn list_tenant_api_keys(
+        &self,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        status: Option<String>,
+        context: &C) -> Result<ListTenantApiKeysResponse, ApiError>;
 
     /// List all tenants
     async fn list_tenants(
@@ -1537,6 +3175,37 @@ pub trait Api<C: Send + Sync> {
         page_size: Option<i32>,
         page_number: Option<i32>,
         context: &C) -> Result<ListTenantsResponse, ApiError>;
+
+    /// List webhooks
+    async fn list_webhooks(
+        &self,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        status: Option<String>,
+        search: Option<String>,
+        context: &C) -> Result<ListWebhooksResponse, ApiError>;
+
+    /// Rotate API key
+    async fn rotate_api_key(
+        &self,
+        rotate_api_key_request: models::RotateApiKeyRequest,
+        context: &C) -> Result<RotateApiKeyResponse, ApiError>;
+
+    /// Rotate tenant API key
+    async fn rotate_tenant_api_key(
+        &self,
+        rotate_tenant_api_key_request: models::RotateTenantApiKeyRequest,
+        context: &C) -> Result<RotateTenantApiKeyResponse, ApiError>;
+
+    /// Update API key
+    async fn update_api_key(
+        &self,
+        update_api_key_request: models::UpdateApiKeyRequest,
+        context: &C) -> Result<UpdateApiKeyResponse, ApiError>;
 
     /// Update organization details
     async fn update_organization(
@@ -1549,6 +3218,18 @@ pub trait Api<C: Send + Sync> {
         &self,
         update_tenant_request: models::UpdateTenantRequest,
         context: &C) -> Result<UpdateTenantResponse, ApiError>;
+
+    /// Update tenant API key
+    async fn update_tenant_api_key(
+        &self,
+        update_tenant_api_key_request: models::UpdateTenantApiKeyRequest,
+        context: &C) -> Result<UpdateTenantApiKeyResponse, ApiError>;
+
+    /// Update webhook
+    async fn update_webhook(
+        &self,
+        update_webhook_request: models::UpdateWebhookRequest,
+        context: &C) -> Result<UpdateWebhookResponse, ApiError>;
 
     /// Create a new account
     async fn create_account(
@@ -1666,6 +3347,12 @@ pub trait ApiNoContext<C: Send + Sync> {
 
     fn context(&self) -> &C;
 
+    /// Create a new API key
+    async fn create_api_key(
+        &self,
+        create_api_key_request: models::CreateApiKeyRequest,
+        ) -> Result<CreateApiKeyResponse, ApiError>;
+
     /// Create a new organization
     async fn create_organization(
         &self,
@@ -1678,6 +3365,28 @@ pub trait ApiNoContext<C: Send + Sync> {
         organization_id: String,
         create_tenant_body: models::CreateTenantBody,
         ) -> Result<CreateTenantResponse, ApiError>;
+
+    /// Create a new tenant API key
+    async fn create_tenant_api_key(
+        &self,
+        create_tenant_api_key_request: models::CreateTenantApiKeyRequest,
+        ) -> Result<CreateTenantApiKeyResponse, ApiError>;
+
+    /// Create webhook
+    async fn create_webhook(
+        &self,
+        create_webhook_request: models::CreateWebhookRequest,
+        ) -> Result<CreateWebhookResponse, ApiError>;
+
+    /// Delete API key
+    async fn delete_api_key(
+        &self,
+        key_id: String,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        ) -> Result<DeleteApiKeyResponse, ApiError>;
 
     /// Delete an organization
     async fn delete_organization(
@@ -1692,6 +3401,44 @@ pub trait ApiNoContext<C: Send + Sync> {
         tenant_id: String,
         ) -> Result<DeleteTenantResponse, ApiError>;
 
+    /// Delete tenant API key
+    async fn delete_tenant_api_key(
+        &self,
+        key_id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        ) -> Result<DeleteTenantApiKeyResponse, ApiError>;
+
+    /// Delete webhook
+    async fn delete_webhook(
+        &self,
+        webhook_id: String,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        ) -> Result<DeleteWebhookResponse, ApiError>;
+
+    /// Get API key details
+    async fn get_api_key(
+        &self,
+        key_id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        workspace_id: Option<String>,
+        ) -> Result<GetApiKeyResponse, ApiError>;
+
+    /// Get lead details
+    async fn get_lead(
+        &self,
+        lead_id: String,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        ) -> Result<GetLeadResponse, ApiError>;
+
     /// Get organization details
     async fn get_organization(
         &self,
@@ -1705,12 +3452,64 @@ pub trait ApiNoContext<C: Send + Sync> {
         tenant_id: String,
         ) -> Result<GetTenantResponse, ApiError>;
 
+    /// Get tenant API key details
+    async fn get_tenant_api_key(
+        &self,
+        key_id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        ) -> Result<GetTenantApiKeyResponse, ApiError>;
+
+    /// Get webhook
+    async fn get_webhook(
+        &self,
+        webhook_id: String,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        ) -> Result<GetWebhookResponse, ApiError>;
+
+    /// List API keys
+    async fn list_api_keys(
+        &self,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        workspace_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        status: Option<String>,
+        search: Option<String>,
+        ) -> Result<ListApiKeysResponse, ApiError>;
+
+    /// List leads
+    async fn list_leads(
+        &self,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        ) -> Result<ListLeadsResponse, ApiError>;
+
     /// List all organizations
     async fn list_organizations(
         &self,
         page_size: Option<i32>,
         page_number: Option<i32>,
         ) -> Result<ListOrganizationsResponse, ApiError>;
+
+    /// List tenant API keys
+    async fn list_tenant_api_keys(
+        &self,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        status: Option<String>,
+        ) -> Result<ListTenantApiKeysResponse, ApiError>;
 
     /// List all tenants
     async fn list_tenants(
@@ -1719,6 +3518,37 @@ pub trait ApiNoContext<C: Send + Sync> {
         page_size: Option<i32>,
         page_number: Option<i32>,
         ) -> Result<ListTenantsResponse, ApiError>;
+
+    /// List webhooks
+    async fn list_webhooks(
+        &self,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        status: Option<String>,
+        search: Option<String>,
+        ) -> Result<ListWebhooksResponse, ApiError>;
+
+    /// Rotate API key
+    async fn rotate_api_key(
+        &self,
+        rotate_api_key_request: models::RotateApiKeyRequest,
+        ) -> Result<RotateApiKeyResponse, ApiError>;
+
+    /// Rotate tenant API key
+    async fn rotate_tenant_api_key(
+        &self,
+        rotate_tenant_api_key_request: models::RotateTenantApiKeyRequest,
+        ) -> Result<RotateTenantApiKeyResponse, ApiError>;
+
+    /// Update API key
+    async fn update_api_key(
+        &self,
+        update_api_key_request: models::UpdateApiKeyRequest,
+        ) -> Result<UpdateApiKeyResponse, ApiError>;
 
     /// Update organization details
     async fn update_organization(
@@ -1731,6 +3561,18 @@ pub trait ApiNoContext<C: Send + Sync> {
         &self,
         update_tenant_request: models::UpdateTenantRequest,
         ) -> Result<UpdateTenantResponse, ApiError>;
+
+    /// Update tenant API key
+    async fn update_tenant_api_key(
+        &self,
+        update_tenant_api_key_request: models::UpdateTenantApiKeyRequest,
+        ) -> Result<UpdateTenantApiKeyResponse, ApiError>;
+
+    /// Update webhook
+    async fn update_webhook(
+        &self,
+        update_webhook_request: models::UpdateWebhookRequest,
+        ) -> Result<UpdateWebhookResponse, ApiError>;
 
     /// Create a new account
     async fn create_account(
@@ -1862,6 +3704,16 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         ContextWrapper::context(self)
     }
 
+    /// Create a new API key
+    async fn create_api_key(
+        &self,
+        create_api_key_request: models::CreateApiKeyRequest,
+        ) -> Result<CreateApiKeyResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().create_api_key(create_api_key_request, &context).await
+    }
+
     /// Create a new organization
     async fn create_organization(
         &self,
@@ -1881,6 +3733,40 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().create_tenant(organization_id, create_tenant_body, &context).await
+    }
+
+    /// Create a new tenant API key
+    async fn create_tenant_api_key(
+        &self,
+        create_tenant_api_key_request: models::CreateTenantApiKeyRequest,
+        ) -> Result<CreateTenantApiKeyResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().create_tenant_api_key(create_tenant_api_key_request, &context).await
+    }
+
+    /// Create webhook
+    async fn create_webhook(
+        &self,
+        create_webhook_request: models::CreateWebhookRequest,
+        ) -> Result<CreateWebhookResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().create_webhook(create_webhook_request, &context).await
+    }
+
+    /// Delete API key
+    async fn delete_api_key(
+        &self,
+        key_id: String,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        ) -> Result<DeleteApiKeyResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().delete_api_key(key_id, organization_id, workspace_id, tenant_id, account_id, &context).await
     }
 
     /// Delete an organization
@@ -1904,6 +3790,60 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         self.api().delete_tenant(organization_id, tenant_id, &context).await
     }
 
+    /// Delete tenant API key
+    async fn delete_tenant_api_key(
+        &self,
+        key_id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        ) -> Result<DeleteTenantApiKeyResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().delete_tenant_api_key(key_id, organization_id, tenant_id, &context).await
+    }
+
+    /// Delete webhook
+    async fn delete_webhook(
+        &self,
+        webhook_id: String,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        ) -> Result<DeleteWebhookResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().delete_webhook(webhook_id, organization_id, workspace_id, tenant_id, account_id, &context).await
+    }
+
+    /// Get API key details
+    async fn get_api_key(
+        &self,
+        key_id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        workspace_id: Option<String>,
+        ) -> Result<GetApiKeyResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_api_key(key_id, organization_id, tenant_id, account_id, workspace_id, &context).await
+    }
+
+    /// Get lead details
+    async fn get_lead(
+        &self,
+        lead_id: String,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        ) -> Result<GetLeadResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_lead(lead_id, organization_id, workspace_id, tenant_id, account_id, &context).await
+    }
+
     /// Get organization details
     async fn get_organization(
         &self,
@@ -1925,6 +3865,64 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         self.api().get_tenant(organization_id, tenant_id, &context).await
     }
 
+    /// Get tenant API key details
+    async fn get_tenant_api_key(
+        &self,
+        key_id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        ) -> Result<GetTenantApiKeyResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_tenant_api_key(key_id, organization_id, tenant_id, &context).await
+    }
+
+    /// Get webhook
+    async fn get_webhook(
+        &self,
+        webhook_id: String,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        ) -> Result<GetWebhookResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_webhook(webhook_id, organization_id, workspace_id, tenant_id, account_id, &context).await
+    }
+
+    /// List API keys
+    async fn list_api_keys(
+        &self,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        workspace_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        status: Option<String>,
+        search: Option<String>,
+        ) -> Result<ListApiKeysResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().list_api_keys(organization_id, tenant_id, account_id, workspace_id, page_size, page_number, status, search, &context).await
+    }
+
+    /// List leads
+    async fn list_leads(
+        &self,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        ) -> Result<ListLeadsResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().list_leads(organization_id, workspace_id, tenant_id, account_id, page_size, page_number, &context).await
+    }
+
     /// List all organizations
     async fn list_organizations(
         &self,
@@ -1934,6 +3932,20 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().list_organizations(page_size, page_number, &context).await
+    }
+
+    /// List tenant API keys
+    async fn list_tenant_api_keys(
+        &self,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        status: Option<String>,
+        ) -> Result<ListTenantApiKeysResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().list_tenant_api_keys(organization_id, tenant_id, page_size, page_number, status, &context).await
     }
 
     /// List all tenants
@@ -1946,6 +3958,53 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().list_tenants(organization_id, page_size, page_number, &context).await
+    }
+
+    /// List webhooks
+    async fn list_webhooks(
+        &self,
+        organization_id: Option<String>,
+        workspace_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        status: Option<String>,
+        search: Option<String>,
+        ) -> Result<ListWebhooksResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().list_webhooks(organization_id, workspace_id, tenant_id, account_id, page_size, page_number, status, search, &context).await
+    }
+
+    /// Rotate API key
+    async fn rotate_api_key(
+        &self,
+        rotate_api_key_request: models::RotateApiKeyRequest,
+        ) -> Result<RotateApiKeyResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().rotate_api_key(rotate_api_key_request, &context).await
+    }
+
+    /// Rotate tenant API key
+    async fn rotate_tenant_api_key(
+        &self,
+        rotate_tenant_api_key_request: models::RotateTenantApiKeyRequest,
+        ) -> Result<RotateTenantApiKeyResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().rotate_tenant_api_key(rotate_tenant_api_key_request, &context).await
+    }
+
+    /// Update API key
+    async fn update_api_key(
+        &self,
+        update_api_key_request: models::UpdateApiKeyRequest,
+        ) -> Result<UpdateApiKeyResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().update_api_key(update_api_key_request, &context).await
     }
 
     /// Update organization details
@@ -1966,6 +4025,26 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().update_tenant(update_tenant_request, &context).await
+    }
+
+    /// Update tenant API key
+    async fn update_tenant_api_key(
+        &self,
+        update_tenant_api_key_request: models::UpdateTenantApiKeyRequest,
+        ) -> Result<UpdateTenantApiKeyResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().update_tenant_api_key(update_tenant_api_key_request, &context).await
+    }
+
+    /// Update webhook
+    async fn update_webhook(
+        &self,
+        update_webhook_request: models::UpdateWebhookRequest,
+        ) -> Result<UpdateWebhookResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().update_webhook(update_webhook_request, &context).await
     }
 
     /// Create a new account

@@ -47,15 +47,15 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
-    create_organization_request = playbookmedia_backend_client_sdk.CreateOrganizationRequest() # CreateOrganizationRequest | 
+    create_api_key_request = playbookmedia_backend_client_sdk.CreateAPIKeyRequest() # CreateAPIKeyRequest | 
 
     try:
-        # Create a new organization
-        api_response = await api_instance.create_organization(create_organization_request)
-        print("The response of LeadScraperServiceApi->create_organization:\n")
+        # Create a new API key
+        api_response = await api_instance.create_api_key(create_api_key_request)
+        print("The response of LeadScraperServiceApi->create_api_key:\n")
         pprint(api_response)
     except ApiException as e:
-        print("Exception when calling LeadScraperServiceApi->create_organization: %s\n" % e)
+        print("Exception when calling LeadScraperServiceApi->create_api_key: %s\n" % e)
 
 ```
 
@@ -65,16 +65,35 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*LeadScraperServiceApi* | [**create_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_api_key) | **POST** /lead-scraper-microservice/api/v1/api-keys | Create a new API key
 *LeadScraperServiceApi* | [**create_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_organization) | **POST** /lead-scraper-microservice/api/v1/organization | Create a new organization
 *LeadScraperServiceApi* | [**create_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_tenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant
+*LeadScraperServiceApi* | [**create_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_tenant_api_key) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key
+*LeadScraperServiceApi* | [**create_webhook**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_webhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook
+*LeadScraperServiceApi* | [**delete_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_api_key) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 *LeadScraperServiceApi* | [**delete_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_organization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
 *LeadScraperServiceApi* | [**delete_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_tenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
+*LeadScraperServiceApi* | [**delete_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_tenant_api_key) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
+*LeadScraperServiceApi* | [**delete_webhook**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_webhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
+*LeadScraperServiceApi* | [**get_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_api_key) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
+*LeadScraperServiceApi* | [**get_lead**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_lead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
 *LeadScraperServiceApi* | [**get_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_organization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details
 *LeadScraperServiceApi* | [**get_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_tenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details
+*LeadScraperServiceApi* | [**get_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_tenant_api_key) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details
+*LeadScraperServiceApi* | [**get_webhook**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_webhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook
+*LeadScraperServiceApi* | [**list_api_keys**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_api_keys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys
+*LeadScraperServiceApi* | [**list_leads**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_leads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads
 *LeadScraperServiceApi* | [**list_organizations**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_organizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations
+*LeadScraperServiceApi* | [**list_tenant_api_keys**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_tenant_api_keys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys
 *LeadScraperServiceApi* | [**list_tenants**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_tenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
+*LeadScraperServiceApi* | [**list_webhooks**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_webhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks
+*LeadScraperServiceApi* | [**rotate_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#rotate_api_key) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key
+*LeadScraperServiceApi* | [**rotate_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#rotate_tenant_api_key) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key
+*LeadScraperServiceApi* | [**update_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_api_key) | **PUT** /lead-scraper-microservice/api/v1/api-keys | Update API key
 *LeadScraperServiceApi* | [**update_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_organization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details
 *LeadScraperServiceApi* | [**update_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_tenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details
+*LeadScraperServiceApi* | [**update_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_tenant_api_key) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Update tenant API key
+*LeadScraperServiceApi* | [**update_webhook**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_webhook) | **PUT** /lead-scraper-microservice/api/v1/webhooks | Update webhook
 *WorkspaceServiceApi* | [**create_account**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#create_account) | **POST** /workspace-service/v1/accounts | Create a new account
 *WorkspaceServiceApi* | [**create_workspace**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#create_workspace) | **POST** /workspace-service/v1/workspaces | Create workspace
 *WorkspaceServiceApi* | [**delete_account**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#delete_account) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
@@ -135,19 +154,28 @@ Class | Method | HTTP request | Description
  - [ConflictInfo](playbookmedia_backend_client_sdk/docs/ConflictInfo.md)
  - [ContextualSummary](playbookmedia_backend_client_sdk/docs/ContextualSummary.md)
  - [ContractIntelligence](playbookmedia_backend_client_sdk/docs/ContractIntelligence.md)
+ - [CreateAPIKeyRequest](playbookmedia_backend_client_sdk/docs/CreateAPIKeyRequest.md)
+ - [CreateAPIKeyResponse](playbookmedia_backend_client_sdk/docs/CreateAPIKeyResponse.md)
  - [CreateAccountRequest](playbookmedia_backend_client_sdk/docs/CreateAccountRequest.md)
  - [CreateAccountResponse](playbookmedia_backend_client_sdk/docs/CreateAccountResponse.md)
  - [CreateOrganizationRequest](playbookmedia_backend_client_sdk/docs/CreateOrganizationRequest.md)
  - [CreateOrganizationResponse](playbookmedia_backend_client_sdk/docs/CreateOrganizationResponse.md)
+ - [CreateTenantAPIKeyRequest](playbookmedia_backend_client_sdk/docs/CreateTenantAPIKeyRequest.md)
+ - [CreateTenantAPIKeyResponse](playbookmedia_backend_client_sdk/docs/CreateTenantAPIKeyResponse.md)
  - [CreateTenantBody](playbookmedia_backend_client_sdk/docs/CreateTenantBody.md)
  - [CreateTenantResponse](playbookmedia_backend_client_sdk/docs/CreateTenantResponse.md)
+ - [CreateWebhookRequest](playbookmedia_backend_client_sdk/docs/CreateWebhookRequest.md)
+ - [CreateWebhookResponse](playbookmedia_backend_client_sdk/docs/CreateWebhookResponse.md)
  - [CreateWorkspaceRequest](playbookmedia_backend_client_sdk/docs/CreateWorkspaceRequest.md)
  - [CreateWorkspaceResponse](playbookmedia_backend_client_sdk/docs/CreateWorkspaceResponse.md)
  - [DataProfile](playbookmedia_backend_client_sdk/docs/DataProfile.md)
  - [DayOfWeek](playbookmedia_backend_client_sdk/docs/DayOfWeek.md)
+ - [DeleteAPIKeyResponse](playbookmedia_backend_client_sdk/docs/DeleteAPIKeyResponse.md)
  - [DeleteAccountResponse](playbookmedia_backend_client_sdk/docs/DeleteAccountResponse.md)
  - [DeleteOrganizationResponse](playbookmedia_backend_client_sdk/docs/DeleteOrganizationResponse.md)
+ - [DeleteTenantAPIKeyResponse](playbookmedia_backend_client_sdk/docs/DeleteTenantAPIKeyResponse.md)
  - [DeleteTenantResponse](playbookmedia_backend_client_sdk/docs/DeleteTenantResponse.md)
+ - [DeleteWebhookResponse](playbookmedia_backend_client_sdk/docs/DeleteWebhookResponse.md)
  - [DeleteWorkspaceResponse](playbookmedia_backend_client_sdk/docs/DeleteWorkspaceResponse.md)
  - [Dependency](playbookmedia_backend_client_sdk/docs/Dependency.md)
  - [DocumentBranch](playbookmedia_backend_client_sdk/docs/DocumentBranch.md)
@@ -168,9 +196,13 @@ Class | Method | HTTP request | Description
  - [FolderMetadata](playbookmedia_backend_client_sdk/docs/FolderMetadata.md)
  - [ForbiddenErrorMessageResponse](playbookmedia_backend_client_sdk/docs/ForbiddenErrorMessageResponse.md)
  - [GatewayTimeoutErrorMessageResponse](playbookmedia_backend_client_sdk/docs/GatewayTimeoutErrorMessageResponse.md)
+ - [GetAPIKeyResponse](playbookmedia_backend_client_sdk/docs/GetAPIKeyResponse.md)
  - [GetAccountResponse](playbookmedia_backend_client_sdk/docs/GetAccountResponse.md)
+ - [GetLeadResponse](playbookmedia_backend_client_sdk/docs/GetLeadResponse.md)
  - [GetOrganizationResponse](playbookmedia_backend_client_sdk/docs/GetOrganizationResponse.md)
+ - [GetTenantAPIKeyResponse](playbookmedia_backend_client_sdk/docs/GetTenantAPIKeyResponse.md)
  - [GetTenantResponse](playbookmedia_backend_client_sdk/docs/GetTenantResponse.md)
+ - [GetWebhookResponse](playbookmedia_backend_client_sdk/docs/GetWebhookResponse.md)
  - [GetWorkspaceAnalyticsResponse](playbookmedia_backend_client_sdk/docs/GetWorkspaceAnalyticsResponse.md)
  - [GetWorkspaceComplianceReportResponse](playbookmedia_backend_client_sdk/docs/GetWorkspaceComplianceReportResponse.md)
  - [GetWorkspaceResponse](playbookmedia_backend_client_sdk/docs/GetWorkspaceResponse.md)
@@ -183,9 +215,13 @@ Class | Method | HTTP request | Description
  - [Language](playbookmedia_backend_client_sdk/docs/Language.md)
  - [Lead](playbookmedia_backend_client_sdk/docs/Lead.md)
  - [LimitInfo](playbookmedia_backend_client_sdk/docs/LimitInfo.md)
+ - [ListAPIKeysResponse](playbookmedia_backend_client_sdk/docs/ListAPIKeysResponse.md)
  - [ListAccountsResponse](playbookmedia_backend_client_sdk/docs/ListAccountsResponse.md)
+ - [ListLeadsResponse](playbookmedia_backend_client_sdk/docs/ListLeadsResponse.md)
  - [ListOrganizationsResponse](playbookmedia_backend_client_sdk/docs/ListOrganizationsResponse.md)
+ - [ListTenantAPIKeysResponse](playbookmedia_backend_client_sdk/docs/ListTenantAPIKeysResponse.md)
  - [ListTenantsResponse](playbookmedia_backend_client_sdk/docs/ListTenantsResponse.md)
+ - [ListWebhooksResponse](playbookmedia_backend_client_sdk/docs/ListWebhooksResponse.md)
  - [ListWorkspaceSharingsResponse](playbookmedia_backend_client_sdk/docs/ListWorkspaceSharingsResponse.md)
  - [ListWorkspacesResponse](playbookmedia_backend_client_sdk/docs/ListWorkspacesResponse.md)
  - [MFAInfo](playbookmedia_backend_client_sdk/docs/MFAInfo.md)
@@ -220,6 +256,10 @@ Class | Method | HTTP request | Description
  - [Review](playbookmedia_backend_client_sdk/docs/Review.md)
  - [RiskAssessment](playbookmedia_backend_client_sdk/docs/RiskAssessment.md)
  - [Role](playbookmedia_backend_client_sdk/docs/Role.md)
+ - [RotateAPIKeyRequest](playbookmedia_backend_client_sdk/docs/RotateAPIKeyRequest.md)
+ - [RotateAPIKeyResponse](playbookmedia_backend_client_sdk/docs/RotateAPIKeyResponse.md)
+ - [RotateTenantAPIKeyRequest](playbookmedia_backend_client_sdk/docs/RotateTenantAPIKeyRequest.md)
+ - [RotateTenantAPIKeyResponse](playbookmedia_backend_client_sdk/docs/RotateTenantAPIKeyResponse.md)
  - [RpcStatus](playbookmedia_backend_client_sdk/docs/RpcStatus.md)
  - [SchemaValidation](playbookmedia_backend_client_sdk/docs/SchemaValidation.md)
  - [ScrapingJob](playbookmedia_backend_client_sdk/docs/ScrapingJob.md)
@@ -248,12 +288,18 @@ Class | Method | HTTP request | Description
  - [TooEarlyErrorMessageResponse](playbookmedia_backend_client_sdk/docs/TooEarlyErrorMessageResponse.md)
  - [TriggerEvent](playbookmedia_backend_client_sdk/docs/TriggerEvent.md)
  - [UnprocessableEntityErrorMessageResponse](playbookmedia_backend_client_sdk/docs/UnprocessableEntityErrorMessageResponse.md)
+ - [UpdateAPIKeyRequest](playbookmedia_backend_client_sdk/docs/UpdateAPIKeyRequest.md)
+ - [UpdateAPIKeyResponse](playbookmedia_backend_client_sdk/docs/UpdateAPIKeyResponse.md)
  - [UpdateAccountRequest](playbookmedia_backend_client_sdk/docs/UpdateAccountRequest.md)
  - [UpdateAccountResponse](playbookmedia_backend_client_sdk/docs/UpdateAccountResponse.md)
  - [UpdateOrganizationRequest](playbookmedia_backend_client_sdk/docs/UpdateOrganizationRequest.md)
  - [UpdateOrganizationResponse](playbookmedia_backend_client_sdk/docs/UpdateOrganizationResponse.md)
+ - [UpdateTenantAPIKeyRequest](playbookmedia_backend_client_sdk/docs/UpdateTenantAPIKeyRequest.md)
+ - [UpdateTenantAPIKeyResponse](playbookmedia_backend_client_sdk/docs/UpdateTenantAPIKeyResponse.md)
  - [UpdateTenantRequest](playbookmedia_backend_client_sdk/docs/UpdateTenantRequest.md)
  - [UpdateTenantResponse](playbookmedia_backend_client_sdk/docs/UpdateTenantResponse.md)
+ - [UpdateWebhookRequest](playbookmedia_backend_client_sdk/docs/UpdateWebhookRequest.md)
+ - [UpdateWebhookResponse](playbookmedia_backend_client_sdk/docs/UpdateWebhookResponse.md)
  - [UpdateWorkspaceRequest](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceRequest.md)
  - [UpdateWorkspaceResponse](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceResponse.md)
  - [UpdateWorkspaceSharingRequest](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceSharingRequest.md)

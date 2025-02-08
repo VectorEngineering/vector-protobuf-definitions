@@ -1,5 +1,5 @@
 import { TextGenerationModel } from "./types";
-import { z } from "zod";
+import { z } from "@hono/zod-openapi";
 
 /**
  * Schema for AI completion request parameters
@@ -92,7 +92,8 @@ export const aiCompletionRequestSchema = z.object({
   frequencyPenalty: z.number().min(0).optional(),
   presencePenalty: z.number().min(0).optional(),
   stop: z.array(z.string()).optional(),
-});
+})
+  .openapi("AiCompletionRequest");
 
 /**
  * Schema for AI model capabilities
@@ -118,7 +119,8 @@ export const aiModelCapabilitiesSchema = z.object({
   streaming: z.boolean(),
   functionCalling: z.boolean().optional(),
   lora: z.boolean().optional(),
-});
+})
+  .openapi("AiModelCapabilities");
 
 /**
  * Schema for AI model information
@@ -182,7 +184,8 @@ export const aiStatusResponseSchema = z.object({
   status: z.enum(["healthy", "degraded", "down"]),
   models: z.array(aiModelSchema),
   lastChecked: z.string().datetime(),
-});
+})
+  .openapi("AiStatusResponse");
 
 // Type exports using Zod inference
 export type AiCompletionRequest = z.infer<typeof aiCompletionRequestSchema>;

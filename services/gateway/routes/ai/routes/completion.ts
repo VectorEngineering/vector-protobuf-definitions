@@ -1,6 +1,7 @@
+import { OpenAPIHono as Hono, createRoute } from "@hono/zod-openapi";
+
 import { Env } from "../../../types";
 import { HTTPException } from "hono/http-exception";
-import { Hono } from "hono";
 import { aiCompletionRequestSchema } from "../schema";
 import { createCompletionHandler } from "../lib/completion";
 import { validateRequest } from "../../../middleware/core";

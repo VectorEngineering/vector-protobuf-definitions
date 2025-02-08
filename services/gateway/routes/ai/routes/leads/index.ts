@@ -1,5 +1,6 @@
+import { OpenAPIHono as Hono, createRoute } from "@hono/zod-openapi";
+
 import { Env } from "../../../../types";
-import { Hono } from "hono";
 import hours from "./hours";
 import intelligence from "./intelligence";
 import qualify from "./qualify";

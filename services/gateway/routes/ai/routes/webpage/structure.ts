@@ -1,9 +1,10 @@
+import { OpenAPIHono as Hono, createRoute } from "@hono/zod-openapi";
+
 import { Env } from "../../../../types";
 import { HTTPException } from "hono/http-exception";
-import { Hono } from "hono";
 import { structureHandler } from "../../lib/handlers";
 import { validateRequest } from "../../../../middleware/core";
-import { z } from "zod";
+import { z } from "@hono/zod-openapi";
 
 /**
  * Schema for HTML content request

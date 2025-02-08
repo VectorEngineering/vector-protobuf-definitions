@@ -1,8 +1,8 @@
+import { OpenAPIHono as Hono, createRoute } from "@hono/zod-openapi";
 import { LeadGenResponseSchema, htmlRequestSchema } from "./schemas";
 
 import { Env } from "../../../../types";
 import { HTTPException } from "hono/http-exception";
-import { Hono } from "hono";
 import { leadgenHandler } from "../../lib/handlers";
 import { validateRequest } from "../../../../middleware/core";
 

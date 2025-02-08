@@ -1,6 +1,7 @@
+import { OpenAPIHono as Hono, createRoute } from "@hono/zod-openapi";
+
 import { Env } from "../../types";
 import { HTTPException } from "hono/http-exception";
-import { Hono } from "hono";
 import analyzeCompany from "./routes/webpage/analyze-company";
 import analyzeLead from "./routes/webpage/analyze-lead";
 import completion from "./routes/completion";
@@ -20,14 +21,57 @@ import summary from "./routes/webpage/summary";
 
 /**
  * AI routes handler
- * Provides endpoints for AI completions, service status, and HTML processing
+ * @openapi
+ * tags:
+ *   name: AI
+ *   description: AI-powered text processing and analysis endpoints
  */
 const aiRouter = new Hono<{ Bindings: Env }>();
 
-// Mount completion routes
+/**
+ * @openapi
+ * /ai:
+ *   post:
+ *     summary: Generate AI completion
+ *     description: Generate text using AI models with optional streaming
+ *     tags: [AI]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/AiCompletionRequest'
+ *     responses:
+ *       200:
+ *         description: Successful completion
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 completion:
+ *                   type: string
+ *           text/event-stream:
+ *             schema:
+ *               type: string
+ */
 aiRouter.route("/", completion);
 
-// Mount status routes
+/**
+ * @openapi
+ * /ai/status:
+ *   get:
+ *     summary: Get AI service status
+ *     description: Returns current status of AI service and available models
+ *     tags: [AI]
+ *     responses:
+ *       200:
+ *         description: Service status
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/AiStatusResponse'
+ */
 aiRouter.route("/status", status);
 
 // Mount HTML processing routes

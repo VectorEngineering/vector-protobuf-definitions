@@ -1,3 +1,4 @@
+import { OpenAPIHono as Hono, createRoute } from "@hono/zod-openapi";
 import {
   analyzeStructure,
   cleanHtml,
@@ -14,7 +15,6 @@ import {
 
 import { Env } from "../../../types";
 import { HTTPException } from "hono/http-exception";
-import { Hono } from "hono";
 import { validateRequest } from "../../../middleware/core";
 import { z } from "zod";
 

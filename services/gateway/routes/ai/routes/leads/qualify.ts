@@ -1,11 +1,12 @@
+import { OpenAPIHono as Hono, createRoute } from "@hono/zod-openapi";
+
 import { BatchBusinessDataSchema } from "../webpage/schemas";
 import { Env } from "../../../../types";
 import { HTTPException } from "hono/http-exception";
-import { Hono } from "hono";
 import { businessQualificationHandler } from "../../lib/handlers";
 import { handleBatchRequest } from "../../lib/batch";
 import { validateRequest } from "../../../../middleware/core";
-import { z } from "zod";
+import { z } from "@hono/zod-openapi";
 
 /**
  * Schema for business data request

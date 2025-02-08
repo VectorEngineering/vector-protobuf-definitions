@@ -1,11 +1,11 @@
+import { OpenAPIHono as Hono, createRoute } from "@hono/zod-openapi";
 import { extractMetadata, extractText } from "../../lib/html";
 
 import { Env } from "../../../../types";
 import { HTTPException } from "hono/http-exception";
-import { Hono } from "hono";
 import { createCompletionHandler } from "../../lib/completion";
 import { validateRequest } from "../../../../middleware/core";
-import { z } from "zod";
+import { z } from "@hono/zod-openapi";
 
 /**
  * Schema for lead analysis

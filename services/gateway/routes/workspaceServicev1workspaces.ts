@@ -110,8 +110,8 @@ const putRoute = createRoute({
       content: {
         "application/json": {
           schema: wrapSchema(
-            schemas.UpdateWorkspaceRequest1,
-            "UpdateWorkspaceRequest1",
+            schemas.UpdateWorkspaceRequest,
+            "UpdateWorkspaceRequest",
           ),
         },
       },

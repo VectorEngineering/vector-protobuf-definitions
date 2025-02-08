@@ -9,8 +9,8 @@ Method | HTTP request | Description
 **DeleteAccount**](workspace_service_api.md#DeleteAccount) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 **DeleteWorkspace1**](workspace_service_api.md#DeleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
 **GetAccount**](workspace_service_api.md#GetAccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details
-**GetWorkspace**](workspace_service_api.md#GetWorkspace) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
-**GetWorkspaceAnalytics**](workspace_service_api.md#GetWorkspaceAnalytics) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
+**GetWorkspace1**](workspace_service_api.md#GetWorkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
+**GetWorkspaceAnalytics1**](workspace_service_api.md#GetWorkspaceAnalytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
 **GetWorkspaceComplianceReport**](workspace_service_api.md#GetWorkspaceComplianceReport) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report
 **GetWorkspaceStorageStats**](workspace_service_api.md#GetWorkspaceStorageStats) | **GET** /workspace-service/v1/workspaces/storage-stats/{workspaceId} | Get storage statistics
 **ListWorkspaceSharings**](workspace_service_api.md#ListWorkspaceSharings) | **GET** /workspace-service/v1/workspaces/sharings/{workspaceId} | List workspace sharings
@@ -149,8 +149,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **GetWorkspace**
-> models::GetWorkspaceResponse GetWorkspace(id)
+# **GetWorkspace1**
+> models::GetWorkspaceResponse1 GetWorkspace1(id)
 Get workspace details
 
 ### Required Parameters
@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**models::GetWorkspaceResponse**](GetWorkspaceResponse.md)
+[**models::GetWorkspaceResponse1**](GetWorkspaceResponse1.md)
 
 ### Authorization
 
@@ -174,8 +174,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **GetWorkspaceAnalytics**
-> models::GetWorkspaceAnalyticsResponse GetWorkspaceAnalytics(workspace_id, optional)
+# **GetWorkspaceAnalytics1**
+> models::GetWorkspaceAnalyticsResponse1 GetWorkspaceAnalytics1(workspace_id, optional)
 Get workspace analytics
 
 ### Required Parameters
@@ -196,7 +196,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**models::GetWorkspaceAnalyticsResponse**](GetWorkspaceAnalyticsResponse.md)
+[**models::GetWorkspaceAnalyticsResponse1**](GetWorkspaceAnalyticsResponse1.md)
 
 ### Authorization
 
@@ -415,14 +415,14 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateWorkspace1**
-> models::UpdateWorkspaceResponse UpdateWorkspace1(update_workspace_request1)
+> models::UpdateWorkspaceResponse UpdateWorkspace1(update_workspace_request)
 Update workspace
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-  **update_workspace_request1** | [**UpdateWorkspaceRequest1**](UpdateWorkspaceRequest1.md)|  | 
+  **update_workspace_request** | [**UpdateWorkspaceRequest**](UpdateWorkspaceRequest.md)|  | 
 
 ### Return type
 

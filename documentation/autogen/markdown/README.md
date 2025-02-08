@@ -24,6 +24,8 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *LeadScraperServiceApi* | [**getTenant**](Apis/LeadScraperServiceApi.md#gettenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details |
 *LeadScraperServiceApi* | [**getTenantAPIKey**](Apis/LeadScraperServiceApi.md#gettenantapikey) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details |
 *LeadScraperServiceApi* | [**getWebhook**](Apis/LeadScraperServiceApi.md#getwebhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook |
+*LeadScraperServiceApi* | [**getWorkspace**](Apis/LeadScraperServiceApi.md#getworkspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details |
+*LeadScraperServiceApi* | [**getWorkspaceAnalytics**](Apis/LeadScraperServiceApi.md#getworkspaceanalytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics |
 *LeadScraperServiceApi* | [**listAPIKeys**](Apis/LeadScraperServiceApi.md#listapikeys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys |
 *LeadScraperServiceApi* | [**listLeads**](Apis/LeadScraperServiceApi.md#listleads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads |
 *LeadScraperServiceApi* | [**listOrganizations**](Apis/LeadScraperServiceApi.md#listorganizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations |
@@ -43,8 +45,8 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *WorkspaceServiceApi* | [**deleteAccount**](Apis/WorkspaceServiceApi.md#deleteaccount) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account |
 *WorkspaceServiceApi* | [**deleteWorkspace1**](Apis/WorkspaceServiceApi.md#deleteworkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace |
 *WorkspaceServiceApi* | [**getAccount**](Apis/WorkspaceServiceApi.md#getaccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details |
-*WorkspaceServiceApi* | [**getWorkspace**](Apis/WorkspaceServiceApi.md#getworkspace) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details |
-*WorkspaceServiceApi* | [**getWorkspaceAnalytics**](Apis/WorkspaceServiceApi.md#getworkspaceanalytics) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics |
+*WorkspaceServiceApi* | [**getWorkspace1**](Apis/WorkspaceServiceApi.md#getworkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details |
+*WorkspaceServiceApi* | [**getWorkspaceAnalytics1**](Apis/WorkspaceServiceApi.md#getworkspaceanalytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics |
 *WorkspaceServiceApi* | [**getWorkspaceComplianceReport**](Apis/WorkspaceServiceApi.md#getworkspacecompliancereport) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report |
 *WorkspaceServiceApi* | [**getWorkspaceStorageStats**](Apis/WorkspaceServiceApi.md#getworkspacestoragestats) | **GET** /workspace-service/v1/workspaces/storage-stats/{workspaceId} | Get storage statistics |
 *WorkspaceServiceApi* | [**listWorkspaceSharings**](Apis/WorkspaceServiceApi.md#listworkspacesharings) | **GET** /workspace-service/v1/workspaces/sharings/{workspaceId} | List workspace sharings |
@@ -149,14 +151,17 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [GetTenantResponse](./Models/GetTenantResponse.md)
  - [GetWebhookResponse](./Models/GetWebhookResponse.md)
  - [GetWorkspaceAnalyticsResponse](./Models/GetWorkspaceAnalyticsResponse.md)
+ - [GetWorkspaceAnalyticsResponse1](./Models/GetWorkspaceAnalyticsResponse1.md)
  - [GetWorkspaceComplianceReportResponse](./Models/GetWorkspaceComplianceReportResponse.md)
  - [GetWorkspaceResponse](./Models/GetWorkspaceResponse.md)
+ - [GetWorkspaceResponse1](./Models/GetWorkspaceResponse1.md)
  - [GetWorkspaceStorageStatsResponse](./Models/GetWorkspaceStorageStatsResponse.md)
  - [GoneErrorMessageResponse](./Models/GoneErrorMessageResponse.md)
  - [IncludedField](./Models/IncludedField.md)
  - [InternalErrorCode](./Models/InternalErrorCode.md)
  - [InternalErrorMessageResponse](./Models/InternalErrorMessageResponse.md)
  - [Interval](./Models/Interval.md)
+ - [JobSuccessRate](./Models/JobSuccessRate.md)
  - [Language](./Models/Language.md)
  - [Lead](./Models/Lead.md)
  - [LimitInfo](./Models/LimitInfo.md)
@@ -245,7 +250,6 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [UpdateWebhookRequest](./Models/UpdateWebhookRequest.md)
  - [UpdateWebhookResponse](./Models/UpdateWebhookResponse.md)
  - [UpdateWorkspaceRequest](./Models/UpdateWorkspaceRequest.md)
- - [UpdateWorkspaceRequest1](./Models/UpdateWorkspaceRequest1.md)
  - [UpdateWorkspaceResponse](./Models/UpdateWorkspaceResponse.md)
  - [UpdateWorkspaceSharingRequest](./Models/UpdateWorkspaceSharingRequest.md)
  - [UpdateWorkspaceSharingResponse](./Models/UpdateWorkspaceSharingResponse.md)

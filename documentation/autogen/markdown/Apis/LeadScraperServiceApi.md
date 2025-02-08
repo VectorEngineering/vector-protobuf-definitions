@@ -21,6 +21,8 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**getTenant**](LeadScraperServiceApi.md#getTenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details |
 | [**getTenantAPIKey**](LeadScraperServiceApi.md#getTenantAPIKey) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details |
 | [**getWebhook**](LeadScraperServiceApi.md#getWebhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook |
+| [**getWorkspace**](LeadScraperServiceApi.md#getWorkspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details |
+| [**getWorkspaceAnalytics**](LeadScraperServiceApi.md#getWorkspaceAnalytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics |
 | [**listAPIKeys**](LeadScraperServiceApi.md#listAPIKeys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys |
 | [**listLeads**](LeadScraperServiceApi.md#listLeads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads |
 | [**listOrganizations**](LeadScraperServiceApi.md#listOrganizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations |
@@ -513,6 +515,65 @@ Get webhook
 ### Return type
 
 [**GetWebhookResponse**](../Models/GetWebhookResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="getWorkspace"></a>
+# **getWorkspace**
+> GetWorkspaceResponse getWorkspace(id, organizationId, tenantId, accountId)
+
+Get workspace details
+
+    Retrieves details of a specific workspace
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **String**|  | [default to null] |
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
+| **accountId** | **String**|  | [optional] [default to null] |
+
+### Return type
+
+[**GetWorkspaceResponse**](../Models/GetWorkspaceResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="getWorkspaceAnalytics"></a>
+# **getWorkspaceAnalytics**
+> GetWorkspaceAnalyticsResponse getWorkspaceAnalytics(workspaceId, startTime, endTime)
+
+Get workspace analytics
+
+    Retrieves analytics data for a specific workspace
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **workspaceId** | **String**|  | [default to null] |
+| **startTime** | **Date**|  | [optional] [default to null] |
+| **endTime** | **Date**|  | [optional] [default to null] |
+
+### Return type
+
+[**GetWorkspaceAnalyticsResponse**](../Models/GetWorkspaceAnalyticsResponse.md)
 
 ### Authorization
 

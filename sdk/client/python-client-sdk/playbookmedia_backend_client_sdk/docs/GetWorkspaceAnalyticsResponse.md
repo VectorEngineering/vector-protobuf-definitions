@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**activity** | [**ActivityMetrics**](ActivityMetrics.md) |  | [optional] 
-**user_activities** | [**List[UserActivity]**](UserActivity.md) |  | [optional] 
-**compliance** | [**ComplianceMetrics**](ComplianceMetrics.md) |  | [optional] 
-**recent_activities** | [**List[WorkspaceActivity]**](WorkspaceActivity.md) |  | [optional] 
+**total_leads** | **int** |  | [optional] 
+**active_workflows** | **int** |  | [optional] 
+**jobs_last30_days** | **int** |  | [optional] 
+**success_rates** | [**List[JobSuccessRate]**](JobSuccessRate.md) |  | [optional] 
 
 ## Example
 

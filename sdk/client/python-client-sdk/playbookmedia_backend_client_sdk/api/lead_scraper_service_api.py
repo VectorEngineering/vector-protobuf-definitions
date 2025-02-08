@@ -17,6 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from datetime import datetime
 from pydantic import Field, StrictInt, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
@@ -42,6 +43,8 @@ from playbookmedia_backend_client_sdk.models.get_organization_response import Ge
 from playbookmedia_backend_client_sdk.models.get_tenant_api_key_response import GetTenantAPIKeyResponse
 from playbookmedia_backend_client_sdk.models.get_tenant_response import GetTenantResponse
 from playbookmedia_backend_client_sdk.models.get_webhook_response import GetWebhookResponse
+from playbookmedia_backend_client_sdk.models.get_workspace_analytics_response import GetWorkspaceAnalyticsResponse
+from playbookmedia_backend_client_sdk.models.get_workspace_response import GetWorkspaceResponse
 from playbookmedia_backend_client_sdk.models.list_api_keys_response import ListAPIKeysResponse
 from playbookmedia_backend_client_sdk.models.list_leads_response import ListLeadsResponse
 from playbookmedia_backend_client_sdk.models.list_organizations_response import ListOrganizationsResponse
@@ -5867,6 +5870,729 @@ class LeadScraperServiceApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/lead-scraper-microservice/api/v1/webhooks/{webhookId}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def get_workspace(
+        self,
+        id: StrictStr,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
+        account_id: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetWorkspaceResponse:
+        """Get workspace details
+
+        Retrieves details of a specific workspace
+
+        :param id: (required)
+        :type id: str
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
+        :param account_id:
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_workspace_serialize(
+            id=id,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetWorkspaceResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def get_workspace_with_http_info(
+        self,
+        id: StrictStr,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
+        account_id: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetWorkspaceResponse]:
+        """Get workspace details
+
+        Retrieves details of a specific workspace
+
+        :param id: (required)
+        :type id: str
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
+        :param account_id:
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_workspace_serialize(
+            id=id,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetWorkspaceResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def get_workspace_without_preload_content(
+        self,
+        id: StrictStr,
+        organization_id: Optional[StrictStr] = None,
+        tenant_id: Optional[StrictStr] = None,
+        account_id: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get workspace details
+
+        Retrieves details of a specific workspace
+
+        :param id: (required)
+        :type id: str
+        :param organization_id:
+        :type organization_id: str
+        :param tenant_id:
+        :type tenant_id: str
+        :param account_id:
+        :type account_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_workspace_serialize(
+            id=id,
+            organization_id=organization_id,
+            tenant_id=tenant_id,
+            account_id=account_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetWorkspaceResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_workspace_serialize(
+        self,
+        id,
+        organization_id,
+        tenant_id,
+        account_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if id is not None:
+            _path_params['id'] = id
+        # process the query parameters
+        if organization_id is not None:
+            
+            _query_params.append(('organizationId', organization_id))
+            
+        if tenant_id is not None:
+            
+            _query_params.append(('tenantId', tenant_id))
+            
+        if account_id is not None:
+            
+            _query_params.append(('accountId', account_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/lead-scraper-microservice/api/v1/workspace/{id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def get_workspace_analytics(
+        self,
+        workspace_id: StrictStr,
+        start_time: Optional[datetime] = None,
+        end_time: Optional[datetime] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetWorkspaceAnalyticsResponse:
+        """Get workspace analytics
+
+        Retrieves analytics data for a specific workspace
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param start_time:
+        :type start_time: datetime
+        :param end_time:
+        :type end_time: datetime
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_workspace_analytics_serialize(
+            workspace_id=workspace_id,
+            start_time=start_time,
+            end_time=end_time,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetWorkspaceAnalyticsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def get_workspace_analytics_with_http_info(
+        self,
+        workspace_id: StrictStr,
+        start_time: Optional[datetime] = None,
+        end_time: Optional[datetime] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetWorkspaceAnalyticsResponse]:
+        """Get workspace analytics
+
+        Retrieves analytics data for a specific workspace
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param start_time:
+        :type start_time: datetime
+        :param end_time:
+        :type end_time: datetime
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_workspace_analytics_serialize(
+            workspace_id=workspace_id,
+            start_time=start_time,
+            end_time=end_time,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetWorkspaceAnalyticsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def get_workspace_analytics_without_preload_content(
+        self,
+        workspace_id: StrictStr,
+        start_time: Optional[datetime] = None,
+        end_time: Optional[datetime] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get workspace analytics
+
+        Retrieves analytics data for a specific workspace
+
+        :param workspace_id: (required)
+        :type workspace_id: str
+        :param start_time:
+        :type start_time: datetime
+        :param end_time:
+        :type end_time: datetime
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_workspace_analytics_serialize(
+            workspace_id=workspace_id,
+            start_time=start_time,
+            end_time=end_time,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetWorkspaceAnalyticsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_workspace_analytics_serialize(
+        self,
+        workspace_id,
+        start_time,
+        end_time,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if workspace_id is not None:
+            _path_params['workspaceId'] = workspace_id
+        # process the query parameters
+        if start_time is not None:
+            if isinstance(start_time, datetime):
+                _query_params.append(
+                    (
+                        'startTime',
+                        start_time.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('startTime', start_time))
+            
+        if end_time is not None:
+            if isinstance(end_time, datetime):
+                _query_params.append(
+                    (
+                        'endTime',
+                        end_time.strftime(
+                            self.api_client.configuration.datetime_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('endTime', end_time))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

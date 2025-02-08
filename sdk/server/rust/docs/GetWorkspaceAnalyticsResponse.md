@@ -3,10 +3,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**activity** | [***models::ActivityMetrics**](ActivityMetrics.md) |  | [optional] [default to None]
-**user_activities** | [**Vec<models::UserActivity>**](UserActivity.md) |  | [optional] [default to None]
-**compliance** | [***models::ComplianceMetrics**](ComplianceMetrics.md) |  | [optional] [default to None]
-**recent_activities** | [**Vec<models::WorkspaceActivity>**](WorkspaceActivity.md) |  | [optional] [default to None]
+**total_leads** | **i32** |  | [optional] [default to None]
+**active_workflows** | **i32** |  | [optional] [default to None]
+**jobs_last30_days** | **i32** |  | [optional] [default to None]
+**success_rates** | [**Vec<models::JobSuccessRate>**](JobSuccessRate.md) |  | [optional] [default to None]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

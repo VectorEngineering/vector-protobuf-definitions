@@ -21,6 +21,8 @@ Method | HTTP request | Description
 [**GetTenant**](lead_scraper_service_api.md#GetTenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details
 [**GetTenantAPIKey**](lead_scraper_service_api.md#GetTenantAPIKey) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details
 [**GetWebhook**](lead_scraper_service_api.md#GetWebhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook
+[**GetWorkspace**](lead_scraper_service_api.md#GetWorkspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details
+[**GetWorkspaceAnalytics**](lead_scraper_service_api.md#GetWorkspaceAnalytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics
 [**ListAPIKeys**](lead_scraper_service_api.md#ListAPIKeys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys
 [**ListLeads**](lead_scraper_service_api.md#ListLeads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads
 [**ListOrganizations**](lead_scraper_service_api.md#ListOrganizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations
@@ -156,6 +158,20 @@ Retrieves details of a specific tenant API key
 Get webhook
 
 Retrieves details of a specific webhook configuration
+<a name="GetWorkspace"></a>
+# **GetWorkspace**
+> GetWorkspaceResponse GetWorkspace(Id_, organizationId, tenantId, accountId)
+
+Get workspace details
+
+Retrieves details of a specific workspace
+<a name="GetWorkspaceAnalytics"></a>
+# **GetWorkspaceAnalytics**
+> GetWorkspaceAnalyticsResponse GetWorkspaceAnalytics(workspaceId, startTime, endTime)
+
+Get workspace analytics
+
+Retrieves analytics data for a specific workspace
 <a name="ListAPIKeys"></a>
 # **ListAPIKeys**
 > ListApiKeysResponse ListAPIKeys(organizationId, tenantId, accountId, workspaceId, pageSize, pageNumber, status, search)

@@ -1390,6 +1390,166 @@ pub enum GetWebhookResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum GetWorkspaceResponse {
+    /// Workspace retrieved successfully
+    WorkspaceRetrievedSuccessfully
+    (models::GetWorkspaceResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum GetWorkspaceAnalyticsResponse {
+    /// Analytics data retrieved successfully
+    AnalyticsDataRetrievedSuccessfully
+    (models::GetWorkspaceAnalyticsResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum ListApiKeysResponse {
     /// API keys retrieved successfully
     APIKeysRetrievedSuccessfully
@@ -2718,10 +2878,10 @@ pub enum GetAccountResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
-pub enum GetWorkspaceResponse {
+pub enum GetWorkspace1Response {
     /// Workspace retrieved successfully
     WorkspaceRetrievedSuccessfully
-    (models::GetWorkspaceResponse)
+    (models::GetWorkspaceResponse1)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -2758,10 +2918,10 @@ pub enum GetWorkspaceResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
-pub enum GetWorkspaceAnalyticsResponse {
+pub enum GetWorkspaceAnalytics1Response {
     /// Analytics data retrieved successfully
     AnalyticsDataRetrievedSuccessfully
-    (models::GetWorkspaceAnalyticsResponse)
+    (models::GetWorkspaceAnalyticsResponse1)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -3293,6 +3453,23 @@ pub trait Api<C: Send + Sync> {
         account_id: Option<String>,
         context: &C) -> Result<GetWebhookResponse, ApiError>;
 
+    /// Get workspace details
+    async fn get_workspace(
+        &self,
+        id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        context: &C) -> Result<GetWorkspaceResponse, ApiError>;
+
+    /// Get workspace analytics
+    async fn get_workspace_analytics(
+        &self,
+        workspace_id: String,
+        start_time: Option<chrono::DateTime::<chrono::Utc>>,
+        end_time: Option<chrono::DateTime::<chrono::Utc>>,
+        context: &C) -> Result<GetWorkspaceAnalyticsResponse, ApiError>;
+
     /// List API keys
     async fn list_api_keys(
         &self,
@@ -3434,18 +3611,18 @@ pub trait Api<C: Send + Sync> {
         context: &C) -> Result<GetAccountResponse, ApiError>;
 
     /// Get workspace details
-    async fn get_workspace(
+    async fn get_workspace1(
         &self,
         id: String,
-        context: &C) -> Result<GetWorkspaceResponse, ApiError>;
+        context: &C) -> Result<GetWorkspace1Response, ApiError>;
 
     /// Get workspace analytics
-    async fn get_workspace_analytics(
+    async fn get_workspace_analytics1(
         &self,
         workspace_id: String,
         start_time: Option<chrono::DateTime::<chrono::Utc>>,
         end_time: Option<chrono::DateTime::<chrono::Utc>>,
-        context: &C) -> Result<GetWorkspaceAnalyticsResponse, ApiError>;
+        context: &C) -> Result<GetWorkspaceAnalytics1Response, ApiError>;
 
     /// Get compliance report
     async fn get_workspace_compliance_report(
@@ -3499,7 +3676,7 @@ pub trait Api<C: Send + Sync> {
     /// Update workspace
     async fn update_workspace1(
         &self,
-        update_workspace_request1: models::UpdateWorkspaceRequest1,
+        update_workspace_request: models::UpdateWorkspaceRequest,
         context: &C) -> Result<UpdateWorkspace1Response, ApiError>;
 
     /// Update workspace sharing
@@ -3648,6 +3825,23 @@ pub trait ApiNoContext<C: Send + Sync> {
         account_id: Option<String>,
         ) -> Result<GetWebhookResponse, ApiError>;
 
+    /// Get workspace details
+    async fn get_workspace(
+        &self,
+        id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        ) -> Result<GetWorkspaceResponse, ApiError>;
+
+    /// Get workspace analytics
+    async fn get_workspace_analytics(
+        &self,
+        workspace_id: String,
+        start_time: Option<chrono::DateTime::<chrono::Utc>>,
+        end_time: Option<chrono::DateTime::<chrono::Utc>>,
+        ) -> Result<GetWorkspaceAnalyticsResponse, ApiError>;
+
     /// List API keys
     async fn list_api_keys(
         &self,
@@ -3789,18 +3983,18 @@ pub trait ApiNoContext<C: Send + Sync> {
         ) -> Result<GetAccountResponse, ApiError>;
 
     /// Get workspace details
-    async fn get_workspace(
+    async fn get_workspace1(
         &self,
         id: String,
-        ) -> Result<GetWorkspaceResponse, ApiError>;
+        ) -> Result<GetWorkspace1Response, ApiError>;
 
     /// Get workspace analytics
-    async fn get_workspace_analytics(
+    async fn get_workspace_analytics1(
         &self,
         workspace_id: String,
         start_time: Option<chrono::DateTime::<chrono::Utc>>,
         end_time: Option<chrono::DateTime::<chrono::Utc>>,
-        ) -> Result<GetWorkspaceAnalyticsResponse, ApiError>;
+        ) -> Result<GetWorkspaceAnalytics1Response, ApiError>;
 
     /// Get compliance report
     async fn get_workspace_compliance_report(
@@ -3854,7 +4048,7 @@ pub trait ApiNoContext<C: Send + Sync> {
     /// Update workspace
     async fn update_workspace1(
         &self,
-        update_workspace_request1: models::UpdateWorkspaceRequest1,
+        update_workspace_request: models::UpdateWorkspaceRequest,
         ) -> Result<UpdateWorkspace1Response, ApiError>;
 
     /// Update workspace sharing
@@ -4085,6 +4279,31 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         self.api().get_webhook(webhook_id, organization_id, workspace_id, tenant_id, account_id, &context).await
     }
 
+    /// Get workspace details
+    async fn get_workspace(
+        &self,
+        id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        ) -> Result<GetWorkspaceResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_workspace(id, organization_id, tenant_id, account_id, &context).await
+    }
+
+    /// Get workspace analytics
+    async fn get_workspace_analytics(
+        &self,
+        workspace_id: String,
+        start_time: Option<chrono::DateTime::<chrono::Utc>>,
+        end_time: Option<chrono::DateTime::<chrono::Utc>>,
+        ) -> Result<GetWorkspaceAnalyticsResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().get_workspace_analytics(workspace_id, start_time, end_time, &context).await
+    }
+
     /// List API keys
     async fn list_api_keys(
         &self,
@@ -4302,25 +4521,25 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     }
 
     /// Get workspace details
-    async fn get_workspace(
+    async fn get_workspace1(
         &self,
         id: String,
-        ) -> Result<GetWorkspaceResponse, ApiError>
+        ) -> Result<GetWorkspace1Response, ApiError>
     {
         let context = self.context().clone();
-        self.api().get_workspace(id, &context).await
+        self.api().get_workspace1(id, &context).await
     }
 
     /// Get workspace analytics
-    async fn get_workspace_analytics(
+    async fn get_workspace_analytics1(
         &self,
         workspace_id: String,
         start_time: Option<chrono::DateTime::<chrono::Utc>>,
         end_time: Option<chrono::DateTime::<chrono::Utc>>,
-        ) -> Result<GetWorkspaceAnalyticsResponse, ApiError>
+        ) -> Result<GetWorkspaceAnalytics1Response, ApiError>
     {
         let context = self.context().clone();
-        self.api().get_workspace_analytics(workspace_id, start_time, end_time, &context).await
+        self.api().get_workspace_analytics1(workspace_id, start_time, end_time, &context).await
     }
 
     /// Get compliance report
@@ -4403,11 +4622,11 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     /// Update workspace
     async fn update_workspace1(
         &self,
-        update_workspace_request1: models::UpdateWorkspaceRequest1,
+        update_workspace_request: models::UpdateWorkspaceRequest,
         ) -> Result<UpdateWorkspace1Response, ApiError>
     {
         let context = self.context().clone();
-        self.api().update_workspace1(update_workspace_request1, &context).await
+        self.api().update_workspace1(update_workspace_request, &context).await
     }
 
     /// Update workspace sharing

@@ -732,86 +732,86 @@ service LeadScraperService {
     //     };
     // }
 
-    // // Analytics
-    // /**
-    //  * GetWorkspaceAnalytics provides comprehensive workspace metrics
-    //  * 
-    //  * Metrics categories:
-    //  * - Resource utilization (CPU, memory, storage)
-    //  * - Job execution statistics
-    //  * - Error rates and types
-    //  * - Performance trends
-    //  * - Cost analysis
-    //  * 
-    //  * Time ranges:
-    //  * - Real-time metrics
-    //  * - Historical data (configurable periods)
-    //  * - Trend analysis
-    //  * 
-    //  * Aggregation options:
-    //  * - By workflow
-    //  * - By job type
-    //  * - By time period
-    //  * - By resource type
-    //  */
-    // rpc GetWorkspaceAnalytics(GetWorkspaceAnalyticsRequest) returns (GetWorkspaceAnalyticsResponse) {
-    //     option (google.api.http) = {
-    //         get: "/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/analytics"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Get workspace analytics"
-    //         tags: ["lead-scraper-service"],
-    //         operation_id: "GetWorkspaceAnalytics",
-    //         description: "Retrieves analytics data for a specific workspace",
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Analytics data retrieved successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.GetWorkspaceAnalyticsResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    // Analytics
+    /**
+     * GetWorkspaceAnalytics provides comprehensive workspace metrics
+     * 
+     * Metrics categories:
+     * - Resource utilization (CPU, memory, storage)
+     * - Job execution statistics
+     * - Error rates and types
+     * - Performance trends
+     * - Cost analysis
+     * 
+     * Time ranges:
+     * - Real-time metrics
+     * - Historical data (configurable periods)
+     * - Trend analysis
+     * 
+     * Aggregation options:
+     * - By workflow
+     * - By job type
+     * - By time period
+     * - By resource type
+     */
+    rpc GetWorkspaceAnalytics(GetWorkspaceAnalyticsRequest) returns (GetWorkspaceAnalyticsResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/analytics"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get workspace analytics"
+            tags: ["lead-scraper-service"],
+            operation_id: "GetWorkspaceAnalytics",
+            description: "Retrieves analytics data for a specific workspace",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Analytics data retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.GetWorkspaceAnalyticsResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * GetWorkspace retrieves detailed workspace information
-    //  * 
-    //  * Response includes:
-    //  * - Basic metadata (name, ID, creation date)
-    //  * - Access control configuration
-    //  * - Resource quotas and usage
-    //  * - Workflow inventory
-    //  * - Integration settings
-    //  * 
-    //  * Security features:
-    //  * - Role-based access control
-    //  * - Audit log integration
-    //  * - Resource isolation validation
-    //  * 
-    //  * Common use cases:
-    //  * - Workspace administration
-    //  * - Configuration management
-    //  * - Compliance auditing
-    //  * - Resource planning
-    //  */
-    // rpc GetWorkspace(GetWorkspaceRequest) returns (GetWorkspaceResponse) {
-    //     option (google.api.http) = {
-    //         get: "/lead-scraper-microservice/api/v1/workspace/{id}"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Get workspace details"
-    //         tags: ["lead-scraper-service"],
-    //         operation_id: "GetWorkspace",
-    //         description: "Retrieves details of a specific workspace",
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Workspace retrieved successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.GetWorkspaceResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * GetWorkspace retrieves detailed workspace information
+     * 
+     * Response includes:
+     * - Basic metadata (name, ID, creation date)
+     * - Access control configuration
+     * - Resource quotas and usage
+     * - Workflow inventory
+     * - Integration settings
+     * 
+     * Security features:
+     * - Role-based access control
+     * - Audit log integration
+     * - Resource isolation validation
+     * 
+     * Common use cases:
+     * - Workspace administration
+     * - Configuration management
+     * - Compliance auditing
+     * - Resource planning
+     */
+    rpc GetWorkspace(GetWorkspaceRequest) returns (GetWorkspaceResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/workspace/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get workspace details"
+            tags: ["lead-scraper-service"],
+            operation_id: "GetWorkspace",
+            description: "Retrieves details of a specific workspace",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workspace retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.GetWorkspaceResponse" } }
+                }
+            }
+        };
+    }
 
     /**
      * UpdateWorkspace modifies workspace configuration

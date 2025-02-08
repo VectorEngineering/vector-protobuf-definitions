@@ -30,6 +30,8 @@ from playbookmedia_backend_server_sdk.models.get_organization_response import Ge
 from playbookmedia_backend_server_sdk.models.get_tenant_api_key_response import GetTenantAPIKeyResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_tenant_response import GetTenantResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_webhook_response import GetWebhookResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.get_workspace_analytics_response import GetWorkspaceAnalyticsResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.get_workspace_response import GetWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.gone_error_message_response import GoneErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.internal_error_message_response import InternalErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_api_keys_response import ListAPIKeysResponse  # noqa: E501
@@ -350,6 +352,44 @@ def get_webhook(webhook_id, organization_id=None, workspace_id=None, tenant_id=N
 
     :rtype: Union[GetWebhookResponse, Tuple[GetWebhookResponse, int], Tuple[GetWebhookResponse, int, Dict[str, str]]
     """
+    return 'do some magic!'
+
+
+def get_workspace(id, organization_id=None, tenant_id=None, account_id=None):  # noqa: E501
+    """Get workspace details
+
+    Retrieves details of a specific workspace # noqa: E501
+
+    :param id: 
+    :type id: str
+    :param organization_id: 
+    :type organization_id: str
+    :param tenant_id: 
+    :type tenant_id: str
+    :param account_id: 
+    :type account_id: str
+
+    :rtype: Union[GetWorkspaceResponse, Tuple[GetWorkspaceResponse, int], Tuple[GetWorkspaceResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
+def get_workspace_analytics(workspace_id, start_time=None, end_time=None):  # noqa: E501
+    """Get workspace analytics
+
+    Retrieves analytics data for a specific workspace # noqa: E501
+
+    :param workspace_id: 
+    :type workspace_id: str
+    :param start_time: 
+    :type start_time: str
+    :param end_time: 
+    :type end_time: str
+
+    :rtype: Union[GetWorkspaceAnalyticsResponse, Tuple[GetWorkspaceAnalyticsResponse, int], Tuple[GetWorkspaceAnalyticsResponse, int, Dict[str, str]]
+    """
+    start_time = util.deserialize_datetime(start_time)
+    end_time = util.deserialize_datetime(end_time)
     return 'do some magic!'
 
 

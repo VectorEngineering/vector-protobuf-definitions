@@ -1453,10 +1453,6 @@ const DeleteWebhookResponse = z
   .object({ success: z.boolean() })
   .partial()
   .passthrough();
-const UpdateWorkspaceRequest = z
-  .object({ workspace: Workspace })
-  .partial()
-  .passthrough();
 const FileEmbeddings = z
   .object({
     id: z.string(),
@@ -2117,12 +2113,37 @@ const Workspace1 = z
   })
   .partial()
   .passthrough();
+const UpdateWorkspaceRequest = z
+  .object({ workspace: Workspace1 })
+  .partial()
+  .passthrough();
 const UpdateWorkspaceResponse = z
   .object({ workspace: Workspace1 })
   .partial()
   .passthrough();
+const GetWorkspaceResponse = z
+  .object({ workspace: Workspace })
+  .partial()
+  .passthrough();
 const DeleteWorkspaceResponse = z
   .object({ success: z.boolean() })
+  .partial()
+  .passthrough();
+const JobSuccessRate = z
+  .object({
+    workflowId: z.string(),
+    successRate: z.number(),
+    totalRuns: z.number().int(),
+  })
+  .partial()
+  .passthrough();
+const GetWorkspaceAnalyticsResponse = z
+  .object({
+    totalLeads: z.number().int(),
+    activeWorkflows: z.number().int(),
+    jobsLast30Days: z.number().int(),
+    successRates: z.array(JobSuccessRate),
+  })
   .partial()
   .passthrough();
 const ComplianceLevel = z.enum([
@@ -2244,10 +2265,6 @@ const CreateWorkspaceResponse = z
   .object({ workspace: Workspace1 })
   .partial()
   .passthrough();
-const UpdateWorkspaceRequest1 = z
-  .object({ workspace: Workspace1 })
-  .partial()
-  .passthrough();
 const ActivityMetrics = z
   .object({
     totalFiles: z.number().int(),
@@ -2277,7 +2294,7 @@ const ComplianceMetrics = z
   })
   .partial()
   .passthrough();
-const GetWorkspaceAnalyticsResponse = z
+const GetWorkspaceAnalyticsResponse1 = z
   .object({
     activity: ActivityMetrics,
     userActivities: z.array(UserActivity),
@@ -2352,7 +2369,7 @@ const GetWorkspaceStorageStatsResponse = z
   })
   .partial()
   .passthrough();
-const GetWorkspaceResponse = z
+const GetWorkspaceResponse1 = z
   .object({ workspace: Workspace1 })
   .partial()
   .passthrough();
@@ -2492,7 +2509,6 @@ export const schemas = {
   UpdateWebhookResponse,
   GetWebhookResponse,
   DeleteWebhookResponse,
-  UpdateWorkspaceRequest,
   FileEmbeddings,
   FileVersion,
   CommentThread,
@@ -2538,8 +2554,12 @@ export const schemas = {
   AppPermission,
   MarketplaceApp,
   Workspace1,
+  UpdateWorkspaceRequest,
   UpdateWorkspaceResponse,
+  GetWorkspaceResponse,
   DeleteWorkspaceResponse,
+  JobSuccessRate,
+  GetWorkspaceAnalyticsResponse,
   ComplianceLevel,
   CreateAccountRequest,
   DataProfile,
@@ -2555,11 +2575,10 @@ export const schemas = {
   RemoveWorkspaceSharingResponse,
   CreateWorkspaceRequest,
   CreateWorkspaceResponse,
-  UpdateWorkspaceRequest1,
   ActivityMetrics,
   UserActivity,
   ComplianceMetrics,
-  GetWorkspaceAnalyticsResponse,
+  GetWorkspaceAnalyticsResponse1,
   ComplianceViolation,
   ComplianceScore,
   GetWorkspaceComplianceReportResponse,
@@ -2567,7 +2586,7 @@ export const schemas = {
   ListWorkspaceSharingsResponse,
   StorageBreakdown,
   GetWorkspaceStorageStatsResponse,
-  GetWorkspaceResponse,
+  GetWorkspaceResponse1,
   ShareWorkspaceBody,
   ShareWorkspaceResponse,
 };
@@ -6049,6 +6068,128 @@ const endpoints = makeApi([
     ],
   },
   {
+    method: "get",
+    path: "/lead-scraper-microservice/api/v1/workspace/:id",
+    alias: "GetWorkspace",
+    description: `Retrieves details of a specific workspace`,
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "id",
+        type: "Path",
+        schema: z.string(),
+      },
+      {
+        name: "organizationId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+      {
+        name: "tenantId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+      {
+        name: "accountId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+    ],
+    response: GetWorkspaceResponse,
+    errors: [
+      {
+        status: 400,
+        description: `Bad Request - Invalid input parameters`,
+        schema: ValidationErrorMessageResponse,
+      },
+      {
+        status: 401,
+        description: `Unauthorized - Authentication required`,
+        schema: AuthenticationErrorMessageResponse,
+      },
+      {
+        status: 402,
+        description: `Payment Required - Payment is necessary to proceed`,
+        schema: PaymentRequiredErrorMessageResponse,
+      },
+      {
+        status: 403,
+        description: `Forbidden - Access denied`,
+        schema: ForbiddenErrorMessageResponse,
+      },
+      {
+        status: 404,
+        description: `Not Found - Resource not found`,
+        schema: NotFoundErrorMessageResponse,
+      },
+      {
+        status: 405,
+        description: `Method Not Allowed - HTTP method not supported`,
+        schema: MethodNotAllowedErrorMessageResponse,
+      },
+      {
+        status: 409,
+        description: `Conflict - Resource already exists`,
+        schema: ConflictErrorMessageResponse,
+      },
+      {
+        status: 410,
+        description: `Gone - Resource is no longer available`,
+        schema: GoneErrorMessageResponse,
+      },
+      {
+        status: 412,
+        description: `Precondition Failed - Preconditions in headers did not match`,
+        schema: PreconditionFailedErrorMessageResponse,
+      },
+      {
+        status: 422,
+        description: `Unprocessable Entity - Semantic errors in the request`,
+        schema: UnprocessableEntityErrorMessageResponse,
+      },
+      {
+        status: 425,
+        description: `Too Early - Request is being replayed`,
+        schema: TooEarlyErrorMessageResponse,
+      },
+      {
+        status: 429,
+        description: `Too Many Requests - Rate limit exceeded`,
+        schema: RateLimitErrorMessageResponse,
+      },
+      {
+        status: 500,
+        description: `Internal Server Error`,
+        schema: InternalErrorMessageResponse,
+      },
+      {
+        status: 501,
+        description: `Not Implemented - Functionality not supported`,
+        schema: NotImplementedErrorMessageResponse,
+      },
+      {
+        status: 502,
+        description: `Bad Gateway - Invalid response from upstream server`,
+        schema: BadGatewayErrorMessageResponse,
+      },
+      {
+        status: 503,
+        description: `Service Unavailable - Try again later`,
+        schema: ServiceUnavailableErrorMessageResponse,
+      },
+      {
+        status: 504,
+        description: `Gateway Timeout - Upstream server timed out`,
+        schema: GatewayTimeoutErrorMessageResponse,
+      },
+      {
+        status: "default",
+        description: `An unexpected error response.`,
+        schema: rpc_Status,
+      },
+    ],
+  },
+  {
     method: "delete",
     path: "/lead-scraper-microservice/api/v1/workspace/:id",
     alias: "DeleteWorkspace",
@@ -6062,6 +6203,123 @@ const endpoints = makeApi([
       },
     ],
     response: z.object({ success: z.boolean() }).partial().passthrough(),
+    errors: [
+      {
+        status: 400,
+        description: `Bad Request - Invalid input parameters`,
+        schema: ValidationErrorMessageResponse,
+      },
+      {
+        status: 401,
+        description: `Unauthorized - Authentication required`,
+        schema: AuthenticationErrorMessageResponse,
+      },
+      {
+        status: 402,
+        description: `Payment Required - Payment is necessary to proceed`,
+        schema: PaymentRequiredErrorMessageResponse,
+      },
+      {
+        status: 403,
+        description: `Forbidden - Access denied`,
+        schema: ForbiddenErrorMessageResponse,
+      },
+      {
+        status: 404,
+        description: `Not Found - Resource not found`,
+        schema: NotFoundErrorMessageResponse,
+      },
+      {
+        status: 405,
+        description: `Method Not Allowed - HTTP method not supported`,
+        schema: MethodNotAllowedErrorMessageResponse,
+      },
+      {
+        status: 409,
+        description: `Conflict - Resource already exists`,
+        schema: ConflictErrorMessageResponse,
+      },
+      {
+        status: 410,
+        description: `Gone - Resource is no longer available`,
+        schema: GoneErrorMessageResponse,
+      },
+      {
+        status: 412,
+        description: `Precondition Failed - Preconditions in headers did not match`,
+        schema: PreconditionFailedErrorMessageResponse,
+      },
+      {
+        status: 422,
+        description: `Unprocessable Entity - Semantic errors in the request`,
+        schema: UnprocessableEntityErrorMessageResponse,
+      },
+      {
+        status: 425,
+        description: `Too Early - Request is being replayed`,
+        schema: TooEarlyErrorMessageResponse,
+      },
+      {
+        status: 429,
+        description: `Too Many Requests - Rate limit exceeded`,
+        schema: RateLimitErrorMessageResponse,
+      },
+      {
+        status: 500,
+        description: `Internal Server Error`,
+        schema: InternalErrorMessageResponse,
+      },
+      {
+        status: 501,
+        description: `Not Implemented - Functionality not supported`,
+        schema: NotImplementedErrorMessageResponse,
+      },
+      {
+        status: 502,
+        description: `Bad Gateway - Invalid response from upstream server`,
+        schema: BadGatewayErrorMessageResponse,
+      },
+      {
+        status: 503,
+        description: `Service Unavailable - Try again later`,
+        schema: ServiceUnavailableErrorMessageResponse,
+      },
+      {
+        status: 504,
+        description: `Gateway Timeout - Upstream server timed out`,
+        schema: GatewayTimeoutErrorMessageResponse,
+      },
+      {
+        status: "default",
+        description: `An unexpected error response.`,
+        schema: rpc_Status,
+      },
+    ],
+  },
+  {
+    method: "get",
+    path: "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/analytics",
+    alias: "GetWorkspaceAnalytics",
+    description: `Retrieves analytics data for a specific workspace`,
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "workspaceId",
+        type: "Path",
+        schema: z.string(),
+      },
+      {
+        name: "startTime",
+        type: "Query",
+        schema: z.string().datetime({ offset: true }).optional(),
+      },
+      {
+        name: "endTime",
+        type: "Query",
+        schema: z.string().datetime({ offset: true }).optional(),
+      },
+    ],
+    response: GetWorkspaceAnalyticsResponse,
     errors: [
       {
         status: 400,
@@ -6557,7 +6815,7 @@ const endpoints = makeApi([
       {
         name: "body",
         type: "Body",
-        schema: UpdateWorkspaceRequest1,
+        schema: UpdateWorkspaceRequest,
       },
     ],
     response: UpdateWorkspaceResponse,
@@ -6607,7 +6865,7 @@ const endpoints = makeApi([
   {
     method: "get",
     path: "/workspace-service/v1/workspaces/:id",
-    alias: "GetWorkspace",
+    alias: "GetWorkspace1",
     requestFormat: "json",
     parameters: [
       {
@@ -6616,7 +6874,7 @@ const endpoints = makeApi([
         schema: z.string(),
       },
     ],
-    response: GetWorkspaceResponse,
+    response: GetWorkspaceResponse1,
     errors: [
       {
         status: 400,
@@ -6780,7 +7038,7 @@ const endpoints = makeApi([
   {
     method: "get",
     path: "/workspace-service/v1/workspaces/analytics/:workspaceId",
-    alias: "GetWorkspaceAnalytics",
+    alias: "GetWorkspaceAnalytics1",
     requestFormat: "json",
     parameters: [
       {
@@ -6799,7 +7057,7 @@ const endpoints = makeApi([
         schema: z.string().datetime({ offset: true }).optional(),
       },
     ],
-    response: GetWorkspaceAnalyticsResponse,
+    response: GetWorkspaceAnalyticsResponse1,
     errors: [
       {
         status: 400,
@@ -7580,6 +7838,24 @@ export class ApiClient {
     );
   }
 
+  async getLeadScraperMicroserviceApiV1WorkspaceId(params: {
+    id: string;
+    organizationId: string | undefined;
+    tenantId: string | undefined;
+    accountId: string | undefined;
+  }) {
+    return this.client.get("/lead-scraper-microservice/api/v1/workspace/:id", {
+      params: {
+        id: params.id,
+      },
+      queries: {
+        organizationId: params.organizationId,
+        tenantId: params.tenantId,
+        accountId: params.accountId,
+      },
+    });
+  }
+
   async deleteLeadScraperMicroserviceApiV1WorkspaceId(params: { id: string }) {
     return this.client.delete(
       "/lead-scraper-microservice/api/v1/workspace/:id",
@@ -7587,6 +7863,24 @@ export class ApiClient {
       {
         params: {
           id: params.id,
+        },
+      },
+    );
+  }
+  async getLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdAnalytics(params: {
+    workspaceId: string;
+    startTime: string | undefined;
+    endTime: string | undefined;
+  }) {
+    return this.client.get(
+      "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/analytics",
+      {
+        params: {
+          workspaceId: params.workspaceId,
+        },
+        queries: {
+          startTime: params.startTime,
+          endTime: params.endTime,
         },
       },
     );
@@ -7651,7 +7945,7 @@ export class ApiClient {
   }
 
   async updateWorkspaceServiceV1Workspaces(
-    data: z.infer<typeof schemas.UpdateWorkspaceRequest1>,
+    data: z.infer<typeof schemas.UpdateWorkspaceRequest>,
   ) {
     return this.client.put("/workspace-service/v1/workspaces", data, {});
   }

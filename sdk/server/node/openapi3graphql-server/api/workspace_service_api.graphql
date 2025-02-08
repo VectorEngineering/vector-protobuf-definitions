@@ -53,7 +53,7 @@ input UpdateAccountInput {
 
 input UpdateWorkspace1Input {
     
-    updateWorkspaceRequest1: UpdateWorkspaceRequest1Input
+    updateWorkspaceRequest: UpdateWorkspaceRequestInput
 }
 
 input UpdateWorkspaceSharingInput {
@@ -93,7 +93,7 @@ type Mutation {
   # @return [UpdateAccountResponse]
   UpdateAccount(input: UpdateAccountInput!): UpdateAccountResponse
   # Update workspace
-  # @param UpdateWorkspaceRequest1 updateWorkspaceRequest1 
+  # @param UpdateWorkspaceRequest updateWorkspaceRequest 
   # @return [UpdateWorkspaceResponse]
   UpdateWorkspace1(input: UpdateWorkspace1Input!): UpdateWorkspaceResponse
   # Update workspace sharing
@@ -109,14 +109,14 @@ type Query {
   GetAccount(Id_: String!): GetAccountResponse
   # Get workspace details
   # @param String! Id_ 
-  # @return [GetWorkspaceResponse]
-  GetWorkspace(Id_: String!): GetWorkspaceResponse
+  # @return [GetWorkspaceResponse1]
+  GetWorkspace1(Id_: String!): GetWorkspaceResponse1
   # Get workspace analytics
   # @param String! workspaceId 
   # @param String! startTime 
   # @param String! endTime 
-  # @return [GetWorkspaceAnalyticsResponse]
-  GetWorkspaceAnalytics(workspaceId: String!, startTime: String!, endTime: String!): GetWorkspaceAnalyticsResponse
+  # @return [GetWorkspaceAnalyticsResponse1]
+  GetWorkspaceAnalytics1(workspaceId: String!, startTime: String!, endTime: String!): GetWorkspaceAnalyticsResponse1
   # Get compliance report
   # @param String! workspaceId 
   # @param String! complianceType 

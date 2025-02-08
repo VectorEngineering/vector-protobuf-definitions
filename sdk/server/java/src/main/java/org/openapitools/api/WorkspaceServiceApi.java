@@ -16,9 +16,9 @@ import org.openapitools.model.DeleteAccountResponse;
 import org.openapitools.model.DeleteWorkspaceResponse;
 import org.openapitools.model.ForbiddenErrorMessageResponse;
 import org.openapitools.model.GetAccountResponse;
-import org.openapitools.model.GetWorkspaceAnalyticsResponse;
+import org.openapitools.model.GetWorkspaceAnalyticsResponse1;
 import org.openapitools.model.GetWorkspaceComplianceReportResponse;
-import org.openapitools.model.GetWorkspaceResponse;
+import org.openapitools.model.GetWorkspaceResponse1;
 import org.openapitools.model.GetWorkspaceStorageStatsResponse;
 import org.openapitools.model.InternalErrorMessageResponse;
 import org.openapitools.model.ListWorkspaceSharingsResponse;
@@ -32,7 +32,7 @@ import org.openapitools.model.ShareWorkspaceResponse;
 import org.openapitools.model.Status;
 import org.openapitools.model.UpdateAccountRequest;
 import org.openapitools.model.UpdateAccountResponse;
-import org.openapitools.model.UpdateWorkspaceRequest1;
+import org.openapitools.model.UpdateWorkspaceRequest;
 import org.openapitools.model.UpdateWorkspaceResponse;
 import org.openapitools.model.UpdateWorkspaceSharingRequest;
 import org.openapitools.model.UpdateWorkspaceSharingResponse;
@@ -63,7 +63,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T09:22:11.288895-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T09:23:51.243070-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 @Validated
 @Tag(name = "workspace-service", description = "the workspace-service API")
 public interface WorkspaceServiceApi {
@@ -911,13 +911,13 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "getWorkspace",
+        operationId = "getWorkspace1",
         summary = "Get workspace details",
         tags = { "workspace-service" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Workspace retrieved successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = GetWorkspaceResponse.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = GetWorkspaceResponse.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = GetWorkspaceResponse1.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = GetWorkspaceResponse1.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input parameters", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorMessageResponse.class)),
@@ -959,7 +959,7 @@ public interface WorkspaceServiceApi {
         produces = { "application/json", "" }
     )
     
-    default ResponseEntity<GetWorkspaceResponse> getWorkspace(
+    default ResponseEntity<GetWorkspaceResponse1> getWorkspace1(
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
     ) {
         getRequest().ifPresent(request -> {
@@ -1073,13 +1073,13 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "getWorkspaceAnalytics",
+        operationId = "getWorkspaceAnalytics1",
         summary = "Get workspace analytics",
         tags = { "workspace-service" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Analytics data retrieved successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = GetWorkspaceAnalyticsResponse.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = GetWorkspaceAnalyticsResponse.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = GetWorkspaceAnalyticsResponse1.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = GetWorkspaceAnalyticsResponse1.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input parameters", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorMessageResponse.class)),
@@ -1121,7 +1121,7 @@ public interface WorkspaceServiceApi {
         produces = { "application/json", "" }
     )
     
-    default ResponseEntity<GetWorkspaceAnalyticsResponse> getWorkspaceAnalytics(
+    default ResponseEntity<GetWorkspaceAnalyticsResponse1> getWorkspaceAnalytics1(
         @Parameter(name = "workspaceId", description = "", required = true, in = ParameterIn.PATH) @PathVariable("workspaceId") String workspaceId,
         @Parameter(name = "startTime", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "startTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime startTime,
         @Parameter(name = "endTime", description = "", in = ParameterIn.QUERY) @Valid @RequestParam(value = "endTime", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime endTime
@@ -2359,7 +2359,7 @@ public interface WorkspaceServiceApi {
     /**
      * PUT /workspace-service/v1/workspaces : Update workspace
      *
-     * @param updateWorkspaceRequest1  (required)
+     * @param updateWorkspaceRequest  (required)
      * @return Workspace updated successfully (status code 200)
      *         or Bad Request - Invalid input parameters (status code 400)
      *         or Unauthorized - Authentication required (status code 401)
@@ -2421,7 +2421,7 @@ public interface WorkspaceServiceApi {
     )
     
     default ResponseEntity<UpdateWorkspaceResponse> updateWorkspace1(
-        @Parameter(name = "UpdateWorkspaceRequest1", description = "", required = true) @Valid @RequestBody UpdateWorkspaceRequest1 updateWorkspaceRequest1
+        @Parameter(name = "UpdateWorkspaceRequest", description = "", required = true) @Valid @RequestBody UpdateWorkspaceRequest updateWorkspaceRequest
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {

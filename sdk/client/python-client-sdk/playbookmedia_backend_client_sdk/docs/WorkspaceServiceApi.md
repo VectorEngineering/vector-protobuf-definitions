@@ -9,8 +9,8 @@ Method | HTTP request | Description
 [**delete_account**](WorkspaceServiceApi.md#delete_account) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 [**delete_workspace1**](WorkspaceServiceApi.md#delete_workspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
 [**get_account**](WorkspaceServiceApi.md#get_account) | **GET** /workspace-service/v1/accounts/{id} | Get account details
-[**get_workspace**](WorkspaceServiceApi.md#get_workspace) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
-[**get_workspace_analytics**](WorkspaceServiceApi.md#get_workspace_analytics) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
+[**get_workspace1**](WorkspaceServiceApi.md#get_workspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
+[**get_workspace_analytics1**](WorkspaceServiceApi.md#get_workspace_analytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
 [**get_workspace_compliance_report**](WorkspaceServiceApi.md#get_workspace_compliance_report) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report
 [**get_workspace_storage_stats**](WorkspaceServiceApi.md#get_workspace_storage_stats) | **GET** /workspace-service/v1/workspaces/storage-stats/{workspaceId} | Get storage statistics
 [**list_workspace_sharings**](WorkspaceServiceApi.md#list_workspace_sharings) | **GET** /workspace-service/v1/workspaces/sharings/{workspaceId} | List workspace sharings
@@ -398,8 +398,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_workspace**
-> GetWorkspaceResponse get_workspace(id)
+# **get_workspace1**
+> GetWorkspaceResponse1 get_workspace1(id)
 
 Get workspace details
 
@@ -408,7 +408,7 @@ Get workspace details
 
 ```python
 import playbookmedia_backend_client_sdk
-from playbookmedia_backend_client_sdk.models.get_workspace_response import GetWorkspaceResponse
+from playbookmedia_backend_client_sdk.models.get_workspace_response1 import GetWorkspaceResponse1
 from playbookmedia_backend_client_sdk.rest import ApiException
 from pprint import pprint
 
@@ -427,11 +427,11 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
 
     try:
         # Get workspace details
-        api_response = await api_instance.get_workspace(id)
-        print("The response of WorkspaceServiceApi->get_workspace:\n")
+        api_response = await api_instance.get_workspace1(id)
+        print("The response of WorkspaceServiceApi->get_workspace1:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WorkspaceServiceApi->get_workspace: %s\n" % e)
+        print("Exception when calling WorkspaceServiceApi->get_workspace1: %s\n" % e)
 ```
 
 
@@ -445,7 +445,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetWorkspaceResponse**](GetWorkspaceResponse.md)
+[**GetWorkspaceResponse1**](GetWorkspaceResponse1.md)
 
 ### Authorization
 
@@ -472,8 +472,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_workspace_analytics**
-> GetWorkspaceAnalyticsResponse get_workspace_analytics(workspace_id, start_time=start_time, end_time=end_time)
+# **get_workspace_analytics1**
+> GetWorkspaceAnalyticsResponse1 get_workspace_analytics1(workspace_id, start_time=start_time, end_time=end_time)
 
 Get workspace analytics
 
@@ -482,7 +482,7 @@ Get workspace analytics
 
 ```python
 import playbookmedia_backend_client_sdk
-from playbookmedia_backend_client_sdk.models.get_workspace_analytics_response import GetWorkspaceAnalyticsResponse
+from playbookmedia_backend_client_sdk.models.get_workspace_analytics_response1 import GetWorkspaceAnalyticsResponse1
 from playbookmedia_backend_client_sdk.rest import ApiException
 from pprint import pprint
 
@@ -503,11 +503,11 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
 
     try:
         # Get workspace analytics
-        api_response = await api_instance.get_workspace_analytics(workspace_id, start_time=start_time, end_time=end_time)
-        print("The response of WorkspaceServiceApi->get_workspace_analytics:\n")
+        api_response = await api_instance.get_workspace_analytics1(workspace_id, start_time=start_time, end_time=end_time)
+        print("The response of WorkspaceServiceApi->get_workspace_analytics1:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WorkspaceServiceApi->get_workspace_analytics: %s\n" % e)
+        print("Exception when calling WorkspaceServiceApi->get_workspace_analytics1: %s\n" % e)
 ```
 
 
@@ -523,7 +523,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetWorkspaceAnalyticsResponse**](GetWorkspaceAnalyticsResponse.md)
+[**GetWorkspaceAnalyticsResponse1**](GetWorkspaceAnalyticsResponse1.md)
 
 ### Authorization
 
@@ -1085,7 +1085,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_workspace1**
-> UpdateWorkspaceResponse update_workspace1(update_workspace_request1)
+> UpdateWorkspaceResponse update_workspace1(update_workspace_request)
 
 Update workspace
 
@@ -1094,7 +1094,7 @@ Update workspace
 
 ```python
 import playbookmedia_backend_client_sdk
-from playbookmedia_backend_client_sdk.models.update_workspace_request1 import UpdateWorkspaceRequest1
+from playbookmedia_backend_client_sdk.models.update_workspace_request import UpdateWorkspaceRequest
 from playbookmedia_backend_client_sdk.models.update_workspace_response import UpdateWorkspaceResponse
 from playbookmedia_backend_client_sdk.rest import ApiException
 from pprint import pprint
@@ -1110,11 +1110,11 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = playbookmedia_backend_client_sdk.WorkspaceServiceApi(api_client)
-    update_workspace_request1 = playbookmedia_backend_client_sdk.UpdateWorkspaceRequest1() # UpdateWorkspaceRequest1 | 
+    update_workspace_request = playbookmedia_backend_client_sdk.UpdateWorkspaceRequest() # UpdateWorkspaceRequest | 
 
     try:
         # Update workspace
-        api_response = await api_instance.update_workspace1(update_workspace_request1)
+        api_response = await api_instance.update_workspace1(update_workspace_request)
         print("The response of WorkspaceServiceApi->update_workspace1:\n")
         pprint(api_response)
     except Exception as e:
@@ -1128,7 +1128,7 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **update_workspace_request1** | [**UpdateWorkspaceRequest1**](UpdateWorkspaceRequest1.md)|  | 
+ **update_workspace_request** | [**UpdateWorkspaceRequest**](UpdateWorkspaceRequest.md)|  | 
 
 ### Return type
 

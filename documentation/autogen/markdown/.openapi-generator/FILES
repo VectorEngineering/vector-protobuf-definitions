@@ -90,14 +90,17 @@ Models/GetTenantAPIKeyResponse.md
 Models/GetTenantResponse.md
 Models/GetWebhookResponse.md
 Models/GetWorkspaceAnalyticsResponse.md
+Models/GetWorkspaceAnalyticsResponse1.md
 Models/GetWorkspaceComplianceReportResponse.md
 Models/GetWorkspaceResponse.md
+Models/GetWorkspaceResponse1.md
 Models/GetWorkspaceStorageStatsResponse.md
 Models/GoneErrorMessageResponse.md
 Models/IncludedField.md
 Models/InternalErrorCode.md
 Models/InternalErrorMessageResponse.md
 Models/Interval.md
+Models/JobSuccessRate.md
 Models/Language.md
 Models/Lead.md
 Models/LimitInfo.md
@@ -186,7 +189,6 @@ Models/UpdateTenantResponse.md
 Models/UpdateWebhookRequest.md
 Models/UpdateWebhookResponse.md
 Models/UpdateWorkspaceRequest.md
-Models/UpdateWorkspaceRequest1.md
 Models/UpdateWorkspaceResponse.md
 Models/UpdateWorkspaceSharingRequest.md
 Models/UpdateWorkspaceSharingResponse.md

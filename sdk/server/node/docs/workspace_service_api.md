@@ -9,8 +9,8 @@ Method | HTTP request | Description
 [**DeleteAccount**](workspace_service_api.md#DeleteAccount) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 [**DeleteWorkspace1**](workspace_service_api.md#DeleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
 [**GetAccount**](workspace_service_api.md#GetAccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details
-[**GetWorkspace**](workspace_service_api.md#GetWorkspace) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
-[**GetWorkspaceAnalytics**](workspace_service_api.md#GetWorkspaceAnalytics) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
+[**GetWorkspace1**](workspace_service_api.md#GetWorkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
+[**GetWorkspaceAnalytics1**](workspace_service_api.md#GetWorkspaceAnalytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
 [**GetWorkspaceComplianceReport**](workspace_service_api.md#GetWorkspaceComplianceReport) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report
 [**GetWorkspaceStorageStats**](workspace_service_api.md#GetWorkspaceStorageStats) | **GET** /workspace-service/v1/workspaces/storage-stats/{workspaceId} | Get storage statistics
 [**ListWorkspaceSharings**](workspace_service_api.md#ListWorkspaceSharings) | **GET** /workspace-service/v1/workspaces/sharings/{workspaceId} | List workspace sharings
@@ -49,14 +49,14 @@ Delete workspace
 > GetAccountResponse GetAccount(Id_)
 
 Get account details
-<a name="GetWorkspace"></a>
-# **GetWorkspace**
-> GetWorkspaceResponse GetWorkspace(Id_)
+<a name="GetWorkspace1"></a>
+# **GetWorkspace1**
+> GetWorkspaceResponse1 GetWorkspace1(Id_)
 
 Get workspace details
-<a name="GetWorkspaceAnalytics"></a>
-# **GetWorkspaceAnalytics**
-> GetWorkspaceAnalyticsResponse GetWorkspaceAnalytics(workspaceId, startTime, endTime)
+<a name="GetWorkspaceAnalytics1"></a>
+# **GetWorkspaceAnalytics1**
+> GetWorkspaceAnalyticsResponse1 GetWorkspaceAnalytics1(workspaceId, startTime, endTime)
 
 Get workspace analytics
 <a name="GetWorkspaceComplianceReport"></a>
@@ -96,7 +96,7 @@ Share workspace
 Update account details
 <a name="UpdateWorkspace1"></a>
 # **UpdateWorkspace1**
-> UpdateWorkspaceResponse UpdateWorkspace1(updateWorkspaceRequest1)
+> UpdateWorkspaceResponse UpdateWorkspace1(updateWorkspaceRequest)
 
 Update workspace
 <a name="UpdateWorkspaceSharing"></a>

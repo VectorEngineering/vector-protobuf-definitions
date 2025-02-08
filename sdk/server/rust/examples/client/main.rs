@@ -22,6 +22,8 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       GetTenantResponse,
                       GetTenantApiKeyResponse,
                       GetWebhookResponse,
+                      GetWorkspaceResponse,
+                      GetWorkspaceAnalyticsResponse,
                       ListApiKeysResponse,
                       ListLeadsResponse,
                       ListOrganizationsResponse,
@@ -41,8 +43,8 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       DeleteAccountResponse,
                       DeleteWorkspace1Response,
                       GetAccountResponse,
-                      GetWorkspaceResponse,
-                      GetWorkspaceAnalyticsResponse,
+                      GetWorkspace1Response,
+                      GetWorkspaceAnalytics1Response,
                       GetWorkspaceComplianceReportResponse,
                       GetWorkspaceStorageStatsResponse,
                       ListWorkspaceSharingsResponse,
@@ -92,6 +94,8 @@ fn main() {
                 "GetTenant", 
                 "GetTenantApiKey", 
                 "GetWebhook", 
+                "GetWorkspace", 
+                "GetWorkspaceAnalytics", 
                 "ListApiKeys", 
                 "ListLeads", 
                 "ListOrganizations", 
@@ -101,8 +105,8 @@ fn main() {
                 "DeleteAccount", 
                 "DeleteWorkspace1", 
                 "GetAccount", 
-                "GetWorkspace", 
-                "GetWorkspaceAnalytics", 
+                "GetWorkspace1", 
+                "GetWorkspaceAnalytics1", 
                 "GetWorkspaceComplianceReport", 
                 "GetWorkspaceStorageStats", 
                 "ListWorkspaceSharings", 
@@ -316,6 +320,23 @@ fn main() {
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
+        Some("GetWorkspace") => {
+            let result = rt.block_on(client.get_workspace(
+                  "id_example".to_string(),
+                  Some("organization_id_example".to_string()),
+                  Some("tenant_id_example".to_string()),
+                  Some("account_id_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("GetWorkspaceAnalytics") => {
+            let result = rt.block_on(client.get_workspace_analytics(
+                  "workspace_id_example".to_string(),
+                  None,
+                  None
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
         Some("ListApiKeys") => {
             let result = rt.block_on(client.list_api_keys(
                   Some("organization_id_example".to_string()),
@@ -476,14 +497,14 @@ fn main() {
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
-        Some("GetWorkspace") => {
-            let result = rt.block_on(client.get_workspace(
+        Some("GetWorkspace1") => {
+            let result = rt.block_on(client.get_workspace1(
                   "id_example".to_string()
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
-        Some("GetWorkspaceAnalytics") => {
-            let result = rt.block_on(client.get_workspace_analytics(
+        Some("GetWorkspaceAnalytics1") => {
+            let result = rt.block_on(client.get_workspace_analytics1(
                   "workspace_id_example".to_string(),
                   None,
                   None

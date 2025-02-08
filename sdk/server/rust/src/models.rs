@@ -16985,21 +16985,21 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct GetWorkspaceAnalyticsResponse {
-    #[serde(rename = "activity")]
+    #[serde(rename = "totalLeads")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub activity: Option<models::ActivityMetrics>,
+    pub total_leads: Option<i32>,
 
-    #[serde(rename = "userActivities")]
+    #[serde(rename = "activeWorkflows")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub user_activities: Option<Vec<models::UserActivity>>,
+    pub active_workflows: Option<i32>,
 
-    #[serde(rename = "compliance")]
+    #[serde(rename = "jobsLast30Days")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub compliance: Option<models::ComplianceMetrics>,
+    pub jobs_last30_days: Option<i32>,
 
-    #[serde(rename = "recentActivities")]
+    #[serde(rename = "successRates")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub recent_activities: Option<Vec<models::WorkspaceActivity>>,
+    pub success_rates: Option<Vec<models::JobSuccessRate>>,
 
 }
 
@@ -17008,10 +17008,10 @@ impl GetWorkspaceAnalyticsResponse {
     #[allow(clippy::new_without_default)]
     pub fn new() -> GetWorkspaceAnalyticsResponse {
         GetWorkspaceAnalyticsResponse {
-            activity: None,
-            user_activities: None,
-            compliance: None,
-            recent_activities: None,
+            total_leads: None,
+            active_workflows: None,
+            jobs_last30_days: None,
+            success_rates: None,
         }
     }
 }
@@ -17022,13 +17022,31 @@ impl GetWorkspaceAnalyticsResponse {
 impl std::string::ToString for GetWorkspaceAnalyticsResponse {
     fn to_string(&self) -> String {
         let params: Vec<Option<String>> = vec![
-            // Skipping activity in query parameter serialization
 
-            // Skipping userActivities in query parameter serialization
+            self.total_leads.as_ref().map(|total_leads| {
+                [
+                    "totalLeads".to_string(),
+                    total_leads.to_string(),
+                ].join(",")
+            }),
 
-            // Skipping compliance in query parameter serialization
 
-            // Skipping recentActivities in query parameter serialization
+            self.active_workflows.as_ref().map(|active_workflows| {
+                [
+                    "activeWorkflows".to_string(),
+                    active_workflows.to_string(),
+                ].join(",")
+            }),
+
+
+            self.jobs_last30_days.as_ref().map(|jobs_last30_days| {
+                [
+                    "jobsLast30Days".to_string(),
+                    jobs_last30_days.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping successRates in query parameter serialization
 
         ];
 
@@ -17047,10 +17065,10 @@ impl std::str::FromStr for GetWorkspaceAnalyticsResponse {
         #[derive(Default)]
         #[allow(dead_code)]
         struct IntermediateRep {
-            pub activity: Vec<models::ActivityMetrics>,
-            pub user_activities: Vec<Vec<models::UserActivity>>,
-            pub compliance: Vec<models::ComplianceMetrics>,
-            pub recent_activities: Vec<Vec<models::WorkspaceActivity>>,
+            pub total_leads: Vec<i32>,
+            pub active_workflows: Vec<i32>,
+            pub jobs_last30_days: Vec<i32>,
+            pub success_rates: Vec<Vec<models::JobSuccessRate>>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -17069,11 +17087,12 @@ impl std::str::FromStr for GetWorkspaceAnalyticsResponse {
                 #[allow(clippy::match_single_binding)]
                 match key {
                     #[allow(clippy::redundant_clone)]
-                    "activity" => intermediate_rep.activity.push(<models::ActivityMetrics as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    "userActivities" => return std::result::Result::Err("Parsing a container in this style is not supported in GetWorkspaceAnalyticsResponse".to_string()),
+                    "totalLeads" => intermediate_rep.total_leads.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
-                    "compliance" => intermediate_rep.compliance.push(<models::ComplianceMetrics as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    "recentActivities" => return std::result::Result::Err("Parsing a container in this style is not supported in GetWorkspaceAnalyticsResponse".to_string()),
+                    "activeWorkflows" => intermediate_rep.active_workflows.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "jobsLast30Days" => intermediate_rep.jobs_last30_days.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "successRates" => return std::result::Result::Err("Parsing a container in this style is not supported in GetWorkspaceAnalyticsResponse".to_string()),
                     _ => return std::result::Result::Err("Unexpected key while parsing GetWorkspaceAnalyticsResponse".to_string())
                 }
             }
@@ -17084,10 +17103,10 @@ impl std::str::FromStr for GetWorkspaceAnalyticsResponse {
 
         // Use the intermediate representation to return the struct
         std::result::Result::Ok(GetWorkspaceAnalyticsResponse {
-            activity: intermediate_rep.activity.into_iter().next(),
-            user_activities: intermediate_rep.user_activities.into_iter().next(),
-            compliance: intermediate_rep.compliance.into_iter().next(),
-            recent_activities: intermediate_rep.recent_activities.into_iter().next(),
+            total_leads: intermediate_rep.total_leads.into_iter().next(),
+            active_workflows: intermediate_rep.active_workflows.into_iter().next(),
+            jobs_last30_days: intermediate_rep.jobs_last30_days.into_iter().next(),
+            success_rates: intermediate_rep.success_rates.into_iter().next(),
         })
     }
 }
@@ -17120,6 +17139,155 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into GetWorkspaceAnalyticsResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct GetWorkspaceAnalyticsResponse1 {
+    #[serde(rename = "activity")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub activity: Option<models::ActivityMetrics>,
+
+    #[serde(rename = "userActivities")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub user_activities: Option<Vec<models::UserActivity>>,
+
+    #[serde(rename = "compliance")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub compliance: Option<models::ComplianceMetrics>,
+
+    #[serde(rename = "recentActivities")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub recent_activities: Option<Vec<models::WorkspaceActivity>>,
+
+}
+
+
+impl GetWorkspaceAnalyticsResponse1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> GetWorkspaceAnalyticsResponse1 {
+        GetWorkspaceAnalyticsResponse1 {
+            activity: None,
+            user_activities: None,
+            compliance: None,
+            recent_activities: None,
+        }
+    }
+}
+
+/// Converts the GetWorkspaceAnalyticsResponse1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for GetWorkspaceAnalyticsResponse1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping activity in query parameter serialization
+
+            // Skipping userActivities in query parameter serialization
+
+            // Skipping compliance in query parameter serialization
+
+            // Skipping recentActivities in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a GetWorkspaceAnalyticsResponse1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for GetWorkspaceAnalyticsResponse1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub activity: Vec<models::ActivityMetrics>,
+            pub user_activities: Vec<Vec<models::UserActivity>>,
+            pub compliance: Vec<models::ComplianceMetrics>,
+            pub recent_activities: Vec<Vec<models::WorkspaceActivity>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing GetWorkspaceAnalyticsResponse1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "activity" => intermediate_rep.activity.push(<models::ActivityMetrics as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "userActivities" => return std::result::Result::Err("Parsing a container in this style is not supported in GetWorkspaceAnalyticsResponse1".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "compliance" => intermediate_rep.compliance.push(<models::ComplianceMetrics as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "recentActivities" => return std::result::Result::Err("Parsing a container in this style is not supported in GetWorkspaceAnalyticsResponse1".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing GetWorkspaceAnalyticsResponse1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(GetWorkspaceAnalyticsResponse1 {
+            activity: intermediate_rep.activity.into_iter().next(),
+            user_activities: intermediate_rep.user_activities.into_iter().next(),
+            compliance: intermediate_rep.compliance.into_iter().next(),
+            recent_activities: intermediate_rep.recent_activities.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<GetWorkspaceAnalyticsResponse1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<GetWorkspaceAnalyticsResponse1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<GetWorkspaceAnalyticsResponse1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for GetWorkspaceAnalyticsResponse1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<GetWorkspaceAnalyticsResponse1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <GetWorkspaceAnalyticsResponse1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into GetWorkspaceAnalyticsResponse1 - {}",
                                 value, err))
                     }
              },
@@ -17325,7 +17493,7 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 pub struct GetWorkspaceResponse {
     #[serde(rename = "workspace")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub workspace: Option<models::Workspace1>,
+    pub workspace: Option<models::Workspace>,
 
 }
 
@@ -17364,7 +17532,7 @@ impl std::str::FromStr for GetWorkspaceResponse {
         #[derive(Default)]
         #[allow(dead_code)]
         struct IntermediateRep {
-            pub workspace: Vec<models::Workspace1>,
+            pub workspace: Vec<models::Workspace>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -17383,7 +17551,7 @@ impl std::str::FromStr for GetWorkspaceResponse {
                 #[allow(clippy::match_single_binding)]
                 match key {
                     #[allow(clippy::redundant_clone)]
-                    "workspace" => intermediate_rep.workspace.push(<models::Workspace1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "workspace" => intermediate_rep.workspace.push(<models::Workspace as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing GetWorkspaceResponse".to_string())
                 }
             }
@@ -17427,6 +17595,124 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into GetWorkspaceResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct GetWorkspaceResponse1 {
+    #[serde(rename = "workspace")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub workspace: Option<models::Workspace1>,
+
+}
+
+
+impl GetWorkspaceResponse1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> GetWorkspaceResponse1 {
+        GetWorkspaceResponse1 {
+            workspace: None,
+        }
+    }
+}
+
+/// Converts the GetWorkspaceResponse1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for GetWorkspaceResponse1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping workspace in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a GetWorkspaceResponse1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for GetWorkspaceResponse1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub workspace: Vec<models::Workspace1>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing GetWorkspaceResponse1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "workspace" => intermediate_rep.workspace.push(<models::Workspace1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing GetWorkspaceResponse1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(GetWorkspaceResponse1 {
+            workspace: intermediate_rep.workspace.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<GetWorkspaceResponse1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<GetWorkspaceResponse1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<GetWorkspaceResponse1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for GetWorkspaceResponse1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<GetWorkspaceResponse1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <GetWorkspaceResponse1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into GetWorkspaceResponse1 - {}",
                                 value, err))
                     }
              },
@@ -18316,6 +18602,164 @@ impl std::str::FromStr for Interval {
         }
     }
 }
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct JobSuccessRate {
+    #[serde(rename = "workflowId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub workflow_id: Option<String>,
+
+    #[serde(rename = "successRate")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub success_rate: Option<f32>,
+
+    #[serde(rename = "totalRuns")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_runs: Option<i32>,
+
+}
+
+
+impl JobSuccessRate {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> JobSuccessRate {
+        JobSuccessRate {
+            workflow_id: None,
+            success_rate: None,
+            total_runs: None,
+        }
+    }
+}
+
+/// Converts the JobSuccessRate value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for JobSuccessRate {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.workflow_id.as_ref().map(|workflow_id| {
+                [
+                    "workflowId".to_string(),
+                    workflow_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.success_rate.as_ref().map(|success_rate| {
+                [
+                    "successRate".to_string(),
+                    success_rate.to_string(),
+                ].join(",")
+            }),
+
+
+            self.total_runs.as_ref().map(|total_runs| {
+                [
+                    "totalRuns".to_string(),
+                    total_runs.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a JobSuccessRate value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for JobSuccessRate {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub workflow_id: Vec<String>,
+            pub success_rate: Vec<f32>,
+            pub total_runs: Vec<i32>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing JobSuccessRate".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "workflowId" => intermediate_rep.workflow_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "successRate" => intermediate_rep.success_rate.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "totalRuns" => intermediate_rep.total_runs.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing JobSuccessRate".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(JobSuccessRate {
+            workflow_id: intermediate_rep.workflow_id.into_iter().next(),
+            success_rate: intermediate_rep.success_rate.into_iter().next(),
+            total_runs: intermediate_rep.total_runs.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<JobSuccessRate> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<JobSuccessRate>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<JobSuccessRate>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for JobSuccessRate - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<JobSuccessRate> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <JobSuccessRate as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into JobSuccessRate - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
 
 /// - LANGUAGE_ENGLISH: en  - LANGUAGE_SPANISH: es  - LANGUAGE_FRENCH: fr  - LANGUAGE_GERMAN: de  - LANGUAGE_ITALIAN: it  - LANGUAGE_PORTUGUESE: pt  - LANGUAGE_DUTCH: nl  - LANGUAGE_RUSSIAN: ru  - LANGUAGE_CHINESE: zh  - LANGUAGE_JAPANESE: ja  - LANGUAGE_KOREAN: ko  - LANGUAGE_ARABIC: ar  - LANGUAGE_HINDI: hi  - LANGUAGE_GREEK: el  - LANGUAGE_TURKISH: tr
 /// Enumeration of values.
@@ -35069,7 +35513,7 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 pub struct UpdateWorkspaceRequest {
     #[serde(rename = "workspace")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub workspace: Option<models::Workspace>,
+    pub workspace: Option<models::Workspace1>,
 
 }
 
@@ -35108,7 +35552,7 @@ impl std::str::FromStr for UpdateWorkspaceRequest {
         #[derive(Default)]
         #[allow(dead_code)]
         struct IntermediateRep {
-            pub workspace: Vec<models::Workspace>,
+            pub workspace: Vec<models::Workspace1>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -35127,7 +35571,7 @@ impl std::str::FromStr for UpdateWorkspaceRequest {
                 #[allow(clippy::match_single_binding)]
                 match key {
                     #[allow(clippy::redundant_clone)]
-                    "workspace" => intermediate_rep.workspace.push(<models::Workspace as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "workspace" => intermediate_rep.workspace.push(<models::Workspace1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing UpdateWorkspaceRequest".to_string())
                 }
             }
@@ -35171,124 +35615,6 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into UpdateWorkspaceRequest - {}",
-                                value, err))
-                    }
-             },
-             std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
-        }
-    }
-}
-
-
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
-#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
-pub struct UpdateWorkspaceRequest1 {
-    #[serde(rename = "workspace")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub workspace: Option<models::Workspace1>,
-
-}
-
-
-impl UpdateWorkspaceRequest1 {
-    #[allow(clippy::new_without_default)]
-    pub fn new() -> UpdateWorkspaceRequest1 {
-        UpdateWorkspaceRequest1 {
-            workspace: None,
-        }
-    }
-}
-
-/// Converts the UpdateWorkspaceRequest1 value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
-/// Should be implemented in a serde serializer
-impl std::string::ToString for UpdateWorkspaceRequest1 {
-    fn to_string(&self) -> String {
-        let params: Vec<Option<String>> = vec![
-            // Skipping workspace in query parameter serialization
-
-        ];
-
-        params.into_iter().flatten().collect::<Vec<_>>().join(",")
-    }
-}
-
-/// Converts Query Parameters representation (style=form, explode=false) to a UpdateWorkspaceRequest1 value
-/// as specified in https://swagger.io/docs/specification/serialization/
-/// Should be implemented in a serde deserializer
-impl std::str::FromStr for UpdateWorkspaceRequest1 {
-    type Err = String;
-
-    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
-        /// An intermediate representation of the struct to use for parsing.
-        #[derive(Default)]
-        #[allow(dead_code)]
-        struct IntermediateRep {
-            pub workspace: Vec<models::Workspace1>,
-        }
-
-        let mut intermediate_rep = IntermediateRep::default();
-
-        // Parse into intermediate representation
-        let mut string_iter = s.split(',');
-        let mut key_result = string_iter.next();
-
-        while key_result.is_some() {
-            let val = match string_iter.next() {
-                Some(x) => x,
-                None => return std::result::Result::Err("Missing value while parsing UpdateWorkspaceRequest1".to_string())
-            };
-
-            if let Some(key) = key_result {
-                #[allow(clippy::match_single_binding)]
-                match key {
-                    #[allow(clippy::redundant_clone)]
-                    "workspace" => intermediate_rep.workspace.push(<models::Workspace1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    _ => return std::result::Result::Err("Unexpected key while parsing UpdateWorkspaceRequest1".to_string())
-                }
-            }
-
-            // Get the next key
-            key_result = string_iter.next();
-        }
-
-        // Use the intermediate representation to return the struct
-        std::result::Result::Ok(UpdateWorkspaceRequest1 {
-            workspace: intermediate_rep.workspace.into_iter().next(),
-        })
-    }
-}
-
-// Methods for converting between header::IntoHeaderValue<UpdateWorkspaceRequest1> and hyper::header::HeaderValue
-
-#[cfg(any(feature = "client", feature = "server"))]
-impl std::convert::TryFrom<header::IntoHeaderValue<UpdateWorkspaceRequest1>> for hyper::header::HeaderValue {
-    type Error = String;
-
-    fn try_from(hdr_value: header::IntoHeaderValue<UpdateWorkspaceRequest1>) -> std::result::Result<Self, Self::Error> {
-        let hdr_value = hdr_value.to_string();
-        match hyper::header::HeaderValue::from_str(&hdr_value) {
-             std::result::Result::Ok(value) => std::result::Result::Ok(value),
-             std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for UpdateWorkspaceRequest1 - value: {} is invalid {}",
-                     hdr_value, e))
-        }
-    }
-}
-
-#[cfg(any(feature = "client", feature = "server"))]
-impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<UpdateWorkspaceRequest1> {
-    type Error = String;
-
-    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
-        match hdr_value.to_str() {
-             std::result::Result::Ok(value) => {
-                    match <UpdateWorkspaceRequest1 as std::str::FromStr>::from_str(value) {
-                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
-                        std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into UpdateWorkspaceRequest1 - {}",
                                 value, err))
                     }
              },

@@ -289,6 +289,21 @@ type Query {
   # @param String! accountId 
   # @return [GetWebhookResponse]
   GetWebhook(webhookId: String!, organizationId: String!, workspaceId: String!, tenantId: String!, accountId: String!): GetWebhookResponse
+  # Get workspace details
+  # Retrieves details of a specific workspace
+  # @param String! Id_ 
+  # @param String! organizationId 
+  # @param String! tenantId 
+  # @param String! accountId 
+  # @return [GetWorkspaceResponse]
+  GetWorkspace(Id_: String!, organizationId: String!, tenantId: String!, accountId: String!): GetWorkspaceResponse
+  # Get workspace analytics
+  # Retrieves analytics data for a specific workspace
+  # @param String! workspaceId 
+  # @param String! startTime 
+  # @param String! endTime 
+  # @return [GetWorkspaceAnalyticsResponse]
+  GetWorkspaceAnalytics(workspaceId: String!, startTime: String!, endTime: String!): GetWorkspaceAnalyticsResponse
   # List API keys
   # Retrieves a list of API keys with optional filtering
   # @param String! organizationId 

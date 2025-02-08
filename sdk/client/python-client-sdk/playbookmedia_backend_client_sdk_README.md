@@ -82,6 +82,8 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**get_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_tenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details
 *LeadScraperServiceApi* | [**get_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_tenant_api_key) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details
 *LeadScraperServiceApi* | [**get_webhook**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_webhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook
+*LeadScraperServiceApi* | [**get_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_workspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details
+*LeadScraperServiceApi* | [**get_workspace_analytics**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_workspace_analytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics
 *LeadScraperServiceApi* | [**list_api_keys**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_api_keys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys
 *LeadScraperServiceApi* | [**list_leads**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_leads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads
 *LeadScraperServiceApi* | [**list_organizations**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_organizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations
@@ -101,8 +103,8 @@ Class | Method | HTTP request | Description
 *WorkspaceServiceApi* | [**delete_account**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#delete_account) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 *WorkspaceServiceApi* | [**delete_workspace1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#delete_workspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
 *WorkspaceServiceApi* | [**get_account**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_account) | **GET** /workspace-service/v1/accounts/{id} | Get account details
-*WorkspaceServiceApi* | [**get_workspace**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
-*WorkspaceServiceApi* | [**get_workspace_analytics**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace_analytics) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
+*WorkspaceServiceApi* | [**get_workspace1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
+*WorkspaceServiceApi* | [**get_workspace_analytics1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace_analytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
 *WorkspaceServiceApi* | [**get_workspace_compliance_report**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace_compliance_report) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report
 *WorkspaceServiceApi* | [**get_workspace_storage_stats**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace_storage_stats) | **GET** /workspace-service/v1/workspaces/storage-stats/{workspaceId} | Get storage statistics
 *WorkspaceServiceApi* | [**list_workspace_sharings**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#list_workspace_sharings) | **GET** /workspace-service/v1/workspaces/sharings/{workspaceId} | List workspace sharings
@@ -206,14 +208,17 @@ Class | Method | HTTP request | Description
  - [GetTenantResponse](playbookmedia_backend_client_sdk/docs/GetTenantResponse.md)
  - [GetWebhookResponse](playbookmedia_backend_client_sdk/docs/GetWebhookResponse.md)
  - [GetWorkspaceAnalyticsResponse](playbookmedia_backend_client_sdk/docs/GetWorkspaceAnalyticsResponse.md)
+ - [GetWorkspaceAnalyticsResponse1](playbookmedia_backend_client_sdk/docs/GetWorkspaceAnalyticsResponse1.md)
  - [GetWorkspaceComplianceReportResponse](playbookmedia_backend_client_sdk/docs/GetWorkspaceComplianceReportResponse.md)
  - [GetWorkspaceResponse](playbookmedia_backend_client_sdk/docs/GetWorkspaceResponse.md)
+ - [GetWorkspaceResponse1](playbookmedia_backend_client_sdk/docs/GetWorkspaceResponse1.md)
  - [GetWorkspaceStorageStatsResponse](playbookmedia_backend_client_sdk/docs/GetWorkspaceStorageStatsResponse.md)
  - [GoneErrorMessageResponse](playbookmedia_backend_client_sdk/docs/GoneErrorMessageResponse.md)
  - [IncludedField](playbookmedia_backend_client_sdk/docs/IncludedField.md)
  - [InternalErrorCode](playbookmedia_backend_client_sdk/docs/InternalErrorCode.md)
  - [InternalErrorMessageResponse](playbookmedia_backend_client_sdk/docs/InternalErrorMessageResponse.md)
  - [Interval](playbookmedia_backend_client_sdk/docs/Interval.md)
+ - [JobSuccessRate](playbookmedia_backend_client_sdk/docs/JobSuccessRate.md)
  - [Language](playbookmedia_backend_client_sdk/docs/Language.md)
  - [Lead](playbookmedia_backend_client_sdk/docs/Lead.md)
  - [LimitInfo](playbookmedia_backend_client_sdk/docs/LimitInfo.md)
@@ -303,7 +308,6 @@ Class | Method | HTTP request | Description
  - [UpdateWebhookRequest](playbookmedia_backend_client_sdk/docs/UpdateWebhookRequest.md)
  - [UpdateWebhookResponse](playbookmedia_backend_client_sdk/docs/UpdateWebhookResponse.md)
  - [UpdateWorkspaceRequest](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceRequest.md)
- - [UpdateWorkspaceRequest1](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceRequest1.md)
  - [UpdateWorkspaceResponse](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceResponse.md)
  - [UpdateWorkspaceSharingRequest](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceSharingRequest.md)
  - [UpdateWorkspaceSharingResponse](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceSharingResponse.md)

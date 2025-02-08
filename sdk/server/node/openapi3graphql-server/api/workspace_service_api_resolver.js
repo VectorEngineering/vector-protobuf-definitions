@@ -24,15 +24,15 @@ export default {
             };
         },
 
-        // @return GetWorkspaceResponse
-        GetWorkspace: ($Id_) => {
+        // @return GetWorkspaceResponse1
+        GetWorkspace1: ($Id_) => {
             return {
                 "Id_": "Id__example"
             };
         },
 
-        // @return GetWorkspaceAnalyticsResponse
-        GetWorkspaceAnalytics: ($workspaceId, $startTime, $endTime) => {
+        // @return GetWorkspaceAnalyticsResponse1
+        GetWorkspaceAnalytics1: ($workspaceId, $startTime, $endTime) => {
             return {
                 "workspaceId": "workspaceId_example",
                 "startTime": "2013-10-20T19:20:30+01:00",
@@ -129,9 +129,9 @@ export default {
         },
 
         // @return UpdateWorkspaceResponse
-        UpdateWorkspace1: ($updateWorkspaceRequest1) => {
+        UpdateWorkspace1: ($updateWorkspaceRequest) => {
             return {
-                "updateWorkspaceRequest1": ""
+                "updateWorkspaceRequest": ""
             };
         },
 

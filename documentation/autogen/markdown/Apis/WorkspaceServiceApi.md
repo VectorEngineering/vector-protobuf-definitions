@@ -9,8 +9,8 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**deleteAccount**](WorkspaceServiceApi.md#deleteAccount) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account |
 | [**deleteWorkspace1**](WorkspaceServiceApi.md#deleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace |
 | [**getAccount**](WorkspaceServiceApi.md#getAccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details |
-| [**getWorkspace**](WorkspaceServiceApi.md#getWorkspace) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details |
-| [**getWorkspaceAnalytics**](WorkspaceServiceApi.md#getWorkspaceAnalytics) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics |
+| [**getWorkspace1**](WorkspaceServiceApi.md#getWorkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details |
+| [**getWorkspaceAnalytics1**](WorkspaceServiceApi.md#getWorkspaceAnalytics1) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics |
 | [**getWorkspaceComplianceReport**](WorkspaceServiceApi.md#getWorkspaceComplianceReport) | **GET** /workspace-service/v1/workspaces/compliance-report/{workspaceId} | Get compliance report |
 | [**getWorkspaceStorageStats**](WorkspaceServiceApi.md#getWorkspaceStorageStats) | **GET** /workspace-service/v1/workspaces/storage-stats/{workspaceId} | Get storage statistics |
 | [**listWorkspaceSharings**](WorkspaceServiceApi.md#listWorkspaceSharings) | **GET** /workspace-service/v1/workspaces/sharings/{workspaceId} | List workspace sharings |
@@ -149,9 +149,9 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
-<a name="getWorkspace"></a>
-# **getWorkspace**
-> GetWorkspaceResponse getWorkspace(id)
+<a name="getWorkspace1"></a>
+# **getWorkspace1**
+> GetWorkspaceResponse1 getWorkspace1(id)
 
 Get workspace details
 
@@ -163,7 +163,7 @@ Get workspace details
 
 ### Return type
 
-[**GetWorkspaceResponse**](../Models/GetWorkspaceResponse.md)
+[**GetWorkspaceResponse1**](../Models/GetWorkspaceResponse1.md)
 
 ### Authorization
 
@@ -174,9 +174,9 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
-<a name="getWorkspaceAnalytics"></a>
-# **getWorkspaceAnalytics**
-> GetWorkspaceAnalyticsResponse getWorkspaceAnalytics(workspaceId, startTime, endTime)
+<a name="getWorkspaceAnalytics1"></a>
+# **getWorkspaceAnalytics1**
+> GetWorkspaceAnalyticsResponse1 getWorkspaceAnalytics1(workspaceId, startTime, endTime)
 
 Get workspace analytics
 
@@ -190,7 +190,7 @@ Get workspace analytics
 
 ### Return type
 
-[**GetWorkspaceAnalyticsResponse**](../Models/GetWorkspaceAnalyticsResponse.md)
+[**GetWorkspaceAnalyticsResponse1**](../Models/GetWorkspaceAnalyticsResponse1.md)
 
 ### Authorization
 
@@ -385,7 +385,7 @@ No authorization required
 
 <a name="updateWorkspace1"></a>
 # **updateWorkspace1**
-> UpdateWorkspaceResponse updateWorkspace1(UpdateWorkspaceRequest1)
+> UpdateWorkspaceResponse updateWorkspace1(UpdateWorkspaceRequest)
 
 Update workspace
 
@@ -393,7 +393,7 @@ Update workspace
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **UpdateWorkspaceRequest1** | [**UpdateWorkspaceRequest1**](../Models/UpdateWorkspaceRequest1.md)|  | |
+| **UpdateWorkspaceRequest** | [**UpdateWorkspaceRequest**](../Models/UpdateWorkspaceRequest.md)|  | |
 
 ### Return type
 

@@ -74,6 +74,25 @@ export default {
             };
         },
 
+        // @return GetWorkspaceResponse
+        GetWorkspace: ($Id_, $organizationId, $tenantId, $accountId) => {
+            return {
+                "Id_": "Id__example",
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example"
+            };
+        },
+
+        // @return GetWorkspaceAnalyticsResponse
+        GetWorkspaceAnalytics: ($workspaceId, $startTime, $endTime) => {
+            return {
+                "workspaceId": "workspaceId_example",
+                "startTime": "2013-10-20T19:20:30+01:00",
+                "endTime": "2013-10-20T19:20:30+01:00"
+            };
+        },
+
         // @return ListApiKeysResponse
         ListAPIKeys: ($organizationId, $tenantId, $accountId, $workspaceId, $pageSize, $pageNumber, $status, $search) => {
             return {

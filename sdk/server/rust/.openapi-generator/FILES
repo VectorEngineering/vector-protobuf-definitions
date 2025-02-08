@@ -93,14 +93,17 @@ docs/GetTenantApiKeyResponse.md
 docs/GetTenantResponse.md
 docs/GetWebhookResponse.md
 docs/GetWorkspaceAnalyticsResponse.md
+docs/GetWorkspaceAnalyticsResponse1.md
 docs/GetWorkspaceComplianceReportResponse.md
 docs/GetWorkspaceResponse.md
+docs/GetWorkspaceResponse1.md
 docs/GetWorkspaceStorageStatsResponse.md
 docs/GoneErrorMessageResponse.md
 docs/IncludedField.md
 docs/InternalErrorCode.md
 docs/InternalErrorMessageResponse.md
 docs/Interval.md
+docs/JobSuccessRate.md
 docs/Language.md
 docs/Lead.md
 docs/LimitInfo.md
@@ -190,7 +193,6 @@ docs/UpdateTenantResponse.md
 docs/UpdateWebhookRequest.md
 docs/UpdateWebhookResponse.md
 docs/UpdateWorkspaceRequest.md
-docs/UpdateWorkspaceRequest1.md
 docs/UpdateWorkspaceResponse.md
 docs/UpdateWorkspaceSharingRequest.md
 docs/UpdateWorkspaceSharingResponse.md

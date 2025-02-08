@@ -19,37 +19,39 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	LeadScraperService_UpdateWorkspace_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/UpdateWorkspace"
-	LeadScraperService_DeleteWorkspace_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/DeleteWorkspace"
-	LeadScraperService_CreateTenant_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/CreateTenant"
-	LeadScraperService_GetTenant_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/GetTenant"
-	LeadScraperService_UpdateTenant_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/UpdateTenant"
-	LeadScraperService_DeleteTenant_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/DeleteTenant"
-	LeadScraperService_ListTenants_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/ListTenants"
-	LeadScraperService_CreateOrganization_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/CreateOrganization"
-	LeadScraperService_GetOrganization_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/GetOrganization"
-	LeadScraperService_UpdateOrganization_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/UpdateOrganization"
-	LeadScraperService_DeleteOrganization_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/DeleteOrganization"
-	LeadScraperService_ListOrganizations_FullMethodName  = "/lead_scraper_service.v1.LeadScraperService/ListOrganizations"
-	LeadScraperService_CreateTenantAPIKey_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/CreateTenantAPIKey"
-	LeadScraperService_GetTenantAPIKey_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/GetTenantAPIKey"
-	LeadScraperService_UpdateTenantAPIKey_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/UpdateTenantAPIKey"
-	LeadScraperService_DeleteTenantAPIKey_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/DeleteTenantAPIKey"
-	LeadScraperService_ListTenantAPIKeys_FullMethodName  = "/lead_scraper_service.v1.LeadScraperService/ListTenantAPIKeys"
-	LeadScraperService_RotateTenantAPIKey_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/RotateTenantAPIKey"
-	LeadScraperService_CreateAPIKey_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/CreateAPIKey"
-	LeadScraperService_GetAPIKey_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/GetAPIKey"
-	LeadScraperService_UpdateAPIKey_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/UpdateAPIKey"
-	LeadScraperService_DeleteAPIKey_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/DeleteAPIKey"
-	LeadScraperService_ListAPIKeys_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/ListAPIKeys"
-	LeadScraperService_RotateAPIKey_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/RotateAPIKey"
-	LeadScraperService_ListLeads_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/ListLeads"
-	LeadScraperService_GetLead_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/GetLead"
-	LeadScraperService_CreateWebhook_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/CreateWebhook"
-	LeadScraperService_GetWebhook_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/GetWebhook"
-	LeadScraperService_UpdateWebhook_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/UpdateWebhook"
-	LeadScraperService_DeleteWebhook_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/DeleteWebhook"
-	LeadScraperService_ListWebhooks_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/ListWebhooks"
+	LeadScraperService_GetWorkspaceAnalytics_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/GetWorkspaceAnalytics"
+	LeadScraperService_GetWorkspace_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/GetWorkspace"
+	LeadScraperService_UpdateWorkspace_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/UpdateWorkspace"
+	LeadScraperService_DeleteWorkspace_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/DeleteWorkspace"
+	LeadScraperService_CreateTenant_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/CreateTenant"
+	LeadScraperService_GetTenant_FullMethodName             = "/lead_scraper_service.v1.LeadScraperService/GetTenant"
+	LeadScraperService_UpdateTenant_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/UpdateTenant"
+	LeadScraperService_DeleteTenant_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/DeleteTenant"
+	LeadScraperService_ListTenants_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/ListTenants"
+	LeadScraperService_CreateOrganization_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/CreateOrganization"
+	LeadScraperService_GetOrganization_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/GetOrganization"
+	LeadScraperService_UpdateOrganization_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/UpdateOrganization"
+	LeadScraperService_DeleteOrganization_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/DeleteOrganization"
+	LeadScraperService_ListOrganizations_FullMethodName     = "/lead_scraper_service.v1.LeadScraperService/ListOrganizations"
+	LeadScraperService_CreateTenantAPIKey_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/CreateTenantAPIKey"
+	LeadScraperService_GetTenantAPIKey_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/GetTenantAPIKey"
+	LeadScraperService_UpdateTenantAPIKey_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/UpdateTenantAPIKey"
+	LeadScraperService_DeleteTenantAPIKey_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/DeleteTenantAPIKey"
+	LeadScraperService_ListTenantAPIKeys_FullMethodName     = "/lead_scraper_service.v1.LeadScraperService/ListTenantAPIKeys"
+	LeadScraperService_RotateTenantAPIKey_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/RotateTenantAPIKey"
+	LeadScraperService_CreateAPIKey_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/CreateAPIKey"
+	LeadScraperService_GetAPIKey_FullMethodName             = "/lead_scraper_service.v1.LeadScraperService/GetAPIKey"
+	LeadScraperService_UpdateAPIKey_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/UpdateAPIKey"
+	LeadScraperService_DeleteAPIKey_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/DeleteAPIKey"
+	LeadScraperService_ListAPIKeys_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/ListAPIKeys"
+	LeadScraperService_RotateAPIKey_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/RotateAPIKey"
+	LeadScraperService_ListLeads_FullMethodName             = "/lead_scraper_service.v1.LeadScraperService/ListLeads"
+	LeadScraperService_GetLead_FullMethodName               = "/lead_scraper_service.v1.LeadScraperService/GetLead"
+	LeadScraperService_CreateWebhook_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/CreateWebhook"
+	LeadScraperService_GetWebhook_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/GetWebhook"
+	LeadScraperService_UpdateWebhook_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/UpdateWebhook"
+	LeadScraperService_DeleteWebhook_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/DeleteWebhook"
+	LeadScraperService_ListWebhooks_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/ListWebhooks"
 )
 
 // LeadScraperServiceClient is the client API for LeadScraperService service.
@@ -78,6 +80,46 @@ const (
 //
 // ```
 type LeadScraperServiceClient interface {
+	// GetWorkspaceAnalytics provides comprehensive workspace metrics
+	//
+	// Metrics categories:
+	// - Resource utilization (CPU, memory, storage)
+	// - Job execution statistics
+	// - Error rates and types
+	// - Performance trends
+	// - Cost analysis
+	//
+	// Time ranges:
+	// - Real-time metrics
+	// - Historical data (configurable periods)
+	// - Trend analysis
+	//
+	// Aggregation options:
+	// - By workflow
+	// - By job type
+	// - By time period
+	// - By resource type
+	GetWorkspaceAnalytics(ctx context.Context, in *GetWorkspaceAnalyticsRequest, opts ...grpc.CallOption) (*GetWorkspaceAnalyticsResponse, error)
+	// GetWorkspace retrieves detailed workspace information
+	//
+	// Response includes:
+	// - Basic metadata (name, ID, creation date)
+	// - Access control configuration
+	// - Resource quotas and usage
+	// - Workflow inventory
+	// - Integration settings
+	//
+	// Security features:
+	// - Role-based access control
+	// - Audit log integration
+	// - Resource isolation validation
+	//
+	// Common use cases:
+	// - Workspace administration
+	// - Configuration management
+	// - Compliance auditing
+	// - Resource planning
+	GetWorkspace(ctx context.Context, in *GetWorkspaceRequest, opts ...grpc.CallOption) (*GetWorkspaceResponse, error)
 	// UpdateWorkspace modifies workspace configuration
 	//
 	// Modifiable settings:
@@ -517,6 +559,26 @@ func NewLeadScraperServiceClient(cc grpc.ClientConnInterface) LeadScraperService
 	return &leadScraperServiceClient{cc}
 }
 
+func (c *leadScraperServiceClient) GetWorkspaceAnalytics(ctx context.Context, in *GetWorkspaceAnalyticsRequest, opts ...grpc.CallOption) (*GetWorkspaceAnalyticsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWorkspaceAnalyticsResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetWorkspaceAnalytics_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) GetWorkspace(ctx context.Context, in *GetWorkspaceRequest, opts ...grpc.CallOption) (*GetWorkspaceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWorkspaceResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetWorkspace_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *leadScraperServiceClient) UpdateWorkspace(ctx context.Context, in *UpdateWorkspaceRequest, opts ...grpc.CallOption) (*UpdateWorkspaceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateWorkspaceResponse)
@@ -853,6 +915,46 @@ func (c *leadScraperServiceClient) ListWebhooks(ctx context.Context, in *ListWeb
 //
 // ```
 type LeadScraperServiceServer interface {
+	// GetWorkspaceAnalytics provides comprehensive workspace metrics
+	//
+	// Metrics categories:
+	// - Resource utilization (CPU, memory, storage)
+	// - Job execution statistics
+	// - Error rates and types
+	// - Performance trends
+	// - Cost analysis
+	//
+	// Time ranges:
+	// - Real-time metrics
+	// - Historical data (configurable periods)
+	// - Trend analysis
+	//
+	// Aggregation options:
+	// - By workflow
+	// - By job type
+	// - By time period
+	// - By resource type
+	GetWorkspaceAnalytics(context.Context, *GetWorkspaceAnalyticsRequest) (*GetWorkspaceAnalyticsResponse, error)
+	// GetWorkspace retrieves detailed workspace information
+	//
+	// Response includes:
+	// - Basic metadata (name, ID, creation date)
+	// - Access control configuration
+	// - Resource quotas and usage
+	// - Workflow inventory
+	// - Integration settings
+	//
+	// Security features:
+	// - Role-based access control
+	// - Audit log integration
+	// - Resource isolation validation
+	//
+	// Common use cases:
+	// - Workspace administration
+	// - Configuration management
+	// - Compliance auditing
+	// - Resource planning
+	GetWorkspace(context.Context, *GetWorkspaceRequest) (*GetWorkspaceResponse, error)
 	// UpdateWorkspace modifies workspace configuration
 	//
 	// Modifiable settings:
@@ -1292,6 +1394,12 @@ type LeadScraperServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedLeadScraperServiceServer struct{}
 
+func (UnimplementedLeadScraperServiceServer) GetWorkspaceAnalytics(context.Context, *GetWorkspaceAnalyticsRequest) (*GetWorkspaceAnalyticsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetWorkspaceAnalytics not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) GetWorkspace(context.Context, *GetWorkspaceRequest) (*GetWorkspaceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetWorkspace not implemented")
+}
 func (UnimplementedLeadScraperServiceServer) UpdateWorkspace(context.Context, *UpdateWorkspaceRequest) (*UpdateWorkspaceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateWorkspace not implemented")
 }
@@ -1404,6 +1512,42 @@ func RegisterLeadScraperServiceServer(s grpc.ServiceRegistrar, srv LeadScraperSe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&LeadScraperService_ServiceDesc, srv)
+}
+
+func _LeadScraperService_GetWorkspaceAnalytics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWorkspaceAnalyticsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).GetWorkspaceAnalytics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_GetWorkspaceAnalytics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).GetWorkspaceAnalytics(ctx, req.(*GetWorkspaceAnalyticsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_GetWorkspace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetWorkspaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).GetWorkspace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_GetWorkspace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).GetWorkspace(ctx, req.(*GetWorkspaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _LeadScraperService_UpdateWorkspace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1971,6 +2115,14 @@ var LeadScraperService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "lead_scraper_service.v1.LeadScraperService",
 	HandlerType: (*LeadScraperServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetWorkspaceAnalytics",
+			Handler:    _LeadScraperService_GetWorkspaceAnalytics_Handler,
+		},
+		{
+			MethodName: "GetWorkspace",
+			Handler:    _LeadScraperService_GetWorkspace_Handler,
+		},
 		{
 			MethodName: "UpdateWorkspace",
 			Handler:    _LeadScraperService_UpdateWorkspace_Handler,

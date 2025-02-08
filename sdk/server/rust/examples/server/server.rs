@@ -121,6 +121,8 @@ use openapi_client::{
     GetTenantResponse,
     GetTenantApiKeyResponse,
     GetWebhookResponse,
+    GetWorkspaceResponse,
+    GetWorkspaceAnalyticsResponse,
     ListApiKeysResponse,
     ListLeadsResponse,
     ListOrganizationsResponse,
@@ -140,8 +142,8 @@ use openapi_client::{
     DeleteAccountResponse,
     DeleteWorkspace1Response,
     GetAccountResponse,
-    GetWorkspaceResponse,
-    GetWorkspaceAnalyticsResponse,
+    GetWorkspace1Response,
+    GetWorkspaceAnalytics1Response,
     GetWorkspaceComplianceReportResponse,
     GetWorkspaceStorageStatsResponse,
     ListWorkspaceSharingsResponse,
@@ -353,6 +355,31 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<GetWebhookResponse, ApiError>
     {
         info!("get_webhook(\"{}\", {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", webhook_id, organization_id, workspace_id, tenant_id, account_id, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Get workspace details
+    async fn get_workspace(
+        &self,
+        id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        context: &C) -> Result<GetWorkspaceResponse, ApiError>
+    {
+        info!("get_workspace(\"{}\", {:?}, {:?}, {:?}) - X-Span-ID: {:?}", id, organization_id, tenant_id, account_id, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Get workspace analytics
+    async fn get_workspace_analytics(
+        &self,
+        workspace_id: String,
+        start_time: Option<chrono::DateTime::<chrono::Utc>>,
+        end_time: Option<chrono::DateTime::<chrono::Utc>>,
+        context: &C) -> Result<GetWorkspaceAnalyticsResponse, ApiError>
+    {
+        info!("get_workspace_analytics(\"{}\", {:?}, {:?}) - X-Span-ID: {:?}", workspace_id, start_time, end_time, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -573,24 +600,24 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
     }
 
     /// Get workspace details
-    async fn get_workspace(
+    async fn get_workspace1(
         &self,
         id: String,
-        context: &C) -> Result<GetWorkspaceResponse, ApiError>
+        context: &C) -> Result<GetWorkspace1Response, ApiError>
     {
-        info!("get_workspace(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
+        info!("get_workspace1(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
     /// Get workspace analytics
-    async fn get_workspace_analytics(
+    async fn get_workspace_analytics1(
         &self,
         workspace_id: String,
         start_time: Option<chrono::DateTime::<chrono::Utc>>,
         end_time: Option<chrono::DateTime::<chrono::Utc>>,
-        context: &C) -> Result<GetWorkspaceAnalyticsResponse, ApiError>
+        context: &C) -> Result<GetWorkspaceAnalytics1Response, ApiError>
     {
-        info!("get_workspace_analytics(\"{}\", {:?}, {:?}) - X-Span-ID: {:?}", workspace_id, start_time, end_time, context.get().0.clone());
+        info!("get_workspace_analytics1(\"{}\", {:?}, {:?}) - X-Span-ID: {:?}", workspace_id, start_time, end_time, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -674,10 +701,10 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
     /// Update workspace
     async fn update_workspace1(
         &self,
-        update_workspace_request1: models::UpdateWorkspaceRequest1,
+        update_workspace_request: models::UpdateWorkspaceRequest,
         context: &C) -> Result<UpdateWorkspace1Response, ApiError>
     {
-        info!("update_workspace1({:?}) - X-Span-ID: {:?}", update_workspace_request1, context.get().0.clone());
+        info!("update_workspace1({:?}) - X-Span-ID: {:?}", update_workspace_request, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

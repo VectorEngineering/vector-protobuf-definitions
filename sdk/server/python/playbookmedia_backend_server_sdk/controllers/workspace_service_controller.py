@@ -13,9 +13,9 @@ from playbookmedia_backend_server_sdk.models.delete_account_response import Dele
 from playbookmedia_backend_server_sdk.models.delete_workspace_response import DeleteWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.forbidden_error_message_response import ForbiddenErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_account_response import GetAccountResponse  # noqa: E501
-from playbookmedia_backend_server_sdk.models.get_workspace_analytics_response import GetWorkspaceAnalyticsResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.get_workspace_analytics_response1 import GetWorkspaceAnalyticsResponse1  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_workspace_compliance_report_response import GetWorkspaceComplianceReportResponse  # noqa: E501
-from playbookmedia_backend_server_sdk.models.get_workspace_response import GetWorkspaceResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.get_workspace_response1 import GetWorkspaceResponse1  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_workspace_storage_stats_response import GetWorkspaceStorageStatsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.internal_error_message_response import InternalErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_workspace_sharings_response import ListWorkspaceSharingsResponse  # noqa: E501
@@ -28,7 +28,7 @@ from playbookmedia_backend_server_sdk.models.share_workspace_response import Sha
 from playbookmedia_backend_server_sdk.models.status import Status  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_account_request import UpdateAccountRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_account_response import UpdateAccountResponse  # noqa: E501
-from playbookmedia_backend_server_sdk.models.update_workspace_request1 import UpdateWorkspaceRequest1  # noqa: E501
+from playbookmedia_backend_server_sdk.models.update_workspace_request import UpdateWorkspaceRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_workspace_response import UpdateWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_workspace_sharing_request import UpdateWorkspaceSharingRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_workspace_sharing_response import UpdateWorkspaceSharingResponse  # noqa: E501
@@ -105,7 +105,7 @@ def get_account(id):  # noqa: E501
     return 'do some magic!'
 
 
-def get_workspace(id):  # noqa: E501
+def get_workspace1(id):  # noqa: E501
     """Get workspace details
 
      # noqa: E501
@@ -113,12 +113,12 @@ def get_workspace(id):  # noqa: E501
     :param id: 
     :type id: str
 
-    :rtype: Union[GetWorkspaceResponse, Tuple[GetWorkspaceResponse, int], Tuple[GetWorkspaceResponse, int, Dict[str, str]]
+    :rtype: Union[GetWorkspaceResponse1, Tuple[GetWorkspaceResponse1, int], Tuple[GetWorkspaceResponse1, int, Dict[str, str]]
     """
     return 'do some magic!'
 
 
-def get_workspace_analytics(workspace_id, start_time=None, end_time=None):  # noqa: E501
+def get_workspace_analytics1(workspace_id, start_time=None, end_time=None):  # noqa: E501
     """Get workspace analytics
 
      # noqa: E501
@@ -130,7 +130,7 @@ def get_workspace_analytics(workspace_id, start_time=None, end_time=None):  # no
     :param end_time: 
     :type end_time: str
 
-    :rtype: Union[GetWorkspaceAnalyticsResponse, Tuple[GetWorkspaceAnalyticsResponse, int], Tuple[GetWorkspaceAnalyticsResponse, int, Dict[str, str]]
+    :rtype: Union[GetWorkspaceAnalyticsResponse1, Tuple[GetWorkspaceAnalyticsResponse1, int], Tuple[GetWorkspaceAnalyticsResponse1, int, Dict[str, str]]
     """
     start_time = util.deserialize_datetime(start_time)
     end_time = util.deserialize_datetime(end_time)
@@ -246,18 +246,18 @@ def update_account(update_account_request):  # noqa: E501
     return 'do some magic!'
 
 
-def update_workspace1(update_workspace_request1):  # noqa: E501
+def update_workspace1(update_workspace_request):  # noqa: E501
     """Update workspace
 
      # noqa: E501
 
-    :param update_workspace_request1: 
-    :type update_workspace_request1: dict | bytes
+    :param update_workspace_request: 
+    :type update_workspace_request: dict | bytes
 
     :rtype: Union[UpdateWorkspaceResponse, Tuple[UpdateWorkspaceResponse, int], Tuple[UpdateWorkspaceResponse, int, Dict[str, str]]
     """
     if connexion.request.is_json:
-        update_workspace_request1 = UpdateWorkspaceRequest1.from_dict(connexion.request.get_json())  # noqa: E501
+        update_workspace_request = UpdateWorkspaceRequest.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
 
 

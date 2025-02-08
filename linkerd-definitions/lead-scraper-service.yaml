@@ -8,6 +8,14 @@ spec:
   routes:
   - condition:
       method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetWorkspaceAnalytics
+    name: GetWorkspaceAnalytics
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetWorkspace
+    name: GetWorkspace
+  - condition:
+      method: POST
       pathRegex: /lead_scraper_service\.v1\.LeadScraperService/UpdateWorkspace
     name: UpdateWorkspace
   - condition:

@@ -27,9 +27,9 @@ from playbookmedia_backend_client_sdk.models.create_workspace_response import Cr
 from playbookmedia_backend_client_sdk.models.delete_account_response import DeleteAccountResponse
 from playbookmedia_backend_client_sdk.models.delete_workspace_response import DeleteWorkspaceResponse
 from playbookmedia_backend_client_sdk.models.get_account_response import GetAccountResponse
-from playbookmedia_backend_client_sdk.models.get_workspace_analytics_response import GetWorkspaceAnalyticsResponse
+from playbookmedia_backend_client_sdk.models.get_workspace_analytics_response1 import GetWorkspaceAnalyticsResponse1
 from playbookmedia_backend_client_sdk.models.get_workspace_compliance_report_response import GetWorkspaceComplianceReportResponse
-from playbookmedia_backend_client_sdk.models.get_workspace_response import GetWorkspaceResponse
+from playbookmedia_backend_client_sdk.models.get_workspace_response1 import GetWorkspaceResponse1
 from playbookmedia_backend_client_sdk.models.get_workspace_storage_stats_response import GetWorkspaceStorageStatsResponse
 from playbookmedia_backend_client_sdk.models.list_workspace_sharings_response import ListWorkspaceSharingsResponse
 from playbookmedia_backend_client_sdk.models.list_workspaces_response import ListWorkspacesResponse
@@ -38,7 +38,7 @@ from playbookmedia_backend_client_sdk.models.share_workspace_body import ShareWo
 from playbookmedia_backend_client_sdk.models.share_workspace_response import ShareWorkspaceResponse
 from playbookmedia_backend_client_sdk.models.update_account_request import UpdateAccountRequest
 from playbookmedia_backend_client_sdk.models.update_account_response import UpdateAccountResponse
-from playbookmedia_backend_client_sdk.models.update_workspace_request1 import UpdateWorkspaceRequest1
+from playbookmedia_backend_client_sdk.models.update_workspace_request import UpdateWorkspaceRequest
 from playbookmedia_backend_client_sdk.models.update_workspace_response import UpdateWorkspaceResponse
 from playbookmedia_backend_client_sdk.models.update_workspace_sharing_request import UpdateWorkspaceSharingRequest
 from playbookmedia_backend_client_sdk.models.update_workspace_sharing_response import UpdateWorkspaceSharingResponse
@@ -1484,7 +1484,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def get_workspace(
+    async def get_workspace1(
         self,
         id: StrictStr,
         _request_timeout: Union[
@@ -1499,7 +1499,7 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetWorkspaceResponse:
+    ) -> GetWorkspaceResponse1:
         """Get workspace details
 
 
@@ -1527,7 +1527,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_workspace_serialize(
+        _param = self._get_workspace1_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1536,7 +1536,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetWorkspaceResponse",
+            '200': "GetWorkspaceResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -1557,7 +1557,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def get_workspace_with_http_info(
+    async def get_workspace1_with_http_info(
         self,
         id: StrictStr,
         _request_timeout: Union[
@@ -1572,7 +1572,7 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetWorkspaceResponse]:
+    ) -> ApiResponse[GetWorkspaceResponse1]:
         """Get workspace details
 
 
@@ -1600,7 +1600,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_workspace_serialize(
+        _param = self._get_workspace1_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1609,7 +1609,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetWorkspaceResponse",
+            '200': "GetWorkspaceResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -1630,7 +1630,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def get_workspace_without_preload_content(
+    async def get_workspace1_without_preload_content(
         self,
         id: StrictStr,
         _request_timeout: Union[
@@ -1673,7 +1673,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_workspace_serialize(
+        _param = self._get_workspace1_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1682,7 +1682,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetWorkspaceResponse",
+            '200': "GetWorkspaceResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -1698,7 +1698,7 @@ class WorkspaceServiceApi:
         return response_data.response
 
 
-    def _get_workspace_serialize(
+    def _get_workspace1_serialize(
         self,
         id,
         _request_auth,
@@ -1761,7 +1761,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def get_workspace_analytics(
+    async def get_workspace_analytics1(
         self,
         workspace_id: StrictStr,
         start_time: Optional[datetime] = None,
@@ -1778,7 +1778,7 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetWorkspaceAnalyticsResponse:
+    ) -> GetWorkspaceAnalyticsResponse1:
         """Get workspace analytics
 
 
@@ -1810,7 +1810,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_workspace_analytics_serialize(
+        _param = self._get_workspace_analytics1_serialize(
             workspace_id=workspace_id,
             start_time=start_time,
             end_time=end_time,
@@ -1821,7 +1821,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetWorkspaceAnalyticsResponse",
+            '200': "GetWorkspaceAnalyticsResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -1842,7 +1842,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def get_workspace_analytics_with_http_info(
+    async def get_workspace_analytics1_with_http_info(
         self,
         workspace_id: StrictStr,
         start_time: Optional[datetime] = None,
@@ -1859,7 +1859,7 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetWorkspaceAnalyticsResponse]:
+    ) -> ApiResponse[GetWorkspaceAnalyticsResponse1]:
         """Get workspace analytics
 
 
@@ -1891,7 +1891,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_workspace_analytics_serialize(
+        _param = self._get_workspace_analytics1_serialize(
             workspace_id=workspace_id,
             start_time=start_time,
             end_time=end_time,
@@ -1902,7 +1902,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetWorkspaceAnalyticsResponse",
+            '200': "GetWorkspaceAnalyticsResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -1923,7 +1923,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def get_workspace_analytics_without_preload_content(
+    async def get_workspace_analytics1_without_preload_content(
         self,
         workspace_id: StrictStr,
         start_time: Optional[datetime] = None,
@@ -1972,7 +1972,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_workspace_analytics_serialize(
+        _param = self._get_workspace_analytics1_serialize(
             workspace_id=workspace_id,
             start_time=start_time,
             end_time=end_time,
@@ -1983,7 +1983,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetWorkspaceAnalyticsResponse",
+            '200': "GetWorkspaceAnalyticsResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -1999,7 +1999,7 @@ class WorkspaceServiceApi:
         return response_data.response
 
 
-    def _get_workspace_analytics_serialize(
+    def _get_workspace_analytics1_serialize(
         self,
         workspace_id,
         start_time,
@@ -4178,7 +4178,7 @@ class WorkspaceServiceApi:
     @validate_call
     async def update_workspace1(
         self,
-        update_workspace_request1: UpdateWorkspaceRequest1,
+        update_workspace_request: UpdateWorkspaceRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4195,8 +4195,8 @@ class WorkspaceServiceApi:
         """Update workspace
 
 
-        :param update_workspace_request1: (required)
-        :type update_workspace_request1: UpdateWorkspaceRequest1
+        :param update_workspace_request: (required)
+        :type update_workspace_request: UpdateWorkspaceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4220,7 +4220,7 @@ class WorkspaceServiceApi:
         """ # noqa: E501
 
         _param = self._update_workspace1_serialize(
-            update_workspace_request1=update_workspace_request1,
+            update_workspace_request=update_workspace_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4251,7 +4251,7 @@ class WorkspaceServiceApi:
     @validate_call
     async def update_workspace1_with_http_info(
         self,
-        update_workspace_request1: UpdateWorkspaceRequest1,
+        update_workspace_request: UpdateWorkspaceRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4268,8 +4268,8 @@ class WorkspaceServiceApi:
         """Update workspace
 
 
-        :param update_workspace_request1: (required)
-        :type update_workspace_request1: UpdateWorkspaceRequest1
+        :param update_workspace_request: (required)
+        :type update_workspace_request: UpdateWorkspaceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4293,7 +4293,7 @@ class WorkspaceServiceApi:
         """ # noqa: E501
 
         _param = self._update_workspace1_serialize(
-            update_workspace_request1=update_workspace_request1,
+            update_workspace_request=update_workspace_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4324,7 +4324,7 @@ class WorkspaceServiceApi:
     @validate_call
     async def update_workspace1_without_preload_content(
         self,
-        update_workspace_request1: UpdateWorkspaceRequest1,
+        update_workspace_request: UpdateWorkspaceRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4341,8 +4341,8 @@ class WorkspaceServiceApi:
         """Update workspace
 
 
-        :param update_workspace_request1: (required)
-        :type update_workspace_request1: UpdateWorkspaceRequest1
+        :param update_workspace_request: (required)
+        :type update_workspace_request: UpdateWorkspaceRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4366,7 +4366,7 @@ class WorkspaceServiceApi:
         """ # noqa: E501
 
         _param = self._update_workspace1_serialize(
-            update_workspace_request1=update_workspace_request1,
+            update_workspace_request=update_workspace_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4392,7 +4392,7 @@ class WorkspaceServiceApi:
 
     def _update_workspace1_serialize(
         self,
-        update_workspace_request1,
+        update_workspace_request,
         _request_auth,
         _content_type,
         _headers,
@@ -4416,8 +4416,8 @@ class WorkspaceServiceApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if update_workspace_request1 is not None:
-            _body_params = update_workspace_request1
+        if update_workspace_request is not None:
+            _body_params = update_workspace_request
 
 
         # set the HTTP header `Accept`

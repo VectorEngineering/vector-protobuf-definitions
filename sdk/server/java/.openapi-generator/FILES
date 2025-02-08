@@ -98,14 +98,17 @@ src/main/java/org/openapitools/model/GetTenantAPIKeyResponse.java
 src/main/java/org/openapitools/model/GetTenantResponse.java
 src/main/java/org/openapitools/model/GetWebhookResponse.java
 src/main/java/org/openapitools/model/GetWorkspaceAnalyticsResponse.java
+src/main/java/org/openapitools/model/GetWorkspaceAnalyticsResponse1.java
 src/main/java/org/openapitools/model/GetWorkspaceComplianceReportResponse.java
 src/main/java/org/openapitools/model/GetWorkspaceResponse.java
+src/main/java/org/openapitools/model/GetWorkspaceResponse1.java
 src/main/java/org/openapitools/model/GetWorkspaceStorageStatsResponse.java
 src/main/java/org/openapitools/model/GoneErrorMessageResponse.java
 src/main/java/org/openapitools/model/IncludedField.java
 src/main/java/org/openapitools/model/InternalErrorCode.java
 src/main/java/org/openapitools/model/InternalErrorMessageResponse.java
 src/main/java/org/openapitools/model/Interval.java
+src/main/java/org/openapitools/model/JobSuccessRate.java
 src/main/java/org/openapitools/model/Language.java
 src/main/java/org/openapitools/model/Lead.java
 src/main/java/org/openapitools/model/LimitInfo.java
@@ -195,7 +198,6 @@ src/main/java/org/openapitools/model/UpdateTenantResponse.java
 src/main/java/org/openapitools/model/UpdateWebhookRequest.java
 src/main/java/org/openapitools/model/UpdateWebhookResponse.java
 src/main/java/org/openapitools/model/UpdateWorkspaceRequest.java
-src/main/java/org/openapitools/model/UpdateWorkspaceRequest1.java
 src/main/java/org/openapitools/model/UpdateWorkspaceResponse.java
 src/main/java/org/openapitools/model/UpdateWorkspaceSharingRequest.java
 src/main/java/org/openapitools/model/UpdateWorkspaceSharingResponse.java

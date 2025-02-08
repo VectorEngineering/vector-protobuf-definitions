@@ -75,8 +75,8 @@ const getRoute = createRoute({
           schema: z
             .object({
               data: wrapSchema(
-                schemas.GetWorkspaceAnalyticsResponse,
-                "GetWorkspaceAnalyticsResponse",
+                schemas.GetWorkspaceAnalyticsResponse1,
+                "GetWorkspaceAnalyticsResponse1",
               ),
             })
             .openapi({

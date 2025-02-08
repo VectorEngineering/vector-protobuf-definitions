@@ -649,88 +649,88 @@ service LeadScraperService {
     //     };
     // }
 
-    // // Execution Control
-    // /**
-    //  * TriggerWorkflow initiates workflow execution with specified parameters
-    //  * 
-    //  * Features:
-    //  * - Immediate or scheduled execution
-    //  * - Custom parameter overrides
-    //  * - Dependency chain validation
-    //  * - Resource availability check
-    //  * 
-    //  * Execution process:
-    //  * 1. Validates workflow configuration
-    //  * 2. Checks resource availability
-    //  * 3. Initializes execution environment
-    //  * 4. Starts job processing
-    //  * 5. Monitors progress and updates status
-    //  * 
-    //  * Error handling:
-    //  * - Automatic retry for transient failures
-    //  * - Configurable timeout settings
-    //  * - Detailed error reporting
-    //  */
-    // rpc TriggerWorkflow(TriggerWorkflowRequest) returns (TriggerWorkflowResponse) {
-    //     option (google.api.http) = {
-    //         post: "/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}/trigger"
-    //         body: "*"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Trigger workflow execution"
-    //         tags: ["lead-scraper-service"],
-    //         operation_id: "TriggerWorkflow",
-    //         description: "Triggers the execution of a specific workflow",
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Workflow triggered successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.TriggerWorkflowResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    // Execution Control
+    /**
+     * TriggerWorkflow initiates workflow execution with specified parameters
+     * 
+     * Features:
+     * - Immediate or scheduled execution
+     * - Custom parameter overrides
+     * - Dependency chain validation
+     * - Resource availability check
+     * 
+     * Execution process:
+     * 1. Validates workflow configuration
+     * 2. Checks resource availability
+     * 3. Initializes execution environment
+     * 4. Starts job processing
+     * 5. Monitors progress and updates status
+     * 
+     * Error handling:
+     * - Automatic retry for transient failures
+     * - Configurable timeout settings
+     * - Detailed error reporting
+     */
+    rpc TriggerWorkflow(TriggerWorkflowRequest) returns (TriggerWorkflowResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}/trigger"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Trigger workflow execution"
+            tags: ["lead-scraper-service"],
+            operation_id: "TriggerWorkflow",
+            description: "Triggers the execution of a specific workflow",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workflow triggered successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.TriggerWorkflowResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * PauseWorkflow safely suspends workflow execution
-    //  * 
-    //  * Behavior:
-    //  * - Gracefully stops job processing
-    //  * - Maintains workflow state
-    //  * - Preserves partial results
-    //  * - Allows resume from last checkpoint
-    //  * 
-    //  * Safety measures:
-    //  * - Completes in-progress tasks
-    //  * - Saves checkpoint data
-    //  * - Updates workflow status
-    //  * - Notifies dependent systems
-    //  * 
-    //  * Use cases:
-    //  * - System maintenance
-    //  * - Resource reallocation
-    //  * - Error investigation
-    //  * - Configuration updates
-    //  */
-    // rpc PauseWorkflow(PauseWorkflowRequest) returns (PauseWorkflowResponse) {
-    //     option (google.api.http) = {
-    //         post: "/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}/pause"
-    //         body: "*"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Pause workflow execution"
-    //         tags: ["lead-scraper-service"],
-    //         operation_id: "PauseWorkflow",
-    //         description: "Pauses the execution of a specific workflow",
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Workflow paused successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.PauseWorkflowResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * PauseWorkflow safely suspends workflow execution
+     * 
+     * Behavior:
+     * - Gracefully stops job processing
+     * - Maintains workflow state
+     * - Preserves partial results
+     * - Allows resume from last checkpoint
+     * 
+     * Safety measures:
+     * - Completes in-progress tasks
+     * - Saves checkpoint data
+     * - Updates workflow status
+     * - Notifies dependent systems
+     * 
+     * Use cases:
+     * - System maintenance
+     * - Resource reallocation
+     * - Error investigation
+     * - Configuration updates
+     */
+    rpc PauseWorkflow(PauseWorkflowRequest) returns (PauseWorkflowResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}/pause"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Pause workflow execution"
+            tags: ["lead-scraper-service"],
+            operation_id: "PauseWorkflow",
+            description: "Pauses the execution of a specific workflow",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workflow paused successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.PauseWorkflowResponse" } }
+                }
+            }
+        };
+    }
 
     // Analytics
     /**

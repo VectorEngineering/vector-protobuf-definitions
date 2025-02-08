@@ -19,6 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	LeadScraperService_UpdateAccountSettings_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/UpdateAccountSettings"
+	LeadScraperService_ListAccounts_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/ListAccounts"
 	LeadScraperService_CreateWorkflow_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/CreateWorkflow"
 	LeadScraperService_DeleteWorkflow_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/DeleteWorkflow"
 	LeadScraperService_GetWorkflow_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/GetWorkflow"
@@ -87,6 +89,39 @@ const (
 //
 // ```
 type LeadScraperServiceClient interface {
+	// UpdateAccountSettings modifies configurable account parameters
+	//
+	// Configurable settings:
+	// - Notification preferences
+	// - API rate limits
+	// - Data retention policies
+	// - Security settings (2FA, IP whitelisting)
+	// - Default job parameters
+	//
+	// Example update:
+	// ```json
+	//
+	//	{
+	//	  "notification_settings": {
+	//	    "job_completion_webhook": "https://example.com/webhooks/jobs"
+	//	  },
+	//	  "data_retention_days": 30
+	//	}
+	//
+	// ```
+	UpdateAccountSettings(ctx context.Context, in *UpdateAccountSettingsRequest, opts ...grpc.CallOption) (*UpdateAccountSettingsResponse, error)
+	// ListAccounts retrieves paginated account information
+	//
+	// Features:
+	// - Server-side filtering by organization, status, and region
+	// - Sorting by creation date, last active, etc.
+	// - Partial response field masking
+	//
+	// Security:
+	// - Requires admin privileges
+	// - Results filtered by organization context
+	// - Sensitive fields omitted by default
+	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (*ListAccountsResponse, error)
 	// CreateWorkflow establishes a new workflow for a workspace
 	//
 	// # This endpoint creates a new workflow configuration for a specific workspace
@@ -673,6 +708,26 @@ func NewLeadScraperServiceClient(cc grpc.ClientConnInterface) LeadScraperService
 	return &leadScraperServiceClient{cc}
 }
 
+func (c *leadScraperServiceClient) UpdateAccountSettings(ctx context.Context, in *UpdateAccountSettingsRequest, opts ...grpc.CallOption) (*UpdateAccountSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAccountSettingsResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_UpdateAccountSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (*ListAccountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAccountsResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_ListAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *leadScraperServiceClient) CreateWorkflow(ctx context.Context, in *CreateWorkflowRequest, opts ...grpc.CallOption) (*CreateWorkflowResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateWorkflowResponse)
@@ -1099,6 +1154,39 @@ func (c *leadScraperServiceClient) ListWebhooks(ctx context.Context, in *ListWeb
 //
 // ```
 type LeadScraperServiceServer interface {
+	// UpdateAccountSettings modifies configurable account parameters
+	//
+	// Configurable settings:
+	// - Notification preferences
+	// - API rate limits
+	// - Data retention policies
+	// - Security settings (2FA, IP whitelisting)
+	// - Default job parameters
+	//
+	// Example update:
+	// ```json
+	//
+	//	{
+	//	  "notification_settings": {
+	//	    "job_completion_webhook": "https://example.com/webhooks/jobs"
+	//	  },
+	//	  "data_retention_days": 30
+	//	}
+	//
+	// ```
+	UpdateAccountSettings(context.Context, *UpdateAccountSettingsRequest) (*UpdateAccountSettingsResponse, error)
+	// ListAccounts retrieves paginated account information
+	//
+	// Features:
+	// - Server-side filtering by organization, status, and region
+	// - Sorting by creation date, last active, etc.
+	// - Partial response field masking
+	//
+	// Security:
+	// - Requires admin privileges
+	// - Results filtered by organization context
+	// - Sensitive fields omitted by default
+	ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error)
 	// CreateWorkflow establishes a new workflow for a workspace
 	//
 	// # This endpoint creates a new workflow configuration for a specific workspace
@@ -1685,6 +1773,12 @@ type LeadScraperServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedLeadScraperServiceServer struct{}
 
+func (UnimplementedLeadScraperServiceServer) UpdateAccountSettings(context.Context, *UpdateAccountSettingsRequest) (*UpdateAccountSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccountSettings not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) ListAccounts(context.Context, *ListAccountsRequest) (*ListAccountsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccounts not implemented")
+}
 func (UnimplementedLeadScraperServiceServer) CreateWorkflow(context.Context, *CreateWorkflowRequest) (*CreateWorkflowResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateWorkflow not implemented")
 }
@@ -1824,6 +1918,42 @@ func RegisterLeadScraperServiceServer(s grpc.ServiceRegistrar, srv LeadScraperSe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&LeadScraperService_ServiceDesc, srv)
+}
+
+func _LeadScraperService_UpdateAccountSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAccountSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).UpdateAccountSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_UpdateAccountSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).UpdateAccountSettings(ctx, req.(*UpdateAccountSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_ListAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).ListAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_ListAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).ListAccounts(ctx, req.(*ListAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _LeadScraperService_CreateWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2553,6 +2683,14 @@ var LeadScraperService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "lead_scraper_service.v1.LeadScraperService",
 	HandlerType: (*LeadScraperServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "UpdateAccountSettings",
+			Handler:    _LeadScraperService_UpdateAccountSettings_Handler,
+		},
+		{
+			MethodName: "ListAccounts",
+			Handler:    _LeadScraperService_ListAccounts_Handler,
+		},
 		{
 			MethodName: "CreateWorkflow",
 			Handler:    _LeadScraperService_CreateWorkflow_Handler,

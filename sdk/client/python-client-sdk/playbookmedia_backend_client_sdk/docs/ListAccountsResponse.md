@@ -5,9 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**accounts** | [**List[Account1]**](Account1.md) |  | [optional] 
-**next_page_token** | **str** |  | [optional] 
-**total_size** | **int** |  | [optional] 
+**accounts** | [**List[Account]**](Account.md) |  | [optional] 
+**next_page_number** | **int** |  | [optional] 
 
 ## Example
 

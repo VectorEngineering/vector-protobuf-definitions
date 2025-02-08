@@ -20826,15 +20826,11 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 pub struct ListAccountsResponse {
     #[serde(rename = "accounts")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub accounts: Option<Vec<models::Account1>>,
+    pub accounts: Option<Vec<models::Account>>,
 
-    #[serde(rename = "nextPageToken")]
+    #[serde(rename = "nextPageNumber")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub next_page_token: Option<String>,
-
-    #[serde(rename = "totalSize")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub total_size: Option<i32>,
+    pub next_page_number: Option<i32>,
 
 }
 
@@ -20844,8 +20840,7 @@ impl ListAccountsResponse {
     pub fn new() -> ListAccountsResponse {
         ListAccountsResponse {
             accounts: None,
-            next_page_token: None,
-            total_size: None,
+            next_page_number: None,
         }
     }
 }
@@ -20859,18 +20854,10 @@ impl std::string::ToString for ListAccountsResponse {
             // Skipping accounts in query parameter serialization
 
 
-            self.next_page_token.as_ref().map(|next_page_token| {
+            self.next_page_number.as_ref().map(|next_page_number| {
                 [
-                    "nextPageToken".to_string(),
-                    next_page_token.to_string(),
-                ].join(",")
-            }),
-
-
-            self.total_size.as_ref().map(|total_size| {
-                [
-                    "totalSize".to_string(),
-                    total_size.to_string(),
+                    "nextPageNumber".to_string(),
+                    next_page_number.to_string(),
                 ].join(",")
             }),
 
@@ -20891,9 +20878,8 @@ impl std::str::FromStr for ListAccountsResponse {
         #[derive(Default)]
         #[allow(dead_code)]
         struct IntermediateRep {
-            pub accounts: Vec<Vec<models::Account1>>,
-            pub next_page_token: Vec<String>,
-            pub total_size: Vec<i32>,
+            pub accounts: Vec<Vec<models::Account>>,
+            pub next_page_number: Vec<i32>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -20913,9 +20899,7 @@ impl std::str::FromStr for ListAccountsResponse {
                 match key {
                     "accounts" => return std::result::Result::Err("Parsing a container in this style is not supported in ListAccountsResponse".to_string()),
                     #[allow(clippy::redundant_clone)]
-                    "nextPageToken" => intermediate_rep.next_page_token.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "totalSize" => intermediate_rep.total_size.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "nextPageNumber" => intermediate_rep.next_page_number.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing ListAccountsResponse".to_string())
                 }
             }
@@ -20927,8 +20911,7 @@ impl std::str::FromStr for ListAccountsResponse {
         // Use the intermediate representation to return the struct
         std::result::Result::Ok(ListAccountsResponse {
             accounts: intermediate_rep.accounts.into_iter().next(),
-            next_page_token: intermediate_rep.next_page_token.into_iter().next(),
-            total_size: intermediate_rep.total_size.into_iter().next(),
+            next_page_number: intermediate_rep.next_page_number.into_iter().next(),
         })
     }
 }
@@ -20961,6 +20944,157 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into ListAccountsResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ListAccountsResponse1 {
+    #[serde(rename = "accounts")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub accounts: Option<Vec<models::Account1>>,
+
+    #[serde(rename = "nextPageToken")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub next_page_token: Option<String>,
+
+    #[serde(rename = "totalSize")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub total_size: Option<i32>,
+
+}
+
+
+impl ListAccountsResponse1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ListAccountsResponse1 {
+        ListAccountsResponse1 {
+            accounts: None,
+            next_page_token: None,
+            total_size: None,
+        }
+    }
+}
+
+/// Converts the ListAccountsResponse1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ListAccountsResponse1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping accounts in query parameter serialization
+
+
+            self.next_page_token.as_ref().map(|next_page_token| {
+                [
+                    "nextPageToken".to_string(),
+                    next_page_token.to_string(),
+                ].join(",")
+            }),
+
+
+            self.total_size.as_ref().map(|total_size| {
+                [
+                    "totalSize".to_string(),
+                    total_size.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ListAccountsResponse1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ListAccountsResponse1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub accounts: Vec<Vec<models::Account1>>,
+            pub next_page_token: Vec<String>,
+            pub total_size: Vec<i32>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ListAccountsResponse1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    "accounts" => return std::result::Result::Err("Parsing a container in this style is not supported in ListAccountsResponse1".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "nextPageToken" => intermediate_rep.next_page_token.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "totalSize" => intermediate_rep.total_size.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ListAccountsResponse1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ListAccountsResponse1 {
+            accounts: intermediate_rep.accounts.into_iter().next(),
+            next_page_token: intermediate_rep.next_page_token.into_iter().next(),
+            total_size: intermediate_rep.total_size.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ListAccountsResponse1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ListAccountsResponse1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ListAccountsResponse1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ListAccountsResponse1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ListAccountsResponse1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ListAccountsResponse1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ListAccountsResponse1 - {}",
                                 value, err))
                     }
              },
@@ -35440,6 +35574,242 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into UpdateAccountResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct UpdateAccountSettingsRequest {
+    #[serde(rename = "settings")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub settings: Option<models::AccountSettings>,
+
+}
+
+
+impl UpdateAccountSettingsRequest {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> UpdateAccountSettingsRequest {
+        UpdateAccountSettingsRequest {
+            settings: None,
+        }
+    }
+}
+
+/// Converts the UpdateAccountSettingsRequest value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for UpdateAccountSettingsRequest {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping settings in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a UpdateAccountSettingsRequest value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for UpdateAccountSettingsRequest {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub settings: Vec<models::AccountSettings>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing UpdateAccountSettingsRequest".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "settings" => intermediate_rep.settings.push(<models::AccountSettings as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing UpdateAccountSettingsRequest".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(UpdateAccountSettingsRequest {
+            settings: intermediate_rep.settings.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<UpdateAccountSettingsRequest> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<UpdateAccountSettingsRequest>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<UpdateAccountSettingsRequest>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for UpdateAccountSettingsRequest - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<UpdateAccountSettingsRequest> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <UpdateAccountSettingsRequest as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into UpdateAccountSettingsRequest - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct UpdateAccountSettingsResponse {
+    #[serde(rename = "settings")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub settings: Option<models::AccountSettings>,
+
+}
+
+
+impl UpdateAccountSettingsResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> UpdateAccountSettingsResponse {
+        UpdateAccountSettingsResponse {
+            settings: None,
+        }
+    }
+}
+
+/// Converts the UpdateAccountSettingsResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for UpdateAccountSettingsResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping settings in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a UpdateAccountSettingsResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for UpdateAccountSettingsResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub settings: Vec<models::AccountSettings>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing UpdateAccountSettingsResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "settings" => intermediate_rep.settings.push(<models::AccountSettings as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing UpdateAccountSettingsResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(UpdateAccountSettingsResponse {
+            settings: intermediate_rep.settings.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<UpdateAccountSettingsResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<UpdateAccountSettingsResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<UpdateAccountSettingsResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for UpdateAccountSettingsResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<UpdateAccountSettingsResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <UpdateAccountSettingsResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into UpdateAccountSettingsResponse - {}",
                                 value, err))
                     }
              },

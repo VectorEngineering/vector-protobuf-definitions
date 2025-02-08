@@ -1794,6 +1794,86 @@ pub enum GetWorkspaceAnalyticsResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum ListAccountsResponse {
+    /// Accounts retrieved successfully
+    AccountsRetrievedSuccessfully
+    (models::ListAccountsResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum ListApiKeysResponse {
     /// API keys retrieved successfully
     APIKeysRetrievedSuccessfully
@@ -2598,6 +2678,86 @@ pub enum TriggerWorkflowResponse {
     /// Workflow triggered successfully
     WorkflowTriggeredSuccessfully
     (models::TriggerWorkflowResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum UpdateAccountSettingsResponse {
+    /// Settings updated successfully
+    SettingsUpdatedSuccessfully
+    (models::UpdateAccountSettingsResponse)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -4058,6 +4218,16 @@ pub trait Api<C: Send + Sync> {
         end_time: Option<chrono::DateTime::<chrono::Utc>>,
         context: &C) -> Result<GetWorkspaceAnalyticsResponse, ApiError>;
 
+    /// List all accounts
+    async fn list_accounts(
+        &self,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        filter: Option<String>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        context: &C) -> Result<ListAccountsResponse, ApiError>;
+
     /// List API keys
     async fn list_api_keys(
         &self,
@@ -4159,6 +4329,12 @@ pub trait Api<C: Send + Sync> {
         id: String,
         trigger_workflow_body: models::TriggerWorkflowBody,
         context: &C) -> Result<TriggerWorkflowResponse, ApiError>;
+
+    /// Update account settings
+    async fn update_account_settings(
+        &self,
+        update_account_settings_request: models::UpdateAccountSettingsRequest,
+        context: &C) -> Result<UpdateAccountSettingsResponse, ApiError>;
 
     /// Update API key
     async fn update_api_key(
@@ -4488,6 +4664,16 @@ pub trait ApiNoContext<C: Send + Sync> {
         end_time: Option<chrono::DateTime::<chrono::Utc>>,
         ) -> Result<GetWorkspaceAnalyticsResponse, ApiError>;
 
+    /// List all accounts
+    async fn list_accounts(
+        &self,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        filter: Option<String>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        ) -> Result<ListAccountsResponse, ApiError>;
+
     /// List API keys
     async fn list_api_keys(
         &self,
@@ -4589,6 +4775,12 @@ pub trait ApiNoContext<C: Send + Sync> {
         id: String,
         trigger_workflow_body: models::TriggerWorkflowBody,
         ) -> Result<TriggerWorkflowResponse, ApiError>;
+
+    /// Update account settings
+    async fn update_account_settings(
+        &self,
+        update_account_settings_request: models::UpdateAccountSettingsRequest,
+        ) -> Result<UpdateAccountSettingsResponse, ApiError>;
 
     /// Update API key
     async fn update_api_key(
@@ -5020,6 +5212,20 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         self.api().get_workspace_analytics(workspace_id, start_time, end_time, &context).await
     }
 
+    /// List all accounts
+    async fn list_accounts(
+        &self,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        filter: Option<String>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        ) -> Result<ListAccountsResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().list_accounts(page_size, page_number, filter, organization_id, tenant_id, &context).await
+    }
+
     /// List API keys
     async fn list_api_keys(
         &self,
@@ -5164,6 +5370,16 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().trigger_workflow(workspace_id, id, trigger_workflow_body, &context).await
+    }
+
+    /// Update account settings
+    async fn update_account_settings(
+        &self,
+        update_account_settings_request: models::UpdateAccountSettingsRequest,
+        ) -> Result<UpdateAccountSettingsResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().update_account_settings(update_account_settings_request, &context).await
     }
 
     /// Update API key

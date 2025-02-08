@@ -27,6 +27,7 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       GetWorkflowResponse,
                       GetWorkspaceResponse,
                       GetWorkspaceAnalyticsResponse,
+                      ListAccountsResponse,
                       ListApiKeysResponse,
                       ListLeadsResponse,
                       ListOrganizationsResponse,
@@ -38,6 +39,7 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       RotateApiKeyResponse,
                       RotateTenantApiKeyResponse,
                       TriggerWorkflowResponse,
+                      UpdateAccountSettingsResponse,
                       UpdateApiKeyResponse,
                       UpdateOrganizationResponse,
                       UpdateTenantResponse,
@@ -105,6 +107,7 @@ fn main() {
                 "GetWorkflow", 
                 "GetWorkspace", 
                 "GetWorkspaceAnalytics", 
+                "ListAccounts", 
                 "ListApiKeys", 
                 "ListLeads", 
                 "ListOrganizations", 
@@ -373,6 +376,16 @@ fn main() {
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
+        Some("ListAccounts") => {
+            let result = rt.block_on(client.list_accounts(
+                  Some(56),
+                  Some(56),
+                  Some("filter_example".to_string()),
+                  Some("organization_id_example".to_string()),
+                  Some("tenant_id_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
         Some("ListApiKeys") => {
             let result = rt.block_on(client.list_api_keys(
                   Some("organization_id_example".to_string()),
@@ -478,6 +491,14 @@ fn main() {
             let result = rt.block_on(client.trigger_workflow(
                   "workspace_id_example".to_string(),
                   "id_example".to_string(),
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("UpdateAccountSettings") => {
+            let result = rt.block_on(client.update_account_settings(
                   ???
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());

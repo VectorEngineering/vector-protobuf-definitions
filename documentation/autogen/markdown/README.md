@@ -30,6 +30,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *LeadScraperServiceApi* | [**getWorkspace**](Apis/LeadScraperServiceApi.md#getworkspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details |
 *LeadScraperServiceApi* | [**getWorkspaceAnalytics**](Apis/LeadScraperServiceApi.md#getworkspaceanalytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics |
 *LeadScraperServiceApi* | [**listAPIKeys**](Apis/LeadScraperServiceApi.md#listapikeys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys |
+*LeadScraperServiceApi* | [**listAccounts**](Apis/LeadScraperServiceApi.md#listaccounts) | **GET** /lead-scraper-microservice/api/v1/accounts/list | List all accounts |
 *LeadScraperServiceApi* | [**listLeads**](Apis/LeadScraperServiceApi.md#listleads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads |
 *LeadScraperServiceApi* | [**listOrganizations**](Apis/LeadScraperServiceApi.md#listorganizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations |
 *LeadScraperServiceApi* | [**listTenantAPIKeys**](Apis/LeadScraperServiceApi.md#listtenantapikeys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys |
@@ -41,6 +42,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *LeadScraperServiceApi* | [**rotateTenantAPIKey**](Apis/LeadScraperServiceApi.md#rotatetenantapikey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key |
 *LeadScraperServiceApi* | [**triggerWorkflow**](Apis/LeadScraperServiceApi.md#triggerworkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution |
 *LeadScraperServiceApi* | [**updateAPIKey**](Apis/LeadScraperServiceApi.md#updateapikey) | **PUT** /lead-scraper-microservice/api/v1/api-keys | Update API key |
+*LeadScraperServiceApi* | [**updateAccountSettings**](Apis/LeadScraperServiceApi.md#updateaccountsettings) | **PUT** /lead-scraper-microservice/api/v1/accounts/settings | Update account settings |
 *LeadScraperServiceApi* | [**updateOrganization**](Apis/LeadScraperServiceApi.md#updateorganization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details |
 *LeadScraperServiceApi* | [**updateTenant**](Apis/LeadScraperServiceApi.md#updatetenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details |
 *LeadScraperServiceApi* | [**updateTenantAPIKey**](Apis/LeadScraperServiceApi.md#updatetenantapikey) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Update tenant API key |
@@ -178,6 +180,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [LimitInfo](./Models/LimitInfo.md)
  - [ListAPIKeysResponse](./Models/ListAPIKeysResponse.md)
  - [ListAccountsResponse](./Models/ListAccountsResponse.md)
+ - [ListAccountsResponse1](./Models/ListAccountsResponse1.md)
  - [ListLeadsResponse](./Models/ListLeadsResponse.md)
  - [ListOrganizationsResponse](./Models/ListOrganizationsResponse.md)
  - [ListTenantAPIKeysResponse](./Models/ListTenantAPIKeysResponse.md)
@@ -257,6 +260,8 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [UpdateAPIKeyResponse](./Models/UpdateAPIKeyResponse.md)
  - [UpdateAccountRequest](./Models/UpdateAccountRequest.md)
  - [UpdateAccountResponse](./Models/UpdateAccountResponse.md)
+ - [UpdateAccountSettingsRequest](./Models/UpdateAccountSettingsRequest.md)
+ - [UpdateAccountSettingsResponse](./Models/UpdateAccountSettingsResponse.md)
  - [UpdateOrganizationRequest](./Models/UpdateOrganizationRequest.md)
  - [UpdateOrganizationResponse](./Models/UpdateOrganizationResponse.md)
  - [UpdateTenantAPIKeyRequest](./Models/UpdateTenantAPIKeyRequest.md)

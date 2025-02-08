@@ -118,6 +118,7 @@ src/main/java/org/openapitools/model/Lead.java
 src/main/java/org/openapitools/model/LimitInfo.java
 src/main/java/org/openapitools/model/ListAPIKeysResponse.java
 src/main/java/org/openapitools/model/ListAccountsResponse.java
+src/main/java/org/openapitools/model/ListAccountsResponse1.java
 src/main/java/org/openapitools/model/ListLeadsResponse.java
 src/main/java/org/openapitools/model/ListOrganizationsResponse.java
 src/main/java/org/openapitools/model/ListTenantAPIKeysResponse.java
@@ -198,6 +199,8 @@ src/main/java/org/openapitools/model/UpdateAPIKeyRequest.java
 src/main/java/org/openapitools/model/UpdateAPIKeyResponse.java
 src/main/java/org/openapitools/model/UpdateAccountRequest.java
 src/main/java/org/openapitools/model/UpdateAccountResponse.java
+src/main/java/org/openapitools/model/UpdateAccountSettingsRequest.java
+src/main/java/org/openapitools/model/UpdateAccountSettingsResponse.java
 src/main/java/org/openapitools/model/UpdateOrganizationRequest.java
 src/main/java/org/openapitools/model/UpdateOrganizationResponse.java
 src/main/java/org/openapitools/model/UpdateTenantAPIKeyRequest.java

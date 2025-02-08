@@ -126,6 +126,7 @@ use openapi_client::{
     GetWorkflowResponse,
     GetWorkspaceResponse,
     GetWorkspaceAnalyticsResponse,
+    ListAccountsResponse,
     ListApiKeysResponse,
     ListLeadsResponse,
     ListOrganizationsResponse,
@@ -137,6 +138,7 @@ use openapi_client::{
     RotateApiKeyResponse,
     RotateTenantApiKeyResponse,
     TriggerWorkflowResponse,
+    UpdateAccountSettingsResponse,
     UpdateApiKeyResponse,
     UpdateOrganizationResponse,
     UpdateTenantResponse,
@@ -426,6 +428,20 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
+    /// List all accounts
+    async fn list_accounts(
+        &self,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        filter: Option<String>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        context: &C) -> Result<ListAccountsResponse, ApiError>
+    {
+        info!("list_accounts({:?}, {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", page_size, page_number, filter, organization_id, tenant_id, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
     /// List API keys
     async fn list_api_keys(
         &self,
@@ -569,6 +585,16 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<TriggerWorkflowResponse, ApiError>
     {
         info!("trigger_workflow(\"{}\", \"{}\", {:?}) - X-Span-ID: {:?}", workspace_id, id, trigger_workflow_body, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Update account settings
+    async fn update_account_settings(
+        &self,
+        update_account_settings_request: models::UpdateAccountSettingsRequest,
+        context: &C) -> Result<UpdateAccountSettingsResponse, ApiError>
+    {
+        info!("update_account_settings({:?}) - X-Span-ID: {:?}", update_account_settings_request, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

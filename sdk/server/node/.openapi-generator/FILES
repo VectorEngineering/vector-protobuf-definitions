@@ -107,6 +107,7 @@ docs/Language.md
 docs/Lead.md
 docs/LimitInfo.md
 docs/ListAccountsResponse.md
+docs/ListAccountsResponse1.md
 docs/ListApiKeysResponse.md
 docs/ListLeadsResponse.md
 docs/ListOrganizationsResponse.md
@@ -186,6 +187,8 @@ docs/TriggerWorkflowResponse.md
 docs/UnprocessableEntityErrorMessageResponse.md
 docs/UpdateAccountRequest.md
 docs/UpdateAccountResponse.md
+docs/UpdateAccountSettingsRequest.md
+docs/UpdateAccountSettingsResponse.md
 docs/UpdateApiKeyRequest.md
 docs/UpdateApiKeyResponse.md
 docs/UpdateOrganizationRequest.md
@@ -330,6 +333,7 @@ openapi3graphql-server/model/language.graphql
 openapi3graphql-server/model/lead.graphql
 openapi3graphql-server/model/limit_info.graphql
 openapi3graphql-server/model/list_accounts_response.graphql
+openapi3graphql-server/model/list_accounts_response1.graphql
 openapi3graphql-server/model/list_api_keys_response.graphql
 openapi3graphql-server/model/list_leads_response.graphql
 openapi3graphql-server/model/list_organizations_response.graphql
@@ -409,6 +413,8 @@ openapi3graphql-server/model/trigger_workflow_response.graphql
 openapi3graphql-server/model/unprocessable_entity_error_message_response.graphql
 openapi3graphql-server/model/update_account_request.graphql
 openapi3graphql-server/model/update_account_response.graphql
+openapi3graphql-server/model/update_account_settings_request.graphql
+openapi3graphql-server/model/update_account_settings_response.graphql
 openapi3graphql-server/model/update_api_key_request.graphql
 openapi3graphql-server/model/update_api_key_response.graphql
 openapi3graphql-server/model/update_organization_request.graphql

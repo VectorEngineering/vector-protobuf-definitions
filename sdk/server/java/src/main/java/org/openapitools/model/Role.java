@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Gets or Sets Role
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:12:03.775072-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:13:54.615102-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public enum Role {
   
   UNSPECIFIED("ROLE_UNSPECIFIED"),

@@ -80,25 +80,297 @@ type DocumentSnapshot = Partial<{
   createdAt: string;
 }>;
 
-const CreateAPIKeyRequest = z
+const AccountStatus = z.enum([
+  "ACCOUNT_STATUS_UNSPECIFIED",
+  "ACCOUNT_STATUS_ACTIVE",
+  "ACCOUNT_STATUS_SUSPENDED",
+  "ACCOUNT_STATUS_PENDING_VERIFICATION",
+]);
+const Role = z.enum([
+  "ROLE_UNSPECIFIED",
+  "ROLE_ADMIN",
+  "ROLE_USER",
+  "ROLE_VIEWER",
+  "ROLE_MANAGER",
+]);
+const Permission = z.enum([
+  "PERMISSION_UNSPECIFIED",
+  "PERMISSION_READ",
+  "PERMISSION_WRITE",
+  "PERMISSION_DELETE",
+  "PERMISSION_MANAGE_USERS",
+  "PERMISSION_MANAGE_BILLING",
+  "PERMISSION_VIEW_ANALYTICS",
+  "PERMISSION_MANAGE_WORKFLOWS",
+]);
+const Timezone = z.enum([
+  "TIMEZONE_UNSPECIFIED",
+  "TIMEZONE_UTC",
+  "TIMEZONE_EST",
+  "TIMEZONE_CST",
+  "TIMEZONE_MST",
+  "TIMEZONE_PST",
+  "TIMEZONE_GMT",
+  "TIMEZONE_CET",
+  "TIMEZONE_IST",
+  "TIMEZONE_JST",
+  "TIMEZONE_AEST",
+]);
+const WorkflowStatus = z.enum([
+  "WORKFLOW_STATUS_UNSPECIFIED",
+  "WORKFLOW_STATUS_DRAFT",
+  "WORKFLOW_STATUS_ACTIVE",
+  "WORKFLOW_STATUS_PAUSED",
+  "WORKFLOW_STATUS_FAILED",
+  "WORKFLOW_STATUS_COMPLETED",
+  "WORKFLOW_STATUS_ARCHIVED",
+  "WORKFLOW_STATUS_PENDING_APPROVAL",
+  "WORKFLOW_STATUS_VALIDATING",
+  "WORKFLOW_STATUS_QUOTA_EXCEEDED",
+  "WORKFLOW_STATUS_WARNING",
+]);
+const BackgroundJobStatus = z.enum([
+  "BACKGROUND_JOB_STATUS_UNSPECIFIED",
+  "BACKGROUND_JOB_STATUS_QUEUED",
+  "BACKGROUND_JOB_STATUS_IN_PROGRESS",
+  "BACKGROUND_JOB_STATUS_COMPLETED",
+  "BACKGROUND_JOB_STATUS_FAILED",
+  "BACKGROUND_JOB_STATUS_CANCELLED",
+  "BACKGROUND_JOB_STATUS_TIMED_OUT",
+]);
+const Language = z.enum([
+  "LANGUAGE_UNSPECIFIED",
+  "LANGUAGE_ENGLISH",
+  "LANGUAGE_SPANISH",
+  "LANGUAGE_FRENCH",
+  "LANGUAGE_GERMAN",
+  "LANGUAGE_ITALIAN",
+  "LANGUAGE_PORTUGUESE",
+  "LANGUAGE_DUTCH",
+  "LANGUAGE_RUSSIAN",
+  "LANGUAGE_CHINESE",
+  "LANGUAGE_JAPANESE",
+  "LANGUAGE_KOREAN",
+  "LANGUAGE_ARABIC",
+  "LANGUAGE_HINDI",
+  "LANGUAGE_GREEK",
+  "LANGUAGE_TURKISH",
+]);
+const DayOfWeek = z.enum([
+  "DAY_OF_WEEK_UNSPECIFIED",
+  "DAY_OF_WEEK_MONDAY",
+  "DAY_OF_WEEK_TUESDAY",
+  "DAY_OF_WEEK_WEDNESDAY",
+  "DAY_OF_WEEK_THURSDAY",
+  "DAY_OF_WEEK_FRIDAY",
+  "DAY_OF_WEEK_SATURDAY",
+  "DAY_OF_WEEK_SUNDAY",
+]);
+const BusinessHours = z
   .object({
-    organizationId: z.string(),
-    workspaceId: z.string(),
-    tenantId: z.string(),
-    accountId: z.string(),
+    id: z.string(),
+    day: DayOfWeek.default("DAY_OF_WEEK_UNSPECIFIED"),
+    openTime: z.string(),
+    closeTime: z.string(),
+    closed: z.boolean(),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+  })
+  .partial()
+  .passthrough();
+const Review = z
+  .object({
+    id: z.string(),
+    author: z.string(),
+    rating: z.number(),
+    text: z.string(),
+    time: z.string().datetime({ offset: true }),
+    language: z.string(),
+    profilePhotoUrl: z.string(),
+    reviewCount: z.number().int(),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+  })
+  .partial()
+  .passthrough();
+const RevenueRange = z.enum([
+  "REVENUE_RANGE_UNSPECIFIED",
+  "REVENUE_RANGE_UNDER_100K",
+  "REVENUE_RANGE_100K_TO_1M",
+  "REVENUE_RANGE_1M_TO_10M",
+  "REVENUE_RANGE_10M_TO_50M",
+  "REVENUE_RANGE_OVER_50M",
+]);
+const EmployeeBenefit = z.enum([
+  "EMPLOYEE_BENEFIT_UNSPECIFIED",
+  "EMPLOYEE_BENEFIT_HEALTH_INSURANCE",
+  "EMPLOYEE_BENEFIT_RETIREMENT_PLAN",
+  "EMPLOYEE_BENEFIT_PAID_TIME_OFF",
+  "EMPLOYEE_BENEFIT_REMOTE_WORK",
+]);
+const Lead = z
+  .object({
+    id: z.string(),
     name: z.string(),
-    description: z.string(),
-    scopes: z.array(z.string()),
-    expiresAt: z.string().datetime({ offset: true }),
-    maxUses: z.number().int(),
-    allowedIps: z.array(z.string()),
-    rateLimit: z.number().int(),
-    enforceSigning: z.boolean(),
-    allowedSignatureAlgorithms: z.array(z.string()),
-    enforceMutualTls: z.boolean(),
-    alertEmails: z.array(z.string()),
-    alertOnQuotaThreshold: z.boolean(),
-    quotaAlertThreshold: z.number(),
+    website: z.string(),
+    phone: z.string(),
+    address: z.string(),
+    city: z.string(),
+    state: z.string(),
+    country: z.string(),
+    latitude: z.number(),
+    longitude: z.number(),
+    googleRating: z.number(),
+    reviewCount: z.number().int(),
+    industry: z.string(),
+    employeeCount: z.number().int(),
+    estimatedRevenue: z.string(),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+    placeId: z.string(),
+    googleMapsUrl: z.string(),
+    businessStatus: z.string(),
+    regularHours: z.array(BusinessHours),
+    specialHours: z.array(BusinessHours),
+    photoReferences: z.array(z.string()),
+    mainPhotoUrl: z.string(),
+    reviews: z.array(Review),
+    types: z.array(z.string()),
+    amenities: z.array(z.string()),
+    servesVegetarianFood: z.boolean(),
+    outdoorSeating: z.boolean(),
+    paymentMethods: z.array(z.string()),
+    wheelchairAccessible: z.boolean(),
+    parkingAvailable: z.boolean(),
+    socialMedia: z.record(z.string()),
+    ratingCategory: z.string(),
+    rating: z.number(),
+    count: z.number().int(),
+    lastUpdated: z.string().datetime({ offset: true }),
+    dataSourceVersion: z.string(),
+    scrapingSessionId: z.string(),
+    alternatePhones: z.array(z.string()),
+    contactPersonName: z.string(),
+    contactPersonTitle: z.string(),
+    contactEmail: z.string(),
+    foundedYear: z.number().int(),
+    businessType: z.string(),
+    certifications: z.array(z.string()),
+    licenseNumber: z.string(),
+    revenueRange: RevenueRange.default("REVENUE_RANGE_UNSPECIFIED"),
+    fundingStage: z.string(),
+    isPublicCompany: z.boolean(),
+    websiteLoadSpeed: z.number(),
+    hasSslCertificate: z.boolean(),
+    cmsUsed: z.string(),
+    ecommercePlatforms: z.array(z.string()),
+    timezone: z.string(),
+    neighborhood: z.string(),
+    nearbyLandmarks: z.array(z.string()),
+    transportationAccess: z.string(),
+    employeeBenefits: z.array(EmployeeBenefit),
+    parentCompany: z.string(),
+    subsidiaries: z.array(z.string()),
+    isFranchise: z.boolean(),
+    seoKeywords: z.array(z.string()),
+    usesGoogleAds: z.boolean(),
+    googleMyBusinessCategory: z.string(),
+    naicsCode: z.string(),
+    sicCode: z.string(),
+    unspscCode: z.string(),
+    isGreenCertified: z.boolean(),
+    energySources: z.array(z.string()),
+    sustainabilityRating: z.string(),
+    recentAnnouncements: z.array(z.string()),
+    lastProductLaunch: z.string().datetime({ offset: true }),
+    hasLitigationHistory: z.boolean(),
+    exportControlStatus: z.string(),
+  })
+  .partial()
+  .passthrough();
+const ScrapingJob = z
+  .object({
+    id: z.string(),
+    priority: z.number().int(),
+    payloadType: z.string(),
+    payload: z.string(),
+    createdAt: z.string().datetime({ offset: true }),
+    status: BackgroundJobStatus.default("BACKGROUND_JOB_STATUS_UNSPECIFIED"),
+    name: z.string(),
+    keywords: z.array(z.string()),
+    lang: Language.default("LANGUAGE_UNSPECIFIED"),
+    zoom: z.number().int(),
+    lat: z.string(),
+    lon: z.string(),
+    fastMode: z.boolean(),
+    radius: z.number().int(),
+    depth: z.number().int(),
+    email: z.boolean(),
+    maxTime: z.number().int(),
+    proxies: z.array(z.string()),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+    leads: z.array(Lead),
+    url: z.string(),
+  })
+  .partial()
+  .passthrough();
+const OutputFormat = z.enum([
+  "OUTPUT_FORMAT_UNSPECIFIED",
+  "OUTPUT_FORMAT_JSON",
+  "OUTPUT_FORMAT_CSV",
+  "OUTPUT_FORMAT_BIGQUERY",
+  "OUTPUT_FORMAT_POSTGRES",
+]);
+const ScrapingWorkflow = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    cronExpression: z.string(),
+    nextRunTime: z.string().datetime({ offset: true }),
+    lastRunTime: z.string().datetime({ offset: true }),
+    status: WorkflowStatus.default("WORKFLOW_STATUS_UNSPECIFIED"),
+    retryCount: z.number().int(),
+    maxRetries: z.number().int(),
+    alertEmails: z.string(),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+    jobs: z.array(ScrapingJob),
+    geoFencingRadius: z.number(),
+    geoFencingLat: z.number(),
+    geoFencingLon: z.number(),
+    geoFencingZoomMin: z.number().int(),
+    geoFencingZoomMax: z.number().int(),
+    includeReviews: z.boolean(),
+    includePhotos: z.boolean(),
+    includeBusinessHours: z.boolean(),
+    maxReviewsPerBusiness: z.number().int(),
+    outputFormat: OutputFormat.default("OUTPUT_FORMAT_UNSPECIFIED"),
+    outputDestination: z.string(),
+    dataRetention: z.string(),
+    anonymizePii: z.boolean(),
+    notificationSlackChannel: z.string(),
+    notificationEmailGroup: z.string(),
+    notificationNotifyOnStart: z.boolean(),
+    notificationNotifyOnComplete: z.boolean(),
+    notificationNotifyOnFailure: z.boolean(),
+    contentFilterAllowedCountries: z.array(z.string()),
+    contentFilterExcludedTypes: z.array(z.string()),
+    contentFilterMinimumRating: z.number(),
+    contentFilterMinimumReviews: z.number().int(),
+    qosMaxConcurrentRequests: z.number().int(),
+    qosMaxRetries: z.number().int(),
+    qosRequestTimeout: z.string(),
+    qosEnableJavascript: z.boolean(),
+    respectRobotsTxt: z.boolean(),
+    acceptTermsOfService: z.boolean(),
+    userAgent: z.string(),
+    searchTerms: z.array(z.string()),
+    scheduledEntryId: z.string(),
   })
   .partial()
   .passthrough();
@@ -184,8 +456,152 @@ const APIKey = z
   })
   .partial()
   .passthrough();
-const CreateAPIKeyResponse = z
-  .object({ apiKey: APIKey, keyValue: z.string() })
+const TriggerEvent = z.enum([
+  "TRIGGER_EVENT_UNSPECIFIED",
+  "TRIGGER_EVENT_JOB_STARTED",
+  "TRIGGER_EVENT_JOB_COMPLETED",
+  "TRIGGER_EVENT_JOB_FAILED",
+  "TRIGGER_EVENT_LEAD_FOUND",
+  "TRIGGER_EVENT_QUOTA_EXCEEDED",
+  "TRIGGER_EVENT_ERROR_THRESHOLD_REACHED",
+  "TRIGGER_EVENT_RATE_LIMIT_REACHED",
+  "TRIGGER_EVENT_DATA_VALIDATION_FAILED",
+  "TRIGGER_EVENT_NEW_PROXY_NEEDED",
+  "TRIGGER_EVENT_SCHEDULED_MAINTENANCE",
+]);
+const IncludedField = z.enum([
+  "INCLUDED_FIELD_UNSPECIFIED",
+  "INCLUDED_FIELD_NAME",
+  "INCLUDED_FIELD_WEBSITE",
+  "INCLUDED_FIELD_PHONE",
+  "INCLUDED_FIELD_ADDRESS",
+  "INCLUDED_FIELD_LOCATION",
+  "INCLUDED_FIELD_COORDINATES",
+  "INCLUDED_FIELD_GOOGLE_RATING",
+  "INCLUDED_FIELD_REVIEW_COUNT",
+  "INCLUDED_FIELD_REVIEWS",
+  "INCLUDED_FIELD_BUSINESS_HOURS",
+  "INCLUDED_FIELD_BUSINESS_STATUS",
+  "INCLUDED_FIELD_PLACE_ID",
+  "INCLUDED_FIELD_GOOGLE_MAPS_URL",
+  "INCLUDED_FIELD_PHOTOS",
+  "INCLUDED_FIELD_MAIN_PHOTO",
+  "INCLUDED_FIELD_BUSINESS_TYPES",
+  "INCLUDED_FIELD_AMENITIES",
+  "INCLUDED_FIELD_PAYMENT_METHODS",
+  "INCLUDED_FIELD_SOCIAL_PROFILES",
+  "INCLUDED_FIELD_EMPLOYEE_COUNT",
+  "INCLUDED_FIELD_REVENUE_INFO",
+  "INCLUDED_FIELD_FOUNDED_YEAR",
+  "INCLUDED_FIELD_CERTIFICATIONS",
+  "INCLUDED_FIELD_NAICS_CODE",
+  "INCLUDED_FIELD_SIC_CODE",
+  "INCLUDED_FIELD_SCRAPING_METADATA",
+  "INCLUDED_FIELD_COMPLIANCE_INFO",
+  "INCLUDED_FIELD_ALTERNATE_PHONES",
+  "INCLUDED_FIELD_CONTACT_PERSON",
+  "INCLUDED_FIELD_CONTACT_EMAIL",
+]);
+const PayloadFormat = z.enum([
+  "PAYLOAD_FORMAT_UNSPECIFIED",
+  "PAYLOAD_FORMAT_JSON",
+  "PAYLOAD_FORMAT_XML",
+  "PAYLOAD_FORMAT_FORM_DATA",
+  "PAYLOAD_FORMAT_PROTOBUF",
+  "PAYLOAD_FORMAT_YAML",
+]);
+const WebhookConfig = z
+  .object({
+    id: z.string(),
+    url: z.string(),
+    authType: z.string(),
+    authToken: z.string(),
+    customHeaders: z.record(z.string()),
+    maxRetries: z.number().int(),
+    retryInterval: z.string(),
+    triggerEvents: z.array(TriggerEvent),
+    includedFields: z.array(IncludedField),
+    includeFullResults: z.boolean(),
+    payloadFormat: PayloadFormat.default("PAYLOAD_FORMAT_UNSPECIFIED"),
+    verifySsl: z.boolean(),
+    signingSecret: z.string(),
+    rateLimit: z.number().int(),
+    rateLimitInterval: z.string(),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    lastTriggeredAt: z.string().datetime({ offset: true }),
+    successfulCalls: z.number().int(),
+    failedCalls: z.number().int(),
+    metadata: z.object({}).partial().passthrough(),
+    webhookName: z.string(),
+  })
+  .partial()
+  .passthrough();
+const Workspace = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    industry: z.string(),
+    domain: z.string(),
+    gdprCompliant: z.boolean(),
+    hipaaCompliant: z.boolean(),
+    soc2Compliant: z.boolean(),
+    storageQuota: z.string(),
+    usedStorage: z.string(),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+    workflows: z.array(ScrapingWorkflow),
+    jobsRunThisMonth: z.number().int(),
+    workspaceJobLimit: z.number().int(),
+    dailyJobQuota: z.number().int(),
+    activeScrapers: z.number().int(),
+    totalLeadsCollected: z.number().int(),
+    lastJobRun: z.string().datetime({ offset: true }),
+    scrapingJobs: z.array(ScrapingJob),
+    apiKeys: z.array(APIKey),
+    webhooks: z.array(WebhookConfig),
+  })
+  .partial()
+  .passthrough();
+const AccountSettings = z
+  .object({
+    id: z.string(),
+    emailNotifications: z.boolean(),
+    slackNotifications: z.boolean(),
+    defaultDataRetention: z.string(),
+    autoPurgeEnabled: z.boolean(),
+    require2fa: z.boolean(),
+    sessionTimeout: z.string(),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+  })
+  .partial()
+  .passthrough();
+const Account = z
+  .object({
+    id: z.string(),
+    authPlatformUserId: z.string(),
+    email: z.string(),
+    deletedAt: z.string().datetime({ offset: true }),
+    createdAt: z.string().datetime({ offset: true }),
+    accountStatus: AccountStatus.default("ACCOUNT_STATUS_UNSPECIFIED"),
+    roles: z.array(Role),
+    permissions: z.array(Permission),
+    mfaEnabled: z.boolean(),
+    lastLoginAt: z.string().datetime({ offset: true }),
+    timezone: Timezone.default("TIMEZONE_UNSPECIFIED"),
+    totalJobsRun: z.number().int(),
+    monthlyJobLimit: z.number().int(),
+    concurrentJobLimit: z.number().int(),
+    workspaces: z.array(Workspace),
+    settings: AccountSettings,
+  })
+  .partial()
+  .passthrough();
+const ListAccountsResponse = z
+  .object({ accounts: z.array(Account), nextPageNumber: z.number().int() })
   .partial()
   .passthrough();
 const ValidationErrorCode = z.enum([
@@ -647,6 +1063,40 @@ const rpc_Status = z
   })
   .partial()
   .passthrough();
+const UpdateAccountSettingsRequest = z
+  .object({ settings: AccountSettings })
+  .partial()
+  .passthrough();
+const UpdateAccountSettingsResponse = z
+  .object({ settings: AccountSettings })
+  .partial()
+  .passthrough();
+const CreateAPIKeyRequest = z
+  .object({
+    organizationId: z.string(),
+    workspaceId: z.string(),
+    tenantId: z.string(),
+    accountId: z.string(),
+    name: z.string(),
+    description: z.string(),
+    scopes: z.array(z.string()),
+    expiresAt: z.string().datetime({ offset: true }),
+    maxUses: z.number().int(),
+    allowedIps: z.array(z.string()),
+    rateLimit: z.number().int(),
+    enforceSigning: z.boolean(),
+    allowedSignatureAlgorithms: z.array(z.string()),
+    enforceMutualTls: z.boolean(),
+    alertEmails: z.array(z.string()),
+    alertOnQuotaThreshold: z.boolean(),
+    quotaAlertThreshold: z.number(),
+  })
+  .partial()
+  .passthrough();
+const CreateAPIKeyResponse = z
+  .object({ apiKey: APIKey, keyValue: z.string() })
+  .partial()
+  .passthrough();
 const UpdateAPIKeyRequest = z
   .object({ apiKey: APIKey })
   .partial()
@@ -686,141 +1136,6 @@ const DeleteAPIKeyResponse = z
   .object({ success: z.boolean() })
   .partial()
   .passthrough();
-const DayOfWeek = z.enum([
-  "DAY_OF_WEEK_UNSPECIFIED",
-  "DAY_OF_WEEK_MONDAY",
-  "DAY_OF_WEEK_TUESDAY",
-  "DAY_OF_WEEK_WEDNESDAY",
-  "DAY_OF_WEEK_THURSDAY",
-  "DAY_OF_WEEK_FRIDAY",
-  "DAY_OF_WEEK_SATURDAY",
-  "DAY_OF_WEEK_SUNDAY",
-]);
-const BusinessHours = z
-  .object({
-    id: z.string(),
-    day: DayOfWeek.default("DAY_OF_WEEK_UNSPECIFIED"),
-    openTime: z.string(),
-    closeTime: z.string(),
-    closed: z.boolean(),
-    createdAt: z.string().datetime({ offset: true }),
-    updatedAt: z.string().datetime({ offset: true }),
-    deletedAt: z.string().datetime({ offset: true }),
-  })
-  .partial()
-  .passthrough();
-const Review = z
-  .object({
-    id: z.string(),
-    author: z.string(),
-    rating: z.number(),
-    text: z.string(),
-    time: z.string().datetime({ offset: true }),
-    language: z.string(),
-    profilePhotoUrl: z.string(),
-    reviewCount: z.number().int(),
-    createdAt: z.string().datetime({ offset: true }),
-    updatedAt: z.string().datetime({ offset: true }),
-    deletedAt: z.string().datetime({ offset: true }),
-  })
-  .partial()
-  .passthrough();
-const RevenueRange = z.enum([
-  "REVENUE_RANGE_UNSPECIFIED",
-  "REVENUE_RANGE_UNDER_100K",
-  "REVENUE_RANGE_100K_TO_1M",
-  "REVENUE_RANGE_1M_TO_10M",
-  "REVENUE_RANGE_10M_TO_50M",
-  "REVENUE_RANGE_OVER_50M",
-]);
-const EmployeeBenefit = z.enum([
-  "EMPLOYEE_BENEFIT_UNSPECIFIED",
-  "EMPLOYEE_BENEFIT_HEALTH_INSURANCE",
-  "EMPLOYEE_BENEFIT_RETIREMENT_PLAN",
-  "EMPLOYEE_BENEFIT_PAID_TIME_OFF",
-  "EMPLOYEE_BENEFIT_REMOTE_WORK",
-]);
-const Lead = z
-  .object({
-    id: z.string(),
-    name: z.string(),
-    website: z.string(),
-    phone: z.string(),
-    address: z.string(),
-    city: z.string(),
-    state: z.string(),
-    country: z.string(),
-    latitude: z.number(),
-    longitude: z.number(),
-    googleRating: z.number(),
-    reviewCount: z.number().int(),
-    industry: z.string(),
-    employeeCount: z.number().int(),
-    estimatedRevenue: z.string(),
-    createdAt: z.string().datetime({ offset: true }),
-    updatedAt: z.string().datetime({ offset: true }),
-    deletedAt: z.string().datetime({ offset: true }),
-    placeId: z.string(),
-    googleMapsUrl: z.string(),
-    businessStatus: z.string(),
-    regularHours: z.array(BusinessHours),
-    specialHours: z.array(BusinessHours),
-    photoReferences: z.array(z.string()),
-    mainPhotoUrl: z.string(),
-    reviews: z.array(Review),
-    types: z.array(z.string()),
-    amenities: z.array(z.string()),
-    servesVegetarianFood: z.boolean(),
-    outdoorSeating: z.boolean(),
-    paymentMethods: z.array(z.string()),
-    wheelchairAccessible: z.boolean(),
-    parkingAvailable: z.boolean(),
-    socialMedia: z.record(z.string()),
-    ratingCategory: z.string(),
-    rating: z.number(),
-    count: z.number().int(),
-    lastUpdated: z.string().datetime({ offset: true }),
-    dataSourceVersion: z.string(),
-    scrapingSessionId: z.string(),
-    alternatePhones: z.array(z.string()),
-    contactPersonName: z.string(),
-    contactPersonTitle: z.string(),
-    contactEmail: z.string(),
-    foundedYear: z.number().int(),
-    businessType: z.string(),
-    certifications: z.array(z.string()),
-    licenseNumber: z.string(),
-    revenueRange: RevenueRange.default("REVENUE_RANGE_UNSPECIFIED"),
-    fundingStage: z.string(),
-    isPublicCompany: z.boolean(),
-    websiteLoadSpeed: z.number(),
-    hasSslCertificate: z.boolean(),
-    cmsUsed: z.string(),
-    ecommercePlatforms: z.array(z.string()),
-    timezone: z.string(),
-    neighborhood: z.string(),
-    nearbyLandmarks: z.array(z.string()),
-    transportationAccess: z.string(),
-    employeeBenefits: z.array(EmployeeBenefit),
-    parentCompany: z.string(),
-    subsidiaries: z.array(z.string()),
-    isFranchise: z.boolean(),
-    seoKeywords: z.array(z.string()),
-    usesGoogleAds: z.boolean(),
-    googleMyBusinessCategory: z.string(),
-    naicsCode: z.string(),
-    sicCode: z.string(),
-    unspscCode: z.string(),
-    isGreenCertified: z.boolean(),
-    energySources: z.array(z.string()),
-    sustainabilityRating: z.string(),
-    recentAnnouncements: z.array(z.string()),
-    lastProductLaunch: z.string().datetime({ offset: true }),
-    hasLitigationHistory: z.boolean(),
-    exportControlStatus: z.string(),
-  })
-  .partial()
-  .passthrough();
 const ListLeadsResponse = z
   .object({
     leads: z.array(Lead),
@@ -836,309 +1151,6 @@ const BillingPlan = z.enum([
   "BILLING_PLAN_BUSINESS",
   "BILLING_PLAN_ENTERPRISE",
 ]);
-const AccountStatus = z.enum([
-  "ACCOUNT_STATUS_UNSPECIFIED",
-  "ACCOUNT_STATUS_ACTIVE",
-  "ACCOUNT_STATUS_SUSPENDED",
-  "ACCOUNT_STATUS_PENDING_VERIFICATION",
-]);
-const Role = z.enum([
-  "ROLE_UNSPECIFIED",
-  "ROLE_ADMIN",
-  "ROLE_USER",
-  "ROLE_VIEWER",
-  "ROLE_MANAGER",
-]);
-const Permission = z.enum([
-  "PERMISSION_UNSPECIFIED",
-  "PERMISSION_READ",
-  "PERMISSION_WRITE",
-  "PERMISSION_DELETE",
-  "PERMISSION_MANAGE_USERS",
-  "PERMISSION_MANAGE_BILLING",
-  "PERMISSION_VIEW_ANALYTICS",
-  "PERMISSION_MANAGE_WORKFLOWS",
-]);
-const Timezone = z.enum([
-  "TIMEZONE_UNSPECIFIED",
-  "TIMEZONE_UTC",
-  "TIMEZONE_EST",
-  "TIMEZONE_CST",
-  "TIMEZONE_MST",
-  "TIMEZONE_PST",
-  "TIMEZONE_GMT",
-  "TIMEZONE_CET",
-  "TIMEZONE_IST",
-  "TIMEZONE_JST",
-  "TIMEZONE_AEST",
-]);
-const WorkflowStatus = z.enum([
-  "WORKFLOW_STATUS_UNSPECIFIED",
-  "WORKFLOW_STATUS_DRAFT",
-  "WORKFLOW_STATUS_ACTIVE",
-  "WORKFLOW_STATUS_PAUSED",
-  "WORKFLOW_STATUS_FAILED",
-  "WORKFLOW_STATUS_COMPLETED",
-  "WORKFLOW_STATUS_ARCHIVED",
-  "WORKFLOW_STATUS_PENDING_APPROVAL",
-  "WORKFLOW_STATUS_VALIDATING",
-  "WORKFLOW_STATUS_QUOTA_EXCEEDED",
-  "WORKFLOW_STATUS_WARNING",
-]);
-const BackgroundJobStatus = z.enum([
-  "BACKGROUND_JOB_STATUS_UNSPECIFIED",
-  "BACKGROUND_JOB_STATUS_QUEUED",
-  "BACKGROUND_JOB_STATUS_IN_PROGRESS",
-  "BACKGROUND_JOB_STATUS_COMPLETED",
-  "BACKGROUND_JOB_STATUS_FAILED",
-  "BACKGROUND_JOB_STATUS_CANCELLED",
-  "BACKGROUND_JOB_STATUS_TIMED_OUT",
-]);
-const Language = z.enum([
-  "LANGUAGE_UNSPECIFIED",
-  "LANGUAGE_ENGLISH",
-  "LANGUAGE_SPANISH",
-  "LANGUAGE_FRENCH",
-  "LANGUAGE_GERMAN",
-  "LANGUAGE_ITALIAN",
-  "LANGUAGE_PORTUGUESE",
-  "LANGUAGE_DUTCH",
-  "LANGUAGE_RUSSIAN",
-  "LANGUAGE_CHINESE",
-  "LANGUAGE_JAPANESE",
-  "LANGUAGE_KOREAN",
-  "LANGUAGE_ARABIC",
-  "LANGUAGE_HINDI",
-  "LANGUAGE_GREEK",
-  "LANGUAGE_TURKISH",
-]);
-const ScrapingJob = z
-  .object({
-    id: z.string(),
-    priority: z.number().int(),
-    payloadType: z.string(),
-    payload: z.string(),
-    createdAt: z.string().datetime({ offset: true }),
-    status: BackgroundJobStatus.default("BACKGROUND_JOB_STATUS_UNSPECIFIED"),
-    name: z.string(),
-    keywords: z.array(z.string()),
-    lang: Language.default("LANGUAGE_UNSPECIFIED"),
-    zoom: z.number().int(),
-    lat: z.string(),
-    lon: z.string(),
-    fastMode: z.boolean(),
-    radius: z.number().int(),
-    depth: z.number().int(),
-    email: z.boolean(),
-    maxTime: z.number().int(),
-    proxies: z.array(z.string()),
-    updatedAt: z.string().datetime({ offset: true }),
-    deletedAt: z.string().datetime({ offset: true }),
-    leads: z.array(Lead),
-    url: z.string(),
-  })
-  .partial()
-  .passthrough();
-const OutputFormat = z.enum([
-  "OUTPUT_FORMAT_UNSPECIFIED",
-  "OUTPUT_FORMAT_JSON",
-  "OUTPUT_FORMAT_CSV",
-  "OUTPUT_FORMAT_BIGQUERY",
-  "OUTPUT_FORMAT_POSTGRES",
-]);
-const ScrapingWorkflow = z
-  .object({
-    id: z.string(),
-    name: z.string(),
-    cronExpression: z.string(),
-    nextRunTime: z.string().datetime({ offset: true }),
-    lastRunTime: z.string().datetime({ offset: true }),
-    status: WorkflowStatus.default("WORKFLOW_STATUS_UNSPECIFIED"),
-    retryCount: z.number().int(),
-    maxRetries: z.number().int(),
-    alertEmails: z.string(),
-    createdAt: z.string().datetime({ offset: true }),
-    updatedAt: z.string().datetime({ offset: true }),
-    deletedAt: z.string().datetime({ offset: true }),
-    jobs: z.array(ScrapingJob),
-    geoFencingRadius: z.number(),
-    geoFencingLat: z.number(),
-    geoFencingLon: z.number(),
-    geoFencingZoomMin: z.number().int(),
-    geoFencingZoomMax: z.number().int(),
-    includeReviews: z.boolean(),
-    includePhotos: z.boolean(),
-    includeBusinessHours: z.boolean(),
-    maxReviewsPerBusiness: z.number().int(),
-    outputFormat: OutputFormat.default("OUTPUT_FORMAT_UNSPECIFIED"),
-    outputDestination: z.string(),
-    dataRetention: z.string(),
-    anonymizePii: z.boolean(),
-    notificationSlackChannel: z.string(),
-    notificationEmailGroup: z.string(),
-    notificationNotifyOnStart: z.boolean(),
-    notificationNotifyOnComplete: z.boolean(),
-    notificationNotifyOnFailure: z.boolean(),
-    contentFilterAllowedCountries: z.array(z.string()),
-    contentFilterExcludedTypes: z.array(z.string()),
-    contentFilterMinimumRating: z.number(),
-    contentFilterMinimumReviews: z.number().int(),
-    qosMaxConcurrentRequests: z.number().int(),
-    qosMaxRetries: z.number().int(),
-    qosRequestTimeout: z.string(),
-    qosEnableJavascript: z.boolean(),
-    respectRobotsTxt: z.boolean(),
-    acceptTermsOfService: z.boolean(),
-    userAgent: z.string(),
-    searchTerms: z.array(z.string()),
-    scheduledEntryId: z.string(),
-  })
-  .partial()
-  .passthrough();
-const TriggerEvent = z.enum([
-  "TRIGGER_EVENT_UNSPECIFIED",
-  "TRIGGER_EVENT_JOB_STARTED",
-  "TRIGGER_EVENT_JOB_COMPLETED",
-  "TRIGGER_EVENT_JOB_FAILED",
-  "TRIGGER_EVENT_LEAD_FOUND",
-  "TRIGGER_EVENT_QUOTA_EXCEEDED",
-  "TRIGGER_EVENT_ERROR_THRESHOLD_REACHED",
-  "TRIGGER_EVENT_RATE_LIMIT_REACHED",
-  "TRIGGER_EVENT_DATA_VALIDATION_FAILED",
-  "TRIGGER_EVENT_NEW_PROXY_NEEDED",
-  "TRIGGER_EVENT_SCHEDULED_MAINTENANCE",
-]);
-const IncludedField = z.enum([
-  "INCLUDED_FIELD_UNSPECIFIED",
-  "INCLUDED_FIELD_NAME",
-  "INCLUDED_FIELD_WEBSITE",
-  "INCLUDED_FIELD_PHONE",
-  "INCLUDED_FIELD_ADDRESS",
-  "INCLUDED_FIELD_LOCATION",
-  "INCLUDED_FIELD_COORDINATES",
-  "INCLUDED_FIELD_GOOGLE_RATING",
-  "INCLUDED_FIELD_REVIEW_COUNT",
-  "INCLUDED_FIELD_REVIEWS",
-  "INCLUDED_FIELD_BUSINESS_HOURS",
-  "INCLUDED_FIELD_BUSINESS_STATUS",
-  "INCLUDED_FIELD_PLACE_ID",
-  "INCLUDED_FIELD_GOOGLE_MAPS_URL",
-  "INCLUDED_FIELD_PHOTOS",
-  "INCLUDED_FIELD_MAIN_PHOTO",
-  "INCLUDED_FIELD_BUSINESS_TYPES",
-  "INCLUDED_FIELD_AMENITIES",
-  "INCLUDED_FIELD_PAYMENT_METHODS",
-  "INCLUDED_FIELD_SOCIAL_PROFILES",
-  "INCLUDED_FIELD_EMPLOYEE_COUNT",
-  "INCLUDED_FIELD_REVENUE_INFO",
-  "INCLUDED_FIELD_FOUNDED_YEAR",
-  "INCLUDED_FIELD_CERTIFICATIONS",
-  "INCLUDED_FIELD_NAICS_CODE",
-  "INCLUDED_FIELD_SIC_CODE",
-  "INCLUDED_FIELD_SCRAPING_METADATA",
-  "INCLUDED_FIELD_COMPLIANCE_INFO",
-  "INCLUDED_FIELD_ALTERNATE_PHONES",
-  "INCLUDED_FIELD_CONTACT_PERSON",
-  "INCLUDED_FIELD_CONTACT_EMAIL",
-]);
-const PayloadFormat = z.enum([
-  "PAYLOAD_FORMAT_UNSPECIFIED",
-  "PAYLOAD_FORMAT_JSON",
-  "PAYLOAD_FORMAT_XML",
-  "PAYLOAD_FORMAT_FORM_DATA",
-  "PAYLOAD_FORMAT_PROTOBUF",
-  "PAYLOAD_FORMAT_YAML",
-]);
-const WebhookConfig = z
-  .object({
-    id: z.string(),
-    url: z.string(),
-    authType: z.string(),
-    authToken: z.string(),
-    customHeaders: z.record(z.string()),
-    maxRetries: z.number().int(),
-    retryInterval: z.string(),
-    triggerEvents: z.array(TriggerEvent),
-    includedFields: z.array(IncludedField),
-    includeFullResults: z.boolean(),
-    payloadFormat: PayloadFormat.default("PAYLOAD_FORMAT_UNSPECIFIED"),
-    verifySsl: z.boolean(),
-    signingSecret: z.string(),
-    rateLimit: z.number().int(),
-    rateLimitInterval: z.string(),
-    createdAt: z.string().datetime({ offset: true }),
-    updatedAt: z.string().datetime({ offset: true }),
-    lastTriggeredAt: z.string().datetime({ offset: true }),
-    successfulCalls: z.number().int(),
-    failedCalls: z.number().int(),
-    metadata: z.object({}).partial().passthrough(),
-    webhookName: z.string(),
-  })
-  .partial()
-  .passthrough();
-const Workspace = z
-  .object({
-    id: z.string(),
-    name: z.string(),
-    industry: z.string(),
-    domain: z.string(),
-    gdprCompliant: z.boolean(),
-    hipaaCompliant: z.boolean(),
-    soc2Compliant: z.boolean(),
-    storageQuota: z.string(),
-    usedStorage: z.string(),
-    createdAt: z.string().datetime({ offset: true }),
-    updatedAt: z.string().datetime({ offset: true }),
-    deletedAt: z.string().datetime({ offset: true }),
-    workflows: z.array(ScrapingWorkflow),
-    jobsRunThisMonth: z.number().int(),
-    workspaceJobLimit: z.number().int(),
-    dailyJobQuota: z.number().int(),
-    activeScrapers: z.number().int(),
-    totalLeadsCollected: z.number().int(),
-    lastJobRun: z.string().datetime({ offset: true }),
-    scrapingJobs: z.array(ScrapingJob),
-    apiKeys: z.array(APIKey),
-    webhooks: z.array(WebhookConfig),
-  })
-  .partial()
-  .passthrough();
-const AccountSettings = z
-  .object({
-    id: z.string(),
-    emailNotifications: z.boolean(),
-    slackNotifications: z.boolean(),
-    defaultDataRetention: z.string(),
-    autoPurgeEnabled: z.boolean(),
-    require2fa: z.boolean(),
-    sessionTimeout: z.string(),
-    createdAt: z.string().datetime({ offset: true }),
-    updatedAt: z.string().datetime({ offset: true }),
-    deletedAt: z.string().datetime({ offset: true }),
-  })
-  .partial()
-  .passthrough();
-const Account = z
-  .object({
-    id: z.string(),
-    authPlatformUserId: z.string(),
-    email: z.string(),
-    deletedAt: z.string().datetime({ offset: true }),
-    createdAt: z.string().datetime({ offset: true }),
-    accountStatus: AccountStatus.default("ACCOUNT_STATUS_UNSPECIFIED"),
-    roles: z.array(Role),
-    permissions: z.array(Permission),
-    mfaEnabled: z.boolean(),
-    lastLoginAt: z.string().datetime({ offset: true }),
-    timezone: Timezone.default("TIMEZONE_UNSPECIFIED"),
-    totalJobsRun: z.number().int(),
-    monthlyJobLimit: z.number().int(),
-    concurrentJobLimit: z.number().int(),
-    workspaces: z.array(Workspace),
-    settings: AccountSettings,
-  })
-  .partial()
-  .passthrough();
 const TenantAPIKeyScope = z.enum([
   "TENANT_API_KEY_SCOPE_UNSPECIFIED",
   "TENANT_API_KEY_SCOPE_READ_JOBS",
@@ -2437,10 +2449,32 @@ const ShareWorkspaceResponse = z
   .passthrough();
 
 export const schemas = {
-  CreateAPIKeyRequest,
+  AccountStatus,
+  Role,
+  Permission,
+  Timezone,
+  WorkflowStatus,
+  BackgroundJobStatus,
+  Language,
+  DayOfWeek,
+  BusinessHours,
+  Review,
+  RevenueRange,
+  EmployeeBenefit,
+  Lead,
+  ScrapingJob,
+  OutputFormat,
+  ScrapingWorkflow,
   v1_Status,
   APIKey,
-  CreateAPIKeyResponse,
+  TriggerEvent,
+  IncludedField,
+  PayloadFormat,
+  WebhookConfig,
+  Workspace,
+  AccountSettings,
+  Account,
+  ListAccountsResponse,
   ValidationErrorCode,
   FieldViolation,
   SchemaValidation,
@@ -2487,6 +2521,10 @@ export const schemas = {
   ServiceUnavailableErrorMessageResponse,
   GatewayTimeoutErrorMessageResponse,
   rpc_Status,
+  UpdateAccountSettingsRequest,
+  UpdateAccountSettingsResponse,
+  CreateAPIKeyRequest,
+  CreateAPIKeyResponse,
   UpdateAPIKeyRequest,
   UpdateAPIKeyResponse,
   ListAPIKeysResponse,
@@ -2494,32 +2532,9 @@ export const schemas = {
   RotateAPIKeyResponse,
   GetAPIKeyResponse,
   DeleteAPIKeyResponse,
-  DayOfWeek,
-  BusinessHours,
-  Review,
-  RevenueRange,
-  EmployeeBenefit,
-  Lead,
   ListLeadsResponse,
   GetLeadResponse,
   BillingPlan,
-  AccountStatus,
-  Role,
-  Permission,
-  Timezone,
-  WorkflowStatus,
-  BackgroundJobStatus,
-  Language,
-  ScrapingJob,
-  OutputFormat,
-  ScrapingWorkflow,
-  TriggerEvent,
-  IncludedField,
-  PayloadFormat,
-  WebhookConfig,
-  Workspace,
-  AccountSettings,
-  Account,
   TenantAPIKeyScope,
   TenantAPIKey,
   Tenant,
@@ -2653,6 +2668,240 @@ export const schemas = {
 };
 
 const endpoints = makeApi([
+  {
+    method: "get",
+    path: "/lead-scraper-microservice/api/v1/accounts/list",
+    alias: "ListAccounts",
+    description: `Retrieves a list of accounts`,
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "pageSize",
+        type: "Query",
+        schema: z.number().int().optional(),
+      },
+      {
+        name: "pageNumber",
+        type: "Query",
+        schema: z.number().int().optional(),
+      },
+      {
+        name: "filter",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+      {
+        name: "organizationId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+      {
+        name: "tenantId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+    ],
+    response: ListAccountsResponse,
+    errors: [
+      {
+        status: 400,
+        description: `Bad Request - Invalid input parameters`,
+        schema: ValidationErrorMessageResponse,
+      },
+      {
+        status: 401,
+        description: `Unauthorized - Authentication required`,
+        schema: AuthenticationErrorMessageResponse,
+      },
+      {
+        status: 402,
+        description: `Payment Required - Payment is necessary to proceed`,
+        schema: PaymentRequiredErrorMessageResponse,
+      },
+      {
+        status: 403,
+        description: `Forbidden - Access denied`,
+        schema: ForbiddenErrorMessageResponse,
+      },
+      {
+        status: 404,
+        description: `Not Found - Resource not found`,
+        schema: NotFoundErrorMessageResponse,
+      },
+      {
+        status: 405,
+        description: `Method Not Allowed - HTTP method not supported`,
+        schema: MethodNotAllowedErrorMessageResponse,
+      },
+      {
+        status: 409,
+        description: `Conflict - Resource already exists`,
+        schema: ConflictErrorMessageResponse,
+      },
+      {
+        status: 410,
+        description: `Gone - Resource is no longer available`,
+        schema: GoneErrorMessageResponse,
+      },
+      {
+        status: 412,
+        description: `Precondition Failed - Preconditions in headers did not match`,
+        schema: PreconditionFailedErrorMessageResponse,
+      },
+      {
+        status: 422,
+        description: `Unprocessable Entity - Semantic errors in the request`,
+        schema: UnprocessableEntityErrorMessageResponse,
+      },
+      {
+        status: 425,
+        description: `Too Early - Request is being replayed`,
+        schema: TooEarlyErrorMessageResponse,
+      },
+      {
+        status: 429,
+        description: `Too Many Requests - Rate limit exceeded`,
+        schema: RateLimitErrorMessageResponse,
+      },
+      {
+        status: 500,
+        description: `Internal Server Error`,
+        schema: InternalErrorMessageResponse,
+      },
+      {
+        status: 501,
+        description: `Not Implemented - Functionality not supported`,
+        schema: NotImplementedErrorMessageResponse,
+      },
+      {
+        status: 502,
+        description: `Bad Gateway - Invalid response from upstream server`,
+        schema: BadGatewayErrorMessageResponse,
+      },
+      {
+        status: 503,
+        description: `Service Unavailable - Try again later`,
+        schema: ServiceUnavailableErrorMessageResponse,
+      },
+      {
+        status: 504,
+        description: `Gateway Timeout - Upstream server timed out`,
+        schema: GatewayTimeoutErrorMessageResponse,
+      },
+      {
+        status: "default",
+        description: `An unexpected error response.`,
+        schema: rpc_Status,
+      },
+    ],
+  },
+  {
+    method: "put",
+    path: "/lead-scraper-microservice/api/v1/accounts/settings",
+    alias: "UpdateAccountSettings",
+    description: `Updates the settings for a given account`,
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "body",
+        type: "Body",
+        schema: UpdateAccountSettingsRequest,
+      },
+    ],
+    response: UpdateAccountSettingsResponse,
+    errors: [
+      {
+        status: 400,
+        description: `Bad Request - Invalid input parameters`,
+        schema: ValidationErrorMessageResponse,
+      },
+      {
+        status: 401,
+        description: `Unauthorized - Authentication required`,
+        schema: AuthenticationErrorMessageResponse,
+      },
+      {
+        status: 402,
+        description: `Payment Required - Payment is necessary to proceed`,
+        schema: PaymentRequiredErrorMessageResponse,
+      },
+      {
+        status: 403,
+        description: `Forbidden - Access denied`,
+        schema: ForbiddenErrorMessageResponse,
+      },
+      {
+        status: 404,
+        description: `Not Found - Resource not found`,
+        schema: NotFoundErrorMessageResponse,
+      },
+      {
+        status: 405,
+        description: `Method Not Allowed - HTTP method not supported`,
+        schema: MethodNotAllowedErrorMessageResponse,
+      },
+      {
+        status: 409,
+        description: `Conflict - Resource already exists`,
+        schema: ConflictErrorMessageResponse,
+      },
+      {
+        status: 410,
+        description: `Gone - Resource is no longer available`,
+        schema: GoneErrorMessageResponse,
+      },
+      {
+        status: 412,
+        description: `Precondition Failed - Preconditions in headers did not match`,
+        schema: PreconditionFailedErrorMessageResponse,
+      },
+      {
+        status: 422,
+        description: `Unprocessable Entity - Semantic errors in the request`,
+        schema: UnprocessableEntityErrorMessageResponse,
+      },
+      {
+        status: 425,
+        description: `Too Early - Request is being replayed`,
+        schema: TooEarlyErrorMessageResponse,
+      },
+      {
+        status: 429,
+        description: `Too Many Requests - Rate limit exceeded`,
+        schema: RateLimitErrorMessageResponse,
+      },
+      {
+        status: 500,
+        description: `Internal Server Error`,
+        schema: InternalErrorMessageResponse,
+      },
+      {
+        status: 501,
+        description: `Not Implemented - Functionality not supported`,
+        schema: NotImplementedErrorMessageResponse,
+      },
+      {
+        status: 502,
+        description: `Bad Gateway - Invalid response from upstream server`,
+        schema: BadGatewayErrorMessageResponse,
+      },
+      {
+        status: 503,
+        description: `Service Unavailable - Try again later`,
+        schema: ServiceUnavailableErrorMessageResponse,
+      },
+      {
+        status: 504,
+        description: `Gateway Timeout - Upstream server timed out`,
+        schema: GatewayTimeoutErrorMessageResponse,
+      },
+      {
+        status: "default",
+        description: `An unexpected error response.`,
+        schema: rpc_Status,
+      },
+    ],
+  },
   {
     method: "post",
     path: "/lead-scraper-microservice/api/v1/api-keys",
@@ -8258,6 +8507,35 @@ export class ApiClient {
 
   constructor(baseUrl: string, options?: ZodiosOptions) {
     this.client = new Zodios(baseUrl, endpoints, options);
+  }
+
+  async getLeadScraperMicroserviceApiV1AccountsList(params: {
+    pageSize: number | undefined;
+    pageNumber: number | undefined;
+    filter: string | undefined;
+    organizationId: string | undefined;
+    tenantId: string | undefined;
+  }) {
+    return this.client.get("/lead-scraper-microservice/api/v1/accounts/list", {
+      params: {},
+      queries: {
+        pageSize: params.pageSize ? Number(params.pageSize) : undefined,
+        pageNumber: params.pageNumber ? Number(params.pageNumber) : undefined,
+        filter: params.filter,
+        organizationId: params.organizationId,
+        tenantId: params.tenantId,
+      },
+    });
+  }
+
+  async updateLeadScraperMicroserviceApiV1AccountsSettings(
+    data: z.infer<typeof schemas.UpdateAccountSettingsRequest>,
+  ) {
+    return this.client.put(
+      "/lead-scraper-microservice/api/v1/accounts/settings",
+      data,
+      {},
+    );
   }
 
   async createLeadScraperMicroserviceApiV1ApiKeys(

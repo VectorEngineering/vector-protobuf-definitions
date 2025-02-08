@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-08T10:12:06.282281-05:00[America/New_York]
+- Build date: 2025-02-08T10:13:57.140386-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -78,6 +78,7 @@ cargo run --example client GetWebhook
 cargo run --example client GetWorkflow
 cargo run --example client GetWorkspace
 cargo run --example client GetWorkspaceAnalytics
+cargo run --example client ListAccounts
 cargo run --example client ListApiKeys
 cargo run --example client ListLeads
 cargo run --example client ListOrganizations
@@ -150,6 +151,7 @@ Method | HTTP request | Description
 [**GetWorkflow**](docs/lead_scraper_service_api.md#GetWorkflow) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Get workflow details
 [**GetWorkspace**](docs/lead_scraper_service_api.md#GetWorkspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details
 [**GetWorkspaceAnalytics**](docs/lead_scraper_service_api.md#GetWorkspaceAnalytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics
+[**ListAccounts**](docs/lead_scraper_service_api.md#ListAccounts) | **GET** /lead-scraper-microservice/api/v1/accounts/list | List all accounts
 [**ListAPIKeys**](docs/lead_scraper_service_api.md#ListAPIKeys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys
 [**ListLeads**](docs/lead_scraper_service_api.md#ListLeads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads
 [**ListOrganizations**](docs/lead_scraper_service_api.md#ListOrganizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations
@@ -161,6 +163,7 @@ Method | HTTP request | Description
 [**RotateAPIKey**](docs/lead_scraper_service_api.md#RotateAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key
 [**RotateTenantAPIKey**](docs/lead_scraper_service_api.md#RotateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key
 [**TriggerWorkflow**](docs/lead_scraper_service_api.md#TriggerWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution
+[**UpdateAccountSettings**](docs/lead_scraper_service_api.md#UpdateAccountSettings) | **PUT** /lead-scraper-microservice/api/v1/accounts/settings | Update account settings
 [**UpdateAPIKey**](docs/lead_scraper_service_api.md#UpdateAPIKey) | **PUT** /lead-scraper-microservice/api/v1/api-keys | Update API key
 [**UpdateOrganization**](docs/lead_scraper_service_api.md#UpdateOrganization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details
 [**UpdateTenant**](docs/lead_scraper_service_api.md#UpdateTenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details
@@ -297,6 +300,7 @@ Method | HTTP request | Description
  - [Lead](docs/Lead.md)
  - [LimitInfo](docs/LimitInfo.md)
  - [ListAccountsResponse](docs/ListAccountsResponse.md)
+ - [ListAccountsResponse1](docs/ListAccountsResponse1.md)
  - [ListApiKeysResponse](docs/ListApiKeysResponse.md)
  - [ListLeadsResponse](docs/ListLeadsResponse.md)
  - [ListOrganizationsResponse](docs/ListOrganizationsResponse.md)
@@ -376,6 +380,8 @@ Method | HTTP request | Description
  - [UnprocessableEntityErrorMessageResponse](docs/UnprocessableEntityErrorMessageResponse.md)
  - [UpdateAccountRequest](docs/UpdateAccountRequest.md)
  - [UpdateAccountResponse](docs/UpdateAccountResponse.md)
+ - [UpdateAccountSettingsRequest](docs/UpdateAccountSettingsRequest.md)
+ - [UpdateAccountSettingsResponse](docs/UpdateAccountSettingsResponse.md)
  - [UpdateApiKeyRequest](docs/UpdateApiKeyRequest.md)
  - [UpdateApiKeyResponse](docs/UpdateApiKeyResponse.md)
  - [UpdateOrganizationRequest](docs/UpdateOrganizationRequest.md)

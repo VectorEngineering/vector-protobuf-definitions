@@ -146,6 +146,11 @@ input UpdateAPIKeyInput {
     updateApiKeyRequest: UpdateApiKeyRequestInput
 }
 
+input UpdateAccountSettingsInput {
+    
+    updateAccountSettingsRequest: UpdateAccountSettingsRequestInput
+}
+
 input UpdateOrganizationInput {
     
     updateOrganizationRequest: UpdateOrganizationRequestInput
@@ -288,6 +293,11 @@ type Mutation {
   # @param UpdateApiKeyRequest updateApiKeyRequest 
   # @return [UpdateApiKeyResponse]
   UpdateAPIKey(input: UpdateAPIKeyInput!): UpdateApiKeyResponse
+  # Update account settings
+  # Updates the settings for a given account
+  # @param UpdateAccountSettingsRequest updateAccountSettingsRequest 
+  # @return [UpdateAccountSettingsResponse]
+  UpdateAccountSettings(input: UpdateAccountSettingsInput!): UpdateAccountSettingsResponse
   # Update organization details
   # Updates the configuration of a specific organization
   # @param UpdateOrganizationRequest updateOrganizationRequest 
@@ -399,6 +409,15 @@ type Query {
   # @param String! search 
   # @return [ListApiKeysResponse]
   ListAPIKeys(organizationId: String!, tenantId: String!, accountId: String!, workspaceId: String!, pageSize: Int!, pageNumber: Int!, status: String!, search: String!): ListApiKeysResponse
+  # List all accounts
+  # Retrieves a list of accounts
+  # @param Int! pageSize 
+  # @param Int! pageNumber 
+  # @param String! filter 
+  # @param String! organizationId 
+  # @param String! tenantId 
+  # @return [ListAccountsResponse]
+  ListAccounts(pageSize: Int!, pageNumber: Int!, filter: String!, organizationId: String!, tenantId: String!): ListAccountsResponse
   # List leads
   # Retrieves a paginated list of leads with comprehensive filtering options
   # @param String! organizationId Context identifiers

@@ -27,6 +27,7 @@ Method | HTTP request | Description
 [**GetWorkspace**](lead_scraper_service_api.md#GetWorkspace) | **GET** /lead-scraper-microservice/api/v1/workspace/{id} | Get workspace details
 [**GetWorkspaceAnalytics**](lead_scraper_service_api.md#GetWorkspaceAnalytics) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics | Get workspace analytics
 [**ListAPIKeys**](lead_scraper_service_api.md#ListAPIKeys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys
+[**ListAccounts**](lead_scraper_service_api.md#ListAccounts) | **GET** /lead-scraper-microservice/api/v1/accounts/list | List all accounts
 [**ListLeads**](lead_scraper_service_api.md#ListLeads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads
 [**ListOrganizations**](lead_scraper_service_api.md#ListOrganizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations
 [**ListTenantAPIKeys**](lead_scraper_service_api.md#ListTenantAPIKeys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys
@@ -38,6 +39,7 @@ Method | HTTP request | Description
 [**RotateTenantAPIKey**](lead_scraper_service_api.md#RotateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key
 [**TriggerWorkflow**](lead_scraper_service_api.md#TriggerWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger | Trigger workflow execution
 [**UpdateAPIKey**](lead_scraper_service_api.md#UpdateAPIKey) | **PUT** /lead-scraper-microservice/api/v1/api-keys | Update API key
+[**UpdateAccountSettings**](lead_scraper_service_api.md#UpdateAccountSettings) | **PUT** /lead-scraper-microservice/api/v1/accounts/settings | Update account settings
 [**UpdateOrganization**](lead_scraper_service_api.md#UpdateOrganization) | **PUT** /lead-scraper-microservice/api/v1/organization | Update organization details
 [**UpdateTenant**](lead_scraper_service_api.md#UpdateTenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details
 [**UpdateTenantAPIKey**](lead_scraper_service_api.md#UpdateTenantAPIKey) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Update tenant API key
@@ -207,6 +209,13 @@ Retrieves analytics data for a specific workspace
 List API keys
 
 Retrieves a list of API keys with optional filtering
+<a name="ListAccounts"></a>
+# **ListAccounts**
+> ListAccountsResponse ListAccounts(pageSize, pageNumber, filter, organizationId, tenantId)
+
+List all accounts
+
+Retrieves a list of accounts
 <a name="ListLeads"></a>
 # **ListLeads**
 > ListLeadsResponse ListLeads(organizationId, workspaceId, tenantId, accountId, pageSize, pageNumber)
@@ -284,6 +293,13 @@ Triggers the execution of a specific workflow
 Update API key
 
 Updates an existing API key&#39;s configuration
+<a name="UpdateAccountSettings"></a>
+# **UpdateAccountSettings**
+> UpdateAccountSettingsResponse UpdateAccountSettings(updateAccountSettingsRequest)
+
+Update account settings
+
+Updates the settings for a given account
 <a name="UpdateOrganization"></a>
 # **UpdateOrganization**
 > UpdateOrganizationResponse UpdateOrganization(updateOrganizationRequest)

@@ -115,6 +115,17 @@ export default {
             };
         },
 
+        // @return ListAccountsResponse
+        ListAccounts: ($pageSize, $pageNumber, $filter, $organizationId, $tenantId) => {
+            return {
+                "pageSize": "56",
+                "pageNumber": "56",
+                "filter": "filter_example",
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example"
+            };
+        },
+
         // @return ListLeadsResponse
         ListLeads: ($organizationId, $workspaceId, $tenantId, $accountId, $pageSize, $pageNumber) => {
             return {
@@ -330,6 +341,13 @@ export default {
         UpdateAPIKey: ($updateApiKeyRequest) => {
             return {
                 "updateApiKeyRequest": ""
+            };
+        },
+
+        // @return UpdateAccountSettingsResponse
+        UpdateAccountSettings: ($updateAccountSettingsRequest) => {
+            return {
+                "updateAccountSettingsRequest": ""
             };
         },
 

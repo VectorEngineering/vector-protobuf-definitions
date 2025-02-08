@@ -39,6 +39,7 @@ from playbookmedia_backend_server_sdk.models.get_workspace_response import GetWo
 from playbookmedia_backend_server_sdk.models.gone_error_message_response import GoneErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.internal_error_message_response import InternalErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_api_keys_response import ListAPIKeysResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.list_accounts_response import ListAccountsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_leads_response import ListLeadsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_organizations_response import ListOrganizationsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_tenant_api_keys_response import ListTenantAPIKeysResponse  # noqa: E501
@@ -65,6 +66,8 @@ from playbookmedia_backend_server_sdk.models.trigger_workflow_response import Tr
 from playbookmedia_backend_server_sdk.models.unprocessable_entity_error_message_response import UnprocessableEntityErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_api_key_request import UpdateAPIKeyRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_api_key_response import UpdateAPIKeyResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.update_account_settings_request import UpdateAccountSettingsRequest  # noqa: E501
+from playbookmedia_backend_server_sdk.models.update_account_settings_response import UpdateAccountSettingsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_organization_request import UpdateOrganizationRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_organization_response import UpdateOrganizationResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_tenant_api_key_request import UpdateTenantAPIKeyRequest  # noqa: E501
@@ -457,6 +460,27 @@ def get_workspace_analytics(workspace_id, start_time=None, end_time=None):  # no
     return 'do some magic!'
 
 
+def list_accounts(page_size=None, page_number=None, filter=None, organization_id=None, tenant_id=None):  # noqa: E501
+    """List all accounts
+
+    Retrieves a list of accounts # noqa: E501
+
+    :param page_size: 
+    :type page_size: int
+    :param page_number: 
+    :type page_number: int
+    :param filter: 
+    :type filter: str
+    :param organization_id: 
+    :type organization_id: str
+    :param tenant_id: 
+    :type tenant_id: str
+
+    :rtype: Union[ListAccountsResponse, Tuple[ListAccountsResponse, int], Tuple[ListAccountsResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
 def list_api_keys(organization_id=None, tenant_id=None, account_id=None, workspace_id=None, page_size=None, page_number=None, status=None, search=None):  # noqa: E501
     """List API keys
 
@@ -677,6 +701,21 @@ def trigger_workflow(workspace_id, id, trigger_workflow_body):  # noqa: E501
     """
     if connexion.request.is_json:
         trigger_workflow_body = TriggerWorkflowBody.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
+def update_account_settings(update_account_settings_request):  # noqa: E501
+    """Update account settings
+
+    Updates the settings for a given account # noqa: E501
+
+    :param update_account_settings_request: 
+    :type update_account_settings_request: dict | bytes
+
+    :rtype: Union[UpdateAccountSettingsResponse, Tuple[UpdateAccountSettingsResponse, int], Tuple[UpdateAccountSettingsResponse, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        update_account_settings_request = UpdateAccountSettingsRequest.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
 
 

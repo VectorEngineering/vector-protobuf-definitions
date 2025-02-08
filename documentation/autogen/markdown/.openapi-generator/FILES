@@ -110,6 +110,7 @@ Models/Lead.md
 Models/LimitInfo.md
 Models/ListAPIKeysResponse.md
 Models/ListAccountsResponse.md
+Models/ListAccountsResponse1.md
 Models/ListLeadsResponse.md
 Models/ListOrganizationsResponse.md
 Models/ListTenantAPIKeysResponse.md
@@ -189,6 +190,8 @@ Models/UpdateAPIKeyRequest.md
 Models/UpdateAPIKeyResponse.md
 Models/UpdateAccountRequest.md
 Models/UpdateAccountResponse.md
+Models/UpdateAccountSettingsRequest.md
+Models/UpdateAccountSettingsResponse.md
 Models/UpdateOrganizationRequest.md
 Models/UpdateOrganizationResponse.md
 Models/UpdateTenantAPIKeyRequest.md

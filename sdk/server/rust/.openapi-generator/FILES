@@ -112,6 +112,7 @@ docs/Language.md
 docs/Lead.md
 docs/LimitInfo.md
 docs/ListAccountsResponse.md
+docs/ListAccountsResponse1.md
 docs/ListApiKeysResponse.md
 docs/ListLeadsResponse.md
 docs/ListOrganizationsResponse.md
@@ -191,6 +192,8 @@ docs/TriggerWorkflowResponse.md
 docs/UnprocessableEntityErrorMessageResponse.md
 docs/UpdateAccountRequest.md
 docs/UpdateAccountResponse.md
+docs/UpdateAccountSettingsRequest.md
+docs/UpdateAccountSettingsResponse.md
 docs/UpdateApiKeyRequest.md
 docs/UpdateApiKeyResponse.md
 docs/UpdateOrganizationRequest.md

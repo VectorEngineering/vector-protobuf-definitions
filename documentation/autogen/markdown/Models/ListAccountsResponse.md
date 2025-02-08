@@ -3,9 +3,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **accounts** | [**List**](Account1.md) |  | [optional] [default to null] |
-| **nextPageToken** | **String** |  | [optional] [default to null] |
-| **totalSize** | **Integer** |  | [optional] [default to null] |
+| **accounts** | [**List**](Account.md) |  | [optional] [default to null] |
+| **nextPageNumber** | **Integer** |  | [optional] [default to null] |
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

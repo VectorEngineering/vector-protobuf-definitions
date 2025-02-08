@@ -830,6 +830,86 @@ pub enum DeleteWebhookResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum DeleteWorkspaceResponse {
+    /// Workspace deleted successfully
+    WorkspaceDeletedSuccessfully
+    (models::DeleteWorkspaceResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum GetApiKeyResponse {
     /// API key retrieved successfully
     APIKeyRetrievedSuccessfully
@@ -2350,6 +2430,86 @@ pub enum UpdateWebhookResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum UpdateWorkspaceResponse {
+    /// Workspace updated successfully
+    WorkspaceUpdatedSuccessfully
+    (models::UpdateWorkspaceResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum CreateAccountResponse {
     /// A successful response.
     ASuccessfulResponse
@@ -2478,7 +2638,7 @@ pub enum DeleteAccountResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
-pub enum DeleteWorkspaceResponse {
+pub enum DeleteWorkspace1Response {
     /// Workspace deleted successfully
     WorkspaceDeletedSuccessfully
     (models::DeleteWorkspaceResponse)
@@ -2918,7 +3078,7 @@ pub enum UpdateAccountResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
-pub enum UpdateWorkspaceResponse {
+pub enum UpdateWorkspace1Response {
     /// Workspace updated successfully
     WorkspaceUpdatedSuccessfully
     (models::UpdateWorkspaceResponse)
@@ -3076,6 +3236,12 @@ pub trait Api<C: Send + Sync> {
         account_id: Option<String>,
         context: &C) -> Result<DeleteWebhookResponse, ApiError>;
 
+    /// Delete a workspace
+    async fn delete_workspace(
+        &self,
+        id: String,
+        context: &C) -> Result<DeleteWorkspaceResponse, ApiError>;
+
     /// Get API key details
     async fn get_api_key(
         &self,
@@ -3231,6 +3397,12 @@ pub trait Api<C: Send + Sync> {
         update_webhook_request: models::UpdateWebhookRequest,
         context: &C) -> Result<UpdateWebhookResponse, ApiError>;
 
+    /// Update workspace details
+    async fn update_workspace(
+        &self,
+        update_workspace_request: models::UpdateWorkspaceRequest,
+        context: &C) -> Result<UpdateWorkspaceResponse, ApiError>;
+
     /// Create a new account
     async fn create_account(
         &self,
@@ -3250,10 +3422,10 @@ pub trait Api<C: Send + Sync> {
         context: &C) -> Result<DeleteAccountResponse, ApiError>;
 
     /// Delete workspace
-    async fn delete_workspace(
+    async fn delete_workspace1(
         &self,
         id: String,
-        context: &C) -> Result<DeleteWorkspaceResponse, ApiError>;
+        context: &C) -> Result<DeleteWorkspace1Response, ApiError>;
 
     /// Get account details
     async fn get_account(
@@ -3325,10 +3497,10 @@ pub trait Api<C: Send + Sync> {
         context: &C) -> Result<UpdateAccountResponse, ApiError>;
 
     /// Update workspace
-    async fn update_workspace(
+    async fn update_workspace1(
         &self,
-        update_workspace_request: models::UpdateWorkspaceRequest,
-        context: &C) -> Result<UpdateWorkspaceResponse, ApiError>;
+        update_workspace_request1: models::UpdateWorkspaceRequest1,
+        context: &C) -> Result<UpdateWorkspace1Response, ApiError>;
 
     /// Update workspace sharing
     async fn update_workspace_sharing(
@@ -3418,6 +3590,12 @@ pub trait ApiNoContext<C: Send + Sync> {
         tenant_id: Option<String>,
         account_id: Option<String>,
         ) -> Result<DeleteWebhookResponse, ApiError>;
+
+    /// Delete a workspace
+    async fn delete_workspace(
+        &self,
+        id: String,
+        ) -> Result<DeleteWorkspaceResponse, ApiError>;
 
     /// Get API key details
     async fn get_api_key(
@@ -3574,6 +3752,12 @@ pub trait ApiNoContext<C: Send + Sync> {
         update_webhook_request: models::UpdateWebhookRequest,
         ) -> Result<UpdateWebhookResponse, ApiError>;
 
+    /// Update workspace details
+    async fn update_workspace(
+        &self,
+        update_workspace_request: models::UpdateWorkspaceRequest,
+        ) -> Result<UpdateWorkspaceResponse, ApiError>;
+
     /// Create a new account
     async fn create_account(
         &self,
@@ -3593,10 +3777,10 @@ pub trait ApiNoContext<C: Send + Sync> {
         ) -> Result<DeleteAccountResponse, ApiError>;
 
     /// Delete workspace
-    async fn delete_workspace(
+    async fn delete_workspace1(
         &self,
         id: String,
-        ) -> Result<DeleteWorkspaceResponse, ApiError>;
+        ) -> Result<DeleteWorkspace1Response, ApiError>;
 
     /// Get account details
     async fn get_account(
@@ -3668,10 +3852,10 @@ pub trait ApiNoContext<C: Send + Sync> {
         ) -> Result<UpdateAccountResponse, ApiError>;
 
     /// Update workspace
-    async fn update_workspace(
+    async fn update_workspace1(
         &self,
-        update_workspace_request: models::UpdateWorkspaceRequest,
-        ) -> Result<UpdateWorkspaceResponse, ApiError>;
+        update_workspace_request1: models::UpdateWorkspaceRequest1,
+        ) -> Result<UpdateWorkspace1Response, ApiError>;
 
     /// Update workspace sharing
     async fn update_workspace_sharing(
@@ -3814,6 +3998,16 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().delete_webhook(webhook_id, organization_id, workspace_id, tenant_id, account_id, &context).await
+    }
+
+    /// Delete a workspace
+    async fn delete_workspace(
+        &self,
+        id: String,
+        ) -> Result<DeleteWorkspaceResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().delete_workspace(id, &context).await
     }
 
     /// Get API key details
@@ -4047,6 +4241,16 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         self.api().update_webhook(update_webhook_request, &context).await
     }
 
+    /// Update workspace details
+    async fn update_workspace(
+        &self,
+        update_workspace_request: models::UpdateWorkspaceRequest,
+        ) -> Result<UpdateWorkspaceResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().update_workspace(update_workspace_request, &context).await
+    }
+
     /// Create a new account
     async fn create_account(
         &self,
@@ -4078,13 +4282,13 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     }
 
     /// Delete workspace
-    async fn delete_workspace(
+    async fn delete_workspace1(
         &self,
         id: String,
-        ) -> Result<DeleteWorkspaceResponse, ApiError>
+        ) -> Result<DeleteWorkspace1Response, ApiError>
     {
         let context = self.context().clone();
-        self.api().delete_workspace(id, &context).await
+        self.api().delete_workspace1(id, &context).await
     }
 
     /// Get account details
@@ -4197,13 +4401,13 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     }
 
     /// Update workspace
-    async fn update_workspace(
+    async fn update_workspace1(
         &self,
-        update_workspace_request: models::UpdateWorkspaceRequest,
-        ) -> Result<UpdateWorkspaceResponse, ApiError>
+        update_workspace_request1: models::UpdateWorkspaceRequest1,
+        ) -> Result<UpdateWorkspace1Response, ApiError>
     {
         let context = self.context().clone();
-        self.api().update_workspace(update_workspace_request, &context).await
+        self.api().update_workspace1(update_workspace_request1, &context).await
     }
 
     /// Update workspace sharing

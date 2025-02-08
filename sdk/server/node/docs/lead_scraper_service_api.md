@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**DeleteTenant**](lead_scraper_service_api.md#DeleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 [**DeleteTenantAPIKey**](lead_scraper_service_api.md#DeleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
 [**DeleteWebhook**](lead_scraper_service_api.md#DeleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
+[**DeleteWorkspace**](lead_scraper_service_api.md#DeleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
 [**GetAPIKey**](lead_scraper_service_api.md#GetAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
 [**GetLead**](lead_scraper_service_api.md#GetLead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
 [**GetOrganization**](lead_scraper_service_api.md#GetOrganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details
@@ -33,6 +34,7 @@ Method | HTTP request | Description
 [**UpdateTenant**](lead_scraper_service_api.md#UpdateTenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details
 [**UpdateTenantAPIKey**](lead_scraper_service_api.md#UpdateTenantAPIKey) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Update tenant API key
 [**UpdateWebhook**](lead_scraper_service_api.md#UpdateWebhook) | **PUT** /lead-scraper-microservice/api/v1/webhooks | Update webhook
+[**UpdateWorkspace**](lead_scraper_service_api.md#UpdateWorkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details
 
 
 <a name="CreateAPIKey"></a>
@@ -105,6 +107,13 @@ Permanently deletes a tenant API key
 Delete webhook
 
 Deletes a webhook configuration
+<a name="DeleteWorkspace"></a>
+# **DeleteWorkspace**
+> DeleteWorkspaceResponse DeleteWorkspace(Id_)
+
+Delete a workspace
+
+Deletes a specific workspace
 <a name="GetAPIKey"></a>
 # **GetAPIKey**
 > GetApiKeyResponse GetAPIKey(keyId, organizationId, tenantId, accountId, workspaceId)
@@ -238,3 +247,10 @@ Updates an existing tenant API key&#39;s configuration
 Update webhook
 
 Updates an existing webhook configuration
+<a name="UpdateWorkspace"></a>
+# **UpdateWorkspace**
+> UpdateWorkspaceResponse UpdateWorkspace(updateWorkspaceRequest)
+
+Update workspace details
+
+Updates the details of a specific workspace

@@ -72,27 +72,28 @@ import { z } from "@hono/zod-openapi";
  *             type: string
  *           example: ["\n\n", "```"]
  */
-export const aiCompletionRequestSchema = z.object({
-  model: z.custom<TextGenerationModel>(
-    (val) => {
-      return typeof val === "string" && val.startsWith("@cf/");
-    },
-    {
-      message:
-        "Invalid Cloudflare AI model. Must be a valid @cf/ model identifier.",
-    },
-  ),
-  prompt: z.string().min(1),
-  stream: z.boolean().optional().default(false),
-  temperature: z.number().min(0).max(2).optional().default(0.7),
-  maxTokens: z.number().positive().optional().default(1000),
-  topP: z.number().min(0).max(1).optional().default(1),
-  topK: z.number().positive().optional(),
-  repetitionPenalty: z.number().min(0).optional(),
-  frequencyPenalty: z.number().min(0).optional(),
-  presencePenalty: z.number().min(0).optional(),
-  stop: z.array(z.string()).optional(),
-})
+export const aiCompletionRequestSchema = z
+  .object({
+    model: z.custom<TextGenerationModel>(
+      (val) => {
+        return typeof val === "string" && val.startsWith("@cf/");
+      },
+      {
+        message:
+          "Invalid Cloudflare AI model. Must be a valid @cf/ model identifier.",
+      },
+    ),
+    prompt: z.string().min(1),
+    stream: z.boolean().optional().default(false),
+    temperature: z.number().min(0).max(2).optional().default(0.7),
+    maxTokens: z.number().positive().optional().default(1000),
+    topP: z.number().min(0).max(1).optional().default(1),
+    topK: z.number().positive().optional(),
+    repetitionPenalty: z.number().min(0).optional(),
+    frequencyPenalty: z.number().min(0).optional(),
+    presencePenalty: z.number().min(0).optional(),
+    stop: z.array(z.string()).optional(),
+  })
   .openapi("AiCompletionRequest");
 
 /**
@@ -115,11 +116,12 @@ export const aiCompletionRequestSchema = z.object({
  *           type: boolean
  *           description: Whether the model supports LoRA adapters
  */
-export const aiModelCapabilitiesSchema = z.object({
-  streaming: z.boolean(),
-  functionCalling: z.boolean().optional(),
-  lora: z.boolean().optional(),
-})
+export const aiModelCapabilitiesSchema = z
+  .object({
+    streaming: z.boolean(),
+    functionCalling: z.boolean().optional(),
+    lora: z.boolean().optional(),
+  })
   .openapi("AiModelCapabilities");
 
 /**
@@ -180,11 +182,12 @@ export const aiModelSchema = z.object({
  *           format: date-time
  *           description: When the status was last checked
  */
-export const aiStatusResponseSchema = z.object({
-  status: z.enum(["healthy", "degraded", "down"]),
-  models: z.array(aiModelSchema),
-  lastChecked: z.string().datetime(),
-})
+export const aiStatusResponseSchema = z
+  .object({
+    status: z.enum(["healthy", "degraded", "down"]),
+    models: z.array(aiModelSchema),
+    lastChecked: z.string().datetime(),
+  })
   .openapi("AiStatusResponse");
 
 // Type exports using Zod inference

@@ -186,6 +186,7 @@ Models/UpdateTenantResponse.md
 Models/UpdateWebhookRequest.md
 Models/UpdateWebhookResponse.md
 Models/UpdateWorkspaceRequest.md
+Models/UpdateWorkspaceRequest1.md
 Models/UpdateWorkspaceResponse.md
 Models/UpdateWorkspaceSharingRequest.md
 Models/UpdateWorkspaceSharingResponse.md

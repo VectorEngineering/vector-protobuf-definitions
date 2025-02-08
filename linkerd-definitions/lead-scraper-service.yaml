@@ -8,6 +8,14 @@ spec:
   routes:
   - condition:
       method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/UpdateWorkspace
+    name: UpdateWorkspace
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/DeleteWorkspace
+    name: DeleteWorkspace
+  - condition:
+      method: POST
       pathRegex: /lead_scraper_service\.v1\.LeadScraperService/CreateTenant
     name: CreateTenant
   - condition:

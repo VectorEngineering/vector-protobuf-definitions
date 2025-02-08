@@ -75,6 +75,7 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**delete_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_tenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 *LeadScraperServiceApi* | [**delete_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_tenant_api_key) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
 *LeadScraperServiceApi* | [**delete_webhook**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_webhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
+*LeadScraperServiceApi* | [**delete_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_workspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
 *LeadScraperServiceApi* | [**get_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_api_key) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
 *LeadScraperServiceApi* | [**get_lead**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_lead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
 *LeadScraperServiceApi* | [**get_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_organization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details
@@ -94,10 +95,11 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**update_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_tenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details
 *LeadScraperServiceApi* | [**update_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_tenant_api_key) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Update tenant API key
 *LeadScraperServiceApi* | [**update_webhook**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_webhook) | **PUT** /lead-scraper-microservice/api/v1/webhooks | Update webhook
+*LeadScraperServiceApi* | [**update_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_workspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details
 *WorkspaceServiceApi* | [**create_account**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#create_account) | **POST** /workspace-service/v1/accounts | Create a new account
 *WorkspaceServiceApi* | [**create_workspace**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#create_workspace) | **POST** /workspace-service/v1/workspaces | Create workspace
 *WorkspaceServiceApi* | [**delete_account**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#delete_account) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
-*WorkspaceServiceApi* | [**delete_workspace**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#delete_workspace) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
+*WorkspaceServiceApi* | [**delete_workspace1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#delete_workspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
 *WorkspaceServiceApi* | [**get_account**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_account) | **GET** /workspace-service/v1/accounts/{id} | Get account details
 *WorkspaceServiceApi* | [**get_workspace**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
 *WorkspaceServiceApi* | [**get_workspace_analytics**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace_analytics) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
@@ -108,7 +110,7 @@ Class | Method | HTTP request | Description
 *WorkspaceServiceApi* | [**remove_workspace_sharing**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#remove_workspace_sharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing
 *WorkspaceServiceApi* | [**share_workspace**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#share_workspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace
 *WorkspaceServiceApi* | [**update_account**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#update_account) | **PUT** /workspace-service/v1/accounts | Update account details
-*WorkspaceServiceApi* | [**update_workspace**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#update_workspace) | **PUT** /workspace-service/v1/workspaces | Update workspace
+*WorkspaceServiceApi* | [**update_workspace1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#update_workspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace
 *WorkspaceServiceApi* | [**update_workspace_sharing**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#update_workspace_sharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing
 
 
@@ -301,6 +303,7 @@ Class | Method | HTTP request | Description
  - [UpdateWebhookRequest](playbookmedia_backend_client_sdk/docs/UpdateWebhookRequest.md)
  - [UpdateWebhookResponse](playbookmedia_backend_client_sdk/docs/UpdateWebhookResponse.md)
  - [UpdateWorkspaceRequest](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceRequest.md)
+ - [UpdateWorkspaceRequest1](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceRequest1.md)
  - [UpdateWorkspaceResponse](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceResponse.md)
  - [UpdateWorkspaceSharingRequest](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceSharingRequest.md)
  - [UpdateWorkspaceSharingResponse](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceSharingResponse.md)

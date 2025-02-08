@@ -28,7 +28,7 @@ from playbookmedia_backend_server_sdk.models.share_workspace_response import Sha
 from playbookmedia_backend_server_sdk.models.status import Status  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_account_request import UpdateAccountRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_account_response import UpdateAccountResponse  # noqa: E501
-from playbookmedia_backend_server_sdk.models.update_workspace_request import UpdateWorkspaceRequest  # noqa: E501
+from playbookmedia_backend_server_sdk.models.update_workspace_request1 import UpdateWorkspaceRequest1  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_workspace_response import UpdateWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_workspace_sharing_request import UpdateWorkspaceSharingRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_workspace_sharing_response import UpdateWorkspaceSharingResponse  # noqa: E501
@@ -79,7 +79,7 @@ def delete_account(id):  # noqa: E501
     return 'do some magic!'
 
 
-def delete_workspace(id):  # noqa: E501
+def delete_workspace1(id):  # noqa: E501
     """Delete workspace
 
      # noqa: E501
@@ -246,18 +246,18 @@ def update_account(update_account_request):  # noqa: E501
     return 'do some magic!'
 
 
-def update_workspace(update_workspace_request):  # noqa: E501
+def update_workspace1(update_workspace_request1):  # noqa: E501
     """Update workspace
 
      # noqa: E501
 
-    :param update_workspace_request: 
-    :type update_workspace_request: dict | bytes
+    :param update_workspace_request1: 
+    :type update_workspace_request1: dict | bytes
 
     :rtype: Union[UpdateWorkspaceResponse, Tuple[UpdateWorkspaceResponse, int], Tuple[UpdateWorkspaceResponse, int, Dict[str, str]]
     """
     if connexion.request.is_json:
-        update_workspace_request = UpdateWorkspaceRequest.from_dict(connexion.request.get_json())  # noqa: E501
+        update_workspace_request1 = UpdateWorkspaceRequest1.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
 
 

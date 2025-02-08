@@ -25,7 +25,7 @@ import javax.annotation.Generated;
 
 @Schema(name = "rpc.Status", description = "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details.  You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).")
 @JsonTypeName("rpc.Status")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T22:05:34.423190-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T09:22:11.288895-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class RpcStatus {
 
   private Integer code;

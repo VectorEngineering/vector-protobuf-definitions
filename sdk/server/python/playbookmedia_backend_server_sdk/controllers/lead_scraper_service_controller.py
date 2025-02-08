@@ -21,6 +21,7 @@ from playbookmedia_backend_server_sdk.models.delete_organization_response import
 from playbookmedia_backend_server_sdk.models.delete_tenant_api_key_response import DeleteTenantAPIKeyResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_tenant_response import DeleteTenantResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_webhook_response import DeleteWebhookResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.delete_workspace_response import DeleteWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.forbidden_error_message_response import ForbiddenErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.gateway_timeout_error_message_response import GatewayTimeoutErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_api_key_response import GetAPIKeyResponse  # noqa: E501
@@ -61,6 +62,8 @@ from playbookmedia_backend_server_sdk.models.update_tenant_request import Update
 from playbookmedia_backend_server_sdk.models.update_tenant_response import UpdateTenantResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_webhook_request import UpdateWebhookRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_webhook_response import UpdateWebhookResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.update_workspace_request import UpdateWorkspaceRequest  # noqa: E501
+from playbookmedia_backend_server_sdk.models.update_workspace_response import UpdateWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.validation_error_message_response import ValidationErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk import util
 
@@ -225,6 +228,19 @@ def delete_webhook(webhook_id, organization_id=None, workspace_id=None, tenant_i
     :type account_id: str
 
     :rtype: Union[DeleteWebhookResponse, Tuple[DeleteWebhookResponse, int], Tuple[DeleteWebhookResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
+def delete_workspace(id):  # noqa: E501
+    """Delete a workspace
+
+    Deletes a specific workspace # noqa: E501
+
+    :param id: 
+    :type id: str
+
+    :rtype: Union[DeleteWorkspaceResponse, Tuple[DeleteWorkspaceResponse, int], Tuple[DeleteWorkspaceResponse, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -569,4 +585,19 @@ def update_webhook(update_webhook_request):  # noqa: E501
     """
     if connexion.request.is_json:
         update_webhook_request = UpdateWebhookRequest.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
+def update_workspace(update_workspace_request):  # noqa: E501
+    """Update workspace details
+
+    Updates the details of a specific workspace # noqa: E501
+
+    :param update_workspace_request: 
+    :type update_workspace_request: dict | bytes
+
+    :rtype: Union[UpdateWorkspaceResponse, Tuple[UpdateWorkspaceResponse, int], Tuple[UpdateWorkspaceResponse, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        update_workspace_request = UpdateWorkspaceRequest.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'

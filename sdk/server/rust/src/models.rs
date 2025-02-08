@@ -35069,7 +35069,7 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 pub struct UpdateWorkspaceRequest {
     #[serde(rename = "workspace")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub workspace: Option<models::Workspace1>,
+    pub workspace: Option<models::Workspace>,
 
 }
 
@@ -35108,7 +35108,7 @@ impl std::str::FromStr for UpdateWorkspaceRequest {
         #[derive(Default)]
         #[allow(dead_code)]
         struct IntermediateRep {
-            pub workspace: Vec<models::Workspace1>,
+            pub workspace: Vec<models::Workspace>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -35127,7 +35127,7 @@ impl std::str::FromStr for UpdateWorkspaceRequest {
                 #[allow(clippy::match_single_binding)]
                 match key {
                     #[allow(clippy::redundant_clone)]
-                    "workspace" => intermediate_rep.workspace.push(<models::Workspace1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "workspace" => intermediate_rep.workspace.push(<models::Workspace as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing UpdateWorkspaceRequest".to_string())
                 }
             }
@@ -35171,6 +35171,124 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into UpdateWorkspaceRequest - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct UpdateWorkspaceRequest1 {
+    #[serde(rename = "workspace")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub workspace: Option<models::Workspace1>,
+
+}
+
+
+impl UpdateWorkspaceRequest1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> UpdateWorkspaceRequest1 {
+        UpdateWorkspaceRequest1 {
+            workspace: None,
+        }
+    }
+}
+
+/// Converts the UpdateWorkspaceRequest1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for UpdateWorkspaceRequest1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping workspace in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a UpdateWorkspaceRequest1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for UpdateWorkspaceRequest1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub workspace: Vec<models::Workspace1>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing UpdateWorkspaceRequest1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "workspace" => intermediate_rep.workspace.push(<models::Workspace1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing UpdateWorkspaceRequest1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(UpdateWorkspaceRequest1 {
+            workspace: intermediate_rep.workspace.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<UpdateWorkspaceRequest1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<UpdateWorkspaceRequest1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<UpdateWorkspaceRequest1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for UpdateWorkspaceRequest1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<UpdateWorkspaceRequest1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <UpdateWorkspaceRequest1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into UpdateWorkspaceRequest1 - {}",
                                 value, err))
                     }
              },

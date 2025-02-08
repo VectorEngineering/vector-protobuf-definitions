@@ -100,7 +100,7 @@ export default {
         },
 
         // @return DeleteWorkspaceResponse
-        DeleteWorkspace: ($Id_) => {
+        DeleteWorkspace1: ($Id_) => {
             return {
                 "Id_": "Id__example"
             };
@@ -129,9 +129,9 @@ export default {
         },
 
         // @return UpdateWorkspaceResponse
-        UpdateWorkspace: ($updateWorkspaceRequest) => {
+        UpdateWorkspace1: ($updateWorkspaceRequest1) => {
             return {
-                "updateWorkspaceRequest": ""
+                "updateWorkspaceRequest1": ""
             };
         },
 

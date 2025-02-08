@@ -195,6 +195,7 @@ src/main/java/org/openapitools/model/UpdateTenantResponse.java
 src/main/java/org/openapitools/model/UpdateWebhookRequest.java
 src/main/java/org/openapitools/model/UpdateWebhookResponse.java
 src/main/java/org/openapitools/model/UpdateWorkspaceRequest.java
+src/main/java/org/openapitools/model/UpdateWorkspaceRequest1.java
 src/main/java/org/openapitools/model/UpdateWorkspaceResponse.java
 src/main/java/org/openapitools/model/UpdateWorkspaceSharingRequest.java
 src/main/java/org/openapitools/model/UpdateWorkspaceSharingResponse.java

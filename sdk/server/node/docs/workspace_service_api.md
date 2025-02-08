@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**CreateAccount**](workspace_service_api.md#CreateAccount) | **POST** /workspace-service/v1/accounts | Create a new account
 [**CreateWorkspace**](workspace_service_api.md#CreateWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace
 [**DeleteAccount**](workspace_service_api.md#DeleteAccount) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
-[**DeleteWorkspace**](workspace_service_api.md#DeleteWorkspace) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
+[**DeleteWorkspace1**](workspace_service_api.md#DeleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
 [**GetAccount**](workspace_service_api.md#GetAccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details
 [**GetWorkspace**](workspace_service_api.md#GetWorkspace) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
 [**GetWorkspaceAnalytics**](workspace_service_api.md#GetWorkspaceAnalytics) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
@@ -18,7 +18,7 @@ Method | HTTP request | Description
 [**RemoveWorkspaceSharing**](workspace_service_api.md#RemoveWorkspaceSharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing
 [**ShareWorkspace**](workspace_service_api.md#ShareWorkspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace
 [**UpdateAccount**](workspace_service_api.md#UpdateAccount) | **PUT** /workspace-service/v1/accounts | Update account details
-[**UpdateWorkspace**](workspace_service_api.md#UpdateWorkspace) | **PUT** /workspace-service/v1/workspaces | Update workspace
+[**UpdateWorkspace1**](workspace_service_api.md#UpdateWorkspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace
 [**UpdateWorkspaceSharing**](workspace_service_api.md#UpdateWorkspaceSharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing
 
 
@@ -39,9 +39,9 @@ Create workspace
 > DeleteAccountResponse DeleteAccount(Id_)
 
 Delete account
-<a name="DeleteWorkspace"></a>
-# **DeleteWorkspace**
-> DeleteWorkspaceResponse DeleteWorkspace(Id_)
+<a name="DeleteWorkspace1"></a>
+# **DeleteWorkspace1**
+> DeleteWorkspaceResponse DeleteWorkspace1(Id_)
 
 Delete workspace
 <a name="GetAccount"></a>
@@ -94,9 +94,9 @@ Share workspace
 > UpdateAccountResponse UpdateAccount(updateAccountRequest)
 
 Update account details
-<a name="UpdateWorkspace"></a>
-# **UpdateWorkspace**
-> UpdateWorkspaceResponse UpdateWorkspace(updateWorkspaceRequest)
+<a name="UpdateWorkspace1"></a>
+# **UpdateWorkspace1**
+> UpdateWorkspaceResponse UpdateWorkspace1(updateWorkspaceRequest1)
 
 Update workspace
 <a name="UpdateWorkspaceSharing"></a>

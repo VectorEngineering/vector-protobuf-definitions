@@ -228,6 +228,13 @@ export default {
             };
         },
 
+        // @return DeleteWorkspaceResponse
+        DeleteWorkspace: ($Id_) => {
+            return {
+                "Id_": "Id__example"
+            };
+        },
+
         // @return RotateApiKeyResponse
         RotateAPIKey: ($rotateApiKeyRequest) => {
             return {
@@ -274,6 +281,13 @@ export default {
         UpdateWebhook: ($updateWebhookRequest) => {
             return {
                 "updateWebhookRequest": ""
+            };
+        },
+
+        // @return UpdateWorkspaceResponse
+        UpdateWorkspace: ($updateWorkspaceRequest) => {
+            return {
+                "updateWorkspaceRequest": ""
             };
         },
 

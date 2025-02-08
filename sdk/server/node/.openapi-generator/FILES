@@ -185,6 +185,7 @@ docs/UpdateTenantResponse.md
 docs/UpdateWebhookRequest.md
 docs/UpdateWebhookResponse.md
 docs/UpdateWorkspaceRequest.md
+docs/UpdateWorkspaceRequest1.md
 docs/UpdateWorkspaceResponse.md
 docs/UpdateWorkspaceSharingRequest.md
 docs/UpdateWorkspaceSharingResponse.md
@@ -394,6 +395,7 @@ openapi3graphql-server/model/update_tenant_response.graphql
 openapi3graphql-server/model/update_webhook_request.graphql
 openapi3graphql-server/model/update_webhook_response.graphql
 openapi3graphql-server/model/update_workspace_request.graphql
+openapi3graphql-server/model/update_workspace_request1.graphql
 openapi3graphql-server/model/update_workspace_response.graphql
 openapi3graphql-server/model/update_workspace_sharing_request.graphql
 openapi3graphql-server/model/update_workspace_sharing_response.graphql

@@ -7,7 +7,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**createAccount**](WorkspaceServiceApi.md#createAccount) | **POST** /workspace-service/v1/accounts | Create a new account |
 | [**createWorkspace**](WorkspaceServiceApi.md#createWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace |
 | [**deleteAccount**](WorkspaceServiceApi.md#deleteAccount) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account |
-| [**deleteWorkspace**](WorkspaceServiceApi.md#deleteWorkspace) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace |
+| [**deleteWorkspace1**](WorkspaceServiceApi.md#deleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace |
 | [**getAccount**](WorkspaceServiceApi.md#getAccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details |
 | [**getWorkspace**](WorkspaceServiceApi.md#getWorkspace) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details |
 | [**getWorkspaceAnalytics**](WorkspaceServiceApi.md#getWorkspaceAnalytics) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics |
@@ -18,7 +18,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**removeWorkspaceSharing**](WorkspaceServiceApi.md#removeWorkspaceSharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing |
 | [**shareWorkspace**](WorkspaceServiceApi.md#shareWorkspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace |
 | [**updateAccount**](WorkspaceServiceApi.md#updateAccount) | **PUT** /workspace-service/v1/accounts | Update account details |
-| [**updateWorkspace**](WorkspaceServiceApi.md#updateWorkspace) | **PUT** /workspace-service/v1/workspaces | Update workspace |
+| [**updateWorkspace1**](WorkspaceServiceApi.md#updateWorkspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace |
 | [**updateWorkspaceSharing**](WorkspaceServiceApi.md#updateWorkspaceSharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing |
 
 
@@ -99,9 +99,9 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
-<a name="deleteWorkspace"></a>
-# **deleteWorkspace**
-> DeleteWorkspaceResponse deleteWorkspace(id)
+<a name="deleteWorkspace1"></a>
+# **deleteWorkspace1**
+> DeleteWorkspaceResponse deleteWorkspace1(id)
 
 Delete workspace
 
@@ -383,9 +383,9 @@ No authorization required
 - **Content-Type**: application/json, application/x-www-form-urlencoded
 - **Accept**: application/json, 
 
-<a name="updateWorkspace"></a>
-# **updateWorkspace**
-> UpdateWorkspaceResponse updateWorkspace(UpdateWorkspaceRequest)
+<a name="updateWorkspace1"></a>
+# **updateWorkspace1**
+> UpdateWorkspaceResponse updateWorkspace1(UpdateWorkspaceRequest1)
 
 Update workspace
 
@@ -393,7 +393,7 @@ Update workspace
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **UpdateWorkspaceRequest** | [**UpdateWorkspaceRequest**](../Models/UpdateWorkspaceRequest.md)|  | |
+| **UpdateWorkspaceRequest1** | [**UpdateWorkspaceRequest1**](../Models/UpdateWorkspaceRequest1.md)|  | |
 
 ### Return type
 

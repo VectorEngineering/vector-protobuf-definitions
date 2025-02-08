@@ -17,6 +17,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *LeadScraperServiceApi* | [**deleteTenant**](Apis/LeadScraperServiceApi.md#deletetenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant |
 *LeadScraperServiceApi* | [**deleteTenantAPIKey**](Apis/LeadScraperServiceApi.md#deletetenantapikey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key |
 *LeadScraperServiceApi* | [**deleteWebhook**](Apis/LeadScraperServiceApi.md#deletewebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook |
+*LeadScraperServiceApi* | [**deleteWorkspace**](Apis/LeadScraperServiceApi.md#deleteworkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace |
 *LeadScraperServiceApi* | [**getAPIKey**](Apis/LeadScraperServiceApi.md#getapikey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details |
 *LeadScraperServiceApi* | [**getLead**](Apis/LeadScraperServiceApi.md#getlead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details |
 *LeadScraperServiceApi* | [**getOrganization**](Apis/LeadScraperServiceApi.md#getorganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details |
@@ -36,10 +37,11 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *LeadScraperServiceApi* | [**updateTenant**](Apis/LeadScraperServiceApi.md#updatetenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details |
 *LeadScraperServiceApi* | [**updateTenantAPIKey**](Apis/LeadScraperServiceApi.md#updatetenantapikey) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Update tenant API key |
 *LeadScraperServiceApi* | [**updateWebhook**](Apis/LeadScraperServiceApi.md#updatewebhook) | **PUT** /lead-scraper-microservice/api/v1/webhooks | Update webhook |
+*LeadScraperServiceApi* | [**updateWorkspace**](Apis/LeadScraperServiceApi.md#updateworkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details |
 | *WorkspaceServiceApi* | [**createAccount**](Apis/WorkspaceServiceApi.md#createaccount) | **POST** /workspace-service/v1/accounts | Create a new account |
 *WorkspaceServiceApi* | [**createWorkspace**](Apis/WorkspaceServiceApi.md#createworkspace) | **POST** /workspace-service/v1/workspaces | Create workspace |
 *WorkspaceServiceApi* | [**deleteAccount**](Apis/WorkspaceServiceApi.md#deleteaccount) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account |
-*WorkspaceServiceApi* | [**deleteWorkspace**](Apis/WorkspaceServiceApi.md#deleteworkspace) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace |
+*WorkspaceServiceApi* | [**deleteWorkspace1**](Apis/WorkspaceServiceApi.md#deleteworkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace |
 *WorkspaceServiceApi* | [**getAccount**](Apis/WorkspaceServiceApi.md#getaccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details |
 *WorkspaceServiceApi* | [**getWorkspace**](Apis/WorkspaceServiceApi.md#getworkspace) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details |
 *WorkspaceServiceApi* | [**getWorkspaceAnalytics**](Apis/WorkspaceServiceApi.md#getworkspaceanalytics) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics |
@@ -50,7 +52,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *WorkspaceServiceApi* | [**removeWorkspaceSharing**](Apis/WorkspaceServiceApi.md#removeworkspacesharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing |
 *WorkspaceServiceApi* | [**shareWorkspace**](Apis/WorkspaceServiceApi.md#shareworkspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace |
 *WorkspaceServiceApi* | [**updateAccount**](Apis/WorkspaceServiceApi.md#updateaccount) | **PUT** /workspace-service/v1/accounts | Update account details |
-*WorkspaceServiceApi* | [**updateWorkspace**](Apis/WorkspaceServiceApi.md#updateworkspace) | **PUT** /workspace-service/v1/workspaces | Update workspace |
+*WorkspaceServiceApi* | [**updateWorkspace1**](Apis/WorkspaceServiceApi.md#updateworkspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace |
 *WorkspaceServiceApi* | [**updateWorkspaceSharing**](Apis/WorkspaceServiceApi.md#updateworkspacesharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing |
 
 
@@ -243,6 +245,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [UpdateWebhookRequest](./Models/UpdateWebhookRequest.md)
  - [UpdateWebhookResponse](./Models/UpdateWebhookResponse.md)
  - [UpdateWorkspaceRequest](./Models/UpdateWorkspaceRequest.md)
+ - [UpdateWorkspaceRequest1](./Models/UpdateWorkspaceRequest1.md)
  - [UpdateWorkspaceResponse](./Models/UpdateWorkspaceResponse.md)
  - [UpdateWorkspaceSharingRequest](./Models/UpdateWorkspaceSharingRequest.md)
  - [UpdateWorkspaceSharingResponse](./Models/UpdateWorkspaceSharingResponse.md)

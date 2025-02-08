@@ -38,7 +38,7 @@ from playbookmedia_backend_client_sdk.models.share_workspace_body import ShareWo
 from playbookmedia_backend_client_sdk.models.share_workspace_response import ShareWorkspaceResponse
 from playbookmedia_backend_client_sdk.models.update_account_request import UpdateAccountRequest
 from playbookmedia_backend_client_sdk.models.update_account_response import UpdateAccountResponse
-from playbookmedia_backend_client_sdk.models.update_workspace_request import UpdateWorkspaceRequest
+from playbookmedia_backend_client_sdk.models.update_workspace_request1 import UpdateWorkspaceRequest1
 from playbookmedia_backend_client_sdk.models.update_workspace_response import UpdateWorkspaceResponse
 from playbookmedia_backend_client_sdk.models.update_workspace_sharing_request import UpdateWorkspaceSharingRequest
 from playbookmedia_backend_client_sdk.models.update_workspace_sharing_response import UpdateWorkspaceSharingResponse
@@ -930,7 +930,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def delete_workspace(
+    async def delete_workspace1(
         self,
         id: StrictStr,
         _request_timeout: Union[
@@ -973,7 +973,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_workspace_serialize(
+        _param = self._delete_workspace1_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1003,7 +1003,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def delete_workspace_with_http_info(
+    async def delete_workspace1_with_http_info(
         self,
         id: StrictStr,
         _request_timeout: Union[
@@ -1046,7 +1046,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_workspace_serialize(
+        _param = self._delete_workspace1_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1076,7 +1076,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def delete_workspace_without_preload_content(
+    async def delete_workspace1_without_preload_content(
         self,
         id: StrictStr,
         _request_timeout: Union[
@@ -1119,7 +1119,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_workspace_serialize(
+        _param = self._delete_workspace1_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1144,7 +1144,7 @@ class WorkspaceServiceApi:
         return response_data.response
 
 
-    def _delete_workspace_serialize(
+    def _delete_workspace1_serialize(
         self,
         id,
         _request_auth,
@@ -4176,9 +4176,9 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def update_workspace(
+    async def update_workspace1(
         self,
-        update_workspace_request: UpdateWorkspaceRequest,
+        update_workspace_request1: UpdateWorkspaceRequest1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4195,8 +4195,8 @@ class WorkspaceServiceApi:
         """Update workspace
 
 
-        :param update_workspace_request: (required)
-        :type update_workspace_request: UpdateWorkspaceRequest
+        :param update_workspace_request1: (required)
+        :type update_workspace_request1: UpdateWorkspaceRequest1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4219,8 +4219,8 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_workspace_serialize(
-            update_workspace_request=update_workspace_request,
+        _param = self._update_workspace1_serialize(
+            update_workspace_request1=update_workspace_request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4249,9 +4249,9 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def update_workspace_with_http_info(
+    async def update_workspace1_with_http_info(
         self,
-        update_workspace_request: UpdateWorkspaceRequest,
+        update_workspace_request1: UpdateWorkspaceRequest1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4268,8 +4268,8 @@ class WorkspaceServiceApi:
         """Update workspace
 
 
-        :param update_workspace_request: (required)
-        :type update_workspace_request: UpdateWorkspaceRequest
+        :param update_workspace_request1: (required)
+        :type update_workspace_request1: UpdateWorkspaceRequest1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4292,8 +4292,8 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_workspace_serialize(
-            update_workspace_request=update_workspace_request,
+        _param = self._update_workspace1_serialize(
+            update_workspace_request1=update_workspace_request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4322,9 +4322,9 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def update_workspace_without_preload_content(
+    async def update_workspace1_without_preload_content(
         self,
-        update_workspace_request: UpdateWorkspaceRequest,
+        update_workspace_request1: UpdateWorkspaceRequest1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4341,8 +4341,8 @@ class WorkspaceServiceApi:
         """Update workspace
 
 
-        :param update_workspace_request: (required)
-        :type update_workspace_request: UpdateWorkspaceRequest
+        :param update_workspace_request1: (required)
+        :type update_workspace_request1: UpdateWorkspaceRequest1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4365,8 +4365,8 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_workspace_serialize(
-            update_workspace_request=update_workspace_request,
+        _param = self._update_workspace1_serialize(
+            update_workspace_request1=update_workspace_request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4390,9 +4390,9 @@ class WorkspaceServiceApi:
         return response_data.response
 
 
-    def _update_workspace_serialize(
+    def _update_workspace1_serialize(
         self,
-        update_workspace_request,
+        update_workspace_request1,
         _request_auth,
         _content_type,
         _headers,
@@ -4416,8 +4416,8 @@ class WorkspaceServiceApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if update_workspace_request is not None:
-            _body_params = update_workspace_request
+        if update_workspace_request1 is not None:
+            _body_params = update_workspace_request1
 
 
         # set the HTTP header `Accept`

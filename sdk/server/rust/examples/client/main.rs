@@ -15,6 +15,7 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       DeleteTenantResponse,
                       DeleteTenantApiKeyResponse,
                       DeleteWebhookResponse,
+                      DeleteWorkspaceResponse,
                       GetApiKeyResponse,
                       GetLeadResponse,
                       GetOrganizationResponse,
@@ -34,10 +35,11 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       UpdateTenantResponse,
                       UpdateTenantApiKeyResponse,
                       UpdateWebhookResponse,
+                      UpdateWorkspaceResponse,
                       CreateAccountResponse,
                       CreateWorkspaceResponse,
                       DeleteAccountResponse,
-                      DeleteWorkspaceResponse,
+                      DeleteWorkspace1Response,
                       GetAccountResponse,
                       GetWorkspaceResponse,
                       GetWorkspaceAnalyticsResponse,
@@ -48,7 +50,7 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       RemoveWorkspaceSharingResponse,
                       ShareWorkspaceResponse,
                       UpdateAccountResponse,
-                      UpdateWorkspaceResponse,
+                      UpdateWorkspace1Response,
                       UpdateWorkspaceSharingResponse,
                      };
 use clap::{App, Arg};
@@ -83,6 +85,7 @@ fn main() {
                 "DeleteTenant", 
                 "DeleteTenantApiKey", 
                 "DeleteWebhook", 
+                "DeleteWorkspace", 
                 "GetApiKey", 
                 "GetLead", 
                 "GetOrganization", 
@@ -96,7 +99,7 @@ fn main() {
                 "ListTenants", 
                 "ListWebhooks", 
                 "DeleteAccount", 
-                "DeleteWorkspace", 
+                "DeleteWorkspace1", 
                 "GetAccount", 
                 "GetWorkspace", 
                 "GetWorkspaceAnalytics", 
@@ -253,6 +256,12 @@ fn main() {
                   Some("workspace_id_example".to_string()),
                   Some("tenant_id_example".to_string()),
                   Some("account_id_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("DeleteWorkspace") => {
+            let result = rt.block_on(client.delete_workspace(
+                  "id_example".to_string()
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
@@ -426,6 +435,14 @@ fn main() {
         },
         */
         /* Disabled because there's no example.
+        Some("UpdateWorkspace") => {
+            let result = rt.block_on(client.update_workspace(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
         Some("CreateAccount") => {
             let result = rt.block_on(client.create_account(
                   ???
@@ -447,8 +464,8 @@ fn main() {
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
-        Some("DeleteWorkspace") => {
-            let result = rt.block_on(client.delete_workspace(
+        Some("DeleteWorkspace1") => {
+            let result = rt.block_on(client.delete_workspace1(
                   "id_example".to_string()
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
@@ -527,8 +544,8 @@ fn main() {
         },
         */
         /* Disabled because there's no example.
-        Some("UpdateWorkspace") => {
-            let result = rt.block_on(client.update_workspace(
+        Some("UpdateWorkspace1") => {
+            let result = rt.block_on(client.update_workspace1(
                   ???
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());

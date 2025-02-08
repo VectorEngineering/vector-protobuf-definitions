@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-07T22:05:36.948504-05:00[America/New_York]
+- Build date: 2025-02-08T09:22:13.739495-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -67,6 +67,7 @@ cargo run --example client DeleteOrganization
 cargo run --example client DeleteTenant
 cargo run --example client DeleteTenantApiKey
 cargo run --example client DeleteWebhook
+cargo run --example client DeleteWorkspace
 cargo run --example client GetApiKey
 cargo run --example client GetLead
 cargo run --example client GetOrganization
@@ -80,7 +81,7 @@ cargo run --example client ListTenantApiKeys
 cargo run --example client ListTenants
 cargo run --example client ListWebhooks
 cargo run --example client DeleteAccount
-cargo run --example client DeleteWorkspace
+cargo run --example client DeleteWorkspace1
 cargo run --example client GetAccount
 cargo run --example client GetWorkspace
 cargo run --example client GetWorkspaceAnalytics
@@ -132,6 +133,7 @@ Method | HTTP request | Description
 [**DeleteTenant**](docs/lead_scraper_service_api.md#DeleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 [**DeleteTenantAPIKey**](docs/lead_scraper_service_api.md#DeleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
 [**DeleteWebhook**](docs/lead_scraper_service_api.md#DeleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
+[**DeleteWorkspace**](docs/lead_scraper_service_api.md#DeleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
 [**GetAPIKey**](docs/lead_scraper_service_api.md#GetAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
 [**GetLead**](docs/lead_scraper_service_api.md#GetLead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
 [**GetOrganization**](docs/lead_scraper_service_api.md#GetOrganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details
@@ -151,10 +153,11 @@ Method | HTTP request | Description
 [**UpdateTenant**](docs/lead_scraper_service_api.md#UpdateTenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details
 [**UpdateTenantAPIKey**](docs/lead_scraper_service_api.md#UpdateTenantAPIKey) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Update tenant API key
 [**UpdateWebhook**](docs/lead_scraper_service_api.md#UpdateWebhook) | **PUT** /lead-scraper-microservice/api/v1/webhooks | Update webhook
+[**UpdateWorkspace**](docs/lead_scraper_service_api.md#UpdateWorkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details
 [**CreateAccount**](docs/workspace_service_api.md#CreateAccount) | **POST** /workspace-service/v1/accounts | Create a new account
 [**CreateWorkspace**](docs/workspace_service_api.md#CreateWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace
 [**DeleteAccount**](docs/workspace_service_api.md#DeleteAccount) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
-[**DeleteWorkspace**](docs/workspace_service_api.md#DeleteWorkspace) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
+[**DeleteWorkspace1**](docs/workspace_service_api.md#DeleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
 [**GetAccount**](docs/workspace_service_api.md#GetAccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details
 [**GetWorkspace**](docs/workspace_service_api.md#GetWorkspace) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
 [**GetWorkspaceAnalytics**](docs/workspace_service_api.md#GetWorkspaceAnalytics) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
@@ -165,7 +168,7 @@ Method | HTTP request | Description
 [**RemoveWorkspaceSharing**](docs/workspace_service_api.md#RemoveWorkspaceSharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing
 [**ShareWorkspace**](docs/workspace_service_api.md#ShareWorkspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace
 [**UpdateAccount**](docs/workspace_service_api.md#UpdateAccount) | **PUT** /workspace-service/v1/accounts | Update account details
-[**UpdateWorkspace**](docs/workspace_service_api.md#UpdateWorkspace) | **PUT** /workspace-service/v1/workspaces | Update workspace
+[**UpdateWorkspace1**](docs/workspace_service_api.md#UpdateWorkspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace
 [**UpdateWorkspaceSharing**](docs/workspace_service_api.md#UpdateWorkspaceSharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing
 
 
@@ -358,6 +361,7 @@ Method | HTTP request | Description
  - [UpdateWebhookRequest](docs/UpdateWebhookRequest.md)
  - [UpdateWebhookResponse](docs/UpdateWebhookResponse.md)
  - [UpdateWorkspaceRequest](docs/UpdateWorkspaceRequest.md)
+ - [UpdateWorkspaceRequest1](docs/UpdateWorkspaceRequest1.md)
  - [UpdateWorkspaceResponse](docs/UpdateWorkspaceResponse.md)
  - [UpdateWorkspaceSharingRequest](docs/UpdateWorkspaceSharingRequest.md)
  - [UpdateWorkspaceSharingResponse](docs/UpdateWorkspaceSharingResponse.md)

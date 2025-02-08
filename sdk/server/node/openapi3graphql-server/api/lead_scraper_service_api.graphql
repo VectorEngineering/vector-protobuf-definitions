@@ -88,6 +88,11 @@ input DeleteWebhookInput {
     accountId: String!
 }
 
+input DeleteWorkspaceInput {
+    
+    Id_: String!
+}
+
 input RotateAPIKeyInput {
     
     rotateApiKeyRequest: RotateApiKeyRequestInput
@@ -121,6 +126,11 @@ input UpdateTenantAPIKeyInput {
 input UpdateWebhookInput {
     
     updateWebhookRequest: UpdateWebhookRequestInput
+}
+
+input UpdateWorkspaceInput {
+    
+    updateWorkspaceRequest: UpdateWorkspaceRequestInput
 }
 
 type Mutation {
@@ -186,6 +196,11 @@ type Mutation {
   # @param String! accountId 
   # @return [DeleteWebhookResponse]
   DeleteWebhook(input: DeleteWebhookInput!): DeleteWebhookResponse
+  # Delete a workspace
+  # Deletes a specific workspace
+  # @param String! Id_ 
+  # @return [DeleteWorkspaceResponse]
+  DeleteWorkspace(input: DeleteWorkspaceInput!): DeleteWorkspaceResponse
   # Rotate API key
   # Rotates an API key while maintaining its configuration
   # @param RotateApiKeyRequest rotateApiKeyRequest 
@@ -221,6 +236,11 @@ type Mutation {
   # @param UpdateWebhookRequest updateWebhookRequest 
   # @return [UpdateWebhookResponse]
   UpdateWebhook(input: UpdateWebhookInput!): UpdateWebhookResponse
+  # Update workspace details
+  # Updates the details of a specific workspace
+  # @param UpdateWorkspaceRequest updateWorkspaceRequest 
+  # @return [UpdateWorkspaceResponse]
+  UpdateWorkspace(input: UpdateWorkspaceInput!): UpdateWorkspaceResponse
 }
 
 type Query {

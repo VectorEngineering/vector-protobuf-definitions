@@ -32,7 +32,7 @@ import org.openapitools.model.ShareWorkspaceResponse;
 import org.openapitools.model.Status;
 import org.openapitools.model.UpdateAccountRequest;
 import org.openapitools.model.UpdateAccountResponse;
-import org.openapitools.model.UpdateWorkspaceRequest;
+import org.openapitools.model.UpdateWorkspaceRequest1;
 import org.openapitools.model.UpdateWorkspaceResponse;
 import org.openapitools.model.UpdateWorkspaceSharingRequest;
 import org.openapitools.model.UpdateWorkspaceSharingResponse;
@@ -63,7 +63,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-07T22:05:34.423190-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T09:22:11.288895-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 @Validated
 @Tag(name = "workspace-service", description = "the workspace-service API")
 public interface WorkspaceServiceApi {
@@ -234,7 +234,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -405,7 +405,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -565,7 +565,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -591,7 +591,7 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "deleteWorkspace",
+        operationId = "deleteWorkspace1",
         summary = "Delete workspace",
         tags = { "workspace-service" },
         responses = {
@@ -639,7 +639,7 @@ public interface WorkspaceServiceApi {
         produces = { "application/json", "" }
     )
     
-    default ResponseEntity<DeleteWorkspaceResponse> deleteWorkspace(
+    default ResponseEntity<DeleteWorkspaceResponse> deleteWorkspace1(
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
     ) {
         getRequest().ifPresent(request -> {
@@ -725,7 +725,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -885,7 +885,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1045,7 +1045,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1209,7 +1209,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1371,7 +1371,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1531,7 +1531,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1695,7 +1695,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -1861,7 +1861,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -2021,7 +2021,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -2184,7 +2184,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -2345,7 +2345,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -2359,7 +2359,7 @@ public interface WorkspaceServiceApi {
     /**
      * PUT /workspace-service/v1/workspaces : Update workspace
      *
-     * @param updateWorkspaceRequest  (required)
+     * @param updateWorkspaceRequest1  (required)
      * @return Workspace updated successfully (status code 200)
      *         or Bad Request - Invalid input parameters (status code 400)
      *         or Unauthorized - Authentication required (status code 401)
@@ -2371,7 +2371,7 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "updateWorkspace",
+        operationId = "updateWorkspace1",
         summary = "Update workspace",
         tags = { "workspace-service" },
         responses = {
@@ -2420,8 +2420,8 @@ public interface WorkspaceServiceApi {
         consumes = { "application/json", "application/x-www-form-urlencoded" }
     )
     
-    default ResponseEntity<UpdateWorkspaceResponse> updateWorkspace(
-        @Parameter(name = "UpdateWorkspaceRequest", description = "", required = true) @Valid @RequestBody UpdateWorkspaceRequest updateWorkspaceRequest
+    default ResponseEntity<UpdateWorkspaceResponse> updateWorkspace1(
+        @Parameter(name = "UpdateWorkspaceRequest1", description = "", required = true) @Valid @RequestBody UpdateWorkspaceRequest1 updateWorkspaceRequest1
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -2506,7 +2506,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -2667,7 +2667,7 @@ public interface WorkspaceServiceApi {
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"code\" : 8, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
+                    String exampleString = "{ \"code\" : 0, \"details\" : [ { \"@type\" : \"@type\" }, { \"@type\" : \"@type\" } ], \"message\" : \"message\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

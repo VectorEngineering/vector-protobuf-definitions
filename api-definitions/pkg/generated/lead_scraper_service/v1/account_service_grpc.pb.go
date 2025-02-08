@@ -19,6 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	LeadScraperService_UpdateWorkspace_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/UpdateWorkspace"
+	LeadScraperService_DeleteWorkspace_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/DeleteWorkspace"
 	LeadScraperService_CreateTenant_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/CreateTenant"
 	LeadScraperService_GetTenant_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/GetTenant"
 	LeadScraperService_UpdateTenant_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/UpdateTenant"
@@ -76,6 +78,53 @@ const (
 //
 // ```
 type LeadScraperServiceClient interface {
+	// UpdateWorkspace modifies workspace configuration
+	//
+	// Modifiable settings:
+	// - Basic information (name, description)
+	// - Access control lists
+	// - Resource quotas
+	// - Default parameters
+	// - Integration configurations
+	// - Notification preferences
+	//
+	// Update process:
+	// 1. Validates new configuration
+	// 2. Checks resource implications
+	// 3. Applies changes atomically
+	// 4. Updates dependent systems
+	// 5. Logs modifications
+	//
+	// Safety features:
+	// - Configuration validation
+	// - Atomic updates
+	// - Rollback capability
+	// - Audit trail
+	UpdateWorkspace(ctx context.Context, in *UpdateWorkspaceRequest, opts ...grpc.CallOption) (*UpdateWorkspaceResponse, error)
+	// DeleteWorkspace removes a workspace and associated resources
+	//
+	// Deletion process:
+	// 1. Validation checks
+	//   - Resource dependencies
+	//   - Active workflows
+	//   - User permissions
+	//
+	// 2. Resource cleanup
+	//   - Workflow termination
+	//   - Data archival
+	//   - Resource deallocation
+	//
+	// Safety measures:
+	// - Soft delete with recovery window
+	// - Dependency validation
+	// - Resource cleanup confirmation
+	// - Audit trail preservation
+	//
+	// Post-deletion:
+	// - Notification to stakeholders
+	// - Resource reclamation
+	// - Audit log finalization
+	DeleteWorkspace(ctx context.Context, in *DeleteWorkspaceRequest, opts ...grpc.CallOption) (*DeleteWorkspaceResponse, error)
 	// CreateTenant establishes a new tenant in the system
 	//
 	// A tenant represents the top-level organizational unit that can contain
@@ -468,6 +517,26 @@ func NewLeadScraperServiceClient(cc grpc.ClientConnInterface) LeadScraperService
 	return &leadScraperServiceClient{cc}
 }
 
+func (c *leadScraperServiceClient) UpdateWorkspace(ctx context.Context, in *UpdateWorkspaceRequest, opts ...grpc.CallOption) (*UpdateWorkspaceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateWorkspaceResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_UpdateWorkspace_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) DeleteWorkspace(ctx context.Context, in *DeleteWorkspaceRequest, opts ...grpc.CallOption) (*DeleteWorkspaceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteWorkspaceResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_DeleteWorkspace_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *leadScraperServiceClient) CreateTenant(ctx context.Context, in *CreateTenantRequest, opts ...grpc.CallOption) (*CreateTenantResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateTenantResponse)
@@ -784,6 +853,53 @@ func (c *leadScraperServiceClient) ListWebhooks(ctx context.Context, in *ListWeb
 //
 // ```
 type LeadScraperServiceServer interface {
+	// UpdateWorkspace modifies workspace configuration
+	//
+	// Modifiable settings:
+	// - Basic information (name, description)
+	// - Access control lists
+	// - Resource quotas
+	// - Default parameters
+	// - Integration configurations
+	// - Notification preferences
+	//
+	// Update process:
+	// 1. Validates new configuration
+	// 2. Checks resource implications
+	// 3. Applies changes atomically
+	// 4. Updates dependent systems
+	// 5. Logs modifications
+	//
+	// Safety features:
+	// - Configuration validation
+	// - Atomic updates
+	// - Rollback capability
+	// - Audit trail
+	UpdateWorkspace(context.Context, *UpdateWorkspaceRequest) (*UpdateWorkspaceResponse, error)
+	// DeleteWorkspace removes a workspace and associated resources
+	//
+	// Deletion process:
+	// 1. Validation checks
+	//   - Resource dependencies
+	//   - Active workflows
+	//   - User permissions
+	//
+	// 2. Resource cleanup
+	//   - Workflow termination
+	//   - Data archival
+	//   - Resource deallocation
+	//
+	// Safety measures:
+	// - Soft delete with recovery window
+	// - Dependency validation
+	// - Resource cleanup confirmation
+	// - Audit trail preservation
+	//
+	// Post-deletion:
+	// - Notification to stakeholders
+	// - Resource reclamation
+	// - Audit log finalization
+	DeleteWorkspace(context.Context, *DeleteWorkspaceRequest) (*DeleteWorkspaceResponse, error)
 	// CreateTenant establishes a new tenant in the system
 	//
 	// A tenant represents the top-level organizational unit that can contain
@@ -1176,6 +1292,12 @@ type LeadScraperServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedLeadScraperServiceServer struct{}
 
+func (UnimplementedLeadScraperServiceServer) UpdateWorkspace(context.Context, *UpdateWorkspaceRequest) (*UpdateWorkspaceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWorkspace not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) DeleteWorkspace(context.Context, *DeleteWorkspaceRequest) (*DeleteWorkspaceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteWorkspace not implemented")
+}
 func (UnimplementedLeadScraperServiceServer) CreateTenant(context.Context, *CreateTenantRequest) (*CreateTenantResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTenant not implemented")
 }
@@ -1282,6 +1404,42 @@ func RegisterLeadScraperServiceServer(s grpc.ServiceRegistrar, srv LeadScraperSe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&LeadScraperService_ServiceDesc, srv)
+}
+
+func _LeadScraperService_UpdateWorkspace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWorkspaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).UpdateWorkspace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_UpdateWorkspace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).UpdateWorkspace(ctx, req.(*UpdateWorkspaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_DeleteWorkspace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteWorkspaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).DeleteWorkspace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_DeleteWorkspace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).DeleteWorkspace(ctx, req.(*DeleteWorkspaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _LeadScraperService_CreateTenant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1813,6 +1971,14 @@ var LeadScraperService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "lead_scraper_service.v1.LeadScraperService",
 	HandlerType: (*LeadScraperServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "UpdateWorkspace",
+			Handler:    _LeadScraperService_UpdateWorkspace_Handler,
+		},
+		{
+			MethodName: "DeleteWorkspace",
+			Handler:    _LeadScraperService_DeleteWorkspace_Handler,
+		},
 		{
 			MethodName: "CreateTenant",
 			Handler:    _LeadScraperService_CreateTenant_Handler,

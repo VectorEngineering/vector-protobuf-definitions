@@ -22,6 +22,8 @@ import { leadScraperMicroserviceapiv1organizationstenantsorganizationidtenantidR
 import { leadScraperMicroserviceapiv1organizationsorganizationidtenantsRouter } from "./leadScraperMicroserviceapiv1organizationsorganizationidtenants";
 import { leadScraperMicroserviceapiv1webhooksRouter } from "./leadScraperMicroserviceapiv1webhooks";
 import { leadScraperMicroserviceapiv1webhookswebhookidRouter } from "./leadScraperMicroserviceapiv1webhookswebhookid";
+import { leadScraperMicroserviceapiv1workspaceRouter } from "./leadScraperMicroserviceapiv1workspace";
+import { leadScraperMicroserviceapiv1workspaceidRouter } from "./leadScraperMicroserviceapiv1workspaceid";
 import { workspaceServicev1accountsRouter } from "./workspaceServicev1accounts";
 import { workspaceServicev1accountsidRouter } from "./workspaceServicev1accountsid";
 import { workspaceServicev1workspaceSharingsRouter } from "./workspaceServicev1workspaceSharings";
@@ -113,6 +115,14 @@ router.route(
 router.route(
   "/lead-scraper-microservice/api/v1/webhooks/{webhookId}",
   leadScraperMicroserviceapiv1webhookswebhookidRouter,
+);
+router.route(
+  "/lead-scraper-microservice/api/v1/workspace",
+  leadScraperMicroserviceapiv1workspaceRouter,
+);
+router.route(
+  "/lead-scraper-microservice/api/v1/workspace/{id}",
+  leadScraperMicroserviceapiv1workspaceidRouter,
 );
 
 // Workspace Service Routes

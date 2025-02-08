@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**create_account**](WorkspaceServiceApi.md#create_account) | **POST** /workspace-service/v1/accounts | Create a new account
 [**create_workspace**](WorkspaceServiceApi.md#create_workspace) | **POST** /workspace-service/v1/workspaces | Create workspace
 [**delete_account**](WorkspaceServiceApi.md#delete_account) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
-[**delete_workspace**](WorkspaceServiceApi.md#delete_workspace) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
+[**delete_workspace1**](WorkspaceServiceApi.md#delete_workspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
 [**get_account**](WorkspaceServiceApi.md#get_account) | **GET** /workspace-service/v1/accounts/{id} | Get account details
 [**get_workspace**](WorkspaceServiceApi.md#get_workspace) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
 [**get_workspace_analytics**](WorkspaceServiceApi.md#get_workspace_analytics) | **GET** /workspace-service/v1/workspaces/analytics/{workspaceId} | Get workspace analytics
@@ -18,7 +18,7 @@ Method | HTTP request | Description
 [**remove_workspace_sharing**](WorkspaceServiceApi.md#remove_workspace_sharing) | **DELETE** /workspace-service/v1/workspace-sharings/{sharingId} | Remove workspace sharing
 [**share_workspace**](WorkspaceServiceApi.md#share_workspace) | **POST** /workspace-service/v1/workspaces/{workspaceId}/share | Share workspace
 [**update_account**](WorkspaceServiceApi.md#update_account) | **PUT** /workspace-service/v1/accounts | Update account details
-[**update_workspace**](WorkspaceServiceApi.md#update_workspace) | **PUT** /workspace-service/v1/workspaces | Update workspace
+[**update_workspace1**](WorkspaceServiceApi.md#update_workspace1) | **PUT** /workspace-service/v1/workspaces | Update workspace
 [**update_workspace_sharing**](WorkspaceServiceApi.md#update_workspace_sharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing
 
 
@@ -250,8 +250,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete_workspace**
-> DeleteWorkspaceResponse delete_workspace(id)
+# **delete_workspace1**
+> DeleteWorkspaceResponse delete_workspace1(id)
 
 Delete workspace
 
@@ -279,11 +279,11 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
 
     try:
         # Delete workspace
-        api_response = await api_instance.delete_workspace(id)
-        print("The response of WorkspaceServiceApi->delete_workspace:\n")
+        api_response = await api_instance.delete_workspace1(id)
+        print("The response of WorkspaceServiceApi->delete_workspace1:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WorkspaceServiceApi->delete_workspace: %s\n" % e)
+        print("Exception when calling WorkspaceServiceApi->delete_workspace1: %s\n" % e)
 ```
 
 
@@ -1084,8 +1084,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **update_workspace**
-> UpdateWorkspaceResponse update_workspace(update_workspace_request)
+# **update_workspace1**
+> UpdateWorkspaceResponse update_workspace1(update_workspace_request1)
 
 Update workspace
 
@@ -1094,7 +1094,7 @@ Update workspace
 
 ```python
 import playbookmedia_backend_client_sdk
-from playbookmedia_backend_client_sdk.models.update_workspace_request import UpdateWorkspaceRequest
+from playbookmedia_backend_client_sdk.models.update_workspace_request1 import UpdateWorkspaceRequest1
 from playbookmedia_backend_client_sdk.models.update_workspace_response import UpdateWorkspaceResponse
 from playbookmedia_backend_client_sdk.rest import ApiException
 from pprint import pprint
@@ -1110,15 +1110,15 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = playbookmedia_backend_client_sdk.WorkspaceServiceApi(api_client)
-    update_workspace_request = playbookmedia_backend_client_sdk.UpdateWorkspaceRequest() # UpdateWorkspaceRequest | 
+    update_workspace_request1 = playbookmedia_backend_client_sdk.UpdateWorkspaceRequest1() # UpdateWorkspaceRequest1 | 
 
     try:
         # Update workspace
-        api_response = await api_instance.update_workspace(update_workspace_request)
-        print("The response of WorkspaceServiceApi->update_workspace:\n")
+        api_response = await api_instance.update_workspace1(update_workspace_request1)
+        print("The response of WorkspaceServiceApi->update_workspace1:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WorkspaceServiceApi->update_workspace: %s\n" % e)
+        print("Exception when calling WorkspaceServiceApi->update_workspace1: %s\n" % e)
 ```
 
 
@@ -1128,7 +1128,7 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **update_workspace_request** | [**UpdateWorkspaceRequest**](UpdateWorkspaceRequest.md)|  | 
+ **update_workspace_request1** | [**UpdateWorkspaceRequest1**](UpdateWorkspaceRequest1.md)|  | 
 
 ### Return type
 

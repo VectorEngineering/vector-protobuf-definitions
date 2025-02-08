@@ -29,7 +29,7 @@ input DeleteAccountInput {
     Id_: String!
 }
 
-input DeleteWorkspaceInput {
+input DeleteWorkspace1Input {
     
     Id_: String!
 }
@@ -51,9 +51,9 @@ input UpdateAccountInput {
     updateAccountRequest: UpdateAccountRequestInput
 }
 
-input UpdateWorkspaceInput {
+input UpdateWorkspace1Input {
     
-    updateWorkspaceRequest: UpdateWorkspaceRequestInput
+    updateWorkspaceRequest1: UpdateWorkspaceRequest1Input
 }
 
 input UpdateWorkspaceSharingInput {
@@ -78,7 +78,7 @@ type Mutation {
   # Delete workspace
   # @param String! Id_ 
   # @return [DeleteWorkspaceResponse]
-  DeleteWorkspace(input: DeleteWorkspaceInput!): DeleteWorkspaceResponse
+  DeleteWorkspace1(input: DeleteWorkspace1Input!): DeleteWorkspaceResponse
   # Remove workspace sharing
   # @param String! sharingId 
   # @return [RemoveWorkspaceSharingResponse]
@@ -93,9 +93,9 @@ type Mutation {
   # @return [UpdateAccountResponse]
   UpdateAccount(input: UpdateAccountInput!): UpdateAccountResponse
   # Update workspace
-  # @param UpdateWorkspaceRequest updateWorkspaceRequest 
+  # @param UpdateWorkspaceRequest1 updateWorkspaceRequest1 
   # @return [UpdateWorkspaceResponse]
-  UpdateWorkspace(input: UpdateWorkspaceInput!): UpdateWorkspaceResponse
+  UpdateWorkspace1(input: UpdateWorkspace1Input!): UpdateWorkspaceResponse
   # Update workspace sharing
   # @param UpdateWorkspaceSharingRequest updateWorkspaceSharingRequest 
   # @return [UpdateWorkspaceSharingResponse]

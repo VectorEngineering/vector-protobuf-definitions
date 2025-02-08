@@ -1453,29 +1453,9 @@ const DeleteWebhookResponse = z
   .object({ success: z.boolean() })
   .partial()
   .passthrough();
-const ComplianceLevel = z.enum([
-  "COMPLIANCE_LEVEL_UNSPECIFIED",
-  "COMPLIANCE_LEVEL_NONE",
-  "COMPLIANCE_LEVEL_BASIC",
-  "COMPLIANCE_LEVEL_ADVANCED",
-  "COMPLIANCE_LEVEL_ENTERPRISE",
-]);
-const CreateAccountRequest = z
-  .object({
-    auth0UserId: z.string(),
-    email: z.string(),
-    baseDirectory: z.string().optional(),
-    region: z.string().optional(),
-    orgId: z.string().optional(),
-    tenantId: z.string().optional(),
-    roles: z.array(z.string()).optional(),
-    permissions: z.array(z.string()).optional(),
-    mfaEnabled: z.boolean().optional(),
-    complianceLevel: ComplianceLevel.optional().default(
-      "COMPLIANCE_LEVEL_UNSPECIFIED",
-    ),
-    preferences: z.record(z.string()).optional(),
-  })
+const UpdateWorkspaceRequest = z
+  .object({ workspace: Workspace })
+  .partial()
   .passthrough();
 const FileEmbeddings = z
   .object({
@@ -2137,6 +2117,38 @@ const Workspace1 = z
   })
   .partial()
   .passthrough();
+const UpdateWorkspaceResponse = z
+  .object({ workspace: Workspace1 })
+  .partial()
+  .passthrough();
+const DeleteWorkspaceResponse = z
+  .object({ success: z.boolean() })
+  .partial()
+  .passthrough();
+const ComplianceLevel = z.enum([
+  "COMPLIANCE_LEVEL_UNSPECIFIED",
+  "COMPLIANCE_LEVEL_NONE",
+  "COMPLIANCE_LEVEL_BASIC",
+  "COMPLIANCE_LEVEL_ADVANCED",
+  "COMPLIANCE_LEVEL_ENTERPRISE",
+]);
+const CreateAccountRequest = z
+  .object({
+    auth0UserId: z.string(),
+    email: z.string(),
+    baseDirectory: z.string().optional(),
+    region: z.string().optional(),
+    orgId: z.string().optional(),
+    tenantId: z.string().optional(),
+    roles: z.array(z.string()).optional(),
+    permissions: z.array(z.string()).optional(),
+    mfaEnabled: z.boolean().optional(),
+    complianceLevel: ComplianceLevel.optional().default(
+      "COMPLIANCE_LEVEL_UNSPECIFIED",
+    ),
+    preferences: z.record(z.string()).optional(),
+  })
+  .passthrough();
 const DataProfile = z
   .object({
     id: z.string(),
@@ -2232,11 +2244,7 @@ const CreateWorkspaceResponse = z
   .object({ workspace: Workspace1 })
   .partial()
   .passthrough();
-const UpdateWorkspaceRequest = z
-  .object({ workspace: Workspace1 })
-  .partial()
-  .passthrough();
-const UpdateWorkspaceResponse = z
+const UpdateWorkspaceRequest1 = z
   .object({ workspace: Workspace1 })
   .partial()
   .passthrough();
@@ -2346,10 +2354,6 @@ const GetWorkspaceStorageStatsResponse = z
   .passthrough();
 const GetWorkspaceResponse = z
   .object({ workspace: Workspace1 })
-  .partial()
-  .passthrough();
-const DeleteWorkspaceResponse = z
-  .object({ success: z.boolean() })
   .partial()
   .passthrough();
 const ShareWorkspaceBody = z
@@ -2488,8 +2492,7 @@ export const schemas = {
   UpdateWebhookResponse,
   GetWebhookResponse,
   DeleteWebhookResponse,
-  ComplianceLevel,
-  CreateAccountRequest,
+  UpdateWorkspaceRequest,
   FileEmbeddings,
   FileVersion,
   CommentThread,
@@ -2535,6 +2538,10 @@ export const schemas = {
   AppPermission,
   MarketplaceApp,
   Workspace1,
+  UpdateWorkspaceResponse,
+  DeleteWorkspaceResponse,
+  ComplianceLevel,
+  CreateAccountRequest,
   DataProfile,
   Account1,
   CreateAccountResponse,
@@ -2548,8 +2555,7 @@ export const schemas = {
   RemoveWorkspaceSharingResponse,
   CreateWorkspaceRequest,
   CreateWorkspaceResponse,
-  UpdateWorkspaceRequest,
-  UpdateWorkspaceResponse,
+  UpdateWorkspaceRequest1,
   ActivityMetrics,
   UserActivity,
   ComplianceMetrics,
@@ -2562,7 +2568,6 @@ export const schemas = {
   StorageBreakdown,
   GetWorkspaceStorageStatsResponse,
   GetWorkspaceResponse,
-  DeleteWorkspaceResponse,
   ShareWorkspaceBody,
   ShareWorkspaceResponse,
 };
@@ -5937,6 +5942,220 @@ const endpoints = makeApi([
     ],
   },
   {
+    method: "put",
+    path: "/lead-scraper-microservice/api/v1/workspace",
+    alias: "UpdateWorkspace",
+    description: `Updates the details of a specific workspace`,
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "body",
+        type: "Body",
+        schema: UpdateWorkspaceRequest,
+      },
+    ],
+    response: UpdateWorkspaceResponse,
+    errors: [
+      {
+        status: 400,
+        description: `Bad Request - Invalid input parameters`,
+        schema: ValidationErrorMessageResponse,
+      },
+      {
+        status: 401,
+        description: `Unauthorized - Authentication required`,
+        schema: AuthenticationErrorMessageResponse,
+      },
+      {
+        status: 402,
+        description: `Payment Required - Payment is necessary to proceed`,
+        schema: PaymentRequiredErrorMessageResponse,
+      },
+      {
+        status: 403,
+        description: `Forbidden - Access denied`,
+        schema: ForbiddenErrorMessageResponse,
+      },
+      {
+        status: 404,
+        description: `Not Found - Resource not found`,
+        schema: NotFoundErrorMessageResponse,
+      },
+      {
+        status: 405,
+        description: `Method Not Allowed - HTTP method not supported`,
+        schema: MethodNotAllowedErrorMessageResponse,
+      },
+      {
+        status: 409,
+        description: `Conflict - Resource already exists`,
+        schema: ConflictErrorMessageResponse,
+      },
+      {
+        status: 410,
+        description: `Gone - Resource is no longer available`,
+        schema: GoneErrorMessageResponse,
+      },
+      {
+        status: 412,
+        description: `Precondition Failed - Preconditions in headers did not match`,
+        schema: PreconditionFailedErrorMessageResponse,
+      },
+      {
+        status: 422,
+        description: `Unprocessable Entity - Semantic errors in the request`,
+        schema: UnprocessableEntityErrorMessageResponse,
+      },
+      {
+        status: 425,
+        description: `Too Early - Request is being replayed`,
+        schema: TooEarlyErrorMessageResponse,
+      },
+      {
+        status: 429,
+        description: `Too Many Requests - Rate limit exceeded`,
+        schema: RateLimitErrorMessageResponse,
+      },
+      {
+        status: 500,
+        description: `Internal Server Error`,
+        schema: InternalErrorMessageResponse,
+      },
+      {
+        status: 501,
+        description: `Not Implemented - Functionality not supported`,
+        schema: NotImplementedErrorMessageResponse,
+      },
+      {
+        status: 502,
+        description: `Bad Gateway - Invalid response from upstream server`,
+        schema: BadGatewayErrorMessageResponse,
+      },
+      {
+        status: 503,
+        description: `Service Unavailable - Try again later`,
+        schema: ServiceUnavailableErrorMessageResponse,
+      },
+      {
+        status: 504,
+        description: `Gateway Timeout - Upstream server timed out`,
+        schema: GatewayTimeoutErrorMessageResponse,
+      },
+      {
+        status: "default",
+        description: `An unexpected error response.`,
+        schema: rpc_Status,
+      },
+    ],
+  },
+  {
+    method: "delete",
+    path: "/lead-scraper-microservice/api/v1/workspace/:id",
+    alias: "DeleteWorkspace",
+    description: `Deletes a specific workspace`,
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "id",
+        type: "Path",
+        schema: z.string(),
+      },
+    ],
+    response: z.object({ success: z.boolean() }).partial().passthrough(),
+    errors: [
+      {
+        status: 400,
+        description: `Bad Request - Invalid input parameters`,
+        schema: ValidationErrorMessageResponse,
+      },
+      {
+        status: 401,
+        description: `Unauthorized - Authentication required`,
+        schema: AuthenticationErrorMessageResponse,
+      },
+      {
+        status: 402,
+        description: `Payment Required - Payment is necessary to proceed`,
+        schema: PaymentRequiredErrorMessageResponse,
+      },
+      {
+        status: 403,
+        description: `Forbidden - Access denied`,
+        schema: ForbiddenErrorMessageResponse,
+      },
+      {
+        status: 404,
+        description: `Not Found - Resource not found`,
+        schema: NotFoundErrorMessageResponse,
+      },
+      {
+        status: 405,
+        description: `Method Not Allowed - HTTP method not supported`,
+        schema: MethodNotAllowedErrorMessageResponse,
+      },
+      {
+        status: 409,
+        description: `Conflict - Resource already exists`,
+        schema: ConflictErrorMessageResponse,
+      },
+      {
+        status: 410,
+        description: `Gone - Resource is no longer available`,
+        schema: GoneErrorMessageResponse,
+      },
+      {
+        status: 412,
+        description: `Precondition Failed - Preconditions in headers did not match`,
+        schema: PreconditionFailedErrorMessageResponse,
+      },
+      {
+        status: 422,
+        description: `Unprocessable Entity - Semantic errors in the request`,
+        schema: UnprocessableEntityErrorMessageResponse,
+      },
+      {
+        status: 425,
+        description: `Too Early - Request is being replayed`,
+        schema: TooEarlyErrorMessageResponse,
+      },
+      {
+        status: 429,
+        description: `Too Many Requests - Rate limit exceeded`,
+        schema: RateLimitErrorMessageResponse,
+      },
+      {
+        status: 500,
+        description: `Internal Server Error`,
+        schema: InternalErrorMessageResponse,
+      },
+      {
+        status: 501,
+        description: `Not Implemented - Functionality not supported`,
+        schema: NotImplementedErrorMessageResponse,
+      },
+      {
+        status: 502,
+        description: `Bad Gateway - Invalid response from upstream server`,
+        schema: BadGatewayErrorMessageResponse,
+      },
+      {
+        status: 503,
+        description: `Service Unavailable - Try again later`,
+        schema: ServiceUnavailableErrorMessageResponse,
+      },
+      {
+        status: 504,
+        description: `Gateway Timeout - Upstream server timed out`,
+        schema: GatewayTimeoutErrorMessageResponse,
+      },
+      {
+        status: "default",
+        description: `An unexpected error response.`,
+        schema: rpc_Status,
+      },
+    ],
+  },
+  {
     method: "post",
     path: "/workspace-service/v1/accounts",
     alias: "CreateAccount",
@@ -6332,13 +6551,13 @@ const endpoints = makeApi([
   {
     method: "put",
     path: "/workspace-service/v1/workspaces",
-    alias: "UpdateWorkspace",
+    alias: "UpdateWorkspace1",
     requestFormat: "json",
     parameters: [
       {
         name: "body",
         type: "Body",
-        schema: UpdateWorkspaceRequest,
+        schema: UpdateWorkspaceRequest1,
       },
     ],
     response: UpdateWorkspaceResponse,
@@ -6444,7 +6663,7 @@ const endpoints = makeApi([
   {
     method: "delete",
     path: "/workspace-service/v1/workspaces/:id",
-    alias: "DeleteWorkspace",
+    alias: "DeleteWorkspace1",
     requestFormat: "json",
     parameters: [
       {
@@ -7351,6 +7570,28 @@ export class ApiClient {
     );
   }
 
+  async updateLeadScraperMicroserviceApiV1Workspace(
+    data: z.infer<typeof schemas.UpdateWorkspaceRequest>,
+  ) {
+    return this.client.put(
+      "/lead-scraper-microservice/api/v1/workspace",
+      data,
+      {},
+    );
+  }
+
+  async deleteLeadScraperMicroserviceApiV1WorkspaceId(params: { id: string }) {
+    return this.client.delete(
+      "/lead-scraper-microservice/api/v1/workspace/:id",
+      undefined,
+      {
+        params: {
+          id: params.id,
+        },
+      },
+    );
+  }
+
   async createWorkspaceServiceV1Accounts(
     data: z.infer<typeof CreateAccountRequest>,
   ) {
@@ -7410,7 +7651,7 @@ export class ApiClient {
   }
 
   async updateWorkspaceServiceV1Workspaces(
-    data: z.infer<typeof schemas.UpdateWorkspaceRequest>,
+    data: z.infer<typeof schemas.UpdateWorkspaceRequest1>,
   ) {
     return this.client.put("/workspace-service/v1/workspaces", data, {});
   }

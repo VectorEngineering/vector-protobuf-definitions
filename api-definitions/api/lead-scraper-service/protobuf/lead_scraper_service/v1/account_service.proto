@@ -813,93 +813,93 @@ service LeadScraperService {
     //     };
     // }
 
-    // /**
-    //  * UpdateWorkspace modifies workspace configuration
-    //  * 
-    //  * Modifiable settings:
-    //  * - Basic information (name, description)
-    //  * - Access control lists
-    //  * - Resource quotas
-    //  * - Default parameters
-    //  * - Integration configurations
-    //  * - Notification preferences
-    //  * 
-    //  * Update process:
-    //  * 1. Validates new configuration
-    //  * 2. Checks resource implications
-    //  * 3. Applies changes atomically
-    //  * 4. Updates dependent systems
-    //  * 5. Logs modifications
-    //  * 
-    //  * Safety features:
-    //  * - Configuration validation
-    //  * - Atomic updates
-    //  * - Rollback capability
-    //  * - Audit trail
-    //  */
-    // rpc UpdateWorkspace(UpdateWorkspaceRequest) returns (UpdateWorkspaceResponse) {
-    //     option (google.api.http) = {
-    //         put: "/lead-scraper-microservice/api/v1/workspace"
-    //         body: "*"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Update workspace details"
-    //         tags: ["lead-scraper-service"],
-    //         operation_id: "UpdateWorkspace",
-    //         description: "Updates the details of a specific workspace",
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Workspace updated successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.UpdateWorkspaceResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * UpdateWorkspace modifies workspace configuration
+     * 
+     * Modifiable settings:
+     * - Basic information (name, description)
+     * - Access control lists
+     * - Resource quotas
+     * - Default parameters
+     * - Integration configurations
+     * - Notification preferences
+     * 
+     * Update process:
+     * 1. Validates new configuration
+     * 2. Checks resource implications
+     * 3. Applies changes atomically
+     * 4. Updates dependent systems
+     * 5. Logs modifications
+     * 
+     * Safety features:
+     * - Configuration validation
+     * - Atomic updates
+     * - Rollback capability
+     * - Audit trail
+     */
+    rpc UpdateWorkspace(UpdateWorkspaceRequest) returns (UpdateWorkspaceResponse) {
+        option (google.api.http) = {
+            put: "/lead-scraper-microservice/api/v1/workspace"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Update workspace details"
+            tags: ["lead-scraper-service"],
+            operation_id: "UpdateWorkspace",
+            description: "Updates the details of a specific workspace",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workspace updated successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.UpdateWorkspaceResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * DeleteWorkspace removes a workspace and associated resources
-    //  * 
-    //  * Deletion process:
-    //  * 1. Validation checks
-    //  *    - Resource dependencies
-    //  *    - Active workflows
-    //  *    - User permissions
-    //  * 
-    //  * 2. Resource cleanup
-    //  *    - Workflow termination
-    //  *    - Data archival
-    //  *    - Resource deallocation
-    //  * 
-    //  * Safety measures:
-    //  * - Soft delete with recovery window
-    //  * - Dependency validation
-    //  * - Resource cleanup confirmation
-    //  * - Audit trail preservation
-    //  * 
-    //  * Post-deletion:
-    //  * - Notification to stakeholders
-    //  * - Resource reclamation
-    //  * - Audit log finalization
-    //  */
-    // rpc DeleteWorkspace(DeleteWorkspaceRequest) returns (DeleteWorkspaceResponse) {
-    //     option (google.api.http) = {
-    //         delete: "/lead-scraper-microservice/api/v1/workspace/{id}"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Delete a workspace"
-    //         tags: ["lead-scraper-service"],
-    //         operation_id: "DeleteWorkspace",
-    //         description: "Deletes a specific workspace",
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Workspace deleted successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.DeleteWorkspaceResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * DeleteWorkspace removes a workspace and associated resources
+     * 
+     * Deletion process:
+     * 1. Validation checks
+     *    - Resource dependencies
+     *    - Active workflows
+     *    - User permissions
+     * 
+     * 2. Resource cleanup
+     *    - Workflow termination
+     *    - Data archival
+     *    - Resource deallocation
+     * 
+     * Safety measures:
+     * - Soft delete with recovery window
+     * - Dependency validation
+     * - Resource cleanup confirmation
+     * - Audit trail preservation
+     * 
+     * Post-deletion:
+     * - Notification to stakeholders
+     * - Resource reclamation
+     * - Audit log finalization
+     */
+    rpc DeleteWorkspace(DeleteWorkspaceRequest) returns (DeleteWorkspaceResponse) {
+        option (google.api.http) = {
+            delete: "/lead-scraper-microservice/api/v1/workspace/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete a workspace"
+            tags: ["lead-scraper-service"],
+            operation_id: "DeleteWorkspace",
+            description: "Deletes a specific workspace",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workspace deleted successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.DeleteWorkspaceResponse" } }
+                }
+            }
+        };
+    }
 
     // Tenant Management
     /**

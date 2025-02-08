@@ -14,6 +14,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**deleteTenant**](LeadScraperServiceApi.md#deleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant |
 | [**deleteTenantAPIKey**](LeadScraperServiceApi.md#deleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key |
 | [**deleteWebhook**](LeadScraperServiceApi.md#deleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook |
+| [**deleteWorkspace**](LeadScraperServiceApi.md#deleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace |
 | [**getAPIKey**](LeadScraperServiceApi.md#getAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details |
 | [**getLead**](LeadScraperServiceApi.md#getLead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details |
 | [**getOrganization**](LeadScraperServiceApi.md#getOrganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details |
@@ -33,6 +34,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**updateTenant**](LeadScraperServiceApi.md#updateTenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details |
 | [**updateTenantAPIKey**](LeadScraperServiceApi.md#updateTenantAPIKey) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Update tenant API key |
 | [**updateWebhook**](LeadScraperServiceApi.md#updateWebhook) | **PUT** /lead-scraper-microservice/api/v1/webhooks | Update webhook |
+| [**updateWorkspace**](LeadScraperServiceApi.md#updateWorkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details |
 
 
 <a name="createAPIKey"></a>
@@ -307,6 +309,33 @@ Delete webhook
 ### Return type
 
 [**DeleteWebhookResponse**](../Models/DeleteWebhookResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="deleteWorkspace"></a>
+# **deleteWorkspace**
+> DeleteWorkspaceResponse deleteWorkspace(id)
+
+Delete a workspace
+
+    Deletes a specific workspace
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **String**|  | [default to null] |
+
+### Return type
+
+[**DeleteWorkspaceResponse**](../Models/DeleteWorkspaceResponse.md)
 
 ### Authorization
 
@@ -861,6 +890,33 @@ Update webhook
 ### Return type
 
 [**UpdateWebhookResponse**](../Models/UpdateWebhookResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
+<a name="updateWorkspace"></a>
+# **updateWorkspace**
+> UpdateWorkspaceResponse updateWorkspace(UpdateWorkspaceRequest)
+
+Update workspace details
+
+    Updates the details of a specific workspace
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **UpdateWorkspaceRequest** | [**UpdateWorkspaceRequest**](../Models/UpdateWorkspaceRequest.md)|  | |
+
+### Return type
+
+[**UpdateWorkspaceResponse**](../Models/UpdateWorkspaceResponse.md)
 
 ### Authorization
 

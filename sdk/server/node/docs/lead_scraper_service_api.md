@@ -29,6 +29,7 @@ Method | HTTP request | Description
 [**ListTenantAPIKeys**](lead_scraper_service_api.md#ListTenantAPIKeys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys
 [**ListTenants**](lead_scraper_service_api.md#ListTenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
 [**ListWebhooks**](lead_scraper_service_api.md#ListWebhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks
+[**ListWorkflows**](lead_scraper_service_api.md#ListWorkflows) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | List workflows
 [**PauseWorkflow**](lead_scraper_service_api.md#PauseWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution
 [**RotateAPIKey**](lead_scraper_service_api.md#RotateAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key
 [**RotateTenantAPIKey**](lead_scraper_service_api.md#RotateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key
@@ -38,6 +39,7 @@ Method | HTTP request | Description
 [**UpdateTenant**](lead_scraper_service_api.md#UpdateTenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details
 [**UpdateTenantAPIKey**](lead_scraper_service_api.md#UpdateTenantAPIKey) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Update tenant API key
 [**UpdateWebhook**](lead_scraper_service_api.md#UpdateWebhook) | **PUT** /lead-scraper-microservice/api/v1/webhooks | Update webhook
+[**UpdateWorkflow**](lead_scraper_service_api.md#UpdateWorkflow) | **PUT** /lead-scraper-microservice/api/v1/workspaces/workflow | Update workflow details
 [**UpdateWorkspace**](lead_scraper_service_api.md#UpdateWorkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details
 
 
@@ -216,6 +218,13 @@ Retrieves a list of all tenants in the system
 List webhooks
 
 Lists all webhook configurations with pagination
+<a name="ListWorkflows"></a>
+# **ListWorkflows**
+> ListWorkflowsResponse ListWorkflows(workspaceId, pageSize, pageNumber, filter, organizationId, tenantId, accountId)
+
+List workflows
+
+Retrieves a list of workflows for a given workspace
 <a name="PauseWorkflow"></a>
 # **PauseWorkflow**
 > PauseWorkflowResponse PauseWorkflow(workspaceId, Id_, pauseWorkflowBody)
@@ -279,6 +288,13 @@ Updates an existing tenant API key&#39;s configuration
 Update webhook
 
 Updates an existing webhook configuration
+<a name="UpdateWorkflow"></a>
+# **UpdateWorkflow**
+> UpdateWorkflowResponse UpdateWorkflow(updateWorkflowRequest)
+
+Update workflow details
+
+Updates the details of a specific workflow
 <a name="UpdateWorkspace"></a>
 # **UpdateWorkspace**
 > UpdateWorkspaceResponse UpdateWorkspace(updateWorkspaceRequest)

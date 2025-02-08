@@ -24,7 +24,9 @@ import { leadScraperMicroserviceapiv1webhooksRouter } from "./leadScraperMicrose
 import { leadScraperMicroserviceapiv1webhookswebhookidRouter } from "./leadScraperMicroserviceapiv1webhookswebhookid";
 import { leadScraperMicroserviceapiv1workspaceRouter } from "./leadScraperMicroserviceapiv1workspace";
 import { leadScraperMicroserviceapiv1workspaceidRouter } from "./leadScraperMicroserviceapiv1workspaceid";
+import { leadScraperMicroserviceapiv1workspacesworkflowRouter } from "./leadScraperMicroserviceapiv1workspacesworkflow";
 import { leadScraperMicroserviceapiv1workspacesworkspaceidanalyticsRouter } from "./leadScraperMicroserviceapiv1workspacesworkspaceidanalytics";
+import { leadScraperMicroserviceapiv1workspacesworkspaceidworkflowsRouter } from "./leadScraperMicroserviceapiv1workspacesworkspaceidworkflows";
 import { leadScraperMicroserviceapiv1workspacesworkspaceidworkflowsidpauseRouter } from "./leadScraperMicroserviceapiv1workspacesworkspaceidworkflowsidpause";
 import { leadScraperMicroserviceapiv1workspacesworkspaceidworkflowsidtriggerRouter } from "./leadScraperMicroserviceapiv1workspacesworkspaceidworkflowsidtrigger";
 import { workspaceServicev1accountsRouter } from "./workspaceServicev1accounts";
@@ -128,8 +130,16 @@ router.route(
   leadScraperMicroserviceapiv1workspaceidRouter,
 );
 router.route(
+  "/lead-scraper-microservice/api/v1/workspaces/workflow",
+  leadScraperMicroserviceapiv1workspacesworkflowRouter,
+);
+router.route(
   "/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics",
   leadScraperMicroserviceapiv1workspacesworkspaceidanalyticsRouter,
+);
+router.route(
+  "/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows",
+  leadScraperMicroserviceapiv1workspacesworkspaceidworkflowsRouter,
 );
 router.route(
   "/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause",

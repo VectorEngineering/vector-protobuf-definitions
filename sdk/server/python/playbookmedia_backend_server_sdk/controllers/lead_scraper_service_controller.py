@@ -40,6 +40,7 @@ from playbookmedia_backend_server_sdk.models.list_organizations_response import 
 from playbookmedia_backend_server_sdk.models.list_tenant_api_keys_response import ListTenantAPIKeysResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_tenants_response import ListTenantsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_webhooks_response import ListWebhooksResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.list_workflows_response import ListWorkflowsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.method_not_allowed_error_message_response import MethodNotAllowedErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.not_found_error_message_response import NotFoundErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.not_implemented_error_message_response import NotImplementedErrorMessageResponse  # noqa: E501
@@ -68,6 +69,8 @@ from playbookmedia_backend_server_sdk.models.update_tenant_request import Update
 from playbookmedia_backend_server_sdk.models.update_tenant_response import UpdateTenantResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_webhook_request import UpdateWebhookRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_webhook_response import UpdateWebhookResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.update_workflow_request import UpdateWorkflowRequest  # noqa: E501
+from playbookmedia_backend_server_sdk.models.update_workflow_response import UpdateWorkflowResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_workspace_request import UpdateWorkspaceRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.update_workspace_response import UpdateWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.validation_error_message_response import ValidationErrorMessageResponse  # noqa: E501
@@ -527,6 +530,31 @@ def list_webhooks(organization_id=None, workspace_id=None, tenant_id=None, accou
     return 'do some magic!'
 
 
+def list_workflows(workspace_id, page_size=None, page_number=None, filter=None, organization_id=None, tenant_id=None, account_id=None):  # noqa: E501
+    """List workflows
+
+    Retrieves a list of workflows for a given workspace # noqa: E501
+
+    :param workspace_id: 
+    :type workspace_id: str
+    :param page_size: 
+    :type page_size: int
+    :param page_number: 
+    :type page_number: int
+    :param filter: 
+    :type filter: str
+    :param organization_id: 
+    :type organization_id: str
+    :param tenant_id: 
+    :type tenant_id: str
+    :param account_id: 
+    :type account_id: str
+
+    :rtype: Union[ListWorkflowsResponse, Tuple[ListWorkflowsResponse, int], Tuple[ListWorkflowsResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
 def pause_workflow(workspace_id, id, pause_workflow_body):  # noqa: E501
     """Pause workflow execution
 
@@ -667,6 +695,21 @@ def update_webhook(update_webhook_request):  # noqa: E501
     """
     if connexion.request.is_json:
         update_webhook_request = UpdateWebhookRequest.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
+def update_workflow(update_workflow_request):  # noqa: E501
+    """Update workflow details
+
+    Updates the details of a specific workflow # noqa: E501
+
+    :param update_workflow_request: 
+    :type update_workflow_request: dict | bytes
+
+    :rtype: Union[UpdateWorkflowResponse, Tuple[UpdateWorkflowResponse, int], Tuple[UpdateWorkflowResponse, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        update_workflow_request = UpdateWorkflowRequest.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
 
 

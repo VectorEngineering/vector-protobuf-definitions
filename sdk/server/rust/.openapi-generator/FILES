@@ -114,6 +114,7 @@ docs/ListOrganizationsResponse.md
 docs/ListTenantApiKeysResponse.md
 docs/ListTenantsResponse.md
 docs/ListWebhooksResponse.md
+docs/ListWorkflowsResponse.md
 docs/ListWorkspaceSharingsResponse.md
 docs/ListWorkspacesResponse.md
 docs/MarketplaceApp.md
@@ -196,6 +197,8 @@ docs/UpdateTenantRequest.md
 docs/UpdateTenantResponse.md
 docs/UpdateWebhookRequest.md
 docs/UpdateWebhookResponse.md
+docs/UpdateWorkflowRequest.md
+docs/UpdateWorkflowResponse.md
 docs/UpdateWorkspaceRequest.md
 docs/UpdateWorkspaceResponse.md
 docs/UpdateWorkspaceSharingRequest.md

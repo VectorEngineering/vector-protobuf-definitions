@@ -30,6 +30,7 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       ListTenantApiKeysResponse,
                       ListTenantsResponse,
                       ListWebhooksResponse,
+                      ListWorkflowsResponse,
                       PauseWorkflowResponse,
                       RotateApiKeyResponse,
                       RotateTenantApiKeyResponse,
@@ -39,6 +40,7 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       UpdateTenantResponse,
                       UpdateTenantApiKeyResponse,
                       UpdateWebhookResponse,
+                      UpdateWorkflowResponse,
                       UpdateWorkspaceResponse,
                       CreateAccountResponse,
                       CreateWorkspaceResponse,
@@ -104,6 +106,7 @@ fn main() {
                 "ListTenantApiKeys", 
                 "ListTenants", 
                 "ListWebhooks", 
+                "ListWorkflows", 
                 "DeleteAccount", 
                 "DeleteWorkspace1", 
                 "GetAccount", 
@@ -401,6 +404,18 @@ fn main() {
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
+        Some("ListWorkflows") => {
+            let result = rt.block_on(client.list_workflows(
+                  "workspace_id_example".to_string(),
+                  Some(56),
+                  Some(56),
+                  Some("filter_example".to_string()),
+                  Some("organization_id_example".to_string()),
+                  Some("tenant_id_example".to_string()),
+                  Some("account_id_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
         /* Disabled because there's no example.
         Some("PauseWorkflow") => {
             let result = rt.block_on(client.pause_workflow(
@@ -472,6 +487,14 @@ fn main() {
         /* Disabled because there's no example.
         Some("UpdateWebhook") => {
             let result = rt.block_on(client.update_webhook(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("UpdateWorkflow") => {
+            let result = rt.block_on(client.update_workflow(
                   ???
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());

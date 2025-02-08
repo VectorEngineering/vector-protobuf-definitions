@@ -2129,6 +2129,14 @@ const DeleteWorkspaceResponse = z
   .object({ success: z.boolean() })
   .partial()
   .passthrough();
+const UpdateWorkflowRequest = z
+  .object({ workflow: ScrapingWorkflow })
+  .partial()
+  .passthrough();
+const UpdateWorkflowResponse = z
+  .object({ workflow: ScrapingWorkflow })
+  .partial()
+  .passthrough();
 const JobSuccessRate = z
   .object({
     workflowId: z.string(),
@@ -2143,6 +2151,13 @@ const GetWorkspaceAnalyticsResponse = z
     activeWorkflows: z.number().int(),
     jobsLast30Days: z.number().int(),
     successRates: z.array(JobSuccessRate),
+  })
+  .partial()
+  .passthrough();
+const ListWorkflowsResponse = z
+  .object({
+    workflows: z.array(ScrapingWorkflow),
+    nextPageNumber: z.number().int(),
   })
   .partial()
   .passthrough();
@@ -2577,8 +2592,11 @@ export const schemas = {
   UpdateWorkspaceResponse,
   GetWorkspaceResponse,
   DeleteWorkspaceResponse,
+  UpdateWorkflowRequest,
+  UpdateWorkflowResponse,
   JobSuccessRate,
   GetWorkspaceAnalyticsResponse,
+  ListWorkflowsResponse,
   PauseWorkflowBody,
   PauseWorkflowResponse,
   TriggerWorkflowBody,
@@ -6437,6 +6455,143 @@ const endpoints = makeApi([
     ],
   },
   {
+    method: "get",
+    path: "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows",
+    alias: "ListWorkflows",
+    description: `Retrieves a list of workflows for a given workspace`,
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "workspaceId",
+        type: "Path",
+        schema: z.string(),
+      },
+      {
+        name: "pageSize",
+        type: "Query",
+        schema: z.number().int().optional(),
+      },
+      {
+        name: "pageNumber",
+        type: "Query",
+        schema: z.number().int().optional(),
+      },
+      {
+        name: "filter",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+      {
+        name: "organizationId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+      {
+        name: "tenantId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+      {
+        name: "accountId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+    ],
+    response: ListWorkflowsResponse,
+    errors: [
+      {
+        status: 400,
+        description: `Bad Request - Invalid input parameters`,
+        schema: ValidationErrorMessageResponse,
+      },
+      {
+        status: 401,
+        description: `Unauthorized - Authentication required`,
+        schema: AuthenticationErrorMessageResponse,
+      },
+      {
+        status: 402,
+        description: `Payment Required - Payment is necessary to proceed`,
+        schema: PaymentRequiredErrorMessageResponse,
+      },
+      {
+        status: 403,
+        description: `Forbidden - Access denied`,
+        schema: ForbiddenErrorMessageResponse,
+      },
+      {
+        status: 404,
+        description: `Not Found - Resource not found`,
+        schema: NotFoundErrorMessageResponse,
+      },
+      {
+        status: 405,
+        description: `Method Not Allowed - HTTP method not supported`,
+        schema: MethodNotAllowedErrorMessageResponse,
+      },
+      {
+        status: 409,
+        description: `Conflict - Resource already exists`,
+        schema: ConflictErrorMessageResponse,
+      },
+      {
+        status: 410,
+        description: `Gone - Resource is no longer available`,
+        schema: GoneErrorMessageResponse,
+      },
+      {
+        status: 412,
+        description: `Precondition Failed - Preconditions in headers did not match`,
+        schema: PreconditionFailedErrorMessageResponse,
+      },
+      {
+        status: 422,
+        description: `Unprocessable Entity - Semantic errors in the request`,
+        schema: UnprocessableEntityErrorMessageResponse,
+      },
+      {
+        status: 425,
+        description: `Too Early - Request is being replayed`,
+        schema: TooEarlyErrorMessageResponse,
+      },
+      {
+        status: 429,
+        description: `Too Many Requests - Rate limit exceeded`,
+        schema: RateLimitErrorMessageResponse,
+      },
+      {
+        status: 500,
+        description: `Internal Server Error`,
+        schema: InternalErrorMessageResponse,
+      },
+      {
+        status: 501,
+        description: `Not Implemented - Functionality not supported`,
+        schema: NotImplementedErrorMessageResponse,
+      },
+      {
+        status: 502,
+        description: `Bad Gateway - Invalid response from upstream server`,
+        schema: BadGatewayErrorMessageResponse,
+      },
+      {
+        status: 503,
+        description: `Service Unavailable - Try again later`,
+        schema: ServiceUnavailableErrorMessageResponse,
+      },
+      {
+        status: 504,
+        description: `Gateway Timeout - Upstream server timed out`,
+        schema: GatewayTimeoutErrorMessageResponse,
+      },
+      {
+        status: "default",
+        description: `An unexpected error response.`,
+        schema: rpc_Status,
+      },
+    ],
+  },
+  {
     method: "post",
     path: "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id/pause",
     alias: "PauseWorkflow",
@@ -6577,6 +6732,113 @@ const endpoints = makeApi([
       },
     ],
     response: TriggerWorkflowResponse,
+    errors: [
+      {
+        status: 400,
+        description: `Bad Request - Invalid input parameters`,
+        schema: ValidationErrorMessageResponse,
+      },
+      {
+        status: 401,
+        description: `Unauthorized - Authentication required`,
+        schema: AuthenticationErrorMessageResponse,
+      },
+      {
+        status: 402,
+        description: `Payment Required - Payment is necessary to proceed`,
+        schema: PaymentRequiredErrorMessageResponse,
+      },
+      {
+        status: 403,
+        description: `Forbidden - Access denied`,
+        schema: ForbiddenErrorMessageResponse,
+      },
+      {
+        status: 404,
+        description: `Not Found - Resource not found`,
+        schema: NotFoundErrorMessageResponse,
+      },
+      {
+        status: 405,
+        description: `Method Not Allowed - HTTP method not supported`,
+        schema: MethodNotAllowedErrorMessageResponse,
+      },
+      {
+        status: 409,
+        description: `Conflict - Resource already exists`,
+        schema: ConflictErrorMessageResponse,
+      },
+      {
+        status: 410,
+        description: `Gone - Resource is no longer available`,
+        schema: GoneErrorMessageResponse,
+      },
+      {
+        status: 412,
+        description: `Precondition Failed - Preconditions in headers did not match`,
+        schema: PreconditionFailedErrorMessageResponse,
+      },
+      {
+        status: 422,
+        description: `Unprocessable Entity - Semantic errors in the request`,
+        schema: UnprocessableEntityErrorMessageResponse,
+      },
+      {
+        status: 425,
+        description: `Too Early - Request is being replayed`,
+        schema: TooEarlyErrorMessageResponse,
+      },
+      {
+        status: 429,
+        description: `Too Many Requests - Rate limit exceeded`,
+        schema: RateLimitErrorMessageResponse,
+      },
+      {
+        status: 500,
+        description: `Internal Server Error`,
+        schema: InternalErrorMessageResponse,
+      },
+      {
+        status: 501,
+        description: `Not Implemented - Functionality not supported`,
+        schema: NotImplementedErrorMessageResponse,
+      },
+      {
+        status: 502,
+        description: `Bad Gateway - Invalid response from upstream server`,
+        schema: BadGatewayErrorMessageResponse,
+      },
+      {
+        status: 503,
+        description: `Service Unavailable - Try again later`,
+        schema: ServiceUnavailableErrorMessageResponse,
+      },
+      {
+        status: 504,
+        description: `Gateway Timeout - Upstream server timed out`,
+        schema: GatewayTimeoutErrorMessageResponse,
+      },
+      {
+        status: "default",
+        description: `An unexpected error response.`,
+        schema: rpc_Status,
+      },
+    ],
+  },
+  {
+    method: "put",
+    path: "/lead-scraper-microservice/api/v1/workspaces/workflow",
+    alias: "UpdateWorkflow",
+    description: `Updates the details of a specific workflow`,
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "body",
+        type: "Body",
+        schema: UpdateWorkflowRequest,
+      },
+    ],
+    response: UpdateWorkflowResponse,
     errors: [
       {
         status: 400,
@@ -8124,6 +8386,17 @@ export class ApiClient {
       },
     );
   }
+
+  async updateLeadScraperMicroserviceApiV1WorkspacesWorkflow(
+    data: z.infer<typeof schemas.UpdateWorkflowRequest>,
+  ) {
+    return this.client.put(
+      "/lead-scraper-microservice/api/v1/workspaces/workflow",
+      data,
+      {},
+    );
+  }
+
   async getLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdAnalytics(params: {
     workspaceId: string;
     startTime: string | undefined;
@@ -8138,6 +8411,33 @@ export class ApiClient {
         queries: {
           startTime: params.startTime,
           endTime: params.endTime,
+        },
+      },
+    );
+  }
+
+  async getLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdWorkflows(params: {
+    workspaceId: string;
+    pageSize: number | undefined;
+    pageNumber: number | undefined;
+    filter: string | undefined;
+    organizationId: string | undefined;
+    tenantId: string | undefined;
+    accountId: string | undefined;
+  }) {
+    return this.client.get(
+      "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows",
+      {
+        params: {
+          workspaceId: params.workspaceId,
+        },
+        queries: {
+          pageSize: params.pageSize ? Number(params.pageSize) : undefined,
+          pageNumber: params.pageNumber ? Number(params.pageNumber) : undefined,
+          filter: params.filter,
+          organizationId: params.organizationId,
+          tenantId: params.tenantId,
+          accountId: params.accountId,
         },
       },
     );

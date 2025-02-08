@@ -29,6 +29,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**listTenantAPIKeys**](LeadScraperServiceApi.md#listTenantAPIKeys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys |
 | [**listTenants**](LeadScraperServiceApi.md#listTenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants |
 | [**listWebhooks**](LeadScraperServiceApi.md#listWebhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks |
+| [**listWorkflows**](LeadScraperServiceApi.md#listWorkflows) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | List workflows |
 | [**pauseWorkflow**](LeadScraperServiceApi.md#pauseWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution |
 | [**rotateAPIKey**](LeadScraperServiceApi.md#rotateAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key |
 | [**rotateTenantAPIKey**](LeadScraperServiceApi.md#rotateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key |
@@ -38,6 +39,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**updateTenant**](LeadScraperServiceApi.md#updateTenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details |
 | [**updateTenantAPIKey**](LeadScraperServiceApi.md#updateTenantAPIKey) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Update tenant API key |
 | [**updateWebhook**](LeadScraperServiceApi.md#updateWebhook) | **PUT** /lead-scraper-microservice/api/v1/webhooks | Update webhook |
+| [**updateWorkflow**](LeadScraperServiceApi.md#updateWorkflow) | **PUT** /lead-scraper-microservice/api/v1/workspaces/workflow | Update workflow details |
 | [**updateWorkspace**](LeadScraperServiceApi.md#updateWorkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details |
 
 
@@ -774,6 +776,39 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
+<a name="listWorkflows"></a>
+# **listWorkflows**
+> ListWorkflowsResponse listWorkflows(workspaceId, pageSize, pageNumber, filter, organizationId, tenantId, accountId)
+
+List workflows
+
+    Retrieves a list of workflows for a given workspace
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **workspaceId** | **String**|  | [default to null] |
+| **pageSize** | **Integer**|  | [optional] [default to null] |
+| **pageNumber** | **Integer**|  | [optional] [default to null] |
+| **filter** | **String**|  | [optional] [default to null] |
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
+| **accountId** | **String**|  | [optional] [default to null] |
+
+### Return type
+
+[**ListWorkflowsResponse**](../Models/ListWorkflowsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
 <a name="pauseWorkflow"></a>
 # **pauseWorkflow**
 > PauseWorkflowResponse pauseWorkflow(workspaceId, id, PauseWorkflowBody)
@@ -1011,6 +1046,33 @@ Update webhook
 ### Return type
 
 [**UpdateWebhookResponse**](../Models/UpdateWebhookResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
+<a name="updateWorkflow"></a>
+# **updateWorkflow**
+> UpdateWorkflowResponse updateWorkflow(UpdateWorkflowRequest)
+
+Update workflow details
+
+    Updates the details of a specific workflow
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **UpdateWorkflowRequest** | [**UpdateWorkflowRequest**](../Models/UpdateWorkflowRequest.md)|  | |
+
+### Return type
+
+[**UpdateWorkflowResponse**](../Models/UpdateWorkflowResponse.md)
 
 ### Authorization
 

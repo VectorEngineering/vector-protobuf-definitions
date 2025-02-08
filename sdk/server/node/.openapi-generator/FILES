@@ -109,6 +109,7 @@ docs/ListOrganizationsResponse.md
 docs/ListTenantApiKeysResponse.md
 docs/ListTenantsResponse.md
 docs/ListWebhooksResponse.md
+docs/ListWorkflowsResponse.md
 docs/ListWorkspaceSharingsResponse.md
 docs/ListWorkspacesResponse.md
 docs/MarketplaceApp.md
@@ -191,6 +192,8 @@ docs/UpdateTenantRequest.md
 docs/UpdateTenantResponse.md
 docs/UpdateWebhookRequest.md
 docs/UpdateWebhookResponse.md
+docs/UpdateWorkflowRequest.md
+docs/UpdateWorkflowResponse.md
 docs/UpdateWorkspaceRequest.md
 docs/UpdateWorkspaceResponse.md
 docs/UpdateWorkspaceSharingRequest.md
@@ -325,6 +328,7 @@ openapi3graphql-server/model/list_organizations_response.graphql
 openapi3graphql-server/model/list_tenant_api_keys_response.graphql
 openapi3graphql-server/model/list_tenants_response.graphql
 openapi3graphql-server/model/list_webhooks_response.graphql
+openapi3graphql-server/model/list_workflows_response.graphql
 openapi3graphql-server/model/list_workspace_sharings_response.graphql
 openapi3graphql-server/model/list_workspaces_response.graphql
 openapi3graphql-server/model/marketplace_app.graphql
@@ -407,6 +411,8 @@ openapi3graphql-server/model/update_tenant_request.graphql
 openapi3graphql-server/model/update_tenant_response.graphql
 openapi3graphql-server/model/update_webhook_request.graphql
 openapi3graphql-server/model/update_webhook_response.graphql
+openapi3graphql-server/model/update_workflow_request.graphql
+openapi3graphql-server/model/update_workflow_response.graphql
 openapi3graphql-server/model/update_workspace_request.graphql
 openapi3graphql-server/model/update_workspace_response.graphql
 openapi3graphql-server/model/update_workspace_sharing_request.graphql

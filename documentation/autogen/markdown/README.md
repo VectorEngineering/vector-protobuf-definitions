@@ -32,6 +32,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *LeadScraperServiceApi* | [**listTenantAPIKeys**](Apis/LeadScraperServiceApi.md#listtenantapikeys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys |
 *LeadScraperServiceApi* | [**listTenants**](Apis/LeadScraperServiceApi.md#listtenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants |
 *LeadScraperServiceApi* | [**listWebhooks**](Apis/LeadScraperServiceApi.md#listwebhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks |
+*LeadScraperServiceApi* | [**listWorkflows**](Apis/LeadScraperServiceApi.md#listworkflows) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | List workflows |
 *LeadScraperServiceApi* | [**pauseWorkflow**](Apis/LeadScraperServiceApi.md#pauseworkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution |
 *LeadScraperServiceApi* | [**rotateAPIKey**](Apis/LeadScraperServiceApi.md#rotateapikey) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key |
 *LeadScraperServiceApi* | [**rotateTenantAPIKey**](Apis/LeadScraperServiceApi.md#rotatetenantapikey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key |
@@ -41,6 +42,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *LeadScraperServiceApi* | [**updateTenant**](Apis/LeadScraperServiceApi.md#updatetenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details |
 *LeadScraperServiceApi* | [**updateTenantAPIKey**](Apis/LeadScraperServiceApi.md#updatetenantapikey) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Update tenant API key |
 *LeadScraperServiceApi* | [**updateWebhook**](Apis/LeadScraperServiceApi.md#updatewebhook) | **PUT** /lead-scraper-microservice/api/v1/webhooks | Update webhook |
+*LeadScraperServiceApi* | [**updateWorkflow**](Apis/LeadScraperServiceApi.md#updateworkflow) | **PUT** /lead-scraper-microservice/api/v1/workspaces/workflow | Update workflow details |
 *LeadScraperServiceApi* | [**updateWorkspace**](Apis/LeadScraperServiceApi.md#updateworkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details |
 | *WorkspaceServiceApi* | [**createAccount**](Apis/WorkspaceServiceApi.md#createaccount) | **POST** /workspace-service/v1/accounts | Create a new account |
 *WorkspaceServiceApi* | [**createWorkspace**](Apis/WorkspaceServiceApi.md#createworkspace) | **POST** /workspace-service/v1/workspaces | Create workspace |
@@ -174,6 +176,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [ListTenantAPIKeysResponse](./Models/ListTenantAPIKeysResponse.md)
  - [ListTenantsResponse](./Models/ListTenantsResponse.md)
  - [ListWebhooksResponse](./Models/ListWebhooksResponse.md)
+ - [ListWorkflowsResponse](./Models/ListWorkflowsResponse.md)
  - [ListWorkspaceSharingsResponse](./Models/ListWorkspaceSharingsResponse.md)
  - [ListWorkspacesResponse](./Models/ListWorkspacesResponse.md)
  - [MFAInfo](./Models/MFAInfo.md)
@@ -255,6 +258,8 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [UpdateTenantResponse](./Models/UpdateTenantResponse.md)
  - [UpdateWebhookRequest](./Models/UpdateWebhookRequest.md)
  - [UpdateWebhookResponse](./Models/UpdateWebhookResponse.md)
+ - [UpdateWorkflowRequest](./Models/UpdateWorkflowRequest.md)
+ - [UpdateWorkflowResponse](./Models/UpdateWorkflowResponse.md)
  - [UpdateWorkspaceRequest](./Models/UpdateWorkspaceRequest.md)
  - [UpdateWorkspaceResponse](./Models/UpdateWorkspaceResponse.md)
  - [UpdateWorkspaceSharingRequest](./Models/UpdateWorkspaceSharingRequest.md)

@@ -6394,6 +6394,193 @@
         ]
       }
     },
+    "/lead-scraper-microservice/api/v1/workspaces/workflow": {
+      "put": {
+        "summary": "Update workflow details",
+        "description": "Updates the details of a specific workflow",
+        "operationId": "UpdateWorkflow",
+        "responses": {
+          "200": {
+            "description": "Workflow updated successfully",
+            "schema": {
+              "$ref": "#/definitions/UpdateWorkflowResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "schema": {
+              "$ref": "#/definitions/ValidationErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"status\":{\"code\":400,\"message\":\"Bad Request\"},\"error_code\":2000,\"message\":\"Invalid input parameters\",\"field_violations\":[{\"field\":\"email\",\"message\":\"Invalid email format\",\"constraint\":\"email\",\"value\":\"invalid-email\"}],\"schema_validation\":{\"schema_version\":\"v1\",\"invalid_patterns\":[\"email_format\"]}}"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "schema": {
+              "$ref": "#/definitions/AuthenticationErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"status\":{\"code\":401,\"message\":\"Unauthorized\"},\"error_code\":1001,\"message\":\"Authentication failed\",\"token_info\":{\"token_type\":\"Bearer\"},\"auth_context\":{\"required_scopes\":[\"read:user\"]},\"oauth2_info\":{\"authorization_url\":\"https://solomon-ai.io/oauth/authorize\"}}"
+            }
+          },
+          "402": {
+            "description": "Payment Required - Payment is necessary to proceed",
+            "schema": {
+              "$ref": "#/definitions/PaymentRequiredErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":402,\"message\":\"Payment Required\",\"payment_info\":{\"amount_due\":29.99,\"currency\":\"USD\",\"due_date\":\"2024-01-01T00:00:00Z\"}}"
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":403,\"message\":\"Forbidden\",\"reason\":\"Insufficient permissions\",\"required_permissions\":[\"admin\"]}"
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource not found",
+            "schema": {
+              "$ref": "#/definitions/NotFoundErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"status\":{\"code\":404,\"message\":\"Not Found\"},\"error_code\":5102,\"message\":\"Resource not found\",\"resource_info\":{\"type\":\"user\",\"id\":\"123\",\"path\":\"/user-microservice/api/v2/users/123\"},\"suggestions\":{\"alternative_paths\":[\"/user-microservice/api/v2/users\"]}}"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed - HTTP method not supported",
+            "schema": {
+              "$ref": "#/definitions/MethodNotAllowedErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":405,\"message\":\"Method Not Allowed\",\"allowed_methods\":[\"GET\",\"POST\"]}"
+            }
+          },
+          "409": {
+            "description": "Conflict - Resource already exists",
+            "schema": {
+              "$ref": "#/definitions/ConflictErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"status\":{\"code\":409,\"message\":\"Conflict\"},\"error_code\":2300,\"message\":\"Resource already exists\",\"conflict_info\":{\"resource_type\":\"user\",\"identifier\":\"user@example.com\",\"conflict_reason\":\"Email already registered\"}}"
+            }
+          },
+          "410": {
+            "description": "Gone - Resource is no longer available",
+            "schema": {
+              "$ref": "#/definitions/GoneErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":410,\"message\":\"Gone\",\"resource\":\"/api/v1/users\"}"
+            }
+          },
+          "412": {
+            "description": "Precondition Failed - Preconditions in headers did not match",
+            "schema": {
+              "$ref": "#/definitions/PreconditionFailedErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":412,\"message\":\"Precondition Failed\",\"failed_conditions\":[\"If-Match header does not match\"]}"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity - Semantic errors in the request",
+            "schema": {
+              "$ref": "#/definitions/UnprocessableEntityErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":422,\"message\":\"Unprocessable Entity\",\"errors\":[{\"field\":\"email\",\"error\":\"Invalid format\"}]}"
+            }
+          },
+          "425": {
+            "description": "Too Early - Request is being replayed",
+            "schema": {
+              "$ref": "#/definitions/TooEarlyErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":425,\"message\":\"Too Early\"}"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded",
+            "schema": {
+              "$ref": "#/definitions/RateLimitErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"status\":{\"code\":429,\"message\":\"Too Many Requests\"},\"error_code\":4102,\"message\":\"Rate limit exceeded\",\"limit_info\":{\"current\":150,\"limit\":100,\"window_size\":\"1m\"}}"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/InternalErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"status\":{\"code\":500,\"message\":\"Internal Server Error\"},\"error_code\":4000,\"message\":\"An unexpected error occurred\",\"incident_id\":\"inc-123\",\"service_status\":{\"name\":\"user-service\",\"status\":\"degraded\"}}"
+            }
+          },
+          "501": {
+            "description": "Not Implemented - Functionality not supported",
+            "schema": {
+              "$ref": "#/definitions/NotImplementedErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":501,\"message\":\"Not Implemented\",\"feature\":\"User Deletion\"}"
+            }
+          },
+          "502": {
+            "description": "Bad Gateway - Invalid response from upstream server",
+            "schema": {
+              "$ref": "#/definitions/BadGatewayErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":502,\"message\":\"Bad Gateway\",\"upstream_service\":\"Auth Service\"}"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable - Try again later",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailableErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"status\":{\"code\":503,\"message\":\"Service Unavailable\"},\"error_code\":4300,\"message\":\"Service is temporarily unavailable\",\"availability_info\":{\"retry_after\":60,\"affected_services\":[\"user-service\"]}}"
+            }
+          },
+          "504": {
+            "description": "Gateway Timeout - Upstream server timed out",
+            "schema": {
+              "$ref": "#/definitions/GatewayTimeoutErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":504,\"message\":\"Gateway Timeout\",\"upstream_service\":\"Database\"}"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateWorkflowRequest"
+            }
+          }
+        ],
+        "tags": [
+          "lead-scraper-service"
+        ]
+      }
+    },
     "/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics": {
       "get": {
         "summary": "Get workspace analytics",
@@ -6587,6 +6774,233 @@
             "required": false,
             "type": "string",
             "format": "date-time"
+          }
+        ],
+        "tags": [
+          "lead-scraper-service"
+        ]
+      }
+    },
+    "/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows": {
+      "get": {
+        "summary": "List workflows",
+        "description": "Retrieves a list of workflows for a given workspace",
+        "operationId": "ListWorkflows",
+        "responses": {
+          "200": {
+            "description": "Workflows retrieved successfully",
+            "schema": {
+              "$ref": "#/definitions/ListWorkflowsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid input parameters",
+            "schema": {
+              "$ref": "#/definitions/ValidationErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"status\":{\"code\":400,\"message\":\"Bad Request\"},\"error_code\":2000,\"message\":\"Invalid input parameters\",\"field_violations\":[{\"field\":\"email\",\"message\":\"Invalid email format\",\"constraint\":\"email\",\"value\":\"invalid-email\"}],\"schema_validation\":{\"schema_version\":\"v1\",\"invalid_patterns\":[\"email_format\"]}}"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Authentication required",
+            "schema": {
+              "$ref": "#/definitions/AuthenticationErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"status\":{\"code\":401,\"message\":\"Unauthorized\"},\"error_code\":1001,\"message\":\"Authentication failed\",\"token_info\":{\"token_type\":\"Bearer\"},\"auth_context\":{\"required_scopes\":[\"read:user\"]},\"oauth2_info\":{\"authorization_url\":\"https://solomon-ai.io/oauth/authorize\"}}"
+            }
+          },
+          "402": {
+            "description": "Payment Required - Payment is necessary to proceed",
+            "schema": {
+              "$ref": "#/definitions/PaymentRequiredErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":402,\"message\":\"Payment Required\",\"payment_info\":{\"amount_due\":29.99,\"currency\":\"USD\",\"due_date\":\"2024-01-01T00:00:00Z\"}}"
+            }
+          },
+          "403": {
+            "description": "Forbidden - Access denied",
+            "schema": {
+              "$ref": "#/definitions/ForbiddenErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":403,\"message\":\"Forbidden\",\"reason\":\"Insufficient permissions\",\"required_permissions\":[\"admin\"]}"
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource not found",
+            "schema": {
+              "$ref": "#/definitions/NotFoundErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"status\":{\"code\":404,\"message\":\"Not Found\"},\"error_code\":5102,\"message\":\"Resource not found\",\"resource_info\":{\"type\":\"user\",\"id\":\"123\",\"path\":\"/user-microservice/api/v2/users/123\"},\"suggestions\":{\"alternative_paths\":[\"/user-microservice/api/v2/users\"]}}"
+            }
+          },
+          "405": {
+            "description": "Method Not Allowed - HTTP method not supported",
+            "schema": {
+              "$ref": "#/definitions/MethodNotAllowedErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":405,\"message\":\"Method Not Allowed\",\"allowed_methods\":[\"GET\",\"POST\"]}"
+            }
+          },
+          "409": {
+            "description": "Conflict - Resource already exists",
+            "schema": {
+              "$ref": "#/definitions/ConflictErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"status\":{\"code\":409,\"message\":\"Conflict\"},\"error_code\":2300,\"message\":\"Resource already exists\",\"conflict_info\":{\"resource_type\":\"user\",\"identifier\":\"user@example.com\",\"conflict_reason\":\"Email already registered\"}}"
+            }
+          },
+          "410": {
+            "description": "Gone - Resource is no longer available",
+            "schema": {
+              "$ref": "#/definitions/GoneErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":410,\"message\":\"Gone\",\"resource\":\"/api/v1/users\"}"
+            }
+          },
+          "412": {
+            "description": "Precondition Failed - Preconditions in headers did not match",
+            "schema": {
+              "$ref": "#/definitions/PreconditionFailedErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":412,\"message\":\"Precondition Failed\",\"failed_conditions\":[\"If-Match header does not match\"]}"
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity - Semantic errors in the request",
+            "schema": {
+              "$ref": "#/definitions/UnprocessableEntityErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":422,\"message\":\"Unprocessable Entity\",\"errors\":[{\"field\":\"email\",\"error\":\"Invalid format\"}]}"
+            }
+          },
+          "425": {
+            "description": "Too Early - Request is being replayed",
+            "schema": {
+              "$ref": "#/definitions/TooEarlyErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":425,\"message\":\"Too Early\"}"
+            }
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded",
+            "schema": {
+              "$ref": "#/definitions/RateLimitErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"status\":{\"code\":429,\"message\":\"Too Many Requests\"},\"error_code\":4102,\"message\":\"Rate limit exceeded\",\"limit_info\":{\"current\":150,\"limit\":100,\"window_size\":\"1m\"}}"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/InternalErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"status\":{\"code\":500,\"message\":\"Internal Server Error\"},\"error_code\":4000,\"message\":\"An unexpected error occurred\",\"incident_id\":\"inc-123\",\"service_status\":{\"name\":\"user-service\",\"status\":\"degraded\"}}"
+            }
+          },
+          "501": {
+            "description": "Not Implemented - Functionality not supported",
+            "schema": {
+              "$ref": "#/definitions/NotImplementedErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":501,\"message\":\"Not Implemented\",\"feature\":\"User Deletion\"}"
+            }
+          },
+          "502": {
+            "description": "Bad Gateway - Invalid response from upstream server",
+            "schema": {
+              "$ref": "#/definitions/BadGatewayErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":502,\"message\":\"Bad Gateway\",\"upstream_service\":\"Auth Service\"}"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable - Try again later",
+            "schema": {
+              "$ref": "#/definitions/ServiceUnavailableErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"status\":{\"code\":503,\"message\":\"Service Unavailable\"},\"error_code\":4300,\"message\":\"Service is temporarily unavailable\",\"availability_info\":{\"retry_after\":60,\"affected_services\":[\"user-service\"]}}"
+            }
+          },
+          "504": {
+            "description": "Gateway Timeout - Upstream server timed out",
+            "schema": {
+              "$ref": "#/definitions/GatewayTimeoutErrorMessageResponse"
+            },
+            "examples": {
+              "": "{\"code\":504,\"message\":\"Gateway Timeout\",\"upstream_service\":\"Database\"}"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpc.Status"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "organizationId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "tenantId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
+          },
+          {
+            "name": "accountId",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "uint64"
           }
         ],
         "tags": [
@@ -8888,6 +9302,22 @@
         }
       }
     },
+    "ListWorkflowsResponse": {
+      "type": "object",
+      "properties": {
+        "workflows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ScrapingWorkflow"
+          }
+        },
+        "nextPageNumber": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
     "MFAInfo": {
       "type": "object",
       "properties": {
@@ -10700,6 +11130,22 @@
       "properties": {
         "webhook": {
           "$ref": "#/definitions/WebhookConfig"
+        }
+      }
+    },
+    "UpdateWorkflowRequest": {
+      "type": "object",
+      "properties": {
+        "workflow": {
+          "$ref": "#/definitions/ScrapingWorkflow"
+        }
+      }
+    },
+    "UpdateWorkflowResponse": {
+      "type": "object",
+      "properties": {
+        "workflow": {
+          "$ref": "#/definitions/ScrapingWorkflow"
         }
       }
     },

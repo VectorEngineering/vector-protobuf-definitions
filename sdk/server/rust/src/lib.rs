@@ -2030,6 +2030,86 @@ pub enum ListWebhooksResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum ListWorkflowsResponse {
+    /// Workflows retrieved successfully
+    WorkflowsRetrievedSuccessfully
+    (models::ListWorkflowsResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum PauseWorkflowResponse {
     /// Workflow paused successfully
     WorkflowPausedSuccessfully
@@ -2674,6 +2754,86 @@ pub enum UpdateWebhookResponse {
     /// Webhook updated successfully
     WebhookUpdatedSuccessfully
     (models::UpdateWebhookResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum UpdateWorkflowResponse {
+    /// Workflow updated successfully
+    WorkflowUpdatedSuccessfully
+    (models::UpdateWorkflowResponse)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -3692,6 +3852,18 @@ pub trait Api<C: Send + Sync> {
         search: Option<String>,
         context: &C) -> Result<ListWebhooksResponse, ApiError>;
 
+    /// List workflows
+    async fn list_workflows(
+        &self,
+        workspace_id: String,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        filter: Option<String>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        context: &C) -> Result<ListWorkflowsResponse, ApiError>;
+
     /// Pause workflow execution
     async fn pause_workflow(
         &self,
@@ -3749,6 +3921,12 @@ pub trait Api<C: Send + Sync> {
         &self,
         update_webhook_request: models::UpdateWebhookRequest,
         context: &C) -> Result<UpdateWebhookResponse, ApiError>;
+
+    /// Update workflow details
+    async fn update_workflow(
+        &self,
+        update_workflow_request: models::UpdateWorkflowRequest,
+        context: &C) -> Result<UpdateWorkflowResponse, ApiError>;
 
     /// Update workspace details
     async fn update_workspace(
@@ -4080,6 +4258,18 @@ pub trait ApiNoContext<C: Send + Sync> {
         search: Option<String>,
         ) -> Result<ListWebhooksResponse, ApiError>;
 
+    /// List workflows
+    async fn list_workflows(
+        &self,
+        workspace_id: String,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        filter: Option<String>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        ) -> Result<ListWorkflowsResponse, ApiError>;
+
     /// Pause workflow execution
     async fn pause_workflow(
         &self,
@@ -4137,6 +4327,12 @@ pub trait ApiNoContext<C: Send + Sync> {
         &self,
         update_webhook_request: models::UpdateWebhookRequest,
         ) -> Result<UpdateWebhookResponse, ApiError>;
+
+    /// Update workflow details
+    async fn update_workflow(
+        &self,
+        update_workflow_request: models::UpdateWorkflowRequest,
+        ) -> Result<UpdateWorkflowResponse, ApiError>;
 
     /// Update workspace details
     async fn update_workspace(
@@ -4582,6 +4778,22 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         self.api().list_webhooks(organization_id, workspace_id, tenant_id, account_id, page_size, page_number, status, search, &context).await
     }
 
+    /// List workflows
+    async fn list_workflows(
+        &self,
+        workspace_id: String,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        filter: Option<String>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        ) -> Result<ListWorkflowsResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().list_workflows(workspace_id, page_size, page_number, filter, organization_id, tenant_id, account_id, &context).await
+    }
+
     /// Pause workflow execution
     async fn pause_workflow(
         &self,
@@ -4674,6 +4886,16 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().update_webhook(update_webhook_request, &context).await
+    }
+
+    /// Update workflow details
+    async fn update_workflow(
+        &self,
+        update_workflow_request: models::UpdateWorkflowRequest,
+        ) -> Result<UpdateWorkflowResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().update_workflow(update_workflow_request, &context).await
     }
 
     /// Update workspace details

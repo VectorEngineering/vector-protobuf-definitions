@@ -111,6 +111,7 @@ Models/ListOrganizationsResponse.md
 Models/ListTenantAPIKeysResponse.md
 Models/ListTenantsResponse.md
 Models/ListWebhooksResponse.md
+Models/ListWorkflowsResponse.md
 Models/ListWorkspaceSharingsResponse.md
 Models/ListWorkspacesResponse.md
 Models/MFAInfo.md
@@ -192,6 +193,8 @@ Models/UpdateTenantRequest.md
 Models/UpdateTenantResponse.md
 Models/UpdateWebhookRequest.md
 Models/UpdateWebhookResponse.md
+Models/UpdateWorkflowRequest.md
+Models/UpdateWorkflowResponse.md
 Models/UpdateWorkspaceRequest.md
 Models/UpdateWorkspaceResponse.md
 Models/UpdateWorkspaceSharingRequest.md

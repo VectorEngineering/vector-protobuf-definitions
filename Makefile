@@ -95,3 +95,6 @@ copy-configs-to-gateway: ## Copy final configurations to API gateway
 autogen: gen copy-swagger convert-swagger-to-openapiv3 update-typescript-client-sdk update-docs generate-krakend-config prettify-krakend merge-configs validate copy-configs-to-gateway ## Run all generation steps
 
 generate: gen copy-swagger convert-swagger-to-openapiv3 update-typescript-client-sdk update-docs generate-krakend-config prettify-krakend merge-configs validate copy-configs-to-gateway ## Alias for autogen
+
+run:
+	make autogen && ./scripts/build.sh autogen 

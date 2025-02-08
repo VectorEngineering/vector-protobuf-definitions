@@ -146,6 +146,11 @@ input UpdateWebhookInput {
     updateWebhookRequest: UpdateWebhookRequestInput
 }
 
+input UpdateWorkflowInput {
+    
+    updateWorkflowRequest: UpdateWorkflowRequestInput
+}
+
 input UpdateWorkspaceInput {
     
     updateWorkspaceRequest: UpdateWorkspaceRequestInput
@@ -268,6 +273,11 @@ type Mutation {
   # @param UpdateWebhookRequest updateWebhookRequest 
   # @return [UpdateWebhookResponse]
   UpdateWebhook(input: UpdateWebhookInput!): UpdateWebhookResponse
+  # Update workflow details
+  # Updates the details of a specific workflow
+  # @param UpdateWorkflowRequest updateWorkflowRequest 
+  # @return [UpdateWorkflowResponse]
+  UpdateWorkflow(input: UpdateWorkflowInput!): UpdateWorkflowResponse
   # Update workspace details
   # Updates the details of a specific workspace
   # @param UpdateWorkspaceRequest updateWorkspaceRequest 
@@ -392,5 +402,16 @@ type Query {
   # @param String! search 
   # @return [ListWebhooksResponse]
   ListWebhooks(organizationId: String!, workspaceId: String!, tenantId: String!, accountId: String!, pageSize: Int!, pageNumber: Int!, status: String!, search: String!): ListWebhooksResponse
+  # List workflows
+  # Retrieves a list of workflows for a given workspace
+  # @param String! workspaceId 
+  # @param Int! pageSize 
+  # @param Int! pageNumber 
+  # @param String! filter 
+  # @param String! organizationId 
+  # @param String! tenantId 
+  # @param String! accountId 
+  # @return [ListWorkflowsResponse]
+  ListWorkflows(workspaceId: String!, pageSize: Int!, pageNumber: Int!, filter: String!, organizationId: String!, tenantId: String!, accountId: String!): ListWorkflowsResponse
 }
 

@@ -19,6 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	LeadScraperService_UpdateWorkflow_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/UpdateWorkflow"
+	LeadScraperService_ListWorkflows_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/ListWorkflows"
 	LeadScraperService_TriggerWorkflow_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/TriggerWorkflow"
 	LeadScraperService_PauseWorkflow_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/PauseWorkflow"
 	LeadScraperService_GetWorkspaceAnalytics_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/GetWorkspaceAnalytics"
@@ -82,6 +84,40 @@ const (
 //
 // ```
 type LeadScraperServiceClient interface {
+	// UpdateWorkflow modifies the configuration of a specific workflow
+	//
+	// This endpoint allows updating the details of a workflow, including:
+	// - Workflow name and description
+	// - Job parameters
+	//
+	// Example update:
+	// ```json
+	//
+	//	{
+	//	  "name": "Updated Workflow",
+	//	  "description": "Updated description"
+	//	}
+	//
+	// ```
+	UpdateWorkflow(ctx context.Context, in *UpdateWorkflowRequest, opts ...grpc.CallOption) (*UpdateWorkflowResponse, error)
+	// ListWorkflows retrieves all workflows in a workspace
+	//
+	// Features:
+	// - Pagination support with customizable page size
+	// - Filtering by status, creation date, and type
+	// - Sorting options for various workflow attributes
+	//
+	// Response includes:
+	// - Workflow metadata and configuration
+	// - Execution statistics and status
+	// - Last run information
+	// - Associated resource usage
+	//
+	// Common use cases:
+	// - Monitoring workflow health
+	// - Auditing workflow configurations
+	// - Resource utilization analysis
+	ListWorkflows(ctx context.Context, in *ListWorkflowsRequest, opts ...grpc.CallOption) (*ListWorkflowsResponse, error)
 	// TriggerWorkflow initiates workflow execution with specified parameters
 	//
 	// Features:
@@ -601,6 +637,26 @@ func NewLeadScraperServiceClient(cc grpc.ClientConnInterface) LeadScraperService
 	return &leadScraperServiceClient{cc}
 }
 
+func (c *leadScraperServiceClient) UpdateWorkflow(ctx context.Context, in *UpdateWorkflowRequest, opts ...grpc.CallOption) (*UpdateWorkflowResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateWorkflowResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_UpdateWorkflow_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) ListWorkflows(ctx context.Context, in *ListWorkflowsRequest, opts ...grpc.CallOption) (*ListWorkflowsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListWorkflowsResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_ListWorkflows_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *leadScraperServiceClient) TriggerWorkflow(ctx context.Context, in *TriggerWorkflowRequest, opts ...grpc.CallOption) (*TriggerWorkflowResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(TriggerWorkflowResponse)
@@ -977,6 +1033,40 @@ func (c *leadScraperServiceClient) ListWebhooks(ctx context.Context, in *ListWeb
 //
 // ```
 type LeadScraperServiceServer interface {
+	// UpdateWorkflow modifies the configuration of a specific workflow
+	//
+	// This endpoint allows updating the details of a workflow, including:
+	// - Workflow name and description
+	// - Job parameters
+	//
+	// Example update:
+	// ```json
+	//
+	//	{
+	//	  "name": "Updated Workflow",
+	//	  "description": "Updated description"
+	//	}
+	//
+	// ```
+	UpdateWorkflow(context.Context, *UpdateWorkflowRequest) (*UpdateWorkflowResponse, error)
+	// ListWorkflows retrieves all workflows in a workspace
+	//
+	// Features:
+	// - Pagination support with customizable page size
+	// - Filtering by status, creation date, and type
+	// - Sorting options for various workflow attributes
+	//
+	// Response includes:
+	// - Workflow metadata and configuration
+	// - Execution statistics and status
+	// - Last run information
+	// - Associated resource usage
+	//
+	// Common use cases:
+	// - Monitoring workflow health
+	// - Auditing workflow configurations
+	// - Resource utilization analysis
+	ListWorkflows(context.Context, *ListWorkflowsRequest) (*ListWorkflowsResponse, error)
 	// TriggerWorkflow initiates workflow execution with specified parameters
 	//
 	// Features:
@@ -1496,6 +1586,12 @@ type LeadScraperServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedLeadScraperServiceServer struct{}
 
+func (UnimplementedLeadScraperServiceServer) UpdateWorkflow(context.Context, *UpdateWorkflowRequest) (*UpdateWorkflowResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWorkflow not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) ListWorkflows(context.Context, *ListWorkflowsRequest) (*ListWorkflowsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListWorkflows not implemented")
+}
 func (UnimplementedLeadScraperServiceServer) TriggerWorkflow(context.Context, *TriggerWorkflowRequest) (*TriggerWorkflowResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TriggerWorkflow not implemented")
 }
@@ -1620,6 +1716,42 @@ func RegisterLeadScraperServiceServer(s grpc.ServiceRegistrar, srv LeadScraperSe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&LeadScraperService_ServiceDesc, srv)
+}
+
+func _LeadScraperService_UpdateWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWorkflowRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).UpdateWorkflow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_UpdateWorkflow_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).UpdateWorkflow(ctx, req.(*UpdateWorkflowRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_ListWorkflows_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListWorkflowsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).ListWorkflows(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_ListWorkflows_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).ListWorkflows(ctx, req.(*ListWorkflowsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _LeadScraperService_TriggerWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2259,6 +2391,14 @@ var LeadScraperService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "lead_scraper_service.v1.LeadScraperService",
 	HandlerType: (*LeadScraperServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "UpdateWorkflow",
+			Handler:    _LeadScraperService_UpdateWorkflow_Handler,
+		},
+		{
+			MethodName: "ListWorkflows",
+			Handler:    _LeadScraperService_ListWorkflows_Handler,
+		},
 		{
 			MethodName: "TriggerWorkflow",
 			Handler:    _LeadScraperService_TriggerWorkflow_Handler,

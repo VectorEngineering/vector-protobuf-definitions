@@ -576,78 +576,78 @@ service LeadScraperService {
     //     };
     // }
 
-    // /**
-    //  * UpdateWorkflow modifies the configuration of a specific workflow
-    //  * 
-    //  * This endpoint allows updating the details of a workflow, including:
-    //  * - Workflow name and description
-    //  * - Job parameters
-    //  * 
-    //  * Example update:
-    //  * ```json
-    //  * {
-    //  *   "name": "Updated Workflow",
-    //  *   "description": "Updated description"
-    //  * }
-    //  * ```
-    //  */
-    // rpc UpdateWorkflow(UpdateWorkflowRequest) returns (UpdateWorkflowResponse) {
-    //     option (google.api.http) = {
-    //         put: "/lead-scraper-microservice/api/v1/workspaces/workflow"
-    //         body: "*"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Update workflow details"
-    //         tags: ["lead-scraper-service"],
-    //         operation_id: "UpdateWorkflow",
-    //         description: "Updates the details of a specific workflow",
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Workflow updated successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.UpdateWorkflowResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * UpdateWorkflow modifies the configuration of a specific workflow
+     * 
+     * This endpoint allows updating the details of a workflow, including:
+     * - Workflow name and description
+     * - Job parameters
+     * 
+     * Example update:
+     * ```json
+     * {
+     *   "name": "Updated Workflow",
+     *   "description": "Updated description"
+     * }
+     * ```
+     */
+    rpc UpdateWorkflow(UpdateWorkflowRequest) returns (UpdateWorkflowResponse) {
+        option (google.api.http) = {
+            put: "/lead-scraper-microservice/api/v1/workspaces/workflow"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Update workflow details"
+            tags: ["lead-scraper-service"],
+            operation_id: "UpdateWorkflow",
+            description: "Updates the details of a specific workflow",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workflow updated successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.UpdateWorkflowResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * ListWorkflows retrieves all workflows in a workspace
-    //  * 
-    //  * Features:
-    //  * - Pagination support with customizable page size
-    //  * - Filtering by status, creation date, and type
-    //  * - Sorting options for various workflow attributes
-    //  * 
-    //  * Response includes:
-    //  * - Workflow metadata and configuration
-    //  * - Execution statistics and status
-    //  * - Last run information
-    //  * - Associated resource usage
-    //  * 
-    //  * Common use cases:
-    //  * - Monitoring workflow health
-    //  * - Auditing workflow configurations
-    //  * - Resource utilization analysis
-    //  */
-    // rpc ListWorkflows(ListWorkflowsRequest) returns (ListWorkflowsResponse) {
-    //     option (google.api.http) = {
-    //         get: "/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "List workflows"
-    //         tags: ["lead-scraper-service"],
-    //         operation_id: "ListWorkflows",
-    //         description: "Retrieves a list of workflows for a given workspace",
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Workflows retrieved successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.ListWorkflowsResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * ListWorkflows retrieves all workflows in a workspace
+     * 
+     * Features:
+     * - Pagination support with customizable page size
+     * - Filtering by status, creation date, and type
+     * - Sorting options for various workflow attributes
+     * 
+     * Response includes:
+     * - Workflow metadata and configuration
+     * - Execution statistics and status
+     * - Last run information
+     * - Associated resource usage
+     * 
+     * Common use cases:
+     * - Monitoring workflow health
+     * - Auditing workflow configurations
+     * - Resource utilization analysis
+     */
+    rpc ListWorkflows(ListWorkflowsRequest) returns (ListWorkflowsResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "List workflows"
+            tags: ["lead-scraper-service"],
+            operation_id: "ListWorkflows",
+            description: "Retrieves a list of workflows for a given workspace",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workflows retrieved successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.ListWorkflowsResponse" } }
+                }
+            }
+        };
+    }
 
     // Execution Control
     /**

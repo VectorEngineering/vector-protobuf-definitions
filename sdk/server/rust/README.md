@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-08T09:25:22.009853-05:00[America/New_York]
+- Build date: 2025-02-08T09:28:13.827792-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -82,6 +82,7 @@ cargo run --example client ListOrganizations
 cargo run --example client ListTenantApiKeys
 cargo run --example client ListTenants
 cargo run --example client ListWebhooks
+cargo run --example client ListWorkflows
 cargo run --example client DeleteAccount
 cargo run --example client DeleteWorkspace1
 cargo run --example client GetAccount
@@ -150,6 +151,7 @@ Method | HTTP request | Description
 [**ListTenantAPIKeys**](docs/lead_scraper_service_api.md#ListTenantAPIKeys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys
 [**ListTenants**](docs/lead_scraper_service_api.md#ListTenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
 [**ListWebhooks**](docs/lead_scraper_service_api.md#ListWebhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks
+[**ListWorkflows**](docs/lead_scraper_service_api.md#ListWorkflows) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | List workflows
 [**PauseWorkflow**](docs/lead_scraper_service_api.md#PauseWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution
 [**RotateAPIKey**](docs/lead_scraper_service_api.md#RotateAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key
 [**RotateTenantAPIKey**](docs/lead_scraper_service_api.md#RotateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key
@@ -159,6 +161,7 @@ Method | HTTP request | Description
 [**UpdateTenant**](docs/lead_scraper_service_api.md#UpdateTenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details
 [**UpdateTenantAPIKey**](docs/lead_scraper_service_api.md#UpdateTenantAPIKey) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Update tenant API key
 [**UpdateWebhook**](docs/lead_scraper_service_api.md#UpdateWebhook) | **PUT** /lead-scraper-microservice/api/v1/webhooks | Update webhook
+[**UpdateWorkflow**](docs/lead_scraper_service_api.md#UpdateWorkflow) | **PUT** /lead-scraper-microservice/api/v1/workspaces/workflow | Update workflow details
 [**UpdateWorkspace**](docs/lead_scraper_service_api.md#UpdateWorkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details
 [**CreateAccount**](docs/workspace_service_api.md#CreateAccount) | **POST** /workspace-service/v1/accounts | Create a new account
 [**CreateWorkspace**](docs/workspace_service_api.md#CreateWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace
@@ -291,6 +294,7 @@ Method | HTTP request | Description
  - [ListTenantApiKeysResponse](docs/ListTenantApiKeysResponse.md)
  - [ListTenantsResponse](docs/ListTenantsResponse.md)
  - [ListWebhooksResponse](docs/ListWebhooksResponse.md)
+ - [ListWorkflowsResponse](docs/ListWorkflowsResponse.md)
  - [ListWorkspaceSharingsResponse](docs/ListWorkspaceSharingsResponse.md)
  - [ListWorkspacesResponse](docs/ListWorkspacesResponse.md)
  - [MarketplaceApp](docs/MarketplaceApp.md)
@@ -373,6 +377,8 @@ Method | HTTP request | Description
  - [UpdateTenantResponse](docs/UpdateTenantResponse.md)
  - [UpdateWebhookRequest](docs/UpdateWebhookRequest.md)
  - [UpdateWebhookResponse](docs/UpdateWebhookResponse.md)
+ - [UpdateWorkflowRequest](docs/UpdateWorkflowRequest.md)
+ - [UpdateWorkflowResponse](docs/UpdateWorkflowResponse.md)
  - [UpdateWorkspaceRequest](docs/UpdateWorkspaceRequest.md)
  - [UpdateWorkspaceResponse](docs/UpdateWorkspaceResponse.md)
  - [UpdateWorkspaceSharingRequest](docs/UpdateWorkspaceSharingRequest.md)

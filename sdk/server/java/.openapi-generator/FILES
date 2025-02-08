@@ -119,6 +119,7 @@ src/main/java/org/openapitools/model/ListOrganizationsResponse.java
 src/main/java/org/openapitools/model/ListTenantAPIKeysResponse.java
 src/main/java/org/openapitools/model/ListTenantsResponse.java
 src/main/java/org/openapitools/model/ListWebhooksResponse.java
+src/main/java/org/openapitools/model/ListWorkflowsResponse.java
 src/main/java/org/openapitools/model/ListWorkspaceSharingsResponse.java
 src/main/java/org/openapitools/model/ListWorkspacesResponse.java
 src/main/java/org/openapitools/model/MFAInfo.java
@@ -201,6 +202,8 @@ src/main/java/org/openapitools/model/UpdateTenantRequest.java
 src/main/java/org/openapitools/model/UpdateTenantResponse.java
 src/main/java/org/openapitools/model/UpdateWebhookRequest.java
 src/main/java/org/openapitools/model/UpdateWebhookResponse.java
+src/main/java/org/openapitools/model/UpdateWorkflowRequest.java
+src/main/java/org/openapitools/model/UpdateWorkflowResponse.java
 src/main/java/org/openapitools/model/UpdateWorkspaceRequest.java
 src/main/java/org/openapitools/model/UpdateWorkspaceResponse.java
 src/main/java/org/openapitools/model/UpdateWorkspaceSharingRequest.java

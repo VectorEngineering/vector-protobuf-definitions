@@ -129,6 +129,7 @@ use openapi_client::{
     ListTenantApiKeysResponse,
     ListTenantsResponse,
     ListWebhooksResponse,
+    ListWorkflowsResponse,
     PauseWorkflowResponse,
     RotateApiKeyResponse,
     RotateTenantApiKeyResponse,
@@ -138,6 +139,7 @@ use openapi_client::{
     UpdateTenantResponse,
     UpdateTenantApiKeyResponse,
     UpdateWebhookResponse,
+    UpdateWorkflowResponse,
     UpdateWorkspaceResponse,
     CreateAccountResponse,
     CreateWorkspaceResponse,
@@ -471,6 +473,22 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
+    /// List workflows
+    async fn list_workflows(
+        &self,
+        workspace_id: String,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        filter: Option<String>,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        account_id: Option<String>,
+        context: &C) -> Result<ListWorkflowsResponse, ApiError>
+    {
+        info!("list_workflows(\"{}\", {:?}, {:?}, {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", workspace_id, page_size, page_number, filter, organization_id, tenant_id, account_id, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
     /// Pause workflow execution
     async fn pause_workflow(
         &self,
@@ -562,6 +580,16 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<UpdateWebhookResponse, ApiError>
     {
         info!("update_webhook({:?}) - X-Span-ID: {:?}", update_webhook_request, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Update workflow details
+    async fn update_workflow(
+        &self,
+        update_workflow_request: models::UpdateWorkflowRequest,
+        context: &C) -> Result<UpdateWorkflowResponse, ApiError>
+    {
+        info!("update_workflow({:?}) - X-Span-ID: {:?}", update_workflow_request, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

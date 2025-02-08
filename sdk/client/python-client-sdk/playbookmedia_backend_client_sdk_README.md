@@ -90,6 +90,7 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**list_tenant_api_keys**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_tenant_api_keys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys
 *LeadScraperServiceApi* | [**list_tenants**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_tenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
 *LeadScraperServiceApi* | [**list_webhooks**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_webhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks
+*LeadScraperServiceApi* | [**list_workflows**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_workflows) | **GET** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | List workflows
 *LeadScraperServiceApi* | [**pause_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#pause_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause | Pause workflow execution
 *LeadScraperServiceApi* | [**rotate_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#rotate_api_key) | **POST** /lead-scraper-microservice/api/v1/api-keys/rotate | Rotate API key
 *LeadScraperServiceApi* | [**rotate_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#rotate_tenant_api_key) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate | Rotate tenant API key
@@ -99,6 +100,7 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**update_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_tenant) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants | Update tenant details
 *LeadScraperServiceApi* | [**update_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_tenant_api_key) | **PUT** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Update tenant API key
 *LeadScraperServiceApi* | [**update_webhook**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_webhook) | **PUT** /lead-scraper-microservice/api/v1/webhooks | Update webhook
+*LeadScraperServiceApi* | [**update_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_workflow) | **PUT** /lead-scraper-microservice/api/v1/workspaces/workflow | Update workflow details
 *LeadScraperServiceApi* | [**update_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_workspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details
 *WorkspaceServiceApi* | [**create_account**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#create_account) | **POST** /workspace-service/v1/accounts | Create a new account
 *WorkspaceServiceApi* | [**create_workspace**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#create_workspace) | **POST** /workspace-service/v1/workspaces | Create workspace
@@ -231,6 +233,7 @@ Class | Method | HTTP request | Description
  - [ListTenantAPIKeysResponse](playbookmedia_backend_client_sdk/docs/ListTenantAPIKeysResponse.md)
  - [ListTenantsResponse](playbookmedia_backend_client_sdk/docs/ListTenantsResponse.md)
  - [ListWebhooksResponse](playbookmedia_backend_client_sdk/docs/ListWebhooksResponse.md)
+ - [ListWorkflowsResponse](playbookmedia_backend_client_sdk/docs/ListWorkflowsResponse.md)
  - [ListWorkspaceSharingsResponse](playbookmedia_backend_client_sdk/docs/ListWorkspaceSharingsResponse.md)
  - [ListWorkspacesResponse](playbookmedia_backend_client_sdk/docs/ListWorkspacesResponse.md)
  - [MFAInfo](playbookmedia_backend_client_sdk/docs/MFAInfo.md)
@@ -313,6 +316,8 @@ Class | Method | HTTP request | Description
  - [UpdateTenantResponse](playbookmedia_backend_client_sdk/docs/UpdateTenantResponse.md)
  - [UpdateWebhookRequest](playbookmedia_backend_client_sdk/docs/UpdateWebhookRequest.md)
  - [UpdateWebhookResponse](playbookmedia_backend_client_sdk/docs/UpdateWebhookResponse.md)
+ - [UpdateWorkflowRequest](playbookmedia_backend_client_sdk/docs/UpdateWorkflowRequest.md)
+ - [UpdateWorkflowResponse](playbookmedia_backend_client_sdk/docs/UpdateWorkflowResponse.md)
  - [UpdateWorkspaceRequest](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceRequest.md)
  - [UpdateWorkspaceResponse](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceResponse.md)
  - [UpdateWorkspaceSharingRequest](playbookmedia_backend_client_sdk/docs/UpdateWorkspaceSharingRequest.md)

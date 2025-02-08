@@ -10,6 +10,7 @@ Method | HTTP request | Description
 **CreateTenantAPIKey**](lead_scraper_service_api.md#CreateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key
 **CreateWebhook**](lead_scraper_service_api.md#CreateWebhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook
 **CreateWorkflow**](lead_scraper_service_api.md#CreateWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow
+**DeleteAccount**](lead_scraper_service_api.md#DeleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 **DeleteAPIKey**](lead_scraper_service_api.md#DeleteAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 **DeleteOrganization**](lead_scraper_service_api.md#DeleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
 **DeleteTenant**](lead_scraper_service_api.md#DeleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
@@ -210,6 +211,43 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: application/json, application/x-www-form-urlencoded
+ - **Accept**: , application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **DeleteAccount**
+> models::DeleteAccountResponse DeleteAccount(id, optional)
+Delete account
+
+Permanently deletes an account and associated resources
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+  **id** | **String**|  | 
+ **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a map[string]interface{}.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **String**|  | 
+ **organization_id** | **String**|  | 
+ **tenant_id** | **String**|  | 
+
+### Return type
+
+[**models::DeleteAccountResponse**](DeleteAccountResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: , application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -8,6 +8,10 @@ spec:
   routes:
   - condition:
       method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/DeleteAccount
+    name: DeleteAccount
+  - condition:
+      method: POST
       pathRegex: /lead_scraper_service\.v1\.LeadScraperService/ListWorkspaces
     name: ListWorkspaces
   - condition:

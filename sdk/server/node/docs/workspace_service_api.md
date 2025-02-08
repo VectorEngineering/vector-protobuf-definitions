@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateAccount**](workspace_service_api.md#CreateAccount) | **POST** /workspace-service/v1/accounts | Create a new account
 [**CreateWorkspace**](workspace_service_api.md#CreateWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace
-[**DeleteAccount**](workspace_service_api.md#DeleteAccount) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
+[**DeleteAccount1**](workspace_service_api.md#DeleteAccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 [**DeleteWorkspace1**](workspace_service_api.md#DeleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
 [**GetAccount**](workspace_service_api.md#GetAccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details
 [**GetWorkspace1**](workspace_service_api.md#GetWorkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
@@ -34,9 +34,9 @@ Creates a new user account with initial workspace
 > CreateWorkspaceResponse CreateWorkspace(createWorkspaceRequest)
 
 Create workspace
-<a name="DeleteAccount"></a>
-# **DeleteAccount**
-> DeleteAccountResponse DeleteAccount(Id_)
+<a name="DeleteAccount1"></a>
+# **DeleteAccount1**
+> DeleteAccountResponse DeleteAccount1(Id_)
 
 Delete account
 <a name="DeleteWorkspace1"></a>

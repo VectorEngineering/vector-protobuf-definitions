@@ -14,6 +14,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *LeadScraperServiceApi* | [**createWebhook**](Apis/LeadScraperServiceApi.md#createwebhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook |
 *LeadScraperServiceApi* | [**createWorkflow**](Apis/LeadScraperServiceApi.md#createworkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow |
 *LeadScraperServiceApi* | [**deleteAPIKey**](Apis/LeadScraperServiceApi.md#deleteapikey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key |
+*LeadScraperServiceApi* | [**deleteAccount**](Apis/LeadScraperServiceApi.md#deleteaccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account |
 *LeadScraperServiceApi* | [**deleteOrganization**](Apis/LeadScraperServiceApi.md#deleteorganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization |
 *LeadScraperServiceApi* | [**deleteTenant**](Apis/LeadScraperServiceApi.md#deletetenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant |
 *LeadScraperServiceApi* | [**deleteTenantAPIKey**](Apis/LeadScraperServiceApi.md#deletetenantapikey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key |
@@ -53,7 +54,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *LeadScraperServiceApi* | [**updateWorkspace**](Apis/LeadScraperServiceApi.md#updateworkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details |
 | *WorkspaceServiceApi* | [**createAccount**](Apis/WorkspaceServiceApi.md#createaccount) | **POST** /workspace-service/v1/accounts | Create a new account |
 *WorkspaceServiceApi* | [**createWorkspace**](Apis/WorkspaceServiceApi.md#createworkspace) | **POST** /workspace-service/v1/workspaces | Create workspace |
-*WorkspaceServiceApi* | [**deleteAccount**](Apis/WorkspaceServiceApi.md#deleteaccount) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account |
+*WorkspaceServiceApi* | [**deleteAccount1**](Apis/WorkspaceServiceApi.md#deleteaccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account |
 *WorkspaceServiceApi* | [**deleteWorkspace1**](Apis/WorkspaceServiceApi.md#deleteworkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace |
 *WorkspaceServiceApi* | [**getAccount**](Apis/WorkspaceServiceApi.md#getaccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details |
 *WorkspaceServiceApi* | [**getWorkspace1**](Apis/WorkspaceServiceApi.md#getworkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details |

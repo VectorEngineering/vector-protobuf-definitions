@@ -5,6 +5,7 @@ import type { Env } from "../types";
 // Import all route handlers
 import { leadScraperMicroserviceapiv1accountslistRouter } from "./leadScraperMicroserviceapiv1accountslist";
 import { leadScraperMicroserviceapiv1accountssettingsRouter } from "./leadScraperMicroserviceapiv1accountssettings";
+import { leadScraperMicroserviceapiv1accountsidRouter } from "./leadScraperMicroserviceapiv1accountsid";
 import { leadScraperMicroserviceapiv1accountsidusageRouter } from "./leadScraperMicroserviceapiv1accountsidusage";
 import { leadScraperMicroserviceapiv1apiKeysRouter } from "./leadScraperMicroserviceapiv1apiKeys";
 import { leadScraperMicroserviceapiv1apiKeyslistRouter } from "./leadScraperMicroserviceapiv1apiKeyslist";
@@ -57,6 +58,10 @@ router.route(
 router.route(
   "/lead-scraper-microservice/api/v1/accounts/settings",
   leadScraperMicroserviceapiv1accountssettingsRouter,
+);
+router.route(
+  "/lead-scraper-microservice/api/v1/accounts/{id}",
+  leadScraperMicroserviceapiv1accountsidRouter,
 );
 router.route(
   "/lead-scraper-microservice/api/v1/accounts/{id}/usage",

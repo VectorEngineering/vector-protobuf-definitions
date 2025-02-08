@@ -11,6 +11,7 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       CreateTenantApiKeyResponse,
                       CreateWebhookResponse,
                       CreateWorkflowResponse,
+                      DeleteAccountResponse,
                       DeleteApiKeyResponse,
                       DeleteOrganizationResponse,
                       DeleteTenantResponse,
@@ -51,7 +52,7 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       UpdateWorkspaceResponse,
                       CreateAccountResponse,
                       CreateWorkspaceResponse,
-                      DeleteAccountResponse,
+                      DeleteAccount1Response,
                       DeleteWorkspace1Response,
                       GetAccountResponse,
                       GetWorkspace1Response,
@@ -93,6 +94,7 @@ fn main() {
         .arg(Arg::with_name("operation")
             .help("Sets the operation to run")
             .possible_values(&[
+                "DeleteAccount", 
                 "DeleteApiKey", 
                 "DeleteOrganization", 
                 "DeleteTenant", 
@@ -119,7 +121,7 @@ fn main() {
                 "ListWebhooks", 
                 "ListWorkflows", 
                 "ListWorkspaces", 
-                "DeleteAccount", 
+                "DeleteAccount1", 
                 "DeleteWorkspace1", 
                 "GetAccount", 
                 "GetWorkspace1", 
@@ -248,6 +250,14 @@ fn main() {
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
         */
+        Some("DeleteAccount") => {
+            let result = rt.block_on(client.delete_account(
+                  "id_example".to_string(),
+                  Some("organization_id_example".to_string()),
+                  Some("tenant_id_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
         Some("DeleteApiKey") => {
             let result = rt.block_on(client.delete_api_key(
                   "key_id_example".to_string(),
@@ -596,8 +606,8 @@ fn main() {
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
         */
-        Some("DeleteAccount") => {
-            let result = rt.block_on(client.delete_account(
+        Some("DeleteAccount1") => {
+            let result = rt.block_on(client.delete_account1(
                   "id_example".to_string()
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());

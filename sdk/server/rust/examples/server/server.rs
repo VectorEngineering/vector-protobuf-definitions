@@ -110,6 +110,7 @@ use openapi_client::{
     CreateTenantApiKeyResponse,
     CreateWebhookResponse,
     CreateWorkflowResponse,
+    DeleteAccountResponse,
     DeleteApiKeyResponse,
     DeleteOrganizationResponse,
     DeleteTenantResponse,
@@ -150,7 +151,7 @@ use openapi_client::{
     UpdateWorkspaceResponse,
     CreateAccountResponse,
     CreateWorkspaceResponse,
-    DeleteAccountResponse,
+    DeleteAccount1Response,
     DeleteWorkspace1Response,
     GetAccountResponse,
     GetWorkspace1Response,
@@ -231,6 +232,18 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<CreateWorkflowResponse, ApiError>
     {
         info!("create_workflow(\"{}\", {:?}) - X-Span-ID: {:?}", workspace_id, create_workflow_body, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Delete account
+    async fn delete_account(
+        &self,
+        id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        context: &C) -> Result<DeleteAccountResponse, ApiError>
+    {
+        info!("delete_account(\"{}\", {:?}, {:?}) - X-Span-ID: {:?}", id, organization_id, tenant_id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -715,12 +728,12 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
     }
 
     /// Delete account
-    async fn delete_account(
+    async fn delete_account1(
         &self,
         id: String,
-        context: &C) -> Result<DeleteAccountResponse, ApiError>
+        context: &C) -> Result<DeleteAccount1Response, ApiError>
     {
-        info!("delete_account(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
+        info!("delete_account1(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

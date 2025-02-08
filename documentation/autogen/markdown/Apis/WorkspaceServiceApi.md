@@ -6,7 +6,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 |------------- | ------------- | -------------|
 | [**createAccount**](WorkspaceServiceApi.md#createAccount) | **POST** /workspace-service/v1/accounts | Create a new account |
 | [**createWorkspace**](WorkspaceServiceApi.md#createWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace |
-| [**deleteAccount**](WorkspaceServiceApi.md#deleteAccount) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account |
+| [**deleteAccount1**](WorkspaceServiceApi.md#deleteAccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account |
 | [**deleteWorkspace1**](WorkspaceServiceApi.md#deleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace |
 | [**getAccount**](WorkspaceServiceApi.md#getAccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details |
 | [**getWorkspace1**](WorkspaceServiceApi.md#getWorkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details |
@@ -74,9 +74,9 @@ No authorization required
 - **Content-Type**: application/json, application/x-www-form-urlencoded
 - **Accept**: application/json, 
 
-<a name="deleteAccount"></a>
-# **deleteAccount**
-> DeleteAccountResponse deleteAccount(id)
+<a name="deleteAccount1"></a>
+# **deleteAccount1**
+> DeleteAccountResponse deleteAccount1(id)
 
 Delete account
 

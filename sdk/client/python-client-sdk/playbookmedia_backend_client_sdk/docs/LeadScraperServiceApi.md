@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**create_tenant_api_key**](LeadScraperServiceApi.md#create_tenant_api_key) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key
 [**create_webhook**](LeadScraperServiceApi.md#create_webhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook
 [**create_workflow**](LeadScraperServiceApi.md#create_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow
+[**delete_account**](LeadScraperServiceApi.md#delete_account) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 [**delete_api_key**](LeadScraperServiceApi.md#delete_api_key) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 [**delete_organization**](LeadScraperServiceApi.md#delete_organization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
 [**delete_tenant**](LeadScraperServiceApi.md#delete_tenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
@@ -558,6 +559,96 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | A successful response. |  -  |
 **201** | Workflow created successfully |  -  |
+**400** | Bad Request - Invalid input parameters |  -  |
+**401** | Unauthorized - Authentication required |  -  |
+**402** | Payment Required - Payment is necessary to proceed |  -  |
+**403** | Forbidden - Access denied |  -  |
+**404** | Not Found - Resource not found |  -  |
+**405** | Method Not Allowed - HTTP method not supported |  -  |
+**409** | Conflict - Resource already exists |  -  |
+**410** | Gone - Resource is no longer available |  -  |
+**412** | Precondition Failed - Preconditions in headers did not match |  -  |
+**422** | Unprocessable Entity - Semantic errors in the request |  -  |
+**425** | Too Early - Request is being replayed |  -  |
+**429** | Too Many Requests - Rate limit exceeded |  -  |
+**500** | Internal Server Error |  -  |
+**501** | Not Implemented - Functionality not supported |  -  |
+**502** | Bad Gateway - Invalid response from upstream server |  -  |
+**503** | Service Unavailable - Try again later |  -  |
+**504** | Gateway Timeout - Upstream server timed out |  -  |
+**0** | An unexpected error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_account**
+> DeleteAccountResponse delete_account(id, organization_id=organization_id, tenant_id=tenant_id)
+
+Delete account
+
+Permanently deletes an account and associated resources
+
+### Example
+
+
+```python
+import playbookmedia_backend_client_sdk
+from playbookmedia_backend_client_sdk.models.delete_account_response import DeleteAccountResponse
+from playbookmedia_backend_client_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://lead-scraping-microservice.vector.svc.cluster.local:9896
+# See configuration.py for a list of all supported configuration parameters.
+configuration = playbookmedia_backend_client_sdk.Configuration(
+    host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+)
+
+
+# Enter a context with an instance of the API client
+async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
+    id = 'id_example' # str | 
+    organization_id = 'organization_id_example' # str |  (optional)
+    tenant_id = 'tenant_id_example' # str |  (optional)
+
+    try:
+        # Delete account
+        api_response = await api_instance.delete_account(id, organization_id=organization_id, tenant_id=tenant_id)
+        print("The response of LeadScraperServiceApi->delete_account:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling LeadScraperServiceApi->delete_account: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**|  | 
+ **organization_id** | **str**|  | [optional] 
+ **tenant_id** | **str**|  | [optional] 
+
+### Return type
+
+[**DeleteAccountResponse**](DeleteAccountResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Account deleted successfully |  -  |
 **400** | Bad Request - Invalid input parameters |  -  |
 **401** | Unauthorized - Authentication required |  -  |
 **402** | Payment Required - Payment is necessary to proceed |  -  |

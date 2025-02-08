@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**CreateWebhook**](lead_scraper_service_api.md#CreateWebhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook
 [**CreateWorkflow**](lead_scraper_service_api.md#CreateWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow
 [**DeleteAPIKey**](lead_scraper_service_api.md#DeleteAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
+[**DeleteAccount**](lead_scraper_service_api.md#DeleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 [**DeleteOrganization**](lead_scraper_service_api.md#DeleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
 [**DeleteTenant**](lead_scraper_service_api.md#DeleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 [**DeleteTenantAPIKey**](lead_scraper_service_api.md#DeleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
@@ -99,6 +100,13 @@ Creates a new workflow for a specific workspace
 Delete API key
 
 Permanently deletes an API key
+<a name="DeleteAccount"></a>
+# **DeleteAccount**
+> DeleteAccountResponse DeleteAccount(Id_, organizationId, tenantId)
+
+Delete account
+
+Permanently deletes an account and associated resources
 <a name="DeleteOrganization"></a>
 # **DeleteOrganization**
 > DeleteOrganizationResponse DeleteOrganization(Id_)

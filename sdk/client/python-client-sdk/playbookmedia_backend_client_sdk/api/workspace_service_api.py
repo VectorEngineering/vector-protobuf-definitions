@@ -653,7 +653,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def delete_account(
+    async def delete_account1(
         self,
         id: StrictStr,
         _request_timeout: Union[
@@ -696,7 +696,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_account_serialize(
+        _param = self._delete_account1_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -726,7 +726,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def delete_account_with_http_info(
+    async def delete_account1_with_http_info(
         self,
         id: StrictStr,
         _request_timeout: Union[
@@ -769,7 +769,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_account_serialize(
+        _param = self._delete_account1_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -799,7 +799,7 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def delete_account_without_preload_content(
+    async def delete_account1_without_preload_content(
         self,
         id: StrictStr,
         _request_timeout: Union[
@@ -842,7 +842,7 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_account_serialize(
+        _param = self._delete_account1_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -867,7 +867,7 @@ class WorkspaceServiceApi:
         return response_data.response
 
 
-    def _delete_account_serialize(
+    def _delete_account1_serialize(
         self,
         id,
         _request_auth,

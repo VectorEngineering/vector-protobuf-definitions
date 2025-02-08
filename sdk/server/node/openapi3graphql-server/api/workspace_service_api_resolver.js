@@ -93,7 +93,7 @@ export default {
         },
 
         // @return DeleteAccountResponse
-        DeleteAccount: ($Id_) => {
+        DeleteAccount1: ($Id_) => {
             return {
                 "Id_": "Id__example"
             };

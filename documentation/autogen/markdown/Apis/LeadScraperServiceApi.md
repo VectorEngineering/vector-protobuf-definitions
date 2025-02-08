@@ -11,6 +11,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**createWebhook**](LeadScraperServiceApi.md#createWebhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook |
 | [**createWorkflow**](LeadScraperServiceApi.md#createWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow |
 | [**deleteAPIKey**](LeadScraperServiceApi.md#deleteAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key |
+| [**deleteAccount**](LeadScraperServiceApi.md#deleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account |
 | [**deleteOrganization**](LeadScraperServiceApi.md#deleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization |
 | [**deleteTenant**](LeadScraperServiceApi.md#deleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant |
 | [**deleteTenantAPIKey**](LeadScraperServiceApi.md#deleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key |
@@ -235,6 +236,35 @@ Delete API key
 ### Return type
 
 [**DeleteAPIKeyResponse**](../Models/DeleteAPIKeyResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="deleteAccount"></a>
+# **deleteAccount**
+> DeleteAccountResponse deleteAccount(id, organizationId, tenantId)
+
+Delete account
+
+    Permanently deletes an account and associated resources
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **id** | **String**|  | [default to null] |
+| **organizationId** | **String**|  | [optional] [default to null] |
+| **tenantId** | **String**|  | [optional] [default to null] |
+
+### Return type
+
+[**DeleteAccountResponse**](../Models/DeleteAccountResponse.md)
 
 ### Authorization
 

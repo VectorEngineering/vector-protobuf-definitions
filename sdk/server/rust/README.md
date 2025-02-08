@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-08T10:19:32.125441-05:00[America/New_York]
+- Build date: 2025-02-08T10:25:15.333536-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -62,6 +62,7 @@ cargo run --example server
 To run a client, follow one of the following simple steps:
 
 ```
+cargo run --example client DeleteAccount
 cargo run --example client DeleteApiKey
 cargo run --example client DeleteOrganization
 cargo run --example client DeleteTenant
@@ -88,7 +89,7 @@ cargo run --example client ListTenants
 cargo run --example client ListWebhooks
 cargo run --example client ListWorkflows
 cargo run --example client ListWorkspaces
-cargo run --example client DeleteAccount
+cargo run --example client DeleteAccount1
 cargo run --example client DeleteWorkspace1
 cargo run --example client GetAccount
 cargo run --example client GetWorkspace1
@@ -137,6 +138,7 @@ Method | HTTP request | Description
 [**CreateTenantAPIKey**](docs/lead_scraper_service_api.md#CreateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key
 [**CreateWebhook**](docs/lead_scraper_service_api.md#CreateWebhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook
 [**CreateWorkflow**](docs/lead_scraper_service_api.md#CreateWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow
+[**DeleteAccount**](docs/lead_scraper_service_api.md#DeleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 [**DeleteAPIKey**](docs/lead_scraper_service_api.md#DeleteAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 [**DeleteOrganization**](docs/lead_scraper_service_api.md#DeleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
 [**DeleteTenant**](docs/lead_scraper_service_api.md#DeleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
@@ -177,7 +179,7 @@ Method | HTTP request | Description
 [**UpdateWorkspace**](docs/lead_scraper_service_api.md#UpdateWorkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details
 [**CreateAccount**](docs/workspace_service_api.md#CreateAccount) | **POST** /workspace-service/v1/accounts | Create a new account
 [**CreateWorkspace**](docs/workspace_service_api.md#CreateWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace
-[**DeleteAccount**](docs/workspace_service_api.md#DeleteAccount) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
+[**DeleteAccount1**](docs/workspace_service_api.md#DeleteAccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 [**DeleteWorkspace1**](docs/workspace_service_api.md#DeleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
 [**GetAccount**](docs/workspace_service_api.md#GetAccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details
 [**GetWorkspace1**](docs/workspace_service_api.md#GetWorkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details

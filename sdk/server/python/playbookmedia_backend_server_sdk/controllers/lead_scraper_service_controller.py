@@ -19,6 +19,7 @@ from playbookmedia_backend_server_sdk.models.create_webhook_response import Crea
 from playbookmedia_backend_server_sdk.models.create_workflow_body import CreateWorkflowBody  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_workflow_response import CreateWorkflowResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_api_key_response import DeleteAPIKeyResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.delete_account_response import DeleteAccountResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_organization_response import DeleteOrganizationResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_tenant_api_key_response import DeleteTenantAPIKeyResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_tenant_response import DeleteTenantResponse  # noqa: E501
@@ -177,6 +178,23 @@ def create_workflow(workspace_id, create_workflow_body):  # noqa: E501
     """
     if connexion.request.is_json:
         create_workflow_body = CreateWorkflowBody.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
+def delete_account(id, organization_id=None, tenant_id=None):  # noqa: E501
+    """Delete account
+
+    Permanently deletes an account and associated resources # noqa: E501
+
+    :param id: 
+    :type id: str
+    :param organization_id: 
+    :type organization_id: str
+    :param tenant_id: 
+    :type tenant_id: str
+
+    :rtype: Union[DeleteAccountResponse, Tuple[DeleteAccountResponse, int], Tuple[DeleteAccountResponse, int, Dict[str, str]]
+    """
     return 'do some magic!'
 
 

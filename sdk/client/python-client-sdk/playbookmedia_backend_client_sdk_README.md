@@ -71,6 +71,7 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**create_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_tenant_api_key) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key
 *LeadScraperServiceApi* | [**create_webhook**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_webhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook
 *LeadScraperServiceApi* | [**create_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow
+*LeadScraperServiceApi* | [**delete_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_account) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 *LeadScraperServiceApi* | [**delete_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_api_key) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 *LeadScraperServiceApi* | [**delete_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_organization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
 *LeadScraperServiceApi* | [**delete_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_tenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
@@ -111,7 +112,7 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**update_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#update_workspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details
 *WorkspaceServiceApi* | [**create_account**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#create_account) | **POST** /workspace-service/v1/accounts | Create a new account
 *WorkspaceServiceApi* | [**create_workspace**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#create_workspace) | **POST** /workspace-service/v1/workspaces | Create workspace
-*WorkspaceServiceApi* | [**delete_account**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#delete_account) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
+*WorkspaceServiceApi* | [**delete_account1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#delete_account1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 *WorkspaceServiceApi* | [**delete_workspace1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#delete_workspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
 *WorkspaceServiceApi* | [**get_account**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_account) | **GET** /workspace-service/v1/accounts/{id} | Get account details
 *WorkspaceServiceApi* | [**get_workspace1**](playbookmedia_backend_client_sdk/docs/WorkspaceServiceApi.md#get_workspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details

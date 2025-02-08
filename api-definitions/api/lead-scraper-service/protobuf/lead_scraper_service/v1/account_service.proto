@@ -269,33 +269,33 @@ service LeadScraperService {
     //     };
     // }
 
-    // // Delete account
-    // //
-    // // Permanently deletes an account and all associated resources.
-    // // This action cannot be undone.
-    // //
-    // // Required permissions:
-    // // - delete:account
-    // rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse) {
-    //     option (google.api.http) = {
-    //         delete: "/lead-scraper-microservice/api/v1/accounts/{id}"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Delete account"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "DeleteAccount"
-    //         description: "Permanently deletes an account and associated resources"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Account deleted successfully"
-    //                 schema: {
-    //                     json_schema: { ref: ".lead_scraper_service.v1.DeleteAccountResponse" }
-    //                 }
-    //             }
-    //         }
-    //     };
-    // }
+    // Delete account
+    //
+    // Permanently deletes an account and all associated resources.
+    // This action cannot be undone.
+    //
+    // Required permissions:
+    // - delete:account
+    rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse) {
+        option (google.api.http) = {
+            delete: "/lead-scraper-microservice/api/v1/accounts/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete account"
+            tags: ["lead-scraper-service"]
+            operation_id: "DeleteAccount"
+            description: "Permanently deletes an account and associated resources"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Account deleted successfully"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.DeleteAccountResponse" }
+                    }
+                }
+            }
+        };
+    }
 
     // /**
     //  * CreateWorkspace establishes a new organizational workspace for managing scraping jobs

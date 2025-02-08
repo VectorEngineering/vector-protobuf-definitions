@@ -514,6 +514,86 @@ pub enum CreateWorkflowResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum DeleteAccountResponse {
+    /// Account deleted successfully
+    AccountDeletedSuccessfully
+    (models::DeleteAccountResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum DeleteApiKeyResponse {
     /// API key deleted successfully
     APIKeyDeletedSuccessfully
@@ -3642,7 +3722,7 @@ pub enum CreateWorkspaceResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
-pub enum DeleteAccountResponse {
+pub enum DeleteAccount1Response {
     /// Account deleted successfully
     AccountDeletedSuccessfully
     (models::DeleteAccountResponse)
@@ -4246,6 +4326,14 @@ pub trait Api<C: Send + Sync> {
         create_workflow_body: models::CreateWorkflowBody,
         context: &C) -> Result<CreateWorkflowResponse, ApiError>;
 
+    /// Delete account
+    async fn delete_account(
+        &self,
+        id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        context: &C) -> Result<DeleteAccountResponse, ApiError>;
+
     /// Delete API key
     async fn delete_api_key(
         &self,
@@ -4567,10 +4655,10 @@ pub trait Api<C: Send + Sync> {
         context: &C) -> Result<CreateWorkspaceResponse, ApiError>;
 
     /// Delete account
-    async fn delete_account(
+    async fn delete_account1(
         &self,
         id: String,
-        context: &C) -> Result<DeleteAccountResponse, ApiError>;
+        context: &C) -> Result<DeleteAccount1Response, ApiError>;
 
     /// Delete workspace
     async fn delete_workspace1(
@@ -4707,6 +4795,14 @@ pub trait ApiNoContext<C: Send + Sync> {
         workspace_id: String,
         create_workflow_body: models::CreateWorkflowBody,
         ) -> Result<CreateWorkflowResponse, ApiError>;
+
+    /// Delete account
+    async fn delete_account(
+        &self,
+        id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        ) -> Result<DeleteAccountResponse, ApiError>;
 
     /// Delete API key
     async fn delete_api_key(
@@ -5029,10 +5125,10 @@ pub trait ApiNoContext<C: Send + Sync> {
         ) -> Result<CreateWorkspaceResponse, ApiError>;
 
     /// Delete account
-    async fn delete_account(
+    async fn delete_account1(
         &self,
         id: String,
-        ) -> Result<DeleteAccountResponse, ApiError>;
+        ) -> Result<DeleteAccount1Response, ApiError>;
 
     /// Delete workspace
     async fn delete_workspace1(
@@ -5206,6 +5302,18 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().create_workflow(workspace_id, create_workflow_body, &context).await
+    }
+
+    /// Delete account
+    async fn delete_account(
+        &self,
+        id: String,
+        organization_id: Option<String>,
+        tenant_id: Option<String>,
+        ) -> Result<DeleteAccountResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().delete_account(id, organization_id, tenant_id, &context).await
     }
 
     /// Delete API key
@@ -5689,13 +5797,13 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     }
 
     /// Delete account
-    async fn delete_account(
+    async fn delete_account1(
         &self,
         id: String,
-        ) -> Result<DeleteAccountResponse, ApiError>
+        ) -> Result<DeleteAccount1Response, ApiError>
     {
         let context = self.context().clone();
-        self.api().delete_account(id, &context).await
+        self.api().delete_account1(id, &context).await
     }
 
     /// Delete workspace

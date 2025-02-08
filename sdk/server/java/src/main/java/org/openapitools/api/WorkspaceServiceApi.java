@@ -63,7 +63,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:19:29.531196-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:25:12.747579-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 @Validated
 @Tag(name = "workspace-service", description = "the workspace-service API")
 public interface WorkspaceServiceApi {
@@ -431,7 +431,7 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "deleteAccount",
+        operationId = "deleteAccount1",
         summary = "Delete account",
         tags = { "workspace-service" },
         responses = {
@@ -479,7 +479,7 @@ public interface WorkspaceServiceApi {
         produces = { "application/json", "" }
     )
     
-    default ResponseEntity<DeleteAccountResponse> deleteAccount(
+    default ResponseEntity<DeleteAccountResponse> deleteAccount1(
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
     ) {
         getRequest().ifPresent(request -> {

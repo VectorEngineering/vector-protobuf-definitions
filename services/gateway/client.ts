@@ -1071,6 +1071,10 @@ const UpdateAccountSettingsResponse = z
   .object({ settings: AccountSettings })
   .partial()
   .passthrough();
+const DeleteAccountResponse = z
+  .object({ success: z.boolean() })
+  .partial()
+  .passthrough();
 const GetAccountUsageResponse = z
   .object({
     totalJobsRun: z.number().int(),
@@ -2309,10 +2313,6 @@ const GetAccountResponse = z
   .object({ account: Account1 })
   .partial()
   .passthrough();
-const DeleteAccountResponse = z
-  .object({ success: z.boolean() })
-  .partial()
-  .passthrough();
 const UpdateWorkspaceSharingRequest = z
   .object({ sharing: WorkspaceSharing })
   .partial()
@@ -2536,6 +2536,7 @@ export const schemas = {
   rpc_Status,
   UpdateAccountSettingsRequest,
   UpdateAccountSettingsResponse,
+  DeleteAccountResponse,
   GetAccountUsageResponse,
   CreateAPIKeyRequest,
   CreateAPIKeyResponse,
@@ -2660,7 +2661,6 @@ export const schemas = {
   UpdateAccountRequest,
   UpdateAccountResponse,
   GetAccountResponse,
-  DeleteAccountResponse,
   UpdateWorkspaceSharingRequest,
   UpdateWorkspaceSharingResponse,
   RemoveWorkspaceSharingResponse,
@@ -2683,6 +2683,123 @@ export const schemas = {
 };
 
 const endpoints = makeApi([
+  {
+    method: "delete",
+    path: "/lead-scraper-microservice/api/v1/accounts/:id",
+    alias: "DeleteAccount",
+    description: `Permanently deletes an account and associated resources`,
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "id",
+        type: "Path",
+        schema: z.string(),
+      },
+      {
+        name: "organizationId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+      {
+        name: "tenantId",
+        type: "Query",
+        schema: z.string().optional(),
+      },
+    ],
+    response: z.object({ success: z.boolean() }).partial().passthrough(),
+    errors: [
+      {
+        status: 400,
+        description: `Bad Request - Invalid input parameters`,
+        schema: ValidationErrorMessageResponse,
+      },
+      {
+        status: 401,
+        description: `Unauthorized - Authentication required`,
+        schema: AuthenticationErrorMessageResponse,
+      },
+      {
+        status: 402,
+        description: `Payment Required - Payment is necessary to proceed`,
+        schema: PaymentRequiredErrorMessageResponse,
+      },
+      {
+        status: 403,
+        description: `Forbidden - Access denied`,
+        schema: ForbiddenErrorMessageResponse,
+      },
+      {
+        status: 404,
+        description: `Not Found - Resource not found`,
+        schema: NotFoundErrorMessageResponse,
+      },
+      {
+        status: 405,
+        description: `Method Not Allowed - HTTP method not supported`,
+        schema: MethodNotAllowedErrorMessageResponse,
+      },
+      {
+        status: 409,
+        description: `Conflict - Resource already exists`,
+        schema: ConflictErrorMessageResponse,
+      },
+      {
+        status: 410,
+        description: `Gone - Resource is no longer available`,
+        schema: GoneErrorMessageResponse,
+      },
+      {
+        status: 412,
+        description: `Precondition Failed - Preconditions in headers did not match`,
+        schema: PreconditionFailedErrorMessageResponse,
+      },
+      {
+        status: 422,
+        description: `Unprocessable Entity - Semantic errors in the request`,
+        schema: UnprocessableEntityErrorMessageResponse,
+      },
+      {
+        status: 425,
+        description: `Too Early - Request is being replayed`,
+        schema: TooEarlyErrorMessageResponse,
+      },
+      {
+        status: 429,
+        description: `Too Many Requests - Rate limit exceeded`,
+        schema: RateLimitErrorMessageResponse,
+      },
+      {
+        status: 500,
+        description: `Internal Server Error`,
+        schema: InternalErrorMessageResponse,
+      },
+      {
+        status: 501,
+        description: `Not Implemented - Functionality not supported`,
+        schema: NotImplementedErrorMessageResponse,
+      },
+      {
+        status: 502,
+        description: `Bad Gateway - Invalid response from upstream server`,
+        schema: BadGatewayErrorMessageResponse,
+      },
+      {
+        status: 503,
+        description: `Service Unavailable - Try again later`,
+        schema: ServiceUnavailableErrorMessageResponse,
+      },
+      {
+        status: 504,
+        description: `Gateway Timeout - Upstream server timed out`,
+        schema: GatewayTimeoutErrorMessageResponse,
+      },
+      {
+        status: "default",
+        description: `An unexpected error response.`,
+        schema: rpc_Status,
+      },
+    ],
+  },
   {
     method: "get",
     path: "/lead-scraper-microservice/api/v1/accounts/:id/usage",
@@ -7973,7 +8090,7 @@ const endpoints = makeApi([
   {
     method: "delete",
     path: "/workspace-service/v1/accounts/:id",
-    alias: "DeleteAccount",
+    alias: "DeleteAccount1",
     requestFormat: "json",
     parameters: [
       {
@@ -8787,6 +8904,25 @@ export class ApiClient {
     );
   }
 
+  async deleteLeadScraperMicroserviceApiV1AccountsId(params: {
+    id: string;
+    organizationId: string | undefined;
+    tenantId: string | undefined;
+  }) {
+    return this.client.delete(
+      "/lead-scraper-microservice/api/v1/accounts/:id",
+      undefined,
+      {
+        params: {
+          id: params.id,
+        },
+        queries: {
+          organizationId: params.organizationId,
+          tenantId: params.tenantId,
+        },
+      },
+    );
+  }
   async getLeadScraperMicroserviceApiV1AccountsIdUsage(params: { id: string }) {
     return this.client.get(
       "/lead-scraper-microservice/api/v1/accounts/:id/usage",

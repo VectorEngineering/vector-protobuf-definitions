@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_account**](WorkspaceServiceApi.md#create_account) | **POST** /workspace-service/v1/accounts | Create a new account
 [**create_workspace**](WorkspaceServiceApi.md#create_workspace) | **POST** /workspace-service/v1/workspaces | Create workspace
-[**delete_account**](WorkspaceServiceApi.md#delete_account) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
+[**delete_account1**](WorkspaceServiceApi.md#delete_account1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 [**delete_workspace1**](WorkspaceServiceApi.md#delete_workspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
 [**get_account**](WorkspaceServiceApi.md#get_account) | **GET** /workspace-service/v1/accounts/{id} | Get account details
 [**get_workspace1**](WorkspaceServiceApi.md#get_workspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
@@ -176,8 +176,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **delete_account**
-> DeleteAccountResponse delete_account(id)
+# **delete_account1**
+> DeleteAccountResponse delete_account1(id)
 
 Delete account
 
@@ -205,11 +205,11 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
 
     try:
         # Delete account
-        api_response = await api_instance.delete_account(id)
-        print("The response of WorkspaceServiceApi->delete_account:\n")
+        api_response = await api_instance.delete_account1(id)
+        print("The response of WorkspaceServiceApi->delete_account1:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WorkspaceServiceApi->delete_account: %s\n" % e)
+        print("Exception when calling WorkspaceServiceApi->delete_account1: %s\n" % e)
 ```
 
 

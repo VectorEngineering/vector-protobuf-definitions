@@ -19,6 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	LeadScraperService_DeleteAccount_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/DeleteAccount"
 	LeadScraperService_ListWorkspaces_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/ListWorkspaces"
 	LeadScraperService_GetAccountUsage_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/GetAccountUsage"
 	LeadScraperService_UpdateAccountSettings_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/UpdateAccountSettings"
@@ -91,6 +92,14 @@ const (
 //
 // ```
 type LeadScraperServiceClient interface {
+	// Delete account
+	//
+	// Permanently deletes an account and all associated resources.
+	// This action cannot be undone.
+	//
+	// Required permissions:
+	// - delete:account
+	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error)
 	// ListWorkspaces retrieves all workspaces associated with an account
 	//
 	// Features:
@@ -736,6 +745,16 @@ func NewLeadScraperServiceClient(cc grpc.ClientConnInterface) LeadScraperService
 	return &leadScraperServiceClient{cc}
 }
 
+func (c *leadScraperServiceClient) DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteAccountResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_DeleteAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *leadScraperServiceClient) ListWorkspaces(ctx context.Context, in *ListWorkspacesRequest, opts ...grpc.CallOption) (*ListWorkspacesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListWorkspacesResponse)
@@ -1202,6 +1221,14 @@ func (c *leadScraperServiceClient) ListWebhooks(ctx context.Context, in *ListWeb
 //
 // ```
 type LeadScraperServiceServer interface {
+	// Delete account
+	//
+	// Permanently deletes an account and all associated resources.
+	// This action cannot be undone.
+	//
+	// Required permissions:
+	// - delete:account
+	DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error)
 	// ListWorkspaces retrieves all workspaces associated with an account
 	//
 	// Features:
@@ -1847,6 +1874,9 @@ type LeadScraperServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedLeadScraperServiceServer struct{}
 
+func (UnimplementedLeadScraperServiceServer) DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccount not implemented")
+}
 func (UnimplementedLeadScraperServiceServer) ListWorkspaces(context.Context, *ListWorkspacesRequest) (*ListWorkspacesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListWorkspaces not implemented")
 }
@@ -1998,6 +2028,24 @@ func RegisterLeadScraperServiceServer(s grpc.ServiceRegistrar, srv LeadScraperSe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&LeadScraperService_ServiceDesc, srv)
+}
+
+func _LeadScraperService_DeleteAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).DeleteAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_DeleteAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).DeleteAccount(ctx, req.(*DeleteAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _LeadScraperService_ListWorkspaces_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2799,6 +2847,10 @@ var LeadScraperService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "lead_scraper_service.v1.LeadScraperService",
 	HandlerType: (*LeadScraperServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "DeleteAccount",
+			Handler:    _LeadScraperService_DeleteAccount_Handler,
+		},
 		{
 			MethodName: "ListWorkspaces",
 			Handler:    _LeadScraperService_ListWorkspaces_Handler,

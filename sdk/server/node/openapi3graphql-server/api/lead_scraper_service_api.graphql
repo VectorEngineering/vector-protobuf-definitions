@@ -61,6 +61,15 @@ input DeleteAPIKeyInput {
     accountId: String!
 }
 
+input DeleteAccountInput {
+    
+    Id_: String!, 
+    
+    organizationId: String!, 
+    
+    tenantId: String!
+}
+
 input DeleteOrganizationInput {
     
     Id_: String!
@@ -223,6 +232,13 @@ type Mutation {
   # @param String! accountId 
   # @return [DeleteApiKeyResponse]
   DeleteAPIKey(input: DeleteAPIKeyInput!): DeleteApiKeyResponse
+  # Delete account
+  # Permanently deletes an account and associated resources
+  # @param String! Id_ 
+  # @param String! organizationId 
+  # @param String! tenantId 
+  # @return [DeleteAccountResponse]
+  DeleteAccount(input: DeleteAccountInput!): DeleteAccountResponse
   # Delete an organization
   # Permanently deletes an organization and all associated resources
   # @param String! Id_ 

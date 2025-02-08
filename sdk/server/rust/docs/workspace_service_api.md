@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 **CreateAccount**](workspace_service_api.md#CreateAccount) | **POST** /workspace-service/v1/accounts | Create a new account
 **CreateWorkspace**](workspace_service_api.md#CreateWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace
-**DeleteAccount**](workspace_service_api.md#DeleteAccount) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
+**DeleteAccount1**](workspace_service_api.md#DeleteAccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 **DeleteWorkspace1**](workspace_service_api.md#DeleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
 **GetAccount**](workspace_service_api.md#GetAccount) | **GET** /workspace-service/v1/accounts/{id} | Get account details
 **GetWorkspace1**](workspace_service_api.md#GetWorkspace1) | **GET** /workspace-service/v1/workspaces/{id} | Get workspace details
@@ -74,8 +74,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **DeleteAccount**
-> models::DeleteAccountResponse DeleteAccount(id)
+# **DeleteAccount1**
+> models::DeleteAccountResponse DeleteAccount1(id)
 Delete account
 
 ### Required Parameters

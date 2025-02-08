@@ -66,7 +66,7 @@ def create_workspace(create_workspace_request):  # noqa: E501
     return 'do some magic!'
 
 
-def delete_account(id):  # noqa: E501
+def delete_account1(id):  # noqa: E501
     """Delete account
 
      # noqa: E501

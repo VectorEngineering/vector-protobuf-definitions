@@ -270,6 +270,15 @@ export default {
             };
         },
 
+        // @return DeleteAccountResponse
+        DeleteAccount: ($Id_, $organizationId, $tenantId) => {
+            return {
+                "Id_": "Id__example",
+                "organizationId": "organizationId_example",
+                "tenantId": "tenantId_example"
+            };
+        },
+
         // @return DeleteOrganizationResponse
         DeleteOrganization: ($Id_) => {
             return {

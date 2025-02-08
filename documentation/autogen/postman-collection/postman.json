@@ -2981,6 +2981,65 @@
                         },
 	                        {
     "name": "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows",
+                "description": "Creates a new workflow for a specific workspace",
+                 "item": [
+                            {
+                                "name": "Create a new workflow",
+                                "request": {
+                                    "method": "POST",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"workflow\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "workspaces",
+                                            ":workspaceId",
+                                            "workflows"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "workspaceId",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Creates a new workflow for a specific workspace"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows",
                 "description": "Retrieves a list of workflows for a given workspace",
                  "item": [
                             {
@@ -3064,6 +3123,83 @@
                                         ]
                                     },
                                     "description": "Retrieves a list of workflows for a given workspace"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id",
+                "description": "Deletes a specific workflow",
+                 "item": [
+                            {
+                                "name": "Delete workflow",
+                                "request": {
+                                    "method": "DELETE",
+                                    "header": [
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "workspaces",
+                                            ":workspaceId",
+                                            "workflows",
+                                            ":id"
+                                        ],
+                                        "variable": [
+                                            {
+                                                "key": "workspaceId",
+                                                "value": "",
+                                                "description": ""
+                                            },
+                                            {
+                                                "key": "id",
+                                                "value": "",
+                                                "description": ""
+                                            }
+                                        ],
+                                        "query": [
+                                            {
+                                                "key": "orgId",
+                                                "value": "orgId_example",
+                                                "description": "",
+                                                "disabled": false
+                                            },
+                                            {
+                                                "key": "tenantId",
+                                                "value": "tenantId_example",
+                                                "description": "",
+                                                "disabled": false
+                                            },
+                                            {
+                                                "key": "accountId",
+                                                "value": "accountId_example",
+                                                "description": "",
+                                                "disabled": true
+                                            }
+                                        ]
+                                    },
+                                    "description": "Deletes a specific workflow"
                                 }
                             }
                             ]

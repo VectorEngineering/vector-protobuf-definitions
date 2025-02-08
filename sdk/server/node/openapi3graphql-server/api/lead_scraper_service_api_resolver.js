@@ -222,6 +222,14 @@ export default {
             };
         },
 
+        // @return CreateWorkflowResponse
+        CreateWorkflow: ($workspaceId, $createWorkflowBody) => {
+            return {
+                "workspaceId": "workspaceId_example",
+                "createWorkflowBody": ""
+            };
+        },
+
         // @return DeleteApiKeyResponse
         DeleteAPIKey: ($keyId, $organizationId, $workspaceId, $tenantId, $accountId) => {
             return {
@@ -263,6 +271,17 @@ export default {
                 "webhookId": "webhookId_example",
                 "organizationId": "organizationId_example",
                 "workspaceId": "workspaceId_example",
+                "tenantId": "tenantId_example",
+                "accountId": "accountId_example"
+            };
+        },
+
+        // @return DeleteWorkflowResponse
+        DeleteWorkflow: ($workspaceId, $Id_, $orgId, $tenantId, $accountId) => {
+            return {
+                "workspaceId": "workspaceId_example",
+                "Id_": "Id__example",
+                "orgId": "orgId_example",
                 "tenantId": "tenantId_example",
                 "accountId": "accountId_example"
             };

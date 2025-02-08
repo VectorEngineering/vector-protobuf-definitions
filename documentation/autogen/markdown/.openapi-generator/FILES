@@ -52,6 +52,8 @@ Models/CreateTenantBody.md
 Models/CreateTenantResponse.md
 Models/CreateWebhookRequest.md
 Models/CreateWebhookResponse.md
+Models/CreateWorkflowBody.md
+Models/CreateWorkflowResponse.md
 Models/CreateWorkspaceRequest.md
 Models/CreateWorkspaceResponse.md
 Models/DataProfile.md
@@ -62,6 +64,7 @@ Models/DeleteOrganizationResponse.md
 Models/DeleteTenantAPIKeyResponse.md
 Models/DeleteTenantResponse.md
 Models/DeleteWebhookResponse.md
+Models/DeleteWorkflowResponse.md
 Models/DeleteWorkspaceResponse.md
 Models/Dependency.md
 Models/DocumentBranch.md

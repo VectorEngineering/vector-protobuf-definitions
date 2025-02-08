@@ -106,5 +106,115 @@ router.openapi(getRoute, async (c) => {
   }
 });
 
+const deleteRoute = createRoute({
+  method: "delete",
+  path: "/",
+  tags: [""],
+  summary: "Delete workflow",
+  description: "Deletes a specific workflow",
+  request: {
+    query: z
+      .object({
+        orgId: z.string().openapi({
+          param: {
+            name: "orgId",
+            in: "query",
+            required: true,
+            description: "",
+          },
+        }),
+        tenantId: z.string().openapi({
+          param: {
+            name: "tenantId",
+            in: "query",
+            required: true,
+            description: "",
+          },
+        }),
+        accountId: z
+          .string()
+          .optional()
+          .openapi({
+            param: {
+              name: "accountId",
+              in: "query",
+              required: false,
+              description: "",
+            },
+          }),
+      })
+      .openapi({
+        title: "Query Parameters",
+        description: "Query parameters for the request",
+      }),
+  },
+  responses: {
+    200: {
+      content: {
+        "application/json": {
+          schema: z
+            .object({
+              success: z.boolean(),
+            })
+            .openapi({
+              title: "Success Response",
+              description: "Workflow deleted successfully",
+            }),
+        },
+      },
+      description: "Deletes a specific workflow",
+    },
+    400: {
+      content: {
+        "application/json": {
+          schema: ErrorResponseSchema,
+        },
+      },
+      description: "Returns an error",
+    },
+  },
+});
+
+router.openapi(deleteRoute, async (c) => {
+  const client = new ApiClient(c.env.API_BASE_URL);
+  try {
+    const params = {
+      workspaceId:
+        c.req.param("workspaceId") ||
+        (() => {
+          throw new HTTPException(400, {
+            message: "Missing required path parameter: workspaceId",
+          });
+        })(),
+      id:
+        c.req.param("id") ||
+        (() => {
+          throw new HTTPException(400, {
+            message: "Missing required path parameter: id",
+          });
+        })(),
+      orgId: c.req.valid("query").orgId,
+      tenantId: c.req.valid("query").tenantId,
+      accountId: c.req.valid("query").accountId,
+    };
+    const response =
+      await client.deleteLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdWorkflowsId(
+        params,
+      );
+    return c.json({ success: true }, 200);
+  } catch (error) {
+    if (error instanceof HTTPException) {
+      throw error;
+    }
+    return c.json(
+      {
+        error: error.message || "Internal Server Error",
+        code: "INTERNAL_ERROR",
+      },
+      400,
+    );
+  }
+});
+
 export const leadScraperMicroserviceapiv1workspacesworkspaceidworkflowsidRouter =
   router;

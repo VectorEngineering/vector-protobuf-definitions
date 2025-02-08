@@ -60,6 +60,8 @@ src/main/java/org/openapitools/model/CreateTenantBody.java
 src/main/java/org/openapitools/model/CreateTenantResponse.java
 src/main/java/org/openapitools/model/CreateWebhookRequest.java
 src/main/java/org/openapitools/model/CreateWebhookResponse.java
+src/main/java/org/openapitools/model/CreateWorkflowBody.java
+src/main/java/org/openapitools/model/CreateWorkflowResponse.java
 src/main/java/org/openapitools/model/CreateWorkspaceRequest.java
 src/main/java/org/openapitools/model/CreateWorkspaceResponse.java
 src/main/java/org/openapitools/model/DataProfile.java
@@ -70,6 +72,7 @@ src/main/java/org/openapitools/model/DeleteOrganizationResponse.java
 src/main/java/org/openapitools/model/DeleteTenantAPIKeyResponse.java
 src/main/java/org/openapitools/model/DeleteTenantResponse.java
 src/main/java/org/openapitools/model/DeleteWebhookResponse.java
+src/main/java/org/openapitools/model/DeleteWorkflowResponse.java
 src/main/java/org/openapitools/model/DeleteWorkspaceResponse.java
 src/main/java/org/openapitools/model/Dependency.java
 src/main/java/org/openapitools/model/DocumentBranch.java

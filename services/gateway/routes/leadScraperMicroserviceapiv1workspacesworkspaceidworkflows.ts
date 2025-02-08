@@ -179,5 +179,83 @@ router.openapi(getRoute, async (c) => {
   }
 });
 
+const postRoute = createRoute({
+  method: "post",
+  path: "/",
+  tags: [""],
+  summary: "Create a new workflow",
+  description: "Creates a new workflow for a specific workspace",
+  request: {
+    body: {
+      content: {
+        "application/json": {
+          schema: wrapSchema(schemas.CreateWorkflowBody, "CreateWorkflowBody"),
+        },
+      },
+    },
+  },
+  responses: {
+    201: {
+      content: {
+        "application/json": {
+          schema: z
+            .object({
+              data: wrapSchema(
+                schemas.CreateWorkflowResponse,
+                "CreateWorkflowResponse",
+              ),
+            })
+            .openapi({
+              title: "Success Response",
+              description: "Workflow created successfully",
+            }),
+        },
+      },
+      description: "Creates a new workflow for a specific workspace",
+    },
+    400: {
+      content: {
+        "application/json": {
+          schema: ErrorResponseSchema,
+        },
+      },
+      description: "Returns an error",
+    },
+  },
+});
+
+router.openapi(postRoute, async (c) => {
+  const client = new ApiClient(c.env.API_BASE_URL);
+  try {
+    const data = await c.req.json();
+    const params = {
+      workspaceId:
+        c.req.param("workspaceId") ||
+        (() => {
+          throw new HTTPException(400, {
+            message: "Missing required path parameter: workspaceId",
+          });
+        })(),
+    };
+    const response =
+      await client.createLeadScraperMicroserviceApiV1WorkspacesWorkspaceIdWorkflows(
+        data,
+        params,
+      );
+    return c.json({ data: response }, 201);
+  } catch (error) {
+    if (error instanceof HTTPException) {
+      throw error;
+    }
+    return c.json(
+      {
+        error: error.message || "Internal Server Error",
+        code: "INTERNAL_ERROR",
+      },
+      400,
+    );
+  }
+});
+
 export const leadScraperMicroserviceapiv1workspacesworkspaceidworkflowsRouter =
   router;

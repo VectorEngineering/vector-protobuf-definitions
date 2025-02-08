@@ -16,11 +16,14 @@ from playbookmedia_backend_server_sdk.models.create_tenant_body import CreateTen
 from playbookmedia_backend_server_sdk.models.create_tenant_response import CreateTenantResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_webhook_request import CreateWebhookRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_webhook_response import CreateWebhookResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.create_workflow_body import CreateWorkflowBody  # noqa: E501
+from playbookmedia_backend_server_sdk.models.create_workflow_response import CreateWorkflowResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_api_key_response import DeleteAPIKeyResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_organization_response import DeleteOrganizationResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_tenant_api_key_response import DeleteTenantAPIKeyResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_tenant_response import DeleteTenantResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_webhook_response import DeleteWebhookResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.delete_workflow_response import DeleteWorkflowResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_workspace_response import DeleteWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.forbidden_error_message_response import ForbiddenErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.gateway_timeout_error_message_response import GatewayTimeoutErrorMessageResponse  # noqa: E501
@@ -155,6 +158,23 @@ def create_webhook(create_webhook_request):  # noqa: E501
     return 'do some magic!'
 
 
+def create_workflow(workspace_id, create_workflow_body):  # noqa: E501
+    """Create a new workflow
+
+    Creates a new workflow for a specific workspace # noqa: E501
+
+    :param workspace_id: 
+    :type workspace_id: str
+    :param create_workflow_body: 
+    :type create_workflow_body: dict | bytes
+
+    :rtype: Union[CreateWorkflowResponse, Tuple[CreateWorkflowResponse, int], Tuple[CreateWorkflowResponse, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        create_workflow_body = CreateWorkflowBody.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
 def delete_api_key(key_id, organization_id=None, workspace_id=None, tenant_id=None, account_id=None):  # noqa: E501
     """Delete API key
 
@@ -238,6 +258,27 @@ def delete_webhook(webhook_id, organization_id=None, workspace_id=None, tenant_i
     :type account_id: str
 
     :rtype: Union[DeleteWebhookResponse, Tuple[DeleteWebhookResponse, int], Tuple[DeleteWebhookResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
+def delete_workflow(workspace_id, id, org_id, tenant_id, account_id=None):  # noqa: E501
+    """Delete workflow
+
+    Deletes a specific workflow # noqa: E501
+
+    :param workspace_id: 
+    :type workspace_id: str
+    :param id: 
+    :type id: str
+    :param org_id: 
+    :type org_id: str
+    :param tenant_id: 
+    :type tenant_id: str
+    :param account_id: 
+    :type account_id: str
+
+    :rtype: Union[DeleteWorkflowResponse, Tuple[DeleteWorkflowResponse, int], Tuple[DeleteWorkflowResponse, int, Dict[str, str]]
     """
     return 'do some magic!'
 

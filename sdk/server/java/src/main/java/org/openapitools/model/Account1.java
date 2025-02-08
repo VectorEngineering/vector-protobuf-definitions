@@ -29,7 +29,7 @@ import javax.annotation.Generated;
  * Account1
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T09:39:48.398562-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:12:03.775072-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class Account1 {
 
   private String id;

@@ -41,6 +41,13 @@ input CreateWebhookInput {
     createWebhookRequest: CreateWebhookRequestInput
 }
 
+input CreateWorkflowInput {
+    
+    workspaceId: String!, 
+    
+    createWorkflowBody: CreateWorkflowBodyInput
+}
+
 input DeleteAPIKeyInput {
     
     keyId: String!, 
@@ -82,6 +89,19 @@ input DeleteWebhookInput {
     organizationId: String!, 
     
     workspaceId: String!, 
+    
+    tenantId: String!, 
+    
+    accountId: String!
+}
+
+input DeleteWorkflowInput {
+    
+    workspaceId: String!, 
+    
+    Id_: String!, 
+    
+    orgId: String!, 
     
     tenantId: String!, 
     
@@ -183,6 +203,12 @@ type Mutation {
   # @param CreateWebhookRequest createWebhookRequest 
   # @return [CreateWebhookResponse]
   CreateWebhook(input: CreateWebhookInput!): CreateWebhookResponse
+  # Create a new workflow
+  # Creates a new workflow for a specific workspace
+  # @param String! workspaceId 
+  # @param CreateWorkflowBody createWorkflowBody 
+  # @return [CreateWorkflowResponse]
+  CreateWorkflow(input: CreateWorkflowInput!): CreateWorkflowResponse
   # Delete API key
   # Permanently deletes an API key
   # @param String! keyId 
@@ -219,6 +245,15 @@ type Mutation {
   # @param String! accountId 
   # @return [DeleteWebhookResponse]
   DeleteWebhook(input: DeleteWebhookInput!): DeleteWebhookResponse
+  # Delete workflow
+  # Deletes a specific workflow
+  # @param String! workspaceId 
+  # @param String! Id_ 
+  # @param String! orgId 
+  # @param String! tenantId 
+  # @param String! accountId 
+  # @return [DeleteWorkflowResponse]
+  DeleteWorkflow(input: DeleteWorkflowInput!): DeleteWorkflowResponse
   # Delete a workspace
   # Deletes a specific workspace
   # @param String! Id_ 

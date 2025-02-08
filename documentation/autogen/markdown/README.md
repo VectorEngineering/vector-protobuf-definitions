@@ -12,11 +12,13 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *LeadScraperServiceApi* | [**createTenant**](Apis/LeadScraperServiceApi.md#createtenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant |
 *LeadScraperServiceApi* | [**createTenantAPIKey**](Apis/LeadScraperServiceApi.md#createtenantapikey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key |
 *LeadScraperServiceApi* | [**createWebhook**](Apis/LeadScraperServiceApi.md#createwebhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook |
+*LeadScraperServiceApi* | [**createWorkflow**](Apis/LeadScraperServiceApi.md#createworkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow |
 *LeadScraperServiceApi* | [**deleteAPIKey**](Apis/LeadScraperServiceApi.md#deleteapikey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key |
 *LeadScraperServiceApi* | [**deleteOrganization**](Apis/LeadScraperServiceApi.md#deleteorganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization |
 *LeadScraperServiceApi* | [**deleteTenant**](Apis/LeadScraperServiceApi.md#deletetenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant |
 *LeadScraperServiceApi* | [**deleteTenantAPIKey**](Apis/LeadScraperServiceApi.md#deletetenantapikey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key |
 *LeadScraperServiceApi* | [**deleteWebhook**](Apis/LeadScraperServiceApi.md#deletewebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook |
+*LeadScraperServiceApi* | [**deleteWorkflow**](Apis/LeadScraperServiceApi.md#deleteworkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow |
 *LeadScraperServiceApi* | [**deleteWorkspace**](Apis/LeadScraperServiceApi.md#deleteworkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace |
 *LeadScraperServiceApi* | [**getAPIKey**](Apis/LeadScraperServiceApi.md#getapikey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details |
 *LeadScraperServiceApi* | [**getLead**](Apis/LeadScraperServiceApi.md#getlead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details |
@@ -118,6 +120,8 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [CreateTenantResponse](./Models/CreateTenantResponse.md)
  - [CreateWebhookRequest](./Models/CreateWebhookRequest.md)
  - [CreateWebhookResponse](./Models/CreateWebhookResponse.md)
+ - [CreateWorkflowBody](./Models/CreateWorkflowBody.md)
+ - [CreateWorkflowResponse](./Models/CreateWorkflowResponse.md)
  - [CreateWorkspaceRequest](./Models/CreateWorkspaceRequest.md)
  - [CreateWorkspaceResponse](./Models/CreateWorkspaceResponse.md)
  - [DataProfile](./Models/DataProfile.md)
@@ -128,6 +132,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [DeleteTenantAPIKeyResponse](./Models/DeleteTenantAPIKeyResponse.md)
  - [DeleteTenantResponse](./Models/DeleteTenantResponse.md)
  - [DeleteWebhookResponse](./Models/DeleteWebhookResponse.md)
+ - [DeleteWorkflowResponse](./Models/DeleteWorkflowResponse.md)
  - [DeleteWorkspaceResponse](./Models/DeleteWorkspaceResponse.md)
  - [Dependency](./Models/Dependency.md)
  - [DocumentBranch](./Models/DocumentBranch.md)

@@ -10,11 +10,13 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       CreateTenantResponse,
                       CreateTenantApiKeyResponse,
                       CreateWebhookResponse,
+                      CreateWorkflowResponse,
                       DeleteApiKeyResponse,
                       DeleteOrganizationResponse,
                       DeleteTenantResponse,
                       DeleteTenantApiKeyResponse,
                       DeleteWebhookResponse,
+                      DeleteWorkflowResponse,
                       DeleteWorkspaceResponse,
                       GetApiKeyResponse,
                       GetLeadResponse,
@@ -92,6 +94,7 @@ fn main() {
                 "DeleteTenant", 
                 "DeleteTenantApiKey", 
                 "DeleteWebhook", 
+                "DeleteWorkflow", 
                 "DeleteWorkspace", 
                 "GetApiKey", 
                 "GetLead", 
@@ -229,6 +232,15 @@ fn main() {
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
         */
+        /* Disabled because there's no example.
+        Some("CreateWorkflow") => {
+            let result = rt.block_on(client.create_workflow(
+                  "workspace_id_example".to_string(),
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
         Some("DeleteApiKey") => {
             let result = rt.block_on(client.delete_api_key(
                   "key_id_example".to_string(),
@@ -266,6 +278,16 @@ fn main() {
                   Some("organization_id_example".to_string()),
                   Some("workspace_id_example".to_string()),
                   Some("tenant_id_example".to_string()),
+                  Some("account_id_example".to_string())
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("DeleteWorkflow") => {
+            let result = rt.block_on(client.delete_workflow(
+                  "workspace_id_example".to_string(),
+                  "id_example".to_string(),
+                  "org_id_example".to_string(),
+                  "tenant_id_example".to_string(),
                   Some("account_id_example".to_string())
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());

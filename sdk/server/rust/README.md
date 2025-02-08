@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-08T09:39:50.864134-05:00[America/New_York]
+- Build date: 2025-02-08T10:12:06.282281-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -67,6 +67,7 @@ cargo run --example client DeleteOrganization
 cargo run --example client DeleteTenant
 cargo run --example client DeleteTenantApiKey
 cargo run --example client DeleteWebhook
+cargo run --example client DeleteWorkflow
 cargo run --example client DeleteWorkspace
 cargo run --example client GetApiKey
 cargo run --example client GetLead
@@ -132,11 +133,13 @@ Method | HTTP request | Description
 [**CreateTenant**](docs/lead_scraper_service_api.md#CreateTenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant
 [**CreateTenantAPIKey**](docs/lead_scraper_service_api.md#CreateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key
 [**CreateWebhook**](docs/lead_scraper_service_api.md#CreateWebhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook
+[**CreateWorkflow**](docs/lead_scraper_service_api.md#CreateWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow
 [**DeleteAPIKey**](docs/lead_scraper_service_api.md#DeleteAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 [**DeleteOrganization**](docs/lead_scraper_service_api.md#DeleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
 [**DeleteTenant**](docs/lead_scraper_service_api.md#DeleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 [**DeleteTenantAPIKey**](docs/lead_scraper_service_api.md#DeleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
 [**DeleteWebhook**](docs/lead_scraper_service_api.md#DeleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
+[**DeleteWorkflow**](docs/lead_scraper_service_api.md#DeleteWorkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 [**DeleteWorkspace**](docs/lead_scraper_service_api.md#DeleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
 [**GetAPIKey**](docs/lead_scraper_service_api.md#GetAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
 [**GetLead**](docs/lead_scraper_service_api.md#GetLead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
@@ -237,6 +240,8 @@ Method | HTTP request | Description
  - [CreateTenantResponse](docs/CreateTenantResponse.md)
  - [CreateWebhookRequest](docs/CreateWebhookRequest.md)
  - [CreateWebhookResponse](docs/CreateWebhookResponse.md)
+ - [CreateWorkflowBody](docs/CreateWorkflowBody.md)
+ - [CreateWorkflowResponse](docs/CreateWorkflowResponse.md)
  - [CreateWorkspaceRequest](docs/CreateWorkspaceRequest.md)
  - [CreateWorkspaceResponse](docs/CreateWorkspaceResponse.md)
  - [DataProfile](docs/DataProfile.md)
@@ -247,6 +252,7 @@ Method | HTTP request | Description
  - [DeleteTenantApiKeyResponse](docs/DeleteTenantApiKeyResponse.md)
  - [DeleteTenantResponse](docs/DeleteTenantResponse.md)
  - [DeleteWebhookResponse](docs/DeleteWebhookResponse.md)
+ - [DeleteWorkflowResponse](docs/DeleteWorkflowResponse.md)
  - [DeleteWorkspaceResponse](docs/DeleteWorkspaceResponse.md)
  - [Dependency](docs/Dependency.md)
  - [DocumentBranch](docs/DocumentBranch.md)

@@ -9,11 +9,13 @@ Method | HTTP request | Description
 [**CreateTenant**](lead_scraper_service_api.md#CreateTenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant
 [**CreateTenantAPIKey**](lead_scraper_service_api.md#CreateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key
 [**CreateWebhook**](lead_scraper_service_api.md#CreateWebhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook
+[**CreateWorkflow**](lead_scraper_service_api.md#CreateWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow
 [**DeleteAPIKey**](lead_scraper_service_api.md#DeleteAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 [**DeleteOrganization**](lead_scraper_service_api.md#DeleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
 [**DeleteTenant**](lead_scraper_service_api.md#DeleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 [**DeleteTenantAPIKey**](lead_scraper_service_api.md#DeleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
 [**DeleteWebhook**](lead_scraper_service_api.md#DeleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
+[**DeleteWorkflow**](lead_scraper_service_api.md#DeleteWorkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 [**DeleteWorkspace**](lead_scraper_service_api.md#DeleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
 [**GetAPIKey**](lead_scraper_service_api.md#GetAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
 [**GetLead**](lead_scraper_service_api.md#GetLead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
@@ -79,6 +81,13 @@ Creates a new API key for a tenant with specified permissions
 Create webhook
 
 Creates a new webhook configuration for event notifications
+<a name="CreateWorkflow"></a>
+# **CreateWorkflow**
+> CreateWorkflowResponse CreateWorkflow(workspaceId, createWorkflowBody)
+
+Create a new workflow
+
+Creates a new workflow for a specific workspace
 <a name="DeleteAPIKey"></a>
 # **DeleteAPIKey**
 > DeleteApiKeyResponse DeleteAPIKey(keyId, organizationId, workspaceId, tenantId, accountId)
@@ -114,6 +123,13 @@ Permanently deletes a tenant API key
 Delete webhook
 
 Deletes a webhook configuration
+<a name="DeleteWorkflow"></a>
+# **DeleteWorkflow**
+> DeleteWorkflowResponse DeleteWorkflow(workspaceId, Id_, orgId, tenantId, accountId)
+
+Delete workflow
+
+Deletes a specific workflow
 <a name="DeleteWorkspace"></a>
 # **DeleteWorkspace**
 > DeleteWorkspaceResponse DeleteWorkspace(Id_)

@@ -109,11 +109,13 @@ use openapi_client::{
     CreateTenantResponse,
     CreateTenantApiKeyResponse,
     CreateWebhookResponse,
+    CreateWorkflowResponse,
     DeleteApiKeyResponse,
     DeleteOrganizationResponse,
     DeleteTenantResponse,
     DeleteTenantApiKeyResponse,
     DeleteWebhookResponse,
+    DeleteWorkflowResponse,
     DeleteWorkspaceResponse,
     GetApiKeyResponse,
     GetLeadResponse,
@@ -217,6 +219,17 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
+    /// Create a new workflow
+    async fn create_workflow(
+        &self,
+        workspace_id: String,
+        create_workflow_body: models::CreateWorkflowBody,
+        context: &C) -> Result<CreateWorkflowResponse, ApiError>
+    {
+        info!("create_workflow(\"{}\", {:?}) - X-Span-ID: {:?}", workspace_id, create_workflow_body, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
     /// Delete API key
     async fn delete_api_key(
         &self,
@@ -275,6 +288,20 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<DeleteWebhookResponse, ApiError>
     {
         info!("delete_webhook(\"{}\", {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", webhook_id, organization_id, workspace_id, tenant_id, account_id, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Delete workflow
+    async fn delete_workflow(
+        &self,
+        workspace_id: String,
+        id: String,
+        org_id: String,
+        tenant_id: String,
+        account_id: Option<String>,
+        context: &C) -> Result<DeleteWorkflowResponse, ApiError>
+    {
+        info!("delete_workflow(\"{}\", \"{}\", \"{}\", \"{}\", {:?}) - X-Span-ID: {:?}", workspace_id, id, org_id, tenant_id, account_id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

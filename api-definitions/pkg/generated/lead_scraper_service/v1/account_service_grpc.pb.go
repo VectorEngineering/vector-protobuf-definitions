@@ -19,6 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	LeadScraperService_CreateWorkflow_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/CreateWorkflow"
+	LeadScraperService_DeleteWorkflow_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/DeleteWorkflow"
 	LeadScraperService_GetWorkflow_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/GetWorkflow"
 	LeadScraperService_UpdateWorkflow_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/UpdateWorkflow"
 	LeadScraperService_ListWorkflows_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/ListWorkflows"
@@ -85,6 +87,32 @@ const (
 //
 // ```
 type LeadScraperServiceClient interface {
+	// CreateWorkflow establishes a new workflow for a workspace
+	//
+	// # This endpoint creates a new workflow configuration for a specific workspace
+	//
+	// Required parameters:
+	// - workspace_id: Parent workspace ID
+	// - name: Human-readable workflow name
+	// - description: Optional workflow description
+	// - parameters: Job parameters for the workflow
+	//
+	// Example:
+	// ```json
+	CreateWorkflow(ctx context.Context, in *CreateWorkflowRequest, opts ...grpc.CallOption) (*CreateWorkflowResponse, error)
+	// DeleteWorkflow removes a workflow configuration
+	//
+	// # This endpoint permanently deletes a workflow from a workspace
+	//
+	// Required parameters:
+	// - workspace_id: Parent workspace ID
+	// - id: Workflow ID
+	//
+	// Example:
+	// ```curl
+	// DELETE /lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}
+	// ```
+	DeleteWorkflow(ctx context.Context, in *DeleteWorkflowRequest, opts ...grpc.CallOption) (*DeleteWorkflowResponse, error)
 	// GetWorkflow retrieves detailed information about a specific workflow
 	//
 	// This endpoint provides comprehensive details about a workflow, including:
@@ -645,6 +673,26 @@ func NewLeadScraperServiceClient(cc grpc.ClientConnInterface) LeadScraperService
 	return &leadScraperServiceClient{cc}
 }
 
+func (c *leadScraperServiceClient) CreateWorkflow(ctx context.Context, in *CreateWorkflowRequest, opts ...grpc.CallOption) (*CreateWorkflowResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateWorkflowResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_CreateWorkflow_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) DeleteWorkflow(ctx context.Context, in *DeleteWorkflowRequest, opts ...grpc.CallOption) (*DeleteWorkflowResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteWorkflowResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_DeleteWorkflow_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *leadScraperServiceClient) GetWorkflow(ctx context.Context, in *GetWorkflowRequest, opts ...grpc.CallOption) (*GetWorkflowResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetWorkflowResponse)
@@ -1051,6 +1099,32 @@ func (c *leadScraperServiceClient) ListWebhooks(ctx context.Context, in *ListWeb
 //
 // ```
 type LeadScraperServiceServer interface {
+	// CreateWorkflow establishes a new workflow for a workspace
+	//
+	// # This endpoint creates a new workflow configuration for a specific workspace
+	//
+	// Required parameters:
+	// - workspace_id: Parent workspace ID
+	// - name: Human-readable workflow name
+	// - description: Optional workflow description
+	// - parameters: Job parameters for the workflow
+	//
+	// Example:
+	// ```json
+	CreateWorkflow(context.Context, *CreateWorkflowRequest) (*CreateWorkflowResponse, error)
+	// DeleteWorkflow removes a workflow configuration
+	//
+	// # This endpoint permanently deletes a workflow from a workspace
+	//
+	// Required parameters:
+	// - workspace_id: Parent workspace ID
+	// - id: Workflow ID
+	//
+	// Example:
+	// ```curl
+	// DELETE /lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}
+	// ```
+	DeleteWorkflow(context.Context, *DeleteWorkflowRequest) (*DeleteWorkflowResponse, error)
 	// GetWorkflow retrieves detailed information about a specific workflow
 	//
 	// This endpoint provides comprehensive details about a workflow, including:
@@ -1611,6 +1685,12 @@ type LeadScraperServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedLeadScraperServiceServer struct{}
 
+func (UnimplementedLeadScraperServiceServer) CreateWorkflow(context.Context, *CreateWorkflowRequest) (*CreateWorkflowResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateWorkflow not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) DeleteWorkflow(context.Context, *DeleteWorkflowRequest) (*DeleteWorkflowResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteWorkflow not implemented")
+}
 func (UnimplementedLeadScraperServiceServer) GetWorkflow(context.Context, *GetWorkflowRequest) (*GetWorkflowResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetWorkflow not implemented")
 }
@@ -1744,6 +1824,42 @@ func RegisterLeadScraperServiceServer(s grpc.ServiceRegistrar, srv LeadScraperSe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&LeadScraperService_ServiceDesc, srv)
+}
+
+func _LeadScraperService_CreateWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateWorkflowRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).CreateWorkflow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_CreateWorkflow_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).CreateWorkflow(ctx, req.(*CreateWorkflowRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_DeleteWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteWorkflowRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).DeleteWorkflow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_DeleteWorkflow_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).DeleteWorkflow(ctx, req.(*DeleteWorkflowRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _LeadScraperService_GetWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2437,6 +2553,14 @@ var LeadScraperService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "lead_scraper_service.v1.LeadScraperService",
 	HandlerType: (*LeadScraperServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateWorkflow",
+			Handler:    _LeadScraperService_CreateWorkflow_Handler,
+		},
+		{
+			MethodName: "DeleteWorkflow",
+			Handler:    _LeadScraperService_DeleteWorkflow_Handler,
+		},
 		{
 			MethodName: "GetWorkflow",
 			Handler:    _LeadScraperService_GetWorkflow_Handler,

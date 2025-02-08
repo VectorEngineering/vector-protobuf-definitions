@@ -9,11 +9,13 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**createTenant**](LeadScraperServiceApi.md#createTenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant |
 | [**createTenantAPIKey**](LeadScraperServiceApi.md#createTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key |
 | [**createWebhook**](LeadScraperServiceApi.md#createWebhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook |
+| [**createWorkflow**](LeadScraperServiceApi.md#createWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow |
 | [**deleteAPIKey**](LeadScraperServiceApi.md#deleteAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key |
 | [**deleteOrganization**](LeadScraperServiceApi.md#deleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization |
 | [**deleteTenant**](LeadScraperServiceApi.md#deleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant |
 | [**deleteTenantAPIKey**](LeadScraperServiceApi.md#deleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key |
 | [**deleteWebhook**](LeadScraperServiceApi.md#deleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook |
+| [**deleteWorkflow**](LeadScraperServiceApi.md#deleteWorkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow |
 | [**deleteWorkspace**](LeadScraperServiceApi.md#deleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace |
 | [**getAPIKey**](LeadScraperServiceApi.md#getAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details |
 | [**getLead**](LeadScraperServiceApi.md#getLead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details |
@@ -180,6 +182,34 @@ No authorization required
 - **Content-Type**: application/json, application/x-www-form-urlencoded
 - **Accept**: application/json, 
 
+<a name="createWorkflow"></a>
+# **createWorkflow**
+> CreateWorkflowResponse createWorkflow(workspaceId, CreateWorkflowBody)
+
+Create a new workflow
+
+    Creates a new workflow for a specific workspace
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **workspaceId** | **String**|  | [default to null] |
+| **CreateWorkflowBody** | [**CreateWorkflowBody**](../Models/CreateWorkflowBody.md)|  | |
+
+### Return type
+
+[**CreateWorkflowResponse**](../Models/CreateWorkflowResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
 <a name="deleteAPIKey"></a>
 # **deleteAPIKey**
 > DeleteAPIKeyResponse deleteAPIKey(keyId, organizationId, workspaceId, tenantId, accountId)
@@ -316,6 +346,37 @@ Delete webhook
 ### Return type
 
 [**DeleteWebhookResponse**](../Models/DeleteWebhookResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="deleteWorkflow"></a>
+# **deleteWorkflow**
+> DeleteWorkflowResponse deleteWorkflow(workspaceId, id, orgId, tenantId, accountId)
+
+Delete workflow
+
+    Deletes a specific workflow
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **workspaceId** | **String**|  | [default to null] |
+| **id** | **String**|  | [default to null] |
+| **orgId** | **String**|  | [default to null] |
+| **tenantId** | **String**|  | [default to null] |
+| **accountId** | **String**|  | [optional] [default to null] |
+
+### Return type
+
+[**DeleteWorkflowResponse**](../Models/DeleteWorkflowResponse.md)
 
 ### Authorization
 

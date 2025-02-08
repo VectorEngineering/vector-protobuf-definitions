@@ -483,71 +483,73 @@ service LeadScraperService {
     //     };
     // }
 
-    //  // Workflow Management
-    //  /**
-    //  * CreateWorkflow establishes a new workflow for a workspace
-    //  * 
-    //  * This endpoint creates a new workflow configuration for a specific workspace
-    //  * 
-    //  * Required parameters:
-    //  * - workspace_id: Parent workspace ID
-    //  * - name: Human-readable workflow name
-    //  * - description: Optional workflow description
-    //  * - parameters: Job parameters for the workflow
-    //  * 
-    //  * Example:
-    //  * ```json
-    //  */
-    // rpc CreateWorkflow(CreateWorkflowRequest) returns (CreateWorkflowResponse) {
-    //     option (google.api.http) = {
-    //         post: "/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows"
-    //         body: "*"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Create a new workflow"
-    //         tags: ["lead-scraper-service"],
-    //         responses: {
-    //             key: "201"
-    //             value: {
-    //                 description: "Workflow created successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.CreateWorkflowResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+     // Workflow Management
+     /**
+     * CreateWorkflow establishes a new workflow for a workspace
+     * 
+     * This endpoint creates a new workflow configuration for a specific workspace
+     * 
+     * Required parameters:
+     * - workspace_id: Parent workspace ID
+     * - name: Human-readable workflow name
+     * - description: Optional workflow description
+     * - parameters: Job parameters for the workflow
+     * 
+     * Example:
+     * ```json
+     */
+    rpc CreateWorkflow(CreateWorkflowRequest) returns (CreateWorkflowResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a new workflow"
+            tags: ["lead-scraper-service"],
+            operation_id: "CreateWorkflow",
+            description: "Creates a new workflow for a specific workspace",
+            responses: {
+                key: "201"
+                value: {
+                    description: "Workflow created successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.CreateWorkflowResponse" } }
+                }
+            }
+        };
+    }
 
-    // /**
-    //  * DeleteWorkflow removes a workflow configuration
-    //  * 
-    //  * This endpoint permanently deletes a workflow from a workspace
-    //  *
-    //  * Required parameters:
-    //  * - workspace_id: Parent workspace ID
-    //  * - id: Workflow ID
-    //  * 
-    //  * Example:
-    //  * ```curl
-    //  * DELETE /lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}
-    //  * ```
-    //  */
-    // rpc DeleteWorkflow(DeleteWorkflowRequest) returns (DeleteWorkflowResponse) {
-    //     option (google.api.http) = {
-    //         delete: "/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Delete workflow"
-    //         tags: ["lead-scraper-service"],
-    //         operation_id: "DeleteWorkflow",
-    //         description: "Deletes a specific workflow",
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Workflow deleted successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.DeleteWorkflowResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * DeleteWorkflow removes a workflow configuration
+     * 
+     * This endpoint permanently deletes a workflow from a workspace
+     *
+     * Required parameters:
+     * - workspace_id: Parent workspace ID
+     * - id: Workflow ID
+     * 
+     * Example:
+     * ```curl
+     * DELETE /lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}
+     * ```
+     */
+    rpc DeleteWorkflow(DeleteWorkflowRequest) returns (DeleteWorkflowResponse) {
+        option (google.api.http) = {
+            delete: "/lead-scraper-microservice/api/v1/workspaces/{workspace_id}/workflows/{id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete workflow"
+            tags: ["lead-scraper-service"],
+            operation_id: "DeleteWorkflow",
+            description: "Deletes a specific workflow",
+            responses: {
+                key: "200"
+                value: {
+                    description: "Workflow deleted successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.DeleteWorkflowResponse" } }
+                }
+            }
+        };
+    }
 
     /**
      * GetWorkflow retrieves detailed information about a specific workflow

@@ -9,11 +9,13 @@ Method | HTTP request | Description
 [**create_tenant**](LeadScraperServiceApi.md#create_tenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant
 [**create_tenant_api_key**](LeadScraperServiceApi.md#create_tenant_api_key) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key
 [**create_webhook**](LeadScraperServiceApi.md#create_webhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook
+[**create_workflow**](LeadScraperServiceApi.md#create_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow
 [**delete_api_key**](LeadScraperServiceApi.md#delete_api_key) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 [**delete_organization**](LeadScraperServiceApi.md#delete_organization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
 [**delete_tenant**](LeadScraperServiceApi.md#delete_tenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 [**delete_tenant_api_key**](LeadScraperServiceApi.md#delete_tenant_api_key) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
 [**delete_webhook**](LeadScraperServiceApi.md#delete_webhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
+[**delete_workflow**](LeadScraperServiceApi.md#delete_workflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 [**delete_workspace**](LeadScraperServiceApi.md#delete_workspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
 [**get_api_key**](LeadScraperServiceApi.md#get_api_key) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
 [**get_lead**](LeadScraperServiceApi.md#get_lead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
@@ -483,6 +485,96 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **create_workflow**
+> CreateWorkflowResponse create_workflow(workspace_id, create_workflow_body)
+
+Create a new workflow
+
+Creates a new workflow for a specific workspace
+
+### Example
+
+
+```python
+import playbookmedia_backend_client_sdk
+from playbookmedia_backend_client_sdk.models.create_workflow_body import CreateWorkflowBody
+from playbookmedia_backend_client_sdk.models.create_workflow_response import CreateWorkflowResponse
+from playbookmedia_backend_client_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://lead-scraping-microservice.vector.svc.cluster.local:9896
+# See configuration.py for a list of all supported configuration parameters.
+configuration = playbookmedia_backend_client_sdk.Configuration(
+    host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+)
+
+
+# Enter a context with an instance of the API client
+async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
+    workspace_id = 'workspace_id_example' # str | 
+    create_workflow_body = playbookmedia_backend_client_sdk.CreateWorkflowBody() # CreateWorkflowBody | 
+
+    try:
+        # Create a new workflow
+        api_response = await api_instance.create_workflow(workspace_id, create_workflow_body)
+        print("The response of LeadScraperServiceApi->create_workflow:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling LeadScraperServiceApi->create_workflow: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **workspace_id** | **str**|  | 
+ **create_workflow_body** | [**CreateWorkflowBody**](CreateWorkflowBody.md)|  | 
+
+### Return type
+
+[**CreateWorkflowResponse**](CreateWorkflowResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/x-www-form-urlencoded
+ - **Accept**: application/json, 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | A successful response. |  -  |
+**201** | Workflow created successfully |  -  |
+**400** | Bad Request - Invalid input parameters |  -  |
+**401** | Unauthorized - Authentication required |  -  |
+**402** | Payment Required - Payment is necessary to proceed |  -  |
+**403** | Forbidden - Access denied |  -  |
+**404** | Not Found - Resource not found |  -  |
+**405** | Method Not Allowed - HTTP method not supported |  -  |
+**409** | Conflict - Resource already exists |  -  |
+**410** | Gone - Resource is no longer available |  -  |
+**412** | Precondition Failed - Preconditions in headers did not match |  -  |
+**422** | Unprocessable Entity - Semantic errors in the request |  -  |
+**425** | Too Early - Request is being replayed |  -  |
+**429** | Too Many Requests - Rate limit exceeded |  -  |
+**500** | Internal Server Error |  -  |
+**501** | Not Implemented - Functionality not supported |  -  |
+**502** | Bad Gateway - Invalid response from upstream server |  -  |
+**503** | Service Unavailable - Try again later |  -  |
+**504** | Gateway Timeout - Upstream server timed out |  -  |
+**0** | An unexpected error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **delete_api_key**
 > DeleteAPIKeyResponse delete_api_key(key_id, organization_id=organization_id, workspace_id=workspace_id, tenant_id=tenant_id, account_id=account_id)
 
@@ -914,6 +1006,100 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Webhook deleted successfully |  -  |
+**400** | Bad Request - Invalid input parameters |  -  |
+**401** | Unauthorized - Authentication required |  -  |
+**402** | Payment Required - Payment is necessary to proceed |  -  |
+**403** | Forbidden - Access denied |  -  |
+**404** | Not Found - Resource not found |  -  |
+**405** | Method Not Allowed - HTTP method not supported |  -  |
+**409** | Conflict - Resource already exists |  -  |
+**410** | Gone - Resource is no longer available |  -  |
+**412** | Precondition Failed - Preconditions in headers did not match |  -  |
+**422** | Unprocessable Entity - Semantic errors in the request |  -  |
+**425** | Too Early - Request is being replayed |  -  |
+**429** | Too Many Requests - Rate limit exceeded |  -  |
+**500** | Internal Server Error |  -  |
+**501** | Not Implemented - Functionality not supported |  -  |
+**502** | Bad Gateway - Invalid response from upstream server |  -  |
+**503** | Service Unavailable - Try again later |  -  |
+**504** | Gateway Timeout - Upstream server timed out |  -  |
+**0** | An unexpected error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_workflow**
+> DeleteWorkflowResponse delete_workflow(workspace_id, id, org_id, tenant_id, account_id=account_id)
+
+Delete workflow
+
+Deletes a specific workflow
+
+### Example
+
+
+```python
+import playbookmedia_backend_client_sdk
+from playbookmedia_backend_client_sdk.models.delete_workflow_response import DeleteWorkflowResponse
+from playbookmedia_backend_client_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://lead-scraping-microservice.vector.svc.cluster.local:9896
+# See configuration.py for a list of all supported configuration parameters.
+configuration = playbookmedia_backend_client_sdk.Configuration(
+    host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+)
+
+
+# Enter a context with an instance of the API client
+async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
+    workspace_id = 'workspace_id_example' # str | 
+    id = 'id_example' # str | 
+    org_id = 'org_id_example' # str | 
+    tenant_id = 'tenant_id_example' # str | 
+    account_id = 'account_id_example' # str |  (optional)
+
+    try:
+        # Delete workflow
+        api_response = await api_instance.delete_workflow(workspace_id, id, org_id, tenant_id, account_id=account_id)
+        print("The response of LeadScraperServiceApi->delete_workflow:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling LeadScraperServiceApi->delete_workflow: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **workspace_id** | **str**|  | 
+ **id** | **str**|  | 
+ **org_id** | **str**|  | 
+ **tenant_id** | **str**|  | 
+ **account_id** | **str**|  | [optional] 
+
+### Return type
+
+[**DeleteWorkflowResponse**](DeleteWorkflowResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Workflow deleted successfully |  -  |
 **400** | Bad Request - Invalid input parameters |  -  |
 **401** | Unauthorized - Authentication required |  -  |
 **402** | Payment Required - Payment is necessary to proceed |  -  |

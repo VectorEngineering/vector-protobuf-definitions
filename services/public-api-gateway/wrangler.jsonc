@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "usage-based-api-gateway",
+  "main": "src/index.tsx",
+  "compatibility_date": "2025-01-21",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  "placement": {
+    "mode": "smart"
+  },
+  "d1_databases": [
+    {
+      "binding": "USAGE_BASED_API_GATEWAY_DATABASE",
+      "database_name": "usage-based-api-gateway",
+      "database_id": "adb33ff8-e3a8-4d20-91f9-106712448348"
+    }
+  ]
+}

@@ -11782,6 +11782,130 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct DeleteScrapingJobResponse {
+    #[serde(rename = "success")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub success: Option<bool>,
+
+}
+
+
+impl DeleteScrapingJobResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> DeleteScrapingJobResponse {
+        DeleteScrapingJobResponse {
+            success: None,
+        }
+    }
+}
+
+/// Converts the DeleteScrapingJobResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for DeleteScrapingJobResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.success.as_ref().map(|success| {
+                [
+                    "success".to_string(),
+                    success.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a DeleteScrapingJobResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for DeleteScrapingJobResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub success: Vec<bool>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing DeleteScrapingJobResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "success" => intermediate_rep.success.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing DeleteScrapingJobResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(DeleteScrapingJobResponse {
+            success: intermediate_rep.success.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<DeleteScrapingJobResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<DeleteScrapingJobResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<DeleteScrapingJobResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for DeleteScrapingJobResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<DeleteScrapingJobResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <DeleteScrapingJobResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into DeleteScrapingJobResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct DeleteTenantApiKeyResponse {
     #[serde(rename = "success")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -14226,6 +14350,158 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into DocumentVersion - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct DownloadScrapingResultsResponse {
+    #[serde(rename = "content")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub content: Option<swagger::ByteArray>,
+
+    #[serde(rename = "filename")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub filename: Option<String>,
+
+    #[serde(rename = "contentType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub content_type: Option<String>,
+
+}
+
+
+impl DownloadScrapingResultsResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> DownloadScrapingResultsResponse {
+        DownloadScrapingResultsResponse {
+            content: None,
+            filename: None,
+            content_type: None,
+        }
+    }
+}
+
+/// Converts the DownloadScrapingResultsResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for DownloadScrapingResultsResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping content in query parameter serialization
+            // Skipping content in query parameter serialization
+
+
+            self.filename.as_ref().map(|filename| {
+                [
+                    "filename".to_string(),
+                    filename.to_string(),
+                ].join(",")
+            }),
+
+
+            self.content_type.as_ref().map(|content_type| {
+                [
+                    "contentType".to_string(),
+                    content_type.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a DownloadScrapingResultsResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for DownloadScrapingResultsResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub content: Vec<swagger::ByteArray>,
+            pub filename: Vec<String>,
+            pub content_type: Vec<String>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing DownloadScrapingResultsResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    "content" => return std::result::Result::Err("Parsing binary data in this style is not supported in DownloadScrapingResultsResponse".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "filename" => intermediate_rep.filename.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "contentType" => intermediate_rep.content_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing DownloadScrapingResultsResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(DownloadScrapingResultsResponse {
+            content: intermediate_rep.content.into_iter().next(),
+            filename: intermediate_rep.filename.into_iter().next(),
+            content_type: intermediate_rep.content_type.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<DownloadScrapingResultsResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<DownloadScrapingResultsResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<DownloadScrapingResultsResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for DownloadScrapingResultsResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<DownloadScrapingResultsResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <DownloadScrapingResultsResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into DownloadScrapingResultsResponse - {}",
                                 value, err))
                     }
              },
@@ -17264,6 +17540,124 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into GetOrganizationResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct GetScrapingJobResponse {
+    #[serde(rename = "job")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub job: Option<models::ScrapingJob>,
+
+}
+
+
+impl GetScrapingJobResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> GetScrapingJobResponse {
+        GetScrapingJobResponse {
+            job: None,
+        }
+    }
+}
+
+/// Converts the GetScrapingJobResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for GetScrapingJobResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping job in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a GetScrapingJobResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for GetScrapingJobResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub job: Vec<models::ScrapingJob>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing GetScrapingJobResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "job" => intermediate_rep.job.push(<models::ScrapingJob as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing GetScrapingJobResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(GetScrapingJobResponse {
+            job: intermediate_rep.job.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<GetScrapingJobResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<GetScrapingJobResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<GetScrapingJobResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for GetScrapingJobResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<GetScrapingJobResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <GetScrapingJobResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into GetScrapingJobResponse - {}",
                                 value, err))
                     }
              },
@@ -21835,6 +22229,123 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into ListOrganizationsResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct ListScrapingJobsResponse {
+    #[serde(rename = "jobs")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub jobs: Option<Vec<models::ScrapingJob>>,
+
+}
+
+
+impl ListScrapingJobsResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> ListScrapingJobsResponse {
+        ListScrapingJobsResponse {
+            jobs: None,
+        }
+    }
+}
+
+/// Converts the ListScrapingJobsResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for ListScrapingJobsResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping jobs in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a ListScrapingJobsResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for ListScrapingJobsResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub jobs: Vec<Vec<models::ScrapingJob>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing ListScrapingJobsResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    "jobs" => return std::result::Result::Err("Parsing a container in this style is not supported in ListScrapingJobsResponse".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing ListScrapingJobsResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(ListScrapingJobsResponse {
+            jobs: intermediate_rep.jobs.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<ListScrapingJobsResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<ListScrapingJobsResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<ListScrapingJobsResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for ListScrapingJobsResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<ListScrapingJobsResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <ListScrapingJobsResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into ListScrapingJobsResponse - {}",
                                 value, err))
                     }
              },

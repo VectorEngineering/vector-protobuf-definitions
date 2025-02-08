@@ -61,6 +61,7 @@ Models/DayOfWeek.md
 Models/DeleteAPIKeyResponse.md
 Models/DeleteAccountResponse.md
 Models/DeleteOrganizationResponse.md
+Models/DeleteScrapingJobResponse.md
 Models/DeleteTenantAPIKeyResponse.md
 Models/DeleteTenantResponse.md
 Models/DeleteWebhookResponse.md
@@ -73,6 +74,7 @@ Models/DocumentSnapshot.md
 Models/DocumentStatus.md
 Models/DocumentTemplate.md
 Models/DocumentVersion.md
+Models/DownloadScrapingResultsResponse.md
 Models/EmployeeBenefit.md
 Models/ErrorResponse.md
 Models/ExplanationBlock.md
@@ -91,6 +93,7 @@ Models/GetAccountResponse1.md
 Models/GetAccountUsageResponse.md
 Models/GetLeadResponse.md
 Models/GetOrganizationResponse.md
+Models/GetScrapingJobResponse.md
 Models/GetTenantAPIKeyResponse.md
 Models/GetTenantResponse.md
 Models/GetWebhookResponse.md
@@ -115,6 +118,7 @@ Models/ListAccountsResponse.md
 Models/ListAccountsResponse1.md
 Models/ListLeadsResponse.md
 Models/ListOrganizationsResponse.md
+Models/ListScrapingJobsResponse.md
 Models/ListTenantAPIKeysResponse.md
 Models/ListTenantsResponse.md
 Models/ListWebhooksResponse.md

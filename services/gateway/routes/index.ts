@@ -12,6 +12,9 @@ import { leadScraperMicroserviceapiv1apiKeysRouter } from "./leadScraperMicroser
 import { leadScraperMicroserviceapiv1apiKeyslistRouter } from "./leadScraperMicroserviceapiv1apiKeyslist";
 import { leadScraperMicroserviceapiv1apiKeysrotateRouter } from "./leadScraperMicroserviceapiv1apiKeysrotate";
 import { leadScraperMicroserviceapiv1apiKeyskeyidRouter } from "./leadScraperMicroserviceapiv1apiKeyskeyid";
+import { leadScraperMicroserviceapiv1jobsRouter } from "./leadScraperMicroserviceapiv1jobs";
+import { leadScraperMicroserviceapiv1jobsjobidRouter } from "./leadScraperMicroserviceapiv1jobsjobid";
+import { leadScraperMicroserviceapiv1jobsjobiddownloadRouter } from "./leadScraperMicroserviceapiv1jobsjobiddownload";
 import { leadScraperMicroserviceapiv1leadsRouter } from "./leadScraperMicroserviceapiv1leads";
 import { leadScraperMicroserviceapiv1leadsleadidRouter } from "./leadScraperMicroserviceapiv1leadsleadid";
 import { leadScraperMicroserviceapiv1organizationRouter } from "./leadScraperMicroserviceapiv1organization";
@@ -87,6 +90,18 @@ router.route(
 router.route(
   "/lead-scraper-microservice/api/v1/api-keys/{keyId}",
   leadScraperMicroserviceapiv1apiKeyskeyidRouter,
+);
+router.route(
+  "/lead-scraper-microservice/api/v1/jobs",
+  leadScraperMicroserviceapiv1jobsRouter,
+);
+router.route(
+  "/lead-scraper-microservice/api/v1/jobs/{jobId}",
+  leadScraperMicroserviceapiv1jobsjobidRouter,
+);
+router.route(
+  "/lead-scraper-microservice/api/v1/jobs/{jobId}/download",
+  leadScraperMicroserviceapiv1jobsjobiddownloadRouter,
 );
 router.route(
   "/lead-scraper-microservice/api/v1/leads",

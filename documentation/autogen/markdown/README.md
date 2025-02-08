@@ -16,16 +16,19 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *LeadScraperServiceApi* | [**deleteAPIKey**](Apis/LeadScraperServiceApi.md#deleteapikey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key |
 *LeadScraperServiceApi* | [**deleteAccount**](Apis/LeadScraperServiceApi.md#deleteaccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account |
 *LeadScraperServiceApi* | [**deleteOrganization**](Apis/LeadScraperServiceApi.md#deleteorganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization |
+*LeadScraperServiceApi* | [**deleteScrapingJob**](Apis/LeadScraperServiceApi.md#deletescrapingjob) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job |
 *LeadScraperServiceApi* | [**deleteTenant**](Apis/LeadScraperServiceApi.md#deletetenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant |
 *LeadScraperServiceApi* | [**deleteTenantAPIKey**](Apis/LeadScraperServiceApi.md#deletetenantapikey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key |
 *LeadScraperServiceApi* | [**deleteWebhook**](Apis/LeadScraperServiceApi.md#deletewebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook |
 *LeadScraperServiceApi* | [**deleteWorkflow**](Apis/LeadScraperServiceApi.md#deleteworkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow |
 *LeadScraperServiceApi* | [**deleteWorkspace**](Apis/LeadScraperServiceApi.md#deleteworkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace |
+*LeadScraperServiceApi* | [**downloadScrapingResults**](Apis/LeadScraperServiceApi.md#downloadscrapingresults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV |
 *LeadScraperServiceApi* | [**getAPIKey**](Apis/LeadScraperServiceApi.md#getapikey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details |
 *LeadScraperServiceApi* | [**getAccount**](Apis/LeadScraperServiceApi.md#getaccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details |
 *LeadScraperServiceApi* | [**getAccountUsage**](Apis/LeadScraperServiceApi.md#getaccountusage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage |
 *LeadScraperServiceApi* | [**getLead**](Apis/LeadScraperServiceApi.md#getlead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details |
 *LeadScraperServiceApi* | [**getOrganization**](Apis/LeadScraperServiceApi.md#getorganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details |
+*LeadScraperServiceApi* | [**getScrapingJob**](Apis/LeadScraperServiceApi.md#getscrapingjob) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job |
 *LeadScraperServiceApi* | [**getTenant**](Apis/LeadScraperServiceApi.md#gettenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details |
 *LeadScraperServiceApi* | [**getTenantAPIKey**](Apis/LeadScraperServiceApi.md#gettenantapikey) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details |
 *LeadScraperServiceApi* | [**getWebhook**](Apis/LeadScraperServiceApi.md#getwebhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook |
@@ -36,6 +39,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *LeadScraperServiceApi* | [**listAccounts**](Apis/LeadScraperServiceApi.md#listaccounts) | **GET** /lead-scraper-microservice/api/v1/accounts/list | List all accounts |
 *LeadScraperServiceApi* | [**listLeads**](Apis/LeadScraperServiceApi.md#listleads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads |
 *LeadScraperServiceApi* | [**listOrganizations**](Apis/LeadScraperServiceApi.md#listorganizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations |
+*LeadScraperServiceApi* | [**listScrapingJobs**](Apis/LeadScraperServiceApi.md#listscrapingjobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs |
 *LeadScraperServiceApi* | [**listTenantAPIKeys**](Apis/LeadScraperServiceApi.md#listtenantapikeys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys |
 *LeadScraperServiceApi* | [**listTenants**](Apis/LeadScraperServiceApi.md#listtenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants |
 *LeadScraperServiceApi* | [**listWebhooks**](Apis/LeadScraperServiceApi.md#listwebhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks |
@@ -136,6 +140,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [DeleteAPIKeyResponse](./Models/DeleteAPIKeyResponse.md)
  - [DeleteAccountResponse](./Models/DeleteAccountResponse.md)
  - [DeleteOrganizationResponse](./Models/DeleteOrganizationResponse.md)
+ - [DeleteScrapingJobResponse](./Models/DeleteScrapingJobResponse.md)
  - [DeleteTenantAPIKeyResponse](./Models/DeleteTenantAPIKeyResponse.md)
  - [DeleteTenantResponse](./Models/DeleteTenantResponse.md)
  - [DeleteWebhookResponse](./Models/DeleteWebhookResponse.md)
@@ -148,6 +153,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [DocumentStatus](./Models/DocumentStatus.md)
  - [DocumentTemplate](./Models/DocumentTemplate.md)
  - [DocumentVersion](./Models/DocumentVersion.md)
+ - [DownloadScrapingResultsResponse](./Models/DownloadScrapingResultsResponse.md)
  - [EmployeeBenefit](./Models/EmployeeBenefit.md)
  - [ErrorResponse](./Models/ErrorResponse.md)
  - [ExplanationBlock](./Models/ExplanationBlock.md)
@@ -166,6 +172,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [GetAccountUsageResponse](./Models/GetAccountUsageResponse.md)
  - [GetLeadResponse](./Models/GetLeadResponse.md)
  - [GetOrganizationResponse](./Models/GetOrganizationResponse.md)
+ - [GetScrapingJobResponse](./Models/GetScrapingJobResponse.md)
  - [GetTenantAPIKeyResponse](./Models/GetTenantAPIKeyResponse.md)
  - [GetTenantResponse](./Models/GetTenantResponse.md)
  - [GetWebhookResponse](./Models/GetWebhookResponse.md)
@@ -190,6 +197,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [ListAccountsResponse1](./Models/ListAccountsResponse1.md)
  - [ListLeadsResponse](./Models/ListLeadsResponse.md)
  - [ListOrganizationsResponse](./Models/ListOrganizationsResponse.md)
+ - [ListScrapingJobsResponse](./Models/ListScrapingJobsResponse.md)
  - [ListTenantAPIKeysResponse](./Models/ListTenantAPIKeysResponse.md)
  - [ListTenantsResponse](./Models/ListTenantsResponse.md)
  - [ListWebhooksResponse](./Models/ListWebhooksResponse.md)

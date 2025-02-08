@@ -19,53 +19,57 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	LeadScraperService_GetAccount_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/GetAccount"
-	LeadScraperService_UpdateAccount_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/UpdateAccount"
-	LeadScraperService_DeleteAccount_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/DeleteAccount"
-	LeadScraperService_ListWorkspaces_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/ListWorkspaces"
-	LeadScraperService_GetAccountUsage_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/GetAccountUsage"
-	LeadScraperService_UpdateAccountSettings_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/UpdateAccountSettings"
-	LeadScraperService_ListAccounts_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/ListAccounts"
-	LeadScraperService_CreateWorkflow_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/CreateWorkflow"
-	LeadScraperService_DeleteWorkflow_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/DeleteWorkflow"
-	LeadScraperService_GetWorkflow_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/GetWorkflow"
-	LeadScraperService_UpdateWorkflow_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/UpdateWorkflow"
-	LeadScraperService_ListWorkflows_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/ListWorkflows"
-	LeadScraperService_TriggerWorkflow_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/TriggerWorkflow"
-	LeadScraperService_PauseWorkflow_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/PauseWorkflow"
-	LeadScraperService_GetWorkspaceAnalytics_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/GetWorkspaceAnalytics"
-	LeadScraperService_GetWorkspace_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/GetWorkspace"
-	LeadScraperService_UpdateWorkspace_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/UpdateWorkspace"
-	LeadScraperService_DeleteWorkspace_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/DeleteWorkspace"
-	LeadScraperService_CreateTenant_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/CreateTenant"
-	LeadScraperService_GetTenant_FullMethodName             = "/lead_scraper_service.v1.LeadScraperService/GetTenant"
-	LeadScraperService_UpdateTenant_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/UpdateTenant"
-	LeadScraperService_DeleteTenant_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/DeleteTenant"
-	LeadScraperService_ListTenants_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/ListTenants"
-	LeadScraperService_CreateOrganization_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/CreateOrganization"
-	LeadScraperService_GetOrganization_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/GetOrganization"
-	LeadScraperService_UpdateOrganization_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/UpdateOrganization"
-	LeadScraperService_DeleteOrganization_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/DeleteOrganization"
-	LeadScraperService_ListOrganizations_FullMethodName     = "/lead_scraper_service.v1.LeadScraperService/ListOrganizations"
-	LeadScraperService_CreateTenantAPIKey_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/CreateTenantAPIKey"
-	LeadScraperService_GetTenantAPIKey_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/GetTenantAPIKey"
-	LeadScraperService_UpdateTenantAPIKey_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/UpdateTenantAPIKey"
-	LeadScraperService_DeleteTenantAPIKey_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/DeleteTenantAPIKey"
-	LeadScraperService_ListTenantAPIKeys_FullMethodName     = "/lead_scraper_service.v1.LeadScraperService/ListTenantAPIKeys"
-	LeadScraperService_RotateTenantAPIKey_FullMethodName    = "/lead_scraper_service.v1.LeadScraperService/RotateTenantAPIKey"
-	LeadScraperService_CreateAPIKey_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/CreateAPIKey"
-	LeadScraperService_GetAPIKey_FullMethodName             = "/lead_scraper_service.v1.LeadScraperService/GetAPIKey"
-	LeadScraperService_UpdateAPIKey_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/UpdateAPIKey"
-	LeadScraperService_DeleteAPIKey_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/DeleteAPIKey"
-	LeadScraperService_ListAPIKeys_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/ListAPIKeys"
-	LeadScraperService_RotateAPIKey_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/RotateAPIKey"
-	LeadScraperService_ListLeads_FullMethodName             = "/lead_scraper_service.v1.LeadScraperService/ListLeads"
-	LeadScraperService_GetLead_FullMethodName               = "/lead_scraper_service.v1.LeadScraperService/GetLead"
-	LeadScraperService_CreateWebhook_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/CreateWebhook"
-	LeadScraperService_GetWebhook_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/GetWebhook"
-	LeadScraperService_UpdateWebhook_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/UpdateWebhook"
-	LeadScraperService_DeleteWebhook_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/DeleteWebhook"
-	LeadScraperService_ListWebhooks_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/ListWebhooks"
+	LeadScraperService_ListScrapingJobs_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/ListScrapingJobs"
+	LeadScraperService_GetScrapingJob_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/GetScrapingJob"
+	LeadScraperService_DeleteScrapingJob_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/DeleteScrapingJob"
+	LeadScraperService_DownloadScrapingResults_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/DownloadScrapingResults"
+	LeadScraperService_GetAccount_FullMethodName              = "/lead_scraper_service.v1.LeadScraperService/GetAccount"
+	LeadScraperService_UpdateAccount_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/UpdateAccount"
+	LeadScraperService_DeleteAccount_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/DeleteAccount"
+	LeadScraperService_ListWorkspaces_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/ListWorkspaces"
+	LeadScraperService_GetAccountUsage_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/GetAccountUsage"
+	LeadScraperService_UpdateAccountSettings_FullMethodName   = "/lead_scraper_service.v1.LeadScraperService/UpdateAccountSettings"
+	LeadScraperService_ListAccounts_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/ListAccounts"
+	LeadScraperService_CreateWorkflow_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/CreateWorkflow"
+	LeadScraperService_DeleteWorkflow_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/DeleteWorkflow"
+	LeadScraperService_GetWorkflow_FullMethodName             = "/lead_scraper_service.v1.LeadScraperService/GetWorkflow"
+	LeadScraperService_UpdateWorkflow_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/UpdateWorkflow"
+	LeadScraperService_ListWorkflows_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/ListWorkflows"
+	LeadScraperService_TriggerWorkflow_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/TriggerWorkflow"
+	LeadScraperService_PauseWorkflow_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/PauseWorkflow"
+	LeadScraperService_GetWorkspaceAnalytics_FullMethodName   = "/lead_scraper_service.v1.LeadScraperService/GetWorkspaceAnalytics"
+	LeadScraperService_GetWorkspace_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/GetWorkspace"
+	LeadScraperService_UpdateWorkspace_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/UpdateWorkspace"
+	LeadScraperService_DeleteWorkspace_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/DeleteWorkspace"
+	LeadScraperService_CreateTenant_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/CreateTenant"
+	LeadScraperService_GetTenant_FullMethodName               = "/lead_scraper_service.v1.LeadScraperService/GetTenant"
+	LeadScraperService_UpdateTenant_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/UpdateTenant"
+	LeadScraperService_DeleteTenant_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/DeleteTenant"
+	LeadScraperService_ListTenants_FullMethodName             = "/lead_scraper_service.v1.LeadScraperService/ListTenants"
+	LeadScraperService_CreateOrganization_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/CreateOrganization"
+	LeadScraperService_GetOrganization_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/GetOrganization"
+	LeadScraperService_UpdateOrganization_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/UpdateOrganization"
+	LeadScraperService_DeleteOrganization_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/DeleteOrganization"
+	LeadScraperService_ListOrganizations_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/ListOrganizations"
+	LeadScraperService_CreateTenantAPIKey_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/CreateTenantAPIKey"
+	LeadScraperService_GetTenantAPIKey_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/GetTenantAPIKey"
+	LeadScraperService_UpdateTenantAPIKey_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/UpdateTenantAPIKey"
+	LeadScraperService_DeleteTenantAPIKey_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/DeleteTenantAPIKey"
+	LeadScraperService_ListTenantAPIKeys_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/ListTenantAPIKeys"
+	LeadScraperService_RotateTenantAPIKey_FullMethodName      = "/lead_scraper_service.v1.LeadScraperService/RotateTenantAPIKey"
+	LeadScraperService_CreateAPIKey_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/CreateAPIKey"
+	LeadScraperService_GetAPIKey_FullMethodName               = "/lead_scraper_service.v1.LeadScraperService/GetAPIKey"
+	LeadScraperService_UpdateAPIKey_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/UpdateAPIKey"
+	LeadScraperService_DeleteAPIKey_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/DeleteAPIKey"
+	LeadScraperService_ListAPIKeys_FullMethodName             = "/lead_scraper_service.v1.LeadScraperService/ListAPIKeys"
+	LeadScraperService_RotateAPIKey_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/RotateAPIKey"
+	LeadScraperService_ListLeads_FullMethodName               = "/lead_scraper_service.v1.LeadScraperService/ListLeads"
+	LeadScraperService_GetLead_FullMethodName                 = "/lead_scraper_service.v1.LeadScraperService/GetLead"
+	LeadScraperService_CreateWebhook_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/CreateWebhook"
+	LeadScraperService_GetWebhook_FullMethodName              = "/lead_scraper_service.v1.LeadScraperService/GetWebhook"
+	LeadScraperService_UpdateWebhook_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/UpdateWebhook"
+	LeadScraperService_DeleteWebhook_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/DeleteWebhook"
+	LeadScraperService_ListWebhooks_FullMethodName            = "/lead_scraper_service.v1.LeadScraperService/ListWebhooks"
 )
 
 // LeadScraperServiceClient is the client API for LeadScraperService service.
@@ -94,6 +98,46 @@ const (
 //
 // ```
 type LeadScraperServiceClient interface {
+	// Get all scraping jobs
+	//
+	// Retrieves a list of all scraping jobs for the authenticated user within their
+	// organization context. The results can be filtered by status and other criteria.
+	//
+	// The response includes basic job information and status. For detailed job data,
+	// use GetScrapingJob with a specific job ID.
+	ListScrapingJobs(ctx context.Context, in *ListScrapingJobsRequest, opts ...grpc.CallOption) (*ListScrapingJobsResponse, error)
+	// Get a specific scraping job
+	//
+	// Retrieves detailed information about a specific scraping job, including its
+	// current status, configuration, and progress metrics.
+	//
+	// This endpoint is useful for:
+	// - Monitoring job progress
+	// - Debugging failed jobs
+	// - Retrieving job configuration details
+	GetScrapingJob(ctx context.Context, in *GetScrapingJobRequest, opts ...grpc.CallOption) (*GetScrapingJobResponse, error)
+	// Delete a specific scraping job
+	//
+	// Permanently removes a scraping job and its associated data. This action cannot
+	// be undone. If the job is currently running, it will be stopped.
+	//
+	// Security note:
+	// - Requires authentication
+	// - User must have appropriate permissions
+	// - Job must belong to user's organization
+	DeleteScrapingJob(ctx context.Context, in *DeleteScrapingJobRequest, opts ...grpc.CallOption) (*DeleteScrapingJobResponse, error)
+	// Download job results
+	//
+	// Downloads the results of a completed scraping job in CSV format. The response
+	// includes the file content and appropriate headers for browser download.
+	//
+	// The CSV file includes:
+	// - Business names and addresses
+	// - Contact information
+	// - Rating and review counts
+	// - Operating hours
+	// - Additional metadata based on job configuration
+	DownloadScrapingResults(ctx context.Context, in *DownloadScrapingResultsRequest, opts ...grpc.CallOption) (*DownloadScrapingResultsResponse, error)
 	// Get account details
 	//
 	// Retrieves detailed information about a specific account, including
@@ -763,6 +807,46 @@ func NewLeadScraperServiceClient(cc grpc.ClientConnInterface) LeadScraperService
 	return &leadScraperServiceClient{cc}
 }
 
+func (c *leadScraperServiceClient) ListScrapingJobs(ctx context.Context, in *ListScrapingJobsRequest, opts ...grpc.CallOption) (*ListScrapingJobsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListScrapingJobsResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_ListScrapingJobs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) GetScrapingJob(ctx context.Context, in *GetScrapingJobRequest, opts ...grpc.CallOption) (*GetScrapingJobResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetScrapingJobResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_GetScrapingJob_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) DeleteScrapingJob(ctx context.Context, in *DeleteScrapingJobRequest, opts ...grpc.CallOption) (*DeleteScrapingJobResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteScrapingJobResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_DeleteScrapingJob_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) DownloadScrapingResults(ctx context.Context, in *DownloadScrapingResultsRequest, opts ...grpc.CallOption) (*DownloadScrapingResultsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DownloadScrapingResultsResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_DownloadScrapingResults_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *leadScraperServiceClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetAccountResponse)
@@ -1259,6 +1343,46 @@ func (c *leadScraperServiceClient) ListWebhooks(ctx context.Context, in *ListWeb
 //
 // ```
 type LeadScraperServiceServer interface {
+	// Get all scraping jobs
+	//
+	// Retrieves a list of all scraping jobs for the authenticated user within their
+	// organization context. The results can be filtered by status and other criteria.
+	//
+	// The response includes basic job information and status. For detailed job data,
+	// use GetScrapingJob with a specific job ID.
+	ListScrapingJobs(context.Context, *ListScrapingJobsRequest) (*ListScrapingJobsResponse, error)
+	// Get a specific scraping job
+	//
+	// Retrieves detailed information about a specific scraping job, including its
+	// current status, configuration, and progress metrics.
+	//
+	// This endpoint is useful for:
+	// - Monitoring job progress
+	// - Debugging failed jobs
+	// - Retrieving job configuration details
+	GetScrapingJob(context.Context, *GetScrapingJobRequest) (*GetScrapingJobResponse, error)
+	// Delete a specific scraping job
+	//
+	// Permanently removes a scraping job and its associated data. This action cannot
+	// be undone. If the job is currently running, it will be stopped.
+	//
+	// Security note:
+	// - Requires authentication
+	// - User must have appropriate permissions
+	// - Job must belong to user's organization
+	DeleteScrapingJob(context.Context, *DeleteScrapingJobRequest) (*DeleteScrapingJobResponse, error)
+	// Download job results
+	//
+	// Downloads the results of a completed scraping job in CSV format. The response
+	// includes the file content and appropriate headers for browser download.
+	//
+	// The CSV file includes:
+	// - Business names and addresses
+	// - Contact information
+	// - Rating and review counts
+	// - Operating hours
+	// - Additional metadata based on job configuration
+	DownloadScrapingResults(context.Context, *DownloadScrapingResultsRequest) (*DownloadScrapingResultsResponse, error)
 	// Get account details
 	//
 	// Retrieves detailed information about a specific account, including
@@ -1928,6 +2052,18 @@ type LeadScraperServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedLeadScraperServiceServer struct{}
 
+func (UnimplementedLeadScraperServiceServer) ListScrapingJobs(context.Context, *ListScrapingJobsRequest) (*ListScrapingJobsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListScrapingJobs not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) GetScrapingJob(context.Context, *GetScrapingJobRequest) (*GetScrapingJobResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetScrapingJob not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) DeleteScrapingJob(context.Context, *DeleteScrapingJobRequest) (*DeleteScrapingJobResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteScrapingJob not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) DownloadScrapingResults(context.Context, *DownloadScrapingResultsRequest) (*DownloadScrapingResultsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DownloadScrapingResults not implemented")
+}
 func (UnimplementedLeadScraperServiceServer) GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccount not implemented")
 }
@@ -2088,6 +2224,78 @@ func RegisterLeadScraperServiceServer(s grpc.ServiceRegistrar, srv LeadScraperSe
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&LeadScraperService_ServiceDesc, srv)
+}
+
+func _LeadScraperService_ListScrapingJobs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListScrapingJobsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).ListScrapingJobs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_ListScrapingJobs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).ListScrapingJobs(ctx, req.(*ListScrapingJobsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_GetScrapingJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetScrapingJobRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).GetScrapingJob(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_GetScrapingJob_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).GetScrapingJob(ctx, req.(*GetScrapingJobRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_DeleteScrapingJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteScrapingJobRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).DeleteScrapingJob(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_DeleteScrapingJob_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).DeleteScrapingJob(ctx, req.(*DeleteScrapingJobRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_DownloadScrapingResults_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DownloadScrapingResultsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).DownloadScrapingResults(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_DownloadScrapingResults_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).DownloadScrapingResults(ctx, req.(*DownloadScrapingResultsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _LeadScraperService_GetAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2943,6 +3151,22 @@ var LeadScraperService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "lead_scraper_service.v1.LeadScraperService",
 	HandlerType: (*LeadScraperServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListScrapingJobs",
+			Handler:    _LeadScraperService_ListScrapingJobs_Handler,
+		},
+		{
+			MethodName: "GetScrapingJob",
+			Handler:    _LeadScraperService_GetScrapingJob_Handler,
+		},
+		{
+			MethodName: "DeleteScrapingJob",
+			Handler:    _LeadScraperService_DeleteScrapingJob_Handler,
+		},
+		{
+			MethodName: "DownloadScrapingResults",
+			Handler:    _LeadScraperService_DownloadScrapingResults_Handler,
+		},
 		{
 			MethodName: "GetAccount",
 			Handler:    _LeadScraperService_GetAccount_Handler,

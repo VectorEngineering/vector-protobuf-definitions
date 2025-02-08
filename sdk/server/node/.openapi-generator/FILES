@@ -59,6 +59,7 @@ docs/DayOfWeek.md
 docs/DeleteAccountResponse.md
 docs/DeleteApiKeyResponse.md
 docs/DeleteOrganizationResponse.md
+docs/DeleteScrapingJobResponse.md
 docs/DeleteTenantApiKeyResponse.md
 docs/DeleteTenantResponse.md
 docs/DeleteWebhookResponse.md
@@ -71,6 +72,7 @@ docs/DocumentSnapshot.md
 docs/DocumentStatus.md
 docs/DocumentTemplate.md
 docs/DocumentVersion.md
+docs/DownloadScrapingResultsResponse.md
 docs/EmployeeBenefit.md
 docs/ErrorResponse.md
 docs/ExplanationBlock.md
@@ -89,6 +91,7 @@ docs/GetAccountUsageResponse.md
 docs/GetApiKeyResponse.md
 docs/GetLeadResponse.md
 docs/GetOrganizationResponse.md
+docs/GetScrapingJobResponse.md
 docs/GetTenantApiKeyResponse.md
 docs/GetTenantResponse.md
 docs/GetWebhookResponse.md
@@ -113,6 +116,7 @@ docs/ListAccountsResponse1.md
 docs/ListApiKeysResponse.md
 docs/ListLeadsResponse.md
 docs/ListOrganizationsResponse.md
+docs/ListScrapingJobsResponse.md
 docs/ListTenantApiKeysResponse.md
 docs/ListTenantsResponse.md
 docs/ListWebhooksResponse.md
@@ -290,6 +294,7 @@ openapi3graphql-server/model/day_of_week.graphql
 openapi3graphql-server/model/delete_account_response.graphql
 openapi3graphql-server/model/delete_api_key_response.graphql
 openapi3graphql-server/model/delete_organization_response.graphql
+openapi3graphql-server/model/delete_scraping_job_response.graphql
 openapi3graphql-server/model/delete_tenant_api_key_response.graphql
 openapi3graphql-server/model/delete_tenant_response.graphql
 openapi3graphql-server/model/delete_webhook_response.graphql
@@ -302,6 +307,7 @@ openapi3graphql-server/model/document_snapshot.graphql
 openapi3graphql-server/model/document_status.graphql
 openapi3graphql-server/model/document_template.graphql
 openapi3graphql-server/model/document_version.graphql
+openapi3graphql-server/model/download_scraping_results_response.graphql
 openapi3graphql-server/model/employee_benefit.graphql
 openapi3graphql-server/model/error_response.graphql
 openapi3graphql-server/model/explanation_block.graphql
@@ -320,6 +326,7 @@ openapi3graphql-server/model/get_account_usage_response.graphql
 openapi3graphql-server/model/get_api_key_response.graphql
 openapi3graphql-server/model/get_lead_response.graphql
 openapi3graphql-server/model/get_organization_response.graphql
+openapi3graphql-server/model/get_scraping_job_response.graphql
 openapi3graphql-server/model/get_tenant_api_key_response.graphql
 openapi3graphql-server/model/get_tenant_response.graphql
 openapi3graphql-server/model/get_webhook_response.graphql
@@ -344,6 +351,7 @@ openapi3graphql-server/model/list_accounts_response1.graphql
 openapi3graphql-server/model/list_api_keys_response.graphql
 openapi3graphql-server/model/list_leads_response.graphql
 openapi3graphql-server/model/list_organizations_response.graphql
+openapi3graphql-server/model/list_scraping_jobs_response.graphql
 openapi3graphql-server/model/list_tenant_api_keys_response.graphql
 openapi3graphql-server/model/list_tenants_response.graphql
 openapi3graphql-server/model/list_webhooks_response.graphql

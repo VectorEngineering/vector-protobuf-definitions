@@ -113,16 +113,19 @@ use openapi_client::{
     DeleteAccountResponse,
     DeleteApiKeyResponse,
     DeleteOrganizationResponse,
+    DeleteScrapingJobResponse,
     DeleteTenantResponse,
     DeleteTenantApiKeyResponse,
     DeleteWebhookResponse,
     DeleteWorkflowResponse,
     DeleteWorkspaceResponse,
+    DownloadScrapingResultsResponse,
     GetAccountResponse,
     GetAccountUsageResponse,
     GetApiKeyResponse,
     GetLeadResponse,
     GetOrganizationResponse,
+    GetScrapingJobResponse,
     GetTenantResponse,
     GetTenantApiKeyResponse,
     GetWebhookResponse,
@@ -133,6 +136,7 @@ use openapi_client::{
     ListApiKeysResponse,
     ListLeadsResponse,
     ListOrganizationsResponse,
+    ListScrapingJobsResponse,
     ListTenantApiKeysResponse,
     ListTenantsResponse,
     ListWebhooksResponse,
@@ -273,6 +277,19 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
+    /// Delete a specific job
+    async fn delete_scraping_job(
+        &self,
+        job_id: String,
+        user_id: String,
+        org_id: String,
+        tenant_id: String,
+        context: &C) -> Result<DeleteScrapingJobResponse, ApiError>
+    {
+        info!("delete_scraping_job(\"{}\", \"{}\", \"{}\", \"{}\") - X-Span-ID: {:?}", job_id, user_id, org_id, tenant_id, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
     /// Delete a tenant
     async fn delete_tenant(
         &self,
@@ -334,6 +351,19 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
+    /// Download job results as CSV
+    async fn download_scraping_results(
+        &self,
+        job_id: String,
+        user_id: String,
+        org_id: String,
+        tenant_id: String,
+        context: &C) -> Result<DownloadScrapingResultsResponse, ApiError>
+    {
+        info!("download_scraping_results(\"{}\", \"{}\", \"{}\", \"{}\") - X-Span-ID: {:?}", job_id, user_id, org_id, tenant_id, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
     /// Get account details
     async fn get_account(
         &self,
@@ -391,6 +421,19 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<GetOrganizationResponse, ApiError>
     {
         info!("get_organization(\"{}\") - X-Span-ID: {:?}", id, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Get a specific job
+    async fn get_scraping_job(
+        &self,
+        job_id: String,
+        user_id: String,
+        org_id: String,
+        tenant_id: String,
+        context: &C) -> Result<GetScrapingJobResponse, ApiError>
+    {
+        info!("get_scraping_job(\"{}\", \"{}\", \"{}\", \"{}\") - X-Span-ID: {:?}", job_id, user_id, org_id, tenant_id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -521,6 +564,18 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<ListOrganizationsResponse, ApiError>
     {
         info!("list_organizations({:?}, {:?}) - X-Span-ID: {:?}", page_size, page_number, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Get all jobs
+    async fn list_scraping_jobs(
+        &self,
+        auth_platform_user_id: String,
+        org_id: String,
+        tenant_id: String,
+        context: &C) -> Result<ListScrapingJobsResponse, ApiError>
+    {
+        info!("list_scraping_jobs(\"{}\", \"{}\", \"{}\") - X-Span-ID: {:?}", auth_platform_user_id, org_id, tenant_id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

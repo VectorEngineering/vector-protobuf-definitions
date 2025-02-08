@@ -21,11 +21,13 @@ from playbookmedia_backend_server_sdk.models.create_workflow_response import Cre
 from playbookmedia_backend_server_sdk.models.delete_api_key_response import DeleteAPIKeyResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_account_response import DeleteAccountResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_organization_response import DeleteOrganizationResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.delete_scraping_job_response import DeleteScrapingJobResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_tenant_api_key_response import DeleteTenantAPIKeyResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_tenant_response import DeleteTenantResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_webhook_response import DeleteWebhookResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_workflow_response import DeleteWorkflowResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_workspace_response import DeleteWorkspaceResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.download_scraping_results_response import DownloadScrapingResultsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.forbidden_error_message_response import ForbiddenErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.gateway_timeout_error_message_response import GatewayTimeoutErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_api_key_response import GetAPIKeyResponse  # noqa: E501
@@ -33,6 +35,7 @@ from playbookmedia_backend_server_sdk.models.get_account_response import GetAcco
 from playbookmedia_backend_server_sdk.models.get_account_usage_response import GetAccountUsageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_lead_response import GetLeadResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_organization_response import GetOrganizationResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.get_scraping_job_response import GetScrapingJobResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_tenant_api_key_response import GetTenantAPIKeyResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_tenant_response import GetTenantResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_webhook_response import GetWebhookResponse  # noqa: E501
@@ -45,6 +48,7 @@ from playbookmedia_backend_server_sdk.models.list_api_keys_response import ListA
 from playbookmedia_backend_server_sdk.models.list_accounts_response import ListAccountsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_leads_response import ListLeadsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_organizations_response import ListOrganizationsResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.list_scraping_jobs_response import ListScrapingJobsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_tenant_api_keys_response import ListTenantAPIKeysResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_tenants_response import ListTenantsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_webhooks_response import ListWebhooksResponse  # noqa: E501
@@ -235,6 +239,25 @@ def delete_organization(id):  # noqa: E501
     return 'do some magic!'
 
 
+def delete_scraping_job(job_id, user_id, org_id, tenant_id):  # noqa: E501
+    """Delete a specific job
+
+    This endpoint deletes a specific Google Maps scraping job # noqa: E501
+
+    :param job_id: 
+    :type job_id: str
+    :param user_id: 
+    :type user_id: str
+    :param org_id: 
+    :type org_id: str
+    :param tenant_id: 
+    :type tenant_id: str
+
+    :rtype: Union[DeleteScrapingJobResponse, Tuple[DeleteScrapingJobResponse, int], Tuple[DeleteScrapingJobResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
 def delete_tenant(organization_id, tenant_id):  # noqa: E501
     """Delete a tenant
 
@@ -322,6 +345,25 @@ def delete_workspace(id):  # noqa: E501
     return 'do some magic!'
 
 
+def download_scraping_results(job_id, user_id, org_id, tenant_id):  # noqa: E501
+    """Download job results as CSV
+
+    This endpoint downloads the results of a Google Maps scraping job as CSV # noqa: E501
+
+    :param job_id: 
+    :type job_id: str
+    :param user_id: 
+    :type user_id: str
+    :param org_id: 
+    :type org_id: str
+    :param tenant_id: 
+    :type tenant_id: str
+
+    :rtype: Union[DownloadScrapingResultsResponse, Tuple[DownloadScrapingResultsResponse, int], Tuple[DownloadScrapingResultsResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
 def get_account(id, organization_id=None, tenant_id=None):  # noqa: E501
     """Get account details
 
@@ -403,6 +445,25 @@ def get_organization(id):  # noqa: E501
     :type id: str
 
     :rtype: Union[GetOrganizationResponse, Tuple[GetOrganizationResponse, int], Tuple[GetOrganizationResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
+def get_scraping_job(job_id, user_id, org_id, tenant_id):  # noqa: E501
+    """Get a specific job
+
+    This endpoint retrieves a specific Google Maps scraping job # noqa: E501
+
+    :param job_id: 
+    :type job_id: str
+    :param user_id: 
+    :type user_id: str
+    :param org_id: 
+    :type org_id: str
+    :param tenant_id: 
+    :type tenant_id: str
+
+    :rtype: Union[GetScrapingJobResponse, Tuple[GetScrapingJobResponse, int], Tuple[GetScrapingJobResponse, int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -595,6 +656,23 @@ def list_organizations(page_size=None, page_number=None):  # noqa: E501
     :type page_number: int
 
     :rtype: Union[ListOrganizationsResponse, Tuple[ListOrganizationsResponse, int], Tuple[ListOrganizationsResponse, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
+def list_scraping_jobs(auth_platform_user_id, org_id, tenant_id):  # noqa: E501
+    """Get all jobs
+
+    This endpoint retrieves all Google Maps scraping jobs # noqa: E501
+
+    :param auth_platform_user_id: 
+    :type auth_platform_user_id: str
+    :param org_id: 
+    :type org_id: str
+    :param tenant_id: 
+    :type tenant_id: str
+
+    :rtype: Union[ListScrapingJobsResponse, Tuple[ListScrapingJobsResponse, int], Tuple[ListScrapingJobsResponse, int, Dict[str, str]]
     """
     return 'do some magic!'
 

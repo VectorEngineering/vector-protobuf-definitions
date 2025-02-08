@@ -74,16 +74,19 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**delete_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_account) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 *LeadScraperServiceApi* | [**delete_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_api_key) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 *LeadScraperServiceApi* | [**delete_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_organization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
+*LeadScraperServiceApi* | [**delete_scraping_job**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_scraping_job) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job
 *LeadScraperServiceApi* | [**delete_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_tenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 *LeadScraperServiceApi* | [**delete_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_tenant_api_key) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
 *LeadScraperServiceApi* | [**delete_webhook**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_webhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
 *LeadScraperServiceApi* | [**delete_workflow**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_workflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 *LeadScraperServiceApi* | [**delete_workspace**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#delete_workspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
+*LeadScraperServiceApi* | [**download_scraping_results**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#download_scraping_results) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV
 *LeadScraperServiceApi* | [**get_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_account) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details
 *LeadScraperServiceApi* | [**get_account_usage**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_account_usage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage
 *LeadScraperServiceApi* | [**get_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_api_key) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
 *LeadScraperServiceApi* | [**get_lead**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_lead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
 *LeadScraperServiceApi* | [**get_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_organization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details
+*LeadScraperServiceApi* | [**get_scraping_job**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_scraping_job) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job
 *LeadScraperServiceApi* | [**get_tenant**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_tenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details
 *LeadScraperServiceApi* | [**get_tenant_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_tenant_api_key) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details
 *LeadScraperServiceApi* | [**get_webhook**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#get_webhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook
@@ -94,6 +97,7 @@ Class | Method | HTTP request | Description
 *LeadScraperServiceApi* | [**list_api_keys**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_api_keys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys
 *LeadScraperServiceApi* | [**list_leads**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_leads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads
 *LeadScraperServiceApi* | [**list_organizations**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_organizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations
+*LeadScraperServiceApi* | [**list_scraping_jobs**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_scraping_jobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs
 *LeadScraperServiceApi* | [**list_tenant_api_keys**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_tenant_api_keys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys
 *LeadScraperServiceApi* | [**list_tenants**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_tenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
 *LeadScraperServiceApi* | [**list_webhooks**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#list_webhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks
@@ -193,6 +197,7 @@ Class | Method | HTTP request | Description
  - [DeleteAPIKeyResponse](playbookmedia_backend_client_sdk/docs/DeleteAPIKeyResponse.md)
  - [DeleteAccountResponse](playbookmedia_backend_client_sdk/docs/DeleteAccountResponse.md)
  - [DeleteOrganizationResponse](playbookmedia_backend_client_sdk/docs/DeleteOrganizationResponse.md)
+ - [DeleteScrapingJobResponse](playbookmedia_backend_client_sdk/docs/DeleteScrapingJobResponse.md)
  - [DeleteTenantAPIKeyResponse](playbookmedia_backend_client_sdk/docs/DeleteTenantAPIKeyResponse.md)
  - [DeleteTenantResponse](playbookmedia_backend_client_sdk/docs/DeleteTenantResponse.md)
  - [DeleteWebhookResponse](playbookmedia_backend_client_sdk/docs/DeleteWebhookResponse.md)
@@ -205,6 +210,7 @@ Class | Method | HTTP request | Description
  - [DocumentStatus](playbookmedia_backend_client_sdk/docs/DocumentStatus.md)
  - [DocumentTemplate](playbookmedia_backend_client_sdk/docs/DocumentTemplate.md)
  - [DocumentVersion](playbookmedia_backend_client_sdk/docs/DocumentVersion.md)
+ - [DownloadScrapingResultsResponse](playbookmedia_backend_client_sdk/docs/DownloadScrapingResultsResponse.md)
  - [EmployeeBenefit](playbookmedia_backend_client_sdk/docs/EmployeeBenefit.md)
  - [ErrorResponse](playbookmedia_backend_client_sdk/docs/ErrorResponse.md)
  - [ExplanationBlock](playbookmedia_backend_client_sdk/docs/ExplanationBlock.md)
@@ -223,6 +229,7 @@ Class | Method | HTTP request | Description
  - [GetAccountUsageResponse](playbookmedia_backend_client_sdk/docs/GetAccountUsageResponse.md)
  - [GetLeadResponse](playbookmedia_backend_client_sdk/docs/GetLeadResponse.md)
  - [GetOrganizationResponse](playbookmedia_backend_client_sdk/docs/GetOrganizationResponse.md)
+ - [GetScrapingJobResponse](playbookmedia_backend_client_sdk/docs/GetScrapingJobResponse.md)
  - [GetTenantAPIKeyResponse](playbookmedia_backend_client_sdk/docs/GetTenantAPIKeyResponse.md)
  - [GetTenantResponse](playbookmedia_backend_client_sdk/docs/GetTenantResponse.md)
  - [GetWebhookResponse](playbookmedia_backend_client_sdk/docs/GetWebhookResponse.md)
@@ -247,6 +254,7 @@ Class | Method | HTTP request | Description
  - [ListAccountsResponse1](playbookmedia_backend_client_sdk/docs/ListAccountsResponse1.md)
  - [ListLeadsResponse](playbookmedia_backend_client_sdk/docs/ListLeadsResponse.md)
  - [ListOrganizationsResponse](playbookmedia_backend_client_sdk/docs/ListOrganizationsResponse.md)
+ - [ListScrapingJobsResponse](playbookmedia_backend_client_sdk/docs/ListScrapingJobsResponse.md)
  - [ListTenantAPIKeysResponse](playbookmedia_backend_client_sdk/docs/ListTenantAPIKeysResponse.md)
  - [ListTenantsResponse](playbookmedia_backend_client_sdk/docs/ListTenantsResponse.md)
  - [ListWebhooksResponse](playbookmedia_backend_client_sdk/docs/ListWebhooksResponse.md)

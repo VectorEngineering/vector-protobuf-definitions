@@ -13,16 +13,19 @@ Method | HTTP request | Description
 **DeleteAccount**](lead_scraper_service_api.md#DeleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 **DeleteAPIKey**](lead_scraper_service_api.md#DeleteAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 **DeleteOrganization**](lead_scraper_service_api.md#DeleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
+**DeleteScrapingJob**](lead_scraper_service_api.md#DeleteScrapingJob) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job
 **DeleteTenant**](lead_scraper_service_api.md#DeleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 **DeleteTenantAPIKey**](lead_scraper_service_api.md#DeleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
 **DeleteWebhook**](lead_scraper_service_api.md#DeleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
 **DeleteWorkflow**](lead_scraper_service_api.md#DeleteWorkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 **DeleteWorkspace**](lead_scraper_service_api.md#DeleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
+**DownloadScrapingResults**](lead_scraper_service_api.md#DownloadScrapingResults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV
 **GetAccount**](lead_scraper_service_api.md#GetAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details
 **GetAccountUsage**](lead_scraper_service_api.md#GetAccountUsage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage
 **GetAPIKey**](lead_scraper_service_api.md#GetAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
 **GetLead**](lead_scraper_service_api.md#GetLead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
 **GetOrganization**](lead_scraper_service_api.md#GetOrganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details
+**GetScrapingJob**](lead_scraper_service_api.md#GetScrapingJob) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job
 **GetTenant**](lead_scraper_service_api.md#GetTenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details
 **GetTenantAPIKey**](lead_scraper_service_api.md#GetTenantAPIKey) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details
 **GetWebhook**](lead_scraper_service_api.md#GetWebhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook
@@ -33,6 +36,7 @@ Method | HTTP request | Description
 **ListAPIKeys**](lead_scraper_service_api.md#ListAPIKeys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys
 **ListLeads**](lead_scraper_service_api.md#ListLeads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads
 **ListOrganizations**](lead_scraper_service_api.md#ListOrganizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations
+**ListScrapingJobs**](lead_scraper_service_api.md#ListScrapingJobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs
 **ListTenantAPIKeys**](lead_scraper_service_api.md#ListTenantAPIKeys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys
 **ListTenants**](lead_scraper_service_api.md#ListTenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
 **ListWebhooks**](lead_scraper_service_api.md#ListWebhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks
@@ -320,6 +324,36 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **DeleteScrapingJob**
+> models::DeleteScrapingJobResponse DeleteScrapingJob(job_id, user_id, org_id, tenant_id)
+Delete a specific job
+
+This endpoint deletes a specific Google Maps scraping job
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+  **job_id** | **String**|  | 
+  **user_id** | **String**|  | 
+  **org_id** | **String**|  | 
+  **tenant_id** | **String**|  | 
+
+### Return type
+
+[**models::DeleteScrapingJobResponse**](DeleteScrapingJobResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: , application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **DeleteTenant**
 > models::DeleteTenantResponse DeleteTenant(organization_id, tenant_id)
 Delete a tenant
@@ -493,6 +527,36 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **DownloadScrapingResults**
+> models::DownloadScrapingResultsResponse DownloadScrapingResults(job_id, user_id, org_id, tenant_id)
+Download job results as CSV
+
+This endpoint downloads the results of a Google Maps scraping job as CSV
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+  **job_id** | **String**|  | 
+  **user_id** | **String**|  | 
+  **org_id** | **String**|  | 
+  **tenant_id** | **String**|  | 
+
+### Return type
+
+[**models::DownloadScrapingResultsResponse**](DownloadScrapingResultsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: , application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **GetAccount**
 > models::GetAccountResponse GetAccount(id, optional)
 Get account details
@@ -650,6 +714,36 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**models::GetOrganizationResponse**](GetOrganizationResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: , application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **GetScrapingJob**
+> models::GetScrapingJobResponse GetScrapingJob(job_id, user_id, org_id, tenant_id)
+Get a specific job
+
+This endpoint retrieves a specific Google Maps scraping job
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+  **job_id** | **String**|  | 
+  **user_id** | **String**|  | 
+  **org_id** | **String**|  | 
+  **tenant_id** | **String**|  | 
+
+### Return type
+
+[**models::GetScrapingJobResponse**](GetScrapingJobResponse.md)
 
 ### Authorization
 
@@ -1010,6 +1104,35 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**models::ListOrganizationsResponse**](ListOrganizationsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: , application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ListScrapingJobs**
+> models::ListScrapingJobsResponse ListScrapingJobs(auth_platform_user_id, org_id, tenant_id)
+Get all jobs
+
+This endpoint retrieves all Google Maps scraping jobs
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+  **auth_platform_user_id** | **String**|  | 
+  **org_id** | **String**|  | 
+  **tenant_id** | **String**|  | 
+
+### Return type
+
+[**models::ListScrapingJobsResponse**](ListScrapingJobsResponse.md)
 
 ### Authorization
 

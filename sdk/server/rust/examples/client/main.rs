@@ -14,16 +14,19 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       DeleteAccountResponse,
                       DeleteApiKeyResponse,
                       DeleteOrganizationResponse,
+                      DeleteScrapingJobResponse,
                       DeleteTenantResponse,
                       DeleteTenantApiKeyResponse,
                       DeleteWebhookResponse,
                       DeleteWorkflowResponse,
                       DeleteWorkspaceResponse,
+                      DownloadScrapingResultsResponse,
                       GetAccountResponse,
                       GetAccountUsageResponse,
                       GetApiKeyResponse,
                       GetLeadResponse,
                       GetOrganizationResponse,
+                      GetScrapingJobResponse,
                       GetTenantResponse,
                       GetTenantApiKeyResponse,
                       GetWebhookResponse,
@@ -34,6 +37,7 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       ListApiKeysResponse,
                       ListLeadsResponse,
                       ListOrganizationsResponse,
+                      ListScrapingJobsResponse,
                       ListTenantApiKeysResponse,
                       ListTenantsResponse,
                       ListWebhooksResponse,
@@ -99,16 +103,19 @@ fn main() {
                 "DeleteAccount", 
                 "DeleteApiKey", 
                 "DeleteOrganization", 
+                "DeleteScrapingJob", 
                 "DeleteTenant", 
                 "DeleteTenantApiKey", 
                 "DeleteWebhook", 
                 "DeleteWorkflow", 
                 "DeleteWorkspace", 
+                "DownloadScrapingResults", 
                 "GetAccount", 
                 "GetAccountUsage", 
                 "GetApiKey", 
                 "GetLead", 
                 "GetOrganization", 
+                "GetScrapingJob", 
                 "GetTenant", 
                 "GetTenantApiKey", 
                 "GetWebhook", 
@@ -119,6 +126,7 @@ fn main() {
                 "ListApiKeys", 
                 "ListLeads", 
                 "ListOrganizations", 
+                "ListScrapingJobs", 
                 "ListTenantApiKeys", 
                 "ListTenants", 
                 "ListWebhooks", 
@@ -277,6 +285,15 @@ fn main() {
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
+        Some("DeleteScrapingJob") => {
+            let result = rt.block_on(client.delete_scraping_job(
+                  "job_id_example".to_string(),
+                  "user_id_example".to_string(),
+                  "org_id_example".to_string(),
+                  "tenant_id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
         Some("DeleteTenant") => {
             let result = rt.block_on(client.delete_tenant(
                   "organization_id_example".to_string(),
@@ -318,6 +335,15 @@ fn main() {
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
+        Some("DownloadScrapingResults") => {
+            let result = rt.block_on(client.download_scraping_results(
+                  "job_id_example".to_string(),
+                  "user_id_example".to_string(),
+                  "org_id_example".to_string(),
+                  "tenant_id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
         Some("GetAccount") => {
             let result = rt.block_on(client.get_account(
                   "id_example".to_string(),
@@ -355,6 +381,15 @@ fn main() {
         Some("GetOrganization") => {
             let result = rt.block_on(client.get_organization(
                   "id_example".to_string()
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("GetScrapingJob") => {
+            let result = rt.block_on(client.get_scraping_job(
+                  "job_id_example".to_string(),
+                  "user_id_example".to_string(),
+                  "org_id_example".to_string(),
+                  "tenant_id_example".to_string()
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
@@ -445,6 +480,14 @@ fn main() {
             let result = rt.block_on(client.list_organizations(
                   Some(56),
                   Some(56)
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        Some("ListScrapingJobs") => {
+            let result = rt.block_on(client.list_scraping_jobs(
+                  "auth_platform_user_id_example".to_string(),
+                  "org_id_example".to_string(),
+                  "tenant_id_example".to_string()
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },

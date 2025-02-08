@@ -13,16 +13,19 @@ Method | HTTP request | Description
 [**DeleteAPIKey**](lead_scraper_service_api.md#DeleteAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 [**DeleteAccount**](lead_scraper_service_api.md#DeleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 [**DeleteOrganization**](lead_scraper_service_api.md#DeleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
+[**DeleteScrapingJob**](lead_scraper_service_api.md#DeleteScrapingJob) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job
 [**DeleteTenant**](lead_scraper_service_api.md#DeleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 [**DeleteTenantAPIKey**](lead_scraper_service_api.md#DeleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
 [**DeleteWebhook**](lead_scraper_service_api.md#DeleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
 [**DeleteWorkflow**](lead_scraper_service_api.md#DeleteWorkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 [**DeleteWorkspace**](lead_scraper_service_api.md#DeleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
+[**DownloadScrapingResults**](lead_scraper_service_api.md#DownloadScrapingResults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV
 [**GetAPIKey**](lead_scraper_service_api.md#GetAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
 [**GetAccount**](lead_scraper_service_api.md#GetAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details
 [**GetAccountUsage**](lead_scraper_service_api.md#GetAccountUsage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage
 [**GetLead**](lead_scraper_service_api.md#GetLead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
 [**GetOrganization**](lead_scraper_service_api.md#GetOrganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details
+[**GetScrapingJob**](lead_scraper_service_api.md#GetScrapingJob) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job
 [**GetTenant**](lead_scraper_service_api.md#GetTenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details
 [**GetTenantAPIKey**](lead_scraper_service_api.md#GetTenantAPIKey) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details
 [**GetWebhook**](lead_scraper_service_api.md#GetWebhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook
@@ -33,6 +36,7 @@ Method | HTTP request | Description
 [**ListAccounts**](lead_scraper_service_api.md#ListAccounts) | **GET** /lead-scraper-microservice/api/v1/accounts/list | List all accounts
 [**ListLeads**](lead_scraper_service_api.md#ListLeads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads
 [**ListOrganizations**](lead_scraper_service_api.md#ListOrganizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations
+[**ListScrapingJobs**](lead_scraper_service_api.md#ListScrapingJobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs
 [**ListTenantAPIKeys**](lead_scraper_service_api.md#ListTenantAPIKeys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys
 [**ListTenants**](lead_scraper_service_api.md#ListTenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
 [**ListWebhooks**](lead_scraper_service_api.md#ListWebhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks
@@ -116,6 +120,13 @@ Permanently deletes an account and associated resources
 Delete an organization
 
 Permanently deletes an organization and all associated resources
+<a name="DeleteScrapingJob"></a>
+# **DeleteScrapingJob**
+> DeleteScrapingJobResponse DeleteScrapingJob(jobId, userId, orgId, tenantId)
+
+Delete a specific job
+
+This endpoint deletes a specific Google Maps scraping job
 <a name="DeleteTenant"></a>
 # **DeleteTenant**
 > DeleteTenantResponse DeleteTenant(organizationId, tenantId)
@@ -151,6 +162,13 @@ Deletes a specific workflow
 Delete a workspace
 
 Deletes a specific workspace
+<a name="DownloadScrapingResults"></a>
+# **DownloadScrapingResults**
+> DownloadScrapingResultsResponse DownloadScrapingResults(jobId, userId, orgId, tenantId)
+
+Download job results as CSV
+
+This endpoint downloads the results of a Google Maps scraping job as CSV
 <a name="GetAPIKey"></a>
 # **GetAPIKey**
 > GetApiKeyResponse GetAPIKey(keyId, organizationId, tenantId, accountId, workspaceId)
@@ -186,6 +204,13 @@ Retrieves detailed information about a specific lead
 Get organization details
 
 Retrieves details of a specific organization
+<a name="GetScrapingJob"></a>
+# **GetScrapingJob**
+> GetScrapingJobResponse GetScrapingJob(jobId, userId, orgId, tenantId)
+
+Get a specific job
+
+This endpoint retrieves a specific Google Maps scraping job
 <a name="GetTenant"></a>
 # **GetTenant**
 > GetTenantResponse GetTenant(organizationId, tenantId)
@@ -256,6 +281,13 @@ Retrieves a paginated list of leads with comprehensive filtering options
 List all organizations
 
 Retrieves a list of all organizations in a tenant
+<a name="ListScrapingJobs"></a>
+# **ListScrapingJobs**
+> ListScrapingJobsResponse ListScrapingJobs(authPlatformUserId, orgId, tenantId)
+
+Get all jobs
+
+This endpoint retrieves all Google Maps scraping jobs
 <a name="ListTenantAPIKeys"></a>
 # **ListTenantAPIKeys**
 > ListTenantApiKeysResponse ListTenantAPIKeys(organizationId, tenantId, pageSize, pageNumber, status)

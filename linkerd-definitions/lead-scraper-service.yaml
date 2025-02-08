@@ -8,6 +8,22 @@ spec:
   routes:
   - condition:
       method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/ListScrapingJobs
+    name: ListScrapingJobs
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetScrapingJob
+    name: GetScrapingJob
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/DeleteScrapingJob
+    name: DeleteScrapingJob
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/DownloadScrapingResults
+    name: DownloadScrapingResults
+  - condition:
+      method: POST
       pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetAccount
     name: GetAccount
   - condition:

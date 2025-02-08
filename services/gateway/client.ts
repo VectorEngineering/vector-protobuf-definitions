@@ -1872,6 +1872,26 @@ const DeleteAPIKeyResponse = z
   .object({ success: z.boolean() })
   .partial()
   .passthrough();
+const ListScrapingJobsResponse = z
+  .object({ jobs: z.array(ScrapingJob) })
+  .partial()
+  .passthrough();
+const GetScrapingJobResponse = z
+  .object({ job: ScrapingJob })
+  .partial()
+  .passthrough();
+const DeleteScrapingJobResponse = z
+  .object({ success: z.boolean() })
+  .partial()
+  .passthrough();
+const DownloadScrapingResultsResponse = z
+  .object({
+    content: z.string(),
+    filename: z.string(),
+    contentType: z.string(),
+  })
+  .partial()
+  .passthrough();
 const ListLeadsResponse = z
   .object({
     leads: z.array(Lead),
@@ -2615,6 +2635,10 @@ export const schemas = {
   RotateAPIKeyResponse,
   GetAPIKeyResponse,
   DeleteAPIKeyResponse,
+  ListScrapingJobsResponse,
+  GetScrapingJobResponse,
+  DeleteScrapingJobResponse,
+  DownloadScrapingResultsResponse,
   ListLeadsResponse,
   GetLeadResponse,
   BillingPlan,
@@ -4008,6 +4032,489 @@ const endpoints = makeApi([
       },
     ],
     response: RotateAPIKeyResponse,
+    errors: [
+      {
+        status: 400,
+        description: `Bad Request - Invalid input parameters`,
+        schema: ValidationErrorMessageResponse,
+      },
+      {
+        status: 401,
+        description: `Unauthorized - Authentication required`,
+        schema: AuthenticationErrorMessageResponse,
+      },
+      {
+        status: 402,
+        description: `Payment Required - Payment is necessary to proceed`,
+        schema: PaymentRequiredErrorMessageResponse,
+      },
+      {
+        status: 403,
+        description: `Forbidden - Access denied`,
+        schema: ForbiddenErrorMessageResponse,
+      },
+      {
+        status: 404,
+        description: `Not Found - Resource not found`,
+        schema: NotFoundErrorMessageResponse,
+      },
+      {
+        status: 405,
+        description: `Method Not Allowed - HTTP method not supported`,
+        schema: MethodNotAllowedErrorMessageResponse,
+      },
+      {
+        status: 409,
+        description: `Conflict - Resource already exists`,
+        schema: ConflictErrorMessageResponse,
+      },
+      {
+        status: 410,
+        description: `Gone - Resource is no longer available`,
+        schema: GoneErrorMessageResponse,
+      },
+      {
+        status: 412,
+        description: `Precondition Failed - Preconditions in headers did not match`,
+        schema: PreconditionFailedErrorMessageResponse,
+      },
+      {
+        status: 422,
+        description: `Unprocessable Entity - Semantic errors in the request`,
+        schema: UnprocessableEntityErrorMessageResponse,
+      },
+      {
+        status: 425,
+        description: `Too Early - Request is being replayed`,
+        schema: TooEarlyErrorMessageResponse,
+      },
+      {
+        status: 429,
+        description: `Too Many Requests - Rate limit exceeded`,
+        schema: RateLimitErrorMessageResponse,
+      },
+      {
+        status: 500,
+        description: `Internal Server Error`,
+        schema: InternalErrorMessageResponse,
+      },
+      {
+        status: 501,
+        description: `Not Implemented - Functionality not supported`,
+        schema: NotImplementedErrorMessageResponse,
+      },
+      {
+        status: 502,
+        description: `Bad Gateway - Invalid response from upstream server`,
+        schema: BadGatewayErrorMessageResponse,
+      },
+      {
+        status: 503,
+        description: `Service Unavailable - Try again later`,
+        schema: ServiceUnavailableErrorMessageResponse,
+      },
+      {
+        status: 504,
+        description: `Gateway Timeout - Upstream server timed out`,
+        schema: GatewayTimeoutErrorMessageResponse,
+      },
+      {
+        status: "default",
+        description: `An unexpected error response.`,
+        schema: rpc_Status,
+      },
+    ],
+  },
+  {
+    method: "get",
+    path: "/lead-scraper-microservice/api/v1/jobs",
+    alias: "ListScrapingJobs",
+    description: `This endpoint retrieves all Google Maps scraping jobs`,
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "authPlatformUserId",
+        type: "Query",
+        schema: z.string(),
+      },
+      {
+        name: "orgId",
+        type: "Query",
+        schema: z.string(),
+      },
+      {
+        name: "tenantId",
+        type: "Query",
+        schema: z.string(),
+      },
+    ],
+    response: ListScrapingJobsResponse,
+    errors: [
+      {
+        status: 400,
+        description: `Bad Request - Invalid input parameters`,
+        schema: ValidationErrorMessageResponse,
+      },
+      {
+        status: 401,
+        description: `Unauthorized - Authentication required`,
+        schema: AuthenticationErrorMessageResponse,
+      },
+      {
+        status: 402,
+        description: `Payment Required - Payment is necessary to proceed`,
+        schema: PaymentRequiredErrorMessageResponse,
+      },
+      {
+        status: 403,
+        description: `Forbidden - Access denied`,
+        schema: ForbiddenErrorMessageResponse,
+      },
+      {
+        status: 404,
+        description: `Not Found - Resource not found`,
+        schema: NotFoundErrorMessageResponse,
+      },
+      {
+        status: 405,
+        description: `Method Not Allowed - HTTP method not supported`,
+        schema: MethodNotAllowedErrorMessageResponse,
+      },
+      {
+        status: 409,
+        description: `Conflict - Resource already exists`,
+        schema: ConflictErrorMessageResponse,
+      },
+      {
+        status: 410,
+        description: `Gone - Resource is no longer available`,
+        schema: GoneErrorMessageResponse,
+      },
+      {
+        status: 412,
+        description: `Precondition Failed - Preconditions in headers did not match`,
+        schema: PreconditionFailedErrorMessageResponse,
+      },
+      {
+        status: 422,
+        description: `Unprocessable Entity - Semantic errors in the request`,
+        schema: UnprocessableEntityErrorMessageResponse,
+      },
+      {
+        status: 425,
+        description: `Too Early - Request is being replayed`,
+        schema: TooEarlyErrorMessageResponse,
+      },
+      {
+        status: 429,
+        description: `Too Many Requests - Rate limit exceeded`,
+        schema: RateLimitErrorMessageResponse,
+      },
+      {
+        status: 500,
+        description: `Internal Server Error`,
+        schema: InternalErrorMessageResponse,
+      },
+      {
+        status: 501,
+        description: `Not Implemented - Functionality not supported`,
+        schema: NotImplementedErrorMessageResponse,
+      },
+      {
+        status: 502,
+        description: `Bad Gateway - Invalid response from upstream server`,
+        schema: BadGatewayErrorMessageResponse,
+      },
+      {
+        status: 503,
+        description: `Service Unavailable - Try again later`,
+        schema: ServiceUnavailableErrorMessageResponse,
+      },
+      {
+        status: 504,
+        description: `Gateway Timeout - Upstream server timed out`,
+        schema: GatewayTimeoutErrorMessageResponse,
+      },
+      {
+        status: "default",
+        description: `An unexpected error response.`,
+        schema: rpc_Status,
+      },
+    ],
+  },
+  {
+    method: "get",
+    path: "/lead-scraper-microservice/api/v1/jobs/:jobId",
+    alias: "GetScrapingJob",
+    description: `This endpoint retrieves a specific Google Maps scraping job`,
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "jobId",
+        type: "Path",
+        schema: z.string(),
+      },
+      {
+        name: "userId",
+        type: "Query",
+        schema: z.string(),
+      },
+      {
+        name: "orgId",
+        type: "Query",
+        schema: z.string(),
+      },
+      {
+        name: "tenantId",
+        type: "Query",
+        schema: z.string(),
+      },
+    ],
+    response: GetScrapingJobResponse,
+    errors: [
+      {
+        status: 400,
+        description: `Bad Request - Invalid input parameters`,
+        schema: ValidationErrorMessageResponse,
+      },
+      {
+        status: 401,
+        description: `Unauthorized - Authentication required`,
+        schema: AuthenticationErrorMessageResponse,
+      },
+      {
+        status: 402,
+        description: `Payment Required - Payment is necessary to proceed`,
+        schema: PaymentRequiredErrorMessageResponse,
+      },
+      {
+        status: 403,
+        description: `Forbidden - Access denied`,
+        schema: ForbiddenErrorMessageResponse,
+      },
+      {
+        status: 404,
+        description: `Not Found - Resource not found`,
+        schema: NotFoundErrorMessageResponse,
+      },
+      {
+        status: 405,
+        description: `Method Not Allowed - HTTP method not supported`,
+        schema: MethodNotAllowedErrorMessageResponse,
+      },
+      {
+        status: 409,
+        description: `Conflict - Resource already exists`,
+        schema: ConflictErrorMessageResponse,
+      },
+      {
+        status: 410,
+        description: `Gone - Resource is no longer available`,
+        schema: GoneErrorMessageResponse,
+      },
+      {
+        status: 412,
+        description: `Precondition Failed - Preconditions in headers did not match`,
+        schema: PreconditionFailedErrorMessageResponse,
+      },
+      {
+        status: 422,
+        description: `Unprocessable Entity - Semantic errors in the request`,
+        schema: UnprocessableEntityErrorMessageResponse,
+      },
+      {
+        status: 425,
+        description: `Too Early - Request is being replayed`,
+        schema: TooEarlyErrorMessageResponse,
+      },
+      {
+        status: 429,
+        description: `Too Many Requests - Rate limit exceeded`,
+        schema: RateLimitErrorMessageResponse,
+      },
+      {
+        status: 500,
+        description: `Internal Server Error`,
+        schema: InternalErrorMessageResponse,
+      },
+      {
+        status: 501,
+        description: `Not Implemented - Functionality not supported`,
+        schema: NotImplementedErrorMessageResponse,
+      },
+      {
+        status: 502,
+        description: `Bad Gateway - Invalid response from upstream server`,
+        schema: BadGatewayErrorMessageResponse,
+      },
+      {
+        status: 503,
+        description: `Service Unavailable - Try again later`,
+        schema: ServiceUnavailableErrorMessageResponse,
+      },
+      {
+        status: 504,
+        description: `Gateway Timeout - Upstream server timed out`,
+        schema: GatewayTimeoutErrorMessageResponse,
+      },
+      {
+        status: "default",
+        description: `An unexpected error response.`,
+        schema: rpc_Status,
+      },
+    ],
+  },
+  {
+    method: "delete",
+    path: "/lead-scraper-microservice/api/v1/jobs/:jobId",
+    alias: "DeleteScrapingJob",
+    description: `This endpoint deletes a specific Google Maps scraping job`,
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "jobId",
+        type: "Path",
+        schema: z.string(),
+      },
+      {
+        name: "userId",
+        type: "Query",
+        schema: z.string(),
+      },
+      {
+        name: "orgId",
+        type: "Query",
+        schema: z.string(),
+      },
+      {
+        name: "tenantId",
+        type: "Query",
+        schema: z.string(),
+      },
+    ],
+    response: z.object({ success: z.boolean() }).partial().passthrough(),
+    errors: [
+      {
+        status: 400,
+        description: `Bad Request - Invalid input parameters`,
+        schema: ValidationErrorMessageResponse,
+      },
+      {
+        status: 401,
+        description: `Unauthorized - Authentication required`,
+        schema: AuthenticationErrorMessageResponse,
+      },
+      {
+        status: 402,
+        description: `Payment Required - Payment is necessary to proceed`,
+        schema: PaymentRequiredErrorMessageResponse,
+      },
+      {
+        status: 403,
+        description: `Forbidden - Access denied`,
+        schema: ForbiddenErrorMessageResponse,
+      },
+      {
+        status: 404,
+        description: `Not Found - Resource not found`,
+        schema: NotFoundErrorMessageResponse,
+      },
+      {
+        status: 405,
+        description: `Method Not Allowed - HTTP method not supported`,
+        schema: MethodNotAllowedErrorMessageResponse,
+      },
+      {
+        status: 409,
+        description: `Conflict - Resource already exists`,
+        schema: ConflictErrorMessageResponse,
+      },
+      {
+        status: 410,
+        description: `Gone - Resource is no longer available`,
+        schema: GoneErrorMessageResponse,
+      },
+      {
+        status: 412,
+        description: `Precondition Failed - Preconditions in headers did not match`,
+        schema: PreconditionFailedErrorMessageResponse,
+      },
+      {
+        status: 422,
+        description: `Unprocessable Entity - Semantic errors in the request`,
+        schema: UnprocessableEntityErrorMessageResponse,
+      },
+      {
+        status: 425,
+        description: `Too Early - Request is being replayed`,
+        schema: TooEarlyErrorMessageResponse,
+      },
+      {
+        status: 429,
+        description: `Too Many Requests - Rate limit exceeded`,
+        schema: RateLimitErrorMessageResponse,
+      },
+      {
+        status: 500,
+        description: `Internal Server Error`,
+        schema: InternalErrorMessageResponse,
+      },
+      {
+        status: 501,
+        description: `Not Implemented - Functionality not supported`,
+        schema: NotImplementedErrorMessageResponse,
+      },
+      {
+        status: 502,
+        description: `Bad Gateway - Invalid response from upstream server`,
+        schema: BadGatewayErrorMessageResponse,
+      },
+      {
+        status: 503,
+        description: `Service Unavailable - Try again later`,
+        schema: ServiceUnavailableErrorMessageResponse,
+      },
+      {
+        status: 504,
+        description: `Gateway Timeout - Upstream server timed out`,
+        schema: GatewayTimeoutErrorMessageResponse,
+      },
+      {
+        status: "default",
+        description: `An unexpected error response.`,
+        schema: rpc_Status,
+      },
+    ],
+  },
+  {
+    method: "get",
+    path: "/lead-scraper-microservice/api/v1/jobs/:jobId/download",
+    alias: "DownloadScrapingResults",
+    description: `This endpoint downloads the results of a Google Maps scraping job as CSV`,
+    requestFormat: "json",
+    parameters: [
+      {
+        name: "jobId",
+        type: "Path",
+        schema: z.string(),
+      },
+      {
+        name: "userId",
+        type: "Query",
+        schema: z.string(),
+      },
+      {
+        name: "orgId",
+        type: "Query",
+        schema: z.string(),
+      },
+      {
+        name: "tenantId",
+        type: "Query",
+        schema: z.string(),
+      },
+    ],
+    response: DownloadScrapingResultsResponse,
     errors: [
       {
         status: 400,
@@ -9304,6 +9811,81 @@ export class ApiClient {
       },
     );
   }
+  async getLeadScraperMicroserviceApiV1Jobs(params: {
+    authPlatformUserId: string;
+    orgId: string;
+    tenantId: string;
+  }) {
+    return this.client.get("/lead-scraper-microservice/api/v1/jobs", {
+      params: {},
+      queries: {
+        authPlatformUserId: params.authPlatformUserId,
+        orgId: params.orgId,
+        tenantId: params.tenantId,
+      },
+    });
+  }
+
+  async getLeadScraperMicroserviceApiV1JobsJobId(params: {
+    jobId: string;
+    userId: string;
+    orgId: string;
+    tenantId: string;
+  }) {
+    return this.client.get("/lead-scraper-microservice/api/v1/jobs/:jobId", {
+      params: {
+        jobId: params.jobId,
+      },
+      queries: {
+        userId: params.userId,
+        orgId: params.orgId,
+        tenantId: params.tenantId,
+      },
+    });
+  }
+
+  async deleteLeadScraperMicroserviceApiV1JobsJobId(params: {
+    jobId: string;
+    userId: string;
+    orgId: string;
+    tenantId: string;
+  }) {
+    return this.client.delete(
+      "/lead-scraper-microservice/api/v1/jobs/:jobId",
+      undefined,
+      {
+        params: {
+          jobId: params.jobId,
+        },
+        queries: {
+          userId: params.userId,
+          orgId: params.orgId,
+          tenantId: params.tenantId,
+        },
+      },
+    );
+  }
+  async getLeadScraperMicroserviceApiV1JobsJobIdDownload(params: {
+    jobId: string;
+    userId: string;
+    orgId: string;
+    tenantId: string;
+  }) {
+    return this.client.get(
+      "/lead-scraper-microservice/api/v1/jobs/:jobId/download",
+      {
+        params: {
+          jobId: params.jobId,
+        },
+        queries: {
+          userId: params.userId,
+          orgId: params.orgId,
+          tenantId: params.tenantId,
+        },
+      },
+    );
+  }
+
   async getLeadScraperMicroserviceApiV1Leads(params: {
     organizationId: string | undefined;
     workspaceId: string | undefined;

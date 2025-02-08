@@ -62,125 +62,125 @@ service LeadScraperService {
     //     };
     // }
 
-    // // Get all scraping jobs
-    // //
-    // // Retrieves a list of all scraping jobs for the authenticated user within their
-    // // organization context. The results can be filtered by status and other criteria.
-    // //
-    // // The response includes basic job information and status. For detailed job data,
-    // // use GetScrapingJob with a specific job ID.
-    // rpc ListScrapingJobs(ListScrapingJobsRequest) returns (ListScrapingJobsResponse) {
-    //     option (google.api.http) = {
-    //         get: "/lead-scraper-microservice/api/v1/jobs"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Get all jobs"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "ListScrapingJobs"
-    //         description: "This endpoint retrieves all Google Maps scraping jobs"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Successful response"
-    //                 schema: {
-    //                     json_schema: { ref: ".lead_scraper_service.v1.ListScrapingJobsResponse" }
-    //                 }
-    //             }
-    //         }
-    //     };
-    // }
+    // Get all scraping jobs
+    //
+    // Retrieves a list of all scraping jobs for the authenticated user within their
+    // organization context. The results can be filtered by status and other criteria.
+    //
+    // The response includes basic job information and status. For detailed job data,
+    // use GetScrapingJob with a specific job ID.
+    rpc ListScrapingJobs(ListScrapingJobsRequest) returns (ListScrapingJobsResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/jobs"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get all jobs"
+            tags: ["lead-scraper-service"]
+            operation_id: "ListScrapingJobs"
+            description: "This endpoint retrieves all Google Maps scraping jobs"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Successful response"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.ListScrapingJobsResponse" }
+                    }
+                }
+            }
+        };
+    }
 
-    // // Get a specific scraping job
-    // //
-    // // Retrieves detailed information about a specific scraping job, including its
-    // // current status, configuration, and progress metrics.
-    // //
-    // // This endpoint is useful for:
-    // // - Monitoring job progress
-    // // - Debugging failed jobs
-    // // - Retrieving job configuration details
-    // rpc GetScrapingJob(GetScrapingJobRequest) returns (GetScrapingJobResponse) {
-    //     option (google.api.http) = {
-    //         get: "/lead-scraper-microservice/api/v1/jobs/{job_id}"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Get a specific job"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "GetScrapingJob"
-    //         description: "This endpoint retrieves a specific Google Maps scraping job"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Successful response"
-    //                 schema: {
-    //                     json_schema: { ref: ".lead_scraper_service.v1.GetScrapingJobResponse" }
-    //                 }
-    //             }
-    //         }
-    //     };
-    // }
+    // Get a specific scraping job
+    //
+    // Retrieves detailed information about a specific scraping job, including its
+    // current status, configuration, and progress metrics.
+    //
+    // This endpoint is useful for:
+    // - Monitoring job progress
+    // - Debugging failed jobs
+    // - Retrieving job configuration details
+    rpc GetScrapingJob(GetScrapingJobRequest) returns (GetScrapingJobResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/jobs/{job_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Get a specific job"
+            tags: ["lead-scraper-service"]
+            operation_id: "GetScrapingJob"
+            description: "This endpoint retrieves a specific Google Maps scraping job"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Successful response"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.GetScrapingJobResponse" }
+                    }
+                }
+            }
+        };
+    }
 
-    // // Delete a specific scraping job
-    // //
-    // // Permanently removes a scraping job and its associated data. This action cannot
-    // // be undone. If the job is currently running, it will be stopped.
-    // //
-    // // Security note:
-    // // - Requires authentication
-    // // - User must have appropriate permissions
-    // // - Job must belong to user's organization
-    // rpc DeleteScrapingJob(DeleteScrapingJobRequest) returns (DeleteScrapingJobResponse) {
-    //     option (google.api.http) = {
-    //         delete: "/lead-scraper-microservice/api/v1/jobs/{job_id}"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Delete a specific job"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "DeleteScrapingJob"
-    //         description: "This endpoint deletes a specific Google Maps scraping job"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Job deleted successfully"
-    //                 schema: {
-    //                     json_schema: { ref: ".lead_scraper_service.v1.DeleteScrapingJobResponse" }
-    //                 }
-    //             }
-    //         }
-    //     };
-    // }
+    // Delete a specific scraping job
+    //
+    // Permanently removes a scraping job and its associated data. This action cannot
+    // be undone. If the job is currently running, it will be stopped.
+    //
+    // Security note:
+    // - Requires authentication
+    // - User must have appropriate permissions
+    // - Job must belong to user's organization
+    rpc DeleteScrapingJob(DeleteScrapingJobRequest) returns (DeleteScrapingJobResponse) {
+        option (google.api.http) = {
+            delete: "/lead-scraper-microservice/api/v1/jobs/{job_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Delete a specific job"
+            tags: ["lead-scraper-service"]
+            operation_id: "DeleteScrapingJob"
+            description: "This endpoint deletes a specific Google Maps scraping job"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Job deleted successfully"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.DeleteScrapingJobResponse" }
+                    }
+                }
+            }
+        };
+    }
 
-    // // Download job results
-    // //
-    // // Downloads the results of a completed scraping job in CSV format. The response
-    // // includes the file content and appropriate headers for browser download.
-    // //
-    // // The CSV file includes:
-    // // - Business names and addresses
-    // // - Contact information
-    // // - Rating and review counts
-    // // - Operating hours
-    // // - Additional metadata based on job configuration
-    // rpc DownloadScrapingResults(DownloadScrapingResultsRequest) returns (DownloadScrapingResultsResponse) {
-    //     option (google.api.http) = {
-    //         get: "/lead-scraper-microservice/api/v1/jobs/{job_id}/download"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Download job results as CSV"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "DownloadScrapingResults"
-    //         description: "This endpoint downloads the results of a Google Maps scraping job as CSV"
-    //         responses: {
-    //             key: "200"
-    //             value: {
-    //                 description: "Successful response"
-    //                 schema: {
-    //                     json_schema: { ref: ".lead_scraper_service.v1.DownloadScrapingResultsResponse" }
-    //                 }
-    //             }
-    //         }
-    //     };
-    // }
+    // Download job results
+    //
+    // Downloads the results of a completed scraping job in CSV format. The response
+    // includes the file content and appropriate headers for browser download.
+    //
+    // The CSV file includes:
+    // - Business names and addresses
+    // - Contact information
+    // - Rating and review counts
+    // - Operating hours
+    // - Additional metadata based on job configuration
+    rpc DownloadScrapingResults(DownloadScrapingResultsRequest) returns (DownloadScrapingResultsResponse) {
+        option (google.api.http) = {
+            get: "/lead-scraper-microservice/api/v1/jobs/{job_id}/download"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Download job results as CSV"
+            tags: ["lead-scraper-service"]
+            operation_id: "DownloadScrapingResults"
+            description: "This endpoint downloads the results of a Google Maps scraping job as CSV"
+            responses: {
+                key: "200"
+                value: {
+                    description: "Successful response"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.DownloadScrapingResultsResponse" }
+                    }
+                }
+            }
+        };
+    }
 
     // // Create a new account
     // //

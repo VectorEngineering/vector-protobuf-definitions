@@ -19,7 +19,7 @@ import javax.annotation.Generated;
  * UpdateAccountSettingsRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:28:30.535712-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:46:38.744443-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class UpdateAccountSettingsRequest {
 
   private AccountSettings settings;

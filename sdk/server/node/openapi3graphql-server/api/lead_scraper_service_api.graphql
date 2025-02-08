@@ -75,6 +75,17 @@ input DeleteOrganizationInput {
     Id_: String!
 }
 
+input DeleteScrapingJobInput {
+    
+    jobId: String!, 
+    
+    userId: String!, 
+    
+    orgId: String!, 
+    
+    tenantId: String!
+}
+
 input DeleteTenantInput {
     
     organizationId: String!, 
@@ -249,6 +260,14 @@ type Mutation {
   # @param String! Id_ 
   # @return [DeleteOrganizationResponse]
   DeleteOrganization(input: DeleteOrganizationInput!): DeleteOrganizationResponse
+  # Delete a specific job
+  # This endpoint deletes a specific Google Maps scraping job
+  # @param String! jobId 
+  # @param String! userId 
+  # @param String! orgId 
+  # @param String! tenantId 
+  # @return [DeleteScrapingJobResponse]
+  DeleteScrapingJob(input: DeleteScrapingJobInput!): DeleteScrapingJobResponse
   # Delete a tenant
   # Permanently deletes a tenant and all associated resources
   # @param String! organizationId 
@@ -357,6 +376,14 @@ type Mutation {
 }
 
 type Query {
+  # Download job results as CSV
+  # This endpoint downloads the results of a Google Maps scraping job as CSV
+  # @param String! jobId 
+  # @param String! userId 
+  # @param String! orgId 
+  # @param String! tenantId 
+  # @return [DownloadScrapingResultsResponse]
+  DownloadScrapingResults(jobId: String!, userId: String!, orgId: String!, tenantId: String!): DownloadScrapingResultsResponse
   # Get API key details
   # Retrieves details of a specific API key
   # @param String! keyId 
@@ -392,6 +419,14 @@ type Query {
   # @param String! Id_ 
   # @return [GetOrganizationResponse]
   GetOrganization(Id_: String!): GetOrganizationResponse
+  # Get a specific job
+  # This endpoint retrieves a specific Google Maps scraping job
+  # @param String! jobId 
+  # @param String! userId 
+  # @param String! orgId 
+  # @param String! tenantId 
+  # @return [GetScrapingJobResponse]
+  GetScrapingJob(jobId: String!, userId: String!, orgId: String!, tenantId: String!): GetScrapingJobResponse
   # Get tenant details
   # Retrieves details of a specific tenant
   # @param String! organizationId 
@@ -472,6 +507,13 @@ type Query {
   # @param Int! pageNumber 
   # @return [ListOrganizationsResponse]
   ListOrganizations(pageSize: Int!, pageNumber: Int!): ListOrganizationsResponse
+  # Get all jobs
+  # This endpoint retrieves all Google Maps scraping jobs
+  # @param String! authPlatformUserId 
+  # @param String! orgId 
+  # @param String! tenantId 
+  # @return [ListScrapingJobsResponse]
+  ListScrapingJobs(authPlatformUserId: String!, orgId: String!, tenantId: String!): ListScrapingJobsResponse
   # List tenant API keys
   # Retrieves all API keys for a specific tenant
   # @param String! organizationId 

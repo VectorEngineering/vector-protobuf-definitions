@@ -13,16 +13,19 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**deleteAPIKey**](LeadScraperServiceApi.md#deleteAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key |
 | [**deleteAccount**](LeadScraperServiceApi.md#deleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account |
 | [**deleteOrganization**](LeadScraperServiceApi.md#deleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization |
+| [**deleteScrapingJob**](LeadScraperServiceApi.md#deleteScrapingJob) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job |
 | [**deleteTenant**](LeadScraperServiceApi.md#deleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant |
 | [**deleteTenantAPIKey**](LeadScraperServiceApi.md#deleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key |
 | [**deleteWebhook**](LeadScraperServiceApi.md#deleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook |
 | [**deleteWorkflow**](LeadScraperServiceApi.md#deleteWorkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow |
 | [**deleteWorkspace**](LeadScraperServiceApi.md#deleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace |
+| [**downloadScrapingResults**](LeadScraperServiceApi.md#downloadScrapingResults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV |
 | [**getAPIKey**](LeadScraperServiceApi.md#getAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details |
 | [**getAccount**](LeadScraperServiceApi.md#getAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details |
 | [**getAccountUsage**](LeadScraperServiceApi.md#getAccountUsage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage |
 | [**getLead**](LeadScraperServiceApi.md#getLead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details |
 | [**getOrganization**](LeadScraperServiceApi.md#getOrganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details |
+| [**getScrapingJob**](LeadScraperServiceApi.md#getScrapingJob) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job |
 | [**getTenant**](LeadScraperServiceApi.md#getTenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details |
 | [**getTenantAPIKey**](LeadScraperServiceApi.md#getTenantAPIKey) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details |
 | [**getWebhook**](LeadScraperServiceApi.md#getWebhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook |
@@ -33,6 +36,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**listAccounts**](LeadScraperServiceApi.md#listAccounts) | **GET** /lead-scraper-microservice/api/v1/accounts/list | List all accounts |
 | [**listLeads**](LeadScraperServiceApi.md#listLeads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads |
 | [**listOrganizations**](LeadScraperServiceApi.md#listOrganizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations |
+| [**listScrapingJobs**](LeadScraperServiceApi.md#listScrapingJobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs |
 | [**listTenantAPIKeys**](LeadScraperServiceApi.md#listTenantAPIKeys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys |
 | [**listTenants**](LeadScraperServiceApi.md#listTenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants |
 | [**listWebhooks**](LeadScraperServiceApi.md#listWebhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks |
@@ -304,6 +308,36 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
+<a name="deleteScrapingJob"></a>
+# **deleteScrapingJob**
+> DeleteScrapingJobResponse deleteScrapingJob(jobId, userId, orgId, tenantId)
+
+Delete a specific job
+
+    This endpoint deletes a specific Google Maps scraping job
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **jobId** | **String**|  | [default to null] |
+| **userId** | **String**|  | [default to null] |
+| **orgId** | **String**|  | [default to null] |
+| **tenantId** | **String**|  | [default to null] |
+
+### Return type
+
+[**DeleteScrapingJobResponse**](../Models/DeleteScrapingJobResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
 <a name="deleteTenant"></a>
 # **deleteTenant**
 > DeleteTenantResponse deleteTenant(organizationId, tenantId)
@@ -450,6 +484,36 @@ No authorization required
 - **Content-Type**: Not defined
 - **Accept**: application/json, 
 
+<a name="downloadScrapingResults"></a>
+# **downloadScrapingResults**
+> DownloadScrapingResultsResponse downloadScrapingResults(jobId, userId, orgId, tenantId)
+
+Download job results as CSV
+
+    This endpoint downloads the results of a Google Maps scraping job as CSV
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **jobId** | **String**|  | [default to null] |
+| **userId** | **String**|  | [default to null] |
+| **orgId** | **String**|  | [default to null] |
+| **tenantId** | **String**|  | [default to null] |
+
+### Return type
+
+[**DownloadScrapingResultsResponse**](../Models/DownloadScrapingResultsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
 <a name="getAPIKey"></a>
 # **getAPIKey**
 > GetAPIKeyResponse getAPIKey(keyId, organizationId, tenantId, accountId, workspaceId)
@@ -585,6 +649,36 @@ Get organization details
 ### Return type
 
 [**GetOrganizationResponse**](../Models/GetOrganizationResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="getScrapingJob"></a>
+# **getScrapingJob**
+> GetScrapingJobResponse getScrapingJob(jobId, userId, orgId, tenantId)
+
+Get a specific job
+
+    This endpoint retrieves a specific Google Maps scraping job
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **jobId** | **String**|  | [default to null] |
+| **userId** | **String**|  | [default to null] |
+| **orgId** | **String**|  | [default to null] |
+| **tenantId** | **String**|  | [default to null] |
+
+### Return type
+
+[**GetScrapingJobResponse**](../Models/GetScrapingJobResponse.md)
 
 ### Authorization
 
@@ -885,6 +979,35 @@ List all organizations
 ### Return type
 
 [**ListOrganizationsResponse**](../Models/ListOrganizationsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, 
+
+<a name="listScrapingJobs"></a>
+# **listScrapingJobs**
+> ListScrapingJobsResponse listScrapingJobs(authPlatformUserId, orgId, tenantId)
+
+Get all jobs
+
+    This endpoint retrieves all Google Maps scraping jobs
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **authPlatformUserId** | **String**|  | [default to null] |
+| **orgId** | **String**|  | [default to null] |
+| **tenantId** | **String**|  | [default to null] |
+
+### Return type
+
+[**ListScrapingJobsResponse**](../Models/ListScrapingJobsResponse.md)
 
 ### Authorization
 

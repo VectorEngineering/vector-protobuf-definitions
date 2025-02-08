@@ -17,6 +17,16 @@
 export default {
     Query: {
 
+        // @return DownloadScrapingResultsResponse
+        DownloadScrapingResults: ($jobId, $userId, $orgId, $tenantId) => {
+            return {
+                "jobId": "jobId_example",
+                "userId": "userId_example",
+                "orgId": "orgId_example",
+                "tenantId": "tenantId_example"
+            };
+        },
+
         // @return GetApiKeyResponse
         GetAPIKey: ($keyId, $organizationId, $tenantId, $accountId, $workspaceId) => {
             return {
@@ -59,6 +69,16 @@ export default {
         GetOrganization: ($Id_) => {
             return {
                 "Id_": "Id__example"
+            };
+        },
+
+        // @return GetScrapingJobResponse
+        GetScrapingJob: ($jobId, $userId, $orgId, $tenantId) => {
+            return {
+                "jobId": "jobId_example",
+                "userId": "userId_example",
+                "orgId": "orgId_example",
+                "tenantId": "tenantId_example"
             };
         },
 
@@ -159,6 +179,15 @@ export default {
             return {
                 "pageSize": "56",
                 "pageNumber": "56"
+            };
+        },
+
+        // @return ListScrapingJobsResponse
+        ListScrapingJobs: ($authPlatformUserId, $orgId, $tenantId) => {
+            return {
+                "authPlatformUserId": "authPlatformUserId_example",
+                "orgId": "orgId_example",
+                "tenantId": "tenantId_example"
             };
         },
 
@@ -292,6 +321,16 @@ export default {
         DeleteOrganization: ($Id_) => {
             return {
                 "Id_": "Id__example"
+            };
+        },
+
+        // @return DeleteScrapingJobResponse
+        DeleteScrapingJob: ($jobId, $userId, $orgId, $tenantId) => {
+            return {
+                "jobId": "jobId_example",
+                "userId": "userId_example",
+                "orgId": "orgId_example",
+                "tenantId": "tenantId_example"
             };
         },
 

@@ -13,16 +13,19 @@ Method | HTTP request | Description
 [**delete_account**](LeadScraperServiceApi.md#delete_account) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 [**delete_api_key**](LeadScraperServiceApi.md#delete_api_key) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 [**delete_organization**](LeadScraperServiceApi.md#delete_organization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
+[**delete_scraping_job**](LeadScraperServiceApi.md#delete_scraping_job) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job
 [**delete_tenant**](LeadScraperServiceApi.md#delete_tenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 [**delete_tenant_api_key**](LeadScraperServiceApi.md#delete_tenant_api_key) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
 [**delete_webhook**](LeadScraperServiceApi.md#delete_webhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
 [**delete_workflow**](LeadScraperServiceApi.md#delete_workflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 [**delete_workspace**](LeadScraperServiceApi.md#delete_workspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
+[**download_scraping_results**](LeadScraperServiceApi.md#download_scraping_results) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV
 [**get_account**](LeadScraperServiceApi.md#get_account) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details
 [**get_account_usage**](LeadScraperServiceApi.md#get_account_usage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage
 [**get_api_key**](LeadScraperServiceApi.md#get_api_key) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
 [**get_lead**](LeadScraperServiceApi.md#get_lead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
 [**get_organization**](LeadScraperServiceApi.md#get_organization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details
+[**get_scraping_job**](LeadScraperServiceApi.md#get_scraping_job) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job
 [**get_tenant**](LeadScraperServiceApi.md#get_tenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details
 [**get_tenant_api_key**](LeadScraperServiceApi.md#get_tenant_api_key) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details
 [**get_webhook**](LeadScraperServiceApi.md#get_webhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook
@@ -33,6 +36,7 @@ Method | HTTP request | Description
 [**list_api_keys**](LeadScraperServiceApi.md#list_api_keys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys
 [**list_leads**](LeadScraperServiceApi.md#list_leads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads
 [**list_organizations**](LeadScraperServiceApi.md#list_organizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations
+[**list_scraping_jobs**](LeadScraperServiceApi.md#list_scraping_jobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs
 [**list_tenant_api_keys**](LeadScraperServiceApi.md#list_tenant_api_keys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys
 [**list_tenants**](LeadScraperServiceApi.md#list_tenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
 [**list_webhooks**](LeadScraperServiceApi.md#list_webhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks
@@ -852,6 +856,98 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **delete_scraping_job**
+> DeleteScrapingJobResponse delete_scraping_job(job_id, user_id, org_id, tenant_id)
+
+Delete a specific job
+
+This endpoint deletes a specific Google Maps scraping job
+
+### Example
+
+
+```python
+import playbookmedia_backend_client_sdk
+from playbookmedia_backend_client_sdk.models.delete_scraping_job_response import DeleteScrapingJobResponse
+from playbookmedia_backend_client_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://lead-scraping-microservice.vector.svc.cluster.local:9896
+# See configuration.py for a list of all supported configuration parameters.
+configuration = playbookmedia_backend_client_sdk.Configuration(
+    host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+)
+
+
+# Enter a context with an instance of the API client
+async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
+    job_id = 'job_id_example' # str | 
+    user_id = 'user_id_example' # str | 
+    org_id = 'org_id_example' # str | 
+    tenant_id = 'tenant_id_example' # str | 
+
+    try:
+        # Delete a specific job
+        api_response = await api_instance.delete_scraping_job(job_id, user_id, org_id, tenant_id)
+        print("The response of LeadScraperServiceApi->delete_scraping_job:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling LeadScraperServiceApi->delete_scraping_job: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **job_id** | **str**|  | 
+ **user_id** | **str**|  | 
+ **org_id** | **str**|  | 
+ **tenant_id** | **str**|  | 
+
+### Return type
+
+[**DeleteScrapingJobResponse**](DeleteScrapingJobResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Job deleted successfully |  -  |
+**400** | Bad Request - Invalid input parameters |  -  |
+**401** | Unauthorized - Authentication required |  -  |
+**402** | Payment Required - Payment is necessary to proceed |  -  |
+**403** | Forbidden - Access denied |  -  |
+**404** | Not Found - Resource not found |  -  |
+**405** | Method Not Allowed - HTTP method not supported |  -  |
+**409** | Conflict - Resource already exists |  -  |
+**410** | Gone - Resource is no longer available |  -  |
+**412** | Precondition Failed - Preconditions in headers did not match |  -  |
+**422** | Unprocessable Entity - Semantic errors in the request |  -  |
+**425** | Too Early - Request is being replayed |  -  |
+**429** | Too Many Requests - Rate limit exceeded |  -  |
+**500** | Internal Server Error |  -  |
+**501** | Not Implemented - Functionality not supported |  -  |
+**502** | Bad Gateway - Invalid response from upstream server |  -  |
+**503** | Service Unavailable - Try again later |  -  |
+**504** | Gateway Timeout - Upstream server timed out |  -  |
+**0** | An unexpected error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **delete_tenant**
 > DeleteTenantResponse delete_tenant(organization_id, tenant_id)
 
@@ -1304,6 +1400,98 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **download_scraping_results**
+> DownloadScrapingResultsResponse download_scraping_results(job_id, user_id, org_id, tenant_id)
+
+Download job results as CSV
+
+This endpoint downloads the results of a Google Maps scraping job as CSV
+
+### Example
+
+
+```python
+import playbookmedia_backend_client_sdk
+from playbookmedia_backend_client_sdk.models.download_scraping_results_response import DownloadScrapingResultsResponse
+from playbookmedia_backend_client_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://lead-scraping-microservice.vector.svc.cluster.local:9896
+# See configuration.py for a list of all supported configuration parameters.
+configuration = playbookmedia_backend_client_sdk.Configuration(
+    host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+)
+
+
+# Enter a context with an instance of the API client
+async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
+    job_id = 'job_id_example' # str | 
+    user_id = 'user_id_example' # str | 
+    org_id = 'org_id_example' # str | 
+    tenant_id = 'tenant_id_example' # str | 
+
+    try:
+        # Download job results as CSV
+        api_response = await api_instance.download_scraping_results(job_id, user_id, org_id, tenant_id)
+        print("The response of LeadScraperServiceApi->download_scraping_results:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling LeadScraperServiceApi->download_scraping_results: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **job_id** | **str**|  | 
+ **user_id** | **str**|  | 
+ **org_id** | **str**|  | 
+ **tenant_id** | **str**|  | 
+
+### Return type
+
+[**DownloadScrapingResultsResponse**](DownloadScrapingResultsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
+**400** | Bad Request - Invalid input parameters |  -  |
+**401** | Unauthorized - Authentication required |  -  |
+**402** | Payment Required - Payment is necessary to proceed |  -  |
+**403** | Forbidden - Access denied |  -  |
+**404** | Not Found - Resource not found |  -  |
+**405** | Method Not Allowed - HTTP method not supported |  -  |
+**409** | Conflict - Resource already exists |  -  |
+**410** | Gone - Resource is no longer available |  -  |
+**412** | Precondition Failed - Preconditions in headers did not match |  -  |
+**422** | Unprocessable Entity - Semantic errors in the request |  -  |
+**425** | Too Early - Request is being replayed |  -  |
+**429** | Too Many Requests - Rate limit exceeded |  -  |
+**500** | Internal Server Error |  -  |
+**501** | Not Implemented - Functionality not supported |  -  |
+**502** | Bad Gateway - Invalid response from upstream server |  -  |
+**503** | Service Unavailable - Try again later |  -  |
+**504** | Gateway Timeout - Upstream server timed out |  -  |
+**0** | An unexpected error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_account**
 > GetAccountResponse get_account(id, organization_id=organization_id, tenant_id=tenant_id)
 
@@ -1733,6 +1921,98 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Organization retrieved successfully |  -  |
+**400** | Bad Request - Invalid input parameters |  -  |
+**401** | Unauthorized - Authentication required |  -  |
+**402** | Payment Required - Payment is necessary to proceed |  -  |
+**403** | Forbidden - Access denied |  -  |
+**404** | Not Found - Resource not found |  -  |
+**405** | Method Not Allowed - HTTP method not supported |  -  |
+**409** | Conflict - Resource already exists |  -  |
+**410** | Gone - Resource is no longer available |  -  |
+**412** | Precondition Failed - Preconditions in headers did not match |  -  |
+**422** | Unprocessable Entity - Semantic errors in the request |  -  |
+**425** | Too Early - Request is being replayed |  -  |
+**429** | Too Many Requests - Rate limit exceeded |  -  |
+**500** | Internal Server Error |  -  |
+**501** | Not Implemented - Functionality not supported |  -  |
+**502** | Bad Gateway - Invalid response from upstream server |  -  |
+**503** | Service Unavailable - Try again later |  -  |
+**504** | Gateway Timeout - Upstream server timed out |  -  |
+**0** | An unexpected error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_scraping_job**
+> GetScrapingJobResponse get_scraping_job(job_id, user_id, org_id, tenant_id)
+
+Get a specific job
+
+This endpoint retrieves a specific Google Maps scraping job
+
+### Example
+
+
+```python
+import playbookmedia_backend_client_sdk
+from playbookmedia_backend_client_sdk.models.get_scraping_job_response import GetScrapingJobResponse
+from playbookmedia_backend_client_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://lead-scraping-microservice.vector.svc.cluster.local:9896
+# See configuration.py for a list of all supported configuration parameters.
+configuration = playbookmedia_backend_client_sdk.Configuration(
+    host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+)
+
+
+# Enter a context with an instance of the API client
+async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
+    job_id = 'job_id_example' # str | 
+    user_id = 'user_id_example' # str | 
+    org_id = 'org_id_example' # str | 
+    tenant_id = 'tenant_id_example' # str | 
+
+    try:
+        # Get a specific job
+        api_response = await api_instance.get_scraping_job(job_id, user_id, org_id, tenant_id)
+        print("The response of LeadScraperServiceApi->get_scraping_job:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling LeadScraperServiceApi->get_scraping_job: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **job_id** | **str**|  | 
+ **user_id** | **str**|  | 
+ **org_id** | **str**|  | 
+ **tenant_id** | **str**|  | 
+
+### Return type
+
+[**GetScrapingJobResponse**](GetScrapingJobResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
 **400** | Bad Request - Invalid input parameters |  -  |
 **401** | Unauthorized - Authentication required |  -  |
 **402** | Payment Required - Payment is necessary to proceed |  -  |
@@ -2653,6 +2933,96 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Organizations retrieved successfully |  -  |
+**400** | Bad Request - Invalid input parameters |  -  |
+**401** | Unauthorized - Authentication required |  -  |
+**402** | Payment Required - Payment is necessary to proceed |  -  |
+**403** | Forbidden - Access denied |  -  |
+**404** | Not Found - Resource not found |  -  |
+**405** | Method Not Allowed - HTTP method not supported |  -  |
+**409** | Conflict - Resource already exists |  -  |
+**410** | Gone - Resource is no longer available |  -  |
+**412** | Precondition Failed - Preconditions in headers did not match |  -  |
+**422** | Unprocessable Entity - Semantic errors in the request |  -  |
+**425** | Too Early - Request is being replayed |  -  |
+**429** | Too Many Requests - Rate limit exceeded |  -  |
+**500** | Internal Server Error |  -  |
+**501** | Not Implemented - Functionality not supported |  -  |
+**502** | Bad Gateway - Invalid response from upstream server |  -  |
+**503** | Service Unavailable - Try again later |  -  |
+**504** | Gateway Timeout - Upstream server timed out |  -  |
+**0** | An unexpected error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_scraping_jobs**
+> ListScrapingJobsResponse list_scraping_jobs(auth_platform_user_id, org_id, tenant_id)
+
+Get all jobs
+
+This endpoint retrieves all Google Maps scraping jobs
+
+### Example
+
+
+```python
+import playbookmedia_backend_client_sdk
+from playbookmedia_backend_client_sdk.models.list_scraping_jobs_response import ListScrapingJobsResponse
+from playbookmedia_backend_client_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://lead-scraping-microservice.vector.svc.cluster.local:9896
+# See configuration.py for a list of all supported configuration parameters.
+configuration = playbookmedia_backend_client_sdk.Configuration(
+    host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+)
+
+
+# Enter a context with an instance of the API client
+async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
+    auth_platform_user_id = 'auth_platform_user_id_example' # str | 
+    org_id = 'org_id_example' # str | 
+    tenant_id = 'tenant_id_example' # str | 
+
+    try:
+        # Get all jobs
+        api_response = await api_instance.list_scraping_jobs(auth_platform_user_id, org_id, tenant_id)
+        print("The response of LeadScraperServiceApi->list_scraping_jobs:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling LeadScraperServiceApi->list_scraping_jobs: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **auth_platform_user_id** | **str**|  | 
+ **org_id** | **str**|  | 
+ **tenant_id** | **str**|  | 
+
+### Return type
+
+[**ListScrapingJobsResponse**](ListScrapingJobsResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful response |  -  |
 **400** | Bad Request - Invalid input parameters |  -  |
 **401** | Unauthorized - Authentication required |  -  |
 **402** | Payment Required - Payment is necessary to proceed |  -  |

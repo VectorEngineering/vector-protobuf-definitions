@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-08T10:28:33.024795-05:00[America/New_York]
+- Build date: 2025-02-08T10:46:41.396077-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -65,16 +65,19 @@ To run a client, follow one of the following simple steps:
 cargo run --example client DeleteAccount
 cargo run --example client DeleteApiKey
 cargo run --example client DeleteOrganization
+cargo run --example client DeleteScrapingJob
 cargo run --example client DeleteTenant
 cargo run --example client DeleteTenantApiKey
 cargo run --example client DeleteWebhook
 cargo run --example client DeleteWorkflow
 cargo run --example client DeleteWorkspace
+cargo run --example client DownloadScrapingResults
 cargo run --example client GetAccount
 cargo run --example client GetAccountUsage
 cargo run --example client GetApiKey
 cargo run --example client GetLead
 cargo run --example client GetOrganization
+cargo run --example client GetScrapingJob
 cargo run --example client GetTenant
 cargo run --example client GetTenantApiKey
 cargo run --example client GetWebhook
@@ -85,6 +88,7 @@ cargo run --example client ListAccounts
 cargo run --example client ListApiKeys
 cargo run --example client ListLeads
 cargo run --example client ListOrganizations
+cargo run --example client ListScrapingJobs
 cargo run --example client ListTenantApiKeys
 cargo run --example client ListTenants
 cargo run --example client ListWebhooks
@@ -142,16 +146,19 @@ Method | HTTP request | Description
 [**DeleteAccount**](docs/lead_scraper_service_api.md#DeleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 [**DeleteAPIKey**](docs/lead_scraper_service_api.md#DeleteAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 [**DeleteOrganization**](docs/lead_scraper_service_api.md#DeleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
+[**DeleteScrapingJob**](docs/lead_scraper_service_api.md#DeleteScrapingJob) | **DELETE** /lead-scraper-microservice/api/v1/jobs/{jobId} | Delete a specific job
 [**DeleteTenant**](docs/lead_scraper_service_api.md#DeleteTenant) | **DELETE** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId} | Delete a tenant
 [**DeleteTenantAPIKey**](docs/lead_scraper_service_api.md#DeleteTenantAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Delete tenant API key
 [**DeleteWebhook**](docs/lead_scraper_service_api.md#DeleteWebhook) | **DELETE** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Delete webhook
 [**DeleteWorkflow**](docs/lead_scraper_service_api.md#DeleteWorkflow) | **DELETE** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id} | Delete workflow
 [**DeleteWorkspace**](docs/lead_scraper_service_api.md#DeleteWorkspace) | **DELETE** /lead-scraper-microservice/api/v1/workspace/{id} | Delete a workspace
+[**DownloadScrapingResults**](docs/lead_scraper_service_api.md#DownloadScrapingResults) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId}/download | Download job results as CSV
 [**GetAccount**](docs/lead_scraper_service_api.md#GetAccount) | **GET** /lead-scraper-microservice/api/v1/accounts/{id} | Get account details
 [**GetAccountUsage**](docs/lead_scraper_service_api.md#GetAccountUsage) | **GET** /lead-scraper-microservice/api/v1/accounts/{id}/usage | Get account usage
 [**GetAPIKey**](docs/lead_scraper_service_api.md#GetAPIKey) | **GET** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Get API key details
 [**GetLead**](docs/lead_scraper_service_api.md#GetLead) | **GET** /lead-scraper-microservice/api/v1/leads/{leadId} | Get lead details
 [**GetOrganization**](docs/lead_scraper_service_api.md#GetOrganization) | **GET** /lead-scraper-microservice/api/v1/organization/{id} | Get organization details
+[**GetScrapingJob**](docs/lead_scraper_service_api.md#GetScrapingJob) | **GET** /lead-scraper-microservice/api/v1/jobs/{jobId} | Get a specific job
 [**GetTenant**](docs/lead_scraper_service_api.md#GetTenant) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId} | Get tenant details
 [**GetTenantAPIKey**](docs/lead_scraper_service_api.md#GetTenantAPIKey) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId} | Get tenant API key details
 [**GetWebhook**](docs/lead_scraper_service_api.md#GetWebhook) | **GET** /lead-scraper-microservice/api/v1/webhooks/{webhookId} | Get webhook
@@ -162,6 +169,7 @@ Method | HTTP request | Description
 [**ListAPIKeys**](docs/lead_scraper_service_api.md#ListAPIKeys) | **GET** /lead-scraper-microservice/api/v1/api-keys/list | List API keys
 [**ListLeads**](docs/lead_scraper_service_api.md#ListLeads) | **GET** /lead-scraper-microservice/api/v1/leads | List leads
 [**ListOrganizations**](docs/lead_scraper_service_api.md#ListOrganizations) | **GET** /lead-scraper-microservice/api/v1/organization | List all organizations
+[**ListScrapingJobs**](docs/lead_scraper_service_api.md#ListScrapingJobs) | **GET** /lead-scraper-microservice/api/v1/jobs | Get all jobs
 [**ListTenantAPIKeys**](docs/lead_scraper_service_api.md#ListTenantAPIKeys) | **GET** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list | List tenant API keys
 [**ListTenants**](docs/lead_scraper_service_api.md#ListTenants) | **GET** /lead-scraper-microservice/api/v1/organization/tenants/{organizationId} | List all tenants
 [**ListWebhooks**](docs/lead_scraper_service_api.md#ListWebhooks) | **GET** /lead-scraper-microservice/api/v1/webhooks | List webhooks
@@ -261,6 +269,7 @@ Method | HTTP request | Description
  - [DeleteAccountResponse](docs/DeleteAccountResponse.md)
  - [DeleteApiKeyResponse](docs/DeleteApiKeyResponse.md)
  - [DeleteOrganizationResponse](docs/DeleteOrganizationResponse.md)
+ - [DeleteScrapingJobResponse](docs/DeleteScrapingJobResponse.md)
  - [DeleteTenantApiKeyResponse](docs/DeleteTenantApiKeyResponse.md)
  - [DeleteTenantResponse](docs/DeleteTenantResponse.md)
  - [DeleteWebhookResponse](docs/DeleteWebhookResponse.md)
@@ -273,6 +282,7 @@ Method | HTTP request | Description
  - [DocumentStatus](docs/DocumentStatus.md)
  - [DocumentTemplate](docs/DocumentTemplate.md)
  - [DocumentVersion](docs/DocumentVersion.md)
+ - [DownloadScrapingResultsResponse](docs/DownloadScrapingResultsResponse.md)
  - [EmployeeBenefit](docs/EmployeeBenefit.md)
  - [ErrorResponse](docs/ErrorResponse.md)
  - [ExplanationBlock](docs/ExplanationBlock.md)
@@ -291,6 +301,7 @@ Method | HTTP request | Description
  - [GetApiKeyResponse](docs/GetApiKeyResponse.md)
  - [GetLeadResponse](docs/GetLeadResponse.md)
  - [GetOrganizationResponse](docs/GetOrganizationResponse.md)
+ - [GetScrapingJobResponse](docs/GetScrapingJobResponse.md)
  - [GetTenantApiKeyResponse](docs/GetTenantApiKeyResponse.md)
  - [GetTenantResponse](docs/GetTenantResponse.md)
  - [GetWebhookResponse](docs/GetWebhookResponse.md)
@@ -315,6 +326,7 @@ Method | HTTP request | Description
  - [ListApiKeysResponse](docs/ListApiKeysResponse.md)
  - [ListLeadsResponse](docs/ListLeadsResponse.md)
  - [ListOrganizationsResponse](docs/ListOrganizationsResponse.md)
+ - [ListScrapingJobsResponse](docs/ListScrapingJobsResponse.md)
  - [ListTenantApiKeysResponse](docs/ListTenantApiKeysResponse.md)
  - [ListTenantsResponse](docs/ListTenantsResponse.md)
  - [ListWebhooksResponse](docs/ListWebhooksResponse.md)

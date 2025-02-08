@@ -36,16 +36,19 @@ from playbookmedia_backend_client_sdk.models.create_workflow_response import Cre
 from playbookmedia_backend_client_sdk.models.delete_api_key_response import DeleteAPIKeyResponse
 from playbookmedia_backend_client_sdk.models.delete_account_response import DeleteAccountResponse
 from playbookmedia_backend_client_sdk.models.delete_organization_response import DeleteOrganizationResponse
+from playbookmedia_backend_client_sdk.models.delete_scraping_job_response import DeleteScrapingJobResponse
 from playbookmedia_backend_client_sdk.models.delete_tenant_api_key_response import DeleteTenantAPIKeyResponse
 from playbookmedia_backend_client_sdk.models.delete_tenant_response import DeleteTenantResponse
 from playbookmedia_backend_client_sdk.models.delete_webhook_response import DeleteWebhookResponse
 from playbookmedia_backend_client_sdk.models.delete_workflow_response import DeleteWorkflowResponse
 from playbookmedia_backend_client_sdk.models.delete_workspace_response import DeleteWorkspaceResponse
+from playbookmedia_backend_client_sdk.models.download_scraping_results_response import DownloadScrapingResultsResponse
 from playbookmedia_backend_client_sdk.models.get_api_key_response import GetAPIKeyResponse
 from playbookmedia_backend_client_sdk.models.get_account_response import GetAccountResponse
 from playbookmedia_backend_client_sdk.models.get_account_usage_response import GetAccountUsageResponse
 from playbookmedia_backend_client_sdk.models.get_lead_response import GetLeadResponse
 from playbookmedia_backend_client_sdk.models.get_organization_response import GetOrganizationResponse
+from playbookmedia_backend_client_sdk.models.get_scraping_job_response import GetScrapingJobResponse
 from playbookmedia_backend_client_sdk.models.get_tenant_api_key_response import GetTenantAPIKeyResponse
 from playbookmedia_backend_client_sdk.models.get_tenant_response import GetTenantResponse
 from playbookmedia_backend_client_sdk.models.get_webhook_response import GetWebhookResponse
@@ -56,6 +59,7 @@ from playbookmedia_backend_client_sdk.models.list_api_keys_response import ListA
 from playbookmedia_backend_client_sdk.models.list_accounts_response import ListAccountsResponse
 from playbookmedia_backend_client_sdk.models.list_leads_response import ListLeadsResponse
 from playbookmedia_backend_client_sdk.models.list_organizations_response import ListOrganizationsResponse
+from playbookmedia_backend_client_sdk.models.list_scraping_jobs_response import ListScrapingJobsResponse
 from playbookmedia_backend_client_sdk.models.list_tenant_api_keys_response import ListTenantAPIKeysResponse
 from playbookmedia_backend_client_sdk.models.list_tenants_response import ListTenantsResponse
 from playbookmedia_backend_client_sdk.models.list_webhooks_response import ListWebhooksResponse
@@ -3122,6 +3126,367 @@ class LeadScraperServiceApi:
 
 
     @validate_call
+    async def delete_scraping_job(
+        self,
+        job_id: StrictStr,
+        user_id: StrictStr,
+        org_id: StrictStr,
+        tenant_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> DeleteScrapingJobResponse:
+        """Delete a specific job
+
+        This endpoint deletes a specific Google Maps scraping job
+
+        :param job_id: (required)
+        :type job_id: str
+        :param user_id: (required)
+        :type user_id: str
+        :param org_id: (required)
+        :type org_id: str
+        :param tenant_id: (required)
+        :type tenant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_scraping_job_serialize(
+            job_id=job_id,
+            user_id=user_id,
+            org_id=org_id,
+            tenant_id=tenant_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteScrapingJobResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def delete_scraping_job_with_http_info(
+        self,
+        job_id: StrictStr,
+        user_id: StrictStr,
+        org_id: StrictStr,
+        tenant_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[DeleteScrapingJobResponse]:
+        """Delete a specific job
+
+        This endpoint deletes a specific Google Maps scraping job
+
+        :param job_id: (required)
+        :type job_id: str
+        :param user_id: (required)
+        :type user_id: str
+        :param org_id: (required)
+        :type org_id: str
+        :param tenant_id: (required)
+        :type tenant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_scraping_job_serialize(
+            job_id=job_id,
+            user_id=user_id,
+            org_id=org_id,
+            tenant_id=tenant_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteScrapingJobResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def delete_scraping_job_without_preload_content(
+        self,
+        job_id: StrictStr,
+        user_id: StrictStr,
+        org_id: StrictStr,
+        tenant_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Delete a specific job
+
+        This endpoint deletes a specific Google Maps scraping job
+
+        :param job_id: (required)
+        :type job_id: str
+        :param user_id: (required)
+        :type user_id: str
+        :param org_id: (required)
+        :type org_id: str
+        :param tenant_id: (required)
+        :type tenant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._delete_scraping_job_serialize(
+            job_id=job_id,
+            user_id=user_id,
+            org_id=org_id,
+            tenant_id=tenant_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DeleteScrapingJobResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _delete_scraping_job_serialize(
+        self,
+        job_id,
+        user_id,
+        org_id,
+        tenant_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if job_id is not None:
+            _path_params['jobId'] = job_id
+        # process the query parameters
+        if user_id is not None:
+            
+            _query_params.append(('userId', user_id))
+            
+        if org_id is not None:
+            
+            _query_params.append(('orgId', org_id))
+            
+        if tenant_id is not None:
+            
+            _query_params.append(('tenantId', tenant_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='DELETE',
+            resource_path='/lead-scraper-microservice/api/v1/jobs/{jobId}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     async def delete_tenant(
         self,
         organization_id: StrictStr,
@@ -4855,6 +5220,367 @@ class LeadScraperServiceApi:
 
 
     @validate_call
+    async def download_scraping_results(
+        self,
+        job_id: StrictStr,
+        user_id: StrictStr,
+        org_id: StrictStr,
+        tenant_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> DownloadScrapingResultsResponse:
+        """Download job results as CSV
+
+        This endpoint downloads the results of a Google Maps scraping job as CSV
+
+        :param job_id: (required)
+        :type job_id: str
+        :param user_id: (required)
+        :type user_id: str
+        :param org_id: (required)
+        :type org_id: str
+        :param tenant_id: (required)
+        :type tenant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._download_scraping_results_serialize(
+            job_id=job_id,
+            user_id=user_id,
+            org_id=org_id,
+            tenant_id=tenant_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DownloadScrapingResultsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def download_scraping_results_with_http_info(
+        self,
+        job_id: StrictStr,
+        user_id: StrictStr,
+        org_id: StrictStr,
+        tenant_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[DownloadScrapingResultsResponse]:
+        """Download job results as CSV
+
+        This endpoint downloads the results of a Google Maps scraping job as CSV
+
+        :param job_id: (required)
+        :type job_id: str
+        :param user_id: (required)
+        :type user_id: str
+        :param org_id: (required)
+        :type org_id: str
+        :param tenant_id: (required)
+        :type tenant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._download_scraping_results_serialize(
+            job_id=job_id,
+            user_id=user_id,
+            org_id=org_id,
+            tenant_id=tenant_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DownloadScrapingResultsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def download_scraping_results_without_preload_content(
+        self,
+        job_id: StrictStr,
+        user_id: StrictStr,
+        org_id: StrictStr,
+        tenant_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Download job results as CSV
+
+        This endpoint downloads the results of a Google Maps scraping job as CSV
+
+        :param job_id: (required)
+        :type job_id: str
+        :param user_id: (required)
+        :type user_id: str
+        :param org_id: (required)
+        :type org_id: str
+        :param tenant_id: (required)
+        :type tenant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._download_scraping_results_serialize(
+            job_id=job_id,
+            user_id=user_id,
+            org_id=org_id,
+            tenant_id=tenant_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DownloadScrapingResultsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _download_scraping_results_serialize(
+        self,
+        job_id,
+        user_id,
+        org_id,
+        tenant_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if job_id is not None:
+            _path_params['jobId'] = job_id
+        # process the query parameters
+        if user_id is not None:
+            
+            _query_params.append(('userId', user_id))
+            
+        if org_id is not None:
+            
+            _query_params.append(('orgId', org_id))
+            
+        if tenant_id is not None:
+            
+            _query_params.append(('tenantId', tenant_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/lead-scraper-microservice/api/v1/jobs/{jobId}/download',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     async def get_account(
         self,
         id: StrictStr,
@@ -6559,6 +7285,367 @@ class LeadScraperServiceApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/lead-scraper-microservice/api/v1/organization/{id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def get_scraping_job(
+        self,
+        job_id: StrictStr,
+        user_id: StrictStr,
+        org_id: StrictStr,
+        tenant_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GetScrapingJobResponse:
+        """Get a specific job
+
+        This endpoint retrieves a specific Google Maps scraping job
+
+        :param job_id: (required)
+        :type job_id: str
+        :param user_id: (required)
+        :type user_id: str
+        :param org_id: (required)
+        :type org_id: str
+        :param tenant_id: (required)
+        :type tenant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_scraping_job_serialize(
+            job_id=job_id,
+            user_id=user_id,
+            org_id=org_id,
+            tenant_id=tenant_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetScrapingJobResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def get_scraping_job_with_http_info(
+        self,
+        job_id: StrictStr,
+        user_id: StrictStr,
+        org_id: StrictStr,
+        tenant_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[GetScrapingJobResponse]:
+        """Get a specific job
+
+        This endpoint retrieves a specific Google Maps scraping job
+
+        :param job_id: (required)
+        :type job_id: str
+        :param user_id: (required)
+        :type user_id: str
+        :param org_id: (required)
+        :type org_id: str
+        :param tenant_id: (required)
+        :type tenant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_scraping_job_serialize(
+            job_id=job_id,
+            user_id=user_id,
+            org_id=org_id,
+            tenant_id=tenant_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetScrapingJobResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def get_scraping_job_without_preload_content(
+        self,
+        job_id: StrictStr,
+        user_id: StrictStr,
+        org_id: StrictStr,
+        tenant_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get a specific job
+
+        This endpoint retrieves a specific Google Maps scraping job
+
+        :param job_id: (required)
+        :type job_id: str
+        :param user_id: (required)
+        :type user_id: str
+        :param org_id: (required)
+        :type org_id: str
+        :param tenant_id: (required)
+        :type tenant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_scraping_job_serialize(
+            job_id=job_id,
+            user_id=user_id,
+            org_id=org_id,
+            tenant_id=tenant_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GetScrapingJobResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _get_scraping_job_serialize(
+        self,
+        job_id,
+        user_id,
+        org_id,
+        tenant_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if job_id is not None:
+            _path_params['jobId'] = job_id
+        # process the query parameters
+        if user_id is not None:
+            
+            _query_params.append(('userId', user_id))
+            
+        if org_id is not None:
+            
+            _query_params.append(('orgId', org_id))
+            
+        if tenant_id is not None:
+            
+            _query_params.append(('tenantId', tenant_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/lead-scraper-microservice/api/v1/jobs/{jobId}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10191,6 +11278,352 @@ class LeadScraperServiceApi:
         return self.api_client.param_serialize(
             method='GET',
             resource_path='/lead-scraper-microservice/api/v1/organization',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    async def list_scraping_jobs(
+        self,
+        auth_platform_user_id: StrictStr,
+        org_id: StrictStr,
+        tenant_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ListScrapingJobsResponse:
+        """Get all jobs
+
+        This endpoint retrieves all Google Maps scraping jobs
+
+        :param auth_platform_user_id: (required)
+        :type auth_platform_user_id: str
+        :param org_id: (required)
+        :type org_id: str
+        :param tenant_id: (required)
+        :type tenant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_scraping_jobs_serialize(
+            auth_platform_user_id=auth_platform_user_id,
+            org_id=org_id,
+            tenant_id=tenant_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListScrapingJobsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+
+    @validate_call
+    async def list_scraping_jobs_with_http_info(
+        self,
+        auth_platform_user_id: StrictStr,
+        org_id: StrictStr,
+        tenant_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[ListScrapingJobsResponse]:
+        """Get all jobs
+
+        This endpoint retrieves all Google Maps scraping jobs
+
+        :param auth_platform_user_id: (required)
+        :type auth_platform_user_id: str
+        :param org_id: (required)
+        :type org_id: str
+        :param tenant_id: (required)
+        :type tenant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_scraping_jobs_serialize(
+            auth_platform_user_id=auth_platform_user_id,
+            org_id=org_id,
+            tenant_id=tenant_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListScrapingJobsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        await response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+
+
+    @validate_call
+    async def list_scraping_jobs_without_preload_content(
+        self,
+        auth_platform_user_id: StrictStr,
+        org_id: StrictStr,
+        tenant_id: StrictStr,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Get all jobs
+
+        This endpoint retrieves all Google Maps scraping jobs
+
+        :param auth_platform_user_id: (required)
+        :type auth_platform_user_id: str
+        :param org_id: (required)
+        :type org_id: str
+        :param tenant_id: (required)
+        :type tenant_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._list_scraping_jobs_serialize(
+            auth_platform_user_id=auth_platform_user_id,
+            org_id=org_id,
+            tenant_id=tenant_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ListScrapingJobsResponse",
+            '400': "ValidationErrorMessageResponse",
+            '401': "AuthenticationErrorMessageResponse",
+            '402': "PaymentRequiredErrorMessageResponse",
+            '403': "ForbiddenErrorMessageResponse",
+            '404': "NotFoundErrorMessageResponse",
+            '405': "MethodNotAllowedErrorMessageResponse",
+            '409': "ConflictErrorMessageResponse",
+            '410': "GoneErrorMessageResponse",
+            '412': "PreconditionFailedErrorMessageResponse",
+            '422': "UnprocessableEntityErrorMessageResponse",
+            '425': "TooEarlyErrorMessageResponse",
+            '429': "RateLimitErrorMessageResponse",
+            '500': "InternalErrorMessageResponse",
+            '501': "NotImplementedErrorMessageResponse",
+            '502': "BadGatewayErrorMessageResponse",
+            '503': "ServiceUnavailableErrorMessageResponse",
+            '504': "GatewayTimeoutErrorMessageResponse",
+        }
+        response_data = await self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        return response_data.response
+
+
+    def _list_scraping_jobs_serialize(
+        self,
+        auth_platform_user_id,
+        org_id,
+        tenant_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if auth_platform_user_id is not None:
+            
+            _query_params.append(('authPlatformUserId', auth_platform_user_id))
+            
+        if org_id is not None:
+            
+            _query_params.append(('orgId', org_id))
+            
+        if tenant_id is not None:
+            
+            _query_params.append(('tenantId', tenant_id))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        if 'Accept' not in _header_params:
+            _header_params['Accept'] = self.api_client.select_header_accept(
+                [
+                    'application/json', 
+                    ''
+                ]
+            )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/lead-scraper-microservice/api/v1/jobs',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

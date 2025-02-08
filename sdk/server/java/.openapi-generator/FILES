@@ -69,6 +69,7 @@ src/main/java/org/openapitools/model/DayOfWeek.java
 src/main/java/org/openapitools/model/DeleteAPIKeyResponse.java
 src/main/java/org/openapitools/model/DeleteAccountResponse.java
 src/main/java/org/openapitools/model/DeleteOrganizationResponse.java
+src/main/java/org/openapitools/model/DeleteScrapingJobResponse.java
 src/main/java/org/openapitools/model/DeleteTenantAPIKeyResponse.java
 src/main/java/org/openapitools/model/DeleteTenantResponse.java
 src/main/java/org/openapitools/model/DeleteWebhookResponse.java
@@ -81,6 +82,7 @@ src/main/java/org/openapitools/model/DocumentSnapshot.java
 src/main/java/org/openapitools/model/DocumentStatus.java
 src/main/java/org/openapitools/model/DocumentTemplate.java
 src/main/java/org/openapitools/model/DocumentVersion.java
+src/main/java/org/openapitools/model/DownloadScrapingResultsResponse.java
 src/main/java/org/openapitools/model/EmployeeBenefit.java
 src/main/java/org/openapitools/model/ErrorResponse.java
 src/main/java/org/openapitools/model/ExplanationBlock.java
@@ -99,6 +101,7 @@ src/main/java/org/openapitools/model/GetAccountResponse1.java
 src/main/java/org/openapitools/model/GetAccountUsageResponse.java
 src/main/java/org/openapitools/model/GetLeadResponse.java
 src/main/java/org/openapitools/model/GetOrganizationResponse.java
+src/main/java/org/openapitools/model/GetScrapingJobResponse.java
 src/main/java/org/openapitools/model/GetTenantAPIKeyResponse.java
 src/main/java/org/openapitools/model/GetTenantResponse.java
 src/main/java/org/openapitools/model/GetWebhookResponse.java
@@ -123,6 +126,7 @@ src/main/java/org/openapitools/model/ListAccountsResponse.java
 src/main/java/org/openapitools/model/ListAccountsResponse1.java
 src/main/java/org/openapitools/model/ListLeadsResponse.java
 src/main/java/org/openapitools/model/ListOrganizationsResponse.java
+src/main/java/org/openapitools/model/ListScrapingJobsResponse.java
 src/main/java/org/openapitools/model/ListTenantAPIKeysResponse.java
 src/main/java/org/openapitools/model/ListTenantsResponse.java
 src/main/java/org/openapitools/model/ListWebhooksResponse.java

@@ -1,7 +1,9 @@
 // Generated TypeScript API Client
+// Note: All imports are handled by the generator
+
 import type { ZodiosInstance } from "@zodios/core";
 
-// Generated schemas
+// Generated schemas and endpoints
 import { makeApi, Zodios, type ZodiosOptions } from "@zodios/core";
 import { z } from "@hono/zod-openapi";
 
@@ -2703,7 +2705,7 @@ export const schemas = {
 const endpoints = makeApi([
   {
     method: "post",
-    path: "/lead-scraper-microservice/api/v1/account",
+    path: "/lead-scraper-microservice/api/v1/accounts",
     alias: "CreateAccount",
     description: `Creates a new user account in the workspace service`,
     requestFormat: "json",
@@ -9921,11 +9923,11 @@ export class ApiClient {
     this.client = new Zodios(baseUrl, endpoints, options);
   }
 
-  async createLeadScraperMicroserviceApiV1Account(
+  async createLeadScraperMicroserviceApiV1Accounts(
     data: z.infer<typeof CreateAccountRequest>,
   ) {
-    return this.client.post(
-      "/lead-scraper-microservice/api/v1/account",
+    return this.client.post<any, any>(
+      "/lead-scraper-microservice/api/v1/accounts",
       data,
       {},
     );
@@ -9938,22 +9940,25 @@ export class ApiClient {
     organizationId: string | undefined;
     tenantId: string | undefined;
   }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/accounts/list", {
-      params: {},
-      queries: {
-        pageSize: params.pageSize ? Number(params.pageSize) : undefined,
-        pageNumber: params.pageNumber ? Number(params.pageNumber) : undefined,
-        filter: params.filter,
-        organizationId: params.organizationId,
-        tenantId: params.tenantId,
+    return this.client.get<any, any>(
+      "/lead-scraper-microservice/api/v1/accounts/list",
+      {
+        params: {},
+        queries: {
+          pageSize: params.pageSize ? Number(params.pageSize) : undefined,
+          pageNumber: params.pageNumber ? Number(params.pageNumber) : undefined,
+          filter: params.filter,
+          organizationId: params.organizationId,
+          tenantId: params.tenantId,
+        },
       },
-    });
+    );
   }
 
   async updateLeadScraperMicroserviceApiV1AccountsSettings(
-    data: z.infer<typeof schemas.UpdateAccountSettingsRequest>,
+    data: z.infer<typeof UpdateAccountSettingsRequest>,
   ) {
-    return this.client.put(
+    return this.client.put<any, any>(
       "/lead-scraper-microservice/api/v1/accounts/settings",
       data,
       {},
@@ -9961,9 +9966,9 @@ export class ApiClient {
   }
 
   async updateLeadScraperMicroserviceApiV1AccountsUpdate(
-    data: z.infer<typeof schemas.UpdateAccountRequest>,
+    data: z.infer<typeof UpdateAccountRequest>,
   ) {
-    return this.client.put(
+    return this.client.put<any, any>(
       "/lead-scraper-microservice/api/v1/accounts/update",
       data,
       {},
@@ -9975,15 +9980,18 @@ export class ApiClient {
     organizationId: string | undefined;
     tenantId: string | undefined;
   }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/accounts/:id", {
-      params: {
-        id: params.id,
+    return this.client.get<any, any>(
+      "/lead-scraper-microservice/api/v1/accounts/:id",
+      {
+        params: {
+          id: params.id,
+        },
+        queries: {
+          organizationId: params.organizationId,
+          tenantId: params.tenantId,
+        },
       },
-      queries: {
-        organizationId: params.organizationId,
-        tenantId: params.tenantId,
-      },
-    });
+    );
   }
 
   async deleteLeadScraperMicroserviceApiV1AccountsId(params: {
@@ -9991,7 +9999,7 @@ export class ApiClient {
     organizationId: string | undefined;
     tenantId: string | undefined;
   }) {
-    return this.client.delete(
+    return this.client.delete<any, any>(
       "/lead-scraper-microservice/api/v1/accounts/:id",
       undefined,
       {
@@ -10006,7 +10014,7 @@ export class ApiClient {
     );
   }
   async getLeadScraperMicroserviceApiV1AccountsIdUsage(params: { id: string }) {
-    return this.client.get(
+    return this.client.get<any, any>(
       "/lead-scraper-microservice/api/v1/accounts/:id/usage",
       {
         params: {
@@ -10019,7 +10027,7 @@ export class ApiClient {
   async createLeadScraperMicroserviceApiV1ApiKeys(
     data: z.infer<typeof CreateAPIKeyRequest>,
   ) {
-    return this.client.post(
+    return this.client.post<any, any>(
       "/lead-scraper-microservice/api/v1/api-keys",
       data,
       {},
@@ -10027,9 +10035,9 @@ export class ApiClient {
   }
 
   async updateLeadScraperMicroserviceApiV1ApiKeys(
-    data: z.infer<typeof schemas.UpdateAPIKeyRequest>,
+    data: z.infer<typeof UpdateAPIKeyRequest>,
   ) {
-    return this.client.put(
+    return this.client.put<any, any>(
       "/lead-scraper-microservice/api/v1/api-keys",
       data,
       {},
@@ -10046,25 +10054,28 @@ export class ApiClient {
     status: string | undefined;
     search: string | undefined;
   }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/api-keys/list", {
-      params: {},
-      queries: {
-        organizationId: params.organizationId,
-        tenantId: params.tenantId,
-        accountId: params.accountId,
-        workspaceId: params.workspaceId,
-        pageSize: params.pageSize ? Number(params.pageSize) : undefined,
-        pageNumber: params.pageNumber ? Number(params.pageNumber) : undefined,
-        status: params.status,
-        search: params.search,
+    return this.client.get<any, any>(
+      "/lead-scraper-microservice/api/v1/api-keys/list",
+      {
+        params: {},
+        queries: {
+          organizationId: params.organizationId,
+          tenantId: params.tenantId,
+          accountId: params.accountId,
+          workspaceId: params.workspaceId,
+          pageSize: params.pageSize ? Number(params.pageSize) : undefined,
+          pageNumber: params.pageNumber ? Number(params.pageNumber) : undefined,
+          status: params.status,
+          search: params.search,
+        },
       },
-    });
+    );
   }
 
   async createLeadScraperMicroserviceApiV1ApiKeysRotate(
     data: z.infer<typeof RotateAPIKeyRequest>,
   ) {
-    return this.client.post(
+    return this.client.post<any, any>(
       "/lead-scraper-microservice/api/v1/api-keys/rotate",
       data,
       {},
@@ -10078,7 +10089,7 @@ export class ApiClient {
     accountId: string | undefined;
     workspaceId: string | undefined;
   }) {
-    return this.client.get(
+    return this.client.get<any, any>(
       "/lead-scraper-microservice/api/v1/api-keys/:keyId",
       {
         params: {
@@ -10101,7 +10112,7 @@ export class ApiClient {
     tenantId: string | undefined;
     accountId: string | undefined;
   }) {
-    return this.client.delete(
+    return this.client.delete<any, any>(
       "/lead-scraper-microservice/api/v1/api-keys/:keyId",
       undefined,
       {
@@ -10122,7 +10133,7 @@ export class ApiClient {
     orgId: string;
     tenantId: string;
   }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/jobs", {
+    return this.client.get<any, any>("/lead-scraper-microservice/api/v1/jobs", {
       params: {},
       queries: {
         authPlatformUserId: params.authPlatformUserId,
@@ -10135,7 +10146,11 @@ export class ApiClient {
   async createLeadScraperMicroserviceApiV1Jobs(
     data: z.infer<typeof CreateScrapingJobRequest>,
   ) {
-    return this.client.post("/lead-scraper-microservice/api/v1/jobs", data, {});
+    return this.client.post<any, any>(
+      "/lead-scraper-microservice/api/v1/jobs",
+      data,
+      {},
+    );
   }
 
   async getLeadScraperMicroserviceApiV1JobsJobId(params: {
@@ -10144,16 +10159,19 @@ export class ApiClient {
     orgId: string;
     tenantId: string;
   }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/jobs/:jobId", {
-      params: {
-        jobId: params.jobId,
+    return this.client.get<any, any>(
+      "/lead-scraper-microservice/api/v1/jobs/:jobId",
+      {
+        params: {
+          jobId: params.jobId,
+        },
+        queries: {
+          userId: params.userId,
+          orgId: params.orgId,
+          tenantId: params.tenantId,
+        },
       },
-      queries: {
-        userId: params.userId,
-        orgId: params.orgId,
-        tenantId: params.tenantId,
-      },
-    });
+    );
   }
 
   async deleteLeadScraperMicroserviceApiV1JobsJobId(params: {
@@ -10162,7 +10180,7 @@ export class ApiClient {
     orgId: string;
     tenantId: string;
   }) {
-    return this.client.delete(
+    return this.client.delete<any, any>(
       "/lead-scraper-microservice/api/v1/jobs/:jobId",
       undefined,
       {
@@ -10183,7 +10201,7 @@ export class ApiClient {
     orgId: string;
     tenantId: string;
   }) {
-    return this.client.get(
+    return this.client.get<any, any>(
       "/lead-scraper-microservice/api/v1/jobs/:jobId/download",
       {
         params: {
@@ -10206,17 +10224,20 @@ export class ApiClient {
     pageSize: number | undefined;
     pageNumber: number | undefined;
   }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/leads", {
-      params: {},
-      queries: {
-        organizationId: params.organizationId,
-        workspaceId: params.workspaceId,
-        tenantId: params.tenantId,
-        accountId: params.accountId,
-        pageSize: params.pageSize ? Number(params.pageSize) : undefined,
-        pageNumber: params.pageNumber ? Number(params.pageNumber) : undefined,
+    return this.client.get<any, any>(
+      "/lead-scraper-microservice/api/v1/leads",
+      {
+        params: {},
+        queries: {
+          organizationId: params.organizationId,
+          workspaceId: params.workspaceId,
+          tenantId: params.tenantId,
+          accountId: params.accountId,
+          pageSize: params.pageSize ? Number(params.pageSize) : undefined,
+          pageNumber: params.pageNumber ? Number(params.pageNumber) : undefined,
+        },
       },
-    });
+    );
   }
 
   async getLeadScraperMicroserviceApiV1LeadsLeadId(params: {
@@ -10226,36 +10247,42 @@ export class ApiClient {
     tenantId: string | undefined;
     accountId: string | undefined;
   }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/leads/:leadId", {
-      params: {
-        leadId: params.leadId,
+    return this.client.get<any, any>(
+      "/lead-scraper-microservice/api/v1/leads/:leadId",
+      {
+        params: {
+          leadId: params.leadId,
+        },
+        queries: {
+          organizationId: params.organizationId,
+          workspaceId: params.workspaceId,
+          tenantId: params.tenantId,
+          accountId: params.accountId,
+        },
       },
-      queries: {
-        organizationId: params.organizationId,
-        workspaceId: params.workspaceId,
-        tenantId: params.tenantId,
-        accountId: params.accountId,
-      },
-    });
+    );
   }
 
   async getLeadScraperMicroserviceApiV1Organization(params: {
     pageSize: number | undefined;
     pageNumber: number | undefined;
   }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/organization", {
-      params: {},
-      queries: {
-        pageSize: params.pageSize ? Number(params.pageSize) : undefined,
-        pageNumber: params.pageNumber ? Number(params.pageNumber) : undefined,
+    return this.client.get<any, any>(
+      "/lead-scraper-microservice/api/v1/organization",
+      {
+        params: {},
+        queries: {
+          pageSize: params.pageSize ? Number(params.pageSize) : undefined,
+          pageNumber: params.pageNumber ? Number(params.pageNumber) : undefined,
+        },
       },
-    });
+    );
   }
 
   async createLeadScraperMicroserviceApiV1Organization(
     data: z.infer<typeof CreateOrganizationRequest>,
   ) {
-    return this.client.post(
+    return this.client.post<any, any>(
       "/lead-scraper-microservice/api/v1/organization",
       data,
       {},
@@ -10263,9 +10290,9 @@ export class ApiClient {
   }
 
   async updateLeadScraperMicroserviceApiV1Organization(
-    data: z.infer<typeof schemas.UpdateOrganizationRequest>,
+    data: z.infer<typeof UpdateOrganizationRequest>,
   ) {
-    return this.client.put(
+    return this.client.put<any, any>(
       "/lead-scraper-microservice/api/v1/organization",
       data,
       {},
@@ -10277,7 +10304,7 @@ export class ApiClient {
     pageSize: number | undefined;
     pageNumber: number | undefined;
   }) {
-    return this.client.get(
+    return this.client.get<any, any>(
       "/lead-scraper-microservice/api/v1/organization/tenants/:organizationId",
       {
         params: {
@@ -10295,7 +10322,7 @@ export class ApiClient {
     organizationId: string;
     tenantId: string;
   }) {
-    return this.client.delete(
+    return this.client.delete<any, any>(
       "/lead-scraper-microservice/api/v1/organization/tenants/:organizationId/:tenantId",
       undefined,
       {
@@ -10307,7 +10334,7 @@ export class ApiClient {
     );
   }
   async getLeadScraperMicroserviceApiV1OrganizationId(params: { id: string }) {
-    return this.client.get(
+    return this.client.get<any, any>(
       "/lead-scraper-microservice/api/v1/organization/:id",
       {
         params: {
@@ -10320,7 +10347,7 @@ export class ApiClient {
   async deleteLeadScraperMicroserviceApiV1OrganizationId(params: {
     id: string;
   }) {
-    return this.client.delete(
+    return this.client.delete<any, any>(
       "/lead-scraper-microservice/api/v1/organization/:id",
       undefined,
       {
@@ -10332,9 +10359,9 @@ export class ApiClient {
   }
 
   async updateLeadScraperMicroserviceApiV1OrganizationsTenants(
-    data: z.infer<typeof schemas.UpdateTenantRequest>,
+    data: z.infer<typeof UpdateTenantRequest>,
   ) {
-    return this.client.put(
+    return this.client.put<any, any>(
       "/lead-scraper-microservice/api/v1/organizations/tenants",
       data,
       {},
@@ -10344,7 +10371,7 @@ export class ApiClient {
   async createLeadScraperMicroserviceApiV1OrganizationsTenantsApiKeys(
     data: z.infer<typeof CreateTenantAPIKeyRequest>,
   ) {
-    return this.client.post(
+    return this.client.post<any, any>(
       "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys",
       data,
       {},
@@ -10352,9 +10379,9 @@ export class ApiClient {
   }
 
   async updateLeadScraperMicroserviceApiV1OrganizationsTenantsApiKeys(
-    data: z.infer<typeof schemas.UpdateTenantAPIKeyRequest>,
+    data: z.infer<typeof UpdateTenantAPIKeyRequest>,
   ) {
-    return this.client.put(
+    return this.client.put<any, any>(
       "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys",
       data,
       {},
@@ -10368,7 +10395,7 @@ export class ApiClient {
     pageNumber: number | undefined;
     status: string | undefined;
   }) {
-    return this.client.get(
+    return this.client.get<any, any>(
       "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list",
       {
         params: {},
@@ -10386,7 +10413,7 @@ export class ApiClient {
   async createLeadScraperMicroserviceApiV1OrganizationsTenantsApiKeysRotate(
     data: z.infer<typeof RotateTenantAPIKeyRequest>,
   ) {
-    return this.client.post(
+    return this.client.post<any, any>(
       "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate",
       data,
       {},
@@ -10398,7 +10425,7 @@ export class ApiClient {
     organizationId: string | undefined;
     tenantId: string | undefined;
   }) {
-    return this.client.get(
+    return this.client.get<any, any>(
       "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/:keyId",
       {
         params: {
@@ -10417,7 +10444,7 @@ export class ApiClient {
     organizationId: string | undefined;
     tenantId: string | undefined;
   }) {
-    return this.client.delete(
+    return this.client.delete<any, any>(
       "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/:keyId",
       undefined,
       {
@@ -10435,7 +10462,7 @@ export class ApiClient {
     organizationId: string;
     tenantId: string;
   }) {
-    return this.client.get(
+    return this.client.get<any, any>(
       "/lead-scraper-microservice/api/v1/organizations/tenants/:organizationId/:tenantId",
       {
         params: {
@@ -10452,7 +10479,7 @@ export class ApiClient {
       organizationId: string;
     },
   ) {
-    return this.client.post(
+    return this.client.post<any, any>(
       "/lead-scraper-microservice/api/v1/organizations/:organizationId/tenants",
       data,
       {
@@ -10473,25 +10500,28 @@ export class ApiClient {
     status: string | undefined;
     search: string | undefined;
   }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/webhooks", {
-      params: {},
-      queries: {
-        organizationId: params.organizationId,
-        workspaceId: params.workspaceId,
-        tenantId: params.tenantId,
-        accountId: params.accountId,
-        pageSize: params.pageSize ? Number(params.pageSize) : undefined,
-        pageNumber: params.pageNumber ? Number(params.pageNumber) : undefined,
-        status: params.status,
-        search: params.search,
+    return this.client.get<any, any>(
+      "/lead-scraper-microservice/api/v1/webhooks",
+      {
+        params: {},
+        queries: {
+          organizationId: params.organizationId,
+          workspaceId: params.workspaceId,
+          tenantId: params.tenantId,
+          accountId: params.accountId,
+          pageSize: params.pageSize ? Number(params.pageSize) : undefined,
+          pageNumber: params.pageNumber ? Number(params.pageNumber) : undefined,
+          status: params.status,
+          search: params.search,
+        },
       },
-    });
+    );
   }
 
   async createLeadScraperMicroserviceApiV1Webhooks(
     data: z.infer<typeof CreateWebhookRequest>,
   ) {
-    return this.client.post(
+    return this.client.post<any, any>(
       "/lead-scraper-microservice/api/v1/webhooks",
       data,
       {},
@@ -10499,9 +10529,9 @@ export class ApiClient {
   }
 
   async updateLeadScraperMicroserviceApiV1Webhooks(
-    data: z.infer<typeof schemas.UpdateWebhookRequest>,
+    data: z.infer<typeof UpdateWebhookRequest>,
   ) {
-    return this.client.put(
+    return this.client.put<any, any>(
       "/lead-scraper-microservice/api/v1/webhooks",
       data,
       {},
@@ -10515,7 +10545,7 @@ export class ApiClient {
     tenantId: string | undefined;
     accountId: string | undefined;
   }) {
-    return this.client.get(
+    return this.client.get<any, any>(
       "/lead-scraper-microservice/api/v1/webhooks/:webhookId",
       {
         params: {
@@ -10538,7 +10568,7 @@ export class ApiClient {
     tenantId: string | undefined;
     accountId: string | undefined;
   }) {
-    return this.client.delete(
+    return this.client.delete<any, any>(
       "/lead-scraper-microservice/api/v1/webhooks/:webhookId",
       undefined,
       {
@@ -10556,9 +10586,9 @@ export class ApiClient {
   }
 
   async updateLeadScraperMicroserviceApiV1Workspace(
-    data: z.infer<typeof schemas.UpdateWorkspaceRequest>,
+    data: z.infer<typeof UpdateWorkspaceRequest>,
   ) {
-    return this.client.put(
+    return this.client.put<any, any>(
       "/lead-scraper-microservice/api/v1/workspace",
       data,
       {},
@@ -10571,20 +10601,23 @@ export class ApiClient {
     tenantId: string | undefined;
     accountId: string | undefined;
   }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/workspace/:id", {
-      params: {
-        id: params.id,
+    return this.client.get<any, any>(
+      "/lead-scraper-microservice/api/v1/workspace/:id",
+      {
+        params: {
+          id: params.id,
+        },
+        queries: {
+          organizationId: params.organizationId,
+          tenantId: params.tenantId,
+          accountId: params.accountId,
+        },
       },
-      queries: {
-        organizationId: params.organizationId,
-        tenantId: params.tenantId,
-        accountId: params.accountId,
-      },
-    });
+    );
   }
 
   async deleteLeadScraperMicroserviceApiV1WorkspaceId(params: { id: string }) {
-    return this.client.delete(
+    return this.client.delete<any, any>(
       "/lead-scraper-microservice/api/v1/workspace/:id",
       undefined,
       {
@@ -10601,22 +10634,25 @@ export class ApiClient {
     organizationId: string | undefined;
     tenantId: string | undefined;
   }) {
-    return this.client.get("/lead-scraper-microservice/api/v1/workspaces", {
-      params: {},
-      queries: {
-        accountId: params.accountId,
-        pageSize: params.pageSize ? Number(params.pageSize) : undefined,
-        pageNumber: params.pageNumber ? Number(params.pageNumber) : undefined,
-        organizationId: params.organizationId,
-        tenantId: params.tenantId,
+    return this.client.get<any, any>(
+      "/lead-scraper-microservice/api/v1/workspaces",
+      {
+        params: {},
+        queries: {
+          accountId: params.accountId,
+          pageSize: params.pageSize ? Number(params.pageSize) : undefined,
+          pageNumber: params.pageNumber ? Number(params.pageNumber) : undefined,
+          organizationId: params.organizationId,
+          tenantId: params.tenantId,
+        },
       },
-    });
+    );
   }
 
   async createLeadScraperMicroserviceApiV1Workspaces(
     data: z.infer<typeof CreateWorkspaceRequest>,
   ) {
-    return this.client.post(
+    return this.client.post<any, any>(
       "/lead-scraper-microservice/api/v1/workspaces",
       data,
       {},
@@ -10624,9 +10660,9 @@ export class ApiClient {
   }
 
   async updateLeadScraperMicroserviceApiV1WorkspacesWorkflow(
-    data: z.infer<typeof schemas.UpdateWorkflowRequest>,
+    data: z.infer<typeof UpdateWorkflowRequest>,
   ) {
-    return this.client.put(
+    return this.client.put<any, any>(
       "/lead-scraper-microservice/api/v1/workspaces/workflow",
       data,
       {},
@@ -10638,7 +10674,7 @@ export class ApiClient {
     startTime: string | undefined;
     endTime: string | undefined;
   }) {
-    return this.client.get(
+    return this.client.get<any, any>(
       "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/analytics",
       {
         params: {
@@ -10661,7 +10697,7 @@ export class ApiClient {
     tenantId: string | undefined;
     accountId: string | undefined;
   }) {
-    return this.client.get(
+    return this.client.get<any, any>(
       "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows",
       {
         params: {
@@ -10685,7 +10721,7 @@ export class ApiClient {
       workspaceId: string;
     },
   ) {
-    return this.client.post(
+    return this.client.post<any, any>(
       "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows",
       data,
       {
@@ -10700,7 +10736,7 @@ export class ApiClient {
     workspaceId: string;
     id: string;
   }) {
-    return this.client.get(
+    return this.client.get<any, any>(
       "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id",
       {
         params: {
@@ -10718,7 +10754,7 @@ export class ApiClient {
     tenantId: string;
     accountId: string | undefined;
   }) {
-    return this.client.delete(
+    return this.client.delete<any, any>(
       "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id",
       undefined,
       {
@@ -10742,7 +10778,7 @@ export class ApiClient {
       id: string;
     },
   ) {
-    return this.client.post(
+    return this.client.post<any, any>(
       "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id/pause",
       data,
       {
@@ -10761,7 +10797,7 @@ export class ApiClient {
       id: string;
     },
   ) {
-    return this.client.post(
+    return this.client.post<any, any>(
       "/lead-scraper-microservice/api/v1/workspaces/:workspaceId/workflows/:id/trigger",
       data,
       {
@@ -10776,17 +10812,25 @@ export class ApiClient {
   async createWorkspaceServiceV1Accounts(
     data: z.infer<typeof CreateAccountRequest1>,
   ) {
-    return this.client.post("/workspace-service/v1/accounts", data, {});
+    return this.client.post<any, any>(
+      "/workspace-service/v1/accounts",
+      data,
+      {},
+    );
   }
 
   async updateWorkspaceServiceV1Accounts(
-    data: z.infer<typeof schemas.UpdateAccountRequest1>,
+    data: z.infer<typeof UpdateAccountRequest1>,
   ) {
-    return this.client.put("/workspace-service/v1/accounts", data, {});
+    return this.client.put<any, any>(
+      "/workspace-service/v1/accounts",
+      data,
+      {},
+    );
   }
 
   async getWorkspaceServiceV1AccountsId(params: { id: string }) {
-    return this.client.get("/workspace-service/v1/accounts/:id", {
+    return this.client.get<any, any>("/workspace-service/v1/accounts/:id", {
       params: {
         id: params.id,
       },
@@ -10794,17 +10838,21 @@ export class ApiClient {
   }
 
   async deleteWorkspaceServiceV1AccountsId(params: { id: string }) {
-    return this.client.delete("/workspace-service/v1/accounts/:id", undefined, {
-      params: {
-        id: params.id,
+    return this.client.delete<any, any>(
+      "/workspace-service/v1/accounts/:id",
+      undefined,
+      {
+        params: {
+          id: params.id,
+        },
       },
-    });
+    );
   }
 
   async updateWorkspaceServiceV1WorkspaceSharings(
-    data: z.infer<typeof schemas.UpdateWorkspaceSharingRequest>,
+    data: z.infer<typeof UpdateWorkspaceSharingRequest>,
   ) {
-    return this.client.put(
+    return this.client.put<any, any>(
       "/workspace-service/v1/workspace-sharings",
       data,
       {},
@@ -10814,7 +10862,7 @@ export class ApiClient {
   async deleteWorkspaceServiceV1WorkspaceSharingsSharingId(params: {
     sharingId: string;
   }) {
-    return this.client.delete(
+    return this.client.delete<any, any>(
       "/workspace-service/v1/workspace-sharings/:sharingId",
       undefined,
       {
@@ -10828,13 +10876,21 @@ export class ApiClient {
   async createWorkspaceServiceV1Workspaces(
     data: z.infer<typeof CreateWorkspaceRequest1>,
   ) {
-    return this.client.post("/workspace-service/v1/workspaces", data, {});
+    return this.client.post<any, any>(
+      "/workspace-service/v1/workspaces",
+      data,
+      {},
+    );
   }
 
   async updateWorkspaceServiceV1Workspaces(
-    data: z.infer<typeof schemas.UpdateWorkspaceRequest>,
+    data: z.infer<typeof UpdateWorkspaceRequest>,
   ) {
-    return this.client.put("/workspace-service/v1/workspaces", data, {});
+    return this.client.put<any, any>(
+      "/workspace-service/v1/workspaces",
+      data,
+      {},
+    );
   }
 
   async getWorkspaceServiceV1WorkspacesAnalyticsWorkspaceId(params: {
@@ -10842,7 +10898,7 @@ export class ApiClient {
     startTime: string | undefined;
     endTime: string | undefined;
   }) {
-    return this.client.get(
+    return this.client.get<any, any>(
       "/workspace-service/v1/workspaces/analytics/:workspaceId",
       {
         params: {
@@ -10860,7 +10916,7 @@ export class ApiClient {
     workspaceId: string;
     complianceType: string | undefined;
   }) {
-    return this.client.get(
+    return this.client.get<any, any>(
       "/workspace-service/v1/workspaces/compliance-report/:workspaceId",
       {
         params: {
@@ -10879,7 +10935,7 @@ export class ApiClient {
     pageToken: string | undefined;
     filter: string | undefined;
   }) {
-    return this.client.get("/workspace-service/v1/workspaces/list", {
+    return this.client.get<any, any>("/workspace-service/v1/workspaces/list", {
       params: {},
       queries: {
         accountId: params.accountId,
@@ -10895,7 +10951,7 @@ export class ApiClient {
     pageSize: number | undefined;
     pageToken: string | undefined;
   }) {
-    return this.client.get(
+    return this.client.get<any, any>(
       "/workspace-service/v1/workspaces/sharings/:workspaceId",
       {
         params: {
@@ -10912,7 +10968,7 @@ export class ApiClient {
   async getWorkspaceServiceV1WorkspacesStorageStatsWorkspaceId(params: {
     workspaceId: string;
   }) {
-    return this.client.get(
+    return this.client.get<any, any>(
       "/workspace-service/v1/workspaces/storage-stats/:workspaceId",
       {
         params: {
@@ -10923,7 +10979,7 @@ export class ApiClient {
   }
 
   async getWorkspaceServiceV1WorkspacesId(params: { id: string }) {
-    return this.client.get("/workspace-service/v1/workspaces/:id", {
+    return this.client.get<any, any>("/workspace-service/v1/workspaces/:id", {
       params: {
         id: params.id,
       },
@@ -10931,7 +10987,7 @@ export class ApiClient {
   }
 
   async deleteWorkspaceServiceV1WorkspacesId(params: { id: string }) {
-    return this.client.delete(
+    return this.client.delete<any, any>(
       "/workspace-service/v1/workspaces/:id",
       undefined,
       {
@@ -10948,7 +11004,7 @@ export class ApiClient {
       workspaceId: string;
     },
   ) {
-    return this.client.post(
+    return this.client.post<any, any>(
       "/workspace-service/v1/workspaces/:workspaceId/share",
       data,
       {

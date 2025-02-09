@@ -456,7 +456,7 @@ impl<S, C> Api<C> for Client<S, C> where
     {
         let mut client_service = self.client_service.clone();
         let mut uri = format!(
-            "{}/lead-scraper-microservice/api/v1/account",
+            "{}/lead-scraper-microservice/api/v1/accounts",
             self.base_path
         );
 

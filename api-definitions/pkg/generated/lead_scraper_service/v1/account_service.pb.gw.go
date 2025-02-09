@@ -3016,7 +3016,7 @@ func RegisterLeadScraperServiceHandlerServer(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/CreateAccount", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/account"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/CreateAccount", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/accounts"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4390,7 +4390,7 @@ func RegisterLeadScraperServiceHandlerClient(ctx context.Context, mux *runtime.S
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/CreateAccount", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/account"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/lead_scraper_service.v1.LeadScraperService/CreateAccount", runtime.WithHTTPPathPattern("/lead-scraper-microservice/api/v1/accounts"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5476,7 +5476,7 @@ var (
 
 	pattern_LeadScraperService_DownloadScrapingResults_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"lead-scraper-microservice", "api", "v1", "jobs", "job_id", "download"}, ""))
 
-	pattern_LeadScraperService_CreateAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"lead-scraper-microservice", "api", "v1", "account"}, ""))
+	pattern_LeadScraperService_CreateAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"lead-scraper-microservice", "api", "v1", "accounts"}, ""))
 
 	pattern_LeadScraperService_GetAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"lead-scraper-microservice", "api", "v1", "accounts", "id"}, ""))
 

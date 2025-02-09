@@ -100,7 +100,7 @@ mod paths {
 
     lazy_static! {
         pub static ref GLOBAL_REGEX_SET: regex::RegexSet = regex::RegexSet::new(vec![
-            r"^/lead-scraper-microservice/api/v1/account$",
+            r"^/lead-scraper-microservice/api/v1/accounts$",
             r"^/lead-scraper-microservice/api/v1/accounts/list$",
             r"^/lead-scraper-microservice/api/v1/accounts/settings$",
             r"^/lead-scraper-microservice/api/v1/accounts/update$",
@@ -152,7 +152,7 @@ mod paths {
         ])
         .expect("Unable to create global regex set");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNT: usize = 0;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS: usize = 0;
     pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_LIST: usize = 1;
     pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_SETTINGS: usize = 2;
     pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_UPDATE: usize = 3;
@@ -469,8 +469,8 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
         match method {
 
-            // CreateAccount - POST /lead-scraper-microservice/api/v1/account
-            hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNT) => {
+            // CreateAccount - POST /lead-scraper-microservice/api/v1/accounts
+            hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => {
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -19468,7 +19468,7 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                         }
             },
 
-            _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNT) => method_not_allowed(),
+            _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => method_not_allowed(),
             _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_LIST) => method_not_allowed(),
             _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_SETTINGS) => method_not_allowed(),
             _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_UPDATE) => method_not_allowed(),
@@ -19530,8 +19530,8 @@ impl<T> RequestParser<T> for ApiRequestParser {
     fn parse_operation_id(request: &Request<T>) -> Option<&'static str> {
         let path = paths::GLOBAL_REGEX_SET.matches(request.uri().path());
         match *request.method() {
-            // CreateAccount - POST /lead-scraper-microservice/api/v1/account
-            hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNT) => Some("CreateAccount"),
+            // CreateAccount - POST /lead-scraper-microservice/api/v1/accounts
+            hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => Some("CreateAccount"),
             // CreateApiKey - POST /lead-scraper-microservice/api/v1/api-keys
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS) => Some("CreateApiKey"),
             // CreateOrganization - POST /lead-scraper-microservice/api/v1/organization

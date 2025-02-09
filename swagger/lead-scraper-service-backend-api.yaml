@@ -23,7 +23,7 @@ tags:
     description: APIs for workspace usage analytics and reporting
   - name: LeadScraperService
 paths:
-  /lead-scraper-microservice/api/v1/account:
+  /lead-scraper-microservice/api/v1/accounts:
     post:
       summary: Create a new account
       description: Creates a new user account in the workspace service

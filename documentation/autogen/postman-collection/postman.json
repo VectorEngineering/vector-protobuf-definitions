@@ -894,7 +894,7 @@
 	            "name": "lead-scraper-service",
 	            "item": [
 	                        {
-    "name": "/lead-scraper-microservice/api/v1/account",
+    "name": "/lead-scraper-microservice/api/v1/accounts",
                 "description": "Creates a new user account in the workspace service",
                  "item": [
                             {
@@ -925,7 +925,7 @@
                                         }
                                     },
                                     "url": {
-                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/account",
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/accounts",
                                         "host": [
                                             "{{baseUrl}}"
                                         ],
@@ -933,7 +933,7 @@
                                             "lead-scraper-microservice",
                                             "api",
                                             "v1",
-                                            "account"
+                                            "accounts"
                                         ],
                                         "variable": [
                                         ],

@@ -5,7 +5,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createAPIKey**](LeadScraperServiceApi.md#createAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys | Create a new API key |
-| [**createAccount**](LeadScraperServiceApi.md#createAccount) | **POST** /lead-scraper-microservice/api/v1/account | Create a new account |
+| [**createAccount**](LeadScraperServiceApi.md#createAccount) | **POST** /lead-scraper-microservice/api/v1/accounts | Create a new account |
 | [**createOrganization**](LeadScraperServiceApi.md#createOrganization) | **POST** /lead-scraper-microservice/api/v1/organization | Create a new organization |
 | [**createScrapingJob**](LeadScraperServiceApi.md#createScrapingJob) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task |
 | [**createTenant**](LeadScraperServiceApi.md#createTenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant |

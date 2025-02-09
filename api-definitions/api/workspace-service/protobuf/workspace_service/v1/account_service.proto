@@ -23,7 +23,7 @@ option go_package = "github.com/VectorEngineering/vector-protobuf-definitions/ap
  */
 service WorkspaceService {
     // Account Management
-    rpc  (CreateAccountRequest) returns (CreateAccountResponse) {
+    rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {
         option (google.api.http) = {
             post: "/workspace-service/v1/accounts"
             body: "*"

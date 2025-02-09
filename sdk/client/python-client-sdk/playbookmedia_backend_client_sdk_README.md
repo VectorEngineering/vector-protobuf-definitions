@@ -65,7 +65,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*LeadScraperServiceApi* | [**create_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_account) | **POST** /lead-scraper-microservice/api/v1/account | Create a new account
+*LeadScraperServiceApi* | [**create_account**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_account) | **POST** /lead-scraper-microservice/api/v1/accounts | Create a new account
 *LeadScraperServiceApi* | [**create_api_key**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_api_key) | **POST** /lead-scraper-microservice/api/v1/api-keys | Create a new API key
 *LeadScraperServiceApi* | [**create_organization**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_organization) | **POST** /lead-scraper-microservice/api/v1/organization | Create a new organization
 *LeadScraperServiceApi* | [**create_scraping_job**](playbookmedia_backend_client_sdk/docs/LeadScraperServiceApi.md#create_scraping_job) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task

@@ -1,7 +1,10 @@
 // Generated TypeScript API Client
+// Note: All imports are handled by the generator
+{{!-- Remove duplicate imports since they're already included in the generated code --}}
+
 import type { ZodiosInstance } from "@zodios/core";
 
-// Generated schemas
+// Generated schemas and endpoints
 {{{zodSchemas}}}
 
 export class ApiClient {
@@ -19,7 +22,9 @@ export class ApiClient {
         {{this.name}}: {{#if (eq this.schema.type "integer")}}number{{else}}string{{/if}}{{#unless this.required}} | undefined{{/unless}};
       {{/each}}
     }{{/if}}) {
-      return this.client.get("{{replacePathParams @key}}", {
+      return this.client.get<any, any>(
+        "{{replacePathParams @key}}", 
+        {
         {{#if get.parameters}}
           params: {
             {{#each get.parameters}}
@@ -52,7 +57,10 @@ export class ApiClient {
         {{this.name}}: {{#if (eq this.schema.type "integer")}}number{{else}}string{{/if}}{{#unless this.required}} | undefined{{/unless}};
       {{/each}}
     }{{/if}}) {
-      return this.client.post("{{replacePathParams @key}}", {{#if post.requestBody}}data{{else}}undefined{{/if}}, {
+      return this.client.post<any, any>(
+        "{{replacePathParams @key}}", 
+        {{#if post.requestBody}}data{{else}}undefined{{/if}}, 
+        {
         {{#if post.parameters}}
           params: {
             {{#each post.parameters}}
@@ -80,12 +88,15 @@ export class ApiClient {
   {{/if}}
 
   {{#if put}}
-    async update{{capitalize (basename @key)}}({{#if put.requestBody}}data: z.infer<typeof schemas.{{lookup put.requestBody.content.[application/json].schema.$ref "#/components/schemas/"}}>, {{/if}}{{#if put.parameters}}params: { 
+    async update{{capitalize (basename @key)}}({{#if put.requestBody}}data: z.infer<typeof {{lookup put.requestBody.content.[application/json].schema.$ref "#/components/schemas/"}}>, {{/if}}{{#if put.parameters}}params: { 
       {{#each put.parameters}}
         {{this.name}}: {{#if (eq this.schema.type "integer")}}number{{else}}string{{/if}}{{#unless this.required}} | undefined{{/unless}};
       {{/each}}
     }{{/if}}) {
-      return this.client.put("{{replacePathParams @key}}", {{#if put.requestBody}}data{{else}}undefined{{/if}}, {
+      return this.client.put<any, any>(
+        "{{replacePathParams @key}}", 
+        {{#if put.requestBody}}data{{else}}undefined{{/if}}, 
+        {
         {{#if put.parameters}}
           params: {
             {{#each put.parameters}}
@@ -118,7 +129,10 @@ export class ApiClient {
         {{this.name}}: {{#if (eq this.schema.type "integer")}}number{{else}}string{{/if}}{{#unless this.required}} | undefined{{/unless}};
       {{/each}}
     }{{/if}}) {
-      return this.client.delete("{{replacePathParams @key}}", undefined, {
+      return this.client.delete<any, any>(
+        "{{replacePathParams @key}}", 
+        undefined, 
+        {
         {{#if delete.parameters}}
           params: {
             {{#each delete.parameters}}

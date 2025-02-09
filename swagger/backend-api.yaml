@@ -56,7 +56,7 @@ tags:
       url: 'https://internal-docs.solomon-ai.io/workspace-service/storage'
   - name: WorkspaceService
 paths:
-  /lead-scraper-microservice/api/v1/account:
+  /lead-scraper-microservice/api/v1/accounts:
     post:
       summary: Create a new account
       description: Creates a new user account in the workspace service

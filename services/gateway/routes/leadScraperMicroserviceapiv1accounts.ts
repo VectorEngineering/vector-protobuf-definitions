@@ -18,7 +18,7 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Route handler for /lead-scraper-microservice/api/v1/account
+// Route handler for /lead-scraper-microservice/api/v1/accounts
 const router = new Hono<{ Bindings: Env }>();
 
 const postRoute = createRoute({
@@ -61,7 +61,7 @@ router.openapi(postRoute, async (c) => {
   try {
     const data = await c.req.json();
     const response =
-      await client.createLeadScraperMicroserviceApiV1Account(data);
+      await client.createLeadScraperMicroserviceApiV1Accounts(data);
     return c.json({ data: response }, 200);
   } catch (error) {
     if (error instanceof HTTPException) {
@@ -77,4 +77,4 @@ router.openapi(postRoute, async (c) => {
   }
 });
 
-export const leadScraperMicroserviceapiv1accountRouter = router;
+export const leadScraperMicroserviceapiv1accountsRouter = router;

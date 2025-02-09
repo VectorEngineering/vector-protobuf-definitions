@@ -380,6 +380,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -747,6 +752,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -1083,6 +1093,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -1419,6 +1434,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -1769,6 +1789,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             },
             "delete": {
@@ -2117,6 +2142,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -2449,6 +2479,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -3119,6 +3154,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -3512,6 +3552,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -3848,6 +3893,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -4216,6 +4266,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             },
             "delete": {
@@ -4582,6 +4637,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -4931,6 +4991,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             },
             "post": {
@@ -5275,6 +5340,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -5633,6 +5703,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             },
             "delete": {
@@ -5989,6 +6064,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -6347,6 +6427,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -6726,6 +6811,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -7094,6 +7184,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -7435,6 +7530,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             },
             "post": {
@@ -8113,6 +8213,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -8463,6 +8568,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -8804,6 +8914,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -9136,6 +9251,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             },
             "delete": {
@@ -9466,6 +9586,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -9802,6 +9927,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -10472,6 +10602,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -10839,6 +10974,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -11175,6 +11315,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -11525,6 +11670,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             },
             "delete": {
@@ -11873,6 +12023,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -12214,6 +12369,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -12964,6 +13124,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             },
             "post": {
@@ -13298,6 +13463,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             },
             "put": {
@@ -13632,6 +13802,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -14000,6 +14175,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             },
             "delete": {
@@ -14366,6 +14546,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -14702,6 +14887,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -15061,6 +15251,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             },
             "delete": {
@@ -15391,6 +15586,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -15759,6 +15959,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             },
             "post": {
@@ -16103,6 +16308,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -16439,6 +16649,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -16789,6 +17004,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -17174,6 +17394,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             },
             "post": {
@@ -17529,6 +17754,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -17870,6 +18100,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             },
             "delete": {
@@ -18236,6 +18471,11 @@
                 ],
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -18592,6 +18832,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         },
@@ -18948,6 +19193,11 @@
                 },
                 "tags": [
                     "lead-scraper-service"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
                 ]
             }
         }

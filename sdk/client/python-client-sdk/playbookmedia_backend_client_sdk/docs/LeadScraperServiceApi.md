@@ -69,6 +69,7 @@ Creates a new user account in the workspace service
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -83,6 +84,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -114,7 +125,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -332,6 +343,7 @@ This endpoint creates a new Google Maps scraping job
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -346,6 +358,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -377,7 +399,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -597,6 +619,7 @@ Creates a new webhook configuration for event notifications
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -611,6 +634,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -642,7 +675,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -684,6 +717,7 @@ Creates a new workflow for a specific workspace
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -698,6 +732,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -731,7 +775,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -774,6 +818,7 @@ Creates a new workspace for a given account
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -788,6 +833,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -819,7 +874,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -862,6 +917,7 @@ Permanently deletes an account and associated resources
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -875,6 +931,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -910,7 +976,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -952,6 +1018,7 @@ Permanently deletes an API key
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -965,6 +1032,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -1004,7 +1081,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1046,6 +1123,7 @@ Permanently deletes an organization and all associated resources
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -1059,6 +1137,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -1090,7 +1178,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1132,6 +1220,7 @@ This endpoint deletes a specific Google Maps scraping job
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -1145,6 +1234,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -1182,7 +1281,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1224,6 +1323,7 @@ Permanently deletes a tenant and all associated resources
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -1237,6 +1337,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -1270,7 +1380,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1312,6 +1422,7 @@ Permanently deletes a tenant API key
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -1325,6 +1436,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -1360,7 +1481,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1402,6 +1523,7 @@ Deletes a webhook configuration
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -1415,6 +1537,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -1454,7 +1586,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1496,6 +1628,7 @@ Deletes a specific workflow
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -1509,6 +1642,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -1548,7 +1691,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1590,6 +1733,7 @@ Deletes a specific workspace
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -1603,6 +1747,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -1634,7 +1788,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1676,6 +1830,7 @@ This endpoint downloads the results of a Google Maps scraping job as CSV
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -1689,6 +1844,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -1726,7 +1891,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1768,6 +1933,7 @@ Retrieves details of a specific account
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -1781,6 +1947,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -1816,7 +1992,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1858,6 +2034,7 @@ Retrieves usage details for a given account
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -1871,6 +2048,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -1902,7 +2089,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1944,6 +2131,7 @@ Retrieves details of a specific API key
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -1957,6 +2145,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -1996,7 +2194,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -2038,6 +2236,7 @@ Retrieves detailed information about a specific lead
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -2051,6 +2250,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -2090,7 +2299,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -2132,6 +2341,7 @@ Retrieves details of a specific organization
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -2145,6 +2355,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -2176,7 +2396,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -2218,6 +2438,7 @@ This endpoint retrieves a specific Google Maps scraping job
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -2231,6 +2452,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -2268,7 +2499,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -2310,6 +2541,7 @@ Retrieves details of a specific tenant
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -2323,6 +2555,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -2356,7 +2598,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -2398,6 +2640,7 @@ Retrieves details of a specific tenant API key
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -2411,6 +2654,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -2446,7 +2699,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -2488,6 +2741,7 @@ Retrieves details of a specific webhook configuration
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -2501,6 +2755,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -2540,7 +2804,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -2582,6 +2846,7 @@ Retrieves details of a specific workflow
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -2595,6 +2860,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -2628,7 +2903,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -2670,6 +2945,7 @@ Retrieves details of a specific workspace
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -2683,6 +2959,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -2720,7 +3006,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -2762,6 +3048,7 @@ Retrieves analytics data for a specific workspace
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -2775,6 +3062,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -2810,7 +3107,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -2852,6 +3149,7 @@ Retrieves a list of accounts
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -2865,6 +3163,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -2904,7 +3212,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -2946,6 +3254,7 @@ Retrieves a list of API keys with optional filtering
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -2959,6 +3268,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -3004,7 +3323,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -3046,6 +3365,7 @@ Retrieves a paginated list of leads with comprehensive filtering options
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -3059,6 +3379,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -3100,7 +3430,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -3142,6 +3472,7 @@ Retrieves a list of all organizations in a tenant
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -3155,6 +3486,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -3188,7 +3529,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -3230,6 +3571,7 @@ This endpoint retrieves all Google Maps scraping jobs
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -3243,6 +3585,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -3278,7 +3630,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -3320,6 +3672,7 @@ Retrieves all API keys for a specific tenant
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -3333,6 +3686,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -3372,7 +3735,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -3414,6 +3777,7 @@ Retrieves a list of all tenants in the system
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -3427,6 +3791,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -3462,7 +3836,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -3504,6 +3878,7 @@ Lists all webhook configurations with pagination
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -3517,6 +3892,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -3562,7 +3947,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -3604,6 +3989,7 @@ Retrieves a list of workflows for a given workspace
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -3617,6 +4003,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -3660,7 +4056,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -3702,6 +4098,7 @@ Retrieves a list of workspaces for a given account
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -3715,6 +4112,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -3754,7 +4161,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -3796,6 +4203,7 @@ Pauses the execution of a specific workflow
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -3810,6 +4218,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -3845,7 +4263,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -3887,6 +4305,7 @@ Rotates an API key while maintaining its configuration
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -3901,6 +4320,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -3932,7 +4361,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -3974,6 +4403,7 @@ Rotates a tenant API key while maintaining its configuration
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -3988,6 +4418,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -4019,7 +4459,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -4061,6 +4501,7 @@ Triggers the execution of a specific workflow
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -4075,6 +4516,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -4110,7 +4561,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -4152,6 +4603,7 @@ Updates specified fields of an existing account
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -4166,6 +4618,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -4197,7 +4659,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -4239,6 +4701,7 @@ Updates the settings for a given account
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -4253,6 +4716,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -4284,7 +4757,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -4326,6 +4799,7 @@ Updates an existing API key's configuration
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -4340,6 +4814,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -4371,7 +4855,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -4413,6 +4897,7 @@ Updates the configuration of a specific organization
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -4427,6 +4912,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -4458,7 +4953,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -4500,6 +4995,7 @@ Updates the configuration of a specific tenant
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -4514,6 +5010,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -4545,7 +5051,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -4587,6 +5093,7 @@ Updates an existing tenant API key's configuration
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -4601,6 +5108,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -4632,7 +5149,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -4674,6 +5191,7 @@ Updates an existing webhook configuration
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -4688,6 +5206,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -4719,7 +5247,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -4761,6 +5289,7 @@ Updates the details of a specific workflow
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -4775,6 +5304,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -4806,7 +5345,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -4848,6 +5387,7 @@ Updates the details of a specific workspace
 
 ### Example
 
+* Api Key Authentication (ApiKeyAuth):
 
 ```python
 import playbookmedia_backend_client_sdk
@@ -4862,6 +5402,16 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
     host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: ApiKeyAuth
+configuration.api_key['ApiKeyAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['ApiKeyAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
@@ -4893,7 +5443,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 

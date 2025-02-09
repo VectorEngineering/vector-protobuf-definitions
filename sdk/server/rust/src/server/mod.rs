@@ -471,6 +471,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // CreateAccount - POST /lead-scraper-microservice/api/v1/accounts
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -1327,6 +1337,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // CreateScrapingJob - POST /lead-scraper-microservice/api/v1/jobs
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -2207,6 +2227,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // CreateWebhook - POST /lead-scraper-microservice/api/v1/webhooks
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -2485,6 +2515,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // CreateWorkflow - POST /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -2798,6 +2838,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // CreateWorkspace - POST /lead-scraper-microservice/api/v1/workspaces
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -3087,6 +3137,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // DeleteAccount - DELETE /lead-scraper-microservice/api/v1/accounts/{id}
             hyper::Method::DELETE if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -3384,6 +3444,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // DeleteApiKey - DELETE /lead-scraper-microservice/api/v1/api-keys/{keyId}
             hyper::Method::DELETE if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_KEYID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -3717,6 +3787,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // DeleteOrganization - DELETE /lead-scraper-microservice/api/v1/organization/{id}
             hyper::Method::DELETE if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_ID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -3975,6 +4055,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // DeleteScrapingJob - DELETE /lead-scraper-microservice/api/v1/jobs/{jobId}
             hyper::Method::DELETE if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -4311,6 +4401,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // DeleteTenant - DELETE /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId}
             hyper::Method::DELETE if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID_TENANTID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -4584,6 +4684,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // DeleteTenantApiKey - DELETE /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId}
             hyper::Method::DELETE if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_KEYID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -4881,6 +4991,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // DeleteWebhook - DELETE /lead-scraper-microservice/api/v1/webhooks/{webhookId}
             hyper::Method::DELETE if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS_WEBHOOKID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -5214,6 +5334,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // DeleteWorkflow - DELETE /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}
             hyper::Method::DELETE if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -5558,6 +5688,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // DeleteWorkspace - DELETE /lead-scraper-microservice/api/v1/workspace/{id}
             hyper::Method::DELETE if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACE_ID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -5816,6 +5956,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // DownloadScrapingResults - GET /lead-scraper-microservice/api/v1/jobs/{jobId}/download
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID_DOWNLOAD) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -6152,6 +6302,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // GetAccount - GET /lead-scraper-microservice/api/v1/accounts/{id}
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -6449,6 +6609,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // GetAccountUsage - GET /lead-scraper-microservice/api/v1/accounts/{id}/usage
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID_USAGE) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -6707,6 +6877,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // GetApiKey - GET /lead-scraper-microservice/api/v1/api-keys/{keyId}
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_KEYID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -7040,6 +7220,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // GetLead - GET /lead-scraper-microservice/api/v1/leads/{leadId}
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_LEADS_LEADID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -7373,6 +7563,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // GetOrganization - GET /lead-scraper-microservice/api/v1/organization/{id}
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_ID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -7631,6 +7831,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // GetScrapingJob - GET /lead-scraper-microservice/api/v1/jobs/{jobId}
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -7967,6 +8177,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // GetTenant - GET /lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId}
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_ORGANIZATIONID_TENANTID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -8240,6 +8460,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // GetTenantApiKey - GET /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId}
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_KEYID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -8537,6 +8767,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // GetWebhook - GET /lead-scraper-microservice/api/v1/webhooks/{webhookId}
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS_WEBHOOKID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -8870,6 +9110,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // GetWorkflow - GET /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -9143,6 +9393,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // GetWorkspace - GET /lead-scraper-microservice/api/v1/workspace/{id}
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACE_ID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -9458,6 +9718,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // GetWorkspaceAnalytics - GET /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_ANALYTICS) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -9755,6 +10025,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // ListAccounts - GET /lead-scraper-microservice/api/v1/accounts/list
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_LIST) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Query parameters (note that non-required or collection query parameters will ignore garbage values, rather than causing a 400 response)
                 let query_params = form_urlencoded::parse(uri.query().unwrap_or_default().as_bytes()).collect::<Vec<_>>();
                 let param_page_size = query_params.iter().filter(|e| e.0 == "pageSize").map(|e| e.1.clone())
@@ -10082,6 +10362,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // ListApiKeys - GET /lead-scraper-microservice/api/v1/api-keys/list
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_LIST) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Query parameters (note that non-required or collection query parameters will ignore garbage values, rather than causing a 400 response)
                 let query_params = form_urlencoded::parse(uri.query().unwrap_or_default().as_bytes()).collect::<Vec<_>>();
                 let param_organization_id = query_params.iter().filter(|e| e.0 == "organizationId").map(|e| e.1.clone())
@@ -10463,6 +10753,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // ListLeads - GET /lead-scraper-microservice/api/v1/leads
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_LEADS) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Query parameters (note that non-required or collection query parameters will ignore garbage values, rather than causing a 400 response)
                 let query_params = form_urlencoded::parse(uri.query().unwrap_or_default().as_bytes()).collect::<Vec<_>>();
                 let param_organization_id = query_params.iter().filter(|e| e.0 == "organizationId").map(|e| e.1.clone())
@@ -10808,6 +11108,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // ListOrganizations - GET /lead-scraper-microservice/api/v1/organization
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Query parameters (note that non-required or collection query parameters will ignore garbage values, rather than causing a 400 response)
                 let query_params = form_urlencoded::parse(uri.query().unwrap_or_default().as_bytes()).collect::<Vec<_>>();
                 let param_page_size = query_params.iter().filter(|e| e.0 == "pageSize").map(|e| e.1.clone())
@@ -11081,6 +11391,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // ListScrapingJobs - GET /lead-scraper-microservice/api/v1/jobs
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Query parameters (note that non-required or collection query parameters will ignore garbage values, rather than causing a 400 response)
                 let query_params = form_urlencoded::parse(uri.query().unwrap_or_default().as_bytes()).collect::<Vec<_>>();
                 let param_auth_platform_user_id = query_params.iter().filter(|e| e.0 == "authPlatformUserId").map(|e| e.1.clone())
@@ -11393,6 +11713,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // ListTenantApiKeys - GET /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_LIST) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Query parameters (note that non-required or collection query parameters will ignore garbage values, rather than causing a 400 response)
                 let query_params = form_urlencoded::parse(uri.query().unwrap_or_default().as_bytes()).collect::<Vec<_>>();
                 let param_organization_id = query_params.iter().filter(|e| e.0 == "organizationId").map(|e| e.1.clone())
@@ -11720,6 +12050,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // ListTenants - GET /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -12017,6 +12357,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // ListWebhooks - GET /lead-scraper-microservice/api/v1/webhooks
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Query parameters (note that non-required or collection query parameters will ignore garbage values, rather than causing a 400 response)
                 let query_params = form_urlencoded::parse(uri.query().unwrap_or_default().as_bytes()).collect::<Vec<_>>();
                 let param_organization_id = query_params.iter().filter(|e| e.0 == "organizationId").map(|e| e.1.clone())
@@ -12398,6 +12748,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // ListWorkflows - GET /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -12767,6 +13127,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // ListWorkspaces - GET /lead-scraper-microservice/api/v1/workspaces
             hyper::Method::GET if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Query parameters (note that non-required or collection query parameters will ignore garbage values, rather than causing a 400 response)
                 let query_params = form_urlencoded::parse(uri.query().unwrap_or_default().as_bytes()).collect::<Vec<_>>();
                 let param_account_id = query_params.iter().filter(|e| e.0 == "accountId").map(|e| e.1.clone())
@@ -13094,6 +13464,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // PauseWorkflow - POST /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_PAUSE) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -13411,6 +13791,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // RotateApiKey - POST /lead-scraper-microservice/api/v1/api-keys/rotate
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_ROTATE) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -13689,6 +14079,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // RotateTenantApiKey - POST /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_ROTATE) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -13967,6 +14367,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // TriggerWorkflow - POST /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_TRIGGER) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Path parameters
                 let path: &str = uri.path();
                 let path_params =
@@ -14284,6 +14694,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // UpdateAccount - PUT /lead-scraper-microservice/api/v1/accounts/update
             hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_UPDATE) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -14562,6 +14982,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // UpdateAccountSettings - PUT /lead-scraper-microservice/api/v1/accounts/settings
             hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_SETTINGS) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -14840,6 +15270,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // UpdateApiKey - PUT /lead-scraper-microservice/api/v1/api-keys
             hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -15118,6 +15558,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // UpdateOrganization - PUT /lead-scraper-microservice/api/v1/organization
             hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -15396,6 +15846,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // UpdateTenant - PUT /lead-scraper-microservice/api/v1/organizations/tenants
             hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -15674,6 +16134,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // UpdateTenantApiKey - PUT /lead-scraper-microservice/api/v1/organizations/tenants/api-keys
             hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -15952,6 +16422,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // UpdateWebhook - PUT /lead-scraper-microservice/api/v1/webhooks
             hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -16230,6 +16710,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // UpdateWorkflow - PUT /lead-scraper-microservice/api/v1/workspaces/workflow
             hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKFLOW) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.
@@ -16508,6 +16998,16 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
             // UpdateWorkspace - PUT /lead-scraper-microservice/api/v1/workspace
             hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACE) => {
+                {
+                    let authorization = match *(&context as &dyn Has<Option<Authorization>>).get() {
+                        Some(ref authorization) => authorization,
+                        None => return Ok(Response::builder()
+                                                .status(StatusCode::FORBIDDEN)
+                                                .body(Body::from("Unauthenticated"))
+                                                .expect("Unable to create Authentication Forbidden response")),
+                    };
+                }
+
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
                 // any unused fields.

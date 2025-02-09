@@ -252,6 +252,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/accounts/list:
     get:
       summary: List all accounts
@@ -496,6 +498,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/accounts/settings:
     put:
       summary: Update account settings
@@ -719,6 +723,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/accounts/update:
     put:
       summary: Update account details
@@ -942,6 +948,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/accounts/{id}":
     get:
       summary: Get account details
@@ -1175,6 +1183,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     delete:
       summary: Delete account
       description: Permanently deletes an account and associated resources
@@ -1407,6 +1417,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/accounts/{id}/usage":
     get:
       summary: Get account usage
@@ -1628,6 +1640,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/api-keys:
     post:
       summary: Create a new API key
@@ -2073,6 +2087,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/api-keys/list:
     get:
       summary: List API keys
@@ -2334,6 +2350,8 @@ paths:
             type: string
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/api-keys/rotate:
     post:
       summary: Rotate API key
@@ -2557,6 +2575,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/api-keys/{keyId}":
     get:
       summary: Get API key details
@@ -2802,6 +2822,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     delete:
       summary: Delete API key
       description: Permanently deletes an API key
@@ -3046,6 +3068,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/jobs:
     get:
       summary: Get all jobs
@@ -3278,6 +3302,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     post:
       summary: Create a new job scraping task
       description: This endpoint creates a new Google Maps scraping job
@@ -3506,6 +3532,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/jobs/{jobId}":
     get:
       summary: Get a specific job
@@ -3744,6 +3772,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     delete:
       summary: Delete a specific job
       description: This endpoint deletes a specific Google Maps scraping job
@@ -3981,6 +4011,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/jobs/{jobId}/download":
     get:
       summary: Download job results as CSV
@@ -4219,6 +4251,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/leads:
     get:
       summary: List leads
@@ -4472,6 +4506,8 @@ paths:
             format: int32
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/leads/{leadId}":
     get:
       summary: Get lead details
@@ -4717,6 +4753,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/organization:
     get:
       summary: List all organizations
@@ -4944,6 +4982,8 @@ paths:
             format: int32
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     post:
       summary: Create a new organization
       description: Creates a new organization within a tenant
@@ -5394,6 +5434,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/organization/tenants/{organizationId}":
     get:
       summary: List all tenants
@@ -5627,6 +5669,8 @@ paths:
             format: int32
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId}":
     delete:
       summary: Delete a tenant
@@ -5854,6 +5898,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/organization/{id}":
     get:
       summary: Get organization details
@@ -6075,6 +6121,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     delete:
       summary: Delete an organization
       description: Permanently deletes an organization and all associated resources
@@ -6295,6 +6343,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/organizations/tenants:
     put:
       summary: Update tenant details
@@ -6518,6 +6568,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/organizations/tenants/api-keys:
     post:
       summary: Create a new tenant API key
@@ -6963,6 +7015,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list:
     get:
       summary: List tenant API keys
@@ -7207,6 +7261,8 @@ paths:
             type: string
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate:
     post:
       summary: Rotate tenant API key
@@ -7430,6 +7486,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId}":
     get:
       summary: Get tenant API key details
@@ -7663,6 +7721,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     delete:
       summary: Delete tenant API key
       description: Permanently deletes a tenant API key
@@ -7895,6 +7955,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId}":
     get:
       summary: Get tenant details
@@ -8122,6 +8184,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants":
     post:
       summary: Create a new tenant
@@ -8619,6 +8683,8 @@ paths:
             type: string
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     post:
       summary: Create webhook
       description: Creates a new webhook configuration for event notifications
@@ -8841,6 +8907,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     put:
       summary: Update webhook
       description: Updates an existing webhook configuration
@@ -9063,6 +9131,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/webhooks/{webhookId}":
     get:
       summary: Get webhook
@@ -9308,6 +9378,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     delete:
       summary: Delete webhook
       description: Deletes a webhook configuration
@@ -9552,6 +9624,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/workspace:
     put:
       summary: Update workspace details
@@ -9775,6 +9849,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/workspace/{id}":
     get:
       summary: Get workspace details
@@ -10014,6 +10090,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     delete:
       summary: Delete a workspace
       description: Deletes a specific workspace
@@ -10234,6 +10312,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/workspaces:
     get:
       summary: List workspaces
@@ -10479,6 +10559,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     post:
       summary: Create a new workspace
       description: Creates a new workspace for a given account
@@ -10707,6 +10789,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/workspaces/workflow:
     put:
       summary: Update workflow details
@@ -10930,6 +11014,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics":
     get:
       summary: Get workspace analytics
@@ -11163,6 +11249,8 @@ paths:
             format: date-time
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows":
     get:
       summary: List workflows
@@ -11419,6 +11507,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     post:
       summary: Create a new workflow
       description: Creates a new workflow for a specific workspace
@@ -11654,6 +11744,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}":
     get:
       summary: Get workflow details
@@ -11881,6 +11973,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     delete:
       summary: Delete workflow
       description: Deletes a specific workflow
@@ -12125,6 +12219,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause":
     post:
       summary: Pause workflow execution
@@ -12361,6 +12457,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   "/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger":
     post:
       summary: Trigger workflow execution
@@ -12597,6 +12695,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
 externalDocs:
   description: Vector User Service Documentation
   url: https://internal-docs.solomon-ai.io/user-service

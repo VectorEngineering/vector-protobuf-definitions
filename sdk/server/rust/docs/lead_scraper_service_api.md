@@ -61,7 +61,7 @@ Method | HTTP request | Description
 
 
 # **CreateAccount**
-> models::CreateAccountResponse CreateAccount(create_account_request)
+> models::CreateAccountResponse CreateAccount(ctx, create_account_request)
 Create a new account
 
 Creates a new user account in the workspace service
@@ -70,6 +70,7 @@ Creates a new user account in the workspace service
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **create_account_request** | [**CreateAccountRequest**](CreateAccountRequest.md)|  | 
 
 ### Return type
@@ -78,7 +79,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -142,7 +143,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CreateScrapingJob**
-> models::CreateScrapingJobResponse CreateScrapingJob(create_scraping_job_request)
+> models::CreateScrapingJobResponse CreateScrapingJob(ctx, create_scraping_job_request)
 Create a new job scraping task
 
 This endpoint creates a new Google Maps scraping job
@@ -151,6 +152,7 @@ This endpoint creates a new Google Maps scraping job
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **create_scraping_job_request** | [**CreateScrapingJobRequest**](CreateScrapingJobRequest.md)|  | 
 
 ### Return type
@@ -159,7 +161,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -224,7 +226,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CreateWebhook**
-> models::CreateWebhookResponse CreateWebhook(create_webhook_request)
+> models::CreateWebhookResponse CreateWebhook(ctx, create_webhook_request)
 Create webhook
 
 Creates a new webhook configuration for event notifications
@@ -233,6 +235,7 @@ Creates a new webhook configuration for event notifications
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **create_webhook_request** | [**CreateWebhookRequest**](CreateWebhookRequest.md)|  | 
 
 ### Return type
@@ -241,7 +244,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -251,7 +254,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CreateWorkflow**
-> models::CreateWorkflowResponse CreateWorkflow(workspace_id, create_workflow_body)
+> models::CreateWorkflowResponse CreateWorkflow(ctx, workspace_id, create_workflow_body)
 Create a new workflow
 
 Creates a new workflow for a specific workspace
@@ -260,6 +263,7 @@ Creates a new workflow for a specific workspace
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **workspace_id** | **String**|  | 
   **create_workflow_body** | [**CreateWorkflowBody**](CreateWorkflowBody.md)|  | 
 
@@ -269,7 +273,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -279,7 +283,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **CreateWorkspace**
-> models::CreateWorkspaceResponse CreateWorkspace(create_workspace_request)
+> models::CreateWorkspaceResponse CreateWorkspace(ctx, create_workspace_request)
 Create a new workspace
 
 Creates a new workspace for a given account
@@ -288,6 +292,7 @@ Creates a new workspace for a given account
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **create_workspace_request** | [**CreateWorkspaceRequest**](CreateWorkspaceRequest.md)|  | 
 
 ### Return type
@@ -296,7 +301,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -306,7 +311,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteAccount**
-> models::DeleteAccountResponse DeleteAccount(id, optional)
+> models::DeleteAccountResponse DeleteAccount(ctx, id, optional)
 Delete account
 
 Permanently deletes an account and associated resources
@@ -315,6 +320,7 @@ Permanently deletes an account and associated resources
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **id** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
@@ -333,7 +339,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -343,7 +349,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteAPIKey**
-> models::DeleteApiKeyResponse DeleteAPIKey(key_id, optional)
+> models::DeleteApiKeyResponse DeleteAPIKey(ctx, key_id, optional)
 Delete API key
 
 Permanently deletes an API key
@@ -352,6 +358,7 @@ Permanently deletes an API key
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **key_id** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
@@ -372,7 +379,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -382,7 +389,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteOrganization**
-> models::DeleteOrganizationResponse DeleteOrganization(id)
+> models::DeleteOrganizationResponse DeleteOrganization(ctx, id)
 Delete an organization
 
 Permanently deletes an organization and all associated resources
@@ -391,6 +398,7 @@ Permanently deletes an organization and all associated resources
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **id** | **String**|  | 
 
 ### Return type
@@ -399,7 +407,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -409,7 +417,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteScrapingJob**
-> models::DeleteScrapingJobResponse DeleteScrapingJob(job_id, user_id, org_id, tenant_id)
+> models::DeleteScrapingJobResponse DeleteScrapingJob(ctx, job_id, user_id, org_id, tenant_id)
 Delete a specific job
 
 This endpoint deletes a specific Google Maps scraping job
@@ -418,6 +426,7 @@ This endpoint deletes a specific Google Maps scraping job
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **job_id** | **String**|  | 
   **user_id** | **String**|  | 
   **org_id** | **String**|  | 
@@ -429,7 +438,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -439,7 +448,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteTenant**
-> models::DeleteTenantResponse DeleteTenant(organization_id, tenant_id)
+> models::DeleteTenantResponse DeleteTenant(ctx, organization_id, tenant_id)
 Delete a tenant
 
 Permanently deletes a tenant and all associated resources
@@ -448,6 +457,7 @@ Permanently deletes a tenant and all associated resources
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **organization_id** | **String**|  | 
   **tenant_id** | **String**|  | 
 
@@ -457,7 +467,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -467,7 +477,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteTenantAPIKey**
-> models::DeleteTenantApiKeyResponse DeleteTenantAPIKey(key_id, optional)
+> models::DeleteTenantApiKeyResponse DeleteTenantAPIKey(ctx, key_id, optional)
 Delete tenant API key
 
 Permanently deletes a tenant API key
@@ -476,6 +486,7 @@ Permanently deletes a tenant API key
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **key_id** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
@@ -494,7 +505,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -504,7 +515,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteWebhook**
-> models::DeleteWebhookResponse DeleteWebhook(webhook_id, optional)
+> models::DeleteWebhookResponse DeleteWebhook(ctx, webhook_id, optional)
 Delete webhook
 
 Deletes a webhook configuration
@@ -513,6 +524,7 @@ Deletes a webhook configuration
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **webhook_id** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
@@ -533,7 +545,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -543,7 +555,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteWorkflow**
-> models::DeleteWorkflowResponse DeleteWorkflow(workspace_id, id, org_id, tenant_id, optional)
+> models::DeleteWorkflowResponse DeleteWorkflow(ctx, workspace_id, id, org_id, tenant_id, optional)
 Delete workflow
 
 Deletes a specific workflow
@@ -552,6 +564,7 @@ Deletes a specific workflow
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **workspace_id** | **String**|  | 
   **id** | **String**|  | 
   **org_id** | **String**|  | 
@@ -575,7 +588,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -585,7 +598,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteWorkspace**
-> models::DeleteWorkspaceResponse DeleteWorkspace(id)
+> models::DeleteWorkspaceResponse DeleteWorkspace(ctx, id)
 Delete a workspace
 
 Deletes a specific workspace
@@ -594,6 +607,7 @@ Deletes a specific workspace
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **id** | **String**|  | 
 
 ### Return type
@@ -602,7 +616,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -612,7 +626,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DownloadScrapingResults**
-> models::DownloadScrapingResultsResponse DownloadScrapingResults(job_id, user_id, org_id, tenant_id)
+> models::DownloadScrapingResultsResponse DownloadScrapingResults(ctx, job_id, user_id, org_id, tenant_id)
 Download job results as CSV
 
 This endpoint downloads the results of a Google Maps scraping job as CSV
@@ -621,6 +635,7 @@ This endpoint downloads the results of a Google Maps scraping job as CSV
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **job_id** | **String**|  | 
   **user_id** | **String**|  | 
   **org_id** | **String**|  | 
@@ -632,7 +647,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -642,7 +657,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetAccount**
-> models::GetAccountResponse GetAccount(id, optional)
+> models::GetAccountResponse GetAccount(ctx, id, optional)
 Get account details
 
 Retrieves details of a specific account
@@ -651,6 +666,7 @@ Retrieves details of a specific account
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **id** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
@@ -669,7 +685,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -679,7 +695,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetAccountUsage**
-> models::GetAccountUsageResponse GetAccountUsage(id)
+> models::GetAccountUsageResponse GetAccountUsage(ctx, id)
 Get account usage
 
 Retrieves usage details for a given account
@@ -688,6 +704,7 @@ Retrieves usage details for a given account
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **id** | **String**|  | 
 
 ### Return type
@@ -696,7 +713,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -706,7 +723,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetAPIKey**
-> models::GetApiKeyResponse GetAPIKey(key_id, optional)
+> models::GetApiKeyResponse GetAPIKey(ctx, key_id, optional)
 Get API key details
 
 Retrieves details of a specific API key
@@ -715,6 +732,7 @@ Retrieves details of a specific API key
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **key_id** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
@@ -735,7 +753,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -745,7 +763,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetLead**
-> models::GetLeadResponse GetLead(lead_id, optional)
+> models::GetLeadResponse GetLead(ctx, lead_id, optional)
 Get lead details
 
 Retrieves detailed information about a specific lead
@@ -754,6 +772,7 @@ Retrieves detailed information about a specific lead
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **lead_id** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
@@ -774,7 +793,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -784,7 +803,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetOrganization**
-> models::GetOrganizationResponse GetOrganization(id)
+> models::GetOrganizationResponse GetOrganization(ctx, id)
 Get organization details
 
 Retrieves details of a specific organization
@@ -793,6 +812,7 @@ Retrieves details of a specific organization
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **id** | **String**|  | 
 
 ### Return type
@@ -801,7 +821,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -811,7 +831,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetScrapingJob**
-> models::GetScrapingJobResponse GetScrapingJob(job_id, user_id, org_id, tenant_id)
+> models::GetScrapingJobResponse GetScrapingJob(ctx, job_id, user_id, org_id, tenant_id)
 Get a specific job
 
 This endpoint retrieves a specific Google Maps scraping job
@@ -820,6 +840,7 @@ This endpoint retrieves a specific Google Maps scraping job
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **job_id** | **String**|  | 
   **user_id** | **String**|  | 
   **org_id** | **String**|  | 
@@ -831,7 +852,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -841,7 +862,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetTenant**
-> models::GetTenantResponse GetTenant(organization_id, tenant_id)
+> models::GetTenantResponse GetTenant(ctx, organization_id, tenant_id)
 Get tenant details
 
 Retrieves details of a specific tenant
@@ -850,6 +871,7 @@ Retrieves details of a specific tenant
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **organization_id** | **String**|  | 
   **tenant_id** | **String**|  | 
 
@@ -859,7 +881,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -869,7 +891,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetTenantAPIKey**
-> models::GetTenantApiKeyResponse GetTenantAPIKey(key_id, optional)
+> models::GetTenantApiKeyResponse GetTenantAPIKey(ctx, key_id, optional)
 Get tenant API key details
 
 Retrieves details of a specific tenant API key
@@ -878,6 +900,7 @@ Retrieves details of a specific tenant API key
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **key_id** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
@@ -896,7 +919,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -906,7 +929,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetWebhook**
-> models::GetWebhookResponse GetWebhook(webhook_id, optional)
+> models::GetWebhookResponse GetWebhook(ctx, webhook_id, optional)
 Get webhook
 
 Retrieves details of a specific webhook configuration
@@ -915,6 +938,7 @@ Retrieves details of a specific webhook configuration
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **webhook_id** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
@@ -935,7 +959,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -945,7 +969,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetWorkflow**
-> models::GetWorkflowResponse GetWorkflow(workspace_id, id)
+> models::GetWorkflowResponse GetWorkflow(ctx, workspace_id, id)
 Get workflow details
 
 Retrieves details of a specific workflow
@@ -954,6 +978,7 @@ Retrieves details of a specific workflow
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **workspace_id** | **String**|  | 
   **id** | **String**|  | 
 
@@ -963,7 +988,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -973,7 +998,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetWorkspace**
-> models::GetWorkspaceResponse GetWorkspace(id, optional)
+> models::GetWorkspaceResponse GetWorkspace(ctx, id, optional)
 Get workspace details
 
 Retrieves details of a specific workspace
@@ -982,6 +1007,7 @@ Retrieves details of a specific workspace
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **id** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
@@ -1001,7 +1027,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1011,7 +1037,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetWorkspaceAnalytics**
-> models::GetWorkspaceAnalyticsResponse GetWorkspaceAnalytics(workspace_id, optional)
+> models::GetWorkspaceAnalyticsResponse GetWorkspaceAnalytics(ctx, workspace_id, optional)
 Get workspace analytics
 
 Retrieves analytics data for a specific workspace
@@ -1020,6 +1046,7 @@ Retrieves analytics data for a specific workspace
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **workspace_id** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
@@ -1038,7 +1065,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1048,7 +1075,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListAccounts**
-> models::ListAccountsResponse ListAccounts(optional)
+> models::ListAccountsResponse ListAccounts(ctx, optional)
 List all accounts
 
 Retrieves a list of accounts
@@ -1057,6 +1084,7 @@ Retrieves a list of accounts
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1076,7 +1104,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1086,7 +1114,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListAPIKeys**
-> models::ListApiKeysResponse ListAPIKeys(optional)
+> models::ListApiKeysResponse ListAPIKeys(ctx, optional)
 List API keys
 
 Retrieves a list of API keys with optional filtering
@@ -1095,6 +1123,7 @@ Retrieves a list of API keys with optional filtering
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1117,7 +1146,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1127,7 +1156,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListLeads**
-> models::ListLeadsResponse ListLeads(optional)
+> models::ListLeadsResponse ListLeads(ctx, optional)
 List leads
 
 Retrieves a paginated list of leads with comprehensive filtering options
@@ -1136,6 +1165,7 @@ Retrieves a paginated list of leads with comprehensive filtering options
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1156,7 +1186,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1166,7 +1196,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListOrganizations**
-> models::ListOrganizationsResponse ListOrganizations(optional)
+> models::ListOrganizationsResponse ListOrganizations(ctx, optional)
 List all organizations
 
 Retrieves a list of all organizations in a tenant
@@ -1175,6 +1205,7 @@ Retrieves a list of all organizations in a tenant
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1191,7 +1222,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1201,7 +1232,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListScrapingJobs**
-> models::ListScrapingJobsResponse ListScrapingJobs(auth_platform_user_id, org_id, tenant_id)
+> models::ListScrapingJobsResponse ListScrapingJobs(ctx, auth_platform_user_id, org_id, tenant_id)
 Get all jobs
 
 This endpoint retrieves all Google Maps scraping jobs
@@ -1210,6 +1241,7 @@ This endpoint retrieves all Google Maps scraping jobs
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **auth_platform_user_id** | **String**|  | 
   **org_id** | **String**|  | 
   **tenant_id** | **String**|  | 
@@ -1220,7 +1252,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1230,7 +1262,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListTenantAPIKeys**
-> models::ListTenantApiKeysResponse ListTenantAPIKeys(optional)
+> models::ListTenantApiKeysResponse ListTenantAPIKeys(ctx, optional)
 List tenant API keys
 
 Retrieves all API keys for a specific tenant
@@ -1239,6 +1271,7 @@ Retrieves all API keys for a specific tenant
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1258,7 +1291,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1268,7 +1301,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListTenants**
-> models::ListTenantsResponse ListTenants(organization_id, optional)
+> models::ListTenantsResponse ListTenants(ctx, organization_id, optional)
 List all tenants
 
 Retrieves a list of all tenants in the system
@@ -1277,6 +1310,7 @@ Retrieves a list of all tenants in the system
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **organization_id** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
@@ -1295,7 +1329,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1305,7 +1339,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListWebhooks**
-> models::ListWebhooksResponse ListWebhooks(optional)
+> models::ListWebhooksResponse ListWebhooks(ctx, optional)
 List webhooks
 
 Lists all webhook configurations with pagination
@@ -1314,6 +1348,7 @@ Lists all webhook configurations with pagination
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1336,7 +1371,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1346,7 +1381,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListWorkflows**
-> models::ListWorkflowsResponse ListWorkflows(workspace_id, optional)
+> models::ListWorkflowsResponse ListWorkflows(ctx, workspace_id, optional)
 List workflows
 
 Retrieves a list of workflows for a given workspace
@@ -1355,6 +1390,7 @@ Retrieves a list of workflows for a given workspace
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **workspace_id** | **String**|  | 
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
@@ -1377,7 +1413,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1387,7 +1423,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListWorkspaces**
-> models::ListWorkspacesResponse ListWorkspaces(optional)
+> models::ListWorkspacesResponse ListWorkspaces(ctx, optional)
 List workspaces
 
 Retrieves a list of workspaces for a given account
@@ -1396,6 +1432,7 @@ Retrieves a list of workspaces for a given account
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
  **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
 
 ### Optional Parameters
@@ -1415,7 +1452,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1425,7 +1462,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **PauseWorkflow**
-> models::PauseWorkflowResponse PauseWorkflow(workspace_id, id, pause_workflow_body)
+> models::PauseWorkflowResponse PauseWorkflow(ctx, workspace_id, id, pause_workflow_body)
 Pause workflow execution
 
 Pauses the execution of a specific workflow
@@ -1434,6 +1471,7 @@ Pauses the execution of a specific workflow
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **workspace_id** | **String**|  | 
   **id** | **String**|  | 
   **pause_workflow_body** | [**PauseWorkflowBody**](PauseWorkflowBody.md)|  | 
@@ -1444,7 +1482,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1454,7 +1492,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RotateAPIKey**
-> models::RotateApiKeyResponse RotateAPIKey(rotate_api_key_request)
+> models::RotateApiKeyResponse RotateAPIKey(ctx, rotate_api_key_request)
 Rotate API key
 
 Rotates an API key while maintaining its configuration
@@ -1463,6 +1501,7 @@ Rotates an API key while maintaining its configuration
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **rotate_api_key_request** | [**RotateApiKeyRequest**](RotateApiKeyRequest.md)|  | 
 
 ### Return type
@@ -1471,7 +1510,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1481,7 +1520,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **RotateTenantAPIKey**
-> models::RotateTenantApiKeyResponse RotateTenantAPIKey(rotate_tenant_api_key_request)
+> models::RotateTenantApiKeyResponse RotateTenantAPIKey(ctx, rotate_tenant_api_key_request)
 Rotate tenant API key
 
 Rotates a tenant API key while maintaining its configuration
@@ -1490,6 +1529,7 @@ Rotates a tenant API key while maintaining its configuration
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **rotate_tenant_api_key_request** | [**RotateTenantApiKeyRequest**](RotateTenantApiKeyRequest.md)|  | 
 
 ### Return type
@@ -1498,7 +1538,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1508,7 +1548,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **TriggerWorkflow**
-> models::TriggerWorkflowResponse TriggerWorkflow(workspace_id, id, trigger_workflow_body)
+> models::TriggerWorkflowResponse TriggerWorkflow(ctx, workspace_id, id, trigger_workflow_body)
 Trigger workflow execution
 
 Triggers the execution of a specific workflow
@@ -1517,6 +1557,7 @@ Triggers the execution of a specific workflow
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **workspace_id** | **String**|  | 
   **id** | **String**|  | 
   **trigger_workflow_body** | [**TriggerWorkflowBody**](TriggerWorkflowBody.md)|  | 
@@ -1527,7 +1568,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1537,7 +1578,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateAccount**
-> models::UpdateAccountResponse UpdateAccount(update_account_request)
+> models::UpdateAccountResponse UpdateAccount(ctx, update_account_request)
 Update account details
 
 Updates specified fields of an existing account
@@ -1546,6 +1587,7 @@ Updates specified fields of an existing account
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **update_account_request** | [**UpdateAccountRequest**](UpdateAccountRequest.md)|  | 
 
 ### Return type
@@ -1554,7 +1596,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1564,7 +1606,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateAccountSettings**
-> models::UpdateAccountSettingsResponse UpdateAccountSettings(update_account_settings_request)
+> models::UpdateAccountSettingsResponse UpdateAccountSettings(ctx, update_account_settings_request)
 Update account settings
 
 Updates the settings for a given account
@@ -1573,6 +1615,7 @@ Updates the settings for a given account
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **update_account_settings_request** | [**UpdateAccountSettingsRequest**](UpdateAccountSettingsRequest.md)|  | 
 
 ### Return type
@@ -1581,7 +1624,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1591,7 +1634,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateAPIKey**
-> models::UpdateApiKeyResponse UpdateAPIKey(update_api_key_request)
+> models::UpdateApiKeyResponse UpdateAPIKey(ctx, update_api_key_request)
 Update API key
 
 Updates an existing API key's configuration
@@ -1600,6 +1643,7 @@ Updates an existing API key's configuration
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **update_api_key_request** | [**UpdateApiKeyRequest**](UpdateApiKeyRequest.md)|  | 
 
 ### Return type
@@ -1608,7 +1652,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1618,7 +1662,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateOrganization**
-> models::UpdateOrganizationResponse UpdateOrganization(update_organization_request)
+> models::UpdateOrganizationResponse UpdateOrganization(ctx, update_organization_request)
 Update organization details
 
 Updates the configuration of a specific organization
@@ -1627,6 +1671,7 @@ Updates the configuration of a specific organization
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **update_organization_request** | [**UpdateOrganizationRequest**](UpdateOrganizationRequest.md)|  | 
 
 ### Return type
@@ -1635,7 +1680,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1645,7 +1690,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateTenant**
-> models::UpdateTenantResponse UpdateTenant(update_tenant_request)
+> models::UpdateTenantResponse UpdateTenant(ctx, update_tenant_request)
 Update tenant details
 
 Updates the configuration of a specific tenant
@@ -1654,6 +1699,7 @@ Updates the configuration of a specific tenant
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **update_tenant_request** | [**UpdateTenantRequest**](UpdateTenantRequest.md)|  | 
 
 ### Return type
@@ -1662,7 +1708,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1672,7 +1718,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateTenantAPIKey**
-> models::UpdateTenantApiKeyResponse UpdateTenantAPIKey(update_tenant_api_key_request)
+> models::UpdateTenantApiKeyResponse UpdateTenantAPIKey(ctx, update_tenant_api_key_request)
 Update tenant API key
 
 Updates an existing tenant API key's configuration
@@ -1681,6 +1727,7 @@ Updates an existing tenant API key's configuration
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **update_tenant_api_key_request** | [**UpdateTenantApiKeyRequest**](UpdateTenantApiKeyRequest.md)|  | 
 
 ### Return type
@@ -1689,7 +1736,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1699,7 +1746,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateWebhook**
-> models::UpdateWebhookResponse UpdateWebhook(update_webhook_request)
+> models::UpdateWebhookResponse UpdateWebhook(ctx, update_webhook_request)
 Update webhook
 
 Updates an existing webhook configuration
@@ -1708,6 +1755,7 @@ Updates an existing webhook configuration
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **update_webhook_request** | [**UpdateWebhookRequest**](UpdateWebhookRequest.md)|  | 
 
 ### Return type
@@ -1716,7 +1764,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1726,7 +1774,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateWorkflow**
-> models::UpdateWorkflowResponse UpdateWorkflow(update_workflow_request)
+> models::UpdateWorkflowResponse UpdateWorkflow(ctx, update_workflow_request)
 Update workflow details
 
 Updates the details of a specific workflow
@@ -1735,6 +1783,7 @@ Updates the details of a specific workflow
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **update_workflow_request** | [**UpdateWorkflowRequest**](UpdateWorkflowRequest.md)|  | 
 
 ### Return type
@@ -1743,7 +1792,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 
@@ -1753,7 +1802,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **UpdateWorkspace**
-> models::UpdateWorkspaceResponse UpdateWorkspace(update_workspace_request)
+> models::UpdateWorkspaceResponse UpdateWorkspace(ctx, update_workspace_request)
 Update workspace details
 
 Updates the details of a specific workspace
@@ -1762,6 +1811,7 @@ Updates the details of a specific workspace
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context containing the authentication | nil if no authentication
   **update_workspace_request** | [**UpdateWorkspaceRequest**](UpdateWorkspaceRequest.md)|  | 
 
 ### Return type
@@ -1770,7 +1820,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 

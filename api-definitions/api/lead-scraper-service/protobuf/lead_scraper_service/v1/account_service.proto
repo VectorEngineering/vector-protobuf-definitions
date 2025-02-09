@@ -50,6 +50,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"]
             operation_id: "CreateScrapingJob"
             description: "This endpoint creates a new Google Maps scraping job"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "201"
                 value: {
@@ -78,6 +84,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"]
             operation_id: "ListScrapingJobs"
             description: "This endpoint retrieves all Google Maps scraping jobs"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -108,6 +120,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"]
             operation_id: "GetScrapingJob"
             description: "This endpoint retrieves a specific Google Maps scraping job"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -138,6 +156,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"]
             operation_id: "DeleteScrapingJob"
             description: "This endpoint deletes a specific Google Maps scraping job"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -170,6 +194,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"]
             operation_id: "DownloadScrapingResults"
             description: "This endpoint downloads the results of a Google Maps scraping job as CSV"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -200,6 +230,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"]
             operation_id: "CreateAccount"
             description: "Creates a new user account in the workspace service"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "201"
                 value: {
@@ -228,6 +264,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"]
             operation_id: "GetAccount"
             description: "Retrieves details of a specific account"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -257,6 +299,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"]
             operation_id: "UpdateAccount"
             description: "Updates specified fields of an existing account"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -285,6 +333,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"]
             operation_id: "DeleteAccount"
             description: "Permanently deletes an account and associated resources"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -334,6 +388,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "CreateWorkspace",
             description: "Creates a new workspace for a given account",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "201"
                 value: {
@@ -366,6 +426,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "ListWorkspaces",
             description: "Retrieves a list of workspaces for a given account",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -400,6 +466,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "GetAccountUsage",
             description: "Retrieves usage details for a given account",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {    
                 key: "200"
                 value: {
@@ -440,6 +512,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "UpdateAccountSettings",
             description: "Updates the settings for a given account",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -472,6 +550,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "ListAccounts",
             description: "Retrieves a list of accounts",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -507,6 +591,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "CreateWorkflow",
             description: "Creates a new workflow for a specific workspace",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "201"
                 value: {
@@ -540,6 +630,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "DeleteWorkflow",
             description: "Deletes a specific workflow",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -567,6 +663,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "GetWorkflow",
             description: "Retrieves details of a specific workflow",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -602,6 +704,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "UpdateWorkflow",
             description: "Updates the details of a specific workflow",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -640,6 +748,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "ListWorkflows",
             description: "Retrieves a list of workflows for a given workspace",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -682,6 +796,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "TriggerWorkflow",
             description: "Triggers the execution of a specific workflow",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -723,6 +843,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "PauseWorkflow",
             description: "Pauses the execution of a specific workflow",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -764,6 +890,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "GetWorkspaceAnalytics",
             description: "Retrieves analytics data for a specific workspace",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -804,6 +936,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "GetWorkspace",
             description: "Retrieves details of a specific workspace",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -848,6 +986,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "UpdateWorkspace",
             description: "Updates the details of a specific workspace",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -892,6 +1036,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "DeleteWorkspace",
             description: "Deletes a specific workspace",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -961,6 +1111,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "GetTenant",
             description: "Retrieves details of a specific tenant",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -994,6 +1150,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "UpdateTenant",
             description: "Updates the configuration of a specific tenant",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -1025,6 +1187,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "DeleteTenant",
             description: "Permanently deletes a tenant and all associated resources",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -1056,6 +1224,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "ListTenants",
             description: "Retrieves a list of all tenants in the system",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -1121,6 +1295,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "GetOrganization",
             description: "Retrieves details of a specific organization",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -1154,6 +1334,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "UpdateOrganization",
             description: "Updates the configuration of a specific organization",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -1185,6 +1371,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "DeleteOrganization",
             description: "Permanently deletes an organization and all associated resources",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -1216,6 +1408,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"],
             operation_id: "ListOrganizations",
             description: "Retrieves a list of all organizations in a tenant",
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -1289,6 +1487,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"]
             operation_id: "GetTenantAPIKey"
             description: "Retrieves details of a specific tenant API key"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -1325,6 +1529,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"]
             operation_id: "UpdateTenantAPIKey"
             description: "Updates an existing tenant API key's configuration"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -1359,6 +1569,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"]
             operation_id: "DeleteTenantAPIKey"
             description: "Permanently deletes a tenant API key"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -1394,6 +1610,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"]
             operation_id: "ListTenantAPIKeys"
             description: "Retrieves all API keys for a specific tenant"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -1429,6 +1651,12 @@ service LeadScraperService {
             summary: "Rotate tenant API key"
             tags: ["lead-scraper-service"]
             operation_id: "RotateTenantAPIKey"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             description: "Rotates a tenant API key while maintaining its configuration"
             responses: {
                 key: "200"
@@ -1500,6 +1728,12 @@ service LeadScraperService {
             summary: "Get API key details"
             tags: ["lead-scraper-service"]
             operation_id: "GetAPIKey"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             description: "Retrieves details of a specific API key"
             responses: {
                 key: "200"
@@ -1538,6 +1772,12 @@ service LeadScraperService {
             summary: "Update API key"
             tags: ["lead-scraper-service"]
             operation_id: "UpdateAPIKey"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             description: "Updates an existing API key's configuration"
             responses: {
                 key: "200"
@@ -1574,6 +1814,12 @@ service LeadScraperService {
             summary: "Delete API key"
             tags: ["lead-scraper-service"]
             operation_id: "DeleteAPIKey"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             description: "Permanently deletes an API key"
             responses: {
                 key: "200"
@@ -1609,6 +1855,12 @@ service LeadScraperService {
             summary: "List API keys"
             tags: ["lead-scraper-service"]
             operation_id: "ListAPIKeys"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             description: "Retrieves a list of API keys with optional filtering"
             responses: {
                 key: "200"
@@ -1646,6 +1898,12 @@ service LeadScraperService {
             summary: "Rotate API key"
             tags: ["lead-scraper-service"]
             operation_id: "RotateAPIKey"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             description: "Rotates an API key while maintaining its configuration"
             responses: {
                 key: "200"
@@ -1678,6 +1936,12 @@ service LeadScraperService {
             summary: "List leads"
             tags: ["lead-scraper-service"]
             operation_id: "ListLeads"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             description: "Retrieves a paginated list of leads with comprehensive filtering options"
             responses: {
                 key: "200"
@@ -1708,6 +1972,12 @@ service LeadScraperService {
             summary: "Get lead details"
             tags: ["lead-scraper-service"]
             operation_id: "GetLead"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             description: "Retrieves detailed information about a specific lead"
             responses: {
                 key: "200"
@@ -1741,6 +2011,12 @@ service LeadScraperService {
             summary: "Create webhook"
             tags: ["lead-scraper-service"]
             operation_id: "CreateWebhook"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             description: "Creates a new webhook configuration for event notifications"
             responses: {
                 key: "200"
@@ -1772,6 +2048,12 @@ service LeadScraperService {
             summary: "Get webhook"
             tags: ["lead-scraper-service"]
             operation_id: "GetWebhook"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             description: "Retrieves details of a specific webhook configuration"
             responses: {
                 key: "200"
@@ -1804,6 +2086,12 @@ service LeadScraperService {
             summary: "Update webhook"
             tags: ["lead-scraper-service"]
             operation_id: "UpdateWebhook"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             description: "Updates an existing webhook configuration"
             responses: {
                 key: "200"
@@ -1835,6 +2123,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"]
             operation_id: "DeleteWebhook"
             description: "Deletes a webhook configuration"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {
@@ -1866,6 +2160,12 @@ service LeadScraperService {
             tags: ["lead-scraper-service"]
             operation_id: "ListWebhooks"
             description: "Lists all webhook configurations with pagination"
+            security: {
+                security_requirement: {
+                    key: "ApiKeyAuth"
+                    value: {}
+                }
+            }
             responses: {
                 key: "200"
                 value: {

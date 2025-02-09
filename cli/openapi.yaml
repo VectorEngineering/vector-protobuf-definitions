@@ -56,8 +56,8 @@ tags:
       url: 'https://internal-docs.solomon-ai.io/workspace-service/storage'
   - name: WorkspaceService
 paths:
-  /lead-scraper-microservice/api/v1/account:
-    put:
+  /lead-scraper-microservice/api/v1/accounts:
+    post:
       summary: Create a new account
       description: Creates a new user account in the workspace service
       operationId: CreateAccount
@@ -303,6 +303,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/accounts/list:
     get:
       summary: List all accounts
@@ -565,6 +567,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/accounts/settings:
     put:
       summary: Update account settings
@@ -806,6 +810,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/accounts/update:
     put:
       summary: Update account details
@@ -1047,6 +1053,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/accounts/{id}':
     get:
       summary: Get account details
@@ -1298,6 +1306,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     delete:
       summary: Delete account
       description: Permanently deletes an account and associated resources
@@ -1548,6 +1558,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/accounts/{id}/usage':
     get:
       summary: Get account usage
@@ -1787,7 +1799,249 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/api-keys:
+    post:
+      summary: Create a new API key
+      description: Creates a new API key with specified permissions and settings
+      operationId: CreateAPIKey
+      responses:
+        '200':
+          description: API key created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAPIKeyResponse'
+        '400':
+          description: Bad Request - Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorMessageResponse'
+            '':
+              examples:
+                response:
+                  value: >-
+                    {"status":{"code":400,"message":"Bad
+                    Request"},"error_code":2000,"message":"Invalid input
+                    parameters","field_violations":[{"field":"email","message":"Invalid
+                    email
+                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}
+        '401':
+          description: Unauthorized - Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthenticationErrorMessageResponse'
+            '':
+              examples:
+                response:
+                  value: >-
+                    {"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
+                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}
+        '402':
+          description: Payment Required - Payment is necessary to proceed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentRequiredErrorMessageResponse'
+            '':
+              examples:
+                response:
+                  value: >-
+                    {"code":402,"message":"Payment
+                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}
+        '403':
+          description: Forbidden - Access denied
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenErrorMessageResponse'
+            '':
+              examples:
+                response:
+                  value: >-
+                    {"code":403,"message":"Forbidden","reason":"Insufficient
+                    permissions","required_permissions":["admin"]}
+        '404':
+          description: Not Found - Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundErrorMessageResponse'
+            '':
+              examples:
+                response:
+                  value: >-
+                    {"status":{"code":404,"message":"Not
+                    Found"},"error_code":5102,"message":"Resource not
+                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}
+        '405':
+          description: Method Not Allowed - HTTP method not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedErrorMessageResponse'
+            '':
+              examples:
+                response:
+                  value: >-
+                    {"code":405,"message":"Method Not
+                    Allowed","allowed_methods":["GET","POST"]}
+        '409':
+          description: Conflict - Resource already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictErrorMessageResponse'
+            '':
+              examples:
+                response:
+                  value: >-
+                    {"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
+                    already
+                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
+                    already registered"}}
+        '410':
+          description: Gone - Resource is no longer available
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoneErrorMessageResponse'
+            '':
+              examples:
+                response:
+                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
+        '412':
+          description: Precondition Failed - Preconditions in headers did not match
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailedErrorMessageResponse'
+            '':
+              examples:
+                response:
+                  value: >-
+                    {"code":412,"message":"Precondition
+                    Failed","failed_conditions":["If-Match header does not
+                    match"]}
+        '422':
+          description: Unprocessable Entity - Semantic errors in the request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityErrorMessageResponse'
+            '':
+              examples:
+                response:
+                  value: >-
+                    {"code":422,"message":"Unprocessable
+                    Entity","errors":[{"field":"email","error":"Invalid
+                    format"}]}
+        '425':
+          description: Too Early - Request is being replayed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooEarlyErrorMessageResponse'
+            '':
+              examples:
+                response:
+                  value: '{"code":425,"message":"Too Early"}'
+        '429':
+          description: Too Many Requests - Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitErrorMessageResponse'
+            '':
+              examples:
+                response:
+                  value: >-
+                    {"status":{"code":429,"message":"Too Many
+                    Requests"},"error_code":4102,"message":"Rate limit
+                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorMessageResponse'
+            '':
+              examples:
+                response:
+                  value: >-
+                    {"status":{"code":500,"message":"Internal Server
+                    Error"},"error_code":4000,"message":"An unexpected error
+                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}
+        '501':
+          description: Not Implemented - Functionality not supported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotImplementedErrorMessageResponse'
+            '':
+              examples:
+                response:
+                  value: >-
+                    {"code":501,"message":"Not Implemented","feature":"User
+                    Deletion"}
+        '502':
+          description: Bad Gateway - Invalid response from upstream server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayErrorMessageResponse'
+            '':
+              examples:
+                response:
+                  value: >-
+                    {"code":502,"message":"Bad Gateway","upstream_service":"Auth
+                    Service"}
+        '503':
+          description: Service Unavailable - Try again later
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableErrorMessageResponse'
+            '':
+              examples:
+                response:
+                  value: >-
+                    {"status":{"code":503,"message":"Service
+                    Unavailable"},"error_code":4300,"message":"Service is
+                    temporarily
+                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}
+        '504':
+          description: Gateway Timeout - Upstream server timed out
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutErrorMessageResponse'
+            '':
+              examples:
+                response:
+                  value: >-
+                    {"code":504,"message":"Gateway
+                    Timeout","upstream_service":"Database"}
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpc.Status'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAPIKeyRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateAPIKeyRequest'
+        required: true
+      tags:
+        - lead-scraper-service
     put:
       summary: Update API key
       description: Updates an existing API key's configuration
@@ -2028,247 +2282,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
-  /lead-scraper-microservice/api/v1/api-keys/create:
-    put:
-      summary: Create a new API key
-      description: Creates a new API key with specified permissions and settings
-      operationId: CreateAPIKey
-      responses:
-        '200':
-          description: API key created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreateAPIKeyResponse'
-        '400':
-          description: Bad Request - Invalid input parameters
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationErrorMessageResponse'
-            '':
-              examples:
-                response:
-                  value: >-
-                    {"status":{"code":400,"message":"Bad
-                    Request"},"error_code":2000,"message":"Invalid input
-                    parameters","field_violations":[{"field":"email","message":"Invalid
-                    email
-                    format","constraint":"email","value":"invalid-email"}],"schema_validation":{"schema_version":"v1","invalid_patterns":["email_format"]}}
-        '401':
-          description: Unauthorized - Authentication required
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuthenticationErrorMessageResponse'
-            '':
-              examples:
-                response:
-                  value: >-
-                    {"status":{"code":401,"message":"Unauthorized"},"error_code":1001,"message":"Authentication
-                    failed","token_info":{"token_type":"Bearer"},"auth_context":{"required_scopes":["read:user"]},"oauth2_info":{"authorization_url":"https://solomon-ai.io/oauth/authorize"}}
-        '402':
-          description: Payment Required - Payment is necessary to proceed
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaymentRequiredErrorMessageResponse'
-            '':
-              examples:
-                response:
-                  value: >-
-                    {"code":402,"message":"Payment
-                    Required","payment_info":{"amount_due":29.99,"currency":"USD","due_date":"2024-01-01T00:00:00Z"}}
-        '403':
-          description: Forbidden - Access denied
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ForbiddenErrorMessageResponse'
-            '':
-              examples:
-                response:
-                  value: >-
-                    {"code":403,"message":"Forbidden","reason":"Insufficient
-                    permissions","required_permissions":["admin"]}
-        '404':
-          description: Not Found - Resource not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotFoundErrorMessageResponse'
-            '':
-              examples:
-                response:
-                  value: >-
-                    {"status":{"code":404,"message":"Not
-                    Found"},"error_code":5102,"message":"Resource not
-                    found","resource_info":{"type":"user","id":"123","path":"/user-microservice/api/v2/users/123"},"suggestions":{"alternative_paths":["/user-microservice/api/v2/users"]}}
-        '405':
-          description: Method Not Allowed - HTTP method not supported
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MethodNotAllowedErrorMessageResponse'
-            '':
-              examples:
-                response:
-                  value: >-
-                    {"code":405,"message":"Method Not
-                    Allowed","allowed_methods":["GET","POST"]}
-        '409':
-          description: Conflict - Resource already exists
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ConflictErrorMessageResponse'
-            '':
-              examples:
-                response:
-                  value: >-
-                    {"status":{"code":409,"message":"Conflict"},"error_code":2300,"message":"Resource
-                    already
-                    exists","conflict_info":{"resource_type":"user","identifier":"user@example.com","conflict_reason":"Email
-                    already registered"}}
-        '410':
-          description: Gone - Resource is no longer available
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GoneErrorMessageResponse'
-            '':
-              examples:
-                response:
-                  value: '{"code":410,"message":"Gone","resource":"/api/v1/users"}'
-        '412':
-          description: Precondition Failed - Preconditions in headers did not match
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PreconditionFailedErrorMessageResponse'
-            '':
-              examples:
-                response:
-                  value: >-
-                    {"code":412,"message":"Precondition
-                    Failed","failed_conditions":["If-Match header does not
-                    match"]}
-        '422':
-          description: Unprocessable Entity - Semantic errors in the request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UnprocessableEntityErrorMessageResponse'
-            '':
-              examples:
-                response:
-                  value: >-
-                    {"code":422,"message":"Unprocessable
-                    Entity","errors":[{"field":"email","error":"Invalid
-                    format"}]}
-        '425':
-          description: Too Early - Request is being replayed
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TooEarlyErrorMessageResponse'
-            '':
-              examples:
-                response:
-                  value: '{"code":425,"message":"Too Early"}'
-        '429':
-          description: Too Many Requests - Rate limit exceeded
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RateLimitErrorMessageResponse'
-            '':
-              examples:
-                response:
-                  value: >-
-                    {"status":{"code":429,"message":"Too Many
-                    Requests"},"error_code":4102,"message":"Rate limit
-                    exceeded","limit_info":{"current":150,"limit":100,"window_size":"1m"}}
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalErrorMessageResponse'
-            '':
-              examples:
-                response:
-                  value: >-
-                    {"status":{"code":500,"message":"Internal Server
-                    Error"},"error_code":4000,"message":"An unexpected error
-                    occurred","incident_id":"inc-123","service_status":{"name":"user-service","status":"degraded"}}
-        '501':
-          description: Not Implemented - Functionality not supported
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NotImplementedErrorMessageResponse'
-            '':
-              examples:
-                response:
-                  value: >-
-                    {"code":501,"message":"Not Implemented","feature":"User
-                    Deletion"}
-        '502':
-          description: Bad Gateway - Invalid response from upstream server
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BadGatewayErrorMessageResponse'
-            '':
-              examples:
-                response:
-                  value: >-
-                    {"code":502,"message":"Bad Gateway","upstream_service":"Auth
-                    Service"}
-        '503':
-          description: Service Unavailable - Try again later
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServiceUnavailableErrorMessageResponse'
-            '':
-              examples:
-                response:
-                  value: >-
-                    {"status":{"code":503,"message":"Service
-                    Unavailable"},"error_code":4300,"message":"Service is
-                    temporarily
-                    unavailable","availability_info":{"retry_after":60,"affected_services":["user-service"]}}
-        '504':
-          description: Gateway Timeout - Upstream server timed out
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GatewayTimeoutErrorMessageResponse'
-            '':
-              examples:
-                response:
-                  value: >-
-                    {"code":504,"message":"Gateway
-                    Timeout","upstream_service":"Database"}
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpc.Status'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CreateAPIKeyRequest'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/CreateAPIKeyRequest'
-        required: true
-      tags:
-        - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/api-keys/list:
     get:
       summary: List API keys
@@ -2548,6 +2563,8 @@ paths:
             type: string
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/api-keys/rotate:
     post:
       summary: Rotate API key
@@ -2789,6 +2806,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/api-keys/{keyId}':
     get:
       summary: Get API key details
@@ -3052,6 +3071,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     delete:
       summary: Delete API key
       description: Permanently deletes an API key
@@ -3314,6 +3335,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/jobs:
     get:
       summary: Get all jobs
@@ -3564,6 +3587,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     post:
       summary: Create a new job scraping task
       description: This endpoint creates a new Google Maps scraping job
@@ -3810,6 +3835,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/jobs/{jobId}':
     get:
       summary: Get a specific job
@@ -4066,6 +4093,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     delete:
       summary: Delete a specific job
       description: This endpoint deletes a specific Google Maps scraping job
@@ -4321,6 +4350,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/jobs/{jobId}/download':
     get:
       summary: Download job results as CSV
@@ -4577,6 +4608,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/leads:
     get:
       summary: List leads
@@ -4848,6 +4881,8 @@ paths:
             format: int32
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/leads/{leadId}':
     get:
       summary: Get lead details
@@ -5111,6 +5146,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/organization:
     get:
       summary: List all organizations
@@ -5356,6 +5393,8 @@ paths:
             format: int32
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     post:
       summary: Create a new organization
       description: Creates a new organization within a tenant
@@ -5842,6 +5881,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/organization/tenants/{organizationId}':
     get:
       summary: List all tenants
@@ -6093,6 +6134,8 @@ paths:
             format: int32
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId}':
     delete:
       summary: Delete a tenant
@@ -6338,6 +6381,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/organization/{id}':
     get:
       summary: Get organization details
@@ -6577,6 +6622,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     delete:
       summary: Delete an organization
       description: Permanently deletes an organization and all associated resources
@@ -6815,6 +6862,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/organizations/tenants:
     put:
       summary: Update tenant details
@@ -7056,6 +7105,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/organizations/tenants/api-keys:
     post:
       summary: Create a new tenant API key
@@ -7537,6 +7588,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list:
     get:
       summary: List tenant API keys
@@ -7799,8 +7852,10 @@ paths:
             type: string
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/rotate:
-    put:
+    post:
       summary: Rotate tenant API key
       description: Rotates a tenant API key while maintaining its configuration
       operationId: RotateTenantAPIKey
@@ -8040,6 +8095,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId}':
     get:
       summary: Get tenant API key details
@@ -8291,6 +8348,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     delete:
       summary: Delete tenant API key
       description: Permanently deletes a tenant API key
@@ -8541,6 +8600,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/organizations/tenants/{organizationId}/{tenantId}':
     get:
       summary: Get tenant details
@@ -8786,6 +8847,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants':
     post:
       summary: Create a new tenant
@@ -9319,6 +9382,8 @@ paths:
             type: string
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     post:
       summary: Create webhook
       description: Creates a new webhook configuration for event notifications
@@ -9559,6 +9624,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     put:
       summary: Update webhook
       description: Updates an existing webhook configuration
@@ -9799,6 +9866,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/webhooks/{webhookId}':
     get:
       summary: Get webhook
@@ -10062,6 +10131,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     delete:
       summary: Delete webhook
       description: Deletes a webhook configuration
@@ -10324,6 +10395,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/workspace:
     put:
       summary: Update workspace details
@@ -10565,6 +10638,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/workspace/{id}':
     get:
       summary: Get workspace details
@@ -10822,6 +10897,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     delete:
       summary: Delete a workspace
       description: Deletes a specific workspace
@@ -11060,6 +11137,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/workspaces:
     get:
       summary: List workspaces
@@ -11323,6 +11402,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     post:
       summary: Create a new workspace
       description: Creates a new workspace for a given account
@@ -11569,6 +11650,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /lead-scraper-microservice/api/v1/workspaces/workflow:
     put:
       summary: Update workflow details
@@ -11810,6 +11893,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/analytics':
     get:
       summary: Get workspace analytics
@@ -12061,6 +12146,8 @@ paths:
             format: date-time
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows':
     get:
       summary: List workflows
@@ -12335,6 +12422,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     post:
       summary: Create a new workflow
       description: Creates a new workflow for a specific workspace
@@ -12588,6 +12677,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}':
     get:
       summary: Get workflow details
@@ -12833,6 +12924,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
     delete:
       summary: Delete workflow
       description: Deletes a specific workflow
@@ -13095,6 +13188,8 @@ paths:
             format: uint64
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/pause':
     post:
       summary: Pause workflow execution
@@ -13349,6 +13444,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   '/lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}/trigger':
     post:
       summary: Trigger workflow execution
@@ -13603,6 +13700,8 @@ paths:
         required: true
       tags:
         - lead-scraper-service
+      security:
+        - ApiKeyAuth: []
   /workspace-service/v1/accounts:
     post:
       summary: Create a new account

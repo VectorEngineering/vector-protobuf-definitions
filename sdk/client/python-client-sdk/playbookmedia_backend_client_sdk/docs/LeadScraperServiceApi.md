@@ -4,12 +4,15 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**create_account**](LeadScraperServiceApi.md#create_account) | **POST** /lead-scraper-microservice/api/v1/account | Create a new account
 [**create_api_key**](LeadScraperServiceApi.md#create_api_key) | **POST** /lead-scraper-microservice/api/v1/api-keys | Create a new API key
 [**create_organization**](LeadScraperServiceApi.md#create_organization) | **POST** /lead-scraper-microservice/api/v1/organization | Create a new organization
+[**create_scraping_job**](LeadScraperServiceApi.md#create_scraping_job) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task
 [**create_tenant**](LeadScraperServiceApi.md#create_tenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant
 [**create_tenant_api_key**](LeadScraperServiceApi.md#create_tenant_api_key) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key
 [**create_webhook**](LeadScraperServiceApi.md#create_webhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook
 [**create_workflow**](LeadScraperServiceApi.md#create_workflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow
+[**create_workspace**](LeadScraperServiceApi.md#create_workspace) | **POST** /lead-scraper-microservice/api/v1/workspaces | Create a new workspace
 [**delete_account**](LeadScraperServiceApi.md#delete_account) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 [**delete_api_key**](LeadScraperServiceApi.md#delete_api_key) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 [**delete_organization**](LeadScraperServiceApi.md#delete_organization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
@@ -56,6 +59,94 @@ Method | HTTP request | Description
 [**update_workflow**](LeadScraperServiceApi.md#update_workflow) | **PUT** /lead-scraper-microservice/api/v1/workspaces/workflow | Update workflow details
 [**update_workspace**](LeadScraperServiceApi.md#update_workspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details
 
+
+# **create_account**
+> CreateAccountResponse create_account(create_account_request)
+
+Create a new account
+
+Creates a new user account in the workspace service
+
+### Example
+
+
+```python
+import playbookmedia_backend_client_sdk
+from playbookmedia_backend_client_sdk.models.create_account_request import CreateAccountRequest
+from playbookmedia_backend_client_sdk.models.create_account_response import CreateAccountResponse
+from playbookmedia_backend_client_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://lead-scraping-microservice.vector.svc.cluster.local:9896
+# See configuration.py for a list of all supported configuration parameters.
+configuration = playbookmedia_backend_client_sdk.Configuration(
+    host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+)
+
+
+# Enter a context with an instance of the API client
+async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
+    create_account_request = playbookmedia_backend_client_sdk.CreateAccountRequest() # CreateAccountRequest | 
+
+    try:
+        # Create a new account
+        api_response = await api_instance.create_account(create_account_request)
+        print("The response of LeadScraperServiceApi->create_account:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling LeadScraperServiceApi->create_account: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_account_request** | [**CreateAccountRequest**](CreateAccountRequest.md)|  | 
+
+### Return type
+
+[**CreateAccountResponse**](CreateAccountResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/x-www-form-urlencoded
+ - **Accept**: application/json, 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | A successful response. |  -  |
+**201** | Account created successfully |  -  |
+**400** | Bad Request - Invalid input parameters |  -  |
+**401** | Unauthorized - Authentication required |  -  |
+**402** | Payment Required - Payment is necessary to proceed |  -  |
+**403** | Forbidden - Access denied |  -  |
+**404** | Not Found - Resource not found |  -  |
+**405** | Method Not Allowed - HTTP method not supported |  -  |
+**409** | Conflict - Resource already exists |  -  |
+**410** | Gone - Resource is no longer available |  -  |
+**412** | Precondition Failed - Preconditions in headers did not match |  -  |
+**422** | Unprocessable Entity - Semantic errors in the request |  -  |
+**425** | Too Early - Request is being replayed |  -  |
+**429** | Too Many Requests - Rate limit exceeded |  -  |
+**500** | Internal Server Error |  -  |
+**501** | Not Implemented - Functionality not supported |  -  |
+**502** | Bad Gateway - Invalid response from upstream server |  -  |
+**503** | Service Unavailable - Try again later |  -  |
+**504** | Gateway Timeout - Upstream server timed out |  -  |
+**0** | An unexpected error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_api_key**
 > CreateAPIKeyResponse create_api_key(create_api_key_request)
@@ -211,6 +302,94 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | A successful response. |  -  |
 **201** | Organization created successfully |  -  |
+**400** | Bad Request - Invalid input parameters |  -  |
+**401** | Unauthorized - Authentication required |  -  |
+**402** | Payment Required - Payment is necessary to proceed |  -  |
+**403** | Forbidden - Access denied |  -  |
+**404** | Not Found - Resource not found |  -  |
+**405** | Method Not Allowed - HTTP method not supported |  -  |
+**409** | Conflict - Resource already exists |  -  |
+**410** | Gone - Resource is no longer available |  -  |
+**412** | Precondition Failed - Preconditions in headers did not match |  -  |
+**422** | Unprocessable Entity - Semantic errors in the request |  -  |
+**425** | Too Early - Request is being replayed |  -  |
+**429** | Too Many Requests - Rate limit exceeded |  -  |
+**500** | Internal Server Error |  -  |
+**501** | Not Implemented - Functionality not supported |  -  |
+**502** | Bad Gateway - Invalid response from upstream server |  -  |
+**503** | Service Unavailable - Try again later |  -  |
+**504** | Gateway Timeout - Upstream server timed out |  -  |
+**0** | An unexpected error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_scraping_job**
+> CreateScrapingJobResponse create_scraping_job(create_scraping_job_request)
+
+Create a new job scraping task
+
+This endpoint creates a new Google Maps scraping job
+
+### Example
+
+
+```python
+import playbookmedia_backend_client_sdk
+from playbookmedia_backend_client_sdk.models.create_scraping_job_request import CreateScrapingJobRequest
+from playbookmedia_backend_client_sdk.models.create_scraping_job_response import CreateScrapingJobResponse
+from playbookmedia_backend_client_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://lead-scraping-microservice.vector.svc.cluster.local:9896
+# See configuration.py for a list of all supported configuration parameters.
+configuration = playbookmedia_backend_client_sdk.Configuration(
+    host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+)
+
+
+# Enter a context with an instance of the API client
+async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
+    create_scraping_job_request = playbookmedia_backend_client_sdk.CreateScrapingJobRequest() # CreateScrapingJobRequest | 
+
+    try:
+        # Create a new job scraping task
+        api_response = await api_instance.create_scraping_job(create_scraping_job_request)
+        print("The response of LeadScraperServiceApi->create_scraping_job:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling LeadScraperServiceApi->create_scraping_job: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_scraping_job_request** | [**CreateScrapingJobRequest**](CreateScrapingJobRequest.md)|  | 
+
+### Return type
+
+[**CreateScrapingJobResponse**](CreateScrapingJobResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/x-www-form-urlencoded
+ - **Accept**: application/json, 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | A successful response. |  -  |
+**201** | Job created successfully |  -  |
 **400** | Bad Request - Invalid input parameters |  -  |
 **401** | Unauthorized - Authentication required |  -  |
 **402** | Payment Required - Payment is necessary to proceed |  -  |
@@ -565,6 +744,94 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | A successful response. |  -  |
 **201** | Workflow created successfully |  -  |
+**400** | Bad Request - Invalid input parameters |  -  |
+**401** | Unauthorized - Authentication required |  -  |
+**402** | Payment Required - Payment is necessary to proceed |  -  |
+**403** | Forbidden - Access denied |  -  |
+**404** | Not Found - Resource not found |  -  |
+**405** | Method Not Allowed - HTTP method not supported |  -  |
+**409** | Conflict - Resource already exists |  -  |
+**410** | Gone - Resource is no longer available |  -  |
+**412** | Precondition Failed - Preconditions in headers did not match |  -  |
+**422** | Unprocessable Entity - Semantic errors in the request |  -  |
+**425** | Too Early - Request is being replayed |  -  |
+**429** | Too Many Requests - Rate limit exceeded |  -  |
+**500** | Internal Server Error |  -  |
+**501** | Not Implemented - Functionality not supported |  -  |
+**502** | Bad Gateway - Invalid response from upstream server |  -  |
+**503** | Service Unavailable - Try again later |  -  |
+**504** | Gateway Timeout - Upstream server timed out |  -  |
+**0** | An unexpected error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_workspace**
+> CreateWorkspaceResponse create_workspace(create_workspace_request)
+
+Create a new workspace
+
+Creates a new workspace for a given account
+
+### Example
+
+
+```python
+import playbookmedia_backend_client_sdk
+from playbookmedia_backend_client_sdk.models.create_workspace_request import CreateWorkspaceRequest
+from playbookmedia_backend_client_sdk.models.create_workspace_response import CreateWorkspaceResponse
+from playbookmedia_backend_client_sdk.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://lead-scraping-microservice.vector.svc.cluster.local:9896
+# See configuration.py for a list of all supported configuration parameters.
+configuration = playbookmedia_backend_client_sdk.Configuration(
+    host = "http://lead-scraping-microservice.vector.svc.cluster.local:9896"
+)
+
+
+# Enter a context with an instance of the API client
+async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = playbookmedia_backend_client_sdk.LeadScraperServiceApi(api_client)
+    create_workspace_request = playbookmedia_backend_client_sdk.CreateWorkspaceRequest() # CreateWorkspaceRequest | 
+
+    try:
+        # Create a new workspace
+        api_response = await api_instance.create_workspace(create_workspace_request)
+        print("The response of LeadScraperServiceApi->create_workspace:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling LeadScraperServiceApi->create_workspace: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_workspace_request** | [**CreateWorkspaceRequest**](CreateWorkspaceRequest.md)|  | 
+
+### Return type
+
+[**CreateWorkspaceResponse**](CreateWorkspaceResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/x-www-form-urlencoded
+ - **Accept**: application/json, 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | A successful response. |  -  |
+**201** | Workspace created successfully |  -  |
 **400** | Bad Request - Invalid input parameters |  -  |
 **401** | Unauthorized - Authentication required |  -  |
 **402** | Payment Required - Payment is necessary to proceed |  -  |

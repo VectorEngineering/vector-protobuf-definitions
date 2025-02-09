@@ -37,14 +37,10 @@ const postRoute = createRoute({
     },
   },
   responses: {
-    201: {
+    200: {
       content: {
         "application/json": {
-          schema: z.object({}).openapi({
-            type: "object",
-            title: "EmptyResponse",
-            description: "Empty response object",
-          }),
+          schema: schemas.RotateAPIKeyResponse,
         },
       },
       description: "Rotates an API key while maintaining its configuration",
@@ -66,7 +62,7 @@ router.openapi(postRoute, async (c) => {
     const data = await c.req.json();
     const response =
       await client.createLeadScraperMicroserviceApiV1ApiKeysRotate(data);
-    return c.json({ data: response }, 201);
+    return c.json({ data: response }, 200);
   } catch (error) {
     if (error instanceof HTTPException) {
       throw error;

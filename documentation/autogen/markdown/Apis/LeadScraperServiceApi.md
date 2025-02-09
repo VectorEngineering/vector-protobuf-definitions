@@ -5,11 +5,14 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createAPIKey**](LeadScraperServiceApi.md#createAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys | Create a new API key |
+| [**createAccount**](LeadScraperServiceApi.md#createAccount) | **POST** /lead-scraper-microservice/api/v1/account | Create a new account |
 | [**createOrganization**](LeadScraperServiceApi.md#createOrganization) | **POST** /lead-scraper-microservice/api/v1/organization | Create a new organization |
+| [**createScrapingJob**](LeadScraperServiceApi.md#createScrapingJob) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task |
 | [**createTenant**](LeadScraperServiceApi.md#createTenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant |
 | [**createTenantAPIKey**](LeadScraperServiceApi.md#createTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key |
 | [**createWebhook**](LeadScraperServiceApi.md#createWebhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook |
 | [**createWorkflow**](LeadScraperServiceApi.md#createWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow |
+| [**createWorkspace**](LeadScraperServiceApi.md#createWorkspace) | **POST** /lead-scraper-microservice/api/v1/workspaces | Create a new workspace |
 | [**deleteAPIKey**](LeadScraperServiceApi.md#deleteAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key |
 | [**deleteAccount**](LeadScraperServiceApi.md#deleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account |
 | [**deleteOrganization**](LeadScraperServiceApi.md#deleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization |
@@ -84,6 +87,33 @@ No authorization required
 - **Content-Type**: application/json, application/x-www-form-urlencoded
 - **Accept**: application/json, 
 
+<a name="createAccount"></a>
+# **createAccount**
+> CreateAccountResponse createAccount(CreateAccountRequest)
+
+Create a new account
+
+    Creates a new user account in the workspace service
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **CreateAccountRequest** | [**CreateAccountRequest**](../Models/CreateAccountRequest.md)|  | |
+
+### Return type
+
+[**CreateAccountResponse**](../Models/CreateAccountResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
 <a name="createOrganization"></a>
 # **createOrganization**
 > CreateOrganizationResponse createOrganization(CreateOrganizationRequest)
@@ -101,6 +131,33 @@ Create a new organization
 ### Return type
 
 [**CreateOrganizationResponse**](../Models/CreateOrganizationResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
+<a name="createScrapingJob"></a>
+# **createScrapingJob**
+> CreateScrapingJobResponse createScrapingJob(CreateScrapingJobRequest)
+
+Create a new job scraping task
+
+    This endpoint creates a new Google Maps scraping job
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **CreateScrapingJobRequest** | [**CreateScrapingJobRequest**](../Models/CreateScrapingJobRequest.md)|  | |
+
+### Return type
+
+[**CreateScrapingJobResponse**](../Models/CreateScrapingJobResponse.md)
 
 ### Authorization
 
@@ -211,6 +268,33 @@ Create a new workflow
 ### Return type
 
 [**CreateWorkflowResponse**](../Models/CreateWorkflowResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/x-www-form-urlencoded
+- **Accept**: application/json, 
+
+<a name="createWorkspace"></a>
+# **createWorkspace**
+> CreateWorkspaceResponse createWorkspace(CreateWorkspaceRequest)
+
+Create a new workspace
+
+    Creates a new workspace for a given account
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **CreateWorkspaceRequest** | [**CreateWorkspaceRequest**](../Models/CreateWorkspaceRequest.md)|  | |
+
+### Return type
+
+[**CreateWorkspaceResponse**](../Models/CreateWorkspaceResponse.md)
 
 ### Authorization
 

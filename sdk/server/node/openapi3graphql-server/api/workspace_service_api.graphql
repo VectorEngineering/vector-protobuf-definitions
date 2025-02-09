@@ -14,14 +14,14 @@
 
 
 
-input CreateAccountInput {
+input CreateAccount1Input {
     
-    createAccountRequest: CreateAccountRequestInput
+    createAccountRequest1: CreateAccountRequest1Input
 }
 
-input CreateWorkspaceInput {
+input CreateWorkspace1Input {
     
-    createWorkspaceRequest: CreateWorkspaceRequestInput
+    createWorkspaceRequest1: CreateWorkspaceRequest1Input
 }
 
 input DeleteAccount1Input {
@@ -64,13 +64,13 @@ input UpdateWorkspaceSharingInput {
 type Mutation {
   # Create a new account
   # Creates a new user account with initial workspace
-  # @param CreateAccountRequest createAccountRequest 
-  # @return [CreateAccountResponse]
-  CreateAccount(input: CreateAccountInput!): CreateAccountResponse
+  # @param CreateAccountRequest1 createAccountRequest1 
+  # @return [CreateAccountResponse1]
+  CreateAccount1(input: CreateAccount1Input!): CreateAccountResponse1
   # Create workspace
-  # @param CreateWorkspaceRequest createWorkspaceRequest 
-  # @return [CreateWorkspaceResponse]
-  CreateWorkspace(input: CreateWorkspaceInput!): CreateWorkspaceResponse
+  # @param CreateWorkspaceRequest1 createWorkspaceRequest1 
+  # @return [CreateWorkspaceResponse1]
+  CreateWorkspace1(input: CreateWorkspace1Input!): CreateWorkspaceResponse1
   # Delete account
   # @param String! Id_ 
   # @return [DeleteAccountResponse]
@@ -109,8 +109,8 @@ type Query {
   GetAccount1(Id_: String!): GetAccountResponse1
   # Get workspace details
   # @param String! Id_ 
-  # @return [GetWorkspaceResponse1]
-  GetWorkspace1(Id_: String!): GetWorkspaceResponse1
+  # @return [GetWorkspaceResponse]
+  GetWorkspace1(Id_: String!): GetWorkspaceResponse
   # Get workspace analytics
   # @param String! workspaceId 
   # @param String! startTime 

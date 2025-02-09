@@ -39,11 +39,15 @@ docs/ConflictInfo.md
 docs/ContextualSummary.md
 docs/ContractIntelligence.md
 docs/CreateAccountRequest.md
+docs/CreateAccountRequest1.md
 docs/CreateAccountResponse.md
+docs/CreateAccountResponse1.md
 docs/CreateApiKeyRequest.md
 docs/CreateApiKeyResponse.md
 docs/CreateOrganizationRequest.md
 docs/CreateOrganizationResponse.md
+docs/CreateScrapingJobRequest.md
+docs/CreateScrapingJobResponse.md
 docs/CreateTenantApiKeyRequest.md
 docs/CreateTenantApiKeyResponse.md
 docs/CreateTenantBody.md
@@ -53,7 +57,9 @@ docs/CreateWebhookResponse.md
 docs/CreateWorkflowBody.md
 docs/CreateWorkflowResponse.md
 docs/CreateWorkspaceRequest.md
+docs/CreateWorkspaceRequest1.md
 docs/CreateWorkspaceResponse.md
+docs/CreateWorkspaceResponse1.md
 docs/DataProfile.md
 docs/DayOfWeek.md
 docs/DeleteAccountResponse.md
@@ -100,7 +106,6 @@ docs/GetWorkspaceAnalyticsResponse.md
 docs/GetWorkspaceAnalyticsResponse1.md
 docs/GetWorkspaceComplianceReportResponse.md
 docs/GetWorkspaceResponse.md
-docs/GetWorkspaceResponse1.md
 docs/GetWorkspaceStorageStatsResponse.md
 docs/GoneErrorMessageResponse.md
 docs/IncludedField.md
@@ -274,11 +279,15 @@ openapi3graphql-server/model/conflict_info.graphql
 openapi3graphql-server/model/contextual_summary.graphql
 openapi3graphql-server/model/contract_intelligence.graphql
 openapi3graphql-server/model/create_account_request.graphql
+openapi3graphql-server/model/create_account_request1.graphql
 openapi3graphql-server/model/create_account_response.graphql
+openapi3graphql-server/model/create_account_response1.graphql
 openapi3graphql-server/model/create_api_key_request.graphql
 openapi3graphql-server/model/create_api_key_response.graphql
 openapi3graphql-server/model/create_organization_request.graphql
 openapi3graphql-server/model/create_organization_response.graphql
+openapi3graphql-server/model/create_scraping_job_request.graphql
+openapi3graphql-server/model/create_scraping_job_response.graphql
 openapi3graphql-server/model/create_tenant_api_key_request.graphql
 openapi3graphql-server/model/create_tenant_api_key_response.graphql
 openapi3graphql-server/model/create_tenant_body.graphql
@@ -288,7 +297,9 @@ openapi3graphql-server/model/create_webhook_response.graphql
 openapi3graphql-server/model/create_workflow_body.graphql
 openapi3graphql-server/model/create_workflow_response.graphql
 openapi3graphql-server/model/create_workspace_request.graphql
+openapi3graphql-server/model/create_workspace_request1.graphql
 openapi3graphql-server/model/create_workspace_response.graphql
+openapi3graphql-server/model/create_workspace_response1.graphql
 openapi3graphql-server/model/data_profile.graphql
 openapi3graphql-server/model/day_of_week.graphql
 openapi3graphql-server/model/delete_account_response.graphql
@@ -335,7 +346,6 @@ openapi3graphql-server/model/get_workspace_analytics_response.graphql
 openapi3graphql-server/model/get_workspace_analytics_response1.graphql
 openapi3graphql-server/model/get_workspace_compliance_report_response.graphql
 openapi3graphql-server/model/get_workspace_response.graphql
-openapi3graphql-server/model/get_workspace_response1.graphql
 openapi3graphql-server/model/get_workspace_storage_stats_response.graphql
 openapi3graphql-server/model/gone_error_message_response.graphql
 openapi3graphql-server/model/included_field.graphql

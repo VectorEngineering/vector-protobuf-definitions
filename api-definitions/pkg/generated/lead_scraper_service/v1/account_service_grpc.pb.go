@@ -19,13 +19,16 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	LeadScraperService_CreateScrapingJob_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/CreateScrapingJob"
 	LeadScraperService_ListScrapingJobs_FullMethodName        = "/lead_scraper_service.v1.LeadScraperService/ListScrapingJobs"
 	LeadScraperService_GetScrapingJob_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/GetScrapingJob"
 	LeadScraperService_DeleteScrapingJob_FullMethodName       = "/lead_scraper_service.v1.LeadScraperService/DeleteScrapingJob"
 	LeadScraperService_DownloadScrapingResults_FullMethodName = "/lead_scraper_service.v1.LeadScraperService/DownloadScrapingResults"
+	LeadScraperService_CreateAccount_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/CreateAccount"
 	LeadScraperService_GetAccount_FullMethodName              = "/lead_scraper_service.v1.LeadScraperService/GetAccount"
 	LeadScraperService_UpdateAccount_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/UpdateAccount"
 	LeadScraperService_DeleteAccount_FullMethodName           = "/lead_scraper_service.v1.LeadScraperService/DeleteAccount"
+	LeadScraperService_CreateWorkspace_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/CreateWorkspace"
 	LeadScraperService_ListWorkspaces_FullMethodName          = "/lead_scraper_service.v1.LeadScraperService/ListWorkspaces"
 	LeadScraperService_GetAccountUsage_FullMethodName         = "/lead_scraper_service.v1.LeadScraperService/GetAccountUsage"
 	LeadScraperService_UpdateAccountSettings_FullMethodName   = "/lead_scraper_service.v1.LeadScraperService/UpdateAccountSettings"
@@ -98,6 +101,17 @@ const (
 //
 // ```
 type LeadScraperServiceClient interface {
+	// Create a new Google Maps scraping job
+	//
+	// This endpoint initiates a new scraping task with the specified parameters.
+	// The job will be queued and processed asynchronously. The response includes
+	// a job ID that can be used to track the job's progress.
+	//
+	// Common use cases:
+	// - Scrape business listings for market research
+	// - Collect location data for geographic analysis
+	// - Extract contact information for lead generation
+	CreateScrapingJob(ctx context.Context, in *CreateScrapingJobRequest, opts ...grpc.CallOption) (*CreateScrapingJobResponse, error)
 	// Get all scraping jobs
 	//
 	// Retrieves a list of all scraping jobs for the authenticated user within their
@@ -138,6 +152,15 @@ type LeadScraperServiceClient interface {
 	// - Operating hours
 	// - Additional metadata based on job configuration
 	DownloadScrapingResults(ctx context.Context, in *DownloadScrapingResultsRequest, opts ...grpc.CallOption) (*DownloadScrapingResultsResponse, error)
+	// Create a new account
+	//
+	// This endpoint creates a new user account in the workspace service.
+	// It sets up the necessary infrastructure for the user to start managing
+	// scraping jobs and other workspace resources.
+	//
+	// Required permissions:
+	// - create:account
+	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error)
 	// Get account details
 	//
 	// Retrieves detailed information about a specific account, including
@@ -162,6 +185,34 @@ type LeadScraperServiceClient interface {
 	// Required permissions:
 	// - delete:account
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error)
+	// CreateWorkspace establishes a new organizational workspace for managing scraping jobs
+	//
+	// This endpoint creates a dedicated workspace with configurable:
+	// - Access controls and permissions
+	// - Resource quotas
+	// - Team member associations
+	// - Job execution environments
+	//
+	// Required parameters:
+	// - account_id: Parent account ID
+	// - name: Human-readable workspace name
+	// - region: Deployment region for workspace resources
+	//
+	// Example:
+	// ```curl
+	// POST /lead-scraper-microservice/api/v1/workspaces
+	//
+	//	{
+	//	  "name": "European Market Research",
+	//	  "region": "eu-west-1",
+	//	  "default_job_parameters": {
+	//	    "lang": "en",
+	//	    "country_code": "GR"
+	//	  }
+	//	}
+	//
+	// ```
+	CreateWorkspace(ctx context.Context, in *CreateWorkspaceRequest, opts ...grpc.CallOption) (*CreateWorkspaceResponse, error)
 	// ListWorkspaces retrieves all workspaces associated with an account
 	//
 	// Features:
@@ -807,6 +858,16 @@ func NewLeadScraperServiceClient(cc grpc.ClientConnInterface) LeadScraperService
 	return &leadScraperServiceClient{cc}
 }
 
+func (c *leadScraperServiceClient) CreateScrapingJob(ctx context.Context, in *CreateScrapingJobRequest, opts ...grpc.CallOption) (*CreateScrapingJobResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateScrapingJobResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_CreateScrapingJob_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *leadScraperServiceClient) ListScrapingJobs(ctx context.Context, in *ListScrapingJobsRequest, opts ...grpc.CallOption) (*ListScrapingJobsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListScrapingJobsResponse)
@@ -847,6 +908,16 @@ func (c *leadScraperServiceClient) DownloadScrapingResults(ctx context.Context, 
 	return out, nil
 }
 
+func (c *leadScraperServiceClient) CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateAccountResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_CreateAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *leadScraperServiceClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetAccountResponse)
@@ -871,6 +942,16 @@ func (c *leadScraperServiceClient) DeleteAccount(ctx context.Context, in *Delete
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteAccountResponse)
 	err := c.cc.Invoke(ctx, LeadScraperService_DeleteAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leadScraperServiceClient) CreateWorkspace(ctx context.Context, in *CreateWorkspaceRequest, opts ...grpc.CallOption) (*CreateWorkspaceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateWorkspaceResponse)
+	err := c.cc.Invoke(ctx, LeadScraperService_CreateWorkspace_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1343,6 +1424,17 @@ func (c *leadScraperServiceClient) ListWebhooks(ctx context.Context, in *ListWeb
 //
 // ```
 type LeadScraperServiceServer interface {
+	// Create a new Google Maps scraping job
+	//
+	// This endpoint initiates a new scraping task with the specified parameters.
+	// The job will be queued and processed asynchronously. The response includes
+	// a job ID that can be used to track the job's progress.
+	//
+	// Common use cases:
+	// - Scrape business listings for market research
+	// - Collect location data for geographic analysis
+	// - Extract contact information for lead generation
+	CreateScrapingJob(context.Context, *CreateScrapingJobRequest) (*CreateScrapingJobResponse, error)
 	// Get all scraping jobs
 	//
 	// Retrieves a list of all scraping jobs for the authenticated user within their
@@ -1383,6 +1475,15 @@ type LeadScraperServiceServer interface {
 	// - Operating hours
 	// - Additional metadata based on job configuration
 	DownloadScrapingResults(context.Context, *DownloadScrapingResultsRequest) (*DownloadScrapingResultsResponse, error)
+	// Create a new account
+	//
+	// This endpoint creates a new user account in the workspace service.
+	// It sets up the necessary infrastructure for the user to start managing
+	// scraping jobs and other workspace resources.
+	//
+	// Required permissions:
+	// - create:account
+	CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error)
 	// Get account details
 	//
 	// Retrieves detailed information about a specific account, including
@@ -1407,6 +1508,34 @@ type LeadScraperServiceServer interface {
 	// Required permissions:
 	// - delete:account
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error)
+	// CreateWorkspace establishes a new organizational workspace for managing scraping jobs
+	//
+	// This endpoint creates a dedicated workspace with configurable:
+	// - Access controls and permissions
+	// - Resource quotas
+	// - Team member associations
+	// - Job execution environments
+	//
+	// Required parameters:
+	// - account_id: Parent account ID
+	// - name: Human-readable workspace name
+	// - region: Deployment region for workspace resources
+	//
+	// Example:
+	// ```curl
+	// POST /lead-scraper-microservice/api/v1/workspaces
+	//
+	//	{
+	//	  "name": "European Market Research",
+	//	  "region": "eu-west-1",
+	//	  "default_job_parameters": {
+	//	    "lang": "en",
+	//	    "country_code": "GR"
+	//	  }
+	//	}
+	//
+	// ```
+	CreateWorkspace(context.Context, *CreateWorkspaceRequest) (*CreateWorkspaceResponse, error)
 	// ListWorkspaces retrieves all workspaces associated with an account
 	//
 	// Features:
@@ -2052,6 +2181,9 @@ type LeadScraperServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedLeadScraperServiceServer struct{}
 
+func (UnimplementedLeadScraperServiceServer) CreateScrapingJob(context.Context, *CreateScrapingJobRequest) (*CreateScrapingJobResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateScrapingJob not implemented")
+}
 func (UnimplementedLeadScraperServiceServer) ListScrapingJobs(context.Context, *ListScrapingJobsRequest) (*ListScrapingJobsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListScrapingJobs not implemented")
 }
@@ -2064,6 +2196,9 @@ func (UnimplementedLeadScraperServiceServer) DeleteScrapingJob(context.Context, 
 func (UnimplementedLeadScraperServiceServer) DownloadScrapingResults(context.Context, *DownloadScrapingResultsRequest) (*DownloadScrapingResultsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DownloadScrapingResults not implemented")
 }
+func (UnimplementedLeadScraperServiceServer) CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAccount not implemented")
+}
 func (UnimplementedLeadScraperServiceServer) GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccount not implemented")
 }
@@ -2072,6 +2207,9 @@ func (UnimplementedLeadScraperServiceServer) UpdateAccount(context.Context, *Upd
 }
 func (UnimplementedLeadScraperServiceServer) DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccount not implemented")
+}
+func (UnimplementedLeadScraperServiceServer) CreateWorkspace(context.Context, *CreateWorkspaceRequest) (*CreateWorkspaceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateWorkspace not implemented")
 }
 func (UnimplementedLeadScraperServiceServer) ListWorkspaces(context.Context, *ListWorkspacesRequest) (*ListWorkspacesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListWorkspaces not implemented")
@@ -2226,6 +2364,24 @@ func RegisterLeadScraperServiceServer(s grpc.ServiceRegistrar, srv LeadScraperSe
 	s.RegisterService(&LeadScraperService_ServiceDesc, srv)
 }
 
+func _LeadScraperService_CreateScrapingJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateScrapingJobRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).CreateScrapingJob(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_CreateScrapingJob_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).CreateScrapingJob(ctx, req.(*CreateScrapingJobRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _LeadScraperService_ListScrapingJobs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListScrapingJobsRequest)
 	if err := dec(in); err != nil {
@@ -2298,6 +2454,24 @@ func _LeadScraperService_DownloadScrapingResults_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _LeadScraperService_CreateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).CreateAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_CreateAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).CreateAccount(ctx, req.(*CreateAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _LeadScraperService_GetAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAccountRequest)
 	if err := dec(in); err != nil {
@@ -2348,6 +2522,24 @@ func _LeadScraperService_DeleteAccount_Handler(srv interface{}, ctx context.Cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(LeadScraperServiceServer).DeleteAccount(ctx, req.(*DeleteAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _LeadScraperService_CreateWorkspace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateWorkspaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LeadScraperServiceServer).CreateWorkspace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: LeadScraperService_CreateWorkspace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LeadScraperServiceServer).CreateWorkspace(ctx, req.(*CreateWorkspaceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3152,6 +3344,10 @@ var LeadScraperService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*LeadScraperServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "CreateScrapingJob",
+			Handler:    _LeadScraperService_CreateScrapingJob_Handler,
+		},
+		{
 			MethodName: "ListScrapingJobs",
 			Handler:    _LeadScraperService_ListScrapingJobs_Handler,
 		},
@@ -3168,6 +3364,10 @@ var LeadScraperService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _LeadScraperService_DownloadScrapingResults_Handler,
 		},
 		{
+			MethodName: "CreateAccount",
+			Handler:    _LeadScraperService_CreateAccount_Handler,
+		},
+		{
 			MethodName: "GetAccount",
 			Handler:    _LeadScraperService_GetAccount_Handler,
 		},
@@ -3178,6 +3378,10 @@ var LeadScraperService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAccount",
 			Handler:    _LeadScraperService_DeleteAccount_Handler,
+		},
+		{
+			MethodName: "CreateWorkspace",
+			Handler:    _LeadScraperService_CreateWorkspace_Handler,
 		},
 		{
 			MethodName: "ListWorkspaces",

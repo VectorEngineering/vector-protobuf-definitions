@@ -8,8 +8,12 @@ from playbookmedia_backend_server_sdk.models.bad_gateway_error_message_response 
 from playbookmedia_backend_server_sdk.models.conflict_error_message_response import ConflictErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_api_key_request import CreateAPIKeyRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_api_key_response import CreateAPIKeyResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.create_account_request import CreateAccountRequest  # noqa: E501
+from playbookmedia_backend_server_sdk.models.create_account_response import CreateAccountResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_organization_request import CreateOrganizationRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_organization_response import CreateOrganizationResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.create_scraping_job_request import CreateScrapingJobRequest  # noqa: E501
+from playbookmedia_backend_server_sdk.models.create_scraping_job_response import CreateScrapingJobResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_tenant_api_key_request import CreateTenantAPIKeyRequest  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_tenant_api_key_response import CreateTenantAPIKeyResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_tenant_body import CreateTenantBody  # noqa: E501
@@ -18,6 +22,8 @@ from playbookmedia_backend_server_sdk.models.create_webhook_request import Creat
 from playbookmedia_backend_server_sdk.models.create_webhook_response import CreateWebhookResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_workflow_body import CreateWorkflowBody  # noqa: E501
 from playbookmedia_backend_server_sdk.models.create_workflow_response import CreateWorkflowResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.create_workspace_request import CreateWorkspaceRequest  # noqa: E501
+from playbookmedia_backend_server_sdk.models.create_workspace_response import CreateWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_api_key_response import DeleteAPIKeyResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_account_response import DeleteAccountResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_organization_response import DeleteOrganizationResponse  # noqa: E501
@@ -94,6 +100,21 @@ from playbookmedia_backend_server_sdk.models.validation_error_message_response i
 from playbookmedia_backend_server_sdk import util
 
 
+def create_account(create_account_request):  # noqa: E501
+    """Create a new account
+
+    Creates a new user account in the workspace service # noqa: E501
+
+    :param create_account_request: 
+    :type create_account_request: dict | bytes
+
+    :rtype: Union[CreateAccountResponse, Tuple[CreateAccountResponse, int], Tuple[CreateAccountResponse, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        create_account_request = CreateAccountRequest.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
 def create_api_key(create_api_key_request):  # noqa: E501
     """Create a new API key
 
@@ -121,6 +142,21 @@ def create_organization(create_organization_request):  # noqa: E501
     """
     if connexion.request.is_json:
         create_organization_request = CreateOrganizationRequest.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
+def create_scraping_job(create_scraping_job_request):  # noqa: E501
+    """Create a new job scraping task
+
+    This endpoint creates a new Google Maps scraping job # noqa: E501
+
+    :param create_scraping_job_request: 
+    :type create_scraping_job_request: dict | bytes
+
+    :rtype: Union[CreateScrapingJobResponse, Tuple[CreateScrapingJobResponse, int], Tuple[CreateScrapingJobResponse, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        create_scraping_job_request = CreateScrapingJobRequest.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
 
 
@@ -185,6 +221,21 @@ def create_workflow(workspace_id, create_workflow_body):  # noqa: E501
     """
     if connexion.request.is_json:
         create_workflow_body = CreateWorkflowBody.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
+
+
+def create_workspace(create_workspace_request):  # noqa: E501
+    """Create a new workspace
+
+    Creates a new workspace for a given account # noqa: E501
+
+    :param create_workspace_request: 
+    :type create_workspace_request: dict | bytes
+
+    :rtype: Union[CreateWorkspaceResponse, Tuple[CreateWorkspaceResponse, int], Tuple[CreateWorkspaceResponse, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        create_workspace_request = CreateWorkspaceRequest.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
 
 

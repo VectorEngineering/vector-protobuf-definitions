@@ -19,9 +19,19 @@ input CreateAPIKeyInput {
     createApiKeyRequest: CreateApiKeyRequestInput
 }
 
+input CreateAccountInput {
+    
+    createAccountRequest: CreateAccountRequestInput
+}
+
 input CreateOrganizationInput {
     
     createOrganizationRequest: CreateOrganizationRequestInput
+}
+
+input CreateScrapingJobInput {
+    
+    createScrapingJobRequest: CreateScrapingJobRequestInput
 }
 
 input CreateTenantInput {
@@ -46,6 +56,11 @@ input CreateWorkflowInput {
     workspaceId: String!, 
     
     createWorkflowBody: CreateWorkflowBodyInput
+}
+
+input CreateWorkspaceInput {
+    
+    createWorkspaceRequest: CreateWorkspaceRequestInput
 }
 
 input DeleteAPIKeyInput {
@@ -212,11 +227,21 @@ type Mutation {
   # @param CreateApiKeyRequest createApiKeyRequest 
   # @return [CreateApiKeyResponse]
   CreateAPIKey(input: CreateAPIKeyInput!): CreateApiKeyResponse
+  # Create a new account
+  # Creates a new user account in the workspace service
+  # @param CreateAccountRequest createAccountRequest 
+  # @return [CreateAccountResponse]
+  CreateAccount(input: CreateAccountInput!): CreateAccountResponse
   # Create a new organization
   # Creates a new organization within a tenant
   # @param CreateOrganizationRequest createOrganizationRequest 
   # @return [CreateOrganizationResponse]
   CreateOrganization(input: CreateOrganizationInput!): CreateOrganizationResponse
+  # Create a new job scraping task
+  # This endpoint creates a new Google Maps scraping job
+  # @param CreateScrapingJobRequest createScrapingJobRequest 
+  # @return [CreateScrapingJobResponse]
+  CreateScrapingJob(input: CreateScrapingJobInput!): CreateScrapingJobResponse
   # Create a new tenant
   # Creates a new tenant in the system
   # @param String! organizationId 
@@ -239,6 +264,11 @@ type Mutation {
   # @param CreateWorkflowBody createWorkflowBody 
   # @return [CreateWorkflowResponse]
   CreateWorkflow(input: CreateWorkflowInput!): CreateWorkflowResponse
+  # Create a new workspace
+  # Creates a new workspace for a given account
+  # @param CreateWorkspaceRequest createWorkspaceRequest 
+  # @return [CreateWorkspaceResponse]
+  CreateWorkspace(input: CreateWorkspaceInput!): CreateWorkspaceResponse
   # Delete API key
   # Permanently deletes an API key
   # @param String! keyId 

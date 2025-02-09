@@ -8,6 +8,10 @@ spec:
   routes:
   - condition:
       method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/CreateScrapingJob
+    name: CreateScrapingJob
+  - condition:
+      method: POST
       pathRegex: /lead_scraper_service\.v1\.LeadScraperService/ListScrapingJobs
     name: ListScrapingJobs
   - condition:
@@ -24,6 +28,10 @@ spec:
     name: DownloadScrapingResults
   - condition:
       method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/CreateAccount
+    name: CreateAccount
+  - condition:
+      method: POST
       pathRegex: /lead_scraper_service\.v1\.LeadScraperService/GetAccount
     name: GetAccount
   - condition:
@@ -34,6 +42,10 @@ spec:
       method: POST
       pathRegex: /lead_scraper_service\.v1\.LeadScraperService/DeleteAccount
     name: DeleteAccount
+  - condition:
+      method: POST
+      pathRegex: /lead_scraper_service\.v1\.LeadScraperService/CreateWorkspace
+    name: CreateWorkspace
   - condition:
       method: POST
       pathRegex: /lead_scraper_service\.v1\.LeadScraperService/ListWorkspaces

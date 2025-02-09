@@ -4,8 +4,8 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-**CreateAccount**](workspace_service_api.md#CreateAccount) | **POST** /workspace-service/v1/accounts | Create a new account
-**CreateWorkspace**](workspace_service_api.md#CreateWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace
+**CreateAccount1**](workspace_service_api.md#CreateAccount1) | **POST** /workspace-service/v1/accounts | Create a new account
+**CreateWorkspace1**](workspace_service_api.md#CreateWorkspace1) | **POST** /workspace-service/v1/workspaces | Create workspace
 **DeleteAccount1**](workspace_service_api.md#DeleteAccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 **DeleteWorkspace1**](workspace_service_api.md#DeleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
 **GetAccount1**](workspace_service_api.md#GetAccount1) | **GET** /workspace-service/v1/accounts/{id} | Get account details
@@ -22,8 +22,8 @@ Method | HTTP request | Description
 **UpdateWorkspaceSharing**](workspace_service_api.md#UpdateWorkspaceSharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing
 
 
-# **CreateAccount**
-> models::CreateAccountResponse CreateAccount(create_account_request)
+# **CreateAccount1**
+> models::CreateAccountResponse1 CreateAccount1(create_account_request1)
 Create a new account
 
 Creates a new user account with initial workspace
@@ -32,11 +32,11 @@ Creates a new user account with initial workspace
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-  **create_account_request** | [**CreateAccountRequest**](CreateAccountRequest.md)|  | 
+  **create_account_request1** | [**CreateAccountRequest1**](CreateAccountRequest1.md)|  | 
 
 ### Return type
 
-[**models::CreateAccountResponse**](CreateAccountResponse.md)
+[**models::CreateAccountResponse1**](CreateAccountResponse1.md)
 
 ### Authorization
 
@@ -49,19 +49,19 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **CreateWorkspace**
-> models::CreateWorkspaceResponse CreateWorkspace(create_workspace_request)
+# **CreateWorkspace1**
+> models::CreateWorkspaceResponse1 CreateWorkspace1(create_workspace_request1)
 Create workspace
 
 ### Required Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-  **create_workspace_request** | [**CreateWorkspaceRequest**](CreateWorkspaceRequest.md)|  | 
+  **create_workspace_request1** | [**CreateWorkspaceRequest1**](CreateWorkspaceRequest1.md)|  | 
 
 ### Return type
 
-[**models::CreateWorkspaceResponse**](CreateWorkspaceResponse.md)
+[**models::CreateWorkspaceResponse1**](CreateWorkspaceResponse1.md)
 
 ### Authorization
 
@@ -150,7 +150,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetWorkspace1**
-> models::GetWorkspaceResponse1 GetWorkspace1(id)
+> models::GetWorkspaceResponse GetWorkspace1(id)
 Get workspace details
 
 ### Required Parameters
@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**models::GetWorkspaceResponse1**](GetWorkspaceResponse1.md)
+[**models::GetWorkspaceResponse**](GetWorkspaceResponse.md)
 
 ### Authorization
 

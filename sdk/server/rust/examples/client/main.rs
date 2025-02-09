@@ -5,12 +5,15 @@
 use futures::{future, Stream, stream};
 #[allow(unused_imports)]
 use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, models,
+                      CreateAccountResponse,
                       CreateApiKeyResponse,
                       CreateOrganizationResponse,
+                      CreateScrapingJobResponse,
                       CreateTenantResponse,
                       CreateTenantApiKeyResponse,
                       CreateWebhookResponse,
                       CreateWorkflowResponse,
+                      CreateWorkspaceResponse,
                       DeleteAccountResponse,
                       DeleteApiKeyResponse,
                       DeleteOrganizationResponse,
@@ -56,8 +59,8 @@ use openapi_client::{Api, ApiNoContext, Claims, Client, ContextWrapperExt, model
                       UpdateWebhookResponse,
                       UpdateWorkflowResponse,
                       UpdateWorkspaceResponse,
-                      CreateAccountResponse,
-                      CreateWorkspaceResponse,
+                      CreateAccount1Response,
+                      CreateWorkspace1Response,
                       DeleteAccount1Response,
                       DeleteWorkspace1Response,
                       GetAccount1Response,
@@ -212,6 +215,14 @@ fn main() {
 
     match matches.value_of("operation") {
         /* Disabled because there's no example.
+        Some("CreateAccount") => {
+            let result = rt.block_on(client.create_account(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
         Some("CreateApiKey") => {
             let result = rt.block_on(client.create_api_key(
                   ???
@@ -222,6 +233,14 @@ fn main() {
         /* Disabled because there's no example.
         Some("CreateOrganization") => {
             let result = rt.block_on(client.create_organization(
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("CreateScrapingJob") => {
+            let result = rt.block_on(client.create_scraping_job(
                   ???
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
@@ -256,6 +275,14 @@ fn main() {
         Some("CreateWorkflow") => {
             let result = rt.block_on(client.create_workflow(
                   "workspace_id_example".to_string(),
+                  ???
+            ));
+            info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
+        },
+        */
+        /* Disabled because there's no example.
+        Some("CreateWorkspace") => {
+            let result = rt.block_on(client.create_workspace(
                   ???
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
@@ -653,16 +680,16 @@ fn main() {
         },
         */
         /* Disabled because there's no example.
-        Some("CreateAccount") => {
-            let result = rt.block_on(client.create_account(
+        Some("CreateAccount1") => {
+            let result = rt.block_on(client.create_account1(
                   ???
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
         */
         /* Disabled because there's no example.
-        Some("CreateWorkspace") => {
-            let result = rt.block_on(client.create_workspace(
+        Some("CreateWorkspace1") => {
+            let result = rt.block_on(client.create_workspace1(
                   ???
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());

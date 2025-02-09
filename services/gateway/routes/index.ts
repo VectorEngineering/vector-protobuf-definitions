@@ -3,6 +3,7 @@ import { OpenAPIHono as Hono } from "@hono/zod-openapi";
 import type { Env } from "../types";
 
 // Import all route handlers
+import { leadScraperMicroserviceapiv1accountRouter } from "./leadScraperMicroserviceapiv1account";
 import { leadScraperMicroserviceapiv1accountslistRouter } from "./leadScraperMicroserviceapiv1accountslist";
 import { leadScraperMicroserviceapiv1accountssettingsRouter } from "./leadScraperMicroserviceapiv1accountssettings";
 import { leadScraperMicroserviceapiv1accountsupdateRouter } from "./leadScraperMicroserviceapiv1accountsupdate";
@@ -55,6 +56,10 @@ import { workspaceServicev1workspacesworkspaceidshareRouter } from "./workspaceS
 const router = new Hono<{ Bindings: Env }>();
 
 // Lead Scraper Microservice Routes
+router.route(
+  "/lead-scraper-microservice/api/v1/account",
+  leadScraperMicroserviceapiv1accountRouter,
+);
 router.route(
   "/lead-scraper-microservice/api/v1/accounts/list",
   leadScraperMicroserviceapiv1accountslistRouter,

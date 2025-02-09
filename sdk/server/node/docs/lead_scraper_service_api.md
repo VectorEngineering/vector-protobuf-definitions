@@ -5,11 +5,14 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateAPIKey**](lead_scraper_service_api.md#CreateAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys | Create a new API key
+[**CreateAccount**](lead_scraper_service_api.md#CreateAccount) | **POST** /lead-scraper-microservice/api/v1/account | Create a new account
 [**CreateOrganization**](lead_scraper_service_api.md#CreateOrganization) | **POST** /lead-scraper-microservice/api/v1/organization | Create a new organization
+[**CreateScrapingJob**](lead_scraper_service_api.md#CreateScrapingJob) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task
 [**CreateTenant**](lead_scraper_service_api.md#CreateTenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant
 [**CreateTenantAPIKey**](lead_scraper_service_api.md#CreateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key
 [**CreateWebhook**](lead_scraper_service_api.md#CreateWebhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook
 [**CreateWorkflow**](lead_scraper_service_api.md#CreateWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow
+[**CreateWorkspace**](lead_scraper_service_api.md#CreateWorkspace) | **POST** /lead-scraper-microservice/api/v1/workspaces | Create a new workspace
 [**DeleteAPIKey**](lead_scraper_service_api.md#DeleteAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 [**DeleteAccount**](lead_scraper_service_api.md#DeleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 [**DeleteOrganization**](lead_scraper_service_api.md#DeleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
@@ -64,6 +67,13 @@ Method | HTTP request | Description
 Create a new API key
 
 Creates a new API key with specified permissions and settings
+<a name="CreateAccount"></a>
+# **CreateAccount**
+> CreateAccountResponse CreateAccount(createAccountRequest)
+
+Create a new account
+
+Creates a new user account in the workspace service
 <a name="CreateOrganization"></a>
 # **CreateOrganization**
 > CreateOrganizationResponse CreateOrganization(createOrganizationRequest)
@@ -71,6 +81,13 @@ Creates a new API key with specified permissions and settings
 Create a new organization
 
 Creates a new organization within a tenant
+<a name="CreateScrapingJob"></a>
+# **CreateScrapingJob**
+> CreateScrapingJobResponse CreateScrapingJob(createScrapingJobRequest)
+
+Create a new job scraping task
+
+This endpoint creates a new Google Maps scraping job
 <a name="CreateTenant"></a>
 # **CreateTenant**
 > CreateTenantResponse CreateTenant(organizationId, createTenantBody)
@@ -99,6 +116,13 @@ Creates a new webhook configuration for event notifications
 Create a new workflow
 
 Creates a new workflow for a specific workspace
+<a name="CreateWorkspace"></a>
+# **CreateWorkspace**
+> CreateWorkspaceResponse CreateWorkspace(createWorkspaceRequest)
+
+Create a new workspace
+
+Creates a new workspace for a given account
 <a name="DeleteAPIKey"></a>
 # **DeleteAPIKey**
 > DeleteApiKeyResponse DeleteAPIKey(keyId, organizationId, workspaceId, tenantId, accountId)

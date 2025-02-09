@@ -20,16 +20,16 @@ from typing_extensions import Annotated
 from datetime import datetime
 from pydantic import StrictInt, StrictStr
 from typing import Optional
-from playbookmedia_backend_client_sdk.models.create_account_request import CreateAccountRequest
-from playbookmedia_backend_client_sdk.models.create_account_response import CreateAccountResponse
-from playbookmedia_backend_client_sdk.models.create_workspace_request import CreateWorkspaceRequest
-from playbookmedia_backend_client_sdk.models.create_workspace_response import CreateWorkspaceResponse
+from playbookmedia_backend_client_sdk.models.create_account_request1 import CreateAccountRequest1
+from playbookmedia_backend_client_sdk.models.create_account_response1 import CreateAccountResponse1
+from playbookmedia_backend_client_sdk.models.create_workspace_request1 import CreateWorkspaceRequest1
+from playbookmedia_backend_client_sdk.models.create_workspace_response1 import CreateWorkspaceResponse1
 from playbookmedia_backend_client_sdk.models.delete_account_response import DeleteAccountResponse
 from playbookmedia_backend_client_sdk.models.delete_workspace_response import DeleteWorkspaceResponse
 from playbookmedia_backend_client_sdk.models.get_account_response1 import GetAccountResponse1
 from playbookmedia_backend_client_sdk.models.get_workspace_analytics_response1 import GetWorkspaceAnalyticsResponse1
 from playbookmedia_backend_client_sdk.models.get_workspace_compliance_report_response import GetWorkspaceComplianceReportResponse
-from playbookmedia_backend_client_sdk.models.get_workspace_response1 import GetWorkspaceResponse1
+from playbookmedia_backend_client_sdk.models.get_workspace_response import GetWorkspaceResponse
 from playbookmedia_backend_client_sdk.models.get_workspace_storage_stats_response import GetWorkspaceStorageStatsResponse
 from playbookmedia_backend_client_sdk.models.list_workspace_sharings_response import ListWorkspaceSharingsResponse
 from playbookmedia_backend_client_sdk.models.list_workspaces_response1 import ListWorkspacesResponse1
@@ -62,9 +62,9 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def create_account(
+    async def create_account1(
         self,
-        create_account_request: CreateAccountRequest,
+        create_account_request1: CreateAccountRequest1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -77,13 +77,13 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> CreateAccountResponse:
+    ) -> CreateAccountResponse1:
         """Create a new account
 
         Creates a new user account with initial workspace
 
-        :param create_account_request: (required)
-        :type create_account_request: CreateAccountRequest
+        :param create_account_request1: (required)
+        :type create_account_request1: CreateAccountRequest1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -106,8 +106,8 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_account_serialize(
-            create_account_request=create_account_request,
+        _param = self._create_account1_serialize(
+            create_account_request1=create_account_request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -115,8 +115,8 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CreateAccountResponse",
-            '201': "CreateAccountResponse",
+            '200': "CreateAccountResponse1",
+            '201': "CreateAccountResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -137,9 +137,9 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def create_account_with_http_info(
+    async def create_account1_with_http_info(
         self,
-        create_account_request: CreateAccountRequest,
+        create_account_request1: CreateAccountRequest1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -152,13 +152,13 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[CreateAccountResponse]:
+    ) -> ApiResponse[CreateAccountResponse1]:
         """Create a new account
 
         Creates a new user account with initial workspace
 
-        :param create_account_request: (required)
-        :type create_account_request: CreateAccountRequest
+        :param create_account_request1: (required)
+        :type create_account_request1: CreateAccountRequest1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -181,8 +181,8 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_account_serialize(
-            create_account_request=create_account_request,
+        _param = self._create_account1_serialize(
+            create_account_request1=create_account_request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -190,8 +190,8 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CreateAccountResponse",
-            '201': "CreateAccountResponse",
+            '200': "CreateAccountResponse1",
+            '201': "CreateAccountResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -212,9 +212,9 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def create_account_without_preload_content(
+    async def create_account1_without_preload_content(
         self,
-        create_account_request: CreateAccountRequest,
+        create_account_request1: CreateAccountRequest1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -232,8 +232,8 @@ class WorkspaceServiceApi:
 
         Creates a new user account with initial workspace
 
-        :param create_account_request: (required)
-        :type create_account_request: CreateAccountRequest
+        :param create_account_request1: (required)
+        :type create_account_request1: CreateAccountRequest1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -256,8 +256,8 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_account_serialize(
-            create_account_request=create_account_request,
+        _param = self._create_account1_serialize(
+            create_account_request1=create_account_request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -265,8 +265,8 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CreateAccountResponse",
-            '201': "CreateAccountResponse",
+            '200': "CreateAccountResponse1",
+            '201': "CreateAccountResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -282,9 +282,9 @@ class WorkspaceServiceApi:
         return response_data.response
 
 
-    def _create_account_serialize(
+    def _create_account1_serialize(
         self,
-        create_account_request,
+        create_account_request1,
         _request_auth,
         _content_type,
         _headers,
@@ -308,8 +308,8 @@ class WorkspaceServiceApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_account_request is not None:
-            _body_params = create_account_request
+        if create_account_request1 is not None:
+            _body_params = create_account_request1
 
 
         # set the HTTP header `Accept`
@@ -359,9 +359,9 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def create_workspace(
+    async def create_workspace1(
         self,
-        create_workspace_request: CreateWorkspaceRequest,
+        create_workspace_request1: CreateWorkspaceRequest1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -374,12 +374,12 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> CreateWorkspaceResponse:
+    ) -> CreateWorkspaceResponse1:
         """Create workspace
 
 
-        :param create_workspace_request: (required)
-        :type create_workspace_request: CreateWorkspaceRequest
+        :param create_workspace_request1: (required)
+        :type create_workspace_request1: CreateWorkspaceRequest1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -402,8 +402,8 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_workspace_serialize(
-            create_workspace_request=create_workspace_request,
+        _param = self._create_workspace1_serialize(
+            create_workspace_request1=create_workspace_request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -411,8 +411,8 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CreateWorkspaceResponse",
-            '201': "CreateWorkspaceResponse",
+            '200': "CreateWorkspaceResponse1",
+            '201': "CreateWorkspaceResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -433,9 +433,9 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def create_workspace_with_http_info(
+    async def create_workspace1_with_http_info(
         self,
-        create_workspace_request: CreateWorkspaceRequest,
+        create_workspace_request1: CreateWorkspaceRequest1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -448,12 +448,12 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[CreateWorkspaceResponse]:
+    ) -> ApiResponse[CreateWorkspaceResponse1]:
         """Create workspace
 
 
-        :param create_workspace_request: (required)
-        :type create_workspace_request: CreateWorkspaceRequest
+        :param create_workspace_request1: (required)
+        :type create_workspace_request1: CreateWorkspaceRequest1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -476,8 +476,8 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_workspace_serialize(
-            create_workspace_request=create_workspace_request,
+        _param = self._create_workspace1_serialize(
+            create_workspace_request1=create_workspace_request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -485,8 +485,8 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CreateWorkspaceResponse",
-            '201': "CreateWorkspaceResponse",
+            '200': "CreateWorkspaceResponse1",
+            '201': "CreateWorkspaceResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -507,9 +507,9 @@ class WorkspaceServiceApi:
 
 
     @validate_call
-    async def create_workspace_without_preload_content(
+    async def create_workspace1_without_preload_content(
         self,
-        create_workspace_request: CreateWorkspaceRequest,
+        create_workspace_request1: CreateWorkspaceRequest1,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -526,8 +526,8 @@ class WorkspaceServiceApi:
         """Create workspace
 
 
-        :param create_workspace_request: (required)
-        :type create_workspace_request: CreateWorkspaceRequest
+        :param create_workspace_request1: (required)
+        :type create_workspace_request1: CreateWorkspaceRequest1
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -550,8 +550,8 @@ class WorkspaceServiceApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_workspace_serialize(
-            create_workspace_request=create_workspace_request,
+        _param = self._create_workspace1_serialize(
+            create_workspace_request1=create_workspace_request1,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -559,8 +559,8 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CreateWorkspaceResponse",
-            '201': "CreateWorkspaceResponse",
+            '200': "CreateWorkspaceResponse1",
+            '201': "CreateWorkspaceResponse1",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -576,9 +576,9 @@ class WorkspaceServiceApi:
         return response_data.response
 
 
-    def _create_workspace_serialize(
+    def _create_workspace1_serialize(
         self,
-        create_workspace_request,
+        create_workspace_request1,
         _request_auth,
         _content_type,
         _headers,
@@ -602,8 +602,8 @@ class WorkspaceServiceApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if create_workspace_request is not None:
-            _body_params = create_workspace_request
+        if create_workspace_request1 is not None:
+            _body_params = create_workspace_request1
 
 
         # set the HTTP header `Accept`
@@ -1499,7 +1499,7 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GetWorkspaceResponse1:
+    ) -> GetWorkspaceResponse:
         """Get workspace details
 
 
@@ -1536,7 +1536,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetWorkspaceResponse1",
+            '200': "GetWorkspaceResponse",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -1572,7 +1572,7 @@ class WorkspaceServiceApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[GetWorkspaceResponse1]:
+    ) -> ApiResponse[GetWorkspaceResponse]:
         """Get workspace details
 
 
@@ -1609,7 +1609,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetWorkspaceResponse1",
+            '200': "GetWorkspaceResponse",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",
@@ -1682,7 +1682,7 @@ class WorkspaceServiceApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetWorkspaceResponse1",
+            '200': "GetWorkspaceResponse",
             '400': "ValidationErrorMessageResponse",
             '401': "AuthenticationErrorMessageResponse1",
             '403': "ForbiddenErrorMessageResponse",

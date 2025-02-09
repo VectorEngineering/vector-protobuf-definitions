@@ -24,7 +24,7 @@ export default {
             };
         },
 
-        // @return GetWorkspaceResponse1
+        // @return GetWorkspaceResponse
         GetWorkspace1: ($Id_) => {
             return {
                 "Id_": "Id__example"
@@ -78,17 +78,17 @@ export default {
 
     Mutation: {
 
-        // @return CreateAccountResponse
-        CreateAccount: ($createAccountRequest) => {
+        // @return CreateAccountResponse1
+        CreateAccount1: ($createAccountRequest1) => {
             return {
-                "createAccountRequest": ""
+                "createAccountRequest1": ""
             };
         },
 
-        // @return CreateWorkspaceResponse
-        CreateWorkspace: ($createWorkspaceRequest) => {
+        // @return CreateWorkspaceResponse1
+        CreateWorkspace1: ($createWorkspaceRequest1) => {
             return {
-                "createWorkspaceRequest": ""
+                "createWorkspaceRequest1": ""
             };
         },
 

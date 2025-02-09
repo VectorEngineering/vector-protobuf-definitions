@@ -5,13 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**workspace** | [**Workspace**](Workspace.md) |  | [optional] 
 **account_id** | **str** |  | [optional] 
-**name** | **str** |  | 
-**storage_quota** | **str** |  | [optional] 
-**allow_public_sharing** | **bool** |  | [optional] 
-**require_approval** | **bool** |  | [optional] 
-**gdpr_compliant** | **bool** |  | [optional] 
-**hipaa_compliant** | **bool** |  | [optional] 
+**organization_id** | **str** |  | [optional] 
+**tenant_id** | **str** |  | [optional] 
 
 ## Example
 

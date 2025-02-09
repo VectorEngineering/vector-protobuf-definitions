@@ -4,8 +4,8 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateAccount**](workspace_service_api.md#CreateAccount) | **POST** /workspace-service/v1/accounts | Create a new account
-[**CreateWorkspace**](workspace_service_api.md#CreateWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace
+[**CreateAccount1**](workspace_service_api.md#CreateAccount1) | **POST** /workspace-service/v1/accounts | Create a new account
+[**CreateWorkspace1**](workspace_service_api.md#CreateWorkspace1) | **POST** /workspace-service/v1/workspaces | Create workspace
 [**DeleteAccount1**](workspace_service_api.md#DeleteAccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 [**DeleteWorkspace1**](workspace_service_api.md#DeleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
 [**GetAccount1**](workspace_service_api.md#GetAccount1) | **GET** /workspace-service/v1/accounts/{id} | Get account details
@@ -22,16 +22,16 @@ Method | HTTP request | Description
 [**UpdateWorkspaceSharing**](workspace_service_api.md#UpdateWorkspaceSharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing
 
 
-<a name="CreateAccount"></a>
-# **CreateAccount**
-> CreateAccountResponse CreateAccount(createAccountRequest)
+<a name="CreateAccount1"></a>
+# **CreateAccount1**
+> CreateAccountResponse1 CreateAccount1(createAccountRequest1)
 
 Create a new account
 
 Creates a new user account with initial workspace
-<a name="CreateWorkspace"></a>
-# **CreateWorkspace**
-> CreateWorkspaceResponse CreateWorkspace(createWorkspaceRequest)
+<a name="CreateWorkspace1"></a>
+# **CreateWorkspace1**
+> CreateWorkspaceResponse1 CreateWorkspace1(createWorkspaceRequest1)
 
 Create workspace
 <a name="DeleteAccount1"></a>
@@ -51,7 +51,7 @@ Delete workspace
 Get account details
 <a name="GetWorkspace1"></a>
 # **GetWorkspace1**
-> GetWorkspaceResponse1 GetWorkspace1(Id_)
+> GetWorkspaceResponse GetWorkspace1(Id_)
 
 Get workspace details
 <a name="GetWorkspaceAnalytics1"></a>

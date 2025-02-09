@@ -19,7 +19,7 @@ import javax.annotation.Generated;
  * CreateAccountResponse1
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:44:33.125020-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-09T13:53:28.529590-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class CreateAccountResponse1 {
 
   private Account1 account;

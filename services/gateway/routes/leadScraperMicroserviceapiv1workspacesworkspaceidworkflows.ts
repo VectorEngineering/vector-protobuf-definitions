@@ -178,7 +178,7 @@ const postRoute = createRoute({
     },
   },
   responses: {
-    201: {
+    200: {
       content: {
         "application/json": {
           schema: schemas.CreateWorkflowResponse,
@@ -215,7 +215,7 @@ router.openapi(postRoute, async (c) => {
         data,
         params,
       );
-    return c.json({ data: response }, 201);
+    return c.json({ data: response }, 200);
   } catch (error) {
     if (error instanceof HTTPException) {
       throw error;

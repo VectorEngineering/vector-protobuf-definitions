@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * - BILLING_MODE_LICENSED: Fixed price per seat  - BILLING_MODE_METERED: Usage-based  - BILLING_MODE_HYBRID: Base price + usage
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-09T12:56:25.550372-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-09T13:53:28.529590-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public enum BillingMode {
   
   UNSPECIFIED("BILLING_MODE_UNSPECIFIED"),

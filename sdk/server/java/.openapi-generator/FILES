@@ -51,9 +51,13 @@ src/main/java/org/openapitools/model/ContractIntelligence.java
 src/main/java/org/openapitools/model/CreateAPIKeyRequest.java
 src/main/java/org/openapitools/model/CreateAPIKeyResponse.java
 src/main/java/org/openapitools/model/CreateAccountRequest.java
+src/main/java/org/openapitools/model/CreateAccountRequest1.java
 src/main/java/org/openapitools/model/CreateAccountResponse.java
+src/main/java/org/openapitools/model/CreateAccountResponse1.java
 src/main/java/org/openapitools/model/CreateOrganizationRequest.java
 src/main/java/org/openapitools/model/CreateOrganizationResponse.java
+src/main/java/org/openapitools/model/CreateScrapingJobRequest.java
+src/main/java/org/openapitools/model/CreateScrapingJobResponse.java
 src/main/java/org/openapitools/model/CreateTenantAPIKeyRequest.java
 src/main/java/org/openapitools/model/CreateTenantAPIKeyResponse.java
 src/main/java/org/openapitools/model/CreateTenantBody.java
@@ -63,7 +67,9 @@ src/main/java/org/openapitools/model/CreateWebhookResponse.java
 src/main/java/org/openapitools/model/CreateWorkflowBody.java
 src/main/java/org/openapitools/model/CreateWorkflowResponse.java
 src/main/java/org/openapitools/model/CreateWorkspaceRequest.java
+src/main/java/org/openapitools/model/CreateWorkspaceRequest1.java
 src/main/java/org/openapitools/model/CreateWorkspaceResponse.java
+src/main/java/org/openapitools/model/CreateWorkspaceResponse1.java
 src/main/java/org/openapitools/model/DataProfile.java
 src/main/java/org/openapitools/model/DayOfWeek.java
 src/main/java/org/openapitools/model/DeleteAPIKeyResponse.java
@@ -110,7 +116,6 @@ src/main/java/org/openapitools/model/GetWorkspaceAnalyticsResponse.java
 src/main/java/org/openapitools/model/GetWorkspaceAnalyticsResponse1.java
 src/main/java/org/openapitools/model/GetWorkspaceComplianceReportResponse.java
 src/main/java/org/openapitools/model/GetWorkspaceResponse.java
-src/main/java/org/openapitools/model/GetWorkspaceResponse1.java
 src/main/java/org/openapitools/model/GetWorkspaceStorageStatsResponse.java
 src/main/java/org/openapitools/model/GoneErrorMessageResponse.java
 src/main/java/org/openapitools/model/IncludedField.java

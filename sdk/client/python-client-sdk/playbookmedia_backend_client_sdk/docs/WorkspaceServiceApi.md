@@ -4,8 +4,8 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_account**](WorkspaceServiceApi.md#create_account) | **POST** /workspace-service/v1/accounts | Create a new account
-[**create_workspace**](WorkspaceServiceApi.md#create_workspace) | **POST** /workspace-service/v1/workspaces | Create workspace
+[**create_account1**](WorkspaceServiceApi.md#create_account1) | **POST** /workspace-service/v1/accounts | Create a new account
+[**create_workspace1**](WorkspaceServiceApi.md#create_workspace1) | **POST** /workspace-service/v1/workspaces | Create workspace
 [**delete_account1**](WorkspaceServiceApi.md#delete_account1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 [**delete_workspace1**](WorkspaceServiceApi.md#delete_workspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
 [**get_account1**](WorkspaceServiceApi.md#get_account1) | **GET** /workspace-service/v1/accounts/{id} | Get account details
@@ -22,8 +22,8 @@ Method | HTTP request | Description
 [**update_workspace_sharing**](WorkspaceServiceApi.md#update_workspace_sharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing
 
 
-# **create_account**
-> CreateAccountResponse create_account(create_account_request)
+# **create_account1**
+> CreateAccountResponse1 create_account1(create_account_request1)
 
 Create a new account
 
@@ -34,8 +34,8 @@ Creates a new user account with initial workspace
 
 ```python
 import playbookmedia_backend_client_sdk
-from playbookmedia_backend_client_sdk.models.create_account_request import CreateAccountRequest
-from playbookmedia_backend_client_sdk.models.create_account_response import CreateAccountResponse
+from playbookmedia_backend_client_sdk.models.create_account_request1 import CreateAccountRequest1
+from playbookmedia_backend_client_sdk.models.create_account_response1 import CreateAccountResponse1
 from playbookmedia_backend_client_sdk.rest import ApiException
 from pprint import pprint
 
@@ -50,15 +50,15 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = playbookmedia_backend_client_sdk.WorkspaceServiceApi(api_client)
-    create_account_request = playbookmedia_backend_client_sdk.CreateAccountRequest() # CreateAccountRequest | 
+    create_account_request1 = playbookmedia_backend_client_sdk.CreateAccountRequest1() # CreateAccountRequest1 | 
 
     try:
         # Create a new account
-        api_response = await api_instance.create_account(create_account_request)
-        print("The response of WorkspaceServiceApi->create_account:\n")
+        api_response = await api_instance.create_account1(create_account_request1)
+        print("The response of WorkspaceServiceApi->create_account1:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WorkspaceServiceApi->create_account: %s\n" % e)
+        print("Exception when calling WorkspaceServiceApi->create_account1: %s\n" % e)
 ```
 
 
@@ -68,11 +68,11 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_account_request** | [**CreateAccountRequest**](CreateAccountRequest.md)|  | 
+ **create_account_request1** | [**CreateAccountRequest1**](CreateAccountRequest1.md)|  | 
 
 ### Return type
 
-[**CreateAccountResponse**](CreateAccountResponse.md)
+[**CreateAccountResponse1**](CreateAccountResponse1.md)
 
 ### Authorization
 
@@ -100,8 +100,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_workspace**
-> CreateWorkspaceResponse create_workspace(create_workspace_request)
+# **create_workspace1**
+> CreateWorkspaceResponse1 create_workspace1(create_workspace_request1)
 
 Create workspace
 
@@ -110,8 +110,8 @@ Create workspace
 
 ```python
 import playbookmedia_backend_client_sdk
-from playbookmedia_backend_client_sdk.models.create_workspace_request import CreateWorkspaceRequest
-from playbookmedia_backend_client_sdk.models.create_workspace_response import CreateWorkspaceResponse
+from playbookmedia_backend_client_sdk.models.create_workspace_request1 import CreateWorkspaceRequest1
+from playbookmedia_backend_client_sdk.models.create_workspace_response1 import CreateWorkspaceResponse1
 from playbookmedia_backend_client_sdk.rest import ApiException
 from pprint import pprint
 
@@ -126,15 +126,15 @@ configuration = playbookmedia_backend_client_sdk.Configuration(
 async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = playbookmedia_backend_client_sdk.WorkspaceServiceApi(api_client)
-    create_workspace_request = playbookmedia_backend_client_sdk.CreateWorkspaceRequest() # CreateWorkspaceRequest | 
+    create_workspace_request1 = playbookmedia_backend_client_sdk.CreateWorkspaceRequest1() # CreateWorkspaceRequest1 | 
 
     try:
         # Create workspace
-        api_response = await api_instance.create_workspace(create_workspace_request)
-        print("The response of WorkspaceServiceApi->create_workspace:\n")
+        api_response = await api_instance.create_workspace1(create_workspace_request1)
+        print("The response of WorkspaceServiceApi->create_workspace1:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WorkspaceServiceApi->create_workspace: %s\n" % e)
+        print("Exception when calling WorkspaceServiceApi->create_workspace1: %s\n" % e)
 ```
 
 
@@ -144,11 +144,11 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_workspace_request** | [**CreateWorkspaceRequest**](CreateWorkspaceRequest.md)|  | 
+ **create_workspace_request1** | [**CreateWorkspaceRequest1**](CreateWorkspaceRequest1.md)|  | 
 
 ### Return type
 
-[**CreateWorkspaceResponse**](CreateWorkspaceResponse.md)
+[**CreateWorkspaceResponse1**](CreateWorkspaceResponse1.md)
 
 ### Authorization
 
@@ -399,7 +399,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_workspace1**
-> GetWorkspaceResponse1 get_workspace1(id)
+> GetWorkspaceResponse get_workspace1(id)
 
 Get workspace details
 
@@ -408,7 +408,7 @@ Get workspace details
 
 ```python
 import playbookmedia_backend_client_sdk
-from playbookmedia_backend_client_sdk.models.get_workspace_response1 import GetWorkspaceResponse1
+from playbookmedia_backend_client_sdk.models.get_workspace_response import GetWorkspaceResponse
 from playbookmedia_backend_client_sdk.rest import ApiException
 from pprint import pprint
 
@@ -445,7 +445,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetWorkspaceResponse1**](GetWorkspaceResponse1.md)
+[**GetWorkspaceResponse**](GetWorkspaceResponse.md)
 
 ### Authorization
 

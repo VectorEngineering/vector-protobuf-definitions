@@ -8570,6 +8570,175 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct CreateAccountRequest {
+    #[serde(rename = "account")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub account: Option<models::Account>,
+
+    #[serde(rename = "initialWorkspaceName")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub initial_workspace_name: Option<String>,
+
+    #[serde(rename = "organizationId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub organization_id: Option<String>,
+
+    #[serde(rename = "tenantId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub tenant_id: Option<String>,
+
+}
+
+
+impl CreateAccountRequest {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> CreateAccountRequest {
+        CreateAccountRequest {
+            account: None,
+            initial_workspace_name: None,
+            organization_id: None,
+            tenant_id: None,
+        }
+    }
+}
+
+/// Converts the CreateAccountRequest value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for CreateAccountRequest {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping account in query parameter serialization
+
+
+            self.initial_workspace_name.as_ref().map(|initial_workspace_name| {
+                [
+                    "initialWorkspaceName".to_string(),
+                    initial_workspace_name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.organization_id.as_ref().map(|organization_id| {
+                [
+                    "organizationId".to_string(),
+                    organization_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.tenant_id.as_ref().map(|tenant_id| {
+                [
+                    "tenantId".to_string(),
+                    tenant_id.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateAccountRequest value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for CreateAccountRequest {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub account: Vec<models::Account>,
+            pub initial_workspace_name: Vec<String>,
+            pub organization_id: Vec<String>,
+            pub tenant_id: Vec<String>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing CreateAccountRequest".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "account" => intermediate_rep.account.push(<models::Account as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "initialWorkspaceName" => intermediate_rep.initial_workspace_name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "organizationId" => intermediate_rep.organization_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateAccountRequest".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(CreateAccountRequest {
+            account: intermediate_rep.account.into_iter().next(),
+            initial_workspace_name: intermediate_rep.initial_workspace_name.into_iter().next(),
+            organization_id: intermediate_rep.organization_id.into_iter().next(),
+            tenant_id: intermediate_rep.tenant_id.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<CreateAccountRequest> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateAccountRequest>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateAccountRequest>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for CreateAccountRequest - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateAccountRequest> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <CreateAccountRequest as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into CreateAccountRequest - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct CreateAccountRequest1 {
     #[serde(rename = "auth0UserId")]
     pub auth0_user_id: String,
 
@@ -8615,10 +8784,10 @@ pub struct CreateAccountRequest {
 }
 
 
-impl CreateAccountRequest {
+impl CreateAccountRequest1 {
     #[allow(clippy::new_without_default)]
-    pub fn new(auth0_user_id: String, email: String, ) -> CreateAccountRequest {
-        CreateAccountRequest {
+    pub fn new(auth0_user_id: String, email: String, ) -> CreateAccountRequest1 {
+        CreateAccountRequest1 {
             auth0_user_id,
             email,
             base_directory: None,
@@ -8634,10 +8803,10 @@ impl CreateAccountRequest {
     }
 }
 
-/// Converts the CreateAccountRequest value to the Query Parameters representation (style=form, explode=false)
+/// Converts the CreateAccountRequest1 value to the Query Parameters representation (style=form, explode=false)
 /// specified in https://swagger.io/docs/specification/serialization/
 /// Should be implemented in a serde serializer
-impl std::string::ToString for CreateAccountRequest {
+impl std::string::ToString for CreateAccountRequest1 {
     fn to_string(&self) -> String {
         let params: Vec<Option<String>> = vec![
 
@@ -8714,10 +8883,10 @@ impl std::string::ToString for CreateAccountRequest {
     }
 }
 
-/// Converts Query Parameters representation (style=form, explode=false) to a CreateAccountRequest value
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateAccountRequest1 value
 /// as specified in https://swagger.io/docs/specification/serialization/
 /// Should be implemented in a serde deserializer
-impl std::str::FromStr for CreateAccountRequest {
+impl std::str::FromStr for CreateAccountRequest1 {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
@@ -8747,7 +8916,7 @@ impl std::str::FromStr for CreateAccountRequest {
         while key_result.is_some() {
             let val = match string_iter.next() {
                 Some(x) => x,
-                None => return std::result::Result::Err("Missing value while parsing CreateAccountRequest".to_string())
+                None => return std::result::Result::Err("Missing value while parsing CreateAccountRequest1".to_string())
             };
 
             if let Some(key) = key_result {
@@ -8765,14 +8934,14 @@ impl std::str::FromStr for CreateAccountRequest {
                     "orgId" => intermediate_rep.org_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    "roles" => return std::result::Result::Err("Parsing a container in this style is not supported in CreateAccountRequest".to_string()),
-                    "permissions" => return std::result::Result::Err("Parsing a container in this style is not supported in CreateAccountRequest".to_string()),
+                    "roles" => return std::result::Result::Err("Parsing a container in this style is not supported in CreateAccountRequest1".to_string()),
+                    "permissions" => return std::result::Result::Err("Parsing a container in this style is not supported in CreateAccountRequest1".to_string()),
                     #[allow(clippy::redundant_clone)]
                     "mfaEnabled" => intermediate_rep.mfa_enabled.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "complianceLevel" => intermediate_rep.compliance_level.push(<models::ComplianceLevel as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    "preferences" => return std::result::Result::Err("Parsing a container in this style is not supported in CreateAccountRequest".to_string()),
-                    _ => return std::result::Result::Err("Unexpected key while parsing CreateAccountRequest".to_string())
+                    "preferences" => return std::result::Result::Err("Parsing a container in this style is not supported in CreateAccountRequest1".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateAccountRequest1".to_string())
                 }
             }
 
@@ -8781,9 +8950,9 @@ impl std::str::FromStr for CreateAccountRequest {
         }
 
         // Use the intermediate representation to return the struct
-        std::result::Result::Ok(CreateAccountRequest {
-            auth0_user_id: intermediate_rep.auth0_user_id.into_iter().next().ok_or_else(|| "auth0UserId missing in CreateAccountRequest".to_string())?,
-            email: intermediate_rep.email.into_iter().next().ok_or_else(|| "email missing in CreateAccountRequest".to_string())?,
+        std::result::Result::Ok(CreateAccountRequest1 {
+            auth0_user_id: intermediate_rep.auth0_user_id.into_iter().next().ok_or_else(|| "auth0UserId missing in CreateAccountRequest1".to_string())?,
+            email: intermediate_rep.email.into_iter().next().ok_or_else(|| "email missing in CreateAccountRequest1".to_string())?,
             base_directory: intermediate_rep.base_directory.into_iter().next(),
             region: intermediate_rep.region.into_iter().next(),
             org_id: intermediate_rep.org_id.into_iter().next(),
@@ -8797,34 +8966,34 @@ impl std::str::FromStr for CreateAccountRequest {
     }
 }
 
-// Methods for converting between header::IntoHeaderValue<CreateAccountRequest> and hyper::header::HeaderValue
+// Methods for converting between header::IntoHeaderValue<CreateAccountRequest1> and hyper::header::HeaderValue
 
 #[cfg(any(feature = "client", feature = "server"))]
-impl std::convert::TryFrom<header::IntoHeaderValue<CreateAccountRequest>> for hyper::header::HeaderValue {
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateAccountRequest1>> for hyper::header::HeaderValue {
     type Error = String;
 
-    fn try_from(hdr_value: header::IntoHeaderValue<CreateAccountRequest>) -> std::result::Result<Self, Self::Error> {
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateAccountRequest1>) -> std::result::Result<Self, Self::Error> {
         let hdr_value = hdr_value.to_string();
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for CreateAccountRequest - value: {} is invalid {}",
+                 format!("Invalid header value for CreateAccountRequest1 - value: {} is invalid {}",
                      hdr_value, e))
         }
     }
 }
 
 #[cfg(any(feature = "client", feature = "server"))]
-impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateAccountRequest> {
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateAccountRequest1> {
     type Error = String;
 
     fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
         match hdr_value.to_str() {
              std::result::Result::Ok(value) => {
-                    match <CreateAccountRequest as std::str::FromStr>::from_str(value) {
+                    match <CreateAccountRequest1 as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into CreateAccountRequest - {}",
+                            format!("Unable to convert header value '{}' into CreateAccountRequest1 - {}",
                                 value, err))
                     }
              },
@@ -8841,11 +9010,11 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 pub struct CreateAccountResponse {
     #[serde(rename = "account")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub account: Option<models::Account1>,
+    pub account: Option<models::Account>,
 
-    #[serde(rename = "initialWorkspaceName")]
+    #[serde(rename = "initialWorkspaceId")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub initial_workspace_name: Option<String>,
+    pub initial_workspace_id: Option<String>,
 
 }
 
@@ -8855,7 +9024,7 @@ impl CreateAccountResponse {
     pub fn new() -> CreateAccountResponse {
         CreateAccountResponse {
             account: None,
-            initial_workspace_name: None,
+            initial_workspace_id: None,
         }
     }
 }
@@ -8869,10 +9038,10 @@ impl std::string::ToString for CreateAccountResponse {
             // Skipping account in query parameter serialization
 
 
-            self.initial_workspace_name.as_ref().map(|initial_workspace_name| {
+            self.initial_workspace_id.as_ref().map(|initial_workspace_id| {
                 [
-                    "initialWorkspaceName".to_string(),
-                    initial_workspace_name.to_string(),
+                    "initialWorkspaceId".to_string(),
+                    initial_workspace_id.to_string(),
                 ].join(",")
             }),
 
@@ -8893,8 +9062,8 @@ impl std::str::FromStr for CreateAccountResponse {
         #[derive(Default)]
         #[allow(dead_code)]
         struct IntermediateRep {
-            pub account: Vec<models::Account1>,
-            pub initial_workspace_name: Vec<String>,
+            pub account: Vec<models::Account>,
+            pub initial_workspace_id: Vec<String>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -8913,9 +9082,9 @@ impl std::str::FromStr for CreateAccountResponse {
                 #[allow(clippy::match_single_binding)]
                 match key {
                     #[allow(clippy::redundant_clone)]
-                    "account" => intermediate_rep.account.push(<models::Account1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "account" => intermediate_rep.account.push(<models::Account as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
-                    "initialWorkspaceName" => intermediate_rep.initial_workspace_name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "initialWorkspaceId" => intermediate_rep.initial_workspace_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing CreateAccountResponse".to_string())
                 }
             }
@@ -8927,7 +9096,7 @@ impl std::str::FromStr for CreateAccountResponse {
         // Use the intermediate representation to return the struct
         std::result::Result::Ok(CreateAccountResponse {
             account: intermediate_rep.account.into_iter().next(),
-            initial_workspace_name: intermediate_rep.initial_workspace_name.into_iter().next(),
+            initial_workspace_id: intermediate_rep.initial_workspace_id.into_iter().next(),
         })
     }
 }
@@ -8960,6 +9129,141 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into CreateAccountResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct CreateAccountResponse1 {
+    #[serde(rename = "account")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub account: Option<models::Account1>,
+
+    #[serde(rename = "initialWorkspaceName")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub initial_workspace_name: Option<String>,
+
+}
+
+
+impl CreateAccountResponse1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> CreateAccountResponse1 {
+        CreateAccountResponse1 {
+            account: None,
+            initial_workspace_name: None,
+        }
+    }
+}
+
+/// Converts the CreateAccountResponse1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for CreateAccountResponse1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping account in query parameter serialization
+
+
+            self.initial_workspace_name.as_ref().map(|initial_workspace_name| {
+                [
+                    "initialWorkspaceName".to_string(),
+                    initial_workspace_name.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateAccountResponse1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for CreateAccountResponse1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub account: Vec<models::Account1>,
+            pub initial_workspace_name: Vec<String>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing CreateAccountResponse1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "account" => intermediate_rep.account.push(<models::Account1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "initialWorkspaceName" => intermediate_rep.initial_workspace_name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateAccountResponse1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(CreateAccountResponse1 {
+            account: intermediate_rep.account.into_iter().next(),
+            initial_workspace_name: intermediate_rep.initial_workspace_name.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<CreateAccountResponse1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateAccountResponse1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateAccountResponse1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for CreateAccountResponse1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateAccountResponse1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <CreateAccountResponse1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into CreateAccountResponse1 - {}",
                                 value, err))
                     }
              },
@@ -9717,6 +10021,486 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into CreateOrganizationResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct CreateScrapingJobRequest {
+    #[serde(rename = "authPlatformUserId")]
+    pub auth_platform_user_id: String,
+
+    #[serde(rename = "orgId")]
+    pub org_id: String,
+
+    #[serde(rename = "tenantId")]
+    pub tenant_id: String,
+
+    #[serde(rename = "name")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub name: Option<String>,
+
+    #[serde(rename = "keywords")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub keywords: Option<Vec<String>>,
+
+    #[serde(rename = "lang")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub lang: Option<String>,
+
+    #[serde(rename = "zoom")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub zoom: Option<i32>,
+
+    #[serde(rename = "lat")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub lat: Option<String>,
+
+    #[serde(rename = "lon")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub lon: Option<String>,
+
+    #[serde(rename = "fastMode")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub fast_mode: Option<bool>,
+
+    #[serde(rename = "radius")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub radius: Option<i32>,
+
+    #[serde(rename = "depth")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub depth: Option<i32>,
+
+    #[serde(rename = "email")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub email: Option<bool>,
+
+    #[serde(rename = "maxTime")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub max_time: Option<i32>,
+
+    #[serde(rename = "proxies")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub proxies: Option<Vec<String>>,
+
+}
+
+
+impl CreateScrapingJobRequest {
+    #[allow(clippy::new_without_default)]
+    pub fn new(auth_platform_user_id: String, org_id: String, tenant_id: String, ) -> CreateScrapingJobRequest {
+        CreateScrapingJobRequest {
+            auth_platform_user_id,
+            org_id,
+            tenant_id,
+            name: None,
+            keywords: None,
+            lang: None,
+            zoom: None,
+            lat: None,
+            lon: None,
+            fast_mode: None,
+            radius: None,
+            depth: None,
+            email: None,
+            max_time: None,
+            proxies: None,
+        }
+    }
+}
+
+/// Converts the CreateScrapingJobRequest value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for CreateScrapingJobRequest {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            Some("authPlatformUserId".to_string()),
+            Some(self.auth_platform_user_id.to_string()),
+
+
+            Some("orgId".to_string()),
+            Some(self.org_id.to_string()),
+
+
+            Some("tenantId".to_string()),
+            Some(self.tenant_id.to_string()),
+
+
+            self.name.as_ref().map(|name| {
+                [
+                    "name".to_string(),
+                    name.to_string(),
+                ].join(",")
+            }),
+
+
+            self.keywords.as_ref().map(|keywords| {
+                [
+                    "keywords".to_string(),
+                    keywords.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.lang.as_ref().map(|lang| {
+                [
+                    "lang".to_string(),
+                    lang.to_string(),
+                ].join(",")
+            }),
+
+
+            self.zoom.as_ref().map(|zoom| {
+                [
+                    "zoom".to_string(),
+                    zoom.to_string(),
+                ].join(",")
+            }),
+
+
+            self.lat.as_ref().map(|lat| {
+                [
+                    "lat".to_string(),
+                    lat.to_string(),
+                ].join(",")
+            }),
+
+
+            self.lon.as_ref().map(|lon| {
+                [
+                    "lon".to_string(),
+                    lon.to_string(),
+                ].join(",")
+            }),
+
+
+            self.fast_mode.as_ref().map(|fast_mode| {
+                [
+                    "fastMode".to_string(),
+                    fast_mode.to_string(),
+                ].join(",")
+            }),
+
+
+            self.radius.as_ref().map(|radius| {
+                [
+                    "radius".to_string(),
+                    radius.to_string(),
+                ].join(",")
+            }),
+
+
+            self.depth.as_ref().map(|depth| {
+                [
+                    "depth".to_string(),
+                    depth.to_string(),
+                ].join(",")
+            }),
+
+
+            self.email.as_ref().map(|email| {
+                [
+                    "email".to_string(),
+                    email.to_string(),
+                ].join(",")
+            }),
+
+
+            self.max_time.as_ref().map(|max_time| {
+                [
+                    "maxTime".to_string(),
+                    max_time.to_string(),
+                ].join(",")
+            }),
+
+
+            self.proxies.as_ref().map(|proxies| {
+                [
+                    "proxies".to_string(),
+                    proxies.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateScrapingJobRequest value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for CreateScrapingJobRequest {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub auth_platform_user_id: Vec<String>,
+            pub org_id: Vec<String>,
+            pub tenant_id: Vec<String>,
+            pub name: Vec<String>,
+            pub keywords: Vec<Vec<String>>,
+            pub lang: Vec<String>,
+            pub zoom: Vec<i32>,
+            pub lat: Vec<String>,
+            pub lon: Vec<String>,
+            pub fast_mode: Vec<bool>,
+            pub radius: Vec<i32>,
+            pub depth: Vec<i32>,
+            pub email: Vec<bool>,
+            pub max_time: Vec<i32>,
+            pub proxies: Vec<Vec<String>>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing CreateScrapingJobRequest".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "authPlatformUserId" => intermediate_rep.auth_platform_user_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "orgId" => intermediate_rep.org_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "name" => intermediate_rep.name.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "keywords" => return std::result::Result::Err("Parsing a container in this style is not supported in CreateScrapingJobRequest".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "lang" => intermediate_rep.lang.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "zoom" => intermediate_rep.zoom.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "lat" => intermediate_rep.lat.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "lon" => intermediate_rep.lon.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "fastMode" => intermediate_rep.fast_mode.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "radius" => intermediate_rep.radius.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "depth" => intermediate_rep.depth.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "email" => intermediate_rep.email.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "maxTime" => intermediate_rep.max_time.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "proxies" => return std::result::Result::Err("Parsing a container in this style is not supported in CreateScrapingJobRequest".to_string()),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateScrapingJobRequest".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(CreateScrapingJobRequest {
+            auth_platform_user_id: intermediate_rep.auth_platform_user_id.into_iter().next().ok_or_else(|| "authPlatformUserId missing in CreateScrapingJobRequest".to_string())?,
+            org_id: intermediate_rep.org_id.into_iter().next().ok_or_else(|| "orgId missing in CreateScrapingJobRequest".to_string())?,
+            tenant_id: intermediate_rep.tenant_id.into_iter().next().ok_or_else(|| "tenantId missing in CreateScrapingJobRequest".to_string())?,
+            name: intermediate_rep.name.into_iter().next(),
+            keywords: intermediate_rep.keywords.into_iter().next(),
+            lang: intermediate_rep.lang.into_iter().next(),
+            zoom: intermediate_rep.zoom.into_iter().next(),
+            lat: intermediate_rep.lat.into_iter().next(),
+            lon: intermediate_rep.lon.into_iter().next(),
+            fast_mode: intermediate_rep.fast_mode.into_iter().next(),
+            radius: intermediate_rep.radius.into_iter().next(),
+            depth: intermediate_rep.depth.into_iter().next(),
+            email: intermediate_rep.email.into_iter().next(),
+            max_time: intermediate_rep.max_time.into_iter().next(),
+            proxies: intermediate_rep.proxies.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<CreateScrapingJobRequest> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateScrapingJobRequest>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateScrapingJobRequest>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for CreateScrapingJobRequest - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateScrapingJobRequest> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <CreateScrapingJobRequest as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into CreateScrapingJobRequest - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct CreateScrapingJobResponse {
+    #[serde(rename = "jobId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub job_id: Option<String>,
+
+    #[serde(rename = "status")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub status: Option<models::BackgroundJobStatus>,
+
+}
+
+
+impl CreateScrapingJobResponse {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> CreateScrapingJobResponse {
+        CreateScrapingJobResponse {
+            job_id: None,
+            status: None,
+        }
+    }
+}
+
+/// Converts the CreateScrapingJobResponse value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for CreateScrapingJobResponse {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+
+            self.job_id.as_ref().map(|job_id| {
+                [
+                    "jobId".to_string(),
+                    job_id.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping status in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateScrapingJobResponse value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for CreateScrapingJobResponse {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub job_id: Vec<String>,
+            pub status: Vec<models::BackgroundJobStatus>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing CreateScrapingJobResponse".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "jobId" => intermediate_rep.job_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "status" => intermediate_rep.status.push(<models::BackgroundJobStatus as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateScrapingJobResponse".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(CreateScrapingJobResponse {
+            job_id: intermediate_rep.job_id.into_iter().next(),
+            status: intermediate_rep.status.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<CreateScrapingJobResponse> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateScrapingJobResponse>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateScrapingJobResponse>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for CreateScrapingJobResponse - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateScrapingJobResponse> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <CreateScrapingJobResponse as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into CreateScrapingJobResponse - {}",
                                 value, err))
                     }
              },
@@ -10806,6 +11590,175 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 #[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
 #[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
 pub struct CreateWorkspaceRequest {
+    #[serde(rename = "workspace")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub workspace: Option<models::Workspace>,
+
+    #[serde(rename = "accountId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub account_id: Option<String>,
+
+    #[serde(rename = "organizationId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub organization_id: Option<String>,
+
+    #[serde(rename = "tenantId")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub tenant_id: Option<String>,
+
+}
+
+
+impl CreateWorkspaceRequest {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> CreateWorkspaceRequest {
+        CreateWorkspaceRequest {
+            workspace: None,
+            account_id: None,
+            organization_id: None,
+            tenant_id: None,
+        }
+    }
+}
+
+/// Converts the CreateWorkspaceRequest value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for CreateWorkspaceRequest {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping workspace in query parameter serialization
+
+
+            self.account_id.as_ref().map(|account_id| {
+                [
+                    "accountId".to_string(),
+                    account_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.organization_id.as_ref().map(|organization_id| {
+                [
+                    "organizationId".to_string(),
+                    organization_id.to_string(),
+                ].join(",")
+            }),
+
+
+            self.tenant_id.as_ref().map(|tenant_id| {
+                [
+                    "tenantId".to_string(),
+                    tenant_id.to_string(),
+                ].join(",")
+            }),
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateWorkspaceRequest value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for CreateWorkspaceRequest {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub workspace: Vec<models::Workspace>,
+            pub account_id: Vec<String>,
+            pub organization_id: Vec<String>,
+            pub tenant_id: Vec<String>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing CreateWorkspaceRequest".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "workspace" => intermediate_rep.workspace.push(<models::Workspace as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "accountId" => intermediate_rep.account_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "organizationId" => intermediate_rep.organization_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateWorkspaceRequest".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(CreateWorkspaceRequest {
+            workspace: intermediate_rep.workspace.into_iter().next(),
+            account_id: intermediate_rep.account_id.into_iter().next(),
+            organization_id: intermediate_rep.organization_id.into_iter().next(),
+            tenant_id: intermediate_rep.tenant_id.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<CreateWorkspaceRequest> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateWorkspaceRequest>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateWorkspaceRequest>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for CreateWorkspaceRequest - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateWorkspaceRequest> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <CreateWorkspaceRequest as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into CreateWorkspaceRequest - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct CreateWorkspaceRequest1 {
     #[serde(rename = "accountId")]
     #[serde(skip_serializing_if="Option::is_none")]
     pub account_id: Option<String>,
@@ -10836,10 +11789,10 @@ pub struct CreateWorkspaceRequest {
 }
 
 
-impl CreateWorkspaceRequest {
+impl CreateWorkspaceRequest1 {
     #[allow(clippy::new_without_default)]
-    pub fn new(name: String, ) -> CreateWorkspaceRequest {
-        CreateWorkspaceRequest {
+    pub fn new(name: String, ) -> CreateWorkspaceRequest1 {
+        CreateWorkspaceRequest1 {
             account_id: None,
             name,
             storage_quota: None,
@@ -10851,10 +11804,10 @@ impl CreateWorkspaceRequest {
     }
 }
 
-/// Converts the CreateWorkspaceRequest value to the Query Parameters representation (style=form, explode=false)
+/// Converts the CreateWorkspaceRequest1 value to the Query Parameters representation (style=form, explode=false)
 /// specified in https://swagger.io/docs/specification/serialization/
 /// Should be implemented in a serde serializer
-impl std::string::ToString for CreateWorkspaceRequest {
+impl std::string::ToString for CreateWorkspaceRequest1 {
     fn to_string(&self) -> String {
         let params: Vec<Option<String>> = vec![
 
@@ -10915,10 +11868,10 @@ impl std::string::ToString for CreateWorkspaceRequest {
     }
 }
 
-/// Converts Query Parameters representation (style=form, explode=false) to a CreateWorkspaceRequest value
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateWorkspaceRequest1 value
 /// as specified in https://swagger.io/docs/specification/serialization/
 /// Should be implemented in a serde deserializer
-impl std::str::FromStr for CreateWorkspaceRequest {
+impl std::str::FromStr for CreateWorkspaceRequest1 {
     type Err = String;
 
     fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
@@ -10944,7 +11897,7 @@ impl std::str::FromStr for CreateWorkspaceRequest {
         while key_result.is_some() {
             let val = match string_iter.next() {
                 Some(x) => x,
-                None => return std::result::Result::Err("Missing value while parsing CreateWorkspaceRequest".to_string())
+                None => return std::result::Result::Err("Missing value while parsing CreateWorkspaceRequest1".to_string())
             };
 
             if let Some(key) = key_result {
@@ -10964,7 +11917,7 @@ impl std::str::FromStr for CreateWorkspaceRequest {
                     "gdprCompliant" => intermediate_rep.gdpr_compliant.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "hipaaCompliant" => intermediate_rep.hipaa_compliant.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    _ => return std::result::Result::Err("Unexpected key while parsing CreateWorkspaceRequest".to_string())
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateWorkspaceRequest1".to_string())
                 }
             }
 
@@ -10973,9 +11926,9 @@ impl std::str::FromStr for CreateWorkspaceRequest {
         }
 
         // Use the intermediate representation to return the struct
-        std::result::Result::Ok(CreateWorkspaceRequest {
+        std::result::Result::Ok(CreateWorkspaceRequest1 {
             account_id: intermediate_rep.account_id.into_iter().next(),
-            name: intermediate_rep.name.into_iter().next().ok_or_else(|| "name missing in CreateWorkspaceRequest".to_string())?,
+            name: intermediate_rep.name.into_iter().next().ok_or_else(|| "name missing in CreateWorkspaceRequest1".to_string())?,
             storage_quota: intermediate_rep.storage_quota.into_iter().next(),
             allow_public_sharing: intermediate_rep.allow_public_sharing.into_iter().next(),
             require_approval: intermediate_rep.require_approval.into_iter().next(),
@@ -10985,34 +11938,34 @@ impl std::str::FromStr for CreateWorkspaceRequest {
     }
 }
 
-// Methods for converting between header::IntoHeaderValue<CreateWorkspaceRequest> and hyper::header::HeaderValue
+// Methods for converting between header::IntoHeaderValue<CreateWorkspaceRequest1> and hyper::header::HeaderValue
 
 #[cfg(any(feature = "client", feature = "server"))]
-impl std::convert::TryFrom<header::IntoHeaderValue<CreateWorkspaceRequest>> for hyper::header::HeaderValue {
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateWorkspaceRequest1>> for hyper::header::HeaderValue {
     type Error = String;
 
-    fn try_from(hdr_value: header::IntoHeaderValue<CreateWorkspaceRequest>) -> std::result::Result<Self, Self::Error> {
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateWorkspaceRequest1>) -> std::result::Result<Self, Self::Error> {
         let hdr_value = hdr_value.to_string();
         match hyper::header::HeaderValue::from_str(&hdr_value) {
              std::result::Result::Ok(value) => std::result::Result::Ok(value),
              std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for CreateWorkspaceRequest - value: {} is invalid {}",
+                 format!("Invalid header value for CreateWorkspaceRequest1 - value: {} is invalid {}",
                      hdr_value, e))
         }
     }
 }
 
 #[cfg(any(feature = "client", feature = "server"))]
-impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateWorkspaceRequest> {
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateWorkspaceRequest1> {
     type Error = String;
 
     fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
         match hdr_value.to_str() {
              std::result::Result::Ok(value) => {
-                    match <CreateWorkspaceRequest as std::str::FromStr>::from_str(value) {
+                    match <CreateWorkspaceRequest1 as std::str::FromStr>::from_str(value) {
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into CreateWorkspaceRequest - {}",
+                            format!("Unable to convert header value '{}' into CreateWorkspaceRequest1 - {}",
                                 value, err))
                     }
              },
@@ -11029,7 +11982,7 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 pub struct CreateWorkspaceResponse {
     #[serde(rename = "workspace")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub workspace: Option<models::Workspace1>,
+    pub workspace: Option<models::Workspace>,
 
 }
 
@@ -11068,7 +12021,7 @@ impl std::str::FromStr for CreateWorkspaceResponse {
         #[derive(Default)]
         #[allow(dead_code)]
         struct IntermediateRep {
-            pub workspace: Vec<models::Workspace1>,
+            pub workspace: Vec<models::Workspace>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -11087,7 +12040,7 @@ impl std::str::FromStr for CreateWorkspaceResponse {
                 #[allow(clippy::match_single_binding)]
                 match key {
                     #[allow(clippy::redundant_clone)]
-                    "workspace" => intermediate_rep.workspace.push(<models::Workspace1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "workspace" => intermediate_rep.workspace.push(<models::Workspace as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing CreateWorkspaceResponse".to_string())
                 }
             }
@@ -11131,6 +12084,124 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into CreateWorkspaceResponse - {}",
+                                value, err))
+                    }
+             },
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Unable to convert header: {:?} to string: {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+
+#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
+#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
+pub struct CreateWorkspaceResponse1 {
+    #[serde(rename = "workspace")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub workspace: Option<models::Workspace1>,
+
+}
+
+
+impl CreateWorkspaceResponse1 {
+    #[allow(clippy::new_without_default)]
+    pub fn new() -> CreateWorkspaceResponse1 {
+        CreateWorkspaceResponse1 {
+            workspace: None,
+        }
+    }
+}
+
+/// Converts the CreateWorkspaceResponse1 value to the Query Parameters representation (style=form, explode=false)
+/// specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde serializer
+impl std::string::ToString for CreateWorkspaceResponse1 {
+    fn to_string(&self) -> String {
+        let params: Vec<Option<String>> = vec![
+            // Skipping workspace in query parameter serialization
+
+        ];
+
+        params.into_iter().flatten().collect::<Vec<_>>().join(",")
+    }
+}
+
+/// Converts Query Parameters representation (style=form, explode=false) to a CreateWorkspaceResponse1 value
+/// as specified in https://swagger.io/docs/specification/serialization/
+/// Should be implemented in a serde deserializer
+impl std::str::FromStr for CreateWorkspaceResponse1 {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        /// An intermediate representation of the struct to use for parsing.
+        #[derive(Default)]
+        #[allow(dead_code)]
+        struct IntermediateRep {
+            pub workspace: Vec<models::Workspace1>,
+        }
+
+        let mut intermediate_rep = IntermediateRep::default();
+
+        // Parse into intermediate representation
+        let mut string_iter = s.split(',');
+        let mut key_result = string_iter.next();
+
+        while key_result.is_some() {
+            let val = match string_iter.next() {
+                Some(x) => x,
+                None => return std::result::Result::Err("Missing value while parsing CreateWorkspaceResponse1".to_string())
+            };
+
+            if let Some(key) = key_result {
+                #[allow(clippy::match_single_binding)]
+                match key {
+                    #[allow(clippy::redundant_clone)]
+                    "workspace" => intermediate_rep.workspace.push(<models::Workspace1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    _ => return std::result::Result::Err("Unexpected key while parsing CreateWorkspaceResponse1".to_string())
+                }
+            }
+
+            // Get the next key
+            key_result = string_iter.next();
+        }
+
+        // Use the intermediate representation to return the struct
+        std::result::Result::Ok(CreateWorkspaceResponse1 {
+            workspace: intermediate_rep.workspace.into_iter().next(),
+        })
+    }
+}
+
+// Methods for converting between header::IntoHeaderValue<CreateWorkspaceResponse1> and hyper::header::HeaderValue
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<header::IntoHeaderValue<CreateWorkspaceResponse1>> for hyper::header::HeaderValue {
+    type Error = String;
+
+    fn try_from(hdr_value: header::IntoHeaderValue<CreateWorkspaceResponse1>) -> std::result::Result<Self, Self::Error> {
+        let hdr_value = hdr_value.to_string();
+        match hyper::header::HeaderValue::from_str(&hdr_value) {
+             std::result::Result::Ok(value) => std::result::Result::Ok(value),
+             std::result::Result::Err(e) => std::result::Result::Err(
+                 format!("Invalid header value for CreateWorkspaceResponse1 - value: {} is invalid {}",
+                     hdr_value, e))
+        }
+    }
+}
+
+#[cfg(any(feature = "client", feature = "server"))]
+impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<CreateWorkspaceResponse1> {
+    type Error = String;
+
+    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
+        match hdr_value.to_str() {
+             std::result::Result::Ok(value) => {
+                    match <CreateWorkspaceResponse1 as std::str::FromStr>::from_str(value) {
+                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
+                        std::result::Result::Err(err) => std::result::Result::Err(
+                            format!("Unable to convert header value '{}' into CreateWorkspaceResponse1 - {}",
                                 value, err))
                     }
              },
@@ -18642,7 +19713,7 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
 pub struct GetWorkspaceResponse {
     #[serde(rename = "workspace")]
     #[serde(skip_serializing_if="Option::is_none")]
-    pub workspace: Option<models::Workspace>,
+    pub workspace: Option<models::Workspace1>,
 
 }
 
@@ -18681,7 +19752,7 @@ impl std::str::FromStr for GetWorkspaceResponse {
         #[derive(Default)]
         #[allow(dead_code)]
         struct IntermediateRep {
-            pub workspace: Vec<models::Workspace>,
+            pub workspace: Vec<models::Workspace1>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -18700,7 +19771,7 @@ impl std::str::FromStr for GetWorkspaceResponse {
                 #[allow(clippy::match_single_binding)]
                 match key {
                     #[allow(clippy::redundant_clone)]
-                    "workspace" => intermediate_rep.workspace.push(<models::Workspace as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "workspace" => intermediate_rep.workspace.push(<models::Workspace1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing GetWorkspaceResponse".to_string())
                 }
             }
@@ -18744,124 +19815,6 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
                         std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
                         std::result::Result::Err(err) => std::result::Result::Err(
                             format!("Unable to convert header value '{}' into GetWorkspaceResponse - {}",
-                                value, err))
-                    }
-             },
-             std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Unable to convert header: {:?} to string: {}",
-                     hdr_value, e))
-        }
-    }
-}
-
-
-#[derive(Debug, Clone, PartialEq, serde::Serialize, serde::Deserialize, validator::Validate)]
-#[cfg_attr(feature = "conversion", derive(frunk::LabelledGeneric))]
-pub struct GetWorkspaceResponse1 {
-    #[serde(rename = "workspace")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub workspace: Option<models::Workspace1>,
-
-}
-
-
-impl GetWorkspaceResponse1 {
-    #[allow(clippy::new_without_default)]
-    pub fn new() -> GetWorkspaceResponse1 {
-        GetWorkspaceResponse1 {
-            workspace: None,
-        }
-    }
-}
-
-/// Converts the GetWorkspaceResponse1 value to the Query Parameters representation (style=form, explode=false)
-/// specified in https://swagger.io/docs/specification/serialization/
-/// Should be implemented in a serde serializer
-impl std::string::ToString for GetWorkspaceResponse1 {
-    fn to_string(&self) -> String {
-        let params: Vec<Option<String>> = vec![
-            // Skipping workspace in query parameter serialization
-
-        ];
-
-        params.into_iter().flatten().collect::<Vec<_>>().join(",")
-    }
-}
-
-/// Converts Query Parameters representation (style=form, explode=false) to a GetWorkspaceResponse1 value
-/// as specified in https://swagger.io/docs/specification/serialization/
-/// Should be implemented in a serde deserializer
-impl std::str::FromStr for GetWorkspaceResponse1 {
-    type Err = String;
-
-    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
-        /// An intermediate representation of the struct to use for parsing.
-        #[derive(Default)]
-        #[allow(dead_code)]
-        struct IntermediateRep {
-            pub workspace: Vec<models::Workspace1>,
-        }
-
-        let mut intermediate_rep = IntermediateRep::default();
-
-        // Parse into intermediate representation
-        let mut string_iter = s.split(',');
-        let mut key_result = string_iter.next();
-
-        while key_result.is_some() {
-            let val = match string_iter.next() {
-                Some(x) => x,
-                None => return std::result::Result::Err("Missing value while parsing GetWorkspaceResponse1".to_string())
-            };
-
-            if let Some(key) = key_result {
-                #[allow(clippy::match_single_binding)]
-                match key {
-                    #[allow(clippy::redundant_clone)]
-                    "workspace" => intermediate_rep.workspace.push(<models::Workspace1 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    _ => return std::result::Result::Err("Unexpected key while parsing GetWorkspaceResponse1".to_string())
-                }
-            }
-
-            // Get the next key
-            key_result = string_iter.next();
-        }
-
-        // Use the intermediate representation to return the struct
-        std::result::Result::Ok(GetWorkspaceResponse1 {
-            workspace: intermediate_rep.workspace.into_iter().next(),
-        })
-    }
-}
-
-// Methods for converting between header::IntoHeaderValue<GetWorkspaceResponse1> and hyper::header::HeaderValue
-
-#[cfg(any(feature = "client", feature = "server"))]
-impl std::convert::TryFrom<header::IntoHeaderValue<GetWorkspaceResponse1>> for hyper::header::HeaderValue {
-    type Error = String;
-
-    fn try_from(hdr_value: header::IntoHeaderValue<GetWorkspaceResponse1>) -> std::result::Result<Self, Self::Error> {
-        let hdr_value = hdr_value.to_string();
-        match hyper::header::HeaderValue::from_str(&hdr_value) {
-             std::result::Result::Ok(value) => std::result::Result::Ok(value),
-             std::result::Result::Err(e) => std::result::Result::Err(
-                 format!("Invalid header value for GetWorkspaceResponse1 - value: {} is invalid {}",
-                     hdr_value, e))
-        }
-    }
-}
-
-#[cfg(any(feature = "client", feature = "server"))]
-impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderValue<GetWorkspaceResponse1> {
-    type Error = String;
-
-    fn try_from(hdr_value: hyper::header::HeaderValue) -> std::result::Result<Self, Self::Error> {
-        match hdr_value.to_str() {
-             std::result::Result::Ok(value) => {
-                    match <GetWorkspaceResponse1 as std::str::FromStr>::from_str(value) {
-                        std::result::Result::Ok(value) => std::result::Result::Ok(header::IntoHeaderValue(value)),
-                        std::result::Result::Err(err) => std::result::Result::Err(
-                            format!("Unable to convert header value '{}' into GetWorkspaceResponse1 - {}",
                                 value, err))
                     }
              },

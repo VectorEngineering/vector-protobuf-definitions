@@ -8,11 +8,14 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | Class | Method | HTTP request | Description |
 |------------ | ------------- | ------------- | -------------|
 | *LeadScraperServiceApi* | [**createAPIKey**](Apis/LeadScraperServiceApi.md#createapikey) | **POST** /lead-scraper-microservice/api/v1/api-keys | Create a new API key |
+*LeadScraperServiceApi* | [**createAccount**](Apis/LeadScraperServiceApi.md#createaccount) | **POST** /lead-scraper-microservice/api/v1/account | Create a new account |
 *LeadScraperServiceApi* | [**createOrganization**](Apis/LeadScraperServiceApi.md#createorganization) | **POST** /lead-scraper-microservice/api/v1/organization | Create a new organization |
+*LeadScraperServiceApi* | [**createScrapingJob**](Apis/LeadScraperServiceApi.md#createscrapingjob) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task |
 *LeadScraperServiceApi* | [**createTenant**](Apis/LeadScraperServiceApi.md#createtenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant |
 *LeadScraperServiceApi* | [**createTenantAPIKey**](Apis/LeadScraperServiceApi.md#createtenantapikey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key |
 *LeadScraperServiceApi* | [**createWebhook**](Apis/LeadScraperServiceApi.md#createwebhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook |
 *LeadScraperServiceApi* | [**createWorkflow**](Apis/LeadScraperServiceApi.md#createworkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow |
+*LeadScraperServiceApi* | [**createWorkspace**](Apis/LeadScraperServiceApi.md#createworkspace) | **POST** /lead-scraper-microservice/api/v1/workspaces | Create a new workspace |
 *LeadScraperServiceApi* | [**deleteAPIKey**](Apis/LeadScraperServiceApi.md#deleteapikey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key |
 *LeadScraperServiceApi* | [**deleteAccount**](Apis/LeadScraperServiceApi.md#deleteaccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account |
 *LeadScraperServiceApi* | [**deleteOrganization**](Apis/LeadScraperServiceApi.md#deleteorganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization |
@@ -58,8 +61,8 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 *LeadScraperServiceApi* | [**updateWebhook**](Apis/LeadScraperServiceApi.md#updatewebhook) | **PUT** /lead-scraper-microservice/api/v1/webhooks | Update webhook |
 *LeadScraperServiceApi* | [**updateWorkflow**](Apis/LeadScraperServiceApi.md#updateworkflow) | **PUT** /lead-scraper-microservice/api/v1/workspaces/workflow | Update workflow details |
 *LeadScraperServiceApi* | [**updateWorkspace**](Apis/LeadScraperServiceApi.md#updateworkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details |
-| *WorkspaceServiceApi* | [**createAccount**](Apis/WorkspaceServiceApi.md#createaccount) | **POST** /workspace-service/v1/accounts | Create a new account |
-*WorkspaceServiceApi* | [**createWorkspace**](Apis/WorkspaceServiceApi.md#createworkspace) | **POST** /workspace-service/v1/workspaces | Create workspace |
+| *WorkspaceServiceApi* | [**createAccount1**](Apis/WorkspaceServiceApi.md#createaccount1) | **POST** /workspace-service/v1/accounts | Create a new account |
+*WorkspaceServiceApi* | [**createWorkspace1**](Apis/WorkspaceServiceApi.md#createworkspace1) | **POST** /workspace-service/v1/workspaces | Create workspace |
 *WorkspaceServiceApi* | [**deleteAccount1**](Apis/WorkspaceServiceApi.md#deleteaccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account |
 *WorkspaceServiceApi* | [**deleteWorkspace1**](Apis/WorkspaceServiceApi.md#deleteworkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace |
 *WorkspaceServiceApi* | [**getAccount1**](Apis/WorkspaceServiceApi.md#getaccount1) | **GET** /workspace-service/v1/accounts/{id} | Get account details |
@@ -122,9 +125,13 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [CreateAPIKeyRequest](./Models/CreateAPIKeyRequest.md)
  - [CreateAPIKeyResponse](./Models/CreateAPIKeyResponse.md)
  - [CreateAccountRequest](./Models/CreateAccountRequest.md)
+ - [CreateAccountRequest1](./Models/CreateAccountRequest1.md)
  - [CreateAccountResponse](./Models/CreateAccountResponse.md)
+ - [CreateAccountResponse1](./Models/CreateAccountResponse1.md)
  - [CreateOrganizationRequest](./Models/CreateOrganizationRequest.md)
  - [CreateOrganizationResponse](./Models/CreateOrganizationResponse.md)
+ - [CreateScrapingJobRequest](./Models/CreateScrapingJobRequest.md)
+ - [CreateScrapingJobResponse](./Models/CreateScrapingJobResponse.md)
  - [CreateTenantAPIKeyRequest](./Models/CreateTenantAPIKeyRequest.md)
  - [CreateTenantAPIKeyResponse](./Models/CreateTenantAPIKeyResponse.md)
  - [CreateTenantBody](./Models/CreateTenantBody.md)
@@ -134,7 +141,9 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [CreateWorkflowBody](./Models/CreateWorkflowBody.md)
  - [CreateWorkflowResponse](./Models/CreateWorkflowResponse.md)
  - [CreateWorkspaceRequest](./Models/CreateWorkspaceRequest.md)
+ - [CreateWorkspaceRequest1](./Models/CreateWorkspaceRequest1.md)
  - [CreateWorkspaceResponse](./Models/CreateWorkspaceResponse.md)
+ - [CreateWorkspaceResponse1](./Models/CreateWorkspaceResponse1.md)
  - [DataProfile](./Models/DataProfile.md)
  - [DayOfWeek](./Models/DayOfWeek.md)
  - [DeleteAPIKeyResponse](./Models/DeleteAPIKeyResponse.md)
@@ -181,7 +190,6 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [GetWorkspaceAnalyticsResponse1](./Models/GetWorkspaceAnalyticsResponse1.md)
  - [GetWorkspaceComplianceReportResponse](./Models/GetWorkspaceComplianceReportResponse.md)
  - [GetWorkspaceResponse](./Models/GetWorkspaceResponse.md)
- - [GetWorkspaceResponse1](./Models/GetWorkspaceResponse1.md)
  - [GetWorkspaceStorageStatsResponse](./Models/GetWorkspaceStorageStatsResponse.md)
  - [GoneErrorMessageResponse](./Models/GoneErrorMessageResponse.md)
  - [IncludedField](./Models/IncludedField.md)

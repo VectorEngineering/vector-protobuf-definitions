@@ -18,9 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from playbookmedia_backend_client_sdk.models.compliance_level import ComplianceLevel
+from playbookmedia_backend_client_sdk.models.account import Account
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,18 +28,11 @@ class CreateAccountRequest(BaseModel):
     """
     CreateAccountRequest
     """ # noqa: E501
-    auth0_user_id: StrictStr = Field(alias="auth0UserId")
-    email: StrictStr
-    base_directory: Optional[StrictStr] = Field(default=None, alias="baseDirectory")
-    region: Optional[StrictStr] = None
-    org_id: Optional[StrictStr] = Field(default=None, alias="orgId")
+    account: Optional[Account] = None
+    initial_workspace_name: Optional[StrictStr] = Field(default=None, alias="initialWorkspaceName")
+    organization_id: Optional[StrictStr] = Field(default=None, alias="organizationId")
     tenant_id: Optional[StrictStr] = Field(default=None, alias="tenantId")
-    roles: Optional[List[StrictStr]] = None
-    permissions: Optional[List[StrictStr]] = None
-    mfa_enabled: Optional[StrictBool] = Field(default=None, alias="mfaEnabled")
-    compliance_level: Optional[ComplianceLevel] = Field(default=ComplianceLevel.UNSPECIFIED, alias="complianceLevel")
-    preferences: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["auth0UserId", "email", "baseDirectory", "region", "orgId", "tenantId", "roles", "permissions", "mfaEnabled", "complianceLevel", "preferences"]
+    __properties: ClassVar[List[str]] = ["account", "initialWorkspaceName", "organizationId", "tenantId"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,6 +73,9 @@ class CreateAccountRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of account
+        if self.account:
+            _dict['account'] = self.account.to_dict()
         return _dict
 
     @classmethod
@@ -92,17 +88,10 @@ class CreateAccountRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "auth0UserId": obj.get("auth0UserId"),
-            "email": obj.get("email"),
-            "baseDirectory": obj.get("baseDirectory"),
-            "region": obj.get("region"),
-            "orgId": obj.get("orgId"),
-            "tenantId": obj.get("tenantId"),
-            "roles": obj.get("roles"),
-            "permissions": obj.get("permissions"),
-            "mfaEnabled": obj.get("mfaEnabled"),
-            "complianceLevel": obj.get("complianceLevel") if obj.get("complianceLevel") is not None else ComplianceLevel.UNSPECIFIED,
-            "preferences": obj.get("preferences")
+            "account": Account.from_dict(obj["account"]) if obj.get("account") is not None else None,
+            "initialWorkspaceName": obj.get("initialWorkspaceName"),
+            "organizationId": obj.get("organizationId"),
+            "tenantId": obj.get("tenantId")
         })
         return _obj
 

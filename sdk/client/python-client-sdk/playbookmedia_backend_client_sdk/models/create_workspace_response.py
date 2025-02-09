@@ -20,7 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
-from playbookmedia_backend_client_sdk.models.workspace1 import Workspace1
+from playbookmedia_backend_client_sdk.models.workspace import Workspace
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +28,7 @@ class CreateWorkspaceResponse(BaseModel):
     """
     CreateWorkspaceResponse
     """ # noqa: E501
-    workspace: Optional[Workspace1] = None
+    workspace: Optional[Workspace] = None
     __properties: ClassVar[List[str]] = ["workspace"]
 
     model_config = ConfigDict(
@@ -85,7 +85,7 @@ class CreateWorkspaceResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "workspace": Workspace1.from_dict(obj["workspace"]) if obj.get("workspace") is not None else None
+            "workspace": Workspace.from_dict(obj["workspace"]) if obj.get("workspace") is not None else None
         })
         return _obj
 

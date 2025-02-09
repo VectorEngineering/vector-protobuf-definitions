@@ -21,12 +21,15 @@ pub use crate::context;
 type ServiceFuture = BoxFuture<'static, Result<Response<Body>, crate::ServiceError>>;
 
 use crate::{Api,
+     CreateAccountResponse,
      CreateApiKeyResponse,
      CreateOrganizationResponse,
+     CreateScrapingJobResponse,
      CreateTenantResponse,
      CreateTenantApiKeyResponse,
      CreateWebhookResponse,
      CreateWorkflowResponse,
+     CreateWorkspaceResponse,
      DeleteAccountResponse,
      DeleteApiKeyResponse,
      DeleteOrganizationResponse,
@@ -72,8 +75,8 @@ use crate::{Api,
      UpdateWebhookResponse,
      UpdateWorkflowResponse,
      UpdateWorkspaceResponse,
-     CreateAccountResponse,
-     CreateWorkspaceResponse,
+     CreateAccount1Response,
+     CreateWorkspace1Response,
      DeleteAccount1Response,
      DeleteWorkspace1Response,
      GetAccount1Response,
@@ -97,6 +100,7 @@ mod paths {
 
     lazy_static! {
         pub static ref GLOBAL_REGEX_SET: regex::RegexSet = regex::RegexSet::new(vec![
+            r"^/lead-scraper-microservice/api/v1/account$",
             r"^/lead-scraper-microservice/api/v1/accounts/list$",
             r"^/lead-scraper-microservice/api/v1/accounts/settings$",
             r"^/lead-scraper-microservice/api/v1/accounts/update$",
@@ -148,210 +152,211 @@ mod paths {
         ])
         .expect("Unable to create global regex set");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_LIST: usize = 0;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_SETTINGS: usize = 1;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_UPDATE: usize = 2;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID: usize = 3;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNT: usize = 0;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_LIST: usize = 1;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_SETTINGS: usize = 2;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_UPDATE: usize = 3;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID: usize = 4;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/accounts/(?P<id>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID_USAGE: usize = 4;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID_USAGE: usize = 5;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID_USAGE: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/accounts/(?P<id>[^/?#]*)/usage$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID_USAGE");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS: usize = 5;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_LIST: usize = 6;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_ROTATE: usize = 7;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_KEYID: usize = 8;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS: usize = 6;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_LIST: usize = 7;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_ROTATE: usize = 8;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_KEYID: usize = 9;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_KEYID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/api-keys/(?P<keyId>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS_KEYID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS: usize = 9;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID: usize = 10;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS: usize = 10;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID: usize = 11;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/jobs/(?P<jobId>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID_DOWNLOAD: usize = 11;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID_DOWNLOAD: usize = 12;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID_DOWNLOAD: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/jobs/(?P<jobId>[^/?#]*)/download$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS_JOBID_DOWNLOAD");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_LEADS: usize = 12;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_LEADS_LEADID: usize = 13;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_LEADS: usize = 13;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_LEADS_LEADID: usize = 14;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_LEADS_LEADID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/leads/(?P<leadId>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_LEADS_LEADID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION: usize = 14;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID: usize = 15;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION: usize = 15;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID: usize = 16;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/organization/tenants/(?P<organizationId>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID_TENANTID: usize = 16;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID_TENANTID: usize = 17;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID_TENANTID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/organization/tenants/(?P<organizationId>[^/?#]*)/(?P<tenantId>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_TENANTS_ORGANIZATIONID_TENANTID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_ID: usize = 17;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_ID: usize = 18;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_ID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/organization/(?P<id>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION_ID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS: usize = 18;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS: usize = 19;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_LIST: usize = 20;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_ROTATE: usize = 21;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_KEYID: usize = 22;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS: usize = 19;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS: usize = 20;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_LIST: usize = 21;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_ROTATE: usize = 22;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_KEYID: usize = 23;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_KEYID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/organizations/tenants/api-keys/(?P<keyId>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_API_KEYS_KEYID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_ORGANIZATIONID_TENANTID: usize = 23;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_ORGANIZATIONID_TENANTID: usize = 24;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_ORGANIZATIONID_TENANTID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/organizations/tenants/(?P<organizationId>[^/?#]*)/(?P<tenantId>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_TENANTS_ORGANIZATIONID_TENANTID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_ORGANIZATIONID_TENANTS: usize = 24;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_ORGANIZATIONID_TENANTS: usize = 25;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_ORGANIZATIONID_TENANTS: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/organizations/(?P<organizationId>[^/?#]*)/tenants$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_ORGANIZATIONID_TENANTS");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS: usize = 25;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS_WEBHOOKID: usize = 26;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS: usize = 26;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS_WEBHOOKID: usize = 27;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS_WEBHOOKID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/webhooks/(?P<webhookId>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS_WEBHOOKID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACE: usize = 27;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACE_ID: usize = 28;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACE: usize = 28;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACE_ID: usize = 29;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACE_ID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/workspace/(?P<id>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACE_ID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES: usize = 29;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKFLOW: usize = 30;
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_ANALYTICS: usize = 31;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES: usize = 30;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKFLOW: usize = 31;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_ANALYTICS: usize = 32;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_ANALYTICS: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/workspaces/(?P<workspaceId>[^/?#]*)/analytics$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_ANALYTICS");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS: usize = 32;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS: usize = 33;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/workspaces/(?P<workspaceId>[^/?#]*)/workflows$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID: usize = 33;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID: usize = 34;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/workspaces/(?P<workspaceId>[^/?#]*)/workflows/(?P<id>[^/?#]*)$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_PAUSE: usize = 34;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_PAUSE: usize = 35;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_PAUSE: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/workspaces/(?P<workspaceId>[^/?#]*)/workflows/(?P<id>[^/?#]*)/pause$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_PAUSE");
     }
-    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_TRIGGER: usize = 35;
+    pub(crate) static ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_TRIGGER: usize = 36;
     lazy_static! {
         pub static ref REGEX_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_TRIGGER: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/lead-scraper-microservice/api/v1/workspaces/(?P<workspaceId>[^/?#]*)/workflows/(?P<id>[^/?#]*)/trigger$")
                 .expect("Unable to create regex for LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS_ID_TRIGGER");
     }
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_ACCOUNTS: usize = 36;
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_ACCOUNTS_ID: usize = 37;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_ACCOUNTS: usize = 37;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_ACCOUNTS_ID: usize = 38;
     lazy_static! {
         pub static ref REGEX_WORKSPACE_SERVICE_V1_ACCOUNTS_ID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/workspace-service/v1/accounts/(?P<id>[^/?#]*)$")
                 .expect("Unable to create regex for WORKSPACE_SERVICE_V1_ACCOUNTS_ID");
     }
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACE_SHARINGS: usize = 38;
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACE_SHARINGS_SHARINGID: usize = 39;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACE_SHARINGS: usize = 39;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACE_SHARINGS_SHARINGID: usize = 40;
     lazy_static! {
         pub static ref REGEX_WORKSPACE_SERVICE_V1_WORKSPACE_SHARINGS_SHARINGID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/workspace-service/v1/workspace-sharings/(?P<sharingId>[^/?#]*)$")
                 .expect("Unable to create regex for WORKSPACE_SERVICE_V1_WORKSPACE_SHARINGS_SHARINGID");
     }
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES: usize = 40;
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_ANALYTICS_WORKSPACEID: usize = 41;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES: usize = 41;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_ANALYTICS_WORKSPACEID: usize = 42;
     lazy_static! {
         pub static ref REGEX_WORKSPACE_SERVICE_V1_WORKSPACES_ANALYTICS_WORKSPACEID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/workspace-service/v1/workspaces/analytics/(?P<workspaceId>[^/?#]*)$")
                 .expect("Unable to create regex for WORKSPACE_SERVICE_V1_WORKSPACES_ANALYTICS_WORKSPACEID");
     }
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_COMPLIANCE_REPORT_WORKSPACEID: usize = 42;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_COMPLIANCE_REPORT_WORKSPACEID: usize = 43;
     lazy_static! {
         pub static ref REGEX_WORKSPACE_SERVICE_V1_WORKSPACES_COMPLIANCE_REPORT_WORKSPACEID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/workspace-service/v1/workspaces/compliance-report/(?P<workspaceId>[^/?#]*)$")
                 .expect("Unable to create regex for WORKSPACE_SERVICE_V1_WORKSPACES_COMPLIANCE_REPORT_WORKSPACEID");
     }
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_LIST: usize = 43;
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_SHARINGS_WORKSPACEID: usize = 44;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_LIST: usize = 44;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_SHARINGS_WORKSPACEID: usize = 45;
     lazy_static! {
         pub static ref REGEX_WORKSPACE_SERVICE_V1_WORKSPACES_SHARINGS_WORKSPACEID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/workspace-service/v1/workspaces/sharings/(?P<workspaceId>[^/?#]*)$")
                 .expect("Unable to create regex for WORKSPACE_SERVICE_V1_WORKSPACES_SHARINGS_WORKSPACEID");
     }
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_STORAGE_STATS_WORKSPACEID: usize = 45;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_STORAGE_STATS_WORKSPACEID: usize = 46;
     lazy_static! {
         pub static ref REGEX_WORKSPACE_SERVICE_V1_WORKSPACES_STORAGE_STATS_WORKSPACEID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/workspace-service/v1/workspaces/storage-stats/(?P<workspaceId>[^/?#]*)$")
                 .expect("Unable to create regex for WORKSPACE_SERVICE_V1_WORKSPACES_STORAGE_STATS_WORKSPACEID");
     }
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_ID: usize = 46;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_ID: usize = 47;
     lazy_static! {
         pub static ref REGEX_WORKSPACE_SERVICE_V1_WORKSPACES_ID: regex::Regex =
             #[allow(clippy::invalid_regex)]
             regex::Regex::new(r"^/workspace-service/v1/workspaces/(?P<id>[^/?#]*)$")
                 .expect("Unable to create regex for WORKSPACE_SERVICE_V1_WORKSPACES_ID");
     }
-    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_WORKSPACEID_SHARE: usize = 47;
+    pub(crate) static ID_WORKSPACE_SERVICE_V1_WORKSPACES_WORKSPACEID_SHARE: usize = 48;
     lazy_static! {
         pub static ref REGEX_WORKSPACE_SERVICE_V1_WORKSPACES_WORKSPACEID_SHARE: regex::Regex =
             #[allow(clippy::invalid_regex)]
@@ -463,6 +468,295 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
         let path = paths::GLOBAL_REGEX_SET.matches(uri.path());
 
         match method {
+
+            // CreateAccount - POST /lead-scraper-microservice/api/v1/account
+            hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNT) => {
+                // Body parameters (note that non-required body parameters will ignore garbage
+                // values, rather than causing a 400 response). Produce warning header and logs for
+                // any unused fields.
+                let result = body.into_raw().await;
+                match result {
+                            Ok(body) => {
+                                let mut unused_elements = Vec::new();
+                                let param_create_account_request: Option<models::CreateAccountRequest> = if !body.is_empty() {
+                                    let deserializer = &mut serde_json::Deserializer::from_slice(&body);
+                                    match serde_ignored::deserialize(deserializer, |path| {
+                                            warn!("Ignoring unknown field in body: {}", path);
+                                            unused_elements.push(path.to_string());
+                                    }) {
+                                        Ok(param_create_account_request) => param_create_account_request,
+                                        Err(e) => return Ok(Response::builder()
+                                                        .status(StatusCode::BAD_REQUEST)
+                                                        .body(Body::from(format!("Couldn't parse body parameter CreateAccountRequest - doesn't match schema: {}", e)))
+                                                        .expect("Unable to create Bad Request response for invalid body parameter CreateAccountRequest due to schema")),
+                                    }
+                                } else {
+                                    None
+                                };
+                                let param_create_account_request = match param_create_account_request {
+                                    Some(param_create_account_request) => param_create_account_request,
+                                    None => return Ok(Response::builder()
+                                                        .status(StatusCode::BAD_REQUEST)
+                                                        .body(Body::from("Missing required body parameter CreateAccountRequest"))
+                                                        .expect("Unable to create Bad Request response for missing body parameter CreateAccountRequest")),
+                                };
+
+                                let result = api_impl.create_account(
+                                            param_create_account_request,
+                                        &context
+                                    ).await;
+                                let mut response = Response::new(Body::empty());
+                                response.headers_mut().insert(
+                                            HeaderName::from_static("x-span-id"),
+                                            HeaderValue::from_str((&context as &dyn Has<XSpanIdString>).get().0.clone().as_str())
+                                                .expect("Unable to create X-Span-ID header value"));
+
+                                        if !unused_elements.is_empty() {
+                                            response.headers_mut().insert(
+                                                HeaderName::from_static("warning"),
+                                                HeaderValue::from_str(format!("Ignoring unknown fields in body: {:?}", unused_elements).as_str())
+                                                    .expect("Unable to create Warning header value"));
+                                        }
+
+                                        match result {
+                                            Ok(rsp) => match rsp {
+                                                CreateAccountResponse::ASuccessfulResponse
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(200).expect("Unable to turn 200 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_A_SUCCESSFUL_RESPONSE"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::AccountCreatedSuccessfully
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(201).expect("Unable to turn 201 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_ACCOUNT_CREATED_SUCCESSFULLY"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::BadRequest
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(400).expect("Unable to turn 400 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_BAD_REQUEST"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::Unauthorized
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(401).expect("Unable to turn 401 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_UNAUTHORIZED"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::PaymentRequired
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(402).expect("Unable to turn 402 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_PAYMENT_REQUIRED"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::Forbidden
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(403).expect("Unable to turn 403 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_FORBIDDEN"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::NotFound
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(404).expect("Unable to turn 404 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_NOT_FOUND"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::MethodNotAllowed
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(405).expect("Unable to turn 405 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_METHOD_NOT_ALLOWED"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::Conflict
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(409).expect("Unable to turn 409 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_CONFLICT"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::Gone
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(410).expect("Unable to turn 410 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_GONE"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::PreconditionFailed
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(412).expect("Unable to turn 412 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_PRECONDITION_FAILED"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::UnprocessableEntity
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(422).expect("Unable to turn 422 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_UNPROCESSABLE_ENTITY"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::TooEarly
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(425).expect("Unable to turn 425 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_TOO_EARLY"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::TooManyRequests
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(429).expect("Unable to turn 429 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_TOO_MANY_REQUESTS"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::InternalServerError
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(500).expect("Unable to turn 500 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_INTERNAL_SERVER_ERROR"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::NotImplemented
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(501).expect("Unable to turn 501 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_NOT_IMPLEMENTED"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::BadGateway
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(502).expect("Unable to turn 502 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_BAD_GATEWAY"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::ServiceUnavailable
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(503).expect("Unable to turn 503 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_SERVICE_UNAVAILABLE"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::GatewayTimeout
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(504).expect("Unable to turn 504 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_GATEWAY_TIMEOUT"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateAccountResponse::AnUnexpectedErrorResponse
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(0).expect("Unable to turn 0 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_AN_UNEXPECTED_ERROR_RESPONSE"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                            },
+                                            Err(_) => {
+                                                // Application code returned an error. This should not happen, as the implementation should
+                                                // return a valid response.
+                                                *response.status_mut() = StatusCode::INTERNAL_SERVER_ERROR;
+                                                *response.body_mut() = Body::from("An internal error occurred");
+                                            },
+                                        }
+
+                                        Ok(response)
+                            },
+                            Err(e) => Ok(Response::builder()
+                                                .status(StatusCode::BAD_REQUEST)
+                                                .body(Body::from(format!("Couldn't read body parameter CreateAccountRequest: {}", e)))
+                                                .expect("Unable to create Bad Request response due to unable to read body parameter CreateAccountRequest")),
+                        }
+            },
 
             // CreateApiKey - POST /lead-scraper-microservice/api/v1/api-keys
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS) => {
@@ -1028,6 +1322,295 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                                                 .status(StatusCode::BAD_REQUEST)
                                                 .body(Body::from(format!("Couldn't read body parameter CreateOrganizationRequest: {}", e)))
                                                 .expect("Unable to create Bad Request response due to unable to read body parameter CreateOrganizationRequest")),
+                        }
+            },
+
+            // CreateScrapingJob - POST /lead-scraper-microservice/api/v1/jobs
+            hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS) => {
+                // Body parameters (note that non-required body parameters will ignore garbage
+                // values, rather than causing a 400 response). Produce warning header and logs for
+                // any unused fields.
+                let result = body.into_raw().await;
+                match result {
+                            Ok(body) => {
+                                let mut unused_elements = Vec::new();
+                                let param_create_scraping_job_request: Option<models::CreateScrapingJobRequest> = if !body.is_empty() {
+                                    let deserializer = &mut serde_json::Deserializer::from_slice(&body);
+                                    match serde_ignored::deserialize(deserializer, |path| {
+                                            warn!("Ignoring unknown field in body: {}", path);
+                                            unused_elements.push(path.to_string());
+                                    }) {
+                                        Ok(param_create_scraping_job_request) => param_create_scraping_job_request,
+                                        Err(e) => return Ok(Response::builder()
+                                                        .status(StatusCode::BAD_REQUEST)
+                                                        .body(Body::from(format!("Couldn't parse body parameter CreateScrapingJobRequest - doesn't match schema: {}", e)))
+                                                        .expect("Unable to create Bad Request response for invalid body parameter CreateScrapingJobRequest due to schema")),
+                                    }
+                                } else {
+                                    None
+                                };
+                                let param_create_scraping_job_request = match param_create_scraping_job_request {
+                                    Some(param_create_scraping_job_request) => param_create_scraping_job_request,
+                                    None => return Ok(Response::builder()
+                                                        .status(StatusCode::BAD_REQUEST)
+                                                        .body(Body::from("Missing required body parameter CreateScrapingJobRequest"))
+                                                        .expect("Unable to create Bad Request response for missing body parameter CreateScrapingJobRequest")),
+                                };
+
+                                let result = api_impl.create_scraping_job(
+                                            param_create_scraping_job_request,
+                                        &context
+                                    ).await;
+                                let mut response = Response::new(Body::empty());
+                                response.headers_mut().insert(
+                                            HeaderName::from_static("x-span-id"),
+                                            HeaderValue::from_str((&context as &dyn Has<XSpanIdString>).get().0.clone().as_str())
+                                                .expect("Unable to create X-Span-ID header value"));
+
+                                        if !unused_elements.is_empty() {
+                                            response.headers_mut().insert(
+                                                HeaderName::from_static("warning"),
+                                                HeaderValue::from_str(format!("Ignoring unknown fields in body: {:?}", unused_elements).as_str())
+                                                    .expect("Unable to create Warning header value"));
+                                        }
+
+                                        match result {
+                                            Ok(rsp) => match rsp {
+                                                CreateScrapingJobResponse::ASuccessfulResponse
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(200).expect("Unable to turn 200 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_A_SUCCESSFUL_RESPONSE"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::JobCreatedSuccessfully
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(201).expect("Unable to turn 201 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_JOB_CREATED_SUCCESSFULLY"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::BadRequest
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(400).expect("Unable to turn 400 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_BAD_REQUEST"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::Unauthorized
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(401).expect("Unable to turn 401 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_UNAUTHORIZED"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::PaymentRequired
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(402).expect("Unable to turn 402 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_PAYMENT_REQUIRED"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::Forbidden
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(403).expect("Unable to turn 403 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_FORBIDDEN"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::NotFound
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(404).expect("Unable to turn 404 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_NOT_FOUND"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::MethodNotAllowed
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(405).expect("Unable to turn 405 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_METHOD_NOT_ALLOWED"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::Conflict
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(409).expect("Unable to turn 409 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_CONFLICT"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::Gone
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(410).expect("Unable to turn 410 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_GONE"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::PreconditionFailed
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(412).expect("Unable to turn 412 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_PRECONDITION_FAILED"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::UnprocessableEntity
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(422).expect("Unable to turn 422 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_UNPROCESSABLE_ENTITY"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::TooEarly
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(425).expect("Unable to turn 425 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_TOO_EARLY"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::TooManyRequests
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(429).expect("Unable to turn 429 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_TOO_MANY_REQUESTS"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::InternalServerError
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(500).expect("Unable to turn 500 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_INTERNAL_SERVER_ERROR"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::NotImplemented
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(501).expect("Unable to turn 501 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_NOT_IMPLEMENTED"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::BadGateway
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(502).expect("Unable to turn 502 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_BAD_GATEWAY"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::ServiceUnavailable
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(503).expect("Unable to turn 503 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_SERVICE_UNAVAILABLE"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::GatewayTimeout
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(504).expect("Unable to turn 504 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_GATEWAY_TIMEOUT"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateScrapingJobResponse::AnUnexpectedErrorResponse
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(0).expect("Unable to turn 0 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_SCRAPING_JOB_AN_UNEXPECTED_ERROR_RESPONSE"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                            },
+                                            Err(_) => {
+                                                // Application code returned an error. This should not happen, as the implementation should
+                                                // return a valid response.
+                                                *response.status_mut() = StatusCode::INTERNAL_SERVER_ERROR;
+                                                *response.body_mut() = Body::from("An internal error occurred");
+                                            },
+                                        }
+
+                                        Ok(response)
+                            },
+                            Err(e) => Ok(Response::builder()
+                                                .status(StatusCode::BAD_REQUEST)
+                                                .body(Body::from(format!("Couldn't read body parameter CreateScrapingJobRequest: {}", e)))
+                                                .expect("Unable to create Bad Request response due to unable to read body parameter CreateScrapingJobRequest")),
                         }
             },
 
@@ -2210,6 +2793,295 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                                                 .status(StatusCode::BAD_REQUEST)
                                                 .body(Body::from(format!("Couldn't read body parameter CreateWorkflowBody: {}", e)))
                                                 .expect("Unable to create Bad Request response due to unable to read body parameter CreateWorkflowBody")),
+                        }
+            },
+
+            // CreateWorkspace - POST /lead-scraper-microservice/api/v1/workspaces
+            hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES) => {
+                // Body parameters (note that non-required body parameters will ignore garbage
+                // values, rather than causing a 400 response). Produce warning header and logs for
+                // any unused fields.
+                let result = body.into_raw().await;
+                match result {
+                            Ok(body) => {
+                                let mut unused_elements = Vec::new();
+                                let param_create_workspace_request: Option<models::CreateWorkspaceRequest> = if !body.is_empty() {
+                                    let deserializer = &mut serde_json::Deserializer::from_slice(&body);
+                                    match serde_ignored::deserialize(deserializer, |path| {
+                                            warn!("Ignoring unknown field in body: {}", path);
+                                            unused_elements.push(path.to_string());
+                                    }) {
+                                        Ok(param_create_workspace_request) => param_create_workspace_request,
+                                        Err(e) => return Ok(Response::builder()
+                                                        .status(StatusCode::BAD_REQUEST)
+                                                        .body(Body::from(format!("Couldn't parse body parameter CreateWorkspaceRequest - doesn't match schema: {}", e)))
+                                                        .expect("Unable to create Bad Request response for invalid body parameter CreateWorkspaceRequest due to schema")),
+                                    }
+                                } else {
+                                    None
+                                };
+                                let param_create_workspace_request = match param_create_workspace_request {
+                                    Some(param_create_workspace_request) => param_create_workspace_request,
+                                    None => return Ok(Response::builder()
+                                                        .status(StatusCode::BAD_REQUEST)
+                                                        .body(Body::from("Missing required body parameter CreateWorkspaceRequest"))
+                                                        .expect("Unable to create Bad Request response for missing body parameter CreateWorkspaceRequest")),
+                                };
+
+                                let result = api_impl.create_workspace(
+                                            param_create_workspace_request,
+                                        &context
+                                    ).await;
+                                let mut response = Response::new(Body::empty());
+                                response.headers_mut().insert(
+                                            HeaderName::from_static("x-span-id"),
+                                            HeaderValue::from_str((&context as &dyn Has<XSpanIdString>).get().0.clone().as_str())
+                                                .expect("Unable to create X-Span-ID header value"));
+
+                                        if !unused_elements.is_empty() {
+                                            response.headers_mut().insert(
+                                                HeaderName::from_static("warning"),
+                                                HeaderValue::from_str(format!("Ignoring unknown fields in body: {:?}", unused_elements).as_str())
+                                                    .expect("Unable to create Warning header value"));
+                                        }
+
+                                        match result {
+                                            Ok(rsp) => match rsp {
+                                                CreateWorkspaceResponse::ASuccessfulResponse
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(200).expect("Unable to turn 200 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_A_SUCCESSFUL_RESPONSE"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::WorkspaceCreatedSuccessfully
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(201).expect("Unable to turn 201 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_WORKSPACE_CREATED_SUCCESSFULLY"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::BadRequest
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(400).expect("Unable to turn 400 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_BAD_REQUEST"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::Unauthorized
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(401).expect("Unable to turn 401 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_UNAUTHORIZED"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::PaymentRequired
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(402).expect("Unable to turn 402 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_PAYMENT_REQUIRED"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::Forbidden
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(403).expect("Unable to turn 403 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_FORBIDDEN"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::NotFound
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(404).expect("Unable to turn 404 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_NOT_FOUND"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::MethodNotAllowed
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(405).expect("Unable to turn 405 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_METHOD_NOT_ALLOWED"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::Conflict
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(409).expect("Unable to turn 409 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_CONFLICT"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::Gone
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(410).expect("Unable to turn 410 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_GONE"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::PreconditionFailed
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(412).expect("Unable to turn 412 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_PRECONDITION_FAILED"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::UnprocessableEntity
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(422).expect("Unable to turn 422 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_UNPROCESSABLE_ENTITY"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::TooEarly
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(425).expect("Unable to turn 425 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_TOO_EARLY"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::TooManyRequests
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(429).expect("Unable to turn 429 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_TOO_MANY_REQUESTS"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::InternalServerError
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(500).expect("Unable to turn 500 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_INTERNAL_SERVER_ERROR"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::NotImplemented
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(501).expect("Unable to turn 501 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_NOT_IMPLEMENTED"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::BadGateway
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(502).expect("Unable to turn 502 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_BAD_GATEWAY"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::ServiceUnavailable
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(503).expect("Unable to turn 503 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_SERVICE_UNAVAILABLE"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::GatewayTimeout
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(504).expect("Unable to turn 504 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_GATEWAY_TIMEOUT"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                                CreateWorkspaceResponse::AnUnexpectedErrorResponse
+                                                    (body)
+                                                => {
+                                                    *response.status_mut() = StatusCode::from_u16(0).expect("Unable to turn 0 into a StatusCode");
+                                                    response.headers_mut().insert(
+                                                        CONTENT_TYPE,
+                                                        HeaderValue::from_str("application/json")
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_AN_UNEXPECTED_ERROR_RESPONSE"));
+                                                    let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
+                                                    *response.body_mut() = Body::from(body_content);
+                                                },
+                                            },
+                                            Err(_) => {
+                                                // Application code returned an error. This should not happen, as the implementation should
+                                                // return a valid response.
+                                                *response.status_mut() = StatusCode::INTERNAL_SERVER_ERROR;
+                                                *response.body_mut() = Body::from("An internal error occurred");
+                                            },
+                                        }
+
+                                        Ok(response)
+                            },
+                            Err(e) => Ok(Response::builder()
+                                                .status(StatusCode::BAD_REQUEST)
+                                                .body(Body::from(format!("Couldn't read body parameter CreateWorkspaceRequest: {}", e)))
+                                                .expect("Unable to create Bad Request response due to unable to read body parameter CreateWorkspaceRequest")),
                         }
             },
 
@@ -15912,7 +16784,7 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                         }
             },
 
-            // CreateAccount - POST /workspace-service/v1/accounts
+            // CreateAccount1 - POST /workspace-service/v1/accounts
             hyper::Method::POST if path.matched(paths::ID_WORKSPACE_SERVICE_V1_ACCOUNTS) => {
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
@@ -15921,31 +16793,31 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                 match result {
                             Ok(body) => {
                                 let mut unused_elements = Vec::new();
-                                let param_create_account_request: Option<models::CreateAccountRequest> = if !body.is_empty() {
+                                let param_create_account_request1: Option<models::CreateAccountRequest1> = if !body.is_empty() {
                                     let deserializer = &mut serde_json::Deserializer::from_slice(&body);
                                     match serde_ignored::deserialize(deserializer, |path| {
                                             warn!("Ignoring unknown field in body: {}", path);
                                             unused_elements.push(path.to_string());
                                     }) {
-                                        Ok(param_create_account_request) => param_create_account_request,
+                                        Ok(param_create_account_request1) => param_create_account_request1,
                                         Err(e) => return Ok(Response::builder()
                                                         .status(StatusCode::BAD_REQUEST)
-                                                        .body(Body::from(format!("Couldn't parse body parameter CreateAccountRequest - doesn't match schema: {}", e)))
-                                                        .expect("Unable to create Bad Request response for invalid body parameter CreateAccountRequest due to schema")),
+                                                        .body(Body::from(format!("Couldn't parse body parameter CreateAccountRequest1 - doesn't match schema: {}", e)))
+                                                        .expect("Unable to create Bad Request response for invalid body parameter CreateAccountRequest1 due to schema")),
                                     }
                                 } else {
                                     None
                                 };
-                                let param_create_account_request = match param_create_account_request {
-                                    Some(param_create_account_request) => param_create_account_request,
+                                let param_create_account_request1 = match param_create_account_request1 {
+                                    Some(param_create_account_request1) => param_create_account_request1,
                                     None => return Ok(Response::builder()
                                                         .status(StatusCode::BAD_REQUEST)
-                                                        .body(Body::from("Missing required body parameter CreateAccountRequest"))
-                                                        .expect("Unable to create Bad Request response for missing body parameter CreateAccountRequest")),
+                                                        .body(Body::from("Missing required body parameter CreateAccountRequest1"))
+                                                        .expect("Unable to create Bad Request response for missing body parameter CreateAccountRequest1")),
                                 };
 
-                                let result = api_impl.create_account(
-                                            param_create_account_request,
+                                let result = api_impl.create_account1(
+                                            param_create_account_request1,
                                         &context
                                     ).await;
                                 let mut response = Response::new(Body::empty());
@@ -15963,113 +16835,113 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
                                         match result {
                                             Ok(rsp) => match rsp {
-                                                CreateAccountResponse::ASuccessfulResponse
+                                                CreateAccount1Response::ASuccessfulResponse
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(200).expect("Unable to turn 200 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_A_SUCCESSFUL_RESPONSE"));
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT1_A_SUCCESSFUL_RESPONSE"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateAccountResponse::AccountCreatedSuccessfully
+                                                CreateAccount1Response::AccountCreatedSuccessfully
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(201).expect("Unable to turn 201 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_ACCOUNT_CREATED_SUCCESSFULLY"));
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT1_ACCOUNT_CREATED_SUCCESSFULLY"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateAccountResponse::BadRequest
+                                                CreateAccount1Response::BadRequest
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(400).expect("Unable to turn 400 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_BAD_REQUEST"));
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT1_BAD_REQUEST"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateAccountResponse::Unauthorized
+                                                CreateAccount1Response::Unauthorized
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(401).expect("Unable to turn 401 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_UNAUTHORIZED"));
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT1_UNAUTHORIZED"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateAccountResponse::Forbidden
+                                                CreateAccount1Response::Forbidden
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(403).expect("Unable to turn 403 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_FORBIDDEN"));
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT1_FORBIDDEN"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateAccountResponse::NotFound
+                                                CreateAccount1Response::NotFound
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(404).expect("Unable to turn 404 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_NOT_FOUND"));
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT1_NOT_FOUND"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateAccountResponse::Conflict
+                                                CreateAccount1Response::Conflict
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(409).expect("Unable to turn 409 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_CONFLICT"));
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT1_CONFLICT"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateAccountResponse::TooManyRequests
+                                                CreateAccount1Response::TooManyRequests
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(429).expect("Unable to turn 429 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_TOO_MANY_REQUESTS"));
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT1_TOO_MANY_REQUESTS"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateAccountResponse::InternalServerError
+                                                CreateAccount1Response::InternalServerError
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(500).expect("Unable to turn 500 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_INTERNAL_SERVER_ERROR"));
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT1_INTERNAL_SERVER_ERROR"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateAccountResponse::AnUnexpectedErrorResponse
+                                                CreateAccount1Response::AnUnexpectedErrorResponse
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(0).expect("Unable to turn 0 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT_AN_UNEXPECTED_ERROR_RESPONSE"));
+                                                            .expect("Unable to create Content-Type header for CREATE_ACCOUNT1_AN_UNEXPECTED_ERROR_RESPONSE"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
@@ -16086,12 +16958,12 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                             },
                             Err(e) => Ok(Response::builder()
                                                 .status(StatusCode::BAD_REQUEST)
-                                                .body(Body::from(format!("Couldn't read body parameter CreateAccountRequest: {}", e)))
-                                                .expect("Unable to create Bad Request response due to unable to read body parameter CreateAccountRequest")),
+                                                .body(Body::from(format!("Couldn't read body parameter CreateAccountRequest1: {}", e)))
+                                                .expect("Unable to create Bad Request response due to unable to read body parameter CreateAccountRequest1")),
                         }
             },
 
-            // CreateWorkspace - POST /workspace-service/v1/workspaces
+            // CreateWorkspace1 - POST /workspace-service/v1/workspaces
             hyper::Method::POST if path.matched(paths::ID_WORKSPACE_SERVICE_V1_WORKSPACES) => {
                 // Body parameters (note that non-required body parameters will ignore garbage
                 // values, rather than causing a 400 response). Produce warning header and logs for
@@ -16100,31 +16972,31 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                 match result {
                             Ok(body) => {
                                 let mut unused_elements = Vec::new();
-                                let param_create_workspace_request: Option<models::CreateWorkspaceRequest> = if !body.is_empty() {
+                                let param_create_workspace_request1: Option<models::CreateWorkspaceRequest1> = if !body.is_empty() {
                                     let deserializer = &mut serde_json::Deserializer::from_slice(&body);
                                     match serde_ignored::deserialize(deserializer, |path| {
                                             warn!("Ignoring unknown field in body: {}", path);
                                             unused_elements.push(path.to_string());
                                     }) {
-                                        Ok(param_create_workspace_request) => param_create_workspace_request,
+                                        Ok(param_create_workspace_request1) => param_create_workspace_request1,
                                         Err(e) => return Ok(Response::builder()
                                                         .status(StatusCode::BAD_REQUEST)
-                                                        .body(Body::from(format!("Couldn't parse body parameter CreateWorkspaceRequest - doesn't match schema: {}", e)))
-                                                        .expect("Unable to create Bad Request response for invalid body parameter CreateWorkspaceRequest due to schema")),
+                                                        .body(Body::from(format!("Couldn't parse body parameter CreateWorkspaceRequest1 - doesn't match schema: {}", e)))
+                                                        .expect("Unable to create Bad Request response for invalid body parameter CreateWorkspaceRequest1 due to schema")),
                                     }
                                 } else {
                                     None
                                 };
-                                let param_create_workspace_request = match param_create_workspace_request {
-                                    Some(param_create_workspace_request) => param_create_workspace_request,
+                                let param_create_workspace_request1 = match param_create_workspace_request1 {
+                                    Some(param_create_workspace_request1) => param_create_workspace_request1,
                                     None => return Ok(Response::builder()
                                                         .status(StatusCode::BAD_REQUEST)
-                                                        .body(Body::from("Missing required body parameter CreateWorkspaceRequest"))
-                                                        .expect("Unable to create Bad Request response for missing body parameter CreateWorkspaceRequest")),
+                                                        .body(Body::from("Missing required body parameter CreateWorkspaceRequest1"))
+                                                        .expect("Unable to create Bad Request response for missing body parameter CreateWorkspaceRequest1")),
                                 };
 
-                                let result = api_impl.create_workspace(
-                                            param_create_workspace_request,
+                                let result = api_impl.create_workspace1(
+                                            param_create_workspace_request1,
                                         &context
                                     ).await;
                                 let mut response = Response::new(Body::empty());
@@ -16142,113 +17014,113 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
 
                                         match result {
                                             Ok(rsp) => match rsp {
-                                                CreateWorkspaceResponse::ASuccessfulResponse
+                                                CreateWorkspace1Response::ASuccessfulResponse
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(200).expect("Unable to turn 200 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_A_SUCCESSFUL_RESPONSE"));
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE1_A_SUCCESSFUL_RESPONSE"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateWorkspaceResponse::WorkspaceCreatedSuccessfully
+                                                CreateWorkspace1Response::WorkspaceCreatedSuccessfully
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(201).expect("Unable to turn 201 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_WORKSPACE_CREATED_SUCCESSFULLY"));
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE1_WORKSPACE_CREATED_SUCCESSFULLY"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateWorkspaceResponse::BadRequest
+                                                CreateWorkspace1Response::BadRequest
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(400).expect("Unable to turn 400 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_BAD_REQUEST"));
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE1_BAD_REQUEST"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateWorkspaceResponse::Unauthorized
+                                                CreateWorkspace1Response::Unauthorized
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(401).expect("Unable to turn 401 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_UNAUTHORIZED"));
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE1_UNAUTHORIZED"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateWorkspaceResponse::Forbidden
+                                                CreateWorkspace1Response::Forbidden
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(403).expect("Unable to turn 403 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_FORBIDDEN"));
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE1_FORBIDDEN"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateWorkspaceResponse::NotFound
+                                                CreateWorkspace1Response::NotFound
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(404).expect("Unable to turn 404 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_NOT_FOUND"));
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE1_NOT_FOUND"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateWorkspaceResponse::Conflict
+                                                CreateWorkspace1Response::Conflict
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(409).expect("Unable to turn 409 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_CONFLICT"));
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE1_CONFLICT"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateWorkspaceResponse::TooManyRequests
+                                                CreateWorkspace1Response::TooManyRequests
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(429).expect("Unable to turn 429 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_TOO_MANY_REQUESTS"));
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE1_TOO_MANY_REQUESTS"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateWorkspaceResponse::InternalServerError
+                                                CreateWorkspace1Response::InternalServerError
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(500).expect("Unable to turn 500 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_INTERNAL_SERVER_ERROR"));
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE1_INTERNAL_SERVER_ERROR"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
-                                                CreateWorkspaceResponse::AnUnexpectedErrorResponse
+                                                CreateWorkspace1Response::AnUnexpectedErrorResponse
                                                     (body)
                                                 => {
                                                     *response.status_mut() = StatusCode::from_u16(0).expect("Unable to turn 0 into a StatusCode");
                                                     response.headers_mut().insert(
                                                         CONTENT_TYPE,
                                                         HeaderValue::from_str("application/json")
-                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE_AN_UNEXPECTED_ERROR_RESPONSE"));
+                                                            .expect("Unable to create Content-Type header for CREATE_WORKSPACE1_AN_UNEXPECTED_ERROR_RESPONSE"));
                                                     let body_content = serde_json::to_string(&body).expect("impossible to fail to serialize");
                                                     *response.body_mut() = Body::from(body_content);
                                                 },
@@ -16265,8 +17137,8 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                             },
                             Err(e) => Ok(Response::builder()
                                                 .status(StatusCode::BAD_REQUEST)
-                                                .body(Body::from(format!("Couldn't read body parameter CreateWorkspaceRequest: {}", e)))
-                                                .expect("Unable to create Bad Request response due to unable to read body parameter CreateWorkspaceRequest")),
+                                                .body(Body::from(format!("Couldn't read body parameter CreateWorkspaceRequest1: {}", e)))
+                                                .expect("Unable to create Bad Request response due to unable to read body parameter CreateWorkspaceRequest1")),
                         }
             },
 
@@ -18596,6 +19468,7 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                         }
             },
 
+            _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNT) => method_not_allowed(),
             _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_LIST) => method_not_allowed(),
             _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_SETTINGS) => method_not_allowed(),
             _ if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_UPDATE) => method_not_allowed(),
@@ -18657,10 +19530,14 @@ impl<T> RequestParser<T> for ApiRequestParser {
     fn parse_operation_id(request: &Request<T>) -> Option<&'static str> {
         let path = paths::GLOBAL_REGEX_SET.matches(request.uri().path());
         match *request.method() {
+            // CreateAccount - POST /lead-scraper-microservice/api/v1/account
+            hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNT) => Some("CreateAccount"),
             // CreateApiKey - POST /lead-scraper-microservice/api/v1/api-keys
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_API_KEYS) => Some("CreateApiKey"),
             // CreateOrganization - POST /lead-scraper-microservice/api/v1/organization
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATION) => Some("CreateOrganization"),
+            // CreateScrapingJob - POST /lead-scraper-microservice/api/v1/jobs
+            hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_JOBS) => Some("CreateScrapingJob"),
             // CreateTenant - POST /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ORGANIZATIONS_ORGANIZATIONID_TENANTS) => Some("CreateTenant"),
             // CreateTenantApiKey - POST /lead-scraper-microservice/api/v1/organizations/tenants/api-keys
@@ -18669,6 +19546,8 @@ impl<T> RequestParser<T> for ApiRequestParser {
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WEBHOOKS) => Some("CreateWebhook"),
             // CreateWorkflow - POST /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows
             hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKSPACEID_WORKFLOWS) => Some("CreateWorkflow"),
+            // CreateWorkspace - POST /lead-scraper-microservice/api/v1/workspaces
+            hyper::Method::POST if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES) => Some("CreateWorkspace"),
             // DeleteAccount - DELETE /lead-scraper-microservice/api/v1/accounts/{id}
             hyper::Method::DELETE if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_ACCOUNTS_ID) => Some("DeleteAccount"),
             // DeleteApiKey - DELETE /lead-scraper-microservice/api/v1/api-keys/{keyId}
@@ -18759,10 +19638,10 @@ impl<T> RequestParser<T> for ApiRequestParser {
             hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACES_WORKFLOW) => Some("UpdateWorkflow"),
             // UpdateWorkspace - PUT /lead-scraper-microservice/api/v1/workspace
             hyper::Method::PUT if path.matched(paths::ID_LEAD_SCRAPER_MICROSERVICE_API_V1_WORKSPACE) => Some("UpdateWorkspace"),
-            // CreateAccount - POST /workspace-service/v1/accounts
-            hyper::Method::POST if path.matched(paths::ID_WORKSPACE_SERVICE_V1_ACCOUNTS) => Some("CreateAccount"),
-            // CreateWorkspace - POST /workspace-service/v1/workspaces
-            hyper::Method::POST if path.matched(paths::ID_WORKSPACE_SERVICE_V1_WORKSPACES) => Some("CreateWorkspace"),
+            // CreateAccount1 - POST /workspace-service/v1/accounts
+            hyper::Method::POST if path.matched(paths::ID_WORKSPACE_SERVICE_V1_ACCOUNTS) => Some("CreateAccount1"),
+            // CreateWorkspace1 - POST /workspace-service/v1/workspaces
+            hyper::Method::POST if path.matched(paths::ID_WORKSPACE_SERVICE_V1_WORKSPACES) => Some("CreateWorkspace1"),
             // DeleteAccount1 - DELETE /workspace-service/v1/accounts/{id}
             hyper::Method::DELETE if path.matched(paths::ID_WORKSPACE_SERVICE_V1_ACCOUNTS_ID) => Some("DeleteAccount1"),
             // DeleteWorkspace1 - DELETE /workspace-service/v1/workspaces/{id}

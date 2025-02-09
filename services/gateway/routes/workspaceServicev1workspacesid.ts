@@ -37,7 +37,7 @@ const getRoute = createRoute({
       content: {
         "application/json": {
           schema: z.object({
-            data: schemas.GetWorkspaceResponse1,
+            data: schemas.GetWorkspaceResponse,
           }),
         },
       },

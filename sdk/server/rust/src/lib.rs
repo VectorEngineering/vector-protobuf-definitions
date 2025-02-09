@@ -22,6 +22,90 @@ pub use auth::{AuthenticationApi, Claims};
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
+pub enum CreateAccountResponse {
+    /// A successful response.
+    ASuccessfulResponse
+    (models::CreateAccountResponse)
+    ,
+    /// Account created successfully
+    AccountCreatedSuccessfully
+    (models::CreateAccountResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
 pub enum CreateApiKeyResponse {
     /// API key created successfully
     APIKeyCreatedSuccessfully
@@ -110,6 +194,90 @@ pub enum CreateOrganizationResponse {
     /// Organization created successfully
     OrganizationCreatedSuccessfully
     (models::CreateOrganizationResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum CreateScrapingJobResponse {
+    /// A successful response.
+    ASuccessfulResponse
+    (models::CreateScrapingJobResponse)
+    ,
+    /// Job created successfully
+    JobCreatedSuccessfully
+    (models::CreateScrapingJobResponse)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -438,6 +606,90 @@ pub enum CreateWorkflowResponse {
     /// Workflow created successfully
     WorkflowCreatedSuccessfully
     (models::CreateWorkflowResponse)
+    ,
+    /// Bad Request - Invalid input parameters
+    BadRequest
+    (models::ValidationErrorMessageResponse)
+    ,
+    /// Unauthorized - Authentication required
+    Unauthorized
+    (models::AuthenticationErrorMessageResponse)
+    ,
+    /// Payment Required - Payment is necessary to proceed
+    PaymentRequired
+    (models::PaymentRequiredErrorMessageResponse)
+    ,
+    /// Forbidden - Access denied
+    Forbidden
+    (models::ForbiddenErrorMessageResponse)
+    ,
+    /// Not Found - Resource not found
+    NotFound
+    (models::NotFoundErrorMessageResponse)
+    ,
+    /// Method Not Allowed - HTTP method not supported
+    MethodNotAllowed
+    (models::MethodNotAllowedErrorMessageResponse)
+    ,
+    /// Conflict - Resource already exists
+    Conflict
+    (models::ConflictErrorMessageResponse)
+    ,
+    /// Gone - Resource is no longer available
+    Gone
+    (models::GoneErrorMessageResponse)
+    ,
+    /// Precondition Failed - Preconditions in headers did not match
+    PreconditionFailed
+    (models::PreconditionFailedErrorMessageResponse)
+    ,
+    /// Unprocessable Entity - Semantic errors in the request
+    UnprocessableEntity
+    (models::UnprocessableEntityErrorMessageResponse)
+    ,
+    /// Too Early - Request is being replayed
+    TooEarly
+    (models::TooEarlyErrorMessageResponse)
+    ,
+    /// Too Many Requests - Rate limit exceeded
+    TooManyRequests
+    (models::RateLimitErrorMessageResponse)
+    ,
+    /// Internal Server Error
+    InternalServerError
+    (models::InternalErrorMessageResponse)
+    ,
+    /// Not Implemented - Functionality not supported
+    NotImplemented
+    (models::NotImplementedErrorMessageResponse)
+    ,
+    /// Bad Gateway - Invalid response from upstream server
+    BadGateway
+    (models::BadGatewayErrorMessageResponse)
+    ,
+    /// Service Unavailable - Try again later
+    ServiceUnavailable
+    (models::ServiceUnavailableErrorMessageResponse)
+    ,
+    /// Gateway Timeout - Upstream server timed out
+    GatewayTimeout
+    (models::GatewayTimeoutErrorMessageResponse)
+    ,
+    /// An unexpected error response.
+    AnUnexpectedErrorResponse
+    (models::RpcPeriodStatus)
+}
+
+#[derive(Debug, PartialEq, Serialize, Deserialize)]
+#[must_use]
+pub enum CreateWorkspaceResponse {
+    /// A successful response.
+    ASuccessfulResponse
+    (models::CreateWorkspaceResponse)
+    ,
+    /// Workspace created successfully
+    WorkspaceCreatedSuccessfully
+    (models::CreateWorkspaceResponse)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -4114,14 +4366,14 @@ pub enum UpdateWorkspaceResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
-pub enum CreateAccountResponse {
+pub enum CreateAccount1Response {
     /// A successful response.
     ASuccessfulResponse
-    (models::CreateAccountResponse)
+    (models::CreateAccountResponse1)
     ,
     /// Account created successfully
     AccountCreatedSuccessfully
-    (models::CreateAccountResponse)
+    (models::CreateAccountResponse1)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -4158,14 +4410,14 @@ pub enum CreateAccountResponse {
 
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[must_use]
-pub enum CreateWorkspaceResponse {
+pub enum CreateWorkspace1Response {
     /// A successful response.
     ASuccessfulResponse
-    (models::CreateWorkspaceResponse)
+    (models::CreateWorkspaceResponse1)
     ,
     /// Workspace created successfully
     WorkspaceCreatedSuccessfully
-    (models::CreateWorkspaceResponse)
+    (models::CreateWorkspaceResponse1)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -4325,7 +4577,7 @@ pub enum GetAccount1Response {
 pub enum GetWorkspace1Response {
     /// Workspace retrieved successfully
     WorkspaceRetrievedSuccessfully
-    (models::GetWorkspaceResponse1)
+    (models::GetWorkspaceResponse)
     ,
     /// Bad Request - Invalid input parameters
     BadRequest
@@ -4768,6 +5020,12 @@ pub trait Api<C: Send + Sync> {
         Poll::Ready(Ok(()))
     }
 
+    /// Create a new account
+    async fn create_account(
+        &self,
+        create_account_request: models::CreateAccountRequest,
+        context: &C) -> Result<CreateAccountResponse, ApiError>;
+
     /// Create a new API key
     async fn create_api_key(
         &self,
@@ -4779,6 +5037,12 @@ pub trait Api<C: Send + Sync> {
         &self,
         create_organization_request: models::CreateOrganizationRequest,
         context: &C) -> Result<CreateOrganizationResponse, ApiError>;
+
+    /// Create a new job scraping task
+    async fn create_scraping_job(
+        &self,
+        create_scraping_job_request: models::CreateScrapingJobRequest,
+        context: &C) -> Result<CreateScrapingJobResponse, ApiError>;
 
     /// Create a new tenant
     async fn create_tenant(
@@ -4805,6 +5069,12 @@ pub trait Api<C: Send + Sync> {
         workspace_id: String,
         create_workflow_body: models::CreateWorkflowBody,
         context: &C) -> Result<CreateWorkflowResponse, ApiError>;
+
+    /// Create a new workspace
+    async fn create_workspace(
+        &self,
+        create_workspace_request: models::CreateWorkspaceRequest,
+        context: &C) -> Result<CreateWorkspaceResponse, ApiError>;
 
     /// Delete account
     async fn delete_account(
@@ -5172,16 +5442,16 @@ pub trait Api<C: Send + Sync> {
         context: &C) -> Result<UpdateWorkspaceResponse, ApiError>;
 
     /// Create a new account
-    async fn create_account(
+    async fn create_account1(
         &self,
-        create_account_request: models::CreateAccountRequest,
-        context: &C) -> Result<CreateAccountResponse, ApiError>;
+        create_account_request1: models::CreateAccountRequest1,
+        context: &C) -> Result<CreateAccount1Response, ApiError>;
 
     /// Create workspace
-    async fn create_workspace(
+    async fn create_workspace1(
         &self,
-        create_workspace_request: models::CreateWorkspaceRequest,
-        context: &C) -> Result<CreateWorkspaceResponse, ApiError>;
+        create_workspace_request1: models::CreateWorkspaceRequest1,
+        context: &C) -> Result<CreateWorkspace1Response, ApiError>;
 
     /// Delete account
     async fn delete_account1(
@@ -5287,6 +5557,12 @@ pub trait ApiNoContext<C: Send + Sync> {
 
     fn context(&self) -> &C;
 
+    /// Create a new account
+    async fn create_account(
+        &self,
+        create_account_request: models::CreateAccountRequest,
+        ) -> Result<CreateAccountResponse, ApiError>;
+
     /// Create a new API key
     async fn create_api_key(
         &self,
@@ -5298,6 +5574,12 @@ pub trait ApiNoContext<C: Send + Sync> {
         &self,
         create_organization_request: models::CreateOrganizationRequest,
         ) -> Result<CreateOrganizationResponse, ApiError>;
+
+    /// Create a new job scraping task
+    async fn create_scraping_job(
+        &self,
+        create_scraping_job_request: models::CreateScrapingJobRequest,
+        ) -> Result<CreateScrapingJobResponse, ApiError>;
 
     /// Create a new tenant
     async fn create_tenant(
@@ -5324,6 +5606,12 @@ pub trait ApiNoContext<C: Send + Sync> {
         workspace_id: String,
         create_workflow_body: models::CreateWorkflowBody,
         ) -> Result<CreateWorkflowResponse, ApiError>;
+
+    /// Create a new workspace
+    async fn create_workspace(
+        &self,
+        create_workspace_request: models::CreateWorkspaceRequest,
+        ) -> Result<CreateWorkspaceResponse, ApiError>;
 
     /// Delete account
     async fn delete_account(
@@ -5691,16 +5979,16 @@ pub trait ApiNoContext<C: Send + Sync> {
         ) -> Result<UpdateWorkspaceResponse, ApiError>;
 
     /// Create a new account
-    async fn create_account(
+    async fn create_account1(
         &self,
-        create_account_request: models::CreateAccountRequest,
-        ) -> Result<CreateAccountResponse, ApiError>;
+        create_account_request1: models::CreateAccountRequest1,
+        ) -> Result<CreateAccount1Response, ApiError>;
 
     /// Create workspace
-    async fn create_workspace(
+    async fn create_workspace1(
         &self,
-        create_workspace_request: models::CreateWorkspaceRequest,
-        ) -> Result<CreateWorkspaceResponse, ApiError>;
+        create_workspace_request1: models::CreateWorkspaceRequest1,
+        ) -> Result<CreateWorkspace1Response, ApiError>;
 
     /// Delete account
     async fn delete_account1(
@@ -5820,6 +6108,16 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         ContextWrapper::context(self)
     }
 
+    /// Create a new account
+    async fn create_account(
+        &self,
+        create_account_request: models::CreateAccountRequest,
+        ) -> Result<CreateAccountResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().create_account(create_account_request, &context).await
+    }
+
     /// Create a new API key
     async fn create_api_key(
         &self,
@@ -5838,6 +6136,16 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().create_organization(create_organization_request, &context).await
+    }
+
+    /// Create a new job scraping task
+    async fn create_scraping_job(
+        &self,
+        create_scraping_job_request: models::CreateScrapingJobRequest,
+        ) -> Result<CreateScrapingJobResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().create_scraping_job(create_scraping_job_request, &context).await
     }
 
     /// Create a new tenant
@@ -5880,6 +6188,16 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     {
         let context = self.context().clone();
         self.api().create_workflow(workspace_id, create_workflow_body, &context).await
+    }
+
+    /// Create a new workspace
+    async fn create_workspace(
+        &self,
+        create_workspace_request: models::CreateWorkspaceRequest,
+        ) -> Result<CreateWorkspaceResponse, ApiError>
+    {
+        let context = self.context().clone();
+        self.api().create_workspace(create_workspace_request, &context).await
     }
 
     /// Delete account
@@ -6428,23 +6746,23 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
     }
 
     /// Create a new account
-    async fn create_account(
+    async fn create_account1(
         &self,
-        create_account_request: models::CreateAccountRequest,
-        ) -> Result<CreateAccountResponse, ApiError>
+        create_account_request1: models::CreateAccountRequest1,
+        ) -> Result<CreateAccount1Response, ApiError>
     {
         let context = self.context().clone();
-        self.api().create_account(create_account_request, &context).await
+        self.api().create_account1(create_account_request1, &context).await
     }
 
     /// Create workspace
-    async fn create_workspace(
+    async fn create_workspace1(
         &self,
-        create_workspace_request: models::CreateWorkspaceRequest,
-        ) -> Result<CreateWorkspaceResponse, ApiError>
+        create_workspace_request1: models::CreateWorkspaceRequest1,
+        ) -> Result<CreateWorkspace1Response, ApiError>
     {
         let context = self.context().clone();
-        self.api().create_workspace(create_workspace_request, &context).await
+        self.api().create_workspace1(create_workspace_request1, &context).await
     }
 
     /// Delete account

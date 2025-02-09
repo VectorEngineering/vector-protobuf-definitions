@@ -43,9 +43,13 @@ Models/ContractIntelligence.md
 Models/CreateAPIKeyRequest.md
 Models/CreateAPIKeyResponse.md
 Models/CreateAccountRequest.md
+Models/CreateAccountRequest1.md
 Models/CreateAccountResponse.md
+Models/CreateAccountResponse1.md
 Models/CreateOrganizationRequest.md
 Models/CreateOrganizationResponse.md
+Models/CreateScrapingJobRequest.md
+Models/CreateScrapingJobResponse.md
 Models/CreateTenantAPIKeyRequest.md
 Models/CreateTenantAPIKeyResponse.md
 Models/CreateTenantBody.md
@@ -55,7 +59,9 @@ Models/CreateWebhookResponse.md
 Models/CreateWorkflowBody.md
 Models/CreateWorkflowResponse.md
 Models/CreateWorkspaceRequest.md
+Models/CreateWorkspaceRequest1.md
 Models/CreateWorkspaceResponse.md
+Models/CreateWorkspaceResponse1.md
 Models/DataProfile.md
 Models/DayOfWeek.md
 Models/DeleteAPIKeyResponse.md
@@ -102,7 +108,6 @@ Models/GetWorkspaceAnalyticsResponse.md
 Models/GetWorkspaceAnalyticsResponse1.md
 Models/GetWorkspaceComplianceReportResponse.md
 Models/GetWorkspaceResponse.md
-Models/GetWorkspaceResponse1.md
 Models/GetWorkspaceStorageStatsResponse.md
 Models/GoneErrorMessageResponse.md
 Models/IncludedField.md

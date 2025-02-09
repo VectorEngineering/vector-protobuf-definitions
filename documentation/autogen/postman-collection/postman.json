@@ -894,6 +894,58 @@
 	            "name": "lead-scraper-service",
 	            "item": [
 	                        {
+    "name": "/lead-scraper-microservice/api/v1/account",
+                "description": "Creates a new user account in the workspace service",
+                 "item": [
+                            {
+                                "name": "Create a new account",
+                                "request": {
+                                    "method": "POST",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"account\": \"<string>\",\n \"initialWorkspaceName\": \"<string>\",\n \"organizationId\": \"<string>\",\n \"tenantId\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/account",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "account"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Creates a new user account in the workspace service"
+                                }
+                            }
+                            ]
+                        },
+	                        {
     "name": "/lead-scraper-microservice/api/v1/accounts/:id",
                 "description": "Permanently deletes an account and associated resources",
                  "item": [
@@ -1657,6 +1709,58 @@
                                         ]
                                     },
                                     "description": "Rotates an API key while maintaining its configuration"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/jobs",
+                "description": "This endpoint creates a new Google Maps scraping job",
+                 "item": [
+                            {
+                                "name": "Create a new job scraping task",
+                                "request": {
+                                    "method": "POST",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"authPlatformUserId\": \"<string>\",\n \"orgId\": \"<string>\",\n \"tenantId\": \"<string>\",\n \"name\": \"<string>\",\n \"keywords\": \"<string>\",\n \"lang\": \"<string>\",\n \"zoom\": \"<number>\",\n \"lat\": \"<string>\",\n \"lon\": \"<string>\",\n \"fastMode\": \"<string>\",\n \"radius\": \"<number>\",\n \"depth\": \"<number>\",\n \"email\": \"<string>\",\n \"maxTime\": \"<number>\",\n \"proxies\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/jobs",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "jobs"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "This endpoint creates a new Google Maps scraping job"
                                 }
                             }
                             ]
@@ -3549,6 +3653,58 @@
                                         ]
                                     },
                                     "description": "Retrieves details of a specific workspace"
+                                }
+                            }
+                            ]
+                        },
+	                        {
+    "name": "/lead-scraper-microservice/api/v1/workspaces",
+                "description": "Creates a new workspace for a given account",
+                 "item": [
+                            {
+                                "name": "Create a new workspace",
+                                "request": {
+                                    "method": "POST",
+                                    "header": [
+                                        {
+                                            "key": "Content-Type",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        },
+                                        {
+                                            "key": "Accept",
+                                            "value": "application/json",
+                                            "description": "",
+                                            "disabled": false
+                                        }
+                                    ],
+                                    "body": {
+                                        "mode": "raw",
+                                        "raw": "{\n \"workspace\": \"<string>\",\n \"accountId\": \"<string>\",\n \"organizationId\": \"<string>\",\n \"tenantId\": \"<string>\"\n}",
+                                        "options": {
+                                            "raw": {
+                                                "language": "json"
+                                            }
+                                        }
+                                    },
+                                    "url": {
+                                        "raw": "{{baseUrl}}/lead-scraper-microservice/api/v1/workspaces",
+                                        "host": [
+                                            "{{baseUrl}}"
+                                        ],
+                                        "path": [
+                                            "lead-scraper-microservice",
+                                            "api",
+                                            "v1",
+                                            "workspaces"
+                                        ],
+                                        "variable": [
+                                        ],
+                                        "query": [
+                                        ]
+                                    },
+                                    "description": "Creates a new workspace for a given account"
                                 }
                             }
                             ]

@@ -5,17 +5,17 @@ from typing import Union
 
 from playbookmedia_backend_server_sdk.models.authentication_error_message_response1 import AuthenticationErrorMessageResponse1  # noqa: E501
 from playbookmedia_backend_server_sdk.models.conflict_error_message_response import ConflictErrorMessageResponse  # noqa: E501
-from playbookmedia_backend_server_sdk.models.create_account_request import CreateAccountRequest  # noqa: E501
-from playbookmedia_backend_server_sdk.models.create_account_response import CreateAccountResponse  # noqa: E501
-from playbookmedia_backend_server_sdk.models.create_workspace_request import CreateWorkspaceRequest  # noqa: E501
-from playbookmedia_backend_server_sdk.models.create_workspace_response import CreateWorkspaceResponse  # noqa: E501
+from playbookmedia_backend_server_sdk.models.create_account_request1 import CreateAccountRequest1  # noqa: E501
+from playbookmedia_backend_server_sdk.models.create_account_response1 import CreateAccountResponse1  # noqa: E501
+from playbookmedia_backend_server_sdk.models.create_workspace_request1 import CreateWorkspaceRequest1  # noqa: E501
+from playbookmedia_backend_server_sdk.models.create_workspace_response1 import CreateWorkspaceResponse1  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_account_response import DeleteAccountResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.delete_workspace_response import DeleteWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.forbidden_error_message_response import ForbiddenErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_account_response1 import GetAccountResponse1  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_workspace_analytics_response1 import GetWorkspaceAnalyticsResponse1  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_workspace_compliance_report_response import GetWorkspaceComplianceReportResponse  # noqa: E501
-from playbookmedia_backend_server_sdk.models.get_workspace_response1 import GetWorkspaceResponse1  # noqa: E501
+from playbookmedia_backend_server_sdk.models.get_workspace_response import GetWorkspaceResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.get_workspace_storage_stats_response import GetWorkspaceStorageStatsResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.internal_error_message_response import InternalErrorMessageResponse  # noqa: E501
 from playbookmedia_backend_server_sdk.models.list_workspace_sharings_response import ListWorkspaceSharingsResponse  # noqa: E501
@@ -36,33 +36,33 @@ from playbookmedia_backend_server_sdk.models.validation_error_message_response i
 from playbookmedia_backend_server_sdk import util
 
 
-def create_account(create_account_request):  # noqa: E501
+def create_account1(create_account_request1):  # noqa: E501
     """Create a new account
 
     Creates a new user account with initial workspace # noqa: E501
 
-    :param create_account_request: 
-    :type create_account_request: dict | bytes
+    :param create_account_request1: 
+    :type create_account_request1: dict | bytes
 
-    :rtype: Union[CreateAccountResponse, Tuple[CreateAccountResponse, int], Tuple[CreateAccountResponse, int, Dict[str, str]]
+    :rtype: Union[CreateAccountResponse1, Tuple[CreateAccountResponse1, int], Tuple[CreateAccountResponse1, int, Dict[str, str]]
     """
     if connexion.request.is_json:
-        create_account_request = CreateAccountRequest.from_dict(connexion.request.get_json())  # noqa: E501
+        create_account_request1 = CreateAccountRequest1.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
 
 
-def create_workspace(create_workspace_request):  # noqa: E501
+def create_workspace1(create_workspace_request1):  # noqa: E501
     """Create workspace
 
      # noqa: E501
 
-    :param create_workspace_request: 
-    :type create_workspace_request: dict | bytes
+    :param create_workspace_request1: 
+    :type create_workspace_request1: dict | bytes
 
-    :rtype: Union[CreateWorkspaceResponse, Tuple[CreateWorkspaceResponse, int], Tuple[CreateWorkspaceResponse, int, Dict[str, str]]
+    :rtype: Union[CreateWorkspaceResponse1, Tuple[CreateWorkspaceResponse1, int], Tuple[CreateWorkspaceResponse1, int, Dict[str, str]]
     """
     if connexion.request.is_json:
-        create_workspace_request = CreateWorkspaceRequest.from_dict(connexion.request.get_json())  # noqa: E501
+        create_workspace_request1 = CreateWorkspaceRequest1.from_dict(connexion.request.get_json())  # noqa: E501
     return 'do some magic!'
 
 
@@ -113,7 +113,7 @@ def get_workspace1(id):  # noqa: E501
     :param id: 
     :type id: str
 
-    :rtype: Union[GetWorkspaceResponse1, Tuple[GetWorkspaceResponse1, int], Tuple[GetWorkspaceResponse1, int, Dict[str, str]]
+    :rtype: Union[GetWorkspaceResponse, Tuple[GetWorkspaceResponse, int], Tuple[GetWorkspaceResponse, int, Dict[str, str]]
     """
     return 'do some magic!'
 

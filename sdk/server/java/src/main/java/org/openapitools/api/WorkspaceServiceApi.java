@@ -7,10 +7,10 @@ package org.openapitools.api;
 
 import org.openapitools.model.AuthenticationErrorMessageResponse1;
 import org.openapitools.model.ConflictErrorMessageResponse;
-import org.openapitools.model.CreateAccountRequest;
-import org.openapitools.model.CreateAccountResponse;
-import org.openapitools.model.CreateWorkspaceRequest;
-import org.openapitools.model.CreateWorkspaceResponse;
+import org.openapitools.model.CreateAccountRequest1;
+import org.openapitools.model.CreateAccountResponse1;
+import org.openapitools.model.CreateWorkspaceRequest1;
+import org.openapitools.model.CreateWorkspaceResponse1;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.model.DeleteAccountResponse;
 import org.openapitools.model.DeleteWorkspaceResponse;
@@ -18,7 +18,7 @@ import org.openapitools.model.ForbiddenErrorMessageResponse;
 import org.openapitools.model.GetAccountResponse1;
 import org.openapitools.model.GetWorkspaceAnalyticsResponse1;
 import org.openapitools.model.GetWorkspaceComplianceReportResponse;
-import org.openapitools.model.GetWorkspaceResponse1;
+import org.openapitools.model.GetWorkspaceResponse;
 import org.openapitools.model.GetWorkspaceStorageStatsResponse;
 import org.openapitools.model.InternalErrorMessageResponse;
 import org.openapitools.model.ListWorkspaceSharingsResponse;
@@ -63,7 +63,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-09T12:56:25.550372-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-09T13:53:28.529590-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 @Validated
 @Tag(name = "workspace-service", description = "the workspace-service API")
 public interface WorkspaceServiceApi {
@@ -76,7 +76,7 @@ public interface WorkspaceServiceApi {
      * POST /workspace-service/v1/accounts : Create a new account
      * Creates a new user account with initial workspace
      *
-     * @param createAccountRequest  (required)
+     * @param createAccountRequest1  (required)
      * @return A successful response. (status code 200)
      *         or Account created successfully (status code 201)
      *         or Bad Request - Invalid input parameters (status code 400)
@@ -89,18 +89,18 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "createAccount",
+        operationId = "createAccount1",
         summary = "Create a new account",
         description = "Creates a new user account with initial workspace",
         tags = { "workspace-service" },
         responses = {
             @ApiResponse(responseCode = "200", description = "A successful response.", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateAccountResponse.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = CreateAccountResponse.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateAccountResponse1.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = CreateAccountResponse1.class))
             }),
             @ApiResponse(responseCode = "201", description = "Account created successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateAccountResponse.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = CreateAccountResponse.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateAccountResponse1.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = CreateAccountResponse1.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input parameters", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorMessageResponse.class)),
@@ -143,8 +143,8 @@ public interface WorkspaceServiceApi {
         consumes = { "application/json", "application/x-www-form-urlencoded" }
     )
     
-    default ResponseEntity<CreateAccountResponse> createAccount(
-        @Parameter(name = "CreateAccountRequest", description = "", required = true) @Valid @RequestBody CreateAccountRequest createAccountRequest
+    default ResponseEntity<CreateAccountResponse1> createAccount1(
+        @Parameter(name = "CreateAccountRequest1", description = "", required = true) @Valid @RequestBody CreateAccountRequest1 createAccountRequest1
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -248,7 +248,7 @@ public interface WorkspaceServiceApi {
     /**
      * POST /workspace-service/v1/workspaces : Create workspace
      *
-     * @param createWorkspaceRequest  (required)
+     * @param createWorkspaceRequest1  (required)
      * @return A successful response. (status code 200)
      *         or Workspace created successfully (status code 201)
      *         or Bad Request - Invalid input parameters (status code 400)
@@ -261,17 +261,17 @@ public interface WorkspaceServiceApi {
      *         or An unexpected error response. (status code 200)
      */
     @Operation(
-        operationId = "createWorkspace",
+        operationId = "createWorkspace1",
         summary = "Create workspace",
         tags = { "workspace-service" },
         responses = {
             @ApiResponse(responseCode = "200", description = "A successful response.", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateWorkspaceResponse.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = CreateWorkspaceResponse.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateWorkspaceResponse1.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = CreateWorkspaceResponse1.class))
             }),
             @ApiResponse(responseCode = "201", description = "Workspace created successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateWorkspaceResponse.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = CreateWorkspaceResponse.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = CreateWorkspaceResponse1.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = CreateWorkspaceResponse1.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input parameters", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorMessageResponse.class)),
@@ -314,8 +314,8 @@ public interface WorkspaceServiceApi {
         consumes = { "application/json", "application/x-www-form-urlencoded" }
     )
     
-    default ResponseEntity<CreateWorkspaceResponse> createWorkspace(
-        @Parameter(name = "CreateWorkspaceRequest", description = "", required = true) @Valid @RequestBody CreateWorkspaceRequest createWorkspaceRequest
+    default ResponseEntity<CreateWorkspaceResponse1> createWorkspace1(
+        @Parameter(name = "CreateWorkspaceRequest1", description = "", required = true) @Valid @RequestBody CreateWorkspaceRequest1 createWorkspaceRequest1
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -916,8 +916,8 @@ public interface WorkspaceServiceApi {
         tags = { "workspace-service" },
         responses = {
             @ApiResponse(responseCode = "200", description = "Workspace retrieved successfully", content = {
-                @Content(mediaType = "application/json", schema = @Schema(implementation = GetWorkspaceResponse1.class)),
-                @Content(mediaType = "", schema = @Schema(implementation = GetWorkspaceResponse1.class))
+                @Content(mediaType = "application/json", schema = @Schema(implementation = GetWorkspaceResponse.class)),
+                @Content(mediaType = "", schema = @Schema(implementation = GetWorkspaceResponse.class))
             }),
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input parameters", content = {
                 @Content(mediaType = "application/json", schema = @Schema(implementation = ValidationErrorMessageResponse.class)),
@@ -959,7 +959,7 @@ public interface WorkspaceServiceApi {
         produces = { "application/json", "" }
     )
     
-    default ResponseEntity<GetWorkspaceResponse1> getWorkspace1(
+    default ResponseEntity<GetWorkspaceResponse> getWorkspace1(
         @Parameter(name = "id", description = "", required = true, in = ParameterIn.PATH) @PathVariable("id") String id
     ) {
         getRequest().ifPresent(request -> {

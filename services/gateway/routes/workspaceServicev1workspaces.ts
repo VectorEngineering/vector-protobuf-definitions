@@ -31,16 +31,16 @@ const postRoute = createRoute({
     body: {
       content: {
         "application/json": {
-          schema: schemas.CreateWorkspaceRequest,
+          schema: schemas.CreateWorkspaceRequest1,
         },
       },
     },
   },
   responses: {
-    201: {
+    200: {
       content: {
         "application/json": {
-          schema: schemas.CreateWorkspaceResponse,
+          schema: schemas.CreateWorkspaceResponse1,
         },
       },
       description: "",
@@ -61,7 +61,7 @@ router.openapi(postRoute, async (c) => {
   try {
     const data = await c.req.json();
     const response = await client.createWorkspaceServiceV1Workspaces(data);
-    return c.json({ data: response }, 201);
+    return c.json({ data: response }, 200);
   } catch (error) {
     if (error instanceof HTTPException) {
       throw error;

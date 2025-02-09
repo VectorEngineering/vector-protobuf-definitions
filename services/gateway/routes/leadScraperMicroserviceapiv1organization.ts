@@ -115,7 +115,7 @@ const postRoute = createRoute({
     },
   },
   responses: {
-    201: {
+    200: {
       content: {
         "application/json": {
           schema: schemas.CreateOrganizationResponse,
@@ -140,7 +140,7 @@ router.openapi(postRoute, async (c) => {
     const data = await c.req.json();
     const response =
       await client.createLeadScraperMicroserviceApiV1Organization(data);
-    return c.json({ data: response }, 201);
+    return c.json({ data: response }, 200);
   } catch (error) {
     if (error instanceof HTTPException) {
       throw error;

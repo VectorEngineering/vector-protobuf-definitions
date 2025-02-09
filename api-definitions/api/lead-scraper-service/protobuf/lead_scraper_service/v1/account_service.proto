@@ -30,37 +30,37 @@ option go_package = "github.com/VectorEngineering/vector-protobuf-definitions/ap
  * ```
  */
 service LeadScraperService {
-    // // Create a new Google Maps scraping job
-    // //
-    // // This endpoint initiates a new scraping task with the specified parameters.
-    // // The job will be queued and processed asynchronously. The response includes
-    // // a job ID that can be used to track the job's progress.
-    // //
-    // // Common use cases:
-    // // - Scrape business listings for market research
-    // // - Collect location data for geographic analysis
-    // // - Extract contact information for lead generation
-    // rpc CreateScrapingJob(CreateScrapingJobRequest) returns (CreateScrapingJobResponse) {
-    //     option (google.api.http) = {
-    //         post: "/lead-scraper-microservice/api/v1/jobs"
-    //         body: "*"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Create a new job scraping task"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "CreateScrapingJob"
-    //         description: "This endpoint creates a new Google Maps scraping job"
-    //         responses: {
-    //             key: "201"
-    //             value: {
-    //                 description: "Job created successfully"
-    //                 schema: {
-    //                     json_schema: { ref: ".lead_scraper_service.v1.CreateScrapingJobResponse" }
-    //                 }
-    //             }
-    //         }
-    //     };
-    // }
+    // Create a new Google Maps scraping job
+    //
+    // This endpoint initiates a new scraping task with the specified parameters.
+    // The job will be queued and processed asynchronously. The response includes
+    // a job ID that can be used to track the job's progress.
+    //
+    // Common use cases:
+    // - Scrape business listings for market research
+    // - Collect location data for geographic analysis
+    // - Extract contact information for lead generation
+    rpc CreateScrapingJob(CreateScrapingJobRequest) returns (CreateScrapingJobResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/jobs"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a new job scraping task"
+            tags: ["lead-scraper-service"]
+            operation_id: "CreateScrapingJob"
+            description: "This endpoint creates a new Google Maps scraping job"
+            responses: {
+                key: "201"
+                value: {
+                    description: "Job created successfully"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.CreateScrapingJobResponse" }
+                    }
+                }
+            }
+        };
+    }
 
     // Get all scraping jobs
     //
@@ -182,35 +182,35 @@ service LeadScraperService {
         };
     }
 
-    // // Create a new account
-    // //
-    // // This endpoint creates a new user account in the workspace service.
-    // // It sets up the necessary infrastructure for the user to start managing
-    // // scraping jobs and other workspace resources.
-    // //
-    // // Required permissions:
-    // // - create:account
-    // rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {
-    //     option (google.api.http) = {
-    //         post: "/lead-scraper-microservice/api/v1/account"
-    //         body: "*"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Create a new account"
-    //         tags: ["lead-scraper-service"]
-    //         operation_id: "CreateAccount"
-    //         description: "Creates a new user account in the workspace service"
-    //         responses: {
-    //             key: "201"
-    //             value: {
-    //                 description: "Account created successfully"
-    //                 schema: {
-    //                     json_schema: { ref: ".lead_scraper_service.v1.CreateAccountResponse" }
-    //                 }
-    //             }
-    //         }
-    //     };
-    // }
+    // Create a new account
+    //
+    // This endpoint creates a new user account in the workspace service.
+    // It sets up the necessary infrastructure for the user to start managing
+    // scraping jobs and other workspace resources.
+    //
+    // Required permissions:
+    // - create:account
+    rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/accounts"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a new account"
+            tags: ["lead-scraper-service"]
+            operation_id: "CreateAccount"
+            description: "Creates a new user account in the workspace service"
+            responses: {
+                key: "201"
+                value: {
+                    description: "Account created successfully"
+                    schema: {
+                        json_schema: { ref: ".lead_scraper_service.v1.CreateAccountResponse" }
+                    }
+                }
+            }
+        };
+    }
 
     // Get account details
     //
@@ -297,52 +297,52 @@ service LeadScraperService {
         };
     }
 
-    // /**
-    //  * CreateWorkspace establishes a new organizational workspace for managing scraping jobs
-    //  * 
-    //  * This endpoint creates a dedicated workspace with configurable:
-    //  * - Access controls and permissions
-    //  * - Resource quotas
-    //  * - Team member associations
-    //  * - Job execution environments
-    //  * 
-    //  * Required parameters:
-    //  * - account_id: Parent account ID
-    //  * - name: Human-readable workspace name
-    //  * - region: Deployment region for workspace resources
-    //  * 
-    //  * Example:
-    //  * ```curl
-    //  * POST /lead-scraper-microservice/api/v1/workspaces
-    //  * {
-    //  *   "name": "European Market Research",
-    //  *   "region": "eu-west-1",
-    //  *   "default_job_parameters": {
-    //  *     "lang": "en",
-    //  *     "country_code": "GR"
-    //  *   }
-    //  * }
-    //  * ```
-    //  */
-    // rpc CreateWorkspace(CreateWorkspaceRequest) returns (CreateWorkspaceResponse) {
-    //     option (google.api.http) = {
-    //         post: "/lead-scraper-microservice/api/v1/workspaces"
-    //         body: "*"
-    //     };
-    //     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-    //         summary: "Create a new workspace"
-    //         tags: ["lead-scraper-service"],
-    //         operation_id: "CreateWorkspace",
-    //         description: "Creates a new workspace for a given account",
-    //         responses: {
-    //             key: "201"
-    //             value: {
-    //                 description: "Workspace created successfully"
-    //                 schema: { json_schema: { ref: ".lead_scraper_service.v1.CreateWorkspaceResponse" } }
-    //             }
-    //         }
-    //     };
-    // }
+    /**
+     * CreateWorkspace establishes a new organizational workspace for managing scraping jobs
+     * 
+     * This endpoint creates a dedicated workspace with configurable:
+     * - Access controls and permissions
+     * - Resource quotas
+     * - Team member associations
+     * - Job execution environments
+     * 
+     * Required parameters:
+     * - account_id: Parent account ID
+     * - name: Human-readable workspace name
+     * - region: Deployment region for workspace resources
+     * 
+     * Example:
+     * ```curl
+     * POST /lead-scraper-microservice/api/v1/workspaces
+     * {
+     *   "name": "European Market Research",
+     *   "region": "eu-west-1",
+     *   "default_job_parameters": {
+     *     "lang": "en",
+     *     "country_code": "GR"
+     *   }
+     * }
+     * ```
+     */
+    rpc CreateWorkspace(CreateWorkspaceRequest) returns (CreateWorkspaceResponse) {
+        option (google.api.http) = {
+            post: "/lead-scraper-microservice/api/v1/workspaces"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Create a new workspace"
+            tags: ["lead-scraper-service"],
+            operation_id: "CreateWorkspace",
+            description: "Creates a new workspace for a given account",
+            responses: {
+                key: "201"
+                value: {
+                    description: "Workspace created successfully"
+                    schema: { json_schema: { ref: ".lead_scraper_service.v1.CreateWorkspaceResponse" } }
+                }
+            }
+        };
+    }
 
     /**
      * ListWorkspaces retrieves all workspaces associated with an account

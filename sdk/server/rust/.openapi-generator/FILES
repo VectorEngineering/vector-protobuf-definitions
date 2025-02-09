@@ -44,11 +44,15 @@ docs/ConflictInfo.md
 docs/ContextualSummary.md
 docs/ContractIntelligence.md
 docs/CreateAccountRequest.md
+docs/CreateAccountRequest1.md
 docs/CreateAccountResponse.md
+docs/CreateAccountResponse1.md
 docs/CreateApiKeyRequest.md
 docs/CreateApiKeyResponse.md
 docs/CreateOrganizationRequest.md
 docs/CreateOrganizationResponse.md
+docs/CreateScrapingJobRequest.md
+docs/CreateScrapingJobResponse.md
 docs/CreateTenantApiKeyRequest.md
 docs/CreateTenantApiKeyResponse.md
 docs/CreateTenantBody.md
@@ -58,7 +62,9 @@ docs/CreateWebhookResponse.md
 docs/CreateWorkflowBody.md
 docs/CreateWorkflowResponse.md
 docs/CreateWorkspaceRequest.md
+docs/CreateWorkspaceRequest1.md
 docs/CreateWorkspaceResponse.md
+docs/CreateWorkspaceResponse1.md
 docs/DataProfile.md
 docs/DayOfWeek.md
 docs/DeleteAccountResponse.md
@@ -105,7 +111,6 @@ docs/GetWorkspaceAnalyticsResponse.md
 docs/GetWorkspaceAnalyticsResponse1.md
 docs/GetWorkspaceComplianceReportResponse.md
 docs/GetWorkspaceResponse.md
-docs/GetWorkspaceResponse1.md
 docs/GetWorkspaceStorageStatsResponse.md
 docs/GoneErrorMessageResponse.md
 docs/IncludedField.md

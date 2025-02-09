@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**account** | [**Account1**](Account1.md) |  | [optional] 
-**initial_workspace_name** | **str** |  | [optional] 
+**account** | [**Account**](Account.md) |  | [optional] 
+**initial_workspace_id** | **str** |  | [optional] 
 
 ## Example
 

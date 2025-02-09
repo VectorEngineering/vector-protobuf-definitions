@@ -150,11 +150,11 @@ const postRoute = createRoute({
     }
   },
   responses: {
-    201: {
+    200: {
       content: {
         "application/json": {
-          schema: {{#if pathItem.post.responses.[201].content.[application/json].schema.$ref}}
-            schemas.{{lookup pathItem.post.responses.[201].content.[application/json].schema.$ref "#/components/schemas/"}}
+          schema: {{#if pathItem.post.responses.[200].content.[application/json].schema.$ref}}
+            schemas.{{lookup pathItem.post.responses.[200].content.[application/json].schema.$ref "#/components/schemas/"}}
           {{else}}
             z.object({}).openapi({
               type: "object",
@@ -193,7 +193,7 @@ router.openapi(postRoute, async (c) => {
     {{else}}
     const response = await client.create{{capitalize (basename path)}}(data);
     {{/if}}
-    return c.json({ data: response }, 201);
+    return c.json({ data: response }, 200);
   } catch (error) {
     if (error instanceof HTTPException) {
       throw error;
@@ -205,6 +205,7 @@ router.openapi(postRoute, async (c) => {
   }
 });
 {{/if}}
+
 
 {{#if pathItem.put}}
 const putRoute = createRoute({

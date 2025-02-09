@@ -4,12 +4,15 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+**CreateAccount**](lead_scraper_service_api.md#CreateAccount) | **POST** /lead-scraper-microservice/api/v1/account | Create a new account
 **CreateAPIKey**](lead_scraper_service_api.md#CreateAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys | Create a new API key
 **CreateOrganization**](lead_scraper_service_api.md#CreateOrganization) | **POST** /lead-scraper-microservice/api/v1/organization | Create a new organization
+**CreateScrapingJob**](lead_scraper_service_api.md#CreateScrapingJob) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task
 **CreateTenant**](lead_scraper_service_api.md#CreateTenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant
 **CreateTenantAPIKey**](lead_scraper_service_api.md#CreateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key
 **CreateWebhook**](lead_scraper_service_api.md#CreateWebhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook
 **CreateWorkflow**](lead_scraper_service_api.md#CreateWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow
+**CreateWorkspace**](lead_scraper_service_api.md#CreateWorkspace) | **POST** /lead-scraper-microservice/api/v1/workspaces | Create a new workspace
 **DeleteAccount**](lead_scraper_service_api.md#DeleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 **DeleteAPIKey**](lead_scraper_service_api.md#DeleteAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 **DeleteOrganization**](lead_scraper_service_api.md#DeleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
@@ -57,6 +60,33 @@ Method | HTTP request | Description
 **UpdateWorkspace**](lead_scraper_service_api.md#UpdateWorkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details
 
 
+# **CreateAccount**
+> models::CreateAccountResponse CreateAccount(create_account_request)
+Create a new account
+
+Creates a new user account in the workspace service
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+  **create_account_request** | [**CreateAccountRequest**](CreateAccountRequest.md)|  | 
+
+### Return type
+
+[**models::CreateAccountResponse**](CreateAccountResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/x-www-form-urlencoded
+ - **Accept**: , application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **CreateAPIKey**
 > models::CreateApiKeyResponse CreateAPIKey(create_api_key_request)
 Create a new API key
@@ -99,6 +129,33 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**models::CreateOrganizationResponse**](CreateOrganizationResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/x-www-form-urlencoded
+ - **Accept**: , application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **CreateScrapingJob**
+> models::CreateScrapingJobResponse CreateScrapingJob(create_scraping_job_request)
+Create a new job scraping task
+
+This endpoint creates a new Google Maps scraping job
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+  **create_scraping_job_request** | [**CreateScrapingJobRequest**](CreateScrapingJobRequest.md)|  | 
+
+### Return type
+
+[**models::CreateScrapingJobResponse**](CreateScrapingJobResponse.md)
 
 ### Authorization
 
@@ -209,6 +266,33 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**models::CreateWorkflowResponse**](CreateWorkflowResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/x-www-form-urlencoded
+ - **Accept**: , application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **CreateWorkspace**
+> models::CreateWorkspaceResponse CreateWorkspace(create_workspace_request)
+Create a new workspace
+
+Creates a new workspace for a given account
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+  **create_workspace_request** | [**CreateWorkspaceRequest**](CreateWorkspaceRequest.md)|  | 
+
+### Return type
+
+[**models::CreateWorkspaceResponse**](CreateWorkspaceResponse.md)
 
 ### Authorization
 

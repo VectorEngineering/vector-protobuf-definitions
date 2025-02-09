@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-09T12:56:28.131357-05:00[America/New_York]
+- Build date: 2025-02-09T13:53:31.250918-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)
@@ -137,12 +137,15 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreateAccount**](docs/lead_scraper_service_api.md#CreateAccount) | **POST** /lead-scraper-microservice/api/v1/account | Create a new account
 [**CreateAPIKey**](docs/lead_scraper_service_api.md#CreateAPIKey) | **POST** /lead-scraper-microservice/api/v1/api-keys | Create a new API key
 [**CreateOrganization**](docs/lead_scraper_service_api.md#CreateOrganization) | **POST** /lead-scraper-microservice/api/v1/organization | Create a new organization
+[**CreateScrapingJob**](docs/lead_scraper_service_api.md#CreateScrapingJob) | **POST** /lead-scraper-microservice/api/v1/jobs | Create a new job scraping task
 [**CreateTenant**](docs/lead_scraper_service_api.md#CreateTenant) | **POST** /lead-scraper-microservice/api/v1/organizations/{organizationId}/tenants | Create a new tenant
 [**CreateTenantAPIKey**](docs/lead_scraper_service_api.md#CreateTenantAPIKey) | **POST** /lead-scraper-microservice/api/v1/organizations/tenants/api-keys | Create a new tenant API key
 [**CreateWebhook**](docs/lead_scraper_service_api.md#CreateWebhook) | **POST** /lead-scraper-microservice/api/v1/webhooks | Create webhook
 [**CreateWorkflow**](docs/lead_scraper_service_api.md#CreateWorkflow) | **POST** /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows | Create a new workflow
+[**CreateWorkspace**](docs/lead_scraper_service_api.md#CreateWorkspace) | **POST** /lead-scraper-microservice/api/v1/workspaces | Create a new workspace
 [**DeleteAccount**](docs/lead_scraper_service_api.md#DeleteAccount) | **DELETE** /lead-scraper-microservice/api/v1/accounts/{id} | Delete account
 [**DeleteAPIKey**](docs/lead_scraper_service_api.md#DeleteAPIKey) | **DELETE** /lead-scraper-microservice/api/v1/api-keys/{keyId} | Delete API key
 [**DeleteOrganization**](docs/lead_scraper_service_api.md#DeleteOrganization) | **DELETE** /lead-scraper-microservice/api/v1/organization/{id} | Delete an organization
@@ -188,8 +191,8 @@ Method | HTTP request | Description
 [**UpdateWebhook**](docs/lead_scraper_service_api.md#UpdateWebhook) | **PUT** /lead-scraper-microservice/api/v1/webhooks | Update webhook
 [**UpdateWorkflow**](docs/lead_scraper_service_api.md#UpdateWorkflow) | **PUT** /lead-scraper-microservice/api/v1/workspaces/workflow | Update workflow details
 [**UpdateWorkspace**](docs/lead_scraper_service_api.md#UpdateWorkspace) | **PUT** /lead-scraper-microservice/api/v1/workspace | Update workspace details
-[**CreateAccount**](docs/workspace_service_api.md#CreateAccount) | **POST** /workspace-service/v1/accounts | Create a new account
-[**CreateWorkspace**](docs/workspace_service_api.md#CreateWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace
+[**CreateAccount1**](docs/workspace_service_api.md#CreateAccount1) | **POST** /workspace-service/v1/accounts | Create a new account
+[**CreateWorkspace1**](docs/workspace_service_api.md#CreateWorkspace1) | **POST** /workspace-service/v1/workspaces | Create workspace
 [**DeleteAccount1**](docs/workspace_service_api.md#DeleteAccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account
 [**DeleteWorkspace1**](docs/workspace_service_api.md#DeleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace
 [**GetAccount1**](docs/workspace_service_api.md#GetAccount1) | **GET** /workspace-service/v1/accounts/{id} | Get account details
@@ -249,11 +252,15 @@ Method | HTTP request | Description
  - [ContextualSummary](docs/ContextualSummary.md)
  - [ContractIntelligence](docs/ContractIntelligence.md)
  - [CreateAccountRequest](docs/CreateAccountRequest.md)
+ - [CreateAccountRequest1](docs/CreateAccountRequest1.md)
  - [CreateAccountResponse](docs/CreateAccountResponse.md)
+ - [CreateAccountResponse1](docs/CreateAccountResponse1.md)
  - [CreateApiKeyRequest](docs/CreateApiKeyRequest.md)
  - [CreateApiKeyResponse](docs/CreateApiKeyResponse.md)
  - [CreateOrganizationRequest](docs/CreateOrganizationRequest.md)
  - [CreateOrganizationResponse](docs/CreateOrganizationResponse.md)
+ - [CreateScrapingJobRequest](docs/CreateScrapingJobRequest.md)
+ - [CreateScrapingJobResponse](docs/CreateScrapingJobResponse.md)
  - [CreateTenantApiKeyRequest](docs/CreateTenantApiKeyRequest.md)
  - [CreateTenantApiKeyResponse](docs/CreateTenantApiKeyResponse.md)
  - [CreateTenantBody](docs/CreateTenantBody.md)
@@ -263,7 +270,9 @@ Method | HTTP request | Description
  - [CreateWorkflowBody](docs/CreateWorkflowBody.md)
  - [CreateWorkflowResponse](docs/CreateWorkflowResponse.md)
  - [CreateWorkspaceRequest](docs/CreateWorkspaceRequest.md)
+ - [CreateWorkspaceRequest1](docs/CreateWorkspaceRequest1.md)
  - [CreateWorkspaceResponse](docs/CreateWorkspaceResponse.md)
+ - [CreateWorkspaceResponse1](docs/CreateWorkspaceResponse1.md)
  - [DataProfile](docs/DataProfile.md)
  - [DayOfWeek](docs/DayOfWeek.md)
  - [DeleteAccountResponse](docs/DeleteAccountResponse.md)
@@ -310,7 +319,6 @@ Method | HTTP request | Description
  - [GetWorkspaceAnalyticsResponse1](docs/GetWorkspaceAnalyticsResponse1.md)
  - [GetWorkspaceComplianceReportResponse](docs/GetWorkspaceComplianceReportResponse.md)
  - [GetWorkspaceResponse](docs/GetWorkspaceResponse.md)
- - [GetWorkspaceResponse1](docs/GetWorkspaceResponse1.md)
  - [GetWorkspaceStorageStatsResponse](docs/GetWorkspaceStorageStatsResponse.md)
  - [GoneErrorMessageResponse](docs/GoneErrorMessageResponse.md)
  - [IncludedField](docs/IncludedField.md)

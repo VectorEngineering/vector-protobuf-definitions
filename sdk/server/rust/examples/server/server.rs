@@ -104,12 +104,15 @@ use crate::server_auth;
 
 use openapi_client::{
     Api,
+    CreateAccountResponse,
     CreateApiKeyResponse,
     CreateOrganizationResponse,
+    CreateScrapingJobResponse,
     CreateTenantResponse,
     CreateTenantApiKeyResponse,
     CreateWebhookResponse,
     CreateWorkflowResponse,
+    CreateWorkspaceResponse,
     DeleteAccountResponse,
     DeleteApiKeyResponse,
     DeleteOrganizationResponse,
@@ -155,8 +158,8 @@ use openapi_client::{
     UpdateWebhookResponse,
     UpdateWorkflowResponse,
     UpdateWorkspaceResponse,
-    CreateAccountResponse,
-    CreateWorkspaceResponse,
+    CreateAccount1Response,
+    CreateWorkspace1Response,
     DeleteAccount1Response,
     DeleteWorkspace1Response,
     GetAccount1Response,
@@ -179,6 +182,16 @@ use swagger::ApiError;
 #[async_trait]
 impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
 {
+    /// Create a new account
+    async fn create_account(
+        &self,
+        create_account_request: models::CreateAccountRequest,
+        context: &C) -> Result<CreateAccountResponse, ApiError>
+    {
+        info!("create_account({:?}) - X-Span-ID: {:?}", create_account_request, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
     /// Create a new API key
     async fn create_api_key(
         &self,
@@ -196,6 +209,16 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<CreateOrganizationResponse, ApiError>
     {
         info!("create_organization({:?}) - X-Span-ID: {:?}", create_organization_request, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Create a new job scraping task
+    async fn create_scraping_job(
+        &self,
+        create_scraping_job_request: models::CreateScrapingJobRequest,
+        context: &C) -> Result<CreateScrapingJobResponse, ApiError>
+    {
+        info!("create_scraping_job({:?}) - X-Span-ID: {:?}", create_scraping_job_request, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -238,6 +261,16 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         context: &C) -> Result<CreateWorkflowResponse, ApiError>
     {
         info!("create_workflow(\"{}\", {:?}) - X-Span-ID: {:?}", workspace_id, create_workflow_body, context.get().0.clone());
+        Err(ApiError("Api-Error: Operation is NOT implemented".into()))
+    }
+
+    /// Create a new workspace
+    async fn create_workspace(
+        &self,
+        create_workspace_request: models::CreateWorkspaceRequest,
+        context: &C) -> Result<CreateWorkspaceResponse, ApiError>
+    {
+        info!("create_workspace({:?}) - X-Span-ID: {:?}", create_workspace_request, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -787,22 +820,22 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
     }
 
     /// Create a new account
-    async fn create_account(
+    async fn create_account1(
         &self,
-        create_account_request: models::CreateAccountRequest,
-        context: &C) -> Result<CreateAccountResponse, ApiError>
+        create_account_request1: models::CreateAccountRequest1,
+        context: &C) -> Result<CreateAccount1Response, ApiError>
     {
-        info!("create_account({:?}) - X-Span-ID: {:?}", create_account_request, context.get().0.clone());
+        info!("create_account1({:?}) - X-Span-ID: {:?}", create_account_request1, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
     /// Create workspace
-    async fn create_workspace(
+    async fn create_workspace1(
         &self,
-        create_workspace_request: models::CreateWorkspaceRequest,
-        context: &C) -> Result<CreateWorkspaceResponse, ApiError>
+        create_workspace_request1: models::CreateWorkspaceRequest1,
+        context: &C) -> Result<CreateWorkspace1Response, ApiError>
     {
-        info!("create_workspace({:?}) - X-Span-ID: {:?}", create_workspace_request, context.get().0.clone());
+        info!("create_workspace1({:?}) - X-Span-ID: {:?}", create_workspace_request1, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

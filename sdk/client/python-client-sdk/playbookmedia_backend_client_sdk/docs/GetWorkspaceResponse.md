@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**workspace** | [**Workspace**](Workspace.md) |  | [optional] 
+**workspace** | [**Workspace1**](Workspace1.md) |  | [optional] 
 
 ## Example
 

@@ -4,8 +4,8 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createAccount**](WorkspaceServiceApi.md#createAccount) | **POST** /workspace-service/v1/accounts | Create a new account |
-| [**createWorkspace**](WorkspaceServiceApi.md#createWorkspace) | **POST** /workspace-service/v1/workspaces | Create workspace |
+| [**createAccount1**](WorkspaceServiceApi.md#createAccount1) | **POST** /workspace-service/v1/accounts | Create a new account |
+| [**createWorkspace1**](WorkspaceServiceApi.md#createWorkspace1) | **POST** /workspace-service/v1/workspaces | Create workspace |
 | [**deleteAccount1**](WorkspaceServiceApi.md#deleteAccount1) | **DELETE** /workspace-service/v1/accounts/{id} | Delete account |
 | [**deleteWorkspace1**](WorkspaceServiceApi.md#deleteWorkspace1) | **DELETE** /workspace-service/v1/workspaces/{id} | Delete workspace |
 | [**getAccount1**](WorkspaceServiceApi.md#getAccount1) | **GET** /workspace-service/v1/accounts/{id} | Get account details |
@@ -22,9 +22,9 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
 | [**updateWorkspaceSharing**](WorkspaceServiceApi.md#updateWorkspaceSharing) | **PUT** /workspace-service/v1/workspace-sharings | Update workspace sharing |
 
 
-<a name="createAccount"></a>
-# **createAccount**
-> CreateAccountResponse createAccount(CreateAccountRequest)
+<a name="createAccount1"></a>
+# **createAccount1**
+> CreateAccountResponse1 createAccount1(CreateAccountRequest1)
 
 Create a new account
 
@@ -34,11 +34,11 @@ Create a new account
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **CreateAccountRequest** | [**CreateAccountRequest**](../Models/CreateAccountRequest.md)|  | |
+| **CreateAccountRequest1** | [**CreateAccountRequest1**](../Models/CreateAccountRequest1.md)|  | |
 
 ### Return type
 
-[**CreateAccountResponse**](../Models/CreateAccountResponse.md)
+[**CreateAccountResponse1**](../Models/CreateAccountResponse1.md)
 
 ### Authorization
 
@@ -49,9 +49,9 @@ No authorization required
 - **Content-Type**: application/json, application/x-www-form-urlencoded
 - **Accept**: application/json, 
 
-<a name="createWorkspace"></a>
-# **createWorkspace**
-> CreateWorkspaceResponse createWorkspace(CreateWorkspaceRequest)
+<a name="createWorkspace1"></a>
+# **createWorkspace1**
+> CreateWorkspaceResponse1 createWorkspace1(CreateWorkspaceRequest1)
 
 Create workspace
 
@@ -59,11 +59,11 @@ Create workspace
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **CreateWorkspaceRequest** | [**CreateWorkspaceRequest**](../Models/CreateWorkspaceRequest.md)|  | |
+| **CreateWorkspaceRequest1** | [**CreateWorkspaceRequest1**](../Models/CreateWorkspaceRequest1.md)|  | |
 
 ### Return type
 
-[**CreateWorkspaceResponse**](../Models/CreateWorkspaceResponse.md)
+[**CreateWorkspaceResponse1**](../Models/CreateWorkspaceResponse1.md)
 
 ### Authorization
 
@@ -151,7 +151,7 @@ No authorization required
 
 <a name="getWorkspace1"></a>
 # **getWorkspace1**
-> GetWorkspaceResponse1 getWorkspace1(id)
+> GetWorkspaceResponse getWorkspace1(id)
 
 Get workspace details
 
@@ -163,7 +163,7 @@ Get workspace details
 
 ### Return type
 
-[**GetWorkspaceResponse1**](../Models/GetWorkspaceResponse1.md)
+[**GetWorkspaceResponse**](../Models/GetWorkspaceResponse.md)
 
 ### Authorization
 

@@ -260,10 +260,24 @@ export default {
             };
         },
 
+        // @return CreateAccountResponse
+        CreateAccount: ($createAccountRequest) => {
+            return {
+                "createAccountRequest": ""
+            };
+        },
+
         // @return CreateOrganizationResponse
         CreateOrganization: ($createOrganizationRequest) => {
             return {
                 "createOrganizationRequest": ""
+            };
+        },
+
+        // @return CreateScrapingJobResponse
+        CreateScrapingJob: ($createScrapingJobRequest) => {
+            return {
+                "createScrapingJobRequest": ""
             };
         },
 
@@ -294,6 +308,13 @@ export default {
             return {
                 "workspaceId": "workspaceId_example",
                 "createWorkflowBody": ""
+            };
+        },
+
+        // @return CreateWorkspaceResponse
+        CreateWorkspace: ($createWorkspaceRequest) => {
+            return {
+                "createWorkspaceRequest": ""
             };
         },
 

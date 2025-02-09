@@ -3711,7 +3711,7 @@ func DefaultStrictUpdateTenant(ctx context.Context, in *Tenant, db *gorm.DB) (*T
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(TenantORMWithAfterStrictUpdateSave); ok {
@@ -4843,7 +4843,7 @@ func DefaultStrictUpdateAccount(ctx context.Context, in *Account, db *gorm.DB) (
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(AccountORMWithAfterStrictUpdateSave); ok {

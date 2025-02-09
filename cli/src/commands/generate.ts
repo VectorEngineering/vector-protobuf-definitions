@@ -86,6 +86,10 @@ Handlebars.registerHelper('hasQueryParams', function (parameters) {
   return parameters?.some((p: any) => p.in === 'query');
 });
 
+Handlebars.registerHelper('hasPathParams', function (parameters) {
+  return parameters?.some((p: any) => p.in === 'path');
+});
+
 interface GenerateOptions {
   input: string;
   output: string;

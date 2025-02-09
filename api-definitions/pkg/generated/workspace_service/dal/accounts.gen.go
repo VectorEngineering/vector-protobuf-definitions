@@ -69,16 +69,8 @@ func newAccountORM(db *gorm.DB, opts ...gen.DOOption) accountORM {
 		},
 		Folders: struct {
 			field.RelationField
-			ChildFolders struct {
-				field.RelationField
-			}
 		}{
 			RelationField: field.NewRelation("Workspaces.Folders", "workspace_servicev1.FolderMetadataORM"),
-			ChildFolders: struct {
-				field.RelationField
-			}{
-				RelationField: field.NewRelation("Workspaces.Folders.ChildFolders", "workspace_servicev1.FolderMetadataORM"),
-			},
 		},
 		InstalledApps: struct {
 			field.RelationField
@@ -584,9 +576,6 @@ type accountORMHasManyWorkspaces struct {
 	}
 	Folders struct {
 		field.RelationField
-		ChildFolders struct {
-			field.RelationField
-		}
 	}
 	InstalledApps struct {
 		field.RelationField

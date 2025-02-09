@@ -28,6 +28,15 @@ const getRoute = createRoute({
   description: "{{pathItem.get.description}}",
   {{#if pathItem.get.parameters}}
   request: {
+    {{#if (hasPathParams pathItem.get.parameters)}}
+    params: z.object({
+      {{#each pathItem.get.parameters}}
+      {{#if (eq this.in "path")}}
+      {{this.name}}: {{#if (eq this.schema.type "integer")}}z.number(){{else}}z.string(){{/if}}{{#unless this.required}}.optional(){{/unless}},
+      {{/if}}
+      {{/each}}
+    }),
+    {{/if}}
     {{#if (hasQueryParams pathItem.get.parameters)}}
     query: z.object({
       {{#each pathItem.get.parameters}}
@@ -115,6 +124,15 @@ const postRoute = createRoute({
   summary: "{{pathItem.post.summary}}",
   description: "{{pathItem.post.description}}",
   request: {
+    {{#if (hasPathParams pathItem.post.parameters)}}
+    params: z.object({
+      {{#each pathItem.post.parameters}}
+      {{#if (eq this.in "path")}}
+      {{this.name}}: {{#if (eq this.schema.type "integer")}}z.number(){{else}}z.string(){{/if}}{{#unless this.required}}.optional(){{/unless}},
+      {{/if}}
+      {{/each}}
+    }),
+    {{/if}}
     body: {
       content: {
         "application/json": {
@@ -196,6 +214,15 @@ const putRoute = createRoute({
   summary: "{{pathItem.put.summary}}",
   description: "{{pathItem.put.description}}",
   request: {
+    {{#if (hasPathParams pathItem.put.parameters)}}
+    params: z.object({
+      {{#each pathItem.put.parameters}}
+      {{#if (eq this.in "path")}}
+      {{this.name}}: {{#if (eq this.schema.type "integer")}}z.number(){{else}}z.string(){{/if}}{{#unless this.required}}.optional(){{/unless}},
+      {{/if}}
+      {{/each}}
+    }),
+    {{/if}}
     body: {
       content: {
         "application/json": {
@@ -278,6 +305,15 @@ const deleteRoute = createRoute({
   description: "{{pathItem.delete.description}}",
   {{#if pathItem.delete.parameters}}
   request: {
+    {{#if (hasPathParams pathItem.delete.parameters)}}
+    params: z.object({
+      {{#each pathItem.delete.parameters}}
+      {{#if (eq this.in "path")}}
+      {{this.name}}: {{#if (eq this.schema.type "integer")}}z.number(){{else}}z.string(){{/if}}{{#unless this.required}}.optional(){{/unless}},
+      {{/if}}
+      {{/each}}
+    }),
+    {{/if}}
     {{#if (hasQueryParams pathItem.delete.parameters)}}
     query: z.object({
       {{#each pathItem.delete.parameters}}

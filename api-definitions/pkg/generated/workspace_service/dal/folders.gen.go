@@ -32,7 +32,6 @@ func newFolderMetadataORM(db *gorm.DB, opts ...gen.DOOption) folderMetadataORM {
 	_folderMetadataORM.ALL = field.NewAsterisk(tableName)
 	_folderMetadataORM.CreatedAt = field.NewTime(tableName, "created_at")
 	_folderMetadataORM.DeletedAt = field.NewTime(tableName, "deleted_at")
-	_folderMetadataORM.FolderMetadataId = field.NewUint64(tableName, "folder_metadata_id")
 	_folderMetadataORM.Id = field.NewUint64(tableName, "id")
 	_folderMetadataORM.IsDeleted = field.NewBool(tableName, "is_deleted")
 	_folderMetadataORM.Name = field.NewString(tableName, "name")
@@ -41,16 +40,6 @@ func newFolderMetadataORM(db *gorm.DB, opts ...gen.DOOption) folderMetadataORM {
 	_folderMetadataORM.S3FolderPath = field.NewString(tableName, "s3_folder_path")
 	_folderMetadataORM.UpdatedAt = field.NewTime(tableName, "updated_at")
 	_folderMetadataORM.WorkspaceId = field.NewUint64(tableName, "workspace_id")
-	_folderMetadataORM.ChildFolders = folderMetadataORMHasManyChildFolders{
-		db: db.Session(&gorm.Session{}),
-
-		RelationField: field.NewRelation("ChildFolders", "workspace_servicev1.FolderMetadataORM"),
-		ChildFolders: struct {
-			field.RelationField
-		}{
-			RelationField: field.NewRelation("ChildFolders.ChildFolders", "workspace_servicev1.FolderMetadataORM"),
-		},
-	}
 
 	_folderMetadataORM.fillFieldMap()
 
@@ -60,19 +49,17 @@ func newFolderMetadataORM(db *gorm.DB, opts ...gen.DOOption) folderMetadataORM {
 type folderMetadataORM struct {
 	folderMetadataORMDo
 
-	ALL              field.Asterisk
-	CreatedAt        field.Time
-	DeletedAt        field.Time
-	FolderMetadataId field.Uint64
-	Id               field.Uint64
-	IsDeleted        field.Bool
-	Name             field.String
-	ParentFolderId   field.Uint64
-	S3BucketName     field.String
-	S3FolderPath     field.String
-	UpdatedAt        field.Time
-	WorkspaceId      field.Uint64
-	ChildFolders     folderMetadataORMHasManyChildFolders
+	ALL            field.Asterisk
+	CreatedAt      field.Time
+	DeletedAt      field.Time
+	Id             field.Uint64
+	IsDeleted      field.Bool
+	Name           field.String
+	ParentFolderId field.Uint64
+	S3BucketName   field.String
+	S3FolderPath   field.String
+	UpdatedAt      field.Time
+	WorkspaceId    field.Uint64
 
 	fieldMap map[string]field.Expr
 }
@@ -91,7 +78,6 @@ func (f *folderMetadataORM) updateTableName(table string) *folderMetadataORM {
 	f.ALL = field.NewAsterisk(table)
 	f.CreatedAt = field.NewTime(table, "created_at")
 	f.DeletedAt = field.NewTime(table, "deleted_at")
-	f.FolderMetadataId = field.NewUint64(table, "folder_metadata_id")
 	f.Id = field.NewUint64(table, "id")
 	f.IsDeleted = field.NewBool(table, "is_deleted")
 	f.Name = field.NewString(table, "name")
@@ -116,10 +102,9 @@ func (f *folderMetadataORM) GetFieldByName(fieldName string) (field.OrderExpr, b
 }
 
 func (f *folderMetadataORM) fillFieldMap() {
-	f.fieldMap = make(map[string]field.Expr, 12)
+	f.fieldMap = make(map[string]field.Expr, 10)
 	f.fieldMap["created_at"] = f.CreatedAt
 	f.fieldMap["deleted_at"] = f.DeletedAt
-	f.fieldMap["folder_metadata_id"] = f.FolderMetadataId
 	f.fieldMap["id"] = f.Id
 	f.fieldMap["is_deleted"] = f.IsDeleted
 	f.fieldMap["name"] = f.Name
@@ -128,7 +113,6 @@ func (f *folderMetadataORM) fillFieldMap() {
 	f.fieldMap["s3_folder_path"] = f.S3FolderPath
 	f.fieldMap["updated_at"] = f.UpdatedAt
 	f.fieldMap["workspace_id"] = f.WorkspaceId
-
 }
 
 func (f folderMetadataORM) clone(db *gorm.DB) folderMetadataORM {
@@ -139,81 +123,6 @@ func (f folderMetadataORM) clone(db *gorm.DB) folderMetadataORM {
 func (f folderMetadataORM) replaceDB(db *gorm.DB) folderMetadataORM {
 	f.folderMetadataORMDo.ReplaceDB(db)
 	return f
-}
-
-type folderMetadataORMHasManyChildFolders struct {
-	db *gorm.DB
-
-	field.RelationField
-
-	ChildFolders struct {
-		field.RelationField
-	}
-}
-
-func (a folderMetadataORMHasManyChildFolders) Where(conds ...field.Expr) *folderMetadataORMHasManyChildFolders {
-	if len(conds) == 0 {
-		return &a
-	}
-
-	exprs := make([]clause.Expression, 0, len(conds))
-	for _, cond := range conds {
-		exprs = append(exprs, cond.BeCond().(clause.Expression))
-	}
-	a.db = a.db.Clauses(clause.Where{Exprs: exprs})
-	return &a
-}
-
-func (a folderMetadataORMHasManyChildFolders) WithContext(ctx context.Context) *folderMetadataORMHasManyChildFolders {
-	a.db = a.db.WithContext(ctx)
-	return &a
-}
-
-func (a folderMetadataORMHasManyChildFolders) Session(session *gorm.Session) *folderMetadataORMHasManyChildFolders {
-	a.db = a.db.Session(session)
-	return &a
-}
-
-func (a folderMetadataORMHasManyChildFolders) Model(m *workspace_servicev1.FolderMetadataORM) *folderMetadataORMHasManyChildFoldersTx {
-	return &folderMetadataORMHasManyChildFoldersTx{a.db.Model(m).Association(a.Name())}
-}
-
-type folderMetadataORMHasManyChildFoldersTx struct{ tx *gorm.Association }
-
-func (a folderMetadataORMHasManyChildFoldersTx) Find() (result []*workspace_servicev1.FolderMetadataORM, err error) {
-	return result, a.tx.Find(&result)
-}
-
-func (a folderMetadataORMHasManyChildFoldersTx) Append(values ...*workspace_servicev1.FolderMetadataORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Append(targetValues...)
-}
-
-func (a folderMetadataORMHasManyChildFoldersTx) Replace(values ...*workspace_servicev1.FolderMetadataORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Replace(targetValues...)
-}
-
-func (a folderMetadataORMHasManyChildFoldersTx) Delete(values ...*workspace_servicev1.FolderMetadataORM) (err error) {
-	targetValues := make([]interface{}, len(values))
-	for i, v := range values {
-		targetValues[i] = v
-	}
-	return a.tx.Delete(targetValues...)
-}
-
-func (a folderMetadataORMHasManyChildFoldersTx) Clear() error {
-	return a.tx.Clear()
-}
-
-func (a folderMetadataORMHasManyChildFoldersTx) Count() int64 {
-	return a.tx.Count()
 }
 
 type folderMetadataORMDo struct{ gen.DO }

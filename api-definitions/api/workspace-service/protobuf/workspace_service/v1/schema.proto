@@ -232,7 +232,6 @@ message FolderMetadata {
     google.protobuf.Timestamp deleted_at = 10;
 
     // Relationships
-    repeated FolderMetadata child_folders = 11 [(gorm.field).has_many = {}];
     repeated FileMetadata files = 12 [(gorm.field).has_many = {}];
 }
 

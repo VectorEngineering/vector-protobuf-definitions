@@ -32,4 +32,4 @@ dev:
 	pnpm run dev
 
 run:
-	rm -rf generated && pnpm run cli generate -i openapi.yaml -o ./generated
+	rm -rf generated && pnpm run cli generate -i openapi.yaml -o ./generated && cd generated && pnpm run format && pnpm run build && cd ..

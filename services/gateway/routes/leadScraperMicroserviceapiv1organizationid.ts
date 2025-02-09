@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /lead-scraper-microservice/api/v1/organization/{id}
 const router = new Hono<{ Bindings: Env }>();
 
@@ -37,22 +27,18 @@ const getRoute = createRoute({
   tags: [""],
   summary: "Get organization details",
   description: "Retrieves details of a specific organization",
-  request: {},
+  request: {
+    params: z.object({
+      id: z.string(),
+    }),
+  },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.GetOrganizationResponse,
-                "GetOrganizationResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Organization retrieved successfully",
-            }),
+          schema: z.object({
+            data: schemas.GetOrganizationResponse,
+          }),
         },
       },
       description: "Retrieves details of a specific organization",
@@ -104,19 +90,16 @@ const deleteRoute = createRoute({
   summary: "Delete an organization",
   description:
     "Permanently deletes an organization and all associated resources",
-  request: {},
+  request: {
+    params: z.object({
+      id: z.string(),
+    }),
+  },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              success: z.boolean(),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Organization deleted successfully",
-            }),
+          schema: schemas.DeleteOrganizationResponse,
         },
       },
       description:

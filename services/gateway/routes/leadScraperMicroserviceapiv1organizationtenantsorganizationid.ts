@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}
 const router = new Hono<{ Bindings: Env }>();
 
@@ -38,51 +28,41 @@ const getRoute = createRoute({
   summary: "List all tenants",
   description: "Retrieves a list of all tenants in the system",
   request: {
-    query: z
-      .object({
-        pageSize: z
-          .number()
-          .optional()
-          .openapi({
-            param: {
-              name: "pageSize",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        pageNumber: z
-          .number()
-          .optional()
-          .openapi({
-            param: {
-              name: "pageNumber",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
-      }),
+    params: z.object({
+      organizationId: z.string(),
+    }),
+    query: z.object({
+      pageSize: z
+        .number()
+        .optional()
+        .openapi({
+          param: {
+            name: "pageSize",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      pageNumber: z
+        .number()
+        .optional()
+        .openapi({
+          param: {
+            name: "pageNumber",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.ListTenantsResponse,
-                "ListTenantsResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Tenants retrieved successfully",
-            }),
+          schema: z.object({
+            data: schemas.ListTenantsResponse,
+          }),
         },
       },
       description: "Retrieves a list of all tenants in the system",

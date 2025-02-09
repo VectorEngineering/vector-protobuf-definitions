@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /lead-scraper-microservice/api/v1/organization/tenants/{organizationId}/{tenantId}
 const router = new Hono<{ Bindings: Env }>();
 
@@ -37,19 +27,17 @@ const deleteRoute = createRoute({
   tags: [""],
   summary: "Delete a tenant",
   description: "Permanently deletes a tenant and all associated resources",
-  request: {},
+  request: {
+    params: z.object({
+      organizationId: z.string(),
+      tenantId: z.string(),
+    }),
+  },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              success: z.boolean(),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Tenant deleted successfully",
-            }),
+          schema: schemas.DeleteTenantResponse,
         },
       },
       description: "Permanently deletes a tenant and all associated resources",

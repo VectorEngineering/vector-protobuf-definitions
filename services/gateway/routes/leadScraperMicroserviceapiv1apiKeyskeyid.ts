@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /lead-scraper-microservice/api/v1/api-keys/{keyId}
 const router = new Hono<{ Bindings: Env }>();
 
@@ -38,70 +28,63 @@ const getRoute = createRoute({
   summary: "Get API key details",
   description: "Retrieves details of a specific API key",
   request: {
-    query: z
-      .object({
-        organizationId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "organizationId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        tenantId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "tenantId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        accountId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "accountId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        workspaceId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "workspaceId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
-      }),
+    params: z.object({
+      keyId: z.string(),
+    }),
+    query: z.object({
+      organizationId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "organizationId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      tenantId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "tenantId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      accountId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "accountId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      workspaceId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "workspaceId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(schemas.GetAPIKeyResponse, "GetAPIKeyResponse"),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "API key retrieved successfully",
-            }),
+          schema: z.object({
+            data: schemas.GetAPIKeyResponse,
+          }),
         },
       },
       description: "Retrieves details of a specific API key",
@@ -157,70 +140,61 @@ const deleteRoute = createRoute({
   summary: "Delete API key",
   description: "Permanently deletes an API key",
   request: {
-    query: z
-      .object({
-        organizationId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "organizationId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        workspaceId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "workspaceId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        tenantId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "tenantId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        accountId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "accountId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
-      }),
+    params: z.object({
+      keyId: z.string(),
+    }),
+    query: z.object({
+      organizationId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "organizationId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      workspaceId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "workspaceId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      tenantId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "tenantId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      accountId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "accountId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              success: z.boolean(),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "API key deleted successfully",
-            }),
+          schema: schemas.DeleteAPIKeyResponse,
         },
       },
       description: "Permanently deletes an API key",

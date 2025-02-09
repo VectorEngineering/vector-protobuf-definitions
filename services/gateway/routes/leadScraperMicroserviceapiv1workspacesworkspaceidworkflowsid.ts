@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /lead-scraper-microservice/api/v1/workspaces/{workspaceId}/workflows/{id}
 const router = new Hono<{ Bindings: Env }>();
 
@@ -37,22 +27,19 @@ const getRoute = createRoute({
   tags: [""],
   summary: "Get workflow details",
   description: "Retrieves details of a specific workflow",
-  request: {},
+  request: {
+    params: z.object({
+      workspaceId: z.string(),
+      id: z.string(),
+    }),
+  },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.GetWorkflowResponse,
-                "GetWorkflowResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Workflow retrieved successfully",
-            }),
+          schema: z.object({
+            data: schemas.GetWorkflowResponse,
+          }),
         },
       },
       description: "Retrieves details of a specific workflow",
@@ -113,53 +100,45 @@ const deleteRoute = createRoute({
   summary: "Delete workflow",
   description: "Deletes a specific workflow",
   request: {
-    query: z
-      .object({
-        orgId: z.string().openapi({
-          param: {
-            name: "orgId",
-            in: "query",
-            required: true,
-            description: "",
-          },
-        }),
-        tenantId: z.string().openapi({
-          param: {
-            name: "tenantId",
-            in: "query",
-            required: true,
-            description: "",
-          },
-        }),
-        accountId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "accountId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
+    params: z.object({
+      workspaceId: z.string(),
+      id: z.string(),
+    }),
+    query: z.object({
+      orgId: z.string().openapi({
+        param: {
+          name: "orgId",
+          in: "query",
+          required: true,
+          description: "",
+        },
       }),
+      tenantId: z.string().openapi({
+        param: {
+          name: "tenantId",
+          in: "query",
+          required: true,
+          description: "",
+        },
+      }),
+      accountId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "accountId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              success: z.boolean(),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Workflow deleted successfully",
-            }),
+          schema: schemas.DeleteWorkflowResponse,
         },
       },
       description: "Deletes a specific workflow",

@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /workspace-service/v1/workspaces/list
 const router = new Hono<{ Bindings: Env }>();
 
@@ -38,73 +28,60 @@ const getRoute = createRoute({
   summary: "List workspaces",
   description: "",
   request: {
-    query: z
-      .object({
-        accountId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "accountId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        pageSize: z
-          .number()
-          .optional()
-          .openapi({
-            param: {
-              name: "pageSize",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        pageToken: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "pageToken",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        filter: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "filter",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
-      }),
+    query: z.object({
+      accountId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "accountId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      pageSize: z
+        .number()
+        .optional()
+        .openapi({
+          param: {
+            name: "pageSize",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      pageToken: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "pageToken",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      filter: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "filter",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.ListWorkspacesResponse1,
-                "ListWorkspacesResponse1",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Workspaces retrieved successfully",
-            }),
+          schema: z.object({
+            data: schemas.ListWorkspacesResponse1,
+          }),
         },
       },
       description: "",

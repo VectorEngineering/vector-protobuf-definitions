@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /workspace-service/v1/workspaces/{workspaceId}/share
 const router = new Hono<{ Bindings: Env }>();
 
@@ -38,10 +28,13 @@ const postRoute = createRoute({
   summary: "Share workspace",
   description: "",
   request: {
+    params: z.object({
+      workspaceId: z.string(),
+    }),
     body: {
       content: {
         "application/json": {
-          schema: wrapSchema(schemas.ShareWorkspaceBody, "ShareWorkspaceBody"),
+          schema: schemas.ShareWorkspaceBody,
         },
       },
     },
@@ -50,14 +43,11 @@ const postRoute = createRoute({
     201: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: z.any().openapi({ type: "object" }),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "",
-            }),
+          schema: z.object({}).openapi({
+            type: "object",
+            title: "EmptyResponse",
+            description: "Empty response object",
+          }),
         },
       },
       description: "",

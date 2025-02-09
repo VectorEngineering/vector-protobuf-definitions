@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 
 **deleted_at** | **datetime** |  | [optional] 
-**child_folders** | [**List[FolderMetadata]**](FolderMetadata.md) |  | [optional] 
 **files** | [**List[FileMetadata]**](FileMetadata.md) |  | [optional] 
 
 ## Example

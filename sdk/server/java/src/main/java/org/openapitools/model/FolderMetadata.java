@@ -24,7 +24,7 @@ import javax.annotation.Generated;
  * FolderMetadata
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-08T10:46:38.744443-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-09T12:56:25.550372-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class FolderMetadata {
 
   private String id;
@@ -47,9 +47,6 @@ public class FolderMetadata {
 
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
   private OffsetDateTime deletedAt;
-
-  @Valid
-  private List<@Valid FolderMetadata> childFolders = new ArrayList<>();
 
   @Valid
   private List<@Valid FileMetadata> files = new ArrayList<>();
@@ -234,34 +231,6 @@ public class FolderMetadata {
     this.deletedAt = deletedAt;
   }
 
-  public FolderMetadata childFolders(List<@Valid FolderMetadata> childFolders) {
-    this.childFolders = childFolders;
-    return this;
-  }
-
-  public FolderMetadata addChildFoldersItem(FolderMetadata childFoldersItem) {
-    if (this.childFolders == null) {
-      this.childFolders = new ArrayList<>();
-    }
-    this.childFolders.add(childFoldersItem);
-    return this;
-  }
-
-  /**
-   * Get childFolders
-   * @return childFolders
-   */
-  @Valid 
-  @Schema(name = "childFolders", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("childFolders")
-  public List<@Valid FolderMetadata> getChildFolders() {
-    return childFolders;
-  }
-
-  public void setChildFolders(List<@Valid FolderMetadata> childFolders) {
-    this.childFolders = childFolders;
-  }
-
   public FolderMetadata files(List<@Valid FileMetadata> files) {
     this.files = files;
     return this;
@@ -308,13 +277,12 @@ public class FolderMetadata {
         Objects.equals(this.createdAt, folderMetadata.createdAt) &&
         Objects.equals(this.updatedAt, folderMetadata.updatedAt) &&
         Objects.equals(this.deletedAt, folderMetadata.deletedAt) &&
-        Objects.equals(this.childFolders, folderMetadata.childFolders) &&
         Objects.equals(this.files, folderMetadata.files);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, s3BucketName, s3FolderPath, isDeleted, parentFolderId, createdAt, updatedAt, deletedAt, childFolders, files);
+    return Objects.hash(id, name, s3BucketName, s3FolderPath, isDeleted, parentFolderId, createdAt, updatedAt, deletedAt, files);
   }
 
   @Override
@@ -330,7 +298,6 @@ public class FolderMetadata {
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
     sb.append("    deletedAt: ").append(toIndentedString(deletedAt)).append("\n");
-    sb.append("    childFolders: ").append(toIndentedString(childFolders)).append("\n");
     sb.append("    files: ").append(toIndentedString(files)).append("\n");
     sb.append("}");
     return sb.toString();

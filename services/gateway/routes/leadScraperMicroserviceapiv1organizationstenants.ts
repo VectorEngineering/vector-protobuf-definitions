@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /lead-scraper-microservice/api/v1/organizations/tenants
 const router = new Hono<{ Bindings: Env }>();
 
@@ -41,10 +31,7 @@ const putRoute = createRoute({
     body: {
       content: {
         "application/json": {
-          schema: wrapSchema(
-            schemas.UpdateTenantRequest,
-            "UpdateTenantRequest",
-          ),
+          schema: schemas.UpdateTenantRequest,
         },
       },
     },
@@ -53,17 +40,7 @@ const putRoute = createRoute({
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.UpdateTenantResponse,
-                "UpdateTenantResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Tenant updated successfully",
-            }),
+          schema: schemas.UpdateTenantResponse,
         },
       },
       description: "Updates the configuration of a specific tenant",

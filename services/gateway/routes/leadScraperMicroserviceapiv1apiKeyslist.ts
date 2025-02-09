@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /lead-scraper-microservice/api/v1/api-keys/list
 const router = new Hono<{ Bindings: Env }>();
 
@@ -38,117 +28,104 @@ const getRoute = createRoute({
   summary: "List API keys",
   description: "Retrieves a list of API keys with optional filtering",
   request: {
-    query: z
-      .object({
-        organizationId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "organizationId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        tenantId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "tenantId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        accountId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "accountId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        workspaceId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "workspaceId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        pageSize: z
-          .number()
-          .optional()
-          .openapi({
-            param: {
-              name: "pageSize",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        pageNumber: z
-          .number()
-          .optional()
-          .openapi({
-            param: {
-              name: "pageNumber",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        status: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "status",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        search: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "search",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
-      }),
+    query: z.object({
+      organizationId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "organizationId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      tenantId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "tenantId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      accountId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "accountId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      workspaceId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "workspaceId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      pageSize: z
+        .number()
+        .optional()
+        .openapi({
+          param: {
+            name: "pageSize",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      pageNumber: z
+        .number()
+        .optional()
+        .openapi({
+          param: {
+            name: "pageNumber",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      status: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "status",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      search: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "search",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.ListAPIKeysResponse,
-                "ListAPIKeysResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "API keys retrieved successfully",
-            }),
+          schema: z.object({
+            data: schemas.ListAPIKeysResponse,
+          }),
         },
       },
       description: "Retrieves a list of API keys with optional filtering",

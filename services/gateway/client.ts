@@ -5,81 +5,6 @@ import type { ZodiosInstance } from "@zodios/core";
 import { makeApi, Zodios, type ZodiosOptions } from "@zodios/core";
 import { z } from "@hono/zod-openapi";
 
-type FolderMetadata = Partial<{
-  id: string;
-  name: string;
-  s3BucketName: string;
-  s3FolderPath: string;
-  isDeleted: boolean;
-  parentFolderId: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
-  childFolders: Array<FolderMetadata>;
-  files: Array<FileMetadata>;
-}>;
-type FileMetadata = Partial<{
-  id: string;
-  name: string;
-  size: string;
-  s3Key: string;
-  s3BucketName: string;
-  isDeleted: boolean;
-  version: number;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
-  embeddings: FileEmbeddings;
-  versions: Array<FileVersion>;
-  comments: Array<CommentThread>;
-  sharing: Array<FileSharing>;
-  snapshots: Array<DocumentSnapshot>;
-}>;
-type FileEmbeddings = Partial<{
-  id: string;
-  embeddings: Array<number>;
-  modelVersion: string;
-  createdAt: string;
-  updatedAt: string;
-}>;
-type FileVersion = Partial<{
-  id: string;
-  fileId: string;
-  versionNumber: number;
-  s3Key: string;
-  size: string;
-  commitMessage: string;
-  authorId: string;
-  createdAt: string;
-}>;
-type CommentThread = Partial<{
-  id: string;
-  authorId: string;
-  content: string;
-  startPosition: number;
-  endPosition: number;
-  resolved: boolean;
-  createdAt: string;
-  updatedAt: string;
-}>;
-type FileSharing = Partial<{
-  id: string;
-  sharedWithEmail: string;
-  permissionLevel: string;
-  expiresAt: string;
-  createdAt: string;
-  updatedAt: string;
-}>;
-type DocumentSnapshot = Partial<{
-  id: string;
-  fileId: string;
-  snapshotHash: string;
-  content: string;
-  authorId: string;
-  reason: string;
-  createdAt: string;
-}>;
-
 const AccountStatus = z.enum([
   "ACCOUNT_STATUS_UNSPECIFIED",
   "ACCOUNT_STATUS_ACTIVE",
@@ -1169,24 +1094,21 @@ const FileMetadata = z
   })
   .partial()
   .passthrough();
-const FolderMetadata: z.ZodType<FolderMetadata> = z.lazy(() =>
-  z
-    .object({
-      id: z.string(),
-      name: z.string(),
-      s3BucketName: z.string(),
-      s3FolderPath: z.string(),
-      isDeleted: z.boolean(),
-      parentFolderId: z.string(),
-      createdAt: z.string().datetime({ offset: true }),
-      updatedAt: z.string().datetime({ offset: true }),
-      deletedAt: z.string().datetime({ offset: true }),
-      childFolders: z.array(FolderMetadata),
-      files: z.array(FileMetadata),
-    })
-    .partial()
-    .passthrough(),
-);
+const FolderMetadata = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    s3BucketName: z.string(),
+    s3FolderPath: z.string(),
+    isDeleted: z.boolean(),
+    parentFolderId: z.string(),
+    createdAt: z.string().datetime({ offset: true }),
+    updatedAt: z.string().datetime({ offset: true }),
+    deletedAt: z.string().datetime({ offset: true }),
+    files: z.array(FileMetadata),
+  })
+  .partial()
+  .passthrough();
 const TemplateType = z.enum([
   "TEMPLATE_TYPE_UNSPECIFIED",
   "TEMPLATE_TYPE_STANDARD",

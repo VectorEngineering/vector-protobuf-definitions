@@ -3716,20 +3716,13 @@
           "type": "string",
           "format": "date-time"
         },
-        "childFolders": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/FolderMetadata"
-          },
-          "title": "Relationships"
-        },
         "files": {
           "type": "array",
           "items": {
             "type": "object",
             "$ref": "#/definitions/FileMetadata"
-          }
+          },
+          "title": "Relationships"
         }
       },
       "title": "File system entities"

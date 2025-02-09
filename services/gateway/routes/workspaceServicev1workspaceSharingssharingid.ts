@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /workspace-service/v1/workspace-sharings/{sharingId}
 const router = new Hono<{ Bindings: Env }>();
 
@@ -37,19 +27,16 @@ const deleteRoute = createRoute({
   tags: [""],
   summary: "Remove workspace sharing",
   description: "",
-  request: {},
+  request: {
+    params: z.object({
+      sharingId: z.string(),
+    }),
+  },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              success: z.boolean(),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Workspace sharing removed successfully",
-            }),
+          schema: schemas.RemoveWorkspaceSharingResponse,
         },
       },
       description: "",

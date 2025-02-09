@@ -61,11 +61,6 @@ func newWorkspaceORM(db *gorm.DB, opts ...gen.DOOption) workspaceORM {
 		db: db.Session(&gorm.Session{}),
 
 		RelationField: field.NewRelation("Folders", "workspace_servicev1.FolderMetadataORM"),
-		ChildFolders: struct {
-			field.RelationField
-		}{
-			RelationField: field.NewRelation("Folders.ChildFolders", "workspace_servicev1.FolderMetadataORM"),
-		},
 	}
 
 	_workspaceORM.InstalledApps = workspaceORMHasManyInstalledApps{
@@ -559,10 +554,6 @@ type workspaceORMHasManyFolders struct {
 	db *gorm.DB
 
 	field.RelationField
-
-	ChildFolders struct {
-		field.RelationField
-	}
 }
 
 func (a workspaceORMHasManyFolders) Where(conds ...field.Expr) *workspaceORMHasManyFolders {

@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /lead-scraper-microservice/api/v1/accounts/{id}
 const router = new Hono<{ Bindings: Env }>();
 
@@ -38,51 +28,41 @@ const getRoute = createRoute({
   summary: "Get account details",
   description: "Retrieves details of a specific account",
   request: {
-    query: z
-      .object({
-        organizationId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "organizationId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        tenantId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "tenantId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
-      }),
+    params: z.object({
+      id: z.string(),
+    }),
+    query: z.object({
+      organizationId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "organizationId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      tenantId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "tenantId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.GetAccountResponse,
-                "GetAccountResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Account details retrieved successfully",
-            }),
+          schema: z.object({
+            data: schemas.GetAccountResponse,
+          }),
         },
       },
       description: "Retrieves details of a specific account",
@@ -136,48 +116,39 @@ const deleteRoute = createRoute({
   summary: "Delete account",
   description: "Permanently deletes an account and associated resources",
   request: {
-    query: z
-      .object({
-        organizationId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "organizationId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        tenantId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "tenantId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
-      }),
+    params: z.object({
+      id: z.string(),
+    }),
+    query: z.object({
+      organizationId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "organizationId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      tenantId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "tenantId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              success: z.boolean(),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Account deleted successfully",
-            }),
+          schema: schemas.DeleteAccountResponse,
         },
       },
       description: "Permanently deletes an account and associated resources",

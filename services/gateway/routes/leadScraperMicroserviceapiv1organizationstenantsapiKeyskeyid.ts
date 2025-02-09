@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/{keyId}
 const router = new Hono<{ Bindings: Env }>();
 
@@ -38,51 +28,41 @@ const getRoute = createRoute({
   summary: "Get tenant API key details",
   description: "Retrieves details of a specific tenant API key",
   request: {
-    query: z
-      .object({
-        organizationId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "organizationId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        tenantId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "tenantId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
-      }),
+    params: z.object({
+      keyId: z.string(),
+    }),
+    query: z.object({
+      organizationId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "organizationId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      tenantId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "tenantId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.GetTenantAPIKeyResponse,
-                "GetTenantAPIKeyResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Tenant API key retrieved successfully",
-            }),
+          schema: z.object({
+            data: schemas.GetTenantAPIKeyResponse,
+          }),
         },
       },
       description: "Retrieves details of a specific tenant API key",
@@ -138,48 +118,39 @@ const deleteRoute = createRoute({
   summary: "Delete tenant API key",
   description: "Permanently deletes a tenant API key",
   request: {
-    query: z
-      .object({
-        organizationId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "organizationId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        tenantId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "tenantId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
-      }),
+    params: z.object({
+      keyId: z.string(),
+    }),
+    query: z.object({
+      organizationId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "organizationId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      tenantId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "tenantId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              success: z.boolean(),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Tenant API key deleted successfully",
-            }),
+          schema: schemas.DeleteTenantAPIKeyResponse,
         },
       },
       description: "Permanently deletes a tenant API key",

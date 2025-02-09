@@ -16,14 +16,6 @@ const ErrorResponseSchema = z.object({
   description: "Standard error response object"
 });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z.lazy(() => schema).openapi({
-    type: "object",
-    title: title
-  });
-};
-
 // Route handler for {{path}}
 const router = new Hono<{ Bindings: Env }>();
 
@@ -36,6 +28,15 @@ const getRoute = createRoute({
   description: "{{pathItem.get.description}}",
   {{#if pathItem.get.parameters}}
   request: {
+    {{#if (hasPathParams pathItem.get.parameters)}}
+    params: z.object({
+      {{#each pathItem.get.parameters}}
+      {{#if (eq this.in "path")}}
+      {{this.name}}: {{#if (eq this.schema.type "integer")}}z.number(){{else}}z.string(){{/if}}{{#unless this.required}}.optional(){{/unless}},
+      {{/if}}
+      {{/each}}
+    }),
+    {{/if}}
     {{#if (hasQueryParams pathItem.get.parameters)}}
     query: z.object({
       {{#each pathItem.get.parameters}}
@@ -50,9 +51,6 @@ const getRoute = createRoute({
       }),
       {{/if}}
       {{/each}}
-    }).openapi({
-      title: "Query Parameters",
-      description: "Query parameters for the request"
     }),
     {{/if}}
   },
@@ -62,11 +60,16 @@ const getRoute = createRoute({
       content: {
         "application/json": {
           schema: z.object({
-            data: {{#if pathItem.get.responses.[200].content.[application/json].schema.$ref}}wrapSchema(schemas.{{lookup pathItem.get.responses.[200].content.[application/json].schema.$ref "#/components/schemas/"}}, "{{lookup pathItem.get.responses.[200].content.[application/json].schema.$ref "#/components/schemas/"}}"){{else}}z.any().openapi({ type: "object" }){{/if}}
-          }).openapi({
-            title: "Success Response",
-            description: "{{pathItem.get.responses.[200].description}}"
-          }),
+            data: {{#if pathItem.get.responses.[200].content.[application/json].schema.$ref}}
+              schemas.{{lookup pathItem.get.responses.[200].content.[application/json].schema.$ref "#/components/schemas/"}}
+            {{else}}
+              z.object({}).openapi({
+                type: "object",
+                title: "EmptyResponse",
+                description: "Empty response object"
+              })
+            {{/if}}
+          })
         },
       },
       description: "{{pathItem.get.description}}",
@@ -121,10 +124,27 @@ const postRoute = createRoute({
   summary: "{{pathItem.post.summary}}",
   description: "{{pathItem.post.description}}",
   request: {
+    {{#if (hasPathParams pathItem.post.parameters)}}
+    params: z.object({
+      {{#each pathItem.post.parameters}}
+      {{#if (eq this.in "path")}}
+      {{this.name}}: {{#if (eq this.schema.type "integer")}}z.number(){{else}}z.string(){{/if}}{{#unless this.required}}.optional(){{/unless}},
+      {{/if}}
+      {{/each}}
+    }),
+    {{/if}}
     body: {
       content: {
         "application/json": {
-          schema: {{#if pathItem.post.requestBody.content.[application/json].schema.$ref}}wrapSchema(schemas.{{lookup pathItem.post.requestBody.content.[application/json].schema.$ref "#/components/schemas/"}}, "{{lookup pathItem.post.requestBody.content.[application/json].schema.$ref "#/components/schemas/"}}"){{else}}z.any().openapi({ type: "object" }){{/if}}
+          schema: {{#if pathItem.post.requestBody.content.[application/json].schema.$ref}}
+            schemas.{{lookup pathItem.post.requestBody.content.[application/json].schema.$ref "#/components/schemas/"}}
+          {{else}}
+            z.object({}).openapi({
+              type: "object",
+              title: "EmptyRequest",
+              description: "Empty request object"
+            })
+          {{/if}}
         }
       }
     }
@@ -133,12 +153,15 @@ const postRoute = createRoute({
     201: {
       content: {
         "application/json": {
-          schema: z.object({
-            data: {{#if pathItem.post.responses.[201].content.[application/json].schema.$ref}}wrapSchema(schemas.{{lookup pathItem.post.responses.[201].content.[application/json].schema.$ref "#/components/schemas/"}}, "{{lookup pathItem.post.responses.[201].content.[application/json].schema.$ref "#/components/schemas/"}}"){{else}}z.any().openapi({ type: "object" }){{/if}}
-          }).openapi({
-            title: "Success Response",
-            description: "{{pathItem.post.responses.[201].description}}"
-          }),
+          schema: {{#if pathItem.post.responses.[201].content.[application/json].schema.$ref}}
+            schemas.{{lookup pathItem.post.responses.[201].content.[application/json].schema.$ref "#/components/schemas/"}}
+          {{else}}
+            z.object({}).openapi({
+              type: "object",
+              title: "EmptyResponse",
+              description: "Empty response object"
+            })
+          {{/if}}
         },
       },
       description: "{{pathItem.post.description}}",
@@ -191,10 +214,27 @@ const putRoute = createRoute({
   summary: "{{pathItem.put.summary}}",
   description: "{{pathItem.put.description}}",
   request: {
+    {{#if (hasPathParams pathItem.put.parameters)}}
+    params: z.object({
+      {{#each pathItem.put.parameters}}
+      {{#if (eq this.in "path")}}
+      {{this.name}}: {{#if (eq this.schema.type "integer")}}z.number(){{else}}z.string(){{/if}}{{#unless this.required}}.optional(){{/unless}},
+      {{/if}}
+      {{/each}}
+    }),
+    {{/if}}
     body: {
       content: {
         "application/json": {
-          schema: {{#if pathItem.put.requestBody.content.[application/json].schema.$ref}}wrapSchema(schemas.{{lookup pathItem.put.requestBody.content.[application/json].schema.$ref "#/components/schemas/"}}, "{{lookup pathItem.put.requestBody.content.[application/json].schema.$ref "#/components/schemas/"}}"){{else}}z.any().openapi({ type: "object" }){{/if}}
+          schema: {{#if pathItem.put.requestBody.content.[application/json].schema.$ref}}
+            schemas.{{lookup pathItem.put.requestBody.content.[application/json].schema.$ref "#/components/schemas/"}}
+          {{else}}
+            z.object({}).openapi({
+              type: "object",
+              title: "EmptyRequest",
+              description: "Empty request object"
+            })
+          {{/if}}
         }
       }
     }
@@ -203,12 +243,15 @@ const putRoute = createRoute({
     200: {
       content: {
         "application/json": {
-          schema: z.object({
-            data: {{#if pathItem.put.responses.[200].content.[application/json].schema.$ref}}wrapSchema(schemas.{{lookup pathItem.put.responses.[200].content.[application/json].schema.$ref "#/components/schemas/"}}, "{{lookup pathItem.put.responses.[200].content.[application/json].schema.$ref "#/components/schemas/"}}"){{else}}z.any().openapi({ type: "object" }){{/if}}
-          }).openapi({
-            title: "Success Response",
-            description: "{{pathItem.put.responses.[200].description}}"
-          }),
+          schema: {{#if pathItem.put.responses.[200].content.[application/json].schema.$ref}}
+            schemas.{{lookup pathItem.put.responses.[200].content.[application/json].schema.$ref "#/components/schemas/"}}
+          {{else}}
+            z.object({}).openapi({
+              type: "object",
+              title: "EmptyResponse",
+              description: "Empty response object"
+            })
+          {{/if}}
         },
       },
       description: "{{pathItem.put.description}}",
@@ -262,6 +305,15 @@ const deleteRoute = createRoute({
   description: "{{pathItem.delete.description}}",
   {{#if pathItem.delete.parameters}}
   request: {
+    {{#if (hasPathParams pathItem.delete.parameters)}}
+    params: z.object({
+      {{#each pathItem.delete.parameters}}
+      {{#if (eq this.in "path")}}
+      {{this.name}}: {{#if (eq this.schema.type "integer")}}z.number(){{else}}z.string(){{/if}}{{#unless this.required}}.optional(){{/unless}},
+      {{/if}}
+      {{/each}}
+    }),
+    {{/if}}
     {{#if (hasQueryParams pathItem.delete.parameters)}}
     query: z.object({
       {{#each pathItem.delete.parameters}}
@@ -276,9 +328,6 @@ const deleteRoute = createRoute({
       }),
       {{/if}}
       {{/each}}
-    }).openapi({
-      title: "Query Parameters",
-      description: "Query parameters for the request"
     }),
     {{/if}}
   },
@@ -287,12 +336,17 @@ const deleteRoute = createRoute({
     200: {
       content: {
         "application/json": {
-          schema: z.object({
-            success: z.boolean()
-          }).openapi({
-            title: "Success Response",
-            description: "{{pathItem.delete.responses.[200].description}}"
-          }),
+          schema: {{#if pathItem.delete.responses.[200].content.[application/json].schema.$ref}}
+            schemas.{{lookup pathItem.delete.responses.[200].content.[application/json].schema.$ref "#/components/schemas/"}}
+          {{else}}
+            z.object({
+              success: z.boolean()
+            }).openapi({
+              type: "object",
+              title: "DeleteResponse",
+              description: "Delete operation response"
+            })
+          {{/if}}
         },
       },
       description: "{{pathItem.delete.description}}",

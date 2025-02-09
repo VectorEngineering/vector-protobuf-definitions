@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /workspace-service/v1/accounts
 const router = new Hono<{ Bindings: Env }>();
 
@@ -41,10 +31,7 @@ const postRoute = createRoute({
     body: {
       content: {
         "application/json": {
-          schema: wrapSchema(
-            schemas.CreateAccountRequest,
-            "CreateAccountRequest",
-          ),
+          schema: schemas.CreateAccountRequest,
         },
       },
     },
@@ -53,17 +40,7 @@ const postRoute = createRoute({
     201: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.CreateAccountResponse,
-                "CreateAccountResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Account created successfully",
-            }),
+          schema: schemas.CreateAccountResponse,
         },
       },
       description: "Creates a new user account with initial workspace",
@@ -109,10 +86,7 @@ const putRoute = createRoute({
     body: {
       content: {
         "application/json": {
-          schema: wrapSchema(
-            schemas.UpdateAccountRequest1,
-            "UpdateAccountRequest1",
-          ),
+          schema: schemas.UpdateAccountRequest1,
         },
       },
     },
@@ -121,17 +95,7 @@ const putRoute = createRoute({
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.UpdateAccountResponse,
-                "UpdateAccountResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Account updated successfully",
-            }),
+          schema: schemas.UpdateAccountResponse,
         },
       },
       description: "",

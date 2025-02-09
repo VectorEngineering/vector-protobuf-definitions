@@ -3,9 +3,6 @@ name: Deploy Cloudflare Workers
 on:
   push:
     branches: [ main ]
-    paths:
-      - 'services/usage-based-api-gateway/**'
-      - 'services/gateway/**'
   workflow_dispatch:
     inputs:
       worker:
@@ -19,7 +16,7 @@ on:
 
 jobs:
   deploy-usage-based-api-gateway:
-    if: github.event_name == 'push' && contains(github.event.paths, 'services/usage-based-api-gateway/') || github.event.inputs.worker == 'all' || github.event.inputs.worker == 'usage-based-api-gateway'
+    if: github.event_name == 'push' || github.event.inputs.worker == 'all' || github.event.inputs.worker == 'usage-based-api-gateway'
     uses: ./.github/workflows/cloudflare-worker-deploy.yml
     with:
       worker_dir: services/usage-based-api-gateway
@@ -29,7 +26,7 @@ jobs:
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
   deploy-gateway:
-    if: github.event_name == 'push' && contains(github.event.paths, 'services/gateway/') || github.event.inputs.worker == 'all' || github.event.inputs.worker == 'gateway'
+    if: github.event_name == 'push' || github.event.inputs.worker == 'all' || github.event.inputs.worker == 'gateway'
     uses: ./.github/workflows/cloudflare-worker-deploy.yml
     with:
       worker_dir: services/gateway

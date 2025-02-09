@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /lead-scraper-microservice/api/v1/workspace
 const router = new Hono<{ Bindings: Env }>();
 
@@ -41,10 +31,7 @@ const putRoute = createRoute({
     body: {
       content: {
         "application/json": {
-          schema: wrapSchema(
-            schemas.UpdateWorkspaceRequest,
-            "UpdateWorkspaceRequest",
-          ),
+          schema: schemas.UpdateWorkspaceRequest,
         },
       },
     },
@@ -53,17 +40,7 @@ const putRoute = createRoute({
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.UpdateWorkspaceResponse,
-                "UpdateWorkspaceResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Workspace updated successfully",
-            }),
+          schema: schemas.UpdateWorkspaceResponse,
         },
       },
       description: "Updates the details of a specific workspace",

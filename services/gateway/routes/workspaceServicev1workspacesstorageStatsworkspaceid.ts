@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /workspace-service/v1/workspaces/storage-stats/{workspaceId}
 const router = new Hono<{ Bindings: Env }>();
 
@@ -37,22 +27,18 @@ const getRoute = createRoute({
   tags: [""],
   summary: "Get storage statistics",
   description: "",
-  request: {},
+  request: {
+    params: z.object({
+      workspaceId: z.string(),
+    }),
+  },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.GetWorkspaceStorageStatsResponse,
-                "GetWorkspaceStorageStatsResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Storage statistics retrieved successfully",
-            }),
+          schema: z.object({
+            data: schemas.GetWorkspaceStorageStatsResponse,
+          }),
         },
       },
       description: "",

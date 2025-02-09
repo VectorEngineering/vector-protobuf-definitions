@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /lead-scraper-microservice/api/v1/organizations/tenants/api-keys/list
 const router = new Hono<{ Bindings: Env }>();
 
@@ -38,84 +28,71 @@ const getRoute = createRoute({
   summary: "List tenant API keys",
   description: "Retrieves all API keys for a specific tenant",
   request: {
-    query: z
-      .object({
-        organizationId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "organizationId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        tenantId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "tenantId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        pageSize: z
-          .number()
-          .optional()
-          .openapi({
-            param: {
-              name: "pageSize",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        pageNumber: z
-          .number()
-          .optional()
-          .openapi({
-            param: {
-              name: "pageNumber",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        status: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "status",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
-      }),
+    query: z.object({
+      organizationId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "organizationId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      tenantId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "tenantId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      pageSize: z
+        .number()
+        .optional()
+        .openapi({
+          param: {
+            name: "pageSize",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      pageNumber: z
+        .number()
+        .optional()
+        .openapi({
+          param: {
+            name: "pageNumber",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      status: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "status",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.ListTenantAPIKeysResponse,
-                "ListTenantAPIKeysResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Tenant API keys retrieved successfully",
-            }),
+          schema: z.object({
+            data: schemas.ListTenantAPIKeysResponse,
+          }),
         },
       },
       description: "Retrieves all API keys for a specific tenant",

@@ -18,7 +18,6 @@ type FolderMetadata {
   createdAt: String!
   updatedAt: String!
   deletedAt: String!
-  childFolders: [FolderMetadata!]
   files: [FileMetadata!]
 }
 
@@ -32,7 +31,6 @@ input FolderMetadataInput {
     createdAt: String!
     updatedAt: String!
     deletedAt: String!
-    childFolders: [FolderMetadataInput]
     files: [FileMetadataInput]
 }
 

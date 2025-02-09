@@ -16213,10 +16213,6 @@ pub struct FolderMetadata {
     #[serde(skip_serializing_if="Option::is_none")]
     pub deleted_at: Option<chrono::DateTime::<chrono::Utc>>,
 
-    #[serde(rename = "childFolders")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub child_folders: Option<Vec<models::FolderMetadata>>,
-
     #[serde(rename = "files")]
     #[serde(skip_serializing_if="Option::is_none")]
     pub files: Option<Vec<models::FileMetadata>>,
@@ -16237,7 +16233,6 @@ impl FolderMetadata {
             created_at: None,
             updated_at: None,
             deleted_at: None,
-            child_folders: None,
             files: None,
         }
     }
@@ -16303,8 +16298,6 @@ impl std::string::ToString for FolderMetadata {
 
             // Skipping deletedAt in query parameter serialization
 
-            // Skipping childFolders in query parameter serialization
-
             // Skipping files in query parameter serialization
 
         ];
@@ -16333,7 +16326,6 @@ impl std::str::FromStr for FolderMetadata {
             pub created_at: Vec<chrono::DateTime::<chrono::Utc>>,
             pub updated_at: Vec<chrono::DateTime::<chrono::Utc>>,
             pub deleted_at: Vec<chrono::DateTime::<chrono::Utc>>,
-            pub child_folders: Vec<Vec<models::FolderMetadata>>,
             pub files: Vec<Vec<models::FileMetadata>>,
         }
 
@@ -16370,7 +16362,6 @@ impl std::str::FromStr for FolderMetadata {
                     "updatedAt" => intermediate_rep.updated_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "deletedAt" => intermediate_rep.deleted_at.push(<chrono::DateTime::<chrono::Utc> as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    "childFolders" => return std::result::Result::Err("Parsing a container in this style is not supported in FolderMetadata".to_string()),
                     "files" => return std::result::Result::Err("Parsing a container in this style is not supported in FolderMetadata".to_string()),
                     _ => return std::result::Result::Err("Unexpected key while parsing FolderMetadata".to_string())
                 }
@@ -16391,7 +16382,6 @@ impl std::str::FromStr for FolderMetadata {
             created_at: intermediate_rep.created_at.into_iter().next(),
             updated_at: intermediate_rep.updated_at.into_iter().next(),
             deleted_at: intermediate_rep.deleted_at.into_iter().next(),
-            child_folders: intermediate_rep.child_folders.into_iter().next(),
             files: intermediate_rep.files.into_iter().next(),
         })
     }

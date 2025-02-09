@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /lead-scraper-microservice/api/v1/jobs/{jobId}
 const router = new Hono<{ Bindings: Env }>();
 
@@ -38,53 +28,43 @@ const getRoute = createRoute({
   summary: "Get a specific job",
   description: "This endpoint retrieves a specific Google Maps scraping job",
   request: {
-    query: z
-      .object({
-        userId: z.string().openapi({
-          param: {
-            name: "userId",
-            in: "query",
-            required: true,
-            description: "",
-          },
-        }),
-        orgId: z.string().openapi({
-          param: {
-            name: "orgId",
-            in: "query",
-            required: true,
-            description: "",
-          },
-        }),
-        tenantId: z.string().openapi({
-          param: {
-            name: "tenantId",
-            in: "query",
-            required: true,
-            description: "",
-          },
-        }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
+    params: z.object({
+      jobId: z.string(),
+    }),
+    query: z.object({
+      userId: z.string().openapi({
+        param: {
+          name: "userId",
+          in: "query",
+          required: true,
+          description: "",
+        },
       }),
+      orgId: z.string().openapi({
+        param: {
+          name: "orgId",
+          in: "query",
+          required: true,
+          description: "",
+        },
+      }),
+      tenantId: z.string().openapi({
+        param: {
+          name: "tenantId",
+          in: "query",
+          required: true,
+          description: "",
+        },
+      }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.GetScrapingJobResponse,
-                "GetScrapingJobResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Successful response",
-            }),
+          schema: z.object({
+            data: schemas.GetScrapingJobResponse,
+          }),
         },
       },
       description:
@@ -140,50 +120,41 @@ const deleteRoute = createRoute({
   summary: "Delete a specific job",
   description: "This endpoint deletes a specific Google Maps scraping job",
   request: {
-    query: z
-      .object({
-        userId: z.string().openapi({
-          param: {
-            name: "userId",
-            in: "query",
-            required: true,
-            description: "",
-          },
-        }),
-        orgId: z.string().openapi({
-          param: {
-            name: "orgId",
-            in: "query",
-            required: true,
-            description: "",
-          },
-        }),
-        tenantId: z.string().openapi({
-          param: {
-            name: "tenantId",
-            in: "query",
-            required: true,
-            description: "",
-          },
-        }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
+    params: z.object({
+      jobId: z.string(),
+    }),
+    query: z.object({
+      userId: z.string().openapi({
+        param: {
+          name: "userId",
+          in: "query",
+          required: true,
+          description: "",
+        },
       }),
+      orgId: z.string().openapi({
+        param: {
+          name: "orgId",
+          in: "query",
+          required: true,
+          description: "",
+        },
+      }),
+      tenantId: z.string().openapi({
+        param: {
+          name: "tenantId",
+          in: "query",
+          required: true,
+          description: "",
+        },
+      }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              success: z.boolean(),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Job deleted successfully",
-            }),
+          schema: schemas.DeleteScrapingJobResponse,
         },
       },
       description: "This endpoint deletes a specific Google Maps scraping job",

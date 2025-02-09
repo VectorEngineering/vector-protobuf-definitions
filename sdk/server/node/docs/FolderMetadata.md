@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 **createdAt** | **String!** |  | [optional] [default to null]
 **updatedAt** | **String!** |  | [optional] [default to null]
 **deletedAt** | **String!** |  | [optional] [default to null]
-**childFolders** | [**FolderMetadata**](FolderMetadata.md) |  | [optional] [default to null]
 **files** | [**FileMetadata**](FileMetadata.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

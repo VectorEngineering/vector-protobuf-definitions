@@ -14,7 +14,7 @@ class FolderMetadata(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, name=None, s3_bucket_name=None, s3_folder_path=None, is_deleted=None, parent_folder_id=None, created_at=None, updated_at=None, deleted_at=None, child_folders=None, files=None):  # noqa: E501
+    def __init__(self, id=None, name=None, s3_bucket_name=None, s3_folder_path=None, is_deleted=None, parent_folder_id=None, created_at=None, updated_at=None, deleted_at=None, files=None):  # noqa: E501
         """FolderMetadata - a model defined in OpenAPI
 
         :param id: The id of this FolderMetadata.  # noqa: E501
@@ -35,8 +35,6 @@ class FolderMetadata(Model):
         :type updated_at: datetime
         :param deleted_at: The deleted_at of this FolderMetadata.  # noqa: E501
         :type deleted_at: datetime
-        :param child_folders: The child_folders of this FolderMetadata.  # noqa: E501
-        :type child_folders: List[FolderMetadata]
         :param files: The files of this FolderMetadata.  # noqa: E501
         :type files: List[FileMetadata]
         """
@@ -50,7 +48,6 @@ class FolderMetadata(Model):
             'created_at': datetime,
             'updated_at': datetime,
             'deleted_at': datetime,
-            'child_folders': List[FolderMetadata],
             'files': List[FileMetadata]
         }
 
@@ -64,7 +61,6 @@ class FolderMetadata(Model):
             'created_at': 'createdAt',
             'updated_at': 'updatedAt',
             'deleted_at': 'deletedAt',
-            'child_folders': 'childFolders',
             'files': 'files'
         }
 
@@ -77,7 +73,6 @@ class FolderMetadata(Model):
         self._created_at = created_at
         self._updated_at = updated_at
         self._deleted_at = deleted_at
-        self._child_folders = child_folders
         self._files = files
 
     @classmethod
@@ -279,27 +274,6 @@ class FolderMetadata(Model):
         """
 
         self._deleted_at = deleted_at
-
-    @property
-    def child_folders(self) -> List[FolderMetadata]:
-        """Gets the child_folders of this FolderMetadata.
-
-
-        :return: The child_folders of this FolderMetadata.
-        :rtype: List[FolderMetadata]
-        """
-        return self._child_folders
-
-    @child_folders.setter
-    def child_folders(self, child_folders: List[FolderMetadata]):
-        """Sets the child_folders of this FolderMetadata.
-
-
-        :param child_folders: The child_folders of this FolderMetadata.
-        :type child_folders: List[FolderMetadata]
-        """
-
-        self._child_folders = child_folders
 
     @property
     def files(self) -> List[FileMetadata]:

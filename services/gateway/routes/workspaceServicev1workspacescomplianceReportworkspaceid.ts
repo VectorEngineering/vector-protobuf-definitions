@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /workspace-service/v1/workspaces/compliance-report/{workspaceId}
 const router = new Hono<{ Bindings: Env }>();
 
@@ -38,40 +28,30 @@ const getRoute = createRoute({
   summary: "Get compliance report",
   description: "",
   request: {
-    query: z
-      .object({
-        complianceType: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "complianceType",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
-      }),
+    params: z.object({
+      workspaceId: z.string(),
+    }),
+    query: z.object({
+      complianceType: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "complianceType",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.GetWorkspaceComplianceReportResponse,
-                "GetWorkspaceComplianceReportResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Compliance report retrieved successfully",
-            }),
+          schema: z.object({
+            data: schemas.GetWorkspaceComplianceReportResponse,
+          }),
         },
       },
       description: "",

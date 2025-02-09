@@ -3498,15 +3498,11 @@ components:
         deletedAt:
           type: string
           format: date-time
-        childFolders:
-          type: array
-          items:
-            $ref: "#/components/schemas/FolderMetadata"
-          title: Relationships
         files:
           type: array
           items:
             $ref: "#/components/schemas/FileMetadata"
+          title: Relationships
       title: File system entities
     ForbiddenErrorMessageResponse:
       type: object

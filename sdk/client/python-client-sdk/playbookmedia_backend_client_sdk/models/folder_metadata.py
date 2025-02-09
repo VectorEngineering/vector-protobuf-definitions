@@ -38,9 +38,8 @@ class FolderMetadata(BaseModel):
     created_at: Optional[datetime] = Field(default=None, alias="createdAt")
     updated_at: Optional[datetime] = Field(default=None, alias="updatedAt")
     deleted_at: Optional[datetime] = Field(default=None, alias="deletedAt")
-    child_folders: Optional[List[FolderMetadata]] = Field(default=None, alias="childFolders")
     files: Optional[List[FileMetadata]] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "s3BucketName", "s3FolderPath", "isDeleted", "parentFolderId", "createdAt", "updatedAt", "deletedAt", "childFolders", "files"]
+    __properties: ClassVar[List[str]] = ["id", "name", "s3BucketName", "s3FolderPath", "isDeleted", "parentFolderId", "createdAt", "updatedAt", "deletedAt", "files"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -81,13 +80,6 @@ class FolderMetadata(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in child_folders (list)
-        _items = []
-        if self.child_folders:
-            for _item in self.child_folders:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['childFolders'] = _items
         # override the default output from pydantic by calling `to_dict()` of each item in files (list)
         _items = []
         if self.files:
@@ -116,11 +108,8 @@ class FolderMetadata(BaseModel):
             "createdAt": obj.get("createdAt"),
             "updatedAt": obj.get("updatedAt"),
             "deletedAt": obj.get("deletedAt"),
-            "childFolders": [FolderMetadata.from_dict(_item) for _item in obj["childFolders"]] if obj.get("childFolders") is not None else None,
             "files": [FileMetadata.from_dict(_item) for _item in obj["files"]] if obj.get("files") is not None else None
         })
         return _obj
 
-# TODO: Rewrite to not use raise_errors
-FolderMetadata.model_rebuild(raise_errors=False)
 

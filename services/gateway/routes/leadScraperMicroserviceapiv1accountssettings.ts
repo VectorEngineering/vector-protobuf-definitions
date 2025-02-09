@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /lead-scraper-microservice/api/v1/accounts/settings
 const router = new Hono<{ Bindings: Env }>();
 
@@ -41,10 +31,7 @@ const putRoute = createRoute({
     body: {
       content: {
         "application/json": {
-          schema: wrapSchema(
-            schemas.UpdateAccountSettingsRequest,
-            "UpdateAccountSettingsRequest",
-          ),
+          schema: schemas.UpdateAccountSettingsRequest,
         },
       },
     },
@@ -53,17 +40,7 @@ const putRoute = createRoute({
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.UpdateAccountSettingsResponse,
-                "UpdateAccountSettingsResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Settings updated successfully",
-            }),
+          schema: schemas.UpdateAccountSettingsResponse,
         },
       },
       description: "Updates the settings for a given account",

@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /lead-scraper-microservice/api/v1/leads/{leadId}
 const router = new Hono<{ Bindings: Env }>();
 
@@ -38,70 +28,63 @@ const getRoute = createRoute({
   summary: "Get lead details",
   description: "Retrieves detailed information about a specific lead",
   request: {
-    query: z
-      .object({
-        organizationId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "organizationId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        workspaceId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "workspaceId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        tenantId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "tenantId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        accountId: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "accountId",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
-      }),
+    params: z.object({
+      leadId: z.string(),
+    }),
+    query: z.object({
+      organizationId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "organizationId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      workspaceId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "workspaceId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      tenantId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "tenantId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      accountId: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "accountId",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(schemas.GetLeadResponse, "GetLeadResponse"),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Lead retrieved successfully",
-            }),
+          schema: z.object({
+            data: schemas.GetLeadResponse,
+          }),
         },
       },
       description: "Retrieves detailed information about a specific lead",

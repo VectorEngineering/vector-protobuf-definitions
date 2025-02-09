@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /lead-scraper-microservice/api/v1/jobs
 const router = new Hono<{ Bindings: Env }>();
 
@@ -38,53 +28,40 @@ const getRoute = createRoute({
   summary: "Get all jobs",
   description: "This endpoint retrieves all Google Maps scraping jobs",
   request: {
-    query: z
-      .object({
-        authPlatformUserId: z.string().openapi({
-          param: {
-            name: "authPlatformUserId",
-            in: "query",
-            required: true,
-            description: "",
-          },
-        }),
-        orgId: z.string().openapi({
-          param: {
-            name: "orgId",
-            in: "query",
-            required: true,
-            description: "",
-          },
-        }),
-        tenantId: z.string().openapi({
-          param: {
-            name: "tenantId",
-            in: "query",
-            required: true,
-            description: "",
-          },
-        }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
+    query: z.object({
+      authPlatformUserId: z.string().openapi({
+        param: {
+          name: "authPlatformUserId",
+          in: "query",
+          required: true,
+          description: "",
+        },
       }),
+      orgId: z.string().openapi({
+        param: {
+          name: "orgId",
+          in: "query",
+          required: true,
+          description: "",
+        },
+      }),
+      tenantId: z.string().openapi({
+        param: {
+          name: "tenantId",
+          in: "query",
+          required: true,
+          description: "",
+        },
+      }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.ListScrapingJobsResponse,
-                "ListScrapingJobsResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Successful response",
-            }),
+          schema: z.object({
+            data: schemas.ListScrapingJobsResponse,
+          }),
         },
       },
       description: "This endpoint retrieves all Google Maps scraping jobs",

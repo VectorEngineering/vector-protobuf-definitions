@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /lead-scraper-microservice/api/v1/organization
 const router = new Hono<{ Bindings: Env }>();
 
@@ -38,51 +28,38 @@ const getRoute = createRoute({
   summary: "List all organizations",
   description: "Retrieves a list of all organizations in a tenant",
   request: {
-    query: z
-      .object({
-        pageSize: z
-          .number()
-          .optional()
-          .openapi({
-            param: {
-              name: "pageSize",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        pageNumber: z
-          .number()
-          .optional()
-          .openapi({
-            param: {
-              name: "pageNumber",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
-      }),
+    query: z.object({
+      pageSize: z
+        .number()
+        .optional()
+        .openapi({
+          param: {
+            name: "pageSize",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      pageNumber: z
+        .number()
+        .optional()
+        .openapi({
+          param: {
+            name: "pageNumber",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.ListOrganizationsResponse,
-                "ListOrganizationsResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Organizations retrieved successfully",
-            }),
+          schema: z.object({
+            data: schemas.ListOrganizationsResponse,
+          }),
         },
       },
       description: "Retrieves a list of all organizations in a tenant",
@@ -132,10 +109,7 @@ const postRoute = createRoute({
     body: {
       content: {
         "application/json": {
-          schema: wrapSchema(
-            schemas.CreateOrganizationRequest,
-            "CreateOrganizationRequest",
-          ),
+          schema: schemas.CreateOrganizationRequest,
         },
       },
     },
@@ -144,17 +118,7 @@ const postRoute = createRoute({
     201: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.CreateOrganizationResponse,
-                "CreateOrganizationResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Organization created successfully",
-            }),
+          schema: schemas.CreateOrganizationResponse,
         },
       },
       description: "Creates a new organization within a tenant",
@@ -201,10 +165,7 @@ const putRoute = createRoute({
     body: {
       content: {
         "application/json": {
-          schema: wrapSchema(
-            schemas.UpdateOrganizationRequest,
-            "UpdateOrganizationRequest",
-          ),
+          schema: schemas.UpdateOrganizationRequest,
         },
       },
     },
@@ -213,17 +174,7 @@ const putRoute = createRoute({
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.UpdateOrganizationResponse,
-                "UpdateOrganizationResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Organization updated successfully",
-            }),
+          schema: schemas.UpdateOrganizationResponse,
         },
       },
       description: "Updates the configuration of a specific organization",

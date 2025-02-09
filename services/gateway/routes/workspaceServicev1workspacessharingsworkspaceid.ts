@@ -18,16 +18,6 @@ const ErrorResponseSchema = z
     description: "Standard error response object",
   });
 
-// Wrap imported schemas with OpenAPI metadata
-const wrapSchema = (schema: any, title: string) => {
-  return z
-    .lazy(() => schema)
-    .openapi({
-      type: "object",
-      title: title,
-    });
-};
-
 // Route handler for /workspace-service/v1/workspaces/sharings/{workspaceId}
 const router = new Hono<{ Bindings: Env }>();
 
@@ -38,51 +28,41 @@ const getRoute = createRoute({
   summary: "List workspace sharings",
   description: "",
   request: {
-    query: z
-      .object({
-        pageSize: z
-          .number()
-          .optional()
-          .openapi({
-            param: {
-              name: "pageSize",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-        pageToken: z
-          .string()
-          .optional()
-          .openapi({
-            param: {
-              name: "pageToken",
-              in: "query",
-              required: false,
-              description: "",
-            },
-          }),
-      })
-      .openapi({
-        title: "Query Parameters",
-        description: "Query parameters for the request",
-      }),
+    params: z.object({
+      workspaceId: z.string(),
+    }),
+    query: z.object({
+      pageSize: z
+        .number()
+        .optional()
+        .openapi({
+          param: {
+            name: "pageSize",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+      pageToken: z
+        .string()
+        .optional()
+        .openapi({
+          param: {
+            name: "pageToken",
+            in: "query",
+            required: false,
+            description: "",
+          },
+        }),
+    }),
   },
   responses: {
     200: {
       content: {
         "application/json": {
-          schema: z
-            .object({
-              data: wrapSchema(
-                schemas.ListWorkspaceSharingsResponse,
-                "ListWorkspaceSharingsResponse",
-              ),
-            })
-            .openapi({
-              title: "Success Response",
-              description: "Workspace sharings retrieved successfully",
-            }),
+          schema: z.object({
+            data: schemas.ListWorkspaceSharingsResponse,
+          }),
         },
       },
       description: "",

@@ -20,7 +20,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "BadGatewayErrorMessageResponse", description = "Represents errors when the server received an invalid response from an upstream server")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-09T19:46:06.918250-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-09T22:48:58.302614-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class BadGatewayErrorMessageResponse {
 
   private Integer code;

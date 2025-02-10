@@ -2,6 +2,7 @@
 // Note: All imports are handled by the generator
 
 import type { ZodiosInstance } from "@zodios/core";
+import { authMiddleware } from "./middleware/client-auth";
 
 // Generated schemas and endpoints
 import { makeApi, Zodios, type ZodiosOptions } from "@zodios/core";
@@ -9919,8 +9920,25 @@ export function createApiClient(baseUrl: string, options?: ZodiosOptions) {
 export class ApiClient {
   private readonly client: ZodiosInstance<typeof endpoints>;
 
-  constructor(baseUrl: string, options?: ZodiosOptions) {
-    this.client = new Zodios(baseUrl, endpoints, options);
+  constructor(
+    baseUrl: string,
+    options?: { apiKey?: string; bearerToken?: string },
+  ) {
+    const client = new Zodios(baseUrl, endpoints);
+
+    // Add auth middleware with endpoint information
+    client.use(authMiddleware);
+
+    // Set authentication headers if provided
+    if (options?.apiKey) {
+      client.axios.defaults.headers["X-API-Key"] = options.apiKey;
+    }
+    if (options?.bearerToken) {
+      client.axios.defaults.headers["Authorization"] =
+        `Bearer ${options.bearerToken}`;
+    }
+
+    this.client = client;
   }
 
   async createLeadScraperMicroserviceApiV1Accounts(

@@ -26,7 +26,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "APIKey", description = "APIKey represents an authentication token for accessing the API. It includes features for rate limiting, permissions, and usage tracking.  Key features: - Unique key identification - Scope-based access control - Rate limiting - Usage tracking - Expiration management - Multi-tenant support  Database considerations: - Uses GORM for ORM mapping - Includes indexes for efficient querying - Supports soft deletes  Usage example: ```go apiKey := &APIKey{     Name: \"Production API Key\",     Scopes: []string{\"leads:read\", \"leads:write\"},     ExpiresAt: timestamppb.New(time.Now().AddDate(1, 0, 0)), } ```")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-13T17:57:23.762503-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-13T18:55:20.876030-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class APIKey {
 
   private String id;
@@ -173,6 +173,10 @@ public class APIKey {
   private Boolean encrypted;
 
   private String dataClassification;
+
+  private Integer maxUses;
+
+  private Integer rateLimit;
 
   public APIKey id(String id) {
     this.id = id;
@@ -1522,6 +1526,46 @@ public class APIKey {
     this.dataClassification = dataClassification;
   }
 
+  public APIKey maxUses(Integer maxUses) {
+    this.maxUses = maxUses;
+    return this;
+  }
+
+  /**
+   * Get maxUses
+   * @return maxUses
+   */
+  
+  @Schema(name = "maxUses", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("maxUses")
+  public Integer getMaxUses() {
+    return maxUses;
+  }
+
+  public void setMaxUses(Integer maxUses) {
+    this.maxUses = maxUses;
+  }
+
+  public APIKey rateLimit(Integer rateLimit) {
+    this.rateLimit = rateLimit;
+    return this;
+  }
+
+  /**
+   * Get rateLimit
+   * @return rateLimit
+   */
+  
+  @Schema(name = "rateLimit", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("rateLimit")
+  public Integer getRateLimit() {
+    return rateLimit;
+  }
+
+  public void setRateLimit(Integer rateLimit) {
+    this.rateLimit = rateLimit;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -1593,12 +1637,14 @@ public class APIKey {
         Objects.equals(this.errorAlertThreshold, apIKey.errorAlertThreshold) &&
         Objects.equals(this.monitoringIntegrations, apIKey.monitoringIntegrations) &&
         Objects.equals(this.encrypted, apIKey.encrypted) &&
-        Objects.equals(this.dataClassification, apIKey.dataClassification);
+        Objects.equals(this.dataClassification, apIKey.dataClassification) &&
+        Objects.equals(this.maxUses, apIKey.maxUses) &&
+        Objects.equals(this.rateLimit, apIKey.rateLimit);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, keyHash, keyPrefix, scopes, allowedIps, allowedDomains, allowedEnvironments, isTestKey, requestsPerSecond, requestsPerDay, concurrentRequests, monthlyRequestQuota, costPerRequest, billingTier, totalRequests, totalErrors, lastUsedAt, averageResponseTime, Arrays.hashCode(endpointUsageJson), Arrays.hashCode(errorRatesJson), Arrays.hashCode(recentErrors), successfulRequestsCount, successRate, status, createdAt, updatedAt, expiresAt, deletedAt, lastRotatedAt, lastSecurityReviewAt, requiresClientSecret, clientSecretHash, enforceHttps, enforceSigning, allowedSignatureAlgorithms, enforceMutualTls, clientCertificateHash, requireRequestSigning, description, Arrays.hashCode(metadataJson), tags, apiVersion, supportedFeatures, documentationUrl, supportContact, logAllRequests, lastRotationReason, lastRotationDate, rotationFrequencyDays, complianceStandards, requiresAuditLogging, dataResidency, approvedIntegrations, alertEmails, webhookUrl, alertOnQuotaThreshold, quotaAlertThreshold, alertOnErrorSpike, errorAlertThreshold, monitoringIntegrations, encrypted, dataClassification);
+    return Objects.hash(id, name, keyHash, keyPrefix, scopes, allowedIps, allowedDomains, allowedEnvironments, isTestKey, requestsPerSecond, requestsPerDay, concurrentRequests, monthlyRequestQuota, costPerRequest, billingTier, totalRequests, totalErrors, lastUsedAt, averageResponseTime, Arrays.hashCode(endpointUsageJson), Arrays.hashCode(errorRatesJson), Arrays.hashCode(recentErrors), successfulRequestsCount, successRate, status, createdAt, updatedAt, expiresAt, deletedAt, lastRotatedAt, lastSecurityReviewAt, requiresClientSecret, clientSecretHash, enforceHttps, enforceSigning, allowedSignatureAlgorithms, enforceMutualTls, clientCertificateHash, requireRequestSigning, description, Arrays.hashCode(metadataJson), tags, apiVersion, supportedFeatures, documentationUrl, supportContact, logAllRequests, lastRotationReason, lastRotationDate, rotationFrequencyDays, complianceStandards, requiresAuditLogging, dataResidency, approvedIntegrations, alertEmails, webhookUrl, alertOnQuotaThreshold, quotaAlertThreshold, alertOnErrorSpike, errorAlertThreshold, monitoringIntegrations, encrypted, dataClassification, maxUses, rateLimit);
   }
 
   @Override
@@ -1668,6 +1714,8 @@ public class APIKey {
     sb.append("    monitoringIntegrations: ").append(toIndentedString(monitoringIntegrations)).append("\n");
     sb.append("    encrypted: ").append(toIndentedString(encrypted)).append("\n");
     sb.append("    dataClassification: ").append(toIndentedString(dataClassification)).append("\n");
+    sb.append("    maxUses: ").append(toIndentedString(maxUses)).append("\n");
+    sb.append("    rateLimit: ").append(toIndentedString(rateLimit)).append("\n");
     sb.append("}");
     return sb.toString();
   }

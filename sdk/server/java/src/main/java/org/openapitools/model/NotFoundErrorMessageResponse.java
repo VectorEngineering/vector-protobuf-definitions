@@ -25,7 +25,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "NotFoundErrorMessageResponse", description = "Represents resource not found errors")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-13T17:57:23.762503-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-13T18:55:20.876030-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class NotFoundErrorMessageResponse {
 
   private NotFoundErrorCode code = NotFoundErrorCode.NO_NOT_FOUND_ERROR;

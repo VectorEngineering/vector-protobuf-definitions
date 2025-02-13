@@ -66,6 +66,8 @@ Name | Type | Description | Notes
 **monitoringIntegrations** | **String!** |  | [optional] [default to null]
 **encrypted** | **Boolean!** |  | [optional] [default to null]
 **dataClassification** | **String!** |  | [optional] [default to null]
+**maxUses** | **Int!** |  | [optional] [default to null]
+**rateLimit** | **Int!** |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

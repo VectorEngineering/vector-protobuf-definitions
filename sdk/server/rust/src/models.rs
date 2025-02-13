@@ -1970,6 +1970,14 @@ pub struct ApiKey {
     #[serde(skip_serializing_if="Option::is_none")]
     pub data_classification: Option<String>,
 
+    #[serde(rename = "maxUses")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub max_uses: Option<i32>,
+
+    #[serde(rename = "rateLimit")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub rate_limit: Option<i32>,
+
 }
 
 
@@ -2040,6 +2048,8 @@ impl ApiKey {
             monitoring_integrations: None,
             encrypted: None,
             data_classification: None,
+            max_uses: None,
+            rate_limit: None,
         }
     }
 }
@@ -2480,6 +2490,22 @@ impl std::string::ToString for ApiKey {
                 ].join(",")
             }),
 
+
+            self.max_uses.as_ref().map(|max_uses| {
+                [
+                    "maxUses".to_string(),
+                    max_uses.to_string(),
+                ].join(",")
+            }),
+
+
+            self.rate_limit.as_ref().map(|rate_limit| {
+                [
+                    "rateLimit".to_string(),
+                    rate_limit.to_string(),
+                ].join(",")
+            }),
+
         ];
 
         params.into_iter().flatten().collect::<Vec<_>>().join(",")
@@ -2560,6 +2586,8 @@ impl std::str::FromStr for ApiKey {
             pub monitoring_integrations: Vec<Vec<String>>,
             pub encrypted: Vec<bool>,
             pub data_classification: Vec<String>,
+            pub max_uses: Vec<i32>,
+            pub rate_limit: Vec<i32>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -2688,6 +2716,10 @@ impl std::str::FromStr for ApiKey {
                     "encrypted" => intermediate_rep.encrypted.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "dataClassification" => intermediate_rep.data_classification.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "maxUses" => intermediate_rep.max_uses.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "rateLimit" => intermediate_rep.rate_limit.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing ApiKey".to_string())
                 }
             }
@@ -2761,6 +2793,8 @@ impl std::str::FromStr for ApiKey {
             monitoring_integrations: intermediate_rep.monitoring_integrations.into_iter().next(),
             encrypted: intermediate_rep.encrypted.into_iter().next(),
             data_classification: intermediate_rep.data_classification.into_iter().next(),
+            max_uses: intermediate_rep.max_uses.into_iter().next(),
+            rate_limit: intermediate_rep.rate_limit.into_iter().next(),
         })
     }
 }

@@ -66,6 +66,8 @@ Name | Type | Description | Notes
 **monitoring_integrations** | **Vec<String>** |  | [optional] [default to None]
 **encrypted** | **bool** |  | [optional] [default to None]
 **data_classification** | **String** |  | [optional] [default to None]
+**max_uses** | **i32** |  | [optional] [default to None]
+**rate_limit** | **i32** |  | [optional] [default to None]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

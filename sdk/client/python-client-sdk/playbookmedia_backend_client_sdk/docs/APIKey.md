@@ -69,6 +69,8 @@ Name | Type | Description | Notes
 **monitoring_integrations** | **List[str]** |  | [optional] 
 **encrypted** | **bool** |  | [optional] 
 **data_classification** | **str** |  | [optional] 
+**max_uses** | **int** |  | [optional] 
+**rate_limit** | **int** |  | [optional] 
 
 ## Example
 

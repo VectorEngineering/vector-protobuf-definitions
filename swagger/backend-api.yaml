@@ -15909,6 +15909,12 @@ components:
           type: boolean
         dataClassification:
           type: string
+        maxUses:
+          type: integer
+          format: int32
+        rateLimit:
+          type: integer
+          format: int32
       description: |-
         APIKey represents an authentication token for accessing the API.
         It includes features for rate limiting, permissions, and usage tracking.

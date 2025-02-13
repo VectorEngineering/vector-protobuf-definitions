@@ -379,6 +379,8 @@ const APIKey = z
     monitoringIntegrations: z.array(z.string()),
     encrypted: z.boolean(),
     dataClassification: z.string(),
+    maxUses: z.number().int(),
+    rateLimit: z.number().int(),
   })
   .partial()
   .passthrough();

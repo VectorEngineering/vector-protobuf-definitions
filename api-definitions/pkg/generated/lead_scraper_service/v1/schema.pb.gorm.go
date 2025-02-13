@@ -2443,11 +2443,13 @@ type APIKeyORM struct {
 	LastSecurityReviewAt       *time.Time
 	LastUsedAt                 *time.Time `gorm:"index:idx_api_keys_last_used"`
 	LogAllRequests             bool
+	MaxUses                    int32
 	MetadataJson               []byte         `gorm:"type:bytea"`
 	MonitoringIntegrations     pq.StringArray `gorm:"type:text[]"`
 	MonthlyRequestQuota        int64
 	Name                       string `gorm:"index:idx_api_keys_name"`
 	QuotaAlertThreshold        float32
+	RateLimit                  int32
 	RecentErrors               []byte `gorm:"type:bytea"`
 	RequestsPerDay             int32
 	RequestsPerSecond          int32
@@ -2604,6 +2606,8 @@ func (m *APIKey) ToORM(ctx context.Context) (APIKeyORM, error) {
 	}
 	to.Encrypted = m.Encrypted
 	to.DataClassification = m.DataClassification
+	to.MaxUses = m.MaxUses
+	to.RateLimit = m.RateLimit
 	if posthook, ok := interface{}(m).(APIKeyWithAfterToORM); ok {
 		err = posthook.AfterToORM(ctx, &to)
 	}
@@ -2732,6 +2736,8 @@ func (m *APIKeyORM) ToPB(ctx context.Context) (APIKey, error) {
 	}
 	to.Encrypted = m.Encrypted
 	to.DataClassification = m.DataClassification
+	to.MaxUses = m.MaxUses
+	to.RateLimit = m.RateLimit
 	if posthook, ok := interface{}(m).(APIKeyWithAfterToPB); ok {
 		err = posthook.AfterToPB(ctx, &to)
 	}
@@ -3148,7 +3154,7 @@ func DefaultStrictUpdateOrganization(ctx context.Context, in *Organization, db *
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(OrganizationORMWithAfterStrictUpdateSave); ok {
@@ -3532,7 +3538,7 @@ func DefaultCreateTenant(ctx context.Context, in *Tenant, db *gorm.DB) (*Tenant,
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Workspaces").Preload("Settings").Create(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Settings").Preload("Workspaces").Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(TenantORMWithAfterCreate_); ok {
@@ -3705,7 +3711,7 @@ func DefaultStrictUpdateTenant(ctx context.Context, in *Tenant, db *gorm.DB) (*T
 			return nil, err
 		}
 	}
-	if err = db.Omit().Preload("Workspaces").Preload("Settings").Save(&ormObj).Error; err != nil {
+	if err = db.Omit().Preload("Settings").Preload("Workspaces").Save(&ormObj).Error; err != nil {
 		return nil, err
 	}
 	if hook, ok := interface{}(&ormObj).(TenantORMWithAfterStrictUpdateSave); ok {
@@ -10175,6 +10181,14 @@ func DefaultApplyFieldMaskAPIKey(ctx context.Context, patchee *APIKey, patcher *
 		}
 		if f == prefix+"DataClassification" {
 			patchee.DataClassification = patcher.DataClassification
+			continue
+		}
+		if f == prefix+"MaxUses" {
+			patchee.MaxUses = patcher.MaxUses
+			continue
+		}
+		if f == prefix+"RateLimit" {
+			patchee.RateLimit = patcher.RateLimit
 			continue
 		}
 	}

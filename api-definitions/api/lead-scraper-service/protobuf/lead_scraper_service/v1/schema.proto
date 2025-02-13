@@ -1226,7 +1226,6 @@ message APIKey {
 
     int32 max_uses = 70;
     int32 rate_limit = 71;
-
 }
 
 message TenantAPIKey {

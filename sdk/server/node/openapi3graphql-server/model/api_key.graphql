@@ -75,6 +75,8 @@ type ApiKey {
   monitoringIntegrations: [String!!]
   encrypted: Boolean!
   dataClassification: String!
+  maxUses: Int!
+  rateLimit: Int!
 }
 
 input ApiKeyInput {
@@ -143,5 +145,7 @@ input ApiKeyInput {
     monitoringIntegrations: [String!]
     encrypted: Boolean!
     dataClassification: String!
+    maxUses: Int!
+    rateLimit: Int!
 }
 

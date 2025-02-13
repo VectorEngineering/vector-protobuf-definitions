@@ -14,7 +14,7 @@ class APIKey(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, name=None, key_hash=None, key_prefix=None, scopes=None, allowed_ips=None, allowed_domains=None, allowed_environments=None, is_test_key=None, requests_per_second=None, requests_per_day=None, concurrent_requests=None, monthly_request_quota=None, cost_per_request=None, billing_tier=None, total_requests=None, total_errors=None, last_used_at=None, average_response_time=None, endpoint_usage_json=None, error_rates_json=None, recent_errors=None, successful_requests_count=None, success_rate=None, status=V1Status.UNSPECIFIED, created_at=None, updated_at=None, expires_at=None, deleted_at=None, last_rotated_at=None, last_security_review_at=None, requires_client_secret=None, client_secret_hash=None, enforce_https=None, enforce_signing=None, allowed_signature_algorithms=None, enforce_mutual_tls=None, client_certificate_hash=None, require_request_signing=None, description=None, metadata_json=None, tags=None, api_version=None, supported_features=None, documentation_url=None, support_contact=None, log_all_requests=None, last_rotation_reason=None, last_rotation_date=None, rotation_frequency_days=None, compliance_standards=None, requires_audit_logging=None, data_residency=None, approved_integrations=None, alert_emails=None, webhook_url=None, alert_on_quota_threshold=None, quota_alert_threshold=None, alert_on_error_spike=None, error_alert_threshold=None, monitoring_integrations=None, encrypted=None, data_classification=None):  # noqa: E501
+    def __init__(self, id=None, name=None, key_hash=None, key_prefix=None, scopes=None, allowed_ips=None, allowed_domains=None, allowed_environments=None, is_test_key=None, requests_per_second=None, requests_per_day=None, concurrent_requests=None, monthly_request_quota=None, cost_per_request=None, billing_tier=None, total_requests=None, total_errors=None, last_used_at=None, average_response_time=None, endpoint_usage_json=None, error_rates_json=None, recent_errors=None, successful_requests_count=None, success_rate=None, status=V1Status.UNSPECIFIED, created_at=None, updated_at=None, expires_at=None, deleted_at=None, last_rotated_at=None, last_security_review_at=None, requires_client_secret=None, client_secret_hash=None, enforce_https=None, enforce_signing=None, allowed_signature_algorithms=None, enforce_mutual_tls=None, client_certificate_hash=None, require_request_signing=None, description=None, metadata_json=None, tags=None, api_version=None, supported_features=None, documentation_url=None, support_contact=None, log_all_requests=None, last_rotation_reason=None, last_rotation_date=None, rotation_frequency_days=None, compliance_standards=None, requires_audit_logging=None, data_residency=None, approved_integrations=None, alert_emails=None, webhook_url=None, alert_on_quota_threshold=None, quota_alert_threshold=None, alert_on_error_spike=None, error_alert_threshold=None, monitoring_integrations=None, encrypted=None, data_classification=None, max_uses=None, rate_limit=None):  # noqa: E501
         """APIKey - a model defined in OpenAPI
 
         :param id: The id of this APIKey.  # noqa: E501
@@ -143,6 +143,10 @@ class APIKey(Model):
         :type encrypted: bool
         :param data_classification: The data_classification of this APIKey.  # noqa: E501
         :type data_classification: str
+        :param max_uses: The max_uses of this APIKey.  # noqa: E501
+        :type max_uses: int
+        :param rate_limit: The rate_limit of this APIKey.  # noqa: E501
+        :type rate_limit: int
         """
         self.openapi_types = {
             'id': str,
@@ -207,7 +211,9 @@ class APIKey(Model):
             'error_alert_threshold': float,
             'monitoring_integrations': List[str],
             'encrypted': bool,
-            'data_classification': str
+            'data_classification': str,
+            'max_uses': int,
+            'rate_limit': int
         }
 
         self.attribute_map = {
@@ -273,7 +279,9 @@ class APIKey(Model):
             'error_alert_threshold': 'errorAlertThreshold',
             'monitoring_integrations': 'monitoringIntegrations',
             'encrypted': 'encrypted',
-            'data_classification': 'dataClassification'
+            'data_classification': 'dataClassification',
+            'max_uses': 'maxUses',
+            'rate_limit': 'rateLimit'
         }
 
         self._id = id
@@ -339,6 +347,8 @@ class APIKey(Model):
         self._monitoring_integrations = monitoring_integrations
         self._encrypted = encrypted
         self._data_classification = data_classification
+        self._max_uses = max_uses
+        self._rate_limit = rate_limit
 
     @classmethod
     def from_dict(cls, dikt) -> 'APIKey':
@@ -1677,3 +1687,45 @@ class APIKey(Model):
         """
 
         self._data_classification = data_classification
+
+    @property
+    def max_uses(self) -> int:
+        """Gets the max_uses of this APIKey.
+
+
+        :return: The max_uses of this APIKey.
+        :rtype: int
+        """
+        return self._max_uses
+
+    @max_uses.setter
+    def max_uses(self, max_uses: int):
+        """Sets the max_uses of this APIKey.
+
+
+        :param max_uses: The max_uses of this APIKey.
+        :type max_uses: int
+        """
+
+        self._max_uses = max_uses
+
+    @property
+    def rate_limit(self) -> int:
+        """Gets the rate_limit of this APIKey.
+
+
+        :return: The rate_limit of this APIKey.
+        :rtype: int
+        """
+        return self._rate_limit
+
+    @rate_limit.setter
+    def rate_limit(self, rate_limit: int):
+        """Sets the rate_limit of this APIKey.
+
+
+        :param rate_limit: The rate_limit of this APIKey.
+        :type rate_limit: int
+        """
+
+        self._rate_limit = rate_limit

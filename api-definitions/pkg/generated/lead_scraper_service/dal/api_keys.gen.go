@@ -70,11 +70,13 @@ func newAPIKeyORM(db *gorm.DB, opts ...gen.DOOption) aPIKeyORM {
 	_aPIKeyORM.LastSecurityReviewAt = field.NewTime(tableName, "last_security_review_at")
 	_aPIKeyORM.LastUsedAt = field.NewTime(tableName, "last_used_at")
 	_aPIKeyORM.LogAllRequests = field.NewBool(tableName, "log_all_requests")
+	_aPIKeyORM.MaxUses = field.NewInt32(tableName, "max_uses")
 	_aPIKeyORM.MetadataJson = field.NewBytes(tableName, "metadata_json")
 	_aPIKeyORM.MonitoringIntegrations = field.NewField(tableName, "monitoring_integrations")
 	_aPIKeyORM.MonthlyRequestQuota = field.NewInt64(tableName, "monthly_request_quota")
 	_aPIKeyORM.Name = field.NewString(tableName, "name")
 	_aPIKeyORM.QuotaAlertThreshold = field.NewFloat32(tableName, "quota_alert_threshold")
+	_aPIKeyORM.RateLimit = field.NewInt32(tableName, "rate_limit")
 	_aPIKeyORM.RecentErrors = field.NewBytes(tableName, "recent_errors")
 	_aPIKeyORM.RequestsPerDay = field.NewInt32(tableName, "requests_per_day")
 	_aPIKeyORM.RequestsPerSecond = field.NewInt32(tableName, "requests_per_second")
@@ -144,11 +146,13 @@ type aPIKeyORM struct {
 	LastSecurityReviewAt       field.Time
 	LastUsedAt                 field.Time
 	LogAllRequests             field.Bool
+	MaxUses                    field.Int32
 	MetadataJson               field.Bytes
 	MonitoringIntegrations     field.Field
 	MonthlyRequestQuota        field.Int64
 	Name                       field.String
 	QuotaAlertThreshold        field.Float32
+	RateLimit                  field.Int32
 	RecentErrors               field.Bytes
 	RequestsPerDay             field.Int32
 	RequestsPerSecond          field.Int32
@@ -224,11 +228,13 @@ func (a *aPIKeyORM) updateTableName(table string) *aPIKeyORM {
 	a.LastSecurityReviewAt = field.NewTime(table, "last_security_review_at")
 	a.LastUsedAt = field.NewTime(table, "last_used_at")
 	a.LogAllRequests = field.NewBool(table, "log_all_requests")
+	a.MaxUses = field.NewInt32(table, "max_uses")
 	a.MetadataJson = field.NewBytes(table, "metadata_json")
 	a.MonitoringIntegrations = field.NewField(table, "monitoring_integrations")
 	a.MonthlyRequestQuota = field.NewInt64(table, "monthly_request_quota")
 	a.Name = field.NewString(table, "name")
 	a.QuotaAlertThreshold = field.NewFloat32(table, "quota_alert_threshold")
+	a.RateLimit = field.NewInt32(table, "rate_limit")
 	a.RecentErrors = field.NewBytes(table, "recent_errors")
 	a.RequestsPerDay = field.NewInt32(table, "requests_per_day")
 	a.RequestsPerSecond = field.NewInt32(table, "requests_per_second")
@@ -264,7 +270,7 @@ func (a *aPIKeyORM) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 }
 
 func (a *aPIKeyORM) fillFieldMap() {
-	a.fieldMap = make(map[string]field.Expr, 64)
+	a.fieldMap = make(map[string]field.Expr, 66)
 	a.fieldMap["alert_emails"] = a.AlertEmails
 	a.fieldMap["alert_on_error_spike"] = a.AlertOnErrorSpike
 	a.fieldMap["alert_on_quota_threshold"] = a.AlertOnQuotaThreshold
@@ -305,11 +311,13 @@ func (a *aPIKeyORM) fillFieldMap() {
 	a.fieldMap["last_security_review_at"] = a.LastSecurityReviewAt
 	a.fieldMap["last_used_at"] = a.LastUsedAt
 	a.fieldMap["log_all_requests"] = a.LogAllRequests
+	a.fieldMap["max_uses"] = a.MaxUses
 	a.fieldMap["metadata_json"] = a.MetadataJson
 	a.fieldMap["monitoring_integrations"] = a.MonitoringIntegrations
 	a.fieldMap["monthly_request_quota"] = a.MonthlyRequestQuota
 	a.fieldMap["name"] = a.Name
 	a.fieldMap["quota_alert_threshold"] = a.QuotaAlertThreshold
+	a.fieldMap["rate_limit"] = a.RateLimit
 	a.fieldMap["recent_errors"] = a.RecentErrors
 	a.fieldMap["requests_per_day"] = a.RequestsPerDay
 	a.fieldMap["requests_per_second"] = a.RequestsPerSecond

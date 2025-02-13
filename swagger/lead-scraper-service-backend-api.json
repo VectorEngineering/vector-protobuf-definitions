@@ -19531,6 +19531,14 @@
                     },
                     "dataClassification": {
                         "type": "string"
+                    },
+                    "maxUses": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "rateLimit": {
+                        "type": "integer",
+                        "format": "int32"
                     }
                 },
                 "description": "APIKey represents an authentication token for accessing the API.\nIt includes features for rate limiting, permissions, and usage tracking.\n\nKey features:\n- Unique key identification\n- Scope-based access control\n- Rate limiting\n- Usage tracking\n- Expiration management\n- Multi-tenant support\n\nDatabase considerations:\n- Uses GORM for ORM mapping\n- Includes indexes for efficient querying\n- Supports soft deletes\n\nUsage example:\n```go\napiKey := &APIKey{\n    Name: \"Production API Key\",\n    Scopes: []string{\"leads:read\", \"leads:write\"},\n    ExpiresAt: timestamppb.New(time.Now().AddDate(1, 0, 0)),\n}\n```"

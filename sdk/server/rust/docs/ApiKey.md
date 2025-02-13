@@ -7,8 +7,6 @@ Name | Type | Description | Notes
 **name** | **String** |  | [optional] [default to None]
 **key_hash** | **String** |  | [optional] [default to None]
 **key_prefix** | **String** |  | [optional] [default to None]
-**org_id** | **String** |  | [optional] [default to None]
-**tenant_id** | **String** |  | [optional] [default to None]
 **scopes** | **Vec<String>** |  | [optional] [default to None]
 **allowed_ips** | **Vec<String>** |  | [optional] [default to None]
 **allowed_domains** | **Vec<String>** |  | [optional] [default to None]

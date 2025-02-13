@@ -14,7 +14,7 @@ class APIKey(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, name=None, key_hash=None, key_prefix=None, org_id=None, tenant_id=None, scopes=None, allowed_ips=None, allowed_domains=None, allowed_environments=None, is_test_key=None, requests_per_second=None, requests_per_day=None, concurrent_requests=None, monthly_request_quota=None, cost_per_request=None, billing_tier=None, total_requests=None, total_errors=None, last_used_at=None, average_response_time=None, endpoint_usage_json=None, error_rates_json=None, recent_errors=None, successful_requests_count=None, success_rate=None, status=V1Status.UNSPECIFIED, created_at=None, updated_at=None, expires_at=None, deleted_at=None, last_rotated_at=None, last_security_review_at=None, requires_client_secret=None, client_secret_hash=None, enforce_https=None, enforce_signing=None, allowed_signature_algorithms=None, enforce_mutual_tls=None, client_certificate_hash=None, require_request_signing=None, description=None, metadata_json=None, tags=None, api_version=None, supported_features=None, documentation_url=None, support_contact=None, log_all_requests=None, last_rotation_reason=None, last_rotation_date=None, rotation_frequency_days=None, compliance_standards=None, requires_audit_logging=None, data_residency=None, approved_integrations=None, alert_emails=None, webhook_url=None, alert_on_quota_threshold=None, quota_alert_threshold=None, alert_on_error_spike=None, error_alert_threshold=None, monitoring_integrations=None, encrypted=None, data_classification=None):  # noqa: E501
+    def __init__(self, id=None, name=None, key_hash=None, key_prefix=None, scopes=None, allowed_ips=None, allowed_domains=None, allowed_environments=None, is_test_key=None, requests_per_second=None, requests_per_day=None, concurrent_requests=None, monthly_request_quota=None, cost_per_request=None, billing_tier=None, total_requests=None, total_errors=None, last_used_at=None, average_response_time=None, endpoint_usage_json=None, error_rates_json=None, recent_errors=None, successful_requests_count=None, success_rate=None, status=V1Status.UNSPECIFIED, created_at=None, updated_at=None, expires_at=None, deleted_at=None, last_rotated_at=None, last_security_review_at=None, requires_client_secret=None, client_secret_hash=None, enforce_https=None, enforce_signing=None, allowed_signature_algorithms=None, enforce_mutual_tls=None, client_certificate_hash=None, require_request_signing=None, description=None, metadata_json=None, tags=None, api_version=None, supported_features=None, documentation_url=None, support_contact=None, log_all_requests=None, last_rotation_reason=None, last_rotation_date=None, rotation_frequency_days=None, compliance_standards=None, requires_audit_logging=None, data_residency=None, approved_integrations=None, alert_emails=None, webhook_url=None, alert_on_quota_threshold=None, quota_alert_threshold=None, alert_on_error_spike=None, error_alert_threshold=None, monitoring_integrations=None, encrypted=None, data_classification=None):  # noqa: E501
         """APIKey - a model defined in OpenAPI
 
         :param id: The id of this APIKey.  # noqa: E501
@@ -25,10 +25,6 @@ class APIKey(Model):
         :type key_hash: str
         :param key_prefix: The key_prefix of this APIKey.  # noqa: E501
         :type key_prefix: str
-        :param org_id: The org_id of this APIKey.  # noqa: E501
-        :type org_id: str
-        :param tenant_id: The tenant_id of this APIKey.  # noqa: E501
-        :type tenant_id: str
         :param scopes: The scopes of this APIKey.  # noqa: E501
         :type scopes: List[str]
         :param allowed_ips: The allowed_ips of this APIKey.  # noqa: E501
@@ -153,8 +149,6 @@ class APIKey(Model):
             'name': str,
             'key_hash': str,
             'key_prefix': str,
-            'org_id': str,
-            'tenant_id': str,
             'scopes': List[str],
             'allowed_ips': List[str],
             'allowed_domains': List[str],
@@ -221,8 +215,6 @@ class APIKey(Model):
             'name': 'name',
             'key_hash': 'keyHash',
             'key_prefix': 'keyPrefix',
-            'org_id': 'orgId',
-            'tenant_id': 'tenantId',
             'scopes': 'scopes',
             'allowed_ips': 'allowedIps',
             'allowed_domains': 'allowedDomains',
@@ -288,8 +280,6 @@ class APIKey(Model):
         self._name = name
         self._key_hash = key_hash
         self._key_prefix = key_prefix
-        self._org_id = org_id
-        self._tenant_id = tenant_id
         self._scopes = scopes
         self._allowed_ips = allowed_ips
         self._allowed_domains = allowed_domains
@@ -444,48 +434,6 @@ class APIKey(Model):
         """
 
         self._key_prefix = key_prefix
-
-    @property
-    def org_id(self) -> str:
-        """Gets the org_id of this APIKey.
-
-
-        :return: The org_id of this APIKey.
-        :rtype: str
-        """
-        return self._org_id
-
-    @org_id.setter
-    def org_id(self, org_id: str):
-        """Sets the org_id of this APIKey.
-
-
-        :param org_id: The org_id of this APIKey.
-        :type org_id: str
-        """
-
-        self._org_id = org_id
-
-    @property
-    def tenant_id(self) -> str:
-        """Gets the tenant_id of this APIKey.
-
-
-        :return: The tenant_id of this APIKey.
-        :rtype: str
-        """
-        return self._tenant_id
-
-    @tenant_id.setter
-    def tenant_id(self, tenant_id: str):
-        """Sets the tenant_id of this APIKey.
-
-
-        :param tenant_id: The tenant_id of this APIKey.
-        :type tenant_id: str
-        """
-
-        self._tenant_id = tenant_id
 
     @property
     def scopes(self) -> List[str]:

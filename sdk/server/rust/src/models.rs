@@ -1732,14 +1732,6 @@ pub struct ApiKey {
     #[serde(skip_serializing_if="Option::is_none")]
     pub key_prefix: Option<String>,
 
-    #[serde(rename = "orgId")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub org_id: Option<String>,
-
-    #[serde(rename = "tenantId")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub tenant_id: Option<String>,
-
     #[serde(rename = "scopes")]
     #[serde(skip_serializing_if="Option::is_none")]
     pub scopes: Option<Vec<String>>,
@@ -1989,8 +1981,6 @@ impl ApiKey {
             name: None,
             key_hash: None,
             key_prefix: None,
-            org_id: None,
-            tenant_id: None,
             scopes: None,
             allowed_ips: None,
             allowed_domains: None,
@@ -2089,22 +2079,6 @@ impl std::string::ToString for ApiKey {
                 [
                     "keyPrefix".to_string(),
                     key_prefix.to_string(),
-                ].join(",")
-            }),
-
-
-            self.org_id.as_ref().map(|org_id| {
-                [
-                    "orgId".to_string(),
-                    org_id.to_string(),
-                ].join(",")
-            }),
-
-
-            self.tenant_id.as_ref().map(|tenant_id| {
-                [
-                    "tenantId".to_string(),
-                    tenant_id.to_string(),
                 ].join(",")
             }),
 
@@ -2527,8 +2501,6 @@ impl std::str::FromStr for ApiKey {
             pub name: Vec<String>,
             pub key_hash: Vec<String>,
             pub key_prefix: Vec<String>,
-            pub org_id: Vec<String>,
-            pub tenant_id: Vec<String>,
             pub scopes: Vec<Vec<String>>,
             pub allowed_ips: Vec<Vec<String>>,
             pub allowed_domains: Vec<Vec<String>>,
@@ -2613,10 +2585,6 @@ impl std::str::FromStr for ApiKey {
                     "keyHash" => intermediate_rep.key_hash.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     #[allow(clippy::redundant_clone)]
                     "keyPrefix" => intermediate_rep.key_prefix.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "orgId" => intermediate_rep.org_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "tenantId" => intermediate_rep.tenant_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     "scopes" => return std::result::Result::Err("Parsing a container in this style is not supported in ApiKey".to_string()),
                     "allowedIps" => return std::result::Result::Err("Parsing a container in this style is not supported in ApiKey".to_string()),
                     "allowedDomains" => return std::result::Result::Err("Parsing a container in this style is not supported in ApiKey".to_string()),
@@ -2734,8 +2702,6 @@ impl std::str::FromStr for ApiKey {
             name: intermediate_rep.name.into_iter().next(),
             key_hash: intermediate_rep.key_hash.into_iter().next(),
             key_prefix: intermediate_rep.key_prefix.into_iter().next(),
-            org_id: intermediate_rep.org_id.into_iter().next(),
-            tenant_id: intermediate_rep.tenant_id.into_iter().next(),
             scopes: intermediate_rep.scopes.into_iter().next(),
             allowed_ips: intermediate_rep.allowed_ips.into_iter().next(),
             allowed_domains: intermediate_rep.allowed_domains.into_iter().next(),

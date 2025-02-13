@@ -4431,28 +4431,6 @@ func (m *APIKey) validate(all bool) error {
 
 	// no validation rules for KeyPrefix
 
-	if utf8.RuneCountInString(m.GetOrgId()) < 1 {
-		err := APIKeyValidationError{
-			field:  "OrgId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
-	if utf8.RuneCountInString(m.GetTenantId()) < 1 {
-		err := APIKeyValidationError{
-			field:  "TenantId",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
 	// no validation rules for IsTestKey
 
 	if m.GetRequestsPerSecond() <= 0 {

@@ -14,8 +14,6 @@ type ApiKey {
   name: String!
   keyHash: String!
   keyPrefix: String!
-  orgId: String!
-  tenantId: String!
   scopes: [String!!]
   allowedIps: [String!!]
   allowedDomains: [String!!]
@@ -84,8 +82,6 @@ input ApiKeyInput {
     name: String!
     keyHash: String!
     keyPrefix: String!
-    orgId: String!
-    tenantId: String!
     scopes: [String!]
     allowedIps: [String!]
     allowedDomains: [String!]

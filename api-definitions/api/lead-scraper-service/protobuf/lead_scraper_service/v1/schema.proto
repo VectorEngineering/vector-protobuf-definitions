@@ -1143,16 +1143,6 @@ message APIKey {
     // Key prefix for display/reference (first 8 chars)
     string key_prefix = 4 [(gorm.field).tag = {index: "idx_api_keys_prefix"}];
 
-    // Multi-tenant context
-    string org_id = 5 [
-        (validate.rules).string.min_len = 1,
-        (gorm.field).tag = {index: "idx_api_keys_org_id"}
-    ];
-    string tenant_id = 6 [
-        (validate.rules).string.min_len = 1,
-        (gorm.field).tag = {index: "idx_api_keys_tenant_id"}
-    ];
-
     // Access control and permissions
     repeated string scopes = 9 [(gorm.field).tag = {type: "text[]"}];
     repeated string allowed_ips = 10 [(gorm.field).tag = {type: "text[]"}];

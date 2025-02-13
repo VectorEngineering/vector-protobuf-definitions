@@ -7,8 +7,6 @@
 | **name** | **String** |  | [optional] [default to null] |
 | **keyHash** | **String** |  | [optional] [default to null] |
 | **keyPrefix** | **String** |  | [optional] [default to null] |
-| **orgId** | **String** |  | [optional] [default to null] |
-| **tenantId** | **String** |  | [optional] [default to null] |
 | **scopes** | **List** |  | [optional] [default to null] |
 | **allowedIps** | **List** |  | [optional] [default to null] |
 | **allowedDomains** | **List** |  | [optional] [default to null] |

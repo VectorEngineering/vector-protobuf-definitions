@@ -33,8 +33,6 @@ class APIKey(BaseModel):
     name: Optional[StrictStr] = None
     key_hash: Optional[StrictStr] = Field(default=None, alias="keyHash")
     key_prefix: Optional[StrictStr] = Field(default=None, alias="keyPrefix")
-    org_id: Optional[StrictStr] = Field(default=None, alias="orgId")
-    tenant_id: Optional[StrictStr] = Field(default=None, alias="tenantId")
     scopes: Optional[List[StrictStr]] = None
     allowed_ips: Optional[List[StrictStr]] = Field(default=None, alias="allowedIps")
     allowed_domains: Optional[List[StrictStr]] = Field(default=None, alias="allowedDomains")
@@ -94,7 +92,7 @@ class APIKey(BaseModel):
     monitoring_integrations: Optional[List[StrictStr]] = Field(default=None, alias="monitoringIntegrations")
     encrypted: Optional[StrictBool] = None
     data_classification: Optional[StrictStr] = Field(default=None, alias="dataClassification")
-    __properties: ClassVar[List[str]] = ["id", "name", "keyHash", "keyPrefix", "orgId", "tenantId", "scopes", "allowedIps", "allowedDomains", "allowedEnvironments", "isTestKey", "requestsPerSecond", "requestsPerDay", "concurrentRequests", "monthlyRequestQuota", "costPerRequest", "billingTier", "totalRequests", "totalErrors", "lastUsedAt", "averageResponseTime", "endpointUsageJson", "errorRatesJson", "recentErrors", "successfulRequestsCount", "successRate", "status", "createdAt", "updatedAt", "expiresAt", "deletedAt", "lastRotatedAt", "lastSecurityReviewAt", "requiresClientSecret", "clientSecretHash", "enforceHttps", "enforceSigning", "allowedSignatureAlgorithms", "enforceMutualTls", "clientCertificateHash", "requireRequestSigning", "description", "metadataJson", "tags", "apiVersion", "supportedFeatures", "documentationUrl", "supportContact", "logAllRequests", "lastRotationReason", "lastRotationDate", "rotationFrequencyDays", "complianceStandards", "requiresAuditLogging", "dataResidency", "approvedIntegrations", "alertEmails", "webhookUrl", "alertOnQuotaThreshold", "quotaAlertThreshold", "alertOnErrorSpike", "errorAlertThreshold", "monitoringIntegrations", "encrypted", "dataClassification"]
+    __properties: ClassVar[List[str]] = ["id", "name", "keyHash", "keyPrefix", "scopes", "allowedIps", "allowedDomains", "allowedEnvironments", "isTestKey", "requestsPerSecond", "requestsPerDay", "concurrentRequests", "monthlyRequestQuota", "costPerRequest", "billingTier", "totalRequests", "totalErrors", "lastUsedAt", "averageResponseTime", "endpointUsageJson", "errorRatesJson", "recentErrors", "successfulRequestsCount", "successRate", "status", "createdAt", "updatedAt", "expiresAt", "deletedAt", "lastRotatedAt", "lastSecurityReviewAt", "requiresClientSecret", "clientSecretHash", "enforceHttps", "enforceSigning", "allowedSignatureAlgorithms", "enforceMutualTls", "clientCertificateHash", "requireRequestSigning", "description", "metadataJson", "tags", "apiVersion", "supportedFeatures", "documentationUrl", "supportContact", "logAllRequests", "lastRotationReason", "lastRotationDate", "rotationFrequencyDays", "complianceStandards", "requiresAuditLogging", "dataResidency", "approvedIntegrations", "alertEmails", "webhookUrl", "alertOnQuotaThreshold", "quotaAlertThreshold", "alertOnErrorSpike", "errorAlertThreshold", "monitoringIntegrations", "encrypted", "dataClassification"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -151,8 +149,6 @@ class APIKey(BaseModel):
             "name": obj.get("name"),
             "keyHash": obj.get("keyHash"),
             "keyPrefix": obj.get("keyPrefix"),
-            "orgId": obj.get("orgId"),
-            "tenantId": obj.get("tenantId"),
             "scopes": obj.get("scopes"),
             "allowedIps": obj.get("allowedIps"),
             "allowedDomains": obj.get("allowedDomains"),

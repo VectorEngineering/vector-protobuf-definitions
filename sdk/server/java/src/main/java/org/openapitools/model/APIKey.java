@@ -26,7 +26,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "APIKey", description = "APIKey represents an authentication token for accessing the API. It includes features for rate limiting, permissions, and usage tracking.  Key features: - Unique key identification - Scope-based access control - Rate limiting - Usage tracking - Expiration management - Multi-tenant support  Database considerations: - Uses GORM for ORM mapping - Includes indexes for efficient querying - Supports soft deletes  Usage example: ```go apiKey := &APIKey{     Name: \"Production API Key\",     Scopes: []string{\"leads:read\", \"leads:write\"},     ExpiresAt: timestamppb.New(time.Now().AddDate(1, 0, 0)), } ```")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-09T22:48:58.302614-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-13T17:57:23.762503-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class APIKey {
 
   private String id;
@@ -36,10 +36,6 @@ public class APIKey {
   private String keyHash;
 
   private String keyPrefix;
-
-  private String orgId;
-
-  private String tenantId;
 
   @Valid
   private List<String> scopes = new ArrayList<>();
@@ -256,46 +252,6 @@ public class APIKey {
 
   public void setKeyPrefix(String keyPrefix) {
     this.keyPrefix = keyPrefix;
-  }
-
-  public APIKey orgId(String orgId) {
-    this.orgId = orgId;
-    return this;
-  }
-
-  /**
-   * Get orgId
-   * @return orgId
-   */
-  
-  @Schema(name = "orgId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("orgId")
-  public String getOrgId() {
-    return orgId;
-  }
-
-  public void setOrgId(String orgId) {
-    this.orgId = orgId;
-  }
-
-  public APIKey tenantId(String tenantId) {
-    this.tenantId = tenantId;
-    return this;
-  }
-
-  /**
-   * Get tenantId
-   * @return tenantId
-   */
-  
-  @Schema(name = "tenantId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("tenantId")
-  public String getTenantId() {
-    return tenantId;
-  }
-
-  public void setTenantId(String tenantId) {
-    this.tenantId = tenantId;
   }
 
   public APIKey scopes(List<String> scopes) {
@@ -1579,8 +1535,6 @@ public class APIKey {
         Objects.equals(this.name, apIKey.name) &&
         Objects.equals(this.keyHash, apIKey.keyHash) &&
         Objects.equals(this.keyPrefix, apIKey.keyPrefix) &&
-        Objects.equals(this.orgId, apIKey.orgId) &&
-        Objects.equals(this.tenantId, apIKey.tenantId) &&
         Objects.equals(this.scopes, apIKey.scopes) &&
         Objects.equals(this.allowedIps, apIKey.allowedIps) &&
         Objects.equals(this.allowedDomains, apIKey.allowedDomains) &&
@@ -1644,7 +1598,7 @@ public class APIKey {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, keyHash, keyPrefix, orgId, tenantId, scopes, allowedIps, allowedDomains, allowedEnvironments, isTestKey, requestsPerSecond, requestsPerDay, concurrentRequests, monthlyRequestQuota, costPerRequest, billingTier, totalRequests, totalErrors, lastUsedAt, averageResponseTime, Arrays.hashCode(endpointUsageJson), Arrays.hashCode(errorRatesJson), Arrays.hashCode(recentErrors), successfulRequestsCount, successRate, status, createdAt, updatedAt, expiresAt, deletedAt, lastRotatedAt, lastSecurityReviewAt, requiresClientSecret, clientSecretHash, enforceHttps, enforceSigning, allowedSignatureAlgorithms, enforceMutualTls, clientCertificateHash, requireRequestSigning, description, Arrays.hashCode(metadataJson), tags, apiVersion, supportedFeatures, documentationUrl, supportContact, logAllRequests, lastRotationReason, lastRotationDate, rotationFrequencyDays, complianceStandards, requiresAuditLogging, dataResidency, approvedIntegrations, alertEmails, webhookUrl, alertOnQuotaThreshold, quotaAlertThreshold, alertOnErrorSpike, errorAlertThreshold, monitoringIntegrations, encrypted, dataClassification);
+    return Objects.hash(id, name, keyHash, keyPrefix, scopes, allowedIps, allowedDomains, allowedEnvironments, isTestKey, requestsPerSecond, requestsPerDay, concurrentRequests, monthlyRequestQuota, costPerRequest, billingTier, totalRequests, totalErrors, lastUsedAt, averageResponseTime, Arrays.hashCode(endpointUsageJson), Arrays.hashCode(errorRatesJson), Arrays.hashCode(recentErrors), successfulRequestsCount, successRate, status, createdAt, updatedAt, expiresAt, deletedAt, lastRotatedAt, lastSecurityReviewAt, requiresClientSecret, clientSecretHash, enforceHttps, enforceSigning, allowedSignatureAlgorithms, enforceMutualTls, clientCertificateHash, requireRequestSigning, description, Arrays.hashCode(metadataJson), tags, apiVersion, supportedFeatures, documentationUrl, supportContact, logAllRequests, lastRotationReason, lastRotationDate, rotationFrequencyDays, complianceStandards, requiresAuditLogging, dataResidency, approvedIntegrations, alertEmails, webhookUrl, alertOnQuotaThreshold, quotaAlertThreshold, alertOnErrorSpike, errorAlertThreshold, monitoringIntegrations, encrypted, dataClassification);
   }
 
   @Override
@@ -1655,8 +1609,6 @@ public class APIKey {
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    keyHash: ").append(toIndentedString(keyHash)).append("\n");
     sb.append("    keyPrefix: ").append(toIndentedString(keyPrefix)).append("\n");
-    sb.append("    orgId: ").append(toIndentedString(orgId)).append("\n");
-    sb.append("    tenantId: ").append(toIndentedString(tenantId)).append("\n");
     sb.append("    scopes: ").append(toIndentedString(scopes)).append("\n");
     sb.append("    allowedIps: ").append(toIndentedString(allowedIps)).append("\n");
     sb.append("    allowedDomains: ").append(toIndentedString(allowedDomains)).append("\n");

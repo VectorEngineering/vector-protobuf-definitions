@@ -11085,13 +11085,6 @@
           "type": "string",
           "title": "Key prefix for display/reference (first 8 chars)"
         },
-        "orgId": {
-          "type": "string",
-          "title": "Multi-tenant context"
-        },
-        "tenantId": {
-          "type": "string"
-        },
         "scopes": {
           "type": "array",
           "items": {

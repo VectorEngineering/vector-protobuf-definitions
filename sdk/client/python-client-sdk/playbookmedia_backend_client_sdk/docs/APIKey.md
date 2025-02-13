@@ -10,8 +10,6 @@ Name | Type | Description | Notes
 **name** | **str** |  | [optional] 
 **key_hash** | **str** |  | [optional] 
 **key_prefix** | **str** |  | [optional] 
-**org_id** | **str** |  | [optional] 
-**tenant_id** | **str** |  | [optional] 
 **scopes** | **List[str]** |  | [optional] 
 **allowed_ips** | **List[str]** |  | [optional] 
 **allowed_domains** | **List[str]** |  | [optional] 

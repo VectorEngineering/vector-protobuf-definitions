@@ -2447,7 +2447,6 @@ type APIKeyORM struct {
 	MonitoringIntegrations     pq.StringArray `gorm:"type:text[]"`
 	MonthlyRequestQuota        int64
 	Name                       string `gorm:"index:idx_api_keys_name"`
-	OrgId                      string `gorm:"index:idx_api_keys_org_id"`
 	QuotaAlertThreshold        float32
 	RecentErrors               []byte `gorm:"type:bytea"`
 	RequestsPerDay             int32
@@ -2463,7 +2462,6 @@ type APIKeyORM struct {
 	SupportContact             string
 	SupportedFeatures          pq.StringArray `gorm:"type:text[]"`
 	Tags                       pq.StringArray `gorm:"type:text[]"`
-	TenantId                   string         `gorm:"index:idx_api_keys_tenant_id"`
 	TotalErrors                int64
 	TotalRequests              int64
 	UpdatedAt                  *time.Time
@@ -2490,8 +2488,6 @@ func (m *APIKey) ToORM(ctx context.Context) (APIKeyORM, error) {
 	to.Name = m.Name
 	to.KeyHash = m.KeyHash
 	to.KeyPrefix = m.KeyPrefix
-	to.OrgId = m.OrgId
-	to.TenantId = m.TenantId
 	if m.Scopes != nil {
 		to.Scopes = make(pq.StringArray, len(m.Scopes))
 		copy(to.Scopes, m.Scopes)
@@ -2628,8 +2624,6 @@ func (m *APIKeyORM) ToPB(ctx context.Context) (APIKey, error) {
 	to.Name = m.Name
 	to.KeyHash = m.KeyHash
 	to.KeyPrefix = m.KeyPrefix
-	to.OrgId = m.OrgId
-	to.TenantId = m.TenantId
 	if m.Scopes != nil {
 		to.Scopes = make(pq.StringArray, len(m.Scopes))
 		copy(to.Scopes, m.Scopes)
@@ -9793,14 +9787,6 @@ func DefaultApplyFieldMaskAPIKey(ctx context.Context, patchee *APIKey, patcher *
 		}
 		if f == prefix+"KeyPrefix" {
 			patchee.KeyPrefix = patcher.KeyPrefix
-			continue
-		}
-		if f == prefix+"OrgId" {
-			patchee.OrgId = patcher.OrgId
-			continue
-		}
-		if f == prefix+"TenantId" {
-			patchee.TenantId = patcher.TenantId
 			continue
 		}
 		if f == prefix+"Scopes" {

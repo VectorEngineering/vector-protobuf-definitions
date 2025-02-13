@@ -320,8 +320,6 @@ const APIKey = z
     name: z.string(),
     keyHash: z.string(),
     keyPrefix: z.string(),
-    orgId: z.string(),
-    tenantId: z.string(),
     scopes: z.array(z.string()),
     allowedIps: z.array(z.string()),
     allowedDomains: z.array(z.string()),

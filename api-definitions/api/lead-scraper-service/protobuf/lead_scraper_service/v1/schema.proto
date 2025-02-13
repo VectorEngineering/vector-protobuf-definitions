@@ -1223,6 +1223,10 @@ message APIKey {
     string data_classification = 69 [
         (validate.rules).string = {in: ["public", "confidential", "restricted"]}
     ];
+
+    int32 max_uses = 70;
+    int32 rate_limit = 71;
+
 }
 
 message TenantAPIKey {

@@ -32,6 +32,7 @@ import org.openapitools.model.TriggerEvent;
 import org.openapitools.model.V1Status;
 import org.openapitools.model.ValidationErrorCode;
 import org.openapitools.model.WorkflowStatus;
+import org.openapitools.model.WorkspaceType;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -325,6 +326,15 @@ public class EnumConverterConfiguration {
             @Override
             public WorkflowStatus convert(String source) {
                 return WorkflowStatus.fromValue(source);
+            }
+        };
+    }
+    @Bean(name = "org.openapitools.configuration.EnumConverterConfiguration.workspaceTypeConverter")
+    Converter<String, WorkspaceType> workspaceTypeConverter() {
+        return new Converter<String, WorkspaceType>() {
+            @Override
+            public WorkspaceType convert(String source) {
+                return WorkspaceType.fromValue(source);
             }
         };
     }

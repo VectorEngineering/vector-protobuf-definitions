@@ -15443,11 +15443,184 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/WebhookConfig"
+          }
+        },
+        "workspaceType": {
+          "$ref": "#/definitions/WorkspaceType",
+          "title": "Enhanced Workspace Configuration"
+        },
+        "description": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maxTeamMembers": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Team Management"
+        },
+        "currentTeamMembers": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "allowGuestAccess": {
+          "type": "boolean"
+        },
+        "allowedEmailDomains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "proxyUrls": {
+          "type": "array",
+          "items": {
+            "type": "string"
           },
-          "title": "embedded webhook config with relationship"
+          "title": "Proxy Configuration"
+        },
+        "proxyType": {
+          "type": "string",
+          "title": "e.g., \"http\", \"socks5\""
+        },
+        "rotateProxies": {
+          "type": "boolean"
+        },
+        "proxyRotationInterval": {
+          "type": "integer",
+          "format": "int32",
+          "title": "in seconds"
+        },
+        "proxyProvider": {
+          "type": "string"
+        },
+        "proxyAuth": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "maxConcurrentScrapes": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Rate Limiting"
+        },
+        "requestsPerSecond": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxRetries": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "retryInterval": {
+          "type": "string"
+        },
+        "exportFormats": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "e.g., \"csv\", \"json\", \"excel\"",
+          "title": "Data Export Settings"
+        },
+        "exportSchedule": {
+          "type": "string",
+          "title": "cron expression"
+        },
+        "exportDestinations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "e.g., \"s3\", \"gcs\", \"sftp\""
+        },
+        "exportDestinationConfig": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "compressExports": {
+          "type": "boolean"
+        },
+        "compressionFormat": {
+          "type": "string",
+          "title": "e.g., \"zip\", \"gzip\""
+        },
+        "salesforceEnabled": {
+          "type": "boolean",
+          "title": "Integration Settings"
+        },
+        "salesforceConfig": {
+          "type": "string"
+        },
+        "hubspotEnabled": {
+          "type": "boolean"
+        },
+        "hubspotConfig": {
+          "type": "string"
+        },
+        "zapierEnabled": {
+          "type": "boolean"
+        },
+        "zapierWebhook": {
+          "type": "string"
+        },
+        "activeIntegrations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "integrationSettings": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "monthlyBudget": {
+          "type": "number",
+          "format": "float",
+          "title": "Cost Management"
+        },
+        "costPerLead": {
+          "type": "number",
+          "format": "float"
+        },
+        "alertOnBudgetThreshold": {
+          "type": "boolean"
+        },
+        "budgetAlertThreshold": {
+          "type": "number",
+          "format": "float"
+        },
+        "billingCurrency": {
+          "type": "string"
         }
       },
       "title": "Workspace represents a business entity with multiple accounts"
+    },
+    "WorkspaceType": {
+      "type": "string",
+      "enum": [
+        "WORKSPACE_TYPE_UNSPECIFIED",
+        "WORKSPACE_TYPE_PERSONAL",
+        "WORKSPACE_TYPE_TEAM",
+        "WORKSPACE_TYPE_ENTERPRISE"
+      ],
+      "default": "WORKSPACE_TYPE_UNSPECIFIED",
+      "title": "Workspace type enum"
     },
     "rpc.Status": {
       "type": "object",

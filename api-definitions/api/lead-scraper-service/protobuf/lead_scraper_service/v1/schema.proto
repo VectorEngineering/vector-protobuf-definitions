@@ -463,6 +463,14 @@ message Workspace {
         ormable: true
     };
 
+    // Workspace type enum
+    enum WorkspaceType {
+        WORKSPACE_TYPE_UNSPECIFIED = 0;
+        WORKSPACE_TYPE_PERSONAL = 1;
+        WORKSPACE_TYPE_TEAM = 2;
+        WORKSPACE_TYPE_ENTERPRISE = 3;
+    }
+
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
     string name = 2 [
         (validate.rules).string.min_len = 1,
@@ -503,17 +511,61 @@ message Workspace {
     int32 total_leads_collected = 19;
     google.protobuf.Timestamp last_job_run = 20;
 
-
     // Associated scraping jobs for this workspace
-    repeated ScrapingJob scraping_jobs = 22 [(gorm.field).has_many = {
-    }];
+    repeated ScrapingJob scraping_jobs = 22 [(gorm.field).has_many = {}];
+    repeated APIKey api_keys = 23 [(gorm.field).has_many = {}];
+    repeated WebhookConfig webhooks = 24 [(gorm.field).has_many = {}];
 
-    repeated APIKey api_keys = 23 [(gorm.field).has_many = {
-    }];
+    // Enhanced Workspace Configuration
+    WorkspaceType workspace_type = 25 [(validate.rules).enum.defined_only = true];
+    string description = 26;
+    map<string, string> metadata = 27;
+    repeated string tags = 28 [(gorm.field).tag = {type: "text[]"}];
 
-    // embedded webhook config with relationship
-    repeated WebhookConfig webhooks = 24 [(gorm.field).has_many = {
-    }];
+    // Team Management
+    int32 max_team_members = 29;
+    int32 current_team_members = 30;
+    bool allow_guest_access = 31;
+    repeated string allowed_email_domains = 32 [(gorm.field).tag = {type: "text[]"}];
+
+    // Proxy Configuration
+    repeated string proxy_urls = 33;
+    string proxy_type = 34; // e.g., "http", "socks5"
+    bool rotate_proxies = 35;
+    int32 proxy_rotation_interval = 36; // in seconds
+    string proxy_provider = 37;
+    map<string, string> proxy_auth = 38;
+
+    // Rate Limiting
+    int32 max_concurrent_scrapes = 39;
+    int32 requests_per_second = 40;
+    int32 max_retries = 41;
+    google.protobuf.Duration retry_interval = 42;
+
+    // Data Export Settings
+    repeated string export_formats = 43; // e.g., "csv", "json", "excel"
+    string export_schedule = 44; // cron expression
+    repeated string export_destinations = 45; // e.g., "s3", "gcs", "sftp"
+    map<string, string> export_destination_config = 46;
+    bool compress_exports = 47;
+    string compression_format = 48; // e.g., "zip", "gzip"
+
+    // Integration Settings
+    bool salesforce_enabled = 49;
+    string salesforce_config = 50;
+    bool hubspot_enabled = 51;
+    string hubspot_config = 52;
+    bool zapier_enabled = 53;
+    string zapier_webhook = 54;
+    repeated string active_integrations = 55;
+    map<string, string> integration_settings = 56;
+
+    // Cost Management
+    float monthly_budget = 83;
+    float cost_per_lead = 84;
+    bool alert_on_budget_threshold = 85;
+    float budget_alert_threshold = 86;
+    string billing_currency = 87;
 }
 
 /**

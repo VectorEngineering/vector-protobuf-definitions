@@ -465,6 +465,12 @@ const WebhookConfig = z
   })
   .partial()
   .passthrough();
+const WorkspaceType = z.enum([
+  "WORKSPACE_TYPE_UNSPECIFIED",
+  "WORKSPACE_TYPE_PERSONAL",
+  "WORKSPACE_TYPE_TEAM",
+  "WORKSPACE_TYPE_ENTERPRISE",
+]);
 const Workspace = z
   .object({
     id: z.string(),
@@ -489,6 +495,43 @@ const Workspace = z
     scrapingJobs: z.array(ScrapingJob),
     apiKeys: z.array(APIKey),
     webhooks: z.array(WebhookConfig),
+    workspaceType: WorkspaceType.default("WORKSPACE_TYPE_UNSPECIFIED"),
+    description: z.string(),
+    metadata: z.record(z.string()),
+    tags: z.array(z.string()),
+    maxTeamMembers: z.number().int(),
+    currentTeamMembers: z.number().int(),
+    allowGuestAccess: z.boolean(),
+    allowedEmailDomains: z.array(z.string()),
+    proxyUrls: z.array(z.string()),
+    proxyType: z.string(),
+    rotateProxies: z.boolean(),
+    proxyRotationInterval: z.number().int(),
+    proxyProvider: z.string(),
+    proxyAuth: z.record(z.string()),
+    maxConcurrentScrapes: z.number().int(),
+    requestsPerSecond: z.number().int(),
+    maxRetries: z.number().int(),
+    retryInterval: z.string(),
+    exportFormats: z.array(z.string()),
+    exportSchedule: z.string(),
+    exportDestinations: z.array(z.string()),
+    exportDestinationConfig: z.record(z.string()),
+    compressExports: z.boolean(),
+    compressionFormat: z.string(),
+    salesforceEnabled: z.boolean(),
+    salesforceConfig: z.string(),
+    hubspotEnabled: z.boolean(),
+    hubspotConfig: z.string(),
+    zapierEnabled: z.boolean(),
+    zapierWebhook: z.string(),
+    activeIntegrations: z.array(z.string()),
+    integrationSettings: z.record(z.string()),
+    monthlyBudget: z.number(),
+    costPerLead: z.number(),
+    alertOnBudgetThreshold: z.boolean(),
+    budgetAlertThreshold: z.number(),
+    billingCurrency: z.string(),
   })
   .partial()
   .passthrough();
@@ -2493,6 +2536,7 @@ export const schemas = {
   IncludedField,
   PayloadFormat,
   WebhookConfig,
+  WorkspaceType,
   Workspace,
   AccountSettings,
   Account,

@@ -230,6 +230,7 @@ docs/Workspace1.md
 docs/WorkspaceActivity.md
 docs/WorkspaceCompliance.md
 docs/WorkspaceSharing.md
+docs/WorkspaceType.md
 docs/lead_scraper_service_api.md
 docs/workspace_service_api.md
 openapi3graphql-server/.gitignore
@@ -470,6 +471,7 @@ openapi3graphql-server/model/workspace1.graphql
 openapi3graphql-server/model/workspace_activity.graphql
 openapi3graphql-server/model/workspace_compliance.graphql
 openapi3graphql-server/model/workspace_sharing.graphql
+openapi3graphql-server/model/workspace_type.graphql
 openapi3graphql-server/package.json
 openapi3graphql-server/schema.graphql
 openapi3graphql-server/server.js

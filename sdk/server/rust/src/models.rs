@@ -41035,6 +41035,155 @@ pub struct Workspace {
     #[serde(skip_serializing_if="Option::is_none")]
     pub webhooks: Option<Vec<models::WebhookConfig>>,
 
+    #[serde(rename = "workspaceType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub workspace_type: Option<models::WorkspaceType>,
+
+    #[serde(rename = "description")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub description: Option<String>,
+
+    #[serde(rename = "metadata")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub metadata: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "tags")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub tags: Option<Vec<String>>,
+
+    #[serde(rename = "maxTeamMembers")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub max_team_members: Option<i32>,
+
+    #[serde(rename = "currentTeamMembers")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub current_team_members: Option<i32>,
+
+    #[serde(rename = "allowGuestAccess")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub allow_guest_access: Option<bool>,
+
+    #[serde(rename = "allowedEmailDomains")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub allowed_email_domains: Option<Vec<String>>,
+
+    #[serde(rename = "proxyUrls")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub proxy_urls: Option<Vec<String>>,
+
+    #[serde(rename = "proxyType")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub proxy_type: Option<String>,
+
+    #[serde(rename = "rotateProxies")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub rotate_proxies: Option<bool>,
+
+    #[serde(rename = "proxyRotationInterval")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub proxy_rotation_interval: Option<i32>,
+
+    #[serde(rename = "proxyProvider")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub proxy_provider: Option<String>,
+
+    #[serde(rename = "proxyAuth")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub proxy_auth: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "maxConcurrentScrapes")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub max_concurrent_scrapes: Option<i32>,
+
+    #[serde(rename = "requestsPerSecond")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub requests_per_second: Option<i32>,
+
+    #[serde(rename = "maxRetries")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub max_retries: Option<i32>,
+
+    #[serde(rename = "retryInterval")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub retry_interval: Option<String>,
+
+    /// e.g., \"csv\", \"json\", \"excel\"
+    #[serde(rename = "exportFormats")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub export_formats: Option<Vec<String>>,
+
+    #[serde(rename = "exportSchedule")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub export_schedule: Option<String>,
+
+    #[serde(rename = "exportDestinations")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub export_destinations: Option<Vec<String>>,
+
+    #[serde(rename = "exportDestinationConfig")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub export_destination_config: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "compressExports")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub compress_exports: Option<bool>,
+
+    #[serde(rename = "compressionFormat")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub compression_format: Option<String>,
+
+    #[serde(rename = "salesforceEnabled")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub salesforce_enabled: Option<bool>,
+
+    #[serde(rename = "salesforceConfig")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub salesforce_config: Option<String>,
+
+    #[serde(rename = "hubspotEnabled")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub hubspot_enabled: Option<bool>,
+
+    #[serde(rename = "hubspotConfig")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub hubspot_config: Option<String>,
+
+    #[serde(rename = "zapierEnabled")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub zapier_enabled: Option<bool>,
+
+    #[serde(rename = "zapierWebhook")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub zapier_webhook: Option<String>,
+
+    #[serde(rename = "activeIntegrations")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub active_integrations: Option<Vec<String>>,
+
+    #[serde(rename = "integrationSettings")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub integration_settings: Option<std::collections::HashMap<String, String>>,
+
+    #[serde(rename = "monthlyBudget")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub monthly_budget: Option<f32>,
+
+    #[serde(rename = "costPerLead")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub cost_per_lead: Option<f32>,
+
+    #[serde(rename = "alertOnBudgetThreshold")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub alert_on_budget_threshold: Option<bool>,
+
+    #[serde(rename = "budgetAlertThreshold")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub budget_alert_threshold: Option<f32>,
+
+    #[serde(rename = "billingCurrency")]
+    #[serde(skip_serializing_if="Option::is_none")]
+    pub billing_currency: Option<String>,
+
 }
 
 
@@ -41064,6 +41213,43 @@ impl Workspace {
             scraping_jobs: None,
             api_keys: None,
             webhooks: None,
+            workspace_type: None,
+            description: None,
+            metadata: None,
+            tags: None,
+            max_team_members: None,
+            current_team_members: None,
+            allow_guest_access: None,
+            allowed_email_domains: None,
+            proxy_urls: None,
+            proxy_type: None,
+            rotate_proxies: None,
+            proxy_rotation_interval: None,
+            proxy_provider: None,
+            proxy_auth: None,
+            max_concurrent_scrapes: None,
+            requests_per_second: None,
+            max_retries: None,
+            retry_interval: None,
+            export_formats: None,
+            export_schedule: None,
+            export_destinations: None,
+            export_destination_config: None,
+            compress_exports: None,
+            compression_format: None,
+            salesforce_enabled: None,
+            salesforce_config: None,
+            hubspot_enabled: None,
+            hubspot_config: None,
+            zapier_enabled: None,
+            zapier_webhook: None,
+            active_integrations: None,
+            integration_settings: None,
+            monthly_budget: None,
+            cost_per_lead: None,
+            alert_on_budget_threshold: None,
+            budget_alert_threshold: None,
+            billing_currency: None,
         }
     }
 }
@@ -41202,6 +41388,272 @@ impl std::string::ToString for Workspace {
 
             // Skipping webhooks in query parameter serialization
 
+            // Skipping workspaceType in query parameter serialization
+
+
+            self.description.as_ref().map(|description| {
+                [
+                    "description".to_string(),
+                    description.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping metadata in query parameter serialization
+
+
+            self.tags.as_ref().map(|tags| {
+                [
+                    "tags".to_string(),
+                    tags.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.max_team_members.as_ref().map(|max_team_members| {
+                [
+                    "maxTeamMembers".to_string(),
+                    max_team_members.to_string(),
+                ].join(",")
+            }),
+
+
+            self.current_team_members.as_ref().map(|current_team_members| {
+                [
+                    "currentTeamMembers".to_string(),
+                    current_team_members.to_string(),
+                ].join(",")
+            }),
+
+
+            self.allow_guest_access.as_ref().map(|allow_guest_access| {
+                [
+                    "allowGuestAccess".to_string(),
+                    allow_guest_access.to_string(),
+                ].join(",")
+            }),
+
+
+            self.allowed_email_domains.as_ref().map(|allowed_email_domains| {
+                [
+                    "allowedEmailDomains".to_string(),
+                    allowed_email_domains.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.proxy_urls.as_ref().map(|proxy_urls| {
+                [
+                    "proxyUrls".to_string(),
+                    proxy_urls.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.proxy_type.as_ref().map(|proxy_type| {
+                [
+                    "proxyType".to_string(),
+                    proxy_type.to_string(),
+                ].join(",")
+            }),
+
+
+            self.rotate_proxies.as_ref().map(|rotate_proxies| {
+                [
+                    "rotateProxies".to_string(),
+                    rotate_proxies.to_string(),
+                ].join(",")
+            }),
+
+
+            self.proxy_rotation_interval.as_ref().map(|proxy_rotation_interval| {
+                [
+                    "proxyRotationInterval".to_string(),
+                    proxy_rotation_interval.to_string(),
+                ].join(",")
+            }),
+
+
+            self.proxy_provider.as_ref().map(|proxy_provider| {
+                [
+                    "proxyProvider".to_string(),
+                    proxy_provider.to_string(),
+                ].join(",")
+            }),
+
+            // Skipping proxyAuth in query parameter serialization
+
+
+            self.max_concurrent_scrapes.as_ref().map(|max_concurrent_scrapes| {
+                [
+                    "maxConcurrentScrapes".to_string(),
+                    max_concurrent_scrapes.to_string(),
+                ].join(",")
+            }),
+
+
+            self.requests_per_second.as_ref().map(|requests_per_second| {
+                [
+                    "requestsPerSecond".to_string(),
+                    requests_per_second.to_string(),
+                ].join(",")
+            }),
+
+
+            self.max_retries.as_ref().map(|max_retries| {
+                [
+                    "maxRetries".to_string(),
+                    max_retries.to_string(),
+                ].join(",")
+            }),
+
+
+            self.retry_interval.as_ref().map(|retry_interval| {
+                [
+                    "retryInterval".to_string(),
+                    retry_interval.to_string(),
+                ].join(",")
+            }),
+
+
+            self.export_formats.as_ref().map(|export_formats| {
+                [
+                    "exportFormats".to_string(),
+                    export_formats.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+
+            self.export_schedule.as_ref().map(|export_schedule| {
+                [
+                    "exportSchedule".to_string(),
+                    export_schedule.to_string(),
+                ].join(",")
+            }),
+
+
+            self.export_destinations.as_ref().map(|export_destinations| {
+                [
+                    "exportDestinations".to_string(),
+                    export_destinations.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping exportDestinationConfig in query parameter serialization
+
+
+            self.compress_exports.as_ref().map(|compress_exports| {
+                [
+                    "compressExports".to_string(),
+                    compress_exports.to_string(),
+                ].join(",")
+            }),
+
+
+            self.compression_format.as_ref().map(|compression_format| {
+                [
+                    "compressionFormat".to_string(),
+                    compression_format.to_string(),
+                ].join(",")
+            }),
+
+
+            self.salesforce_enabled.as_ref().map(|salesforce_enabled| {
+                [
+                    "salesforceEnabled".to_string(),
+                    salesforce_enabled.to_string(),
+                ].join(",")
+            }),
+
+
+            self.salesforce_config.as_ref().map(|salesforce_config| {
+                [
+                    "salesforceConfig".to_string(),
+                    salesforce_config.to_string(),
+                ].join(",")
+            }),
+
+
+            self.hubspot_enabled.as_ref().map(|hubspot_enabled| {
+                [
+                    "hubspotEnabled".to_string(),
+                    hubspot_enabled.to_string(),
+                ].join(",")
+            }),
+
+
+            self.hubspot_config.as_ref().map(|hubspot_config| {
+                [
+                    "hubspotConfig".to_string(),
+                    hubspot_config.to_string(),
+                ].join(",")
+            }),
+
+
+            self.zapier_enabled.as_ref().map(|zapier_enabled| {
+                [
+                    "zapierEnabled".to_string(),
+                    zapier_enabled.to_string(),
+                ].join(",")
+            }),
+
+
+            self.zapier_webhook.as_ref().map(|zapier_webhook| {
+                [
+                    "zapierWebhook".to_string(),
+                    zapier_webhook.to_string(),
+                ].join(",")
+            }),
+
+
+            self.active_integrations.as_ref().map(|active_integrations| {
+                [
+                    "activeIntegrations".to_string(),
+                    active_integrations.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
+                ].join(",")
+            }),
+
+            // Skipping integrationSettings in query parameter serialization
+
+
+            self.monthly_budget.as_ref().map(|monthly_budget| {
+                [
+                    "monthlyBudget".to_string(),
+                    monthly_budget.to_string(),
+                ].join(",")
+            }),
+
+
+            self.cost_per_lead.as_ref().map(|cost_per_lead| {
+                [
+                    "costPerLead".to_string(),
+                    cost_per_lead.to_string(),
+                ].join(",")
+            }),
+
+
+            self.alert_on_budget_threshold.as_ref().map(|alert_on_budget_threshold| {
+                [
+                    "alertOnBudgetThreshold".to_string(),
+                    alert_on_budget_threshold.to_string(),
+                ].join(",")
+            }),
+
+
+            self.budget_alert_threshold.as_ref().map(|budget_alert_threshold| {
+                [
+                    "budgetAlertThreshold".to_string(),
+                    budget_alert_threshold.to_string(),
+                ].join(",")
+            }),
+
+
+            self.billing_currency.as_ref().map(|billing_currency| {
+                [
+                    "billingCurrency".to_string(),
+                    billing_currency.to_string(),
+                ].join(",")
+            }),
+
         ];
 
         params.into_iter().flatten().collect::<Vec<_>>().join(",")
@@ -41241,6 +41693,43 @@ impl std::str::FromStr for Workspace {
             pub scraping_jobs: Vec<Vec<models::ScrapingJob>>,
             pub api_keys: Vec<Vec<models::ApiKey>>,
             pub webhooks: Vec<Vec<models::WebhookConfig>>,
+            pub workspace_type: Vec<models::WorkspaceType>,
+            pub description: Vec<String>,
+            pub metadata: Vec<std::collections::HashMap<String, String>>,
+            pub tags: Vec<Vec<String>>,
+            pub max_team_members: Vec<i32>,
+            pub current_team_members: Vec<i32>,
+            pub allow_guest_access: Vec<bool>,
+            pub allowed_email_domains: Vec<Vec<String>>,
+            pub proxy_urls: Vec<Vec<String>>,
+            pub proxy_type: Vec<String>,
+            pub rotate_proxies: Vec<bool>,
+            pub proxy_rotation_interval: Vec<i32>,
+            pub proxy_provider: Vec<String>,
+            pub proxy_auth: Vec<std::collections::HashMap<String, String>>,
+            pub max_concurrent_scrapes: Vec<i32>,
+            pub requests_per_second: Vec<i32>,
+            pub max_retries: Vec<i32>,
+            pub retry_interval: Vec<String>,
+            pub export_formats: Vec<Vec<String>>,
+            pub export_schedule: Vec<String>,
+            pub export_destinations: Vec<Vec<String>>,
+            pub export_destination_config: Vec<std::collections::HashMap<String, String>>,
+            pub compress_exports: Vec<bool>,
+            pub compression_format: Vec<String>,
+            pub salesforce_enabled: Vec<bool>,
+            pub salesforce_config: Vec<String>,
+            pub hubspot_enabled: Vec<bool>,
+            pub hubspot_config: Vec<String>,
+            pub zapier_enabled: Vec<bool>,
+            pub zapier_webhook: Vec<String>,
+            pub active_integrations: Vec<Vec<String>>,
+            pub integration_settings: Vec<std::collections::HashMap<String, String>>,
+            pub monthly_budget: Vec<f32>,
+            pub cost_per_lead: Vec<f32>,
+            pub alert_on_budget_threshold: Vec<bool>,
+            pub budget_alert_threshold: Vec<f32>,
+            pub billing_currency: Vec<String>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -41298,6 +41787,70 @@ impl std::str::FromStr for Workspace {
                     "scrapingJobs" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
                     "apiKeys" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
                     "webhooks" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "workspaceType" => intermediate_rep.workspace_type.push(<models::WorkspaceType as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "description" => intermediate_rep.description.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "metadata" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
+                    "tags" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "maxTeamMembers" => intermediate_rep.max_team_members.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "currentTeamMembers" => intermediate_rep.current_team_members.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "allowGuestAccess" => intermediate_rep.allow_guest_access.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "allowedEmailDomains" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
+                    "proxyUrls" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "proxyType" => intermediate_rep.proxy_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "rotateProxies" => intermediate_rep.rotate_proxies.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "proxyRotationInterval" => intermediate_rep.proxy_rotation_interval.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "proxyProvider" => intermediate_rep.proxy_provider.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "proxyAuth" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "maxConcurrentScrapes" => intermediate_rep.max_concurrent_scrapes.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "requestsPerSecond" => intermediate_rep.requests_per_second.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "maxRetries" => intermediate_rep.max_retries.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "retryInterval" => intermediate_rep.retry_interval.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "exportFormats" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "exportSchedule" => intermediate_rep.export_schedule.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "exportDestinations" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
+                    "exportDestinationConfig" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "compressExports" => intermediate_rep.compress_exports.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "compressionFormat" => intermediate_rep.compression_format.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "salesforceEnabled" => intermediate_rep.salesforce_enabled.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "salesforceConfig" => intermediate_rep.salesforce_config.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "hubspotEnabled" => intermediate_rep.hubspot_enabled.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "hubspotConfig" => intermediate_rep.hubspot_config.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "zapierEnabled" => intermediate_rep.zapier_enabled.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "zapierWebhook" => intermediate_rep.zapier_webhook.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    "activeIntegrations" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
+                    "integrationSettings" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
+                    #[allow(clippy::redundant_clone)]
+                    "monthlyBudget" => intermediate_rep.monthly_budget.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "costPerLead" => intermediate_rep.cost_per_lead.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "alertOnBudgetThreshold" => intermediate_rep.alert_on_budget_threshold.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "budgetAlertThreshold" => intermediate_rep.budget_alert_threshold.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
+                    #[allow(clippy::redundant_clone)]
+                    "billingCurrency" => intermediate_rep.billing_currency.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing Workspace".to_string())
                 }
             }
@@ -41330,6 +41883,43 @@ impl std::str::FromStr for Workspace {
             scraping_jobs: intermediate_rep.scraping_jobs.into_iter().next(),
             api_keys: intermediate_rep.api_keys.into_iter().next(),
             webhooks: intermediate_rep.webhooks.into_iter().next(),
+            workspace_type: intermediate_rep.workspace_type.into_iter().next(),
+            description: intermediate_rep.description.into_iter().next(),
+            metadata: intermediate_rep.metadata.into_iter().next(),
+            tags: intermediate_rep.tags.into_iter().next(),
+            max_team_members: intermediate_rep.max_team_members.into_iter().next(),
+            current_team_members: intermediate_rep.current_team_members.into_iter().next(),
+            allow_guest_access: intermediate_rep.allow_guest_access.into_iter().next(),
+            allowed_email_domains: intermediate_rep.allowed_email_domains.into_iter().next(),
+            proxy_urls: intermediate_rep.proxy_urls.into_iter().next(),
+            proxy_type: intermediate_rep.proxy_type.into_iter().next(),
+            rotate_proxies: intermediate_rep.rotate_proxies.into_iter().next(),
+            proxy_rotation_interval: intermediate_rep.proxy_rotation_interval.into_iter().next(),
+            proxy_provider: intermediate_rep.proxy_provider.into_iter().next(),
+            proxy_auth: intermediate_rep.proxy_auth.into_iter().next(),
+            max_concurrent_scrapes: intermediate_rep.max_concurrent_scrapes.into_iter().next(),
+            requests_per_second: intermediate_rep.requests_per_second.into_iter().next(),
+            max_retries: intermediate_rep.max_retries.into_iter().next(),
+            retry_interval: intermediate_rep.retry_interval.into_iter().next(),
+            export_formats: intermediate_rep.export_formats.into_iter().next(),
+            export_schedule: intermediate_rep.export_schedule.into_iter().next(),
+            export_destinations: intermediate_rep.export_destinations.into_iter().next(),
+            export_destination_config: intermediate_rep.export_destination_config.into_iter().next(),
+            compress_exports: intermediate_rep.compress_exports.into_iter().next(),
+            compression_format: intermediate_rep.compression_format.into_iter().next(),
+            salesforce_enabled: intermediate_rep.salesforce_enabled.into_iter().next(),
+            salesforce_config: intermediate_rep.salesforce_config.into_iter().next(),
+            hubspot_enabled: intermediate_rep.hubspot_enabled.into_iter().next(),
+            hubspot_config: intermediate_rep.hubspot_config.into_iter().next(),
+            zapier_enabled: intermediate_rep.zapier_enabled.into_iter().next(),
+            zapier_webhook: intermediate_rep.zapier_webhook.into_iter().next(),
+            active_integrations: intermediate_rep.active_integrations.into_iter().next(),
+            integration_settings: intermediate_rep.integration_settings.into_iter().next(),
+            monthly_budget: intermediate_rep.monthly_budget.into_iter().next(),
+            cost_per_lead: intermediate_rep.cost_per_lead.into_iter().next(),
+            alert_on_budget_threshold: intermediate_rep.alert_on_budget_threshold.into_iter().next(),
+            budget_alert_threshold: intermediate_rep.budget_alert_threshold.into_iter().next(),
+            billing_currency: intermediate_rep.billing_currency.into_iter().next(),
         })
     }
 }
@@ -42354,3 +42944,46 @@ impl std::convert::TryFrom<hyper::header::HeaderValue> for header::IntoHeaderVal
     }
 }
 
+
+/// Enumeration of values.
+/// Since this enum's variants do not hold data, we can easily define them as `#[repr(C)]`
+/// which helps with FFI.
+#[allow(non_camel_case_types)]
+#[repr(C)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, serde::Serialize, serde::Deserialize)]
+#[cfg_attr(feature = "conversion", derive(frunk_enum_derive::LabelledGenericEnum))]
+pub enum WorkspaceType {
+    #[serde(rename = "WORKSPACE_TYPE_UNSPECIFIED")]
+    Unspecified,
+    #[serde(rename = "WORKSPACE_TYPE_PERSONAL")]
+    Personal,
+    #[serde(rename = "WORKSPACE_TYPE_TEAM")]
+    Team,
+    #[serde(rename = "WORKSPACE_TYPE_ENTERPRISE")]
+    Enterprise,
+}
+
+impl std::fmt::Display for WorkspaceType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match *self {
+            WorkspaceType::Unspecified => write!(f, "WORKSPACE_TYPE_UNSPECIFIED"),
+            WorkspaceType::Personal => write!(f, "WORKSPACE_TYPE_PERSONAL"),
+            WorkspaceType::Team => write!(f, "WORKSPACE_TYPE_TEAM"),
+            WorkspaceType::Enterprise => write!(f, "WORKSPACE_TYPE_ENTERPRISE"),
+        }
+    }
+}
+
+impl std::str::FromStr for WorkspaceType {
+    type Err = String;
+
+    fn from_str(s: &str) -> std::result::Result<Self, Self::Err> {
+        match s {
+            "WORKSPACE_TYPE_UNSPECIFIED" => std::result::Result::Ok(WorkspaceType::Unspecified),
+            "WORKSPACE_TYPE_PERSONAL" => std::result::Result::Ok(WorkspaceType::Personal),
+            "WORKSPACE_TYPE_TEAM" => std::result::Result::Ok(WorkspaceType::Team),
+            "WORKSPACE_TYPE_ENTERPRISE" => std::result::Result::Ok(WorkspaceType::Enterprise),
+            _ => std::result::Result::Err(format!("Value not valid: {}", s)),
+        }
+    }
+}

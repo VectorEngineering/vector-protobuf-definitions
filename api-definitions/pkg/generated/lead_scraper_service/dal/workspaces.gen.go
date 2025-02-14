@@ -31,24 +31,57 @@ func newWorkspaceORM(db *gorm.DB, opts ...gen.DOOption) workspaceORM {
 	tableName := _workspaceORM.workspaceORMDo.TableName()
 	_workspaceORM.ALL = field.NewAsterisk(tableName)
 	_workspaceORM.AccountId = field.NewUint64(tableName, "account_id")
+	_workspaceORM.ActiveIntegrations = field.NewField(tableName, "active_integrations")
 	_workspaceORM.ActiveScrapers = field.NewInt32(tableName, "active_scrapers")
+	_workspaceORM.AlertOnBudgetThreshold = field.NewBool(tableName, "alert_on_budget_threshold")
+	_workspaceORM.AllowGuestAccess = field.NewBool(tableName, "allow_guest_access")
+	_workspaceORM.AllowedEmailDomains = field.NewField(tableName, "allowed_email_domains")
+	_workspaceORM.BillingCurrency = field.NewString(tableName, "billing_currency")
+	_workspaceORM.BudgetAlertThreshold = field.NewFloat32(tableName, "budget_alert_threshold")
+	_workspaceORM.CompressExports = field.NewBool(tableName, "compress_exports")
+	_workspaceORM.CompressionFormat = field.NewString(tableName, "compression_format")
+	_workspaceORM.CostPerLead = field.NewFloat32(tableName, "cost_per_lead")
 	_workspaceORM.CreatedAt = field.NewTime(tableName, "created_at")
+	_workspaceORM.CurrentTeamMembers = field.NewInt32(tableName, "current_team_members")
 	_workspaceORM.DailyJobQuota = field.NewInt32(tableName, "daily_job_quota")
 	_workspaceORM.DeletedAt = field.NewTime(tableName, "deleted_at")
+	_workspaceORM.Description = field.NewString(tableName, "description")
 	_workspaceORM.Domain = field.NewString(tableName, "domain")
+	_workspaceORM.ExportDestinations = field.NewField(tableName, "export_destinations")
+	_workspaceORM.ExportFormats = field.NewField(tableName, "export_formats")
+	_workspaceORM.ExportSchedule = field.NewString(tableName, "export_schedule")
 	_workspaceORM.GdprCompliant = field.NewBool(tableName, "gdpr_compliant")
 	_workspaceORM.HipaaCompliant = field.NewBool(tableName, "hipaa_compliant")
+	_workspaceORM.HubspotConfig = field.NewString(tableName, "hubspot_config")
+	_workspaceORM.HubspotEnabled = field.NewBool(tableName, "hubspot_enabled")
 	_workspaceORM.Id = field.NewUint64(tableName, "id")
 	_workspaceORM.Industry = field.NewString(tableName, "industry")
 	_workspaceORM.JobsRunThisMonth = field.NewInt32(tableName, "jobs_run_this_month")
 	_workspaceORM.LastJobRun = field.NewTime(tableName, "last_job_run")
+	_workspaceORM.MaxConcurrentScrapes = field.NewInt32(tableName, "max_concurrent_scrapes")
+	_workspaceORM.MaxRetries = field.NewInt32(tableName, "max_retries")
+	_workspaceORM.MaxTeamMembers = field.NewInt32(tableName, "max_team_members")
+	_workspaceORM.MonthlyBudget = field.NewFloat32(tableName, "monthly_budget")
 	_workspaceORM.Name = field.NewString(tableName, "name")
+	_workspaceORM.ProxyProvider = field.NewString(tableName, "proxy_provider")
+	_workspaceORM.ProxyRotationInterval = field.NewInt32(tableName, "proxy_rotation_interval")
+	_workspaceORM.ProxyType = field.NewString(tableName, "proxy_type")
+	_workspaceORM.ProxyUrls = field.NewField(tableName, "proxy_urls")
+	_workspaceORM.RequestsPerSecond = field.NewInt32(tableName, "requests_per_second")
+	_workspaceORM.RetryInterval = field.NewInt64(tableName, "retry_interval")
+	_workspaceORM.RotateProxies = field.NewBool(tableName, "rotate_proxies")
+	_workspaceORM.SalesforceConfig = field.NewString(tableName, "salesforce_config")
+	_workspaceORM.SalesforceEnabled = field.NewBool(tableName, "salesforce_enabled")
 	_workspaceORM.Soc2Compliant = field.NewBool(tableName, "soc2_compliant")
 	_workspaceORM.StorageQuota = field.NewInt64(tableName, "storage_quota")
+	_workspaceORM.Tags = field.NewField(tableName, "tags")
 	_workspaceORM.TotalLeadsCollected = field.NewInt32(tableName, "total_leads_collected")
 	_workspaceORM.UpdatedAt = field.NewTime(tableName, "updated_at")
 	_workspaceORM.UsedStorage = field.NewInt64(tableName, "used_storage")
 	_workspaceORM.WorkspaceJobLimit = field.NewInt32(tableName, "workspace_job_limit")
+	_workspaceORM.WorkspaceType = field.NewString(tableName, "workspace_type")
+	_workspaceORM.ZapierEnabled = field.NewBool(tableName, "zapier_enabled")
+	_workspaceORM.ZapierWebhook = field.NewString(tableName, "zapier_webhook")
 	_workspaceORM.ApiKeys = workspaceORMHasManyApiKeys{
 		db: db.Session(&gorm.Session{}),
 
@@ -115,27 +148,60 @@ func newWorkspaceORM(db *gorm.DB, opts ...gen.DOOption) workspaceORM {
 type workspaceORM struct {
 	workspaceORMDo
 
-	ALL                 field.Asterisk
-	AccountId           field.Uint64
-	ActiveScrapers      field.Int32
-	CreatedAt           field.Time
-	DailyJobQuota       field.Int32
-	DeletedAt           field.Time
-	Domain              field.String
-	GdprCompliant       field.Bool
-	HipaaCompliant      field.Bool
-	Id                  field.Uint64
-	Industry            field.String
-	JobsRunThisMonth    field.Int32
-	LastJobRun          field.Time
-	Name                field.String
-	Soc2Compliant       field.Bool
-	StorageQuota        field.Int64
-	TotalLeadsCollected field.Int32
-	UpdatedAt           field.Time
-	UsedStorage         field.Int64
-	WorkspaceJobLimit   field.Int32
-	ApiKeys             workspaceORMHasManyApiKeys
+	ALL                    field.Asterisk
+	AccountId              field.Uint64
+	ActiveIntegrations     field.Field
+	ActiveScrapers         field.Int32
+	AlertOnBudgetThreshold field.Bool
+	AllowGuestAccess       field.Bool
+	AllowedEmailDomains    field.Field
+	BillingCurrency        field.String
+	BudgetAlertThreshold   field.Float32
+	CompressExports        field.Bool
+	CompressionFormat      field.String
+	CostPerLead            field.Float32
+	CreatedAt              field.Time
+	CurrentTeamMembers     field.Int32
+	DailyJobQuota          field.Int32
+	DeletedAt              field.Time
+	Description            field.String
+	Domain                 field.String
+	ExportDestinations     field.Field
+	ExportFormats          field.Field
+	ExportSchedule         field.String
+	GdprCompliant          field.Bool
+	HipaaCompliant         field.Bool
+	HubspotConfig          field.String
+	HubspotEnabled         field.Bool
+	Id                     field.Uint64
+	Industry               field.String
+	JobsRunThisMonth       field.Int32
+	LastJobRun             field.Time
+	MaxConcurrentScrapes   field.Int32
+	MaxRetries             field.Int32
+	MaxTeamMembers         field.Int32
+	MonthlyBudget          field.Float32
+	Name                   field.String
+	ProxyProvider          field.String
+	ProxyRotationInterval  field.Int32
+	ProxyType              field.String
+	ProxyUrls              field.Field
+	RequestsPerSecond      field.Int32
+	RetryInterval          field.Int64
+	RotateProxies          field.Bool
+	SalesforceConfig       field.String
+	SalesforceEnabled      field.Bool
+	Soc2Compliant          field.Bool
+	StorageQuota           field.Int64
+	Tags                   field.Field
+	TotalLeadsCollected    field.Int32
+	UpdatedAt              field.Time
+	UsedStorage            field.Int64
+	WorkspaceJobLimit      field.Int32
+	WorkspaceType          field.String
+	ZapierEnabled          field.Bool
+	ZapierWebhook          field.String
+	ApiKeys                workspaceORMHasManyApiKeys
 
 	ScrapingJobs workspaceORMHasManyScrapingJobs
 
@@ -159,24 +225,57 @@ func (w workspaceORM) As(alias string) *workspaceORM {
 func (w *workspaceORM) updateTableName(table string) *workspaceORM {
 	w.ALL = field.NewAsterisk(table)
 	w.AccountId = field.NewUint64(table, "account_id")
+	w.ActiveIntegrations = field.NewField(table, "active_integrations")
 	w.ActiveScrapers = field.NewInt32(table, "active_scrapers")
+	w.AlertOnBudgetThreshold = field.NewBool(table, "alert_on_budget_threshold")
+	w.AllowGuestAccess = field.NewBool(table, "allow_guest_access")
+	w.AllowedEmailDomains = field.NewField(table, "allowed_email_domains")
+	w.BillingCurrency = field.NewString(table, "billing_currency")
+	w.BudgetAlertThreshold = field.NewFloat32(table, "budget_alert_threshold")
+	w.CompressExports = field.NewBool(table, "compress_exports")
+	w.CompressionFormat = field.NewString(table, "compression_format")
+	w.CostPerLead = field.NewFloat32(table, "cost_per_lead")
 	w.CreatedAt = field.NewTime(table, "created_at")
+	w.CurrentTeamMembers = field.NewInt32(table, "current_team_members")
 	w.DailyJobQuota = field.NewInt32(table, "daily_job_quota")
 	w.DeletedAt = field.NewTime(table, "deleted_at")
+	w.Description = field.NewString(table, "description")
 	w.Domain = field.NewString(table, "domain")
+	w.ExportDestinations = field.NewField(table, "export_destinations")
+	w.ExportFormats = field.NewField(table, "export_formats")
+	w.ExportSchedule = field.NewString(table, "export_schedule")
 	w.GdprCompliant = field.NewBool(table, "gdpr_compliant")
 	w.HipaaCompliant = field.NewBool(table, "hipaa_compliant")
+	w.HubspotConfig = field.NewString(table, "hubspot_config")
+	w.HubspotEnabled = field.NewBool(table, "hubspot_enabled")
 	w.Id = field.NewUint64(table, "id")
 	w.Industry = field.NewString(table, "industry")
 	w.JobsRunThisMonth = field.NewInt32(table, "jobs_run_this_month")
 	w.LastJobRun = field.NewTime(table, "last_job_run")
+	w.MaxConcurrentScrapes = field.NewInt32(table, "max_concurrent_scrapes")
+	w.MaxRetries = field.NewInt32(table, "max_retries")
+	w.MaxTeamMembers = field.NewInt32(table, "max_team_members")
+	w.MonthlyBudget = field.NewFloat32(table, "monthly_budget")
 	w.Name = field.NewString(table, "name")
+	w.ProxyProvider = field.NewString(table, "proxy_provider")
+	w.ProxyRotationInterval = field.NewInt32(table, "proxy_rotation_interval")
+	w.ProxyType = field.NewString(table, "proxy_type")
+	w.ProxyUrls = field.NewField(table, "proxy_urls")
+	w.RequestsPerSecond = field.NewInt32(table, "requests_per_second")
+	w.RetryInterval = field.NewInt64(table, "retry_interval")
+	w.RotateProxies = field.NewBool(table, "rotate_proxies")
+	w.SalesforceConfig = field.NewString(table, "salesforce_config")
+	w.SalesforceEnabled = field.NewBool(table, "salesforce_enabled")
 	w.Soc2Compliant = field.NewBool(table, "soc2_compliant")
 	w.StorageQuota = field.NewInt64(table, "storage_quota")
+	w.Tags = field.NewField(table, "tags")
 	w.TotalLeadsCollected = field.NewInt32(table, "total_leads_collected")
 	w.UpdatedAt = field.NewTime(table, "updated_at")
 	w.UsedStorage = field.NewInt64(table, "used_storage")
 	w.WorkspaceJobLimit = field.NewInt32(table, "workspace_job_limit")
+	w.WorkspaceType = field.NewString(table, "workspace_type")
+	w.ZapierEnabled = field.NewBool(table, "zapier_enabled")
+	w.ZapierWebhook = field.NewString(table, "zapier_webhook")
 
 	w.fillFieldMap()
 
@@ -193,26 +292,59 @@ func (w *workspaceORM) GetFieldByName(fieldName string) (field.OrderExpr, bool) 
 }
 
 func (w *workspaceORM) fillFieldMap() {
-	w.fieldMap = make(map[string]field.Expr, 23)
+	w.fieldMap = make(map[string]field.Expr, 56)
 	w.fieldMap["account_id"] = w.AccountId
+	w.fieldMap["active_integrations"] = w.ActiveIntegrations
 	w.fieldMap["active_scrapers"] = w.ActiveScrapers
+	w.fieldMap["alert_on_budget_threshold"] = w.AlertOnBudgetThreshold
+	w.fieldMap["allow_guest_access"] = w.AllowGuestAccess
+	w.fieldMap["allowed_email_domains"] = w.AllowedEmailDomains
+	w.fieldMap["billing_currency"] = w.BillingCurrency
+	w.fieldMap["budget_alert_threshold"] = w.BudgetAlertThreshold
+	w.fieldMap["compress_exports"] = w.CompressExports
+	w.fieldMap["compression_format"] = w.CompressionFormat
+	w.fieldMap["cost_per_lead"] = w.CostPerLead
 	w.fieldMap["created_at"] = w.CreatedAt
+	w.fieldMap["current_team_members"] = w.CurrentTeamMembers
 	w.fieldMap["daily_job_quota"] = w.DailyJobQuota
 	w.fieldMap["deleted_at"] = w.DeletedAt
+	w.fieldMap["description"] = w.Description
 	w.fieldMap["domain"] = w.Domain
+	w.fieldMap["export_destinations"] = w.ExportDestinations
+	w.fieldMap["export_formats"] = w.ExportFormats
+	w.fieldMap["export_schedule"] = w.ExportSchedule
 	w.fieldMap["gdpr_compliant"] = w.GdprCompliant
 	w.fieldMap["hipaa_compliant"] = w.HipaaCompliant
+	w.fieldMap["hubspot_config"] = w.HubspotConfig
+	w.fieldMap["hubspot_enabled"] = w.HubspotEnabled
 	w.fieldMap["id"] = w.Id
 	w.fieldMap["industry"] = w.Industry
 	w.fieldMap["jobs_run_this_month"] = w.JobsRunThisMonth
 	w.fieldMap["last_job_run"] = w.LastJobRun
+	w.fieldMap["max_concurrent_scrapes"] = w.MaxConcurrentScrapes
+	w.fieldMap["max_retries"] = w.MaxRetries
+	w.fieldMap["max_team_members"] = w.MaxTeamMembers
+	w.fieldMap["monthly_budget"] = w.MonthlyBudget
 	w.fieldMap["name"] = w.Name
+	w.fieldMap["proxy_provider"] = w.ProxyProvider
+	w.fieldMap["proxy_rotation_interval"] = w.ProxyRotationInterval
+	w.fieldMap["proxy_type"] = w.ProxyType
+	w.fieldMap["proxy_urls"] = w.ProxyUrls
+	w.fieldMap["requests_per_second"] = w.RequestsPerSecond
+	w.fieldMap["retry_interval"] = w.RetryInterval
+	w.fieldMap["rotate_proxies"] = w.RotateProxies
+	w.fieldMap["salesforce_config"] = w.SalesforceConfig
+	w.fieldMap["salesforce_enabled"] = w.SalesforceEnabled
 	w.fieldMap["soc2_compliant"] = w.Soc2Compliant
 	w.fieldMap["storage_quota"] = w.StorageQuota
+	w.fieldMap["tags"] = w.Tags
 	w.fieldMap["total_leads_collected"] = w.TotalLeadsCollected
 	w.fieldMap["updated_at"] = w.UpdatedAt
 	w.fieldMap["used_storage"] = w.UsedStorage
 	w.fieldMap["workspace_job_limit"] = w.WorkspaceJobLimit
+	w.fieldMap["workspace_type"] = w.WorkspaceType
+	w.fieldMap["zapier_enabled"] = w.ZapierEnabled
+	w.fieldMap["zapier_webhook"] = w.ZapierWebhook
 
 }
 

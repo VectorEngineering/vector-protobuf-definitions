@@ -32,6 +32,44 @@ type Workspace {
   scrapingJobs: [ScrapingJob!]
   apiKeys: [ApiKey!]
   webhooks: [WebhookConfig!]
+  workspaceType: WorkspaceType
+  description: String!
+  metadata: String!
+  tags: [String!!]
+  maxTeamMembers: Int!
+  currentTeamMembers: Int!
+  allowGuestAccess: Boolean!
+  allowedEmailDomains: [String!!]
+  proxyUrls: [String!!]
+  proxyType: String!
+  rotateProxies: Boolean!
+  proxyRotationInterval: Int!
+  proxyProvider: String!
+  proxyAuth: String!
+  maxConcurrentScrapes: Int!
+  requestsPerSecond: Int!
+  maxRetries: Int!
+  retryInterval: String!
+  # e.g., \"csv\", \"json\", \"excel\"
+  exportFormats: [String!!]
+  exportSchedule: String!
+  exportDestinations: [String!!]
+  exportDestinationConfig: String!
+  compressExports: Boolean!
+  compressionFormat: String!
+  salesforceEnabled: Boolean!
+  salesforceConfig: String!
+  hubspotEnabled: Boolean!
+  hubspotConfig: String!
+  zapierEnabled: Boolean!
+  zapierWebhook: String!
+  activeIntegrations: [String!!]
+  integrationSettings: String!
+  monthlyBudget: Float!
+  costPerLead: Float!
+  alertOnBudgetThreshold: Boolean!
+  budgetAlertThreshold: Float!
+  billingCurrency: String!
 }
 
 input WorkspaceInput {
@@ -58,5 +96,43 @@ input WorkspaceInput {
     scrapingJobs: [ScrapingJobInput]
     apiKeys: [ApiKeyInput]
     webhooks: [WebhookConfigInput]
+    workspaceType: WorkspaceType
+    description: String!
+    metadata: [String!]
+    tags: [String!]
+    maxTeamMembers: Int!
+    currentTeamMembers: Int!
+    allowGuestAccess: Boolean!
+    allowedEmailDomains: [String!]
+    proxyUrls: [String!]
+    proxyType: String!
+    rotateProxies: Boolean!
+    proxyRotationInterval: Int!
+    proxyProvider: String!
+    proxyAuth: [String!]
+    maxConcurrentScrapes: Int!
+    requestsPerSecond: Int!
+    maxRetries: Int!
+    retryInterval: String!
+    # e.g., \"csv\", \"json\", \"excel\"
+    exportFormats: [String!]
+    exportSchedule: String!
+    exportDestinations: [String!]
+    exportDestinationConfig: [String!]
+    compressExports: Boolean!
+    compressionFormat: String!
+    salesforceEnabled: Boolean!
+    salesforceConfig: String!
+    hubspotEnabled: Boolean!
+    hubspotConfig: String!
+    zapierEnabled: Boolean!
+    zapierWebhook: String!
+    activeIntegrations: [String!]
+    integrationSettings: [String!]
+    monthlyBudget: Float!
+    costPerLead: Float!
+    alertOnBudgetThreshold: Boolean!
+    budgetAlertThreshold: Float!
+    billingCurrency: String!
 }
 

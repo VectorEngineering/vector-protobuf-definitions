@@ -245,6 +245,7 @@ playbookmedia_backend_server_sdk/models/workspace1.py
 playbookmedia_backend_server_sdk/models/workspace_activity.py
 playbookmedia_backend_server_sdk/models/workspace_compliance.py
 playbookmedia_backend_server_sdk/models/workspace_sharing.py
+playbookmedia_backend_server_sdk/models/workspace_type.py
 playbookmedia_backend_server_sdk/openapi/openapi.yaml
 playbookmedia_backend_server_sdk/test/__init__.py
 playbookmedia_backend_server_sdk/typing_utils.py

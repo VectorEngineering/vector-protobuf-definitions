@@ -230,6 +230,7 @@ Models/Workspace1.md
 Models/WorkspaceActivity.md
 Models/WorkspaceCompliance.md
 Models/WorkspaceSharing.md
+Models/WorkspaceType.md
 Models/rpc.Status.md
 Models/v1.Status.md
 README.md

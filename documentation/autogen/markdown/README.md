@@ -312,6 +312,7 @@ All URIs are relative to *http://lead-scraping-microservice.vector.svc.cluster.l
  - [WorkspaceActivity](./Models/WorkspaceActivity.md)
  - [WorkspaceCompliance](./Models/WorkspaceCompliance.md)
  - [WorkspaceSharing](./Models/WorkspaceSharing.md)
+ - [WorkspaceType](./Models/WorkspaceType.md)
  - [rpc.Status](./Models/rpc.Status.md)
  - [v1.Status](./Models/v1.Status.md)
 

@@ -381,6 +381,7 @@ Class | Method | HTTP request | Description
  - [WorkspaceActivity](playbookmedia_backend_client_sdk/docs/WorkspaceActivity.md)
  - [WorkspaceCompliance](playbookmedia_backend_client_sdk/docs/WorkspaceCompliance.md)
  - [WorkspaceSharing](playbookmedia_backend_client_sdk/docs/WorkspaceSharing.md)
+ - [WorkspaceType](playbookmedia_backend_client_sdk/docs/WorkspaceType.md)
 
 
 <a id="documentation-for-authorization"></a>

@@ -21,7 +21,7 @@ import javax.annotation.Generated;
  * ComplianceScore
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T08:02:26.368586-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T08:10:47.537779-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ComplianceScore {
 
   private String category;

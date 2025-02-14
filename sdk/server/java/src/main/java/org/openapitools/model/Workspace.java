@@ -4,14 +4,18 @@ import java.net.URI;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.openapitools.model.APIKey;
 import org.openapitools.model.ScrapingJob;
 import org.openapitools.model.ScrapingWorkflow;
 import org.openapitools.model.WebhookConfig;
+import org.openapitools.model.WorkspaceType;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
@@ -27,7 +31,7 @@ import javax.annotation.Generated;
  * Workspace
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T08:02:26.368586-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T08:10:47.537779-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class Workspace {
 
   private String id;
@@ -81,6 +85,90 @@ public class Workspace {
 
   @Valid
   private List<@Valid WebhookConfig> webhooks = new ArrayList<>();
+
+  private WorkspaceType workspaceType = WorkspaceType.UNSPECIFIED;
+
+  private String description;
+
+  @Valid
+  private Map<String, String> metadata = new HashMap<>();
+
+  @Valid
+  private List<String> tags = new ArrayList<>();
+
+  private Integer maxTeamMembers;
+
+  private Integer currentTeamMembers;
+
+  private Boolean allowGuestAccess;
+
+  @Valid
+  private List<String> allowedEmailDomains = new ArrayList<>();
+
+  @Valid
+  private List<String> proxyUrls = new ArrayList<>();
+
+  private String proxyType;
+
+  private Boolean rotateProxies;
+
+  private Integer proxyRotationInterval;
+
+  private String proxyProvider;
+
+  @Valid
+  private Map<String, String> proxyAuth = new HashMap<>();
+
+  private Integer maxConcurrentScrapes;
+
+  private Integer requestsPerSecond;
+
+  private Integer maxRetries;
+
+  private String retryInterval;
+
+  @Valid
+  private List<String> exportFormats = new ArrayList<>();
+
+  private String exportSchedule;
+
+  @Valid
+  private List<String> exportDestinations = new ArrayList<>();
+
+  @Valid
+  private Map<String, String> exportDestinationConfig = new HashMap<>();
+
+  private Boolean compressExports;
+
+  private String compressionFormat;
+
+  private Boolean salesforceEnabled;
+
+  private String salesforceConfig;
+
+  private Boolean hubspotEnabled;
+
+  private String hubspotConfig;
+
+  private Boolean zapierEnabled;
+
+  private String zapierWebhook;
+
+  @Valid
+  private List<String> activeIntegrations = new ArrayList<>();
+
+  @Valid
+  private Map<String, String> integrationSettings = new HashMap<>();
+
+  private Float monthlyBudget;
+
+  private Float costPerLead;
+
+  private Boolean alertOnBudgetThreshold;
+
+  private Float budgetAlertThreshold;
+
+  private String billingCurrency;
 
   public Workspace id(String id) {
     this.id = id;
@@ -554,6 +642,826 @@ public class Workspace {
     this.webhooks = webhooks;
   }
 
+  public Workspace workspaceType(WorkspaceType workspaceType) {
+    this.workspaceType = workspaceType;
+    return this;
+  }
+
+  /**
+   * Get workspaceType
+   * @return workspaceType
+   */
+  @Valid 
+  @Schema(name = "workspaceType", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("workspaceType")
+  public WorkspaceType getWorkspaceType() {
+    return workspaceType;
+  }
+
+  public void setWorkspaceType(WorkspaceType workspaceType) {
+    this.workspaceType = workspaceType;
+  }
+
+  public Workspace description(String description) {
+    this.description = description;
+    return this;
+  }
+
+  /**
+   * Get description
+   * @return description
+   */
+  
+  @Schema(name = "description", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("description")
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public Workspace metadata(Map<String, String> metadata) {
+    this.metadata = metadata;
+    return this;
+  }
+
+  public Workspace putMetadataItem(String key, String metadataItem) {
+    if (this.metadata == null) {
+      this.metadata = new HashMap<>();
+    }
+    this.metadata.put(key, metadataItem);
+    return this;
+  }
+
+  /**
+   * Get metadata
+   * @return metadata
+   */
+  
+  @Schema(name = "metadata", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("metadata")
+  public Map<String, String> getMetadata() {
+    return metadata;
+  }
+
+  public void setMetadata(Map<String, String> metadata) {
+    this.metadata = metadata;
+  }
+
+  public Workspace tags(List<String> tags) {
+    this.tags = tags;
+    return this;
+  }
+
+  public Workspace addTagsItem(String tagsItem) {
+    if (this.tags == null) {
+      this.tags = new ArrayList<>();
+    }
+    this.tags.add(tagsItem);
+    return this;
+  }
+
+  /**
+   * Get tags
+   * @return tags
+   */
+  
+  @Schema(name = "tags", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("tags")
+  public List<String> getTags() {
+    return tags;
+  }
+
+  public void setTags(List<String> tags) {
+    this.tags = tags;
+  }
+
+  public Workspace maxTeamMembers(Integer maxTeamMembers) {
+    this.maxTeamMembers = maxTeamMembers;
+    return this;
+  }
+
+  /**
+   * Get maxTeamMembers
+   * @return maxTeamMembers
+   */
+  
+  @Schema(name = "maxTeamMembers", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("maxTeamMembers")
+  public Integer getMaxTeamMembers() {
+    return maxTeamMembers;
+  }
+
+  public void setMaxTeamMembers(Integer maxTeamMembers) {
+    this.maxTeamMembers = maxTeamMembers;
+  }
+
+  public Workspace currentTeamMembers(Integer currentTeamMembers) {
+    this.currentTeamMembers = currentTeamMembers;
+    return this;
+  }
+
+  /**
+   * Get currentTeamMembers
+   * @return currentTeamMembers
+   */
+  
+  @Schema(name = "currentTeamMembers", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("currentTeamMembers")
+  public Integer getCurrentTeamMembers() {
+    return currentTeamMembers;
+  }
+
+  public void setCurrentTeamMembers(Integer currentTeamMembers) {
+    this.currentTeamMembers = currentTeamMembers;
+  }
+
+  public Workspace allowGuestAccess(Boolean allowGuestAccess) {
+    this.allowGuestAccess = allowGuestAccess;
+    return this;
+  }
+
+  /**
+   * Get allowGuestAccess
+   * @return allowGuestAccess
+   */
+  
+  @Schema(name = "allowGuestAccess", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("allowGuestAccess")
+  public Boolean getAllowGuestAccess() {
+    return allowGuestAccess;
+  }
+
+  public void setAllowGuestAccess(Boolean allowGuestAccess) {
+    this.allowGuestAccess = allowGuestAccess;
+  }
+
+  public Workspace allowedEmailDomains(List<String> allowedEmailDomains) {
+    this.allowedEmailDomains = allowedEmailDomains;
+    return this;
+  }
+
+  public Workspace addAllowedEmailDomainsItem(String allowedEmailDomainsItem) {
+    if (this.allowedEmailDomains == null) {
+      this.allowedEmailDomains = new ArrayList<>();
+    }
+    this.allowedEmailDomains.add(allowedEmailDomainsItem);
+    return this;
+  }
+
+  /**
+   * Get allowedEmailDomains
+   * @return allowedEmailDomains
+   */
+  
+  @Schema(name = "allowedEmailDomains", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("allowedEmailDomains")
+  public List<String> getAllowedEmailDomains() {
+    return allowedEmailDomains;
+  }
+
+  public void setAllowedEmailDomains(List<String> allowedEmailDomains) {
+    this.allowedEmailDomains = allowedEmailDomains;
+  }
+
+  public Workspace proxyUrls(List<String> proxyUrls) {
+    this.proxyUrls = proxyUrls;
+    return this;
+  }
+
+  public Workspace addProxyUrlsItem(String proxyUrlsItem) {
+    if (this.proxyUrls == null) {
+      this.proxyUrls = new ArrayList<>();
+    }
+    this.proxyUrls.add(proxyUrlsItem);
+    return this;
+  }
+
+  /**
+   * Get proxyUrls
+   * @return proxyUrls
+   */
+  
+  @Schema(name = "proxyUrls", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("proxyUrls")
+  public List<String> getProxyUrls() {
+    return proxyUrls;
+  }
+
+  public void setProxyUrls(List<String> proxyUrls) {
+    this.proxyUrls = proxyUrls;
+  }
+
+  public Workspace proxyType(String proxyType) {
+    this.proxyType = proxyType;
+    return this;
+  }
+
+  /**
+   * Get proxyType
+   * @return proxyType
+   */
+  
+  @Schema(name = "proxyType", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("proxyType")
+  public String getProxyType() {
+    return proxyType;
+  }
+
+  public void setProxyType(String proxyType) {
+    this.proxyType = proxyType;
+  }
+
+  public Workspace rotateProxies(Boolean rotateProxies) {
+    this.rotateProxies = rotateProxies;
+    return this;
+  }
+
+  /**
+   * Get rotateProxies
+   * @return rotateProxies
+   */
+  
+  @Schema(name = "rotateProxies", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("rotateProxies")
+  public Boolean getRotateProxies() {
+    return rotateProxies;
+  }
+
+  public void setRotateProxies(Boolean rotateProxies) {
+    this.rotateProxies = rotateProxies;
+  }
+
+  public Workspace proxyRotationInterval(Integer proxyRotationInterval) {
+    this.proxyRotationInterval = proxyRotationInterval;
+    return this;
+  }
+
+  /**
+   * Get proxyRotationInterval
+   * @return proxyRotationInterval
+   */
+  
+  @Schema(name = "proxyRotationInterval", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("proxyRotationInterval")
+  public Integer getProxyRotationInterval() {
+    return proxyRotationInterval;
+  }
+
+  public void setProxyRotationInterval(Integer proxyRotationInterval) {
+    this.proxyRotationInterval = proxyRotationInterval;
+  }
+
+  public Workspace proxyProvider(String proxyProvider) {
+    this.proxyProvider = proxyProvider;
+    return this;
+  }
+
+  /**
+   * Get proxyProvider
+   * @return proxyProvider
+   */
+  
+  @Schema(name = "proxyProvider", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("proxyProvider")
+  public String getProxyProvider() {
+    return proxyProvider;
+  }
+
+  public void setProxyProvider(String proxyProvider) {
+    this.proxyProvider = proxyProvider;
+  }
+
+  public Workspace proxyAuth(Map<String, String> proxyAuth) {
+    this.proxyAuth = proxyAuth;
+    return this;
+  }
+
+  public Workspace putProxyAuthItem(String key, String proxyAuthItem) {
+    if (this.proxyAuth == null) {
+      this.proxyAuth = new HashMap<>();
+    }
+    this.proxyAuth.put(key, proxyAuthItem);
+    return this;
+  }
+
+  /**
+   * Get proxyAuth
+   * @return proxyAuth
+   */
+  
+  @Schema(name = "proxyAuth", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("proxyAuth")
+  public Map<String, String> getProxyAuth() {
+    return proxyAuth;
+  }
+
+  public void setProxyAuth(Map<String, String> proxyAuth) {
+    this.proxyAuth = proxyAuth;
+  }
+
+  public Workspace maxConcurrentScrapes(Integer maxConcurrentScrapes) {
+    this.maxConcurrentScrapes = maxConcurrentScrapes;
+    return this;
+  }
+
+  /**
+   * Get maxConcurrentScrapes
+   * @return maxConcurrentScrapes
+   */
+  
+  @Schema(name = "maxConcurrentScrapes", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("maxConcurrentScrapes")
+  public Integer getMaxConcurrentScrapes() {
+    return maxConcurrentScrapes;
+  }
+
+  public void setMaxConcurrentScrapes(Integer maxConcurrentScrapes) {
+    this.maxConcurrentScrapes = maxConcurrentScrapes;
+  }
+
+  public Workspace requestsPerSecond(Integer requestsPerSecond) {
+    this.requestsPerSecond = requestsPerSecond;
+    return this;
+  }
+
+  /**
+   * Get requestsPerSecond
+   * @return requestsPerSecond
+   */
+  
+  @Schema(name = "requestsPerSecond", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("requestsPerSecond")
+  public Integer getRequestsPerSecond() {
+    return requestsPerSecond;
+  }
+
+  public void setRequestsPerSecond(Integer requestsPerSecond) {
+    this.requestsPerSecond = requestsPerSecond;
+  }
+
+  public Workspace maxRetries(Integer maxRetries) {
+    this.maxRetries = maxRetries;
+    return this;
+  }
+
+  /**
+   * Get maxRetries
+   * @return maxRetries
+   */
+  
+  @Schema(name = "maxRetries", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("maxRetries")
+  public Integer getMaxRetries() {
+    return maxRetries;
+  }
+
+  public void setMaxRetries(Integer maxRetries) {
+    this.maxRetries = maxRetries;
+  }
+
+  public Workspace retryInterval(String retryInterval) {
+    this.retryInterval = retryInterval;
+    return this;
+  }
+
+  /**
+   * Get retryInterval
+   * @return retryInterval
+   */
+  
+  @Schema(name = "retryInterval", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("retryInterval")
+  public String getRetryInterval() {
+    return retryInterval;
+  }
+
+  public void setRetryInterval(String retryInterval) {
+    this.retryInterval = retryInterval;
+  }
+
+  public Workspace exportFormats(List<String> exportFormats) {
+    this.exportFormats = exportFormats;
+    return this;
+  }
+
+  public Workspace addExportFormatsItem(String exportFormatsItem) {
+    if (this.exportFormats == null) {
+      this.exportFormats = new ArrayList<>();
+    }
+    this.exportFormats.add(exportFormatsItem);
+    return this;
+  }
+
+  /**
+   * e.g., \"csv\", \"json\", \"excel\"
+   * @return exportFormats
+   */
+  
+  @Schema(name = "exportFormats", description = "e.g., \"csv\", \"json\", \"excel\"", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("exportFormats")
+  public List<String> getExportFormats() {
+    return exportFormats;
+  }
+
+  public void setExportFormats(List<String> exportFormats) {
+    this.exportFormats = exportFormats;
+  }
+
+  public Workspace exportSchedule(String exportSchedule) {
+    this.exportSchedule = exportSchedule;
+    return this;
+  }
+
+  /**
+   * Get exportSchedule
+   * @return exportSchedule
+   */
+  
+  @Schema(name = "exportSchedule", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("exportSchedule")
+  public String getExportSchedule() {
+    return exportSchedule;
+  }
+
+  public void setExportSchedule(String exportSchedule) {
+    this.exportSchedule = exportSchedule;
+  }
+
+  public Workspace exportDestinations(List<String> exportDestinations) {
+    this.exportDestinations = exportDestinations;
+    return this;
+  }
+
+  public Workspace addExportDestinationsItem(String exportDestinationsItem) {
+    if (this.exportDestinations == null) {
+      this.exportDestinations = new ArrayList<>();
+    }
+    this.exportDestinations.add(exportDestinationsItem);
+    return this;
+  }
+
+  /**
+   * Get exportDestinations
+   * @return exportDestinations
+   */
+  
+  @Schema(name = "exportDestinations", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("exportDestinations")
+  public List<String> getExportDestinations() {
+    return exportDestinations;
+  }
+
+  public void setExportDestinations(List<String> exportDestinations) {
+    this.exportDestinations = exportDestinations;
+  }
+
+  public Workspace exportDestinationConfig(Map<String, String> exportDestinationConfig) {
+    this.exportDestinationConfig = exportDestinationConfig;
+    return this;
+  }
+
+  public Workspace putExportDestinationConfigItem(String key, String exportDestinationConfigItem) {
+    if (this.exportDestinationConfig == null) {
+      this.exportDestinationConfig = new HashMap<>();
+    }
+    this.exportDestinationConfig.put(key, exportDestinationConfigItem);
+    return this;
+  }
+
+  /**
+   * Get exportDestinationConfig
+   * @return exportDestinationConfig
+   */
+  
+  @Schema(name = "exportDestinationConfig", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("exportDestinationConfig")
+  public Map<String, String> getExportDestinationConfig() {
+    return exportDestinationConfig;
+  }
+
+  public void setExportDestinationConfig(Map<String, String> exportDestinationConfig) {
+    this.exportDestinationConfig = exportDestinationConfig;
+  }
+
+  public Workspace compressExports(Boolean compressExports) {
+    this.compressExports = compressExports;
+    return this;
+  }
+
+  /**
+   * Get compressExports
+   * @return compressExports
+   */
+  
+  @Schema(name = "compressExports", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("compressExports")
+  public Boolean getCompressExports() {
+    return compressExports;
+  }
+
+  public void setCompressExports(Boolean compressExports) {
+    this.compressExports = compressExports;
+  }
+
+  public Workspace compressionFormat(String compressionFormat) {
+    this.compressionFormat = compressionFormat;
+    return this;
+  }
+
+  /**
+   * Get compressionFormat
+   * @return compressionFormat
+   */
+  
+  @Schema(name = "compressionFormat", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("compressionFormat")
+  public String getCompressionFormat() {
+    return compressionFormat;
+  }
+
+  public void setCompressionFormat(String compressionFormat) {
+    this.compressionFormat = compressionFormat;
+  }
+
+  public Workspace salesforceEnabled(Boolean salesforceEnabled) {
+    this.salesforceEnabled = salesforceEnabled;
+    return this;
+  }
+
+  /**
+   * Get salesforceEnabled
+   * @return salesforceEnabled
+   */
+  
+  @Schema(name = "salesforceEnabled", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("salesforceEnabled")
+  public Boolean getSalesforceEnabled() {
+    return salesforceEnabled;
+  }
+
+  public void setSalesforceEnabled(Boolean salesforceEnabled) {
+    this.salesforceEnabled = salesforceEnabled;
+  }
+
+  public Workspace salesforceConfig(String salesforceConfig) {
+    this.salesforceConfig = salesforceConfig;
+    return this;
+  }
+
+  /**
+   * Get salesforceConfig
+   * @return salesforceConfig
+   */
+  
+  @Schema(name = "salesforceConfig", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("salesforceConfig")
+  public String getSalesforceConfig() {
+    return salesforceConfig;
+  }
+
+  public void setSalesforceConfig(String salesforceConfig) {
+    this.salesforceConfig = salesforceConfig;
+  }
+
+  public Workspace hubspotEnabled(Boolean hubspotEnabled) {
+    this.hubspotEnabled = hubspotEnabled;
+    return this;
+  }
+
+  /**
+   * Get hubspotEnabled
+   * @return hubspotEnabled
+   */
+  
+  @Schema(name = "hubspotEnabled", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("hubspotEnabled")
+  public Boolean getHubspotEnabled() {
+    return hubspotEnabled;
+  }
+
+  public void setHubspotEnabled(Boolean hubspotEnabled) {
+    this.hubspotEnabled = hubspotEnabled;
+  }
+
+  public Workspace hubspotConfig(String hubspotConfig) {
+    this.hubspotConfig = hubspotConfig;
+    return this;
+  }
+
+  /**
+   * Get hubspotConfig
+   * @return hubspotConfig
+   */
+  
+  @Schema(name = "hubspotConfig", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("hubspotConfig")
+  public String getHubspotConfig() {
+    return hubspotConfig;
+  }
+
+  public void setHubspotConfig(String hubspotConfig) {
+    this.hubspotConfig = hubspotConfig;
+  }
+
+  public Workspace zapierEnabled(Boolean zapierEnabled) {
+    this.zapierEnabled = zapierEnabled;
+    return this;
+  }
+
+  /**
+   * Get zapierEnabled
+   * @return zapierEnabled
+   */
+  
+  @Schema(name = "zapierEnabled", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("zapierEnabled")
+  public Boolean getZapierEnabled() {
+    return zapierEnabled;
+  }
+
+  public void setZapierEnabled(Boolean zapierEnabled) {
+    this.zapierEnabled = zapierEnabled;
+  }
+
+  public Workspace zapierWebhook(String zapierWebhook) {
+    this.zapierWebhook = zapierWebhook;
+    return this;
+  }
+
+  /**
+   * Get zapierWebhook
+   * @return zapierWebhook
+   */
+  
+  @Schema(name = "zapierWebhook", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("zapierWebhook")
+  public String getZapierWebhook() {
+    return zapierWebhook;
+  }
+
+  public void setZapierWebhook(String zapierWebhook) {
+    this.zapierWebhook = zapierWebhook;
+  }
+
+  public Workspace activeIntegrations(List<String> activeIntegrations) {
+    this.activeIntegrations = activeIntegrations;
+    return this;
+  }
+
+  public Workspace addActiveIntegrationsItem(String activeIntegrationsItem) {
+    if (this.activeIntegrations == null) {
+      this.activeIntegrations = new ArrayList<>();
+    }
+    this.activeIntegrations.add(activeIntegrationsItem);
+    return this;
+  }
+
+  /**
+   * Get activeIntegrations
+   * @return activeIntegrations
+   */
+  
+  @Schema(name = "activeIntegrations", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("activeIntegrations")
+  public List<String> getActiveIntegrations() {
+    return activeIntegrations;
+  }
+
+  public void setActiveIntegrations(List<String> activeIntegrations) {
+    this.activeIntegrations = activeIntegrations;
+  }
+
+  public Workspace integrationSettings(Map<String, String> integrationSettings) {
+    this.integrationSettings = integrationSettings;
+    return this;
+  }
+
+  public Workspace putIntegrationSettingsItem(String key, String integrationSettingsItem) {
+    if (this.integrationSettings == null) {
+      this.integrationSettings = new HashMap<>();
+    }
+    this.integrationSettings.put(key, integrationSettingsItem);
+    return this;
+  }
+
+  /**
+   * Get integrationSettings
+   * @return integrationSettings
+   */
+  
+  @Schema(name = "integrationSettings", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("integrationSettings")
+  public Map<String, String> getIntegrationSettings() {
+    return integrationSettings;
+  }
+
+  public void setIntegrationSettings(Map<String, String> integrationSettings) {
+    this.integrationSettings = integrationSettings;
+  }
+
+  public Workspace monthlyBudget(Float monthlyBudget) {
+    this.monthlyBudget = monthlyBudget;
+    return this;
+  }
+
+  /**
+   * Get monthlyBudget
+   * @return monthlyBudget
+   */
+  
+  @Schema(name = "monthlyBudget", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("monthlyBudget")
+  public Float getMonthlyBudget() {
+    return monthlyBudget;
+  }
+
+  public void setMonthlyBudget(Float monthlyBudget) {
+    this.monthlyBudget = monthlyBudget;
+  }
+
+  public Workspace costPerLead(Float costPerLead) {
+    this.costPerLead = costPerLead;
+    return this;
+  }
+
+  /**
+   * Get costPerLead
+   * @return costPerLead
+   */
+  
+  @Schema(name = "costPerLead", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("costPerLead")
+  public Float getCostPerLead() {
+    return costPerLead;
+  }
+
+  public void setCostPerLead(Float costPerLead) {
+    this.costPerLead = costPerLead;
+  }
+
+  public Workspace alertOnBudgetThreshold(Boolean alertOnBudgetThreshold) {
+    this.alertOnBudgetThreshold = alertOnBudgetThreshold;
+    return this;
+  }
+
+  /**
+   * Get alertOnBudgetThreshold
+   * @return alertOnBudgetThreshold
+   */
+  
+  @Schema(name = "alertOnBudgetThreshold", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("alertOnBudgetThreshold")
+  public Boolean getAlertOnBudgetThreshold() {
+    return alertOnBudgetThreshold;
+  }
+
+  public void setAlertOnBudgetThreshold(Boolean alertOnBudgetThreshold) {
+    this.alertOnBudgetThreshold = alertOnBudgetThreshold;
+  }
+
+  public Workspace budgetAlertThreshold(Float budgetAlertThreshold) {
+    this.budgetAlertThreshold = budgetAlertThreshold;
+    return this;
+  }
+
+  /**
+   * Get budgetAlertThreshold
+   * @return budgetAlertThreshold
+   */
+  
+  @Schema(name = "budgetAlertThreshold", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("budgetAlertThreshold")
+  public Float getBudgetAlertThreshold() {
+    return budgetAlertThreshold;
+  }
+
+  public void setBudgetAlertThreshold(Float budgetAlertThreshold) {
+    this.budgetAlertThreshold = budgetAlertThreshold;
+  }
+
+  public Workspace billingCurrency(String billingCurrency) {
+    this.billingCurrency = billingCurrency;
+    return this;
+  }
+
+  /**
+   * Get billingCurrency
+   * @return billingCurrency
+   */
+  
+  @Schema(name = "billingCurrency", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("billingCurrency")
+  public String getBillingCurrency() {
+    return billingCurrency;
+  }
+
+  public void setBillingCurrency(String billingCurrency) {
+    this.billingCurrency = billingCurrency;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -584,12 +1492,49 @@ public class Workspace {
         Objects.equals(this.lastJobRun, workspace.lastJobRun) &&
         Objects.equals(this.scrapingJobs, workspace.scrapingJobs) &&
         Objects.equals(this.apiKeys, workspace.apiKeys) &&
-        Objects.equals(this.webhooks, workspace.webhooks);
+        Objects.equals(this.webhooks, workspace.webhooks) &&
+        Objects.equals(this.workspaceType, workspace.workspaceType) &&
+        Objects.equals(this.description, workspace.description) &&
+        Objects.equals(this.metadata, workspace.metadata) &&
+        Objects.equals(this.tags, workspace.tags) &&
+        Objects.equals(this.maxTeamMembers, workspace.maxTeamMembers) &&
+        Objects.equals(this.currentTeamMembers, workspace.currentTeamMembers) &&
+        Objects.equals(this.allowGuestAccess, workspace.allowGuestAccess) &&
+        Objects.equals(this.allowedEmailDomains, workspace.allowedEmailDomains) &&
+        Objects.equals(this.proxyUrls, workspace.proxyUrls) &&
+        Objects.equals(this.proxyType, workspace.proxyType) &&
+        Objects.equals(this.rotateProxies, workspace.rotateProxies) &&
+        Objects.equals(this.proxyRotationInterval, workspace.proxyRotationInterval) &&
+        Objects.equals(this.proxyProvider, workspace.proxyProvider) &&
+        Objects.equals(this.proxyAuth, workspace.proxyAuth) &&
+        Objects.equals(this.maxConcurrentScrapes, workspace.maxConcurrentScrapes) &&
+        Objects.equals(this.requestsPerSecond, workspace.requestsPerSecond) &&
+        Objects.equals(this.maxRetries, workspace.maxRetries) &&
+        Objects.equals(this.retryInterval, workspace.retryInterval) &&
+        Objects.equals(this.exportFormats, workspace.exportFormats) &&
+        Objects.equals(this.exportSchedule, workspace.exportSchedule) &&
+        Objects.equals(this.exportDestinations, workspace.exportDestinations) &&
+        Objects.equals(this.exportDestinationConfig, workspace.exportDestinationConfig) &&
+        Objects.equals(this.compressExports, workspace.compressExports) &&
+        Objects.equals(this.compressionFormat, workspace.compressionFormat) &&
+        Objects.equals(this.salesforceEnabled, workspace.salesforceEnabled) &&
+        Objects.equals(this.salesforceConfig, workspace.salesforceConfig) &&
+        Objects.equals(this.hubspotEnabled, workspace.hubspotEnabled) &&
+        Objects.equals(this.hubspotConfig, workspace.hubspotConfig) &&
+        Objects.equals(this.zapierEnabled, workspace.zapierEnabled) &&
+        Objects.equals(this.zapierWebhook, workspace.zapierWebhook) &&
+        Objects.equals(this.activeIntegrations, workspace.activeIntegrations) &&
+        Objects.equals(this.integrationSettings, workspace.integrationSettings) &&
+        Objects.equals(this.monthlyBudget, workspace.monthlyBudget) &&
+        Objects.equals(this.costPerLead, workspace.costPerLead) &&
+        Objects.equals(this.alertOnBudgetThreshold, workspace.alertOnBudgetThreshold) &&
+        Objects.equals(this.budgetAlertThreshold, workspace.budgetAlertThreshold) &&
+        Objects.equals(this.billingCurrency, workspace.billingCurrency);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, industry, domain, gdprCompliant, hipaaCompliant, soc2Compliant, storageQuota, usedStorage, createdAt, updatedAt, deletedAt, workflows, jobsRunThisMonth, workspaceJobLimit, dailyJobQuota, activeScrapers, totalLeadsCollected, lastJobRun, scrapingJobs, apiKeys, webhooks);
+    return Objects.hash(id, name, industry, domain, gdprCompliant, hipaaCompliant, soc2Compliant, storageQuota, usedStorage, createdAt, updatedAt, deletedAt, workflows, jobsRunThisMonth, workspaceJobLimit, dailyJobQuota, activeScrapers, totalLeadsCollected, lastJobRun, scrapingJobs, apiKeys, webhooks, workspaceType, description, metadata, tags, maxTeamMembers, currentTeamMembers, allowGuestAccess, allowedEmailDomains, proxyUrls, proxyType, rotateProxies, proxyRotationInterval, proxyProvider, proxyAuth, maxConcurrentScrapes, requestsPerSecond, maxRetries, retryInterval, exportFormats, exportSchedule, exportDestinations, exportDestinationConfig, compressExports, compressionFormat, salesforceEnabled, salesforceConfig, hubspotEnabled, hubspotConfig, zapierEnabled, zapierWebhook, activeIntegrations, integrationSettings, monthlyBudget, costPerLead, alertOnBudgetThreshold, budgetAlertThreshold, billingCurrency);
   }
 
   @Override
@@ -618,6 +1563,43 @@ public class Workspace {
     sb.append("    scrapingJobs: ").append(toIndentedString(scrapingJobs)).append("\n");
     sb.append("    apiKeys: ").append(toIndentedString(apiKeys)).append("\n");
     sb.append("    webhooks: ").append(toIndentedString(webhooks)).append("\n");
+    sb.append("    workspaceType: ").append(toIndentedString(workspaceType)).append("\n");
+    sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    metadata: ").append(toIndentedString(metadata)).append("\n");
+    sb.append("    tags: ").append(toIndentedString(tags)).append("\n");
+    sb.append("    maxTeamMembers: ").append(toIndentedString(maxTeamMembers)).append("\n");
+    sb.append("    currentTeamMembers: ").append(toIndentedString(currentTeamMembers)).append("\n");
+    sb.append("    allowGuestAccess: ").append(toIndentedString(allowGuestAccess)).append("\n");
+    sb.append("    allowedEmailDomains: ").append(toIndentedString(allowedEmailDomains)).append("\n");
+    sb.append("    proxyUrls: ").append(toIndentedString(proxyUrls)).append("\n");
+    sb.append("    proxyType: ").append(toIndentedString(proxyType)).append("\n");
+    sb.append("    rotateProxies: ").append(toIndentedString(rotateProxies)).append("\n");
+    sb.append("    proxyRotationInterval: ").append(toIndentedString(proxyRotationInterval)).append("\n");
+    sb.append("    proxyProvider: ").append(toIndentedString(proxyProvider)).append("\n");
+    sb.append("    proxyAuth: ").append(toIndentedString(proxyAuth)).append("\n");
+    sb.append("    maxConcurrentScrapes: ").append(toIndentedString(maxConcurrentScrapes)).append("\n");
+    sb.append("    requestsPerSecond: ").append(toIndentedString(requestsPerSecond)).append("\n");
+    sb.append("    maxRetries: ").append(toIndentedString(maxRetries)).append("\n");
+    sb.append("    retryInterval: ").append(toIndentedString(retryInterval)).append("\n");
+    sb.append("    exportFormats: ").append(toIndentedString(exportFormats)).append("\n");
+    sb.append("    exportSchedule: ").append(toIndentedString(exportSchedule)).append("\n");
+    sb.append("    exportDestinations: ").append(toIndentedString(exportDestinations)).append("\n");
+    sb.append("    exportDestinationConfig: ").append(toIndentedString(exportDestinationConfig)).append("\n");
+    sb.append("    compressExports: ").append(toIndentedString(compressExports)).append("\n");
+    sb.append("    compressionFormat: ").append(toIndentedString(compressionFormat)).append("\n");
+    sb.append("    salesforceEnabled: ").append(toIndentedString(salesforceEnabled)).append("\n");
+    sb.append("    salesforceConfig: ").append(toIndentedString(salesforceConfig)).append("\n");
+    sb.append("    hubspotEnabled: ").append(toIndentedString(hubspotEnabled)).append("\n");
+    sb.append("    hubspotConfig: ").append(toIndentedString(hubspotConfig)).append("\n");
+    sb.append("    zapierEnabled: ").append(toIndentedString(zapierEnabled)).append("\n");
+    sb.append("    zapierWebhook: ").append(toIndentedString(zapierWebhook)).append("\n");
+    sb.append("    activeIntegrations: ").append(toIndentedString(activeIntegrations)).append("\n");
+    sb.append("    integrationSettings: ").append(toIndentedString(integrationSettings)).append("\n");
+    sb.append("    monthlyBudget: ").append(toIndentedString(monthlyBudget)).append("\n");
+    sb.append("    costPerLead: ").append(toIndentedString(costPerLead)).append("\n");
+    sb.append("    alertOnBudgetThreshold: ").append(toIndentedString(alertOnBudgetThreshold)).append("\n");
+    sb.append("    budgetAlertThreshold: ").append(toIndentedString(budgetAlertThreshold)).append("\n");
+    sb.append("    billingCurrency: ").append(toIndentedString(billingCurrency)).append("\n");
     sb.append("}");
     return sb.toString();
   }

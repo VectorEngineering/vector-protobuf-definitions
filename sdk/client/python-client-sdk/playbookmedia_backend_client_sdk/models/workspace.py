@@ -19,12 +19,13 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from playbookmedia_backend_client_sdk.models.api_key import APIKey
 from playbookmedia_backend_client_sdk.models.scraping_job import ScrapingJob
 from playbookmedia_backend_client_sdk.models.scraping_workflow import ScrapingWorkflow
 from playbookmedia_backend_client_sdk.models.webhook_config import WebhookConfig
+from playbookmedia_backend_client_sdk.models.workspace_type import WorkspaceType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -54,7 +55,44 @@ class Workspace(BaseModel):
     scraping_jobs: Optional[List[ScrapingJob]] = Field(default=None, alias="scrapingJobs")
     api_keys: Optional[List[APIKey]] = Field(default=None, alias="apiKeys")
     webhooks: Optional[List[WebhookConfig]] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "industry", "domain", "gdprCompliant", "hipaaCompliant", "soc2Compliant", "storageQuota", "usedStorage", "createdAt", "updatedAt", "deletedAt", "workflows", "jobsRunThisMonth", "workspaceJobLimit", "dailyJobQuota", "activeScrapers", "totalLeadsCollected", "lastJobRun", "scrapingJobs", "apiKeys", "webhooks"]
+    workspace_type: Optional[WorkspaceType] = Field(default=WorkspaceType.UNSPECIFIED, alias="workspaceType")
+    description: Optional[StrictStr] = None
+    metadata: Optional[Dict[str, StrictStr]] = None
+    tags: Optional[List[StrictStr]] = None
+    max_team_members: Optional[StrictInt] = Field(default=None, alias="maxTeamMembers")
+    current_team_members: Optional[StrictInt] = Field(default=None, alias="currentTeamMembers")
+    allow_guest_access: Optional[StrictBool] = Field(default=None, alias="allowGuestAccess")
+    allowed_email_domains: Optional[List[StrictStr]] = Field(default=None, alias="allowedEmailDomains")
+    proxy_urls: Optional[List[StrictStr]] = Field(default=None, alias="proxyUrls")
+    proxy_type: Optional[StrictStr] = Field(default=None, alias="proxyType")
+    rotate_proxies: Optional[StrictBool] = Field(default=None, alias="rotateProxies")
+    proxy_rotation_interval: Optional[StrictInt] = Field(default=None, alias="proxyRotationInterval")
+    proxy_provider: Optional[StrictStr] = Field(default=None, alias="proxyProvider")
+    proxy_auth: Optional[Dict[str, StrictStr]] = Field(default=None, alias="proxyAuth")
+    max_concurrent_scrapes: Optional[StrictInt] = Field(default=None, alias="maxConcurrentScrapes")
+    requests_per_second: Optional[StrictInt] = Field(default=None, alias="requestsPerSecond")
+    max_retries: Optional[StrictInt] = Field(default=None, alias="maxRetries")
+    retry_interval: Optional[StrictStr] = Field(default=None, alias="retryInterval")
+    export_formats: Optional[List[StrictStr]] = Field(default=None, description="e.g., \"csv\", \"json\", \"excel\"", alias="exportFormats")
+    export_schedule: Optional[StrictStr] = Field(default=None, alias="exportSchedule")
+    export_destinations: Optional[List[StrictStr]] = Field(default=None, alias="exportDestinations")
+    export_destination_config: Optional[Dict[str, StrictStr]] = Field(default=None, alias="exportDestinationConfig")
+    compress_exports: Optional[StrictBool] = Field(default=None, alias="compressExports")
+    compression_format: Optional[StrictStr] = Field(default=None, alias="compressionFormat")
+    salesforce_enabled: Optional[StrictBool] = Field(default=None, alias="salesforceEnabled")
+    salesforce_config: Optional[StrictStr] = Field(default=None, alias="salesforceConfig")
+    hubspot_enabled: Optional[StrictBool] = Field(default=None, alias="hubspotEnabled")
+    hubspot_config: Optional[StrictStr] = Field(default=None, alias="hubspotConfig")
+    zapier_enabled: Optional[StrictBool] = Field(default=None, alias="zapierEnabled")
+    zapier_webhook: Optional[StrictStr] = Field(default=None, alias="zapierWebhook")
+    active_integrations: Optional[List[StrictStr]] = Field(default=None, alias="activeIntegrations")
+    integration_settings: Optional[Dict[str, StrictStr]] = Field(default=None, alias="integrationSettings")
+    monthly_budget: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="monthlyBudget")
+    cost_per_lead: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="costPerLead")
+    alert_on_budget_threshold: Optional[StrictBool] = Field(default=None, alias="alertOnBudgetThreshold")
+    budget_alert_threshold: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="budgetAlertThreshold")
+    billing_currency: Optional[StrictStr] = Field(default=None, alias="billingCurrency")
+    __properties: ClassVar[List[str]] = ["id", "name", "industry", "domain", "gdprCompliant", "hipaaCompliant", "soc2Compliant", "storageQuota", "usedStorage", "createdAt", "updatedAt", "deletedAt", "workflows", "jobsRunThisMonth", "workspaceJobLimit", "dailyJobQuota", "activeScrapers", "totalLeadsCollected", "lastJobRun", "scrapingJobs", "apiKeys", "webhooks", "workspaceType", "description", "metadata", "tags", "maxTeamMembers", "currentTeamMembers", "allowGuestAccess", "allowedEmailDomains", "proxyUrls", "proxyType", "rotateProxies", "proxyRotationInterval", "proxyProvider", "proxyAuth", "maxConcurrentScrapes", "requestsPerSecond", "maxRetries", "retryInterval", "exportFormats", "exportSchedule", "exportDestinations", "exportDestinationConfig", "compressExports", "compressionFormat", "salesforceEnabled", "salesforceConfig", "hubspotEnabled", "hubspotConfig", "zapierEnabled", "zapierWebhook", "activeIntegrations", "integrationSettings", "monthlyBudget", "costPerLead", "alertOnBudgetThreshold", "budgetAlertThreshold", "billingCurrency"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -156,7 +194,44 @@ class Workspace(BaseModel):
             "lastJobRun": obj.get("lastJobRun"),
             "scrapingJobs": [ScrapingJob.from_dict(_item) for _item in obj["scrapingJobs"]] if obj.get("scrapingJobs") is not None else None,
             "apiKeys": [APIKey.from_dict(_item) for _item in obj["apiKeys"]] if obj.get("apiKeys") is not None else None,
-            "webhooks": [WebhookConfig.from_dict(_item) for _item in obj["webhooks"]] if obj.get("webhooks") is not None else None
+            "webhooks": [WebhookConfig.from_dict(_item) for _item in obj["webhooks"]] if obj.get("webhooks") is not None else None,
+            "workspaceType": obj.get("workspaceType") if obj.get("workspaceType") is not None else WorkspaceType.UNSPECIFIED,
+            "description": obj.get("description"),
+            "metadata": obj.get("metadata"),
+            "tags": obj.get("tags"),
+            "maxTeamMembers": obj.get("maxTeamMembers"),
+            "currentTeamMembers": obj.get("currentTeamMembers"),
+            "allowGuestAccess": obj.get("allowGuestAccess"),
+            "allowedEmailDomains": obj.get("allowedEmailDomains"),
+            "proxyUrls": obj.get("proxyUrls"),
+            "proxyType": obj.get("proxyType"),
+            "rotateProxies": obj.get("rotateProxies"),
+            "proxyRotationInterval": obj.get("proxyRotationInterval"),
+            "proxyProvider": obj.get("proxyProvider"),
+            "proxyAuth": obj.get("proxyAuth"),
+            "maxConcurrentScrapes": obj.get("maxConcurrentScrapes"),
+            "requestsPerSecond": obj.get("requestsPerSecond"),
+            "maxRetries": obj.get("maxRetries"),
+            "retryInterval": obj.get("retryInterval"),
+            "exportFormats": obj.get("exportFormats"),
+            "exportSchedule": obj.get("exportSchedule"),
+            "exportDestinations": obj.get("exportDestinations"),
+            "exportDestinationConfig": obj.get("exportDestinationConfig"),
+            "compressExports": obj.get("compressExports"),
+            "compressionFormat": obj.get("compressionFormat"),
+            "salesforceEnabled": obj.get("salesforceEnabled"),
+            "salesforceConfig": obj.get("salesforceConfig"),
+            "hubspotEnabled": obj.get("hubspotEnabled"),
+            "hubspotConfig": obj.get("hubspotConfig"),
+            "zapierEnabled": obj.get("zapierEnabled"),
+            "zapierWebhook": obj.get("zapierWebhook"),
+            "activeIntegrations": obj.get("activeIntegrations"),
+            "integrationSettings": obj.get("integrationSettings"),
+            "monthlyBudget": obj.get("monthlyBudget"),
+            "costPerLead": obj.get("costPerLead"),
+            "alertOnBudgetThreshold": obj.get("alertOnBudgetThreshold"),
+            "budgetAlertThreshold": obj.get("budgetAlertThreshold"),
+            "billingCurrency": obj.get("billingCurrency")
         })
         return _obj
 

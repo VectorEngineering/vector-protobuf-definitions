@@ -232,3 +232,4 @@ from playbookmedia_backend_server_sdk.models.workspace1 import Workspace1
 from playbookmedia_backend_server_sdk.models.workspace_activity import WorkspaceActivity
 from playbookmedia_backend_server_sdk.models.workspace_compliance import WorkspaceCompliance
 from playbookmedia_backend_server_sdk.models.workspace_sharing import WorkspaceSharing
+from playbookmedia_backend_server_sdk.models.workspace_type import WorkspaceType

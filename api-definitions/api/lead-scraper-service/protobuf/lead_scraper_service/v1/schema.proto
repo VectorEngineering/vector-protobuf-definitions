@@ -471,7 +471,6 @@ message Workspace {
     string industry = 3;
     string domain = 4 [
         (validate.rules).string = {
-            email: true,
             max_len: 253  // Max DNS label length
         },
         (gorm.field).tag = {index: "idx_workspace_domain"}

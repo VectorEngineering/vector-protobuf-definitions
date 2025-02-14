@@ -40,3 +40,4 @@ coverage/
 generated/
 cli/generated/
 **/*.wrangler
+!api-definitions/pkg/generated/lead_scraper_service/dal/

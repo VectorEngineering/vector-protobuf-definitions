@@ -23,7 +23,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "ServiceUnavailableErrorMessageResponse", description = "Represents service availability errors")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T12:20:31.247605-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T12:22:33.767757-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ServiceUnavailableErrorMessageResponse {
 
   private InternalErrorCode code = InternalErrorCode.NO_INTERNAL_ERROR;

@@ -581,6 +581,7 @@ message Workspace {
 message ScrapingJob {
     option (gorm.opts) = {
         ormable: true
+        table: "gmaps_jobs"
     };
 
     // Changed from uint64 to string to support UUID

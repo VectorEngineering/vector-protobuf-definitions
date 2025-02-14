@@ -30,7 +30,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "Tenant", description = "Key features: - Resource isolation - Independent configuration - Usage tracking - Service subscriptions")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T12:22:33.767757-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T12:30:40.954679-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class Tenant {
 
   private String id;

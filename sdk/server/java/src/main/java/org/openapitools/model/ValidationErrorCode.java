@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * - VALIDATION_ERROR: General validation errors  - AUTHORIZATION_MODEL_NOT_FOUND: Resource not found errors  - INVALID_CONTINUATION_TOKEN: Input errors  - DUPLICATE_ENTRY: Conflict errors  - INVALID_SCHEMA_VERSION: Schema errors  - INVALID_FORMAT: New validation error codes  General invalid format  - INVALID_EMAIL_FORMAT: Email format is invalid  - INVALID_PASSWORD_STRENGTH: Password does not meet strength requirements  - FIELD_TOO_SHORT: Field value is too short  - FIELD_TOO_LONG: Field value is too long  - UNSUPPORTED_MEDIA_TYPE: Media type is not supported
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T12:22:33.767757-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T12:30:40.954679-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public enum ValidationErrorCode {
   
   NO_ERROR("NO_ERROR"),

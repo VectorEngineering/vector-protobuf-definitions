@@ -22,7 +22,7 @@ import javax.annotation.Generated;
  * AppInstallation
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T07:41:41.360877-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T07:43:30.114008-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class AppInstallation {
 
   private String id;

@@ -19,7 +19,7 @@ import javax.annotation.Generated;
  * GetLeadResponse
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T08:15:02.658504-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T12:20:31.247605-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class GetLeadResponse {
 
   private Lead lead;

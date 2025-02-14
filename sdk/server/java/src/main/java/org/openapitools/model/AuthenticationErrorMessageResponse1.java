@@ -26,7 +26,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "AuthenticationErrorMessageResponse1", description = "Represents authentication and authorization failures")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T08:15:02.658504-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T12:20:31.247605-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class AuthenticationErrorMessageResponse1 {
 
   private AuthErrorCode code = AuthErrorCode.NO_AUTH_ERROR;

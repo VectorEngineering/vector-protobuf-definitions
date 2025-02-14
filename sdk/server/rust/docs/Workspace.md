@@ -33,16 +33,6 @@ Name | Type | Description | Notes
 **current_team_members** | **i32** |  | [optional] [default to None]
 **allow_guest_access** | **bool** |  | [optional] [default to None]
 **allowed_email_domains** | **Vec<String>** |  | [optional] [default to None]
-**proxy_urls** | **Vec<String>** |  | [optional] [default to None]
-**proxy_type** | **String** |  | [optional] [default to None]
-**rotate_proxies** | **bool** |  | [optional] [default to None]
-**proxy_rotation_interval** | **i32** |  | [optional] [default to None]
-**proxy_provider** | **String** |  | [optional] [default to None]
-**proxy_auth** | **std::collections::HashMap<String, String>** |  | [optional] [default to None]
-**max_concurrent_scrapes** | **i32** |  | [optional] [default to None]
-**requests_per_second** | **i32** |  | [optional] [default to None]
-**max_retries** | **i32** |  | [optional] [default to None]
-**retry_interval** | **String** |  | [optional] [default to None]
 **export_formats** | **Vec<String>** | e.g., \"csv\", \"json\", \"excel\" | [optional] [default to None]
 **export_schedule** | **String** |  | [optional] [default to None]
 **export_destinations** | **Vec<String>** |  | [optional] [default to None]
@@ -57,11 +47,6 @@ Name | Type | Description | Notes
 **zapier_webhook** | **String** |  | [optional] [default to None]
 **active_integrations** | **Vec<String>** |  | [optional] [default to None]
 **integration_settings** | **std::collections::HashMap<String, String>** |  | [optional] [default to None]
-**monthly_budget** | **f32** |  | [optional] [default to None]
-**cost_per_lead** | **f32** |  | [optional] [default to None]
-**alert_on_budget_threshold** | **bool** |  | [optional] [default to None]
-**budget_alert_threshold** | **f32** |  | [optional] [default to None]
-**billing_currency** | **String** |  | [optional] [default to None]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

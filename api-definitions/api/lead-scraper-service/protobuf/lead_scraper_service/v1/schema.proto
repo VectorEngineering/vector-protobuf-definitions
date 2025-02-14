@@ -528,20 +528,6 @@ message Workspace {
     bool allow_guest_access = 31;
     repeated string allowed_email_domains = 32 [(gorm.field).tag = {type: "text[]"}];
 
-    // Proxy Configuration
-    repeated string proxy_urls = 33;
-    string proxy_type = 34; // e.g., "http", "socks5"
-    bool rotate_proxies = 35;
-    int32 proxy_rotation_interval = 36; // in seconds
-    string proxy_provider = 37;
-    map<string, string> proxy_auth = 38;
-
-    // Rate Limiting
-    int32 max_concurrent_scrapes = 39;
-    int32 requests_per_second = 40;
-    int32 max_retries = 41;
-    google.protobuf.Duration retry_interval = 42;
-
     // Data Export Settings
     repeated string export_formats = 43; // e.g., "csv", "json", "excel"
     string export_schedule = 44; // cron expression
@@ -559,13 +545,6 @@ message Workspace {
     string zapier_webhook = 54;
     repeated string active_integrations = 55;
     map<string, string> integration_settings = 56;
-
-    // Cost Management
-    float monthly_budget = 83;
-    float cost_per_lead = 84;
-    bool alert_on_budget_threshold = 85;
-    float budget_alert_threshold = 86;
-    string billing_currency = 87;
 }
 
 /**

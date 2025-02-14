@@ -22,7 +22,7 @@ class Workspace(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, name=None, industry=None, domain=None, gdpr_compliant=None, hipaa_compliant=None, soc2_compliant=None, storage_quota=None, used_storage=None, created_at=None, updated_at=None, deleted_at=None, workflows=None, jobs_run_this_month=None, workspace_job_limit=None, daily_job_quota=None, active_scrapers=None, total_leads_collected=None, last_job_run=None, scraping_jobs=None, api_keys=None, webhooks=None, workspace_type=WorkspaceType.UNSPECIFIED, description=None, metadata=None, tags=None, max_team_members=None, current_team_members=None, allow_guest_access=None, allowed_email_domains=None, proxy_urls=None, proxy_type=None, rotate_proxies=None, proxy_rotation_interval=None, proxy_provider=None, proxy_auth=None, max_concurrent_scrapes=None, requests_per_second=None, max_retries=None, retry_interval=None, export_formats=None, export_schedule=None, export_destinations=None, export_destination_config=None, compress_exports=None, compression_format=None, salesforce_enabled=None, salesforce_config=None, hubspot_enabled=None, hubspot_config=None, zapier_enabled=None, zapier_webhook=None, active_integrations=None, integration_settings=None, monthly_budget=None, cost_per_lead=None, alert_on_budget_threshold=None, budget_alert_threshold=None, billing_currency=None):  # noqa: E501
+    def __init__(self, id=None, name=None, industry=None, domain=None, gdpr_compliant=None, hipaa_compliant=None, soc2_compliant=None, storage_quota=None, used_storage=None, created_at=None, updated_at=None, deleted_at=None, workflows=None, jobs_run_this_month=None, workspace_job_limit=None, daily_job_quota=None, active_scrapers=None, total_leads_collected=None, last_job_run=None, scraping_jobs=None, api_keys=None, webhooks=None, workspace_type=WorkspaceType.UNSPECIFIED, description=None, metadata=None, tags=None, max_team_members=None, current_team_members=None, allow_guest_access=None, allowed_email_domains=None, export_formats=None, export_schedule=None, export_destinations=None, export_destination_config=None, compress_exports=None, compression_format=None, salesforce_enabled=None, salesforce_config=None, hubspot_enabled=None, hubspot_config=None, zapier_enabled=None, zapier_webhook=None, active_integrations=None, integration_settings=None):  # noqa: E501
         """Workspace - a model defined in OpenAPI
 
         :param id: The id of this Workspace.  # noqa: E501
@@ -85,26 +85,6 @@ class Workspace(Model):
         :type allow_guest_access: bool
         :param allowed_email_domains: The allowed_email_domains of this Workspace.  # noqa: E501
         :type allowed_email_domains: List[str]
-        :param proxy_urls: The proxy_urls of this Workspace.  # noqa: E501
-        :type proxy_urls: List[str]
-        :param proxy_type: The proxy_type of this Workspace.  # noqa: E501
-        :type proxy_type: str
-        :param rotate_proxies: The rotate_proxies of this Workspace.  # noqa: E501
-        :type rotate_proxies: bool
-        :param proxy_rotation_interval: The proxy_rotation_interval of this Workspace.  # noqa: E501
-        :type proxy_rotation_interval: int
-        :param proxy_provider: The proxy_provider of this Workspace.  # noqa: E501
-        :type proxy_provider: str
-        :param proxy_auth: The proxy_auth of this Workspace.  # noqa: E501
-        :type proxy_auth: Dict[str, str]
-        :param max_concurrent_scrapes: The max_concurrent_scrapes of this Workspace.  # noqa: E501
-        :type max_concurrent_scrapes: int
-        :param requests_per_second: The requests_per_second of this Workspace.  # noqa: E501
-        :type requests_per_second: int
-        :param max_retries: The max_retries of this Workspace.  # noqa: E501
-        :type max_retries: int
-        :param retry_interval: The retry_interval of this Workspace.  # noqa: E501
-        :type retry_interval: str
         :param export_formats: The export_formats of this Workspace.  # noqa: E501
         :type export_formats: List[str]
         :param export_schedule: The export_schedule of this Workspace.  # noqa: E501
@@ -133,16 +113,6 @@ class Workspace(Model):
         :type active_integrations: List[str]
         :param integration_settings: The integration_settings of this Workspace.  # noqa: E501
         :type integration_settings: Dict[str, str]
-        :param monthly_budget: The monthly_budget of this Workspace.  # noqa: E501
-        :type monthly_budget: float
-        :param cost_per_lead: The cost_per_lead of this Workspace.  # noqa: E501
-        :type cost_per_lead: float
-        :param alert_on_budget_threshold: The alert_on_budget_threshold of this Workspace.  # noqa: E501
-        :type alert_on_budget_threshold: bool
-        :param budget_alert_threshold: The budget_alert_threshold of this Workspace.  # noqa: E501
-        :type budget_alert_threshold: float
-        :param billing_currency: The billing_currency of this Workspace.  # noqa: E501
-        :type billing_currency: str
         """
         self.openapi_types = {
             'id': str,
@@ -175,16 +145,6 @@ class Workspace(Model):
             'current_team_members': int,
             'allow_guest_access': bool,
             'allowed_email_domains': List[str],
-            'proxy_urls': List[str],
-            'proxy_type': str,
-            'rotate_proxies': bool,
-            'proxy_rotation_interval': int,
-            'proxy_provider': str,
-            'proxy_auth': Dict[str, str],
-            'max_concurrent_scrapes': int,
-            'requests_per_second': int,
-            'max_retries': int,
-            'retry_interval': str,
             'export_formats': List[str],
             'export_schedule': str,
             'export_destinations': List[str],
@@ -198,12 +158,7 @@ class Workspace(Model):
             'zapier_enabled': bool,
             'zapier_webhook': str,
             'active_integrations': List[str],
-            'integration_settings': Dict[str, str],
-            'monthly_budget': float,
-            'cost_per_lead': float,
-            'alert_on_budget_threshold': bool,
-            'budget_alert_threshold': float,
-            'billing_currency': str
+            'integration_settings': Dict[str, str]
         }
 
         self.attribute_map = {
@@ -237,16 +192,6 @@ class Workspace(Model):
             'current_team_members': 'currentTeamMembers',
             'allow_guest_access': 'allowGuestAccess',
             'allowed_email_domains': 'allowedEmailDomains',
-            'proxy_urls': 'proxyUrls',
-            'proxy_type': 'proxyType',
-            'rotate_proxies': 'rotateProxies',
-            'proxy_rotation_interval': 'proxyRotationInterval',
-            'proxy_provider': 'proxyProvider',
-            'proxy_auth': 'proxyAuth',
-            'max_concurrent_scrapes': 'maxConcurrentScrapes',
-            'requests_per_second': 'requestsPerSecond',
-            'max_retries': 'maxRetries',
-            'retry_interval': 'retryInterval',
             'export_formats': 'exportFormats',
             'export_schedule': 'exportSchedule',
             'export_destinations': 'exportDestinations',
@@ -260,12 +205,7 @@ class Workspace(Model):
             'zapier_enabled': 'zapierEnabled',
             'zapier_webhook': 'zapierWebhook',
             'active_integrations': 'activeIntegrations',
-            'integration_settings': 'integrationSettings',
-            'monthly_budget': 'monthlyBudget',
-            'cost_per_lead': 'costPerLead',
-            'alert_on_budget_threshold': 'alertOnBudgetThreshold',
-            'budget_alert_threshold': 'budgetAlertThreshold',
-            'billing_currency': 'billingCurrency'
+            'integration_settings': 'integrationSettings'
         }
 
         self._id = id
@@ -298,16 +238,6 @@ class Workspace(Model):
         self._current_team_members = current_team_members
         self._allow_guest_access = allow_guest_access
         self._allowed_email_domains = allowed_email_domains
-        self._proxy_urls = proxy_urls
-        self._proxy_type = proxy_type
-        self._rotate_proxies = rotate_proxies
-        self._proxy_rotation_interval = proxy_rotation_interval
-        self._proxy_provider = proxy_provider
-        self._proxy_auth = proxy_auth
-        self._max_concurrent_scrapes = max_concurrent_scrapes
-        self._requests_per_second = requests_per_second
-        self._max_retries = max_retries
-        self._retry_interval = retry_interval
         self._export_formats = export_formats
         self._export_schedule = export_schedule
         self._export_destinations = export_destinations
@@ -322,11 +252,6 @@ class Workspace(Model):
         self._zapier_webhook = zapier_webhook
         self._active_integrations = active_integrations
         self._integration_settings = integration_settings
-        self._monthly_budget = monthly_budget
-        self._cost_per_lead = cost_per_lead
-        self._alert_on_budget_threshold = alert_on_budget_threshold
-        self._budget_alert_threshold = budget_alert_threshold
-        self._billing_currency = billing_currency
 
     @classmethod
     def from_dict(cls, dikt) -> 'Workspace':
@@ -972,216 +897,6 @@ class Workspace(Model):
         self._allowed_email_domains = allowed_email_domains
 
     @property
-    def proxy_urls(self) -> List[str]:
-        """Gets the proxy_urls of this Workspace.
-
-
-        :return: The proxy_urls of this Workspace.
-        :rtype: List[str]
-        """
-        return self._proxy_urls
-
-    @proxy_urls.setter
-    def proxy_urls(self, proxy_urls: List[str]):
-        """Sets the proxy_urls of this Workspace.
-
-
-        :param proxy_urls: The proxy_urls of this Workspace.
-        :type proxy_urls: List[str]
-        """
-
-        self._proxy_urls = proxy_urls
-
-    @property
-    def proxy_type(self) -> str:
-        """Gets the proxy_type of this Workspace.
-
-
-        :return: The proxy_type of this Workspace.
-        :rtype: str
-        """
-        return self._proxy_type
-
-    @proxy_type.setter
-    def proxy_type(self, proxy_type: str):
-        """Sets the proxy_type of this Workspace.
-
-
-        :param proxy_type: The proxy_type of this Workspace.
-        :type proxy_type: str
-        """
-
-        self._proxy_type = proxy_type
-
-    @property
-    def rotate_proxies(self) -> bool:
-        """Gets the rotate_proxies of this Workspace.
-
-
-        :return: The rotate_proxies of this Workspace.
-        :rtype: bool
-        """
-        return self._rotate_proxies
-
-    @rotate_proxies.setter
-    def rotate_proxies(self, rotate_proxies: bool):
-        """Sets the rotate_proxies of this Workspace.
-
-
-        :param rotate_proxies: The rotate_proxies of this Workspace.
-        :type rotate_proxies: bool
-        """
-
-        self._rotate_proxies = rotate_proxies
-
-    @property
-    def proxy_rotation_interval(self) -> int:
-        """Gets the proxy_rotation_interval of this Workspace.
-
-
-        :return: The proxy_rotation_interval of this Workspace.
-        :rtype: int
-        """
-        return self._proxy_rotation_interval
-
-    @proxy_rotation_interval.setter
-    def proxy_rotation_interval(self, proxy_rotation_interval: int):
-        """Sets the proxy_rotation_interval of this Workspace.
-
-
-        :param proxy_rotation_interval: The proxy_rotation_interval of this Workspace.
-        :type proxy_rotation_interval: int
-        """
-
-        self._proxy_rotation_interval = proxy_rotation_interval
-
-    @property
-    def proxy_provider(self) -> str:
-        """Gets the proxy_provider of this Workspace.
-
-
-        :return: The proxy_provider of this Workspace.
-        :rtype: str
-        """
-        return self._proxy_provider
-
-    @proxy_provider.setter
-    def proxy_provider(self, proxy_provider: str):
-        """Sets the proxy_provider of this Workspace.
-
-
-        :param proxy_provider: The proxy_provider of this Workspace.
-        :type proxy_provider: str
-        """
-
-        self._proxy_provider = proxy_provider
-
-    @property
-    def proxy_auth(self) -> Dict[str, str]:
-        """Gets the proxy_auth of this Workspace.
-
-
-        :return: The proxy_auth of this Workspace.
-        :rtype: Dict[str, str]
-        """
-        return self._proxy_auth
-
-    @proxy_auth.setter
-    def proxy_auth(self, proxy_auth: Dict[str, str]):
-        """Sets the proxy_auth of this Workspace.
-
-
-        :param proxy_auth: The proxy_auth of this Workspace.
-        :type proxy_auth: Dict[str, str]
-        """
-
-        self._proxy_auth = proxy_auth
-
-    @property
-    def max_concurrent_scrapes(self) -> int:
-        """Gets the max_concurrent_scrapes of this Workspace.
-
-
-        :return: The max_concurrent_scrapes of this Workspace.
-        :rtype: int
-        """
-        return self._max_concurrent_scrapes
-
-    @max_concurrent_scrapes.setter
-    def max_concurrent_scrapes(self, max_concurrent_scrapes: int):
-        """Sets the max_concurrent_scrapes of this Workspace.
-
-
-        :param max_concurrent_scrapes: The max_concurrent_scrapes of this Workspace.
-        :type max_concurrent_scrapes: int
-        """
-
-        self._max_concurrent_scrapes = max_concurrent_scrapes
-
-    @property
-    def requests_per_second(self) -> int:
-        """Gets the requests_per_second of this Workspace.
-
-
-        :return: The requests_per_second of this Workspace.
-        :rtype: int
-        """
-        return self._requests_per_second
-
-    @requests_per_second.setter
-    def requests_per_second(self, requests_per_second: int):
-        """Sets the requests_per_second of this Workspace.
-
-
-        :param requests_per_second: The requests_per_second of this Workspace.
-        :type requests_per_second: int
-        """
-
-        self._requests_per_second = requests_per_second
-
-    @property
-    def max_retries(self) -> int:
-        """Gets the max_retries of this Workspace.
-
-
-        :return: The max_retries of this Workspace.
-        :rtype: int
-        """
-        return self._max_retries
-
-    @max_retries.setter
-    def max_retries(self, max_retries: int):
-        """Sets the max_retries of this Workspace.
-
-
-        :param max_retries: The max_retries of this Workspace.
-        :type max_retries: int
-        """
-
-        self._max_retries = max_retries
-
-    @property
-    def retry_interval(self) -> str:
-        """Gets the retry_interval of this Workspace.
-
-
-        :return: The retry_interval of this Workspace.
-        :rtype: str
-        """
-        return self._retry_interval
-
-    @retry_interval.setter
-    def retry_interval(self, retry_interval: str):
-        """Sets the retry_interval of this Workspace.
-
-
-        :param retry_interval: The retry_interval of this Workspace.
-        :type retry_interval: str
-        """
-
-        self._retry_interval = retry_interval
-
-    @property
     def export_formats(self) -> List[str]:
         """Gets the export_formats of this Workspace.
 
@@ -1476,108 +1191,3 @@ class Workspace(Model):
         """
 
         self._integration_settings = integration_settings
-
-    @property
-    def monthly_budget(self) -> float:
-        """Gets the monthly_budget of this Workspace.
-
-
-        :return: The monthly_budget of this Workspace.
-        :rtype: float
-        """
-        return self._monthly_budget
-
-    @monthly_budget.setter
-    def monthly_budget(self, monthly_budget: float):
-        """Sets the monthly_budget of this Workspace.
-
-
-        :param monthly_budget: The monthly_budget of this Workspace.
-        :type monthly_budget: float
-        """
-
-        self._monthly_budget = monthly_budget
-
-    @property
-    def cost_per_lead(self) -> float:
-        """Gets the cost_per_lead of this Workspace.
-
-
-        :return: The cost_per_lead of this Workspace.
-        :rtype: float
-        """
-        return self._cost_per_lead
-
-    @cost_per_lead.setter
-    def cost_per_lead(self, cost_per_lead: float):
-        """Sets the cost_per_lead of this Workspace.
-
-
-        :param cost_per_lead: The cost_per_lead of this Workspace.
-        :type cost_per_lead: float
-        """
-
-        self._cost_per_lead = cost_per_lead
-
-    @property
-    def alert_on_budget_threshold(self) -> bool:
-        """Gets the alert_on_budget_threshold of this Workspace.
-
-
-        :return: The alert_on_budget_threshold of this Workspace.
-        :rtype: bool
-        """
-        return self._alert_on_budget_threshold
-
-    @alert_on_budget_threshold.setter
-    def alert_on_budget_threshold(self, alert_on_budget_threshold: bool):
-        """Sets the alert_on_budget_threshold of this Workspace.
-
-
-        :param alert_on_budget_threshold: The alert_on_budget_threshold of this Workspace.
-        :type alert_on_budget_threshold: bool
-        """
-
-        self._alert_on_budget_threshold = alert_on_budget_threshold
-
-    @property
-    def budget_alert_threshold(self) -> float:
-        """Gets the budget_alert_threshold of this Workspace.
-
-
-        :return: The budget_alert_threshold of this Workspace.
-        :rtype: float
-        """
-        return self._budget_alert_threshold
-
-    @budget_alert_threshold.setter
-    def budget_alert_threshold(self, budget_alert_threshold: float):
-        """Sets the budget_alert_threshold of this Workspace.
-
-
-        :param budget_alert_threshold: The budget_alert_threshold of this Workspace.
-        :type budget_alert_threshold: float
-        """
-
-        self._budget_alert_threshold = budget_alert_threshold
-
-    @property
-    def billing_currency(self) -> str:
-        """Gets the billing_currency of this Workspace.
-
-
-        :return: The billing_currency of this Workspace.
-        :rtype: str
-        """
-        return self._billing_currency
-
-    @billing_currency.setter
-    def billing_currency(self, billing_currency: str):
-        """Sets the billing_currency of this Workspace.
-
-
-        :param billing_currency: The billing_currency of this Workspace.
-        :type billing_currency: str
-        """
-
-        self._billing_currency = billing_currency

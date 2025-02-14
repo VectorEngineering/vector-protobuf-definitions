@@ -33,16 +33,6 @@ Name | Type | Description | Notes
 **currentTeamMembers** | **Int!** |  | [optional] [default to null]
 **allowGuestAccess** | **Boolean!** |  | [optional] [default to null]
 **allowedEmailDomains** | **String!** |  | [optional] [default to null]
-**proxyUrls** | **String!** |  | [optional] [default to null]
-**proxyType** | **String!** |  | [optional] [default to null]
-**rotateProxies** | **Boolean!** |  | [optional] [default to null]
-**proxyRotationInterval** | **Int!** |  | [optional] [default to null]
-**proxyProvider** | **String!** |  | [optional] [default to null]
-**proxyAuth** | **String!** |  | [optional] [default to null]
-**maxConcurrentScrapes** | **Int!** |  | [optional] [default to null]
-**requestsPerSecond** | **Int!** |  | [optional] [default to null]
-**maxRetries** | **Int!** |  | [optional] [default to null]
-**retryInterval** | **String!** |  | [optional] [default to null]
 **exportFormats** | **String!** | e.g., \&quot;csv\&quot;, \&quot;json\&quot;, \&quot;excel\&quot; | [optional] [default to null]
 **exportSchedule** | **String!** |  | [optional] [default to null]
 **exportDestinations** | **String!** |  | [optional] [default to null]
@@ -57,11 +47,6 @@ Name | Type | Description | Notes
 **zapierWebhook** | **String!** |  | [optional] [default to null]
 **activeIntegrations** | **String!** |  | [optional] [default to null]
 **integrationSettings** | **String!** |  | [optional] [default to null]
-**monthlyBudget** | **Float!** |  | [optional] [default to null]
-**costPerLead** | **Float!** |  | [optional] [default to null]
-**alertOnBudgetThreshold** | **Boolean!** |  | [optional] [default to null]
-**budgetAlertThreshold** | **Float!** |  | [optional] [default to null]
-**billingCurrency** | **String!** |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

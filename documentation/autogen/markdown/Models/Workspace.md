@@ -33,16 +33,6 @@
 | **currentTeamMembers** | **Integer** |  | [optional] [default to null] |
 | **allowGuestAccess** | **Boolean** |  | [optional] [default to null] |
 | **allowedEmailDomains** | **List** |  | [optional] [default to null] |
-| **proxyUrls** | **List** |  | [optional] [default to null] |
-| **proxyType** | **String** |  | [optional] [default to null] |
-| **rotateProxies** | **Boolean** |  | [optional] [default to null] |
-| **proxyRotationInterval** | **Integer** |  | [optional] [default to null] |
-| **proxyProvider** | **String** |  | [optional] [default to null] |
-| **proxyAuth** | **Map** |  | [optional] [default to null] |
-| **maxConcurrentScrapes** | **Integer** |  | [optional] [default to null] |
-| **requestsPerSecond** | **Integer** |  | [optional] [default to null] |
-| **maxRetries** | **Integer** |  | [optional] [default to null] |
-| **retryInterval** | **String** |  | [optional] [default to null] |
 | **exportFormats** | **List** | e.g., \&quot;csv\&quot;, \&quot;json\&quot;, \&quot;excel\&quot; | [optional] [default to null] |
 | **exportSchedule** | **String** |  | [optional] [default to null] |
 | **exportDestinations** | **List** |  | [optional] [default to null] |
@@ -57,11 +47,6 @@
 | **zapierWebhook** | **String** |  | [optional] [default to null] |
 | **activeIntegrations** | **List** |  | [optional] [default to null] |
 | **integrationSettings** | **Map** |  | [optional] [default to null] |
-| **monthlyBudget** | **Float** |  | [optional] [default to null] |
-| **costPerLead** | **Float** |  | [optional] [default to null] |
-| **alertOnBudgetThreshold** | **Boolean** |  | [optional] [default to null] |
-| **budgetAlertThreshold** | **Float** |  | [optional] [default to null] |
-| **billingCurrency** | **String** |  | [optional] [default to null] |
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

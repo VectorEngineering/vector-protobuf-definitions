@@ -26454,50 +26454,6 @@
                             "type": "string"
                         }
                     },
-                    "proxyUrls": {
-                        "type": "array",
-                        "items": {
-                            "type": "string"
-                        },
-                        "title": "Proxy Configuration"
-                    },
-                    "proxyType": {
-                        "type": "string",
-                        "title": "e.g., \"http\", \"socks5\""
-                    },
-                    "rotateProxies": {
-                        "type": "boolean"
-                    },
-                    "proxyRotationInterval": {
-                        "type": "integer",
-                        "format": "int32",
-                        "title": "in seconds"
-                    },
-                    "proxyProvider": {
-                        "type": "string"
-                    },
-                    "proxyAuth": {
-                        "type": "object",
-                        "additionalProperties": {
-                            "type": "string"
-                        }
-                    },
-                    "maxConcurrentScrapes": {
-                        "type": "integer",
-                        "format": "int32",
-                        "title": "Rate Limiting"
-                    },
-                    "requestsPerSecond": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "maxRetries": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "retryInterval": {
-                        "type": "string"
-                    },
                     "exportFormats": {
                         "type": "array",
                         "items": {
@@ -26560,25 +26516,6 @@
                         "additionalProperties": {
                             "type": "string"
                         }
-                    },
-                    "monthlyBudget": {
-                        "type": "number",
-                        "format": "float",
-                        "title": "Cost Management"
-                    },
-                    "costPerLead": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "alertOnBudgetThreshold": {
-                        "type": "boolean"
-                    },
-                    "budgetAlertThreshold": {
-                        "type": "number",
-                        "format": "float"
-                    },
-                    "billingCurrency": {
-                        "type": "string"
                     }
                 },
                 "title": "Workspace represents a business entity with multiple accounts"

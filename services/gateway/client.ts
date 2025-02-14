@@ -503,16 +503,6 @@ const Workspace = z
     currentTeamMembers: z.number().int(),
     allowGuestAccess: z.boolean(),
     allowedEmailDomains: z.array(z.string()),
-    proxyUrls: z.array(z.string()),
-    proxyType: z.string(),
-    rotateProxies: z.boolean(),
-    proxyRotationInterval: z.number().int(),
-    proxyProvider: z.string(),
-    proxyAuth: z.record(z.string()),
-    maxConcurrentScrapes: z.number().int(),
-    requestsPerSecond: z.number().int(),
-    maxRetries: z.number().int(),
-    retryInterval: z.string(),
     exportFormats: z.array(z.string()),
     exportSchedule: z.string(),
     exportDestinations: z.array(z.string()),
@@ -527,11 +517,6 @@ const Workspace = z
     zapierWebhook: z.string(),
     activeIntegrations: z.array(z.string()),
     integrationSettings: z.record(z.string()),
-    monthlyBudget: z.number(),
-    costPerLead: z.number(),
-    alertOnBudgetThreshold: z.boolean(),
-    budgetAlertThreshold: z.number(),
-    billingCurrency: z.string(),
   })
   .partial()
   .passthrough();

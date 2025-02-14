@@ -19,8 +19,8 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from playbookmedia_backend_client_sdk.models.api_key import APIKey
 from playbookmedia_backend_client_sdk.models.scraping_job import ScrapingJob
 from playbookmedia_backend_client_sdk.models.scraping_workflow import ScrapingWorkflow
@@ -63,16 +63,6 @@ class Workspace(BaseModel):
     current_team_members: Optional[StrictInt] = Field(default=None, alias="currentTeamMembers")
     allow_guest_access: Optional[StrictBool] = Field(default=None, alias="allowGuestAccess")
     allowed_email_domains: Optional[List[StrictStr]] = Field(default=None, alias="allowedEmailDomains")
-    proxy_urls: Optional[List[StrictStr]] = Field(default=None, alias="proxyUrls")
-    proxy_type: Optional[StrictStr] = Field(default=None, alias="proxyType")
-    rotate_proxies: Optional[StrictBool] = Field(default=None, alias="rotateProxies")
-    proxy_rotation_interval: Optional[StrictInt] = Field(default=None, alias="proxyRotationInterval")
-    proxy_provider: Optional[StrictStr] = Field(default=None, alias="proxyProvider")
-    proxy_auth: Optional[Dict[str, StrictStr]] = Field(default=None, alias="proxyAuth")
-    max_concurrent_scrapes: Optional[StrictInt] = Field(default=None, alias="maxConcurrentScrapes")
-    requests_per_second: Optional[StrictInt] = Field(default=None, alias="requestsPerSecond")
-    max_retries: Optional[StrictInt] = Field(default=None, alias="maxRetries")
-    retry_interval: Optional[StrictStr] = Field(default=None, alias="retryInterval")
     export_formats: Optional[List[StrictStr]] = Field(default=None, description="e.g., \"csv\", \"json\", \"excel\"", alias="exportFormats")
     export_schedule: Optional[StrictStr] = Field(default=None, alias="exportSchedule")
     export_destinations: Optional[List[StrictStr]] = Field(default=None, alias="exportDestinations")
@@ -87,12 +77,7 @@ class Workspace(BaseModel):
     zapier_webhook: Optional[StrictStr] = Field(default=None, alias="zapierWebhook")
     active_integrations: Optional[List[StrictStr]] = Field(default=None, alias="activeIntegrations")
     integration_settings: Optional[Dict[str, StrictStr]] = Field(default=None, alias="integrationSettings")
-    monthly_budget: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="monthlyBudget")
-    cost_per_lead: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="costPerLead")
-    alert_on_budget_threshold: Optional[StrictBool] = Field(default=None, alias="alertOnBudgetThreshold")
-    budget_alert_threshold: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, alias="budgetAlertThreshold")
-    billing_currency: Optional[StrictStr] = Field(default=None, alias="billingCurrency")
-    __properties: ClassVar[List[str]] = ["id", "name", "industry", "domain", "gdprCompliant", "hipaaCompliant", "soc2Compliant", "storageQuota", "usedStorage", "createdAt", "updatedAt", "deletedAt", "workflows", "jobsRunThisMonth", "workspaceJobLimit", "dailyJobQuota", "activeScrapers", "totalLeadsCollected", "lastJobRun", "scrapingJobs", "apiKeys", "webhooks", "workspaceType", "description", "metadata", "tags", "maxTeamMembers", "currentTeamMembers", "allowGuestAccess", "allowedEmailDomains", "proxyUrls", "proxyType", "rotateProxies", "proxyRotationInterval", "proxyProvider", "proxyAuth", "maxConcurrentScrapes", "requestsPerSecond", "maxRetries", "retryInterval", "exportFormats", "exportSchedule", "exportDestinations", "exportDestinationConfig", "compressExports", "compressionFormat", "salesforceEnabled", "salesforceConfig", "hubspotEnabled", "hubspotConfig", "zapierEnabled", "zapierWebhook", "activeIntegrations", "integrationSettings", "monthlyBudget", "costPerLead", "alertOnBudgetThreshold", "budgetAlertThreshold", "billingCurrency"]
+    __properties: ClassVar[List[str]] = ["id", "name", "industry", "domain", "gdprCompliant", "hipaaCompliant", "soc2Compliant", "storageQuota", "usedStorage", "createdAt", "updatedAt", "deletedAt", "workflows", "jobsRunThisMonth", "workspaceJobLimit", "dailyJobQuota", "activeScrapers", "totalLeadsCollected", "lastJobRun", "scrapingJobs", "apiKeys", "webhooks", "workspaceType", "description", "metadata", "tags", "maxTeamMembers", "currentTeamMembers", "allowGuestAccess", "allowedEmailDomains", "exportFormats", "exportSchedule", "exportDestinations", "exportDestinationConfig", "compressExports", "compressionFormat", "salesforceEnabled", "salesforceConfig", "hubspotEnabled", "hubspotConfig", "zapierEnabled", "zapierWebhook", "activeIntegrations", "integrationSettings"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -203,16 +188,6 @@ class Workspace(BaseModel):
             "currentTeamMembers": obj.get("currentTeamMembers"),
             "allowGuestAccess": obj.get("allowGuestAccess"),
             "allowedEmailDomains": obj.get("allowedEmailDomains"),
-            "proxyUrls": obj.get("proxyUrls"),
-            "proxyType": obj.get("proxyType"),
-            "rotateProxies": obj.get("rotateProxies"),
-            "proxyRotationInterval": obj.get("proxyRotationInterval"),
-            "proxyProvider": obj.get("proxyProvider"),
-            "proxyAuth": obj.get("proxyAuth"),
-            "maxConcurrentScrapes": obj.get("maxConcurrentScrapes"),
-            "requestsPerSecond": obj.get("requestsPerSecond"),
-            "maxRetries": obj.get("maxRetries"),
-            "retryInterval": obj.get("retryInterval"),
             "exportFormats": obj.get("exportFormats"),
             "exportSchedule": obj.get("exportSchedule"),
             "exportDestinations": obj.get("exportDestinations"),
@@ -226,12 +201,7 @@ class Workspace(BaseModel):
             "zapierEnabled": obj.get("zapierEnabled"),
             "zapierWebhook": obj.get("zapierWebhook"),
             "activeIntegrations": obj.get("activeIntegrations"),
-            "integrationSettings": obj.get("integrationSettings"),
-            "monthlyBudget": obj.get("monthlyBudget"),
-            "costPerLead": obj.get("costPerLead"),
-            "alertOnBudgetThreshold": obj.get("alertOnBudgetThreshold"),
-            "budgetAlertThreshold": obj.get("budgetAlertThreshold"),
-            "billingCurrency": obj.get("billingCurrency")
+            "integrationSettings": obj.get("integrationSettings")
         })
         return _obj
 

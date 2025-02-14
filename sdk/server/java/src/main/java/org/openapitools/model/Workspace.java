@@ -31,7 +31,7 @@ import javax.annotation.Generated;
  * Workspace
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T08:12:58.450907-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T08:15:02.658504-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class Workspace {
 
   private String id;
@@ -106,28 +106,6 @@ public class Workspace {
   private List<String> allowedEmailDomains = new ArrayList<>();
 
   @Valid
-  private List<String> proxyUrls = new ArrayList<>();
-
-  private String proxyType;
-
-  private Boolean rotateProxies;
-
-  private Integer proxyRotationInterval;
-
-  private String proxyProvider;
-
-  @Valid
-  private Map<String, String> proxyAuth = new HashMap<>();
-
-  private Integer maxConcurrentScrapes;
-
-  private Integer requestsPerSecond;
-
-  private Integer maxRetries;
-
-  private String retryInterval;
-
-  @Valid
   private List<String> exportFormats = new ArrayList<>();
 
   private String exportSchedule;
@@ -159,16 +137,6 @@ public class Workspace {
 
   @Valid
   private Map<String, String> integrationSettings = new HashMap<>();
-
-  private Float monthlyBudget;
-
-  private Float costPerLead;
-
-  private Boolean alertOnBudgetThreshold;
-
-  private Float budgetAlertThreshold;
-
-  private String billingCurrency;
 
   public Workspace id(String id) {
     this.id = id;
@@ -826,222 +794,6 @@ public class Workspace {
     this.allowedEmailDomains = allowedEmailDomains;
   }
 
-  public Workspace proxyUrls(List<String> proxyUrls) {
-    this.proxyUrls = proxyUrls;
-    return this;
-  }
-
-  public Workspace addProxyUrlsItem(String proxyUrlsItem) {
-    if (this.proxyUrls == null) {
-      this.proxyUrls = new ArrayList<>();
-    }
-    this.proxyUrls.add(proxyUrlsItem);
-    return this;
-  }
-
-  /**
-   * Get proxyUrls
-   * @return proxyUrls
-   */
-  
-  @Schema(name = "proxyUrls", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("proxyUrls")
-  public List<String> getProxyUrls() {
-    return proxyUrls;
-  }
-
-  public void setProxyUrls(List<String> proxyUrls) {
-    this.proxyUrls = proxyUrls;
-  }
-
-  public Workspace proxyType(String proxyType) {
-    this.proxyType = proxyType;
-    return this;
-  }
-
-  /**
-   * Get proxyType
-   * @return proxyType
-   */
-  
-  @Schema(name = "proxyType", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("proxyType")
-  public String getProxyType() {
-    return proxyType;
-  }
-
-  public void setProxyType(String proxyType) {
-    this.proxyType = proxyType;
-  }
-
-  public Workspace rotateProxies(Boolean rotateProxies) {
-    this.rotateProxies = rotateProxies;
-    return this;
-  }
-
-  /**
-   * Get rotateProxies
-   * @return rotateProxies
-   */
-  
-  @Schema(name = "rotateProxies", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("rotateProxies")
-  public Boolean getRotateProxies() {
-    return rotateProxies;
-  }
-
-  public void setRotateProxies(Boolean rotateProxies) {
-    this.rotateProxies = rotateProxies;
-  }
-
-  public Workspace proxyRotationInterval(Integer proxyRotationInterval) {
-    this.proxyRotationInterval = proxyRotationInterval;
-    return this;
-  }
-
-  /**
-   * Get proxyRotationInterval
-   * @return proxyRotationInterval
-   */
-  
-  @Schema(name = "proxyRotationInterval", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("proxyRotationInterval")
-  public Integer getProxyRotationInterval() {
-    return proxyRotationInterval;
-  }
-
-  public void setProxyRotationInterval(Integer proxyRotationInterval) {
-    this.proxyRotationInterval = proxyRotationInterval;
-  }
-
-  public Workspace proxyProvider(String proxyProvider) {
-    this.proxyProvider = proxyProvider;
-    return this;
-  }
-
-  /**
-   * Get proxyProvider
-   * @return proxyProvider
-   */
-  
-  @Schema(name = "proxyProvider", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("proxyProvider")
-  public String getProxyProvider() {
-    return proxyProvider;
-  }
-
-  public void setProxyProvider(String proxyProvider) {
-    this.proxyProvider = proxyProvider;
-  }
-
-  public Workspace proxyAuth(Map<String, String> proxyAuth) {
-    this.proxyAuth = proxyAuth;
-    return this;
-  }
-
-  public Workspace putProxyAuthItem(String key, String proxyAuthItem) {
-    if (this.proxyAuth == null) {
-      this.proxyAuth = new HashMap<>();
-    }
-    this.proxyAuth.put(key, proxyAuthItem);
-    return this;
-  }
-
-  /**
-   * Get proxyAuth
-   * @return proxyAuth
-   */
-  
-  @Schema(name = "proxyAuth", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("proxyAuth")
-  public Map<String, String> getProxyAuth() {
-    return proxyAuth;
-  }
-
-  public void setProxyAuth(Map<String, String> proxyAuth) {
-    this.proxyAuth = proxyAuth;
-  }
-
-  public Workspace maxConcurrentScrapes(Integer maxConcurrentScrapes) {
-    this.maxConcurrentScrapes = maxConcurrentScrapes;
-    return this;
-  }
-
-  /**
-   * Get maxConcurrentScrapes
-   * @return maxConcurrentScrapes
-   */
-  
-  @Schema(name = "maxConcurrentScrapes", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("maxConcurrentScrapes")
-  public Integer getMaxConcurrentScrapes() {
-    return maxConcurrentScrapes;
-  }
-
-  public void setMaxConcurrentScrapes(Integer maxConcurrentScrapes) {
-    this.maxConcurrentScrapes = maxConcurrentScrapes;
-  }
-
-  public Workspace requestsPerSecond(Integer requestsPerSecond) {
-    this.requestsPerSecond = requestsPerSecond;
-    return this;
-  }
-
-  /**
-   * Get requestsPerSecond
-   * @return requestsPerSecond
-   */
-  
-  @Schema(name = "requestsPerSecond", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("requestsPerSecond")
-  public Integer getRequestsPerSecond() {
-    return requestsPerSecond;
-  }
-
-  public void setRequestsPerSecond(Integer requestsPerSecond) {
-    this.requestsPerSecond = requestsPerSecond;
-  }
-
-  public Workspace maxRetries(Integer maxRetries) {
-    this.maxRetries = maxRetries;
-    return this;
-  }
-
-  /**
-   * Get maxRetries
-   * @return maxRetries
-   */
-  
-  @Schema(name = "maxRetries", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("maxRetries")
-  public Integer getMaxRetries() {
-    return maxRetries;
-  }
-
-  public void setMaxRetries(Integer maxRetries) {
-    this.maxRetries = maxRetries;
-  }
-
-  public Workspace retryInterval(String retryInterval) {
-    this.retryInterval = retryInterval;
-    return this;
-  }
-
-  /**
-   * Get retryInterval
-   * @return retryInterval
-   */
-  
-  @Schema(name = "retryInterval", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("retryInterval")
-  public String getRetryInterval() {
-    return retryInterval;
-  }
-
-  public void setRetryInterval(String retryInterval) {
-    this.retryInterval = retryInterval;
-  }
-
   public Workspace exportFormats(List<String> exportFormats) {
     this.exportFormats = exportFormats;
     return this;
@@ -1362,106 +1114,6 @@ public class Workspace {
     this.integrationSettings = integrationSettings;
   }
 
-  public Workspace monthlyBudget(Float monthlyBudget) {
-    this.monthlyBudget = monthlyBudget;
-    return this;
-  }
-
-  /**
-   * Get monthlyBudget
-   * @return monthlyBudget
-   */
-  
-  @Schema(name = "monthlyBudget", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("monthlyBudget")
-  public Float getMonthlyBudget() {
-    return monthlyBudget;
-  }
-
-  public void setMonthlyBudget(Float monthlyBudget) {
-    this.monthlyBudget = monthlyBudget;
-  }
-
-  public Workspace costPerLead(Float costPerLead) {
-    this.costPerLead = costPerLead;
-    return this;
-  }
-
-  /**
-   * Get costPerLead
-   * @return costPerLead
-   */
-  
-  @Schema(name = "costPerLead", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("costPerLead")
-  public Float getCostPerLead() {
-    return costPerLead;
-  }
-
-  public void setCostPerLead(Float costPerLead) {
-    this.costPerLead = costPerLead;
-  }
-
-  public Workspace alertOnBudgetThreshold(Boolean alertOnBudgetThreshold) {
-    this.alertOnBudgetThreshold = alertOnBudgetThreshold;
-    return this;
-  }
-
-  /**
-   * Get alertOnBudgetThreshold
-   * @return alertOnBudgetThreshold
-   */
-  
-  @Schema(name = "alertOnBudgetThreshold", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("alertOnBudgetThreshold")
-  public Boolean getAlertOnBudgetThreshold() {
-    return alertOnBudgetThreshold;
-  }
-
-  public void setAlertOnBudgetThreshold(Boolean alertOnBudgetThreshold) {
-    this.alertOnBudgetThreshold = alertOnBudgetThreshold;
-  }
-
-  public Workspace budgetAlertThreshold(Float budgetAlertThreshold) {
-    this.budgetAlertThreshold = budgetAlertThreshold;
-    return this;
-  }
-
-  /**
-   * Get budgetAlertThreshold
-   * @return budgetAlertThreshold
-   */
-  
-  @Schema(name = "budgetAlertThreshold", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("budgetAlertThreshold")
-  public Float getBudgetAlertThreshold() {
-    return budgetAlertThreshold;
-  }
-
-  public void setBudgetAlertThreshold(Float budgetAlertThreshold) {
-    this.budgetAlertThreshold = budgetAlertThreshold;
-  }
-
-  public Workspace billingCurrency(String billingCurrency) {
-    this.billingCurrency = billingCurrency;
-    return this;
-  }
-
-  /**
-   * Get billingCurrency
-   * @return billingCurrency
-   */
-  
-  @Schema(name = "billingCurrency", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
-  @JsonProperty("billingCurrency")
-  public String getBillingCurrency() {
-    return billingCurrency;
-  }
-
-  public void setBillingCurrency(String billingCurrency) {
-    this.billingCurrency = billingCurrency;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -1501,16 +1153,6 @@ public class Workspace {
         Objects.equals(this.currentTeamMembers, workspace.currentTeamMembers) &&
         Objects.equals(this.allowGuestAccess, workspace.allowGuestAccess) &&
         Objects.equals(this.allowedEmailDomains, workspace.allowedEmailDomains) &&
-        Objects.equals(this.proxyUrls, workspace.proxyUrls) &&
-        Objects.equals(this.proxyType, workspace.proxyType) &&
-        Objects.equals(this.rotateProxies, workspace.rotateProxies) &&
-        Objects.equals(this.proxyRotationInterval, workspace.proxyRotationInterval) &&
-        Objects.equals(this.proxyProvider, workspace.proxyProvider) &&
-        Objects.equals(this.proxyAuth, workspace.proxyAuth) &&
-        Objects.equals(this.maxConcurrentScrapes, workspace.maxConcurrentScrapes) &&
-        Objects.equals(this.requestsPerSecond, workspace.requestsPerSecond) &&
-        Objects.equals(this.maxRetries, workspace.maxRetries) &&
-        Objects.equals(this.retryInterval, workspace.retryInterval) &&
         Objects.equals(this.exportFormats, workspace.exportFormats) &&
         Objects.equals(this.exportSchedule, workspace.exportSchedule) &&
         Objects.equals(this.exportDestinations, workspace.exportDestinations) &&
@@ -1524,17 +1166,12 @@ public class Workspace {
         Objects.equals(this.zapierEnabled, workspace.zapierEnabled) &&
         Objects.equals(this.zapierWebhook, workspace.zapierWebhook) &&
         Objects.equals(this.activeIntegrations, workspace.activeIntegrations) &&
-        Objects.equals(this.integrationSettings, workspace.integrationSettings) &&
-        Objects.equals(this.monthlyBudget, workspace.monthlyBudget) &&
-        Objects.equals(this.costPerLead, workspace.costPerLead) &&
-        Objects.equals(this.alertOnBudgetThreshold, workspace.alertOnBudgetThreshold) &&
-        Objects.equals(this.budgetAlertThreshold, workspace.budgetAlertThreshold) &&
-        Objects.equals(this.billingCurrency, workspace.billingCurrency);
+        Objects.equals(this.integrationSettings, workspace.integrationSettings);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, industry, domain, gdprCompliant, hipaaCompliant, soc2Compliant, storageQuota, usedStorage, createdAt, updatedAt, deletedAt, workflows, jobsRunThisMonth, workspaceJobLimit, dailyJobQuota, activeScrapers, totalLeadsCollected, lastJobRun, scrapingJobs, apiKeys, webhooks, workspaceType, description, metadata, tags, maxTeamMembers, currentTeamMembers, allowGuestAccess, allowedEmailDomains, proxyUrls, proxyType, rotateProxies, proxyRotationInterval, proxyProvider, proxyAuth, maxConcurrentScrapes, requestsPerSecond, maxRetries, retryInterval, exportFormats, exportSchedule, exportDestinations, exportDestinationConfig, compressExports, compressionFormat, salesforceEnabled, salesforceConfig, hubspotEnabled, hubspotConfig, zapierEnabled, zapierWebhook, activeIntegrations, integrationSettings, monthlyBudget, costPerLead, alertOnBudgetThreshold, budgetAlertThreshold, billingCurrency);
+    return Objects.hash(id, name, industry, domain, gdprCompliant, hipaaCompliant, soc2Compliant, storageQuota, usedStorage, createdAt, updatedAt, deletedAt, workflows, jobsRunThisMonth, workspaceJobLimit, dailyJobQuota, activeScrapers, totalLeadsCollected, lastJobRun, scrapingJobs, apiKeys, webhooks, workspaceType, description, metadata, tags, maxTeamMembers, currentTeamMembers, allowGuestAccess, allowedEmailDomains, exportFormats, exportSchedule, exportDestinations, exportDestinationConfig, compressExports, compressionFormat, salesforceEnabled, salesforceConfig, hubspotEnabled, hubspotConfig, zapierEnabled, zapierWebhook, activeIntegrations, integrationSettings);
   }
 
   @Override
@@ -1571,16 +1208,6 @@ public class Workspace {
     sb.append("    currentTeamMembers: ").append(toIndentedString(currentTeamMembers)).append("\n");
     sb.append("    allowGuestAccess: ").append(toIndentedString(allowGuestAccess)).append("\n");
     sb.append("    allowedEmailDomains: ").append(toIndentedString(allowedEmailDomains)).append("\n");
-    sb.append("    proxyUrls: ").append(toIndentedString(proxyUrls)).append("\n");
-    sb.append("    proxyType: ").append(toIndentedString(proxyType)).append("\n");
-    sb.append("    rotateProxies: ").append(toIndentedString(rotateProxies)).append("\n");
-    sb.append("    proxyRotationInterval: ").append(toIndentedString(proxyRotationInterval)).append("\n");
-    sb.append("    proxyProvider: ").append(toIndentedString(proxyProvider)).append("\n");
-    sb.append("    proxyAuth: ").append(toIndentedString(proxyAuth)).append("\n");
-    sb.append("    maxConcurrentScrapes: ").append(toIndentedString(maxConcurrentScrapes)).append("\n");
-    sb.append("    requestsPerSecond: ").append(toIndentedString(requestsPerSecond)).append("\n");
-    sb.append("    maxRetries: ").append(toIndentedString(maxRetries)).append("\n");
-    sb.append("    retryInterval: ").append(toIndentedString(retryInterval)).append("\n");
     sb.append("    exportFormats: ").append(toIndentedString(exportFormats)).append("\n");
     sb.append("    exportSchedule: ").append(toIndentedString(exportSchedule)).append("\n");
     sb.append("    exportDestinations: ").append(toIndentedString(exportDestinations)).append("\n");
@@ -1595,11 +1222,6 @@ public class Workspace {
     sb.append("    zapierWebhook: ").append(toIndentedString(zapierWebhook)).append("\n");
     sb.append("    activeIntegrations: ").append(toIndentedString(activeIntegrations)).append("\n");
     sb.append("    integrationSettings: ").append(toIndentedString(integrationSettings)).append("\n");
-    sb.append("    monthlyBudget: ").append(toIndentedString(monthlyBudget)).append("\n");
-    sb.append("    costPerLead: ").append(toIndentedString(costPerLead)).append("\n");
-    sb.append("    alertOnBudgetThreshold: ").append(toIndentedString(alertOnBudgetThreshold)).append("\n");
-    sb.append("    budgetAlertThreshold: ").append(toIndentedString(budgetAlertThreshold)).append("\n");
-    sb.append("    billingCurrency: ").append(toIndentedString(billingCurrency)).append("\n");
     sb.append("}");
     return sb.toString();
   }

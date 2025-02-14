@@ -35,16 +35,6 @@ Name | Type | Description | Notes
 **current_team_members** | **int** |  | [optional] 
 **allow_guest_access** | **bool** |  | [optional] 
 **allowed_email_domains** | **List[str]** |  | [optional] 
-**proxy_urls** | **List[str]** |  | [optional] 
-**proxy_type** | **str** |  | [optional] 
-**rotate_proxies** | **bool** |  | [optional] 
-**proxy_rotation_interval** | **int** |  | [optional] 
-**proxy_provider** | **str** |  | [optional] 
-**proxy_auth** | **Dict[str, str]** |  | [optional] 
-**max_concurrent_scrapes** | **int** |  | [optional] 
-**requests_per_second** | **int** |  | [optional] 
-**max_retries** | **int** |  | [optional] 
-**retry_interval** | **str** |  | [optional] 
 **export_formats** | **List[str]** | e.g., \&quot;csv\&quot;, \&quot;json\&quot;, \&quot;excel\&quot; | [optional] 
 **export_schedule** | **str** |  | [optional] 
 **export_destinations** | **List[str]** |  | [optional] 
@@ -59,11 +49,6 @@ Name | Type | Description | Notes
 **zapier_webhook** | **str** |  | [optional] 
 **active_integrations** | **List[str]** |  | [optional] 
 **integration_settings** | **Dict[str, str]** |  | [optional] 
-**monthly_budget** | **float** |  | [optional] 
-**cost_per_lead** | **float** |  | [optional] 
-**alert_on_budget_threshold** | **bool** |  | [optional] 
-**budget_alert_threshold** | **float** |  | [optional] 
-**billing_currency** | **str** |  | [optional] 
 
 ## Example
 

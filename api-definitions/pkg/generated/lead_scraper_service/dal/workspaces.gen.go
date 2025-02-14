@@ -33,14 +33,10 @@ func newWorkspaceORM(db *gorm.DB, opts ...gen.DOOption) workspaceORM {
 	_workspaceORM.AccountId = field.NewUint64(tableName, "account_id")
 	_workspaceORM.ActiveIntegrations = field.NewField(tableName, "active_integrations")
 	_workspaceORM.ActiveScrapers = field.NewInt32(tableName, "active_scrapers")
-	_workspaceORM.AlertOnBudgetThreshold = field.NewBool(tableName, "alert_on_budget_threshold")
 	_workspaceORM.AllowGuestAccess = field.NewBool(tableName, "allow_guest_access")
 	_workspaceORM.AllowedEmailDomains = field.NewField(tableName, "allowed_email_domains")
-	_workspaceORM.BillingCurrency = field.NewString(tableName, "billing_currency")
-	_workspaceORM.BudgetAlertThreshold = field.NewFloat32(tableName, "budget_alert_threshold")
 	_workspaceORM.CompressExports = field.NewBool(tableName, "compress_exports")
 	_workspaceORM.CompressionFormat = field.NewString(tableName, "compression_format")
-	_workspaceORM.CostPerLead = field.NewFloat32(tableName, "cost_per_lead")
 	_workspaceORM.CreatedAt = field.NewTime(tableName, "created_at")
 	_workspaceORM.CurrentTeamMembers = field.NewInt32(tableName, "current_team_members")
 	_workspaceORM.DailyJobQuota = field.NewInt32(tableName, "daily_job_quota")
@@ -58,18 +54,8 @@ func newWorkspaceORM(db *gorm.DB, opts ...gen.DOOption) workspaceORM {
 	_workspaceORM.Industry = field.NewString(tableName, "industry")
 	_workspaceORM.JobsRunThisMonth = field.NewInt32(tableName, "jobs_run_this_month")
 	_workspaceORM.LastJobRun = field.NewTime(tableName, "last_job_run")
-	_workspaceORM.MaxConcurrentScrapes = field.NewInt32(tableName, "max_concurrent_scrapes")
-	_workspaceORM.MaxRetries = field.NewInt32(tableName, "max_retries")
 	_workspaceORM.MaxTeamMembers = field.NewInt32(tableName, "max_team_members")
-	_workspaceORM.MonthlyBudget = field.NewFloat32(tableName, "monthly_budget")
 	_workspaceORM.Name = field.NewString(tableName, "name")
-	_workspaceORM.ProxyProvider = field.NewString(tableName, "proxy_provider")
-	_workspaceORM.ProxyRotationInterval = field.NewInt32(tableName, "proxy_rotation_interval")
-	_workspaceORM.ProxyType = field.NewString(tableName, "proxy_type")
-	_workspaceORM.ProxyUrls = field.NewField(tableName, "proxy_urls")
-	_workspaceORM.RequestsPerSecond = field.NewInt32(tableName, "requests_per_second")
-	_workspaceORM.RetryInterval = field.NewInt64(tableName, "retry_interval")
-	_workspaceORM.RotateProxies = field.NewBool(tableName, "rotate_proxies")
 	_workspaceORM.SalesforceConfig = field.NewString(tableName, "salesforce_config")
 	_workspaceORM.SalesforceEnabled = field.NewBool(tableName, "salesforce_enabled")
 	_workspaceORM.Soc2Compliant = field.NewBool(tableName, "soc2_compliant")
@@ -148,60 +134,46 @@ func newWorkspaceORM(db *gorm.DB, opts ...gen.DOOption) workspaceORM {
 type workspaceORM struct {
 	workspaceORMDo
 
-	ALL                    field.Asterisk
-	AccountId              field.Uint64
-	ActiveIntegrations     field.Field
-	ActiveScrapers         field.Int32
-	AlertOnBudgetThreshold field.Bool
-	AllowGuestAccess       field.Bool
-	AllowedEmailDomains    field.Field
-	BillingCurrency        field.String
-	BudgetAlertThreshold   field.Float32
-	CompressExports        field.Bool
-	CompressionFormat      field.String
-	CostPerLead            field.Float32
-	CreatedAt              field.Time
-	CurrentTeamMembers     field.Int32
-	DailyJobQuota          field.Int32
-	DeletedAt              field.Time
-	Description            field.String
-	Domain                 field.String
-	ExportDestinations     field.Field
-	ExportFormats          field.Field
-	ExportSchedule         field.String
-	GdprCompliant          field.Bool
-	HipaaCompliant         field.Bool
-	HubspotConfig          field.String
-	HubspotEnabled         field.Bool
-	Id                     field.Uint64
-	Industry               field.String
-	JobsRunThisMonth       field.Int32
-	LastJobRun             field.Time
-	MaxConcurrentScrapes   field.Int32
-	MaxRetries             field.Int32
-	MaxTeamMembers         field.Int32
-	MonthlyBudget          field.Float32
-	Name                   field.String
-	ProxyProvider          field.String
-	ProxyRotationInterval  field.Int32
-	ProxyType              field.String
-	ProxyUrls              field.Field
-	RequestsPerSecond      field.Int32
-	RetryInterval          field.Int64
-	RotateProxies          field.Bool
-	SalesforceConfig       field.String
-	SalesforceEnabled      field.Bool
-	Soc2Compliant          field.Bool
-	StorageQuota           field.Int64
-	Tags                   field.Field
-	TotalLeadsCollected    field.Int32
-	UpdatedAt              field.Time
-	UsedStorage            field.Int64
-	WorkspaceJobLimit      field.Int32
-	WorkspaceType          field.String
-	ZapierEnabled          field.Bool
-	ZapierWebhook          field.String
-	ApiKeys                workspaceORMHasManyApiKeys
+	ALL                 field.Asterisk
+	AccountId           field.Uint64
+	ActiveIntegrations  field.Field
+	ActiveScrapers      field.Int32
+	AllowGuestAccess    field.Bool
+	AllowedEmailDomains field.Field
+	CompressExports     field.Bool
+	CompressionFormat   field.String
+	CreatedAt           field.Time
+	CurrentTeamMembers  field.Int32
+	DailyJobQuota       field.Int32
+	DeletedAt           field.Time
+	Description         field.String
+	Domain              field.String
+	ExportDestinations  field.Field
+	ExportFormats       field.Field
+	ExportSchedule      field.String
+	GdprCompliant       field.Bool
+	HipaaCompliant      field.Bool
+	HubspotConfig       field.String
+	HubspotEnabled      field.Bool
+	Id                  field.Uint64
+	Industry            field.String
+	JobsRunThisMonth    field.Int32
+	LastJobRun          field.Time
+	MaxTeamMembers      field.Int32
+	Name                field.String
+	SalesforceConfig    field.String
+	SalesforceEnabled   field.Bool
+	Soc2Compliant       field.Bool
+	StorageQuota        field.Int64
+	Tags                field.Field
+	TotalLeadsCollected field.Int32
+	UpdatedAt           field.Time
+	UsedStorage         field.Int64
+	WorkspaceJobLimit   field.Int32
+	WorkspaceType       field.String
+	ZapierEnabled       field.Bool
+	ZapierWebhook       field.String
+	ApiKeys             workspaceORMHasManyApiKeys
 
 	ScrapingJobs workspaceORMHasManyScrapingJobs
 
@@ -227,14 +199,10 @@ func (w *workspaceORM) updateTableName(table string) *workspaceORM {
 	w.AccountId = field.NewUint64(table, "account_id")
 	w.ActiveIntegrations = field.NewField(table, "active_integrations")
 	w.ActiveScrapers = field.NewInt32(table, "active_scrapers")
-	w.AlertOnBudgetThreshold = field.NewBool(table, "alert_on_budget_threshold")
 	w.AllowGuestAccess = field.NewBool(table, "allow_guest_access")
 	w.AllowedEmailDomains = field.NewField(table, "allowed_email_domains")
-	w.BillingCurrency = field.NewString(table, "billing_currency")
-	w.BudgetAlertThreshold = field.NewFloat32(table, "budget_alert_threshold")
 	w.CompressExports = field.NewBool(table, "compress_exports")
 	w.CompressionFormat = field.NewString(table, "compression_format")
-	w.CostPerLead = field.NewFloat32(table, "cost_per_lead")
 	w.CreatedAt = field.NewTime(table, "created_at")
 	w.CurrentTeamMembers = field.NewInt32(table, "current_team_members")
 	w.DailyJobQuota = field.NewInt32(table, "daily_job_quota")
@@ -252,18 +220,8 @@ func (w *workspaceORM) updateTableName(table string) *workspaceORM {
 	w.Industry = field.NewString(table, "industry")
 	w.JobsRunThisMonth = field.NewInt32(table, "jobs_run_this_month")
 	w.LastJobRun = field.NewTime(table, "last_job_run")
-	w.MaxConcurrentScrapes = field.NewInt32(table, "max_concurrent_scrapes")
-	w.MaxRetries = field.NewInt32(table, "max_retries")
 	w.MaxTeamMembers = field.NewInt32(table, "max_team_members")
-	w.MonthlyBudget = field.NewFloat32(table, "monthly_budget")
 	w.Name = field.NewString(table, "name")
-	w.ProxyProvider = field.NewString(table, "proxy_provider")
-	w.ProxyRotationInterval = field.NewInt32(table, "proxy_rotation_interval")
-	w.ProxyType = field.NewString(table, "proxy_type")
-	w.ProxyUrls = field.NewField(table, "proxy_urls")
-	w.RequestsPerSecond = field.NewInt32(table, "requests_per_second")
-	w.RetryInterval = field.NewInt64(table, "retry_interval")
-	w.RotateProxies = field.NewBool(table, "rotate_proxies")
 	w.SalesforceConfig = field.NewString(table, "salesforce_config")
 	w.SalesforceEnabled = field.NewBool(table, "salesforce_enabled")
 	w.Soc2Compliant = field.NewBool(table, "soc2_compliant")
@@ -292,18 +250,14 @@ func (w *workspaceORM) GetFieldByName(fieldName string) (field.OrderExpr, bool) 
 }
 
 func (w *workspaceORM) fillFieldMap() {
-	w.fieldMap = make(map[string]field.Expr, 56)
+	w.fieldMap = make(map[string]field.Expr, 42)
 	w.fieldMap["account_id"] = w.AccountId
 	w.fieldMap["active_integrations"] = w.ActiveIntegrations
 	w.fieldMap["active_scrapers"] = w.ActiveScrapers
-	w.fieldMap["alert_on_budget_threshold"] = w.AlertOnBudgetThreshold
 	w.fieldMap["allow_guest_access"] = w.AllowGuestAccess
 	w.fieldMap["allowed_email_domains"] = w.AllowedEmailDomains
-	w.fieldMap["billing_currency"] = w.BillingCurrency
-	w.fieldMap["budget_alert_threshold"] = w.BudgetAlertThreshold
 	w.fieldMap["compress_exports"] = w.CompressExports
 	w.fieldMap["compression_format"] = w.CompressionFormat
-	w.fieldMap["cost_per_lead"] = w.CostPerLead
 	w.fieldMap["created_at"] = w.CreatedAt
 	w.fieldMap["current_team_members"] = w.CurrentTeamMembers
 	w.fieldMap["daily_job_quota"] = w.DailyJobQuota
@@ -321,18 +275,8 @@ func (w *workspaceORM) fillFieldMap() {
 	w.fieldMap["industry"] = w.Industry
 	w.fieldMap["jobs_run_this_month"] = w.JobsRunThisMonth
 	w.fieldMap["last_job_run"] = w.LastJobRun
-	w.fieldMap["max_concurrent_scrapes"] = w.MaxConcurrentScrapes
-	w.fieldMap["max_retries"] = w.MaxRetries
 	w.fieldMap["max_team_members"] = w.MaxTeamMembers
-	w.fieldMap["monthly_budget"] = w.MonthlyBudget
 	w.fieldMap["name"] = w.Name
-	w.fieldMap["proxy_provider"] = w.ProxyProvider
-	w.fieldMap["proxy_rotation_interval"] = w.ProxyRotationInterval
-	w.fieldMap["proxy_type"] = w.ProxyType
-	w.fieldMap["proxy_urls"] = w.ProxyUrls
-	w.fieldMap["requests_per_second"] = w.RequestsPerSecond
-	w.fieldMap["retry_interval"] = w.RetryInterval
-	w.fieldMap["rotate_proxies"] = w.RotateProxies
 	w.fieldMap["salesforce_config"] = w.SalesforceConfig
 	w.fieldMap["salesforce_enabled"] = w.SalesforceEnabled
 	w.fieldMap["soc2_compliant"] = w.Soc2Compliant

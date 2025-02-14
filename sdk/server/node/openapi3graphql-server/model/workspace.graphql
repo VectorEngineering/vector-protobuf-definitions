@@ -40,16 +40,6 @@ type Workspace {
   currentTeamMembers: Int!
   allowGuestAccess: Boolean!
   allowedEmailDomains: [String!!]
-  proxyUrls: [String!!]
-  proxyType: String!
-  rotateProxies: Boolean!
-  proxyRotationInterval: Int!
-  proxyProvider: String!
-  proxyAuth: String!
-  maxConcurrentScrapes: Int!
-  requestsPerSecond: Int!
-  maxRetries: Int!
-  retryInterval: String!
   # e.g., \"csv\", \"json\", \"excel\"
   exportFormats: [String!!]
   exportSchedule: String!
@@ -65,11 +55,6 @@ type Workspace {
   zapierWebhook: String!
   activeIntegrations: [String!!]
   integrationSettings: String!
-  monthlyBudget: Float!
-  costPerLead: Float!
-  alertOnBudgetThreshold: Boolean!
-  budgetAlertThreshold: Float!
-  billingCurrency: String!
 }
 
 input WorkspaceInput {
@@ -104,16 +89,6 @@ input WorkspaceInput {
     currentTeamMembers: Int!
     allowGuestAccess: Boolean!
     allowedEmailDomains: [String!]
-    proxyUrls: [String!]
-    proxyType: String!
-    rotateProxies: Boolean!
-    proxyRotationInterval: Int!
-    proxyProvider: String!
-    proxyAuth: [String!]
-    maxConcurrentScrapes: Int!
-    requestsPerSecond: Int!
-    maxRetries: Int!
-    retryInterval: String!
     # e.g., \"csv\", \"json\", \"excel\"
     exportFormats: [String!]
     exportSchedule: String!
@@ -129,10 +104,5 @@ input WorkspaceInput {
     zapierWebhook: String!
     activeIntegrations: [String!]
     integrationSettings: [String!]
-    monthlyBudget: Float!
-    costPerLead: Float!
-    alertOnBudgetThreshold: Boolean!
-    budgetAlertThreshold: Float!
-    billingCurrency: String!
 }
 

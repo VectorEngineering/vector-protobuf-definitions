@@ -1767,51 +1767,6 @@ func (m *Workspace) validate(all bool) error {
 
 	// no validation rules for AllowGuestAccess
 
-	// no validation rules for ProxyType
-
-	// no validation rules for RotateProxies
-
-	// no validation rules for ProxyRotationInterval
-
-	// no validation rules for ProxyProvider
-
-	// no validation rules for ProxyAuth
-
-	// no validation rules for MaxConcurrentScrapes
-
-	// no validation rules for RequestsPerSecond
-
-	// no validation rules for MaxRetries
-
-	if all {
-		switch v := interface{}(m.GetRetryInterval()).(type) {
-		case interface{ ValidateAll() error }:
-			if err := v.ValidateAll(); err != nil {
-				errors = append(errors, WorkspaceValidationError{
-					field:  "RetryInterval",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		case interface{ Validate() error }:
-			if err := v.Validate(); err != nil {
-				errors = append(errors, WorkspaceValidationError{
-					field:  "RetryInterval",
-					reason: "embedded message failed validation",
-					cause:  err,
-				})
-			}
-		}
-	} else if v, ok := interface{}(m.GetRetryInterval()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return WorkspaceValidationError{
-				field:  "RetryInterval",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
-
 	// no validation rules for ExportSchedule
 
 	// no validation rules for ExportDestinationConfig
@@ -1833,16 +1788,6 @@ func (m *Workspace) validate(all bool) error {
 	// no validation rules for ZapierWebhook
 
 	// no validation rules for IntegrationSettings
-
-	// no validation rules for MonthlyBudget
-
-	// no validation rules for CostPerLead
-
-	// no validation rules for AlertOnBudgetThreshold
-
-	// no validation rules for BudgetAlertThreshold
-
-	// no validation rules for BillingCurrency
 
 	if len(errors) > 0 {
 		return WorkspaceMultiError(errors)

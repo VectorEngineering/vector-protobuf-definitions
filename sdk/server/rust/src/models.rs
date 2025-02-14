@@ -41067,46 +41067,6 @@ pub struct Workspace {
     #[serde(skip_serializing_if="Option::is_none")]
     pub allowed_email_domains: Option<Vec<String>>,
 
-    #[serde(rename = "proxyUrls")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub proxy_urls: Option<Vec<String>>,
-
-    #[serde(rename = "proxyType")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub proxy_type: Option<String>,
-
-    #[serde(rename = "rotateProxies")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub rotate_proxies: Option<bool>,
-
-    #[serde(rename = "proxyRotationInterval")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub proxy_rotation_interval: Option<i32>,
-
-    #[serde(rename = "proxyProvider")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub proxy_provider: Option<String>,
-
-    #[serde(rename = "proxyAuth")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub proxy_auth: Option<std::collections::HashMap<String, String>>,
-
-    #[serde(rename = "maxConcurrentScrapes")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub max_concurrent_scrapes: Option<i32>,
-
-    #[serde(rename = "requestsPerSecond")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub requests_per_second: Option<i32>,
-
-    #[serde(rename = "maxRetries")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub max_retries: Option<i32>,
-
-    #[serde(rename = "retryInterval")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub retry_interval: Option<String>,
-
     /// e.g., \"csv\", \"json\", \"excel\"
     #[serde(rename = "exportFormats")]
     #[serde(skip_serializing_if="Option::is_none")]
@@ -41164,26 +41124,6 @@ pub struct Workspace {
     #[serde(skip_serializing_if="Option::is_none")]
     pub integration_settings: Option<std::collections::HashMap<String, String>>,
 
-    #[serde(rename = "monthlyBudget")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub monthly_budget: Option<f32>,
-
-    #[serde(rename = "costPerLead")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub cost_per_lead: Option<f32>,
-
-    #[serde(rename = "alertOnBudgetThreshold")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub alert_on_budget_threshold: Option<bool>,
-
-    #[serde(rename = "budgetAlertThreshold")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub budget_alert_threshold: Option<f32>,
-
-    #[serde(rename = "billingCurrency")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub billing_currency: Option<String>,
-
 }
 
 
@@ -41221,16 +41161,6 @@ impl Workspace {
             current_team_members: None,
             allow_guest_access: None,
             allowed_email_domains: None,
-            proxy_urls: None,
-            proxy_type: None,
-            rotate_proxies: None,
-            proxy_rotation_interval: None,
-            proxy_provider: None,
-            proxy_auth: None,
-            max_concurrent_scrapes: None,
-            requests_per_second: None,
-            max_retries: None,
-            retry_interval: None,
             export_formats: None,
             export_schedule: None,
             export_destinations: None,
@@ -41245,11 +41175,6 @@ impl Workspace {
             zapier_webhook: None,
             active_integrations: None,
             integration_settings: None,
-            monthly_budget: None,
-            cost_per_lead: None,
-            alert_on_budget_threshold: None,
-            budget_alert_threshold: None,
-            billing_currency: None,
         }
     }
 }
@@ -41441,80 +41366,6 @@ impl std::string::ToString for Workspace {
             }),
 
 
-            self.proxy_urls.as_ref().map(|proxy_urls| {
-                [
-                    "proxyUrls".to_string(),
-                    proxy_urls.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(","),
-                ].join(",")
-            }),
-
-
-            self.proxy_type.as_ref().map(|proxy_type| {
-                [
-                    "proxyType".to_string(),
-                    proxy_type.to_string(),
-                ].join(",")
-            }),
-
-
-            self.rotate_proxies.as_ref().map(|rotate_proxies| {
-                [
-                    "rotateProxies".to_string(),
-                    rotate_proxies.to_string(),
-                ].join(",")
-            }),
-
-
-            self.proxy_rotation_interval.as_ref().map(|proxy_rotation_interval| {
-                [
-                    "proxyRotationInterval".to_string(),
-                    proxy_rotation_interval.to_string(),
-                ].join(",")
-            }),
-
-
-            self.proxy_provider.as_ref().map(|proxy_provider| {
-                [
-                    "proxyProvider".to_string(),
-                    proxy_provider.to_string(),
-                ].join(",")
-            }),
-
-            // Skipping proxyAuth in query parameter serialization
-
-
-            self.max_concurrent_scrapes.as_ref().map(|max_concurrent_scrapes| {
-                [
-                    "maxConcurrentScrapes".to_string(),
-                    max_concurrent_scrapes.to_string(),
-                ].join(",")
-            }),
-
-
-            self.requests_per_second.as_ref().map(|requests_per_second| {
-                [
-                    "requestsPerSecond".to_string(),
-                    requests_per_second.to_string(),
-                ].join(",")
-            }),
-
-
-            self.max_retries.as_ref().map(|max_retries| {
-                [
-                    "maxRetries".to_string(),
-                    max_retries.to_string(),
-                ].join(",")
-            }),
-
-
-            self.retry_interval.as_ref().map(|retry_interval| {
-                [
-                    "retryInterval".to_string(),
-                    retry_interval.to_string(),
-                ].join(",")
-            }),
-
-
             self.export_formats.as_ref().map(|export_formats| {
                 [
                     "exportFormats".to_string(),
@@ -41614,46 +41465,6 @@ impl std::string::ToString for Workspace {
 
             // Skipping integrationSettings in query parameter serialization
 
-
-            self.monthly_budget.as_ref().map(|monthly_budget| {
-                [
-                    "monthlyBudget".to_string(),
-                    monthly_budget.to_string(),
-                ].join(",")
-            }),
-
-
-            self.cost_per_lead.as_ref().map(|cost_per_lead| {
-                [
-                    "costPerLead".to_string(),
-                    cost_per_lead.to_string(),
-                ].join(",")
-            }),
-
-
-            self.alert_on_budget_threshold.as_ref().map(|alert_on_budget_threshold| {
-                [
-                    "alertOnBudgetThreshold".to_string(),
-                    alert_on_budget_threshold.to_string(),
-                ].join(",")
-            }),
-
-
-            self.budget_alert_threshold.as_ref().map(|budget_alert_threshold| {
-                [
-                    "budgetAlertThreshold".to_string(),
-                    budget_alert_threshold.to_string(),
-                ].join(",")
-            }),
-
-
-            self.billing_currency.as_ref().map(|billing_currency| {
-                [
-                    "billingCurrency".to_string(),
-                    billing_currency.to_string(),
-                ].join(",")
-            }),
-
         ];
 
         params.into_iter().flatten().collect::<Vec<_>>().join(",")
@@ -41701,16 +41512,6 @@ impl std::str::FromStr for Workspace {
             pub current_team_members: Vec<i32>,
             pub allow_guest_access: Vec<bool>,
             pub allowed_email_domains: Vec<Vec<String>>,
-            pub proxy_urls: Vec<Vec<String>>,
-            pub proxy_type: Vec<String>,
-            pub rotate_proxies: Vec<bool>,
-            pub proxy_rotation_interval: Vec<i32>,
-            pub proxy_provider: Vec<String>,
-            pub proxy_auth: Vec<std::collections::HashMap<String, String>>,
-            pub max_concurrent_scrapes: Vec<i32>,
-            pub requests_per_second: Vec<i32>,
-            pub max_retries: Vec<i32>,
-            pub retry_interval: Vec<String>,
             pub export_formats: Vec<Vec<String>>,
             pub export_schedule: Vec<String>,
             pub export_destinations: Vec<Vec<String>>,
@@ -41725,11 +41526,6 @@ impl std::str::FromStr for Workspace {
             pub zapier_webhook: Vec<String>,
             pub active_integrations: Vec<Vec<String>>,
             pub integration_settings: Vec<std::collections::HashMap<String, String>>,
-            pub monthly_budget: Vec<f32>,
-            pub cost_per_lead: Vec<f32>,
-            pub alert_on_budget_threshold: Vec<bool>,
-            pub budget_alert_threshold: Vec<f32>,
-            pub billing_currency: Vec<String>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -41800,24 +41596,6 @@ impl std::str::FromStr for Workspace {
                     #[allow(clippy::redundant_clone)]
                     "allowGuestAccess" => intermediate_rep.allow_guest_access.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     "allowedEmailDomains" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
-                    "proxyUrls" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
-                    #[allow(clippy::redundant_clone)]
-                    "proxyType" => intermediate_rep.proxy_type.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "rotateProxies" => intermediate_rep.rotate_proxies.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "proxyRotationInterval" => intermediate_rep.proxy_rotation_interval.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "proxyProvider" => intermediate_rep.proxy_provider.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    "proxyAuth" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
-                    #[allow(clippy::redundant_clone)]
-                    "maxConcurrentScrapes" => intermediate_rep.max_concurrent_scrapes.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "requestsPerSecond" => intermediate_rep.requests_per_second.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "maxRetries" => intermediate_rep.max_retries.push(<i32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "retryInterval" => intermediate_rep.retry_interval.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     "exportFormats" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
                     #[allow(clippy::redundant_clone)]
                     "exportSchedule" => intermediate_rep.export_schedule.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
@@ -41841,16 +41619,6 @@ impl std::str::FromStr for Workspace {
                     "zapierWebhook" => intermediate_rep.zapier_webhook.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     "activeIntegrations" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
                     "integrationSettings" => return std::result::Result::Err("Parsing a container in this style is not supported in Workspace".to_string()),
-                    #[allow(clippy::redundant_clone)]
-                    "monthlyBudget" => intermediate_rep.monthly_budget.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "costPerLead" => intermediate_rep.cost_per_lead.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "alertOnBudgetThreshold" => intermediate_rep.alert_on_budget_threshold.push(<bool as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "budgetAlertThreshold" => intermediate_rep.budget_alert_threshold.push(<f32 as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "billingCurrency" => intermediate_rep.billing_currency.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing Workspace".to_string())
                 }
             }
@@ -41891,16 +41659,6 @@ impl std::str::FromStr for Workspace {
             current_team_members: intermediate_rep.current_team_members.into_iter().next(),
             allow_guest_access: intermediate_rep.allow_guest_access.into_iter().next(),
             allowed_email_domains: intermediate_rep.allowed_email_domains.into_iter().next(),
-            proxy_urls: intermediate_rep.proxy_urls.into_iter().next(),
-            proxy_type: intermediate_rep.proxy_type.into_iter().next(),
-            rotate_proxies: intermediate_rep.rotate_proxies.into_iter().next(),
-            proxy_rotation_interval: intermediate_rep.proxy_rotation_interval.into_iter().next(),
-            proxy_provider: intermediate_rep.proxy_provider.into_iter().next(),
-            proxy_auth: intermediate_rep.proxy_auth.into_iter().next(),
-            max_concurrent_scrapes: intermediate_rep.max_concurrent_scrapes.into_iter().next(),
-            requests_per_second: intermediate_rep.requests_per_second.into_iter().next(),
-            max_retries: intermediate_rep.max_retries.into_iter().next(),
-            retry_interval: intermediate_rep.retry_interval.into_iter().next(),
             export_formats: intermediate_rep.export_formats.into_iter().next(),
             export_schedule: intermediate_rep.export_schedule.into_iter().next(),
             export_destinations: intermediate_rep.export_destinations.into_iter().next(),
@@ -41915,11 +41673,6 @@ impl std::str::FromStr for Workspace {
             zapier_webhook: intermediate_rep.zapier_webhook.into_iter().next(),
             active_integrations: intermediate_rep.active_integrations.into_iter().next(),
             integration_settings: intermediate_rep.integration_settings.into_iter().next(),
-            monthly_budget: intermediate_rep.monthly_budget.into_iter().next(),
-            cost_per_lead: intermediate_rep.cost_per_lead.into_iter().next(),
-            alert_on_budget_threshold: intermediate_rep.alert_on_budget_threshold.into_iter().next(),
-            budget_alert_threshold: intermediate_rep.budget_alert_threshold.into_iter().next(),
-            billing_currency: intermediate_rep.billing_currency.into_iter().next(),
         })
     }
 }

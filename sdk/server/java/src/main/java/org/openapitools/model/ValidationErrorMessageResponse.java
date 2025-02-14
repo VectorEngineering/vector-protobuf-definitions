@@ -28,7 +28,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "ValidationErrorMessageResponse", description = "Represents data validation and business logic errors")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T00:28:49.378974-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T07:41:41.360877-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ValidationErrorMessageResponse {
 
   private ValidationErrorCode code = ValidationErrorCode.NO_ERROR;

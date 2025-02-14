@@ -1,6 +1,6 @@
 {
   "name": "@playbookmedia/backend-node-sdk",
-  "version": "1.11.14",
+  "version": "1.11.15",
   "description": "Vector Backend Node SDK for interacting with the Vector API",
   "main": "./lib/index.js",
   "files": [

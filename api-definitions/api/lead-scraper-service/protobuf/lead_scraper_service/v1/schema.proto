@@ -117,8 +117,7 @@ enum Status {
  */
 message Organization {
     option (gorm.opts) = {
-        ormable: true,
-        table: "lead_scraper_organizations"
+        ormable: true
     };
 
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
@@ -190,8 +189,7 @@ message Organization {
  */
 message Tenant {
     option (gorm.opts) = {
-        ormable: true,
-        table: "lead_scraper_tenants"
+        ormable: true
     };
 
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
@@ -250,8 +248,7 @@ message Tenant {
  */
 message Subscription {
     option (gorm.opts) = {
-        ormable: true,
-        table: "lead_scraper_subscriptions"
+        ormable: true
     };
 
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
@@ -363,8 +360,7 @@ message Subscription {
  */
 message Account {
     option (gorm.opts) = {
-        ormable: true,
-        table: "lead_scraper_accounts"
+        ormable: true
     };
 
     // Unique identifier for the account
@@ -464,8 +460,7 @@ message Account {
  */
 message Workspace {
     option (gorm.opts) = {
-        ormable: true,
-        table: "lead_scraper_workspaces"
+        ormable: true
     };
 
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
@@ -554,8 +549,7 @@ message Workspace {
  */
 message ScrapingJob {
     option (gorm.opts) = {
-        ormable: true,
-        table: "lead_scraper_scraping_jobs"
+        ormable: true
     };
 
     // Changed from uint64 to string to support UUID
@@ -642,8 +636,7 @@ message ScrapingJob {
  */
 message ScrapingWorkflow {
     option (gorm.opts) = {
-        ormable: true,
-        table: "lead_scraper_scraping_workflows"
+        ormable: true
     };
 
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
@@ -733,8 +726,7 @@ message ScrapingWorkflow {
  */
 message WebhookConfig {
     option (gorm.opts) = {
-        ormable: true,
-        table: "lead_scraper_webhook_configs"
+        ormable: true
     };
 
     uint64 id = 1 [(gorm.field).tag = {primary_key: true, index: "idx_webhook_configs_id"}];
@@ -865,8 +857,7 @@ message WebhookConfig {
  */
 message Lead {
     option (gorm.opts) = {
-        ormable: true,
-        table: "lead_scraper_leads"
+        ormable: true
     };
 
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
@@ -1031,8 +1022,7 @@ message Lead {
 // Detailed reviews
 message Review {
     option (gorm.opts) = {
-        ormable: true,
-        table: "lead_scraper_reviews"
+        ormable: true
     };
 
     uint64 id = 1 [(gorm.field).tag = {primary_key: true, index: "idx_reviews_id"}];
@@ -1052,8 +1042,7 @@ message Review {
 // Temporal data
 message BusinessHours {
     option (gorm.opts) = {
-        ormable: true,
-        table: "lead_scraper_business_hours"
+        ormable: true
     };
 
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
@@ -1085,8 +1074,7 @@ message BusinessHours {
 // Account-wide settings
 message AccountSettings {
     option (gorm.opts) = {
-        ormable: true,
-        table: "lead_scraper_account_settings"
+        ormable: true
     };
 
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
@@ -1136,8 +1124,7 @@ message AccountSettings {
  */
 message APIKey {
     option (gorm.opts) = {
-        ormable: true,
-        table: "lead_scraper_api_keys"
+        ormable: true
     };
 
     // Unique identifier
@@ -1242,8 +1229,7 @@ message APIKey {
 
 message TenantAPIKey {
     option (gorm.opts) = {
-        ormable: true,
-        table: "lead_scraper_tenant_api_keys"
+        ormable: true
     };
  
     uint64 id = 1 [(gorm.field).tag = {primary_key: true}];
@@ -1317,8 +1303,7 @@ enum TenantAPIKeyScope {
  */
 message Result {
     option (gorm.opts) = {
-        ormable: true,
-        table: "lead_scraper_results"
+        ormable: true
     };
 
     int32 id = 1 [(gorm.field).tag = {primary_key: true}];

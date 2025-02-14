@@ -29,7 +29,7 @@ import javax.annotation.Generated;
  */
 
 @Schema(name = "Organization", description = "Key features: - Multi-tenant support - Hierarchical structure - Enterprise features - Billing management  Use cases: - Company creates multiple apps/tenants - Enterprise manages business units - Usage tracking across tenants")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-13T19:56:39.276659-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T00:26:22.645676-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class Organization {
 
   private String id;

@@ -20227,9 +20227,6 @@
                     "workspaceId": {
                         "type": "string",
                         "format": "uint64"
-                    },
-                    "url": {
-                        "type": "string"
                     }
                 },
                 "title": "CreateScrapingJobRequest represents a request to create a new Google Maps scraping job",

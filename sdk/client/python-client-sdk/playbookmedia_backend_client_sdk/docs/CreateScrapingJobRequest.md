@@ -21,7 +21,6 @@ Name | Type | Description | Notes
 **max_time** | **int** |  | [optional] 
 **proxies** | **List[str]** |  | [optional] 
 **workspace_id** | **str** |  | [optional] 
-**url** | **str** |  | [optional] 
 
 ## Example
 

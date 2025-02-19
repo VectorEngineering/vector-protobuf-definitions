@@ -10096,10 +10096,6 @@ pub struct CreateScrapingJobRequest {
     #[serde(skip_serializing_if="Option::is_none")]
     pub workspace_id: Option<String>,
 
-    #[serde(rename = "url")]
-    #[serde(skip_serializing_if="Option::is_none")]
-    pub url: Option<String>,
-
 }
 
 
@@ -10123,7 +10119,6 @@ impl CreateScrapingJobRequest {
             max_time: None,
             proxies: None,
             workspace_id: None,
-            url: None,
         }
     }
 }
@@ -10250,14 +10245,6 @@ impl std::string::ToString for CreateScrapingJobRequest {
                 ].join(",")
             }),
 
-
-            self.url.as_ref().map(|url| {
-                [
-                    "url".to_string(),
-                    url.to_string(),
-                ].join(",")
-            }),
-
         ];
 
         params.into_iter().flatten().collect::<Vec<_>>().join(",")
@@ -10291,7 +10278,6 @@ impl std::str::FromStr for CreateScrapingJobRequest {
             pub max_time: Vec<i32>,
             pub proxies: Vec<Vec<String>>,
             pub workspace_id: Vec<String>,
-            pub url: Vec<String>,
         }
 
         let mut intermediate_rep = IntermediateRep::default();
@@ -10339,8 +10325,6 @@ impl std::str::FromStr for CreateScrapingJobRequest {
                     "proxies" => return std::result::Result::Err("Parsing a container in this style is not supported in CreateScrapingJobRequest".to_string()),
                     #[allow(clippy::redundant_clone)]
                     "workspaceId" => intermediate_rep.workspace_id.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
-                    #[allow(clippy::redundant_clone)]
-                    "url" => intermediate_rep.url.push(<String as std::str::FromStr>::from_str(val).map_err(|x| x.to_string())?),
                     _ => return std::result::Result::Err("Unexpected key while parsing CreateScrapingJobRequest".to_string())
                 }
             }
@@ -10367,7 +10351,6 @@ impl std::str::FromStr for CreateScrapingJobRequest {
             max_time: intermediate_rep.max_time.into_iter().next(),
             proxies: intermediate_rep.proxies.into_iter().next(),
             workspace_id: intermediate_rep.workspace_id.into_iter().next(),
-            url: intermediate_rep.url.into_iter().next(),
         })
     }
 }

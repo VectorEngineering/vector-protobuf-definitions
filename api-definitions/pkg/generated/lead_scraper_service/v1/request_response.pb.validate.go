@@ -194,17 +194,6 @@ func (m *CreateScrapingJobRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
-	if utf8.RuneCountInString(m.GetUrl()) < 1 {
-		err := CreateScrapingJobRequestValidationError{
-			field:  "Url",
-			reason: "value length must be at least 1 runes",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
-
 	if len(errors) > 0 {
 		return CreateScrapingJobRequestMultiError(errors)
 	}

@@ -47,7 +47,6 @@ message CreateScrapingJobRequest {
     int32 max_time = 14 [(validate.rules).int32.gt = 0];
     repeated string proxies = 15;
     uint64 workspace_id = 16 [(validate.rules).uint64.gt = 0];
-    string url = 17 [(validate.rules).string.min_len = 1];
 }
 
 // CreateScrapingJobResponse represents the response after creating a scraping job

@@ -19,7 +19,7 @@ import javax.annotation.Generated;
  * GetWorkflowResponse
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-19T11:22:55.992070-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-19T11:32:59.900685-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class GetWorkflowResponse {
 
   private ScrapingWorkflow workflow;

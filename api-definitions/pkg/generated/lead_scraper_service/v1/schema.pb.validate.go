@@ -2066,26 +2066,7 @@ func (m *ScrapingJob) validate(all bool) error {
 
 	}
 
-	if uri, err := url.Parse(m.GetUrl()); err != nil {
-		err = ScrapingJobValidationError{
-			field:  "Url",
-			reason: "value must be a valid URI",
-			cause:  err,
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	} else if !uri.IsAbs() {
-		err := ScrapingJobValidationError{
-			field:  "Url",
-			reason: "value must be absolute",
-		}
-		if !all {
-			return err
-		}
-		errors = append(errors, err)
-	}
+	// no validation rules for Url
 
 	if len(errors) > 0 {
 		return ScrapingJobMultiError(errors)

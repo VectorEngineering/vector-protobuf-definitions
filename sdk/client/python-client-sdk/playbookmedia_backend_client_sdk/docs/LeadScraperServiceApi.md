@@ -1212,7 +1212,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_scraping_job**
-> DeleteScrapingJobResponse delete_scraping_job(job_id, user_id, org_id, tenant_id)
+> DeleteScrapingJobResponse delete_scraping_job(job_id, user_id, org_id, tenant_id, workspace_id=workspace_id)
 
 Delete a specific job
 
@@ -1253,10 +1253,11 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
     user_id = 'user_id_example' # str | 
     org_id = 'org_id_example' # str | 
     tenant_id = 'tenant_id_example' # str | 
+    workspace_id = 'workspace_id_example' # str |  (optional)
 
     try:
         # Delete a specific job
-        api_response = await api_instance.delete_scraping_job(job_id, user_id, org_id, tenant_id)
+        api_response = await api_instance.delete_scraping_job(job_id, user_id, org_id, tenant_id, workspace_id=workspace_id)
         print("The response of LeadScraperServiceApi->delete_scraping_job:\n")
         pprint(api_response)
     except Exception as e:
@@ -1274,6 +1275,7 @@ Name | Type | Description  | Notes
  **user_id** | **str**|  | 
  **org_id** | **str**|  | 
  **tenant_id** | **str**|  | 
+ **workspace_id** | **str**|  | [optional] 
 
 ### Return type
 
@@ -2430,7 +2432,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_scraping_job**
-> GetScrapingJobResponse get_scraping_job(job_id, user_id, org_id, tenant_id)
+> GetScrapingJobResponse get_scraping_job(job_id, user_id, org_id, tenant_id, workspace_id=workspace_id)
 
 Get a specific job
 
@@ -2471,10 +2473,11 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
     user_id = 'user_id_example' # str | 
     org_id = 'org_id_example' # str | 
     tenant_id = 'tenant_id_example' # str | 
+    workspace_id = 'workspace_id_example' # str |  (optional)
 
     try:
         # Get a specific job
-        api_response = await api_instance.get_scraping_job(job_id, user_id, org_id, tenant_id)
+        api_response = await api_instance.get_scraping_job(job_id, user_id, org_id, tenant_id, workspace_id=workspace_id)
         print("The response of LeadScraperServiceApi->get_scraping_job:\n")
         pprint(api_response)
     except Exception as e:
@@ -2492,6 +2495,7 @@ Name | Type | Description  | Notes
  **user_id** | **str**|  | 
  **org_id** | **str**|  | 
  **tenant_id** | **str**|  | 
+ **workspace_id** | **str**|  | [optional] 
 
 ### Return type
 

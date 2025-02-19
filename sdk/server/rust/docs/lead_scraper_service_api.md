@@ -417,7 +417,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **DeleteScrapingJob**
-> models::DeleteScrapingJobResponse DeleteScrapingJob(ctx, job_id, user_id, org_id, tenant_id)
+> models::DeleteScrapingJobResponse DeleteScrapingJob(ctx, job_id, user_id, org_id, tenant_id, optional)
 Delete a specific job
 
 This endpoint deletes a specific Google Maps scraping job
@@ -431,6 +431,18 @@ Name | Type | Description  | Notes
   **user_id** | **String**|  | 
   **org_id** | **String**|  | 
   **tenant_id** | **String**|  | 
+ **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a map[string]interface{}.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **job_id** | **String**|  | 
+ **user_id** | **String**|  | 
+ **org_id** | **String**|  | 
+ **tenant_id** | **String**|  | 
+ **workspace_id** | **String**|  | 
 
 ### Return type
 
@@ -831,7 +843,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **GetScrapingJob**
-> models::GetScrapingJobResponse GetScrapingJob(ctx, job_id, user_id, org_id, tenant_id)
+> models::GetScrapingJobResponse GetScrapingJob(ctx, job_id, user_id, org_id, tenant_id, optional)
 Get a specific job
 
 This endpoint retrieves a specific Google Maps scraping job
@@ -845,6 +857,18 @@ Name | Type | Description  | Notes
   **user_id** | **String**|  | 
   **org_id** | **String**|  | 
   **tenant_id** | **String**|  | 
+ **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a map[string]interface{}.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **job_id** | **String**|  | 
+ **user_id** | **String**|  | 
+ **org_id** | **String**|  | 
+ **tenant_id** | **String**|  | 
+ **workspace_id** | **String**|  | 
 
 ### Return type
 

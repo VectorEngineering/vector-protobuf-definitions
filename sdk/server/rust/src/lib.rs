@@ -5107,6 +5107,7 @@ pub trait Api<C: Send + Sync> {
         user_id: String,
         org_id: String,
         tenant_id: String,
+        workspace_id: Option<String>,
         context: &C) -> Result<DeleteScrapingJobResponse, ApiError>;
 
     /// Delete a tenant
@@ -5206,6 +5207,7 @@ pub trait Api<C: Send + Sync> {
         user_id: String,
         org_id: String,
         tenant_id: String,
+        workspace_id: Option<String>,
         context: &C) -> Result<GetScrapingJobResponse, ApiError>;
 
     /// Get tenant details
@@ -5648,6 +5650,7 @@ pub trait ApiNoContext<C: Send + Sync> {
         user_id: String,
         org_id: String,
         tenant_id: String,
+        workspace_id: Option<String>,
         ) -> Result<DeleteScrapingJobResponse, ApiError>;
 
     /// Delete a tenant
@@ -5747,6 +5750,7 @@ pub trait ApiNoContext<C: Send + Sync> {
         user_id: String,
         org_id: String,
         tenant_id: String,
+        workspace_id: Option<String>,
         ) -> Result<GetScrapingJobResponse, ApiError>;
 
     /// Get tenant details
@@ -6251,10 +6255,11 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         user_id: String,
         org_id: String,
         tenant_id: String,
+        workspace_id: Option<String>,
         ) -> Result<DeleteScrapingJobResponse, ApiError>
     {
         let context = self.context().clone();
-        self.api().delete_scraping_job(job_id, user_id, org_id, tenant_id, &context).await
+        self.api().delete_scraping_job(job_id, user_id, org_id, tenant_id, workspace_id, &context).await
     }
 
     /// Delete a tenant
@@ -6398,10 +6403,11 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         user_id: String,
         org_id: String,
         tenant_id: String,
+        workspace_id: Option<String>,
         ) -> Result<GetScrapingJobResponse, ApiError>
     {
         let context = self.context().clone();
-        self.api().get_scraping_job(job_id, user_id, org_id, tenant_id, &context).await
+        self.api().get_scraping_job(job_id, user_id, org_id, tenant_id, workspace_id, &context).await
     }
 
     /// Get tenant details

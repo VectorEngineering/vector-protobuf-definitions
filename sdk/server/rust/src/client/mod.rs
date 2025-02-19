@@ -4681,6 +4681,7 @@ impl<S, C> Api<C> for Client<S, C> where
         param_user_id: String,
         param_org_id: String,
         param_tenant_id: String,
+        param_workspace_id: Option<String>,
         context: &C) -> Result<DeleteScrapingJobResponse, ApiError>
     {
         let mut client_service = self.client_service.clone();
@@ -4699,6 +4700,10 @@ impl<S, C> Api<C> for Client<S, C> where
                     &param_org_id);
                 query_string.append_pair("tenantId",
                     &param_tenant_id);
+            if let Some(param_workspace_id) = param_workspace_id {
+                query_string.append_pair("workspaceId",
+                    &param_workspace_id);
+            }
             query_string.finish()
         };
         if !query_string.is_empty() {
@@ -8874,6 +8879,7 @@ impl<S, C> Api<C> for Client<S, C> where
         param_user_id: String,
         param_org_id: String,
         param_tenant_id: String,
+        param_workspace_id: Option<String>,
         context: &C) -> Result<GetScrapingJobResponse, ApiError>
     {
         let mut client_service = self.client_service.clone();
@@ -8892,6 +8898,10 @@ impl<S, C> Api<C> for Client<S, C> where
                     &param_org_id);
                 query_string.append_pair("tenantId",
                     &param_tenant_id);
+            if let Some(param_workspace_id) = param_workspace_id {
+                query_string.append_pair("workspaceId",
+                    &param_workspace_id);
+            }
             query_string.finish()
         };
         if !query_string.is_empty() {

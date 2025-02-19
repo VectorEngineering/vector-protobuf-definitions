@@ -73,12 +73,13 @@ export default {
         },
 
         // @return GetScrapingJobResponse
-        GetScrapingJob: ($jobId, $userId, $orgId, $tenantId) => {
+        GetScrapingJob: ($jobId, $userId, $orgId, $tenantId, $workspaceId) => {
             return {
                 "jobId": "jobId_example",
                 "userId": "userId_example",
                 "orgId": "orgId_example",
-                "tenantId": "tenantId_example"
+                "tenantId": "tenantId_example",
+                "workspaceId": "workspaceId_example"
             };
         },
 
@@ -350,12 +351,13 @@ export default {
         },
 
         // @return DeleteScrapingJobResponse
-        DeleteScrapingJob: ($jobId, $userId, $orgId, $tenantId) => {
+        DeleteScrapingJob: ($jobId, $userId, $orgId, $tenantId, $workspaceId) => {
             return {
                 "jobId": "jobId_example",
                 "userId": "userId_example",
                 "orgId": "orgId_example",
-                "tenantId": "tenantId_example"
+                "tenantId": "tenantId_example",
+                "workspaceId": "workspaceId_example"
             };
         },
 

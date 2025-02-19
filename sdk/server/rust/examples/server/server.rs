@@ -317,9 +317,10 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         user_id: String,
         org_id: String,
         tenant_id: String,
+        workspace_id: Option<String>,
         context: &C) -> Result<DeleteScrapingJobResponse, ApiError>
     {
-        info!("delete_scraping_job(\"{}\", \"{}\", \"{}\", \"{}\") - X-Span-ID: {:?}", job_id, user_id, org_id, tenant_id, context.get().0.clone());
+        info!("delete_scraping_job(\"{}\", \"{}\", \"{}\", \"{}\", {:?}) - X-Span-ID: {:?}", job_id, user_id, org_id, tenant_id, workspace_id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 
@@ -464,9 +465,10 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         user_id: String,
         org_id: String,
         tenant_id: String,
+        workspace_id: Option<String>,
         context: &C) -> Result<GetScrapingJobResponse, ApiError>
     {
-        info!("get_scraping_job(\"{}\", \"{}\", \"{}\", \"{}\") - X-Span-ID: {:?}", job_id, user_id, org_id, tenant_id, context.get().0.clone());
+        info!("get_scraping_job(\"{}\", \"{}\", \"{}\", \"{}\", {:?}) - X-Span-ID: {:?}", job_id, user_id, org_id, tenant_id, workspace_id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

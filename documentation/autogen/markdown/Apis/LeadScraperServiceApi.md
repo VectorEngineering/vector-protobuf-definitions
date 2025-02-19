@@ -394,7 +394,7 @@ Delete an organization
 
 <a name="deleteScrapingJob"></a>
 # **deleteScrapingJob**
-> DeleteScrapingJobResponse deleteScrapingJob(jobId, userId, orgId, tenantId)
+> DeleteScrapingJobResponse deleteScrapingJob(jobId, userId, orgId, tenantId, workspaceId)
 
 Delete a specific job
 
@@ -408,6 +408,7 @@ Delete a specific job
 | **userId** | **String**|  | [default to null] |
 | **orgId** | **String**|  | [default to null] |
 | **tenantId** | **String**|  | [default to null] |
+| **workspaceId** | **String**|  | [optional] [default to null] |
 
 ### Return type
 
@@ -745,7 +746,7 @@ Get organization details
 
 <a name="getScrapingJob"></a>
 # **getScrapingJob**
-> GetScrapingJobResponse getScrapingJob(jobId, userId, orgId, tenantId)
+> GetScrapingJobResponse getScrapingJob(jobId, userId, orgId, tenantId, workspaceId)
 
 Get a specific job
 
@@ -759,6 +760,7 @@ Get a specific job
 | **userId** | **String**|  | [default to null] |
 | **orgId** | **String**|  | [default to null] |
 | **tenantId** | **String**|  | [default to null] |
+| **workspaceId** | **String**|  | [optional] [default to null] |
 
 ### Return type
 

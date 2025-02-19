@@ -1915,6 +1915,12 @@
                                                 "value": "tenantId_example",
                                                 "description": "",
                                                 "disabled": false
+                                            },
+                                            {
+                                                "key": "workspaceId",
+                                                "value": "workspaceId_example",
+                                                "description": "",
+                                                "disabled": true
                                             }
                                         ]
                                     },
@@ -1985,6 +1991,12 @@
                                                 "value": "tenantId_example",
                                                 "description": "",
                                                 "disabled": false
+                                            },
+                                            {
+                                                "key": "workspaceId",
+                                                "value": "workspaceId_example",
+                                                "description": "",
+                                                "disabled": true
                                             }
                                         ]
                                     },

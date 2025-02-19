@@ -290,7 +290,7 @@ def delete_organization(id):  # noqa: E501
     return 'do some magic!'
 
 
-def delete_scraping_job(job_id, user_id, org_id, tenant_id):  # noqa: E501
+def delete_scraping_job(job_id, user_id, org_id, tenant_id, workspace_id=None):  # noqa: E501
     """Delete a specific job
 
     This endpoint deletes a specific Google Maps scraping job # noqa: E501
@@ -303,6 +303,8 @@ def delete_scraping_job(job_id, user_id, org_id, tenant_id):  # noqa: E501
     :type org_id: str
     :param tenant_id: 
     :type tenant_id: str
+    :param workspace_id: 
+    :type workspace_id: str
 
     :rtype: Union[DeleteScrapingJobResponse, Tuple[DeleteScrapingJobResponse, int], Tuple[DeleteScrapingJobResponse, int, Dict[str, str]]
     """
@@ -500,7 +502,7 @@ def get_organization(id):  # noqa: E501
     return 'do some magic!'
 
 
-def get_scraping_job(job_id, user_id, org_id, tenant_id):  # noqa: E501
+def get_scraping_job(job_id, user_id, org_id, tenant_id, workspace_id=None):  # noqa: E501
     """Get a specific job
 
     This endpoint retrieves a specific Google Maps scraping job # noqa: E501
@@ -513,6 +515,8 @@ def get_scraping_job(job_id, user_id, org_id, tenant_id):  # noqa: E501
     :type org_id: str
     :param tenant_id: 
     :type tenant_id: str
+    :param workspace_id: 
+    :type workspace_id: str
 
     :rtype: Union[GetScrapingJobResponse, Tuple[GetScrapingJobResponse, int], Tuple[GetScrapingJobResponse, int, Dict[str, str]]
     """

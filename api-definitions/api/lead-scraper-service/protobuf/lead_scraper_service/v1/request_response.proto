@@ -75,6 +75,7 @@ message GetScrapingJobRequest {
         (validate.rules).uint64.gt = 0,
         (google.api.field_behavior) = REQUIRED
     ];
+    uint64 workspace_id = 5 [(validate.rules).uint64.gt = 0];
 }
 
 // GetScrapingJobResponse represents the response containing scraping job details
@@ -127,6 +128,7 @@ message DeleteScrapingJobRequest {
         (validate.rules).uint64.gt = 0,
         (google.api.field_behavior) = REQUIRED
     ];
+    uint64 workspace_id = 5 [(validate.rules).uint64.gt = 0];
 }
 
 // DeleteScrapingJobResponse represents the response after deleting a scraping job

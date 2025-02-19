@@ -317,7 +317,8 @@ fn main() {
                   "job_id_example".to_string(),
                   "user_id_example".to_string(),
                   "org_id_example".to_string(),
-                  "tenant_id_example".to_string()
+                  "tenant_id_example".to_string(),
+                  Some("workspace_id_example".to_string())
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },
@@ -416,7 +417,8 @@ fn main() {
                   "job_id_example".to_string(),
                   "user_id_example".to_string(),
                   "org_id_example".to_string(),
-                  "tenant_id_example".to_string()
+                  "tenant_id_example".to_string(),
+                  Some("workspace_id_example".to_string())
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },

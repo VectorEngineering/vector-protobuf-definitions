@@ -455,6 +455,17 @@ func (m *GetScrapingJobRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if m.GetWorkspaceId() <= 0 {
+		err := GetScrapingJobRequestValidationError{
+			field:  "WorkspaceId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return GetScrapingJobRequestMultiError(errors)
 	}
@@ -1041,6 +1052,17 @@ func (m *DeleteScrapingJobRequest) validate(all bool) error {
 	if m.GetTenantId() <= 0 {
 		err := DeleteScrapingJobRequestValidationError{
 			field:  "TenantId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWorkspaceId() <= 0 {
+		err := DeleteScrapingJobRequestValidationError{
+			field:  "WorkspaceId",
 			reason: "value must be greater than 0",
 		}
 		if !all {

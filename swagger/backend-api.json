@@ -5793,6 +5793,15 @@
                             "type": "string",
                             "format": "uint64"
                         }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uint64"
+                        }
                     }
                 ],
                 "tags": [
@@ -6150,6 +6159,15 @@
                         "name": "tenantId",
                         "in": "query",
                         "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uint64"
+                        }
+                    },
+                    {
+                        "name": "workspaceId",
+                        "in": "query",
+                        "required": false,
                         "schema": {
                             "type": "string",
                             "format": "uint64"

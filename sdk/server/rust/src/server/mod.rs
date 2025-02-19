@@ -4162,12 +4162,30 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                         .body(Body::from("Missing required query parameter tenantId"))
                         .expect("Unable to create Bad Request response for missing query parameter tenantId")),
                 };
+                let param_workspace_id = query_params.iter().filter(|e| e.0 == "workspaceId").map(|e| e.1.clone())
+                    .next();
+                let param_workspace_id = match param_workspace_id {
+                    Some(param_workspace_id) => {
+                        let param_workspace_id =
+                            <String as std::str::FromStr>::from_str
+                                (&param_workspace_id);
+                        match param_workspace_id {
+                            Ok(param_workspace_id) => Some(param_workspace_id),
+                            Err(e) => return Ok(Response::builder()
+                                .status(StatusCode::BAD_REQUEST)
+                                .body(Body::from(format!("Couldn't parse query parameter workspaceId - doesn't match schema: {}", e)))
+                                .expect("Unable to create Bad Request response for invalid query parameter workspaceId")),
+                        }
+                    },
+                    None => None,
+                };
 
                                 let result = api_impl.delete_scraping_job(
                                             param_job_id,
                                             param_user_id,
                                             param_org_id,
                                             param_tenant_id,
+                                            param_workspace_id,
                                         &context
                                     ).await;
                                 let mut response = Response::new(Body::empty());
@@ -7938,12 +7956,30 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                         .body(Body::from("Missing required query parameter tenantId"))
                         .expect("Unable to create Bad Request response for missing query parameter tenantId")),
                 };
+                let param_workspace_id = query_params.iter().filter(|e| e.0 == "workspaceId").map(|e| e.1.clone())
+                    .next();
+                let param_workspace_id = match param_workspace_id {
+                    Some(param_workspace_id) => {
+                        let param_workspace_id =
+                            <String as std::str::FromStr>::from_str
+                                (&param_workspace_id);
+                        match param_workspace_id {
+                            Ok(param_workspace_id) => Some(param_workspace_id),
+                            Err(e) => return Ok(Response::builder()
+                                .status(StatusCode::BAD_REQUEST)
+                                .body(Body::from(format!("Couldn't parse query parameter workspaceId - doesn't match schema: {}", e)))
+                                .expect("Unable to create Bad Request response for invalid query parameter workspaceId")),
+                        }
+                    },
+                    None => None,
+                };
 
                                 let result = api_impl.get_scraping_job(
                                             param_job_id,
                                             param_user_id,
                                             param_org_id,
                                             param_tenant_id,
+                                            param_workspace_id,
                                         &context
                                     ).await;
                                 let mut response = Response::new(Body::empty());

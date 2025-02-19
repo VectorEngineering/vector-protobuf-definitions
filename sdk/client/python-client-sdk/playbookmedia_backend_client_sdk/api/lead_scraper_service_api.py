@@ -4127,6 +4127,7 @@ class LeadScraperServiceApi:
         user_id: StrictStr,
         org_id: StrictStr,
         tenant_id: StrictStr,
+        workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4152,6 +4153,8 @@ class LeadScraperServiceApi:
         :type org_id: str
         :param tenant_id: (required)
         :type tenant_id: str
+        :param workspace_id:
+        :type workspace_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4179,6 +4182,7 @@ class LeadScraperServiceApi:
             user_id=user_id,
             org_id=org_id,
             tenant_id=tenant_id,
+            workspace_id=workspace_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4223,6 +4227,7 @@ class LeadScraperServiceApi:
         user_id: StrictStr,
         org_id: StrictStr,
         tenant_id: StrictStr,
+        workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4248,6 +4253,8 @@ class LeadScraperServiceApi:
         :type org_id: str
         :param tenant_id: (required)
         :type tenant_id: str
+        :param workspace_id:
+        :type workspace_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4275,6 +4282,7 @@ class LeadScraperServiceApi:
             user_id=user_id,
             org_id=org_id,
             tenant_id=tenant_id,
+            workspace_id=workspace_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4319,6 +4327,7 @@ class LeadScraperServiceApi:
         user_id: StrictStr,
         org_id: StrictStr,
         tenant_id: StrictStr,
+        workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4344,6 +4353,8 @@ class LeadScraperServiceApi:
         :type org_id: str
         :param tenant_id: (required)
         :type tenant_id: str
+        :param workspace_id:
+        :type workspace_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -4371,6 +4382,7 @@ class LeadScraperServiceApi:
             user_id=user_id,
             org_id=org_id,
             tenant_id=tenant_id,
+            workspace_id=workspace_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4410,6 +4422,7 @@ class LeadScraperServiceApi:
         user_id,
         org_id,
         tenant_id,
+        workspace_id,
         _request_auth,
         _content_type,
         _headers,
@@ -4443,6 +4456,10 @@ class LeadScraperServiceApi:
         if tenant_id is not None:
             
             _query_params.append(('tenantId', tenant_id))
+            
+        if workspace_id is not None:
+            
+            _query_params.append(('workspaceId', workspace_id))
             
         # process the header parameters
         # process the form parameters
@@ -8314,6 +8331,7 @@ class LeadScraperServiceApi:
         user_id: StrictStr,
         org_id: StrictStr,
         tenant_id: StrictStr,
+        workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8339,6 +8357,8 @@ class LeadScraperServiceApi:
         :type org_id: str
         :param tenant_id: (required)
         :type tenant_id: str
+        :param workspace_id:
+        :type workspace_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8366,6 +8386,7 @@ class LeadScraperServiceApi:
             user_id=user_id,
             org_id=org_id,
             tenant_id=tenant_id,
+            workspace_id=workspace_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8410,6 +8431,7 @@ class LeadScraperServiceApi:
         user_id: StrictStr,
         org_id: StrictStr,
         tenant_id: StrictStr,
+        workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8435,6 +8457,8 @@ class LeadScraperServiceApi:
         :type org_id: str
         :param tenant_id: (required)
         :type tenant_id: str
+        :param workspace_id:
+        :type workspace_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8462,6 +8486,7 @@ class LeadScraperServiceApi:
             user_id=user_id,
             org_id=org_id,
             tenant_id=tenant_id,
+            workspace_id=workspace_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8506,6 +8531,7 @@ class LeadScraperServiceApi:
         user_id: StrictStr,
         org_id: StrictStr,
         tenant_id: StrictStr,
+        workspace_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8531,6 +8557,8 @@ class LeadScraperServiceApi:
         :type org_id: str
         :param tenant_id: (required)
         :type tenant_id: str
+        :param workspace_id:
+        :type workspace_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -8558,6 +8586,7 @@ class LeadScraperServiceApi:
             user_id=user_id,
             org_id=org_id,
             tenant_id=tenant_id,
+            workspace_id=workspace_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8597,6 +8626,7 @@ class LeadScraperServiceApi:
         user_id,
         org_id,
         tenant_id,
+        workspace_id,
         _request_auth,
         _content_type,
         _headers,
@@ -8630,6 +8660,10 @@ class LeadScraperServiceApi:
         if tenant_id is not None:
             
             _query_params.append(('tenantId', tenant_id))
+            
+        if workspace_id is not None:
+            
+            _query_params.append(('workspaceId', workspace_id))
             
         # process the header parameters
         # process the form parameters

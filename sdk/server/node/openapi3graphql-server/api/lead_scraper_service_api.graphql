@@ -98,7 +98,9 @@ input DeleteScrapingJobInput {
     
     orgId: String!, 
     
-    tenantId: String!
+    tenantId: String!, 
+    
+    workspaceId: String!
 }
 
 input DeleteTenantInput {
@@ -296,6 +298,7 @@ type Mutation {
   # @param String! userId 
   # @param String! orgId 
   # @param String! tenantId 
+  # @param String! workspaceId 
   # @return [DeleteScrapingJobResponse]
   DeleteScrapingJob(input: DeleteScrapingJobInput!): DeleteScrapingJobResponse
   # Delete a tenant
@@ -455,8 +458,9 @@ type Query {
   # @param String! userId 
   # @param String! orgId 
   # @param String! tenantId 
+  # @param String! workspaceId 
   # @return [GetScrapingJobResponse]
-  GetScrapingJob(jobId: String!, userId: String!, orgId: String!, tenantId: String!): GetScrapingJobResponse
+  GetScrapingJob(jobId: String!, userId: String!, orgId: String!, tenantId: String!, workspaceId: String!): GetScrapingJobResponse
   # Get tenant details
   # Retrieves details of a specific tenant
   # @param String! organizationId 

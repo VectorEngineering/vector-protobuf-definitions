@@ -146,7 +146,7 @@ Delete an organization
 Permanently deletes an organization and all associated resources
 <a name="DeleteScrapingJob"></a>
 # **DeleteScrapingJob**
-> DeleteScrapingJobResponse DeleteScrapingJob(jobId, userId, orgId, tenantId)
+> DeleteScrapingJobResponse DeleteScrapingJob(jobId, userId, orgId, tenantId, workspaceId)
 
 Delete a specific job
 
@@ -230,7 +230,7 @@ Get organization details
 Retrieves details of a specific organization
 <a name="GetScrapingJob"></a>
 # **GetScrapingJob**
-> GetScrapingJobResponse GetScrapingJob(jobId, userId, orgId, tenantId)
+> GetScrapingJobResponse GetScrapingJob(jobId, userId, orgId, tenantId, workspaceId)
 
 Get a specific job
 

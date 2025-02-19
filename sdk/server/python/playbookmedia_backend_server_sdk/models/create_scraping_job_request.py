@@ -12,7 +12,7 @@ class CreateScrapingJobRequest(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, auth_platform_user_id=None, org_id=None, tenant_id=None, name=None, keywords=None, lang=None, zoom=None, lat=None, lon=None, fast_mode=None, radius=None, depth=None, email=None, max_time=None, proxies=None):  # noqa: E501
+    def __init__(self, auth_platform_user_id=None, org_id=None, tenant_id=None, name=None, keywords=None, lang=None, zoom=None, lat=None, lon=None, fast_mode=None, radius=None, depth=None, email=None, max_time=None, proxies=None, workspace_id=None):  # noqa: E501
         """CreateScrapingJobRequest - a model defined in OpenAPI
 
         :param auth_platform_user_id: The auth_platform_user_id of this CreateScrapingJobRequest.  # noqa: E501
@@ -45,6 +45,8 @@ class CreateScrapingJobRequest(Model):
         :type max_time: int
         :param proxies: The proxies of this CreateScrapingJobRequest.  # noqa: E501
         :type proxies: List[str]
+        :param workspace_id: The workspace_id of this CreateScrapingJobRequest.  # noqa: E501
+        :type workspace_id: str
         """
         self.openapi_types = {
             'auth_platform_user_id': str,
@@ -61,7 +63,8 @@ class CreateScrapingJobRequest(Model):
             'depth': int,
             'email': bool,
             'max_time': int,
-            'proxies': List[str]
+            'proxies': List[str],
+            'workspace_id': str
         }
 
         self.attribute_map = {
@@ -79,7 +82,8 @@ class CreateScrapingJobRequest(Model):
             'depth': 'depth',
             'email': 'email',
             'max_time': 'maxTime',
-            'proxies': 'proxies'
+            'proxies': 'proxies',
+            'workspace_id': 'workspaceId'
         }
 
         self._auth_platform_user_id = auth_platform_user_id
@@ -97,6 +101,7 @@ class CreateScrapingJobRequest(Model):
         self._email = email
         self._max_time = max_time
         self._proxies = proxies
+        self._workspace_id = workspace_id
 
     @classmethod
     def from_dict(cls, dikt) -> 'CreateScrapingJobRequest':
@@ -429,3 +434,24 @@ class CreateScrapingJobRequest(Model):
         """
 
         self._proxies = proxies
+
+    @property
+    def workspace_id(self) -> str:
+        """Gets the workspace_id of this CreateScrapingJobRequest.
+
+
+        :return: The workspace_id of this CreateScrapingJobRequest.
+        :rtype: str
+        """
+        return self._workspace_id
+
+    @workspace_id.setter
+    def workspace_id(self, workspace_id: str):
+        """Sets the workspace_id of this CreateScrapingJobRequest.
+
+
+        :param workspace_id: The workspace_id of this CreateScrapingJobRequest.
+        :type workspace_id: str
+        """
+
+        self._workspace_id = workspace_id

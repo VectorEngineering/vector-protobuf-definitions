@@ -183,6 +183,17 @@ func (m *CreateScrapingJobRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if m.GetWorkspaceId() <= 0 {
+		err := CreateScrapingJobRequestValidationError{
+			field:  "WorkspaceId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return CreateScrapingJobRequestMultiError(errors)
 	}

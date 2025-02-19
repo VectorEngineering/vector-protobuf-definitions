@@ -1737,7 +1737,7 @@
                                     ],
                                     "body": {
                                         "mode": "raw",
-                                        "raw": "{\n \"authPlatformUserId\": \"<string>\",\n \"orgId\": \"<string>\",\n \"tenantId\": \"<string>\",\n \"name\": \"<string>\",\n \"keywords\": \"<string>\",\n \"lang\": \"<string>\",\n \"zoom\": \"<number>\",\n \"lat\": \"<string>\",\n \"lon\": \"<string>\",\n \"fastMode\": \"<string>\",\n \"radius\": \"<number>\",\n \"depth\": \"<number>\",\n \"email\": \"<string>\",\n \"maxTime\": \"<number>\",\n \"proxies\": \"<string>\"\n}",
+                                        "raw": "{\n \"authPlatformUserId\": \"<string>\",\n \"orgId\": \"<string>\",\n \"tenantId\": \"<string>\",\n \"name\": \"<string>\",\n \"keywords\": \"<string>\",\n \"lang\": \"<string>\",\n \"zoom\": \"<number>\",\n \"lat\": \"<string>\",\n \"lon\": \"<string>\",\n \"fastMode\": \"<string>\",\n \"radius\": \"<number>\",\n \"depth\": \"<number>\",\n \"email\": \"<string>\",\n \"maxTime\": \"<number>\",\n \"proxies\": \"<string>\",\n \"workspaceId\": \"<string>\"\n}",
                                         "options": {
                                             "raw": {
                                                 "language": "json"

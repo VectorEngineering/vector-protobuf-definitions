@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Gets or Sets WorkspaceType
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-18T23:01:10.850512-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-19T01:32:43.436930-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public enum WorkspaceType {
   
   UNSPECIFIED("WORKSPACE_TYPE_UNSPECIFIED"),

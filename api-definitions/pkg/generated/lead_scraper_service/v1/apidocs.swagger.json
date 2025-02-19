@@ -12013,6 +12013,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "workspaceId": {
+          "type": "string",
+          "format": "uint64"
         }
       },
       "title": "CreateScrapingJobRequest represents a request to create a new Google Maps scraping job",

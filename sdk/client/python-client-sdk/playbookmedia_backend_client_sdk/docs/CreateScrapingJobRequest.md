@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **email** | **bool** |  | [optional] 
 **max_time** | **int** |  | [optional] 
 **proxies** | **List[str]** |  | [optional] 
+**workspace_id** | **str** |  | [optional] 
 
 ## Example
 

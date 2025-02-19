@@ -21,7 +21,7 @@ import javax.annotation.Generated;
  * CreateScrapingJobRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-18T23:01:10.850512-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-19T01:32:43.436930-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class CreateScrapingJobRequest {
 
   private String authPlatformUserId;
@@ -55,6 +55,8 @@ public class CreateScrapingJobRequest {
 
   @Valid
   private List<String> proxies = new ArrayList<>();
+
+  private String workspaceId;
 
   public CreateScrapingJobRequest() {
     super();
@@ -385,6 +387,26 @@ public class CreateScrapingJobRequest {
     this.proxies = proxies;
   }
 
+  public CreateScrapingJobRequest workspaceId(String workspaceId) {
+    this.workspaceId = workspaceId;
+    return this;
+  }
+
+  /**
+   * Get workspaceId
+   * @return workspaceId
+   */
+  
+  @Schema(name = "workspaceId", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("workspaceId")
+  public String getWorkspaceId() {
+    return workspaceId;
+  }
+
+  public void setWorkspaceId(String workspaceId) {
+    this.workspaceId = workspaceId;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -408,12 +430,13 @@ public class CreateScrapingJobRequest {
         Objects.equals(this.depth, createScrapingJobRequest.depth) &&
         Objects.equals(this.email, createScrapingJobRequest.email) &&
         Objects.equals(this.maxTime, createScrapingJobRequest.maxTime) &&
-        Objects.equals(this.proxies, createScrapingJobRequest.proxies);
+        Objects.equals(this.proxies, createScrapingJobRequest.proxies) &&
+        Objects.equals(this.workspaceId, createScrapingJobRequest.workspaceId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(authPlatformUserId, orgId, tenantId, name, keywords, lang, zoom, lat, lon, fastMode, radius, depth, email, maxTime, proxies);
+    return Objects.hash(authPlatformUserId, orgId, tenantId, name, keywords, lang, zoom, lat, lon, fastMode, radius, depth, email, maxTime, proxies, workspaceId);
   }
 
   @Override
@@ -435,6 +458,7 @@ public class CreateScrapingJobRequest {
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    maxTime: ").append(toIndentedString(maxTime)).append("\n");
     sb.append("    proxies: ").append(toIndentedString(proxies)).append("\n");
+    sb.append("    workspaceId: ").append(toIndentedString(workspaceId)).append("\n");
     sb.append("}");
     return sb.toString();
   }

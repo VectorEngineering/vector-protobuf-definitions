@@ -21,7 +21,7 @@ import javax.annotation.Generated;
  * ComplianceViolation
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-19T01:39:43.907035-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-19T01:49:19.350068-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class ComplianceViolation {
 
   private String ruleId;

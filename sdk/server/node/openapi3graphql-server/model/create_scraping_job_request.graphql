@@ -25,6 +25,7 @@ type CreateScrapingJobRequest {
   maxTime: Int!
   proxies: [String!!]
   workspaceId: String!
+  url: String!
 }
 
 input CreateScrapingJobRequestInput {
@@ -44,5 +45,6 @@ input CreateScrapingJobRequestInput {
     maxTime: Int!
     proxies: [String!]
     workspaceId: String!
+    url: String!
 }
 

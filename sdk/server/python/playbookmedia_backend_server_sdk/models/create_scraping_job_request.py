@@ -12,7 +12,7 @@ class CreateScrapingJobRequest(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, auth_platform_user_id=None, org_id=None, tenant_id=None, name=None, keywords=None, lang=None, zoom=None, lat=None, lon=None, fast_mode=None, radius=None, depth=None, email=None, max_time=None, proxies=None, workspace_id=None):  # noqa: E501
+    def __init__(self, auth_platform_user_id=None, org_id=None, tenant_id=None, name=None, keywords=None, lang=None, zoom=None, lat=None, lon=None, fast_mode=None, radius=None, depth=None, email=None, max_time=None, proxies=None, workspace_id=None, url=None):  # noqa: E501
         """CreateScrapingJobRequest - a model defined in OpenAPI
 
         :param auth_platform_user_id: The auth_platform_user_id of this CreateScrapingJobRequest.  # noqa: E501
@@ -47,6 +47,8 @@ class CreateScrapingJobRequest(Model):
         :type proxies: List[str]
         :param workspace_id: The workspace_id of this CreateScrapingJobRequest.  # noqa: E501
         :type workspace_id: str
+        :param url: The url of this CreateScrapingJobRequest.  # noqa: E501
+        :type url: str
         """
         self.openapi_types = {
             'auth_platform_user_id': str,
@@ -64,7 +66,8 @@ class CreateScrapingJobRequest(Model):
             'email': bool,
             'max_time': int,
             'proxies': List[str],
-            'workspace_id': str
+            'workspace_id': str,
+            'url': str
         }
 
         self.attribute_map = {
@@ -83,7 +86,8 @@ class CreateScrapingJobRequest(Model):
             'email': 'email',
             'max_time': 'maxTime',
             'proxies': 'proxies',
-            'workspace_id': 'workspaceId'
+            'workspace_id': 'workspaceId',
+            'url': 'url'
         }
 
         self._auth_platform_user_id = auth_platform_user_id
@@ -102,6 +106,7 @@ class CreateScrapingJobRequest(Model):
         self._max_time = max_time
         self._proxies = proxies
         self._workspace_id = workspace_id
+        self._url = url
 
     @classmethod
     def from_dict(cls, dikt) -> 'CreateScrapingJobRequest':
@@ -455,3 +460,24 @@ class CreateScrapingJobRequest(Model):
         """
 
         self._workspace_id = workspace_id
+
+    @property
+    def url(self) -> str:
+        """Gets the url of this CreateScrapingJobRequest.
+
+
+        :return: The url of this CreateScrapingJobRequest.
+        :rtype: str
+        """
+        return self._url
+
+    @url.setter
+    def url(self, url: str):
+        """Sets the url of this CreateScrapingJobRequest.
+
+
+        :param url: The url of this CreateScrapingJobRequest.
+        :type url: str
+        """
+
+        self._url = url

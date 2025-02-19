@@ -21,7 +21,7 @@ import javax.annotation.Generated;
  * CreateScrapingJobRequest
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-19T01:49:19.350068-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-19T02:14:00.124734-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class CreateScrapingJobRequest {
 
   private String authPlatformUserId;
@@ -57,6 +57,8 @@ public class CreateScrapingJobRequest {
   private List<String> proxies = new ArrayList<>();
 
   private String workspaceId;
+
+  private String url;
 
   public CreateScrapingJobRequest() {
     super();
@@ -407,6 +409,26 @@ public class CreateScrapingJobRequest {
     this.workspaceId = workspaceId;
   }
 
+  public CreateScrapingJobRequest url(String url) {
+    this.url = url;
+    return this;
+  }
+
+  /**
+   * Get url
+   * @return url
+   */
+  
+  @Schema(name = "url", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("url")
+  public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(String url) {
+    this.url = url;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -431,12 +453,13 @@ public class CreateScrapingJobRequest {
         Objects.equals(this.email, createScrapingJobRequest.email) &&
         Objects.equals(this.maxTime, createScrapingJobRequest.maxTime) &&
         Objects.equals(this.proxies, createScrapingJobRequest.proxies) &&
-        Objects.equals(this.workspaceId, createScrapingJobRequest.workspaceId);
+        Objects.equals(this.workspaceId, createScrapingJobRequest.workspaceId) &&
+        Objects.equals(this.url, createScrapingJobRequest.url);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(authPlatformUserId, orgId, tenantId, name, keywords, lang, zoom, lat, lon, fastMode, radius, depth, email, maxTime, proxies, workspaceId);
+    return Objects.hash(authPlatformUserId, orgId, tenantId, name, keywords, lang, zoom, lat, lon, fastMode, radius, depth, email, maxTime, proxies, workspaceId, url);
   }
 
   @Override
@@ -459,6 +482,7 @@ public class CreateScrapingJobRequest {
     sb.append("    maxTime: ").append(toIndentedString(maxTime)).append("\n");
     sb.append("    proxies: ").append(toIndentedString(proxies)).append("\n");
     sb.append("    workspaceId: ").append(toIndentedString(workspaceId)).append("\n");
+    sb.append("    url: ").append(toIndentedString(url)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -14,7 +14,7 @@ To see how to make this your own, look here:
 [README]((https://openapi-generator.tech))
 
 - API version: 1.0
-- Build date: 2025-02-19T01:49:22.067530-05:00[America/New_York]
+- Build date: 2025-02-19T02:14:02.744476-05:00[America/New_York]
 - Generator version: 7.7.0
 
 For more information, please visit [https://vector.ai](https://vector.ai)

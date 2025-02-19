@@ -43,7 +43,8 @@ class CreateScrapingJobRequest(BaseModel):
     max_time: Optional[StrictInt] = Field(default=None, alias="maxTime")
     proxies: Optional[List[StrictStr]] = None
     workspace_id: Optional[StrictStr] = Field(default=None, alias="workspaceId")
-    __properties: ClassVar[List[str]] = ["authPlatformUserId", "orgId", "tenantId", "name", "keywords", "lang", "zoom", "lat", "lon", "fastMode", "radius", "depth", "email", "maxTime", "proxies", "workspaceId"]
+    url: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["authPlatformUserId", "orgId", "tenantId", "name", "keywords", "lang", "zoom", "lat", "lon", "fastMode", "radius", "depth", "email", "maxTime", "proxies", "workspaceId", "url"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -111,7 +112,8 @@ class CreateScrapingJobRequest(BaseModel):
             "email": obj.get("email"),
             "maxTime": obj.get("maxTime"),
             "proxies": obj.get("proxies"),
-            "workspaceId": obj.get("workspaceId")
+            "workspaceId": obj.get("workspaceId"),
+            "url": obj.get("url")
         })
         return _obj
 

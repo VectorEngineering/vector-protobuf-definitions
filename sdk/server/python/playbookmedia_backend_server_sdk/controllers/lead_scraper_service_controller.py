@@ -711,7 +711,7 @@ def list_organizations(page_size=None, page_number=None):  # noqa: E501
     return 'do some magic!'
 
 
-def list_scraping_jobs(auth_platform_user_id, org_id, tenant_id):  # noqa: E501
+def list_scraping_jobs(auth_platform_user_id, org_id, tenant_id, page_size=None, page_number=None, workspace_id=None, workflow_id=None):  # noqa: E501
     """Get all jobs
 
     This endpoint retrieves all Google Maps scraping jobs # noqa: E501
@@ -722,6 +722,14 @@ def list_scraping_jobs(auth_platform_user_id, org_id, tenant_id):  # noqa: E501
     :type org_id: str
     :param tenant_id: 
     :type tenant_id: str
+    :param page_size: 
+    :type page_size: int
+    :param page_number: 
+    :type page_number: int
+    :param workspace_id: 
+    :type workspace_id: str
+    :param workflow_id: 
+    :type workflow_id: str
 
     :rtype: Union[ListScrapingJobsResponse, Tuple[ListScrapingJobsResponse, int], Tuple[ListScrapingJobsResponse, int, Dict[str, str]]
     """

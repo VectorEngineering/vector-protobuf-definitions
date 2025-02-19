@@ -11475,11 +11475,83 @@ impl<T, C> hyper::service::Service<(Request<Body>, C)> for Service<T, C> where
                         .body(Body::from("Missing required query parameter tenantId"))
                         .expect("Unable to create Bad Request response for missing query parameter tenantId")),
                 };
+                let param_page_size = query_params.iter().filter(|e| e.0 == "pageSize").map(|e| e.1.clone())
+                    .next();
+                let param_page_size = match param_page_size {
+                    Some(param_page_size) => {
+                        let param_page_size =
+                            <i32 as std::str::FromStr>::from_str
+                                (&param_page_size);
+                        match param_page_size {
+                            Ok(param_page_size) => Some(param_page_size),
+                            Err(e) => return Ok(Response::builder()
+                                .status(StatusCode::BAD_REQUEST)
+                                .body(Body::from(format!("Couldn't parse query parameter pageSize - doesn't match schema: {}", e)))
+                                .expect("Unable to create Bad Request response for invalid query parameter pageSize")),
+                        }
+                    },
+                    None => None,
+                };
+                let param_page_number = query_params.iter().filter(|e| e.0 == "pageNumber").map(|e| e.1.clone())
+                    .next();
+                let param_page_number = match param_page_number {
+                    Some(param_page_number) => {
+                        let param_page_number =
+                            <i32 as std::str::FromStr>::from_str
+                                (&param_page_number);
+                        match param_page_number {
+                            Ok(param_page_number) => Some(param_page_number),
+                            Err(e) => return Ok(Response::builder()
+                                .status(StatusCode::BAD_REQUEST)
+                                .body(Body::from(format!("Couldn't parse query parameter pageNumber - doesn't match schema: {}", e)))
+                                .expect("Unable to create Bad Request response for invalid query parameter pageNumber")),
+                        }
+                    },
+                    None => None,
+                };
+                let param_workspace_id = query_params.iter().filter(|e| e.0 == "workspaceId").map(|e| e.1.clone())
+                    .next();
+                let param_workspace_id = match param_workspace_id {
+                    Some(param_workspace_id) => {
+                        let param_workspace_id =
+                            <String as std::str::FromStr>::from_str
+                                (&param_workspace_id);
+                        match param_workspace_id {
+                            Ok(param_workspace_id) => Some(param_workspace_id),
+                            Err(e) => return Ok(Response::builder()
+                                .status(StatusCode::BAD_REQUEST)
+                                .body(Body::from(format!("Couldn't parse query parameter workspaceId - doesn't match schema: {}", e)))
+                                .expect("Unable to create Bad Request response for invalid query parameter workspaceId")),
+                        }
+                    },
+                    None => None,
+                };
+                let param_workflow_id = query_params.iter().filter(|e| e.0 == "workflowId").map(|e| e.1.clone())
+                    .next();
+                let param_workflow_id = match param_workflow_id {
+                    Some(param_workflow_id) => {
+                        let param_workflow_id =
+                            <String as std::str::FromStr>::from_str
+                                (&param_workflow_id);
+                        match param_workflow_id {
+                            Ok(param_workflow_id) => Some(param_workflow_id),
+                            Err(e) => return Ok(Response::builder()
+                                .status(StatusCode::BAD_REQUEST)
+                                .body(Body::from(format!("Couldn't parse query parameter workflowId - doesn't match schema: {}", e)))
+                                .expect("Unable to create Bad Request response for invalid query parameter workflowId")),
+                        }
+                    },
+                    None => None,
+                };
 
                                 let result = api_impl.list_scraping_jobs(
                                             param_auth_platform_user_id,
                                             param_org_id,
                                             param_tenant_id,
+                                            param_page_size,
+                                            param_page_number,
+                                            param_workspace_id,
+                                            param_workflow_id,
                                         &context
                                     ).await;
                                 let mut response = Response::new(Body::empty());

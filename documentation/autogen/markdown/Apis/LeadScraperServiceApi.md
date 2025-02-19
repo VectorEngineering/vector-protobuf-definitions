@@ -1075,7 +1075,7 @@ List all organizations
 
 <a name="listScrapingJobs"></a>
 # **listScrapingJobs**
-> ListScrapingJobsResponse listScrapingJobs(authPlatformUserId, orgId, tenantId)
+> ListScrapingJobsResponse listScrapingJobs(authPlatformUserId, orgId, tenantId, pageSize, pageNumber, workspaceId, workflowId)
 
 Get all jobs
 
@@ -1088,6 +1088,10 @@ Get all jobs
 | **authPlatformUserId** | **String**|  | [default to null] |
 | **orgId** | **String**|  | [default to null] |
 | **tenantId** | **String**|  | [default to null] |
+| **pageSize** | **Integer**|  | [optional] [default to null] |
+| **pageNumber** | **Integer**|  | [optional] [default to null] |
+| **workspaceId** | **String**|  | [optional] [default to null] |
+| **workflowId** | **String**|  | [optional] [default to null] |
 
 ### Return type
 

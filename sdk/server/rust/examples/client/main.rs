@@ -514,7 +514,11 @@ fn main() {
             let result = rt.block_on(client.list_scraping_jobs(
                   "auth_platform_user_id_example".to_string(),
                   "org_id_example".to_string(),
-                  "tenant_id_example".to_string()
+                  "tenant_id_example".to_string(),
+                  Some(56),
+                  Some(56),
+                  Some("workspace_id_example".to_string()),
+                  Some("workflow_id_example".to_string())
             ));
             info!("{:?} (X-Span-ID: {:?})", result, (client.context() as &dyn Has<XSpanIdString>).get().clone());
         },

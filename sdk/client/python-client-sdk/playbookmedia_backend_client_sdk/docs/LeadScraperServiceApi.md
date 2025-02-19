@@ -3563,7 +3563,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_scraping_jobs**
-> ListScrapingJobsResponse list_scraping_jobs(auth_platform_user_id, org_id, tenant_id)
+> ListScrapingJobsResponse list_scraping_jobs(auth_platform_user_id, org_id, tenant_id, page_size=page_size, page_number=page_number, workspace_id=workspace_id, workflow_id=workflow_id)
 
 Get all jobs
 
@@ -3603,10 +3603,14 @@ async with playbookmedia_backend_client_sdk.ApiClient(configuration) as api_clie
     auth_platform_user_id = 'auth_platform_user_id_example' # str | 
     org_id = 'org_id_example' # str | 
     tenant_id = 'tenant_id_example' # str | 
+    page_size = 56 # int |  (optional)
+    page_number = 56 # int |  (optional)
+    workspace_id = 'workspace_id_example' # str |  (optional)
+    workflow_id = 'workflow_id_example' # str |  (optional)
 
     try:
         # Get all jobs
-        api_response = await api_instance.list_scraping_jobs(auth_platform_user_id, org_id, tenant_id)
+        api_response = await api_instance.list_scraping_jobs(auth_platform_user_id, org_id, tenant_id, page_size=page_size, page_number=page_number, workspace_id=workspace_id, workflow_id=workflow_id)
         print("The response of LeadScraperServiceApi->list_scraping_jobs:\n")
         pprint(api_response)
     except Exception as e:
@@ -3623,6 +3627,10 @@ Name | Type | Description  | Notes
  **auth_platform_user_id** | **str**|  | 
  **org_id** | **str**|  | 
  **tenant_id** | **str**|  | 
+ **page_size** | **int**|  | [optional] 
+ **page_number** | **int**|  | [optional] 
+ **workspace_id** | **str**|  | [optional] 
+ **workflow_id** | **str**|  | [optional] 
 
 ### Return type
 

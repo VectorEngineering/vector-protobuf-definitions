@@ -606,9 +606,13 @@ impl<C> Api<C> for Server<C> where C: Has<XSpanIdString> + Send + Sync
         auth_platform_user_id: String,
         org_id: String,
         tenant_id: String,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        workspace_id: Option<String>,
+        workflow_id: Option<String>,
         context: &C) -> Result<ListScrapingJobsResponse, ApiError>
     {
-        info!("list_scraping_jobs(\"{}\", \"{}\", \"{}\") - X-Span-ID: {:?}", auth_platform_user_id, org_id, tenant_id, context.get().0.clone());
+        info!("list_scraping_jobs(\"{}\", \"{}\", \"{}\", {:?}, {:?}, {:?}, {:?}) - X-Span-ID: {:?}", auth_platform_user_id, org_id, tenant_id, page_size, page_number, workspace_id, workflow_id, context.get().0.clone());
         Err(ApiError("Api-Error: Operation is NOT implemented".into()))
     }
 

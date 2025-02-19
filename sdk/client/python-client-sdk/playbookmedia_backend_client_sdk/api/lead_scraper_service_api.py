@@ -12317,6 +12317,10 @@ class LeadScraperServiceApi:
         auth_platform_user_id: StrictStr,
         org_id: StrictStr,
         tenant_id: StrictStr,
+        page_size: Optional[StrictInt] = None,
+        page_number: Optional[StrictInt] = None,
+        workspace_id: Optional[StrictStr] = None,
+        workflow_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -12340,6 +12344,14 @@ class LeadScraperServiceApi:
         :type org_id: str
         :param tenant_id: (required)
         :type tenant_id: str
+        :param page_size:
+        :type page_size: int
+        :param page_number:
+        :type page_number: int
+        :param workspace_id:
+        :type workspace_id: str
+        :param workflow_id:
+        :type workflow_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -12366,6 +12378,10 @@ class LeadScraperServiceApi:
             auth_platform_user_id=auth_platform_user_id,
             org_id=org_id,
             tenant_id=tenant_id,
+            page_size=page_size,
+            page_number=page_number,
+            workspace_id=workspace_id,
+            workflow_id=workflow_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -12409,6 +12425,10 @@ class LeadScraperServiceApi:
         auth_platform_user_id: StrictStr,
         org_id: StrictStr,
         tenant_id: StrictStr,
+        page_size: Optional[StrictInt] = None,
+        page_number: Optional[StrictInt] = None,
+        workspace_id: Optional[StrictStr] = None,
+        workflow_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -12432,6 +12452,14 @@ class LeadScraperServiceApi:
         :type org_id: str
         :param tenant_id: (required)
         :type tenant_id: str
+        :param page_size:
+        :type page_size: int
+        :param page_number:
+        :type page_number: int
+        :param workspace_id:
+        :type workspace_id: str
+        :param workflow_id:
+        :type workflow_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -12458,6 +12486,10 @@ class LeadScraperServiceApi:
             auth_platform_user_id=auth_platform_user_id,
             org_id=org_id,
             tenant_id=tenant_id,
+            page_size=page_size,
+            page_number=page_number,
+            workspace_id=workspace_id,
+            workflow_id=workflow_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -12501,6 +12533,10 @@ class LeadScraperServiceApi:
         auth_platform_user_id: StrictStr,
         org_id: StrictStr,
         tenant_id: StrictStr,
+        page_size: Optional[StrictInt] = None,
+        page_number: Optional[StrictInt] = None,
+        workspace_id: Optional[StrictStr] = None,
+        workflow_id: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -12524,6 +12560,14 @@ class LeadScraperServiceApi:
         :type org_id: str
         :param tenant_id: (required)
         :type tenant_id: str
+        :param page_size:
+        :type page_size: int
+        :param page_number:
+        :type page_number: int
+        :param workspace_id:
+        :type workspace_id: str
+        :param workflow_id:
+        :type workflow_id: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -12550,6 +12594,10 @@ class LeadScraperServiceApi:
             auth_platform_user_id=auth_platform_user_id,
             org_id=org_id,
             tenant_id=tenant_id,
+            page_size=page_size,
+            page_number=page_number,
+            workspace_id=workspace_id,
+            workflow_id=workflow_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -12588,6 +12636,10 @@ class LeadScraperServiceApi:
         auth_platform_user_id,
         org_id,
         tenant_id,
+        page_size,
+        page_number,
+        workspace_id,
+        workflow_id,
         _request_auth,
         _content_type,
         _headers,
@@ -12619,6 +12671,22 @@ class LeadScraperServiceApi:
         if tenant_id is not None:
             
             _query_params.append(('tenantId', tenant_id))
+            
+        if page_size is not None:
+            
+            _query_params.append(('pageSize', page_size))
+            
+        if page_number is not None:
+            
+            _query_params.append(('pageNumber', page_number))
+            
+        if workspace_id is not None:
+            
+            _query_params.append(('workspaceId', workspace_id))
+            
+        if workflow_id is not None:
+            
+            _query_params.append(('workflowId', workflow_id))
             
         # process the header parameters
         # process the form parameters

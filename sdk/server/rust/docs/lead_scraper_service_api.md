@@ -1232,7 +1232,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ListScrapingJobs**
-> models::ListScrapingJobsResponse ListScrapingJobs(ctx, auth_platform_user_id, org_id, tenant_id)
+> models::ListScrapingJobsResponse ListScrapingJobs(ctx, auth_platform_user_id, org_id, tenant_id, optional)
 Get all jobs
 
 This endpoint retrieves all Google Maps scraping jobs
@@ -1245,6 +1245,20 @@ Name | Type | Description  | Notes
   **auth_platform_user_id** | **String**|  | 
   **org_id** | **String**|  | 
   **tenant_id** | **String**|  | 
+ **optional** | **map[string]interface{}** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a map[string]interface{}.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **auth_platform_user_id** | **String**|  | 
+ **org_id** | **String**|  | 
+ **tenant_id** | **String**|  | 
+ **page_size** | **i32**|  | 
+ **page_number** | **i32**|  | 
+ **workspace_id** | **String**|  | 
+ **workflow_id** | **String**|  | 
 
 ### Return type
 

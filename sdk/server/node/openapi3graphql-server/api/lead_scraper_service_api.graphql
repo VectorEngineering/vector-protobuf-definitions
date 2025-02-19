@@ -542,8 +542,12 @@ type Query {
   # @param String! authPlatformUserId 
   # @param String! orgId 
   # @param String! tenantId 
+  # @param Int! pageSize 
+  # @param Int! pageNumber 
+  # @param String! workspaceId 
+  # @param String! workflowId 
   # @return [ListScrapingJobsResponse]
-  ListScrapingJobs(authPlatformUserId: String!, orgId: String!, tenantId: String!): ListScrapingJobsResponse
+  ListScrapingJobs(authPlatformUserId: String!, orgId: String!, tenantId: String!, pageSize: Int!, pageNumber: Int!, workspaceId: String!, workflowId: String!): ListScrapingJobsResponse
   # List tenant API keys
   # Retrieves all API keys for a specific tenant
   # @param String! organizationId 

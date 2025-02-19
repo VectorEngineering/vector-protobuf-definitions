@@ -5304,6 +5304,10 @@ pub trait Api<C: Send + Sync> {
         auth_platform_user_id: String,
         org_id: String,
         tenant_id: String,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        workspace_id: Option<String>,
+        workflow_id: Option<String>,
         context: &C) -> Result<ListScrapingJobsResponse, ApiError>;
 
     /// List tenant API keys
@@ -5841,6 +5845,10 @@ pub trait ApiNoContext<C: Send + Sync> {
         auth_platform_user_id: String,
         org_id: String,
         tenant_id: String,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        workspace_id: Option<String>,
+        workflow_id: Option<String>,
         ) -> Result<ListScrapingJobsResponse, ApiError>;
 
     /// List tenant API keys
@@ -6532,10 +6540,14 @@ impl<T: Api<C> + Send + Sync, C: Clone + Send + Sync> ApiNoContext<C> for Contex
         auth_platform_user_id: String,
         org_id: String,
         tenant_id: String,
+        page_size: Option<i32>,
+        page_number: Option<i32>,
+        workspace_id: Option<String>,
+        workflow_id: Option<String>,
         ) -> Result<ListScrapingJobsResponse, ApiError>
     {
         let context = self.context().clone();
-        self.api().list_scraping_jobs(auth_platform_user_id, org_id, tenant_id, &context).await
+        self.api().list_scraping_jobs(auth_platform_user_id, org_id, tenant_id, page_size, page_number, workspace_id, workflow_id, &context).await
     }
 
     /// List tenant API keys

@@ -183,11 +183,15 @@ export default {
         },
 
         // @return ListScrapingJobsResponse
-        ListScrapingJobs: ($authPlatformUserId, $orgId, $tenantId) => {
+        ListScrapingJobs: ($authPlatformUserId, $orgId, $tenantId, $pageSize, $pageNumber, $workspaceId, $workflowId) => {
             return {
                 "authPlatformUserId": "authPlatformUserId_example",
                 "orgId": "orgId_example",
-                "tenantId": "tenantId_example"
+                "tenantId": "tenantId_example",
+                "pageSize": "56",
+                "pageNumber": "56",
+                "workspaceId": "workspaceId_example",
+                "workflowId": "workflowId_example"
             };
         },
 

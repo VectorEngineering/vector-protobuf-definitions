@@ -710,6 +710,41 @@ func (m *ListScrapingJobsRequest) validate(all bool) error {
 		errors = append(errors, err)
 	}
 
+	if val := m.GetPageSize(); val < 1 || val > 200 {
+		err := ListScrapingJobsRequestValidationError{
+			field:  "PageSize",
+			reason: "value must be inside range [1, 200]",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	// no validation rules for PageNumber
+
+	if m.GetWorkspaceId() <= 0 {
+		err := ListScrapingJobsRequestValidationError{
+			field:  "WorkspaceId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
+	if m.GetWorkflowId() <= 0 {
+		err := ListScrapingJobsRequestValidationError{
+			field:  "WorkflowId",
+			reason: "value must be greater than 0",
+		}
+		if !all {
+			return err
+		}
+		errors = append(errors, err)
+	}
+
 	if len(errors) > 0 {
 		return ListScrapingJobsRequestMultiError(errors)
 	}

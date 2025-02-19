@@ -95,6 +95,10 @@ message ListScrapingJobsRequest {
         (validate.rules).uint64.gt = 0,
         (google.api.field_behavior) = REQUIRED
     ];
+    int32 page_size = 4 [(validate.rules).int32 = {gte: 1, lte: 200}];
+    int32 page_number = 5;
+    uint64 workspace_id = 6 [(validate.rules).uint64.gt = 0];
+    uint64 workflow_id = 7 [(validate.rules).uint64.gt = 0];
 }
 
 // ListScrapingJobsResponse represents the response containing a list of scraping jobs

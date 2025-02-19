@@ -307,7 +307,7 @@ List all organizations
 Retrieves a list of all organizations in a tenant
 <a name="ListScrapingJobs"></a>
 # **ListScrapingJobs**
-> ListScrapingJobsResponse ListScrapingJobs(authPlatformUserId, orgId, tenantId)
+> ListScrapingJobsResponse ListScrapingJobs(authPlatformUserId, orgId, tenantId, pageSize, pageNumber, workspaceId, workflowId)
 
 Get all jobs
 

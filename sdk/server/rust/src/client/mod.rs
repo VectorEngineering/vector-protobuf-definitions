@@ -12778,6 +12778,10 @@ impl<S, C> Api<C> for Client<S, C> where
         param_auth_platform_user_id: String,
         param_org_id: String,
         param_tenant_id: String,
+        param_page_size: Option<i32>,
+        param_page_number: Option<i32>,
+        param_workspace_id: Option<String>,
+        param_workflow_id: Option<String>,
         context: &C) -> Result<ListScrapingJobsResponse, ApiError>
     {
         let mut client_service = self.client_service.clone();
@@ -12795,6 +12799,22 @@ impl<S, C> Api<C> for Client<S, C> where
                     &param_org_id);
                 query_string.append_pair("tenantId",
                     &param_tenant_id);
+            if let Some(param_page_size) = param_page_size {
+                query_string.append_pair("pageSize",
+                    &param_page_size.to_string());
+            }
+            if let Some(param_page_number) = param_page_number {
+                query_string.append_pair("pageNumber",
+                    &param_page_number.to_string());
+            }
+            if let Some(param_workspace_id) = param_workspace_id {
+                query_string.append_pair("workspaceId",
+                    &param_workspace_id);
+            }
+            if let Some(param_workflow_id) = param_workflow_id {
+                query_string.append_pair("workflowId",
+                    &param_workflow_id);
+            }
             query_string.finish()
         };
         if !query_string.is_empty() {

@@ -35,7 +35,7 @@ import javax.annotation.Generated;
  * MarketplaceApp
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-14T12:30:40.954679-05:00[America/New_York]", comments = "Generator version: 7.7.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2025-02-18T23:01:10.850512-05:00[America/New_York]", comments = "Generator version: 7.7.0")
 public class MarketplaceApp {
 
   private String id;
